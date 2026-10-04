@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const IpamPoolAllocation = @import("ipam_pool_allocation.zig").IpamPoolAllocation;
 const serde = @import("serde.zig");
 
@@ -62,6 +63,16 @@ pub const AllocateIpamPoolCidrInput = struct {
 
     /// A preview of the next available CIDR in a pool.
     preview_next_cidr: ?bool = null,
+
+    /// The key/value combination of a tag assigned to the resource. Use the tag key
+    /// in the filter name and the tag value as the filter value.
+    /// For example, to find all resources that have a tag with the key `Owner` and
+    /// the value `TeamA`, specify `tag:Owner` for the filter name and `TeamA` for
+    /// the filter value.
+    ///
+    /// If you specify tags, the request is authorized against the allocation
+    /// resource in addition to the pool resource.
+    tag_specifications: ?[]const TagSpecification = null,
 };
 
 pub const AllocateIpamPoolCidrOutput = struct {
@@ -145,6 +156,40 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AllocateIpamPoolCidrInp
     if (input.preview_next_cidr) |v| {
         try body_buf.appendSlice(allocator, "&PreviewNextCidr=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
+    if (input.tag_specifications) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.resource_type) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.ResourceType=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
+                }
+            }
+            if (item.tags) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        if (item_1.key) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        if (item_1.value) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

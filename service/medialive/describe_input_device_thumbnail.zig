@@ -52,6 +52,7 @@ pub const DescribeInputDeviceThumbnailOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeInputDeviceThumbnailInput, options: CallOptions) !DescribeInputDeviceThumbnailOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -60,8 +61,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeInp
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "medialive", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -73,6 +72,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeInp
         return error.ServiceError;
     }
 
+    errdefer stream_resp.deinit();
     const result = try deserializeStreamingResponse(allocator, &stream_resp);
     return result;
 }
@@ -104,7 +104,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeInputDeviceThum
 
 fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !DescribeInputDeviceThumbnailOutput {
     var result: DescribeInputDeviceThumbnailOutput = .{};
-    result.body = stream_resp.body;
+    errdefer {
+        if (result.e_tag) |value| allocator.free(value);
+    }
     if (stream_resp.headers.get("content-length")) |value| {
         result.content_length = std.fmt.parseInt(i64, value, 10) catch null;
     }
@@ -117,6 +119,7 @@ fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.
     if (stream_resp.headers.get("last-modified")) |value| {
         result.last_modified = std.fmt.parseInt(i64, value, 10) catch null;
     }
+    result.body = stream_resp.body;
     stream_resp.deinitHeaders();
 
     return result;

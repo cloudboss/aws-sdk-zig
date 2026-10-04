@@ -11,8 +11,7 @@ pub const ListStagesInput = struct {
     max_results: ?i32 = null,
 
     /// The first stage to retrieve. This is used for pagination; see the
-    /// `nextToken`
-    /// response field.
+    /// `nextToken` response field.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -22,8 +21,8 @@ pub const ListStagesInput = struct {
 };
 
 pub const ListStagesOutput = struct {
-    /// If there are more stages than `maxResults`, use `nextToken` in the
-    /// request to get the next set.
+    /// If there are more stages than `maxResults`, use `nextToken` in the request
+    /// to get the next set.
     next_token: ?[]const u8 = null,
 
     /// List of the matching stages (summary information only).
@@ -99,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListStagesInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListStagesOutput {
-    var result: ListStagesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListStagesOutput, body, allocator);
-    }
+    const result: ListStagesOutput = try aws.json.parseJsonObject(
+        ListStagesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

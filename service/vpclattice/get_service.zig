@@ -45,6 +45,10 @@ pub const GetServiceOutput = struct {
     /// The ID of the service.
     id: ?[]const u8 = null,
 
+    /// The amount of time, in seconds, that a connection can remain idle before VPC
+    /// Lattice closes it.
+    idle_timeout_seconds: ?i32 = null,
+
     /// The date and time that the service was last updated, in ISO-8601 format.
     last_updated_at: ?i64 = null,
 
@@ -64,6 +68,7 @@ pub const GetServiceOutput = struct {
         .failure_code = "failureCode",
         .failure_message = "failureMessage",
         .id = "id",
+        .idle_timeout_seconds = "idleTimeoutSeconds",
         .last_updated_at = "lastUpdatedAt",
         .name = "name",
         .status = "status",
@@ -119,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetServiceInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetServiceOutput {
-    var result: GetServiceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetServiceOutput, body, allocator);
-    }
+    const result: GetServiceOutput = try aws.json.parseJsonObject(
+        GetServiceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

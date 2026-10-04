@@ -6,6 +6,7 @@ const DynamoDBv2Action = @import("dynamo_d_bv_2_action.zig").DynamoDBv2Action;
 const ElasticsearchAction = @import("elasticsearch_action.zig").ElasticsearchAction;
 const FirehoseAction = @import("firehose_action.zig").FirehoseAction;
 const HttpAction = @import("http_action.zig").HttpAction;
+const InfluxDBAction = @import("influx_db_action.zig").InfluxDBAction;
 const IotAnalyticsAction = @import("iot_analytics_action.zig").IotAnalyticsAction;
 const IotEventsAction = @import("iot_events_action.zig").IotEventsAction;
 const IotSiteWiseAction = @import("iot_site_wise_action.zig").IotSiteWiseAction;
@@ -56,6 +57,9 @@ pub const Action = struct {
 
     /// Send data to an HTTPS endpoint.
     http: ?HttpAction = null,
+
+    /// Write data to an InfluxDB database.
+    influx_db: ?InfluxDBAction = null,
 
     /// Sends message data to an IoT Analytics channel.
     iot_analytics: ?IotAnalyticsAction = null,
@@ -118,6 +122,7 @@ pub const Action = struct {
         .elasticsearch = "elasticsearch",
         .firehose = "firehose",
         .http = "http",
+        .influx_db = "influxDB",
         .iot_analytics = "iotAnalytics",
         .iot_events = "iotEvents",
         .iot_site_wise = "iotSiteWise",

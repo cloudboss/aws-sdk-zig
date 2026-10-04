@@ -14,7 +14,11 @@ pub const WorkflowExecutionMetadata = struct {
     /// runtime.
     parallel_group: ?[]const u8 = null,
 
-    /// Indicates retry status for this runtime instance of the workflow.
+    /// Indicates whether a retry of the image build superseded this runtime
+    /// instance
+    /// of the workflow. When you retry a failed image build, Image Builder sets
+    /// this flag to
+    /// `true` on the original workflow executions that the retry re-ran.
     retried: ?bool = null,
 
     /// The timestamp when the runtime instance of this workflow started.
@@ -23,9 +27,12 @@ pub const WorkflowExecutionMetadata = struct {
     /// The current runtime status for this workflow.
     status: ?WorkflowExecutionStatus = null,
 
-    /// The total number of steps in the workflow. This should equal the sum of the
-    /// step
-    /// counts for steps that succeeded, were skipped, and failed.
+    /// The total number of steps that the workflow document defines for this
+    /// runtime
+    /// instance of the workflow. Image Builder sets this count before any steps
+    /// run. The sum of
+    /// succeeded, skipped, and failed steps only reaches this total if every step
+    /// finishes in one of those states.
     total_step_count: i32 = 0,
 
     /// A runtime count for the number of steps in the workflow that failed.

@@ -9,6 +9,7 @@ const ReplicationConfigurationDefaultLargeStagingDiskType = @import("replication
 const ReplicationConfigurationEbsEncryption = @import("replication_configuration_ebs_encryption.zig").ReplicationConfigurationEbsEncryption;
 const InternetProtocol = @import("internet_protocol.zig").InternetProtocol;
 const ReplicationConfigurationReplicatedDisk = @import("replication_configuration_replicated_disk.zig").ReplicationConfigurationReplicatedDisk;
+const StorageConfiguration = @import("storage_configuration.zig").StorageConfiguration;
 
 pub const GetReplicationConfigurationInput = struct {
     /// Request to get Replication Configuration by Account ID.
@@ -70,6 +71,9 @@ pub const GetReplicationConfigurationOutput = struct {
     /// Replication Configuration Staging Area tags.
     staging_area_tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// Replication Configuration storage configuration.
+    storage_configuration: ?StorageConfiguration = null,
+
     /// Replication Configuration store snapshot on local zone.
     store_snapshot_on_local_zone: ?bool = null,
 
@@ -95,6 +99,7 @@ pub const GetReplicationConfigurationOutput = struct {
         .source_server_id = "sourceServerID",
         .staging_area_subnet_id = "stagingAreaSubnetId",
         .staging_area_tags = "stagingAreaTags",
+        .storage_configuration = "storageConfiguration",
         .store_snapshot_on_local_zone = "storeSnapshotOnLocalZone",
         .use_dedicated_replication_server = "useDedicatedReplicationServer",
         .use_fips_endpoint = "useFipsEndpoint",
@@ -163,10 +168,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetReplicationConfigura
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetReplicationConfigurationOutput {
-    var result: GetReplicationConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetReplicationConfigurationOutput, body, allocator);
-    }
+    const result: GetReplicationConfigurationOutput = try aws.json.parseJsonObject(
+        GetReplicationConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

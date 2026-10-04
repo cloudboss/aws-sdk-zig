@@ -17,7 +17,8 @@ pub const DistributionConfigurationSummary = struct {
     /// The name of the distribution configuration.
     name: ?[]const u8 = null,
 
-    /// A list of Regions where the container image is distributed to.
+    /// A list of the Regions that the distribution configuration distributes
+    /// images to.
     regions: ?[]const []const u8 = null,
 
     /// The tags associated with the distribution configuration.

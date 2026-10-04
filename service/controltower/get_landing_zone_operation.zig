@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLandingZoneOperation
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetLandingZoneOperationOutput {
-    var result: GetLandingZoneOperationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetLandingZoneOperationOutput, body, allocator);
-    }
+    const result: GetLandingZoneOperationOutput = try aws.json.parseJsonObject(
+        GetLandingZoneOperationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

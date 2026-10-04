@@ -7,8 +7,8 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const UserProficiencyDisassociate = @import("user_proficiency_disassociate.zig").UserProficiencyDisassociate;
 
 pub const DisassociateUserProficienciesInput = struct {
-    /// The identifier of the Amazon Connect instance. You can find the instance ID
-    /// in the Amazon Resource Name (ARN) of the
+    /// The identifier of the Connect Customer instance. You can find the instance
+    /// ID in the Amazon Resource Name (ARN) of the
     /// instance.
     instance_id: []const u8,
 

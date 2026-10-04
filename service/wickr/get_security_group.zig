@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSecurityGroupInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSecurityGroupOutput {
-    var result: GetSecurityGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSecurityGroupOutput, body, allocator);
-    }
+    const result: GetSecurityGroupOutput = try aws.json.parseJsonObject(
+        GetSecurityGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

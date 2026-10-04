@@ -8,6 +8,16 @@ const IdentityProviderTypeType = @import("identity_provider_type_type.zig").Iden
 /// relationship
 /// between the IdP and your user pool.
 pub const IdentityProviderType = struct {
+    /// A mapping between the authentication context class reference (ACR) levels of
+    /// your user
+    /// pool and the ACR values of the external OpenID Connect (OIDC) identity
+    /// provider (IdP), so
+    /// that your application gets a consistent step-up experience regardless of
+    /// which IdP
+    /// authenticated the user. The map is keyed by level, from `Level1` through
+    /// `Level4`.
+    acr_mapping: ?[]const aws.map.StringMapEntry = null,
+
     /// A mapping of IdP attributes to standard and custom user pool attributes.
     attribute_mapping: ?[]const aws.map.StringMapEntry = null,
 
@@ -168,6 +178,7 @@ pub const IdentityProviderType = struct {
     user_pool_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .acr_mapping = "AcrMapping",
         .attribute_mapping = "AttributeMapping",
         .creation_date = "CreationDate",
         .idp_identifiers = "IdpIdentifiers",

@@ -10,8 +10,8 @@ pub const TerminateServiceJobInput = struct {
     job_id: []const u8,
 
     /// A message to attach to the service job that explains the reason for
-    /// canceling it. This message is returned by `DescribeServiceJob` operations on
-    /// the service job.
+    /// terminating it. This message is returned by `DescribeServiceJob` operations
+    /// on the service job.
     reason: []const u8,
 
     pub const json_field_names = .{

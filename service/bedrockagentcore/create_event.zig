@@ -5,6 +5,8 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Branch = @import("branch.zig").Branch;
+const ExtractionConfig = @import("extraction_config.zig").ExtractionConfig;
+const ExtractionMode = @import("extraction_mode.zig").ExtractionMode;
 const MetadataValue = @import("metadata_value.zig").MetadataValue;
 const PayloadType = @import("payload_type.zig").PayloadType;
 const Event = @import("event.zig").Event;
@@ -27,6 +29,17 @@ pub const CreateEventInput = struct {
     /// used.
     event_timestamp: i64,
 
+    /// The extraction configuration for long-term memory records. Use this
+    /// parameter to specify namespace variable keys and their values for namespace
+    /// substitution during extraction.
+    extraction_config: ?ExtractionConfig = null,
+
+    /// Controls long-term memory extraction for this event. When set to `SKIP`, the
+    /// event is stored in short-term memory but is excluded from long-term memory
+    /// extraction. If not specified, the event is processed for extraction as
+    /// usual.
+    extraction_mode: ?ExtractionMode = null,
+
     /// The identifier of the AgentCore Memory resource in which to create the
     /// event.
     memory_id: []const u8,
@@ -34,8 +47,8 @@ pub const CreateEventInput = struct {
     /// The key-value metadata to attach to the event.
     metadata: ?[]const aws.map.MapEntry(MetadataValue) = null,
 
-    /// The content payload of the event. This can include conversational data or
-    /// binary content.
+    /// The content payload of the event. This can include conversational data, JSON
+    /// data, or binary content.
     payload: []const PayloadType,
 
     /// The identifier of the session in which this event occurs. A session
@@ -47,6 +60,8 @@ pub const CreateEventInput = struct {
         .branch = "branch",
         .client_token = "clientToken",
         .event_timestamp = "eventTimestamp",
+        .extraction_config = "extractionConfig",
+        .extraction_mode = "extractionMode",
         .memory_id = "memoryId",
         .metadata = "metadata",
         .payload = "payload",
@@ -123,6 +138,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEventInput, confi
     try body_buf.appendSlice(allocator, "\"eventTimestamp\":");
     try aws.json.writeValue(@TypeOf(input.event_timestamp), input.event_timestamp, allocator, &body_buf);
     has_prev = true;
+    if (input.extraction_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"extractionConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.extraction_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"extractionMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.metadata) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"metadata\":");
@@ -155,10 +182,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEventInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateEventOutput {
-    var result: CreateEventOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateEventOutput, body, allocator);
-    }
+    const result: CreateEventOutput = try aws.json.parseJsonObject(
+        CreateEventOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

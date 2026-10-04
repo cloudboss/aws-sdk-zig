@@ -8,8 +8,14 @@ const Filter = @import("filter.zig").Filter;
 const SchemaConversionRequest = @import("schema_conversion_request.zig").SchemaConversionRequest;
 
 pub const DescribeMetadataModelImportsInput = struct {
-    /// Filters applied to the metadata model imports described in the form of
-    /// key-value pairs.
+    /// The filters to apply to the metadata model import requests.
+    ///
+    /// The following filter names are supported:
+    ///
+    /// * `request-id` – The request identifier.
+    ///
+    /// * `status` – The request status. Valid values: `RECEIVED`, `IN_PROGRESS`,
+    ///   `SUCCESS`, `FAILED`.
     filters: ?[]const Filter = null,
 
     /// Specifies the unique pagination token that makes it possible to display the
@@ -26,7 +32,10 @@ pub const DescribeMetadataModelImportsInput = struct {
     /// unchanged.
     marker: ?[]const u8 = null,
 
-    /// A paginated list of metadata model imports.
+    /// The maximum number of records to include in the response. If more records
+    /// exist than
+    /// the specified `MaxRecords` value, DMS includes a pagination token
+    /// in the response so that you can retrieve the remaining results.
     max_records: ?i32 = null,
 
     /// The migration project name or Amazon Resource Name (ARN).
@@ -55,7 +64,9 @@ pub const DescribeMetadataModelImportsOutput = struct {
     /// unchanged.
     marker: ?[]const u8 = null,
 
-    /// A paginated list of metadata model imports.
+    /// A paginated list of metadata model import requests.
+    ///
+    /// DMS never populates the `ExportSqlDetails` field for this operation.
     requests: ?[]const SchemaConversionRequest = null,
 
     pub const json_field_names = .{

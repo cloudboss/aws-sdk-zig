@@ -92,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetWirelessGatewayTaskI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetWirelessGatewayTaskOutput {
-    var result: GetWirelessGatewayTaskOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetWirelessGatewayTaskOutput, body, allocator);
-    }
+    const result: GetWirelessGatewayTaskOutput = try aws.json.parseJsonObject(
+        GetWirelessGatewayTaskOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

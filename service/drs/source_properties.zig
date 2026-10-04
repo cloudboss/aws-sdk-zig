@@ -1,3 +1,4 @@
+const SourceServerArchitecture = @import("source_server_architecture.zig").SourceServerArchitecture;
 const CPU = @import("cpu.zig").CPU;
 const Disk = @import("disk.zig").Disk;
 const IdentificationHints = @import("identification_hints.zig").IdentificationHints;
@@ -6,6 +7,9 @@ const OS = @import("os.zig").OS;
 
 /// Properties of the Source Server machine.
 pub const SourceProperties = struct {
+    /// The architecture of the Source Server.
+    architecture: ?SourceServerArchitecture = null,
+
     /// An array of CPUs.
     cpus: ?[]const CPU = null,
 
@@ -35,6 +39,7 @@ pub const SourceProperties = struct {
     supports_nitro_instances: ?bool = null,
 
     pub const json_field_names = .{
+        .architecture = "architecture",
         .cpus = "cpus",
         .disks = "disks",
         .identification_hints = "identificationHints",

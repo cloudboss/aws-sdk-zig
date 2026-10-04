@@ -1,3 +1,4 @@
+const ConditionalBehavior = @import("conditional_behavior.zig").ConditionalBehavior;
 const RegistrationFieldDisplayHints = @import("registration_field_display_hints.zig").RegistrationFieldDisplayHints;
 const FieldRequirement = @import("field_requirement.zig").FieldRequirement;
 const FieldType = @import("field_type.zig").FieldType;
@@ -6,6 +7,12 @@ const TextValidation = @import("text_validation.zig").TextValidation;
 
 /// Provides a description of the specified field.
 pub const RegistrationFieldDefinition = struct {
+    /// The conditional behavior rules for this field. Only present when
+    /// **FieldRequirement** is **CONDITIONAL**. Rules are evaluated in order and
+    /// the first matching rule determines the field's resolved requirement. If no
+    /// rule matches, the **DefaultBehavior** applies.
+    conditional_behavior: ?ConditionalBehavior = null,
+
     /// An array of RegistrationFieldDisplayHints objects for the field.
     display_hints: RegistrationFieldDisplayHints,
 
@@ -30,6 +37,7 @@ pub const RegistrationFieldDefinition = struct {
     text_validation: ?TextValidation = null,
 
     pub const json_field_names = .{
+        .conditional_behavior = "ConditionalBehavior",
         .display_hints = "DisplayHints",
         .field_path = "FieldPath",
         .field_requirement = "FieldRequirement",

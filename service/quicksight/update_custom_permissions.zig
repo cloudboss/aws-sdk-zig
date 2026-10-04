@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Capabilities = @import("capabilities.zig").Capabilities;
+const Governance = @import("governance.zig").Governance;
 
 pub const UpdateCustomPermissionsInput = struct {
     /// The ID of the Amazon Web Services account that contains the custom
@@ -17,10 +18,18 @@ pub const UpdateCustomPermissionsInput = struct {
     /// The name of the custom permissions profile that you want to update.
     custom_permissions_name: []const u8,
 
+    /// The governance configuration for the custom permissions profile. The
+    /// `UpdateCustomPermissions` operation replaces all existing `Capabilities` and
+    /// `Governance` values. If you omit this parameter, Amazon Quick removes
+    /// governance from the profile and the existing custom permission behavior
+    /// applies.
+    governance: ?Governance = null,
+
     pub const json_field_names = .{
         .aws_account_id = "AwsAccountId",
         .capabilities = "Capabilities",
         .custom_permissions_name = "CustomPermissionsName",
+        .governance = "Governance",
     };
 };
 
@@ -88,6 +97,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateCustomPermissions
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.governance) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Governance\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -104,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateCustomPermissions
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateCustomPermissionsOutput {
-    var result: UpdateCustomPermissionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateCustomPermissionsOutput, body, allocator);
-    }
+    const result: UpdateCustomPermissionsOutput = try aws.json.parseJsonObject(
+        UpdateCustomPermissionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

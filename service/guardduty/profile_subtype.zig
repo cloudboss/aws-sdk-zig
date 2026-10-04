@@ -5,12 +5,16 @@ pub const ProfileSubtype = enum {
     infrequent,
     unseen,
     rare,
+    count,
+    average,
 
     pub const json_field_names = .{
         .frequent = "FREQUENT",
         .infrequent = "INFREQUENT",
         .unseen = "UNSEEN",
         .rare = "RARE",
+        .count = "COUNT",
+        .average = "AVERAGE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +23,8 @@ pub const ProfileSubtype = enum {
             .infrequent => "INFREQUENT",
             .unseen => "UNSEEN",
             .rare => "RARE",
+            .count => "COUNT",
+            .average => "AVERAGE",
         };
     }
 

@@ -91,10 +91,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDomainPermissionsPol
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDomainPermissionsPolicyOutput {
-    var result: GetDomainPermissionsPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDomainPermissionsPolicyOutput, body, allocator);
-    }
+    const result: GetDomainPermissionsPolicyOutput = try aws.json.parseJsonObject(
+        GetDomainPermissionsPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -3,6 +3,7 @@ const aws = @import("aws");
 const CRUpdateAllocationStrategy = @import("cr_update_allocation_strategy.zig").CRUpdateAllocationStrategy;
 const Ec2Configuration = @import("ec_2_configuration.zig").Ec2Configuration;
 const LaunchTemplateSpecification = @import("launch_template_specification.zig").LaunchTemplateSpecification;
+const UpdateManagedInstancesProviderConfiguration = @import("update_managed_instances_provider_configuration.zig").UpdateManagedInstancesProviderConfiguration;
 const ComputeScalingPolicy = @import("compute_scaling_policy.zig").ComputeScalingPolicy;
 const CRType = @import("cr_type.zig").CRType;
 
@@ -41,6 +42,36 @@ pub const ComputeResourceUpdate = struct {
     /// available, Batch
     /// selects new instance types.
     ///
+    /// **BEST_FIT_PROGRESSIVE_ORDERED**
+    ///
+    /// This is an advanced allocation strategy only for customers who want to
+    /// control which
+    /// instance types are preferred during scaling.
+    ///
+    /// Placing large instance types at the top of the list may result in
+    /// **over-provisioning** for
+    /// small jobs. Placing small instance types at the top may cause the compute
+    /// environment to
+    /// reach Amazon EC2 instance count limits before reaching `maxvCpus`.
+    ///
+    /// Batch selects instance types in the order they appear in the
+    /// `instanceTypes` list. When an instance family is specified, sizes within
+    /// that
+    /// family are expanded using `BEST_FIT_PROGRESSIVE` logic—preferring sizes that
+    /// best fit the jobs, with larger sizes as fallback. Instance types that cannot
+    /// meet the resource
+    /// requirements of the jobs are skipped. This strategy is only available for
+    /// On-Demand Instance
+    /// (`EC2`) compute resources.
+    ///
+    /// If an instance family and an explicit instance type from that family both
+    /// appear in
+    /// `instanceTypes`, the explicit type takes its listed position and is excluded
+    /// from
+    /// the family expansion. For example, in `["m7a.4xlarge", "m7a", "m6a"]`,
+    /// `m7a.4xlarge` is always placed first and is excluded from the `m7a`
+    /// family expansion.
+    ///
     /// **SPOT_CAPACITY_OPTIMIZED**
     ///
     /// Batch selects one or more instance types that are large enough to meet the
@@ -61,13 +92,39 @@ pub const ComputeResourceUpdate = struct {
     /// compute
     /// resources.
     ///
-    /// With `BEST_FIT_PROGRESSIVE`,`SPOT_CAPACITY_OPTIMIZED` and
-    /// `SPOT_PRICE_CAPACITY_OPTIMIZED` (recommended) strategies using On-Demand or
-    /// Spot Instances,
-    /// and the `BEST_FIT` strategy using Spot Instances, Batch might need to exceed
-    /// `maxvCpus` to meet your capacity requirements. In this event, Batch never
-    /// exceeds
-    /// `maxvCpus` by more than a single instance.
+    /// **SPOT_CAPACITY_OPTIMIZED_PRIORITIZED**
+    ///
+    /// This is an advanced allocation strategy for customers who want to influence
+    /// instance
+    /// type selection during scaling. This strategy optimizes for **capacity
+    /// first**, and honors instance type priorities on a best-effort basis
+    /// (priorities are
+    /// honored when they do not significantly reduce available Spot capacity).
+    ///
+    /// Placing large instance types at the top of the list may result in
+    /// **over-provisioning** for
+    /// small jobs. Placing small instance types at the top may cause the compute
+    /// environment to
+    /// reach Amazon EC2 instance count limits before reaching `maxvCpus`.
+    ///
+    /// Batch selects instance types in the order they appear in the
+    /// `instanceTypes` list, but **optimizes for capacity
+    /// first**. The customer-defined priority is honored on a best-effort basis.
+    /// When Spot
+    /// Instance capacity pools are similarly available, priority order is
+    /// respected. When capacity is
+    /// constrained, Batch selects from the most available pools regardless of
+    /// priority to minimize
+    /// the likelihood of Spot Instance interruptions. This strategy is only
+    /// available for Spot
+    /// Instance compute resources.
+    ///
+    /// With any allocation strategy except `BEST_FIT` using On-Demand
+    /// (`EC2`) compute resources, Batch might need to exceed `maxvCpus` to meet
+    /// your
+    /// capacity requirements. In this event, Batch never exceeds `maxvCpus` by more
+    /// than
+    /// a single instance.
     allocation_strategy: ?CRUpdateAllocationStrategy = null,
 
     /// The maximum percentage that a Spot Instance price can be when compared with
@@ -90,6 +147,15 @@ pub const ComputeResourceUpdate = struct {
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't specify it.
     bid_percentage: ?i32 = null,
+
+    /// The updated tags to apply to the Amazon ECS capacity provider and Amazon EC2
+    /// instances. This
+    /// parameter is only valid for `ECS_MANAGED_INSTANCES` compute environments.
+    /// You must
+    /// have the `batch:SetCapacityTags` permission on the compute environment
+    /// resource to
+    /// use this parameter.
+    capacity_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The desired number of vCPUS in the compute environment. Batch modifies this
     /// value between
@@ -294,16 +360,21 @@ pub const ComputeResourceUpdate = struct {
     /// resources. Don't specify it.
     launch_template: ?LaunchTemplateSpecification = null,
 
+    /// The updated configuration for the Amazon ECS Managed Instances capacity
+    /// provider. This parameter
+    /// is only valid when the compute environment type is `ECS_MANAGED_INSTANCES`.
+    /// You
+    /// cannot change `capacityOptionType` or `fipsEnabled` on update.
+    managed_instances_provider: ?UpdateManagedInstancesProviderConfiguration = null,
+
     /// The maximum number of Amazon EC2 vCPUs that an environment can reach.
     ///
-    /// With `BEST_FIT_PROGRESSIVE`,`SPOT_CAPACITY_OPTIMIZED` and
-    /// `SPOT_PRICE_CAPACITY_OPTIMIZED` (recommended) strategies using On-Demand or
-    /// Spot
-    /// Instances, and the `BEST_FIT` strategy using Spot Instances, Batch might
-    /// need to
-    /// exceed `maxvCpus` to meet your capacity requirements. In this event, Batch
-    /// never
-    /// exceeds `maxvCpus` by more than a single instance.
+    /// With any allocation strategy except `BEST_FIT` using On-Demand
+    /// (`EC2`) compute resources, Batch might need to exceed `maxvCpus` to meet
+    /// your
+    /// capacity requirements. In this event, Batch never exceeds `maxvCpus` by more
+    /// than
+    /// a single instance.
     maxv_cpus: ?i32 = null,
 
     /// The minimum number of vCPUs that an environment should maintain (even if the
@@ -412,9 +483,9 @@ pub const ComputeResourceUpdate = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of compute environment: `EC2`, `SPOT`, `FARGATE`,
-    /// or `FARGATE_SPOT`. For more information, see [Compute
-    /// environments](https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html) in the
-    /// *Batch User Guide*.
+    /// `FARGATE_SPOT`, or `ECS_MANAGED_INSTANCES`. For more information, see
+    /// [Compute
+    /// environments](https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html) in the *Batch User Guide*.
     ///
     /// If you choose `SPOT`, you must also specify an Amazon EC2 Spot Fleet role
     /// with the
@@ -428,6 +499,8 @@ pub const ComputeResourceUpdate = struct {
     /// infrastructure update of the compute environment. For more information, see
     /// [Updating compute
     /// environments](https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html) in the *Batch User Guide*.
+    ///
+    /// You cannot change the type to or from `ECS_MANAGED_INSTANCES`.
     @"type": ?CRType = null,
 
     /// Specifies whether the AMI ID is updated to the latest one that's supported
@@ -455,6 +528,7 @@ pub const ComputeResourceUpdate = struct {
     pub const json_field_names = .{
         .allocation_strategy = "allocationStrategy",
         .bid_percentage = "bidPercentage",
+        .capacity_tags = "capacityTags",
         .desiredv_cpus = "desiredvCpus",
         .ec_2_configuration = "ec2Configuration",
         .ec_2_key_pair = "ec2KeyPair",
@@ -462,6 +536,7 @@ pub const ComputeResourceUpdate = struct {
         .instance_role = "instanceRole",
         .instance_types = "instanceTypes",
         .launch_template = "launchTemplate",
+        .managed_instances_provider = "managedInstancesProvider",
         .maxv_cpus = "maxvCpus",
         .minv_cpus = "minvCpus",
         .placement_group = "placementGroup",

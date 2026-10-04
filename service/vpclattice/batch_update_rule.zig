@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchUpdateRuleInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchUpdateRuleOutput {
-    var result: BatchUpdateRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchUpdateRuleOutput, body, allocator);
-    }
+    const result: BatchUpdateRuleOutput = try aws.json.parseJsonObject(
+        BatchUpdateRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

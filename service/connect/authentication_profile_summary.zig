@@ -1,5 +1,5 @@
-/// This API is in preview release for Amazon Connect and is subject to change.
-/// To
+/// This API is in preview release for Connect Customer and is subject to
+/// change. To
 /// request access to this API, contact Amazon Web Services Support.
 ///
 /// A summary of a given authentication profile.
@@ -11,9 +11,9 @@ pub const AuthenticationProfileSummary = struct {
     id: ?[]const u8 = null,
 
     /// Shows whether the authentication profile is the default authentication
-    /// profile for the Amazon Connect
+    /// profile for the Connect Customer
     /// instance. The default authentication profile applies to all agents in an
-    /// Amazon Connect instance, unless
+    /// Connect Customer instance, unless
     /// overridden by another authentication profile.
     is_default: bool = false,
 

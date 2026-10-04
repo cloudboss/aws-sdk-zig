@@ -2,7 +2,7 @@ const ConnectConfiguration = @import("connect_configuration.zig").ConnectConfigu
 
 /// The configuration information of the external data source.
 pub const Configuration = union(enum) {
-    /// The configuration information of the Amazon Connect data source.
+    /// The configuration information of the Connect Customer data source.
     connect_configuration: ?ConnectConfiguration,
 
     pub const json_field_names = .{

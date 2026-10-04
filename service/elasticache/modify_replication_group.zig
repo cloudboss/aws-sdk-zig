@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AuthTokenUpdateStrategyType = @import("auth_token_update_strategy_type.zig").AuthTokenUpdateStrategyType;
 const ClusterMode = @import("cluster_mode.zig").ClusterMode;
+const Durability = @import("durability.zig").Durability;
 const IpDiscovery = @import("ip_discovery.zig").IpDiscovery;
 const LogDeliveryConfigurationRequest = @import("log_delivery_configuration_request.zig").LogDeliveryConfigurationRequest;
 const TransitEncryptionMode = @import("transit_encryption_mode.zig").TransitEncryptionMode;
@@ -106,6 +107,14 @@ pub const ModifyReplicationGroupInput = struct {
     /// configuration
     /// and set the cluster mode to Enabled.
     cluster_mode: ?ClusterMode = null,
+
+    /// Specifies the durability setting for the replication group.
+    /// Use this parameter to change the durability mode of an existing replication
+    /// group,
+    /// for example from `sync` to `async` or vice versa. For more
+    /// information, see
+    /// [Durability](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html).
+    durability: ?Durability = null,
 
     /// Modifies the engine listed in a replication group message. The options are
     /// valkey, memcached or redis.
@@ -341,6 +350,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyReplicationGroupI
     }
     if (input.cluster_mode) |v| {
         try body_buf.appendSlice(allocator, "&ClusterMode=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
+    }
+    if (input.durability) |v| {
+        try body_buf.appendSlice(allocator, "&Durability=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.engine) |v| {

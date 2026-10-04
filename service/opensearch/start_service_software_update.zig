@@ -120,10 +120,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartServiceSoftwareUpd
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartServiceSoftwareUpdateOutput {
-    var result: StartServiceSoftwareUpdateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartServiceSoftwareUpdateOutput, body, allocator);
-    }
+    const result: StartServiceSoftwareUpdateOutput = try aws.json.parseJsonObject(
+        StartServiceSoftwareUpdateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

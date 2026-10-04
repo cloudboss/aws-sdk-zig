@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCoreNetworksInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListCoreNetworksOutput {
-    var result: ListCoreNetworksOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListCoreNetworksOutput, body, allocator);
-    }
+    const result: ListCoreNetworksOutput = try aws.json.parseJsonObject(
+        ListCoreNetworksOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

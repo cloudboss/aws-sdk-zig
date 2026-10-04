@@ -17,6 +17,7 @@ pub const ErrorCode = enum {
     voice_connector_group_associations_exist,
     phone_number_associations_exist,
     gone,
+    validation,
 
     pub const json_field_names = .{
         .bad_request = "BadRequest",
@@ -35,6 +36,7 @@ pub const ErrorCode = enum {
         .voice_connector_group_associations_exist = "VoiceConnectorGroupAssociationsExist",
         .phone_number_associations_exist = "PhoneNumberAssociationsExist",
         .gone = "Gone",
+        .validation = "Validation",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -55,6 +57,7 @@ pub const ErrorCode = enum {
             .voice_connector_group_associations_exist => "VoiceConnectorGroupAssociationsExist",
             .phone_number_associations_exist => "PhoneNumberAssociationsExist",
             .gone => "Gone",
+            .validation => "Validation",
         };
     }
 

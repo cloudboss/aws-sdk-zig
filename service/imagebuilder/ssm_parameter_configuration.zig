@@ -11,9 +11,8 @@ pub const SsmParameterConfiguration = struct {
     /// Region.
     ami_account_id: ?[]const u8 = null,
 
-    /// The data type specifies what type of value the Parameter contains. We
-    /// recommend that
-    /// you use data type `aws:ec2:image`.
+    /// The type of value the parameter contains.
+    /// We recommend the `aws:ec2:image` data type.
     data_type: ?SsmParameterDataType = null,
 
     /// This is the name of the Parameter in the target Region or account. The image

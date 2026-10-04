@@ -93,6 +93,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateThingShadowInput,
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateThingShadowOutput {
     var result: UpdateThingShadowOutput = .{};
+    errdefer {
+        if (result.payload) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.payload = try allocator.dupe(u8, body);
     }

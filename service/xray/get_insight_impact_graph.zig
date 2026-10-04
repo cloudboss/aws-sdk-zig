@@ -137,10 +137,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInsightImpactGraphIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetInsightImpactGraphOutput {
-    var result: GetInsightImpactGraphOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetInsightImpactGraphOutput, body, allocator);
-    }
+    const result: GetInsightImpactGraphOutput = try aws.json.parseJsonObject(
+        GetInsightImpactGraphOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

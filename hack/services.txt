@@ -185,8 +185,6 @@ invoicing models/invoicing/service/2024-12-01/invoicing-2024-12-01.json com.amaz
 iot models/iot/service/2015-05-28/iot-2015-05-28.json com.amazonaws.iot#AWSIotService
 iotdataplane models/iot-data-plane/service/2015-05-28/iot-data-plane-2015-05-28.json com.amazonaws.iotdataplane#IotMoonrakerService
 iotdeviceadvisor models/iotdeviceadvisor/service/2020-09-18/iotdeviceadvisor-2020-09-18.json com.amazonaws.iotdeviceadvisor#IotSenateService
-iotevents models/iot-events/service/2018-07-27/iot-events-2018-07-27.json com.amazonaws.iotevents#IotColumboService
-ioteventsdata models/iot-events-data/service/2018-10-23/iot-events-data-2018-10-23.json com.amazonaws.ioteventsdata#IotColumboDataService
 iotfleetwise models/iotfleetwise/service/2021-06-17/iotfleetwise-2021-06-17.json com.amazonaws.iotfleetwise#IoTAutobahnControlPlane
 iotjobsdataplane models/iot-jobs-data-plane/service/2017-09-29/iot-jobs-data-plane-2017-09-29.json com.amazonaws.iotjobsdataplane#IotLaserThingJobManagerExternalService
 iotmanagedintegrations models/iot-managed-integrations/service/2025-03-03/iot-managed-integrations-2025-03-03.json com.amazonaws.iotmanagedintegrations#IotManagedIntegrations
@@ -215,6 +213,9 @@ kinesisvideowebrtcstorage models/kinesis-video-webrtc-storage/service/2018-05-10
 kms models/kms/service/2014-11-01/kms-2014-11-01.json com.amazonaws.kms#TrentService
 lakeformation models/lakeformation/service/2017-03-31/lakeformation-2017-03-31.json com.amazonaws.lakeformation#AWSLakeFormation
 lambda models/lambda/service/2015-03-31/lambda-2015-03-31.json com.amazonaws.lambda#AWSGirApiService
+lambda-core models/lambda-core/service/2026-04-30/lambda-core-2026-04-30.json com.amazonaws.lambdacore#LambdaCoreApiService
+lambda-microvms models/lambda-microvms/service/2025-09-09/lambda-microvms-2025-09-09.json com.amazonaws.lambdamicrovms#LambdaMicrovms
+lambda-web models/lambda-web/service/2025-03-07/lambda-web-2025-03-07.json com.amazonaws.lambdaweb#LambdaWeb
 launchwizard models/launch-wizard/service/2018-05-10/launch-wizard-2018-05-10.json com.amazonaws.launchwizard#LaunchWizard
 lexmodelbuildingservice models/lex-model-building-service/service/2017-04-19/lex-model-building-service-2017-04-19.json com.amazonaws.lexmodelbuildingservice#AWSDeepSenseModelBuildingService
 lexmodelsv2 models/lex-models-v2/service/2020-08-07/lex-models-v2-2020-08-07.json com.amazonaws.lexmodelsv2#LexModelBuildingServiceV2
@@ -280,7 +281,6 @@ opensearchserverless models/opensearchserverless/service/2021-11-01/opensearchse
 organizations models/organizations/service/2016-11-28/organizations-2016-11-28.json com.amazonaws.organizations#AWSOrganizationsV20161128
 osis models/osis/service/2022-01-01/osis-2022-01-01.json com.amazonaws.osis#AmazonOpenSearchIngestionService
 outposts models/outposts/service/2019-12-03/outposts-2019-12-03.json com.amazonaws.outposts#OutpostsOlafService
-panorama models/panorama/service/2019-07-24/panorama-2019-07-24.json com.amazonaws.panorama#OmniCloudServiceLambda
 partnercentralaccount models/partnercentral-account/service/2025-04-04/partnercentral-account-2025-04-04.json com.amazonaws.partnercentralaccount#PartnerCentralAccount
 partnercentralbenefits models/partnercentral-benefits/service/2018-05-10/partnercentral-benefits-2018-05-10.json com.amazonaws.partnercentralbenefits#PartnerCentralBenefitsService
 partnercentralchannel models/partnercentral-channel/service/2024-03-18/partnercentral-channel-2024-03-18.json com.amazonaws.partnercentralchannel#PartnerCentralChannel
@@ -361,7 +361,6 @@ sfn models/sfn/service/2016-11-23/sfn-2016-11-23.json com.amazonaws.sfn#AWSStepF
 shield models/shield/service/2016-06-02/shield-2016-06-02.json com.amazonaws.shield#AWSShield_20160616
 signer models/signer/service/2017-08-25/signer-2017-08-25.json com.amazonaws.signer#WallabyService
 signin models/signin/service/2023-01-01/signin-2023-01-01.json com.amazonaws.signin#Signin
-simspaceweaver models/simspaceweaver/service/2022-10-28/simspaceweaver-2022-10-28.json com.amazonaws.simspaceweaver#SimSpaceWeaver
 snowball models/snowball/service/2016-06-30/snowball-2016-06-30.json com.amazonaws.snowball#AWSIESnowballJobManagementService
 snowdevicemanagement models/snow-device-management/service/2021-08-04/snow-device-management-2021-08-04.json com.amazonaws.snowdevicemanagement#SnowDeviceManagement
 sns models/sns/service/2010-03-31/sns-2010-03-31.json com.amazonaws.sns#AmazonSimpleNotificationService

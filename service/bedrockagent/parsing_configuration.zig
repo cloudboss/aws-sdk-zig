@@ -25,6 +25,18 @@ pub const ParsingConfiguration = struct {
     bedrock_foundation_model_configuration: ?BedrockFoundationModelConfiguration = null,
 
     /// The parsing strategy for the data source.
+    ///
+    /// For managed knowledge bases, the strategy that you can select depends on the
+    /// embedding model that your knowledge base uses:
+    ///
+    /// * If your knowledge base uses a native multimodal embedding model, specify
+    ///   `MULTI_MODAL_EMBEDDINGS`. With this strategy, files are sent directly to
+    ///   the embedding model instead of being parsed into text. This is the only
+    ///   strategy that is supported for these knowledge bases.
+    /// * Otherwise, specify `SMART_PARSING`.
+    ///
+    /// For more information, see [Customize ingestion for managed knowledge
+    /// bases](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-customize-ingestion.html).
     parsing_strategy: ParsingStrategy,
 
     pub const json_field_names = .{

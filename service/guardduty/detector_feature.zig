@@ -8,6 +8,8 @@ pub const DetectorFeature = enum {
     lambda_network_logs,
     eks_runtime_monitoring,
     runtime_monitoring,
+    ai_protection,
+    ai_analyst,
 
     pub const json_field_names = .{
         .s3_data_events = "S3_DATA_EVENTS",
@@ -17,6 +19,8 @@ pub const DetectorFeature = enum {
         .lambda_network_logs = "LAMBDA_NETWORK_LOGS",
         .eks_runtime_monitoring = "EKS_RUNTIME_MONITORING",
         .runtime_monitoring = "RUNTIME_MONITORING",
+        .ai_protection = "AI_PROTECTION",
+        .ai_analyst = "AI_ANALYST",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -28,6 +32,8 @@ pub const DetectorFeature = enum {
             .lambda_network_logs => "LAMBDA_NETWORK_LOGS",
             .eks_runtime_monitoring => "EKS_RUNTIME_MONITORING",
             .runtime_monitoring => "RUNTIME_MONITORING",
+            .ai_protection => "AI_PROTECTION",
+            .ai_analyst => "AI_ANALYST",
         };
     }
 

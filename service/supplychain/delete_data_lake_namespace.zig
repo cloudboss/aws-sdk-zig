@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteDataLakeNamespace
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteDataLakeNamespaceOutput {
-    var result: DeleteDataLakeNamespaceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteDataLakeNamespaceOutput, body, allocator);
-    }
+    const result: DeleteDataLakeNamespaceOutput = try aws.json.parseJsonObject(
+        DeleteDataLakeNamespaceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

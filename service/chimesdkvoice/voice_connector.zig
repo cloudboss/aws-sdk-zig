@@ -12,14 +12,13 @@ pub const VoiceConnector = struct {
     /// The Voice Connector's creation timestamp, in ISO 8601 format.
     created_timestamp: ?i64 = null,
 
-    /// The connectors for use with Amazon Connect.
+    /// The connectors for use with Connect Customer.
     integration_type: ?VoiceConnectorIntegrationType = null,
 
     /// The Voice Connector's name.
     name: ?[]const u8 = null,
 
-    /// The type of network of the Voice Connector. Either IPv4 only or dual-stack
-    /// (IPv4 and IPv6).
+    /// The type of network for the Voice Connector.
     network_type: ?NetworkType = null,
 
     /// The outbound host name for the Voice Connector.

@@ -3,16 +3,19 @@ const std = @import("std");
 pub const PostalCodeMode = enum {
     merge_all_spanned_localities,
     enumerate_spanned_localities,
+    enumerate_spanned_districts,
 
     pub const json_field_names = .{
         .merge_all_spanned_localities = "MergeAllSpannedLocalities",
         .enumerate_spanned_localities = "EnumerateSpannedLocalities",
+        .enumerate_spanned_districts = "EnumerateSpannedDistricts",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .merge_all_spanned_localities => "MergeAllSpannedLocalities",
             .enumerate_spanned_localities => "EnumerateSpannedLocalities",
+            .enumerate_spanned_districts => "EnumerateSpannedDistricts",
         };
     }
 

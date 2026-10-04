@@ -8,52 +8,46 @@ const EnvironmentDescription = @import("environment_description.zig").Environmen
 const serde = @import("serde.zig");
 
 pub const DescribeEnvironmentsInput = struct {
-    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-    /// include only
-    /// those that are associated with this application.
+    /// If specified, Elastic Beanstalk restricts the returned descriptions to
+    /// include only those that are associated with this application.
     application_name: ?[]const u8 = null,
 
-    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-    /// include only
-    /// those that have the specified IDs.
+    /// If specified, Elastic Beanstalk restricts the returned descriptions to
+    /// include only those that have the specified IDs.
     environment_ids: ?[]const []const u8 = null,
 
-    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-    /// include only
-    /// those that have the specified names.
+    /// If specified, Elastic Beanstalk restricts the returned descriptions to
+    /// include only those that have the specified names.
     environment_names: ?[]const []const u8 = null,
 
-    /// If specified when `IncludeDeleted` is set to `true`, then
-    /// environments deleted after this date are displayed.
+    /// If specified when `IncludeDeleted` is set to `true`, then environments
+    /// deleted after this date are displayed.
     included_deleted_back_to: ?i64 = null,
 
     /// Indicates whether to include deleted environments:
     ///
-    /// `true`: Environments that have been deleted after
-    /// `IncludedDeletedBackTo` are displayed.
+    /// `true`: Environments that have been deleted after `IncludedDeletedBackTo`
+    /// are displayed.
     ///
     /// `false`: Do not include deleted environments.
     include_deleted: ?bool = null,
 
     /// For a paginated request. Specify a maximum number of environments to include
-    /// in
-    /// each response.
+    /// in each response.
     ///
-    /// If no `MaxRecords` is specified, all available environments are
-    /// retrieved in a single response.
+    /// If no `MaxRecords` is specified, all available environments are retrieved in
+    /// a single response.
     max_records: ?i32 = null,
 
     /// For a paginated request. Specify a token from a previous response page to
-    /// retrieve the next response page. All other
-    /// parameter values must be identical to the ones specified in the initial
-    /// request.
+    /// retrieve the next response page. All other parameter values must be
+    /// identical to the ones specified in the initial request.
     ///
     /// If no `NextToken` is specified, the first page is retrieved.
     next_token: ?[]const u8 = null,
 
-    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-    /// include only
-    /// those that are associated with this application version.
+    /// If specified, Elastic Beanstalk restricts the returned descriptions to
+    /// include only those that are associated with this application version.
     version_label: ?[]const u8 = null,
 };
 
@@ -62,8 +56,7 @@ pub const DescribeEnvironmentsOutput = struct {
     environments: ?[]const EnvironmentDescription = null,
 
     /// In a paginated request, the token that you can pass in a subsequent request
-    /// to get the
-    /// next response page.
+    /// to get the next response page.
     next_token: ?[]const u8 = null,
 };
 

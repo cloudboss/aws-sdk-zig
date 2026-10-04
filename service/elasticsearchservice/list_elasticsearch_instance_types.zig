@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListElasticsearchInstan
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListElasticsearchInstanceTypesOutput {
-    var result: ListElasticsearchInstanceTypesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListElasticsearchInstanceTypesOutput, body, allocator);
-    }
+    const result: ListElasticsearchInstanceTypesOutput = try aws.json.parseJsonObject(
+        ListElasticsearchInstanceTypesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

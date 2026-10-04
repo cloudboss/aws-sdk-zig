@@ -12,10 +12,7 @@ pub const CreateActivityInput = struct {
     encryption_configuration: ?EncryptionConfiguration = null,
 
     /// The name of the activity to create. This name must be unique for your Amazon
-    /// Web Services account and region for 90 days. For more information,
-    /// see [
-    /// Limits Related to State Machine
-    /// Executions](https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions) in the *Step Functions Developer Guide*.
+    /// Web Services account and region.
     ///
     /// A name must *not* contain:
     ///

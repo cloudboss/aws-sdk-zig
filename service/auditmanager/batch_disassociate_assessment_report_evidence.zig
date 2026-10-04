@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchDisassociateAssess
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchDisassociateAssessmentReportEvidenceOutput {
-    var result: BatchDisassociateAssessmentReportEvidenceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchDisassociateAssessmentReportEvidenceOutput, body, allocator);
-    }
+    const result: BatchDisassociateAssessmentReportEvidenceOutput = try aws.json.parseJsonObject(
+        BatchDisassociateAssessmentReportEvidenceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

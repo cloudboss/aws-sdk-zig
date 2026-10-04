@@ -9,6 +9,7 @@ const AppSecurityGroupManagement = @import("app_security_group_management.zig").
 const DefaultSpaceSettings = @import("default_space_settings.zig").DefaultSpaceSettings;
 const UserSettings = @import("user_settings.zig").UserSettings;
 const DomainSettingsForUpdate = @import("domain_settings_for_update.zig").DomainSettingsForUpdate;
+const HomeEfsFileSystemCreation = @import("home_efs_file_system_creation.zig").HomeEfsFileSystemCreation;
 const TagPropagation = @import("tag_propagation.zig").TagPropagation;
 
 pub const UpdateDomainInput = struct {
@@ -47,6 +48,11 @@ pub const UpdateDomainInput = struct {
     /// A collection of `DomainSettings` configuration values to update.
     domain_settings_for_update: ?DomainSettingsForUpdate = null,
 
+    /// Indicates whether to create a home EFS file system for the domain. You can
+    /// change from `Disabled` to `Enabled` to provision EFS on demand, but you
+    /// cannot change from `Enabled` to `Disabled`.
+    home_efs_file_system_creation: ?HomeEfsFileSystemCreation = null,
+
     /// The VPC subnets that Studio uses for communication.
     ///
     /// If removing subnets, ensure there are no apps in the `InService`, `Pending`,
@@ -71,6 +77,7 @@ pub const UpdateDomainInput = struct {
         .default_user_settings = "DefaultUserSettings",
         .domain_id = "DomainId",
         .domain_settings_for_update = "DomainSettingsForUpdate",
+        .home_efs_file_system_creation = "HomeEfsFileSystemCreation",
         .subnet_ids = "SubnetIds",
         .tag_propagation = "TagPropagation",
         .vpc_id = "VpcId",

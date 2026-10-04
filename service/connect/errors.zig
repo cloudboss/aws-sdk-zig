@@ -11,6 +11,7 @@ pub const ServiceError = struct {
         conflict_exception: ConflictException,
         contact_flow_not_published_exception: ContactFlowNotPublishedException,
         contact_not_found_exception: ContactNotFoundException,
+        contact_not_terminated_exception: ContactNotTerminatedException,
         destination_not_allowed_exception: DestinationNotAllowedException,
         duplicate_resource_exception: DuplicateResourceException,
         idempotency_exception: IdempotencyException,
@@ -43,6 +44,7 @@ pub const ServiceError = struct {
                 .conflict_exception => "ConflictException",
                 .contact_flow_not_published_exception => "ContactFlowNotPublishedException",
                 .contact_not_found_exception => "ContactNotFoundException",
+                .contact_not_terminated_exception => "ContactNotTerminatedException",
                 .destination_not_allowed_exception => "DestinationNotAllowedException",
                 .duplicate_resource_exception => "DuplicateResourceException",
                 .idempotency_exception => "IdempotencyException",
@@ -77,6 +79,7 @@ pub const ServiceError = struct {
                 .conflict_exception => |e| e.message,
                 .contact_flow_not_published_exception => |e| e.message,
                 .contact_not_found_exception => |e| e.message,
+                .contact_not_terminated_exception => |e| e.message,
                 .destination_not_allowed_exception => |e| e.message,
                 .duplicate_resource_exception => |e| e.message,
                 .idempotency_exception => |e| e.message,
@@ -111,6 +114,7 @@ pub const ServiceError = struct {
                 .conflict_exception => 409,
                 .contact_flow_not_published_exception => 404,
                 .contact_not_found_exception => 410,
+                .contact_not_terminated_exception => 409,
                 .destination_not_allowed_exception => 403,
                 .duplicate_resource_exception => 409,
                 .idempotency_exception => 409,
@@ -145,6 +149,7 @@ pub const ServiceError = struct {
                 .conflict_exception => |e| e.request_id,
                 .contact_flow_not_published_exception => |e| e.request_id,
                 .contact_not_found_exception => |e| e.request_id,
+                .contact_not_terminated_exception => |e| e.request_id,
                 .destination_not_allowed_exception => |e| e.request_id,
                 .duplicate_resource_exception => |e| e.request_id,
                 .idempotency_exception => |e| e.request_id,
@@ -215,6 +220,11 @@ pub const ContactFlowNotPublishedException = struct {
 };
 
 pub const ContactNotFoundException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const ContactNotTerminatedException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -383,6 +393,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     }
     if (std.mem.eql(u8, error_code, "ContactNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .contact_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ContactNotTerminatedException")) {
+        return .{ .arena = arena, .kind = .{ .contact_not_terminated_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

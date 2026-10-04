@@ -7,10 +7,8 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const DeleteTaxRegistrationInput = struct {
     /// Unique account identifier for the TRN information that needs to be deleted.
-    /// If this isn't
-    /// passed, the account ID corresponding to the credentials of the API caller
-    /// will be used for
-    /// this parameter.
+    /// If this isn't passed, the account ID corresponding to the credentials of the
+    /// API caller will be used for this parameter.
     account_id: ?[]const u8 = null,
 
     pub const json_field_names = .{

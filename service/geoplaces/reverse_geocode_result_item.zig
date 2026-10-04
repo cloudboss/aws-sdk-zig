@@ -3,6 +3,7 @@ const Address = @import("address.zig").Address;
 const Category = @import("category.zig").Category;
 const FoodType = @import("food_type.zig").FoodType;
 const Intersection = @import("intersection.zig").Intersection;
+const RelatedPlace = @import("related_place.zig").RelatedPlace;
 const PlaceType = @import("place_type.zig").PlaceType;
 const PostalCodeDetails = @import("postal_code_details.zig").PostalCodeDetails;
 const TimeZone = @import("time_zone.zig").TimeZone;
@@ -29,6 +30,10 @@ pub const ReverseGeocodeResultItem = struct {
     /// The distance in meters from the QueryPosition.
     distance: i64 = 0,
 
+    /// If `true`, indicates that the coordinates of the position and access points
+    /// of the point address are estimated.
+    estimated_point_address: ?bool = null,
+
     /// List of food types offered by this result. Not available in `ap-southeast-1`
     /// and `ap-southeast-5` regions for
     /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
@@ -38,6 +43,9 @@ pub const ReverseGeocodeResultItem = struct {
     /// `ap-southeast-1` and `ap-southeast-5` regions for
     /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     intersections: ?[]const Intersection = null,
+
+    /// The main address corresponding to a place of type Secondary Address.
+    main_address: ?RelatedPlace = null,
 
     /// The bounding box enclosing the geometric shape (area or line) that an
     /// individual result covers.
@@ -81,8 +89,10 @@ pub const ReverseGeocodeResultItem = struct {
         .address_number_corrected = "AddressNumberCorrected",
         .categories = "Categories",
         .distance = "Distance",
+        .estimated_point_address = "EstimatedPointAddress",
         .food_types = "FoodTypes",
         .intersections = "Intersections",
+        .main_address = "MainAddress",
         .map_view = "MapView",
         .place_id = "PlaceId",
         .place_type = "PlaceType",

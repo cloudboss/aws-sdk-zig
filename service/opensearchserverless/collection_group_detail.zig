@@ -1,4 +1,6 @@
 const CollectionGroupCapacityLimits = @import("collection_group_capacity_limits.zig").CollectionGroupCapacityLimits;
+const CurrentCapacity = @import("current_capacity.zig").CurrentCapacity;
+const ServerlessGeneration = @import("serverless_generation.zig").ServerlessGeneration;
 const StandbyReplicas = @import("standby_replicas.zig").StandbyReplicas;
 const Tag = @import("tag.zig").Tag;
 
@@ -14,8 +16,14 @@ pub const CollectionGroupDetail = struct {
     /// The Epoch time when the collection group was created.
     created_date: ?i64 = null,
 
+    /// Current search and indexing capacity for the collection group.
+    current_capacity: ?CurrentCapacity = null,
+
     /// The description of the collection group.
     description: ?[]const u8 = null,
+
+    /// The generation of Amazon OpenSearch Serverless for the collection group.
+    generation: ?ServerlessGeneration = null,
 
     /// The unique identifier of the collection group.
     id: ?[]const u8 = null,
@@ -36,7 +44,9 @@ pub const CollectionGroupDetail = struct {
         .arn = "arn",
         .capacity_limits = "capacityLimits",
         .created_date = "createdDate",
+        .current_capacity = "currentCapacity",
         .description = "description",
+        .generation = "generation",
         .id = "id",
         .name = "name",
         .number_of_collections = "numberOfCollections",

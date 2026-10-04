@@ -1,8 +1,12 @@
+const RequestBillingMode = @import("request_billing_mode.zig").RequestBillingMode;
 const Tag = @import("tag.zig").Tag;
 
 pub const CreateConnectionRequest = struct {
     /// The bandwidth of the connection.
     bandwidth: []const u8,
+
+    /// The billing mode for the connection.
+    billing_mode: ?RequestBillingMode = null,
 
     /// The name of the connection.
     connection_name: []const u8,
@@ -28,6 +32,7 @@ pub const CreateConnectionRequest = struct {
 
     pub const json_field_names = .{
         .bandwidth = "bandwidth",
+        .billing_mode = "billingMode",
         .connection_name = "connectionName",
         .lag_id = "lagId",
         .location = "location",

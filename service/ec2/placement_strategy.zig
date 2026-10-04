@@ -4,11 +4,13 @@ pub const PlacementStrategy = enum {
     cluster,
     spread,
     partition,
+    precision_time,
 
     pub const json_field_names = .{
         .cluster = "cluster",
         .spread = "spread",
         .partition = "partition",
+        .precision_time = "precision-time",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const PlacementStrategy = enum {
             .cluster => "cluster",
             .spread => "spread",
             .partition => "partition",
+            .precision_time => "precision-time",
         };
     }
 

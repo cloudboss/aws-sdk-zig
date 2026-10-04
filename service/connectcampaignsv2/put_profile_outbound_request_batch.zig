@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutProfileOutboundReque
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutProfileOutboundRequestBatchOutput {
-    var result: PutProfileOutboundRequestBatchOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutProfileOutboundRequestBatchOutput, body, allocator);
-    }
+    const result: PutProfileOutboundRequestBatchOutput = try aws.json.parseJsonObject(
+        PutProfileOutboundRequestBatchOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

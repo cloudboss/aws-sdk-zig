@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMultiRegionEndpoi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateMultiRegionEndpointOutput {
-    var result: CreateMultiRegionEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateMultiRegionEndpointOutput, body, allocator);
-    }
+    const result: CreateMultiRegionEndpointOutput = try aws.json.parseJsonObject(
+        CreateMultiRegionEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

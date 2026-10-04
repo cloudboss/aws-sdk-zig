@@ -20,6 +20,12 @@ pub const AIRecommendationDeploymentConfiguration = struct {
     /// The recommended instance type for the deployment.
     instance_type: ?AIRecommendationInstanceType = null,
 
+    /// The minimum host (CPU) memory, in MiB, to reserve for each model copy when
+    /// deploying the recommendation as an Inference Component. This value maps to
+    /// the Inference Component's
+    /// `ComputeResourceRequirements$MinMemoryRequiredInMb` field.
+    min_cpu_memory_required_in_mb: ?i32 = null,
+
     /// The Amazon S3 data channels for the deployment.
     s3: ?[]const AIRecommendationDeploymentS3Channel = null,
 
@@ -29,6 +35,7 @@ pub const AIRecommendationDeploymentConfiguration = struct {
         .image_uri = "ImageUri",
         .instance_count = "InstanceCount",
         .instance_type = "InstanceType",
+        .min_cpu_memory_required_in_mb = "MinCpuMemoryRequiredInMb",
         .s3 = "S3",
     };
 };

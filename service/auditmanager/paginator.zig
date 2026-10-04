@@ -38,18 +38,16 @@ pub const GetChangeLogsPaginator = struct {
 
         const output = try get_change_logs.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -78,18 +76,16 @@ pub const GetDelegationsPaginator = struct {
 
         const output = try get_delegations.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -118,18 +114,16 @@ pub const GetEvidenceByEvidenceFolderPaginator = struct {
 
         const output = try get_evidence_by_evidence_folder.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -158,18 +152,16 @@ pub const GetEvidenceFoldersByAssessmentPaginator = struct {
 
         const output = try get_evidence_folders_by_assessment.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -198,18 +190,16 @@ pub const GetEvidenceFoldersByAssessmentControlPaginator = struct {
 
         const output = try get_evidence_folders_by_assessment_control.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -238,18 +228,16 @@ pub const ListAssessmentControlInsightsByControlDomainPaginator = struct {
 
         const output = try list_assessment_control_insights_by_control_domain.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -278,18 +266,16 @@ pub const ListAssessmentFrameworkShareRequestsPaginator = struct {
 
         const output = try list_assessment_framework_share_requests.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -318,18 +304,16 @@ pub const ListAssessmentFrameworksPaginator = struct {
 
         const output = try list_assessment_frameworks.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -358,18 +342,16 @@ pub const ListAssessmentReportsPaginator = struct {
 
         const output = try list_assessment_reports.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -398,18 +380,16 @@ pub const ListAssessmentsPaginator = struct {
 
         const output = try list_assessments.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -438,18 +418,16 @@ pub const ListControlDomainInsightsPaginator = struct {
 
         const output = try list_control_domain_insights.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -478,18 +456,16 @@ pub const ListControlDomainInsightsByAssessmentPaginator = struct {
 
         const output = try list_control_domain_insights_by_assessment.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -518,18 +494,16 @@ pub const ListControlInsightsByControlDomainPaginator = struct {
 
         const output = try list_control_insights_by_control_domain.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -558,18 +532,16 @@ pub const ListControlsPaginator = struct {
 
         const output = try list_controls.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -598,18 +570,16 @@ pub const ListKeywordsForDataSourcePaginator = struct {
 
         const output = try list_keywords_for_data_source.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -638,18 +608,16 @@ pub const ListNotificationsPaginator = struct {
 
         const output = try list_notifications.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }

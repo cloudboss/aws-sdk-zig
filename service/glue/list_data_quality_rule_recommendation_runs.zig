@@ -17,10 +17,14 @@ pub const ListDataQualityRuleRecommendationRunsInput = struct {
     /// A paginated token to offset the results.
     next_token: ?[]const u8 = null,
 
+    /// A list of key-value pair tags to filter recommendation runs.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
     pub const json_field_names = .{
         .filter = "Filter",
         .max_results = "MaxResults",
         .next_token = "NextToken",
+        .tags = "Tags",
     };
 };
 

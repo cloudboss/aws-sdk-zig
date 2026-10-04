@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSolNetworkPackage
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateSolNetworkPackageOutput {
-    var result: CreateSolNetworkPackageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateSolNetworkPackageOutput, body, allocator);
-    }
+    const result: CreateSolNetworkPackageOutput = try aws.json.parseJsonObject(
+        CreateSolNetworkPackageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

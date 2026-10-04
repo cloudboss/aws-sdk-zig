@@ -26,10 +26,14 @@ pub const DeleteCustomDBEngineVersionInput = struct {
     ///
     /// * `custom-sqlserver-ee`
     /// * `custom-sqlserver-se`
-    /// * `ccustom-sqlserver-web`
+    /// * `custom-sqlserver-web`
     /// * `custom-sqlserver-dev`
     ///
-    /// RDS for SQL Server supports only `sqlserver-dev-ee`.
+    /// RDS for SQL Server supports the following values:
+    ///
+    /// * `sqlserver-ee` (Bring Your Own Media)
+    /// * `sqlserver-se` (Bring Your Own Media)
+    /// * `sqlserver-dev-ee`
     engine: []const u8,
 
     /// The custom engine version (CEV) for your DB instance. This option is

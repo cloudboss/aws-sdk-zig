@@ -35,10 +35,8 @@ pub const SearchNearbyInput = struct {
     /// valid SigV4 signature must be provided when making a request.
     key: ?[]const u8 = null,
 
-    /// A list of [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag)
-    /// compliant language codes for the results to be rendered in. If there is no
-    /// data for the result in the requested language, data will be returned in the
-    /// default language for the entry.
+    /// A list of [BCP
+    /// 47](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry) compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.
     language: ?[]const u8 = null,
 
     /// An optional limit for the number of results returned in a single call.
@@ -217,10 +215,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchNearbyInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchNearbyOutput {
-    var result: SearchNearbyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchNearbyOutput, body, allocator);
-    }
+    var result: SearchNearbyOutput = try aws.json.parseJsonObject(
+        SearchNearbyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("x-amz-geo-pricing-bucket")) |value| {
         result.pricing_bucket = try allocator.dupe(u8, value);

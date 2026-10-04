@@ -16,8 +16,7 @@ pub const GetGatewayInput = struct {
 };
 
 pub const GetGatewayOutput = struct {
-    /// By providing the ARN (Amazon Resource Name), this
-    /// API returns the gateway.
+    /// By providing the ARN (Amazon Resource Name), this API returns the gateway.
     gateway: ?GatewayDetails = null,
 
     pub const json_field_names = .{

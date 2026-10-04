@@ -187,10 +187,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateServiceLevelObjec
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateServiceLevelObjectiveOutput {
-    var result: CreateServiceLevelObjectiveOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateServiceLevelObjectiveOutput, body, allocator);
-    }
+    const result: CreateServiceLevelObjectiveOutput = try aws.json.parseJsonObject(
+        CreateServiceLevelObjectiveOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

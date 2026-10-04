@@ -1,6 +1,7 @@
 const CategoryFilterFunction = @import("category_filter_function.zig").CategoryFilterFunction;
 const CategoryFilterType = @import("category_filter_type.zig").CategoryFilterType;
 const TopicCategoryFilterConstant = @import("topic_category_filter_constant.zig").TopicCategoryFilterConstant;
+const NullFilterType = @import("null_filter_type.zig").NullFilterType;
 
 /// A structure that represents a category filter.
 pub const TopicCategoryFilter = struct {
@@ -18,10 +19,14 @@ pub const TopicCategoryFilter = struct {
     /// A Boolean value that indicates if the filter is inverse.
     inverse: bool = false,
 
+    /// The `null` filter that is applied to the category filter.
+    null_filter: ?NullFilterType = null,
+
     pub const json_field_names = .{
         .category_filter_function = "CategoryFilterFunction",
         .category_filter_type = "CategoryFilterType",
         .constant = "Constant",
         .inverse = "Inverse",
+        .null_filter = "NullFilter",
     };
 };

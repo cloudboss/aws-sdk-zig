@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: EnableOrganizationAdmin
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !EnableOrganizationAdminAccountOutput {
-    var result: EnableOrganizationAdminAccountOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(EnableOrganizationAdminAccountOutput, body, allocator);
-    }
+    const result: EnableOrganizationAdminAccountOutput = try aws.json.parseJsonObject(
+        EnableOrganizationAdminAccountOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -11,7 +11,7 @@ pub const RouteVehicleTravelOnlySummary = struct {
     /// **Unit**: `seconds`
     duration: i64 = 0,
 
-    /// Duration of the computed span under typical traffic congestion.
+    /// Duration of the leg under typical traffic congestion.
     ///
     /// **Unit**: `seconds`
     typical_duration: i64 = 0,

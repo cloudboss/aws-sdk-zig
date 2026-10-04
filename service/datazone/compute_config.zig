@@ -1,4 +1,5 @@
-/// The compute configuration for a notebook run in Amazon DataZone.
+/// The compute configuration for a notebook run in Amazon SageMaker Unified
+/// Studio.
 pub const ComputeConfig = struct {
     /// The environment version for the notebook run compute.
     environment_version: ?[]const u8 = null,

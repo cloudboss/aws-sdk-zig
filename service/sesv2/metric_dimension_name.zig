@@ -10,15 +10,20 @@ const std = @import("std");
 ///
 /// * `ISP` – The recipient ISP (e.g. `Gmail`, `Yahoo`,
 /// etc.).
+///
+/// * `TENANT_NAME` – The name of the tenant used when sending messages
+/// (if one was used).
 pub const MetricDimensionName = enum {
     email_identity,
     configuration_set,
     isp,
+    tenant_name,
 
     pub const json_field_names = .{
         .email_identity = "EMAIL_IDENTITY",
         .configuration_set = "CONFIGURATION_SET",
         .isp = "ISP",
+        .tenant_name = "TENANT_NAME",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -26,6 +31,7 @@ pub const MetricDimensionName = enum {
             .email_identity => "EMAIL_IDENTITY",
             .configuration_set => "CONFIGURATION_SET",
             .isp => "ISP",
+            .tenant_name => "TENANT_NAME",
         };
     }
 

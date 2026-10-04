@@ -92,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEnvironmentCredentia
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetEnvironmentCredentialsOutput {
-    var result: GetEnvironmentCredentialsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetEnvironmentCredentialsOutput, body, allocator);
-    }
+    const result: GetEnvironmentCredentialsOutput = try aws.json.parseJsonObject(
+        GetEnvironmentCredentialsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

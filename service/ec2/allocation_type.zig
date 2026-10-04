@@ -3,16 +3,19 @@ const std = @import("std");
 pub const AllocationType = enum {
     used,
     future,
+    cancelling,
 
     pub const json_field_names = .{
         .used = "used",
         .future = "future",
+        .cancelling = "cancelling",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .used => "used",
             .future => "future",
+            .cancelling => "cancelling",
         };
     }
 

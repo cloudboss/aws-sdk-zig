@@ -3,16 +3,19 @@ const std = @import("std");
 pub const VpcState = enum {
     pending,
     available,
+    deleting,
 
     pub const json_field_names = .{
         .pending = "pending",
         .available = "available",
+        .deleting = "deleting",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .pending => "pending",
             .available => "available",
+            .deleting => "deleting",
         };
     }
 

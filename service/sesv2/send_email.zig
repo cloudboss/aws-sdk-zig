@@ -4,12 +4,19 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const ConfigurationOverrides = @import("configuration_overrides.zig").ConfigurationOverrides;
 const EmailContent = @import("email_content.zig").EmailContent;
 const Destination = @import("destination.zig").Destination;
 const MessageTag = @import("message_tag.zig").MessageTag;
 const ListManagementOptions = @import("list_management_options.zig").ListManagementOptions;
 
 pub const SendEmailInput = struct {
+    /// An object that overrides, for this message only, settings that would
+    /// otherwise apply to
+    /// it. Each setting that you don't override keeps the value that already
+    /// applies.
+    configuration_overrides: ?ConfigurationOverrides = null,
+
     /// The name of the configuration set to use when sending the email.
     configuration_set_name: ?[]const u8 = null,
 
@@ -99,6 +106,7 @@ pub const SendEmailInput = struct {
     tenant_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .configuration_overrides = "ConfigurationOverrides",
         .configuration_set_name = "ConfigurationSetName",
         .content = "Content",
         .destination = "Destination",
@@ -167,6 +175,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendEmailInput, config:
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.configuration_overrides) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ConfigurationOverrides\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.configuration_set_name) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"ConfigurationSetName\":");
@@ -253,10 +267,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendEmailInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SendEmailOutput {
-    var result: SendEmailOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SendEmailOutput, body, allocator);
-    }
+    const result: SendEmailOutput = try aws.json.parseJsonObject(
+        SendEmailOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -16,7 +16,9 @@ pub const GetImageRecipePolicyInput = struct {
 };
 
 pub const GetImageRecipePolicyOutput = struct {
-    /// The image recipe policy object.
+    /// The resource policy for the image recipe, as a JSON policy document. If no
+    /// policy has been applied, the response contains an empty JSON object
+    /// (`{}`).
     policy: ?[]const u8 = null,
 
     /// The request ID that uniquely identifies this request.
@@ -83,10 +85,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetImageRecipePolicyInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetImageRecipePolicyOutput {
-    var result: GetImageRecipePolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetImageRecipePolicyOutput, body, allocator);
-    }
+    const result: GetImageRecipePolicyOutput = try aws.json.parseJsonObject(
+        GetImageRecipePolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

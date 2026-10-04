@@ -9,61 +9,52 @@ const EventDescription = @import("event_description.zig").EventDescription;
 const serde = @import("serde.zig");
 
 pub const DescribeEventsInput = struct {
-    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-    /// include only
-    /// those associated with this application.
+    /// If specified, Elastic Beanstalk restricts the returned descriptions to
+    /// include only those associated with this application.
     application_name: ?[]const u8 = null,
 
-    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-    /// those that
-    /// occur up to, but not including, the `EndTime`.
+    /// If specified, Elastic Beanstalk restricts the returned descriptions to those
+    /// that occur up to, but not including, the `EndTime`.
     end_time: ?i64 = null,
 
-    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-    /// those
+    /// If specified, Elastic Beanstalk restricts the returned descriptions to those
     /// associated with this environment.
     environment_id: ?[]const u8 = null,
 
-    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-    /// those
+    /// If specified, Elastic Beanstalk restricts the returned descriptions to those
     /// associated with this environment.
     environment_name: ?[]const u8 = null,
 
     /// Specifies the maximum number of events that can be returned, beginning with
-    /// the most
-    /// recent event.
+    /// the most recent event.
     max_records: ?i32 = null,
 
     /// Pagination token. If specified, the events return the next batch of results.
     next_token: ?[]const u8 = null,
 
-    /// The ARN of a custom platform version. If specified, AWS Elastic Beanstalk
-    /// restricts the
-    /// returned descriptions to those associated with this custom platform version.
+    /// The ARN of a custom platform version. If specified, Elastic Beanstalk
+    /// restricts the returned descriptions to those associated with this custom
+    /// platform
+    /// version.
     platform_arn: ?[]const u8 = null,
 
-    /// If specified, AWS Elastic Beanstalk restricts the described events to
-    /// include only
-    /// those associated with this request ID.
+    /// If specified, Elastic Beanstalk restricts the described events to include
+    /// only those associated with this request ID.
     request_id: ?[]const u8 = null,
 
     /// If specified, limits the events returned from this call to include only
-    /// those with the
-    /// specified severity or higher.
+    /// those with the specified severity or higher.
     severity: ?EventSeverity = null,
 
-    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-    /// those that
-    /// occur on or after this time.
+    /// If specified, Elastic Beanstalk restricts the returned descriptions to those
+    /// that occur on or after this time.
     start_time: ?i64 = null,
 
-    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-    /// those that
-    /// are associated with this environment configuration.
+    /// If specified, Elastic Beanstalk restricts the returned descriptions to those
+    /// that are associated with this environment configuration.
     template_name: ?[]const u8 = null,
 
-    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-    /// those
+    /// If specified, Elastic Beanstalk restricts the returned descriptions to those
     /// associated with this application version.
     version_label: ?[]const u8 = null,
 };
@@ -73,8 +64,8 @@ pub const DescribeEventsOutput = struct {
     events: ?[]const EventDescription = null,
 
     /// If returned, this indicates that there are more results to obtain. Use this
-    /// token in
-    /// the next DescribeEvents call to get the next batch of events.
+    /// token in the next DescribeEvents call to get the next
+    /// batch of events.
     next_token: ?[]const u8 = null,
 };
 

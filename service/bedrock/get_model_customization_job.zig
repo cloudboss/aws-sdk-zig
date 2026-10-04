@@ -176,10 +176,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetModelCustomizationJo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetModelCustomizationJobOutput {
-    var result: GetModelCustomizationJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetModelCustomizationJobOutput, body, allocator);
-    }
+    const result: GetModelCustomizationJobOutput = try aws.json.parseJsonObject(
+        GetModelCustomizationJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

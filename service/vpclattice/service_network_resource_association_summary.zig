@@ -30,7 +30,8 @@ pub const ServiceNetworkResourceAssociationSummary = struct {
     /// association.
     private_dns_enabled: ?bool = null,
 
-    /// The private DNS entry for the service.
+    /// The private DNS entry for the service. This entry includes only the domain
+    /// name.
     private_dns_entry: ?DnsEntry = null,
 
     /// The Amazon Resource Name (ARN) of the association.

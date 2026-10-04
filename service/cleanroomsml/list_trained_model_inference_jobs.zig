@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTrainedModelInferen
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTrainedModelInferenceJobsOutput {
-    var result: ListTrainedModelInferenceJobsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListTrainedModelInferenceJobsOutput, body, allocator);
-    }
+    const result: ListTrainedModelInferenceJobsOutput = try aws.json.parseJsonObject(
+        ListTrainedModelInferenceJobsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

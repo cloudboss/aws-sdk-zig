@@ -39,18 +39,16 @@ pub const ListDatasetsPaginator = struct {
 
         const output = try list_datasets.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -79,18 +77,16 @@ pub const ListDocumentClassificationJobsPaginator = struct {
 
         const output = try list_document_classification_jobs.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -119,18 +115,16 @@ pub const ListDocumentClassifierSummariesPaginator = struct {
 
         const output = try list_document_classifier_summaries.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -159,18 +153,16 @@ pub const ListDocumentClassifiersPaginator = struct {
 
         const output = try list_document_classifiers.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -199,18 +191,16 @@ pub const ListDominantLanguageDetectionJobsPaginator = struct {
 
         const output = try list_dominant_language_detection_jobs.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -239,18 +229,16 @@ pub const ListEndpointsPaginator = struct {
 
         const output = try list_endpoints.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -279,18 +267,16 @@ pub const ListEntitiesDetectionJobsPaginator = struct {
 
         const output = try list_entities_detection_jobs.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -319,18 +305,16 @@ pub const ListEntityRecognizerSummariesPaginator = struct {
 
         const output = try list_entity_recognizer_summaries.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -359,18 +343,16 @@ pub const ListEntityRecognizersPaginator = struct {
 
         const output = try list_entity_recognizers.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -399,18 +381,16 @@ pub const ListEventsDetectionJobsPaginator = struct {
 
         const output = try list_events_detection_jobs.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -439,18 +419,16 @@ pub const ListFlywheelIterationHistoryPaginator = struct {
 
         const output = try list_flywheel_iteration_history.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -479,18 +457,16 @@ pub const ListFlywheelsPaginator = struct {
 
         const output = try list_flywheels.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -519,18 +495,16 @@ pub const ListKeyPhrasesDetectionJobsPaginator = struct {
 
         const output = try list_key_phrases_detection_jobs.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -559,18 +533,16 @@ pub const ListPiiEntitiesDetectionJobsPaginator = struct {
 
         const output = try list_pii_entities_detection_jobs.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -599,18 +571,16 @@ pub const ListSentimentDetectionJobsPaginator = struct {
 
         const output = try list_sentiment_detection_jobs.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -639,18 +609,16 @@ pub const ListTargetedSentimentDetectionJobsPaginator = struct {
 
         const output = try list_targeted_sentiment_detection_jobs.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }
@@ -679,18 +647,16 @@ pub const ListTopicsDetectionJobsPaginator = struct {
 
         const output = try list_topics_detection_jobs.execute(self.client, allocator, self.params, options);
 
-        if (output.next_token) |token| {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = self.client.allocator.dupe(u8, token) catch null;
-        } else {
-            if (self.next_token) |old| {
-                self.client.allocator.free(old);
-            }
-            self.next_token = null;
-            self.done = true;
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
         }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
 
         return output;
     }

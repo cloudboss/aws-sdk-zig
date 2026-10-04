@@ -79,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteTargetAccountConf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteTargetAccountConfigurationOutput {
-    var result: DeleteTargetAccountConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteTargetAccountConfigurationOutput, body, allocator);
-    }
+    const result: DeleteTargetAccountConfigurationOutput = try aws.json.parseJsonObject(
+        DeleteTargetAccountConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

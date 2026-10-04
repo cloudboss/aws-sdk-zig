@@ -67,6 +67,9 @@ pub const InvokeModelWithResponseStreamInput = struct {
     /// Model performance settings for the request.
     performance_config_latency: ?PerformanceConfigLatency = null,
 
+    /// Key-value pairs that you can use to filter invocation logs.
+    request_metadata: ?[]const u8 = null,
+
     /// Specifies the processing tier type used for serving the request.
     service_tier: ?ServiceTierType = null,
 
@@ -82,6 +85,7 @@ pub const InvokeModelWithResponseStreamInput = struct {
         .guardrail_version = "guardrailVersion",
         .model_id = "modelId",
         .performance_config_latency = "performanceConfigLatency",
+        .request_metadata = "requestMetadata",
         .service_tier = "serviceTier",
         .trace = "trace",
     };
@@ -113,6 +117,7 @@ pub const InvokeModelWithResponseStreamOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeModelWithResponseStreamInput, options: CallOptions) !InvokeModelWithResponseStreamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -121,8 +126,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeModel
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "amazonbedrockfrontendservice", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -134,11 +137,9 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeModel
         return error.ServiceError;
     }
 
-    stream_resp.deinitHeaders();
-    errdefer stream_resp.body.deinit();
-
-    const body = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
-    return .{ .body = body };
+    errdefer stream_resp.deinit();
+    const result = try deserializeStreamingResponse(allocator, &stream_resp);
+    return result;
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: InvokeModelWithResponseStreamInput, config: *aws.Config) !aws.http.Request {
@@ -176,6 +177,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeModelWithResponse
     if (input.performance_config_latency) |v| {
         try request.headers.put(allocator, "X-Amzn-Bedrock-PerformanceConfig-Latency", v.wireName());
     }
+    if (input.request_metadata) |v| {
+        try request.headers.put(allocator, "X-Amzn-Bedrock-Request-Metadata", v);
+    }
     if (input.service_tier) |v| {
         try request.headers.put(allocator, "X-Amzn-Bedrock-Service-Tier", v.wireName());
     }
@@ -184,4 +188,29 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeModelWithResponse
     }
 
     return request;
+}
+
+fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !InvokeModelWithResponseStreamOutput {
+    var result: InvokeModelWithResponseStreamOutput = .{
+        .content_type = "",
+    };
+    errdefer {
+        allocator.free(result.content_type);
+    }
+    if (stream_resp.headers.get("x-amzn-bedrock-content-type")) |value| {
+        result.content_type = try allocator.dupe(u8, value);
+    }
+    if (stream_resp.headers.get("x-amzn-bedrock-performanceconfig-latency")) |value| {
+        result.performance_config_latency = PerformanceConfigLatency.fromWireName(value);
+    }
+    if (stream_resp.headers.get("x-amzn-bedrock-service-tier")) |value| {
+        result.service_tier = ServiceTierType.fromWireName(value);
+    }
+    result.body = try aws.event_stream_reader.EventStreamReader.init(
+        allocator,
+        stream_resp.body,
+    );
+    stream_resp.deinitHeaders();
+
+    return result;
 }

@@ -117,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchStartViewerSession
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchStartViewerSessionRevocationOutput {
-    var result: BatchStartViewerSessionRevocationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchStartViewerSessionRevocationOutput, body, allocator);
-    }
+    var result: BatchStartViewerSessionRevocationOutput = try aws.json.parseJsonObject(
+        BatchStartViewerSessionRevocationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("access-control-allow-origin")) |value| {
         result.access_control_allow_origin = try allocator.dupe(u8, value);

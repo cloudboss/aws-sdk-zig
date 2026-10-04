@@ -8,6 +8,7 @@ pub const ServiceError = struct {
     pub const Kind = union(enum) {
         active_instance_refresh_not_found_fault: ActiveInstanceRefreshNotFoundFault,
         already_exists_fault: AlreadyExistsFault,
+        idempotent_call_in_progress_fault: IdempotentCallInProgressFault,
         idempotent_parameter_mismatch_error: IdempotentParameterMismatchError,
         instance_refresh_in_progress_fault: InstanceRefreshInProgressFault,
         invalid_next_token: InvalidNextToken,
@@ -23,6 +24,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .active_instance_refresh_not_found_fault => "ActiveInstanceRefreshNotFoundFault",
                 .already_exists_fault => "AlreadyExistsFault",
+                .idempotent_call_in_progress_fault => "IdempotentCallInProgressFault",
                 .idempotent_parameter_mismatch_error => "IdempotentParameterMismatchError",
                 .instance_refresh_in_progress_fault => "InstanceRefreshInProgressFault",
                 .invalid_next_token => "InvalidNextToken",
@@ -40,6 +42,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .active_instance_refresh_not_found_fault => |e| e.message,
                 .already_exists_fault => |e| e.message,
+                .idempotent_call_in_progress_fault => |e| e.message,
                 .idempotent_parameter_mismatch_error => |e| e.message,
                 .instance_refresh_in_progress_fault => |e| e.message,
                 .invalid_next_token => |e| e.message,
@@ -57,6 +60,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .active_instance_refresh_not_found_fault => 400,
                 .already_exists_fault => 400,
+                .idempotent_call_in_progress_fault => 500,
                 .idempotent_parameter_mismatch_error => 400,
                 .instance_refresh_in_progress_fault => 400,
                 .invalid_next_token => 400,
@@ -74,6 +78,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .active_instance_refresh_not_found_fault => |e| e.request_id,
                 .already_exists_fault => |e| e.request_id,
+                .idempotent_call_in_progress_fault => |e| e.request_id,
                 .idempotent_parameter_mismatch_error => |e| e.request_id,
                 .instance_refresh_in_progress_fault => |e| e.request_id,
                 .invalid_next_token => |e| e.request_id,
@@ -115,6 +120,11 @@ pub const ActiveInstanceRefreshNotFoundFault = struct {
 };
 
 pub const AlreadyExistsFault = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const IdempotentCallInProgressFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -190,6 +200,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     }
     if (std.mem.eql(u8, error_code, "AlreadyExistsFault")) {
         return .{ .arena = arena, .kind = .{ .already_exists_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "IdempotentCallInProgressFault")) {
+        return .{ .arena = arena, .kind = .{ .idempotent_call_in_progress_fault = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

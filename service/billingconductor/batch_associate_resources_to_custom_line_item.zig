@@ -104,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchAssociateResources
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchAssociateResourcesToCustomLineItemOutput {
-    var result: BatchAssociateResourcesToCustomLineItemOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchAssociateResourcesToCustomLineItemOutput, body, allocator);
-    }
+    const result: BatchAssociateResourcesToCustomLineItemOutput = try aws.json.parseJsonObject(
+        BatchAssociateResourcesToCustomLineItemOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStorageConfiguration
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetStorageConfigurationOutput {
-    var result: GetStorageConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetStorageConfigurationOutput, body, allocator);
-    }
+    const result: GetStorageConfigurationOutput = try aws.json.parseJsonObject(
+        GetStorageConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

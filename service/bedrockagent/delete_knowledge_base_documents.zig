@@ -112,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteKnowledgeBaseDocu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteKnowledgeBaseDocumentsOutput {
-    var result: DeleteKnowledgeBaseDocumentsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteKnowledgeBaseDocumentsOutput, body, allocator);
-    }
+    const result: DeleteKnowledgeBaseDocumentsOutput = try aws.json.parseJsonObject(
+        DeleteKnowledgeBaseDocumentsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

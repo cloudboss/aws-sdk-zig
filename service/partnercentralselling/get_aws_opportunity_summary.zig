@@ -13,6 +13,7 @@ const AwsTeamMember = @import("aws_team_member.zig").AwsTeamMember;
 const OpportunityOrigin = @import("opportunity_origin.zig").OpportunityOrigin;
 const AwsOpportunityProject = @import("aws_opportunity_project.zig").AwsOpportunityProject;
 const AwsOpportunityRelatedEntities = @import("aws_opportunity_related_entities.zig").AwsOpportunityRelatedEntities;
+const AwsSoftwareRevenue = @import("aws_software_revenue.zig").AwsSoftwareRevenue;
 const Visibility = @import("visibility.zig").Visibility;
 
 pub const GetAwsOpportunitySummaryInput = struct {
@@ -37,6 +38,10 @@ pub const GetAwsOpportunitySummaryOutput = struct {
     /// environment (e.g., `AWS` or `Sandbox`) where the opportunity is being
     /// managed.
     catalog: []const u8,
+
+    /// Engagement classification for this opportunity. Read-only. Null before
+    /// scoring. Known values: `AWS Field-engaged`, `Agent-engaged`, `Partner-led`.
+    cosell_motion: ?[]const u8 = null,
 
     /// Provides details about the customer associated with the AWS Opportunity,
     /// including account information, industry, and other customer data. These
@@ -89,6 +94,10 @@ pub const GetAwsOpportunitySummaryOutput = struct {
     /// their CRM system.
     related_opportunity_id: ?[]const u8 = null,
 
+    /// Seller-provided PARC deal terms: commitment value, discount, and contract
+    /// dates.
+    software_revenue: ?AwsSoftwareRevenue = null,
+
     /// Defines the visibility level for the AWS Opportunity. Use `Full` visibility
     /// for most cases, while `Limited` visibility is reserved for special programs
     /// or sensitive opportunities.
@@ -96,6 +105,7 @@ pub const GetAwsOpportunitySummaryOutput = struct {
 
     pub const json_field_names = .{
         .catalog = "Catalog",
+        .cosell_motion = "CosellMotion",
         .customer = "Customer",
         .insights = "Insights",
         .involvement_type = "InvolvementType",
@@ -106,6 +116,7 @@ pub const GetAwsOpportunitySummaryOutput = struct {
         .project = "Project",
         .related_entity_ids = "RelatedEntityIds",
         .related_opportunity_id = "RelatedOpportunityId",
+        .software_revenue = "SoftwareRevenue",
         .visibility = "Visibility",
     };
 };

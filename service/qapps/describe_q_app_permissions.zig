@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeQAppPermissions
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeQAppPermissionsOutput {
-    var result: DescribeQAppPermissionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeQAppPermissionsOutput, body, allocator);
-    }
+    const result: DescribeQAppPermissionsOutput = try aws.json.parseJsonObject(
+        DescribeQAppPermissionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

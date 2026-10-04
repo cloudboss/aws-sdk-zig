@@ -39,12 +39,16 @@ pub const CreateResourceConfigurationInput = struct {
     /// hyphen as the first or last character, or immediately after another hyphen.
     name: []const u8,
 
-    /// (SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use to access
-    /// a resource configuration (for example: 1-65535). You can separate port
-    /// ranges using commas (for example: 1,2,22-30).
+    /// (SINGLE, GROUP, CHILD, CIDR) The port ranges that a consumer can use to
+    /// access a resource configuration (for example: 1-65535). You can separate
+    /// port ranges using commas (for example: 1,2,22-30). To resolve DNS through a
+    /// CIDR resource configuration, include port 53 in the port ranges.
     port_ranges: ?[]const []const u8 = null,
 
-    /// (SINGLE, GROUP) The protocol accepted by the resource configuration.
+    /// (SINGLE, GROUP, CIDR) The protocol accepted by the resource configuration.
+    /// The default is `TCP`. `TCP_UDP` is supported only for CIDR resource
+    /// configurations; specify it for a CIDR resource configuration to allow DNS
+    /// resolution, which uses UDP.
     protocol: ?ProtocolType = null,
 
     /// Identifies the resource configuration in one of the following ways:
@@ -55,6 +59,14 @@ pub const CreateResourceConfigurationInput = struct {
     /// * **Domain name** - Any domain name that is publicly resolvable.
     /// * **IP address** - For IPv4 and IPv6, only IP addresses in the VPC are
     ///   supported.
+    /// * **CIDR range** - For a resource configuration of type CIDR, specify a
+    ///   `cidrResource` with one or more `cidrRanges` (for example, `10.0.0.0/16`)
+    ///   that cover the IP addresses of the resources you want to make accessible.
+    ///   You can specify up to 10 ranges, using IPv4, IPv6, or both, and each range
+    ///   must include a prefix length. To represent your entire network, specify
+    ///   `0.0.0.0/0` (IPv4) or `::/0` (IPv6) as the only range. You can't use
+    ///   reserved ranges such as `169.254.0.0/16`, `100.64.0.0/10`, `224.0.0.0/4`,
+    ///   `fe80::/10`, or `ff00::/8`.
     resource_configuration_definition: ?ResourceConfigurationDefinition = null,
 
     /// (CHILD) The ID or ARN of the parent resource configuration of type `GROUP`.
@@ -62,9 +74,12 @@ pub const CreateResourceConfigurationInput = struct {
     /// resource configuration.
     resource_configuration_group_identifier: ?[]const u8 = null,
 
-    /// (SINGLE, GROUP, ARN) The ID or ARN of the resource gateway used to connect
-    /// to the resource configuration. For a child resource configuration, this
-    /// value is inherited from the parent resource configuration.
+    /// (SINGLE, GROUP, ARN, CIDR) The ID or ARN of the resource gateway used to
+    /// connect to the resource configuration. For a child resource configuration,
+    /// this value is inherited from the parent resource configuration. For a CIDR
+    /// resource configuration, the associated resource gateway must have its DNS
+    /// resolution set to `IN_VPC` so that DNS queries resolve in the context of
+    /// your VPC.
     resource_gateway_identifier: ?[]const u8 = null,
 
     /// The tags for the resource configuration.
@@ -79,6 +94,13 @@ pub const CreateResourceConfigurationInput = struct {
     /// * **CHILD** - A single resource that is part of a group resource
     ///   configuration.
     /// * **ARN** - An Amazon Web Services resource.
+    /// * **CIDR** - A network segment, expressed as a range of IP addresses (a CIDR
+    ///   block). Use this type to share a portion of your network rather than an
+    ///   individual resource. A consumer accesses the resources within the CIDR
+    ///   range through a `Tunnel` VPC endpoint. You can't add a CIDR resource
+    ///   configuration to a service network. A CIDR resource configuration must be
+    ///   associated with a resource gateway whose DNS resolution is set to
+    ///   `IN_VPC`.
     @"type": ResourceConfigurationType,
 
     pub const json_field_names = .{
@@ -167,6 +189,10 @@ pub const CreateResourceConfigurationOutput = struct {
     /// * **CHILD** - A single resource that is part of a group resource
     ///   configuration.
     /// * **ARN** - An Amazon Web Services resource.
+    /// * **CIDR** - A network segment, expressed as a range of IP addresses (a CIDR
+    ///   block). A consumer accesses the resources within the CIDR range through a
+    ///   `Tunnel` VPC endpoint. A CIDR resource configuration must be associated
+    ///   with a resource gateway whose DNS resolution is set to `IN_VPC`.
     @"type": ?ResourceConfigurationType = null,
 
     pub const json_field_names = .{
@@ -316,10 +342,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateResourceConfigura
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateResourceConfigurationOutput {
-    var result: CreateResourceConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateResourceConfigurationOutput, body, allocator);
-    }
+    const result: CreateResourceConfigurationOutput = try aws.json.parseJsonObject(
+        CreateResourceConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

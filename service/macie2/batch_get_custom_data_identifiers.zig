@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetCustomDataIdent
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetCustomDataIdentifiersOutput {
-    var result: BatchGetCustomDataIdentifiersOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetCustomDataIdentifiersOutput, body, allocator);
-    }
+    const result: BatchGetCustomDataIdentifiersOutput = try aws.json.parseJsonObject(
+        BatchGetCustomDataIdentifiersOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

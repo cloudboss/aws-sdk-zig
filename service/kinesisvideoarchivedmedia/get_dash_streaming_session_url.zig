@@ -301,10 +301,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDASHStreamingSession
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDASHStreamingSessionURLOutput {
-    var result: GetDASHStreamingSessionURLOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDASHStreamingSessionURLOutput, body, allocator);
-    }
+    const result: GetDASHStreamingSessionURLOutput = try aws.json.parseJsonObject(
+        GetDASHStreamingSessionURLOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

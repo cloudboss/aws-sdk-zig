@@ -7,6 +7,7 @@ pub const ServiceError = struct {
 
     pub const Kind = union(enum) {
         access_denied_exception: AccessDeniedException,
+        conflict_exception: ConflictException,
         illegal_argument_exception: IllegalArgumentException,
         illegal_state_exception: IllegalStateException,
         internal_server_exception: InternalServerException,
@@ -16,6 +17,7 @@ pub const ServiceError = struct {
         pub fn code(self: Kind) []const u8 {
             return switch (self) {
                 .access_denied_exception => "AccessDeniedException",
+                .conflict_exception => "ConflictException",
                 .illegal_argument_exception => "IllegalArgumentException",
                 .illegal_state_exception => "IllegalStateException",
                 .internal_server_exception => "InternalServerException",
@@ -27,6 +29,7 @@ pub const ServiceError = struct {
         pub fn message(self: Kind) []const u8 {
             return switch (self) {
                 .access_denied_exception => |e| e.message,
+                .conflict_exception => |e| e.message,
                 .illegal_argument_exception => |e| e.message,
                 .illegal_state_exception => |e| e.message,
                 .internal_server_exception => |e| e.message,
@@ -38,6 +41,7 @@ pub const ServiceError = struct {
         pub fn httpStatus(self: Kind) u16 {
             return switch (self) {
                 .access_denied_exception => 403,
+                .conflict_exception => 409,
                 .illegal_argument_exception => 400,
                 .illegal_state_exception => 400,
                 .internal_server_exception => 500,
@@ -49,6 +53,7 @@ pub const ServiceError = struct {
         pub fn requestId(self: Kind) []const u8 {
             return switch (self) {
                 .access_denied_exception => |e| e.request_id,
+                .conflict_exception => |e| e.request_id,
                 .illegal_argument_exception => |e| e.request_id,
                 .illegal_state_exception => |e| e.request_id,
                 .internal_server_exception => |e| e.request_id,
@@ -88,6 +93,26 @@ pub const AccessDeniedException = struct {
 
     pub const json_field_names = .{
         .message = "message",
+    };
+};
+
+/// The client token was already used with different request parameters. A
+/// client token must map to the same parameters for every request. To retry
+/// this operation, provide a new client token.
+pub const ConflictException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    /// The identifier of the resource involved in the client token conflict.
+    resource_id: ?[]const u8 = null,
+
+    /// The type of the resource involved in the client token conflict.
+    resource_type: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .resource_id = "resourceId",
+        .resource_type = "resourceType",
     };
 };
 
@@ -172,6 +197,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             typed_error.message = owned_message;
             typed_error.request_id = owned_request_id;
             return .{ .arena = arena, .kind = .{ .access_denied_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        const parsed_error: ?ConflictException = aws.json.parseJsonObject(ConflictException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .conflict_exception = typed_error } };
         }
     }
     if (std.mem.eql(u8, error_code, "IllegalArgumentException")) {

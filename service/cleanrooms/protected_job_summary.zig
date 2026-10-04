@@ -9,6 +9,9 @@ pub const ProtectedJobSummary = struct {
     /// The ID of the protected job.
     id: []const u8,
 
+    /// The account ID of the member that pays for the job compute costs.
+    job_compute_payer_account_id: ?[]const u8 = null,
+
     /// The unique ARN for the membership that initiated the protected job.
     membership_arn: []const u8,
 
@@ -24,6 +27,7 @@ pub const ProtectedJobSummary = struct {
     pub const json_field_names = .{
         .create_time = "createTime",
         .id = "id",
+        .job_compute_payer_account_id = "jobComputePayerAccountId",
         .membership_arn = "membershipArn",
         .membership_id = "membershipId",
         .receiver_configurations = "receiverConfigurations",

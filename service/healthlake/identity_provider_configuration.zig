@@ -9,42 +9,32 @@ pub const IdentityProviderConfiguration = struct {
     /// HealthLake provides support for both SMART on FHIR V1 and V2 as described
     /// below.
     ///
-    /// * `SMART_ON_FHIR_V1` – Support for only SMART on FHIR V1, which
-    /// includes `read` (read/search) and `write`
-    /// (create/update/delete) permissions.
-    ///
-    /// * `SMART_ON_FHIR` – Support for both SMART on FHIR V1 and V2,
-    /// which includes `create`, `read`, `update`,
-    /// `delete`, and `search` permissions.
-    ///
-    /// * `AWS_AUTH` – The default HealthLake authorization
-    /// strategy; not affiliated with SMART on FHIR.
+    /// * `SMART_ON_FHIR_V1` – Support for only SMART on FHIR V1, which includes
+    ///   `read` (read/search) and `write` (create/update/delete) permissions.
+    /// * `SMART_ON_FHIR` – Support for both SMART on FHIR V1 and V2, which includes
+    ///   `create`, `read`, `update`, `delete`, and `search` permissions.
+    /// * `Amazon Web Services_AUTH` – The default HealthLake authorization
+    ///   strategy; not affiliated with SMART on FHIR.
     authorization_strategy: AuthorizationStrategy,
 
     /// The parameter to enable SMART on FHIR fine-grained authorization for the
-    /// data
-    /// store.
+    /// data store.
     fine_grained_authorization_enabled: bool = false,
 
     /// The Amazon Resource Name (ARN) of the Lambda function to use to decode the
-    /// access token created by the
-    /// authorization server.
+    /// access token created by the authorization server.
     idp_lambda_arn: ?[]const u8 = null,
 
     /// The JSON metadata elements to use in your identity provider configuration.
-    /// Required
-    /// elements are listed based on the launch specification of the SMART
-    /// application. For more
-    /// information on all possible elements, see
+    /// Required elements are listed based on the launch specification of the SMART
+    /// application. For more information on all possible elements, see
     /// [Metadata](https://build.fhir.org/ig/HL7/smart-app-launch/conformance.html#metadata) in SMART's App Launch specification.
     ///
-    /// `authorization_endpoint`: The URL to the OAuth2 authorization
-    /// endpoint.
+    /// `authorization_endpoint`: The URL to the OAuth2 authorization endpoint.
     ///
     /// `grant_types_supported`: An array of grant types that are supported at the
     /// token endpoint. You must provide at least one grant type option. Valid
-    /// options are
-    /// `authorization_code` and `client_credentials`.
+    /// options are `authorization_code` and `client_credentials`.
     ///
     /// `token_endpoint`: The URL to the OAuth2 token endpoint.
     ///
@@ -53,8 +43,7 @@ pub const IdentityProviderConfiguration = struct {
     ///
     /// `code_challenge_methods_supported`: An array of strings of supported PKCE
     /// code challenge methods. You must include the `S256` method in the array of
-    /// PKCE
-    /// code challenge methods.
+    /// PKCE code challenge methods.
     metadata: ?[]const u8 = null,
 
     pub const json_field_names = .{

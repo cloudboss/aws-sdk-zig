@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CancelDomainConfigChang
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CancelDomainConfigChangeOutput {
-    var result: CancelDomainConfigChangeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CancelDomainConfigChangeOutput, body, allocator);
-    }
+    const result: CancelDomainConfigChangeOutput = try aws.json.parseJsonObject(
+        CancelDomainConfigChangeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -116,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetIntentVersionsInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetIntentVersionsOutput {
-    var result: GetIntentVersionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetIntentVersionsOutput, body, allocator);
-    }
+    const result: GetIntentVersionsOutput = try aws.json.parseJsonObject(
+        GetIntentVersionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

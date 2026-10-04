@@ -129,10 +129,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListProtectedResourcesB
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListProtectedResourcesByBackupVaultOutput {
-    var result: ListProtectedResourcesByBackupVaultOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListProtectedResourcesByBackupVaultOutput, body, allocator);
-    }
+    const result: ListProtectedResourcesByBackupVaultOutput = try aws.json.parseJsonObject(
+        ListProtectedResourcesByBackupVaultOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1257,7 +1257,8 @@ pub const Client = struct {
     /// size. This
     /// operation cannot be called on instances in a warm pool.
     ///
-    /// This call simply makes a termination request. The instance is not terminated
+    /// This call simply makes a termination request. The instances are not
+    /// terminated
     /// immediately. When an instance is terminated, the instance status changes to
     /// `terminated`. You can't connect to or start an instance after you've
     /// terminated it.
@@ -1265,6 +1266,11 @@ pub const Client = struct {
     /// If you do not specify the option to decrement the desired capacity, Amazon
     /// EC2 Auto Scaling launches
     /// instances to replace the ones that are terminated.
+    ///
+    /// To terminate multiple instances in a single call, use the `InstanceIds`
+    /// and `AutoScalingGroupName` parameters instead of `InstanceId`.
+    /// When terminating multiple instances, the response populates
+    /// `Activities` instead of `Activity`.
     ///
     /// By default, Amazon EC2 Auto Scaling balances instances across all
     /// Availability Zones. If you

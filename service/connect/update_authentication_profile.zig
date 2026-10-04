@@ -9,7 +9,7 @@ pub const UpdateAuthenticationProfileInput = struct {
     /// A list of IP address range strings that are allowed to access the instance.
     /// For more information on how to
     /// configure IP addresses, see[Configure session
-    /// timeouts](https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts) in the *Amazon Connect Administrator Guide*.
+    /// timeouts](https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts) in the *Connect Customer Administrator Guide*.
     allowed_ips: ?[]const []const u8 = null,
 
     /// A unique identifier for the authentication profile.
@@ -19,25 +19,25 @@ pub const UpdateAuthenticationProfileInput = struct {
     /// instance. For more information on how to
     /// configure IP addresses, For more information on how to configure IP
     /// addresses, see [Configure IP-based access
-    /// control](https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-ip-based-ac) in the *Amazon Connect Administrator Guide*.
+    /// control](https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-ip-based-ac) in the *Connect Customer Administrator Guide*.
     blocked_ips: ?[]const []const u8 = null,
 
     /// The description for the authentication profile.
     description: ?[]const u8 = null,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
     /// The name for the authentication profile.
     name: ?[]const u8 = null,
 
-    /// The short lived session duration configuration for users logged in to Amazon
-    /// Connect, in minutes. This value
+    /// The short lived session duration configuration for users logged in to
+    /// Connect Customer, in minutes. This value
     /// determines the maximum possible time before an agent is authenticated. For
     /// more information, For more information on
     /// how to configure IP addresses, see [Configure session
-    /// timeouts](https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts) in the *Amazon Connect Administrator Guide*.
+    /// timeouts](https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts) in the *Connect Customer Administrator Guide*.
     periodic_session_duration: ?i32 = null,
 
     /// The period, in minutes, before an agent is automatically signed out of the

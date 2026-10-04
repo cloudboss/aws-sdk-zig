@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBillingGroupCostRepo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBillingGroupCostReportOutput {
-    var result: GetBillingGroupCostReportOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBillingGroupCostReportOutput, body, allocator);
-    }
+    const result: GetBillingGroupCostReportOutput = try aws.json.parseJsonObject(
+        GetBillingGroupCostReportOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

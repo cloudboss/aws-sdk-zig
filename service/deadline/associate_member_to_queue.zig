@@ -11,6 +11,10 @@ pub const AssociateMemberToQueueInput = struct {
     /// The farm ID of the queue to associate with the member.
     farm_id: []const u8,
 
+    /// The Region of the IAM Identity Center instance. If not provided, the service
+    /// defaults to the Region of the farm.
+    identity_center_region: ?[]const u8 = null,
+
     /// The member's identity store ID to associate with the queue.
     identity_store_id: []const u8,
 
@@ -28,6 +32,7 @@ pub const AssociateMemberToQueueInput = struct {
 
     pub const json_field_names = .{
         .farm_id = "farmId",
+        .identity_center_region = "identityCenterRegion",
         .identity_store_id = "identityStoreId",
         .membership_level = "membershipLevel",
         .principal_id = "principalId",
@@ -82,6 +87,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateMemberToQueueI
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.identity_center_region) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"identityCenterRegion\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"identityStoreId\":");
     try aws.json.writeValue(@TypeOf(input.identity_store_id), input.identity_store_id, allocator, &body_buf);

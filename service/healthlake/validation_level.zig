@@ -1,5 +1,6 @@
 const std = @import("std");
 
+/// The level of FHIR validation to apply.
 pub const ValidationLevel = enum {
     strict,
     structure_only,

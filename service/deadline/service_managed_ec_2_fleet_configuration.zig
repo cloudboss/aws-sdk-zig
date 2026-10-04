@@ -1,6 +1,7 @@
 const ServiceManagedEc2AutoScalingConfiguration = @import("service_managed_ec_2_auto_scaling_configuration.zig").ServiceManagedEc2AutoScalingConfiguration;
 const ServiceManagedEc2InstanceCapabilities = @import("service_managed_ec_2_instance_capabilities.zig").ServiceManagedEc2InstanceCapabilities;
 const ServiceManagedEc2InstanceMarketOptions = @import("service_managed_ec_2_instance_market_options.zig").ServiceManagedEc2InstanceMarketOptions;
+const PersistentVolumeConfiguration = @import("persistent_volume_configuration.zig").PersistentVolumeConfiguration;
 const VpcConfiguration = @import("vpc_configuration.zig").VpcConfiguration;
 
 /// The configuration details for a service managed EC2 fleet.
@@ -14,6 +15,9 @@ pub const ServiceManagedEc2FleetConfiguration = struct {
     /// The instance market options for the service managed EC2 fleet.
     instance_market_options: ServiceManagedEc2InstanceMarketOptions,
 
+    /// The persistent volume configuration for the service managed EC2 fleet.
+    persistent_volume_configuration: ?PersistentVolumeConfiguration = null,
+
     /// The storage profile ID for the service managed EC2 fleet.
     storage_profile_id: ?[]const u8 = null,
 
@@ -24,6 +28,7 @@ pub const ServiceManagedEc2FleetConfiguration = struct {
         .auto_scaling_configuration = "autoScalingConfiguration",
         .instance_capabilities = "instanceCapabilities",
         .instance_market_options = "instanceMarketOptions",
+        .persistent_volume_configuration = "persistentVolumeConfiguration",
         .storage_profile_id = "storageProfileId",
         .vpc_configuration = "vpcConfiguration",
     };

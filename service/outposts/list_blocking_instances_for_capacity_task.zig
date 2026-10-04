@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListBlockingInstancesFo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListBlockingInstancesForCapacityTaskOutput {
-    var result: ListBlockingInstancesForCapacityTaskOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListBlockingInstancesForCapacityTaskOutput, body, allocator);
-    }
+    const result: ListBlockingInstancesForCapacityTaskOutput = try aws.json.parseJsonObject(
+        ListBlockingInstancesForCapacityTaskOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -334,10 +334,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeAppVersionTempl
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeAppVersionTemplateOutput {
-    var result: DescribeAppVersionTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeAppVersionTemplateOutput, body, allocator);
-    }
+    const result: DescribeAppVersionTemplateOutput = try aws.json.parseJsonObject(
+        DescribeAppVersionTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

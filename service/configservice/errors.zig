@@ -30,6 +30,7 @@ pub const ServiceError = struct {
         max_number_of_config_rules_exceeded_exception: MaxNumberOfConfigRulesExceededException,
         max_number_of_configuration_recorders_exceeded_exception: MaxNumberOfConfigurationRecordersExceededException,
         max_number_of_conformance_packs_exceeded_exception: MaxNumberOfConformancePacksExceededException,
+        max_number_of_connectors_exceeded_exception: MaxNumberOfConnectorsExceededException,
         max_number_of_delivery_channels_exceeded_exception: MaxNumberOfDeliveryChannelsExceededException,
         max_number_of_organization_config_rules_exceeded_exception: MaxNumberOfOrganizationConfigRulesExceededException,
         max_number_of_organization_conformance_packs_exceeded_exception: MaxNumberOfOrganizationConformancePacksExceededException,
@@ -90,6 +91,7 @@ pub const ServiceError = struct {
                 .max_number_of_config_rules_exceeded_exception => "MaxNumberOfConfigRulesExceededException",
                 .max_number_of_configuration_recorders_exceeded_exception => "MaxNumberOfConfigurationRecordersExceededException",
                 .max_number_of_conformance_packs_exceeded_exception => "MaxNumberOfConformancePacksExceededException",
+                .max_number_of_connectors_exceeded_exception => "MaxNumberOfConnectorsExceededException",
                 .max_number_of_delivery_channels_exceeded_exception => "MaxNumberOfDeliveryChannelsExceededException",
                 .max_number_of_organization_config_rules_exceeded_exception => "MaxNumberOfOrganizationConfigRulesExceededException",
                 .max_number_of_organization_conformance_packs_exceeded_exception => "MaxNumberOfOrganizationConformancePacksExceededException",
@@ -152,6 +154,7 @@ pub const ServiceError = struct {
                 .max_number_of_config_rules_exceeded_exception => |e| e.message,
                 .max_number_of_configuration_recorders_exceeded_exception => |e| e.message,
                 .max_number_of_conformance_packs_exceeded_exception => |e| e.message,
+                .max_number_of_connectors_exceeded_exception => |e| e.message,
                 .max_number_of_delivery_channels_exceeded_exception => |e| e.message,
                 .max_number_of_organization_config_rules_exceeded_exception => |e| e.message,
                 .max_number_of_organization_conformance_packs_exceeded_exception => |e| e.message,
@@ -214,6 +217,7 @@ pub const ServiceError = struct {
                 .max_number_of_config_rules_exceeded_exception => 400,
                 .max_number_of_configuration_recorders_exceeded_exception => 400,
                 .max_number_of_conformance_packs_exceeded_exception => 400,
+                .max_number_of_connectors_exceeded_exception => 400,
                 .max_number_of_delivery_channels_exceeded_exception => 400,
                 .max_number_of_organization_config_rules_exceeded_exception => 400,
                 .max_number_of_organization_conformance_packs_exceeded_exception => 400,
@@ -276,6 +280,7 @@ pub const ServiceError = struct {
                 .max_number_of_config_rules_exceeded_exception => |e| e.request_id,
                 .max_number_of_configuration_recorders_exceeded_exception => |e| e.request_id,
                 .max_number_of_conformance_packs_exceeded_exception => |e| e.request_id,
+                .max_number_of_connectors_exceeded_exception => |e| e.request_id,
                 .max_number_of_delivery_channels_exceeded_exception => |e| e.request_id,
                 .max_number_of_organization_config_rules_exceeded_exception => |e| e.request_id,
                 .max_number_of_organization_conformance_packs_exceeded_exception => |e| e.request_id,
@@ -338,7 +343,22 @@ pub const ServiceError = struct {
 /// [PutServiceLinkedConfigurationRecorder](https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html), you cannot create a service-linked recorder because a service-linked recorder already exists for the specified service.
 ///
 /// For
+/// [PutThirdPartyServiceLinkedConfigurationRecorder](https://docs.aws.amazon.com/config/latest/APIReference/API_PutThirdPartyServiceLinkedConfigurationRecorder.html), you cannot create a service-linked recorder because the specified service principal does not support multiple configuration recorders and one already exists.
+///
+/// For
+/// [PutThirdPartyServiceLinkedConfigurationRecorder](https://docs.aws.amazon.com/config/latest/APIReference/API_PutThirdPartyServiceLinkedConfigurationRecorder.html), another in-progress operation is currently referencing the same connector or service principal. Please try again later.
+///
+/// For
+/// [PutConnector](https://docs.aws.amazon.com/config/latest/APIReference/API_PutConnector.html), you cannot create a connector because a connector already exists for the specified connector configuration.
+///
+/// For
 /// [DeleteServiceLinkedConfigurationRecorder](https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html), you cannot delete the service-linked recorder because it is currently in use by the linked Amazon Web Services service.
+///
+/// For
+/// [DeleteServiceLinkedConfigurationRecorder](https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html), another in-progress operation is currently referencing the same connector. Please try again later.
+///
+/// For
+/// [DeleteConnector](https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteConnector.html), another in-progress operation is currently referencing the connector. Please try again later.
 ///
 /// For
 /// [DeleteDeliveryChannel](https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteDeliveryChannel.html), you cannot delete the specified delivery channel because the customer managed configuration recorder is running. Use the [StopConfigurationRecorder](https://docs.aws.amazon.com/config/latest/APIReference/API_StopConfigurationRecorder.html) operation to stop the customer managed configuration
@@ -417,6 +437,9 @@ pub const InsufficientDeliveryPolicyException = struct {
 ///
 /// * For
 ///   [PutServiceLinkedConfigurationRecorder](https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html), a service-linked configuration recorder cannot be created because you do not have the following permissions: IAM `CreateServiceLinkedRole`.
+///
+/// * For
+///   [PutConnector](https://docs.aws.amazon.com/config/latest/APIReference/API_PutConnector.html), a connector cannot be created because you do not have the following permissions: IAM `CreateServiceLinkedRole`.
 pub const InsufficientPermissionsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
@@ -657,6 +680,16 @@ pub const MaxNumberOfConfigurationRecordersExceededException = struct {
 /// **Service Limits**
 /// ](https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html) in the *Config Developer Guide*.
 pub const MaxNumberOfConformancePacksExceededException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
+};
+
+/// You have reached the limit of the number of connectors in your account.
+pub const MaxNumberOfConnectorsExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 
@@ -1102,6 +1135,15 @@ pub const UnmodifiableEntityException = struct {
 ///
 /// * For service-linked configuration recorders, the configuration recorder
 ///   does not record one or more of the specified resource types.
+///
+/// For
+/// [DeleteServiceLinkedConfigurationRecorder](https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html), one of the following errors:
+///
+/// * You have provided both `Arn` and `ServicePrincipal`. Only one of `Arn` or
+///   `ServicePrincipal` can be specified.
+///
+/// * You have provided a service principal for service-linked configuration
+///   recorder that is not valid.
 pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
@@ -1420,6 +1462,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             typed_error.message = owned_message;
             typed_error.request_id = owned_request_id;
             return .{ .arena = arena, .kind = .{ .max_number_of_conformance_packs_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "MaxNumberOfConnectorsExceededException")) {
+        const parsed_error: ?MaxNumberOfConnectorsExceededException = aws.json.parseJsonObject(MaxNumberOfConnectorsExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .max_number_of_connectors_exceeded_exception = typed_error } };
         }
     }
     if (std.mem.eql(u8, error_code, "MaxNumberOfDeliveryChannelsExceededException")) {

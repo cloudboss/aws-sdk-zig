@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ResetChannelStateInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ResetChannelStateOutput {
-    var result: ResetChannelStateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ResetChannelStateOutput, body, allocator);
-    }
+    const result: ResetChannelStateOutput = try aws.json.parseJsonObject(
+        ResetChannelStateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

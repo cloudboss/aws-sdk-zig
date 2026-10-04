@@ -12,6 +12,14 @@ pub const DescribeSupportedLanguagesInput = struct {
     /// Amazon Web Services service defines its own set of category codes.
     category_code: []const u8,
 
+    /// Specifies whether to validate the request without actually returning
+    /// supported languages.
+    /// When set to `true`, the request is validated but no languages are returned,
+    /// and the
+    /// operation returns a `DryRunOperationException`. When omitted or set to
+    /// `false`, the request runs normally.
+    dry_run: ?bool = null,
+
     /// The type of issue for the case. You can specify `customer-service` or
     /// `technical`.
     issue_type: []const u8,
@@ -23,6 +31,7 @@ pub const DescribeSupportedLanguagesInput = struct {
 
     pub const json_field_names = .{
         .category_code = "categoryCode",
+        .dry_run = "dryRun",
         .issue_type = "issueType",
         .service_code = "serviceCode",
     };

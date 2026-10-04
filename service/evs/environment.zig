@@ -10,8 +10,7 @@ const VcfVersion = @import("vcf_version.zig").VcfVersion;
 
 /// An object that represents an Amazon EVS environment.
 pub const Environment = struct {
-    /// A check on the environment to identify instance health and VMware VCF
-    /// licensing issues.
+    /// A check on the environment to identify connector health.
     checks: ?[]const Check = null,
 
     /// The connectivity configuration for the environment. Amazon EVS requires that

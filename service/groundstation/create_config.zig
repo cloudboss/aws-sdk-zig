@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateConfigInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateConfigOutput {
-    var result: CreateConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateConfigOutput, body, allocator);
-    }
+    const result: CreateConfigOutput = try aws.json.parseJsonObject(
+        CreateConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

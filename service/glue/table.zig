@@ -1,6 +1,7 @@
 const aws = @import("aws");
 
 const FederatedTable = @import("federated_table.zig").FederatedTable;
+const IcebergTableMetadata = @import("iceberg_table_metadata.zig").IcebergTableMetadata;
 const Column = @import("column.zig").Column;
 const TableStatus = @import("table_status.zig").TableStatus;
 const StorageDescriptor = @import("storage_descriptor.zig").StorageDescriptor;
@@ -28,6 +29,12 @@ pub const Table = struct {
     /// A `FederatedTable` structure that references an entity outside the Glue Data
     /// Catalog.
     federated_table: ?FederatedTable = null,
+
+    /// The latest Apache Iceberg table metadata for the table, including format
+    /// version, schemas, partition specifications, and sort orders. This field is
+    /// populated for Iceberg tables and reflects the current state of the table's
+    /// Iceberg metadata.
+    iceberg_table_metadata: ?IcebergTableMetadata = null,
 
     /// Indicates a table is a `MaterializedView`.
     is_materialized_view: ?bool = null,
@@ -125,6 +132,7 @@ pub const Table = struct {
         .database_name = "DatabaseName",
         .description = "Description",
         .federated_table = "FederatedTable",
+        .iceberg_table_metadata = "IcebergTableMetadata",
         .is_materialized_view = "IsMaterializedView",
         .is_multi_dialect_view = "IsMultiDialectView",
         .is_registered_with_lake_formation = "IsRegisteredWithLakeFormation",

@@ -8,6 +8,7 @@ pub const ResourceType = enum {
     app_runner_service,
     verified_access_instance,
     amplify,
+    agentcore_gateway,
 
     pub const json_field_names = .{
         .application_load_balancer = "APPLICATION_LOAD_BALANCER",
@@ -17,6 +18,7 @@ pub const ResourceType = enum {
         .app_runner_service = "APP_RUNNER_SERVICE",
         .verified_access_instance = "VERIFIED_ACCESS_INSTANCE",
         .amplify = "AMPLIFY",
+        .agentcore_gateway = "AGENTCORE_GATEWAY",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -28,6 +30,7 @@ pub const ResourceType = enum {
             .app_runner_service => "APP_RUNNER_SERVICE",
             .verified_access_instance => "VERIFIED_ACCESS_INSTANCE",
             .amplify => "AMPLIFY",
+            .agentcore_gateway => "AGENTCORE_GATEWAY",
         };
     }
 

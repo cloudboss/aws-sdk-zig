@@ -42,6 +42,9 @@ pub const CreatePlanInput = struct {
 
     report_configuration: ?ReportConfiguration = null,
 
+    /// Specifies whether to enable service quota checks for the Region switch plan.
+    service_quota_checks_enabled: ?bool = null,
+
     /// The tags to apply to the Region switch plan.
     tags: ?[]const aws.map.StringMapEntry = null,
 
@@ -61,6 +64,7 @@ pub const CreatePlanInput = struct {
         .recovery_time_objective_minutes = "recoveryTimeObjectiveMinutes",
         .regions = "regions",
         .report_configuration = "reportConfiguration",
+        .service_quota_checks_enabled = "serviceQuotaChecksEnabled",
         .tags = "tags",
         .triggers = "triggers",
         .workflows = "workflows",

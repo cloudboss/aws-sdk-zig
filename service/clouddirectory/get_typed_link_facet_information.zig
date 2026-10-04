@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTypedLinkFacetInform
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTypedLinkFacetInformationOutput {
-    var result: GetTypedLinkFacetInformationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTypedLinkFacetInformationOutput, body, allocator);
-    }
+    const result: GetTypedLinkFacetInformationOutput = try aws.json.parseJsonObject(
+        GetTypedLinkFacetInformationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

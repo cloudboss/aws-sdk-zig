@@ -121,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateAwsAccountWith
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateAwsAccountWithPartnerAccountOutput {
-    var result: AssociateAwsAccountWithPartnerAccountOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateAwsAccountWithPartnerAccountOutput, body, allocator);
-    }
+    const result: AssociateAwsAccountWithPartnerAccountOutput = try aws.json.parseJsonObject(
+        AssociateAwsAccountWithPartnerAccountOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

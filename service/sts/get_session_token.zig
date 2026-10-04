@@ -19,6 +19,8 @@ pub const GetSessionTokenInput = struct {
     /// to one hour.
     duration_seconds: ?i32 = null,
 
+    minimum_session_token_size: ?i32 = null,
+
     /// The identification number of the MFA device that is associated with the IAM
     /// user who is making the `GetSessionToken` call. Specify this value
     /// if the IAM user has a policy that requires MFA authentication. The value is
@@ -59,6 +61,10 @@ pub const GetSessionTokenOutput = struct {
     /// We
     /// strongly recommend that you make no assumptions about the maximum size.
     credentials: ?Credentials = null,
+
+    session_token_size: ?i32 = null,
+
+    session_token_utilization: ?i32 = null,
 };
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSessionTokenInput, options: CallOptions) !GetSessionTokenOutput {
@@ -96,6 +102,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSessionTokenInput, c
     try body_buf.appendSlice(allocator, "Action=GetSessionToken&Version=2011-06-15");
     if (input.duration_seconds) |v| {
         try body_buf.appendSlice(allocator, "&DurationSeconds=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
+    if (input.minimum_session_token_size) |v| {
+        try body_buf.appendSlice(allocator, "&MinimumSessionTokenSize=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.serial_number) |v| {
@@ -140,6 +150,10 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Credentials")) {
                     result.credentials = try serde.deserializeCredentials(allocator, &reader);
+                } else if (std.mem.eql(u8, e.local, "SessionTokenSize")) {
+                    result.session_token_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "SessionTokenUtilization")) {
+                    result.session_token_utilization = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
                     try reader.skipElement();
                 }

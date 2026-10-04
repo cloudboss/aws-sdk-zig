@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const Code = @import("code.zig").Code;
 const DefinitionS3Location = @import("definition_s3_location.zig").DefinitionS3Location;
 const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
 const EngineVersion = @import("engine_version.zig").EngineVersion;
@@ -27,6 +28,14 @@ pub const GetWorkflowInput = struct {
 };
 
 pub const GetWorkflowOutput = struct {
+    /// The Amazon S3 location of the code artifacts provided during workflow
+    /// creation or update.
+    code: ?Code = null,
+
+    /// The time at which the code artifacts were copied for this workflow, in ISO
+    /// 8601 date-time format.
+    code_snapshotted_at: ?i64 = null,
+
     /// The timestamp when the workflow was created, in ISO 8601 date-time format.
     created_at: ?i64 = null,
 
@@ -84,6 +93,8 @@ pub const GetWorkflowOutput = struct {
     workflow_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .code = "Code",
+        .code_snapshotted_at = "CodeSnapshottedAt",
         .created_at = "CreatedAt",
         .definition_s3_location = "DefinitionS3Location",
         .description = "Description",

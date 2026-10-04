@@ -18,91 +18,9 @@ const MaintenanceUpdateSettings = @import("maintenance_update_settings.zig").Mai
 const SpecialRouterSettings = @import("special_router_settings.zig").SpecialRouterSettings;
 const Channel = @import("channel.zig").Channel;
 
-pub const UpdateChannelInput = struct {
-    /// The Elemental Anywhere settings for this channel.
-    anywhere_settings: ?AnywhereSettings = null,
+pub const UpdateChannelInput = @import("update_channel_request.zig").UpdateChannelRequest;
 
-    /// Specification of CDI inputs for this channel
-    cdi_input_specification: ?CdiInputSpecification = null,
-
-    /// Channel engine version for this channel
-    channel_engine_version: ?ChannelEngineVersionRequest = null,
-
-    /// channel ID
-    channel_id: []const u8,
-
-    /// A list of IDs for all the Input Security Groups attached to the channel.
-    channel_security_groups: ?[]const []const u8 = null,
-
-    /// A list of output destinations for this channel.
-    destinations: ?[]const OutputDestination = null,
-
-    dry_run: ?bool = null,
-
-    /// The encoder settings for this channel.
-    encoder_settings: ?EncoderSettings = null,
-
-    /// Include this setting to include Elemental Inference features in this
-    /// channel.
-    inference_settings: ?InferenceSettings = null,
-
-    input_attachments: ?[]const InputAttachment = null,
-
-    /// Specification of network and file inputs for this channel
-    input_specification: ?InputSpecification = null,
-
-    /// The linked channel settings for the channel.
-    linked_channel_settings: ?LinkedChannelSettings = null,
-
-    /// The log level to write to CloudWatch Logs.
-    log_level: ?LogLevel = null,
-
-    /// Maintenance settings for this channel.
-    maintenance: ?MaintenanceUpdateSettings = null,
-
-    /// The name of the channel.
-    name: ?[]const u8 = null,
-
-    /// An optional Amazon Resource Name (ARN) of the role to assume when running
-    /// the Channel. If you do not specify this on an update call but the role was
-    /// previously set that role will be removed.
-    role_arn: ?[]const u8 = null,
-
-    /// When using MediaConnect Router as the source of a MediaLive input there's a
-    /// special handoff that occurs when a router output
-    /// is created. This group of settings is set on your behalf by the MediaConnect
-    /// Router service using this set of settings. This
-    /// setting object can only by used by that service.
-    special_router_settings: ?SpecialRouterSettings = null,
-
-    pub const json_field_names = .{
-        .anywhere_settings = "AnywhereSettings",
-        .cdi_input_specification = "CdiInputSpecification",
-        .channel_engine_version = "ChannelEngineVersion",
-        .channel_id = "ChannelId",
-        .channel_security_groups = "ChannelSecurityGroups",
-        .destinations = "Destinations",
-        .dry_run = "DryRun",
-        .encoder_settings = "EncoderSettings",
-        .inference_settings = "InferenceSettings",
-        .input_attachments = "InputAttachments",
-        .input_specification = "InputSpecification",
-        .linked_channel_settings = "LinkedChannelSettings",
-        .log_level = "LogLevel",
-        .maintenance = "Maintenance",
-        .name = "Name",
-        .role_arn = "RoleArn",
-        .special_router_settings = "SpecialRouterSettings",
-    };
-};
-
-pub const UpdateChannelOutput = struct {
-    channel: ?Channel = null,
-
-    pub const json_field_names = .{
-        .channel = "Channel",
-    };
-};
+pub const UpdateChannelOutput = @import("update_channel_response.zig").UpdateChannelResponse;
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateChannelInput, options: CallOptions) !UpdateChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -255,10 +173,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateChannelInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateChannelOutput {
-    var result: UpdateChannelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateChannelOutput, body, allocator);
-    }
+    const result: UpdateChannelOutput = try aws.json.parseJsonObject(
+        UpdateChannelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

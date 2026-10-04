@@ -152,10 +152,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutRuntimeManagementCon
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutRuntimeManagementConfigOutput {
-    var result: PutRuntimeManagementConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutRuntimeManagementConfigOutput, body, allocator);
-    }
+    const result: PutRuntimeManagementConfigOutput = try aws.json.parseJsonObject(
+        PutRuntimeManagementConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

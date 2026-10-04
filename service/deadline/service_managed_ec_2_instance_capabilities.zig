@@ -5,6 +5,7 @@ const FleetAttributeCapability = @import("fleet_attribute_capability.zig").Fleet
 const MemoryMiBRange = @import("memory_mi_b_range.zig").MemoryMiBRange;
 const ServiceManagedFleetOperatingSystemFamily = @import("service_managed_fleet_operating_system_family.zig").ServiceManagedFleetOperatingSystemFamily;
 const Ec2EbsVolume = @import("ec_2_ebs_volume.zig").Ec2EbsVolume;
+const FleetSoftwareAddOn = @import("fleet_software_add_on.zig").FleetSoftwareAddOn;
 const VCpuCountRange = @import("v_cpu_count_range.zig").VCpuCountRange;
 
 /// The Amazon EC2 instance capabilities.
@@ -37,6 +38,10 @@ pub const ServiceManagedEc2InstanceCapabilities = struct {
     /// The root EBS volume.
     root_ebs_volume: ?Ec2EbsVolume = null,
 
+    /// The software add-ons that the service installs on worker hosts when they
+    /// launch.
+    software_add_ons: ?[]const FleetSoftwareAddOn = null,
+
     /// The amount of vCPU to require for instances in this fleet.
     v_cpu_count: VCpuCountRange,
 
@@ -50,6 +55,7 @@ pub const ServiceManagedEc2InstanceCapabilities = struct {
         .memory_mi_b = "memoryMiB",
         .os_family = "osFamily",
         .root_ebs_volume = "rootEbsVolume",
+        .software_add_ons = "softwareAddOns",
         .v_cpu_count = "vCpuCount",
     };
 };

@@ -27,6 +27,8 @@ pub const WorkspaceStatus = enum {
     version_updating,
     /// Workspace version update failed.
     version_update_failed,
+    /// Workspace is degraded.
+    degraded,
 
     pub const json_field_names = .{
         .active = "ACTIVE",
@@ -42,6 +44,7 @@ pub const WorkspaceStatus = enum {
         .license_removal_failed = "LICENSE_REMOVAL_FAILED",
         .version_updating = "VERSION_UPDATING",
         .version_update_failed = "VERSION_UPDATE_FAILED",
+        .degraded = "DEGRADED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -59,6 +62,7 @@ pub const WorkspaceStatus = enum {
             .license_removal_failed => "LICENSE_REMOVAL_FAILED",
             .version_updating => "VERSION_UPDATING",
             .version_update_failed => "VERSION_UPDATE_FAILED",
+            .degraded => "DEGRADED",
         };
     }
 

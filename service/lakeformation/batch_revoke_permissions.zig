@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchRevokePermissionsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchRevokePermissionsOutput {
-    var result: BatchRevokePermissionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchRevokePermissionsOutput, body, allocator);
-    }
+    const result: BatchRevokePermissionsOutput = try aws.json.parseJsonObject(
+        BatchRevokePermissionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

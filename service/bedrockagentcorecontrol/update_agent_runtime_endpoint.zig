@@ -140,10 +140,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAgentRuntimeEndpo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateAgentRuntimeEndpointOutput {
-    var result: UpdateAgentRuntimeEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateAgentRuntimeEndpointOutput, body, allocator);
-    }
+    const result: UpdateAgentRuntimeEndpointOutput = try aws.json.parseJsonObject(
+        UpdateAgentRuntimeEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

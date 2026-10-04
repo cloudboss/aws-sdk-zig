@@ -20,7 +20,7 @@ pub const StartOutboundEmailContactInput = struct {
     /// APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
     client_token: ?[]const u8 = null,
 
-    /// The identifier of the contact in this instance of Amazon Connect.
+    /// The identifier of the contact in this instance of Connect Customer.
     contact_id: []const u8,
 
     /// The email address of the customer.
@@ -29,10 +29,10 @@ pub const StartOutboundEmailContactInput = struct {
     /// The email message body to be sent to the newly created email.
     email_message: OutboundEmailContent,
 
-    /// The email address associated with the Amazon Connect instance.
+    /// The email address associated with the Connect Customer instance.
     from_email_address: ?EmailAddressInfo = null,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -48,7 +48,7 @@ pub const StartOutboundEmailContactInput = struct {
 };
 
 pub const StartOutboundEmailContactOutput = struct {
-    /// The identifier of the contact in this instance of Amazon Connect.
+    /// The identifier of the contact in this instance of Connect Customer.
     contact_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -142,10 +142,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartOutboundEmailConta
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartOutboundEmailContactOutput {
-    var result: StartOutboundEmailContactOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartOutboundEmailContactOutput, body, allocator);
-    }
+    const result: StartOutboundEmailContactOutput = try aws.json.parseJsonObject(
+        StartOutboundEmailContactOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

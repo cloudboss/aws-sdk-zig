@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetUpgradeStatusInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetUpgradeStatusOutput {
-    var result: GetUpgradeStatusOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetUpgradeStatusOutput, body, allocator);
-    }
+    const result: GetUpgradeStatusOutput = try aws.json.parseJsonObject(
+        GetUpgradeStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,6 +1,6 @@
 const std = @import("std");
 
-/// Transaction status enum
+/// Transaction status enum.
 pub const PaymentStatus = enum {
     proof_generated,
 

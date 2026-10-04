@@ -9,7 +9,7 @@ const AliasConfiguration = @import("alias_configuration.zig").AliasConfiguration
 pub const AssociateEmailAddressAliasInput = struct {
     /// Configuration object that specifies which email address will serve as the
     /// alias. The specified email address
-    /// must already exist in the Amazon Connect instance and cannot already be
+    /// must already exist in the Connect Customer instance and cannot already be
     /// configured as an alias or have an alias
     /// of its own.
     alias_configuration: AliasConfiguration,
@@ -25,7 +25,7 @@ pub const AssociateEmailAddressAliasInput = struct {
     /// The identifier of the email address.
     email_address_id: []const u8,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 

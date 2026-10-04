@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListNetworkAnalyzerConf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListNetworkAnalyzerConfigurationsOutput {
-    var result: ListNetworkAnalyzerConfigurationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListNetworkAnalyzerConfigurationsOutput, body, allocator);
-    }
+    const result: ListNetworkAnalyzerConfigurationsOutput = try aws.json.parseJsonObject(
+        ListNetworkAnalyzerConfigurationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

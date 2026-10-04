@@ -6,8 +6,12 @@ pub const ServiceError = struct {
     kind: Kind,
 
     pub const Kind = union(enum) {
+        alias_limit_exceeded_exception: AliasLimitExceededException,
         callback_timeout_exception: CallbackTimeoutException,
         capacity_provider_limit_exceeded_exception: CapacityProviderLimitExceededException,
+        code_artifact_user_deleted_exception: CodeArtifactUserDeletedException,
+        code_artifact_user_failed_exception: CodeArtifactUserFailedException,
+        code_artifact_user_pending_exception: CodeArtifactUserPendingException,
         code_signing_config_not_found_exception: CodeSigningConfigNotFoundException,
         code_storage_exceeded_exception: CodeStorageExceededException,
         code_verification_failed_exception: CodeVerificationFailedException,
@@ -20,6 +24,7 @@ pub const ServiceError = struct {
         efs_mount_timeout_exception: EFSMountTimeoutException,
         efsio_exception: EFSIOException,
         eni_limit_reached_exception: ENILimitReachedException,
+        eni_not_ready_exception: ENINotReadyException,
         function_versions_per_capacity_provider_limit_exceeded_exception: FunctionVersionsPerCapacityProviderLimitExceededException,
         invalid_code_signature_exception: InvalidCodeSignatureException,
         invalid_parameter_value_exception: InvalidParameterValueException,
@@ -32,10 +37,12 @@ pub const ServiceError = struct {
         kms_disabled_exception: KMSDisabledException,
         kms_invalid_state_exception: KMSInvalidStateException,
         kms_not_found_exception: KMSNotFoundException,
+        mode_not_supported_exception: ModeNotSupportedException,
         no_published_version_exception: NoPublishedVersionException,
         policy_length_exceeded_exception: PolicyLengthExceededException,
         precondition_failed_exception: PreconditionFailedException,
         provisioned_concurrency_config_not_found_exception: ProvisionedConcurrencyConfigNotFoundException,
+        public_policy_exception: PublicPolicyException,
         recursive_invocation_exception: RecursiveInvocationException,
         request_too_large_exception: RequestTooLargeException,
         resource_conflict_exception: ResourceConflictException,
@@ -47,8 +54,10 @@ pub const ServiceError = struct {
         s3_files_mount_timeout_exception: S3FilesMountTimeoutException,
         serialized_request_entity_too_large_exception: SerializedRequestEntityTooLargeException,
         service_exception: ServiceException,
+        service_quota_exceeded_exception: ServiceQuotaExceededException,
         snap_start_exception: SnapStartException,
         snap_start_not_ready_exception: SnapStartNotReadyException,
+        snap_start_regeneration_failure_exception: SnapStartRegenerationFailureException,
         snap_start_timeout_exception: SnapStartTimeoutException,
         subnet_ip_address_limit_reached_exception: SubnetIPAddressLimitReachedException,
         too_many_requests_exception: TooManyRequestsException,
@@ -57,8 +66,12 @@ pub const ServiceError = struct {
 
         pub fn code(self: Kind) []const u8 {
             return switch (self) {
+                .alias_limit_exceeded_exception => "AliasLimitExceededException",
                 .callback_timeout_exception => "CallbackTimeoutException",
                 .capacity_provider_limit_exceeded_exception => "CapacityProviderLimitExceededException",
+                .code_artifact_user_deleted_exception => "CodeArtifactUserDeletedException",
+                .code_artifact_user_failed_exception => "CodeArtifactUserFailedException",
+                .code_artifact_user_pending_exception => "CodeArtifactUserPendingException",
                 .code_signing_config_not_found_exception => "CodeSigningConfigNotFoundException",
                 .code_storage_exceeded_exception => "CodeStorageExceededException",
                 .code_verification_failed_exception => "CodeVerificationFailedException",
@@ -71,6 +84,7 @@ pub const ServiceError = struct {
                 .efs_mount_timeout_exception => "EFSMountTimeoutException",
                 .efsio_exception => "EFSIOException",
                 .eni_limit_reached_exception => "ENILimitReachedException",
+                .eni_not_ready_exception => "ENINotReadyException",
                 .function_versions_per_capacity_provider_limit_exceeded_exception => "FunctionVersionsPerCapacityProviderLimitExceededException",
                 .invalid_code_signature_exception => "InvalidCodeSignatureException",
                 .invalid_parameter_value_exception => "InvalidParameterValueException",
@@ -83,10 +97,12 @@ pub const ServiceError = struct {
                 .kms_disabled_exception => "KMSDisabledException",
                 .kms_invalid_state_exception => "KMSInvalidStateException",
                 .kms_not_found_exception => "KMSNotFoundException",
+                .mode_not_supported_exception => "ModeNotSupportedException",
                 .no_published_version_exception => "NoPublishedVersionException",
                 .policy_length_exceeded_exception => "PolicyLengthExceededException",
                 .precondition_failed_exception => "PreconditionFailedException",
                 .provisioned_concurrency_config_not_found_exception => "ProvisionedConcurrencyConfigNotFoundException",
+                .public_policy_exception => "PublicPolicyException",
                 .recursive_invocation_exception => "RecursiveInvocationException",
                 .request_too_large_exception => "RequestTooLargeException",
                 .resource_conflict_exception => "ResourceConflictException",
@@ -98,8 +114,10 @@ pub const ServiceError = struct {
                 .s3_files_mount_timeout_exception => "S3FilesMountTimeoutException",
                 .serialized_request_entity_too_large_exception => "SerializedRequestEntityTooLargeException",
                 .service_exception => "ServiceException",
+                .service_quota_exceeded_exception => "ServiceQuotaExceededException",
                 .snap_start_exception => "SnapStartException",
                 .snap_start_not_ready_exception => "SnapStartNotReadyException",
+                .snap_start_regeneration_failure_exception => "SnapStartRegenerationFailureException",
                 .snap_start_timeout_exception => "SnapStartTimeoutException",
                 .subnet_ip_address_limit_reached_exception => "SubnetIPAddressLimitReachedException",
                 .too_many_requests_exception => "TooManyRequestsException",
@@ -110,8 +128,12 @@ pub const ServiceError = struct {
 
         pub fn message(self: Kind) []const u8 {
             return switch (self) {
+                .alias_limit_exceeded_exception => |e| e.message,
                 .callback_timeout_exception => |e| e.message,
                 .capacity_provider_limit_exceeded_exception => |e| e.message,
+                .code_artifact_user_deleted_exception => |e| e.message,
+                .code_artifact_user_failed_exception => |e| e.message,
+                .code_artifact_user_pending_exception => |e| e.message,
                 .code_signing_config_not_found_exception => |e| e.message,
                 .code_storage_exceeded_exception => |e| e.message,
                 .code_verification_failed_exception => |e| e.message,
@@ -124,6 +146,7 @@ pub const ServiceError = struct {
                 .efs_mount_timeout_exception => |e| e.message,
                 .efsio_exception => |e| e.message,
                 .eni_limit_reached_exception => |e| e.message,
+                .eni_not_ready_exception => |e| e.message,
                 .function_versions_per_capacity_provider_limit_exceeded_exception => |e| e.message,
                 .invalid_code_signature_exception => |e| e.message,
                 .invalid_parameter_value_exception => |e| e.message,
@@ -136,10 +159,12 @@ pub const ServiceError = struct {
                 .kms_disabled_exception => |e| e.message,
                 .kms_invalid_state_exception => |e| e.message,
                 .kms_not_found_exception => |e| e.message,
+                .mode_not_supported_exception => |e| e.message,
                 .no_published_version_exception => |e| e.message,
                 .policy_length_exceeded_exception => |e| e.message,
                 .precondition_failed_exception => |e| e.message,
                 .provisioned_concurrency_config_not_found_exception => |e| e.message,
+                .public_policy_exception => |e| e.message,
                 .recursive_invocation_exception => |e| e.message,
                 .request_too_large_exception => |e| e.message,
                 .resource_conflict_exception => |e| e.message,
@@ -151,8 +176,10 @@ pub const ServiceError = struct {
                 .s3_files_mount_timeout_exception => |e| e.message,
                 .serialized_request_entity_too_large_exception => |e| e.message,
                 .service_exception => |e| e.message,
+                .service_quota_exceeded_exception => |e| e.message,
                 .snap_start_exception => |e| e.message,
                 .snap_start_not_ready_exception => |e| e.message,
+                .snap_start_regeneration_failure_exception => |e| e.message,
                 .snap_start_timeout_exception => |e| e.message,
                 .subnet_ip_address_limit_reached_exception => |e| e.message,
                 .too_many_requests_exception => |e| e.message,
@@ -163,8 +190,12 @@ pub const ServiceError = struct {
 
         pub fn httpStatus(self: Kind) u16 {
             return switch (self) {
+                .alias_limit_exceeded_exception => 400,
                 .callback_timeout_exception => 400,
                 .capacity_provider_limit_exceeded_exception => 400,
+                .code_artifact_user_deleted_exception => 409,
+                .code_artifact_user_failed_exception => 409,
+                .code_artifact_user_pending_exception => 409,
                 .code_signing_config_not_found_exception => 404,
                 .code_storage_exceeded_exception => 400,
                 .code_verification_failed_exception => 400,
@@ -177,6 +208,7 @@ pub const ServiceError = struct {
                 .efs_mount_timeout_exception => 408,
                 .efsio_exception => 410,
                 .eni_limit_reached_exception => 502,
+                .eni_not_ready_exception => 502,
                 .function_versions_per_capacity_provider_limit_exceeded_exception => 400,
                 .invalid_code_signature_exception => 400,
                 .invalid_parameter_value_exception => 400,
@@ -189,10 +221,12 @@ pub const ServiceError = struct {
                 .kms_disabled_exception => 502,
                 .kms_invalid_state_exception => 502,
                 .kms_not_found_exception => 502,
+                .mode_not_supported_exception => 400,
                 .no_published_version_exception => 400,
                 .policy_length_exceeded_exception => 400,
                 .precondition_failed_exception => 412,
                 .provisioned_concurrency_config_not_found_exception => 404,
+                .public_policy_exception => 400,
                 .recursive_invocation_exception => 400,
                 .request_too_large_exception => 413,
                 .resource_conflict_exception => 409,
@@ -204,8 +238,10 @@ pub const ServiceError = struct {
                 .s3_files_mount_timeout_exception => 408,
                 .serialized_request_entity_too_large_exception => 413,
                 .service_exception => 500,
+                .service_quota_exceeded_exception => 402,
                 .snap_start_exception => 400,
                 .snap_start_not_ready_exception => 409,
+                .snap_start_regeneration_failure_exception => 409,
                 .snap_start_timeout_exception => 408,
                 .subnet_ip_address_limit_reached_exception => 502,
                 .too_many_requests_exception => 429,
@@ -216,8 +252,12 @@ pub const ServiceError = struct {
 
         pub fn requestId(self: Kind) []const u8 {
             return switch (self) {
+                .alias_limit_exceeded_exception => |e| e.request_id,
                 .callback_timeout_exception => |e| e.request_id,
                 .capacity_provider_limit_exceeded_exception => |e| e.request_id,
+                .code_artifact_user_deleted_exception => |e| e.request_id,
+                .code_artifact_user_failed_exception => |e| e.request_id,
+                .code_artifact_user_pending_exception => |e| e.request_id,
                 .code_signing_config_not_found_exception => |e| e.request_id,
                 .code_storage_exceeded_exception => |e| e.request_id,
                 .code_verification_failed_exception => |e| e.request_id,
@@ -230,6 +270,7 @@ pub const ServiceError = struct {
                 .efs_mount_timeout_exception => |e| e.request_id,
                 .efsio_exception => |e| e.request_id,
                 .eni_limit_reached_exception => |e| e.request_id,
+                .eni_not_ready_exception => |e| e.request_id,
                 .function_versions_per_capacity_provider_limit_exceeded_exception => |e| e.request_id,
                 .invalid_code_signature_exception => |e| e.request_id,
                 .invalid_parameter_value_exception => |e| e.request_id,
@@ -242,10 +283,12 @@ pub const ServiceError = struct {
                 .kms_disabled_exception => |e| e.request_id,
                 .kms_invalid_state_exception => |e| e.request_id,
                 .kms_not_found_exception => |e| e.request_id,
+                .mode_not_supported_exception => |e| e.request_id,
                 .no_published_version_exception => |e| e.request_id,
                 .policy_length_exceeded_exception => |e| e.request_id,
                 .precondition_failed_exception => |e| e.request_id,
                 .provisioned_concurrency_config_not_found_exception => |e| e.request_id,
+                .public_policy_exception => |e| e.request_id,
                 .recursive_invocation_exception => |e| e.request_id,
                 .request_too_large_exception => |e| e.request_id,
                 .resource_conflict_exception => |e| e.request_id,
@@ -257,8 +300,10 @@ pub const ServiceError = struct {
                 .s3_files_mount_timeout_exception => |e| e.request_id,
                 .serialized_request_entity_too_large_exception => |e| e.request_id,
                 .service_exception => |e| e.request_id,
+                .service_quota_exceeded_exception => |e| e.request_id,
                 .snap_start_exception => |e| e.request_id,
                 .snap_start_not_ready_exception => |e| e.request_id,
+                .snap_start_regeneration_failure_exception => |e| e.request_id,
                 .snap_start_timeout_exception => |e| e.request_id,
                 .subnet_ip_address_limit_reached_exception => |e| e.request_id,
                 .too_many_requests_exception => |e| e.request_id,
@@ -289,12 +334,32 @@ pub const ServiceError = struct {
     }
 };
 
+pub const AliasLimitExceededException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
 pub const CallbackTimeoutException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
 pub const CapacityProviderLimitExceededException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const CodeArtifactUserDeletedException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const CodeArtifactUserFailedException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const CodeArtifactUserPendingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -359,6 +424,11 @@ pub const ENILimitReachedException = struct {
     request_id: []const u8 = "",
 };
 
+pub const ENINotReadyException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
 pub const FunctionVersionsPerCapacityProviderLimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
@@ -419,6 +489,11 @@ pub const KMSNotFoundException = struct {
     request_id: []const u8 = "",
 };
 
+pub const ModeNotSupportedException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
 pub const NoPublishedVersionException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
@@ -435,6 +510,11 @@ pub const PreconditionFailedException = struct {
 };
 
 pub const ProvisionedConcurrencyConfigNotFoundException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const PublicPolicyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -494,12 +574,22 @@ pub const ServiceException = struct {
     request_id: []const u8 = "",
 };
 
+pub const ServiceQuotaExceededException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
 pub const SnapStartException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
 pub const SnapStartNotReadyException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const SnapStartRegenerationFailureException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -547,6 +637,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, "");
 
+    if (std.mem.eql(u8, error_code, "AliasLimitExceededException")) {
+        return .{ .arena = arena, .kind = .{ .alias_limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "CallbackTimeoutException")) {
         return .{ .arena = arena, .kind = .{ .callback_timeout_exception = .{
             .message = owned_message,
@@ -555,6 +651,24 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     }
     if (std.mem.eql(u8, error_code, "CapacityProviderLimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .capacity_provider_limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "CodeArtifactUserDeletedException")) {
+        return .{ .arena = arena, .kind = .{ .code_artifact_user_deleted_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "CodeArtifactUserFailedException")) {
+        return .{ .arena = arena, .kind = .{ .code_artifact_user_failed_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "CodeArtifactUserPendingException")) {
+        return .{ .arena = arena, .kind = .{ .code_artifact_user_pending_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };
@@ -631,6 +745,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "ENINotReadyException")) {
+        return .{ .arena = arena, .kind = .{ .eni_not_ready_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "FunctionVersionsPerCapacityProviderLimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .function_versions_per_capacity_provider_limit_exceeded_exception = .{
             .message = owned_message,
@@ -703,6 +823,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "ModeNotSupportedException")) {
+        return .{ .arena = arena, .kind = .{ .mode_not_supported_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "NoPublishedVersionException")) {
         return .{ .arena = arena, .kind = .{ .no_published_version_exception = .{
             .message = owned_message,
@@ -723,6 +849,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     }
     if (std.mem.eql(u8, error_code, "ProvisionedConcurrencyConfigNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .provisioned_concurrency_config_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "PublicPolicyException")) {
+        return .{ .arena = arena, .kind = .{ .public_policy_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };
@@ -793,6 +925,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "SnapStartException")) {
         return .{ .arena = arena, .kind = .{ .snap_start_exception = .{
             .message = owned_message,
@@ -801,6 +939,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     }
     if (std.mem.eql(u8, error_code, "SnapStartNotReadyException")) {
         return .{ .arena = arena, .kind = .{ .snap_start_not_ready_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "SnapStartRegenerationFailureException")) {
+        return .{ .arena = arena, .kind = .{ .snap_start_regeneration_failure_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

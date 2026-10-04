@@ -9,6 +9,20 @@ pub const InvokeEndpointAsyncInput = struct {
     /// The desired MIME type of the inference response from the model container.
     accept: ?[]const u8 = null,
 
+    /// Provides inline input data for the inference request, in the format
+    /// specified in the
+    /// `ContentType` request header. Use this parameter to send the request
+    /// payload directly in the API call instead of uploading it to Amazon S3 and
+    /// referencing it with `InputLocation`. The inline payload can be up to 128,000
+    /// bytes.
+    ///
+    /// `Body` and `InputLocation` are mutually exclusive. Provide
+    /// exactly one of them.
+    ///
+    /// For information about the format of the request body, see [Common Data
+    /// Formats-Inference](https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-inference.html).
+    body: ?[]const u8 = null,
+
     /// The MIME type of the input data in the request body.
     content_type: ?[]const u8 = null,
 
@@ -57,7 +71,7 @@ pub const InvokeEndpointAsyncInput = struct {
     inference_id: ?[]const u8 = null,
 
     /// The Amazon S3 URI where the inference request payload is stored.
-    input_location: []const u8,
+    input_location: ?[]const u8 = null,
 
     /// Maximum amount of time in seconds a request can be processed before it is
     /// marked as
@@ -76,6 +90,7 @@ pub const InvokeEndpointAsyncInput = struct {
 
     pub const json_field_names = .{
         .accept = "Accept",
+        .body = "Body",
         .content_type = "ContentType",
         .custom_attributes = "CustomAttributes",
         .endpoint_name = "EndpointName",
@@ -144,7 +159,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeEndpointAsyncInpu
     try path_buf.appendSlice(allocator, "/async-invocations");
     const path = try path_buf.toOwnedSlice(allocator);
 
-    const body: ?[]const u8 = null;
+    const body = input.body orelse "";
 
     var request = aws.http.Request.init(ep.host);
     request.method = .POST;
@@ -168,7 +183,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeEndpointAsyncInpu
     if (input.inference_id) |v| {
         try request.headers.put(allocator, "X-Amzn-SageMaker-Inference-Id", v);
     }
-    try request.headers.put(allocator, "X-Amzn-SageMaker-InputLocation", input.input_location);
+    if (input.input_location) |v| {
+        try request.headers.put(allocator, "X-Amzn-SageMaker-InputLocation", v);
+    }
     if (input.invocation_timeout_seconds) |v| {
         {
             const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
@@ -189,10 +206,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeEndpointAsyncInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !InvokeEndpointAsyncOutput {
-    var result: InvokeEndpointAsyncOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(InvokeEndpointAsyncOutput, body, allocator);
-    }
+    var result: InvokeEndpointAsyncOutput = try aws.json.parseJsonObject(
+        InvokeEndpointAsyncOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("x-amzn-sagemaker-failurelocation")) |value| {
         result.failure_location = try allocator.dupe(u8, value);

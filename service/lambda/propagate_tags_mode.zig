@@ -1,0 +1,29 @@
+const std = @import("std");
+
+pub const PropagateTagsMode = enum {
+    /// Tag propagation is disabled. No tags are applied to managed resources.
+    none,
+    /// Tags specified in `ExplicitTags` are applied to managed resources at launch.
+    explicit,
+
+    pub const json_field_names = .{
+        .none = "None",
+        .explicit = "Explicit",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .none => "None",
+            .explicit => "Explicit",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
+};

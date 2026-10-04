@@ -11,6 +11,7 @@ const CreateHlsManifestConfiguration = @import("create_hls_manifest_configuratio
 const CreateLowLatencyHlsManifestConfiguration = @import("create_low_latency_hls_manifest_configuration.zig").CreateLowLatencyHlsManifestConfiguration;
 const CreateMssManifestConfiguration = @import("create_mss_manifest_configuration.zig").CreateMssManifestConfiguration;
 const Segment = @import("segment.zig").Segment;
+const StreamNameOutputMode = @import("stream_name_output_mode.zig").StreamNameOutputMode;
 const UriSeparator = @import("uri_separator.zig").UriSeparator;
 const GetDashManifestConfiguration = @import("get_dash_manifest_configuration.zig").GetDashManifestConfiguration;
 const GetHlsManifestConfiguration = @import("get_hls_manifest_configuration.zig").GetHlsManifestConfiguration;
@@ -74,6 +75,11 @@ pub const UpdateOriginEndpointInput = struct {
     /// 1,209,600 seconds (14 days).
     startover_window_seconds: ?i32 = null,
 
+    /// The output mode for stream names in egress manifests. If you provide a
+    /// value, it must match the current value. You can't change the stream name
+    /// output mode after you create the endpoint.
+    stream_name_output_mode: ?StreamNameOutputMode = null,
+
     /// The separator character to use in generated URIs for this origin endpoint.
     /// This setting applies to all manifest types on the endpoint. If you don't
     /// specify a value in the update request, the current value is preserved.
@@ -93,6 +99,7 @@ pub const UpdateOriginEndpointInput = struct {
         .origin_endpoint_name = "OriginEndpointName",
         .segment = "Segment",
         .startover_window_seconds = "StartoverWindowSeconds",
+        .stream_name_output_mode = "StreamNameOutputMode",
         .uri_separator = "UriSeparator",
     };
 };
@@ -157,6 +164,10 @@ pub const UpdateOriginEndpointOutput = struct {
     /// on content that falls within the window.
     startover_window_seconds: ?i32 = null,
 
+    /// The output mode for stream names in egress manifests for this origin
+    /// endpoint.
+    stream_name_output_mode: ?StreamNameOutputMode = null,
+
     /// The comma-separated list of tag key:value pairs assigned to the origin
     /// endpoint.
     tags: ?[]const aws.map.StringMapEntry = null,
@@ -181,6 +192,7 @@ pub const UpdateOriginEndpointOutput = struct {
         .origin_endpoint_name = "OriginEndpointName",
         .segment = "Segment",
         .startover_window_seconds = "StartoverWindowSeconds",
+        .stream_name_output_mode = "StreamNameOutputMode",
         .tags = "Tags",
         .uri_separator = "UriSeparator",
     };
@@ -281,6 +293,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateOriginEndpointInp
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.stream_name_output_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"StreamNameOutputMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.uri_separator) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"UriSeparator\":");
@@ -306,10 +324,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateOriginEndpointInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateOriginEndpointOutput {
-    var result: UpdateOriginEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateOriginEndpointOutput, body, allocator);
-    }
+    const result: UpdateOriginEndpointOutput = try aws.json.parseJsonObject(
+        UpdateOriginEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

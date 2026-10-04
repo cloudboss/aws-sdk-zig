@@ -125,10 +125,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateBrowserStreamInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateBrowserStreamOutput {
-    var result: UpdateBrowserStreamOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateBrowserStreamOutput, body, allocator);
-    }
+    const result: UpdateBrowserStreamOutput = try aws.json.parseJsonObject(
+        UpdateBrowserStreamOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

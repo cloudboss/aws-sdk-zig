@@ -56,6 +56,7 @@ pub const Rule = @import("rule.zig").Rule;
 pub const RuleCondition = @import("rule_condition.zig").RuleCondition;
 pub const RulePriorityPair = @import("rule_priority_pair.zig").RulePriorityPair;
 pub const RuleTransform = @import("rule_transform.zig").RuleTransform;
+pub const SourceIpAddressTypeEnum = @import("source_ip_address_type_enum.zig").SourceIpAddressTypeEnum;
 pub const SourceIpConditionConfig = @import("source_ip_condition_config.zig").SourceIpConditionConfig;
 pub const SslPolicy = @import("ssl_policy.zig").SslPolicy;
 pub const SubnetMapping = @import("subnet_mapping.zig").SubnetMapping;

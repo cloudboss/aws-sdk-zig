@@ -213,6 +213,11 @@ pub const UpdateAutoScalingGroupInput = struct {
     /// groups with multiple instance types and purchase
     /// options](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
+    ///
+    /// You can remove the Distribution Segments configuration by specifying
+    /// `OnDemandBaseCapacity` or
+    /// `OnDemandPercentageAboveBaseCapacity`. You can also remove it explicitly
+    /// by specifying an empty list for `DistributionSegments`.
     mixed_instances_policy: ?MixedInstancesPolicy = null,
 
     /// Indicates whether newly launched instances are protected from termination by
@@ -457,6 +462,22 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAutoScalingGroupI
     }
     if (input.mixed_instances_policy) |v| {
         if (v.instances_distribution) |sv| {
+            if (sv.distribution_segments) |list_d1| {
+                for (list_d1, 0..) |item, idx| {
+                    const n = idx + 1;
+                    if (item.target_capacity_types) |lst_2| {
+                        for (lst_2, 0..) |item_2, idx_2| {
+                            const n_2 = idx_2 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.InstancesDistribution.DistributionSegments.member.{d}.TargetCapacityTypes.member.{d}=", .{n, n_2}) catch continue;
+                                try body_buf.appendSlice(allocator, field_prefix);
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, item_2.wireName());
+                            }
+                        }
+                    }
+                }
+            }
             if (sv.on_demand_allocation_strategy) |sv2| {
                 try body_buf.appendSlice(allocator, "&MixedInstancesPolicy.InstancesDistribution.OnDemandAllocationStrategy=");
                 try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);

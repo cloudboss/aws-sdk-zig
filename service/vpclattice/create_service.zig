@@ -29,6 +29,13 @@ pub const CreateServiceInput = struct {
     /// The custom domain name of the service.
     custom_domain_name: ?[]const u8 = null,
 
+    /// The amount of time, in seconds, that a connection can remain idle (no data
+    /// sent) before VPC Lattice closes it. The valid range is 60 to 600 seconds. If
+    /// you don't specify a value, the default is 60 seconds. This setting does not
+    /// change the maximum connection duration of 10 minutes; connections are still
+    /// closed when they reach that limit.
+    idle_timeout_seconds: ?i32 = null,
+
     /// The name of the service. The name must be unique within the account. The
     /// valid characters are a-z, 0-9, and hyphens (-). You can't use a hyphen as
     /// the first or last character, or immediately after another hyphen.
@@ -42,6 +49,7 @@ pub const CreateServiceInput = struct {
         .certificate_arn = "certificateArn",
         .client_token = "clientToken",
         .custom_domain_name = "customDomainName",
+        .idle_timeout_seconds = "idleTimeoutSeconds",
         .name = "name",
         .tags = "tags",
     };
@@ -66,6 +74,10 @@ pub const CreateServiceOutput = struct {
     /// The ID of the service.
     id: ?[]const u8 = null,
 
+    /// The amount of time, in seconds, that a connection can remain idle before VPC
+    /// Lattice closes it.
+    idle_timeout_seconds: ?i32 = null,
+
     /// The name of the service.
     name: ?[]const u8 = null,
 
@@ -80,6 +92,7 @@ pub const CreateServiceOutput = struct {
         .custom_domain_name = "customDomainName",
         .dns_entry = "dnsEntry",
         .id = "id",
+        .idle_timeout_seconds = "idleTimeoutSeconds",
         .name = "name",
         .status = "status",
     };
@@ -145,6 +158,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateServiceInput, con
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.idle_timeout_seconds) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"idleTimeoutSeconds\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
@@ -171,10 +190,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateServiceInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateServiceOutput {
-    var result: CreateServiceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateServiceOutput, body, allocator);
-    }
+    const result: CreateServiceOutput = try aws.json.parseJsonObject(
+        CreateServiceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

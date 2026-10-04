@@ -162,10 +162,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AcceptLinkInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AcceptLinkOutput {
-    var result: AcceptLinkOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AcceptLinkOutput, body, allocator);
-    }
+    const result: AcceptLinkOutput = try aws.json.parseJsonObject(
+        AcceptLinkOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

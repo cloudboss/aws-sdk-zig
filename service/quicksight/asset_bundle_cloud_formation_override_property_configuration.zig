@@ -6,6 +6,7 @@ const AssetBundleExportJobFolderOverrideProperties = @import("asset_bundle_expor
 const AssetBundleExportJobRefreshScheduleOverrideProperties = @import("asset_bundle_export_job_refresh_schedule_override_properties.zig").AssetBundleExportJobRefreshScheduleOverrideProperties;
 const AssetBundleExportJobResourceIdOverrideConfiguration = @import("asset_bundle_export_job_resource_id_override_configuration.zig").AssetBundleExportJobResourceIdOverrideConfiguration;
 const AssetBundleExportJobThemeOverrideProperties = @import("asset_bundle_export_job_theme_override_properties.zig").AssetBundleExportJobThemeOverrideProperties;
+const AssetBundleExportJobTopicV2OverrideProperties = @import("asset_bundle_export_job_topic_v2_override_properties.zig").AssetBundleExportJobTopicV2OverrideProperties;
 const AssetBundleExportJobVPCConnectionOverrideProperties = @import("asset_bundle_export_job_vpc_connection_override_properties.zig").AssetBundleExportJobVPCConnectionOverrideProperties;
 
 /// An optional collection of CloudFormation property configurations that
@@ -45,6 +46,10 @@ pub const AssetBundleCloudFormationOverridePropertyConfiguration = struct {
     /// parameterized in the returned CloudFormation template.
     themes: ?[]const AssetBundleExportJobThemeOverrideProperties = null,
 
+    /// An optional list of structures that controls how `Topic` resources are
+    /// parameterized in the returned CloudFormation template.
+    topics_v2: ?[]const AssetBundleExportJobTopicV2OverrideProperties = null,
+
     /// An optional list of structures that control how `VPCConnection` resources
     /// are
     /// parameterized in the returned CloudFormation template.
@@ -59,6 +64,7 @@ pub const AssetBundleCloudFormationOverridePropertyConfiguration = struct {
         .refresh_schedules = "RefreshSchedules",
         .resource_id_override_configuration = "ResourceIdOverrideConfiguration",
         .themes = "Themes",
+        .topics_v2 = "TopicsV2",
         .vpc_connections = "VPCConnections",
     };
 };

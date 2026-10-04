@@ -6,7 +6,22 @@ const AttachmentDetails = @import("attachment_details.zig").AttachmentDetails;
 /// communication, and
 /// the date and time of the communication.
 pub const Communication = struct {
-    /// Information about the attachments to the case communication.
+    /// Information about all attachments on the case communication. This includes
+    /// attachments added through `AddAttachmentsToSet` and attachments uploaded
+    /// through `GetAttachmentUploadLinks`.
+    ///
+    /// Use this field to enumerate every attachment on the communication. To
+    /// download an attachment listed in this field, use GetAttachmentDownloadLink.
+    /// `GetAttachmentDownloadLink` returns a presigned URL that works for
+    /// attachments of any size.
+    attachments: ?[]const AttachmentDetails = null,
+
+    /// Information about the attachments to the case communication that are 5 MB or
+    /// smaller.
+    /// This field doesn't include attachments larger than 5 MB. To enumerate every
+    /// attachment on
+    /// the communication, including attachments larger than 5 MB, use the
+    /// `attachments` field instead.
     attachment_set: ?[]const AttachmentDetails = null,
 
     /// The text of the communication between the customer and Amazon Web Services
@@ -16,7 +31,7 @@ pub const Communication = struct {
     /// The support case ID requested or returned in the call. The case ID is an
     /// alphanumeric
     /// string formatted as shown in this example:
-    /// case-*12345678910-2013-c4c1d2bf33c5cf47*
+    /// case-*12345678910-exen-2025-c4c1d2bf33c5cf47*
     case_id: ?[]const u8 = null,
 
     /// The identity of the account that submitted, or responded to, the support
@@ -32,6 +47,7 @@ pub const Communication = struct {
     time_created: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .attachments = "attachments",
         .attachment_set = "attachmentSet",
         .body = "body",
         .case_id = "caseId",

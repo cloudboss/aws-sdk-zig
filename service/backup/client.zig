@@ -3,6 +3,7 @@ const std = @import("std");
 
 const associate_backup_vault_mpa_approval_team = @import("associate_backup_vault_mpa_approval_team.zig");
 const cancel_legal_hold = @import("cancel_legal_hold.zig");
+const create_backup_access_point = @import("create_backup_access_point.zig");
 const create_backup_plan = @import("create_backup_plan.zig");
 const create_backup_selection = @import("create_backup_selection.zig");
 const create_backup_vault = @import("create_backup_vault.zig");
@@ -14,6 +15,7 @@ const create_restore_access_backup_vault = @import("create_restore_access_backup
 const create_restore_testing_plan = @import("create_restore_testing_plan.zig");
 const create_restore_testing_selection = @import("create_restore_testing_selection.zig");
 const create_tiering_configuration = @import("create_tiering_configuration.zig");
+const delete_backup_access_point = @import("delete_backup_access_point.zig");
 const delete_backup_plan = @import("delete_backup_plan.zig");
 const delete_backup_selection = @import("delete_backup_selection.zig");
 const delete_backup_vault = @import("delete_backup_vault.zig");
@@ -26,6 +28,7 @@ const delete_report_plan = @import("delete_report_plan.zig");
 const delete_restore_testing_plan = @import("delete_restore_testing_plan.zig");
 const delete_restore_testing_selection = @import("delete_restore_testing_selection.zig");
 const delete_tiering_configuration = @import("delete_tiering_configuration.zig");
+const describe_backup_access_point = @import("describe_backup_access_point.zig");
 const describe_backup_job = @import("describe_backup_job.zig");
 const describe_backup_vault = @import("describe_backup_vault.zig");
 const describe_copy_job = @import("describe_copy_job.zig");
@@ -49,6 +52,7 @@ const get_backup_selection = @import("get_backup_selection.zig");
 const get_backup_vault_access_policy = @import("get_backup_vault_access_policy.zig");
 const get_backup_vault_notifications = @import("get_backup_vault_notifications.zig");
 const get_legal_hold = @import("get_legal_hold.zig");
+const get_pitr_malware_scan_results = @import("get_pitr_malware_scan_results.zig");
 const get_recovery_point_index_details = @import("get_recovery_point_index_details.zig");
 const get_recovery_point_restore_metadata = @import("get_recovery_point_restore_metadata.zig");
 const get_restore_job_metadata = @import("get_restore_job_metadata.zig");
@@ -57,6 +61,9 @@ const get_restore_testing_plan = @import("get_restore_testing_plan.zig");
 const get_restore_testing_selection = @import("get_restore_testing_selection.zig");
 const get_supported_resource_types = @import("get_supported_resource_types.zig");
 const get_tiering_configuration = @import("get_tiering_configuration.zig");
+const list_backup_access_points = @import("list_backup_access_points.zig");
+const list_backup_access_points_by_recovery_point = @import("list_backup_access_points_by_recovery_point.zig");
+const list_backup_access_points_by_resource = @import("list_backup_access_points_by_resource.zig");
 const list_backup_job_summaries = @import("list_backup_job_summaries.zig");
 const list_backup_jobs = @import("list_backup_jobs.zig");
 const list_backup_plan_templates = @import("list_backup_plan_templates.zig");
@@ -149,6 +156,19 @@ pub const Client = struct {
     /// by a user with sufficient permissions.
     pub fn cancelLegalHold(self: *Self, allocator: std.mem.Allocator, input: cancel_legal_hold.CancelLegalHoldInput, options: CallOptions) !cancel_legal_hold.CancelLegalHoldOutput {
         return cancel_legal_hold.execute(self, allocator, input, options);
+    }
+
+    /// Creates a backup access point for an Amazon S3 recovery point. A backup
+    /// access point provides
+    /// on-demand, read-only access to the backup data in a recovery point through
+    /// an Amazon S3 access point,
+    /// without initiating a restore.
+    ///
+    /// While a backup access point is active for a recovery point, Backup pauses
+    /// lifecycle transitions
+    /// and blocks deletion of that recovery point.
+    pub fn createBackupAccessPoint(self: *Self, allocator: std.mem.Allocator, input: create_backup_access_point.CreateBackupAccessPointInput, options: CallOptions) !create_backup_access_point.CreateBackupAccessPointOutput {
+        return create_backup_access_point.execute(self, allocator, input, options);
     }
 
     /// Creates a backup plan using a backup plan name and backup rules. A backup
@@ -281,6 +301,18 @@ pub const Client = struct {
         return create_tiering_configuration.execute(self, allocator, input, options);
     }
 
+    /// Deletes a backup access point. This deletes the underlying Amazon S3 access
+    /// point and, if no other
+    /// backup access points remain for the recovery point, resumes lifecycle
+    /// transitions for that recovery point.
+    ///
+    /// Always delete backup access points using this operation rather than deleting
+    /// the underlying Amazon S3
+    /// access point directly.
+    pub fn deleteBackupAccessPoint(self: *Self, allocator: std.mem.Allocator, input: delete_backup_access_point.DeleteBackupAccessPointInput, options: CallOptions) !delete_backup_access_point.DeleteBackupAccessPointOutput {
+        return delete_backup_access_point.execute(self, allocator, input, options);
+    }
+
     /// Deletes a backup plan. A backup plan can only be deleted after all
     /// associated selections
     /// of resources have been deleted. Deleting a backup plan deletes the current
@@ -383,6 +415,17 @@ pub const Client = struct {
     /// Deletes the tiering configuration specified by a tiering configuration name.
     pub fn deleteTieringConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_tiering_configuration.DeleteTieringConfigurationInput, options: CallOptions) !delete_tiering_configuration.DeleteTieringConfigurationOutput {
         return delete_tiering_configuration.execute(self, allocator, input, options);
+    }
+
+    /// Returns metadata about a backup access point, including its status and the
+    /// details of the underlying
+    /// Amazon S3 access point.
+    ///
+    /// After a backup access point reaches the `AVAILABLE` status, use this
+    /// operation to retrieve the
+    /// Amazon S3 access point ARN and alias that you need to read the backup data.
+    pub fn describeBackupAccessPoint(self: *Self, allocator: std.mem.Allocator, input: describe_backup_access_point.DescribeBackupAccessPointInput, options: CallOptions) !describe_backup_access_point.DescribeBackupAccessPointOutput {
+        return describe_backup_access_point.execute(self, allocator, input, options);
     }
 
     /// Returns backup job details for the specified `BackupJobId`.
@@ -537,6 +580,12 @@ pub const Client = struct {
         return get_legal_hold.execute(self, allocator, input, options);
     }
 
+    /// Returns the malware scan results for a specified point in time within a
+    /// continuous (point-in-time recovery) backup.
+    pub fn getPitrMalwareScanResults(self: *Self, allocator: std.mem.Allocator, input: get_pitr_malware_scan_results.GetPITRMalwareScanResultsInput, options: CallOptions) !get_pitr_malware_scan_results.GetPITRMalwareScanResultsOutput {
+        return get_pitr_malware_scan_results.execute(self, allocator, input, options);
+    }
+
     /// This operation returns the metadata and details specific to
     /// the backup index associated with the specified recovery point.
     pub fn getRecoveryPointIndexDetails(self: *Self, allocator: std.mem.Allocator, input: get_recovery_point_index_details.GetRecoveryPointIndexDetailsInput, options: CallOptions) !get_recovery_point_index_details.GetRecoveryPointIndexDetailsOutput {
@@ -588,8 +637,30 @@ pub const Client = struct {
         return get_tiering_configuration.execute(self, allocator, input, options);
     }
 
+    /// Returns a list of the backup access points in your account and Region.
+    pub fn listBackupAccessPoints(self: *Self, allocator: std.mem.Allocator, input: list_backup_access_points.ListBackupAccessPointsInput, options: CallOptions) !list_backup_access_points.ListBackupAccessPointsOutput {
+        return list_backup_access_points.execute(self, allocator, input, options);
+    }
+
+    /// Returns the backup access points associated with the specified recovery
+    /// point.
+    ///
+    /// If you own the recovery point and have shared it with other accounts, the
+    /// response includes backup access
+    /// points created by those accounts.
+    pub fn listBackupAccessPointsByRecoveryPoint(self: *Self, allocator: std.mem.Allocator, input: list_backup_access_points_by_recovery_point.ListBackupAccessPointsByRecoveryPointInput, options: CallOptions) !list_backup_access_points_by_recovery_point.ListBackupAccessPointsByRecoveryPointOutput {
+        return list_backup_access_points_by_recovery_point.execute(self, allocator, input, options);
+    }
+
+    /// Returns the backup access points associated with the specified resource,
+    /// such as an Amazon S3
+    /// bucket.
+    pub fn listBackupAccessPointsByResource(self: *Self, allocator: std.mem.Allocator, input: list_backup_access_points_by_resource.ListBackupAccessPointsByResourceInput, options: CallOptions) !list_backup_access_points_by_resource.ListBackupAccessPointsByResourceOutput {
+        return list_backup_access_points_by_resource.execute(self, allocator, input, options);
+    }
+
     /// This is a request for a summary of backup jobs created
-    /// or running within the most recent 30 days. You can
+    /// or running within the most recent 14 days. You can
     /// include parameters AccountID, State, ResourceType, MessageCategory,
     /// AggregationPeriod, MaxResults, or NextToken to filter
     /// results.
@@ -641,7 +712,7 @@ pub const Client = struct {
     }
 
     /// This request obtains a list of copy jobs created
-    /// or running within the the most recent 30 days. You can
+    /// or running within the the most recent 14 days. You can
     /// include parameters AccountID, State, ResourceType, MessageCategory,
     /// AggregationPeriod, MaxResults, or NextToken to filter
     /// results.
@@ -679,10 +750,12 @@ pub const Client = struct {
         return list_legal_holds.execute(self, allocator, input, options);
     }
 
-    /// Returns an array of resources successfully backed up by Backup, including
-    /// the time the resource was saved, an Amazon Resource Name (ARN) of the
-    /// resource, and a
-    /// resource type.
+    /// Returns an array of resources with recovery points created by Backup
+    /// (regardless of the recovery point's
+    /// [status](https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DescribeRecoveryPoint.html#Backup-DescribeRecoveryPoint-response-Status)),
+    /// including the time the resource was saved, an Amazon Resource Name (ARN) of
+    /// the resource,
+    /// and a resource type.
     pub fn listProtectedResources(self: *Self, allocator: std.mem.Allocator, input: list_protected_resources.ListProtectedResourcesInput, options: CallOptions) !list_protected_resources.ListProtectedResourcesOutput {
         return list_protected_resources.execute(self, allocator, input, options);
     }
@@ -733,7 +806,7 @@ pub const Client = struct {
     }
 
     /// This request obtains a summary of restore jobs created
-    /// or running within the the most recent 30 days. You can
+    /// or running within the the most recent 14 days. You can
     /// include parameters AccountID, State, ResourceType,
     /// AggregationPeriod, MaxResults, or NextToken to filter
     /// results.
@@ -773,7 +846,7 @@ pub const Client = struct {
     }
 
     /// This is a request for a summary of scan jobs created or running within the
-    /// most recent 30 days.
+    /// most recent 14 days.
     pub fn listScanJobSummaries(self: *Self, allocator: std.mem.Allocator, input: list_scan_job_summaries.ListScanJobSummariesInput, options: CallOptions) !list_scan_job_summaries.ListScanJobSummariesOutput {
         return list_scan_job_summaries.execute(self, allocator, input, options);
     }
@@ -1055,6 +1128,27 @@ pub const Client = struct {
     /// * `ResourceType`
     pub fn updateTieringConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_tiering_configuration.UpdateTieringConfigurationInput, options: CallOptions) !update_tiering_configuration.UpdateTieringConfigurationOutput {
         return update_tiering_configuration.execute(self, allocator, input, options);
+    }
+
+    pub fn listBackupAccessPointsPaginator(self: *Self, params: list_backup_access_points.ListBackupAccessPointsInput) paginator.ListBackupAccessPointsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listBackupAccessPointsByRecoveryPointPaginator(self: *Self, params: list_backup_access_points_by_recovery_point.ListBackupAccessPointsByRecoveryPointInput) paginator.ListBackupAccessPointsByRecoveryPointPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listBackupAccessPointsByResourcePaginator(self: *Self, params: list_backup_access_points_by_resource.ListBackupAccessPointsByResourceInput) paginator.ListBackupAccessPointsByResourcePaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
     }
 
     pub fn listBackupJobSummariesPaginator(self: *Self, params: list_backup_job_summaries.ListBackupJobSummariesInput) paginator.ListBackupJobSummariesPaginator {

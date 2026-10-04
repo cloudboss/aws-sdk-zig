@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutInvestigationGroupPo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutInvestigationGroupPolicyOutput {
-    var result: PutInvestigationGroupPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutInvestigationGroupPolicyOutput, body, allocator);
-    }
+    const result: PutInvestigationGroupPolicyOutput = try aws.json.parseJsonObject(
+        PutInvestigationGroupPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

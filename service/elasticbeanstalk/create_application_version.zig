@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const BuildConfiguration = @import("build_configuration.zig").BuildConfiguration;
+const ImageConfiguration = @import("image_configuration.zig").ImageConfiguration;
 const SourceBuildInformation = @import("source_build_information.zig").SourceBuildInformation;
 const S3Location = @import("s3_location.zig").S3Location;
 const Tag = @import("tag.zig").Tag;
@@ -21,63 +22,75 @@ pub const CreateApplicationVersionInput = struct {
     /// already exist.
     auto_create_application: ?bool = null,
 
-    /// Settings for an AWS CodeBuild build.
+    /// Settings for an CodeBuild build.
+    ///
+    /// Don't specify `BuildConfiguration` together with
+    /// `ImageConfiguration`, which configures a container image build instead.
     build_configuration: ?BuildConfiguration = null,
 
     /// A description of this application version.
     description: ?[]const u8 = null,
 
+    /// The source of the container image for this application version. You can
+    /// specify an image
+    /// that you built and pushed to a container registry yourself, or settings for
+    /// Elastic Beanstalk to build
+    /// one from your source bundle. Specify exactly one of the `Source` and
+    /// `Build` members.
+    ///
+    /// Don't specify `ImageConfiguration` together with
+    /// `BuildConfiguration`, which configures an CodeBuild build instead.
+    image_configuration: ?ImageConfiguration = null,
+
     /// Pre-processes and validates the environment manifest (`env.yaml`) and
-    /// configuration files (`*.config` files in the `.ebextensions` folder) in
-    /// the source bundle. Validating configuration files can identify issues prior
-    /// to deploying the
-    /// application version to an environment.
+    /// configuration files (`*.config` files in the
+    /// `.ebextensions` folder) in the source bundle. Validating configuration files
+    /// can identify issues prior to deploying the application version
+    /// to an environment.
     ///
     /// You must turn processing on for application versions that you create using
-    /// AWS
-    /// CodeBuild or AWS CodeCommit. For application versions built from a source
-    /// bundle in Amazon S3,
-    /// processing is optional.
+    /// CodeBuild or CodeCommit. For application versions built from a source bundle
+    /// in Amazon S3, processing is optional.
     ///
     /// The `Process` option validates Elastic Beanstalk configuration files. It
     /// doesn't validate your application's configuration files, like proxy server
-    /// or Docker
-    /// configuration.
+    /// or Docker configuration.
     process: ?bool = null,
 
-    /// Specify a commit in an AWS CodeCommit Git repository to use as the source
-    /// code for the
-    /// application version.
+    /// Specify a commit in an CodeCommit Git repository to use as the source code
+    /// for the application version.
     source_build_information: ?SourceBuildInformation = null,
 
     /// The Amazon S3 bucket and key that identify the location of the source bundle
-    /// for this
-    /// version.
+    /// for this version.
     ///
-    /// The Amazon S3 bucket must be in the same region as the
-    /// environment.
+    /// The Amazon S3 bucket must be in the same region as the environment.
     ///
-    /// Specify a source bundle in S3 or a commit in an AWS CodeCommit repository
-    /// (with
-    /// `SourceBuildInformation`), but not both. If neither `SourceBundle` nor
-    /// `SourceBuildInformation` are provided, Elastic Beanstalk uses a sample
-    /// application.
+    /// Unless you're specifying a source bundle in the bucket that Elastic
+    /// Beanstalk manages in your account, you must assign a custom policy to your
+    /// user, and grant
+    /// `Allow` permission to the `s3:Get*` actions on your S3 object resource, for
+    /// example,
+    /// `arn:aws:s3:::your-bucket/your-source-bundle-object`.
+    ///
+    /// Specify a source bundle in Amazon S3 or a commit in an CodeCommit repository
+    /// (with `SourceBuildInformation`), but not both. If neither
+    /// `SourceBundle` nor `SourceBuildInformation` are provided, Elastic Beanstalk
+    /// uses a sample application.
     source_bundle: ?S3Location = null,
 
     /// Specifies the tags applied to the application version.
     ///
     /// Elastic Beanstalk applies these tags only to the application version.
-    /// Environments that use the
-    /// application version don't inherit the tags.
+    /// Environments that use the application version don't inherit the tags.
     tags: ?[]const Tag = null,
 
     /// A label identifying this version.
     ///
     /// Constraint: Must be unique per application. If an application version
-    /// already exists
-    /// with this label for the specified application, AWS Elastic Beanstalk returns
-    /// an
-    /// `InvalidParameterValue` error.
+    /// already exists with this label for the specified application, Elastic
+    /// Beanstalk returns
+    /// an `InvalidParameterValue` error.
     version_label: []const u8,
 };
 
@@ -146,6 +159,44 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateApplicationVersio
     if (input.description) |v| {
         try body_buf.appendSlice(allocator, "&Description=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.image_configuration) |v| {
+        if (v.build) |sv| {
+            if (sv.architecture) |sv2| {
+                try body_buf.appendSlice(allocator, "&ImageConfiguration.Build.Architecture=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
+            }
+            if (sv.buildpack) |sv2| {
+                try body_buf.appendSlice(allocator, "&ImageConfiguration.Build.Buildpack=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
+            }
+            if (sv.code_build_service_role) |sv2| {
+                try body_buf.appendSlice(allocator, "&ImageConfiguration.Build.CodeBuildServiceRole=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
+            }
+            if (sv.compute_type) |sv2| {
+                try body_buf.appendSlice(allocator, "&ImageConfiguration.Build.ComputeType=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
+            }
+            if (sv.dockerfile_location) |sv2| {
+                try body_buf.appendSlice(allocator, "&ImageConfiguration.Build.DockerfileLocation=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
+            }
+            if (sv.timeout_in_minutes) |sv2| {
+                try body_buf.appendSlice(allocator, "&ImageConfiguration.Build.TimeoutInMinutes=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv2}) catch "");
+            }
+            if (sv.@"type") |sv2| {
+                try body_buf.appendSlice(allocator, "&ImageConfiguration.Build.Type=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
+            }
+        }
+        if (v.source) |sv| {
+            if (sv.uri) |sv2| {
+                try body_buf.appendSlice(allocator, "&ImageConfiguration.Source.Uri=");
+                try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
+            }
+        }
     }
     if (input.process) |v| {
         try body_buf.appendSlice(allocator, "&Process=");

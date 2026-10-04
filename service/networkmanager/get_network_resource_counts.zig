@@ -156,10 +156,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetNetworkResourceCount
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetNetworkResourceCountsOutput {
-    var result: GetNetworkResourceCountsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetNetworkResourceCountsOutput, body, allocator);
-    }
+    const result: GetNetworkResourceCountsOutput = try aws.json.parseJsonObject(
+        GetNetworkResourceCountsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

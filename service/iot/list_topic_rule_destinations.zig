@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTopicRuleDestinatio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTopicRuleDestinationsOutput {
-    var result: ListTopicRuleDestinationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListTopicRuleDestinationsOutput, body, allocator);
-    }
+    const result: ListTopicRuleDestinationsOutput = try aws.json.parseJsonObject(
+        ListTopicRuleDestinationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

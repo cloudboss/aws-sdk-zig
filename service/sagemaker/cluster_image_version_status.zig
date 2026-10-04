@@ -7,19 +7,29 @@ const std = @import("std");
 ///
 /// * `UpToDate`: The resource is running the latest available AMI version.
 /// * `UpdateAvailable`: A newer AMI version is available for the resource.
+/// * `SecurityUpdateRequired`: The current AMI has known security
+///   vulnerabilities, and a patched version is available.
+/// * `EndOfLife`: The AMI variant has reached end of support and an upgrade is
+///   required.
 pub const ClusterImageVersionStatus = enum {
     up_to_date,
     update_available,
+    security_update_required,
+    end_of_life,
 
     pub const json_field_names = .{
         .up_to_date = "UpToDate",
         .update_available = "UpdateAvailable",
+        .security_update_required = "SecurityUpdateRequired",
+        .end_of_life = "EndOfLife",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .up_to_date => "UpToDate",
             .update_available => "UpdateAvailable",
+            .security_update_required => "SecurityUpdateRequired",
+            .end_of_life => "EndOfLife",
         };
     }
 

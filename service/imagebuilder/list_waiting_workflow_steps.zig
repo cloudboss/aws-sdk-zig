@@ -7,10 +7,10 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const WorkflowStepExecution = @import("workflow_step_execution.zig").WorkflowStepExecution;
 
 pub const ListWaitingWorkflowStepsInput = struct {
-    /// Specify the maximum number of items to return in a request.
+    /// The maximum number of items to return in a single request.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
@@ -28,7 +28,10 @@ pub const ListWaitingWorkflowStepsOutput = struct {
     next_token: ?[]const u8 = null,
 
     /// An array of the workflow steps that are waiting for action in your
-    /// Amazon Web Services account.
+    /// Amazon Web Services account. Each step is paused at a `WaitForAction` step,
+    /// and
+    /// remains in the list until you respond with
+    /// SendWorkflowStepAction or the wait times out.
     steps: ?[]const WorkflowStepExecution = null,
 
     pub const json_field_names = .{
@@ -101,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListWaitingWorkflowStep
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListWaitingWorkflowStepsOutput {
-    var result: ListWaitingWorkflowStepsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListWaitingWorkflowStepsOutput, body, allocator);
-    }
+    const result: ListWaitingWorkflowStepsOutput = try aws.json.parseJsonObject(
+        ListWaitingWorkflowStepsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -15,6 +15,8 @@ pub const HandshakeConstraintViolationExceptionReason = enum {
     source_and_target_cannot_match,
     unused_prepayment_balance,
     legacy_permissions_still_in_use,
+    past_due_invoice,
+    target_account_validation_failure,
 
     pub const json_field_names = .{
         .account_number_limit_exceeded = "ACCOUNT_NUMBER_LIMIT_EXCEEDED",
@@ -31,6 +33,8 @@ pub const HandshakeConstraintViolationExceptionReason = enum {
         .source_and_target_cannot_match = "SOURCE_AND_TARGET_CANNOT_MATCH",
         .unused_prepayment_balance = "UNUSED_PREPAYMENT_BALANCE",
         .legacy_permissions_still_in_use = "LEGACY_PERMISSIONS_STILL_IN_USE",
+        .past_due_invoice = "PAST_DUE_INVOICE",
+        .target_account_validation_failure = "TARGET_ACCOUNT_VALIDATION_FAILURE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -49,6 +53,8 @@ pub const HandshakeConstraintViolationExceptionReason = enum {
             .source_and_target_cannot_match => "SOURCE_AND_TARGET_CANNOT_MATCH",
             .unused_prepayment_balance => "UNUSED_PREPAYMENT_BALANCE",
             .legacy_permissions_still_in_use => "LEGACY_PERMISSIONS_STILL_IN_USE",
+            .past_due_invoice => "PAST_DUE_INVOICE",
+            .target_account_validation_failure => "TARGET_ACCOUNT_VALIDATION_FAILURE",
         };
     }
 

@@ -17,8 +17,8 @@ pub const CreateTrafficDistributionGroupInput = struct {
     /// A description for the traffic distribution group.
     description: ?[]const u8 = null,
 
-    /// The identifier of the Amazon Connect instance that has been replicated. You
-    /// can find the
+    /// The identifier of the Connect Customer instance that has been replicated.
+    /// You can find the
     /// `instanceId` in the ARN of the instance.
     instance_id: []const u8,
 
@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTrafficDistributi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateTrafficDistributionGroupOutput {
-    var result: CreateTrafficDistributionGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateTrafficDistributionGroupOutput, body, allocator);
-    }
+    const result: CreateTrafficDistributionGroupOutput = try aws.json.parseJsonObject(
+        CreateTrafficDistributionGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

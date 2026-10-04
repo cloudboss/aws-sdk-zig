@@ -15,9 +15,8 @@ pub const ListParticipantReplicasInput = struct {
     next_token: ?[]const u8 = null,
 
     /// Participant ID of the publisher that has been replicated. This is assigned
-    /// by IVS and returned by
-    /// CreateParticipantToken
-    /// or the `jti` (JWT ID) used to [create a self signed
+    /// by IVS and returned by CreateParticipantToken or the `jti` (JWT ID) used to
+    /// [create a self signed
     /// token](https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed).
     participant_id: []const u8,
 
@@ -118,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListParticipantReplicas
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListParticipantReplicasOutput {
-    var result: ListParticipantReplicasOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListParticipantReplicasOutput, body, allocator);
-    }
+    const result: ListParticipantReplicasOutput = try aws.json.parseJsonObject(
+        ListParticipantReplicasOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

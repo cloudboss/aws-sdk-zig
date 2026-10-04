@@ -40,7 +40,7 @@ pub const ListPolicyGenerationAssetsOutput = struct {
     /// [ListPolicyGenerationAssets](https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyGenerationAssets.html) calls to retrieve additional assets. This token is only present when there are more generated policy assets available beyond the current response.
     next_token: ?[]const u8 = null,
 
-    /// An array of generated policy assets including Cedar policies and related
+    /// An array of generated policy assets including Dogwood policies and related
     /// artifacts from the AI-powered policy generation process. Each asset
     /// represents a different policy option or variation generated from the
     /// original natural language input.
@@ -124,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPolicyGenerationAss
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListPolicyGenerationAssetsOutput {
-    var result: ListPolicyGenerationAssetsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListPolicyGenerationAssetsOutput, body, allocator);
-    }
+    const result: ListPolicyGenerationAssetsOutput = try aws.json.parseJsonObject(
+        ListPolicyGenerationAssetsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

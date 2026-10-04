@@ -1,3 +1,5 @@
+pub const AccountConstraint = @import("account_constraint.zig").AccountConstraint;
+pub const DelegatedAdminConstraint = @import("delegated_admin_constraint.zig").DelegatedAdminConstraint;
 pub const DeploymentConditionalField = @import("deployment_conditional_field.zig").DeploymentConditionalField;
 pub const DeploymentData = @import("deployment_data.zig").DeploymentData;
 pub const DeploymentDataSummary = @import("deployment_data_summary.zig").DeploymentDataSummary;
@@ -10,6 +12,7 @@ pub const DeploymentPatternVersionFilterKey = @import("deployment_pattern_versio
 pub const DeploymentSpecificationsField = @import("deployment_specifications_field.zig").DeploymentSpecificationsField;
 pub const DeploymentStatus = @import("deployment_status.zig").DeploymentStatus;
 pub const EventStatus = @import("event_status.zig").EventStatus;
+pub const ManagementAccountConstraint = @import("management_account_constraint.zig").ManagementAccountConstraint;
 pub const WorkloadData = @import("workload_data.zig").WorkloadData;
 pub const WorkloadDataSummary = @import("workload_data_summary.zig").WorkloadDataSummary;
 pub const WorkloadDeploymentPatternData = @import("workload_deployment_pattern_data.zig").WorkloadDeploymentPatternData;

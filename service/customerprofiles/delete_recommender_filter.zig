@@ -78,10 +78,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteRecommenderFilter
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteRecommenderFilterOutput {
-    var result: DeleteRecommenderFilterOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteRecommenderFilterOutput, body, allocator);
-    }
+    const result: DeleteRecommenderFilterOutput = try aws.json.parseJsonObject(
+        DeleteRecommenderFilterOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

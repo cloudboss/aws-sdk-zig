@@ -40,6 +40,7 @@ pub const InvalidInputExceptionReason = enum {
     invalid_start_date,
     end_date_not_end_of_month,
     end_date_too_early,
+    end_date_too_late,
     invalid_end_date,
 
     pub const json_field_names = .{
@@ -82,6 +83,7 @@ pub const InvalidInputExceptionReason = enum {
         .invalid_start_date = "INVALID_START_DATE",
         .end_date_not_end_of_month = "END_DATE_NOT_END_OF_MONTH",
         .end_date_too_early = "END_DATE_TOO_EARLY",
+        .end_date_too_late = "END_DATE_TOO_LATE",
         .invalid_end_date = "INVALID_END_DATE",
     };
 
@@ -126,6 +128,7 @@ pub const InvalidInputExceptionReason = enum {
             .invalid_start_date => "INVALID_START_DATE",
             .end_date_not_end_of_month => "END_DATE_NOT_END_OF_MONTH",
             .end_date_too_early => "END_DATE_TOO_EARLY",
+            .end_date_too_late => "END_DATE_TOO_LATE",
             .invalid_end_date => "INVALID_END_DATE",
         };
     }

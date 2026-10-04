@@ -147,10 +147,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateRecoveryPointLife
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateRecoveryPointLifecycleOutput {
-    var result: UpdateRecoveryPointLifecycleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateRecoveryPointLifecycleOutput, body, allocator);
-    }
+    const result: UpdateRecoveryPointLifecycleOutput = try aws.json.parseJsonObject(
+        UpdateRecoveryPointLifecycleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

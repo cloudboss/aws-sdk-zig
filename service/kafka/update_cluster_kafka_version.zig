@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateClusterKafkaVersi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateClusterKafkaVersionOutput {
-    var result: UpdateClusterKafkaVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateClusterKafkaVersionOutput, body, allocator);
-    }
+    const result: UpdateClusterKafkaVersionOutput = try aws.json.parseJsonObject(
+        UpdateClusterKafkaVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

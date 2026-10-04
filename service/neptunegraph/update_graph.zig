@@ -172,10 +172,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGraphInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateGraphOutput {
-    var result: UpdateGraphOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateGraphOutput, body, allocator);
-    }
+    const result: UpdateGraphOutput = try aws.json.parseJsonObject(
+        UpdateGraphOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -6,6 +6,9 @@ const UltraServerInfo = @import("ultra_server_info.zig").UltraServerInfo;
 /// Lists a summary of the properties of an instance (also called a *node*
 /// interchangeably) of a SageMaker HyperPod cluster.
 pub const ClusterNodeSummary = struct {
+    /// The version of the HyperPod-managed AMI currently running on the node.
+    current_image_release_version: ?[]const u8 = null,
+
     /// The status of the image version for the cluster node.
     image_version_status: ?ClusterImageVersionStatus = null,
 
@@ -42,6 +45,7 @@ pub const ClusterNodeSummary = struct {
     ultra_server_info: ?UltraServerInfo = null,
 
     pub const json_field_names = .{
+        .current_image_release_version = "CurrentImageReleaseVersion",
         .image_version_status = "ImageVersionStatus",
         .instance_group_name = "InstanceGroupName",
         .instance_id = "InstanceId",

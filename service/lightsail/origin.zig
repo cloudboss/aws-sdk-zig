@@ -1,3 +1,4 @@
+const OriginIpAddressTypeEnum = @import("origin_ip_address_type_enum.zig").OriginIpAddressTypeEnum;
 const OriginProtocolPolicyEnum = @import("origin_protocol_policy_enum.zig").OriginProtocolPolicyEnum;
 const RegionName = @import("region_name.zig").RegionName;
 const ResourceType = @import("resource_type.zig").ResourceType;
@@ -12,6 +13,24 @@ const ResourceType = @import("resource_type.zig").ResourceType;
 /// network of edge
 /// servers.
 pub const Origin = struct {
+    /// The IP address type that the distribution uses when connecting to the
+    /// origin.
+    ///
+    /// The possible values are `ipv4` for IPv4 only, `ipv6` for IPv6 only,
+    /// and `dualstack` for IPv4 and IPv6.
+    ip_address_type: ?OriginIpAddressTypeEnum = null,
+
+    /// Specifies whether private origin access is enabled for the distribution's
+    /// origin. With
+    /// private origin access, the distribution can serve objects that aren't
+    /// publicly accessible
+    /// from a Lightsail bucket.
+    ///
+    /// This applies when you set the bucket's `getObject` access rule to
+    /// `private`. It also applies when you set `getObject` to `public`
+    /// but set individual objects to private.
+    is_private_origin_access_enabled: ?bool = null,
+
     /// The name of the origin resource.
     name: ?[]const u8 = null,
 
@@ -34,6 +53,8 @@ pub const Origin = struct {
     response_timeout: ?i32 = null,
 
     pub const json_field_names = .{
+        .ip_address_type = "ipAddressType",
+        .is_private_origin_access_enabled = "isPrivateOriginAccessEnabled",
         .name = "name",
         .protocol_policy = "protocolPolicy",
         .region_name = "regionName",

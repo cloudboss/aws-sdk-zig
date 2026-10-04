@@ -309,7 +309,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStaticMapInput, conf
     const ep = try aws.url.parseEndpoint(endpoint);
 
     var path_buf: std.ArrayList(u8) = .empty;
-    try path_buf.appendSlice(allocator, "/static/");
+    try path_buf.appendSlice(allocator, "/v2/static/");
     try path_buf.appendSlice(allocator, input.file_name);
     const path = try path_buf.toOwnedSlice(allocator);
 
@@ -454,7 +454,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStaticMapInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetStaticMapOutput {
-    var result: GetStaticMapOutput = .{};
+    var result: GetStaticMapOutput = .{
+        .pricing_bucket = "",
+    };
+    errdefer {
+        if (result.cache_control) |value| allocator.free(value);
+        if (result.content_type) |value| allocator.free(value);
+        if (result.e_tag) |value| allocator.free(value);
+        allocator.free(result.pricing_bucket);
+        if (result.blob) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.blob = try allocator.dupe(u8, body);
     }

@@ -17,6 +17,14 @@ pub const SavingsPlansPurchaseAnalysisConfiguration = struct {
     /// The time period associated with the analysis.
     look_back_time_period: DateInterval,
 
+    /// Specifies the target Savings Plans coverage as a percentage from `10` to
+    /// `100`. This field is required when `AnalysisType` is
+    /// `TARGET_AVERAGE_COVERAGE`. It defines the target average hourly coverage
+    /// that the recommended Savings Plans commitment should achieve over the
+    /// lookback
+    /// period.
+    savings_plans_target_coverage: ?i32 = null,
+
     /// Savings Plans to include in the analysis.
     savings_plans_to_add: []const SavingsPlans,
 
@@ -28,6 +36,7 @@ pub const SavingsPlansPurchaseAnalysisConfiguration = struct {
         .account_scope = "AccountScope",
         .analysis_type = "AnalysisType",
         .look_back_time_period = "LookBackTimePeriod",
+        .savings_plans_target_coverage = "SavingsPlansTargetCoverage",
         .savings_plans_to_add = "SavingsPlansToAdd",
         .savings_plans_to_exclude = "SavingsPlansToExclude",
     };

@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeDryRunProgressI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeDryRunProgressOutput {
-    var result: DescribeDryRunProgressOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeDryRunProgressOutput, body, allocator);
-    }
+    const result: DescribeDryRunProgressOutput = try aws.json.parseJsonObject(
+        DescribeDryRunProgressOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

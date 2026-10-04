@@ -5,11 +5,13 @@ pub const ApplicationType = enum {
     standard,
     service,
     mcp_server,
+    a2_a_server,
 
     pub const json_field_names = .{
         .standard = "STANDARD",
         .service = "SERVICE",
         .mcp_server = "MCP_SERVER",
+        .a2_a_server = "A2A_SERVER",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -17,6 +19,7 @@ pub const ApplicationType = enum {
             .standard => "STANDARD",
             .service => "SERVICE",
             .mcp_server => "MCP_SERVER",
+            .a2_a_server => "A2A_SERVER",
         };
     }
 

@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const AIAdapterSource = @import("ai_adapter_source.zig").AIAdapterSource;
 const AIRecommendationComputeSpec = @import("ai_recommendation_compute_spec.zig").AIRecommendationComputeSpec;
 const AIRecommendationInferenceSpecification = @import("ai_recommendation_inference_specification.zig").AIRecommendationInferenceSpecification;
 const AIModelSource = @import("ai_model_source.zig").AIModelSource;
@@ -12,6 +13,12 @@ const AIRecommendationPerformanceTarget = @import("ai_recommendation_performance
 const Tag = @import("tag.zig").Tag;
 
 pub const CreateAIRecommendationJobInput = struct {
+    /// The LoRA adapter source for the recommendation job. Specify either a list of
+    /// model package ARNs or Amazon S3 URIs for your LoRA adapters. When this
+    /// parameter is absent, the recommendation job runs without LoRA adapter
+    /// support.
+    adapter_source: ?AIAdapterSource = null,
+
     /// The name of the AI recommendation job. The name must be unique within your
     /// Amazon Web Services account in the current Amazon Web Services Region.
     ai_recommendation_job_name: []const u8,
@@ -55,6 +62,7 @@ pub const CreateAIRecommendationJobInput = struct {
     tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
+        .adapter_source = "AdapterSource",
         .ai_recommendation_job_name = "AIRecommendationJobName",
         .ai_workload_config_identifier = "AIWorkloadConfigIdentifier",
         .compute_spec = "ComputeSpec",

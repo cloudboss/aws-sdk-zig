@@ -112,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSourceApiAssociat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateSourceApiAssociationOutput {
-    var result: UpdateSourceApiAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateSourceApiAssociationOutput, body, allocator);
-    }
+    const result: UpdateSourceApiAssociationOutput = try aws.json.parseJsonObject(
+        UpdateSourceApiAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

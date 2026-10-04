@@ -10,6 +10,17 @@
 /// player (identified by
 /// `CreatorId`) has created fewer than game session limit in the specified
 /// time period.
+///
+/// The purpose of this policy is to prevent a single player from consuming a
+/// large share of
+/// available hosting resources. For example, setting
+/// `NewGameSessionsPerCreator` to
+/// `4` and `PolicyPeriodInMinutes` to `10` limits each player
+/// to creating 4 game sessions every 10 minutes. Setting these values too high
+/// (for example,
+/// 200 game sessions every 1000 minutes) still allows a single player to
+/// rapidly consume
+/// resources. We recommend keeping these values small.
 pub const ResourceCreationLimitPolicy = struct {
     /// A policy that puts limits on the number of game sessions that a player can
     /// create

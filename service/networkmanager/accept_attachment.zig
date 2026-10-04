@@ -74,10 +74,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AcceptAttachmentInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AcceptAttachmentOutput {
-    var result: AcceptAttachmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AcceptAttachmentOutput, body, allocator);
-    }
+    const result: AcceptAttachmentOutput = try aws.json.parseJsonObject(
+        AcceptAttachmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

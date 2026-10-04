@@ -1,5 +1,6 @@
 const AttachedPermissionsBoundary = @import("attached_permissions_boundary.zig").AttachedPermissionsBoundary;
 const RoleLastUsed = @import("role_last_used.zig").RoleLastUsed;
+const SourceRoleTemplate = @import("source_role_template.zig").SourceRoleTemplate;
 const Tag = @import("tag.zig").Tag;
 
 /// Contains information about an IAM role. This structure is returned as a
@@ -64,6 +65,12 @@ pub const Role = struct {
 
     /// The friendly name that identifies the role.
     role_name: []const u8,
+
+    /// Contains information about the role template that this role was created
+    /// from. This
+    /// member is present only for roles created with
+    /// [AcquireRole](https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html).
+    source_role_template: ?SourceRoleTemplate = null,
 
     /// A list of tags that are attached to the role. For more information about
     /// tagging, see [Tagging IAM

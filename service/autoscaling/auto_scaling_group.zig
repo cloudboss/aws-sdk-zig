@@ -8,6 +8,7 @@ const InstanceMaintenancePolicy = @import("instance_maintenance_policy.zig").Ins
 const Instance = @import("instance.zig").Instance;
 const LaunchTemplateSpecification = @import("launch_template_specification.zig").LaunchTemplateSpecification;
 const MixedInstancesPolicy = @import("mixed_instances_policy.zig").MixedInstancesPolicy;
+const Operator = @import("operator.zig").Operator;
 const SuspendedProcess = @import("suspended_process.zig").SuspendedProcess;
 const TagDescription = @import("tag_description.zig").TagDescription;
 const TrafficSourceIdentifier = @import("traffic_source_identifier.zig").TrafficSourceIdentifier;
@@ -116,6 +117,11 @@ pub const AutoScalingGroup = struct {
     /// protection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html)
     /// in the *Amazon EC2 Auto Scaling User Guide*.
     new_instances_protected_from_scale_in: ?bool = null,
+
+    /// The entity that manages the Auto Scaling group, if applicable. When set,
+    /// only the designated
+    /// operator can make changes to the group configuration.
+    operator: ?Operator = null,
 
     /// The name of the placement group into which to launch EC2 instances for the
     /// Auto Scaling group.

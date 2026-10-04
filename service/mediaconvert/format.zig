@@ -9,6 +9,16 @@ pub const Format = enum {
     wave,
     avi,
     mpegts,
+    mpegps,
+    mp_3,
+    flac,
+    asf,
+    ogg,
+    three_gp,
+    three_g_2,
+    aac,
+    ac_3,
+    eac_3,
 
     pub const json_field_names = .{
         .mp_4 = "mp4",
@@ -19,6 +29,16 @@ pub const Format = enum {
         .wave = "wave",
         .avi = "avi",
         .mpegts = "mpegts",
+        .mpegps = "mpegps",
+        .mp_3 = "mp3",
+        .flac = "flac",
+        .asf = "asf",
+        .ogg = "ogg",
+        .three_gp = "three_gp",
+        .three_g_2 = "three_g2",
+        .aac = "aac",
+        .ac_3 = "ac3",
+        .eac_3 = "eac3",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -31,6 +51,16 @@ pub const Format = enum {
             .wave => "wave",
             .avi => "avi",
             .mpegts => "mpegts",
+            .mpegps => "mpegps",
+            .mp_3 => "mp3",
+            .flac => "flac",
+            .asf => "asf",
+            .ogg => "ogg",
+            .three_gp => "three_gp",
+            .three_g_2 => "three_g2",
+            .aac => "aac",
+            .ac_3 => "ac3",
+            .eac_3 => "eac3",
         };
     }
 

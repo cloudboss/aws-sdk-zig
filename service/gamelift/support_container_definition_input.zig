@@ -1,6 +1,7 @@
 const ContainerDependency = @import("container_dependency.zig").ContainerDependency;
 const ContainerEnvironment = @import("container_environment.zig").ContainerEnvironment;
 const ContainerHealthCheck = @import("container_health_check.zig").ContainerHealthCheck;
+const LinuxCapabilities = @import("linux_capabilities.zig").LinuxCapabilities;
 const ContainerMountPoint = @import("container_mount_point.zig").ContainerMountPoint;
 const ContainerPortConfiguration = @import("container_port_configuration.zig").ContainerPortConfiguration;
 
@@ -88,6 +89,12 @@ pub const SupportContainerDefinitionInput = struct {
     /// ID]:[tag]`
     image_uri: []const u8,
 
+    /// Linux-specific modifications that are applied to the default Docker
+    /// container configuration, such as Linux capabilities. For more information
+    /// see
+    /// [LinuxCapabilities](https://docs.aws.amazon.com/gamelift/latest/apireference/API_LinuxCapabilities.html).
+    linux_capabilities: ?LinuxCapabilities = null,
+
     /// A specified amount of memory (in MiB) to reserve for this container. If you
     /// don't specify
     /// a container-specific memory limit, the container shares the container
@@ -137,6 +144,7 @@ pub const SupportContainerDefinitionInput = struct {
         .essential = "Essential",
         .health_check = "HealthCheck",
         .image_uri = "ImageUri",
+        .linux_capabilities = "LinuxCapabilities",
         .memory_hard_limit_mebibytes = "MemoryHardLimitMebibytes",
         .mount_points = "MountPoints",
         .port_configuration = "PortConfiguration",

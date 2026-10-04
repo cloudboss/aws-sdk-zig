@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UngroupResourcesInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UngroupResourcesOutput {
-    var result: UngroupResourcesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UngroupResourcesOutput, body, allocator);
-    }
+    const result: UngroupResourcesOutput = try aws.json.parseJsonObject(
+        UngroupResourcesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

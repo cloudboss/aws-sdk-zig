@@ -1,4 +1,5 @@
 const AttachmentReference = @import("attachment_reference.zig").AttachmentReference;
+const ContactAnalysisReference = @import("contact_analysis_reference.zig").ContactAnalysisReference;
 const DateReference = @import("date_reference.zig").DateReference;
 const EmailReference = @import("email_reference.zig").EmailReference;
 const EmailMessageReference = @import("email_message_reference.zig").EmailMessageReference;
@@ -14,6 +15,7 @@ pub const ReferenceSummary = union(enum) {
     /// Otherwise,
     /// null.
     attachment: ?AttachmentReference,
+    contact_analysis: ?ContactAnalysisReference,
     /// Information about a reference when the `referenceType` is `DATE`. Otherwise,
     /// null.
     date: ?DateReference,
@@ -40,6 +42,7 @@ pub const ReferenceSummary = union(enum) {
 
     pub const json_field_names = .{
         .attachment = "Attachment",
+        .contact_analysis = "ContactAnalysis",
         .date = "Date",
         .email = "Email",
         .email_message = "EmailMessage",

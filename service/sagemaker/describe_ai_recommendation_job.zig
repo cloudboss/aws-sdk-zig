@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const AIAdapterSource = @import("ai_adapter_source.zig").AIAdapterSource;
 const AIRecommendationJobStatus = @import("ai_recommendation_job_status.zig").AIRecommendationJobStatus;
 const AIRecommendationComputeSpec = @import("ai_recommendation_compute_spec.zig").AIRecommendationComputeSpec;
 const AIRecommendationInferenceSpecification = @import("ai_recommendation_inference_specification.zig").AIRecommendationInferenceSpecification;
@@ -23,6 +24,11 @@ pub const DescribeAIRecommendationJobInput = struct {
 };
 
 pub const DescribeAIRecommendationJobOutput = struct {
+    /// The LoRA adapter source that you specified when you created the
+    /// recommendation job. This field is absent when you created the job without
+    /// LoRA adapters.
+    adapter_source: ?AIAdapterSource = null,
+
     /// The Amazon Resource Name (ARN) of the AI recommendation job.
     ai_recommendation_job_arn: []const u8,
 
@@ -79,6 +85,7 @@ pub const DescribeAIRecommendationJobOutput = struct {
     tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
+        .adapter_source = "AdapterSource",
         .ai_recommendation_job_arn = "AIRecommendationJobArn",
         .ai_recommendation_job_name = "AIRecommendationJobName",
         .ai_recommendation_job_status = "AIRecommendationJobStatus",

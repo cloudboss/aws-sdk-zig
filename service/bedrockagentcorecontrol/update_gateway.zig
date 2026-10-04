@@ -6,11 +6,13 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AuthorizerConfiguration = @import("authorizer_configuration.zig").AuthorizerConfiguration;
 const AuthorizerType = @import("authorizer_type.zig").AuthorizerType;
+const CustomTransformConfiguration = @import("custom_transform_configuration.zig").CustomTransformConfiguration;
 const ExceptionLevel = @import("exception_level.zig").ExceptionLevel;
 const GatewayInterceptorConfiguration = @import("gateway_interceptor_configuration.zig").GatewayInterceptorConfiguration;
 const GatewayPolicyEngineConfiguration = @import("gateway_policy_engine_configuration.zig").GatewayPolicyEngineConfiguration;
 const GatewayProtocolConfiguration = @import("gateway_protocol_configuration.zig").GatewayProtocolConfiguration;
 const GatewayProtocolType = @import("gateway_protocol_type.zig").GatewayProtocolType;
+const WafConfiguration = @import("waf_configuration.zig").WafConfiguration;
 const GatewayStatus = @import("gateway_status.zig").GatewayStatus;
 const WorkloadIdentityDetails = @import("workload_identity_details.zig").WorkloadIdentityDetails;
 
@@ -20,6 +22,10 @@ pub const UpdateGatewayInput = struct {
 
     /// The updated authorizer type for the gateway.
     authorizer_type: AuthorizerType,
+
+    /// The updated custom transformation configuration for the gateway. This
+    /// configuration defines how the gateway transforms requests and responses.
+    custom_transform_configuration: ?CustomTransformConfiguration = null,
 
     /// The updated description for the gateway.
     description: ?[]const u8 = null,
@@ -60,9 +66,13 @@ pub const UpdateGatewayInput = struct {
     /// The updated IAM role ARN that provides permissions for the gateway.
     role_arn: []const u8,
 
+    /// The updated Amazon Web Services WAF configuration for the gateway.
+    waf_configuration: ?WafConfiguration = null,
+
     pub const json_field_names = .{
         .authorizer_configuration = "authorizerConfiguration",
         .authorizer_type = "authorizerType",
+        .custom_transform_configuration = "customTransformConfiguration",
         .description = "description",
         .exception_level = "exceptionLevel",
         .gateway_identifier = "gatewayIdentifier",
@@ -73,6 +83,7 @@ pub const UpdateGatewayInput = struct {
         .protocol_configuration = "protocolConfiguration",
         .protocol_type = "protocolType",
         .role_arn = "roleArn",
+        .waf_configuration = "wafConfiguration",
     };
 };
 
@@ -85,6 +96,10 @@ pub const UpdateGatewayOutput = struct {
 
     /// The timestamp when the gateway was created.
     created_at: i64,
+
+    /// The custom transformation configuration for the gateway. This configuration
+    /// defines how the gateway transforms requests and responses.
+    custom_transform_configuration: ?CustomTransformConfiguration = null,
 
     /// The updated description of the gateway.
     description: ?[]const u8 = null,
@@ -135,6 +150,13 @@ pub const UpdateGatewayOutput = struct {
     /// The timestamp when the gateway was last updated.
     updated_at: i64,
 
+    /// The Amazon Web Services WAF configuration for the gateway.
+    waf_configuration: ?WafConfiguration = null,
+
+    /// The Amazon Resource Name (ARN) of the Amazon Web Services WAF web ACL
+    /// associated with the gateway.
+    web_acl_arn: ?[]const u8 = null,
+
     /// The workload identity details for the updated gateway.
     workload_identity_details: ?WorkloadIdentityDetails = null,
 
@@ -142,6 +164,7 @@ pub const UpdateGatewayOutput = struct {
         .authorizer_configuration = "authorizerConfiguration",
         .authorizer_type = "authorizerType",
         .created_at = "createdAt",
+        .custom_transform_configuration = "customTransformConfiguration",
         .description = "description",
         .exception_level = "exceptionLevel",
         .gateway_arn = "gatewayArn",
@@ -157,6 +180,8 @@ pub const UpdateGatewayOutput = struct {
         .status = "status",
         .status_reasons = "statusReasons",
         .updated_at = "updatedAt",
+        .waf_configuration = "wafConfiguration",
+        .web_acl_arn = "webAclArn",
         .workload_identity_details = "workloadIdentityDetails",
     };
 };
@@ -211,6 +236,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGatewayInput, con
     try body_buf.appendSlice(allocator, "\"authorizerType\":");
     try aws.json.writeValue(@TypeOf(input.authorizer_type), input.authorizer_type, allocator, &body_buf);
     has_prev = true;
+    if (input.custom_transform_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"customTransformConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"description\":");
@@ -261,6 +292,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGatewayInput, con
     try body_buf.appendSlice(allocator, "\"roleArn\":");
     try aws.json.writeValue(@TypeOf(input.role_arn), input.role_arn, allocator, &body_buf);
     has_prev = true;
+    if (input.waf_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"wafConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -277,10 +314,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGatewayInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateGatewayOutput {
-    var result: UpdateGatewayOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateGatewayOutput, body, allocator);
-    }
+    const result: UpdateGatewayOutput = try aws.json.parseJsonObject(
+        UpdateGatewayOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -4,11 +4,17 @@ pub const DataSourceStatus = enum {
     available,
     deleting,
     delete_unsuccessful,
+    creating,
+    updating,
+    failed,
 
     pub const json_field_names = .{
         .available = "AVAILABLE",
         .deleting = "DELETING",
         .delete_unsuccessful = "DELETE_UNSUCCESSFUL",
+        .creating = "CREATING",
+        .updating = "UPDATING",
+        .failed = "FAILED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +22,9 @@ pub const DataSourceStatus = enum {
             .available => "AVAILABLE",
             .deleting => "DELETING",
             .delete_unsuccessful => "DELETE_UNSUCCESSFUL",
+            .creating => "CREATING",
+            .updating => "UPDATING",
+            .failed => "FAILED",
         };
     }
 

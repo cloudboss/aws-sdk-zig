@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateKeyRegistrationIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateKeyRegistrationOutput {
-    var result: UpdateKeyRegistrationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateKeyRegistrationOutput, body, allocator);
-    }
+    const result: UpdateKeyRegistrationOutput = try aws.json.parseJsonObject(
+        UpdateKeyRegistrationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

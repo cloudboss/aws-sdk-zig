@@ -6,8 +6,7 @@ const TaxRegistrationStatus = @import("tax_registration_status.zig").TaxRegistra
 const TaxDocumentMetadata = @import("tax_document_metadata.zig").TaxDocumentMetadata;
 
 /// Your TRN information with jurisdiction details. This doesn't contain the
-/// full legal
-/// address associated with the TRN information.
+/// full legal address associated with the TRN information.
 pub const TaxRegistrationWithJurisdiction = struct {
     /// Additional tax information associated with your TRN.
     additional_tax_information: ?AdditionalInfoResponse = null,
@@ -24,8 +23,7 @@ pub const TaxRegistrationWithJurisdiction = struct {
     /// Your tax registration unique identifier.
     registration_id: []const u8,
 
-    /// The type of your tax registration. This can be either `VAT` or
-    /// `GST`.
+    /// The type of your tax registration. This can be either `VAT` or `GST`.
     registration_type: TaxRegistrationType,
 
     /// The industry that describes your business. For business-to-business (B2B)
@@ -35,8 +33,8 @@ pub const TaxRegistrationWithJurisdiction = struct {
     /// country. Please refer to country specific information in API document.
     sector: ?Sector = null,
 
-    /// The status of your TRN. This can be either `Verified`, `Pending`,
-    /// `Deleted`, or `Rejected`.
+    /// The status of your TRN. This can be either `Verified`, `Pending`, `Deleted`,
+    /// or `Rejected`.
     status: TaxRegistrationStatus,
 
     /// The metadata for your tax document.

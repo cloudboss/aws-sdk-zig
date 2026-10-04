@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListNetworkMigrationDef
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListNetworkMigrationDefinitionsOutput {
-    var result: ListNetworkMigrationDefinitionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListNetworkMigrationDefinitionsOutput, body, allocator);
-    }
+    const result: ListNetworkMigrationDefinitionsOutput = try aws.json.parseJsonObject(
+        ListNetworkMigrationDefinitionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

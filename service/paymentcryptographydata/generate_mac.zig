@@ -122,10 +122,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GenerateMacInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GenerateMacOutput {
-    var result: GenerateMacOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GenerateMacOutput, body, allocator);
-    }
+    const result: GenerateMacOutput = try aws.json.parseJsonObject(
+        GenerateMacOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

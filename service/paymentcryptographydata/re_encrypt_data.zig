@@ -156,10 +156,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ReEncryptDataInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ReEncryptDataOutput {
-    var result: ReEncryptDataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ReEncryptDataOutput, body, allocator);
-    }
+    const result: ReEncryptDataOutput = try aws.json.parseJsonObject(
+        ReEncryptDataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

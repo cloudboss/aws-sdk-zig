@@ -58,6 +58,7 @@ pub const ServiceError = struct {
         invalid_subnet: InvalidSubnet,
         invalid_vpc_network_state_fault: InvalidVPCNetworkStateFault,
         kms_key_not_accessible_fault: KMSKeyNotAccessibleFault,
+        network_type_not_supported_fault: NetworkTypeNotSupportedFault,
         option_group_not_found_fault: OptionGroupNotFoundFault,
         provisioned_iops_not_available_in_az_fault: ProvisionedIopsNotAvailableInAZFault,
         resource_not_found_fault: ResourceNotFoundFault,
@@ -129,6 +130,7 @@ pub const ServiceError = struct {
                 .invalid_subnet => "InvalidSubnet",
                 .invalid_vpc_network_state_fault => "InvalidVPCNetworkStateFault",
                 .kms_key_not_accessible_fault => "KMSKeyNotAccessibleFault",
+                .network_type_not_supported_fault => "NetworkTypeNotSupportedFault",
                 .option_group_not_found_fault => "OptionGroupNotFoundFault",
                 .provisioned_iops_not_available_in_az_fault => "ProvisionedIopsNotAvailableInAZFault",
                 .resource_not_found_fault => "ResourceNotFoundFault",
@@ -202,6 +204,7 @@ pub const ServiceError = struct {
                 .invalid_subnet => |e| e.message,
                 .invalid_vpc_network_state_fault => |e| e.message,
                 .kms_key_not_accessible_fault => |e| e.message,
+                .network_type_not_supported_fault => |e| e.message,
                 .option_group_not_found_fault => |e| e.message,
                 .provisioned_iops_not_available_in_az_fault => |e| e.message,
                 .resource_not_found_fault => |e| e.message,
@@ -275,6 +278,7 @@ pub const ServiceError = struct {
                 .invalid_subnet => 400,
                 .invalid_vpc_network_state_fault => 400,
                 .kms_key_not_accessible_fault => 400,
+                .network_type_not_supported_fault => 400,
                 .option_group_not_found_fault => 404,
                 .provisioned_iops_not_available_in_az_fault => 400,
                 .resource_not_found_fault => 404,
@@ -348,6 +352,7 @@ pub const ServiceError = struct {
                 .invalid_subnet => |e| e.request_id,
                 .invalid_vpc_network_state_fault => |e| e.request_id,
                 .kms_key_not_accessible_fault => |e| e.request_id,
+                .network_type_not_supported_fault => |e| e.request_id,
                 .option_group_not_found_fault => |e| e.request_id,
                 .provisioned_iops_not_available_in_az_fault => |e| e.request_id,
                 .resource_not_found_fault => |e| e.request_id,
@@ -645,6 +650,11 @@ pub const InvalidVPCNetworkStateFault = struct {
 };
 
 pub const KMSKeyNotAccessibleFault = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const NetworkTypeNotSupportedFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -1050,6 +1060,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     }
     if (std.mem.eql(u8, error_code, "KMSKeyNotAccessibleFault")) {
         return .{ .arena = arena, .kind = .{ .kms_key_not_accessible_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "NetworkTypeNotSupportedFault")) {
+        return .{ .arena = arena, .kind = .{ .network_type_not_supported_fault = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

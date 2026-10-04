@@ -16,7 +16,7 @@ pub const UpdateViewContentInput = struct {
     /// The total uncompressed content has a maximum file size of 400kB.
     content: ViewInputContent,
 
-    /// The identifier of the Amazon Connect instance. You can find the instanceId
+    /// The identifier of the Connect Customer instance. You can find the instanceId
     /// in the ARN of the
     /// instance.
     instance_id: []const u8,
@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateViewContentInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateViewContentOutput {
-    var result: UpdateViewContentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateViewContentOutput, body, allocator);
-    }
+    const result: UpdateViewContentOutput = try aws.json.parseJsonObject(
+        UpdateViewContentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

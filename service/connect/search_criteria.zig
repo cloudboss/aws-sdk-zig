@@ -1,5 +1,6 @@
 const SearchContactsAdditionalTimeRange = @import("search_contacts_additional_time_range.zig").SearchContactsAdditionalTimeRange;
 const AgentHierarchyGroups = @import("agent_hierarchy_groups.zig").AgentHierarchyGroups;
+const AiAgentsCriteria = @import("ai_agents_criteria.zig").AiAgentsCriteria;
 const Channel = @import("channel.zig").Channel;
 const ContactAnalysis = @import("contact_analysis.zig").ContactAnalysis;
 const ControlPlaneTagFilter = @import("control_plane_tag_filter.zig").ControlPlaneTagFilter;
@@ -23,10 +24,14 @@ pub const SearchCriteria = struct {
     /// The identifiers of agents who handled the contacts.
     agent_ids: ?[]const []const u8 = null,
 
+    /// AI Agent search criteria definitions.
+    ai_agents: ?AiAgentsCriteria = null,
+
     /// The list of channels associated with contacts.
     channels: ?[]const Channel = null,
 
-    /// Search criteria based on analysis outputs from Amazon Connect Contact Lens.
+    /// Search criteria based on analysis outputs from Connect Customer Contact
+    /// Lens.
     contact_analysis: ?ContactAnalysis = null,
 
     contact_tags: ?ControlPlaneTagFilter = null,
@@ -46,14 +51,14 @@ pub const SearchCriteria = struct {
     /// The search criteria based on user-defined contact attributes that have been
     /// configured for contact search. For
     /// more information, see [Search by custom contact
-    /// attributes](https://docs.aws.amazon.com/connect/latest/adminguide/search-custom-attributes.html) in the *Amazon Connect Administrator
+    /// attributes](https://docs.aws.amazon.com/connect/latest/adminguide/search-custom-attributes.html) in the *Connect Customer Administrator
     /// Guide*.
     ///
     /// To use `SearchableContactAttributes` in a search request, the
     /// `GetContactAttributes`
     /// action is required to perform an API request. For more information, see
     /// [https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions)Actions
-    /// defined by Amazon Connect.
+    /// defined by Connect Customer.
     searchable_contact_attributes: ?SearchableContactAttributes = null,
 
     /// The search criteria based on searchable segment attributes of a contact.
@@ -64,6 +69,7 @@ pub const SearchCriteria = struct {
         .additional_time_range = "AdditionalTimeRange",
         .agent_hierarchy_groups = "AgentHierarchyGroups",
         .agent_ids = "AgentIds",
+        .ai_agents = "AiAgents",
         .channels = "Channels",
         .contact_analysis = "ContactAnalysis",
         .contact_tags = "ContactTags",

@@ -1,6 +1,9 @@
 const SampleType = @import("sample_type.zig").SampleType;
 
 /// Represents a sample of performance data.
+///
+/// Device Farm does not support performance data samples during test
+/// executions.
 pub const Sample = struct {
     /// The sample's ARN.
     arn: ?[]const u8 = null,

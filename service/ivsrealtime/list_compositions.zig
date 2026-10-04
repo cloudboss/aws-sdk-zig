@@ -8,8 +8,7 @@ const CompositionSummary = @import("composition_summary.zig").CompositionSummary
 
 pub const ListCompositionsInput = struct {
     /// Filters the Composition list to match the specified EncoderConfiguration
-    /// attached to at
-    /// least one of its output.
+    /// attached to at least one of its output.
     filter_by_encoder_configuration_arn: ?[]const u8 = null,
 
     /// Filters the Composition list to match the specified Stage ARN.
@@ -34,8 +33,8 @@ pub const ListCompositionsOutput = struct {
     /// List of the matching Compositions (summary information only).
     compositions: ?[]const CompositionSummary = null,
 
-    /// If there are more compositions than `maxResults`, use `nextToken`
-    /// in the request to get the next set.
+    /// If there are more compositions than `maxResults`, use `nextToken` in the
+    /// request to get the next set.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -120,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCompositionsInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListCompositionsOutput {
-    var result: ListCompositionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListCompositionsOutput, body, allocator);
-    }
+    const result: ListCompositionsOutput = try aws.json.parseJsonObject(
+        ListCompositionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

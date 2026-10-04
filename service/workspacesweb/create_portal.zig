@@ -189,10 +189,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePortalInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePortalOutput {
-    var result: CreatePortalOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePortalOutput, body, allocator);
-    }
+    const result: CreatePortalOutput = try aws.json.parseJsonObject(
+        CreatePortalOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

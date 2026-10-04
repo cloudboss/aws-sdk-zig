@@ -10,16 +10,16 @@ pub const StopContactInput = struct {
     /// The ID of the contact.
     contact_id: []const u8,
 
-    /// The reason a contact can be disconnected. Only Amazon Connect outbound
+    /// The reason a contact can be disconnected. Only Connect Customer outbound
     /// campaigns can provide this field. For
     /// a list and description of all the possible disconnect reasons by channel
     /// (including outbound campaign voice contacts)
     /// see DisconnectReason under
     /// [ContactTraceRecord](https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     disconnect_reason: ?DisconnectReason = null,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 

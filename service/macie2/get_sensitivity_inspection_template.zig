@@ -94,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSensitivityInspectio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSensitivityInspectionTemplateOutput {
-    var result: GetSensitivityInspectionTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSensitivityInspectionTemplateOutput, body, allocator);
-    }
+    const result: GetSensitivityInspectionTemplateOutput = try aws.json.parseJsonObject(
+        GetSensitivityInspectionTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

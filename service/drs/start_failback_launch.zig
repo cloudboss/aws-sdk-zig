@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartFailbackLaunchInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartFailbackLaunchOutput {
-    var result: StartFailbackLaunchOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartFailbackLaunchOutput, body, allocator);
-    }
+    const result: StartFailbackLaunchOutput = try aws.json.parseJsonObject(
+        StartFailbackLaunchOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

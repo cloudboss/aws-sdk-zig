@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const RecommendationDiversityConfig = @import("recommendation_diversity_config.zig").RecommendationDiversityConfig;
 const MetadataConfig = @import("metadata_config.zig").MetadataConfig;
 const RecommenderFilter = @import("recommender_filter.zig").RecommenderFilter;
 const RecommenderPromotionalFilter = @import("recommender_promotional_filter.zig").RecommenderPromotionalFilter;
@@ -18,6 +19,11 @@ pub const GetProfileRecommendationsInput = struct {
     /// The contextual metadata used to provide dynamic runtime information to
     /// tailor recommendations.
     context: ?[]const aws.map.StringMapEntry = null,
+
+    /// Runtime diversity configuration for this request. Enables diversity-aware
+    /// recommendations and optionally supplies values for placeholder-based
+    /// diversity caps configured on the recommender.
+    diversity_config: ?RecommendationDiversityConfig = null,
 
     /// The unique name of the domain.
     domain_name: []const u8,
@@ -48,6 +54,7 @@ pub const GetProfileRecommendationsInput = struct {
     pub const json_field_names = .{
         .candidate_ids = "CandidateIds",
         .context = "Context",
+        .diversity_config = "DiversityConfig",
         .domain_name = "DomainName",
         .max_results = "MaxResults",
         .metadata_config = "MetadataConfig",
@@ -121,6 +128,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetProfileRecommendatio
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.diversity_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"DiversityConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.max_results) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"MaxResults\":");
@@ -165,10 +178,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetProfileRecommendatio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetProfileRecommendationsOutput {
-    var result: GetProfileRecommendationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetProfileRecommendationsOutput, body, allocator);
-    }
+    const result: GetProfileRecommendationsOutput = try aws.json.parseJsonObject(
+        GetProfileRecommendationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

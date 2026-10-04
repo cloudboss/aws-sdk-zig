@@ -457,6 +457,10 @@ pub const Client = struct {
     /// update multiple parameters in one request. For example, you must specify
     /// both `adminUsername` and `adminUserPassword` to update either field, but you
     /// can't update both `kmsKeyId` and `logExports` in a single request.
+    ///
+    /// Similarly, an S3 Tables log-publishing update (a request where
+    /// `logDestinationType` is `s3table`) cannot be combined with any other
+    /// namespace configuration change and must be submitted as its own request.
     pub fn updateNamespace(self: *Self, allocator: std.mem.Allocator, input: update_namespace.UpdateNamespaceInput, options: CallOptions) !update_namespace.UpdateNamespaceOutput {
         return update_namespace.execute(self, allocator, input, options);
     }

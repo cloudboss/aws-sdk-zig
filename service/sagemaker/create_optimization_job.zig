@@ -60,6 +60,20 @@ pub const CreateOptimizationJobInput = struct {
     /// in the *Amazon Web Services General Reference Guide*.
     tags: ?[]const Tag = null,
 
+    /// The Amazon Resource Name (ARN) of the training plan to use for this
+    /// optimization job.
+    ///
+    /// When you use reserved capacity from a training plan, the optimization job
+    /// runs on that reserved capacity instead of on-demand capacity. If you omit
+    /// this field, the job uses on-demand capacity. You can specify at most one
+    /// training plan.
+    ///
+    /// For more information about how to reserve GPU capacity for your optimization
+    /// jobs using Amazon SageMaker Training Plans, see [Reserve capacity with
+    /// training
+    /// plans](https://docs.aws.amazon.com/sagemaker/latest/dg/reserve-capacity-with-training-plans.html).
+    training_plan_arns: ?[]const []const u8 = null,
+
     /// A VPC in Amazon VPC that your optimized model has access to.
     vpc_config: ?OptimizationVpcConfig = null,
 
@@ -74,6 +88,7 @@ pub const CreateOptimizationJobInput = struct {
         .role_arn = "RoleArn",
         .stopping_condition = "StoppingCondition",
         .tags = "Tags",
+        .training_plan_arns = "TrainingPlanArns",
         .vpc_config = "VpcConfig",
     };
 };

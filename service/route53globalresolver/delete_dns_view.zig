@@ -122,10 +122,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteDNSViewInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteDNSViewOutput {
-    var result: DeleteDNSViewOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteDNSViewOutput, body, allocator);
-    }
+    const result: DeleteDNSViewOutput = try aws.json.parseJsonObject(
+        DeleteDNSViewOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

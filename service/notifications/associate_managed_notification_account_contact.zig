@@ -11,12 +11,18 @@ pub const AssociateManagedNotificationAccountContactInput = struct {
     /// `ManagedNotificationConfiguration`.
     contact_identifier: AccountContactType,
 
+    /// Specifies whether this contact is subscribed to sensitive events. The
+    /// `notifications:SubscribeSensitiveEvents` permission controls access to
+    /// sensitive events. Defaults to false.
+    is_sensitive_events_subscribed: ?bool = null,
+
     /// The Amazon Resource Name (ARN) of the `ManagedNotificationConfiguration` to
     /// associate with the Account Contact.
     managed_notification_configuration_arn: []const u8,
 
     pub const json_field_names = .{
         .contact_identifier = "contactIdentifier",
+        .is_sensitive_events_subscribed = "isSensitiveEventsSubscribed",
         .managed_notification_configuration_arn = "managedNotificationConfigurationArn",
     };
 };
@@ -63,6 +69,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateManagedNotific
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.is_sensitive_events_subscribed) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"isSensitiveEventsSubscribed\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"managedNotificationConfigurationArn\":");
     try aws.json.writeValue(@TypeOf(input.managed_notification_configuration_arn), input.managed_notification_configuration_arn, allocator, &body_buf);

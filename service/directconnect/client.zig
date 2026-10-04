@@ -8,6 +8,7 @@ const allocate_private_virtual_interface = @import("allocate_private_virtual_int
 const allocate_public_virtual_interface = @import("allocate_public_virtual_interface.zig");
 const allocate_transit_virtual_interface = @import("allocate_transit_virtual_interface.zig");
 const associate_connection_with_lag = @import("associate_connection_with_lag.zig");
+const associate_connections_to_resiliency_group = @import("associate_connections_to_resiliency_group.zig");
 const associate_hosted_connection = @import("associate_hosted_connection.zig");
 const associate_mac_sec_key = @import("associate_mac_sec_key.zig");
 const associate_virtual_interface = @import("associate_virtual_interface.zig");
@@ -25,6 +26,7 @@ const create_interconnect = @import("create_interconnect.zig");
 const create_lag = @import("create_lag.zig");
 const create_private_virtual_interface = @import("create_private_virtual_interface.zig");
 const create_public_virtual_interface = @import("create_public_virtual_interface.zig");
+const create_resiliency_group = @import("create_resiliency_group.zig");
 const create_transit_virtual_interface = @import("create_transit_virtual_interface.zig");
 const delete_bgp_peer = @import("delete_bgp_peer.zig");
 const delete_connection = @import("delete_connection.zig");
@@ -33,6 +35,7 @@ const delete_direct_connect_gateway_association = @import("delete_direct_connect
 const delete_direct_connect_gateway_association_proposal = @import("delete_direct_connect_gateway_association_proposal.zig");
 const delete_interconnect = @import("delete_interconnect.zig");
 const delete_lag = @import("delete_lag.zig");
+const delete_resiliency_group = @import("delete_resiliency_group.zig");
 const delete_virtual_interface = @import("delete_virtual_interface.zig");
 const describe_connection_loa = @import("describe_connection_loa.zig");
 const describe_connections = @import("describe_connections.zig");
@@ -53,16 +56,23 @@ const describe_tags = @import("describe_tags.zig");
 const describe_virtual_gateways = @import("describe_virtual_gateways.zig");
 const describe_virtual_interfaces = @import("describe_virtual_interfaces.zig");
 const disassociate_connection_from_lag = @import("disassociate_connection_from_lag.zig");
+const disassociate_connections_from_resiliency_group = @import("disassociate_connections_from_resiliency_group.zig");
 const disassociate_mac_sec_key = @import("disassociate_mac_sec_key.zig");
+const get_resiliency_group = @import("get_resiliency_group.zig");
+const list_resiliency_group_associations = @import("list_resiliency_group_associations.zig");
+const list_resiliency_groups = @import("list_resiliency_groups.zig");
+const list_virtual_interface_routes = @import("list_virtual_interface_routes.zig");
 const list_virtual_interface_test_history = @import("list_virtual_interface_test_history.zig");
 const start_bgp_failover_test = @import("start_bgp_failover_test.zig");
 const stop_bgp_failover_test = @import("stop_bgp_failover_test.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_connection = @import("update_connection.zig");
+const update_connections_billing_mode = @import("update_connections_billing_mode.zig");
 const update_direct_connect_gateway = @import("update_direct_connect_gateway.zig");
 const update_direct_connect_gateway_association = @import("update_direct_connect_gateway_association.zig");
 const update_lag = @import("update_lag.zig");
+const update_resiliency_group = @import("update_resiliency_group.zig");
 const update_virtual_interface_attributes = @import("update_virtual_interface_attributes.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 
@@ -198,6 +208,15 @@ pub const Client = struct {
     /// connections remain associated with the original LAG.
     pub fn associateConnectionWithLag(self: *Self, allocator: std.mem.Allocator, input: associate_connection_with_lag.AssociateConnectionWithLagInput, options: CallOptions) !associate_connection_with_lag.AssociateConnectionWithLagOutput {
         return associate_connection_with_lag.execute(self, allocator, input, options);
+    }
+
+    /// Associates one or more connections with the specified resiliency group. This
+    /// operation is
+    /// atomic: either all of the specified connections are associated, or the
+    /// operation fails and no
+    /// changes are made.
+    pub fn associateConnectionsToResiliencyGroup(self: *Self, allocator: std.mem.Allocator, input: associate_connections_to_resiliency_group.AssociateConnectionsToResiliencyGroupInput, options: CallOptions) !associate_connections_to_resiliency_group.AssociateConnectionsToResiliencyGroupOutput {
+        return associate_connections_to_resiliency_group.execute(self, allocator, input, options);
     }
 
     /// Associates a hosted connection and its virtual interfaces with a link
@@ -494,6 +513,13 @@ pub const Client = struct {
         return create_public_virtual_interface.execute(self, allocator, input, options);
     }
 
+    /// Creates a resiliency group. A resiliency group lets you group Direct Connect
+    /// connections together
+    /// and manage them as a single unit to meet a target resiliency model.
+    pub fn createResiliencyGroup(self: *Self, allocator: std.mem.Allocator, input: create_resiliency_group.CreateResiliencyGroupInput, options: CallOptions) !create_resiliency_group.CreateResiliencyGroupOutput {
+        return create_resiliency_group.execute(self, allocator, input, options);
+    }
+
     /// Creates a transit virtual interface. A transit virtual interface should be
     /// used to access one or more transit gateways associated with Direct Connect
     /// gateways. A transit virtual interface enables the connection of multiple
@@ -578,6 +604,16 @@ pub const Client = struct {
     /// virtual interfaces or hosted connections.
     pub fn deleteLag(self: *Self, allocator: std.mem.Allocator, input: delete_lag.DeleteLagInput, options: CallOptions) !delete_lag.DeleteLagOutput {
         return delete_lag.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the specified resiliency group. Deletion is asynchronous: the
+    /// resiliency group
+    /// transitions through the `deleting` state before it reaches the
+    /// `deleted` state. The response returns the resiliency group so you can
+    /// observe its
+    /// current state without a subsequent GetResiliencyGroup call.
+    pub fn deleteResiliencyGroup(self: *Self, allocator: std.mem.Allocator, input: delete_resiliency_group.DeleteResiliencyGroupInput, options: CallOptions) !delete_resiliency_group.DeleteResiliencyGroupOutput {
+        return delete_resiliency_group.execute(self, allocator, input, options);
     }
 
     /// Deletes a virtual interface.
@@ -773,7 +809,7 @@ pub const Client = struct {
     /// A virtual interface (VLAN) transmits the traffic between the Direct Connect
     /// location and the customer network.
     ///
-    /// * If you're using an `asn`, the response includes ASN value in both the
+    /// * If you're using an `asn`, the response includes the ASN value in both the
     ///   `asn` and `asnLong` fields.
     ///
     /// * If you're using `asnLong`, the response returns a value of `0` (zero) for
@@ -805,10 +841,49 @@ pub const Client = struct {
         return disassociate_connection_from_lag.execute(self, allocator, input, options);
     }
 
+    /// Disassociates one or more connections from the specified resiliency group.
+    /// This operation
+    /// is atomic: either all of the specified connections are disassociated, or the
+    /// operation fails
+    /// and no changes are made.
+    pub fn disassociateConnectionsFromResiliencyGroup(self: *Self, allocator: std.mem.Allocator, input: disassociate_connections_from_resiliency_group.DisassociateConnectionsFromResiliencyGroupInput, options: CallOptions) !disassociate_connections_from_resiliency_group.DisassociateConnectionsFromResiliencyGroupOutput {
+        return disassociate_connections_from_resiliency_group.execute(self, allocator, input, options);
+    }
+
     /// Removes the association between a MAC Security (MACsec) security key and a
     /// Direct Connect connection.
     pub fn disassociateMacSecKey(self: *Self, allocator: std.mem.Allocator, input: disassociate_mac_sec_key.DisassociateMacSecKeyInput, options: CallOptions) !disassociate_mac_sec_key.DisassociateMacSecKeyOutput {
         return disassociate_mac_sec_key.execute(self, allocator, input, options);
+    }
+
+    /// Gets information about the specified resiliency group.
+    pub fn getResiliencyGroup(self: *Self, allocator: std.mem.Allocator, input: get_resiliency_group.GetResiliencyGroupInput, options: CallOptions) !get_resiliency_group.GetResiliencyGroupOutput {
+        return get_resiliency_group.execute(self, allocator, input, options);
+    }
+
+    /// Lists the connection associations for the specified resiliency group.
+    pub fn listResiliencyGroupAssociations(self: *Self, allocator: std.mem.Allocator, input: list_resiliency_group_associations.ListResiliencyGroupAssociationsInput, options: CallOptions) !list_resiliency_group_associations.ListResiliencyGroupAssociationsOutput {
+        return list_resiliency_group_associations.execute(self, allocator, input, options);
+    }
+
+    /// Lists the resiliency groups owned by your Amazon Web Services account in the
+    /// current
+    /// Amazon Web Services Region.
+    pub fn listResiliencyGroups(self: *Self, allocator: std.mem.Allocator, input: list_resiliency_groups.ListResiliencyGroupsInput, options: CallOptions) !list_resiliency_groups.ListResiliencyGroupsOutput {
+        return list_resiliency_groups.execute(self, allocator, input, options);
+    }
+
+    /// Lists the routes for the specified virtual interface.
+    ///
+    /// Use the `routeDirection` filter to control which routes are returned:
+    ///
+    /// * `accepted`: routes received from the customer network over the virtual
+    ///   interface.
+    ///
+    /// * `advertised`: routes advertised to the customer network over the virtual
+    ///   interface.
+    pub fn listVirtualInterfaceRoutes(self: *Self, allocator: std.mem.Allocator, input: list_virtual_interface_routes.ListVirtualInterfaceRoutesInput, options: CallOptions) !list_virtual_interface_routes.ListVirtualInterfaceRoutesOutput {
+        return list_virtual_interface_routes.execute(self, allocator, input, options);
     }
 
     /// Lists the virtual interface failover test history.
@@ -862,6 +937,13 @@ pub const Client = struct {
         return update_connection.execute(self, allocator, input, options);
     }
 
+    /// Updates the billing mode for the specified Direct Connect connections. You
+    /// can update the billing
+    /// mode for up to 200 connections in a single request.
+    pub fn updateConnectionsBillingMode(self: *Self, allocator: std.mem.Allocator, input: update_connections_billing_mode.UpdateConnectionsBillingModeInput, options: CallOptions) !update_connections_billing_mode.UpdateConnectionsBillingModeOutput {
+        return update_connections_billing_mode.execute(self, allocator, input, options);
+    }
+
     /// Updates the name of a current Direct Connect gateway.
     pub fn updateDirectConnectGateway(self: *Self, allocator: std.mem.Allocator, input: update_direct_connect_gateway.UpdateDirectConnectGatewayInput, options: CallOptions) !update_direct_connect_gateway.UpdateDirectConnectGatewayOutput {
         return update_direct_connect_gateway.execute(self, allocator, input, options);
@@ -897,6 +979,11 @@ pub const Client = struct {
     /// non-operational.
     pub fn updateLag(self: *Self, allocator: std.mem.Allocator, input: update_lag.UpdateLagInput, options: CallOptions) !update_lag.UpdateLagOutput {
         return update_lag.execute(self, allocator, input, options);
+    }
+
+    /// Updates the name of the specified resiliency group.
+    pub fn updateResiliencyGroup(self: *Self, allocator: std.mem.Allocator, input: update_resiliency_group.UpdateResiliencyGroupInput, options: CallOptions) !update_resiliency_group.UpdateResiliencyGroupOutput {
+        return update_resiliency_group.execute(self, allocator, input, options);
     }
 
     /// Updates the specified attributes of the specified virtual private interface.

@@ -84,10 +84,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTemplateGroupAccessC
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTemplateGroupAccessControlEntryOutput {
-    var result: GetTemplateGroupAccessControlEntryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTemplateGroupAccessControlEntryOutput, body, allocator);
-    }
+    const result: GetTemplateGroupAccessControlEntryOutput = try aws.json.parseJsonObject(
+        GetTemplateGroupAccessControlEntryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

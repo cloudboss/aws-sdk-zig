@@ -67,6 +67,11 @@ pub const JobSettings = struct {
     /// https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.
     motion_image_inserter: ?MotionImageInserter = null,
 
+    /// Array of motion image inserters for overlaying multiple independent motion
+    /// graphics. Compositing order follows array index. Mutually exclusive with
+    /// motionImageInserter.
+    motion_image_inserters: ?[]const MotionImageInserter = null,
+
     /// Settings for your Nielsen configuration. If you don't do Nielsen measurement
     /// and analytics, ignore these settings. When you enable Nielsen configuration,
     /// MediaConvert enables PCM to ID3 tagging for all outputs in the job.
@@ -112,6 +117,7 @@ pub const JobSettings = struct {
         .inputs = "Inputs",
         .kantar_watermark = "KantarWatermark",
         .motion_image_inserter = "MotionImageInserter",
+        .motion_image_inserters = "MotionImageInserters",
         .nielsen_configuration = "NielsenConfiguration",
         .nielsen_non_linear_watermark = "NielsenNonLinearWatermark",
         .output_groups = "OutputGroups",

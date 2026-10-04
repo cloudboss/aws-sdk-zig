@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const BaseModelName = @import("base_model_name.zig").BaseModelName;
+const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
 const InputDataConfig = @import("input_data_config.zig").InputDataConfig;
 const CLMLanguageCode = @import("clm_language_code.zig").CLMLanguageCode;
 const Tag = @import("tag.zig").Tag;
@@ -22,6 +23,11 @@ pub const CreateLanguageModelInput = struct {
     /// `WideBand`. To transcribe audio with a sample rate less than 16,000 Hz,
     /// choose `NarrowBand`.
     base_model_name: BaseModelName,
+
+    /// Specifies the encryption configuration for your custom language model. Your
+    /// model artifacts are encrypted with the specified KMS key or with an
+    /// AWS-owned key if a key is not supplied.
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// Contains the Amazon S3 location of the training data you want to use to
     /// create
@@ -79,6 +85,7 @@ pub const CreateLanguageModelInput = struct {
 
     pub const json_field_names = .{
         .base_model_name = "BaseModelName",
+        .encryption_configuration = "EncryptionConfiguration",
         .input_data_config = "InputDataConfig",
         .language_code = "LanguageCode",
         .model_name = "ModelName",

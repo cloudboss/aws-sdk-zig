@@ -6,6 +6,7 @@ pub const SessionKeyDerivationMode = enum {
     amex,
     mastercard_session_key,
     visa,
+    union_pay,
 
     pub const json_field_names = .{
         .emv_common_session_key = "EMV_COMMON_SESSION_KEY",
@@ -13,6 +14,7 @@ pub const SessionKeyDerivationMode = enum {
         .amex = "AMEX",
         .mastercard_session_key = "MASTERCARD_SESSION_KEY",
         .visa = "VISA",
+        .union_pay = "UNION_PAY",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +24,7 @@ pub const SessionKeyDerivationMode = enum {
             .amex => "AMEX",
             .mastercard_session_key => "MASTERCARD_SESSION_KEY",
             .visa => "VISA",
+            .union_pay => "UNION_PAY",
         };
     }
 

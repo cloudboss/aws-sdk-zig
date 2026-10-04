@@ -9,7 +9,7 @@ pub const InsertAdBreakInput = struct {
     /// ARN of the channel into which the ad break is inserted.
     channel_arn: []const u8,
 
-    /// Maximum duration of the ad break, in seconds.
+    /// Duration of the ad break, in seconds.
     duration_seconds: i32,
 
     pub const json_field_names = .{
@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InsertAdBreakInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !InsertAdBreakOutput {
-    var result: InsertAdBreakOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(InsertAdBreakOutput, body, allocator);
-    }
+    const result: InsertAdBreakOutput = try aws.json.parseJsonObject(
+        InsertAdBreakOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

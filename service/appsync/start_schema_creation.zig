@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartSchemaCreationInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartSchemaCreationOutput {
-    var result: StartSchemaCreationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartSchemaCreationOutput, body, allocator);
-    }
+    const result: StartSchemaCreationOutput = try aws.json.parseJsonObject(
+        StartSchemaCreationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

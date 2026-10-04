@@ -7,6 +7,13 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Catalog = @import("catalog.zig").Catalog;
 
 pub const GetCatalogsInput = struct {
+    /// When `true`, the response only includes catalogs that can contain databases.
+    /// Some catalogs are organizational containers that hold only other catalogs,
+    /// not databases. When this parameter is set to `true`, those container-only
+    /// catalogs are excluded, and only catalogs capable of containing databases are
+    /// returned. Defaults to `false`.
+    has_databases: ?bool = null,
+
     /// Whether to list the default catalog in the account and region in the
     /// response. Defaults to `false`. When `true` and `ParentCatalogId = NULL |
     /// Amazon Web Services Account ID`, all catalogs and the default catalog are
@@ -32,6 +39,7 @@ pub const GetCatalogsInput = struct {
     recursive: ?bool = null,
 
     pub const json_field_names = .{
+        .has_databases = "HasDatabases",
         .include_root = "IncludeRoot",
         .max_results = "MaxResults",
         .next_token = "NextToken",

@@ -121,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateBackendAuthInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateBackendAuthOutput {
-    var result: UpdateBackendAuthOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateBackendAuthOutput, body, allocator);
-    }
+    const result: UpdateBackendAuthOutput = try aws.json.parseJsonObject(
+        UpdateBackendAuthOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeAccountHealthIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeAccountHealthOutput {
-    var result: DescribeAccountHealthOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeAccountHealthOutput, body, allocator);
-    }
+    const result: DescribeAccountHealthOutput = try aws.json.parseJsonObject(
+        DescribeAccountHealthOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

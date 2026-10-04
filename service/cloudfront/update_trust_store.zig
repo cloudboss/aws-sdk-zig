@@ -10,13 +10,17 @@ const serde = @import("serde.zig");
 
 pub const UpdateTrustStoreInput = struct {
     /// The CA certificates bundle source.
-    ca_certificates_bundle_source: CaCertificatesBundleSource,
+    ca_certificates_bundle_source: ?CaCertificatesBundleSource = null,
 
     /// The trust store ID.
     id: []const u8,
 
     /// The current version (`ETag` value) of the trust store you are updating.
     if_match: []const u8,
+
+    /// A Boolean that determines whether to use the CA certificate's OCSP endpoint
+    /// to check certificate revocation status.
+    use_client_certificate_ocsp_endpoint: ?bool = null,
 };
 
 pub const UpdateTrustStoreOutput = struct {
@@ -72,6 +76,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateTrustStoreInput, 
     request.body = body;
     try request.headers.put(allocator, "Content-Type", "application/xml");
     try request.headers.put(allocator, "If-Match", input.if_match);
+    if (input.use_client_certificate_ocsp_endpoint) |v| {
+        try request.headers.put(allocator, "UseClientCertificateOCSPEndpoint", if (v) "true" else "false");
+    }
 
     return request;
 }

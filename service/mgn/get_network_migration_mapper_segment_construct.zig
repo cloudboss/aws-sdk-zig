@@ -104,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetNetworkMigrationMapp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetNetworkMigrationMapperSegmentConstructOutput {
-    var result: GetNetworkMigrationMapperSegmentConstructOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetNetworkMigrationMapperSegmentConstructOutput, body, allocator);
-    }
+    const result: GetNetworkMigrationMapperSegmentConstructOutput = try aws.json.parseJsonObject(
+        GetNetworkMigrationMapperSegmentConstructOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

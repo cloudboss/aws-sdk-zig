@@ -1,13 +1,13 @@
 /// Contains information about the identity of a user.
 ///
-/// For Amazon Connect instances that are created with the `EXISTING_DIRECTORY`
-/// identity management
+/// For Connect Customer instances that are created with the
+/// `EXISTING_DIRECTORY` identity management
 /// type, `FirstName`, `LastName`, and `Email` cannot be updated from within
-/// Amazon Connect because they are managed by the directory.
+/// Connect Customer because they are managed by the directory.
 ///
 /// The `FirstName` and `LastName` length constraints below apply only to
 /// instances using
-/// SAML for identity management. If you are using Amazon Connect for identity
+/// SAML for identity management. If you are using Connect Customer for identity
 /// management, the length constraints
 /// are 1-255 for `FirstName`, and 1-256 for `LastName`.
 pub const UserIdentityInfo = struct {
@@ -16,15 +16,15 @@ pub const UserIdentityInfo = struct {
     /// returned.
     email: ?[]const u8 = null,
 
-    /// The first name. This is required if you are using Amazon Connect or SAML for
-    /// identity management. Inputs
+    /// The first name. This is required if you are using Connect Customer or SAML
+    /// for identity management. Inputs
     /// must be in Unicode Normalization Form C (NFC). Text containing characters in
     /// a non-NFC form (for example, decomposed
     /// characters or combining marks) are not accepted.
     first_name: ?[]const u8 = null,
 
-    /// The last name. This is required if you are using Amazon Connect or SAML for
-    /// identity management. Inputs must
+    /// The last name. This is required if you are using Connect Customer or SAML
+    /// for identity management. Inputs must
     /// be in Unicode Normalization Form C (NFC). Text containing characters in a
     /// non-NFC form (for example, decomposed
     /// characters or combining marks) are not accepted.

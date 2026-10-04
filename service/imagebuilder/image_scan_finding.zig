@@ -2,7 +2,9 @@ const InspectorScoreDetails = @import("inspector_score_details.zig").InspectorSc
 const PackageVulnerabilityDetails = @import("package_vulnerability_details.zig").PackageVulnerabilityDetails;
 const Remediation = @import("remediation.zig").Remediation;
 
-/// Contains details about a vulnerability scan finding.
+/// Contains details about a vulnerability scan finding that Amazon Inspector
+/// generated
+/// for an image.
 pub const ImageScanFinding = struct {
     /// The Amazon Web Services account ID that's associated with the finding.
     aws_account_id: ?[]const u8 = null,
@@ -15,7 +17,15 @@ pub const ImageScanFinding = struct {
 
     /// Details about whether a fix is available for any of the packages that are
     /// identified
-    /// in the finding through a version update.
+    /// in the finding through a version update. Valid values include:
+    ///
+    /// * `YES` – A fix is available for all of the packages
+    /// identified in the finding.
+    ///
+    /// * `NO` – No fix is available.
+    ///
+    /// * `PARTIAL` – A fix is available for some, but not
+    /// all, of the packages identified in the finding.
     fix_available: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the image build version that's associated
@@ -40,7 +50,10 @@ pub const ImageScanFinding = struct {
     /// An object that contains the details about how to remediate the finding.
     remediation: ?Remediation = null,
 
-    /// The severity of the finding.
+    /// The severity of the finding. For more information, see [Severity levels for
+    /// Amazon Inspector
+    /// findings](https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html) in the
+    /// *Amazon Inspector User Guide*.
     severity: ?[]const u8 = null,
 
     /// The title of the finding.

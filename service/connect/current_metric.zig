@@ -3,7 +3,7 @@ const Unit = @import("unit.zig").Unit;
 
 /// Contains information about a real-time metric. For a description of each
 /// metric, see [Metrics
-/// definitions](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) in the *Amazon Connect Administrator Guide*.
+/// definitions](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) in the *Connect Customer Administrator Guide*.
 ///
 /// Only one of either the Name or MetricId is required.
 pub const CurrentMetric = struct {

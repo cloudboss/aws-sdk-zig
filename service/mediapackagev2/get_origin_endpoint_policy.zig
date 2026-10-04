@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetOriginEndpointPolicy
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetOriginEndpointPolicyOutput {
-    var result: GetOriginEndpointPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetOriginEndpointPolicyOutput, body, allocator);
-    }
+    const result: GetOriginEndpointPolicyOutput = try aws.json.parseJsonObject(
+        GetOriginEndpointPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

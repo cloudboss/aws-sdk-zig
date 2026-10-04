@@ -7,10 +7,9 @@ pub const GatewayDetails = struct {
     /// features and bug fixes.
     deprecation_date: ?i64 = null,
 
-    /// The Amazon Resource Name (ARN) of the
-    /// gateway. Use the `ListGateways` operation
-    /// to return a list of gateways for your account and
-    /// Amazon Web Services Region.
+    /// The Amazon Resource Name (ARN) of the gateway. Use the `ListGateways`
+    /// operation to return a list of gateways for your account and Amazon Web
+    /// Services Region.
     gateway_arn: ?[]const u8 = null,
 
     /// The display name of the gateway.
@@ -22,25 +21,23 @@ pub const GatewayDetails = struct {
     /// The hypervisor ID of the gateway.
     hypervisor_id: ?[]const u8 = null,
 
-    /// Details showing the last time Backup gateway communicated
-    /// with the cloud, in Unix format and UTC time.
+    /// Details showing the last time Backup gateway communicated with the cloud, in
+    /// Unix format and UTC time.
     last_seen_time: ?i64 = null,
 
     /// Returns your gateway's weekly maintenance start time including the day and
-    /// time of the week.
-    /// Note that values are in terms of the gateway's time zone. Can be weekly or
-    /// monthly.
+    /// time of the week. Note that values are in terms of the gateway's time zone.
+    /// Can be weekly or monthly.
     maintenance_start_time: ?MaintenanceStartTime = null,
 
-    /// Details showing the next update availability time of the
-    /// gateway.
+    /// Details showing the next update availability time of the gateway.
     next_update_availability_time: ?i64 = null,
 
     /// The version number of the software running on the gateway appliance.
     software_version: ?[]const u8 = null,
 
-    /// The DNS name for the virtual private cloud (VPC) endpoint the gateway
-    /// uses to connect to the cloud for backup gateway.
+    /// The DNS name for the virtual private cloud (VPC) endpoint the gateway uses
+    /// to connect to the cloud for backup gateway.
     vpc_endpoint: ?[]const u8 = null,
 
     pub const json_field_names = .{

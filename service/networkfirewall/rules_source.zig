@@ -31,7 +31,7 @@ pub const RulesSource = struct {
     /// destination, ports, direction, and rule options.
     /// For information about the Suricata `Rules` format, see
     /// [Rules
-    /// Format](https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html).
+    /// Format](https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html).
     stateful_rules: ?[]const StatefulRule = null,
 
     /// Stateless inspection criteria to be used in a stateless rule group.

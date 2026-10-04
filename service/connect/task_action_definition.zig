@@ -10,13 +10,13 @@ pub const TaskActionDefinition = struct {
     /// The description. Supports variable injection. For more information, see
     /// [JSONPath
     /// reference](https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html)
-    /// in the *Amazon Connect Administrators Guide*.
+    /// in the *Connect Customer Administrators Guide*.
     description: ?[]const u8 = null,
 
     /// The name. Supports variable injection. For more information, see
     /// [JSONPath
     /// reference](https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html)
-    /// in the *Amazon Connect Administrators Guide*.
+    /// in the *Connect Customer Administrators Guide*.
     name: []const u8,
 
     /// Information about the reference when the `referenceType` is `URL`.

@@ -65,10 +65,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAccountLevelServiceC
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAccountLevelServiceConfigurationOutput {
-    var result: GetAccountLevelServiceConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAccountLevelServiceConfigurationOutput, body, allocator);
-    }
+    const result: GetAccountLevelServiceConfigurationOutput = try aws.json.parseJsonObject(
+        GetAccountLevelServiceConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

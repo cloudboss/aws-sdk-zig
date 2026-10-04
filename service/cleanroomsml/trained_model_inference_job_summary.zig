@@ -35,6 +35,10 @@ pub const TrainedModelInferenceJobSummary = struct {
     /// Details about the metrics status for the trained model inference job.
     metrics_status_details: ?[]const u8 = null,
 
+    /// The account ID of the member that is responsible for paying for model
+    /// inference costs.
+    ml_model_inference_payer_account_id: ?[]const u8 = null,
+
     /// The name of the trained model inference job.
     name: []const u8,
 
@@ -68,6 +72,7 @@ pub const TrainedModelInferenceJobSummary = struct {
         .membership_identifier = "membershipIdentifier",
         .metrics_status = "metricsStatus",
         .metrics_status_details = "metricsStatusDetails",
+        .ml_model_inference_payer_account_id = "mlModelInferencePayerAccountId",
         .name = "name",
         .output_configuration = "outputConfiguration",
         .status = "status",

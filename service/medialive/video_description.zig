@@ -1,11 +1,36 @@
 const VideoCodecSettings = @import("video_codec_settings.zig").VideoCodecSettings;
+const VideoPositionRectangle = @import("video_position_rectangle.zig").VideoPositionRectangle;
 const VideoDescriptionRespondToAfd = @import("video_description_respond_to_afd.zig").VideoDescriptionRespondToAfd;
 const VideoDescriptionScalingBehavior = @import("video_description_scaling_behavior.zig").VideoDescriptionScalingBehavior;
 
 /// Video settings for this stream.
 pub const VideoDescription = struct {
+    /// Specifies the number of pixels of black border that will be inserted around
+    /// the edge
+    /// of the encoded picture. Must be an even integer from 0 (no border, the
+    /// default) up
+    /// to 100. The width and height of the VideoDescription must each be greater
+    /// than twice
+    /// this value. Cannot be used together with {@link outputPositionRectangle} --
+    /// both
+    /// govern the position of the encoded content within the output frame.
+    border: ?i32 = null,
+
     /// Video codec settings.
     codec_settings: ?VideoCodecSettings = null,
+
+    /// Region of the input video to crop before scaling. If not specified, the
+    /// entire input
+    /// frame is used.
+    ///
+    /// Note: Unlike {@link outputPositionRectangle}, the bounds of cropRectangle
+    /// are validated
+    /// at ingest time by the encoder/scaler rather than at the API level, because
+    /// the input
+    /// resolution is not known until the source is probed. Field-level constraints
+    /// on (x, y,
+    /// width, height) defined on {@link VideoPositionRectangle} still apply.
+    crop_rectangle: ?VideoPositionRectangle = null,
 
     /// Output video height, in pixels. Must be an even number. For most codecs, you
     /// can leave this field and width blank in order to use the height and width
@@ -17,6 +42,16 @@ pub const VideoDescription = struct {
     /// identify this Description. Description names should be unique within this
     /// Live Event.
     name: []const u8,
+
+    /// Position of the encoded video within the output frame. The area outside the
+    /// rectangle
+    /// is filled with black. If not specified, the video fills the entire output
+    /// frame.
+    /// When used, both {@link width} and {@link height} of the VideoDescription
+    /// must be
+    /// explicitly specified so that the rectangle can be validated against the
+    /// output frame.
+    output_position_rectangle: ?VideoPositionRectangle = null,
 
     /// Indicates how MediaLive will respond to the AFD values that might be in the
     /// input video. If you do not know what AFD signaling is, or if your downstream
@@ -54,9 +89,12 @@ pub const VideoDescription = struct {
     width: ?i32 = null,
 
     pub const json_field_names = .{
+        .border = "Border",
         .codec_settings = "CodecSettings",
+        .crop_rectangle = "CropRectangle",
         .height = "Height",
         .name = "Name",
+        .output_position_rectangle = "OutputPositionRectangle",
         .respond_to_afd = "RespondToAfd",
         .scaling_behavior = "ScalingBehavior",
         .sharpness = "Sharpness",

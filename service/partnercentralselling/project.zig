@@ -1,6 +1,7 @@
 const AwsPartition = @import("aws_partition.zig").AwsPartition;
 const CompetitorName = @import("competitor_name.zig").CompetitorName;
 const DeliveryModel = @import("delivery_model.zig").DeliveryModel;
+const ExpectedContractDuration = @import("expected_contract_duration.zig").ExpectedContractDuration;
 const ExpectedCustomerSpend = @import("expected_customer_spend.zig").ExpectedCustomerSpend;
 const SalesActivity = @import("sales_activity.zig").SalesActivity;
 
@@ -87,6 +88,11 @@ pub const Project = struct {
     /// * Other: Delivery model not described above.
     delivery_models: ?[]const DeliveryModel = null,
 
+    /// Optional. The expected duration of the contract associated with this
+    /// opportunity. Partners use this value alongside expected customer spend to
+    /// convert Total Contract Value (TCV) into Monthly Recurring Revenue (MRR).
+    expected_contract_duration: ?ExpectedContractDuration = null,
+
     /// Represents the estimated amount that the customer is expected to spend on
     /// AWS services related to the opportunity. This helps in evaluating the
     /// potential financial value of the opportunity for AWS.
@@ -137,6 +143,7 @@ pub const Project = struct {
         .customer_business_problem = "CustomerBusinessProblem",
         .customer_use_case = "CustomerUseCase",
         .delivery_models = "DeliveryModels",
+        .expected_contract_duration = "ExpectedContractDuration",
         .expected_customer_spend = "ExpectedCustomerSpend",
         .other_competitor_names = "OtherCompetitorNames",
         .other_solution_description = "OtherSolutionDescription",

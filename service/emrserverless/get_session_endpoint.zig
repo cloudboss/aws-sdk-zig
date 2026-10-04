@@ -5,43 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetSessionEndpointInput = struct {
-    /// The ID of the application that the session belongs to.
-    application_id: []const u8,
+pub const GetSessionEndpointInput = @import("get_session_endpoint_request.zig").GetSessionEndpointRequest;
 
-    /// The ID of the session.
-    session_id: []const u8,
-
-    pub const json_field_names = .{
-        .application_id = "applicationId",
-        .session_id = "sessionId",
-    };
-};
-
-pub const GetSessionEndpointOutput = struct {
-    /// The output contains the ID of the application.
-    application_id: []const u8,
-
-    /// Authentication token for accessing the session endpoint.
-    auth_token: []const u8,
-
-    /// The expiration time of the authentication token.
-    auth_token_expires_at: i64,
-
-    /// The endpoint URL for connecting to the session.
-    endpoint: []const u8,
-
-    /// The output contains the ID of the session.
-    session_id: []const u8,
-
-    pub const json_field_names = .{
-        .application_id = "applicationId",
-        .auth_token = "authToken",
-        .auth_token_expires_at = "authTokenExpiresAt",
-        .endpoint = "endpoint",
-        .session_id = "sessionId",
-    };
-};
+pub const GetSessionEndpointOutput = @import("get_session_endpoint_response.zig").GetSessionEndpointResponse;
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSessionEndpointInput, options: CallOptions) !GetSessionEndpointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -95,10 +61,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSessionEndpointInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSessionEndpointOutput {
-    var result: GetSessionEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSessionEndpointOutput, body, allocator);
-    }
+    const result: GetSessionEndpointOutput = try aws.json.parseJsonObject(
+        GetSessionEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

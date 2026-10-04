@@ -112,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchResetDevicesForUse
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchResetDevicesForUserOutput {
-    var result: BatchResetDevicesForUserOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchResetDevicesForUserOutput, body, allocator);
-    }
+    const result: BatchResetDevicesForUserOutput = try aws.json.parseJsonObject(
+        BatchResetDevicesForUserOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

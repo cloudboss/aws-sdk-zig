@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetThreatIntelSetInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetThreatIntelSetOutput {
-    var result: GetThreatIntelSetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetThreatIntelSetOutput, body, allocator);
-    }
+    const result: GetThreatIntelSetOutput = try aws.json.parseJsonObject(
+        GetThreatIntelSetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

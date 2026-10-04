@@ -86,10 +86,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDataLakeSettingsInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDataLakeSettingsOutput {
-    var result: GetDataLakeSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDataLakeSettingsOutput, body, allocator);
-    }
+    const result: GetDataLakeSettingsOutput = try aws.json.parseJsonObject(
+        GetDataLakeSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

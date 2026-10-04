@@ -8,6 +8,7 @@ const ClientConnectOptions = @import("client_connect_options.zig").ClientConnect
 const ClientLoginBannerOptions = @import("client_login_banner_options.zig").ClientLoginBannerOptions;
 const ClientRouteEnforcementOptions = @import("client_route_enforcement_options.zig").ClientRouteEnforcementOptions;
 const ConnectionLogOptions = @import("connection_log_options.zig").ConnectionLogOptions;
+const DevicePostureOptions = @import("device_posture_options.zig").DevicePostureOptions;
 const DnsServersOptionsModifyStructure = @import("dns_servers_options_modify_structure.zig").DnsServersOptionsModifyStructure;
 const SelfServicePortal = @import("self_service_portal.zig").SelfServicePortal;
 const TransitGatewayConfigurationInputStructure = @import("transit_gateway_configuration_input_structure.zig").TransitGatewayConfigurationInputStructure;
@@ -55,6 +56,11 @@ pub const ModifyClientVpnEndpointInput = struct {
 
     /// A brief description of the Client VPN endpoint.
     description: ?[]const u8 = null,
+
+    /// The device posture options for the Client VPN endpoint. Specifying this
+    /// parameter replaces the entire device posture configuration for the endpoint.
+    /// To remove all device trust providers, specify an empty list.
+    device_posture_options: ?DevicePostureOptions = null,
 
     /// Indicates whether the client VPN session is disconnected after the maximum
     /// timeout specified in `sessionTimeoutHours` is reached. If `true`, users are
@@ -195,10 +201,49 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyClientVpnEndpoint
             try body_buf.appendSlice(allocator, "&ConnectionLogOptions.Enabled=");
             try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
+        if (v.include_authorization_policy_context) |sv| {
+            try body_buf.appendSlice(allocator, "&ConnectionLogOptions.IncludeAuthorizationPolicyContext=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
+        }
     }
     if (input.description) |v| {
         try body_buf.appendSlice(allocator, "&Description=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.device_posture_options) |v| {
+        if (v.enabled) |sv| {
+            try body_buf.appendSlice(allocator, "&DevicePostureOptions.Enabled=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
+        }
+        if (v.trust_providers) |list_d0| {
+            for (list_d0, 0..) |item, idx| {
+                const n = idx + 1;
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    if (item.public_signing_key_url) |fv_1| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DevicePostureOptions.TrustProvider.{d}.PublicSigningKeyUrl=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    if (item.tenant_id) |fv_1| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DevicePostureOptions.TrustProvider.{d}.TenantId=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
+                    if (item.trust_provider_type) |fv_1| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DevicePostureOptions.TrustProvider.{d}.TrustProviderType=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
+                    }
+                }
+            }
+        }
     }
     if (input.disconnect_on_session_timeout) |v| {
         try body_buf.appendSlice(allocator, "&DisconnectOnSessionTimeout=");

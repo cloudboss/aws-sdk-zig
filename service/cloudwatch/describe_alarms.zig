@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AlarmType = @import("alarm_type.zig").AlarmType;
 const StateValue = @import("state_value.zig").StateValue;
 const CompositeAlarm = @import("composite_alarm.zig").CompositeAlarm;
+const LogAlarm = @import("log_alarm.zig").LogAlarm;
 const MetricAlarm = @import("metric_alarm.zig").MetricAlarm;
 const serde = @import("serde.zig");
 
@@ -30,18 +31,21 @@ pub const DescribeAlarmsInput = struct {
     alarm_names: ?[]const []const u8 = null,
 
     /// Use this parameter to specify whether you want the operation to return
-    /// metric alarms
-    /// or composite alarms. If you omit this parameter, only metric alarms are
-    /// returned, even
-    /// if composite alarms exist in the account.
+    /// metric alarms,
+    /// composite alarms, or log alarms. If you omit this parameter, only metric
+    /// alarms are
+    /// returned, even if composite alarms or log alarms exist in the account.
     ///
     /// For example, if you omit this parameter or specify `MetricAlarms`, the
     /// operation returns only a list of metric alarms. It does not return any
-    /// composite alarms,
-    /// even if composite alarms exist in the account.
+    /// composite alarms
+    /// or log alarms, even if they exist in the account.
     ///
     /// If you specify `CompositeAlarms`, the operation returns only a list of
-    /// composite alarms, and does not return any metric alarms.
+    /// composite alarms, and does not return any metric alarms or log alarms.
+    ///
+    /// If you specify `LogAlarms`, the operation returns only a list of log
+    /// alarms, and does not return any metric alarms or composite alarms.
     alarm_types: ?[]const AlarmType = null,
 
     /// If you use this parameter and specify the name of a composite alarm, the
@@ -113,6 +117,9 @@ pub const DescribeAlarmsOutput = struct {
     /// The information about any composite alarms returned by the operation.
     composite_alarms: ?[]const CompositeAlarm = null,
 
+    /// The information about any log alarms returned by the operation.
+    log_alarms: ?[]const LogAlarm = null,
+
     /// The information about any metric alarms returned by the operation.
     metric_alarms: ?[]const MetricAlarm = null,
 
@@ -121,6 +128,7 @@ pub const DescribeAlarmsOutput = struct {
 
     pub const json_field_names = .{
         .composite_alarms = "CompositeAlarms",
+        .log_alarms = "LogAlarms",
         .metric_alarms = "MetricAlarms",
         .next_token = "NextToken",
     };
@@ -239,6 +247,8 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "CompositeAlarms")) {
                     result.composite_alarms = try serde.deserializeCompositeAlarms(allocator, &reader, "member");
+                } else if (std.mem.eql(u8, e.local, "LogAlarms")) {
+                    result.log_alarms = try serde.deserializeLogAlarms(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "MetricAlarms")) {
                     result.metric_alarms = try serde.deserializeMetricAlarms(allocator, &reader, "member");
                 } else if (std.mem.eql(u8, e.local, "NextToken")) {

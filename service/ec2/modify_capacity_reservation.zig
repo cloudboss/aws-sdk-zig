@@ -6,6 +6,9 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const EndDateType = @import("end_date_type.zig").EndDateType;
 const InstanceMatchCriteria = @import("instance_match_criteria.zig").InstanceMatchCriteria;
+const CapacityReservationAdjustmentDetails = @import("capacity_reservation_adjustment_details.zig").CapacityReservationAdjustmentDetails;
+const CapacityReservationAdjustmentStatus = @import("capacity_reservation_adjustment_status.zig").CapacityReservationAdjustmentStatus;
+const serde = @import("serde.zig");
 
 pub const ModifyCapacityReservationInput = @import("modify_capacity_reservation_request.zig").ModifyCapacityReservationRequest;
 
@@ -48,6 +51,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyCapacityReservati
         try body_buf.appendSlice(allocator, "&Accept=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
+    if (input.accept_modification_terms) |v| {
+        try body_buf.appendSlice(allocator, "&AcceptModificationTerms=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
     if (input.additional_info) |v| {
         try body_buf.appendSlice(allocator, "&AdditionalInfo=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
@@ -74,6 +81,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyCapacityReservati
         try body_buf.appendSlice(allocator, "&InstanceMatchCriteria=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
+    if (input.quote_id) |v| {
+        try body_buf.appendSlice(allocator, "&QuoteId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.start_date) |v| {
+        try body_buf.appendSlice(allocator, "&StartDate=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
 
     const body = try body_buf.toOwnedSlice(allocator);
 
@@ -91,7 +106,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyCapacityReservati
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ModifyCapacityReservationOutput {
     _ = status;
     _ = headers;
-    _ = allocator;
     var reader = aws.xml.Reader.init(body);
 
     while (try reader.next()) |event| {
@@ -105,7 +119,11 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
-                if (std.mem.eql(u8, e.local, "return")) {
+                if (std.mem.eql(u8, e.local, "adjustmentDetails")) {
+                    result.adjustment_details = try serde.deserializeCapacityReservationAdjustmentDetails(allocator, &reader);
+                } else if (std.mem.eql(u8, e.local, "adjustmentStatus")) {
+                    result.adjustment_status = CapacityReservationAdjustmentStatus.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "return")) {
                     result.@"return" = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else {
                     try reader.skipElement();

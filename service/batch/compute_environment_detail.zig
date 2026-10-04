@@ -2,6 +2,7 @@ const aws = @import("aws");
 
 const ComputeResource = @import("compute_resource.zig").ComputeResource;
 const OrchestrationType = @import("orchestration_type.zig").OrchestrationType;
+const EcsSettings = @import("ecs_settings.zig").EcsSettings;
 const EksConfiguration = @import("eks_configuration.zig").EksConfiguration;
 const CEState = @import("ce_state.zig").CEState;
 const CEStatus = @import("ce_status.zig").CEStatus;
@@ -36,6 +37,11 @@ pub const ComputeEnvironmentDetail = struct {
     /// compute environment uses.
     ecs_cluster_arn: ?[]const u8 = null,
 
+    /// The Amazon ECS settings for the compute environment. These settings control
+    /// CloudWatch
+    /// Container Insights collection.
+    ecs_settings: ?EcsSettings = null,
+
     /// The configuration for the Amazon EKS cluster that supports the Batch compute
     /// environment. Only
     /// specify this parameter if the `containerOrchestrationType` is `EKS`.
@@ -68,10 +74,9 @@ pub const ComputeEnvironmentDetail = struct {
     /// don't scale out.
     ///
     /// Compute environments in a `DISABLED` state may continue to incur billing
-    /// charges. To prevent additional charges, turn off and then delete the compute
-    /// environment. For
-    /// more information, see
-    /// [State](https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state) in the *Batch User Guide*.
+    /// charges, for example, if they have running instances due to jobs that are
+    /// still executing or a non-zero `minvCpus` setting. To prevent additional
+    /// charges, disable and delete the compute environment.
     ///
     /// When an instance is idle, the instance scales down to the `minvCpus` value.
     /// However, the instance size doesn't change. For example, consider a
@@ -119,6 +124,7 @@ pub const ComputeEnvironmentDetail = struct {
         .container_orchestration_type = "containerOrchestrationType",
         .context = "context",
         .ecs_cluster_arn = "ecsClusterArn",
+        .ecs_settings = "ecsSettings",
         .eks_configuration = "eksConfiguration",
         .service_role = "serviceRole",
         .state = "state",

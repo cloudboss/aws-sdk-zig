@@ -8,6 +8,7 @@ const ParameterDeclaration = @import("parameter_declaration.zig").ParameterDecla
 const SheetDefinition = @import("sheet_definition.zig").SheetDefinition;
 const StaticFile = @import("static_file.zig").StaticFile;
 const TooltipSheetDefinition = @import("tooltip_sheet_definition.zig").TooltipSheetDefinition;
+const TopicIdentifierDeclaration = @import("topic_identifier_declaration.zig").TopicIdentifierDeclaration;
 
 /// The contents of a dashboard.
 pub const DashboardVersionDefinition = struct {
@@ -51,6 +52,11 @@ pub const DashboardVersionDefinition = struct {
     /// An array of tooltip sheet definitions for a dashboard.
     tooltip_sheets: ?[]const TooltipSheetDefinition = null,
 
+    /// An array of topic identifier declarations. With
+    /// this mapping, you can use topic identifiers instead of topic Amazon Resource
+    /// Names (ARNs) throughout the dashboard's sub-structures.
+    topic_identifier_declarations: ?[]const TopicIdentifierDeclaration = null,
+
     pub const json_field_names = .{
         .analysis_defaults = "AnalysisDefaults",
         .calculated_fields = "CalculatedFields",
@@ -62,5 +68,6 @@ pub const DashboardVersionDefinition = struct {
         .sheets = "Sheets",
         .static_files = "StaticFiles",
         .tooltip_sheets = "TooltipSheets",
+        .topic_identifier_declarations = "TopicIdentifierDeclarations",
     };
 };

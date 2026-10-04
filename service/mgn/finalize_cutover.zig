@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: FinalizeCutoverInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !FinalizeCutoverOutput {
-    var result: FinalizeCutoverOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(FinalizeCutoverOutput, body, allocator);
-    }
+    const result: FinalizeCutoverOutput = try aws.json.parseJsonObject(
+        FinalizeCutoverOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

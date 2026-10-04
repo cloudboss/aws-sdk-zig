@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisassociateApplication
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DisassociateApplicationsOutput {
-    var result: DisassociateApplicationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DisassociateApplicationsOutput, body, allocator);
-    }
+    const result: DisassociateApplicationsOutput = try aws.json.parseJsonObject(
+        DisassociateApplicationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

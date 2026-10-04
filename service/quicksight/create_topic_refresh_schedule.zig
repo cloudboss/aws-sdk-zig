@@ -131,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTopicRefreshSched
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateTopicRefreshScheduleOutput {
-    var result: CreateTopicRefreshScheduleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateTopicRefreshScheduleOutput, body, allocator);
-    }
+    var result: CreateTopicRefreshScheduleOutput = try aws.json.parseJsonObject(
+        CreateTopicRefreshScheduleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

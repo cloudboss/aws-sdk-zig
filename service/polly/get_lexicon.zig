@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLexiconInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetLexiconOutput {
-    var result: GetLexiconOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetLexiconOutput, body, allocator);
-    }
+    const result: GetLexiconOutput = try aws.json.parseJsonObject(
+        GetLexiconOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,3 +1,4 @@
+const ResaleAuthorizationResellerRoleString = @import("resale_authorization_reseller_role_string.zig").ResaleAuthorizationResellerRoleString;
 const ResaleAuthorizationStatusString = @import("resale_authorization_status_string.zig").ResaleAuthorizationStatusString;
 
 /// Summarized information about a Resale Authorization.
@@ -7,6 +8,9 @@ pub const ResaleAuthorizationSummary = struct {
 
     /// The created date of the ResaleAuthorization.
     created_date: ?[]const u8 = null,
+
+    /// The issuer account ID of the ResaleAuthorization.
+    issuer_account_id: ?[]const u8 = null,
 
     /// The manufacturer account ID of the ResaleAuthorization.
     manufacturer_account_id: ?[]const u8 = null,
@@ -32,12 +36,19 @@ pub const ResaleAuthorizationSummary = struct {
     /// The reseller legal name of the ResaleAuthorization
     reseller_legal_name: ?[]const u8 = null,
 
+    /// The reseller role of the ResaleAuthorization.
+    reseller_role: ?ResaleAuthorizationResellerRoleString = null,
+
+    /// The source authorization of the ResaleAuthorization.
+    source_authorization: ?[]const u8 = null,
+
     /// The status of the ResaleAuthorization.
     status: ?ResaleAuthorizationStatusString = null,
 
     pub const json_field_names = .{
         .availability_end_date = "AvailabilityEndDate",
         .created_date = "CreatedDate",
+        .issuer_account_id = "IssuerAccountId",
         .manufacturer_account_id = "ManufacturerAccountId",
         .manufacturer_legal_name = "ManufacturerLegalName",
         .name = "Name",
@@ -46,6 +57,8 @@ pub const ResaleAuthorizationSummary = struct {
         .product_name = "ProductName",
         .reseller_account_id = "ResellerAccountID",
         .reseller_legal_name = "ResellerLegalName",
+        .reseller_role = "ResellerRole",
+        .source_authorization = "SourceAuthorization",
         .status = "Status",
     };
 };

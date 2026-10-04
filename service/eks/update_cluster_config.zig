@@ -7,7 +7,10 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const UpdateAccessConfigRequest = @import("update_access_config_request.zig").UpdateAccessConfigRequest;
 const ComputeConfigRequest = @import("compute_config_request.zig").ComputeConfigRequest;
 const ControlPlaneScalingConfig = @import("control_plane_scaling_config.zig").ControlPlaneScalingConfig;
+const KubeApiServerConfigRequest = @import("kube_api_server_config_request.zig").KubeApiServerConfigRequest;
+const KubeControllerManagerConfigRequest = @import("kube_controller_manager_config_request.zig").KubeControllerManagerConfigRequest;
 const KubernetesNetworkConfigRequest = @import("kubernetes_network_config_request.zig").KubernetesNetworkConfigRequest;
+const KubeSchedulerConfigRequest = @import("kube_scheduler_config_request.zig").KubeSchedulerConfigRequest;
 const Logging = @import("logging.zig").Logging;
 const RemoteNetworkConfigRequest = @import("remote_network_config_request.zig").RemoteNetworkConfigRequest;
 const VpcConfigRequest = @import("vpc_config_request.zig").VpcConfigRequest;
@@ -40,7 +43,16 @@ pub const UpdateClusterConfigInput = struct {
     /// normally.
     deletion_protection: ?bool = null,
 
+    /// The Kubernetes API server configuration for the updated cluster.
+    kube_api_server_config: ?KubeApiServerConfigRequest = null,
+
+    /// The Kubernetes controller manager configuration for the updated cluster.
+    kube_controller_manager_config: ?KubeControllerManagerConfigRequest = null,
+
     kubernetes_network_config: ?KubernetesNetworkConfigRequest = null,
+
+    /// The Kubernetes scheduler configuration for the updated cluster.
+    kube_scheduler_config: ?KubeSchedulerConfigRequest = null,
 
     /// Enable or disable exporting the Kubernetes control plane logs for your
     /// cluster to CloudWatch Logs .
@@ -64,6 +76,11 @@ pub const UpdateClusterConfigInput = struct {
 
     remote_network_config: ?RemoteNetworkConfigRequest = null,
 
+    /// An object representing the VPC configuration to use for the cluster update.
+    /// You can
+    /// use this parameter to update the control plane egress mode, the subnets used
+    /// by the
+    /// cluster, the security groups, and the endpoint access settings.
     resources_vpc_config: ?VpcConfigRequest = null,
 
     /// Update the configuration of the block storage capability of your EKS Auto
@@ -115,7 +132,10 @@ pub const UpdateClusterConfigInput = struct {
         .compute_config = "computeConfig",
         .control_plane_scaling_config = "controlPlaneScalingConfig",
         .deletion_protection = "deletionProtection",
+        .kube_api_server_config = "kubeApiServerConfig",
+        .kube_controller_manager_config = "kubeControllerManagerConfig",
         .kubernetes_network_config = "kubernetesNetworkConfig",
+        .kube_scheduler_config = "kubeSchedulerConfig",
         .logging = "logging",
         .name = "name",
         .remote_network_config = "remoteNetworkConfig",
@@ -204,9 +224,27 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateClusterConfigInpu
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.kube_api_server_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"kubeApiServerConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.kube_controller_manager_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"kubeControllerManagerConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.kubernetes_network_config) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"kubernetesNetworkConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.kube_scheduler_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"kubeSchedulerConfig\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -262,10 +300,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateClusterConfigInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateClusterConfigOutput {
-    var result: UpdateClusterConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateClusterConfigOutput, body, allocator);
-    }
+    const result: UpdateClusterConfigOutput = try aws.json.parseJsonObject(
+        UpdateClusterConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

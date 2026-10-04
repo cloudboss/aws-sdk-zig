@@ -124,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListReadSetImportJobsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListReadSetImportJobsOutput {
-    var result: ListReadSetImportJobsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListReadSetImportJobsOutput, body, allocator);
-    }
+    const result: ListReadSetImportJobsOutput = try aws.json.parseJsonObject(
+        ListReadSetImportJobsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

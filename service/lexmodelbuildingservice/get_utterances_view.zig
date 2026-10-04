@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetUtterancesViewInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetUtterancesViewOutput {
-    var result: GetUtterancesViewOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetUtterancesViewOutput, body, allocator);
-    }
+    const result: GetUtterancesViewOutput = try aws.json.parseJsonObject(
+        GetUtterancesViewOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

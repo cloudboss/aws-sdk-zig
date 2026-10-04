@@ -131,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListConfigurationPolicy
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListConfigurationPolicyAssociationsOutput {
-    var result: ListConfigurationPolicyAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListConfigurationPolicyAssociationsOutput, body, allocator);
-    }
+    const result: ListConfigurationPolicyAssociationsOutput = try aws.json.parseJsonObject(
+        ListConfigurationPolicyAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

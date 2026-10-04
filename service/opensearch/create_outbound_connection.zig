@@ -145,10 +145,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateOutboundConnectio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateOutboundConnectionOutput {
-    var result: CreateOutboundConnectionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateOutboundConnectionOutput, body, allocator);
-    }
+    const result: CreateOutboundConnectionOutput = try aws.json.parseJsonObject(
+        CreateOutboundConnectionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

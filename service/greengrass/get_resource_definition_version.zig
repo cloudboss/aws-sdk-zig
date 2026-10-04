@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetResourceDefinitionVe
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetResourceDefinitionVersionOutput {
-    var result: GetResourceDefinitionVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetResourceDefinitionVersionOutput, body, allocator);
-    }
+    const result: GetResourceDefinitionVersionOutput = try aws.json.parseJsonObject(
+        GetResourceDefinitionVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

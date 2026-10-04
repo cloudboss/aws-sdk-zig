@@ -155,7 +155,9 @@ pub const GuardrailPiiEntityConfig = struct {
     ///
     /// The SIN is formatted as three groups of three digits, such as *
     /// 123-456-789*. A SIN can be validated through a simple check-digit process
-    /// called the [Luhn algorithm](https://www.wikipedia.org/wiki/Luhn_algorithm) .
+    /// called the Luhn algorithm. For more information, see [Luhn
+    /// algorithm](https://www.wikipedia.org/wiki/Luhn_algorithm) on the Wikipedia
+    /// website.
     ///
     /// * **UK Specific**
     ///

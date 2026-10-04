@@ -85,10 +85,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetResourceLogLevelInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetResourceLogLevelOutput {
-    var result: GetResourceLogLevelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetResourceLogLevelOutput, body, allocator);
-    }
+    const result: GetResourceLogLevelOutput = try aws.json.parseJsonObject(
+        GetResourceLogLevelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

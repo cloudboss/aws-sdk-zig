@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetReadinessCheckResour
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetReadinessCheckResourceStatusOutput {
-    var result: GetReadinessCheckResourceStatusOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetReadinessCheckResourceStatusOutput, body, allocator);
-    }
+    const result: GetReadinessCheckResourceStatusOutput = try aws.json.parseJsonObject(
+        GetReadinessCheckResourceStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

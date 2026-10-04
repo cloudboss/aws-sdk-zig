@@ -1,9 +1,9 @@
-/// Import task summery waves.
+/// Import task summary waves.
 pub const ImportTaskSummaryWaves = struct {
-    /// Import task summery waves created count.
+    /// Import task summary waves created count.
     created_count: i64 = 0,
 
-    /// Import task summery waves modified count.
+    /// Import task summary waves modified count.
     modified_count: i64 = 0,
 
     pub const json_field_names = .{

@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutRetentionSettingsInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutRetentionSettingsOutput {
-    var result: PutRetentionSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutRetentionSettingsOutput, body, allocator);
-    }
+    const result: PutRetentionSettingsOutput = try aws.json.parseJsonObject(
+        PutRetentionSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

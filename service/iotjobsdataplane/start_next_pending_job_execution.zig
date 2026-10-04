@@ -116,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartNextPendingJobExec
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartNextPendingJobExecutionOutput {
-    var result: StartNextPendingJobExecutionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartNextPendingJobExecutionOutput, body, allocator);
-    }
+    const result: StartNextPendingJobExecutionOutput = try aws.json.parseJsonObject(
+        StartNextPendingJobExecutionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

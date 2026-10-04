@@ -7,10 +7,12 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ComparisonOperator = @import("comparison_operator.zig").ComparisonOperator;
 const Dimension = @import("dimension.zig").Dimension;
 const EvaluationCriteria = @import("evaluation_criteria.zig").EvaluationCriteria;
+const EvaluationWindow = @import("evaluation_window.zig").EvaluationWindow;
 const MetricDataQuery = @import("metric_data_query.zig").MetricDataQuery;
 const Statistic = @import("statistic.zig").Statistic;
 const Tag = @import("tag.zig").Tag;
 const StandardUnit = @import("standard_unit.zig").StandardUnit;
+const WarmUpConfiguration = @import("warm_up_configuration.zig").WarmUpConfiguration;
 const serde = @import("serde.zig");
 
 pub const PutMetricAlarmInput = struct {
@@ -80,7 +82,8 @@ pub const PutMetricAlarmInput = struct {
     /// * `arn:aws:ssm-incidents::*account-id*:responseplan/*response-plan-name*
     /// `
     ///
-    /// **Start a Amazon Q Developer operational investigation**
+    /// **Start a Amazon Q Developer operational
+    /// investigation**
     ///
     /// `arn:aws:aiops:*region*:*account-id*:investigation-group:*investigation-group-id*
     /// `
@@ -138,8 +141,8 @@ pub const PutMetricAlarmInput = struct {
     /// `ExtendedStatistic`, `Metrics`, `Threshold`,
     /// `ComparisonOperator`, `ThresholdMetricId`,
     /// `EvaluationPeriods`, or `DatapointsToAlarm` parameters of
-    /// `PutMetricAlarm` in the same operation. Instead, all evaluation parameters
-    /// are defined within this structure.
+    /// `PutMetricAlarm` in the same operation. Instead, all evaluation
+    /// parameters are defined within this structure.
     ///
     /// For an example of how to use this parameter, see the **PromQL
     /// alarm** example on this page.
@@ -162,6 +165,27 @@ pub const PutMetricAlarmInput = struct {
     /// setting an
     /// "M out of N" alarm, this value is the N.
     evaluation_periods: ?i32 = null,
+
+    /// The evaluation window that the alarm uses to select the range of metric data
+    /// that it
+    /// evaluates. Specify either a sliding window or a wall clock window. If you
+    /// omit this
+    /// parameter, the alarm uses a sliding window.
+    ///
+    /// A sliding window advances each time the alarm is evaluated, forming a
+    /// rolling time
+    /// window. A wall clock window aligns the evaluated range to fixed clock
+    /// boundaries, such
+    /// as the top of the hour or the start of the day.
+    ///
+    /// You can use `EvaluationWindow` with any type of metric alarm except alarms
+    /// that are based on a PromQL query.
+    ///
+    /// For more information, see [Alarm
+    /// evaluation
+    /// windows](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html) in the *CloudWatch User
+    /// Guide*.
+    evaluation_window: ?EvaluationWindow = null,
 
     /// The extended statistic for the metric specified in `MetricName`. When
     /// you call `PutMetricAlarm` and specify a `MetricName`, you must
@@ -292,11 +316,11 @@ pub const PutMetricAlarmInput = struct {
     ///
     /// If you use the `Metrics` parameter, you cannot include the
     /// `Namespace`, `MetricName`, `Dimensions`,
-    /// `Period`, `Unit`, `Statistic`,
-    /// or `ExtendedStatistic` parameters of `PutMetricAlarm`
-    /// in the same operation. Instead, you retrieve the metrics you are using in
-    /// your
-    /// math expression as part of the `Metrics` array.
+    /// `Period`, `Unit`, `Statistic`, or
+    /// `ExtendedStatistic` parameters of `PutMetricAlarm` in the same
+    /// operation. Instead, you retrieve the metrics you are using in your math
+    /// expression as
+    /// part of the `Metrics` array.
     metrics: ?[]const MetricDataQuery = null,
 
     /// The namespace for the metric associated specified in
@@ -366,8 +390,8 @@ pub const PutMetricAlarmInput = struct {
     ok_actions: ?[]const []const u8 = null,
 
     /// The length, in seconds, used each time the metric specified in
-    /// `MetricName` is evaluated. Valid values are 10, 20, 30, and any multiple of
-    /// 60.
+    /// `MetricName` is evaluated. Valid values are 10, 20, 30, and any multiple
+    /// of 60.
     ///
     /// `Period` is required for alarms based on static thresholds. If you are
     /// creating an alarm based on a metric math expression, you specify the period
@@ -377,24 +401,25 @@ pub const PutMetricAlarmInput = struct {
     /// Be sure to specify 10, 20, or 30 only for metrics that are stored by a
     /// `PutMetricData` call with a `StorageResolution` of 1. If you
     /// specify a period of 10, 20, or 30 for a metric that does not have sub-minute
-    /// resolution, the
-    /// alarm still attempts to gather data at the period rate that you specify. In
-    /// this case,
-    /// it does not receive data for the attempts that do not correspond to a
-    /// one-minute data
-    /// resolution, and the alarm might often lapse into INSUFFICENT_DATA status.
-    /// Specifying 10, 20,
-    /// or 30 also sets this alarm as a high-resolution alarm, which has a higher
-    /// charge than
-    /// other alarms. For more information about pricing, see [Amazon CloudWatch
+    /// resolution,
+    /// the alarm still attempts to gather data at the period rate that you specify.
+    /// In this
+    /// case, it does not receive data for the attempts that do not correspond to a
+    /// one-minute
+    /// data resolution, and the alarm might often lapse into INSUFFICENT_DATA
+    /// status.
+    /// Specifying 10, 20, or 30 also sets this alarm as a high-resolution alarm,
+    /// which has a
+    /// higher charge than other alarms. For more information about pricing, see
+    /// [Amazon CloudWatch
     /// Pricing](https://aws.amazon.com/cloudwatch/pricing/).
     ///
     /// An alarm's total current evaluation period can be no longer than seven days,
     /// so
     /// `Period` multiplied by `EvaluationPeriods` can't be more than
     /// 604,800 seconds. For alarms with a period of less than one hour (3,600
-    /// seconds), the total evaluation period can't be longer than one day (86,400
-    /// seconds).
+    /// seconds), the
+    /// total evaluation period can't be longer than one day (86,400 seconds).
     period: ?i32 = null,
 
     /// The statistic for the metric specified in `MetricName`, other than
@@ -491,6 +516,16 @@ pub const PutMetricAlarmInput = struct {
     /// stuck in the `INSUFFICIENT DATA` state.
     unit: ?StandardUnit = null,
 
+    /// The warm-up configuration for the alarm. A warm-up period delays alarm
+    /// evaluation
+    /// after you create or update the alarm. The warm-up period reduces alarm noise
+    /// from
+    /// missing data while a new resource or service starts publishing metrics.
+    ///
+    /// For more information, see [Alarm warm-up
+    /// periods](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html) in the *Amazon CloudWatch User Guide*.
+    warm_up_configuration: ?WarmUpConfiguration = null,
+
     pub const json_field_names = .{
         .actions_enabled = "ActionsEnabled",
         .alarm_actions = "AlarmActions",
@@ -503,6 +538,7 @@ pub const PutMetricAlarmInput = struct {
         .evaluation_criteria = "EvaluationCriteria",
         .evaluation_interval = "EvaluationInterval",
         .evaluation_periods = "EvaluationPeriods",
+        .evaluation_window = "EvaluationWindow",
         .extended_statistic = "ExtendedStatistic",
         .insufficient_data_actions = "InsufficientDataActions",
         .metric_name = "MetricName",
@@ -516,6 +552,7 @@ pub const PutMetricAlarmInput = struct {
         .threshold_metric_id = "ThresholdMetricId",
         .treat_missing_data = "TreatMissingData",
         .unit = "Unit",
+        .warm_up_configuration = "WarmUpConfiguration",
     };
 };
 
@@ -627,6 +664,19 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricAlarmInput, co
     if (input.evaluation_periods) |v| {
         try body_buf.appendSlice(allocator, "&EvaluationPeriods=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
+    if (input.evaluation_window) |u| {
+        switch (u) {
+            .sliding_window => {},
+            .wall_clock_window => |u_0| {
+                if (u_0) |v_0| {
+                    if (v_0.timezone) |sv| {
+                        try body_buf.appendSlice(allocator, "&EvaluationWindow.WallClockWindow.Timezone=");
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
+                    }
+                }
+            },
+        }
     }
     if (input.extended_statistic) |v| {
         try body_buf.appendSlice(allocator, "&ExtendedStatistic=");
@@ -804,6 +854,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMetricAlarmInput, co
     if (input.unit) |v| {
         try body_buf.appendSlice(allocator, "&Unit=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
+    }
+    if (input.warm_up_configuration) |v| {
+        if (v.only_start_evaluating_after_warm_up_period_ends) |sv| {
+            try body_buf.appendSlice(allocator, "&WarmUpConfiguration.OnlyStartEvaluatingAfterWarmUpPeriodEnds=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
+        }
+        try body_buf.appendSlice(allocator, "&WarmUpConfiguration.WarmUpPeriodDurationInMinutes=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v.warm_up_period_duration_in_minutes}) catch "");
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

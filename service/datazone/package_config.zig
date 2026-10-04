@@ -1,6 +1,7 @@
 const PackageManager = @import("package_manager.zig").PackageManager;
 
-/// The package configuration for a notebook run environment in Amazon DataZone.
+/// The package configuration for a notebook run environment in Amazon SageMaker
+/// Unified Studio.
 pub const PackageConfig = struct {
     /// The package manager for the notebook run environment. The default value is
     /// `UV`.

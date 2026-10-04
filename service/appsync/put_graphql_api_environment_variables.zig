@@ -113,10 +113,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutGraphqlApiEnvironmen
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutGraphqlApiEnvironmentVariablesOutput {
-    var result: PutGraphqlApiEnvironmentVariablesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutGraphqlApiEnvironmentVariablesOutput, body, allocator);
-    }
+    const result: PutGraphqlApiEnvironmentVariablesOutput = try aws.json.parseJsonObject(
+        PutGraphqlApiEnvironmentVariablesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

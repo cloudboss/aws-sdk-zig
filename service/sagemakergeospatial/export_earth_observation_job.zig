@@ -141,10 +141,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExportEarthObservationJ
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ExportEarthObservationJobOutput {
-    var result: ExportEarthObservationJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ExportEarthObservationJobOutput, body, allocator);
-    }
+    const result: ExportEarthObservationJobOutput = try aws.json.parseJsonObject(
+        ExportEarthObservationJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

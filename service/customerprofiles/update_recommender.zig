@@ -20,11 +20,16 @@ pub const UpdateRecommenderInput = struct {
     /// The name of the recommender to update.
     recommender_name: []const u8,
 
+    /// The name of a specific recommender version to activate as part of this
+    /// update (for example, to roll back to a previously trained version).
+    recommender_version_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .description = "Description",
         .domain_name = "DomainName",
         .recommender_config = "RecommenderConfig",
         .recommender_name = "RecommenderName",
+        .recommender_version_name = "RecommenderVersionName",
     };
 };
 
@@ -90,6 +95,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateRecommenderInput,
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.recommender_version_name) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"RecommenderVersionName\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -106,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateRecommenderInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateRecommenderOutput {
-    var result: UpdateRecommenderOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateRecommenderOutput, body, allocator);
-    }
+    const result: UpdateRecommenderOutput = try aws.json.parseJsonObject(
+        UpdateRecommenderOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

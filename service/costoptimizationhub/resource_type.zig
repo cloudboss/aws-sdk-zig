@@ -20,6 +20,12 @@ pub const ResourceType = enum {
     dynamo_db_reserved_capacity,
     memory_db_reserved_instances,
     nat_gateway,
+    dynamo_db_table,
+    elasti_cache_cluster,
+    memory_db_cluster,
+    document_db_cluster,
+    work_spaces,
+    sage_maker_endpoint,
 
     pub const json_field_names = .{
         .ec2_instance = "Ec2Instance",
@@ -41,6 +47,12 @@ pub const ResourceType = enum {
         .dynamo_db_reserved_capacity = "DynamoDbReservedCapacity",
         .memory_db_reserved_instances = "MemoryDbReservedInstances",
         .nat_gateway = "NatGateway",
+        .dynamo_db_table = "DynamoDBTable",
+        .elasti_cache_cluster = "ElastiCacheCluster",
+        .memory_db_cluster = "MemoryDBCluster",
+        .document_db_cluster = "DocumentDBCluster",
+        .work_spaces = "WorkSpaces",
+        .sage_maker_endpoint = "SageMakerEndpoint",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -64,6 +76,12 @@ pub const ResourceType = enum {
             .dynamo_db_reserved_capacity => "DynamoDbReservedCapacity",
             .memory_db_reserved_instances => "MemoryDbReservedInstances",
             .nat_gateway => "NatGateway",
+            .dynamo_db_table => "DynamoDBTable",
+            .elasti_cache_cluster => "ElastiCacheCluster",
+            .memory_db_cluster => "MemoryDBCluster",
+            .document_db_cluster => "DocumentDBCluster",
+            .work_spaces => "WorkSpaces",
+            .sage_maker_endpoint => "SageMakerEndpoint",
         };
     }
 

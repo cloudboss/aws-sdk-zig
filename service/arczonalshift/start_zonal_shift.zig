@@ -197,10 +197,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartZonalShiftInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartZonalShiftOutput {
-    var result: StartZonalShiftOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartZonalShiftOutput, body, allocator);
-    }
+    const result: StartZonalShiftOutput = try aws.json.parseJsonObject(
+        StartZonalShiftOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

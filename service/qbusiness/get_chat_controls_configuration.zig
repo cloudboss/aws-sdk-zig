@@ -146,10 +146,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetChatControlsConfigur
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetChatControlsConfigurationOutput {
-    var result: GetChatControlsConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetChatControlsConfigurationOutput, body, allocator);
-    }
+    const result: GetChatControlsConfigurationOutput = try aws.json.parseJsonObject(
+        GetChatControlsConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

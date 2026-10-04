@@ -79,6 +79,15 @@ pub const GetWorkflowOutput = struct {
     /// The workflow's parameter template.
     parameter_template: ?[]const aws.map.MapEntry(WorkflowParameter) = null,
 
+    /// A mapping of profile names to their parameter templates. Each profile
+    /// defines its own set of parameters that you can use when starting a run with
+    /// that profile.
+    profile_parameter_templates: ?[]const aws.map.MapEntry([]const aws.map.MapEntry(WorkflowParameter)) = null,
+
+    /// The list of Nextflow profiles that are available for this workflow. Profiles
+    /// allow you to select predefined configuration settings at runtime.
+    profiles: ?[]const []const u8 = null,
+
     /// The README content for the workflow, providing documentation and usage
     /// information.
     readme: ?[]const u8 = null,
@@ -126,6 +135,8 @@ pub const GetWorkflowOutput = struct {
         .metadata = "metadata",
         .name = "name",
         .parameter_template = "parameterTemplate",
+        .profile_parameter_templates = "profileParameterTemplates",
+        .profiles = "profiles",
         .readme = "readme",
         .readme_path = "readmePath",
         .status = "status",
@@ -212,10 +223,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetWorkflowInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetWorkflowOutput {
-    var result: GetWorkflowOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetWorkflowOutput, body, allocator);
-    }
+    const result: GetWorkflowOutput = try aws.json.parseJsonObject(
+        GetWorkflowOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

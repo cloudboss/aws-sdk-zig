@@ -31,6 +31,7 @@ const create_glossary = @import("create_glossary.zig");
 const create_glossary_term = @import("create_glossary_term.zig");
 const create_group_profile = @import("create_group_profile.zig");
 const create_listing_change_set = @import("create_listing_change_set.zig");
+const create_notebook = @import("create_notebook.zig");
 const create_project = @import("create_project.zig");
 const create_project_membership = @import("create_project_membership.zig");
 const create_project_profile = @import("create_project_profile.zig");
@@ -57,7 +58,9 @@ const delete_environment_profile = @import("delete_environment_profile.zig");
 const delete_form_type = @import("delete_form_type.zig");
 const delete_glossary = @import("delete_glossary.zig");
 const delete_glossary_term = @import("delete_glossary_term.zig");
+const delete_lineage_event = @import("delete_lineage_event.zig");
 const delete_listing = @import("delete_listing.zig");
+const delete_notebook = @import("delete_notebook.zig");
 const delete_project = @import("delete_project.zig");
 const delete_project_membership = @import("delete_project_membership.zig");
 const delete_project_profile = @import("delete_project_profile.zig");
@@ -95,6 +98,8 @@ const get_lineage_event = @import("get_lineage_event.zig");
 const get_lineage_node = @import("get_lineage_node.zig");
 const get_listing = @import("get_listing.zig");
 const get_metadata_generation_run = @import("get_metadata_generation_run.zig");
+const get_notebook = @import("get_notebook.zig");
+const get_notebook_export = @import("get_notebook_export.zig");
 const get_notebook_run = @import("get_notebook_run.zig");
 const get_project = @import("get_project.zig");
 const get_project_profile = @import("get_project_profile.zig");
@@ -127,6 +132,7 @@ const list_lineage_events = @import("list_lineage_events.zig");
 const list_lineage_node_history = @import("list_lineage_node_history.zig");
 const list_metadata_generation_runs = @import("list_metadata_generation_runs.zig");
 const list_notebook_runs = @import("list_notebook_runs.zig");
+const list_notebooks = @import("list_notebooks.zig");
 const list_notifications = @import("list_notifications.zig");
 const list_policy_grants = @import("list_policy_grants.zig");
 const list_project_memberships = @import("list_project_memberships.zig");
@@ -156,7 +162,10 @@ const search_types = @import("search_types.zig");
 const search_user_profiles = @import("search_user_profiles.zig");
 const start_data_source_run = @import("start_data_source_run.zig");
 const start_metadata_generation_run = @import("start_metadata_generation_run.zig");
+const start_notebook_export = @import("start_notebook_export.zig");
+const start_notebook_import = @import("start_notebook_import.zig");
 const start_notebook_run = @import("start_notebook_run.zig");
+const start_notebook_sync = @import("start_notebook_sync.zig");
 const stop_notebook_run = @import("stop_notebook_run.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
@@ -173,6 +182,7 @@ const update_environment_profile = @import("update_environment_profile.zig");
 const update_glossary = @import("update_glossary.zig");
 const update_glossary_term = @import("update_glossary_term.zig");
 const update_group_profile = @import("update_group_profile.zig");
+const update_notebook = @import("update_notebook.zig");
 const update_project = @import("update_project.zig");
 const update_project_profile = @import("update_project_profile.zig");
 const update_root_domain_unit_owner = @import("update_root_domain_unit_owner.zig");
@@ -525,6 +535,12 @@ pub const Client = struct {
         return create_listing_change_set.execute(self, allocator, input, options);
     }
 
+    /// Creates a
+    /// [notebook](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio. A notebook is a collaborative document within a project that contains code cells for interactive computing.
+    pub fn createNotebook(self: *Self, allocator: std.mem.Allocator, input: create_notebook.CreateNotebookInput, options: CallOptions) !create_notebook.CreateNotebookOutput {
+        return create_notebook.execute(self, allocator, input, options);
+    }
+
     /// Creates an Amazon DataZone project.
     pub fn createProject(self: *Self, allocator: std.mem.Allocator, input: create_project.CreateProjectInput, options: CallOptions) !create_project.CreateProjectOutput {
         return create_project.execute(self, allocator, input, options);
@@ -725,9 +741,20 @@ pub const Client = struct {
         return delete_glossary_term.execute(self, allocator, input, options);
     }
 
+    /// Deletes the specified lineage event.
+    pub fn deleteLineageEvent(self: *Self, allocator: std.mem.Allocator, input: delete_lineage_event.DeleteLineageEventInput, options: CallOptions) !delete_lineage_event.DeleteLineageEventOutput {
+        return delete_lineage_event.execute(self, allocator, input, options);
+    }
+
     /// Deletes a listing (a record of an asset at a given time).
     pub fn deleteListing(self: *Self, allocator: std.mem.Allocator, input: delete_listing.DeleteListingInput, options: CallOptions) !delete_listing.DeleteListingOutput {
         return delete_listing.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a
+    /// [notebook](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
+    pub fn deleteNotebook(self: *Self, allocator: std.mem.Allocator, input: delete_notebook.DeleteNotebookInput, options: CallOptions) !delete_notebook.DeleteNotebookOutput {
+        return delete_notebook.execute(self, allocator, input, options);
     }
 
     /// Deletes a project in Amazon DataZone.
@@ -1018,7 +1045,19 @@ pub const Client = struct {
         return get_metadata_generation_run.execute(self, allocator, input, options);
     }
 
-    /// Gets the details of a notebook run in an Amazon DataZone domain.
+    /// Gets the details of a
+    /// [notebook](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
+    pub fn getNotebook(self: *Self, allocator: std.mem.Allocator, input: get_notebook.GetNotebookInput, options: CallOptions) !get_notebook.GetNotebookOutput {
+        return get_notebook.execute(self, allocator, input, options);
+    }
+
+    /// Gets the details of a notebook export in Amazon SageMaker Unified Studio.
+    pub fn getNotebookExport(self: *Self, allocator: std.mem.Allocator, input: get_notebook_export.GetNotebookExportInput, options: CallOptions) !get_notebook_export.GetNotebookExportOutput {
+        return get_notebook_export.execute(self, allocator, input, options);
+    }
+
+    /// Gets the details of a [notebook
+    /// run](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
     pub fn getNotebookRun(self: *Self, allocator: std.mem.Allocator, input: get_notebook_run.GetNotebookRunInput, options: CallOptions) !get_notebook_run.GetNotebookRunOutput {
         return get_notebook_run.execute(self, allocator, input, options);
     }
@@ -1214,9 +1253,16 @@ pub const Client = struct {
         return list_metadata_generation_runs.execute(self, allocator, input, options);
     }
 
-    /// Lists notebook runs in an Amazon DataZone domain.
+    /// Lists [notebook
+    /// runs](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
     pub fn listNotebookRuns(self: *Self, allocator: std.mem.Allocator, input: list_notebook_runs.ListNotebookRunsInput, options: CallOptions) !list_notebook_runs.ListNotebookRunsOutput {
         return list_notebook_runs.execute(self, allocator, input, options);
+    }
+
+    /// Lists
+    /// [notebooks](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
+    pub fn listNotebooks(self: *Self, allocator: std.mem.Allocator, input: list_notebooks.ListNotebooksInput, options: CallOptions) !list_notebooks.ListNotebooksOutput {
+        return list_notebooks.execute(self, allocator, input, options);
     }
 
     /// Lists all Amazon DataZone notifications.
@@ -1497,15 +1543,35 @@ pub const Client = struct {
         return start_metadata_generation_run.execute(self, allocator, input, options);
     }
 
-    /// Starts a notebook run in an Amazon DataZone domain. A notebook run
-    /// represents the execution of a Amazon DataZone notebook within a project. You
-    /// can configure compute, network, timeout, and environment settings for the
-    /// run.
+    /// Starts a notebook export in Amazon SageMaker Unified Studio. This operation
+    /// exports a notebook to a specified file format and stores the output in
+    /// Amazon Simple Storage Service.
+    pub fn startNotebookExport(self: *Self, allocator: std.mem.Allocator, input: start_notebook_export.StartNotebookExportInput, options: CallOptions) !start_notebook_export.StartNotebookExportOutput {
+        return start_notebook_export.execute(self, allocator, input, options);
+    }
+
+    /// Starts a notebook import in Amazon SageMaker Unified Studio. This operation
+    /// imports a notebook from an Amazon Simple Storage Service location into a
+    /// project.
+    pub fn startNotebookImport(self: *Self, allocator: std.mem.Allocator, input: start_notebook_import.StartNotebookImportInput, options: CallOptions) !start_notebook_import.StartNotebookImportOutput {
+        return start_notebook_import.execute(self, allocator, input, options);
+    }
+
+    /// Starts a notebook run in Amazon SageMaker Unified Studio. A notebook run
+    /// represents the execution of an [Amazon SageMaker
+    /// notebook](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) within a project. You can configure compute, network, timeout, and environment settings for the run.
     pub fn startNotebookRun(self: *Self, allocator: std.mem.Allocator, input: start_notebook_run.StartNotebookRunInput, options: CallOptions) !start_notebook_run.StartNotebookRunOutput {
         return start_notebook_run.execute(self, allocator, input, options);
     }
 
-    /// Stops a running notebook run in an Amazon DataZone domain.
+    /// Starts a notebook sync in Amazon SageMaker Unified Studio. This operation
+    /// syncs a notebook from a Git repository into a project.
+    pub fn startNotebookSync(self: *Self, allocator: std.mem.Allocator, input: start_notebook_sync.StartNotebookSyncInput, options: CallOptions) !start_notebook_sync.StartNotebookSyncOutput {
+        return start_notebook_sync.execute(self, allocator, input, options);
+    }
+
+    /// Stops a running [notebook
+    /// run](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
     pub fn stopNotebookRun(self: *Self, allocator: std.mem.Allocator, input: stop_notebook_run.StopNotebookRunInput, options: CallOptions) !stop_notebook_run.StopNotebookRunOutput {
         return stop_notebook_run.execute(self, allocator, input, options);
     }
@@ -1607,6 +1673,12 @@ pub const Client = struct {
     /// Updates the specified group profile in Amazon DataZone.
     pub fn updateGroupProfile(self: *Self, allocator: std.mem.Allocator, input: update_group_profile.UpdateGroupProfileInput, options: CallOptions) !update_group_profile.UpdateGroupProfileOutput {
         return update_group_profile.execute(self, allocator, input, options);
+    }
+
+    /// Updates a
+    /// [notebook](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
+    pub fn updateNotebook(self: *Self, allocator: std.mem.Allocator, input: update_notebook.UpdateNotebookInput, options: CallOptions) !update_notebook.UpdateNotebookOutput {
+        return update_notebook.execute(self, allocator, input, options);
     }
 
     /// Updates the specified project in Amazon DataZone.
@@ -1805,6 +1877,13 @@ pub const Client = struct {
     }
 
     pub fn listNotebookRunsPaginator(self: *Self, params: list_notebook_runs.ListNotebookRunsInput) paginator.ListNotebookRunsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listNotebooksPaginator(self: *Self, params: list_notebooks.ListNotebooksInput) paginator.ListNotebooksPaginator {
         return .{
             .client = self,
             .params = params,

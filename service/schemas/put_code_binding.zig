@@ -112,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutCodeBindingInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutCodeBindingOutput {
-    var result: PutCodeBindingOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutCodeBindingOutput, body, allocator);
-    }
+    const result: PutCodeBindingOutput = try aws.json.parseJsonObject(
+        PutCodeBindingOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

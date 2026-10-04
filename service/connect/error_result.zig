@@ -1,4 +1,5 @@
-/// This API is in preview release for Amazon Connect and is subject to change.
+/// This API is in preview release for Connect Customer and is subject to
+/// change.
 ///
 /// List of errors for dataset association failures.
 pub const ErrorResult = struct {

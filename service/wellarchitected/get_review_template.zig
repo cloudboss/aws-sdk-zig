@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetReviewTemplateInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetReviewTemplateOutput {
-    var result: GetReviewTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetReviewTemplateOutput, body, allocator);
-    }
+    const result: GetReviewTemplateOutput = try aws.json.parseJsonObject(
+        GetReviewTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

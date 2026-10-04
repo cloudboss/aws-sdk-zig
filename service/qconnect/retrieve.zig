@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const RetrievalConfiguration = @import("retrieval_configuration.zig").RetrievalConfiguration;
+const RetrieveError = @import("retrieve_error.zig").RetrieveError;
 const RetrieveResult = @import("retrieve_result.zig").RetrieveResult;
 
 pub const RetrieveInput = struct {
@@ -25,10 +26,19 @@ pub const RetrieveInput = struct {
 };
 
 pub const RetrieveOutput = struct {
+    /// The per-association errors returned when one or more knowledge base
+    /// associations fail during a `Retrieve` operation that spans multiple
+    /// assistant associations. The overall operation still succeeds and returns the
+    /// results from the associations that were queried successfully. This list
+    /// contains one entry for each association that failed, up to a maximum of
+    /// five.
+    errors: ?[]const RetrieveError = null,
+
     /// The results of the content retrieval operation.
     results: ?[]const RetrieveResult = null,
 
     pub const json_field_names = .{
+        .errors = "errors",
         .results = "results",
     };
 };
@@ -97,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RetrieveInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RetrieveOutput {
-    var result: RetrieveOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RetrieveOutput, body, allocator);
-    }
+    const result: RetrieveOutput = try aws.json.parseJsonObject(
+        RetrieveOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

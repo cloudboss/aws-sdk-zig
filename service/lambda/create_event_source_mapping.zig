@@ -438,10 +438,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEventSourceMappin
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateEventSourceMappingOutput {
-    var result: CreateEventSourceMappingOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateEventSourceMappingOutput, body, allocator);
-    }
+    const result: CreateEventSourceMappingOutput = try aws.json.parseJsonObject(
+        CreateEventSourceMappingOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

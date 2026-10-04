@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExchangeCodeForTokenInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ExchangeCodeForTokenOutput {
-    var result: ExchangeCodeForTokenOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ExchangeCodeForTokenOutput, body, allocator);
-    }
+    const result: ExchangeCodeForTokenOutput = try aws.json.parseJsonObject(
+        ExchangeCodeForTokenOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

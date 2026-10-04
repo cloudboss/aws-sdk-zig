@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteSdiSourceInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteSdiSourceOutput {
-    var result: DeleteSdiSourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteSdiSourceOutput, body, allocator);
-    }
+    const result: DeleteSdiSourceOutput = try aws.json.parseJsonObject(
+        DeleteSdiSourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

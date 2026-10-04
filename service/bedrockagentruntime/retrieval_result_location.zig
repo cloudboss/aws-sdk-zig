@@ -1,6 +1,8 @@
 const RetrievalResultConfluenceLocation = @import("retrieval_result_confluence_location.zig").RetrievalResultConfluenceLocation;
 const RetrievalResultCustomDocumentLocation = @import("retrieval_result_custom_document_location.zig").RetrievalResultCustomDocumentLocation;
+const RetrievalResultGoogleDriveLocation = @import("retrieval_result_google_drive_location.zig").RetrievalResultGoogleDriveLocation;
 const RetrievalResultKendraDocumentLocation = @import("retrieval_result_kendra_document_location.zig").RetrievalResultKendraDocumentLocation;
+const RetrievalResultOneDriveLocation = @import("retrieval_result_one_drive_location.zig").RetrievalResultOneDriveLocation;
 const RetrievalResultS3Location = @import("retrieval_result_s3_location.zig").RetrievalResultS3Location;
 const RetrievalResultSalesforceLocation = @import("retrieval_result_salesforce_location.zig").RetrievalResultSalesforceLocation;
 const RetrievalResultSharePointLocation = @import("retrieval_result_share_point_location.zig").RetrievalResultSharePointLocation;
@@ -25,8 +27,14 @@ pub const RetrievalResultLocation = struct {
     /// Specifies the location of a document in a custom data source.
     custom_document_location: ?RetrievalResultCustomDocumentLocation = null,
 
+    /// The Google Drive data source location.
+    google_drive_location: ?RetrievalResultGoogleDriveLocation = null,
+
     /// The location of a document in Amazon Kendra.
     kendra_document_location: ?RetrievalResultKendraDocumentLocation = null,
+
+    /// The Microsoft OneDrive data source location.
+    one_drive_location: ?RetrievalResultOneDriveLocation = null,
 
     /// The S3 data source location.
     s_3_location: ?RetrievalResultS3Location = null,
@@ -49,7 +57,9 @@ pub const RetrievalResultLocation = struct {
     pub const json_field_names = .{
         .confluence_location = "confluenceLocation",
         .custom_document_location = "customDocumentLocation",
+        .google_drive_location = "googleDriveLocation",
         .kendra_document_location = "kendraDocumentLocation",
+        .one_drive_location = "oneDriveLocation",
         .s_3_location = "s3Location",
         .salesforce_location = "salesforceLocation",
         .share_point_location = "sharePointLocation",

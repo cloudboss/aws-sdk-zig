@@ -160,10 +160,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePipelineInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdatePipelineOutput {
-    var result: UpdatePipelineOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdatePipelineOutput, body, allocator);
-    }
+    const result: UpdatePipelineOutput = try aws.json.parseJsonObject(
+        UpdatePipelineOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

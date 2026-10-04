@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const LaunchDisposition = @import("launch_disposition.zig").LaunchDisposition;
 const LaunchIntoInstanceProperties = @import("launch_into_instance_properties.zig").LaunchIntoInstanceProperties;
 const Licensing = @import("licensing.zig").Licensing;
+const RecoveryMode = @import("recovery_mode.zig").RecoveryMode;
 const TargetInstanceTypeRightSizingMethod = @import("target_instance_type_right_sizing_method.zig").TargetInstanceTypeRightSizingMethod;
 
 pub const GetLaunchConfigurationInput = struct {
@@ -46,6 +47,9 @@ pub const GetLaunchConfigurationOutput = struct {
     /// Whether we want to activate post-launch actions for the Source Server.
     post_launch_enabled: ?bool = null,
 
+    /// Recovery mode.
+    recovery_mode: ?RecoveryMode = null,
+
     /// The ID of the Source Server for this launch configuration.
     source_server_id: ?[]const u8 = null,
 
@@ -62,6 +66,7 @@ pub const GetLaunchConfigurationOutput = struct {
         .licensing = "licensing",
         .name = "name",
         .post_launch_enabled = "postLaunchEnabled",
+        .recovery_mode = "recoveryMode",
         .source_server_id = "sourceServerID",
         .target_instance_type_right_sizing_method = "targetInstanceTypeRightSizingMethod",
     };
@@ -123,10 +128,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLaunchConfigurationI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetLaunchConfigurationOutput {
-    var result: GetLaunchConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetLaunchConfigurationOutput, body, allocator);
-    }
+    const result: GetLaunchConfigurationOutput = try aws.json.parseJsonObject(
+        GetLaunchConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

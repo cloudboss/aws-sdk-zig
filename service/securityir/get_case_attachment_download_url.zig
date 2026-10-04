@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCaseAttachmentDownlo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCaseAttachmentDownloadUrlOutput {
-    var result: GetCaseAttachmentDownloadUrlOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCaseAttachmentDownloadUrlOutput, body, allocator);
-    }
+    const result: GetCaseAttachmentDownloadUrlOutput = try aws.json.parseJsonObject(
+        GetCaseAttachmentDownloadUrlOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

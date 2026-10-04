@@ -155,10 +155,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InitiateDocumentVersion
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !InitiateDocumentVersionUploadOutput {
-    var result: InitiateDocumentVersionUploadOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(InitiateDocumentVersionUploadOutput, body, allocator);
-    }
+    const result: InitiateDocumentVersionUploadOutput = try aws.json.parseJsonObject(
+        InitiateDocumentVersionUploadOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

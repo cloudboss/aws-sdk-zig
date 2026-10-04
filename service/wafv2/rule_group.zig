@@ -2,6 +2,7 @@ const aws = @import("aws");
 
 const LabelSummary = @import("label_summary.zig").LabelSummary;
 const CustomResponseBody = @import("custom_response_body.zig").CustomResponseBody;
+const MonetizationConfig = @import("monetization_config.zig").MonetizationConfig;
 const Rule = @import("rule.zig").Rule;
 const VisibilityConfig = @import("visibility_config.zig").VisibilityConfig;
 
@@ -84,6 +85,12 @@ pub const RuleGroup = struct {
     /// `:`
     label_namespace: ?[]const u8 = null,
 
+    /// The monetization configuration for the rule group. Required when any rule in
+    /// the rule group uses the `Monetize` action. When a rule group with a
+    /// `MonetizationConfig` is used in a web ACL, the rule group's configuration
+    /// applies to rules within that group unless overridden at the web ACL level.
+    monetization_config: ?MonetizationConfig = null,
+
     /// The name of the rule group. You cannot change the name of a rule group after
     /// you create it.
     name: []const u8,
@@ -107,6 +114,7 @@ pub const RuleGroup = struct {
         .description = "Description",
         .id = "Id",
         .label_namespace = "LabelNamespace",
+        .monetization_config = "MonetizationConfig",
         .name = "Name",
         .rules = "Rules",
         .visibility_config = "VisibilityConfig",

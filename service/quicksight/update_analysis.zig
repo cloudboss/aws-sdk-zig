@@ -38,7 +38,8 @@ pub const UpdateAnalysisInput = struct {
 
     /// A source entity to use for the analysis that you're updating. This metadata
     /// structure
-    /// contains details that describe a source template and one or more datasets.
+    /// contains details that describe a source template and one or more datasets or
+    /// topics.
     source_entity: ?AnalysisSourceEntity = null,
 
     /// The Amazon Resource Name (ARN) for the theme to apply to the analysis that
@@ -180,10 +181,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAnalysisInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateAnalysisOutput {
-    var result: UpdateAnalysisOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateAnalysisOutput, body, allocator);
-    }
+    var result: UpdateAnalysisOutput = try aws.json.parseJsonObject(
+        UpdateAnalysisOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

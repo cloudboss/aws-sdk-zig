@@ -9,6 +9,7 @@ pub const AssociationFilterKey = enum {
     last_executed_after,
     association_name,
     resource_group_name,
+    cloud_connector_id,
 
     pub const json_field_names = .{
         .instance_id = "InstanceId",
@@ -19,6 +20,7 @@ pub const AssociationFilterKey = enum {
         .last_executed_after = "LastExecutedAfter",
         .association_name = "AssociationName",
         .resource_group_name = "ResourceGroupName",
+        .cloud_connector_id = "CloudConnectorId",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -31,6 +33,7 @@ pub const AssociationFilterKey = enum {
             .last_executed_after => "LastExecutedAfter",
             .association_name => "AssociationName",
             .resource_group_name => "ResourceGroupName",
+            .cloud_connector_id => "CloudConnectorId",
         };
     }
 

@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeSelfUpgradeConf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeSelfUpgradeConfigurationOutput {
-    var result: DescribeSelfUpgradeConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeSelfUpgradeConfigurationOutput, body, allocator);
-    }
+    var result: DescribeSelfUpgradeConfigurationOutput = try aws.json.parseJsonObject(
+        DescribeSelfUpgradeConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

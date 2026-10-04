@@ -549,6 +549,7 @@ pub const CreateDBInstanceInput = struct {
     /// * `custom-sqlserver-web` (for RDS Custom for SQL Server DB instances)
     /// * `custom-sqlserver-dev` (for RDS Custom for SQL Server DB instances)
     /// * `db2-ae`
+    /// * `db2-ce`
     /// * `db2-se`
     /// * `mariadb`
     /// * `mysql`
@@ -564,7 +565,7 @@ pub const CreateDBInstanceInput = struct {
     /// * `sqlserver-web`
     engine: []const u8,
 
-    /// The life cycle type for this DB instance.
+    /// The lifecycle type for this DB instance.
     ///
     /// By default, this value is set to `open-source-rds-extended-support`, which
     /// enrolls your DB instance into Amazon RDS Extended Support. At the end of
@@ -574,8 +575,8 @@ pub const CreateDBInstanceInput = struct {
     /// standard support date.
     ///
     /// This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
-    /// Amazon Aurora DB instances, the life cycle type is managed by the DB
-    /// cluster.
+    /// Amazon Aurora DB instances, the engine lifecycle support is managed by the
+    /// DB cluster.
     ///
     /// You can use this setting to enroll your DB instance into Amazon RDS Extended
     /// Support. With RDS Extended Support, you can run the selected major engine
@@ -702,7 +703,7 @@ pub const CreateDBInstanceInput = struct {
     ///
     /// * RDS for Db2 - `bring-your-own-license | marketplace-license`
     /// * RDS for MariaDB - `general-public-license`
-    /// * RDS for Microsoft SQL Server - `license-included`
+    /// * RDS for Microsoft SQL Server - `license-included | bring-your-own-media`
     /// * RDS for MySQL - `general-public-license`
     /// * RDS for Oracle - `bring-your-own-license | license-included`
     /// * RDS for PostgreSQL - `postgresql-license`

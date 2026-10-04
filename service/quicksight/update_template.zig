@@ -36,7 +36,11 @@ pub const UpdateTemplateInput = struct {
     /// Use the `DataSetReferences` entity within `SourceTemplate` or
     /// `SourceAnalysis` to list the replacement datasets for the placeholders
     /// listed
-    /// in the original. The schema in each dataset must match its placeholder.
+    /// in the original. The schema in each dataset must match its placeholder. Use
+    /// the `TopicReferences`
+    /// entity to list the replacement topics for the topic placeholders listed in
+    /// the original.
+    /// The schema in each topic must match its placeholder.
     source_entity: ?TemplateSourceEntity = null,
 
     /// The ID for the template.
@@ -181,10 +185,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateTemplateInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateTemplateOutput {
-    var result: UpdateTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateTemplateOutput, body, allocator);
-    }
+    var result: UpdateTemplateOutput = try aws.json.parseJsonObject(
+        UpdateTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

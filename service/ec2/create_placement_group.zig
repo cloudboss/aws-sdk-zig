@@ -32,6 +32,10 @@ pub const CreatePlacementGroupInput = struct {
     /// Reserved for internal use.
     operator: ?OperatorRequest = null,
 
+    /// The ID of a parent placement group. Valid only when **Strategy**
+    /// is set to `cluster`.
+    parent_group_id: ?[]const u8 = null,
+
     /// The number of partitions. Valid only when **Strategy** is
     /// set to `partition`.
     partition_count: ?i32 = null,
@@ -106,6 +110,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePlacementGroupInp
             try body_buf.appendSlice(allocator, "&Operator.Principal=");
             try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
+    }
+    if (input.parent_group_id) |v| {
+        try body_buf.appendSlice(allocator, "&ParentGroupId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.partition_count) |v| {
         try body_buf.appendSlice(allocator, "&PartitionCount=");

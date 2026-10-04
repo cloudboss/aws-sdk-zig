@@ -168,10 +168,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetOidcInfoInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetOidcInfoOutput {
-    var result: GetOidcInfoOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetOidcInfoOutput, body, allocator);
-    }
+    const result: GetOidcInfoOutput = try aws.json.parseJsonObject(
+        GetOidcInfoOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

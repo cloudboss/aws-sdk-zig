@@ -117,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAnomalyDetectorsInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAnomalyDetectorsOutput {
-    var result: ListAnomalyDetectorsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAnomalyDetectorsOutput, body, allocator);
-    }
+    const result: ListAnomalyDetectorsOutput = try aws.json.parseJsonObject(
+        ListAnomalyDetectorsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -94,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetProfileInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetProfileOutput {
-    var result: BatchGetProfileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetProfileOutput, body, allocator);
-    }
+    const result: BatchGetProfileOutput = try aws.json.parseJsonObject(
+        BatchGetProfileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,4 +1,5 @@
-/// The storage configuration for a notebook run in Amazon DataZone.
+/// The storage configuration for a notebook run in Amazon SageMaker Unified
+/// Studio.
 pub const StorageConfig = struct {
     /// The ARN of the KMS key used for encryption.
     kms_key_arn: ?[]const u8 = null,

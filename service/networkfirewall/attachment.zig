@@ -14,6 +14,11 @@ const AttachmentStatus = @import("attachment_status.zig").AttachmentStatus;
 ///   `VpcEndpointAssociationStatus` sync states information. You define these
 ///   subnets using `CreateVpcEndpointAssociation`.
 pub const Attachment = struct {
+    /// The DNS name that resolves to the firewall endpoint in the subnet. This is
+    /// populated for proxy mode firewalls, where clients direct traffic to the
+    /// firewall's proxy using this name.
+    dns_name: ?[]const u8 = null,
+
     /// The identifier of the firewall endpoint that Network Firewall has
     /// instantiated in the
     /// subnet. You use this to identify the firewall endpoint in the VPC route
@@ -44,6 +49,7 @@ pub const Attachment = struct {
     subnet_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .dns_name = "DnsName",
         .endpoint_id = "EndpointId",
         .status = "Status",
         .status_message = "StatusMessage",

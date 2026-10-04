@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutTableReplicationInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutTableReplicationOutput {
-    var result: PutTableReplicationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutTableReplicationOutput, body, allocator);
-    }
+    const result: PutTableReplicationOutput = try aws.json.parseJsonObject(
+        PutTableReplicationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

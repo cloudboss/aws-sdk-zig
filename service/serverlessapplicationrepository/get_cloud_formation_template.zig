@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCloudFormationTempla
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCloudFormationTemplateOutput {
-    var result: GetCloudFormationTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCloudFormationTemplateOutput, body, allocator);
-    }
+    const result: GetCloudFormationTemplateOutput = try aws.json.parseJsonObject(
+        GetCloudFormationTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

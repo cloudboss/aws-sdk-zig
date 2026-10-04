@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateNetworkResourceMe
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateNetworkResourceMetadataOutput {
-    var result: UpdateNetworkResourceMetadataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateNetworkResourceMetadataOutput, body, allocator);
-    }
+    const result: UpdateNetworkResourceMetadataOutput = try aws.json.parseJsonObject(
+        UpdateNetworkResourceMetadataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

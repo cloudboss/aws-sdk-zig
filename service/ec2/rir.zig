@@ -1,0 +1,37 @@
+const std = @import("std");
+
+/// The Regional Internet Registry (RIR).
+pub const Rir = enum {
+    ripe,
+    apnic,
+    arin,
+    lacnic,
+    nicbr,
+
+    pub const json_field_names = .{
+        .ripe = "ripe",
+        .apnic = "apnic",
+        .arin = "arin",
+        .lacnic = "lacnic",
+        .nicbr = "nicbr",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .ripe => "ripe",
+            .apnic => "apnic",
+            .arin => "arin",
+            .lacnic => "lacnic",
+            .nicbr => "nicbr",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
+};

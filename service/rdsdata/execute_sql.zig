@@ -8,8 +8,8 @@ const SqlStatementResult = @import("sql_statement_result.zig").SqlStatementResul
 
 pub const ExecuteSqlInput = struct {
     /// The Amazon Resource Name (ARN) of the secret that enables access to the DB
-    /// cluster. Enter the database user name and password
-    /// for the credentials in the secret.
+    /// cluster. Enter the database user name and password for the credentials in
+    /// the secret.
     ///
     /// For information about creating the secret, see [Create a database
     /// secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html).
@@ -27,10 +27,8 @@ pub const ExecuteSqlInput = struct {
     /// One or more SQL statements to run on the DB cluster.
     ///
     /// You can separate SQL statements from each other with a semicolon (;). Any
-    /// valid SQL
-    /// statement is permitted, including data definition, data manipulation, and
-    /// commit
-    /// statements.
+    /// valid SQL statement is permitted, including data definition, data
+    /// manipulation, and commit statements.
     sql_statements: []const u8,
 
     pub const json_field_names = .{
@@ -127,10 +125,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExecuteSqlInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ExecuteSqlOutput {
-    var result: ExecuteSqlOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ExecuteSqlOutput, body, allocator);
-    }
+    const result: ExecuteSqlOutput = try aws.json.parseJsonObject(
+        ExecuteSqlOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

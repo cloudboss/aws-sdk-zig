@@ -59,8 +59,7 @@ pub const CreateEventBusInput = struct {
     /// The logging configuration settings for the event bus.
     ///
     /// For more information, see [Configuring logs for event
-    /// buses](https://docs.aws.amazon.com/eb-event-bus-logs.html) in the
-    /// *EventBridge User Guide*.
+    /// buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html) in the *EventBridge User Guide*.
     log_config: ?LogConfig = null,
 
     /// The name of the new event bus.
@@ -110,8 +109,7 @@ pub const CreateEventBusOutput = struct {
     /// The logging configuration settings for the event bus.
     ///
     /// For more information, see [Configuring logs for event
-    /// buses](https://docs.aws.amazon.com/eb-event-bus-logs.html) in the
-    /// *EventBridge User Guide*.
+    /// buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html) in the *EventBridge User Guide*.
     log_config: ?LogConfig = null,
 
     pub const json_field_names = .{

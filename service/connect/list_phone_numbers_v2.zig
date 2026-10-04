@@ -9,12 +9,12 @@ const PhoneNumberType = @import("phone_number_type.zig").PhoneNumberType;
 const ListPhoneNumbersSummary = @import("list_phone_numbers_summary.zig").ListPhoneNumbersSummary;
 
 pub const ListPhoneNumbersV2Input = struct {
-    /// The identifier of the Amazon Connect instance that phone numbers are claimed
-    /// to. You
+    /// The identifier of the Connect Customer instance that phone numbers are
+    /// claimed to. You
     /// can [find the
     /// instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance. If both `TargetArn` and `InstanceId` are not provided, this API lists
-    /// numbers claimed to all the Amazon Connect instances belonging to your
+    /// numbers claimed to all the Connect Customer instances belonging to your
     /// account in the same Amazon Web Services Region as the request.
     instance_id: ?[]const u8 = null,
 
@@ -36,10 +36,10 @@ pub const ListPhoneNumbersV2Input = struct {
     /// The type of phone number.
     phone_number_types: ?[]const PhoneNumberType = null,
 
-    /// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+    /// The Amazon Resource Name (ARN) for Connect Customer instances or traffic
     /// distribution groups that phone number inbound traffic is routed through. If
     /// both `TargetArn` and `InstanceId` input are not provided, this API lists
-    /// numbers claimed to all the Amazon Connect instances belonging to your
+    /// numbers claimed to all the Connect Customer instances belonging to your
     /// account in the same Amazon Web Services Region as the request.
     target_arn: ?[]const u8 = null,
 
@@ -55,8 +55,8 @@ pub const ListPhoneNumbersV2Input = struct {
 };
 
 pub const ListPhoneNumbersV2Output = struct {
-    /// Information about phone numbers that have been claimed to your Amazon
-    /// Connect instances or traffic distribution groups.
+    /// Information about phone numbers that have been claimed to your Connect
+    /// Customer instances or traffic distribution groups.
     list_phone_numbers_summary_list: ?[]const ListPhoneNumbersSummary = null,
 
     /// If there are additional results, this is the token for the next set of
@@ -163,10 +163,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPhoneNumbersV2Input
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListPhoneNumbersV2Output {
-    var result: ListPhoneNumbersV2Output = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListPhoneNumbersV2Output, body, allocator);
-    }
+    const result: ListPhoneNumbersV2Output = try aws.json.parseJsonObject(
+        ListPhoneNumbersV2Output,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -4,7 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DataQualityRuleRecommendationRunAdditionalRunOptions = @import("data_quality_rule_recommendation_run_additional_run_options.zig").DataQualityRuleRecommendationRunAdditionalRunOptions;
 const DataSource = @import("data_source.zig").DataSource;
+const RecommendationMode = @import("recommendation_mode.zig").RecommendationMode;
 const TaskStatusType = @import("task_status_type.zig").TaskStatusType;
 
 pub const GetDataQualityRuleRecommendationRunInput = struct {
@@ -17,6 +19,9 @@ pub const GetDataQualityRuleRecommendationRunInput = struct {
 };
 
 pub const GetDataQualityRuleRecommendationRunOutput = struct {
+    /// Additional run options you can specify for a recommendation run.
+    additional_run_options: ?DataQualityRuleRecommendationRunAdditionalRunOptions = null,
+
     /// The date and time when this run was completed.
     completed_on: ?i64 = null,
 
@@ -43,12 +48,17 @@ pub const GetDataQualityRuleRecommendationRunOutput = struct {
     /// The number of `G.1X` workers to be used in the run. The default is 5.
     number_of_workers: ?i32 = null,
 
+    /// The mode that Glue Data Quality uses to recommend rules.
+    ///
+    /// The default is `BASIC`.
+    recommendation_mode: ?RecommendationMode = null,
+
     /// When a start rule recommendation run completes, it creates a recommended
     /// ruleset (a set of rules). This member has those rules in Data Quality
     /// Definition Language (DQDL) format.
     recommended_ruleset: ?[]const u8 = null,
 
-    /// An IAM role supplied to encrypt the results of the run.
+    /// The IAM role that Glue assumes to access resources for the run.
     role: ?[]const u8 = null,
 
     /// The unique run identifier associated with this run.
@@ -66,6 +76,7 @@ pub const GetDataQualityRuleRecommendationRunOutput = struct {
     timeout: ?i32 = null,
 
     pub const json_field_names = .{
+        .additional_run_options = "AdditionalRunOptions",
         .completed_on = "CompletedOn",
         .created_ruleset_name = "CreatedRulesetName",
         .data_quality_security_configuration = "DataQualitySecurityConfiguration",
@@ -74,6 +85,7 @@ pub const GetDataQualityRuleRecommendationRunOutput = struct {
         .execution_time = "ExecutionTime",
         .last_modified_on = "LastModifiedOn",
         .number_of_workers = "NumberOfWorkers",
+        .recommendation_mode = "RecommendationMode",
         .recommended_ruleset = "RecommendedRuleset",
         .role = "Role",
         .run_id = "RunId",

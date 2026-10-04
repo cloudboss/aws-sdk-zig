@@ -66,10 +66,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisassociateServiceRole
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DisassociateServiceRoleFromAccountOutput {
-    var result: DisassociateServiceRoleFromAccountOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DisassociateServiceRoleFromAccountOutput, body, allocator);
-    }
+    const result: DisassociateServiceRoleFromAccountOutput = try aws.json.parseJsonObject(
+        DisassociateServiceRoleFromAccountOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

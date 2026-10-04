@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAutomatedDiscoveryCo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAutomatedDiscoveryConfigurationOutput {
-    var result: GetAutomatedDiscoveryConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAutomatedDiscoveryConfigurationOutput, body, allocator);
-    }
+    const result: GetAutomatedDiscoveryConfigurationOutput = try aws.json.parseJsonObject(
+        GetAutomatedDiscoveryConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

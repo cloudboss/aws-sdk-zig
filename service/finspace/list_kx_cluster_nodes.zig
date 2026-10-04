@@ -112,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListKxClusterNodesInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListKxClusterNodesOutput {
-    var result: ListKxClusterNodesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListKxClusterNodesOutput, body, allocator);
-    }
+    const result: ListKxClusterNodesOutput = try aws.json.parseJsonObject(
+        ListKxClusterNodesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

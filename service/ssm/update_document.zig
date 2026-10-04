@@ -23,9 +23,9 @@ pub const UpdateDocumentInput = struct {
     /// the existing value is applied to the new document version.
     display_name: ?[]const u8 = null,
 
-    /// Specify the document format for the new document version. Systems Manager
-    /// supports JSON and YAML
-    /// documents. JSON is the default format.
+    /// Specify the document format for the new document version. The document
+    /// format can be JSON,
+    /// YAML, or TEXT. JSON is the default format.
     document_format: ?DocumentFormat = null,
 
     /// The version of the document that you want to update. Currently, Systems

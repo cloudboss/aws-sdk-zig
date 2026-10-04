@@ -157,10 +157,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListManagedEndpointsInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListManagedEndpointsOutput {
-    var result: ListManagedEndpointsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListManagedEndpointsOutput, body, allocator);
-    }
+    const result: ListManagedEndpointsOutput = try aws.json.parseJsonObject(
+        ListManagedEndpointsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

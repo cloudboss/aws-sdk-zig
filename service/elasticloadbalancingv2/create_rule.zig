@@ -520,6 +520,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRuleInput, config
             }
         }
         if (item.source_ip_config) |sv_1| {
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (sv_1.ip_address_type) |fv_2| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Conditions.member.{d}.SourceIpConfig.IpAddressType=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2.wireName());
+                }
+            }
             if (sv_1.values) |lst_2| {
                 for (lst_2, 0..) |item_2, idx_2| {
                     const n_2 = idx_2 + 1;

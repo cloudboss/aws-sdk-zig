@@ -1,3 +1,4 @@
+const CallDistributionType = @import("call_distribution_type.zig").CallDistributionType;
 const VoiceConnectorItem = @import("voice_connector_item.zig").VoiceConnectorItem;
 
 /// The Amazon Chime SDK Voice Connector group configuration, including
@@ -5,6 +6,8 @@ const VoiceConnectorItem = @import("voice_connector_item.zig").VoiceConnectorIte
 /// AWS Regions in a group. This creates a fault tolerant mechanism for
 /// fallback in case of availability events.
 pub const VoiceConnectorGroup = struct {
+    call_distribution_type: ?CallDistributionType = null,
+
     /// The Voice Connector group's creation time stamp, in ISO 8601 format.
     created_timestamp: ?i64 = null,
 
@@ -24,6 +27,7 @@ pub const VoiceConnectorGroup = struct {
     voice_connector_items: ?[]const VoiceConnectorItem = null,
 
     pub const json_field_names = .{
+        .call_distribution_type = "CallDistributionType",
         .created_timestamp = "CreatedTimestamp",
         .name = "Name",
         .updated_timestamp = "UpdatedTimestamp",

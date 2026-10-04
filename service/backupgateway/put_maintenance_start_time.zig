@@ -15,8 +15,7 @@ pub const PutMaintenanceStartTimeInput = struct {
     day_of_week: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) for the gateway, used to specify its
-    /// maintenance start
-    /// time.
+    /// maintenance start time.
     gateway_arn: []const u8,
 
     /// The hour of the day to start maintenance on a gateway.
@@ -36,8 +35,7 @@ pub const PutMaintenanceStartTimeInput = struct {
 
 pub const PutMaintenanceStartTimeOutput = struct {
     /// The Amazon Resource Name (ARN) of a gateway for which you set the
-    /// maintenance start
-    /// time.
+    /// maintenance start time.
     gateway_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{

@@ -31,6 +31,7 @@ const delete_pool = @import("delete_pool.zig");
 const delete_protect_configuration = @import("delete_protect_configuration.zig");
 const delete_protect_configuration_rule_set_number_override = @import("delete_protect_configuration_rule_set_number_override.zig");
 const delete_rcs_agent = @import("delete_rcs_agent.zig");
+const delete_rcs_message_spend_limit_override = @import("delete_rcs_message_spend_limit_override.zig");
 const delete_registration = @import("delete_registration.zig");
 const delete_registration_attachment = @import("delete_registration_attachment.zig");
 const delete_registration_field_value = @import("delete_registration_field_value.zig");
@@ -66,6 +67,7 @@ const disassociate_protect_configuration = @import("disassociate_protect_configu
 const discard_registration_version = @import("discard_registration_version.zig");
 const get_protect_configuration_country_rule_set = @import("get_protect_configuration_country_rule_set.zig");
 const get_resource_policy = @import("get_resource_policy.zig");
+const list_available_phone_numbers = @import("list_available_phone_numbers.zig");
 const list_notify_countries = @import("list_notify_countries.zig");
 const list_pool_origination_identities = @import("list_pool_origination_identities.zig");
 const list_protect_configuration_rule_set_number_overrides = @import("list_protect_configuration_rule_set_number_overrides.zig");
@@ -85,6 +87,7 @@ const send_destination_number_verification_code = @import("send_destination_numb
 const send_media_message = @import("send_media_message.zig");
 const send_notify_text_message = @import("send_notify_text_message.zig");
 const send_notify_voice_message = @import("send_notify_voice_message.zig");
+const send_rcs_message = @import("send_rcs_message.zig");
 const send_text_message = @import("send_text_message.zig");
 const send_voice_message = @import("send_voice_message.zig");
 const set_account_default_protect_configuration = @import("set_account_default_protect_configuration.zig");
@@ -93,6 +96,7 @@ const set_default_message_type = @import("set_default_message_type.zig");
 const set_default_sender_id = @import("set_default_sender_id.zig");
 const set_media_message_spend_limit_override = @import("set_media_message_spend_limit_override.zig");
 const set_notify_message_spend_limit_override = @import("set_notify_message_spend_limit_override.zig");
+const set_rcs_message_spend_limit_override = @import("set_rcs_message_spend_limit_override.zig");
 const set_text_message_spend_limit_override = @import("set_text_message_spend_limit_override.zig");
 const set_voice_message_spend_limit_override = @import("set_voice_message_spend_limit_override.zig");
 const submit_registration_version = @import("submit_registration_version.zig");
@@ -262,9 +266,9 @@ pub const Client = struct {
     }
 
     /// Create a new registration attachment to use for uploading a file or a URL to
-    /// a file. The maximum file size is 500KB and valid file extensions are PDF,
-    /// JPEG and PNG. For example, many sender ID registrations require a signed
-    /// “letter of authorization” (LOA) to be submitted.
+    /// a file. The maximum file size is 5MB and valid file extensions are PDF, JPEG
+    /// and PNG. For example, many sender ID registrations require a signed “letter
+    /// of authorization” (LOA) to be submitted.
     ///
     /// Use either `AttachmentUrl` or `AttachmentBody` to upload your attachment. If
     /// both are specified then an exception is returned.
@@ -420,6 +424,13 @@ pub const Client = struct {
     /// is returned.
     pub fn deleteRcsAgent(self: *Self, allocator: std.mem.Allocator, input: delete_rcs_agent.DeleteRcsAgentInput, options: CallOptions) !delete_rcs_agent.DeleteRcsAgentOutput {
         return delete_rcs_agent.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an account-level monthly spending limit override for sending RCS
+    /// messages. Deleting a spend limit override sets the `EnforcedLimit` to equal
+    /// the `MaxLimit`, which is set by Amazon Web Services.
+    pub fn deleteRcsMessageSpendLimitOverride(self: *Self, allocator: std.mem.Allocator, input: delete_rcs_message_spend_limit_override.DeleteRcsMessageSpendLimitOverrideInput, options: CallOptions) !delete_rcs_message_spend_limit_override.DeleteRcsMessageSpendLimitOverrideOutput {
+        return delete_rcs_message_spend_limit_override.execute(self, allocator, input, options);
     }
 
     /// Permanently delete an existing registration from your account.
@@ -738,6 +749,18 @@ pub const Client = struct {
         return get_resource_policy.execute(self, allocator, input, options);
     }
 
+    /// Retrieves a list of phone numbers that are available to request, based on
+    /// the country, capabilities, and number type that you specify. You can
+    /// optionally provide a number preference to return only numbers that match a
+    /// specific digit pattern.
+    ///
+    /// If no numbers match your search, this operation returns an empty list rather
+    /// than an error. This operation currently supports only `TEN_DLC` number types
+    /// in the `US`.
+    pub fn listAvailablePhoneNumbers(self: *Self, allocator: std.mem.Allocator, input: list_available_phone_numbers.ListAvailablePhoneNumbersInput, options: CallOptions) !list_available_phone_numbers.ListAvailablePhoneNumbersOutput {
+        return list_available_phone_numbers.execute(self, allocator, input, options);
+    }
+
     /// Lists countries that support notify messaging. You can optionally filter by
     /// channel, use case, or tier.
     pub fn listNotifyCountries(self: *Self, allocator: std.mem.Allocator, input: list_notify_countries.ListNotifyCountriesInput, options: CallOptions) !list_notify_countries.ListNotifyCountriesOutput {
@@ -876,6 +899,13 @@ pub const Client = struct {
         return send_notify_voice_message.execute(self, allocator, input, options);
     }
 
+    /// Creates a new RCS message and sends it to a recipient's phone number. RCS
+    /// messages support rich content including text, files, rich cards, and
+    /// carousels with interactive suggested actions.
+    pub fn sendRcsMessage(self: *Self, allocator: std.mem.Allocator, input: send_rcs_message.SendRcsMessageInput, options: CallOptions) !send_rcs_message.SendRcsMessageOutput {
+        return send_rcs_message.execute(self, allocator, input, options);
+    }
+
     /// Creates a new text message and sends it to a recipient's phone number.
     /// SendTextMessage only sends an SMS message to one recipient each time it is
     /// invoked.
@@ -942,6 +972,13 @@ pub const Client = struct {
     /// `MaxLimit`, which is set by Amazon Web Services.
     pub fn setNotifyMessageSpendLimitOverride(self: *Self, allocator: std.mem.Allocator, input: set_notify_message_spend_limit_override.SetNotifyMessageSpendLimitOverrideInput, options: CallOptions) !set_notify_message_spend_limit_override.SetNotifyMessageSpendLimitOverrideOutput {
         return set_notify_message_spend_limit_override.execute(self, allocator, input, options);
+    }
+
+    /// Sets an account level monthly spend limit override for sending RCS messages.
+    /// The requested spend limit must be less than or equal to the `MaxLimit`,
+    /// which is set by Amazon Web Services.
+    pub fn setRcsMessageSpendLimitOverride(self: *Self, allocator: std.mem.Allocator, input: set_rcs_message_spend_limit_override.SetRcsMessageSpendLimitOverrideInput, options: CallOptions) !set_rcs_message_spend_limit_override.SetRcsMessageSpendLimitOverrideOutput {
+        return set_rcs_message_spend_limit_override.execute(self, allocator, input, options);
     }
 
     /// Sets an account level monthly spend limit override for sending text
@@ -1203,6 +1240,13 @@ pub const Client = struct {
     }
 
     pub fn describeVerifiedDestinationNumbersPaginator(self: *Self, params: describe_verified_destination_numbers.DescribeVerifiedDestinationNumbersInput) paginator.DescribeVerifiedDestinationNumbersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAvailablePhoneNumbersPaginator(self: *Self, params: list_available_phone_numbers.ListAvailablePhoneNumbersInput) paginator.ListAvailablePhoneNumbersPaginator {
         return .{
             .client = self,
             .params = params,

@@ -12,13 +12,18 @@ const TargetContainerRepository = @import("target_container_repository.zig").Tar
 const LatestVersionReferences = @import("latest_version_references.zig").LatestVersionReferences;
 
 pub const CreateContainerRecipeInput = struct {
-    /// Unique, case-sensitive identifier you provide to ensure
-    /// idempotency of the request. For more information, see [Ensuring
+    /// A unique, case-sensitive identifier you provide to ensure
+    /// that the operation runs no more than one time. If you retry a request with
+    /// the same client
+    /// token, Image Builder returns the original response without running the
+    /// operation again. For more
+    /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
     /// in the *Amazon EC2 API Reference*.
     client_token: []const u8,
 
-    /// The components included in the container recipe.
+    /// The components included in the container recipe. You can specify each
+    /// component only one time in a recipe.
     components: ?[]const ComponentConfiguration = null,
 
     /// The type of container to create.
@@ -27,15 +32,35 @@ pub const CreateContainerRecipeInput = struct {
     /// The description of the container recipe.
     description: ?[]const u8 = null,
 
-    /// The Dockerfile template used to build your image as an inline data blob.
+    /// The Dockerfile template used to build your image, as an inline data blob.
+    /// You must specify exactly one of the `dockerfileTemplateData` or
+    /// `dockerfileTemplateUri` properties. For the contextual variables
+    /// that the template can include, see [Create
+    /// a new version of a container
+    /// recipe](https://docs.aws.amazon.com/imagebuilder/latest/userguide/create-container-recipes.html) in the
+    /// *EC2 Image Builder User Guide*.
     dockerfile_template_data: ?[]const u8 = null,
 
-    /// The Amazon S3 URI for the Dockerfile that will be used to build your
+    /// The Amazon S3 URI for the Dockerfile template that is used to build your
     /// container
-    /// image.
+    /// image. You must have permission to read the object. Image Builder reads the
+    /// object
+    /// once, when it creates the recipe, and stores its content in the recipe.
+    /// Later changes to the S3 object don't affect the recipe. You must specify
+    /// exactly one of the `dockerfileTemplateData` or
+    /// `dockerfileTemplateUri` properties.
     dockerfile_template_uri: ?[]const u8 = null,
 
-    /// Specifies the operating system version for the base image.
+    /// Validates the required permissions and request parameters without performing
+    /// the operation. If validation succeeds, the operation returns a
+    /// `DryRunOperationException` error response.
+    dry_run: ?bool = null,
+
+    /// Specifies the operating system version for the base image. Use this property
+    /// only when the base image is a container image from a registry. When the base
+    /// image is an Image Builder image, the operating system version comes from the
+    /// parent
+    /// image.
     image_os_version_override: ?[]const u8 = null,
 
     /// A group of options that can be used to configure an instance for building
@@ -51,13 +76,23 @@ pub const CreateContainerRecipeInput = struct {
     /// in the *Key Management Service Developer Guide*.
     kms_key_id: ?[]const u8 = null,
 
-    /// The name of the container recipe.
+    /// The name of the container recipe. The recipe name, combined with the
+    /// semantic version, must be unique to your account in each Amazon Web Services
+    /// Region.
+    /// Image Builder generates the container recipe ARN from a normalized form of
+    /// the
+    /// name, so names that differ only in case, spaces, or underscores count as
+    /// the same name.
     name: []const u8,
 
-    /// The base image for the container recipe.
+    /// The base image for the container recipe. This can be an Image Builder image
+    /// resource
+    /// ARN or a container image URI from a registry, for example
+    /// `amazonlinux:latest`.
     parent_image: []const u8,
 
     /// Specifies the operating system platform when you use a custom base image.
+    /// Container recipes support only the Linux and Windows platforms.
     platform_override: ?Platform = null,
 
     /// The semantic version of the container recipe. This version follows the
@@ -67,10 +102,10 @@ pub const CreateContainerRecipeInput = struct {
     /// The semantic version has four nodes: ../.
     /// You can assign values for the first three, and can filter on all of them.
     ///
-    /// **Assignment:** For the first three nodes you can assign any positive
+    /// **Assignment:** For the first three nodes, you can assign any positive
     /// integer value, including
-    /// zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image
-    /// Builder automatically assigns the
+    /// zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder
+    /// automatically assigns the
     /// build number to the fourth node.
     ///
     /// **Patterns:** You can use any numeric pattern that adheres to the assignment
@@ -83,7 +118,9 @@ pub const CreateContainerRecipeInput = struct {
     /// Tags that are attached to the container recipe.
     tags: ?[]const aws.map.StringMapEntry = null,
 
-    /// The destination repository for the container image.
+    /// The destination repository for the container image. The Amazon ECR
+    /// repository
+    /// must already exist in the Amazon Web Services Region where the build runs.
     target_repository: TargetContainerRepository,
 
     /// The working directory for use during build and test workflows.
@@ -96,6 +133,7 @@ pub const CreateContainerRecipeInput = struct {
         .description = "description",
         .dockerfile_template_data = "dockerfileTemplateData",
         .dockerfile_template_uri = "dockerfileTemplateUri",
+        .dry_run = "dryRun",
         .image_os_version_override = "imageOsVersionOverride",
         .instance_configuration = "instanceConfiguration",
         .kms_key_id = "kmsKeyId",
@@ -118,7 +156,10 @@ pub const CreateContainerRecipeOutput = struct {
     /// created.
     container_recipe_arn: ?[]const u8 = null,
 
-    /// The resource ARNs with different wildcard variations of semantic versioning.
+    /// A set of wildcard version ARNs that always reference the latest
+    /// version of the resource. ARNs are included for the latest version overall,
+    /// and for the latest
+    /// versions within the same major, minor, and patch levels.
     latest_version_references: ?LatestVersionReferences = null,
 
     /// The request ID that uniquely identifies this request.
@@ -200,6 +241,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateContainerRecipeIn
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.dry_run) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"dryRun\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.image_os_version_override) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"imageOsVersionOverride\":");
@@ -268,10 +315,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateContainerRecipeIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateContainerRecipeOutput {
-    var result: CreateContainerRecipeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateContainerRecipeOutput, body, allocator);
-    }
+    const result: CreateContainerRecipeOutput = try aws.json.parseJsonObject(
+        CreateContainerRecipeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -23,7 +23,7 @@ pub const CreateEmailAddressInput = struct {
     /// The email address, including the domain.
     email_address: []const u8,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -137,10 +137,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEmailAddressInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateEmailAddressOutput {
-    var result: CreateEmailAddressOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateEmailAddressOutput, body, allocator);
-    }
+    const result: CreateEmailAddressOutput = try aws.json.parseJsonObject(
+        CreateEmailAddressOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

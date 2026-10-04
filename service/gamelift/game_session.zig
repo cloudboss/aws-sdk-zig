@@ -82,8 +82,9 @@ pub const GameSession = struct {
     game_session_data: ?[]const u8 = null,
 
     /// An identifier for the game session that is unique across all regions. The
-    /// value is always a full ARN in the following format:
-    /// `arn:aws:gamelift:::gamesession//`.
+    /// value is always a full ARN in the following format: For Home Region game
+    /// session - `arn:aws:gamelift:::gamesession//`. For Remote Location game
+    /// session - `arn:aws:gamelift:::gamesession///`.
     game_session_id: ?[]const u8 = null,
 
     /// The IP address of the game session. To connect to a Amazon GameLift Servers

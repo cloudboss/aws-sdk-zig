@@ -140,10 +140,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeDocumentVersion
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeDocumentVersionsOutput {
-    var result: DescribeDocumentVersionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeDocumentVersionsOutput, body, allocator);
-    }
+    const result: DescribeDocumentVersionsOutput = try aws.json.parseJsonObject(
+        DescribeDocumentVersionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -90,6 +90,15 @@ pub const DescribeContainerGroupPortMappingsOutput = struct {
     /// are `GAME_SERVER` or `PER_INSTANCE`.
     container_group_type: ?ContainerGroupType = null,
 
+    /// The Amazon Resource Name
+    /// ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html))
+    /// that is assigned to a Amazon GameLift Servers fleet resource and uniquely
+    /// identifies it. ARNs are unique across all Regions. Format is
+    /// `arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912`. In a
+    /// GameLift fleet ARN, the resource ID matches the `FleetId`
+    /// value.
+    fleet_arn: ?[]const u8 = null,
+
     /// A unique identifier for the container fleet.
     fleet_id: ?[]const u8 = null,
 
@@ -108,6 +117,7 @@ pub const DescribeContainerGroupPortMappingsOutput = struct {
         .container_group_definition_arn = "ContainerGroupDefinitionArn",
         .container_group_port_mappings = "ContainerGroupPortMappings",
         .container_group_type = "ContainerGroupType",
+        .fleet_arn = "FleetArn",
         .fleet_id = "FleetId",
         .instance_id = "InstanceId",
         .location = "Location",

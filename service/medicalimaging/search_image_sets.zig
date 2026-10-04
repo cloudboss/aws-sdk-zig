@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchImageSetsInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchImageSetsOutput {
-    var result: SearchImageSetsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchImageSetsOutput, body, allocator);
-    }
+    const result: SearchImageSetsOutput = try aws.json.parseJsonObject(
+        SearchImageSetsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

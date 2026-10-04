@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLensVersionInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateLensVersionOutput {
-    var result: CreateLensVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateLensVersionOutput, body, allocator);
-    }
+    const result: CreateLensVersionOutput = try aws.json.parseJsonObject(
+        CreateLensVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

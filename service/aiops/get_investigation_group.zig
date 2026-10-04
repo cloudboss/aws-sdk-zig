@@ -135,10 +135,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInvestigationGroupIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetInvestigationGroupOutput {
-    var result: GetInvestigationGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetInvestigationGroupOutput, body, allocator);
-    }
+    const result: GetInvestigationGroupOutput = try aws.json.parseJsonObject(
+        GetInvestigationGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

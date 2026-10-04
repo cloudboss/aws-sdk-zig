@@ -7,9 +7,10 @@ pub const ConfigParameter = struct {
     /// `wlm_json_configuration` or query monitoring metrics that let you define
     /// performance boundaries. You can either specify individual query monitoring
     /// metrics (such as `max_scan_row_count`, `max_query_execution_time`) or use
-    /// `wlm_json_configuration` to define query queues with rules, but not both.
-    /// For more information about query monitoring rules and available metrics, see
-    /// [Query monitoring metrics for Amazon Redshift
+    /// `wlm_json_configuration` to define query queues with rules, but not both. If
+    /// you're using `wlm_json_configuration`, the maximum size of `parameterValue`
+    /// is 8000 characters. For more information about query monitoring rules and
+    /// available metrics, see [Query monitoring metrics for Amazon Redshift
     /// Serverless](https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless).
     parameter_key: ?[]const u8 = null,
 

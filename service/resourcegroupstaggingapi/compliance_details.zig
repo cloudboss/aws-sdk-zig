@@ -10,6 +10,11 @@ pub const ComplianceDetails = struct {
     /// incorrect case treatment or noncompliant values.
     keys_with_noncompliant_values: ?[]const []const u8 = null,
 
+    /// These tag keys are defined as required in the
+    /// `report_required_tag_for` block of the effective tag policy, but are
+    /// missing from the resource.
+    missing_tag_keys: ?[]const []const u8 = null,
+
     /// These tag keys on the resource are noncompliant with the effective tag
     /// policy.
     noncompliant_keys: ?[]const []const u8 = null,
@@ -17,6 +22,7 @@ pub const ComplianceDetails = struct {
     pub const json_field_names = .{
         .compliance_status = "ComplianceStatus",
         .keys_with_noncompliant_values = "KeysWithNoncompliantValues",
+        .missing_tag_keys = "MissingTagKeys",
         .noncompliant_keys = "NoncompliantKeys",
     };
 };

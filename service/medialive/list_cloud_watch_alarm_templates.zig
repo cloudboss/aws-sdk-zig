@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCloudWatchAlarmTemp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListCloudWatchAlarmTemplatesOutput {
-    var result: ListCloudWatchAlarmTemplatesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListCloudWatchAlarmTemplatesOutput, body, allocator);
-    }
+    const result: ListCloudWatchAlarmTemplatesOutput = try aws.json.parseJsonObject(
+        ListCloudWatchAlarmTemplatesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

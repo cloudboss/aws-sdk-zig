@@ -128,10 +128,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeBlueprintOptimiza
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !InvokeBlueprintOptimizationAsyncOutput {
-    var result: InvokeBlueprintOptimizationAsyncOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(InvokeBlueprintOptimizationAsyncOutput, body, allocator);
-    }
+    const result: InvokeBlueprintOptimizationAsyncOutput = try aws.json.parseJsonObject(
+        InvokeBlueprintOptimizationAsyncOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

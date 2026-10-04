@@ -78,10 +78,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteDomainLayoutInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteDomainLayoutOutput {
-    var result: DeleteDomainLayoutOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteDomainLayoutOutput, body, allocator);
-    }
+    const result: DeleteDomainLayoutOutput = try aws.json.parseJsonObject(
+        DeleteDomainLayoutOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -79,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpeakerSearchTaskInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSpeakerSearchTaskOutput {
-    var result: GetSpeakerSearchTaskOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSpeakerSearchTaskOutput, body, allocator);
-    }
+    const result: GetSpeakerSearchTaskOutput = try aws.json.parseJsonObject(
+        GetSpeakerSearchTaskOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

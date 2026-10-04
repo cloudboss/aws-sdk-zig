@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDataSetExportHistor
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListDataSetExportHistoryOutput {
-    var result: ListDataSetExportHistoryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListDataSetExportHistoryOutput, body, allocator);
-    }
+    const result: ListDataSetExportHistoryOutput = try aws.json.parseJsonObject(
+        ListDataSetExportHistoryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

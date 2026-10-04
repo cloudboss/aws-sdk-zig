@@ -20,13 +20,16 @@ const EvaluationResult = @import("evaluation_result.zig").EvaluationResult;
 const FeatureType = @import("feature_type.zig").FeatureType;
 const Group = @import("group.zig").Group;
 const GroupDetail = @import("group_detail.zig").GroupDetail;
+const InlinePolicy = @import("inline_policy.zig").InlinePolicy;
 const InstanceProfile = @import("instance_profile.zig").InstanceProfile;
 const ListPoliciesGrantingServiceAccessEntry = @import("list_policies_granting_service_access_entry.zig").ListPoliciesGrantingServiceAccessEntry;
 const LoginProfile = @import("login_profile.zig").LoginProfile;
 const MFADevice = @import("mfa_device.zig").MFADevice;
 const ManagedPolicyDetail = @import("managed_policy_detail.zig").ManagedPolicyDetail;
 const OpenIDConnectProviderListEntry = @import("open_id_connect_provider_list_entry.zig").OpenIDConnectProviderListEntry;
+const OrderedOrganizationPolicyType = @import("ordered_organization_policy_type.zig").OrderedOrganizationPolicyType;
 const OrganizationsDecisionDetail = @import("organizations_decision_detail.zig").OrganizationsDecisionDetail;
+const ParameterDefinition = @import("parameter_definition.zig").ParameterDefinition;
 const PasswordPolicy = @import("password_policy.zig").PasswordPolicy;
 const PermissionsBoundaryAttachmentType = @import("permissions_boundary_attachment_type.zig").PermissionsBoundaryAttachmentType;
 const PermissionsBoundaryDecisionDetail = @import("permissions_boundary_decision_detail.zig").PermissionsBoundaryDecisionDetail;
@@ -35,6 +38,7 @@ const PolicyDetail = @import("policy_detail.zig").PolicyDetail;
 const PolicyEvaluationDecisionType = @import("policy_evaluation_decision_type.zig").PolicyEvaluationDecisionType;
 const PolicyGrantingServiceAccess = @import("policy_granting_service_access.zig").PolicyGrantingServiceAccess;
 const PolicyGroup = @import("policy_group.zig").PolicyGroup;
+const PolicyIdentifier = @import("policy_identifier.zig").PolicyIdentifier;
 const PolicyParameter = @import("policy_parameter.zig").PolicyParameter;
 const PolicyParameterTypeEnum = @import("policy_parameter_type_enum.zig").PolicyParameterTypeEnum;
 const PolicyRole = @import("policy_role.zig").PolicyRole;
@@ -42,10 +46,12 @@ const PolicySourceType = @import("policy_source_type.zig").PolicySourceType;
 const PolicyUser = @import("policy_user.zig").PolicyUser;
 const PolicyVersion = @import("policy_version.zig").PolicyVersion;
 const Position = @import("position.zig").Position;
+const ReplacementValueEntry = @import("replacement_value_entry.zig").ReplacementValueEntry;
 const ResourceSpecificResult = @import("resource_specific_result.zig").ResourceSpecificResult;
 const Role = @import("role.zig").Role;
 const RoleDetail = @import("role_detail.zig").RoleDetail;
 const RoleLastUsed = @import("role_last_used.zig").RoleLastUsed;
+const RoleTemplateVersion = @import("role_template_version.zig").RoleTemplateVersion;
 const RoleUsageType = @import("role_usage_type.zig").RoleUsageType;
 const SAMLPrivateKey = @import("saml_private_key.zig").SAMLPrivateKey;
 const SAMLProviderListEntry = @import("saml_provider_list_entry.zig").SAMLProviderListEntry;
@@ -57,12 +63,16 @@ const ServiceLastAccessed = @import("service_last_accessed.zig").ServiceLastAcce
 const ServiceSpecificCredential = @import("service_specific_credential.zig").ServiceSpecificCredential;
 const ServiceSpecificCredentialMetadata = @import("service_specific_credential_metadata.zig").ServiceSpecificCredentialMetadata;
 const SigningCertificate = @import("signing_certificate.zig").SigningCertificate;
+const SourceRoleTemplate = @import("source_role_template.zig").SourceRoleTemplate;
 const Statement = @import("statement.zig").Statement;
 const Tag = @import("tag.zig").Tag;
+const TagTemplate = @import("tag_template.zig").TagTemplate;
 const TrackedActionLastAccessed = @import("tracked_action_last_accessed.zig").TrackedActionLastAccessed;
 const User = @import("user.zig").User;
 const UserDetail = @import("user_detail.zig").UserDetail;
 const VirtualMFADevice = @import("virtual_mfa_device.zig").VirtualMFADevice;
+const managedByTypeType = @import("managed_by_type_type.zig").managedByTypeType;
+const parameterTypeType = @import("parameter_type_type.zig").parameterTypeType;
 const policyOwnerEntityType = @import("policy_owner_entity_type.zig").policyOwnerEntityType;
 const policyType = @import("policy_type.zig").policyType;
 const stateType = @import("state_type.zig").stateType;
@@ -572,6 +582,24 @@ pub fn deserializegroupNameListType(allocator: std.mem.Allocator, reader: *aws.x
     return list.toOwnedSlice(allocator);
 }
 
+pub fn deserializeinlinePolicyTemplateListType(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const InlinePolicy {
+    var list: std.ArrayList(InlinePolicy) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeInlinePolicy(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
 pub fn deserializeinstanceProfileListType(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const InstanceProfile {
     var list: std.ArrayList(InstanceProfile) = .empty;
     while (try reader.next()) |event| {
@@ -608,6 +636,24 @@ pub fn deserializelistPolicyGrantingServiceAccessResponseListType(allocator: std
     return list.toOwnedSlice(allocator);
 }
 
+pub fn deserializemanagedPolicyArnListType(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
+    var list: std.ArrayList([]const u8) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
 pub fn deserializemfaDeviceListType(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const MFADevice {
     var list: std.ArrayList(MFADevice) = .empty;
     while (try reader.next()) |event| {
@@ -615,6 +661,24 @@ pub fn deserializemfaDeviceListType(allocator: std.mem.Allocator, reader: *aws.x
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
                     try list.append(allocator, try deserializeMFADevice(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeparametersDefinitionListType(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ParameterDefinition {
+    var list: std.ArrayList(ParameterDefinition) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeParameterDefinition(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -860,6 +924,24 @@ pub fn deserializetagListType(allocator: std.mem.Allocator, reader: *aws.xml.Rea
     return list.toOwnedSlice(allocator);
 }
 
+pub fn deserializetagTemplateListType(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const TagTemplate {
+    var list: std.ArrayList(TagTemplate) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeTagTemplate(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
 pub fn deserializethumbprintListType(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
     var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
@@ -982,6 +1064,41 @@ pub fn deserializeEvalDecisionDetailsType(allocator: std.mem.Allocator, reader: 
                                     entry_key = try allocator.dupe(u8, try reader.readElementText());
                                 } else if (std.mem.eql(u8, ie.local, "value")) {
                                     if (PolicyEvaluationDecisionType.fromWireName(try reader.readElementText())) |v| { entry_value = v; }
+                                } else {
+                                    try reader.skipElement();
+                                }
+                            },
+                            .element_end => break,
+                            else => {},
+                        }
+                    }
+                    try list.append(allocator, .{ .key = entry_key, .value = entry_value });
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeaccountPropertiesMapType(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime entry_tag: []const u8) ![]const aws.map.StringMapEntry {
+    var list: std.ArrayList(aws.map.StringMapEntry) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, entry_tag)) {
+                    var entry_key: []const u8 = "";
+                    var entry_value: []const u8 = undefined;
+                    while (try reader.next()) |inner| {
+                        switch (inner) {
+                            .element_start => |ie| {
+                                if (std.mem.eql(u8, ie.local, "key")) {
+                                    entry_key = try allocator.dupe(u8, try reader.readElementText());
+                                } else if (std.mem.eql(u8, ie.local, "value")) {
+                                    entry_value = try allocator.dupe(u8, try reader.readElementText());
                                 } else {
                                     try reader.skipElement();
                                 }
@@ -1483,6 +1600,26 @@ pub fn deserializeGroupDetail(allocator: std.mem.Allocator, reader: *aws.xml.Rea
     return result;
 }
 
+pub fn deserializeInlinePolicy(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !InlinePolicy {
+    var result: InlinePolicy = undefined;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "PolicyDocument")) {
+                    result.policy_document = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "PolicyName")) {
+                    result.policy_name = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
 pub fn deserializeInstanceProfile(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !InstanceProfile {
     var result: InstanceProfile = undefined;
     result.tags = null;
@@ -1661,6 +1798,41 @@ pub fn deserializeOrganizationsDecisionDetail(allocator: std.mem.Allocator, read
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AllowedByOrganizations")) {
                     result.allowed_by_organizations = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeParameterDefinition(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ParameterDefinition {
+    var result: ParameterDefinition = undefined;
+    result.default_value = null;
+    result.description = null;
+    result.immutable = false;
+    result.is_required = false;
+    result.sub_type = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "DefaultValue")) {
+                    result.default_value = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Description")) {
+                    result.description = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Immutable")) {
+                    result.immutable = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "IsRequired")) {
+                    result.is_required = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "Name")) {
+                    result.name = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "SubType")) {
+                    result.sub_type = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Type")) {
+                    result.@"type" = parameterTypeType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -2023,6 +2195,7 @@ pub fn deserializeRole(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !R
     result.max_session_duration = null;
     result.permissions_boundary = null;
     result.role_last_used = null;
+    result.source_role_template = null;
     result.tags = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -2047,6 +2220,8 @@ pub fn deserializeRole(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !R
                     result.role_last_used = try deserializeRoleLastUsed(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "RoleName")) {
                     result.role_name = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "SourceRoleTemplate")) {
+                    result.source_role_template = try deserializeSourceRoleTemplate(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Tags")) {
                     result.tags = try deserializetagListType(allocator, reader, "member");
                 } else {
@@ -2123,6 +2298,91 @@ pub fn deserializeRoleLastUsed(allocator: std.mem.Allocator, reader: *aws.xml.Re
                     result.last_used_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Region")) {
                     result.region = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeRoleTemplateVersion(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !RoleTemplateVersion {
+    var result: RoleTemplateVersion = undefined;
+    result.assume_role_policy_document_template = null;
+    result.create_timestamp = null;
+    result.default_minor_version = null;
+    result.description = null;
+    result.enabled = false;
+    result.inline_policy_templates = null;
+    result.major_version = null;
+    result.managed_by_type = null;
+    result.managed_by_value = null;
+    result.managed_policy_arns = null;
+    result.max_session_duration = null;
+    result.minor_version = null;
+    result.parameters_definition = null;
+    result.permission_boundary_arn = null;
+    result.role_description_pattern = null;
+    result.role_name_pattern = null;
+    result.role_path_pattern = null;
+    result.role_tags_template = null;
+    result.template_arn = null;
+    result.template_name = null;
+    result.template_version_id = null;
+    result.update_timestamp = null;
+    result.version_enabled = false;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AssumeRolePolicyDocumentTemplate")) {
+                    result.assume_role_policy_document_template = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "CreateTimestamp")) {
+                    result.create_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "DefaultMinorVersion")) {
+                    result.default_minor_version = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "Description")) {
+                    result.description = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Enabled")) {
+                    result.enabled = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "InlinePolicyTemplates")) {
+                    result.inline_policy_templates = try deserializeinlinePolicyTemplateListType(allocator, reader, "member");
+                } else if (std.mem.eql(u8, e.local, "MajorVersion")) {
+                    result.major_version = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "ManagedByType")) {
+                    result.managed_by_type = managedByTypeType.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ManagedByValue")) {
+                    result.managed_by_value = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ManagedPolicyArns")) {
+                    result.managed_policy_arns = try deserializemanagedPolicyArnListType(allocator, reader, "member");
+                } else if (std.mem.eql(u8, e.local, "MaxSessionDuration")) {
+                    result.max_session_duration = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "MinorVersion")) {
+                    result.minor_version = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "ParametersDefinition")) {
+                    result.parameters_definition = try deserializeparametersDefinitionListType(allocator, reader, "member");
+                } else if (std.mem.eql(u8, e.local, "PermissionBoundaryArn")) {
+                    result.permission_boundary_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "RoleDescriptionPattern")) {
+                    result.role_description_pattern = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "RoleNamePattern")) {
+                    result.role_name_pattern = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "RolePathPattern")) {
+                    result.role_path_pattern = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "RoleTagsTemplate")) {
+                    result.role_tags_template = try deserializetagTemplateListType(allocator, reader, "member");
+                } else if (std.mem.eql(u8, e.local, "TemplateArn")) {
+                    result.template_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "TemplateName")) {
+                    result.template_name = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "TemplateVersionId")) {
+                    result.template_version_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "UpdateTimestamp")) {
+                    result.update_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "VersionEnabled")) {
+                    result.version_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else {
                     try reader.skipElement();
                 }
@@ -2450,6 +2710,26 @@ pub fn deserializeSigningCertificate(allocator: std.mem.Allocator, reader: *aws.
     return result;
 }
 
+pub fn deserializeSourceRoleTemplate(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !SourceRoleTemplate {
+    var result: SourceRoleTemplate = undefined;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "TemplateArn")) {
+                    result.template_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "TemplateMinorVersion")) {
+                    result.template_minor_version = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
 pub fn deserializeStatement(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Statement {
     var result: Statement = undefined;
     result.end_position = null;
@@ -2480,6 +2760,26 @@ pub fn deserializeStatement(allocator: std.mem.Allocator, reader: *aws.xml.Reade
 
 pub fn deserializeTag(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Tag {
     var result: Tag = undefined;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Key")) {
+                    result.key = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Value")) {
+                    result.value = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeTagTemplate(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !TagTemplate {
+    var result: TagTemplate = undefined;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -2676,6 +2976,30 @@ pub fn serializeContextKeyValueListType(allocator: std.mem.Allocator, buf: *std.
     }
 }
 
+pub fn serializeOrganizationPolicyListType(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const OrderedOrganizationPolicyType, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializeOrderedOrganizationPolicyType(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
+pub fn serializePolicyExclusionsListType(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const PolicyIdentifier, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
 pub fn serializeResourceNameListType(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
         try buf.appendSlice(allocator, "<");
@@ -2748,6 +3072,18 @@ pub fn serializepolicyParameterValuesListType(allocator: std.mem.Allocator, buf:
     }
 }
 
+pub fn serializereplacementValueListType(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
 pub fn serializeserviceNamespaceListType(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
         try buf.appendSlice(allocator, "<");
@@ -2796,6 +3132,40 @@ pub fn serializethumbprintListType(allocator: std.mem.Allocator, buf: *std.Array
     }
 }
 
+pub fn serializeaccountPropertiesMapType(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), entries: []const aws.map.StringMapEntry, comptime entry_tag: []const u8) !void {
+    for (entries) |entry| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, entry_tag);
+        try buf.appendSlice(allocator, ">");
+        try buf.appendSlice(allocator, "<key>");
+        try aws.xml.appendXmlEscaped(allocator, buf, entry.key);
+        try buf.appendSlice(allocator, "</key>");
+        try buf.appendSlice(allocator, "<value>");
+        try aws.xml.appendXmlEscaped(allocator, buf, entry.value);
+        try buf.appendSlice(allocator, "</value>");
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, entry_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
+pub fn serializemapStringReplacementValueEntry(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), entries: []const aws.map.MapEntry(ReplacementValueEntry), comptime entry_tag: []const u8) !void {
+    for (entries) |entry| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, entry_tag);
+        try buf.appendSlice(allocator, ">");
+        try buf.appendSlice(allocator, "<key>");
+        try aws.xml.appendXmlEscaped(allocator, buf, entry.key);
+        try buf.appendSlice(allocator, "</key>");
+        try buf.appendSlice(allocator, "<value>");
+        try serializeReplacementValueEntry(allocator, buf, entry.value);
+        try buf.appendSlice(allocator, "</value>");
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, entry_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
 pub fn serializeContextEntry(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ContextEntry) !void {
     if (value.context_key_name) |v| {
         try buf.appendSlice(allocator, "<ContextKeyName>");
@@ -2827,6 +3197,14 @@ pub fn serializeDelegationPermission(allocator: std.mem.Allocator, buf: *std.Arr
     }
 }
 
+pub fn serializeOrderedOrganizationPolicyType(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: OrderedOrganizationPolicyType) !void {
+    if (value.service_control_policy_input_list) |v| {
+        try buf.appendSlice(allocator, "<ServiceControlPolicyInputList>");
+        try serializeSimulationPolicyListType(allocator, buf, v, "member");
+        try buf.appendSlice(allocator, "</ServiceControlPolicyInputList>");
+    }
+}
+
 pub fn serializePolicyParameter(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: PolicyParameter) !void {
     if (value.name) |v| {
         try buf.appendSlice(allocator, "<Name>");
@@ -2843,6 +3221,12 @@ pub fn serializePolicyParameter(allocator: std.mem.Allocator, buf: *std.ArrayLis
         try serializepolicyParameterValuesListType(allocator, buf, v, "member");
         try buf.appendSlice(allocator, "</Values>");
     }
+}
+
+pub fn serializeReplacementValueEntry(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ReplacementValueEntry) !void {
+    try buf.appendSlice(allocator, "<Values>");
+    try serializereplacementValueListType(allocator, buf, value.values, "member");
+    try buf.appendSlice(allocator, "</Values>");
 }
 
 pub fn serializeTag(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: Tag) !void {

@@ -6,7 +6,17 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const ModifyConversionConfigurationInput = struct {
-    /// The new conversion configuration.
+    /// A JSON string that contains the schema conversion settings to update.
+    /// For the format and available settings, see
+    /// [Specifying schema conversion
+    /// settings for migration
+    /// projects](https://docs.aws.amazon.com/dms/latest/userguide/schema-conversion-settings.html).
+    ///
+    /// Usage:
+    ///
+    /// * Include only the sections and keys to change. The operation merges
+    ///   supplied
+    /// values with the existing configuration.
     conversion_configuration: []const u8,
 
     /// The migration project name or Amazon Resource Name (ARN).

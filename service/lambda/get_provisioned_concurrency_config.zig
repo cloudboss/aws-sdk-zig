@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetProvisionedConcurren
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetProvisionedConcurrencyConfigOutput {
-    var result: GetProvisionedConcurrencyConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetProvisionedConcurrencyConfigOutput, body, allocator);
-    }
+    const result: GetProvisionedConcurrencyConfigOutput = try aws.json.parseJsonObject(
+        GetProvisionedConcurrencyConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

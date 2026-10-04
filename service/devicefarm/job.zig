@@ -1,6 +1,7 @@
 const Counters = @import("counters.zig").Counters;
 const Device = @import("device.zig").Device;
 const DeviceMinutes = @import("device_minutes.zig").DeviceMinutes;
+const JobInsights = @import("job_insights.zig").JobInsights;
 const ExecutionResult = @import("execution_result.zig").ExecutionResult;
 const ExecutionStatus = @import("execution_status.zig").ExecutionStatus;
 const TestType = @import("test_type.zig").TestType;
@@ -21,6 +22,11 @@ pub const Job = struct {
 
     /// Represents the total (metered or unmetered) minutes used by the job.
     device_minutes: ?DeviceMinutes = null,
+
+    /// The insights for the job, including the report status and test-level
+    /// metrics. This field contains data only if you specified `insightsTypes` when
+    /// you scheduled the run.
+    insights: ?JobInsights = null,
 
     /// The ARN of the instance.
     instance_arn: ?[]const u8 = null,
@@ -125,6 +131,7 @@ pub const Job = struct {
         .created = "created",
         .device = "device",
         .device_minutes = "deviceMinutes",
+        .insights = "insights",
         .instance_arn = "instanceArn",
         .message = "message",
         .name = "name",

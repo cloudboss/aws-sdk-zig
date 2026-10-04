@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const GuardrailConfiguration = @import("guardrail_configuration.zig").GuardrailConfiguration;
 const KnowledgeBaseRetrievalConfiguration = @import("knowledge_base_retrieval_configuration.zig").KnowledgeBaseRetrievalConfiguration;
 const KnowledgeBaseQuery = @import("knowledge_base_query.zig").KnowledgeBaseQuery;
+const UserContext = @import("user_context.zig").UserContext;
 const GuadrailAction = @import("guadrail_action.zig").GuadrailAction;
 const KnowledgeBaseRetrievalResult = @import("knowledge_base_retrieval_result.zig").KnowledgeBaseRetrievalResult;
 
@@ -30,12 +31,18 @@ pub const RetrieveInput = struct {
     /// Contains the query to send the knowledge base.
     retrieval_query: KnowledgeBaseQuery,
 
+    /// Contains information about the user making the request. This is used for
+    /// access control filtering to ensure that retrieval results only include
+    /// documents the user is authorized to access.
+    user_context: ?UserContext = null,
+
     pub const json_field_names = .{
         .guardrail_configuration = "guardrailConfiguration",
         .knowledge_base_id = "knowledgeBaseId",
         .next_token = "nextToken",
         .retrieval_configuration = "retrievalConfiguration",
         .retrieval_query = "retrievalQuery",
+        .user_context = "userContext",
     };
 };
 
@@ -120,6 +127,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RetrieveInput, config: 
     try body_buf.appendSlice(allocator, "\"retrievalQuery\":");
     try aws.json.writeValue(@TypeOf(input.retrieval_query), input.retrieval_query, allocator, &body_buf);
     has_prev = true;
+    if (input.user_context) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"userContext\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -136,10 +149,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RetrieveInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RetrieveOutput {
-    var result: RetrieveOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RetrieveOutput, body, allocator);
-    }
+    const result: RetrieveOutput = try aws.json.parseJsonObject(
+        RetrieveOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateFileSystemProtect
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateFileSystemProtectionOutput {
-    var result: UpdateFileSystemProtectionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateFileSystemProtectionOutput, body, allocator);
-    }
+    const result: UpdateFileSystemProtectionOutput = try aws.json.parseJsonObject(
+        UpdateFileSystemProtectionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

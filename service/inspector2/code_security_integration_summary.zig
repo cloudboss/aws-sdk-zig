@@ -1,5 +1,3 @@
-const aws = @import("aws");
-
 const IntegrationStatus = @import("integration_status.zig").IntegrationStatus;
 const IntegrationType = @import("integration_type.zig").IntegrationType;
 
@@ -23,9 +21,6 @@ pub const CodeSecurityIntegrationSummary = struct {
     /// The reason for the current status of the code security integration.
     status_reason: []const u8,
 
-    /// The tags associated with the code security integration.
-    tags: ?[]const aws.map.StringMapEntry = null,
-
     /// The type of repository provider for the integration.
     @"type": IntegrationType,
 
@@ -36,7 +31,6 @@ pub const CodeSecurityIntegrationSummary = struct {
         .name = "name",
         .status = "status",
         .status_reason = "statusReason",
-        .tags = "tags",
         .@"type" = "type",
     };
 };

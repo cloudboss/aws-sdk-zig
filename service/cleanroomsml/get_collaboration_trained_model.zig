@@ -71,6 +71,10 @@ pub const GetCollaborationTrainedModelOutput = struct {
     /// Details about the status information for the model metrics.
     metrics_status_details: ?[]const u8 = null,
 
+    /// The account ID of the member that is responsible for paying for model
+    /// training costs.
+    ml_model_training_payer_account_id: ?[]const u8 = null,
+
     /// The name of the trained model.
     name: []const u8,
 
@@ -115,6 +119,7 @@ pub const GetCollaborationTrainedModelOutput = struct {
         .membership_identifier = "membershipIdentifier",
         .metrics_status = "metricsStatus",
         .metrics_status_details = "metricsStatusDetails",
+        .ml_model_training_payer_account_id = "mlModelTrainingPayerAccountId",
         .name = "name",
         .resource_config = "resourceConfig",
         .status = "status",
@@ -190,10 +195,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCollaborationTrained
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCollaborationTrainedModelOutput {
-    var result: GetCollaborationTrainedModelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCollaborationTrainedModelOutput, body, allocator);
-    }
+    const result: GetCollaborationTrainedModelOutput = try aws.json.parseJsonObject(
+        GetCollaborationTrainedModelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

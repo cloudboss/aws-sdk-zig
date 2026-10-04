@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeAccountAuditCon
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeAccountAuditConfigurationOutput {
-    var result: DescribeAccountAuditConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeAccountAuditConfigurationOutput, body, allocator);
-    }
+    const result: DescribeAccountAuditConfigurationOutput = try aws.json.parseJsonObject(
+        DescribeAccountAuditConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

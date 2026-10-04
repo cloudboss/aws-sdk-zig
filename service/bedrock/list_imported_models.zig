@@ -163,10 +163,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListImportedModelsInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListImportedModelsOutput {
-    var result: ListImportedModelsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListImportedModelsOutput, body, allocator);
-    }
+    const result: ListImportedModelsOutput = try aws.json.parseJsonObject(
+        ListImportedModelsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

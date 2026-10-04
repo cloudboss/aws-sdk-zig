@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLifecyclePolicyInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetLifecyclePolicyOutput {
-    var result: GetLifecyclePolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetLifecyclePolicyOutput, body, allocator);
-    }
+    const result: GetLifecyclePolicyOutput = try aws.json.parseJsonObject(
+        GetLifecyclePolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

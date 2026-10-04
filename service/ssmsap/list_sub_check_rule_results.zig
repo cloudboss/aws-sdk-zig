@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSubCheckRuleResults
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListSubCheckRuleResultsOutput {
-    var result: ListSubCheckRuleResultsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListSubCheckRuleResultsOutput, body, allocator);
-    }
+    const result: ListSubCheckRuleResultsOutput = try aws.json.parseJsonObject(
+        ListSubCheckRuleResultsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

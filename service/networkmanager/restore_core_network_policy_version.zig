@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreCoreNetworkPolic
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RestoreCoreNetworkPolicyVersionOutput {
-    var result: RestoreCoreNetworkPolicyVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RestoreCoreNetworkPolicyVersionOutput, body, allocator);
-    }
+    const result: RestoreCoreNetworkPolicyVersionOutput = try aws.json.parseJsonObject(
+        RestoreCoreNetworkPolicyVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

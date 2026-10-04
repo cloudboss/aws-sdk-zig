@@ -21,7 +21,7 @@ pub const CreateRoutingProfileInput = struct {
     /// Description of the routing profile. Must not be more than 250 characters.
     description: []const u8,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -32,10 +32,10 @@ pub const CreateRoutingProfileInput = struct {
     /// number of RoutingProfileManualAssignmentQueueConfig objects that can be
     /// passed during a CreateRoutingProfile API
     /// request. It is different from the quota of 50 queues per routing profile per
-    /// instance that is listed in Amazon Connect service quotas.
+    /// instance that is listed in Connect Customer service quotas.
     ///
-    /// Note: Use this config for chat, email, and task contacts. It does not
-    /// support voice contacts.
+    /// For voice contacts, manual assignment supports only agent-first callback
+    /// contacts. Chat, email, and task contacts are fully supported.
     manual_assignment_queue_configs: ?[]const RoutingProfileManualAssignmentQueueConfig = null,
 
     /// The channels that agents can handle in the Contact Control Panel (CCP) for
@@ -53,7 +53,7 @@ pub const CreateRoutingProfileInput = struct {
     /// `RoutingProfileQueueConfig` objects
     /// that can be passed during a CreateRoutingProfile API request. It is
     /// different from the quota of 50 queues per routing
-    /// profile per instance that is listed in [Amazon Connect service
+    /// profile per instance that is listed in [Connect Customer service
     /// quotas](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html).
     queue_configs: ?[]const RoutingProfileQueueConfig = null,
 
@@ -182,10 +182,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRoutingProfileInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateRoutingProfileOutput {
-    var result: CreateRoutingProfileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateRoutingProfileOutput, body, allocator);
-    }
+    const result: CreateRoutingProfileOutput = try aws.json.parseJsonObject(
+        CreateRoutingProfileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

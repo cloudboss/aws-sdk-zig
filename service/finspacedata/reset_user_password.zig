@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ResetUserPasswordInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ResetUserPasswordOutput {
-    var result: ResetUserPasswordOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ResetUserPasswordOutput, body, allocator);
-    }
+    const result: ResetUserPasswordOutput = try aws.json.parseJsonObject(
+        ResetUserPasswordOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -7,8 +7,12 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Distribution = @import("distribution.zig").Distribution;
 
 pub const UpdateDistributionConfigurationInput = struct {
-    /// Unique, case-sensitive identifier you provide to ensure
-    /// idempotency of the request. For more information, see [Ensuring
+    /// A unique, case-sensitive identifier you provide to ensure
+    /// that the operation runs no more than one time. If you retry a request with
+    /// the same client
+    /// token, Image Builder returns the original response without running the
+    /// operation again. For more
+    /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
     /// in the *Amazon EC2 API Reference*.
     client_token: []const u8,
@@ -21,7 +25,12 @@ pub const UpdateDistributionConfigurationInput = struct {
     /// update.
     distribution_configuration_arn: []const u8,
 
-    /// The distributions of the distribution configuration.
+    /// The distribution settings for the configuration. Each entry defines how
+    /// output images are distributed in one target Amazon Web Services Region. A
+    /// Region can
+    /// appear at most once in the list. This list replaces the configuration's
+    /// existing
+    /// distributions entirely.
     distributions: []const Distribution,
 
     pub const json_field_names = .{
@@ -121,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDistributionConfi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateDistributionConfigurationOutput {
-    var result: UpdateDistributionConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateDistributionConfigurationOutput, body, allocator);
-    }
+    const result: UpdateDistributionConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateDistributionConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

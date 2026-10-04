@@ -104,6 +104,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLineageEventInput, c
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetLineageEventOutput {
     var result: GetLineageEventOutput = .{};
+    errdefer {
+        if (result.created_by) |value| allocator.free(value);
+        if (result.domain_id) |value| allocator.free(value);
+        if (result.id) |value| allocator.free(value);
+        if (result.event) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.event = try allocator.dupe(u8, body);
     }

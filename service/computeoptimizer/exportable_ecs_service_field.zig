@@ -29,6 +29,7 @@ pub const ExportableECSServiceField = enum {
     recommendation_options_savings_opportunity_after_discounts_percentage,
     recommendation_options_estimated_monthly_savings_currency_after_discounts,
     recommendation_options_estimated_monthly_savings_value_after_discounts,
+    effective_recommendation_preferences_lookback_period,
 
     pub const json_field_names = .{
         .account_id = "AccountId",
@@ -59,6 +60,7 @@ pub const ExportableECSServiceField = enum {
         .recommendation_options_savings_opportunity_after_discounts_percentage = "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
         .recommendation_options_estimated_monthly_savings_currency_after_discounts = "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
         .recommendation_options_estimated_monthly_savings_value_after_discounts = "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
+        .effective_recommendation_preferences_lookback_period = "EffectiveRecommendationPreferencesLookBackPeriod",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -91,6 +93,7 @@ pub const ExportableECSServiceField = enum {
             .recommendation_options_savings_opportunity_after_discounts_percentage => "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
             .recommendation_options_estimated_monthly_savings_currency_after_discounts => "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
             .recommendation_options_estimated_monthly_savings_value_after_discounts => "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
+            .effective_recommendation_preferences_lookback_period => "EffectiveRecommendationPreferencesLookBackPeriod",
         };
     }
 

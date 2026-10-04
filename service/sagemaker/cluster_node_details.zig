@@ -21,8 +21,15 @@ pub const ClusterNodeDetails = struct {
     /// The ID of the Amazon Machine Image (AMI) currently in use by the node.
     current_image_id: ?[]const u8 = null,
 
+    /// The version of the HyperPod-managed AMI currently running on the node.
+    current_image_release_version: ?[]const u8 = null,
+
     /// The ID of the Amazon Machine Image (AMI) desired for the node.
     desired_image_id: ?[]const u8 = null,
+
+    /// The desired version of the HyperPod-managed AMI for the node. This may
+    /// differ from the current version when an update is pending.
+    desired_image_release_version: ?[]const u8 = null,
 
     /// The status of the image version for the cluster node.
     image_version_status: ?ClusterImageVersionStatus = null,
@@ -94,7 +101,9 @@ pub const ClusterNodeDetails = struct {
     pub const json_field_names = .{
         .capacity_type = "CapacityType",
         .current_image_id = "CurrentImageId",
+        .current_image_release_version = "CurrentImageReleaseVersion",
         .desired_image_id = "DesiredImageId",
+        .desired_image_release_version = "DesiredImageReleaseVersion",
         .image_version_status = "ImageVersionStatus",
         .instance_group_name = "InstanceGroupName",
         .instance_id = "InstanceId",

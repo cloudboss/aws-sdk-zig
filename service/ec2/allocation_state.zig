@@ -7,6 +7,7 @@ pub const AllocationState = enum {
     released,
     released_permanent_failure,
     pending,
+    configuring,
 
     pub const json_field_names = .{
         .available = "available",
@@ -15,6 +16,7 @@ pub const AllocationState = enum {
         .released = "released",
         .released_permanent_failure = "released-permanent-failure",
         .pending = "pending",
+        .configuring = "configuring",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +27,7 @@ pub const AllocationState = enum {
             .released => "released",
             .released_permanent_failure => "released-permanent-failure",
             .pending => "pending",
+            .configuring => "configuring",
         };
     }
 

@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DBClusterAssociatedRole = @import("db_cluster_associated_role.zig").DBClusterAssociatedRole;
 const ClusterScalabilityType = @import("cluster_scalability_type.zig").ClusterScalabilityType;
 const DatabaseInsightsMode = @import("database_insights_mode.zig").DatabaseInsightsMode;
 const MasterUserAuthenticationType = @import("master_user_authentication_type.zig").MasterUserAuthenticationType;
@@ -23,6 +24,15 @@ pub const CreateDBClusterInput = struct {
     ///
     /// This setting is required to create a Multi-AZ DB cluster.
     allocated_storage: ?i32 = null,
+
+    /// A list of Amazon Web Services Identity and Access Management (IAM) roles to
+    /// associate with the DB cluster. Each role grants the DB cluster permission to
+    /// access other Amazon Web Services on your behalf. For each role, specify a
+    /// role ARN and, optionally, the feature name (such as `s3Import`, `s3Export`,
+    /// or `Lambda`).
+    ///
+    /// Valid for Cluster Type: Aurora DB clusters only
+    associated_roles: ?[]const DBClusterAssociatedRole = null,
 
     /// Specifies whether minor engine upgrades are applied automatically to the DB
     /// cluster during the maintenance window. By default, minor engine upgrades are
@@ -305,7 +315,7 @@ pub const CreateDBClusterInput = struct {
     ///   ](https://docs.aws.amazon.com/neptune/latest/userguide/intro.html).
     engine: []const u8,
 
-    /// The life cycle type for this DB cluster.
+    /// The lifecycle type for this DB cluster.
     ///
     /// By default, this value is set to `open-source-rds-extended-support`, which
     /// enrolls your DB cluster into Amazon RDS Extended Support. At the end of
@@ -826,6 +836,25 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBClusterInput, c
     if (input.allocated_storage) |v| {
         try body_buf.appendSlice(allocator, "&AllocatedStorage=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
+    if (input.associated_roles) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.feature_name) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociatedRoles.DBClusterAssociatedRole.{d}.FeatureName=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociatedRoles.DBClusterAssociatedRole.{d}.RoleArn=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.role_arn);
+            }
+        }
     }
     if (input.auto_minor_version_upgrade) |v| {
         try body_buf.appendSlice(allocator, "&AutoMinorVersionUpgrade=");

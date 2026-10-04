@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CancelElasticsearchServ
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CancelElasticsearchServiceSoftwareUpdateOutput {
-    var result: CancelElasticsearchServiceSoftwareUpdateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CancelElasticsearchServiceSoftwareUpdateOutput, body, allocator);
-    }
+    const result: CancelElasticsearchServiceSoftwareUpdateOutput = try aws.json.parseJsonObject(
+        CancelElasticsearchServiceSoftwareUpdateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterTransitGatewayI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RegisterTransitGatewayOutput {
-    var result: RegisterTransitGatewayOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RegisterTransitGatewayOutput, body, allocator);
-    }
+    const result: RegisterTransitGatewayOutput = try aws.json.parseJsonObject(
+        RegisterTransitGatewayOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

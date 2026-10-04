@@ -1,4 +1,5 @@
 const HttpUrlDestinationProperties = @import("http_url_destination_properties.zig").HttpUrlDestinationProperties;
+const InfluxDBDestinationProperties = @import("influx_db_destination_properties.zig").InfluxDBDestinationProperties;
 const TopicRuleDestinationStatus = @import("topic_rule_destination_status.zig").TopicRuleDestinationStatus;
 const VpcDestinationProperties = @import("vpc_destination_properties.zig").VpcDestinationProperties;
 
@@ -12,6 +13,11 @@ pub const TopicRuleDestination = struct {
 
     /// Properties of the HTTP URL.
     http_url_properties: ?HttpUrlDestinationProperties = null,
+
+    /// The properties of an InfluxDB topic rule destination, as returned by
+    /// `CreateTopicRuleDestination` and
+    /// `GetTopicRuleDestination`.
+    influx_db_properties: ?InfluxDBDestinationProperties = null,
 
     /// The date and time when the topic rule destination was last updated.
     last_updated_at: ?i64 = null,
@@ -63,6 +69,7 @@ pub const TopicRuleDestination = struct {
         .arn = "arn",
         .created_at = "createdAt",
         .http_url_properties = "httpUrlProperties",
+        .influx_db_properties = "influxDBProperties",
         .last_updated_at = "lastUpdatedAt",
         .status = "status",
         .status_reason = "statusReason",

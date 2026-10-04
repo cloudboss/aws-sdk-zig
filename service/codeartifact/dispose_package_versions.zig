@@ -201,10 +201,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisposePackageVersionsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DisposePackageVersionsOutput {
-    var result: DisposePackageVersionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DisposePackageVersionsOutput, body, allocator);
-    }
+    const result: DisposePackageVersionsOutput = try aws.json.parseJsonObject(
+        DisposePackageVersionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

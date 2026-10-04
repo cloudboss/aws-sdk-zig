@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetKxDatabaseInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetKxDatabaseOutput {
-    var result: GetKxDatabaseOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetKxDatabaseOutput, body, allocator);
-    }
+    const result: GetKxDatabaseOutput = try aws.json.parseJsonObject(
+        GetKxDatabaseOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

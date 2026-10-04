@@ -4,11 +4,13 @@ pub const OriginAccessControlSigningBehaviors = enum {
     never,
     always,
     no_override,
+    always_amz_auth,
 
     pub const json_field_names = .{
         .never = "never",
         .always = "always",
         .no_override = "no-override",
+        .always_amz_auth = "always-amz-auth",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const OriginAccessControlSigningBehaviors = enum {
             .never => "never",
             .always => "always",
             .no_override => "no-override",
+            .always_amz_auth => "always-amz-auth",
         };
     }
 

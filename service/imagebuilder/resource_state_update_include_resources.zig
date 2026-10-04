@@ -1,7 +1,10 @@
-/// Specifies if the lifecycle policy should apply actions to selected
-/// resources.
+/// Specifies which underlying resources the resource state update applies to,
+/// in addition to the Image Builder image resource itself: distributed AMIs and
+/// their
+/// snapshots for AMI images, or distributed container images for container
+/// images.
 pub const ResourceStateUpdateIncludeResources = struct {
-    /// Specifies whether the lifecycle action should apply to distributed AMIs
+    /// Specifies whether the lifecycle action should apply to distributed AMIs.
     amis: bool = false,
 
     /// Specifies whether the lifecycle action should apply to distributed

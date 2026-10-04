@@ -193,10 +193,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutEmailIdentityDkimSig
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutEmailIdentityDkimSigningAttributesOutput {
-    var result: PutEmailIdentityDkimSigningAttributesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutEmailIdentityDkimSigningAttributesOutput, body, allocator);
-    }
+    const result: PutEmailIdentityDkimSigningAttributesOutput = try aws.json.parseJsonObject(
+        PutEmailIdentityDkimSigningAttributesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

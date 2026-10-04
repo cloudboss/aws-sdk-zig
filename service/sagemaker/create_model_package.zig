@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AdditionalInferenceSpecificationDefinition = @import("additional_inference_specification_definition.zig").AdditionalInferenceSpecificationDefinition;
 const DriftCheckBaselines = @import("drift_check_baselines.zig").DriftCheckBaselines;
 const InferenceSpecification = @import("inference_specification.zig").InferenceSpecification;
+const ManagedStorageType = @import("managed_storage_type.zig").ManagedStorageType;
 const MetadataProperties = @import("metadata_properties.zig").MetadataProperties;
 const ModelApprovalStatus = @import("model_approval_status.zig").ModelApprovalStatus;
 const ModelPackageModelCard = @import("model_package_model_card.zig").ModelPackageModelCard;
@@ -60,6 +61,9 @@ pub const CreateModelPackageInput = struct {
     /// * The input and output content formats that the model package supports for
     ///   inference.
     inference_specification: ?InferenceSpecification = null,
+
+    /// The storage type of the model package.
+    managed_storage_type: ?ManagedStorageType = null,
 
     metadata_properties: ?MetadataProperties = null,
 
@@ -163,6 +167,7 @@ pub const CreateModelPackageInput = struct {
         .domain = "Domain",
         .drift_check_baselines = "DriftCheckBaselines",
         .inference_specification = "InferenceSpecification",
+        .managed_storage_type = "ManagedStorageType",
         .metadata_properties = "MetadataProperties",
         .model_approval_status = "ModelApprovalStatus",
         .model_card = "ModelCard",

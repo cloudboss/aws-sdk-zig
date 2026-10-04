@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const CustomResponseBody = @import("custom_response_body.zig").CustomResponseBody;
+const MonetizationConfig = @import("monetization_config.zig").MonetizationConfig;
 const Rule = @import("rule.zig").Rule;
 const Scope = @import("scope.zig").Scope;
 const Tag = @import("tag.zig").Tag;
@@ -52,6 +53,10 @@ pub const CreateRuleGroupInput = struct {
     /// A description of the rule group that helps with identification.
     description: ?[]const u8 = null,
 
+    /// The monetization configuration for the rule group. Provide this when any
+    /// rule in the rule group uses the `Monetize` action.
+    monetization_config: ?MonetizationConfig = null,
+
     /// The name of the rule group. You cannot change the name of a rule group after
     /// you create it.
     name: []const u8,
@@ -85,6 +90,7 @@ pub const CreateRuleGroupInput = struct {
         .capacity = "Capacity",
         .custom_response_bodies = "CustomResponseBodies",
         .description = "Description",
+        .monetization_config = "MonetizationConfig",
         .name = "Name",
         .rules = "Rules",
         .scope = "Scope",

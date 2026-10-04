@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const ClientRoutingPolicy = @import("client_routing_policy.zig").ClientRoutingPolicy;
 const GatewayType = @import("gateway_type.zig").GatewayType;
 const ListenerConfig = @import("listener_config.zig").ListenerConfig;
 const ManagedEndpointConfiguration = @import("managed_endpoint_configuration.zig").ManagedEndpointConfiguration;
@@ -12,7 +13,41 @@ const TrustStoreConfiguration = @import("trust_store_configuration.zig").TrustSt
 const ResponderGatewayStatus = @import("responder_gateway_status.zig").ResponderGatewayStatus;
 
 pub const CreateResponderGatewayInput = struct {
-    /// The unique client token.
+    /// The client routing policy of the gateway. This policy controls which
+    /// Availability Zones RTB Fabric uses to reach the gateway for the requester
+    /// gateways that send traffic to it. Valid values are the following:
+    ///
+    /// * `AVAILABILITY_ZONE_AFFINITY`: RTB Fabric routes each requester's traffic
+    ///   to gateway capacity in the requester's own Availability Zone when the
+    ///   gateway has capacity available there. Otherwise, RTB Fabric routes the
+    ///   traffic to gateway capacity in the other Availability Zones of the
+    ///   gateway.
+    /// * `ANY_AVAILABILITY_ZONE`: RTB Fabric routes each requester's traffic to
+    ///   gateway capacity in every Availability Zone that the subnets of the
+    ///   gateway span. The Availability Zone that the requester is in does not
+    ///   change this.
+    ///
+    /// If you don't specify a value, RTB Fabric uses `AVAILABILITY_ZONE_AFFINITY`.
+    /// To get the behavior of `ANY_AVAILABILITY_ZONE`, create the gateway with
+    /// subnets in more than one Availability Zone. RTB Fabric does not support
+    /// partial Availability Zone affinity, so `PARTIAL_AVAILABILITY_ZONE_AFFINITY`
+    /// is not a valid value. For more information, see [Configuring Availability
+    /// Zone
+    /// affinity](https://docs.aws.amazon.com/rtb-fabric/latest/userguide/working-with-responder-gateways.html#configuring-availability-zone-affinity) in the *Amazon Web Services RTB Fabric User Guide*.
+    client_routing_policy: ?ClientRoutingPolicy = null,
+
+    /// Specifies a unique, case-sensitive identifier that you provide to ensure the
+    /// idempotency of the request. This lets you safely retry the request without
+    /// accidentally performing the same operation a second time. Passing the same
+    /// value to a later call to an operation requires that you also pass the same
+    /// value for all other parameters. We recommend that you use a [UUID type of
+    /// value](https://wikipedia.org/wiki/Universally_unique_identifier).
+    ///
+    /// If you don't provide this value, then Amazon Web Services generates a random
+    /// one for you.
+    ///
+    /// If you retry the operation with the same `clientToken`, but with different
+    /// parameters, the retry fails with an `IdempotentParameterMismatch` error.
     client_token: []const u8,
 
     /// An optional description for the responder gateway.
@@ -38,7 +73,10 @@ pub const CreateResponderGatewayInput = struct {
     /// The unique identifiers of the security groups.
     security_group_ids: []const []const u8,
 
-    /// The unique identifiers of the subnets.
+    /// Unique identifiers of the subnets. A service quota for your account sets the
+    /// number of Availability Zones that your subnets can span. By default, this
+    /// quota is one Availability Zone. To span more Availability Zones, request a
+    /// quota increase.
     subnet_ids: []const []const u8,
 
     /// A map of the key-value pairs of the tag or tags to assign to the resource.
@@ -51,6 +89,7 @@ pub const CreateResponderGatewayInput = struct {
     vpc_id: []const u8,
 
     pub const json_field_names = .{
+        .client_routing_policy = "clientRoutingPolicy",
         .client_token = "clientToken",
         .description = "description",
         .domain_name = "domainName",
@@ -68,6 +107,13 @@ pub const CreateResponderGatewayInput = struct {
 };
 
 pub const CreateResponderGatewayOutput = struct {
+    /// The client routing policy of the gateway. This policy controls which
+    /// Availability Zones RTB Fabric uses to reach the gateway for the requester
+    /// gateways that send traffic to it. For more information, see [Configuring
+    /// Availability Zone
+    /// affinity](https://docs.aws.amazon.com/rtb-fabric/latest/userguide/working-with-responder-gateways.html#configuring-availability-zone-affinity) in the *Amazon Web Services RTB Fabric User Guide*.
+    client_routing_policy: ?ClientRoutingPolicy = null,
+
     /// The external inbound endpoint for the responder gateway.
     external_inbound_endpoint: ?[]const u8 = null,
 
@@ -81,6 +127,7 @@ pub const CreateResponderGatewayOutput = struct {
     status: ResponderGatewayStatus,
 
     pub const json_field_names = .{
+        .client_routing_policy = "clientRoutingPolicy",
         .external_inbound_endpoint = "externalInboundEndpoint",
         .gateway_id = "gatewayId",
         .listener_config = "listenerConfig",
@@ -124,6 +171,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateResponderGatewayI
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.client_routing_policy) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"clientRoutingPolicy\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"clientToken\":");
     try aws.json.writeValue(@TypeOf(input.client_token), input.client_token, allocator, &body_buf);
@@ -206,10 +259,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateResponderGatewayI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateResponderGatewayOutput {
-    var result: CreateResponderGatewayOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateResponderGatewayOutput, body, allocator);
-    }
+    const result: CreateResponderGatewayOutput = try aws.json.parseJsonObject(
+        CreateResponderGatewayOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

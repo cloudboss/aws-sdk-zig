@@ -51,6 +51,10 @@ pub const Budget = struct {
     /// The name of a budget. The name must be unique within an account. The `:`
     /// and `\` characters, and the "/action/" substring, aren't allowed in
     /// `BudgetName`.
+    ///
+    /// Budget names are validated for content. Names that contain phone numbers,
+    /// URLs, or
+    /// email addresses combined with certain terms may be rejected.
     budget_name: []const u8,
 
     /// Specifies whether this budget tracks costs, usage, RI utilization, RI

@@ -10,7 +10,7 @@ const ContactFlowType = @import("contact_flow_type.zig").ContactFlowType;
 pub const CreateContactFlowInput = struct {
     /// The JSON string that represents the content of the flow. For an example, see
     /// [Example
-    /// flow in Amazon Connect Flow
+    /// flow in Connect Customer Flow
     /// language](https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html).
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 256000.
@@ -19,7 +19,7 @@ pub const CreateContactFlowInput = struct {
     /// The description of the flow.
     description: ?[]const u8 = null,
 
-    /// The identifier of the Amazon Connect instance.
+    /// The identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     /// The name of the flow.
@@ -38,7 +38,7 @@ pub const CreateContactFlowInput = struct {
     /// The type of the flow. For descriptions of the available types, see [Choose a
     /// flow
     /// type](https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     @"type": ContactFlowType,
 
     pub const json_field_names = .{
@@ -154,10 +154,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateContactFlowInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateContactFlowOutput {
-    var result: CreateContactFlowOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateContactFlowOutput, body, allocator);
-    }
+    const result: CreateContactFlowOutput = try aws.json.parseJsonObject(
+        CreateContactFlowOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

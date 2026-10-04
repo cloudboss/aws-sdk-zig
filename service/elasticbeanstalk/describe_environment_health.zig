@@ -12,8 +12,8 @@ const serde = @import("serde.zig");
 
 pub const DescribeEnvironmentHealthInput = struct {
     /// Specify the response elements to return. To retrieve all attributes, set to
-    /// `All`. If no attribute names are specified, returns the name of the
-    /// environment.
+    /// `All`. If no attribute names are specified, returns the name of
+    /// the environment.
     attribute_names: ?[]const EnvironmentHealthAttribute = null,
 
     /// Specify the environment by ID.
@@ -32,21 +32,19 @@ pub const DescribeEnvironmentHealthOutput = struct {
     application_metrics: ?ApplicationMetrics = null,
 
     /// Descriptions of the data that contributed to the environment's current
-    /// health
-    /// status.
+    /// health status.
     causes: ?[]const []const u8 = null,
 
     /// The [health
-    /// color](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html) of the
-    /// environment.
+    /// color](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html) of the environment.
     color: ?[]const u8 = null,
 
     /// The environment's name.
     environment_name: ?[]const u8 = null,
 
     /// The [health
-    /// status](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html) of the
-    /// environment. For example, `Ok`.
+    /// status](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html) of the environment. For example,
+    /// `Ok`.
     health_status: ?[]const u8 = null,
 
     /// Summary health information for the instances in the environment.
@@ -55,8 +53,9 @@ pub const DescribeEnvironmentHealthOutput = struct {
     /// The date and time that the health information was retrieved.
     refreshed_at: ?i64 = null,
 
-    /// The environment's operational status. `Ready`, `Launching`,
-    /// `Updating`, `Terminating`, or `Terminated`.
+    /// The environment's operational status. `Ready`, `Launching`, `Updating`,
+    /// `Terminating`, or
+    /// `Terminated`.
     status: ?EnvironmentHealth = null,
 };
 

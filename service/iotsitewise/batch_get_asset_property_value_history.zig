@@ -133,10 +133,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetAssetPropertyVa
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetAssetPropertyValueHistoryOutput {
-    var result: BatchGetAssetPropertyValueHistoryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetAssetPropertyValueHistoryOutput, body, allocator);
-    }
+    const result: BatchGetAssetPropertyValueHistoryOutput = try aws.json.parseJsonObject(
+        BatchGetAssetPropertyValueHistoryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

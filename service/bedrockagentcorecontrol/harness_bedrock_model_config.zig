@@ -1,5 +1,13 @@
+const HarnessBedrockApiFormat = @import("harness_bedrock_api_format.zig").HarnessBedrockApiFormat;
+
 /// Configuration for an Amazon Bedrock model provider.
 pub const HarnessBedrockModelConfig = struct {
+    /// Provider-specific parameters passed through to the model provider unchanged.
+    additional_params: ?[]const u8 = null,
+
+    /// The API format to use when calling the Bedrock provider.
+    api_format: ?HarnessBedrockApiFormat = null,
+
     /// The maximum number of tokens to allow in the generated response per model
     /// call.
     max_tokens: ?i32 = null,
@@ -14,6 +22,8 @@ pub const HarnessBedrockModelConfig = struct {
     top_p: ?f32 = null,
 
     pub const json_field_names = .{
+        .additional_params = "additionalParams",
+        .api_format = "apiFormat",
         .max_tokens = "maxTokens",
         .model_id = "modelId",
         .temperature = "temperature",

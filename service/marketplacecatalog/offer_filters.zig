@@ -1,5 +1,6 @@
 const OfferAvailabilityEndDateFilter = @import("offer_availability_end_date_filter.zig").OfferAvailabilityEndDateFilter;
 const OfferBuyerAccountsFilter = @import("offer_buyer_accounts_filter.zig").OfferBuyerAccountsFilter;
+const OfferCreatedBySourceFilter = @import("offer_created_by_source_filter.zig").OfferCreatedBySourceFilter;
 const OfferEntityIdFilter = @import("offer_entity_id_filter.zig").OfferEntityIdFilter;
 const OfferLastModifiedDateFilter = @import("offer_last_modified_date_filter.zig").OfferLastModifiedDateFilter;
 const OfferNameFilter = @import("offer_name_filter.zig").OfferNameFilter;
@@ -8,6 +9,8 @@ const OfferProductIdFilter = @import("offer_product_id_filter.zig").OfferProduct
 const OfferReleaseDateFilter = @import("offer_release_date_filter.zig").OfferReleaseDateFilter;
 const OfferResaleAuthorizationIdFilter = @import("offer_resale_authorization_id_filter.zig").OfferResaleAuthorizationIdFilter;
 const OfferStateFilter = @import("offer_state_filter.zig").OfferStateFilter;
+const OfferTargetAgreementIdFilter = @import("offer_target_agreement_id_filter.zig").OfferTargetAgreementIdFilter;
+const OfferTargetAgreementIntentFilter = @import("offer_target_agreement_intent_filter.zig").OfferTargetAgreementIntentFilter;
 const OfferTargetingFilter = @import("offer_targeting_filter.zig").OfferTargetingFilter;
 
 /// Object containing all the filter fields for offers entity. Client can add
@@ -19,6 +22,9 @@ pub const OfferFilters = struct {
 
     /// Allows filtering on the `BuyerAccounts` of an offer.
     buyer_accounts: ?OfferBuyerAccountsFilter = null,
+
+    /// Allows filtering on the `CreatedBySource` of an offer.
+    created_by_source: ?OfferCreatedBySourceFilter = null,
 
     /// Allows filtering on `EntityId` of an offer.
     entity_id: ?OfferEntityIdFilter = null,
@@ -47,12 +53,19 @@ pub const OfferFilters = struct {
     /// Allows filtering on the `State` of an offer.
     state: ?OfferStateFilter = null,
 
+    /// Allows filtering on the `TargetAgreementId` of an offer.
+    target_agreement_id: ?OfferTargetAgreementIdFilter = null,
+
+    /// Allows filtering on the `TargetAgreementIntent` of an offer.
+    target_agreement_intent: ?OfferTargetAgreementIntentFilter = null,
+
     /// Allows filtering on the `Targeting` of an offer.
     targeting: ?OfferTargetingFilter = null,
 
     pub const json_field_names = .{
         .availability_end_date = "AvailabilityEndDate",
         .buyer_accounts = "BuyerAccounts",
+        .created_by_source = "CreatedBySource",
         .entity_id = "EntityId",
         .last_modified_date = "LastModifiedDate",
         .name = "Name",
@@ -61,6 +74,8 @@ pub const OfferFilters = struct {
         .release_date = "ReleaseDate",
         .resale_authorization_id = "ResaleAuthorizationId",
         .state = "State",
+        .target_agreement_id = "TargetAgreementId",
+        .target_agreement_intent = "TargetAgreementIntent",
         .targeting = "Targeting",
     };
 };

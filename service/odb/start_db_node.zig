@@ -8,14 +8,20 @@ const DbNodeResourceStatus = @import("db_node_resource_status.zig").DbNodeResour
 
 pub const StartDbNodeInput = struct {
     /// The unique identifier of the VM cluster that contains the DB node to start.
-    cloud_vm_cluster_id: []const u8,
+    /// You must specify either this parameter or `exadbVmClusterId`.
+    cloud_vm_cluster_id: ?[]const u8 = null,
 
     /// The unique identifier of the DB node to start.
     db_node_id: []const u8,
 
+    /// The unique identifier of the Exascale VM cluster that contains the DB node
+    /// to start. You must specify either this parameter or `cloudVmClusterId`.
+    exadb_vm_cluster_id: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .cloud_vm_cluster_id = "cloudVmClusterId",
         .db_node_id = "dbNodeId",
+        .exadb_vm_cluster_id = "exadbVmClusterId",
     };
 };
 

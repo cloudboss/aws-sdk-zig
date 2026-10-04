@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetGraphMemberData
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetGraphMemberDatasourcesOutput {
-    var result: BatchGetGraphMemberDatasourcesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetGraphMemberDatasourcesOutput, body, allocator);
-    }
+    const result: BatchGetGraphMemberDatasourcesOutput = try aws.json.parseJsonObject(
+        BatchGetGraphMemberDatasourcesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

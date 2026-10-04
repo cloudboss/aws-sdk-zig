@@ -20,10 +20,10 @@ pub const ListImagePipelineImagesInput = struct {
     /// view.
     image_pipeline_arn: []const u8,
 
-    /// Specify the maximum number of items to return in a request.
+    /// The maximum number of items to return in a single request.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
@@ -129,10 +129,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListImagePipelineImages
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListImagePipelineImagesOutput {
-    var result: ListImagePipelineImagesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListImagePipelineImagesOutput, body, allocator);
-    }
+    const result: ListImagePipelineImagesOutput = try aws.json.parseJsonObject(
+        ListImagePipelineImagesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

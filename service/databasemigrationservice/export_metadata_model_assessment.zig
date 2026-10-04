@@ -17,7 +17,17 @@ pub const ExportMetadataModelAssessmentInput = struct {
     /// The migration project name or Amazon Resource Name (ARN).
     migration_project_identifier: []const u8,
 
-    /// A value that specifies the database objects to assess.
+    /// A JSON string that identifies the metadata models to export a conversion
+    /// assessment report for. For the selection rule format and examples, see
+    /// [Selection rules in DMS Schema
+    /// Conversion](https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html).
+    ///
+    /// Usage:
+    ///
+    /// * Accepts only source selection rules, where `server-name` in the object
+    ///   locator matches the source data provider.
+    ///
+    /// * Supports only `explicit` rule actions.
     selection_rules: []const u8,
 
     pub const json_field_names = .{

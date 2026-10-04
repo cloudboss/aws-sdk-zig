@@ -1,5 +1,11 @@
+const AIMlflowConfig = @import("ai_mlflow_config.zig").AIMlflowConfig;
+
 /// The output configuration for an AI recommendation job.
 pub const AIRecommendationOutputConfig = struct {
+    /// The MLflow tracking configuration for the job. If you don't specify this
+    /// parameter, MLflow tracking is disabled.
+    mlflow_config: ?AIMlflowConfig = null,
+
     /// The name or Amazon Resource Name (ARN) of the model package group where the
     /// optimized model is registered as a new model package version.
     model_package_group_identifier: ?[]const u8 = null,
@@ -8,6 +14,7 @@ pub const AIRecommendationOutputConfig = struct {
     s3_output_location: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .mlflow_config = "MlflowConfig",
         .model_package_group_identifier = "ModelPackageGroupIdentifier",
         .s3_output_location = "S3OutputLocation",
     };

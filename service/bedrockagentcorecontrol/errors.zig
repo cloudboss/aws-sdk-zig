@@ -14,8 +14,10 @@ pub const ServiceError = struct {
         internal_server_exception: InternalServerException,
         resource_limit_exceeded_exception: ResourceLimitExceededException,
         resource_not_found_exception: ResourceNotFoundException,
+        retryable_conflict_exception: RetryableConflictException,
         service_exception: ServiceException,
         service_quota_exceeded_exception: ServiceQuotaExceededException,
+        subscription_required_exception: SubscriptionRequiredException,
         throttled_exception: ThrottledException,
         throttling_exception: ThrottlingException,
         unauthorized_exception: UnauthorizedException,
@@ -32,8 +34,10 @@ pub const ServiceError = struct {
                 .internal_server_exception => "InternalServerException",
                 .resource_limit_exceeded_exception => "ResourceLimitExceededException",
                 .resource_not_found_exception => "ResourceNotFoundException",
+                .retryable_conflict_exception => "RetryableConflictException",
                 .service_exception => "ServiceException",
                 .service_quota_exceeded_exception => "ServiceQuotaExceededException",
+                .subscription_required_exception => "SubscriptionRequiredException",
                 .throttled_exception => "ThrottledException",
                 .throttling_exception => "ThrottlingException",
                 .unauthorized_exception => "UnauthorizedException",
@@ -52,8 +56,10 @@ pub const ServiceError = struct {
                 .internal_server_exception => |e| e.message,
                 .resource_limit_exceeded_exception => |e| e.message,
                 .resource_not_found_exception => |e| e.message,
+                .retryable_conflict_exception => |e| e.message,
                 .service_exception => |e| e.message,
                 .service_quota_exceeded_exception => |e| e.message,
+                .subscription_required_exception => |e| e.message,
                 .throttled_exception => |e| e.message,
                 .throttling_exception => |e| e.message,
                 .unauthorized_exception => |e| e.message,
@@ -72,8 +78,10 @@ pub const ServiceError = struct {
                 .internal_server_exception => 500,
                 .resource_limit_exceeded_exception => 400,
                 .resource_not_found_exception => 404,
+                .retryable_conflict_exception => 409,
                 .service_exception => 500,
                 .service_quota_exceeded_exception => 402,
+                .subscription_required_exception => 403,
                 .throttled_exception => 429,
                 .throttling_exception => 429,
                 .unauthorized_exception => 401,
@@ -92,8 +100,10 @@ pub const ServiceError = struct {
                 .internal_server_exception => |e| e.request_id,
                 .resource_limit_exceeded_exception => |e| e.request_id,
                 .resource_not_found_exception => |e| e.request_id,
+                .retryable_conflict_exception => |e| e.request_id,
                 .service_exception => |e| e.request_id,
                 .service_quota_exceeded_exception => |e| e.request_id,
+                .subscription_required_exception => |e| e.request_id,
                 .throttled_exception => |e| e.request_id,
                 .throttling_exception => |e| e.request_id,
                 .unauthorized_exception => |e| e.request_id,
@@ -164,12 +174,22 @@ pub const ResourceNotFoundException = struct {
     request_id: []const u8 = "",
 };
 
+pub const RetryableConflictException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
 pub const ServiceException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
 
 pub const ServiceQuotaExceededException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const SubscriptionRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -265,6 +285,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "RetryableConflictException")) {
+        return .{ .arena = arena, .kind = .{ .retryable_conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "ServiceException")) {
         return .{ .arena = arena, .kind = .{ .service_exception = .{
             .message = owned_message,
@@ -273,6 +299,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     }
     if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
         return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "SubscriptionRequiredException")) {
+        return .{ .arena = arena, .kind = .{ .subscription_required_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

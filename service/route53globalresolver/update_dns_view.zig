@@ -177,10 +177,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDNSViewInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateDNSViewOutput {
-    var result: UpdateDNSViewOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateDNSViewOutput, body, allocator);
-    }
+    const result: UpdateDNSViewOutput = try aws.json.parseJsonObject(
+        UpdateDNSViewOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

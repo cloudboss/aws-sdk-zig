@@ -6,7 +6,7 @@ const ChatStreamingConfiguration = @import("chat_streaming_configuration.zig").C
 /// Payload of chat properties to apply when starting a new contact.
 pub const NewSessionDetails = struct {
     /// A custom key-value pair using an attribute map. The attributes are standard
-    /// Amazon Connect attributes. They
+    /// Connect Customer attributes. They
     /// can be accessed in flows just like any other contact attributes.
     ///
     /// There can be up to 32,768 UTF-8 bytes across all key-value pairs per

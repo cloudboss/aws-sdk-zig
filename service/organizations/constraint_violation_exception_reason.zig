@@ -46,6 +46,9 @@ pub const ConstraintViolationExceptionReason = enum {
     transfer_responsibility_target_deletion_in_progress,
     transfer_responsibility_source_deletion_in_progress,
     unsupported_pricing,
+    unmet_billing_prerequisite,
+    account_not_active_for_transfer_responsibility,
+    transfer_responsibility_update_not_allowed,
 
     pub const json_field_names = .{
         .account_number_limit_exceeded = "ACCOUNT_NUMBER_LIMIT_EXCEEDED",
@@ -93,6 +96,9 @@ pub const ConstraintViolationExceptionReason = enum {
         .transfer_responsibility_target_deletion_in_progress = "TRANSFER_RESPONSIBILITY_TARGET_DELETION_IN_PROGRESS",
         .transfer_responsibility_source_deletion_in_progress = "TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS",
         .unsupported_pricing = "UNSUPPORTED_PRICING",
+        .unmet_billing_prerequisite = "UNMET_BILLING_PREREQUISITE",
+        .account_not_active_for_transfer_responsibility = "ACCOUNT_NOT_ACTIVE_FOR_TRANSFER_RESPONSIBILITY",
+        .transfer_responsibility_update_not_allowed = "TRANSFER_RESPONSIBILITY_UPDATE_NOT_ALLOWED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -142,6 +148,9 @@ pub const ConstraintViolationExceptionReason = enum {
             .transfer_responsibility_target_deletion_in_progress => "TRANSFER_RESPONSIBILITY_TARGET_DELETION_IN_PROGRESS",
             .transfer_responsibility_source_deletion_in_progress => "TRANSFER_RESPONSIBILITY_SOURCE_DELETION_IN_PROGRESS",
             .unsupported_pricing => "UNSUPPORTED_PRICING",
+            .unmet_billing_prerequisite => "UNMET_BILLING_PREREQUISITE",
+            .account_not_active_for_transfer_responsibility => "ACCOUNT_NOT_ACTIVE_FOR_TRANSFER_RESPONSIBILITY",
+            .transfer_responsibility_update_not_allowed => "TRANSFER_RESPONSIBILITY_UPDATE_NOT_ALLOWED",
         };
     }
 

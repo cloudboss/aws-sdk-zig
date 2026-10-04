@@ -98,6 +98,7 @@ pub const RunStatus = @import("run_status.zig").RunStatus;
 pub const RunSummary = @import("run_summary.zig").RunSummary;
 pub const S3AccessConfig = @import("s3_access_config.zig").S3AccessConfig;
 pub const SchemaValueType = @import("schema_value_type.zig").SchemaValueType;
+pub const ScratchStorageMode = @import("scratch_storage_mode.zig").ScratchStorageMode;
 pub const SequenceInformation = @import("sequence_information.zig").SequenceInformation;
 pub const SequenceStoreDetail = @import("sequence_store_detail.zig").SequenceStoreDetail;
 pub const SequenceStoreFilter = @import("sequence_store_filter.zig").SequenceStoreFilter;

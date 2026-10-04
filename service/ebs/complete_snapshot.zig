@@ -117,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CompleteSnapshotInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CompleteSnapshotOutput {
-    var result: CompleteSnapshotOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CompleteSnapshotOutput, body, allocator);
-    }
+    const result: CompleteSnapshotOutput = try aws.json.parseJsonObject(
+        CompleteSnapshotOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

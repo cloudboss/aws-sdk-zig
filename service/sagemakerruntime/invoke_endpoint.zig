@@ -70,6 +70,19 @@ pub const InvokeEndpointInput = struct {
     /// Data](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html).
     inference_id: ?[]const u8 = null,
 
+    /// An optional, stable identifier that serves as a routing hint for
+    /// prefix-aware routing.
+    /// The service routes requests with the same prefix and the same identifier to
+    /// the same
+    /// instance. If requests from different applications might have the same prompt
+    /// prefix, set
+    /// a different identifier for each application to differentiate their routing
+    /// decisions.
+    ///
+    /// Applies only to endpoints configured with a
+    /// `RoutingStrategy` of `PREFIX_AWARE`.
+    prefix_aware_id: ?[]const u8 = null,
+
     /// Creates a stateful session or identifies an existing one. You can do one of
     /// the
     /// following:
@@ -123,6 +136,7 @@ pub const InvokeEndpointInput = struct {
         .endpoint_name = "EndpointName",
         .inference_component_name = "InferenceComponentName",
         .inference_id = "InferenceId",
+        .prefix_aware_id = "PrefixAwareId",
         .session_id = "SessionId",
         .target_container_hostname = "TargetContainerHostname",
         .target_model = "TargetModel",
@@ -260,6 +274,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeEndpointInput, co
     if (input.inference_id) |v| {
         try request.headers.put(allocator, "X-Amzn-SageMaker-Inference-Id", v);
     }
+    if (input.prefix_aware_id) |v| {
+        try request.headers.put(allocator, "X-Amzn-SageMaker-Prefix-Aware-Id", v);
+    }
     if (input.session_id) |v| {
         try request.headers.put(allocator, "X-Amzn-SageMaker-Session-Id", v);
     }
@@ -277,7 +294,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeEndpointInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !InvokeEndpointOutput {
-    var result: InvokeEndpointOutput = .{};
+    var result: InvokeEndpointOutput = .{
+        .body = "",
+    };
+    errdefer {
+        if (result.closed_session_id) |value| allocator.free(value);
+        if (result.content_type) |value| allocator.free(value);
+        if (result.custom_attributes) |value| allocator.free(value);
+        if (result.invoked_production_variant) |value| allocator.free(value);
+        if (result.new_session_id) |value| allocator.free(value);
+        allocator.free(result.body);
+    }
     result.body = try allocator.dupe(u8, body);
     _ = status;
     if (headers.get("x-amzn-sagemaker-closed-session-id")) |value| {

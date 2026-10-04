@@ -23,6 +23,10 @@ pub const TrainedModelSummary = struct {
     /// The membership ID of the member that created the trained model.
     membership_identifier: []const u8,
 
+    /// The account ID of the member that is responsible for paying for model
+    /// training costs.
+    ml_model_training_payer_account_id: ?[]const u8 = null,
+
     /// The name of the trained model.
     name: []const u8,
 
@@ -45,6 +49,7 @@ pub const TrainedModelSummary = struct {
         .description = "description",
         .incremental_training_data_channels = "incrementalTrainingDataChannels",
         .membership_identifier = "membershipIdentifier",
+        .ml_model_training_payer_account_id = "mlModelTrainingPayerAccountId",
         .name = "name",
         .status = "status",
         .trained_model_arn = "trainedModelArn",

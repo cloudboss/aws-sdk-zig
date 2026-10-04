@@ -1,10 +1,8 @@
 /// The error object for representing failures in the
-/// `BatchDeleteTaxRegistration`
-/// operation.
+/// `BatchDeleteTaxRegistration` operation.
 pub const BatchDeleteTaxRegistrationError = struct {
     /// The unique account identifier for the account whose tax registration
-    /// couldn't be deleted
-    /// during the `BatchDeleteTaxRegistration` operation.
+    /// couldn't be deleted during the `BatchDeleteTaxRegistration` operation.
     account_id: []const u8,
 
     /// The error code for an individual failure in BatchDeleteTaxRegistration

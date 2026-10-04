@@ -27,7 +27,7 @@ pub const UpdateConfigurationBundleInput = struct {
     client_token: ?[]const u8 = null,
 
     /// A commit message describing the changes in this version.
-    commit_message: ?[]const u8 = null,
+    commit_message: []const u8,
 
     /// The updated component configurations. Creates a new version of the bundle.
     components: ?[]const aws.map.MapEntry(ComponentConfiguration) = null,
@@ -39,11 +39,16 @@ pub const UpdateConfigurationBundleInput = struct {
     /// The updated description for the configuration bundle.
     description: ?[]const u8 = null,
 
+    /// Optional KMS key ARN for encrypting component configurations. If provided,
+    /// components will be encrypted with this key. If the bundle already has a KMS
+    /// key, this rotates to the new key.
+    kms_key_arn: ?[]const u8 = null,
+
     /// A list of parent version identifiers for lineage tracking. Regular commits
     /// have a single parent. Merge commits have two parents: the target branch
     /// parent and the source branch parent. If the branch already exists, the first
     /// parent must be the latest version on that branch.
-    parent_version_ids: ?[]const []const u8 = null,
+    parent_version_ids: []const []const u8,
 
     pub const json_field_names = .{
         .branch_name = "branchName",
@@ -54,6 +59,7 @@ pub const UpdateConfigurationBundleInput = struct {
         .components = "components",
         .created_by = "createdBy",
         .description = "description",
+        .kms_key_arn = "kmsKeyArn",
         .parent_version_ids = "parentVersionIds",
     };
 };
@@ -136,12 +142,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateConfigurationBund
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (input.commit_message) |v| {
-        if (has_prev) try body_buf.appendSlice(allocator, ",");
-        try body_buf.appendSlice(allocator, "\"commitMessage\":");
-        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
-        has_prev = true;
-    }
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"commitMessage\":");
+    try aws.json.writeValue(@TypeOf(input.commit_message), input.commit_message, allocator, &body_buf);
+    has_prev = true;
     if (input.components) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"components\":");
@@ -160,12 +164,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateConfigurationBund
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (input.parent_version_ids) |v| {
+    if (input.kms_key_arn) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
-        try body_buf.appendSlice(allocator, "\"parentVersionIds\":");
+        try body_buf.appendSlice(allocator, "\"kmsKeyArn\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"parentVersionIds\":");
+    try aws.json.writeValue(@TypeOf(input.parent_version_ids), input.parent_version_ids, allocator, &body_buf);
+    has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -182,10 +190,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateConfigurationBund
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateConfigurationBundleOutput {
-    var result: UpdateConfigurationBundleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateConfigurationBundleOutput, body, allocator);
-    }
+    const result: UpdateConfigurationBundleOutput = try aws.json.parseJsonObject(
+        UpdateConfigurationBundleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

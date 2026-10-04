@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateEksAnywhereSubscr
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateEksAnywhereSubscriptionOutput {
-    var result: UpdateEksAnywhereSubscriptionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateEksAnywhereSubscriptionOutput, body, allocator);
-    }
+    const result: UpdateEksAnywhereSubscriptionOutput = try aws.json.parseJsonObject(
+        UpdateEksAnywhereSubscriptionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

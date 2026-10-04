@@ -1,3 +1,5 @@
+const DashAudioTimelinePattern = @import("dash_audio_timeline_pattern.zig").DashAudioTimelinePattern;
+const DashAvailabilityStartTimeConfiguration = @import("dash_availability_start_time_configuration.zig").DashAvailabilityStartTimeConfiguration;
 const DashBaseUrl = @import("dash_base_url.zig").DashBaseUrl;
 const DashCompactness = @import("dash_compactness.zig").DashCompactness;
 const DashDrmSignaling = @import("dash_drm_signaling.zig").DashDrmSignaling;
@@ -14,6 +16,17 @@ const DashUtcTiming = @import("dash_utc_timing.zig").DashUtcTiming;
 
 /// Retrieve the DASH manifest configuration.
 pub const GetDashManifestConfiguration = struct {
+    /// How MediaPackage represents the audio timeline in the DASH manifest, using
+    /// DASH Segment Duration Patternization for audio adaptation sets. `PATTERNED`
+    /// indicates that MediaPackage uses a pattern-based segment template for audio,
+    /// reducing manifest size. `NONE` indicates that the manifest contains an
+    /// explicit timeline for each audio segment.
+    audio_timeline_pattern: ?DashAudioTimelinePattern = null,
+
+    /// The configuration for the DASH `availabilityStartTime` attribute of the
+    /// Media Presentation Description (MPD).
+    availability_start_time_configuration: ?DashAvailabilityStartTimeConfiguration = null,
+
     /// The base URL to use for retrieving segments.
     base_urls: ?[]const DashBaseUrl = null,
 
@@ -97,6 +110,8 @@ pub const GetDashManifestConfiguration = struct {
     utc_timing: ?DashUtcTiming = null,
 
     pub const json_field_names = .{
+        .audio_timeline_pattern = "AudioTimelinePattern",
+        .availability_start_time_configuration = "AvailabilityStartTimeConfiguration",
         .base_urls = "BaseUrls",
         .compactness = "Compactness",
         .drm_signaling = "DrmSignaling",

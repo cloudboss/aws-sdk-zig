@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRuleGroupsNamespace
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListRuleGroupsNamespacesOutput {
-    var result: ListRuleGroupsNamespacesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListRuleGroupsNamespacesOutput, body, allocator);
-    }
+    const result: ListRuleGroupsNamespacesOutput = try aws.json.parseJsonObject(
+        ListRuleGroupsNamespacesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSolNetworkOperation
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListSolNetworkOperationsOutput {
-    var result: ListSolNetworkOperationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListSolNetworkOperationsOutput, body, allocator);
-    }
+    const result: ListSolNetworkOperationsOutput = try aws.json.parseJsonObject(
+        ListSolNetworkOperationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

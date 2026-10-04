@@ -1,3 +1,4 @@
+const DomainListType = @import("domain_list_type.zig").DomainListType;
 const FirewallDomainListStatus = @import("firewall_domain_list_status.zig").FirewallDomainListStatus;
 
 /// High-level information about a list of firewall domains for use in a
@@ -8,6 +9,9 @@ const FirewallDomainListStatus = @import("firewall_domain_list_status.zig").Fire
 pub const FirewallDomainList = struct {
     /// The Amazon Resource Name (ARN) of the firewall domain list.
     arn: ?[]const u8 = null,
+
+    /// The category of the domain list.
+    category: ?[]const u8 = null,
 
     /// The date and time that the domain list was created, in Unix time format and
     /// Coordinated Universal Time (UTC).
@@ -25,6 +29,9 @@ pub const FirewallDomainList = struct {
 
     /// The ID of the domain list.
     id: ?[]const u8 = null,
+
+    /// The type of the managed domain list, for example `THREAT`.
+    managed_list_type: ?DomainListType = null,
 
     /// The owner of the list, used only for lists that are not managed by you. For
     /// example, the managed domain list `AWSManagedDomainsMalwareDomainList` has
@@ -46,10 +53,12 @@ pub const FirewallDomainList = struct {
 
     pub const json_field_names = .{
         .arn = "Arn",
+        .category = "Category",
         .creation_time = "CreationTime",
         .creator_request_id = "CreatorRequestId",
         .domain_count = "DomainCount",
         .id = "Id",
+        .managed_list_type = "ManagedListType",
         .managed_owner_name = "ManagedOwnerName",
         .modification_time = "ModificationTime",
         .name = "Name",

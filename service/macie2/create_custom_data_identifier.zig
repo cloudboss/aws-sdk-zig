@@ -201,10 +201,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCustomDataIdentif
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCustomDataIdentifierOutput {
-    var result: CreateCustomDataIdentifierOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCustomDataIdentifierOutput, body, allocator);
-    }
+    const result: CreateCustomDataIdentifierOutput = try aws.json.parseJsonObject(
+        CreateCustomDataIdentifierOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

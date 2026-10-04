@@ -1,3 +1,5 @@
+const EumsSmsConfigurationType = @import("eums_sms_configuration_type.zig").EumsSmsConfigurationType;
+
 /// User pool configuration for delivery of SMS messages with Amazon Simple
 /// Notification Service. To send SMS
 /// messages with Amazon SNS in the Amazon Web Services Region that you want,
@@ -5,6 +7,15 @@
 /// Identity and Access Management (IAM) role in your Amazon Web Services
 /// account.
 pub const SmsConfigurationType = struct {
+    /// The configuration for sending SMS messages through Amazon Web Services End
+    /// User Messaging SMS, as
+    /// an alternative to Amazon SNS. In a user pool, provide either the Amazon SNS
+    /// configuration
+    /// (`SnsCallerArn`) or this configuration, but not both. In Amazon Web Services
+    /// Regions
+    /// where Amazon SNS is not available, this configuration is required.
+    eums_sms: ?EumsSmsConfigurationType = null,
+
     /// The external ID provides additional security for your IAM role. You can use
     /// an
     /// `ExternalId` with the IAM role that you use with Amazon SNS to send SMS
@@ -32,7 +43,7 @@ pub const SmsConfigurationType = struct {
     /// messages. SMS
     /// messages are subject to a [spending
     /// limit](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html).
-    sns_caller_arn: []const u8,
+    sns_caller_arn: []const u8 = "",
 
     /// The Amazon Web Services Region to use with Amazon SNS integration. You can
     /// choose the same Region as your
@@ -47,6 +58,7 @@ pub const SmsConfigurationType = struct {
     sns_region: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .eums_sms = "EumsSms",
         .external_id = "ExternalId",
         .sns_caller_arn = "SnsCallerArn",
         .sns_region = "SnsRegion",

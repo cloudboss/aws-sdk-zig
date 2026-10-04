@@ -11,15 +11,14 @@ pub const ConfigurationOptionDescription = struct {
     ///   application
     /// availability.
     ///
-    /// * `RestartEnvironment` : The environment is entirely restarted, all AWS
-    ///   resources
-    /// are deleted and recreated, and the environment is unavailable during the
-    /// process.
+    /// * `RestartEnvironment` : The environment is entirely restarted, all A
+    ///   resources are deleted and recreated,
+    /// and the environment is unavailable during the process.
     ///
     /// * `RestartApplicationServer` : The environment is available the entire time.
-    /// However, a short application outage occurs when the application servers on
-    /// the running
-    /// Amazon EC2 instances are restarted.
+    ///   However, a short application
+    /// outage occurs when the application servers on the running Amazon EC2
+    /// instances are restarted.
     change_severity: ?[]const u8 = null,
 
     /// The default value for this configuration option.
@@ -43,7 +42,8 @@ pub const ConfigurationOptionDescription = struct {
     /// The name of the configuration option.
     name: ?[]const u8 = null,
 
-    /// A unique namespace identifying the option's associated AWS resource.
+    /// A unique namespace identifying the option's associated Amazon Web Services
+    /// resource.
     namespace: ?[]const u8 = null,
 
     /// If specified, the configuration option must be a string value that satisfies

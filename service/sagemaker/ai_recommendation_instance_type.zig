@@ -25,6 +25,12 @@ pub const AIRecommendationInstanceType = enum {
     ml_g6_e_16_xlarge,
     ml_g6_e_24_xlarge,
     ml_g6_e_48_xlarge,
+    ml_g7_2_xlarge,
+    ml_g7_4_xlarge,
+    ml_g7_8_xlarge,
+    ml_g7_12_xlarge,
+    ml_g7_24_xlarge,
+    ml_g7_48_xlarge,
     ml_g7_e_2_xlarge,
     ml_g7_e_4_xlarge,
     ml_g7_e_8_xlarge,
@@ -40,6 +46,7 @@ pub const AIRecommendationInstanceType = enum {
     ml_p5_48_xlarge,
     ml_p5_e_48_xlarge,
     ml_p5_en_48_xlarge,
+    ml_p6_b200_48_xlarge,
 
     pub const json_field_names = .{
         .ml_g5_xlarge = "ml.g5.xlarge",
@@ -66,6 +73,12 @@ pub const AIRecommendationInstanceType = enum {
         .ml_g6_e_16_xlarge = "ml.g6e.16xlarge",
         .ml_g6_e_24_xlarge = "ml.g6e.24xlarge",
         .ml_g6_e_48_xlarge = "ml.g6e.48xlarge",
+        .ml_g7_2_xlarge = "ml.g7.2xlarge",
+        .ml_g7_4_xlarge = "ml.g7.4xlarge",
+        .ml_g7_8_xlarge = "ml.g7.8xlarge",
+        .ml_g7_12_xlarge = "ml.g7.12xlarge",
+        .ml_g7_24_xlarge = "ml.g7.24xlarge",
+        .ml_g7_48_xlarge = "ml.g7.48xlarge",
         .ml_g7_e_2_xlarge = "ml.g7e.2xlarge",
         .ml_g7_e_4_xlarge = "ml.g7e.4xlarge",
         .ml_g7_e_8_xlarge = "ml.g7e.8xlarge",
@@ -81,6 +94,7 @@ pub const AIRecommendationInstanceType = enum {
         .ml_p5_48_xlarge = "ml.p5.48xlarge",
         .ml_p5_e_48_xlarge = "ml.p5e.48xlarge",
         .ml_p5_en_48_xlarge = "ml.p5en.48xlarge",
+        .ml_p6_b200_48_xlarge = "ml.p6-b200.48xlarge",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -109,6 +123,12 @@ pub const AIRecommendationInstanceType = enum {
             .ml_g6_e_16_xlarge => "ml.g6e.16xlarge",
             .ml_g6_e_24_xlarge => "ml.g6e.24xlarge",
             .ml_g6_e_48_xlarge => "ml.g6e.48xlarge",
+            .ml_g7_2_xlarge => "ml.g7.2xlarge",
+            .ml_g7_4_xlarge => "ml.g7.4xlarge",
+            .ml_g7_8_xlarge => "ml.g7.8xlarge",
+            .ml_g7_12_xlarge => "ml.g7.12xlarge",
+            .ml_g7_24_xlarge => "ml.g7.24xlarge",
+            .ml_g7_48_xlarge => "ml.g7.48xlarge",
             .ml_g7_e_2_xlarge => "ml.g7e.2xlarge",
             .ml_g7_e_4_xlarge => "ml.g7e.4xlarge",
             .ml_g7_e_8_xlarge => "ml.g7e.8xlarge",
@@ -124,6 +144,7 @@ pub const AIRecommendationInstanceType = enum {
             .ml_p5_48_xlarge => "ml.p5.48xlarge",
             .ml_p5_e_48_xlarge => "ml.p5e.48xlarge",
             .ml_p5_en_48_xlarge => "ml.p5en.48xlarge",
+            .ml_p6_b200_48_xlarge => "ml.p6-b200.48xlarge",
         };
     }
 

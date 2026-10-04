@@ -14,6 +14,7 @@ pub const UsageFeature = enum {
     fargate_runtime_monitoring,
     rds_dbi_protection_provisioned,
     rds_dbi_protection_serverless,
+    ai_protection,
 
     pub const json_field_names = .{
         .flow_logs = "FLOW_LOGS",
@@ -29,6 +30,7 @@ pub const UsageFeature = enum {
         .fargate_runtime_monitoring = "FARGATE_RUNTIME_MONITORING",
         .rds_dbi_protection_provisioned = "RDS_DBI_PROTECTION_PROVISIONED",
         .rds_dbi_protection_serverless = "RDS_DBI_PROTECTION_SERVERLESS",
+        .ai_protection = "AI_PROTECTION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -46,6 +48,7 @@ pub const UsageFeature = enum {
             .fargate_runtime_monitoring => "FARGATE_RUNTIME_MONITORING",
             .rds_dbi_protection_provisioned => "RDS_DBI_PROTECTION_PROVISIONED",
             .rds_dbi_protection_serverless => "RDS_DBI_PROTECTION_SERVERLESS",
+            .ai_protection => "AI_PROTECTION",
         };
     }
 

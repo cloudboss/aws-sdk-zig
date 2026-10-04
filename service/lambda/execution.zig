@@ -18,6 +18,11 @@ pub const Execution = struct {
     /// The Amazon Resource Name (ARN) of the Lambda function.
     function_arn: []const u8,
 
+    /// The ARN of the Key Management Service (KMS) customer managed key that is
+    /// used to encrypt your durable execution's payload data, including input,
+    /// output, and error payloads.
+    kms_key_arn: ?[]const u8 = null,
+
     /// The date and time when the durable execution started, in [ISO-8601
     /// format](https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
     start_timestamp: i64,
@@ -30,6 +35,7 @@ pub const Execution = struct {
         .durable_execution_name = "DurableExecutionName",
         .end_timestamp = "EndTimestamp",
         .function_arn = "FunctionArn",
+        .kms_key_arn = "KMSKeyArn",
         .start_timestamp = "StartTimestamp",
         .status = "Status",
     };

@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListControlPanelsInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListControlPanelsOutput {
-    var result: ListControlPanelsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListControlPanelsOutput, body, allocator);
-    }
+    const result: ListControlPanelsOutput = try aws.json.parseJsonObject(
+        ListControlPanelsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

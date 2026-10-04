@@ -368,8 +368,6 @@ pub const Client = struct {
     /// seconds, the poll
     /// returns a `taskToken` with a null string.
     ///
-    /// This API action isn't logged in CloudTrail.
-    ///
     /// Workers should set their client side socket timeout to at least 65 seconds
     /// (5 seconds
     /// higher than the maximum time the service may hold the poll request).
@@ -425,8 +423,9 @@ pub const Client = struct {
     /// You can also provide a state machine
     /// [alias](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html) ARN or [version](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html) ARN to list the executions associated with a specific alias or version.
     ///
-    /// Results are
-    /// sorted by time, with the most recent execution first.
+    /// Results are sorted by time, with the most recent execution first. Running
+    /// executions are sorted by their `startDate` or `redriveDate`, and other
+    /// executions are sorted by their `stopDate`.
     ///
     /// If `nextToken` is returned, there are more results available. The value of
     /// `nextToken` is a unique pagination token for each page.
@@ -438,7 +437,9 @@ pub const Client = struct {
     /// This operation is eventually consistent. The results are best effort and may
     /// not reflect very recent updates and changes.
     ///
-    /// This API action is not supported by `EXPRESS` state machines.
+    /// This API action is not supported by `EXPRESS` state machines. However, you
+    /// may list `EXPRESS` children started by a map run using the `mapRunArn`
+    /// parameter.
     pub fn listExecutions(self: *Self, allocator: std.mem.Allocator, input: list_executions.ListExecutionsInput, options: CallOptions) !list_executions.ListExecutionsOutput {
         return list_executions.execute(self, allocator, input, options);
     }
@@ -686,7 +687,8 @@ pub const Client = struct {
     /// response as the
     /// original request. If the execution is closed or if the input is different,
     /// it returns a
-    /// `400 ExecutionAlreadyExists` error. You can reuse names after 90 days.
+    /// `400 ExecutionAlreadyExists` error. You can reuse the name 90 days after it
+    /// closes.
     ///
     /// `StartExecution` isn't idempotent for `EXPRESS` workflows.
     pub fn startExecution(self: *Self, allocator: std.mem.Allocator, input: start_execution.StartExecutionInput, options: CallOptions) !start_execution.StartExecutionOutput {
@@ -704,8 +706,6 @@ pub const Client = struct {
     /// as permissions errors, limit errors, or issues with your state machine code
     /// and
     /// configuration.
-    ///
-    /// This API action isn't logged in CloudTrail.
     pub fn startSyncExecution(self: *Self, allocator: std.mem.Allocator, input: start_sync_execution.StartSyncExecutionInput, options: CallOptions) !start_sync_execution.StartSyncExecutionOutput {
         return start_sync_execution.execute(self, allocator, input, options);
     }

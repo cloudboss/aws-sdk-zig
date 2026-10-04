@@ -2,7 +2,8 @@ const aws = @import("aws");
 
 const LifecyclePolicyResourceSelectionRecipe = @import("lifecycle_policy_resource_selection_recipe.zig").LifecyclePolicyResourceSelectionRecipe;
 
-/// Resource selection criteria for the lifecycle policy.
+/// Resource selection criteria for the lifecycle policy. You must provide
+/// exactly one selection criteria: either recipes or a tag map, not both.
 pub const LifecyclePolicyResourceSelection = struct {
     /// A list of recipes that are used as selection criteria for the output
     /// images that the lifecycle policy applies to.

@@ -7,6 +7,14 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Namespace = @import("namespace.zig").Namespace;
 
 pub const RestoreFromRecoveryPointInput = struct {
+    /// If `true`, maintain existing data sharing, zero-ETL and S3 event
+    /// integrations when restoring. Otherwise, integrations will not be maintained
+    /// after the restore operation. Integrations are only maintained when restored
+    /// to the same serverless namespace.
+    ///
+    /// Default: true
+    maintain_integration: ?bool = null,
+
     /// The name of the namespace to restore data into.
     namespace_name: []const u8,
 
@@ -17,6 +25,7 @@ pub const RestoreFromRecoveryPointInput = struct {
     workgroup_name: []const u8,
 
     pub const json_field_names = .{
+        .maintain_integration = "maintainIntegration",
         .namespace_name = "namespaceName",
         .recovery_point_id = "recoveryPointId",
         .workgroup_name = "workgroupName",

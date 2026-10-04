@@ -112,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTrafficDistribution
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTrafficDistributionGroupUsersOutput {
-    var result: ListTrafficDistributionGroupUsersOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListTrafficDistributionGroupUsersOutput, body, allocator);
-    }
+    const result: ListTrafficDistributionGroupUsersOutput = try aws.json.parseJsonObject(
+        ListTrafficDistributionGroupUsersOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -2,7 +2,9 @@ const LifecyclePolicyDetailAction = @import("lifecycle_policy_detail_action.zig"
 const LifecyclePolicyDetailExclusionRules = @import("lifecycle_policy_detail_exclusion_rules.zig").LifecyclePolicyDetailExclusionRules;
 const LifecyclePolicyDetailFilter = @import("lifecycle_policy_detail_filter.zig").LifecyclePolicyDetailFilter;
 
-/// The configuration details for a lifecycle policy resource.
+/// Defines one lifecycle policy rule: the action to take, the filter that
+/// determines which resources the rule applies to, and optional exclusion
+/// rules.
 pub const LifecyclePolicyDetail = struct {
     /// Configuration details for the policy action.
     action: LifecyclePolicyDetailAction,

@@ -12,6 +12,7 @@ pub const FreeTrialFeatureResult = enum {
     eks_runtime_monitoring,
     ec2_runtime_monitoring,
     fargate_runtime_monitoring,
+    ai_protection,
 
     pub const json_field_names = .{
         .flow_logs = "FLOW_LOGS",
@@ -25,6 +26,7 @@ pub const FreeTrialFeatureResult = enum {
         .eks_runtime_monitoring = "EKS_RUNTIME_MONITORING",
         .ec2_runtime_monitoring = "EC2_RUNTIME_MONITORING",
         .fargate_runtime_monitoring = "FARGATE_RUNTIME_MONITORING",
+        .ai_protection = "AI_PROTECTION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -40,6 +42,7 @@ pub const FreeTrialFeatureResult = enum {
             .eks_runtime_monitoring => "EKS_RUNTIME_MONITORING",
             .ec2_runtime_monitoring => "EC2_RUNTIME_MONITORING",
             .fargate_runtime_monitoring => "FARGATE_RUNTIME_MONITORING",
+            .ai_protection => "AI_PROTECTION",
         };
     }
 

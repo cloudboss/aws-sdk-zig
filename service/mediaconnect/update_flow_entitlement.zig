@@ -139,10 +139,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateFlowEntitlementIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateFlowEntitlementOutput {
-    var result: UpdateFlowEntitlementOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateFlowEntitlementOutput, body, allocator);
-    }
+    const result: UpdateFlowEntitlementOutput = try aws.json.parseJsonObject(
+        UpdateFlowEntitlementOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

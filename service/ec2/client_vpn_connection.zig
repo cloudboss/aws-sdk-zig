@@ -2,6 +2,10 @@ const ClientVpnConnectionStatus = @import("client_vpn_connection_status.zig").Cl
 
 /// Describes a client connection.
 pub const ClientVpnConnection = struct {
+    /// The date and time the authorization policy was last evaluated for the client
+    /// connection, if applicable.
+    authorization_policy_last_evaluated_time: ?[]const u8 = null,
+
     /// The IP address of the client.
     client_ip: ?[]const u8 = null,
 

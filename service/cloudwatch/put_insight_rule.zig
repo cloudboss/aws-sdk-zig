@@ -9,21 +9,21 @@ const serde = @import("serde.zig");
 
 pub const PutInsightRuleInput = struct {
     /// Specify `true` to have this rule evaluate log events after they have been
-    /// transformed by
-    /// [Log
-    /// transformation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html). If you specify `true`, then the log events in log groups that have transformers will
-    /// be evaluated by Contributor Insights after being transformed. Log groups
-    /// that don't have
-    /// transformers will still have their original log events evaluated by
-    /// Contributor Insights.
+    /// transformed by [Log
+    /// transformation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatch-Logs-Transformation.html). If you specify `true`, then the log events in log
+    /// groups that have transformers will be evaluated by Contributor Insights
+    /// after being
+    /// transformed. Log groups that don't have transformers will still have their
+    /// original log
+    /// events evaluated by Contributor Insights.
     ///
     /// The default is `false`
     ///
     /// If a log group has a transformer, and transformation fails for some log
-    /// events, those log events won't be evaluated by
-    /// Contributor Insights. For information about investigating log transformation
-    /// failures, see
-    /// [Transformation metrics and
+    /// events,
+    /// those log events won't be evaluated by Contributor Insights. For information
+    /// about
+    /// investigating log transformation failures, see [Transformation metrics and
     /// errors](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Transformation-Errors-Metrics.html).
     apply_on_transformed_logs: ?bool = null,
 

@@ -40,10 +40,10 @@ pub const ModifyDBInstanceInput = struct {
     ///
     /// If you are using SSL/TLS to connect to the DB instance, see [Updating Your
     /// Amazon DocumentDB TLS
-    /// Certificates](https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html) and
+    /// Certificates](https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html) and
     /// [
     /// Encrypting Data in
-    /// Transit](https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html) in the *Amazon DocumentDB Developer
+    /// Transit](https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html) in the *Amazon DocumentDB Developer
     /// Guide*.
     certificate_rotation_restart: ?bool = null,
 
@@ -74,7 +74,7 @@ pub const ModifyDBInstanceInput = struct {
     /// Instance. For
     /// more information, see [Using Amazon
     /// Performance
-    /// Insights](https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html).
+    /// Insights](https://docs.aws.amazon.com/documentdb/latest/devguide/performance-insights.html).
     enable_performance_insights: ?bool = null,
 
     /// The new instance identifier for the instance when renaming an instance. When

@@ -175,10 +175,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ForecastGeofenceEventsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ForecastGeofenceEventsOutput {
-    var result: ForecastGeofenceEventsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ForecastGeofenceEventsOutput, body, allocator);
-    }
+    const result: ForecastGeofenceEventsOutput = try aws.json.parseJsonObject(
+        ForecastGeofenceEventsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

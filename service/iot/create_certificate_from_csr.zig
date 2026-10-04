@@ -105,10 +105,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCertificateFromCs
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCertificateFromCsrOutput {
-    var result: CreateCertificateFromCsrOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCertificateFromCsrOutput, body, allocator);
-    }
+    const result: CreateCertificateFromCsrOutput = try aws.json.parseJsonObject(
+        CreateCertificateFromCsrOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

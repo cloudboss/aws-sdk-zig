@@ -1,5 +1,9 @@
 /// A reference to a child function within a `SEQUENTIAL_EXECUTOR` function.
 pub const FunctionRef = struct {
+    /// An optional alternate name for the function within the executor. If omitted,
+    /// MediaTailor uses the function identifier.
+    alias: ?[]const u8 = null,
+
     /// The identifier of the child function to execute in this step.
     function_id: ?[]const u8 = null,
 
@@ -11,6 +15,7 @@ pub const FunctionRef = struct {
     run_condition: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .alias = "Alias",
         .function_id = "FunctionId",
         .run_condition = "RunCondition",
     };

@@ -13,7 +13,7 @@ pub const ListDatabasesInput = struct {
 
     /// The name of the database. This parameter is required when authenticating
     /// using either Secrets Manager or temporary credentials.
-    database: []const u8,
+    database: ?[]const u8 = null,
 
     /// The database user name. This parameter is required when connecting to a
     /// cluster as a database user and authenticating using temporary credentials.

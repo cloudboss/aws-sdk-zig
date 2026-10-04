@@ -138,10 +138,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchDataTablesInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchDataTablesOutput {
-    var result: SearchDataTablesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchDataTablesOutput, body, allocator);
-    }
+    const result: SearchDataTablesOutput = try aws.json.parseJsonObject(
+        SearchDataTablesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -8,6 +8,7 @@ pub const ServiceError = struct {
     pub const Kind = union(enum) {
         access_denied_by_meta_exception: AccessDeniedByMetaException,
         access_denied_exception: AccessDeniedException,
+        conflict_exception: ConflictException,
         dependency_exception: DependencyException,
         internal_service_exception: InternalServiceException,
         invalid_parameters_exception: InvalidParametersException,
@@ -21,6 +22,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .access_denied_by_meta_exception => "AccessDeniedByMetaException",
                 .access_denied_exception => "AccessDeniedException",
+                .conflict_exception => "ConflictException",
                 .dependency_exception => "DependencyException",
                 .internal_service_exception => "InternalServiceException",
                 .invalid_parameters_exception => "InvalidParametersException",
@@ -36,6 +38,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .access_denied_by_meta_exception => |e| e.message,
                 .access_denied_exception => |e| e.message,
+                .conflict_exception => |e| e.message,
                 .dependency_exception => |e| e.message,
                 .internal_service_exception => |e| e.message,
                 .invalid_parameters_exception => |e| e.message,
@@ -51,6 +54,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .access_denied_by_meta_exception => 403,
                 .access_denied_exception => 403,
+                .conflict_exception => 409,
                 .dependency_exception => 502,
                 .internal_service_exception => 500,
                 .invalid_parameters_exception => 400,
@@ -66,6 +70,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .access_denied_by_meta_exception => |e| e.request_id,
                 .access_denied_exception => |e| e.request_id,
+                .conflict_exception => |e| e.request_id,
                 .dependency_exception => |e| e.request_id,
                 .internal_service_exception => |e| e.request_id,
                 .invalid_parameters_exception => |e| e.request_id,
@@ -105,6 +110,11 @@ pub const AccessDeniedByMetaException = struct {
 };
 
 pub const AccessDeniedException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -175,6 +185,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     }
     if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
         return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

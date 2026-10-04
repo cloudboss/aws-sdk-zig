@@ -143,10 +143,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAppVersionAppComp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateAppVersionAppComponentOutput {
-    var result: UpdateAppVersionAppComponentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateAppVersionAppComponentOutput, body, allocator);
-    }
+    const result: UpdateAppVersionAppComponentOutput = try aws.json.parseJsonObject(
+        UpdateAppVersionAppComponentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

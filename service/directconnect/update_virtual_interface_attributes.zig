@@ -18,6 +18,18 @@ pub const UpdateVirtualInterfaceAttributesInput = struct {
     /// and 8500. The default value is 1500.
     mtu: ?i32 = null,
 
+    /// The number of inbound IPv4 route prefixes to allocate to the virtual
+    /// interface. Not applicable to public virtual interfaces.
+    prefix_pool_allocated_count_ipv_4: ?i32 = null,
+
+    /// The number of inbound IPv6 route prefixes to allocate to the virtual
+    /// interface. Not applicable to public virtual interfaces.
+    prefix_pool_allocated_count_ipv_6: ?i32 = null,
+
+    /// The rate limit (bandwidth allocation) to apply to the virtual interface. Use
+    /// this to update the bandwidth allocation on an existing virtual interface.
+    rate_limit: ?[]const u8 = null,
+
     /// The ID of the virtual private interface.
     virtual_interface_id: []const u8,
 
@@ -27,6 +39,9 @@ pub const UpdateVirtualInterfaceAttributesInput = struct {
     pub const json_field_names = .{
         .enable_site_link = "enableSiteLink",
         .mtu = "mtu",
+        .prefix_pool_allocated_count_ipv_4 = "prefixPoolAllocatedCountIpv4",
+        .prefix_pool_allocated_count_ipv_6 = "prefixPoolAllocatedCountIpv6",
+        .rate_limit = "rateLimit",
         .virtual_interface_id = "virtualInterfaceId",
         .virtual_interface_name = "virtualInterfaceName",
     };

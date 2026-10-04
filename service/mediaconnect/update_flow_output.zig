@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const UpdateEncryption = @import("update_encryption.zig").UpdateEncryption;
 const MediaStreamOutputConfigurationRequest = @import("media_stream_output_configuration_request.zig").MediaStreamOutputConfigurationRequest;
+const NdiOutputTimecodeSource = @import("ndi_output_timecode_source.zig").NdiOutputTimecodeSource;
 const OutputStatus = @import("output_status.zig").OutputStatus;
 const Protocol = @import("protocol.zig").Protocol;
 const State = @import("state.zig").State;
@@ -49,6 +50,17 @@ pub const UpdateFlowOutputInput = struct {
     /// latency of the stream is set to the highest number between the sender’s
     /// minimum latency and the receiver’s minimum latency.
     min_latency: ?i32 = null,
+
+    /// Controls how MediaConnect generates timecodes for NDI output frames. If you
+    /// don't specify this field, MediaConnect leaves the value unchanged.
+    ///
+    /// * `EMBEDDED_TIMECODE` - Preserves timecodes from the input transport stream.
+    ///   The timecodes must be embedded in the video stream as SEI timing messages.
+    ///   If no embedded timecode is detected, MediaConnect uses the UTC system time
+    ///   instead.
+    /// * `UTC_SYSTEM_TIME` - Generates timecodes based on the system clock time
+    ///   when each frame is sent.
+    ndi_output_timecode_source: ?NdiOutputTimecodeSource = null,
 
     /// A suffix for the name of the NDI® sender that the flow creates. If a custom
     /// name isn't specified, MediaConnect uses the output name.
@@ -110,6 +122,7 @@ pub const UpdateFlowOutputInput = struct {
         .max_latency = "MaxLatency",
         .media_stream_output_configurations = "MediaStreamOutputConfigurations",
         .min_latency = "MinLatency",
+        .ndi_output_timecode_source = "NdiOutputTimecodeSource",
         .ndi_program_name = "NdiProgramName",
         .ndi_speed_hq_quality = "NdiSpeedHqQuality",
         .output_arn = "OutputArn",
@@ -223,6 +236,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateFlowOutputInput, 
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.ndi_output_timecode_source) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"NdiOutputTimecodeSource\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.ndi_program_name) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"NdiProgramName\":");
@@ -317,10 +336,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateFlowOutputInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateFlowOutputOutput {
-    var result: UpdateFlowOutputOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateFlowOutputOutput, body, allocator);
-    }
+    const result: UpdateFlowOutputOutput = try aws.json.parseJsonObject(
+        UpdateFlowOutputOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

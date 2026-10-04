@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const UpdatedAuthorizerConfiguration = @import("updated_authorizer_configuration.zig").UpdatedAuthorizerConfiguration;
 const HarnessEnvironmentProviderRequest = @import("harness_environment_provider_request.zig").HarnessEnvironmentProviderRequest;
 const UpdatedHarnessEnvironmentArtifact = @import("updated_harness_environment_artifact.zig").UpdatedHarnessEnvironmentArtifact;
+const HarnessHook = @import("harness_hook.zig").HarnessHook;
 const UpdatedHarnessMemoryConfiguration = @import("updated_harness_memory_configuration.zig").UpdatedHarnessMemoryConfiguration;
 const HarnessModelConfiguration = @import("harness_model_configuration.zig").HarnessModelConfiguration;
 const HarnessSkill = @import("harness_skill.zig").HarnessSkill;
@@ -44,6 +45,11 @@ pub const UpdateHarnessInput = struct {
 
     /// The ID of the harness to update.
     harness_id: []const u8,
+
+    /// The lifecycle hooks to run at defined points in the agent loop. If
+    /// specified, this replaces all existing hooks. If not specified, the existing
+    /// hooks are retained.
+    hooks: ?[]const HarnessHook = null,
 
     /// The maximum number of iterations the agent loop can execute per invocation.
     /// If not specified, the existing value is retained.
@@ -91,6 +97,7 @@ pub const UpdateHarnessInput = struct {
         .environment_variables = "environmentVariables",
         .execution_role_arn = "executionRoleArn",
         .harness_id = "harnessId",
+        .hooks = "hooks",
         .max_iterations = "maxIterations",
         .max_tokens = "maxTokens",
         .memory = "memory",
@@ -193,6 +200,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateHarnessInput, con
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.hooks) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"hooks\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.max_iterations) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"maxIterations\":");
@@ -263,10 +276,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateHarnessInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateHarnessOutput {
-    var result: UpdateHarnessOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateHarnessOutput, body, allocator);
-    }
+    const result: UpdateHarnessOutput = try aws.json.parseJsonObject(
+        UpdateHarnessOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

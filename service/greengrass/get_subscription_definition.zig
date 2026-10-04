@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSubscriptionDefiniti
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSubscriptionDefinitionOutput {
-    var result: GetSubscriptionDefinitionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSubscriptionDefinitionOutput, body, allocator);
-    }
+    const result: GetSubscriptionDefinitionOutput = try aws.json.parseJsonObject(
+        GetSubscriptionDefinitionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

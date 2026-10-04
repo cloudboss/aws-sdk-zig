@@ -1,6 +1,7 @@
 pub const Address = @import("address.zig").Address;
 pub const AlexaSkillStatus = @import("alexa_skill_status.zig").AlexaSkillStatus;
 pub const CallDetails = @import("call_details.zig").CallDetails;
+pub const CallDistributionType = @import("call_distribution_type.zig").CallDistributionType;
 pub const CallLegType = @import("call_leg_type.zig").CallLegType;
 pub const CallingNameStatus = @import("calling_name_status.zig").CallingNameStatus;
 pub const CandidateAddress = @import("candidate_address.zig").CandidateAddress;

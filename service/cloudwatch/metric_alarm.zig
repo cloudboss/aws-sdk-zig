@@ -2,10 +2,12 @@ const ComparisonOperator = @import("comparison_operator.zig").ComparisonOperator
 const Dimension = @import("dimension.zig").Dimension;
 const EvaluationCriteria = @import("evaluation_criteria.zig").EvaluationCriteria;
 const EvaluationState = @import("evaluation_state.zig").EvaluationState;
+const EvaluationWindow = @import("evaluation_window.zig").EvaluationWindow;
 const MetricDataQuery = @import("metric_data_query.zig").MetricDataQuery;
 const StateValue = @import("state_value.zig").StateValue;
 const Statistic = @import("statistic.zig").Statistic;
 const StandardUnit = @import("standard_unit.zig").StandardUnit;
+const WarmUpConfiguration = @import("warm_up_configuration.zig").WarmUpConfiguration;
 
 /// The details about a metric alarm.
 pub const MetricAlarm = struct {
@@ -59,18 +61,30 @@ pub const MetricAlarm = struct {
 
     /// If the value of this field is `PARTIAL_DATA`, it indicates that not all the
     /// available data was able to be retrieved due to quota limitations. For more
-    /// information, see [Create
+    /// information,
+    /// see [Create
     /// alarms on Metrics Insights
     /// queries](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html).
     ///
-    /// If the value of this field is `EVALUATION_ERROR`, it indicates configuration
-    /// errors in alarm setup that require review and correction. Refer to
+    /// If the value of this field is `EVALUATION_ERROR`, it indicates
+    /// configuration errors in alarm setup that require review and correction.
+    /// Refer to
     /// StateReason field of the alarm for more details.
     ///
     /// If the value of this field is `EVALUATION_FAILURE`, it indicates temporary
     /// CloudWatch issues. We recommend manual monitoring until the issue is
     /// resolved
     evaluation_state: ?EvaluationState = null,
+
+    /// The evaluation window that the alarm uses to select the range of metric data
+    /// that it
+    /// evaluates. This is either a sliding window or a wall clock window. For more
+    /// information,
+    /// see [Alarm
+    /// evaluation
+    /// windows](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-evaluation-window.html) in the *CloudWatch User
+    /// Guide*.
+    evaluation_window: ?EvaluationWindow = null,
 
     /// The percentile statistic for the metric associated with the alarm. Specify a
     /// value
@@ -152,6 +166,16 @@ pub const MetricAlarm = struct {
     /// The unit of the metric associated with the alarm.
     unit: ?StandardUnit = null,
 
+    /// The warm-up configuration for the alarm. A warm-up period delays alarm
+    /// evaluation
+    /// after you create or update the alarm. During the warm-up period, the alarm
+    /// stays in
+    /// `INSUFFICIENT_DATA` and does not perform alarm actions.
+    ///
+    /// For more information, see [Alarm warm-up
+    /// periods](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html) in the *Amazon CloudWatch User Guide*.
+    warm_up_configuration: ?WarmUpConfiguration = null,
+
     pub const json_field_names = .{
         .actions_enabled = "ActionsEnabled",
         .alarm_actions = "AlarmActions",
@@ -167,6 +191,7 @@ pub const MetricAlarm = struct {
         .evaluation_interval = "EvaluationInterval",
         .evaluation_periods = "EvaluationPeriods",
         .evaluation_state = "EvaluationState",
+        .evaluation_window = "EvaluationWindow",
         .extended_statistic = "ExtendedStatistic",
         .insufficient_data_actions = "InsufficientDataActions",
         .metric_name = "MetricName",
@@ -184,5 +209,6 @@ pub const MetricAlarm = struct {
         .threshold_metric_id = "ThresholdMetricId",
         .treat_missing_data = "TreatMissingData",
         .unit = "Unit",
+        .warm_up_configuration = "WarmUpConfiguration",
     };
 };

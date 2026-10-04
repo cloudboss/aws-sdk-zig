@@ -38,6 +38,11 @@ pub const DescribeMlflowAppOutput = struct {
     /// List of SageMaker Domain IDs for which this MLflow App is the default.
     default_domain_id_list: ?[]const []const u8 = null,
 
+    /// The ID of the Amazon Web Services KMS key used to encrypt the data at rest
+    /// associated with the MLflow App. This field is absent if the MLflow App is
+    /// not encrypted with a customer-managed key.
+    kms_key_id: ?[]const u8 = null,
+
     last_modified_by: ?UserContext = null,
 
     /// The timestamp when the MLflow App was last modified.
@@ -73,6 +78,7 @@ pub const DescribeMlflowAppOutput = struct {
         .created_by = "CreatedBy",
         .creation_time = "CreationTime",
         .default_domain_id_list = "DefaultDomainIdList",
+        .kms_key_id = "KmsKeyId",
         .last_modified_by = "LastModifiedBy",
         .last_modified_time = "LastModifiedTime",
         .maintenance_status = "MaintenanceStatus",

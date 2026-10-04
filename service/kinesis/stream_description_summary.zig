@@ -1,11 +1,15 @@
 const EncryptionType = @import("encryption_type.zig").EncryptionType;
 const EnhancedMetrics = @import("enhanced_metrics.zig").EnhancedMetrics;
+const RecordDistributionStrategy = @import("record_distribution_strategy.zig").RecordDistributionStrategy;
 const StreamModeDetails = @import("stream_mode_details.zig").StreamModeDetails;
 const StreamStatus = @import("stream_status.zig").StreamStatus;
 const WarmThroughputObject = @import("warm_throughput_object.zig").WarmThroughputObject;
 
 /// Represents the output for DescribeStreamSummary
 pub const StreamDescriptionSummary = struct {
+    /// The number of channels associated with the stream.
+    channel_count: ?i32 = null,
+
     /// The number of enhanced fan-out consumers registered with the stream.
     consumer_count: ?i32 = null,
 
@@ -48,6 +52,14 @@ pub const StreamDescriptionSummary = struct {
 
     /// The number of open shards in the stream.
     open_shard_count: i32,
+
+    /// The record distribution strategy that the stream currently uses. A value of
+    /// `AUTO` indicates that Amazon Kinesis Data Streams distributes records across
+    /// shards using service-managed algorithms. A value of `USER_PARTITION_KEY`
+    /// indicates that shard placement is determined by the partition key that
+    /// producers supply.
+    /// This field is only present for streams that use the on-demand capacity mode.
+    record_distribution_strategy: ?RecordDistributionStrategy = null,
 
     /// The current retention period, in hours.
     retention_period_hours: i32,
@@ -97,12 +109,14 @@ pub const StreamDescriptionSummary = struct {
     warm_throughput: ?WarmThroughputObject = null,
 
     pub const json_field_names = .{
+        .channel_count = "ChannelCount",
         .consumer_count = "ConsumerCount",
         .encryption_type = "EncryptionType",
         .enhanced_monitoring = "EnhancedMonitoring",
         .key_id = "KeyId",
         .max_record_size_in_ki_b = "MaxRecordSizeInKiB",
         .open_shard_count = "OpenShardCount",
+        .record_distribution_strategy = "RecordDistributionStrategy",
         .retention_period_hours = "RetentionPeriodHours",
         .stream_arn = "StreamARN",
         .stream_creation_timestamp = "StreamCreationTimestamp",

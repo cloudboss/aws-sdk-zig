@@ -5,12 +5,14 @@ pub const ModificationResourceEnum = enum {
     user_volume,
     compute_type,
     protocol,
+    nested_virtualization,
 
     pub const json_field_names = .{
         .root_volume = "ROOT_VOLUME",
         .user_volume = "USER_VOLUME",
         .compute_type = "COMPUTE_TYPE",
         .protocol = "PROTOCOL",
+        .nested_virtualization = "NESTED_VIRTUALIZATION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const ModificationResourceEnum = enum {
             .user_volume => "USER_VOLUME",
             .compute_type => "COMPUTE_TYPE",
             .protocol => "PROTOCOL",
+            .nested_virtualization => "NESTED_VIRTUALIZATION",
         };
     }
 

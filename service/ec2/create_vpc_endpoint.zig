@@ -57,18 +57,41 @@ pub const CreateVpcEndpointInput = struct {
     /// attributes.
     private_dns_enabled: ?bool = null,
 
-    /// The Amazon Resource Name (ARN) of a resource configuration that will be
-    /// associated with
-    /// the VPC endpoint of type resource.
+    /// (Resource and Tunnel endpoints only) The Amazon Resource Name (ARN) of a
+    /// resource
+    /// configuration associated with the VPC endpoint. The type of resource
+    /// configuration depends
+    /// on the endpoint type:
+    ///
+    /// * For a Resource endpoint, you can specify a resource configuration that is
+    ///   of type
+    /// `SINGLE`, `GROUP`, or `ARN`. To reach a resource
+    /// that belongs to a group, specify the parent `GROUP` resource
+    /// configuration.
+    ///
+    /// * For a Tunnel endpoint, you can specify a resource configuration that is of
+    ///   type
+    /// `CIDR`.
+    ///
+    /// For more information about the types of resource configurations, see [Types
+    /// of resource
+    /// configurations](https://docs.aws.amazon.com/vpc/latest/privatelink/resource-configuration.html) in the *Amazon Web Services PrivateLink User Guide*.
+    ///
+    /// This request fails if a VPC endpoint owned by a different Amazon Web
+    /// Services account
+    /// already exists on a resource gateway that is enabled for
+    /// `ResourceGatewayCharges`
+    /// payer responsibility.
     resource_configuration_arn: ?[]const u8 = null,
 
     /// (Gateway endpoint) The route table IDs.
     route_table_ids: ?[]const []const u8 = null,
 
-    /// (Interface endpoint) The IDs of the security groups to associate with the
-    /// endpoint network interfaces. If this parameter is not specified, we use the
-    /// default
-    /// security group for the VPC.
+    /// (Interface, Resource, ServiceNetwork, and Tunnel endpoints only) The IDs of
+    /// the security groups
+    /// to associate with the endpoint network interfaces. If this parameter is not
+    /// specified,
+    /// we use the default security group for the VPC.
     security_group_ids: ?[]const []const u8 = null,
 
     /// The name of the endpoint service.
@@ -85,16 +108,25 @@ pub const CreateVpcEndpointInput = struct {
     /// The subnet configurations for the endpoint.
     subnet_configurations: ?[]const SubnetConfiguration = null,
 
-    /// (Interface and Gateway Load Balancer endpoints) The IDs of the subnets in
-    /// which to create endpoint
-    /// network interfaces. For a Gateway Load Balancer endpoint, you can specify
-    /// only one subnet.
+    /// (Interface, Gateway Load Balancer endpoints, Resource, ServiceNetwork, and
+    /// Tunnel endpoints only) The IDs of the
+    /// subnets in which to create endpoint network interfaces. For a Gateway Load
+    /// Balancer endpoint, you can
+    /// specify only one subnet. For a `Tunnel` endpoint, the subnets must be in the
+    /// Availability Zones of the resource gateway associated with the shared
+    /// resource
+    /// configuration. An endpoint network interface is created only in an
+    /// Availability Zone
+    /// that the resource gateway is also in.
     subnet_ids: ?[]const []const u8 = null,
 
     /// The tags to associate with the endpoint.
     tag_specifications: ?[]const TagSpecification = null,
 
     /// The type of endpoint.
+    ///
+    /// For more information about the types of VPC endpoints, see [VPC
+    /// endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints) in the *Amazon Web Services PrivateLink User Guide*.
     ///
     /// Default: Gateway
     vpc_endpoint_type: ?VpcEndpointType = null,

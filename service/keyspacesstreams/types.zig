@@ -1,3 +1,5 @@
+pub const IteratorDescription = @import("iterator_description.zig").IteratorDescription;
+pub const IteratorPosition = @import("iterator_position.zig").IteratorPosition;
 pub const KeyspacesCell = @import("keyspaces_cell.zig").KeyspacesCell;
 pub const KeyspacesCellMapDefinition = @import("keyspaces_cell_map_definition.zig").KeyspacesCellMapDefinition;
 pub const KeyspacesCellValue = @import("keyspaces_cell_value.zig").KeyspacesCellValue;

@@ -275,10 +275,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ChatSyncInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ChatSyncOutput {
-    var result: ChatSyncOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ChatSyncOutput, body, allocator);
-    }
+    const result: ChatSyncOutput = try aws.json.parseJsonObject(
+        ChatSyncOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

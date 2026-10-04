@@ -8,9 +8,9 @@ const ApplicationDescription = @import("application_description.zig").Applicatio
 const serde = @import("serde.zig");
 
 pub const DescribeApplicationsInput = struct {
-    /// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-    /// only include
-    /// those with the specified names.
+    /// If specified, Elastic Beanstalk restricts the returned descriptions to only
+    /// include those with the
+    /// specified names.
     application_names: ?[]const []const u8 = null,
 };
 

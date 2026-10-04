@@ -10,6 +10,7 @@ const get_resource_metadata = @import("get_resource_metadata.zig");
 const get_resource_metrics = @import("get_resource_metrics.zig");
 const list_available_resource_dimensions = @import("list_available_resource_dimensions.zig");
 const list_available_resource_metrics = @import("list_available_resource_metrics.zig");
+const list_performance_analysis_report_recommendations = @import("list_performance_analysis_report_recommendations.zig");
 const list_performance_analysis_reports = @import("list_performance_analysis_reports.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const tag_resource = @import("tag_resource.zig");
@@ -117,6 +118,11 @@ pub const Client = struct {
         return list_available_resource_metrics.execute(self, allocator, input, options);
     }
 
+    /// Retrieves recommendations for a performance analysis report.
+    pub fn listPerformanceAnalysisReportRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_performance_analysis_report_recommendations.ListPerformanceAnalysisReportRecommendationsInput, options: CallOptions) !list_performance_analysis_report_recommendations.ListPerformanceAnalysisReportRecommendationsOutput {
+        return list_performance_analysis_report_recommendations.execute(self, allocator, input, options);
+    }
+
     /// Lists all the analysis reports created for the DB instance. The reports are
     /// sorted based on the start time of each report.
     pub fn listPerformanceAnalysisReports(self: *Self, allocator: std.mem.Allocator, input: list_performance_analysis_reports.ListPerformanceAnalysisReportsInput, options: CallOptions) !list_performance_analysis_reports.ListPerformanceAnalysisReportsOutput {
@@ -161,6 +167,13 @@ pub const Client = struct {
     }
 
     pub fn listAvailableResourceMetricsPaginator(self: *Self, params: list_available_resource_metrics.ListAvailableResourceMetricsInput) paginator.ListAvailableResourceMetricsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listPerformanceAnalysisReportRecommendationsPaginator(self: *Self, params: list_performance_analysis_report_recommendations.ListPerformanceAnalysisReportRecommendationsInput) paginator.ListPerformanceAnalysisReportRecommendationsPaginator {
         return .{
             .client = self,
             .params = params,

@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRetainedMessagesInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListRetainedMessagesOutput {
-    var result: ListRetainedMessagesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListRetainedMessagesOutput, body, allocator);
-    }
+    const result: ListRetainedMessagesOutput = try aws.json.parseJsonObject(
+        ListRetainedMessagesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

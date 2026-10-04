@@ -212,10 +212,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePracticeRunConfig
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePracticeRunConfigurationOutput {
-    var result: CreatePracticeRunConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePracticeRunConfigurationOutput, body, allocator);
-    }
+    const result: CreatePracticeRunConfigurationOutput = try aws.json.parseJsonObject(
+        CreatePracticeRunConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

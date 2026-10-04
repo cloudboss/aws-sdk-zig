@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetServiceNetworkInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetServiceNetworkOutput {
-    var result: GetServiceNetworkOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetServiceNetworkOutput, body, allocator);
-    }
+    const result: GetServiceNetworkOutput = try aws.json.parseJsonObject(
+        GetServiceNetworkOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

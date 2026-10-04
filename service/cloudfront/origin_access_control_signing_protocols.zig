@@ -2,14 +2,17 @@ const std = @import("std");
 
 pub const OriginAccessControlSigningProtocols = enum {
     sigv_4,
+    sigv_4_a,
 
     pub const json_field_names = .{
         .sigv_4 = "sigv4",
+        .sigv_4_a = "sigv4a",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .sigv_4 => "sigv4",
+            .sigv_4_a => "sigv4a",
         };
     }
 

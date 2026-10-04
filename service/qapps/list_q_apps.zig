@@ -104,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListQAppsInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListQAppsOutput {
-    var result: ListQAppsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListQAppsOutput, body, allocator);
-    }
+    const result: ListQAppsOutput = try aws.json.parseJsonObject(
+        ListQAppsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

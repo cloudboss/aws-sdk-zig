@@ -14,6 +14,7 @@ pub const DescribeOptionGroupsInput = struct {
     /// Valid Values:
     ///
     /// * `db2-ae`
+    /// * `db2-ce`
     /// * `db2-se`
     /// * `mariadb`
     /// * `mysql`

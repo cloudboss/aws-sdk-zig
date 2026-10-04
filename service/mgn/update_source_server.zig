@@ -18,13 +18,25 @@ pub const UpdateSourceServerInput = struct {
     /// Update Source Server request connector action.
     connector_action: ?SourceServerConnectorAction = null,
 
+    /// Update Source Server request FQDN for action framework.
+    fqdn_for_action_framework: ?[]const u8 = null,
+
+    /// Update Source Server request platform operating system.
+    platform: ?[]const u8 = null,
+
     /// Update Source Server request source server ID.
     source_server_id: []const u8,
+
+    /// Update Source Server request user provided ID.
+    user_provided_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "accountID",
         .connector_action = "connectorAction",
+        .fqdn_for_action_framework = "fqdnForActionFramework",
+        .platform = "platform",
         .source_server_id = "sourceServerID",
+        .user_provided_id = "userProvidedID",
     };
 };
 
@@ -78,10 +90,28 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSourceServerInput
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.fqdn_for_action_framework) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"fqdnForActionFramework\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.platform) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"platform\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"sourceServerID\":");
     try aws.json.writeValue(@TypeOf(input.source_server_id), input.source_server_id, allocator, &body_buf);
     has_prev = true;
+    if (input.user_provided_id) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"userProvidedID\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -98,10 +128,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSourceServerInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateSourceServerOutput {
-    var result: UpdateSourceServerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateSourceServerOutput, body, allocator);
-    }
+    const result: UpdateSourceServerOutput = try aws.json.parseJsonObject(
+        UpdateSourceServerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateBrowserSetting
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateBrowserSettingsOutput {
-    var result: AssociateBrowserSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateBrowserSettingsOutput, body, allocator);
-    }
+    const result: AssociateBrowserSettingsOutput = try aws.json.parseJsonObject(
+        AssociateBrowserSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

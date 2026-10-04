@@ -3,8 +3,10 @@ const AccessRestriction = @import("access_restriction.zig").AccessRestriction;
 const Address = @import("address.zig").Address;
 const BusinessChain = @import("business_chain.zig").BusinessChain;
 const Category = @import("category.zig").Category;
+const CrossReference = @import("cross_reference.zig").CrossReference;
 const FoodType = @import("food_type.zig").FoodType;
 const PhonemeDetails = @import("phoneme_details.zig").PhonemeDetails;
+const PlaceAttribute = @import("place_attribute.zig").PlaceAttribute;
 const PlaceType = @import("place_type.zig").PlaceType;
 const TimeZone = @import("time_zone.zig").TimeZone;
 
@@ -34,6 +36,10 @@ pub const SuggestPlaceResult = struct {
     /// Categories of results that results must belong to.
     categories: ?[]const Category = null,
 
+    /// The list of supplier references available for this place. Requires the
+    /// `CrossReferences` additional feature to be enabled.
+    cross_references: ?[]const CrossReference = null,
+
     /// The distance in meters from the QueryPosition.
     distance: i64 = 0,
 
@@ -54,6 +60,10 @@ pub const SuggestPlaceResult = struct {
     /// for
     /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     phonemes: ?PhonemeDetails = null,
+
+    /// A list of place attributes for the result, such as whether the business
+    /// offers drive-through service.
+    place_attributes: ?[]const PlaceAttribute = null,
 
     /// The `PlaceId` of the place you wish to receive the information for.
     place_id: ?[]const u8 = null,
@@ -81,10 +91,12 @@ pub const SuggestPlaceResult = struct {
         .address = "Address",
         .business_chains = "BusinessChains",
         .categories = "Categories",
+        .cross_references = "CrossReferences",
         .distance = "Distance",
         .food_types = "FoodTypes",
         .map_view = "MapView",
         .phonemes = "Phonemes",
+        .place_attributes = "PlaceAttributes",
         .place_id = "PlaceId",
         .place_type = "PlaceType",
         .political_view = "PoliticalView",

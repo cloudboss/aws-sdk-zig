@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetServiceViewInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetServiceViewOutput {
-    var result: GetServiceViewOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetServiceViewOutput, body, allocator);
-    }
+    const result: GetServiceViewOutput = try aws.json.parseJsonObject(
+        GetServiceViewOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

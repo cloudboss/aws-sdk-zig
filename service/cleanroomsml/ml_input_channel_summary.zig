@@ -1,3 +1,4 @@
+const PayerConfiguration = @import("payer_configuration.zig").PayerConfiguration;
 const MLInputChannelStatus = @import("ml_input_channel_status.zig").MLInputChannelStatus;
 
 /// Provides summary information about the ML input channel.
@@ -25,6 +26,9 @@ pub const MLInputChannelSummary = struct {
     /// The name of the ML input channel.
     name: []const u8,
 
+    /// The payer configuration for the ML input channel.
+    payer_configuration: ?PayerConfiguration = null,
+
     /// The ID of the protected query that was used to create the ML input channel.
     protected_query_identifier: ?[]const u8 = null,
 
@@ -42,6 +46,7 @@ pub const MLInputChannelSummary = struct {
         .membership_identifier = "membershipIdentifier",
         .ml_input_channel_arn = "mlInputChannelArn",
         .name = "name",
+        .payer_configuration = "payerConfiguration",
         .protected_query_identifier = "protectedQueryIdentifier",
         .status = "status",
         .update_time = "updateTime",

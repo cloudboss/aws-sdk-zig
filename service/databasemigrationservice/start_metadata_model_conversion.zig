@@ -9,7 +9,16 @@ pub const StartMetadataModelConversionInput = struct {
     /// The migration project name or Amazon Resource Name (ARN).
     migration_project_identifier: []const u8,
 
-    /// A value that specifies the database objects to convert.
+    /// A JSON string that identifies the metadata models to convert. For the
+    /// selection rule format and examples, see [Selection rules in DMS Schema
+    /// Conversion](https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html).
+    ///
+    /// Usage:
+    ///
+    /// * Accepts only source selection rules, where `server-name` in the object
+    ///   locator matches the source data provider.
+    ///
+    /// * Supports `explicit`, `include`, and `exclude` rule actions.
     selection_rules: []const u8,
 
     pub const json_field_names = .{
@@ -19,7 +28,7 @@ pub const StartMetadataModelConversionInput = struct {
 };
 
 pub const StartMetadataModelConversionOutput = struct {
-    /// The identifier for the conversion operation.
+    /// The identifier for the conversion request.
     request_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{

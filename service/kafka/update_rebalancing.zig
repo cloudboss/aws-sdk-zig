@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateRebalancingInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateRebalancingOutput {
-    var result: UpdateRebalancingOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateRebalancingOutput, body, allocator);
-    }
+    const result: UpdateRebalancingOutput = try aws.json.parseJsonObject(
+        UpdateRebalancingOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

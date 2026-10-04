@@ -1,4 +1,5 @@
 const HttpTargetConfiguration = @import("http_target_configuration.zig").HttpTargetConfiguration;
+const InferenceTargetConfiguration = @import("inference_target_configuration.zig").InferenceTargetConfiguration;
 const McpTargetConfiguration = @import("mcp_target_configuration.zig").McpTargetConfiguration;
 
 /// The configuration for a gateway target. This structure defines how the
@@ -7,6 +8,9 @@ pub const TargetConfiguration = union(enum) {
     /// The HTTP target configuration. Use this to route gateway requests to an
     /// HTTP-based endpoint such as an AgentCore Runtime.
     http: ?HttpTargetConfiguration,
+    /// The inference configuration for the target. This configuration routes
+    /// requests to a large language model (LLM) provider.
+    inference: ?InferenceTargetConfiguration,
     /// The Model Context Protocol (MCP) configuration for the target. This
     /// configuration defines how the gateway uses MCP to communicate with the
     /// target.
@@ -14,6 +18,7 @@ pub const TargetConfiguration = union(enum) {
 
     pub const json_field_names = .{
         .http = "http",
+        .inference = "inference",
         .mcp = "mcp",
     };
 };

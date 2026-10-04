@@ -3,9 +3,9 @@ const GrantOperation = @import("grant_operation.zig").GrantOperation;
 
 /// Contains information about a grant.
 pub const GrantListEntry = struct {
-    /// A list of key-value pairs that must be present in the encryption context of
-    /// certain
-    /// subsequent operations that the grant allows.
+    /// The constraints on the grant, such as encryption context pairs or a
+    /// SourceArn,
+    /// that restrict the subsequent operations the grant allows.
     constraints: ?GrantConstraints = null,
 
     /// The date and time when the grant was created.
@@ -13,15 +13,19 @@ pub const GrantListEntry = struct {
 
     /// The identity that gets the permissions in the grant.
     ///
-    /// The `GranteePrincipal` field in the `ListGrants` response usually contains
-    /// the
-    /// user or role designated as the grantee principal in the grant. However, when
-    /// the grantee
-    /// principal in the grant is an Amazon Web Services service, the
-    /// `GranteePrincipal` field contains
-    /// the [service
-    /// principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services), which might represent several different grantee principals.
+    /// When a grant is created with the `GranteePrincipal` field, the `ListGrants`
+    /// response usually contains the user or role designated as the grantee
+    /// principal in the grant. However, if the grantee principal
+    /// is an Amazon Web Services service, the `GranteePrincipal` field contains an
+    /// Amazon Web Services [service
+    /// principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services), which
+    /// might correspond to several different grantee principals, such as an IAM
+    /// user, IAM role, or Amazon Web Services account.
     grantee_principal: ?[]const u8 = null,
+
+    /// The Amazon Web Services [service
+    /// principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services) that gets the permissions in the grant.
+    grantee_service_principal: ?[]const u8 = null,
 
     /// The unique identifier for the grant.
     grant_id: ?[]const u8 = null,
@@ -42,15 +46,21 @@ pub const GrantListEntry = struct {
     /// The principal that can retire the grant.
     retiring_principal: ?[]const u8 = null,
 
+    /// The Amazon Web Services [service
+    /// principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services) that can retire the grant.
+    retiring_service_principal: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .constraints = "Constraints",
         .creation_date = "CreationDate",
         .grantee_principal = "GranteePrincipal",
+        .grantee_service_principal = "GranteeServicePrincipal",
         .grant_id = "GrantId",
         .issuing_account = "IssuingAccount",
         .key_id = "KeyId",
         .name = "Name",
         .operations = "Operations",
         .retiring_principal = "RetiringPrincipal",
+        .retiring_service_principal = "RetiringServicePrincipal",
     };
 };

@@ -137,10 +137,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBotChannelAssociatio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBotChannelAssociationsOutput {
-    var result: GetBotChannelAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBotChannelAssociationsOutput, body, allocator);
-    }
+    const result: GetBotChannelAssociationsOutput = try aws.json.parseJsonObject(
+        GetBotChannelAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -12,6 +12,7 @@ const EnvironmentType = @import("environment_type.zig").EnvironmentType;
 const EnvironmentVariable = @import("environment_variable.zig").EnvironmentVariable;
 const ProjectFleet = @import("project_fleet.zig").ProjectFleet;
 const GitSubmodulesConfig = @import("git_submodules_config.zig").GitSubmodulesConfig;
+const HostKernel = @import("host_kernel.zig").HostKernel;
 const ImagePullCredentialsType = @import("image_pull_credentials_type.zig").ImagePullCredentialsType;
 const LogsConfig = @import("logs_config.zig").LogsConfig;
 const RegistryCredential = @import("registry_credential.zig").RegistryCredential;
@@ -130,6 +131,11 @@ pub const StartBuildInput = struct {
     /// CodeBuild build
     /// project.
     git_submodules_config_override: ?GitSubmodulesConfig = null,
+
+    /// The host operating system kernel for this build that overrides the one
+    /// specified in the
+    /// build project.
+    host_kernel_override: ?HostKernel = null,
 
     /// A unique, case sensitive identifier you provide to ensure the idempotency of
     /// the
@@ -301,6 +307,7 @@ pub const StartBuildInput = struct {
         .fleet_override = "fleetOverride",
         .git_clone_depth_override = "gitCloneDepthOverride",
         .git_submodules_config_override = "gitSubmodulesConfigOverride",
+        .host_kernel_override = "hostKernelOverride",
         .idempotency_token = "idempotencyToken",
         .image_override = "imageOverride",
         .image_pull_credentials_type_override = "imagePullCredentialsTypeOverride",

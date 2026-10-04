@@ -53,6 +53,13 @@ pub const DBSnapshot = struct {
     /// Specifies the version of the database engine.
     engine_version: ?[]const u8 = null,
 
+    /// The full size of the DB snapshot, in bytes.
+    ///
+    /// This is not the incremental size of the snapshot. This is the full snapshot
+    /// size and represents the size of all the blocks that were written to the
+    /// source volume at the time the snapshot was created.
+    full_snapshot_size_in_bytes: ?i64 = null,
+
     /// Indicates whether mapping of Amazon Web Services Identity and Access
     /// Management (IAM) accounts to database accounts is enabled.
     iam_database_authentication_enabled: ?bool = null,

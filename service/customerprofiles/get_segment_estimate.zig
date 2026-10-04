@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSegmentEstimateInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSegmentEstimateOutput {
-    var result: GetSegmentEstimateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSegmentEstimateOutput, body, allocator);
-    }
+    var result: GetSegmentEstimateOutput = try aws.json.parseJsonObject(
+        GetSegmentEstimateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status_code = @intCast(status);
     _ = headers;
 

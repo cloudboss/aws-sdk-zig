@@ -1,14 +1,20 @@
 const std = @import("std");
 
 pub const FleetReservationType = enum {
+    on_demand_capacity_reservation,
+    capacity_block,
     interruptible_capacity_reservation,
 
     pub const json_field_names = .{
+        .on_demand_capacity_reservation = "on-demand-capacity-reservation",
+        .capacity_block = "capacity-block",
         .interruptible_capacity_reservation = "interruptible-capacity-reservation",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
+            .on_demand_capacity_reservation => "on-demand-capacity-reservation",
+            .capacity_block => "capacity-block",
             .interruptible_capacity_reservation => "interruptible-capacity-reservation",
         };
     }

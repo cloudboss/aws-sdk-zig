@@ -31,6 +31,9 @@ pub const CreateEnvironmentInput = struct {
     environment_account_region: ?[]const u8 = null,
 
     /// The ID of the blueprint with which the environment is being created.
+    ///
+    /// This parameter is only valid for V1 domains. If provided for a V2 domain,
+    /// the service returns a ValidationException.
     environment_blueprint_identifier: ?[]const u8 = null,
 
     /// The configuration ID of the environment.
@@ -299,10 +302,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEnvironmentInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateEnvironmentOutput {
-    var result: CreateEnvironmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateEnvironmentOutput, body, allocator);
-    }
+    const result: CreateEnvironmentOutput = try aws.json.parseJsonObject(
+        CreateEnvironmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AddBridgeSourcesInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AddBridgeSourcesOutput {
-    var result: AddBridgeSourcesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AddBridgeSourcesOutput, body, allocator);
-    }
+    const result: AddBridgeSourcesOutput = try aws.json.parseJsonObject(
+        AddBridgeSourcesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

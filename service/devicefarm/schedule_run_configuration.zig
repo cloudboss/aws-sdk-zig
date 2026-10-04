@@ -2,6 +2,7 @@ const BillingMethod = @import("billing_method.zig").BillingMethod;
 const CustomerArtifactPaths = @import("customer_artifact_paths.zig").CustomerArtifactPaths;
 const DeviceProxy = @import("device_proxy.zig").DeviceProxy;
 const EnvironmentVariable = @import("environment_variable.zig").EnvironmentVariable;
+const InsightsType = @import("insights_type.zig").InsightsType;
 const Location = @import("location.zig").Location;
 const Radios = @import("radios.zig").Radios;
 
@@ -39,6 +40,15 @@ pub const ScheduleRunConfiguration = struct {
     /// external data for Android or the app's sandbox for iOS.
     extra_data_package_arn: ?[]const u8 = null,
 
+    /// The types of insights to generate for a run. Specify one or more values to
+    /// opt in to
+    /// insights generation when scheduling a run.
+    ///
+    /// Insights are currently supported for custom mode runs with Instrumentation,
+    /// Appium Java TestNG,
+    /// and XCTest UI test types.
+    insights_types: ?[]const InsightsType = null,
+
     /// Information about the locale that is used for the run.
     locale: ?[]const u8 = null,
 
@@ -62,6 +72,7 @@ pub const ScheduleRunConfiguration = struct {
         .environment_variables = "environmentVariables",
         .execution_role_arn = "executionRoleArn",
         .extra_data_package_arn = "extraDataPackageArn",
+        .insights_types = "insightsTypes",
         .locale = "locale",
         .location = "location",
         .network_profile_arn = "networkProfileArn",

@@ -29,6 +29,18 @@ pub const InvokeAgentRuntimeInput = struct {
     /// for JSON data.
     content_type: ?[]const u8 = null,
 
+    /// The MCP method being invoked. For example, `tools/call`, `resources/read`,
+    /// or `prompts/get`.
+    mcp_method: ?[]const u8 = null,
+
+    /// The name of the MCP resource, tool, or prompt being accessed. The value
+    /// depends on the method:
+    ///
+    /// * `tools/call` – The tool name.
+    /// * `resources/read` – The resource URI.
+    /// * `prompts/get` – The prompt name.
+    mcp_name: ?[]const u8 = null,
+
     /// The version of the MCP protocol being used.
     mcp_protocol_version: ?[]const u8 = null,
 
@@ -66,6 +78,8 @@ pub const InvokeAgentRuntimeInput = struct {
         .agent_runtime_arn = "agentRuntimeArn",
         .baggage = "baggage",
         .content_type = "contentType",
+        .mcp_method = "mcpMethod",
+        .mcp_name = "mcpName",
         .mcp_protocol_version = "mcpProtocolVersion",
         .mcp_session_id = "mcpSessionId",
         .payload = "payload",
@@ -134,6 +148,7 @@ pub const InvokeAgentRuntimeOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeAgentRuntimeInput, options: CallOptions) !InvokeAgentRuntimeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -142,8 +157,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeAgent
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "bedrock-agentcore", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -155,6 +168,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeAgent
         return error.ServiceError;
     }
 
+    errdefer stream_resp.deinit();
     const result = try deserializeStreamingResponse(allocator, &stream_resp);
     return result;
 }
@@ -205,6 +219,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeAgentRuntimeInput
     if (input.content_type) |v| {
         try request.headers.put(allocator, "Content-Type", v);
     }
+    if (input.mcp_method) |v| {
+        try request.headers.put(allocator, "Mcp-Method", v);
+    }
+    if (input.mcp_name) |v| {
+        try request.headers.put(allocator, "Mcp-Name", v);
+    }
     if (input.mcp_protocol_version) |v| {
         try request.headers.put(allocator, "Mcp-Protocol-Version", v);
     }
@@ -231,8 +251,19 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeAgentRuntimeInput
 }
 
 fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !InvokeAgentRuntimeOutput {
-    var result: InvokeAgentRuntimeOutput = .{};
-    result.response = stream_resp.body;
+    var result: InvokeAgentRuntimeOutput = .{
+        .content_type = "",
+    };
+    errdefer {
+        if (result.baggage) |value| allocator.free(value);
+        allocator.free(result.content_type);
+        if (result.mcp_protocol_version) |value| allocator.free(value);
+        if (result.mcp_session_id) |value| allocator.free(value);
+        if (result.runtime_session_id) |value| allocator.free(value);
+        if (result.trace_id) |value| allocator.free(value);
+        if (result.trace_parent) |value| allocator.free(value);
+        if (result.trace_state) |value| allocator.free(value);
+    }
     result.status_code = @intCast(stream_resp.status);
     if (stream_resp.headers.get("baggage")) |value| {
         result.baggage = try allocator.dupe(u8, value);
@@ -258,6 +289,7 @@ fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.
     if (stream_resp.headers.get("tracestate")) |value| {
         result.trace_state = try allocator.dupe(u8, value);
     }
+    result.response = stream_resp.body;
     stream_resp.deinitHeaders();
 
     return result;

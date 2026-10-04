@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const CacheUsageLimits = @import("cache_usage_limits.zig").CacheUsageLimits;
+const ConnectionType = @import("connection_type.zig").ConnectionType;
 const NetworkType = @import("network_type.zig").NetworkType;
 const Tag = @import("tag.zig").Tag;
 const ServerlessCache = @import("serverless_cache.zig").ServerlessCache;
@@ -14,6 +15,15 @@ pub const CreateServerlessCacheInput = struct {
     /// Sets the cache usage limits for storage and ElastiCache Processing Units for
     /// the cache.
     cache_usage_limits: ?CacheUsageLimits = null,
+
+    /// The connection type for the serverless cache.
+    /// Must be either `vpc` | `public`.
+    /// Use `vpc` to access the cache through a VPC endpoint, or `public` to access
+    /// the cache over the internet.
+    /// If not specified, defaults to `vpc`.
+    /// This value cannot be changed after the serverless cache is created.
+    /// Setting this to `public` requires Valkey 9 or above.
+    connection_type: ?ConnectionType = null,
 
     /// The daily time that snapshots will be created from the new serverless cache.
     /// By default this number is populated with
@@ -40,7 +50,7 @@ pub const CreateServerlessCacheInput = struct {
 
     /// The IP protocol version used by the serverless cache.
     /// Must be either `ipv4` | `ipv6` | `dual_stack`.
-    /// `ipv6` is only supported with ipv6-only subnets.
+    /// `ipv6` is only supported with IPv6-only subnets.
     /// If not specified, defaults to `ipv4`, unless all provided subnets are
     /// IPv6-only, in which case it defaults to `ipv6`.
     network_type: ?NetworkType = null,
@@ -143,6 +153,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateServerlessCacheIn
                 try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv2}) catch "");
             }
         }
+    }
+    if (input.connection_type) |v| {
+        try body_buf.appendSlice(allocator, "&ConnectionType=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.daily_snapshot_time) |v| {
         try body_buf.appendSlice(allocator, "&DailySnapshotTime=");

@@ -16,7 +16,9 @@ pub const GetContainerRecipePolicyInput = struct {
 };
 
 pub const GetContainerRecipePolicyOutput = struct {
-    /// The container recipe policy object that is returned.
+    /// The resource policy for the container recipe, as a JSON policy document. If
+    /// no policy has been applied, the response contains an empty JSON object
+    /// (`{}`).
     policy: ?[]const u8 = null,
 
     /// The request ID that uniquely identifies this request.
@@ -83,10 +85,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetContainerRecipePolic
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetContainerRecipePolicyOutput {
-    var result: GetContainerRecipePolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetContainerRecipePolicyOutput, body, allocator);
-    }
+    const result: GetContainerRecipePolicyOutput = try aws.json.parseJsonObject(
+        GetContainerRecipePolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

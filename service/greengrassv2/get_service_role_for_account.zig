@@ -72,10 +72,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetServiceRoleForAccoun
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetServiceRoleForAccountOutput {
-    var result: GetServiceRoleForAccountOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetServiceRoleForAccountOutput, body, allocator);
-    }
+    const result: GetServiceRoleForAccountOutput = try aws.json.parseJsonObject(
+        GetServiceRoleForAccountOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

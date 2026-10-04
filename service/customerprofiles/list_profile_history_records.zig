@@ -159,10 +159,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListProfileHistoryRecor
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListProfileHistoryRecordsOutput {
-    var result: ListProfileHistoryRecordsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListProfileHistoryRecordsOutput, body, allocator);
-    }
+    const result: ListProfileHistoryRecordsOutput = try aws.json.parseJsonObject(
+        ListProfileHistoryRecordsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

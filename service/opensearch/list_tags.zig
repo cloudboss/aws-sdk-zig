@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTagsInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTagsOutput {
-    var result: ListTagsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListTagsOutput, body, allocator);
-    }
+    const result: ListTagsOutput = try aws.json.parseJsonObject(
+        ListTagsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRestoreTestingInferr
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRestoreTestingInferredMetadataOutput {
-    var result: GetRestoreTestingInferredMetadataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRestoreTestingInferredMetadataOutput, body, allocator);
-    }
+    const result: GetRestoreTestingInferredMetadataOutput = try aws.json.parseJsonObject(
+        GetRestoreTestingInferredMetadataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

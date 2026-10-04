@@ -112,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateWorkloadIdentityI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateWorkloadIdentityOutput {
-    var result: CreateWorkloadIdentityOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateWorkloadIdentityOutput, body, allocator);
-    }
+    const result: CreateWorkloadIdentityOutput = try aws.json.parseJsonObject(
+        CreateWorkloadIdentityOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

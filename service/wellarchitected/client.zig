@@ -3,6 +3,9 @@ const std = @import("std");
 
 const associate_lenses = @import("associate_lenses.zig");
 const associate_profiles = @import("associate_profiles.zig");
+const create_agent_context = @import("create_agent_context.zig");
+const create_agent_goal = @import("create_agent_goal.zig");
+const create_agent_profile = @import("create_agent_profile.zig");
 const create_lens_share = @import("create_lens_share.zig");
 const create_lens_version = @import("create_lens_version.zig");
 const create_milestone = @import("create_milestone.zig");
@@ -12,6 +15,9 @@ const create_review_template = @import("create_review_template.zig");
 const create_template_share = @import("create_template_share.zig");
 const create_workload = @import("create_workload.zig");
 const create_workload_share = @import("create_workload_share.zig");
+const delete_agent_context = @import("delete_agent_context.zig");
+const delete_agent_goal = @import("delete_agent_goal.zig");
+const delete_agent_profile = @import("delete_agent_profile.zig");
 const delete_lens = @import("delete_lens.zig");
 const delete_lens_share = @import("delete_lens_share.zig");
 const delete_profile = @import("delete_profile.zig");
@@ -23,6 +29,11 @@ const delete_workload_share = @import("delete_workload_share.zig");
 const disassociate_lenses = @import("disassociate_lenses.zig");
 const disassociate_profiles = @import("disassociate_profiles.zig");
 const export_lens = @import("export_lens.zig");
+const get_agent_context = @import("get_agent_context.zig");
+const get_agent_goal = @import("get_agent_goal.zig");
+const get_agent_profile = @import("get_agent_profile.zig");
+const get_agent_recommendation = @import("get_agent_recommendation.zig");
+const get_agent_recommendation_generation = @import("get_agent_recommendation_generation.zig");
 const get_answer = @import("get_answer.zig");
 const get_consolidated_report = @import("get_consolidated_report.zig");
 const get_global_settings = @import("get_global_settings.zig");
@@ -38,6 +49,12 @@ const get_review_template_answer = @import("get_review_template_answer.zig");
 const get_review_template_lens_review = @import("get_review_template_lens_review.zig");
 const get_workload = @import("get_workload.zig");
 const import_lens = @import("import_lens.zig");
+const list_agent_contexts = @import("list_agent_contexts.zig");
+const list_agent_goals = @import("list_agent_goals.zig");
+const list_agent_profiles = @import("list_agent_profiles.zig");
+const list_agent_recommendation_generations = @import("list_agent_recommendation_generations.zig");
+const list_agent_recommendation_items = @import("list_agent_recommendation_items.zig");
+const list_agent_recommendations = @import("list_agent_recommendations.zig");
 const list_answers = @import("list_answers.zig");
 const list_check_details = @import("list_check_details.zig");
 const list_check_summaries = @import("list_check_summaries.zig");
@@ -57,8 +74,14 @@ const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_template_shares = @import("list_template_shares.zig");
 const list_workload_shares = @import("list_workload_shares.zig");
 const list_workloads = @import("list_workloads.zig");
+const put_agent_recommendation_feedback = @import("put_agent_recommendation_feedback.zig");
+const start_agent_recommendation_generation = @import("start_agent_recommendation_generation.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const update_agent_context = @import("update_agent_context.zig");
+const update_agent_goal = @import("update_agent_goal.zig");
+const update_agent_profile = @import("update_agent_profile.zig");
+const update_agent_recommendation_status = @import("update_agent_recommendation_status.zig");
 const update_answer = @import("update_answer.zig");
 const update_global_settings = @import("update_global_settings.zig");
 const update_integration = @import("update_integration.zig");
@@ -106,17 +129,14 @@ pub const Client = struct {
     /// Associate a lens to a workload.
     ///
     /// Up to 10 lenses can be associated with a workload in a single API operation.
-    /// A
-    /// maximum of 20 lenses can be associated with a workload.
+    /// A maximum of 20 lenses can be associated with a workload.
     ///
     /// **Disclaimer**
     ///
     /// By accessing and/or applying custom lenses created by another Amazon Web
-    /// Services user or account,
-    /// you acknowledge that custom lenses created by other users and shared with
-    /// you are
-    /// Third Party Content as defined in the Amazon Web Services Customer
-    /// Agreement.
+    /// Services user or account, you acknowledge that custom lenses created by
+    /// other users and shared with you are Third Party Content as defined in the
+    /// Amazon Web Services Customer Agreement.
     pub fn associateLenses(self: *Self, allocator: std.mem.Allocator, input: associate_lenses.AssociateLensesInput, options: CallOptions) !associate_lenses.AssociateLensesOutput {
         return associate_lenses.execute(self, allocator, input, options);
     }
@@ -126,33 +146,49 @@ pub const Client = struct {
         return associate_profiles.execute(self, allocator, input, options);
     }
 
+    /// Creates a context associated with an optimization profile. Contexts provide
+    /// application and environment information used during recommendation
+    /// generation.
+    pub fn createAgentContext(self: *Self, allocator: std.mem.Allocator, input: create_agent_context.CreateAgentContextInput, options: CallOptions) !create_agent_context.CreateAgentContextOutput {
+        return create_agent_context.execute(self, allocator, input, options);
+    }
+
+    /// Creates an optimization goal associated with a profile. Goals define
+    /// specific targets and objectives for the optimization process.
+    pub fn createAgentGoal(self: *Self, allocator: std.mem.Allocator, input: create_agent_goal.CreateAgentGoalInput, options: CallOptions) !create_agent_goal.CreateAgentGoalOutput {
+        return create_agent_goal.execute(self, allocator, input, options);
+    }
+
+    /// Creates an optimization profile that defines the scope and configuration for
+    /// generating recommendations. A profile specifies the execution role, target
+    /// pillars, and aggregation settings for analyzing your Amazon Web Services
+    /// resources.
+    pub fn createAgentProfile(self: *Self, allocator: std.mem.Allocator, input: create_agent_profile.CreateAgentProfileInput, options: CallOptions) !create_agent_profile.CreateAgentProfileOutput {
+        return create_agent_profile.execute(self, allocator, input, options);
+    }
+
     /// Create a lens share.
     ///
     /// The owner of a lens can share it with other Amazon Web Services accounts,
-    /// users, an organization,
-    /// and organizational units (OUs) in the same Amazon Web Services Region.
-    /// Lenses provided by Amazon Web Services (Amazon Web Services Official
-    /// Content) cannot be shared.
+    /// users, an organization, and organizational units (OUs) in the same Amazon
+    /// Web Services Region. Lenses provided by Amazon Web Services (Amazon Web
+    /// Services Official Content) cannot be shared.
     ///
     /// Shared access to a lens is not removed until the lens invitation is deleted.
     ///
     /// If you share a lens with an organization or OU, all accounts in the
-    /// organization or OU
-    /// are granted access to the lens.
+    /// organization or OU are granted access to the lens.
     ///
     /// For more information, see [Sharing a custom
-    /// lens](https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-sharing.html) in the
-    /// *Well-Architected Tool User Guide*.
+    /// lens](https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-sharing.html) in the *Well-Architected Tool User Guide*.
     ///
     /// **Disclaimer**
     ///
-    /// By sharing your custom lenses with other Amazon Web Services accounts,
-    /// you acknowledge that Amazon Web Services will make your custom lenses
-    /// available to those
-    /// other accounts. Those other accounts may continue to access and use your
-    /// shared custom lenses even if you delete the custom lenses
-    /// from your own Amazon Web Services account or terminate
-    /// your Amazon Web Services account.
+    /// By sharing your custom lenses with other Amazon Web Services accounts, you
+    /// acknowledge that Amazon Web Services will make your custom lenses available
+    /// to those other accounts. Those other accounts may continue to access and use
+    /// your shared custom lenses even if you delete the custom lenses from your own
+    /// Amazon Web Services account or terminate your Amazon Web Services account.
     pub fn createLensShare(self: *Self, allocator: std.mem.Allocator, input: create_lens_share.CreateLensShareInput, options: CallOptions) !create_lens_share.CreateLensShareOutput {
         return create_lens_share.execute(self, allocator, input, options);
     }
@@ -162,11 +198,10 @@ pub const Client = struct {
     /// A lens can have up to 100 versions.
     ///
     /// Use this operation to publish a new lens version after you have imported a
-    /// lens. The `LensAlias`
-    /// is used to identify the lens to be published.
-    /// The owner of a lens can share the lens with other
-    /// Amazon Web Services accounts and users in the same Amazon Web Services
-    /// Region. Only the owner of a lens can delete it.
+    /// lens. The `LensAlias` is used to identify the lens to be published. The
+    /// owner of a lens can share the lens with other Amazon Web Services accounts
+    /// and users in the same Amazon Web Services Region. Only the owner of a lens
+    /// can delete it.
     pub fn createLensVersion(self: *Self, allocator: std.mem.Allocator, input: create_lens_version.CreateLensVersionInput, options: CallOptions) !create_lens_version.CreateLensVersionOutput {
         return create_lens_version.execute(self, allocator, input, options);
     }
@@ -191,16 +226,11 @@ pub const Client = struct {
     /// **Disclaimer**
     ///
     /// Do not include or gather personal identifiable information (PII) of end
-    /// users or
-    /// other identifiable individuals in or via your review templates. If your
-    /// review
-    /// template or those shared with you and used in your account do include or
-    /// collect PII
-    /// you are responsible for: ensuring that the included PII is processed in
-    /// accordance
-    /// with applicable law, providing adequate privacy notices, and obtaining
-    /// necessary
-    /// consents for processing such data.
+    /// users or other identifiable individuals in or via your review templates. If
+    /// your review template or those shared with you and used in your account do
+    /// include or collect PII you are responsible for: ensuring that the included
+    /// PII is processed in accordance with applicable law, providing adequate
+    /// privacy notices, and obtaining necessary consents for processing such data.
     pub fn createReviewTemplate(self: *Self, allocator: std.mem.Allocator, input: create_review_template.CreateReviewTemplateInput, options: CallOptions) !create_review_template.CreateReviewTemplateOutput {
         return create_review_template.execute(self, allocator, input, options);
     }
@@ -208,24 +238,20 @@ pub const Client = struct {
     /// Create a review template share.
     ///
     /// The owner of a review template can share it with other Amazon Web Services
-    /// accounts,
-    /// users, an organization, and organizational units (OUs) in the same Amazon
-    /// Web Services Region.
+    /// accounts, users, an organization, and organizational units (OUs) in the same
+    /// Amazon Web Services Region.
     ///
     /// Shared access to a review template is not removed until the review template
-    /// share
-    /// invitation is deleted.
+    /// share invitation is deleted.
     ///
     /// If you share a review template with an organization or OU, all accounts in
-    /// the
-    /// organization or OU are granted access to the review template.
+    /// the organization or OU are granted access to the review template.
     ///
     /// **Disclaimer**
     ///
     /// By sharing your review template with other Amazon Web Services accounts, you
     /// acknowledge that Amazon Web Services will make your review template
-    /// available to
-    /// those other accounts.
+    /// available to those other accounts.
     pub fn createTemplateShare(self: *Self, allocator: std.mem.Allocator, input: create_template_share.CreateTemplateShareInput, options: CallOptions) !create_template_share.CreateTemplateShareOutput {
         return create_template_share.execute(self, allocator, input, options);
     }
@@ -233,30 +259,25 @@ pub const Client = struct {
     /// Create a new workload.
     ///
     /// The owner of a workload can share the workload with other Amazon Web
-    /// Services accounts, users,
-    /// an organization, and organizational units (OUs)
-    /// in the same Amazon Web Services Region. Only the owner of a workload can
-    /// delete it.
+    /// Services accounts, users, an organization, and organizational units (OUs) in
+    /// the same Amazon Web Services Region. Only the owner of a workload can delete
+    /// it.
     ///
     /// For more information, see [Defining a
-    /// Workload](https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html) in the
-    /// *Well-Architected Tool User Guide*.
+    /// Workload](https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html) in the *Well-Architected Tool User Guide*.
     ///
     /// Either `AwsRegions`, `NonAwsRegions`, or both must be specified when
     /// creating a workload.
     ///
-    /// You also must specify `ReviewOwner`, even though the
-    /// parameter is listed as not being required in the following section.
+    /// You also must specify `ReviewOwner`, even though the parameter is listed as
+    /// not being required in the following section.
     ///
     /// When creating a workload using a review template, you must have the
     /// following IAM permissions:
     ///
     /// * `wellarchitected:GetReviewTemplate`
-    ///
     /// * `wellarchitected:GetReviewTemplateAnswer`
-    ///
     /// * `wellarchitected:ListReviewTemplateAnswers`
-    ///
     /// * `wellarchitected:GetReviewTemplateLensReview`
     pub fn createWorkload(self: *Self, allocator: std.mem.Allocator, input: create_workload.CreateWorkloadInput, options: CallOptions) !create_workload.CreateWorkloadOutput {
         return create_workload.execute(self, allocator, input, options);
@@ -265,38 +286,47 @@ pub const Client = struct {
     /// Create a workload share.
     ///
     /// The owner of a workload can share it with other Amazon Web Services accounts
-    /// and users in the same
-    /// Amazon Web Services Region. Shared access to a workload is not removed until
-    /// the workload invitation is
-    /// deleted.
+    /// and users in the same Amazon Web Services Region. Shared access to a
+    /// workload is not removed until the workload invitation is deleted.
     ///
     /// If you share a workload with an organization or OU, all accounts in the
-    /// organization or OU
-    /// are granted access to the workload.
+    /// organization or OU are granted access to the workload.
     ///
     /// For more information, see [Sharing a
-    /// workload](https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html) in the
-    /// *Well-Architected Tool User Guide*.
+    /// workload](https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html) in the *Well-Architected Tool User Guide*.
     pub fn createWorkloadShare(self: *Self, allocator: std.mem.Allocator, input: create_workload_share.CreateWorkloadShareInput, options: CallOptions) !create_workload_share.CreateWorkloadShareOutput {
         return create_workload_share.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a context associated with a profile.
+    pub fn deleteAgentContext(self: *Self, allocator: std.mem.Allocator, input: delete_agent_context.DeleteAgentContextInput, options: CallOptions) !delete_agent_context.DeleteAgentContextOutput {
+        return delete_agent_context.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an optimization goal from a profile.
+    pub fn deleteAgentGoal(self: *Self, allocator: std.mem.Allocator, input: delete_agent_goal.DeleteAgentGoalInput, options: CallOptions) !delete_agent_goal.DeleteAgentGoalOutput {
+        return delete_agent_goal.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an optimization profile and its associated configuration. This
+    /// action cannot be undone.
+    pub fn deleteAgentProfile(self: *Self, allocator: std.mem.Allocator, input: delete_agent_profile.DeleteAgentProfileInput, options: CallOptions) !delete_agent_profile.DeleteAgentProfileOutput {
+        return delete_agent_profile.execute(self, allocator, input, options);
     }
 
     /// Delete an existing lens.
     ///
     /// Only the owner of a lens can delete it. After the lens is deleted, Amazon
-    /// Web Services accounts and users
-    /// that you shared the lens with can continue to use it, but they will no
-    /// longer be able to apply it to new workloads.
+    /// Web Services accounts and users that you shared the lens with can continue
+    /// to use it, but they will no longer be able to apply it to new workloads.
     ///
     /// **Disclaimer**
     ///
-    /// By sharing your custom lenses with other Amazon Web Services accounts,
-    /// you acknowledge that Amazon Web Services will make your custom lenses
-    /// available to those
-    /// other accounts. Those other accounts may continue to access and use your
-    /// shared custom lenses even if you delete the custom lenses
-    /// from your own Amazon Web Services account or terminate
-    /// your Amazon Web Services account.
+    /// By sharing your custom lenses with other Amazon Web Services accounts, you
+    /// acknowledge that Amazon Web Services will make your custom lenses available
+    /// to those other accounts. Those other accounts may continue to access and use
+    /// your shared custom lenses even if you delete the custom lenses from your own
+    /// Amazon Web Services account or terminate your Amazon Web Services account.
     pub fn deleteLens(self: *Self, allocator: std.mem.Allocator, input: delete_lens.DeleteLensInput, options: CallOptions) !delete_lens.DeleteLensOutput {
         return delete_lens.execute(self, allocator, input, options);
     }
@@ -304,20 +334,17 @@ pub const Client = struct {
     /// Delete a lens share.
     ///
     /// After the lens share is deleted, Amazon Web Services accounts, users,
-    /// organizations,
-    /// and organizational units (OUs)
-    /// that you shared the lens with can continue to use it, but they will no
-    /// longer be able to apply it to new workloads.
+    /// organizations, and organizational units (OUs) that you shared the lens with
+    /// can continue to use it, but they will no longer be able to apply it to new
+    /// workloads.
     ///
     /// **Disclaimer**
     ///
-    /// By sharing your custom lenses with other Amazon Web Services accounts,
-    /// you acknowledge that Amazon Web Services will make your custom lenses
-    /// available to those
-    /// other accounts. Those other accounts may continue to access and use your
-    /// shared custom lenses even if you delete the custom lenses
-    /// from your own Amazon Web Services account or terminate
-    /// your Amazon Web Services account.
+    /// By sharing your custom lenses with other Amazon Web Services accounts, you
+    /// acknowledge that Amazon Web Services will make your custom lenses available
+    /// to those other accounts. Those other accounts may continue to access and use
+    /// your shared custom lenses even if you delete the custom lenses from your own
+    /// Amazon Web Services account or terminate your Amazon Web Services account.
     pub fn deleteLensShare(self: *Self, allocator: std.mem.Allocator, input: delete_lens_share.DeleteLensShareInput, options: CallOptions) !delete_lens_share.DeleteLensShareOutput {
         return delete_lens_share.execute(self, allocator, input, options);
     }
@@ -326,13 +353,11 @@ pub const Client = struct {
     ///
     /// **Disclaimer**
     ///
-    /// By sharing your profile with other Amazon Web Services accounts,
-    /// you acknowledge that Amazon Web Services will make your profile available to
-    /// those
-    /// other accounts. Those other accounts may continue to access and use your
-    /// shared profile even if you delete the profile
-    /// from your own Amazon Web Services account or terminate
-    /// your Amazon Web Services account.
+    /// By sharing your profile with other Amazon Web Services accounts, you
+    /// acknowledge that Amazon Web Services will make your profile available to
+    /// those other accounts. Those other accounts may continue to access and use
+    /// your shared profile even if you delete the profile from your own Amazon Web
+    /// Services account or terminate your Amazon Web Services account.
     pub fn deleteProfile(self: *Self, allocator: std.mem.Allocator, input: delete_profile.DeleteProfileInput, options: CallOptions) !delete_profile.DeleteProfileOutput {
         return delete_profile.execute(self, allocator, input, options);
     }
@@ -348,8 +373,7 @@ pub const Client = struct {
     ///
     /// After the review template is deleted, Amazon Web Services accounts, users,
     /// organizations, and organizational units (OUs) that you shared the review
-    /// template with
-    /// will no longer be able to apply it to new workloads.
+    /// template with will no longer be able to apply it to new workloads.
     pub fn deleteReviewTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_review_template.DeleteReviewTemplateInput, options: CallOptions) !delete_review_template.DeleteReviewTemplateOutput {
         return delete_review_template.execute(self, allocator, input, options);
     }
@@ -357,10 +381,8 @@ pub const Client = struct {
     /// Delete a review template share.
     ///
     /// After the review template share is deleted, Amazon Web Services accounts,
-    /// users,
-    /// organizations, and organizational units (OUs) that you shared the review
-    /// template with
-    /// will no longer be able to apply it to new workloads.
+    /// users, organizations, and organizational units (OUs) that you shared the
+    /// review template with will no longer be able to apply it to new workloads.
     pub fn deleteTemplateShare(self: *Self, allocator: std.mem.Allocator, input: delete_template_share.DeleteTemplateShareInput, options: CallOptions) !delete_template_share.DeleteTemplateShareOutput {
         return delete_template_share.execute(self, allocator, input, options);
     }
@@ -381,8 +403,7 @@ pub const Client = struct {
     /// operation.
     ///
     /// The Amazon Web Services Well-Architected Framework lens (`wellarchitected`)
-    /// cannot be
-    /// removed from a workload.
+    /// cannot be removed from a workload.
     pub fn disassociateLenses(self: *Self, allocator: std.mem.Allocator, input: disassociate_lenses.DisassociateLensesInput, options: CallOptions) !disassociate_lenses.DisassociateLensesOutput {
         return disassociate_lenses.execute(self, allocator, input, options);
     }
@@ -395,26 +416,53 @@ pub const Client = struct {
     /// Export an existing lens.
     ///
     /// Only the owner of a lens can export it. Lenses provided by Amazon Web
-    /// Services (Amazon Web Services Official Content)
-    /// cannot be exported.
+    /// Services (Amazon Web Services Official Content) cannot be exported.
     ///
     /// Lenses are defined in JSON. For more information, see [JSON format
-    /// specification](https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html)
-    /// in the *Well-Architected Tool User Guide*.
+    /// specification](https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html) in the *Well-Architected Tool User Guide*.
     ///
     /// **Disclaimer**
     ///
     /// Do not include or gather personal identifiable information (PII) of end
-    /// users or
-    /// other identifiable individuals in or via your custom lenses. If your custom
-    /// lens or those shared with you and used in your account do include or collect
-    /// PII you are responsible for: ensuring that the included PII is processed in
-    /// accordance
-    /// with applicable law, providing adequate privacy notices, and obtaining
-    /// necessary
-    /// consents for processing such data.
+    /// users or other identifiable individuals in or via your custom lenses. If
+    /// your custom lens or those shared with you and used in your account do
+    /// include or collect PII you are responsible for: ensuring that the included
+    /// PII is processed in accordance with applicable law, providing adequate
+    /// privacy notices, and obtaining necessary consents for processing such data.
     pub fn exportLens(self: *Self, allocator: std.mem.Allocator, input: export_lens.ExportLensInput, options: CallOptions) !export_lens.ExportLensOutput {
         return export_lens.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves detailed information about a specific context associated with a
+    /// profile.
+    pub fn getAgentContext(self: *Self, allocator: std.mem.Allocator, input: get_agent_context.GetAgentContextInput, options: CallOptions) !get_agent_context.GetAgentContextOutput {
+        return get_agent_context.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves detailed information about a specific optimization goal.
+    pub fn getAgentGoal(self: *Self, allocator: std.mem.Allocator, input: get_agent_goal.GetAgentGoalInput, options: CallOptions) !get_agent_goal.GetAgentGoalOutput {
+        return get_agent_goal.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves detailed information about an optimization profile, including its
+    /// configuration and metadata.
+    pub fn getAgentProfile(self: *Self, allocator: std.mem.Allocator, input: get_agent_profile.GetAgentProfileInput, options: CallOptions) !get_agent_profile.GetAgentProfileOutput {
+        return get_agent_profile.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves detailed information about a specific optimization recommendation,
+    /// including its impact analysis, content, and implementation guidance.
+    pub fn getAgentRecommendation(self: *Self, allocator: std.mem.Allocator, input: get_agent_recommendation.GetAgentRecommendationInput, options: CallOptions) !get_agent_recommendation.GetAgentRecommendationOutput {
+        return get_agent_recommendation.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves information about a recommendation generation process, including
+    /// its status, progress, and results. Recommendation generation is
+    /// asynchronous: poll this operation until status reaches a terminal value of
+    /// COMPLETED (results are ready) or ERROR (see errorDetails). Intermediate
+    /// values are QUEUED and IN_PROGRESS.
+    pub fn getAgentRecommendationGeneration(self: *Self, allocator: std.mem.Allocator, input: get_agent_recommendation_generation.GetAgentRecommendationGenerationInput, options: CallOptions) !get_agent_recommendation_generation.GetAgentRecommendationGenerationOutput {
+        return get_agent_recommendation_generation.execute(self, allocator, input, options);
     }
 
     /// Get the answer to a specific question in a workload review.
@@ -492,33 +540,63 @@ pub const Client = struct {
 
     /// Import a new custom lens or update an existing custom lens.
     ///
-    /// To update an existing custom lens, specify its ARN as the `LensAlias`. If
-    /// no ARN is specified, a new custom lens is created.
+    /// To update an existing custom lens, specify its ARN as the `LensAlias`. If no
+    /// ARN is specified, a new custom lens is created.
     ///
     /// The new or updated lens will have a status of `DRAFT`. The lens cannot be
     /// applied to workloads or shared with other Amazon Web Services accounts until
-    /// it's
-    /// published with CreateLensVersion.
+    /// it's published with CreateLensVersion.
     ///
     /// Lenses are defined in JSON. For more information, see [JSON format
-    /// specification](https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html)
-    /// in the *Well-Architected Tool User Guide*.
+    /// specification](https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html) in the *Well-Architected Tool User Guide*.
     ///
     /// A custom lens cannot exceed 500 KB in size.
     ///
     /// **Disclaimer**
     ///
     /// Do not include or gather personal identifiable information (PII) of end
-    /// users or
-    /// other identifiable individuals in or via your custom lenses. If your custom
-    /// lens or those shared with you and used in your account do include or collect
-    /// PII you are responsible for: ensuring that the included PII is processed in
-    /// accordance
-    /// with applicable law, providing adequate privacy notices, and obtaining
-    /// necessary
-    /// consents for processing such data.
+    /// users or other identifiable individuals in or via your custom lenses. If
+    /// your custom lens or those shared with you and used in your account do
+    /// include or collect PII you are responsible for: ensuring that the included
+    /// PII is processed in accordance with applicable law, providing adequate
+    /// privacy notices, and obtaining necessary consents for processing such data.
     pub fn importLens(self: *Self, allocator: std.mem.Allocator, input: import_lens.ImportLensInput, options: CallOptions) !import_lens.ImportLensOutput {
         return import_lens.execute(self, allocator, input, options);
+    }
+
+    /// Lists contexts associated with a profile.
+    pub fn listAgentContexts(self: *Self, allocator: std.mem.Allocator, input: list_agent_contexts.ListAgentContextsInput, options: CallOptions) !list_agent_contexts.ListAgentContextsOutput {
+        return list_agent_contexts.execute(self, allocator, input, options);
+    }
+
+    /// Lists optimization goals associated with a specified profile. Goals define
+    /// specific targets and objectives for the optimization process.
+    pub fn listAgentGoals(self: *Self, allocator: std.mem.Allocator, input: list_agent_goals.ListAgentGoalsInput, options: CallOptions) !list_agent_goals.ListAgentGoalsOutput {
+        return list_agent_goals.execute(self, allocator, input, options);
+    }
+
+    /// Lists optimization profiles in your account. Profiles define the scope and
+    /// configuration for generating optimization recommendations.
+    pub fn listAgentProfiles(self: *Self, allocator: std.mem.Allocator, input: list_agent_profiles.ListAgentProfilesInput, options: CallOptions) !list_agent_profiles.ListAgentProfilesOutput {
+        return list_agent_profiles.execute(self, allocator, input, options);
+    }
+
+    /// Lists recommendation generation processes for a specified profile.
+    pub fn listAgentRecommendationGenerations(self: *Self, allocator: std.mem.Allocator, input: list_agent_recommendation_generations.ListAgentRecommendationGenerationsInput, options: CallOptions) !list_agent_recommendation_generations.ListAgentRecommendationGenerationsOutput {
+        return list_agent_recommendation_generations.execute(self, allocator, input, options);
+    }
+
+    /// Lists recommendation items for a specific recommendation. Recommendation
+    /// items provide detailed information about individual optimization
+    /// opportunities.
+    pub fn listAgentRecommendationItems(self: *Self, allocator: std.mem.Allocator, input: list_agent_recommendation_items.ListAgentRecommendationItemsInput, options: CallOptions) !list_agent_recommendation_items.ListAgentRecommendationItemsOutput {
+        return list_agent_recommendation_items.execute(self, allocator, input, options);
+    }
+
+    /// Lists active optimization recommendations for a specified profile with
+    /// optional filtering by state.
+    pub fn listAgentRecommendations(self: *Self, allocator: std.mem.Allocator, input: list_agent_recommendations.ListAgentRecommendationsInput, options: CallOptions) !list_agent_recommendations.ListAgentRecommendationsOutput {
+        return list_agent_recommendations.execute(self, allocator, input, options);
     }
 
     /// List of answers for a particular workload and lens.
@@ -594,9 +672,9 @@ pub const Client = struct {
 
     /// List the share invitations.
     ///
-    /// `WorkloadNamePrefix`, `LensNamePrefix`,
-    /// `ProfileNamePrefix`, and `TemplateNamePrefix` are mutually
-    /// exclusive. Use the parameter that matches your `ShareResourceType`.
+    /// `WorkloadNamePrefix`, `LensNamePrefix`, `ProfileNamePrefix`, and
+    /// `TemplateNamePrefix` are mutually exclusive. Use the parameter that matches
+    /// your `ShareResourceType`.
     pub fn listShareInvitations(self: *Self, allocator: std.mem.Allocator, input: list_share_invitations.ListShareInvitationsInput, options: CallOptions) !list_share_invitations.ListShareInvitationsOutput {
         return list_share_invitations.execute(self, allocator, input, options);
     }
@@ -624,6 +702,21 @@ pub const Client = struct {
         return list_workloads.execute(self, allocator, input, options);
     }
 
+    /// Submits user feedback on a recommendation to help improve future
+    /// optimization suggestions and track implementation outcomes.
+    pub fn putAgentRecommendationFeedback(self: *Self, allocator: std.mem.Allocator, input: put_agent_recommendation_feedback.PutAgentRecommendationFeedbackInput, options: CallOptions) !put_agent_recommendation_feedback.PutAgentRecommendationFeedbackOutput {
+        return put_agent_recommendation_feedback.execute(self, allocator, input, options);
+    }
+
+    /// Initiates a new recommendation generation process for the specified
+    /// optimization profile. This asynchronous operation analyzes your Amazon Web
+    /// Services resources and generates optimization recommendations based on the
+    /// configured pillars and scope. Use GetAgentRecommendationGeneration to check
+    /// status.
+    pub fn startAgentRecommendationGeneration(self: *Self, allocator: std.mem.Allocator, input: start_agent_recommendation_generation.StartAgentRecommendationGenerationInput, options: CallOptions) !start_agent_recommendation_generation.StartAgentRecommendationGenerationOutput {
+        return start_agent_recommendation_generation.execute(self, allocator, input, options);
+    }
+
     /// Adds one or more tags to the specified resource.
     ///
     /// The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a
@@ -642,6 +735,28 @@ pub const Client = struct {
     /// `DELETE /tags/WorkloadArn?tagKeys=key1&tagKeys=key2`
     pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
+    }
+
+    /// Updates an existing context associated with a profile.
+    pub fn updateAgentContext(self: *Self, allocator: std.mem.Allocator, input: update_agent_context.UpdateAgentContextInput, options: CallOptions) !update_agent_context.UpdateAgentContextOutput {
+        return update_agent_context.execute(self, allocator, input, options);
+    }
+
+    /// Updates the pillars and title of an existing goal associated with a profile.
+    pub fn updateAgentGoal(self: *Self, allocator: std.mem.Allocator, input: update_agent_goal.UpdateAgentGoalInput, options: CallOptions) !update_agent_goal.UpdateAgentGoalOutput {
+        return update_agent_goal.execute(self, allocator, input, options);
+    }
+
+    /// Updates an existing optimization profile's configuration, including its
+    /// pillars, execution role, and aggregation settings.
+    pub fn updateAgentProfile(self: *Self, allocator: std.mem.Allocator, input: update_agent_profile.UpdateAgentProfileInput, options: CallOptions) !update_agent_profile.UpdateAgentProfileOutput {
+        return update_agent_profile.execute(self, allocator, input, options);
+    }
+
+    /// Updates the status of a recommendation to track its progress through the
+    /// implementation lifecycle.
+    pub fn updateAgentRecommendationStatus(self: *Self, allocator: std.mem.Allocator, input: update_agent_recommendation_status.UpdateAgentRecommendationStatusInput, options: CallOptions) !update_agent_recommendation_status.UpdateAgentRecommendationStatusOutput {
+        return update_agent_recommendation_status.execute(self, allocator, input, options);
     }
 
     /// Update the answer to a specific question in a workload review.
@@ -719,6 +834,48 @@ pub const Client = struct {
     }
 
     pub fn getConsolidatedReportPaginator(self: *Self, params: get_consolidated_report.GetConsolidatedReportInput) paginator.GetConsolidatedReportPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAgentContextsPaginator(self: *Self, params: list_agent_contexts.ListAgentContextsInput) paginator.ListAgentContextsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAgentGoalsPaginator(self: *Self, params: list_agent_goals.ListAgentGoalsInput) paginator.ListAgentGoalsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAgentProfilesPaginator(self: *Self, params: list_agent_profiles.ListAgentProfilesInput) paginator.ListAgentProfilesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAgentRecommendationGenerationsPaginator(self: *Self, params: list_agent_recommendation_generations.ListAgentRecommendationGenerationsInput) paginator.ListAgentRecommendationGenerationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAgentRecommendationItemsPaginator(self: *Self, params: list_agent_recommendation_items.ListAgentRecommendationItemsInput) paginator.ListAgentRecommendationItemsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAgentRecommendationsPaginator(self: *Self, params: list_agent_recommendations.ListAgentRecommendationsInput) paginator.ListAgentRecommendationsPaginator {
         return .{
             .client = self,
             .params = params,

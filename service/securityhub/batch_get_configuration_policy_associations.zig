@@ -89,10 +89,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetConfigurationPo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetConfigurationPolicyAssociationsOutput {
-    var result: BatchGetConfigurationPolicyAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetConfigurationPolicyAssociationsOutput, body, allocator);
-    }
+    const result: BatchGetConfigurationPolicyAssociationsOutput = try aws.json.parseJsonObject(
+        BatchGetConfigurationPolicyAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

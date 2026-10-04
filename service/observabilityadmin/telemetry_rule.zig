@@ -31,8 +31,10 @@ pub const TelemetryRule = struct {
     /// `AllRegions`.
     regions: ?[]const []const u8 = null,
 
-    /// The type of Amazon Web Services resource to configure telemetry for (e.g.,
-    /// "AWS::EC2::VPC", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL").
+    /// The type of Amazon Web Services resource to configure telemetry for (for
+    /// example, `AWS::EC2::VPC`, `AWS::EKS::Cluster`,
+    /// `AWS::ElasticLoadBalancingV2::LoadBalancer`, `AWS::Bedrock::KnowledgeBase`,
+    /// or `AWS::BedrockAgentCore::PaymentManager`).
     resource_type: ?ResourceType = null,
 
     /// The organizational scope to which the rule applies, specified using accounts

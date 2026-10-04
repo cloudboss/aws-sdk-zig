@@ -10,10 +10,8 @@ pub const StreetComponents = struct {
     /// Indicates the official directional identifiers assigned to highways.
     direction: ?[]const u8 = null,
 
-    /// A [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag) compliant
-    /// language codes for the results to be rendered in. If there is no data for
-    /// the result in the requested language, data will be returned in the default
-    /// language for the entry.
+    /// A [BCP
+    /// 47](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry) compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.
     language: ?[]const u8 = null,
 
     /// A prefix is a directional identifier that precedes, but is not included in,

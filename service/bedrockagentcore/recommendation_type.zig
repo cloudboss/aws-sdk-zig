@@ -1,5 +1,6 @@
 const std = @import("std");
 
+/// The type of recommendation to generate.
 pub const RecommendationType = enum {
     system_prompt_recommendation,
     tool_description_recommendation,

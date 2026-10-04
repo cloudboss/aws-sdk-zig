@@ -9,6 +9,8 @@ pub const RetrievalResultLocationType = enum {
     custom,
     kendra,
     sql,
+    onedrive,
+    googledrive,
 
     pub const json_field_names = .{
         .s3 = "S3",
@@ -19,6 +21,8 @@ pub const RetrievalResultLocationType = enum {
         .custom = "CUSTOM",
         .kendra = "KENDRA",
         .sql = "SQL",
+        .onedrive = "ONEDRIVE",
+        .googledrive = "GOOGLEDRIVE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -31,6 +35,8 @@ pub const RetrievalResultLocationType = enum {
             .custom => "CUSTOM",
             .kendra => "KENDRA",
             .sql => "SQL",
+            .onedrive => "ONEDRIVE",
+            .googledrive => "GOOGLEDRIVE",
         };
     }
 

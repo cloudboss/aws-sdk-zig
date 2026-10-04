@@ -33,7 +33,7 @@ pub const CreateCloudVmClusterInput = struct {
     /// cluster.
     data_storage_size_in_t_bs: ?f64 = null,
 
-    /// The amount of local node storage, in gigabytes (GBs), to allocate for the VM
+    /// The amount of local node storage, in gigabytes (GB), to allocate for the VM
     /// cluster.
     db_node_storage_size_in_g_bs: ?i32 = null,
 
@@ -72,7 +72,7 @@ pub const CreateCloudVmClusterInput = struct {
     /// Default: `LICENSE_INCLUDED`
     license_model: ?LicenseModel = null,
 
-    /// The amount of memory, in gigabytes (GBs), to allocate for the VM cluster.
+    /// The amount of memory, in gigabytes (GB), to allocate for the VM cluster.
     memory_size_in_g_bs: ?i32 = null,
 
     /// The unique identifier of the ODB network for the VM cluster.

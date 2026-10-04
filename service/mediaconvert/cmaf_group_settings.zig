@@ -6,6 +6,7 @@ const DestinationSettings = @import("destination_settings.zig").DestinationSetti
 const CmafEncryptionSettings = @import("cmaf_encryption_settings.zig").CmafEncryptionSettings;
 const CmafImageBasedTrickPlay = @import("cmaf_image_based_trick_play.zig").CmafImageBasedTrickPlay;
 const CmafImageBasedTrickPlaySettings = @import("cmaf_image_based_trick_play_settings.zig").CmafImageBasedTrickPlaySettings;
+const CmafImageBasedTrickPlayVariant = @import("cmaf_image_based_trick_play_variant.zig").CmafImageBasedTrickPlayVariant;
 const CmafManifestCompression = @import("cmaf_manifest_compression.zig").CmafManifestCompression;
 const CmafManifestDurationFormat = @import("cmaf_manifest_duration_format.zig").CmafManifestDurationFormat;
 const CmafMpdManifestBandwidthType = @import("cmaf_mpd_manifest_bandwidth_type.zig").CmafMpdManifestBandwidthType;
@@ -91,19 +92,28 @@ pub const CmafGroupSettings = struct {
     /// Specify whether MediaConvert generates images for trick play. Keep the
     /// default value, None, to not generate any images. Choose Thumbnail to
     /// generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled
-    /// thumbnails and full-resolution images of single frames. When you enable
-    /// Write HLS manifest, MediaConvert creates a child manifest for each set of
-    /// images that you generate and adds corresponding entries to the parent
-    /// manifest. When you enable Write DASH manifest, MediaConvert adds an entry in
-    /// the .mpd manifest for each set of images that you generate. A common
-    /// application for these images is Roku trick mode. The thumbnails and
-    /// full-frame images that MediaConvert creates with this feature are compatible
-    /// with this Roku specification:
+    /// thumbnails and full-resolution images of single frames. Choose Advanced to
+    /// customize thumbnail and tile settings for a single trick play variant.
+    /// Choose Variants to specify multiple trick play variants, each with its own
+    /// thumbnail and tile settings. When you enable Write HLS manifest,
+    /// MediaConvert creates a child manifest for each set of images that you
+    /// generate and adds corresponding entries to the parent manifest. When you
+    /// enable Write DASH manifest, MediaConvert adds an entry in the .mpd manifest
+    /// for each set of images that you generate. A common application for these
+    /// images is Roku trick mode. The thumbnails and full-frame images that
+    /// MediaConvert creates with this feature are compatible with this Roku
+    /// specification:
     /// https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
     image_based_trick_play: ?CmafImageBasedTrickPlay = null,
 
     /// Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
     image_based_trick_play_settings: ?CmafImageBasedTrickPlaySettings = null,
+
+    /// Specify multiple image-based trick play variants. Each entry creates a
+    /// separate set of JPEG tile images with its own resolution, tile layout, and
+    /// cadence settings. Set imageBasedTrickPlay to VARIANTS when using this
+    /// setting.
+    image_based_trick_play_variants: ?[]const CmafImageBasedTrickPlayVariant = null,
 
     /// When set to GZIP, compresses HLS playlist.
     manifest_compression: ?CmafManifestCompression = null,
@@ -239,6 +249,7 @@ pub const CmafGroupSettings = struct {
         .fragment_length = "FragmentLength",
         .image_based_trick_play = "ImageBasedTrickPlay",
         .image_based_trick_play_settings = "ImageBasedTrickPlaySettings",
+        .image_based_trick_play_variants = "ImageBasedTrickPlayVariants",
         .manifest_compression = "ManifestCompression",
         .manifest_duration_format = "ManifestDurationFormat",
         .min_buffer_time = "MinBufferTime",

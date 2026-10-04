@@ -139,10 +139,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchCreateChannelMembe
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchCreateChannelMembershipOutput {
-    var result: BatchCreateChannelMembershipOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchCreateChannelMembershipOutput, body, allocator);
-    }
+    const result: BatchCreateChannelMembershipOutput = try aws.json.parseJsonObject(
+        BatchCreateChannelMembershipOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

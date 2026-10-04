@@ -10,10 +10,8 @@ pub const StopParticipantReplicationInput = struct {
     destination_stage_arn: []const u8,
 
     /// Participant ID of the publisher that has been replicated. This is assigned
-    /// by IVS and returned by
-    /// CreateParticipantToken
-    /// or the `jti` (JWT ID) used to [
-    /// create a self signed
+    /// by IVS and returned by CreateParticipantToken or the `jti` (JWT ID) used to
+    /// [ create a self signed
     /// token](https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed).
     participant_id: []const u8,
 
@@ -132,6 +130,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StopParticipantReplicat
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StopParticipantReplicationOutput {
     var result: StopParticipantReplicationOutput = .{};
+    errdefer {
+        if (result.access_control_allow_origin) |value| allocator.free(value);
+        if (result.access_control_expose_headers) |value| allocator.free(value);
+        if (result.cache_control) |value| allocator.free(value);
+        if (result.content_security_policy) |value| allocator.free(value);
+        if (result.strict_transport_security) |value| allocator.free(value);
+        if (result.x_content_type_options) |value| allocator.free(value);
+        if (result.x_frame_options) |value| allocator.free(value);
+    }
     _ = body;
     _ = status;
     if (headers.get("access-control-allow-origin")) |value| {

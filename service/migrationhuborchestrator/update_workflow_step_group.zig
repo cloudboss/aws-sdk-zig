@@ -160,10 +160,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateWorkflowStepGroup
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateWorkflowStepGroupOutput {
-    var result: UpdateWorkflowStepGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateWorkflowStepGroupOutput, body, allocator);
-    }
+    const result: UpdateWorkflowStepGroupOutput = try aws.json.parseJsonObject(
+        UpdateWorkflowStepGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

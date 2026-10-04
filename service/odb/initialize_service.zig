@@ -4,13 +4,19 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const Access = @import("access.zig").Access;
 
 pub const InitializeServiceInput = struct {
+    /// Specifies whether to enable or disable the OCI service-account role for
+    /// Amazon Web Services Secrets Manager integration with Autonomous Database.
+    autonomous_database_oci_aws_secrets_manager_integration: ?Access = null,
+
     /// The Oracle Cloud Infrastructure (OCI) identity domain configuration for
     /// service initialization.
     oci_identity_domain: ?bool = null,
 
     pub const json_field_names = .{
+        .autonomous_database_oci_aws_secrets_manager_integration = "autonomousDatabaseOciAwsSecretsManagerIntegration",
         .oci_identity_domain = "ociIdentityDomain",
     };
 };

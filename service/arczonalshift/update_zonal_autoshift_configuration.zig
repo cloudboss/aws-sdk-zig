@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateZonalAutoshiftCon
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateZonalAutoshiftConfigurationOutput {
-    var result: UpdateZonalAutoshiftConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateZonalAutoshiftConfigurationOutput, body, allocator);
-    }
+    const result: UpdateZonalAutoshiftConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateZonalAutoshiftConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

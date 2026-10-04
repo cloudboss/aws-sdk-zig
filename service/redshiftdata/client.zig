@@ -10,6 +10,7 @@ const get_statement_result = @import("get_statement_result.zig");
 const get_statement_result_v2 = @import("get_statement_result_v2.zig");
 const list_databases = @import("list_databases.zig");
 const list_schemas = @import("list_schemas.zig");
+const list_sessions = @import("list_sessions.zig");
 const list_statements = @import("list_statements.zig");
 const list_tables = @import("list_tables.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
@@ -283,6 +284,23 @@ pub const Client = struct {
         return list_schemas.execute(self, allocator, input, options);
     }
 
+    /// Lists the sessions that the caller created in the last 24 hours. By default,
+    /// only sessions with a status of `AVAILABLE` or `BUSY` are returned. You can
+    /// filter the results by session status, compute target (cluster or serverless
+    /// workgroup), or database. To retrieve the metadata for a single session,
+    /// provide the `SessionId` parameter. Use `NextToken` to page through the
+    /// session list.
+    ///
+    /// Returns only the sessions that the caller created. When identity-enhanced
+    /// role sessions are used, you must provide either the `ClusterIdentifier` or
+    /// `WorkgroupName` parameter to ensure that the IAM Identity Center user can
+    /// only access the Amazon Redshift IAM Identity Center applications they are
+    /// assigned. For more information, see [ Trusted identity propagation
+    /// overview](https://docs.aws.amazon.com/singlesignon/latest/userguide/trustedidentitypropagation-overview.html).
+    pub fn listSessions(self: *Self, allocator: std.mem.Allocator, input: list_sessions.ListSessionsInput, options: CallOptions) !list_sessions.ListSessionsOutput {
+        return list_sessions.execute(self, allocator, input, options);
+    }
+
     /// List of SQL statements. By default, only finished statements are shown. A
     /// token is returned to page through the statement list.
     ///
@@ -369,6 +387,13 @@ pub const Client = struct {
     }
 
     pub fn listSchemasPaginator(self: *Self, params: list_schemas.ListSchemasInput) paginator.ListSchemasPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listSessionsPaginator(self: *Self, params: list_sessions.ListSessionsInput) paginator.ListSessionsPaginator {
         return .{
             .client = self,
             .params = params,

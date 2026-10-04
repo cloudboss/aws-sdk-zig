@@ -58,6 +58,7 @@ const Rule = @import("rule.zig").Rule;
 const RuleCondition = @import("rule_condition.zig").RuleCondition;
 const RulePriorityPair = @import("rule_priority_pair.zig").RulePriorityPair;
 const RuleTransform = @import("rule_transform.zig").RuleTransform;
+const SourceIpAddressTypeEnum = @import("source_ip_address_type_enum.zig").SourceIpAddressTypeEnum;
 const SourceIpConditionConfig = @import("source_ip_condition_config.zig").SourceIpConditionConfig;
 const SslPolicy = @import("ssl_policy.zig").SslPolicy;
 const SubnetMapping = @import("subnet_mapping.zig").SubnetMapping;
@@ -1794,11 +1795,14 @@ pub fn deserializeRuleTransform(allocator: std.mem.Allocator, reader: *aws.xml.R
 
 pub fn deserializeSourceIpConditionConfig(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !SourceIpConditionConfig {
     var result: SourceIpConditionConfig = undefined;
+    result.ip_address_type = null;
     result.values = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
-                if (std.mem.eql(u8, e.local, "Values")) {
+                if (std.mem.eql(u8, e.local, "IpAddressType")) {
+                    result.ip_address_type = SourceIpAddressTypeEnum.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Values")) {
                     result.values = try deserializeListOfString(allocator, reader, "member");
                 } else {
                     try reader.skipElement();
@@ -3208,6 +3212,11 @@ pub fn serializeRuleTransform(allocator: std.mem.Allocator, buf: *std.ArrayList(
 }
 
 pub fn serializeSourceIpConditionConfig(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: SourceIpConditionConfig) !void {
+    if (value.ip_address_type) |v| {
+        try buf.appendSlice(allocator, "<IpAddressType>");
+        try buf.appendSlice(allocator, v.wireName());
+        try buf.appendSlice(allocator, "</IpAddressType>");
+    }
     if (value.values) |v| {
         try buf.appendSlice(allocator, "<Values>");
         try serializeListOfString(allocator, buf, v, "member");

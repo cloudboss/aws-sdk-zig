@@ -12,6 +12,7 @@ pub const CapacityReservationState = enum {
     assessing,
     delayed,
     unsupported,
+    cancelling,
     unavailable,
 
     pub const json_field_names = .{
@@ -26,6 +27,7 @@ pub const CapacityReservationState = enum {
         .assessing = "assessing",
         .delayed = "delayed",
         .unsupported = "unsupported",
+        .cancelling = "cancelling",
         .unavailable = "unavailable",
     };
 
@@ -42,6 +44,7 @@ pub const CapacityReservationState = enum {
             .assessing => "assessing",
             .delayed => "delayed",
             .unsupported => "unsupported",
+            .cancelling => "cancelling",
             .unavailable => "unavailable",
         };
     }

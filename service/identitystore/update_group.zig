@@ -8,9 +8,17 @@ const AttributeOperation = @import("attribute_operation.zig").AttributeOperation
 
 pub const UpdateGroupInput = struct {
     /// The identifier for a group in the identity store.
+    ///
+    /// You can specify the group by ID or by Amazon Resource Name (ARN). For
+    /// example, group ID `a1b2c3d4-5678-90ab-cdef-EXAMPLE22222` or group ARN
+    /// `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
     group_id: []const u8,
 
     /// The globally unique identifier for the identity store.
+    ///
+    /// You can specify the identity store by ID or by Amazon Resource Name (ARN).
+    /// For example, identity store ID `d-1234567890` or identity store ARN
+    /// `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
     identity_store_id: []const u8,
 
     /// A list of `AttributeOperation` objects to apply to the requested group.
@@ -19,14 +27,42 @@ pub const UpdateGroupInput = struct {
     /// [Group](https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html).
     operations: []const AttributeOperation,
 
+    /// The expected current revision of the group. When you provide this value, the
+    /// update is applied only if it matches the current revision of the group in
+    /// the identity store, which prevents you from overwriting concurrent changes.
+    /// If the value doesn't match, the operation fails with a `ConflictException`.
+    /// If you don't provide this value, the update is applied unconditionally.
+    revision: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .group_id = "GroupId",
         .identity_store_id = "IdentityStoreId",
         .operations = "Operations",
+        .revision = "Revision",
     };
 };
 
 pub const UpdateGroupOutput = struct {
+    /// The Amazon Resource Name (ARN) of the group in the identity store. For
+    /// example,
+    /// `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
+    group_arn: []const u8,
+
+    /// The identifier for a group in the identity store.
+    group_id: []const u8,
+
+    /// The globally unique identifier for the identity store.
+    identity_store_id: []const u8,
+
+    /// The revision of the group after the requested update is applied.
+    revision: []const u8,
+
+    pub const json_field_names = .{
+        .group_arn = "GroupArn",
+        .group_id = "GroupId",
+        .identity_store_id = "IdentityStoreId",
+        .revision = "Revision",
+    };
 };
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateGroupInput, options: CallOptions) !UpdateGroupOutput {
@@ -76,7 +112,5 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGroupInput, confi
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateGroupOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    _ = allocator;
-    return .{};
+    return aws.json.parseJsonObject(UpdateGroupOutput, body, allocator);
 }

@@ -138,10 +138,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchQuickResponsesInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchQuickResponsesOutput {
-    var result: SearchQuickResponsesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchQuickResponsesOutput, body, allocator);
-    }
+    const result: SearchQuickResponsesOutput = try aws.json.parseJsonObject(
+        SearchQuickResponsesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchCreateAttendeeInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchCreateAttendeeOutput {
-    var result: BatchCreateAttendeeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchCreateAttendeeOutput, body, allocator);
-    }
+    const result: BatchCreateAttendeeOutput = try aws.json.parseJsonObject(
+        BatchCreateAttendeeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

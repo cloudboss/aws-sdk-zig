@@ -42,6 +42,7 @@ pub const GetReadSetOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetReadSetInput, options: CallOptions) !GetReadSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -50,8 +51,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetReadSetI
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "omics", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -63,6 +62,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetReadSetI
         return error.ServiceError;
     }
 
+    errdefer stream_resp.deinit();
     const result = try deserializeStreamingResponse(allocator, &stream_resp);
     return result;
 }

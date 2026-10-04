@@ -138,10 +138,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListQueueLimitAssociati
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListQueueLimitAssociationsOutput {
-    var result: ListQueueLimitAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListQueueLimitAssociationsOutput, body, allocator);
-    }
+    const result: ListQueueLimitAssociationsOutput = try aws.json.parseJsonObject(
+        ListQueueLimitAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,6 +1,7 @@
 const std = @import("std");
 
-/// The type of trigger source for a notebook run in Amazon DataZone.
+/// The type of trigger source for a notebook run in Amazon SageMaker Unified
+/// Studio.
 pub const TriggerSourceType = enum {
     /// The notebook run was triggered manually.
     manual,

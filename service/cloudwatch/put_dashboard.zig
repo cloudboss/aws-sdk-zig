@@ -14,7 +14,7 @@ pub const PutDashboardInput = struct {
     /// to include and their location on the dashboard. This parameter is required.
     ///
     /// For more information about the syntax, see [Dashboard Body Structure and
-    /// Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html).
+    /// Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Dashboard-Body-Structure.html).
     dashboard_body: []const u8,
 
     /// The name of the dashboard. If a dashboard with this name already exists,
@@ -38,10 +38,10 @@ pub const PutDashboardInput = struct {
     ///
     /// You can use this parameter only when creating a new dashboard. If you
     /// specify
-    /// `Tags` when updating an existing dashboard, the tag updates are ignored. To
-    /// add or update tags on an existing dashboard, use
-    /// [TagResource](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html). To
-    /// remove tags, use
+    /// `Tags` when updating an existing dashboard, the tag updates are ignored.
+    /// To add or update tags on an existing dashboard, use
+    /// [TagResource](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html).
+    /// To remove tags, use
     /// [UntagResource](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html).
     tags: ?[]const Tag = null,
 

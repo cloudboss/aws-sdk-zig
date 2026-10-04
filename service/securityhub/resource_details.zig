@@ -453,6 +453,9 @@ pub const ResourceDetails = struct {
     /// Information about the encryption configuration for X-Ray.
     aws_xray_encryption_config: ?AwsXrayEncryptionConfigDetails = null,
 
+    /// Details about an Azure resource that is related to a finding.
+    azure_resource: ?[]const u8 = null,
+
     /// Details about an external code repository with which you can connect your
     /// Amazon Web Services resources.
     /// The connection is established through Amazon Inspector.
@@ -575,6 +578,7 @@ pub const ResourceDetails = struct {
         .aws_wafv_2_web_acl = "AwsWafv2WebAcl",
         .aws_waf_web_acl = "AwsWafWebAcl",
         .aws_xray_encryption_config = "AwsXrayEncryptionConfig",
+        .azure_resource = "AzureResource",
         .code_repository = "CodeRepository",
         .container = "Container",
         .other = "Other",

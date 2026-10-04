@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const Tag = @import("tag.zig").Tag;
 const GlobalReplicationGroup = @import("global_replication_group.zig").GlobalReplicationGroup;
 const serde = @import("serde.zig");
 
@@ -33,6 +34,11 @@ pub const CreateGlobalReplicationGroupInput = struct {
     /// updates to the
     /// secondary cluster. This value is stored as a lowercase string.
     primary_replication_group_id: []const u8,
+
+    /// A list of tags to be added to this resource. A tag is a key-value pair. A
+    /// tag key must
+    /// be accompanied by a tag value, although null is accepted.
+    tags: ?[]const Tag = null,
 };
 
 pub const CreateGlobalReplicationGroupOutput = struct {
@@ -80,6 +86,27 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateGlobalReplication
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.global_replication_group_id_suffix);
     try body_buf.appendSlice(allocator, "&PrimaryReplicationGroupId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.primary_replication_group_id);
+    if (input.tags) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.key) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.Tag.{d}.Key=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.value) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Tags.Tag.{d}.Value=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                }
+            }
+        }
+    }
 
     const body = try body_buf.toOwnedSlice(allocator);
 

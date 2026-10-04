@@ -11,6 +11,7 @@ const CreateHlsManifestConfiguration = @import("create_hls_manifest_configuratio
 const CreateLowLatencyHlsManifestConfiguration = @import("create_low_latency_hls_manifest_configuration.zig").CreateLowLatencyHlsManifestConfiguration;
 const CreateMssManifestConfiguration = @import("create_mss_manifest_configuration.zig").CreateMssManifestConfiguration;
 const Segment = @import("segment.zig").Segment;
+const StreamNameOutputMode = @import("stream_name_output_mode.zig").StreamNameOutputMode;
 const UriSeparator = @import("uri_separator.zig").UriSeparator;
 const GetDashManifestConfiguration = @import("get_dash_manifest_configuration.zig").GetDashManifestConfiguration;
 const GetHlsManifestConfiguration = @import("get_hls_manifest_configuration.zig").GetHlsManifestConfiguration;
@@ -74,6 +75,15 @@ pub const CreateOriginEndpointInput = struct {
     /// 1,209,600 seconds (14 days).
     startover_window_seconds: ?i32 = null,
 
+    /// The output mode for stream names in egress manifests. This setting is valid
+    /// only when the associated channel's `InputType` is `HLS`. You can't change
+    /// the stream name output mode after you create the endpoint.
+    ///
+    /// `INDEX` uses numeric indices for stream names (for example, 1, 2, 3).
+    /// `PASSTHROUGH_NAME` uses the stream names from the input manifest. If you
+    /// don't specify a value, the default is `INDEX`.
+    stream_name_output_mode: ?StreamNameOutputMode = null,
+
     /// A comma-separated list of tag key:value pairs that you define. For example:
     ///
     /// `"Key1": "Value1",`
@@ -100,6 +110,7 @@ pub const CreateOriginEndpointInput = struct {
         .origin_endpoint_name = "OriginEndpointName",
         .segment = "Segment",
         .startover_window_seconds = "StartoverWindowSeconds",
+        .stream_name_output_mode = "StreamNameOutputMode",
         .tags = "Tags",
         .uri_separator = "UriSeparator",
     };
@@ -165,6 +176,10 @@ pub const CreateOriginEndpointOutput = struct {
     /// on content that falls within the window.
     startover_window_seconds: ?i32 = null,
 
+    /// The output mode for stream names in egress manifests for this origin
+    /// endpoint.
+    stream_name_output_mode: ?StreamNameOutputMode = null,
+
     /// The comma-separated list of tag key:value pairs assigned to the origin
     /// endpoint.
     tags: ?[]const aws.map.StringMapEntry = null,
@@ -189,6 +204,7 @@ pub const CreateOriginEndpointOutput = struct {
         .origin_endpoint_name = "OriginEndpointName",
         .segment = "Segment",
         .startover_window_seconds = "StartoverWindowSeconds",
+        .stream_name_output_mode = "StreamNameOutputMode",
         .tags = "Tags",
         .uri_separator = "UriSeparator",
     };
@@ -292,6 +308,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateOriginEndpointInp
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.stream_name_output_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"StreamNameOutputMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Tags\":");
@@ -323,10 +345,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateOriginEndpointInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateOriginEndpointOutput {
-    var result: CreateOriginEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateOriginEndpointOutput, body, allocator);
-    }
+    const result: CreateOriginEndpointOutput = try aws.json.parseJsonObject(
+        CreateOriginEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

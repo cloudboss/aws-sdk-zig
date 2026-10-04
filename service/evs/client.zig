@@ -11,6 +11,8 @@ const delete_environment = @import("delete_environment.zig");
 const delete_environment_connector = @import("delete_environment_connector.zig");
 const delete_environment_host = @import("delete_environment_host.zig");
 const disassociate_eip_from_vlan = @import("disassociate_eip_from_vlan.zig");
+const get_account_settings = @import("get_account_settings.zig");
+const get_depot_url = @import("get_depot_url.zig");
 const get_environment = @import("get_environment.zig");
 const get_versions = @import("get_versions.zig");
 const list_environment_connectors = @import("list_environment_connectors.zig");
@@ -19,6 +21,7 @@ const list_environment_vlans = @import("list_environment_vlans.zig");
 const list_environments = @import("list_environments.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_vm_entitlements = @import("list_vm_entitlements.zig");
+const put_account_settings = @import("put_account_settings.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_environment_connector = @import("update_environment_connector.zig");
@@ -69,18 +72,20 @@ pub const Client = struct {
     /// Creates an Amazon EVS environment that runs VCF software, such as SDDC
     /// Manager, NSX Manager, and vCenter Server.
     ///
-    /// During environment creation, Amazon EVS performs validations on DNS
-    /// settings, provisions VLAN subnets and hosts, and deploys the supplied
-    /// version of VCF.
+    /// When you specify `SELF_DEPLOYED` for `vcfVersion`, Amazon EVS provisions
+    /// only the VLAN subnets; no hosts are added and no VCF installation is
+    /// performed. After the environment is created, you can add hosts with
+    /// `CreateEnvironmentHost` and install VCF yourself. The `licenseInfo`,
+    /// `hosts`, `vcfHostnames`, `siteId`, and `connectivityInfo` parameters are not
+    /// supported in this mode.
     ///
-    /// It can take several hours to create an environment. After the deployment
-    /// completes, you can configure VCF in the vSphere user interface according to
-    /// your needs.
+    /// When you specify any other VCF version, Amazon EVS installs and configures
+    /// VCF for you. For more information, see [Self-deployed
+    /// mode](https://docs.aws.amazon.com/evs/latest/userguide/getting-started-self-deployed.html) in the *Amazon EVS User Guide*.
     ///
-    /// When creating a new environment, the default ESX version for the selected
-    /// VCF version will be used, you cannot choose a specific ESX version in
-    /// `CreateEnvironment` action. When a host has been added with a specific ESX
-    /// version, it can only be upgraded using vCenter Lifecycle Manager.
+    /// When Amazon EVS installs VCF, the default ESX version for the selected VCF
+    /// version will be used. After a host is added with a specific ESX version, it
+    /// can only be upgraded using vCenter Lifecycle Manager.
     ///
     /// You cannot use the `dedicatedHostId` and `placementGroupId` parameters
     /// together in the same `CreateEnvironment` action. This results in a
@@ -89,16 +94,21 @@ pub const Client = struct {
         return create_environment.execute(self, allocator, input, options);
     }
 
-    /// Creates a connector for an Amazon EVS environment. A connector establishes a
-    /// connection to a VCF appliance, such as vCenter, using a fully qualified
-    /// domain name and an Amazon Web Services Secrets Manager secret that stores
-    /// the appliance credentials.
+    /// Creates a connector for an Amazon EVS environment. A connector allows the
+    /// Amazon EVS control plane to interface with VCF appliances using a fully
+    /// qualified domain name.
+    ///
+    /// You can create only one connector of each type per environment. For
+    /// environments where Amazon EVS installs VCF, the `SDDC_MANAGER` connector is
+    /// created automatically.
+    ///
+    /// Amazon EVS requires an active connector to SDDC Manager or VCF Operations
+    /// Manager to monitor environment health and license compliance.
     pub fn createEnvironmentConnector(self: *Self, allocator: std.mem.Allocator, input: create_environment_connector.CreateEnvironmentConnectorInput, options: CallOptions) !create_environment_connector.CreateEnvironmentConnectorOutput {
         return create_environment_connector.execute(self, allocator, input, options);
     }
 
-    /// Creates an ESX host and adds it to an Amazon EVS environment. Amazon EVS
-    /// supports 4-16 hosts per environment.
+    /// Creates an ESX host and adds it to an Amazon EVS environment.
     ///
     /// This action can only be used after the Amazon EVS environment is deployed.
     ///
@@ -110,9 +120,8 @@ pub const Client = struct {
     ///
     /// If you don't specify an ESX version when adding hosts using
     /// `CreateEnvironmentHost` action, Amazon EVS automatically uses the default
-    /// ESX version associated with your environment's VCF version. To find the
-    /// default ESX version for a particular VCF version, use the `GetVersions`
-    /// action.
+    /// ESX version for your environment's VCF version. To find the available ESX
+    /// versions for a particular VCF version, use the `GetVersions` action.
     ///
     /// You cannot use the `dedicatedHostId` and `placementGroupId` parameters
     /// together in the same `CreateEnvironmentHost` action. This results in a
@@ -164,6 +173,23 @@ pub const Client = struct {
         return disassociate_eip_from_vlan.execute(self, allocator, input, options);
     }
 
+    /// Returns the configured EVS settings for your Amazon Web Services account in
+    /// the specified Amazon Web Services Region. If no settings have been set, an
+    /// empty list is returned.
+    pub fn getAccountSettings(self: *Self, allocator: std.mem.Allocator, input: get_account_settings.GetAccountSettingsInput, options: CallOptions) !get_account_settings.GetAccountSettingsOutput {
+        return get_account_settings.execute(self, allocator, input, options);
+    }
+
+    /// Returns a URL and authentication token for accessing the Amazon EVS Custom
+    /// Addon depot. Configure the depot URL as a download source in vSphere
+    /// Lifecycle Manager (vLCM) to sync and install the Amazon EVS Custom Addon.
+    ///
+    /// The depot URL remains active until you rotate the authentication token by
+    /// calling this action with `rotate` set to `true`.
+    pub fn getDepotUrl(self: *Self, allocator: std.mem.Allocator, input: get_depot_url.GetDepotUrlInput, options: CallOptions) !get_depot_url.GetDepotUrlOutput {
+        return get_depot_url.execute(self, allocator, input, options);
+    }
+
     /// Returns a description of the specified environment.
     pub fn getEnvironment(self: *Self, allocator: std.mem.Allocator, input: get_environment.GetEnvironmentInput, options: CallOptions) !get_environment.GetEnvironmentOutput {
         return get_environment.execute(self, allocator, input, options);
@@ -208,6 +234,15 @@ pub const Client = struct {
     /// associated with the specified environment and connector.
     pub fn listVmEntitlements(self: *Self, allocator: std.mem.Allocator, input: list_vm_entitlements.ListVmEntitlementsInput, options: CallOptions) !list_vm_entitlements.ListVmEntitlementsOutput {
         return list_vm_entitlements.execute(self, allocator, input, options);
+    }
+
+    /// Creates or updates account-level EVS settings for your Amazon Web Services
+    /// account in the specified Amazon Web Services Region.
+    ///
+    /// EVS settings included in the request are created or overwritten. Settings
+    /// omitted from the request retain their current values.
+    pub fn putAccountSettings(self: *Self, allocator: std.mem.Allocator, input: put_account_settings.PutAccountSettingsInput, options: CallOptions) !put_account_settings.PutAccountSettingsOutput {
+        return put_account_settings.execute(self, allocator, input, options);
     }
 
     /// Associates the specified tags to an Amazon EVS resource with the specified

@@ -84,10 +84,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutGroupingConfiguratio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutGroupingConfigurationOutput {
-    var result: PutGroupingConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutGroupingConfigurationOutput, body, allocator);
-    }
+    const result: PutGroupingConfigurationOutput = try aws.json.parseJsonObject(
+        PutGroupingConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

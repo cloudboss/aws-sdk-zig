@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ContainerProvider = @import("container_provider.zig").ContainerProvider;
+const SchedulerConfiguration = @import("scheduler_configuration.zig").SchedulerConfiguration;
 
 pub const CreateVirtualClusterInput = struct {
     /// The client token of the virtual cluster.
@@ -16,8 +17,16 @@ pub const CreateVirtualClusterInput = struct {
     /// The specified name of the virtual cluster.
     name: []const u8,
 
+    /// The scheduler configuration (concurrency and queue limits) to apply to the
+    /// virtual
+    /// cluster at creation time. When omitted, no limits are applied.
+    scheduler_configuration: ?SchedulerConfiguration = null,
+
     /// The ID of the security configuration.
     security_configuration_id: ?[]const u8 = null,
+
+    /// Indicates whether the virtual cluster has session support enabled.
+    session_enabled: ?bool = null,
 
     /// The tags assigned to the virtual cluster.
     tags: ?[]const aws.map.StringMapEntry = null,
@@ -26,7 +35,9 @@ pub const CreateVirtualClusterInput = struct {
         .client_token = "clientToken",
         .container_provider = "containerProvider",
         .name = "name",
+        .scheduler_configuration = "schedulerConfiguration",
         .security_configuration_id = "securityConfigurationId",
+        .session_enabled = "sessionEnabled",
         .tags = "tags",
     };
 };
@@ -96,9 +107,21 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVirtualClusterInp
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
     has_prev = true;
+    if (input.scheduler_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"schedulerConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.security_configuration_id) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"securityConfigurationId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.session_enabled) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"sessionEnabled\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -124,10 +147,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVirtualClusterInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateVirtualClusterOutput {
-    var result: CreateVirtualClusterOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateVirtualClusterOutput, body, allocator);
-    }
+    const result: CreateVirtualClusterOutput = try aws.json.parseJsonObject(
+        CreateVirtualClusterOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

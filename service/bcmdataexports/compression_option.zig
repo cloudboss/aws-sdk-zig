@@ -3,16 +3,19 @@ const std = @import("std");
 pub const CompressionOption = enum {
     gzip,
     parquet,
+    zip,
 
     pub const json_field_names = .{
         .gzip = "GZIP",
         .parquet = "PARQUET",
+        .zip = "ZIP",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .gzip => "GZIP",
             .parquet => "PARQUET",
+            .zip => "ZIP",
         };
     }
 

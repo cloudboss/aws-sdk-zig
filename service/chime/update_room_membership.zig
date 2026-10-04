@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateRoomMembershipInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateRoomMembershipOutput {
-    var result: UpdateRoomMembershipOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateRoomMembershipOutput, body, allocator);
-    }
+    const result: UpdateRoomMembershipOutput = try aws.json.parseJsonObject(
+        UpdateRoomMembershipOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

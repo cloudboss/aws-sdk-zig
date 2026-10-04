@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListComputationModelDat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListComputationModelDataBindingUsagesOutput {
-    var result: ListComputationModelDataBindingUsagesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListComputationModelDataBindingUsagesOutput, body, allocator);
-    }
+    const result: ListComputationModelDataBindingUsagesOutput = try aws.json.parseJsonObject(
+        ListComputationModelDataBindingUsagesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

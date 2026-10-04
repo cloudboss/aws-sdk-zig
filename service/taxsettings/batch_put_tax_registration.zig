@@ -28,8 +28,7 @@ pub const BatchPutTaxRegistrationOutput = struct {
     errors: ?[]const BatchPutTaxRegistrationError = null,
 
     /// The status of your TRN stored in the system after processing. Based on the
-    /// validation
-    /// occurring on the TRN, the status can be `Verified`, `Pending` or
+    /// validation occurring on the TRN, the status can be `Verified`, `Pending` or
     /// `Rejected`.
     status: ?TaxRegistrationStatus = null,
 
@@ -99,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchPutTaxRegistration
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchPutTaxRegistrationOutput {
-    var result: BatchPutTaxRegistrationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchPutTaxRegistrationOutput, body, allocator);
-    }
+    const result: BatchPutTaxRegistrationOutput = try aws.json.parseJsonObject(
+        BatchPutTaxRegistrationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

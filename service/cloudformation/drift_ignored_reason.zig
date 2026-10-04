@@ -3,16 +3,19 @@ const std = @import("std");
 pub const DriftIgnoredReason = enum {
     managed_by_aws,
     write_only_property,
+    sensitive_property,
 
     pub const json_field_names = .{
         .managed_by_aws = "MANAGED_BY_AWS",
         .write_only_property = "WRITE_ONLY_PROPERTY",
+        .sensitive_property = "SENSITIVE_PROPERTY",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .managed_by_aws => "MANAGED_BY_AWS",
             .write_only_property => "WRITE_ONLY_PROPERTY",
+            .sensitive_property => "SENSITIVE_PROPERTY",
         };
     }
 

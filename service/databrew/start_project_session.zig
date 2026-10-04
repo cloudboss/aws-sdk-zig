@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartProjectSessionInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartProjectSessionOutput {
-    var result: StartProjectSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartProjectSessionOutput, body, allocator);
-    }
+    const result: StartProjectSessionOutput = try aws.json.parseJsonObject(
+        StartProjectSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

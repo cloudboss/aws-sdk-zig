@@ -84,10 +84,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAutoshiftObserver
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateAutoshiftObserverNotificationStatusOutput {
-    var result: UpdateAutoshiftObserverNotificationStatusOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateAutoshiftObserverNotificationStatusOutput, body, allocator);
-    }
+    const result: UpdateAutoshiftObserverNotificationStatusOutput = try aws.json.parseJsonObject(
+        UpdateAutoshiftObserverNotificationStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ResolveAppVersionResour
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ResolveAppVersionResourcesOutput {
-    var result: ResolveAppVersionResourcesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ResolveAppVersionResourcesOutput, body, allocator);
-    }
+    const result: ResolveAppVersionResourcesOutput = try aws.json.parseJsonObject(
+        ResolveAppVersionResourcesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

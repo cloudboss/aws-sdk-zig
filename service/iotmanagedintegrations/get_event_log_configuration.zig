@@ -85,10 +85,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEventLogConfiguratio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetEventLogConfigurationOutput {
-    var result: GetEventLogConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetEventLogConfigurationOutput, body, allocator);
-    }
+    const result: GetEventLogConfigurationOutput = try aws.json.parseJsonObject(
+        GetEventLogConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

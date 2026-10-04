@@ -1,8 +1,7 @@
 const std = @import("std");
 
-/// Supported blockchain chain identifiers for balance queries.
-/// Each value maps to a specific chain supported by the underlying providers
-/// (Privy, Coinbase).
+/// Supported blockchain chain identifiers for balance queries. Each value maps
+/// to a specific chain supported by the underlying providers (Privy, Coinbase).
 pub const BlockchainChainId = enum {
     /// Base Mainnet (EVM L2)
     base,

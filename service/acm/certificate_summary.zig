@@ -1,3 +1,4 @@
+const CertificateKeyPairOrigin = @import("certificate_key_pair_origin.zig").CertificateKeyPairOrigin;
 const CertificateExport = @import("certificate_export.zig").CertificateExport;
 const ExtendedKeyUsageName = @import("extended_key_usage_name.zig").ExtendedKeyUsageName;
 const KeyAlgorithm = @import("key_algorithm.zig").KeyAlgorithm;
@@ -18,6 +19,9 @@ pub const CertificateSummary = struct {
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
     certificate_arn: ?[]const u8 = null,
 
+    /// The origin of the certificate's key pair.
+    certificate_key_pair_origin: ?CertificateKeyPairOrigin = null,
+
     /// The time at which the certificate was requested.
     created_at: ?i64 = null,
 
@@ -25,8 +29,7 @@ pub const CertificateSummary = struct {
     /// for the certificate.
     domain_name: ?[]const u8 = null,
 
-    /// Indicates whether the certificate has been exported. This value exists only
-    /// when the certificate type is `PRIVATE`.
+    /// Indicates whether the certificate has been exported.
     exported: ?bool = null,
 
     /// Indicates if export is enabled for the certificate.
@@ -111,6 +114,7 @@ pub const CertificateSummary = struct {
 
     pub const json_field_names = .{
         .certificate_arn = "CertificateArn",
+        .certificate_key_pair_origin = "CertificateKeyPairOrigin",
         .created_at = "CreatedAt",
         .domain_name = "DomainName",
         .exported = "Exported",

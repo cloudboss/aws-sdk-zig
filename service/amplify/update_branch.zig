@@ -307,10 +307,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateBranchInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateBranchOutput {
-    var result: UpdateBranchOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateBranchOutput, body, allocator);
-    }
+    const result: UpdateBranchOutput = try aws.json.parseJsonObject(
+        UpdateBranchOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

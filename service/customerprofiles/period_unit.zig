@@ -1,12 +1,14 @@
 const std = @import("std");
 
 pub const PeriodUnit = enum {
+    minutes,
     hours,
     days,
     weeks,
     months,
 
     pub const json_field_names = .{
+        .minutes = "MINUTES",
         .hours = "HOURS",
         .days = "DAYS",
         .weeks = "WEEKS",
@@ -15,6 +17,7 @@ pub const PeriodUnit = enum {
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
+            .minutes => "MINUTES",
             .hours => "HOURS",
             .days => "DAYS",
             .weeks => "WEEKS",

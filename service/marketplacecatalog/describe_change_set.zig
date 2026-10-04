@@ -143,10 +143,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeChangeSetInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeChangeSetOutput {
-    var result: DescribeChangeSetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeChangeSetOutput, body, allocator);
-    }
+    const result: DescribeChangeSetOutput = try aws.json.parseJsonObject(
+        DescribeChangeSetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

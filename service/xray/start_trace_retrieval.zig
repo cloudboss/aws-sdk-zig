@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartTraceRetrievalInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartTraceRetrievalOutput {
-    var result: StartTraceRetrievalOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartTraceRetrievalOutput, body, allocator);
-    }
+    const result: StartTraceRetrievalOutput = try aws.json.parseJsonObject(
+        StartTraceRetrievalOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

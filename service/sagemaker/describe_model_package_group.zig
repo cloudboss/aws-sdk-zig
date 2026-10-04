@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const UserContext = @import("user_context.zig").UserContext;
+const ManagedConfiguration = @import("managed_configuration.zig").ManagedConfiguration;
 const ModelPackageGroupStatus = @import("model_package_group_status.zig").ModelPackageGroupStatus;
 
 pub const DescribeModelPackageGroupInput = struct {
@@ -22,6 +23,9 @@ pub const DescribeModelPackageGroupOutput = struct {
     /// The time that the model group was created.
     creation_time: i64,
 
+    /// The managed configuration of the model package group.
+    managed_configuration: ?ManagedConfiguration = null,
+
     /// The Amazon Resource Name (ARN) of the model group.
     model_package_group_arn: []const u8,
 
@@ -37,6 +41,7 @@ pub const DescribeModelPackageGroupOutput = struct {
     pub const json_field_names = .{
         .created_by = "CreatedBy",
         .creation_time = "CreationTime",
+        .managed_configuration = "ManagedConfiguration",
         .model_package_group_arn = "ModelPackageGroupArn",
         .model_package_group_description = "ModelPackageGroupDescription",
         .model_package_group_name = "ModelPackageGroupName",

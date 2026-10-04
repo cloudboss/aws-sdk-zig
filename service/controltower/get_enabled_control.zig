@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEnabledControlInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetEnabledControlOutput {
-    var result: GetEnabledControlOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetEnabledControlOutput, body, allocator);
-    }
+    const result: GetEnabledControlOutput = try aws.json.parseJsonObject(
+        GetEnabledControlOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

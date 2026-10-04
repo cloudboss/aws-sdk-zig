@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchLookupUserUnameInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchLookupUserUnameOutput {
-    var result: BatchLookupUserUnameOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchLookupUserUnameOutput, body, allocator);
-    }
+    const result: BatchLookupUserUnameOutput = try aws.json.parseJsonObject(
+        BatchLookupUserUnameOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -5,6 +5,8 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ComputeResourceUpdate = @import("compute_resource_update.zig").ComputeResourceUpdate;
+const EcsSettings = @import("ecs_settings.zig").EcsSettings;
+const EksConfigurationUpdate = @import("eks_configuration_update.zig").EksConfigurationUpdate;
 const CEState = @import("ce_state.zig").CEState;
 const UpdatePolicy = @import("update_policy.zig").UpdatePolicy;
 
@@ -22,6 +24,21 @@ pub const UpdateComputeEnvironmentInput = struct {
 
     /// Reserved.
     context: ?[]const u8 = null,
+
+    /// The Amazon ECS settings for the compute environment. These settings control
+    /// CloudWatch
+    /// Container Insights collection for the compute environment.
+    ecs_settings: ?EcsSettings = null,
+
+    /// Updates the Amazon EKS configuration for the compute environment. Only
+    /// specify this
+    /// parameter if the compute environment's `containerOrchestrationType` is
+    /// `EKS`. Currently, the `accessEntry` setting is the only Amazon EKS
+    /// configuration that
+    /// you can change after the compute environment is created. For more
+    /// information, see [Amazon EKS access entry
+    /// authentication](https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html) in the *Batch User Guide*.
+    eks_configuration: ?EksConfigurationUpdate = null,
 
     /// The full Amazon Resource Name (ARN) of the IAM role that allows Batch to
     /// make calls to other Amazon Web Services
@@ -78,10 +95,9 @@ pub const UpdateComputeEnvironmentInput = struct {
     /// don't scale out.
     ///
     /// Compute environments in a `DISABLED` state may continue to incur billing
-    /// charges. To prevent additional charges, turn off and then delete the compute
-    /// environment.
-    /// For more information, see
-    /// [State](https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state) in the *Batch User Guide*.
+    /// charges, for example, if they have running instances due to jobs that are
+    /// still executing or a non-zero `minvCpus` setting. To prevent additional
+    /// charges, disable and delete the compute environment.
     ///
     /// When an instance is idle, the instance scales down to the `minvCpus` value.
     /// However, the instance size doesn't change. For example, consider a
@@ -112,6 +128,8 @@ pub const UpdateComputeEnvironmentInput = struct {
         .compute_environment = "computeEnvironment",
         .compute_resources = "computeResources",
         .context = "context",
+        .ecs_settings = "ecsSettings",
+        .eks_configuration = "eksConfiguration",
         .service_role = "serviceRole",
         .state = "state",
         .unmanagedv_cpus = "unmanagedvCpus",
@@ -186,6 +204,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateComputeEnvironmen
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.ecs_settings) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ecsSettings\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.eks_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"eksConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.service_role) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"serviceRole\":");
@@ -226,10 +256,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateComputeEnvironmen
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateComputeEnvironmentOutput {
-    var result: UpdateComputeEnvironmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateComputeEnvironmentOutput, body, allocator);
-    }
+    const result: UpdateComputeEnvironmentOutput = try aws.json.parseJsonObject(
+        UpdateComputeEnvironmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,0 +1,25 @@
+const std = @import("std");
+
+pub const ComputeResourceType = enum {
+    /// MicroVm compute resource type
+    micro_vm,
+
+    pub const json_field_names = .{
+        .micro_vm = "MicroVm",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .micro_vm => "MicroVm",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
+};

@@ -20,8 +20,13 @@ pub const GroupMembership = struct {
     /// is a member of the group.
     member_id: ?MemberId = null,
 
+    /// The Amazon Resource Name (ARN) of the group membership in the identity
+    /// store. For example,
+    /// `arn:aws:identitystore:::membership/a1b2c3d4-5678-90ab-cdef-EXAMPLE33333`.
+    membership_arn: []const u8,
+
     /// The identifier for a `GroupMembership` object in an identity store.
-    membership_id: ?[]const u8 = null,
+    membership_id: []const u8,
 
     /// The date and time the group membership was last updated.
     updated_at: ?i64 = null,
@@ -35,6 +40,7 @@ pub const GroupMembership = struct {
         .group_id = "GroupId",
         .identity_store_id = "IdentityStoreId",
         .member_id = "MemberId",
+        .membership_arn = "MembershipArn",
         .membership_id = "MembershipId",
         .updated_at = "UpdatedAt",
         .updated_by = "UpdatedBy",

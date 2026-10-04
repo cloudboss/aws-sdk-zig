@@ -78,10 +78,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteDomainAssociation
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteDomainAssociationOutput {
-    var result: DeleteDomainAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteDomainAssociationOutput, body, allocator);
-    }
+    const result: DeleteDomainAssociationOutput = try aws.json.parseJsonObject(
+        DeleteDomainAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

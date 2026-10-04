@@ -5,12 +5,14 @@ pub const JobQueueType = enum {
     ecs,
     ecs_fargate,
     sagemaker_training,
+    ecs_managed_instances,
 
     pub const json_field_names = .{
         .eks = "EKS",
         .ecs = "ECS",
         .ecs_fargate = "ECS_FARGATE",
         .sagemaker_training = "SAGEMAKER_TRAINING",
+        .ecs_managed_instances = "ECS_MANAGED_INSTANCES",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const JobQueueType = enum {
             .ecs => "ECS",
             .ecs_fargate => "ECS_FARGATE",
             .sagemaker_training => "SAGEMAKER_TRAINING",
+            .ecs_managed_instances => "ECS_MANAGED_INSTANCES",
         };
     }
 

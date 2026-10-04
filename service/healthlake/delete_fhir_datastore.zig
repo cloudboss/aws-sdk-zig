@@ -7,7 +7,8 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DatastoreStatus = @import("datastore_status.zig").DatastoreStatus;
 
 pub const DeleteFHIRDatastoreInput = struct {
-    /// The AWS-generated identifier for the data store to be deleted.
+    /// The Amazon Web Services-generated identifier for the data store to be
+    /// deleted.
     datastore_id: []const u8,
 
     pub const json_field_names = .{
@@ -16,14 +17,13 @@ pub const DeleteFHIRDatastoreInput = struct {
 };
 
 pub const DeleteFHIRDatastoreOutput = struct {
-    /// The Amazon Resource Name (ARN) that grants access permission to AWS
-    /// HealthLake.
+    /// The Amazon Resource Name (ARN) that grants access permission to HealthLake.
     datastore_arn: []const u8,
 
-    /// The AWS endpoint of the data store to be deleted.
+    /// The Amazon Web Services endpoint of the data store to be deleted.
     datastore_endpoint: []const u8,
 
-    /// The AWS-generated ID for the deleted data store.
+    /// The Amazon Web Services-generated ID for the deleted data store.
     datastore_id: []const u8,
 
     /// The data store status.

@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ApplicationConfig = @import("application_config.zig").ApplicationConfig;
 const ApplicationSourceConfig = @import("application_source_config.zig").ApplicationSourceConfig;
 const ApplicationType = @import("application_type.zig").ApplicationType;
+const AuthConfig = @import("auth_config.zig").AuthConfig;
 const IframeConfig = @import("iframe_config.zig").IframeConfig;
 const Publication = @import("publication.zig").Publication;
 const Subscription = @import("subscription.zig").Subscription;
@@ -20,6 +21,10 @@ pub const CreateApplicationInput = struct {
 
     /// The type of application.
     application_type: ?ApplicationType = null,
+
+    /// The authentication settings that Connect Customer uses when calling the
+    /// external application.
+    auth_config: ?AuthConfig = null,
 
     /// A unique, case-sensitive identifier that you provide to ensure the
     /// idempotency of the
@@ -65,6 +70,7 @@ pub const CreateApplicationInput = struct {
         .application_config = "ApplicationConfig",
         .application_source_config = "ApplicationSourceConfig",
         .application_type = "ApplicationType",
+        .auth_config = "AuthConfig",
         .client_token = "ClientToken",
         .description = "Description",
         .iframe_config = "IframeConfig",
@@ -141,6 +147,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateApplicationInput,
     if (input.application_type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"ApplicationType\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.auth_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AuthConfig\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -222,10 +234,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateApplicationInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateApplicationOutput {
-    var result: CreateApplicationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateApplicationOutput, body, allocator);
-    }
+    const result: CreateApplicationOutput = try aws.json.parseJsonObject(
+        CreateApplicationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

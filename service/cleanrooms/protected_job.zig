@@ -20,6 +20,9 @@ pub const ProtectedJob = struct {
     /// The identifier for a protected job instance.
     id: []const u8,
 
+    /// The account ID of the member that pays for the job compute costs.
+    job_compute_payer_account_id: ?[]const u8 = null,
+
     /// The job parameters for the protected job.
     job_parameters: ?ProtectedJobParameters = null,
 
@@ -46,6 +49,7 @@ pub const ProtectedJob = struct {
         .create_time = "createTime",
         .@"error" = "error",
         .id = "id",
+        .job_compute_payer_account_id = "jobComputePayerAccountId",
         .job_parameters = "jobParameters",
         .membership_arn = "membershipArn",
         .membership_id = "membershipId",

@@ -41,12 +41,28 @@ pub const CalculateRouteMatrixInput = struct {
     /// `2020-04-22T17:57:24+02:00`
     departure_time: ?[]const u8 = null,
 
-    /// List of destinations for the route.
+    /// List of destinations for the route in World Geodetic System (WGS 84) format:
+    /// [longitude, latitude].
     ///
     /// Route calculations are billed for each origin and destination pair. If you
     /// use a large matrix of origins and destinations, your costs will increase
     /// accordingly. For more information, see [Routes
     /// pricing](https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html) in the *Amazon Location Service Developer Guide*.
+    ///
+    /// The maximum number of destinations depends on the routing boundary
+    /// configuration:
+    ///
+    /// * With `RoutingBoundary.Geometry` set: maximum 500 destinations
+    /// * With `RoutingBoundary.Unbounded` set to `true`: maximum 100 destinations
+    /// * For
+    ///   [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers in `ap-southeast-1` and `ap-southeast-5`: maximum 350 destinations
+    ///
+    /// The total matrix size (origins × destinations) must not exceed:
+    ///
+    /// * With `RoutingBoundary.Geometry`: 160,000
+    /// * With `RoutingBoundary.Unbounded`: 100
+    /// * For
+    ///   [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers in `ap-southeast-1` and `ap-southeast-5`: 122,500
     destinations: []const RouteMatrixDestination,
 
     /// Features to be strictly excluded while calculating the route. Not supported
@@ -65,13 +81,27 @@ pub const CalculateRouteMatrixInput = struct {
     /// Default value: `FastestRoute`
     optimize_routing_for: ?RoutingObjective = null,
 
-    /// The position for the origin in World Geodetic System (WGS 84) format:
+    /// List of origins for the route in World Geodetic System (WGS 84) format:
     /// [longitude, latitude].
     ///
     /// Route calculations are billed for each origin and destination pair. Using a
     /// large amount of Origins in a request can lead you to incur unexpected
     /// charges. For more information, see [Routes
     /// pricing](https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html) in the *Amazon Location Service Developer Guide*.
+    ///
+    /// The maximum number of origins depends on the routing boundary configuration:
+    ///
+    /// * With `RoutingBoundary.Geometry` set: maximum 500 origins
+    /// * With `RoutingBoundary.Unbounded` set to `true`: maximum 15 origins
+    /// * For
+    ///   [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers in `ap-southeast-1` and `ap-southeast-5`: maximum 350 origins
+    ///
+    /// The total matrix size (origins × destinations) must not exceed:
+    ///
+    /// * With `RoutingBoundary.Geometry`: 160,000
+    /// * With `RoutingBoundary.Unbounded`: 100
+    /// * For
+    ///   [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers in `ap-southeast-1` and `ap-southeast-5`: 122,500
     origins: []const RouteMatrixOrigin,
 
     /// Boundary within which the matrix is to be calculated. All data, origins and
@@ -80,8 +110,8 @@ pub const CalculateRouteMatrixInput = struct {
     ///
     /// Default value: `Unbounded set to true`
     ///
-    /// When request routing boundary was set as AutoCircle, the response routing
-    /// boundary will return Circle derived from the AutoCircle settings.
+    /// When `AutoCircle` is set in the request, the response routing boundary will
+    /// return `Circle` derived from the `AutoCircle` settings.
     routing_boundary: ?RouteMatrixBoundary = null,
 
     /// Traffic related options. Not supported in `ap-southeast-1` and
@@ -135,8 +165,8 @@ pub const CalculateRouteMatrixOutput = struct {
     /// Boundary within which the matrix is to be calculated. All data, origins and
     /// destinations outside the boundary are considered invalid.
     ///
-    /// When request routing boundary was set as AutoCircle, the response routing
-    /// boundary will return Circle derived from the AutoCircle settings.
+    /// When `AutoCircle` is set in the request, the response routing boundary will
+    /// return `Circle` derived from the `AutoCircle` settings.
     routing_boundary: ?RouteMatrixBoundary = null,
 
     pub const json_field_names = .{
@@ -177,7 +207,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CalculateRouteMatrixInp
 
     const ep = try aws.url.parseEndpoint(endpoint);
 
-    const path = "/route-matrix";
+    const path = "/v2/route-matrix";
 
     var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
@@ -278,10 +308,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CalculateRouteMatrixInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CalculateRouteMatrixOutput {
-    var result: CalculateRouteMatrixOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CalculateRouteMatrixOutput, body, allocator);
-    }
+    var result: CalculateRouteMatrixOutput = try aws.json.parseJsonObject(
+        CalculateRouteMatrixOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("x-amz-geo-pricing-bucket")) |value| {
         result.pricing_bucket = try allocator.dupe(u8, value);

@@ -4,6 +4,7 @@ const AssetBundleImportJobDataSetOverridePermissions = @import("asset_bundle_imp
 const AssetBundleImportJobDataSourceOverridePermissions = @import("asset_bundle_import_job_data_source_override_permissions.zig").AssetBundleImportJobDataSourceOverridePermissions;
 const AssetBundleImportJobFolderOverridePermissions = @import("asset_bundle_import_job_folder_override_permissions.zig").AssetBundleImportJobFolderOverridePermissions;
 const AssetBundleImportJobThemeOverridePermissions = @import("asset_bundle_import_job_theme_override_permissions.zig").AssetBundleImportJobThemeOverridePermissions;
+const AssetBundleImportJobTopicV2OverridePermissions = @import("asset_bundle_import_job_topic_v2_override_permissions.zig").AssetBundleImportJobTopicV2OverridePermissions;
 
 /// A structure that contains the override permission configurations that modify
 /// the
@@ -34,6 +35,9 @@ pub const AssetBundleImportJobOverridePermissions = struct {
     /// the asset bundle that is imported.
     themes: ?[]const AssetBundleImportJobThemeOverridePermissions = null,
 
+    /// A list of permissions for the topics that you want to apply overrides to.
+    topics_v2: ?[]const AssetBundleImportJobTopicV2OverridePermissions = null,
+
     pub const json_field_names = .{
         .analyses = "Analyses",
         .dashboards = "Dashboards",
@@ -41,5 +45,6 @@ pub const AssetBundleImportJobOverridePermissions = struct {
         .data_sources = "DataSources",
         .folders = "Folders",
         .themes = "Themes",
+        .topics_v2 = "TopicsV2",
     };
 };

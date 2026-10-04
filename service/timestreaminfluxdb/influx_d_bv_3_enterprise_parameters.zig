@@ -204,6 +204,13 @@ pub const InfluxDBv3EnterpriseParameters = struct {
     /// Default: 20%
     parquet_mem_cache_size: ?PercentOrAbsoluteLong = null,
 
+    /// The Amazon Resource Name (ARN) of the Secrets Manager secret that holds your
+    /// repository access token.
+    plugin_repository_secret_arn: ?[]const u8 = null,
+
+    /// Specifies the URL of the repository that InfluxDB downloads plugins from.
+    plugin_repository_url: ?[]const u8 = null,
+
     /// Specifies the interval to prefetch into the Parquet cache during compaction.
     ///
     /// Default: 3d
@@ -316,6 +323,8 @@ pub const InfluxDBv3EnterpriseParameters = struct {
         .parquet_mem_cache_prune_percentage = "parquetMemCachePrunePercentage",
         .parquet_mem_cache_query_path_duration = "parquetMemCacheQueryPathDuration",
         .parquet_mem_cache_size = "parquetMemCacheSize",
+        .plugin_repository_secret_arn = "pluginRepositorySecretArn",
+        .plugin_repository_url = "pluginRepositoryUrl",
         .preemptive_cache_age = "preemptiveCacheAge",
         .query_file_limit = "queryFileLimit",
         .query_log_size = "queryLogSize",

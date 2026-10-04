@@ -4,6 +4,8 @@ const AssignSlaActionDefinition = @import("assign_sla_action_definition.zig").As
 const CreateCaseActionDefinition = @import("create_case_action_definition.zig").CreateCaseActionDefinition;
 const EndAssociatedTasksActionDefinition = @import("end_associated_tasks_action_definition.zig").EndAssociatedTasksActionDefinition;
 const EventBridgeActionDefinition = @import("event_bridge_action_definition.zig").EventBridgeActionDefinition;
+const ExtractInformationActionDefinition = @import("extract_information_action_definition.zig").ExtractInformationActionDefinition;
+const SendInAppNotificationActionDefinition = @import("send_in_app_notification_action_definition.zig").SendInAppNotificationActionDefinition;
 const SendNotificationActionDefinition = @import("send_notification_action_definition.zig").SendNotificationActionDefinition;
 const SubmitAutoEvaluationActionDefinition = @import("submit_auto_evaluation_action_definition.zig").SubmitAutoEvaluationActionDefinition;
 const TaskActionDefinition = @import("task_action_definition.zig").TaskActionDefinition;
@@ -47,6 +49,21 @@ pub const RuleAction = struct {
     /// `OnMetricDataUpdate`
     event_bridge_action: ?EventBridgeActionDefinition = null,
 
+    /// Information about the extract information action.
+    extract_information_action: ?ExtractInformationActionDefinition = null,
+
+    /// Information about the send in-app notification action.
+    ///
+    /// Supported only for `TriggerEventSource` values:
+    /// `OnPostCallAnalysisAvailable` |
+    /// `OnRealTimeCallAnalysisAvailable` | `OnRealTimeChatAnalysisAvailable` |
+    /// `OnPostChatAnalysisAvailable` | `OnAfterCallWorkAvailable` |
+    /// `OnAfterChatWorkAvailable` | `OnEmailAnalysisAvailable` |
+    /// `OnContactEvaluationSubmit` | `OnCaseCreate` | `OnCaseUpdate` |
+    /// `OnSlaBreach` | `OnSchedulePublish` | `OnScheduleUpdate` |
+    /// `OnScheduleTimeOffRequestActivity`
+    send_in_app_notification_action: ?SendInAppNotificationActionDefinition = null,
+
     /// Information about the send notification action.
     ///
     /// Supported only for `TriggerEventSource` values:
@@ -78,6 +95,8 @@ pub const RuleAction = struct {
         .create_case_action = "CreateCaseAction",
         .end_associated_tasks_action = "EndAssociatedTasksAction",
         .event_bridge_action = "EventBridgeAction",
+        .extract_information_action = "ExtractInformationAction",
+        .send_in_app_notification_action = "SendInAppNotificationAction",
         .send_notification_action = "SendNotificationAction",
         .submit_auto_evaluation_action = "SubmitAutoEvaluationAction",
         .task_action = "TaskAction",

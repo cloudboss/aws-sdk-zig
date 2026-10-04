@@ -17,12 +17,19 @@ pub const StartRecommendationInput = struct {
     /// The description of the recommendation.
     description: ?[]const u8 = null,
 
+    /// The ARN of the KMS key used to encrypt recommendation data. If provided,
+    /// customer data is encrypted at rest with the specified key.
+    kms_key_arn: ?[]const u8 = null,
+
     /// The name of the recommendation. Must be unique within your account.
     name: []const u8,
 
     /// The configuration for the recommendation, including the input to optimize,
     /// agent traces to analyze, and evaluation settings.
     recommendation_config: RecommendationConfig,
+
+    /// A map of tag keys and values to associate with the recommendation.
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of recommendation to generate. Valid values are
     /// `SYSTEM_PROMPT_RECOMMENDATION` for system prompt optimization or
@@ -32,8 +39,10 @@ pub const StartRecommendationInput = struct {
     pub const json_field_names = .{
         .client_token = "clientToken",
         .description = "description",
+        .kms_key_arn = "kmsKeyArn",
         .name = "name",
         .recommendation_config = "recommendationConfig",
+        .tags = "tags",
         .@"type" = "type",
     };
 };
@@ -127,6 +136,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartRecommendationInpu
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.kms_key_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"kmsKeyArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
@@ -135,6 +150,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartRecommendationInpu
     try body_buf.appendSlice(allocator, "\"recommendationConfig\":");
     try aws.json.writeValue(@TypeOf(input.recommendation_config), input.recommendation_config, allocator, &body_buf);
     has_prev = true;
+    if (input.tags) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
     try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
@@ -155,10 +176,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartRecommendationInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartRecommendationOutput {
-    var result: StartRecommendationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartRecommendationOutput, body, allocator);
-    }
+    const result: StartRecommendationOutput = try aws.json.parseJsonObject(
+        StartRecommendationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

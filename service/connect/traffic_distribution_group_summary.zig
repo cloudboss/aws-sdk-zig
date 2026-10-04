@@ -11,7 +11,7 @@ pub const TrafficDistributionGroupSummary = struct {
     /// The ARN must be provided if the call is from the replicated Region.
     id: ?[]const u8 = null,
 
-    /// The Amazon Resource Name (ARN) of the traffic distribution group.
+    /// The Amazon Resource Name (ARN) of the instance.
     instance_arn: ?[]const u8 = null,
 
     /// Whether this is the default traffic distribution group created during

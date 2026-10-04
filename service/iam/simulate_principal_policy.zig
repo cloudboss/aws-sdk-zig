@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ContextEntry = @import("context_entry.zig").ContextEntry;
+const PolicyIdentifier = @import("policy_identifier.zig").PolicyIdentifier;
 const EvaluationResult = @import("evaluation_result.zig").EvaluationResult;
 const serde = @import("serde.zig");
 
@@ -16,23 +17,24 @@ pub const SimulatePrincipalPolicyInput = struct {
     /// `iam:CreateUser`.
     action_names: []const []const u8,
 
-    /// The ARN of the IAM user that you want to specify as the simulated caller of
-    /// the API
-    /// operations. If you do not specify a `CallerArn`, it defaults to the ARN of
-    /// the user that you specify in `PolicySourceArn`, if you specified a user. If
-    /// you include both a `PolicySourceArn` (for example,
-    /// `arn:aws:iam::123456789012:user/David`) and a `CallerArn` (for
-    /// example, `arn:aws:iam::123456789012:user/Bob`), the result is that you
-    /// simulate calling the API operations as Bob, as if Bob had David's policies.
+    /// The ARN of the IAM user, group, or role that you want to specify as the
+    /// simulated
+    /// caller of the API operations. If you do not specify a `CallerArn`, it
+    /// defaults to the ARN of the user, group, or role that you specify in
+    /// `PolicySourceArn`. If you include both a `PolicySourceArn`
+    /// (for example, `arn:aws:iam::123456789012:user/David`) and a
+    /// `CallerArn` (for example,
+    /// `arn:aws:iam::123456789012:user/Bob`), the result is that you simulate
+    /// calling the API operations as Bob, as if Bob had David's policies.
     ///
-    /// You can specify only the ARN of an IAM user. You cannot specify the ARN of
-    /// an
-    /// assumed role, federated user, or a service principal.
+    /// You can specify the ARN of an IAM user, group, or role. You cannot specify
+    /// the ARN
+    /// of an assumed role, federated user, or a service principal.
     ///
     /// `CallerArn` is required if you include a `ResourcePolicy` and
-    /// the `PolicySourceArn` is not the ARN for an IAM user. This is required so
-    /// that the resource-based policy's `Principal` element has a value to use in
-    /// evaluating the policy.
+    /// the `PolicySourceArn` is not the ARN for an IAM user, group, or role. This
+    /// is required so that the resource-based policy's `Principal` element has a
+    /// value to use in evaluating the policy.
     ///
     /// For more information about ARNs, see [Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *Amazon Web Services General Reference*.
@@ -108,6 +110,29 @@ pub const SimulatePrincipalPolicyInput = struct {
     /// * The special characters tab (`\u0009`), line feed (`\u000A`), and
     /// carriage return (`\u000D`)
     permissions_boundary_policy_input_list: ?[]const []const u8 = null,
+
+    /// A list of policies to exclude from the simulation. Use this parameter to
+    /// test what
+    /// the simulation result would be if a policy were removed, without changing
+    /// which
+    /// policies are actually attached to the principal identified by
+    /// `PolicySourceArn`.
+    ///
+    /// Each entry is a
+    /// [PolicyIdentifier](https://docs.aws.amazon.com/IAM/latest/APIReference/API_PolicyIdentifier.html)
+    /// that identifies one or more policies to exclude by policy type, by Amazon
+    /// Resource Name
+    /// (ARN), or by the name of an inline policy and the entity it is attached to.
+    ///
+    /// Syntactically invalid identifiers, such as malformed ARNs or wildcards in
+    /// disallowed
+    /// positions, cause the request to fail with an `InvalidInput` error.
+    /// Syntactically valid identifiers that don't match any attached policy are
+    /// ignored.
+    /// Resource control policies (RCPs) are not supported in this release;
+    /// identifiers that
+    /// target RCPs are also ignored.
+    policy_exclusion_list: ?[]const PolicyIdentifier = null,
 
     /// An optional list of additional policy documents to include in the
     /// simulation. Each
@@ -377,6 +402,55 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SimulatePrincipalPolicy
             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PermissionsBoundaryPolicyInputList.member.{d}=", .{n}) catch continue;
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+        }
+    }
+    if (input.policy_exclusion_list) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            switch (item) {
+                .inline_policy_identifier => |u_1| {
+                    if (u_1) |v_1| {
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PolicyExclusionList.member.{d}.InlinePolicyIdentifier.AttachmentName=", .{n}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, v_1.attachment_name);
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PolicyExclusionList.member.{d}.InlinePolicyIdentifier.AttachmentType=", .{n}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, v_1.attachment_type.wireName());
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PolicyExclusionList.member.{d}.InlinePolicyIdentifier.PolicyName=", .{n}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, v_1.policy_name);
+                        }
+                    }
+                },
+                .policy_arn => |u_1| {
+                    if (u_1) |v_1| {
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PolicyExclusionList.member.{d}.PolicyArn=", .{n}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, v_1);
+                        }
+                    }
+                },
+                .policy_type => |u_1| {
+                    if (u_1) |v_1| {
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&PolicyExclusionList.member.{d}.PolicyType=", .{n}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, v_1.wireName());
+                        }
+                    }
+                },
+            }
         }
     }
     if (input.policy_input_list) |list| {

@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteBotVersionInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteBotVersionOutput {
-    var result: DeleteBotVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteBotVersionOutput, body, allocator);
-    }
+    const result: DeleteBotVersionOutput = try aws.json.parseJsonObject(
+        DeleteBotVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

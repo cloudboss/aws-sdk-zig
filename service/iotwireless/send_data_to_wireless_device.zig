@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendDataToWirelessDevic
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SendDataToWirelessDeviceOutput {
-    var result: SendDataToWirelessDeviceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SendDataToWirelessDeviceOutput, body, allocator);
-    }
+    const result: SendDataToWirelessDeviceOutput = try aws.json.parseJsonObject(
+        SendDataToWirelessDeviceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

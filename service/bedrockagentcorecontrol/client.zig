@@ -1,18 +1,26 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const add_dataset_examples = @import("add_dataset_examples.zig");
+const batch_put_gateway_rate_limits = @import("batch_put_gateway_rate_limits.zig");
 const create_agent_runtime = @import("create_agent_runtime.zig");
 const create_agent_runtime_endpoint = @import("create_agent_runtime_endpoint.zig");
 const create_api_key_credential_provider = @import("create_api_key_credential_provider.zig");
 const create_browser = @import("create_browser.zig");
 const create_browser_profile = @import("create_browser_profile.zig");
+const create_capacity_provider = @import("create_capacity_provider.zig");
 const create_code_interpreter = @import("create_code_interpreter.zig");
 const create_configuration_bundle = @import("create_configuration_bundle.zig");
+const create_consent_portal = @import("create_consent_portal.zig");
+const create_dataset = @import("create_dataset.zig");
+const create_dataset_version = @import("create_dataset_version.zig");
 const create_evaluator = @import("create_evaluator.zig");
 const create_gateway = @import("create_gateway.zig");
+const create_gateway_rate_limit = @import("create_gateway_rate_limit.zig");
 const create_gateway_rule = @import("create_gateway_rule.zig");
 const create_gateway_target = @import("create_gateway_target.zig");
 const create_harness = @import("create_harness.zig");
+const create_harness_endpoint = @import("create_harness_endpoint.zig");
 const create_memory = @import("create_memory.zig");
 const create_oauth_2_credential_provider = @import("create_oauth_2_credential_provider.zig");
 const create_online_evaluation_config = @import("create_online_evaluation_config.zig");
@@ -29,13 +37,19 @@ const delete_agent_runtime_endpoint = @import("delete_agent_runtime_endpoint.zig
 const delete_api_key_credential_provider = @import("delete_api_key_credential_provider.zig");
 const delete_browser = @import("delete_browser.zig");
 const delete_browser_profile = @import("delete_browser_profile.zig");
+const delete_capacity_provider = @import("delete_capacity_provider.zig");
 const delete_code_interpreter = @import("delete_code_interpreter.zig");
 const delete_configuration_bundle = @import("delete_configuration_bundle.zig");
+const delete_consent_portal = @import("delete_consent_portal.zig");
+const delete_dataset = @import("delete_dataset.zig");
+const delete_dataset_examples = @import("delete_dataset_examples.zig");
 const delete_evaluator = @import("delete_evaluator.zig");
 const delete_gateway = @import("delete_gateway.zig");
+const delete_gateway_rate_limit = @import("delete_gateway_rate_limit.zig");
 const delete_gateway_rule = @import("delete_gateway_rule.zig");
 const delete_gateway_target = @import("delete_gateway_target.zig");
 const delete_harness = @import("delete_harness.zig");
+const delete_harness_endpoint = @import("delete_harness_endpoint.zig");
 const delete_memory = @import("delete_memory.zig");
 const delete_oauth_2_credential_provider = @import("delete_oauth_2_credential_provider.zig");
 const delete_online_evaluation_config = @import("delete_online_evaluation_config.zig");
@@ -53,14 +67,19 @@ const get_agent_runtime_endpoint = @import("get_agent_runtime_endpoint.zig");
 const get_api_key_credential_provider = @import("get_api_key_credential_provider.zig");
 const get_browser = @import("get_browser.zig");
 const get_browser_profile = @import("get_browser_profile.zig");
+const get_capacity_provider = @import("get_capacity_provider.zig");
 const get_code_interpreter = @import("get_code_interpreter.zig");
 const get_configuration_bundle = @import("get_configuration_bundle.zig");
 const get_configuration_bundle_version = @import("get_configuration_bundle_version.zig");
+const get_consent_portal = @import("get_consent_portal.zig");
+const get_dataset = @import("get_dataset.zig");
 const get_evaluator = @import("get_evaluator.zig");
 const get_gateway = @import("get_gateway.zig");
+const get_gateway_rate_limit = @import("get_gateway_rate_limit.zig");
 const get_gateway_rule = @import("get_gateway_rule.zig");
 const get_gateway_target = @import("get_gateway_target.zig");
 const get_harness = @import("get_harness.zig");
+const get_harness_endpoint = @import("get_harness_endpoint.zig");
 const get_memory = @import("get_memory.zig");
 const get_oauth_2_credential_provider = @import("get_oauth_2_credential_provider.zig");
 const get_online_evaluation_config = @import("get_online_evaluation_config.zig");
@@ -69,7 +88,10 @@ const get_payment_credential_provider = @import("get_payment_credential_provider
 const get_payment_manager = @import("get_payment_manager.zig");
 const get_policy = @import("get_policy.zig");
 const get_policy_engine = @import("get_policy_engine.zig");
+const get_policy_engine_summary = @import("get_policy_engine_summary.zig");
 const get_policy_generation = @import("get_policy_generation.zig");
+const get_policy_generation_summary = @import("get_policy_generation_summary.zig");
+const get_policy_summary = @import("get_policy_summary.zig");
 const get_registry = @import("get_registry.zig");
 const get_registry_record = @import("get_registry_record.zig");
 const get_resource_policy = @import("get_resource_policy.zig");
@@ -77,17 +99,26 @@ const get_token_vault = @import("get_token_vault.zig");
 const get_workload_identity = @import("get_workload_identity.zig");
 const list_agent_runtime_endpoints = @import("list_agent_runtime_endpoints.zig");
 const list_agent_runtime_versions = @import("list_agent_runtime_versions.zig");
+const list_agent_runtime_versions_by_capacity_provider = @import("list_agent_runtime_versions_by_capacity_provider.zig");
 const list_agent_runtimes = @import("list_agent_runtimes.zig");
 const list_api_key_credential_providers = @import("list_api_key_credential_providers.zig");
 const list_browser_profiles = @import("list_browser_profiles.zig");
 const list_browsers = @import("list_browsers.zig");
+const list_capacity_providers = @import("list_capacity_providers.zig");
 const list_code_interpreters = @import("list_code_interpreters.zig");
 const list_configuration_bundle_versions = @import("list_configuration_bundle_versions.zig");
 const list_configuration_bundles = @import("list_configuration_bundles.zig");
+const list_consent_portals = @import("list_consent_portals.zig");
+const list_dataset_examples = @import("list_dataset_examples.zig");
+const list_dataset_versions = @import("list_dataset_versions.zig");
+const list_datasets = @import("list_datasets.zig");
 const list_evaluators = @import("list_evaluators.zig");
+const list_gateway_rate_limits = @import("list_gateway_rate_limits.zig");
 const list_gateway_rules = @import("list_gateway_rules.zig");
 const list_gateway_targets = @import("list_gateway_targets.zig");
 const list_gateways = @import("list_gateways.zig");
+const list_harness_endpoints = @import("list_harness_endpoints.zig");
+const list_harness_versions = @import("list_harness_versions.zig");
 const list_harnesses = @import("list_harnesses.zig");
 const list_memories = @import("list_memories.zig");
 const list_oauth_2_credential_providers = @import("list_oauth_2_credential_providers.zig");
@@ -96,14 +127,18 @@ const list_payment_connectors = @import("list_payment_connectors.zig");
 const list_payment_credential_providers = @import("list_payment_credential_providers.zig");
 const list_payment_managers = @import("list_payment_managers.zig");
 const list_policies = @import("list_policies.zig");
+const list_policy_engine_summaries = @import("list_policy_engine_summaries.zig");
 const list_policy_engines = @import("list_policy_engines.zig");
 const list_policy_generation_assets = @import("list_policy_generation_assets.zig");
+const list_policy_generation_summaries = @import("list_policy_generation_summaries.zig");
 const list_policy_generations = @import("list_policy_generations.zig");
+const list_policy_summaries = @import("list_policy_summaries.zig");
 const list_registries = @import("list_registries.zig");
 const list_registry_records = @import("list_registry_records.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_workload_identities = @import("list_workload_identities.zig");
 const put_resource_policy = @import("put_resource_policy.zig");
+const rotate_payment_connector_credentials = @import("rotate_payment_connector_credentials.zig");
 const set_token_vault_cmk = @import("set_token_vault_cmk.zig");
 const start_policy_generation = @import("start_policy_generation.zig");
 const submit_registry_record_for_approval = @import("submit_registry_record_for_approval.zig");
@@ -113,12 +148,18 @@ const untag_resource = @import("untag_resource.zig");
 const update_agent_runtime = @import("update_agent_runtime.zig");
 const update_agent_runtime_endpoint = @import("update_agent_runtime_endpoint.zig");
 const update_api_key_credential_provider = @import("update_api_key_credential_provider.zig");
+const update_capacity_provider = @import("update_capacity_provider.zig");
 const update_configuration_bundle = @import("update_configuration_bundle.zig");
+const update_consent_portal = @import("update_consent_portal.zig");
+const update_dataset = @import("update_dataset.zig");
+const update_dataset_examples = @import("update_dataset_examples.zig");
 const update_evaluator = @import("update_evaluator.zig");
 const update_gateway = @import("update_gateway.zig");
+const update_gateway_rate_limit = @import("update_gateway_rate_limit.zig");
 const update_gateway_rule = @import("update_gateway_rule.zig");
 const update_gateway_target = @import("update_gateway_target.zig");
 const update_harness = @import("update_harness.zig");
+const update_harness_endpoint = @import("update_harness_endpoint.zig");
 const update_memory = @import("update_memory.zig");
 const update_oauth_2_credential_provider = @import("update_oauth_2_credential_provider.zig");
 const update_online_evaluation_config = @import("update_online_evaluation_config.zig");
@@ -162,6 +203,21 @@ pub const Client = struct {
         _ = self;
     }
 
+    /// Adds examples to the dataset's DRAFT. All examples are validated against the
+    /// dataset's schema type before any writes occur. If any example fails
+    /// validation, the entire batch is rejected (all-or-nothing semantics).
+    pub fn addDatasetExamples(self: *Self, allocator: std.mem.Allocator, input: add_dataset_examples.AddDatasetExamplesInput, options: CallOptions) !add_dataset_examples.AddDatasetExamplesOutput {
+        return add_dataset_examples.execute(self, allocator, input, options);
+    }
+
+    /// Atomically creates or updates multiple rate limits for a gateway. The
+    /// operation updates existing limits with matching keys and creates new limits
+    /// for new keys. If the operation fails, the service applies no changes. Retry
+    /// the request after resolving the issue.
+    pub fn batchPutGatewayRateLimits(self: *Self, allocator: std.mem.Allocator, input: batch_put_gateway_rate_limits.BatchPutGatewayRateLimitsInput, options: CallOptions) !batch_put_gateway_rate_limits.BatchPutGatewayRateLimitsOutput {
+        return batch_put_gateway_rate_limits.execute(self, allocator, input, options);
+    }
+
     /// Creates an Amazon Bedrock AgentCore Runtime.
     pub fn createAgentRuntime(self: *Self, allocator: std.mem.Allocator, input: create_agent_runtime.CreateAgentRuntimeInput, options: CallOptions) !create_agent_runtime.CreateAgentRuntimeOutput {
         return create_agent_runtime.execute(self, allocator, input, options);
@@ -190,6 +246,18 @@ pub const Client = struct {
         return create_browser_profile.execute(self, allocator, input, options);
     }
 
+    /// Creates a capacity provider. A capacity provider defines the Amazon EC2
+    /// infrastructure for AgentCore Runtime, including the operating system,
+    /// allowed instance types, networking, and storage. It also specifies the IAM
+    /// permissions that AgentCore uses to manage those instances.
+    ///
+    /// The capacity provider name must be unique within your account. After you
+    /// create the capacity provider, it enters a `CREATING` state and transitions
+    /// to `READY` when it is available for use.
+    pub fn createCapacityProvider(self: *Self, allocator: std.mem.Allocator, input: create_capacity_provider.CreateCapacityProviderInput, options: CallOptions) !create_capacity_provider.CreateCapacityProviderOutput {
+        return create_capacity_provider.execute(self, allocator, input, options);
+    }
+
     /// Creates a custom code interpreter.
     pub fn createCodeInterpreter(self: *Self, allocator: std.mem.Allocator, input: create_code_interpreter.CreateCodeInterpreterInput, options: CallOptions) !create_code_interpreter.CreateCodeInterpreterOutput {
         return create_code_interpreter.execute(self, allocator, input, options);
@@ -199,6 +267,26 @@ pub const Client = struct {
     /// versioned component configurations for agent evaluation workflows.
     pub fn createConfigurationBundle(self: *Self, allocator: std.mem.Allocator, input: create_configuration_bundle.CreateConfigurationBundleInput, options: CallOptions) !create_configuration_bundle.CreateConfigurationBundleOutput {
         return create_configuration_bundle.execute(self, allocator, input, options);
+    }
+
+    /// Creates a new consent portal.
+    pub fn createConsentPortal(self: *Self, allocator: std.mem.Allocator, input: create_consent_portal.CreateConsentPortalInput, options: CallOptions) !create_consent_portal.CreateConsentPortalOutput {
+        return create_consent_portal.execute(self, allocator, input, options);
+    }
+
+    /// Creates a new dataset resource asynchronously. Returns immediately with
+    /// status CREATING. Poll `GetDataset` until status transitions to ACTIVE or
+    /// CREATE_FAILED.
+    pub fn createDataset(self: *Self, allocator: std.mem.Allocator, input: create_dataset.CreateDatasetInput, options: CallOptions) !create_dataset.CreateDatasetOutput {
+        return create_dataset.execute(self, allocator, input, options);
+    }
+
+    /// Publishes the current DRAFT as a new numbered version. The DRAFT is
+    /// preserved and remains editable after publishing. Returns immediately with
+    /// status UPDATING. Poll `GetDataset` until status transitions to ACTIVE or
+    /// UPDATE_FAILED.
+    pub fn createDatasetVersion(self: *Self, allocator: std.mem.Allocator, input: create_dataset_version.CreateDatasetVersionInput, options: CallOptions) !create_dataset_version.CreateDatasetVersionOutput {
+        return create_dataset_version.execute(self, allocator, input, options);
     }
 
     /// Creates a custom evaluator for agent quality assessment. Custom evaluators
@@ -219,6 +307,13 @@ pub const Client = struct {
         return create_gateway.execute(self, allocator, input, options);
     }
 
+    /// Creates a rate limit for a gateway. Rate limits define throttling rules for
+    /// each dimension that control request rates, token consumption rates, and
+    /// concurrent connections through the gateway.
+    pub fn createGatewayRateLimit(self: *Self, allocator: std.mem.Allocator, input: create_gateway_rate_limit.CreateGatewayRateLimitInput, options: CallOptions) !create_gateway_rate_limit.CreateGatewayRateLimitOutput {
+        return create_gateway_rate_limit.execute(self, allocator, input, options);
+    }
+
     /// Creates a rule for a gateway. Rules define conditions and actions that
     /// control how requests are routed and processed through the gateway, including
     /// principal-based access control and path-based routing.
@@ -232,9 +327,14 @@ pub const Client = struct {
         return create_gateway_target.execute(self, allocator, input, options);
     }
 
-    /// Operation to create a Harness.
+    /// Operation to create a harness.
     pub fn createHarness(self: *Self, allocator: std.mem.Allocator, input: create_harness.CreateHarnessInput, options: CallOptions) !create_harness.CreateHarnessOutput {
         return create_harness.execute(self, allocator, input, options);
+    }
+
+    /// Operation to create a harness endpoint.
+    pub fn createHarnessEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_harness_endpoint.CreateHarnessEndpointInput, options: CallOptions) !create_harness_endpoint.CreateHarnessEndpointOutput {
+        return create_harness_endpoint.execute(self, allocator, input, options);
     }
 
     /// Creates a new Amazon Bedrock AgentCore Memory resource.
@@ -282,14 +382,19 @@ pub const Client = struct {
 
     /// Creates a policy within the AgentCore Policy system. Policies provide
     /// real-time, deterministic control over agentic interactions with AgentCore
-    /// Gateway. Using the Cedar policy language, you can define fine-grained
-    /// policies that specify which interactions with Gateway tools are permitted
-    /// based on input parameters and OAuth claims, ensuring agents operate within
-    /// defined boundaries and business rules. The policy is validated during
-    /// creation against the Cedar schema generated from the Gateway's tools' input
-    /// schemas, which defines the available tools, their parameters, and expected
-    /// data types. This is an asynchronous operation. Use the
+    /// Gateway. Using Cedar or Dogwood, you can define fine-grained policies that
+    /// specify which interactions with Gateway tools are permitted based on input
+    /// parameters and OAuth claims, ensuring agents operate within defined
+    /// boundaries and business rules. The policy is validated during creation
+    /// against the Cedar schema generated from the Gateway's tools' input schemas,
+    /// which defines the available tools, their parameters, and expected data
+    /// types. This is an asynchronous operation. Use the
     /// [GetPolicy](https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetPolicy.html) operation to poll the `status` field to track completion.
+    ///
+    /// If the new policy is a temporal policy, creating it invalidates the policy
+    /// engine's active temporal sessions. For more information about temporal
+    /// policy sessions, see [session-based temporal
+    /// policies](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy-session-based-temporal.html). The policy engine returns an HTTP 409 `ConflictException` to in-flight sessions. To resume, you must start a new session with a new session ID.
     pub fn createPolicy(self: *Self, allocator: std.mem.Allocator, input: create_policy.CreatePolicyInput, options: CallOptions) !create_policy.CreatePolicyOutput {
         return create_policy.execute(self, allocator, input, options);
     }
@@ -332,12 +437,13 @@ pub const Client = struct {
         return create_workload_identity.execute(self, allocator, input, options);
     }
 
-    /// Deletes an Amazon Bedrock AgentCore Runtime.
+    /// Deletes an Amazon Bedrock AgentCore Runtime, or a single version of an
+    /// AgentCore Runtime when you provide the version qualifier.
     pub fn deleteAgentRuntime(self: *Self, allocator: std.mem.Allocator, input: delete_agent_runtime.DeleteAgentRuntimeInput, options: CallOptions) !delete_agent_runtime.DeleteAgentRuntimeOutput {
         return delete_agent_runtime.execute(self, allocator, input, options);
     }
 
-    /// Deletes an AAgentCore Runtime endpoint.
+    /// Deletes an AgentCore Runtime endpoint.
     pub fn deleteAgentRuntimeEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_agent_runtime_endpoint.DeleteAgentRuntimeEndpointInput, options: CallOptions) !delete_agent_runtime_endpoint.DeleteAgentRuntimeEndpointOutput {
         return delete_agent_runtime_endpoint.execute(self, allocator, input, options);
     }
@@ -357,6 +463,13 @@ pub const Client = struct {
         return delete_browser_profile.execute(self, allocator, input, options);
     }
 
+    /// Deletes a capacity provider. Before you delete a capacity provider,
+    /// disassociate all agent runtimes and runtime versions that reference it. If
+    /// any references remain, the operation fails.
+    pub fn deleteCapacityProvider(self: *Self, allocator: std.mem.Allocator, input: delete_capacity_provider.DeleteCapacityProviderInput, options: CallOptions) !delete_capacity_provider.DeleteCapacityProviderOutput {
+        return delete_capacity_provider.execute(self, allocator, input, options);
+    }
+
     /// Deletes a custom code interpreter.
     pub fn deleteCodeInterpreter(self: *Self, allocator: std.mem.Allocator, input: delete_code_interpreter.DeleteCodeInterpreterInput, options: CallOptions) !delete_code_interpreter.DeleteCodeInterpreterOutput {
         return delete_code_interpreter.execute(self, allocator, input, options);
@@ -365,6 +478,25 @@ pub const Client = struct {
     /// Deletes a configuration bundle and all of its versions.
     pub fn deleteConfigurationBundle(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_bundle.DeleteConfigurationBundleInput, options: CallOptions) !delete_configuration_bundle.DeleteConfigurationBundleOutput {
         return delete_configuration_bundle.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a consent portal.
+    pub fn deleteConsentPortal(self: *Self, allocator: std.mem.Allocator, input: delete_consent_portal.DeleteConsentPortalInput, options: CallOptions) !delete_consent_portal.DeleteConsentPortalOutput {
+        return delete_consent_portal.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a dataset version or an entire dataset asynchronously. If
+    /// `datasetVersion` is absent, deletes all versions and the dataset record
+    /// itself. If provided, deletes only that specific version.
+    pub fn deleteDataset(self: *Self, allocator: std.mem.Allocator, input: delete_dataset.DeleteDatasetInput, options: CallOptions) !delete_dataset.DeleteDatasetOutput {
+        return delete_dataset.execute(self, allocator, input, options);
+    }
+
+    /// Deletes specific examples by ID from DRAFT. All example IDs are validated
+    /// before any deletes occur. If any ID does not exist in DRAFT, the entire
+    /// batch is rejected (all-or-nothing semantics).
+    pub fn deleteDatasetExamples(self: *Self, allocator: std.mem.Allocator, input: delete_dataset_examples.DeleteDatasetExamplesInput, options: CallOptions) !delete_dataset_examples.DeleteDatasetExamplesOutput {
+        return delete_dataset_examples.execute(self, allocator, input, options);
     }
 
     /// Deletes a custom evaluator. Builtin evaluators cannot be deleted. The
@@ -377,6 +509,11 @@ pub const Client = struct {
     /// Deletes a gateway.
     pub fn deleteGateway(self: *Self, allocator: std.mem.Allocator, input: delete_gateway.DeleteGatewayInput, options: CallOptions) !delete_gateway.DeleteGatewayOutput {
         return delete_gateway.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a gateway rate limit.
+    pub fn deleteGatewayRateLimit(self: *Self, allocator: std.mem.Allocator, input: delete_gateway_rate_limit.DeleteGatewayRateLimitInput, options: CallOptions) !delete_gateway_rate_limit.DeleteGatewayRateLimitOutput {
+        return delete_gateway_rate_limit.execute(self, allocator, input, options);
     }
 
     /// Deletes a gateway rule.
@@ -399,7 +536,13 @@ pub const Client = struct {
         return delete_harness.execute(self, allocator, input, options);
     }
 
-    /// Deletes an Amazon Bedrock AgentCore Memory resource.
+    /// Operation to delete a harness endpoint.
+    pub fn deleteHarnessEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_harness_endpoint.DeleteHarnessEndpointInput, options: CallOptions) !delete_harness_endpoint.DeleteHarnessEndpointOutput {
+        return delete_harness_endpoint.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an Amazon Bedrock AgentCore Memory resource. When you delete a
+    /// memory resource, it is permanently removed.
     pub fn deleteMemory(self: *Self, allocator: std.mem.Allocator, input: delete_memory.DeleteMemoryInput, options: CallOptions) !delete_memory.DeleteMemoryOutput {
         return delete_memory.execute(self, allocator, input, options);
     }
@@ -498,6 +641,12 @@ pub const Client = struct {
         return get_browser_profile.execute(self, allocator, input, options);
     }
 
+    /// Retrieves information about a capacity provider, including its status,
+    /// permissions configuration, and compute configuration.
+    pub fn getCapacityProvider(self: *Self, allocator: std.mem.Allocator, input: get_capacity_provider.GetCapacityProviderInput, options: CallOptions) !get_capacity_provider.GetCapacityProviderOutput {
+        return get_capacity_provider.execute(self, allocator, input, options);
+    }
+
     /// Gets information about a custom code interpreter.
     pub fn getCodeInterpreter(self: *Self, allocator: std.mem.Allocator, input: get_code_interpreter.GetCodeInterpreterInput, options: CallOptions) !get_code_interpreter.GetCodeInterpreterOutput {
         return get_code_interpreter.execute(self, allocator, input, options);
@@ -515,6 +664,18 @@ pub const Client = struct {
         return get_configuration_bundle_version.execute(self, allocator, input, options);
     }
 
+    /// Retrieves information about a consent portal.
+    pub fn getConsentPortal(self: *Self, allocator: std.mem.Allocator, input: get_consent_portal.GetConsentPortalInput, options: CallOptions) !get_consent_portal.GetConsentPortalOutput {
+        return get_consent_portal.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves dataset metadata. Use the `datasetVersion` query parameter to
+    /// retrieve a specific version's metadata. If absent, defaults to DRAFT. For
+    /// paginated example content, use `ListDatasetExamples`.
+    pub fn getDataset(self: *Self, allocator: std.mem.Allocator, input: get_dataset.GetDatasetInput, options: CallOptions) !get_dataset.GetDatasetOutput {
+        return get_dataset.execute(self, allocator, input, options);
+    }
+
     /// Retrieves detailed information about an evaluator, including its
     /// configuration, status, and metadata. Works with both built-in and custom
     /// evaluators.
@@ -527,6 +688,11 @@ pub const Client = struct {
         return get_gateway.execute(self, allocator, input, options);
     }
 
+    /// Retrieves information about a gateway rate limit.
+    pub fn getGatewayRateLimit(self: *Self, allocator: std.mem.Allocator, input: get_gateway_rate_limit.GetGatewayRateLimitInput, options: CallOptions) !get_gateway_rate_limit.GetGatewayRateLimitOutput {
+        return get_gateway_rate_limit.execute(self, allocator, input, options);
+    }
+
     /// Retrieves detailed information about a specific gateway rule.
     pub fn getGatewayRule(self: *Self, allocator: std.mem.Allocator, input: get_gateway_rule.GetGatewayRuleInput, options: CallOptions) !get_gateway_rule.GetGatewayRuleOutput {
         return get_gateway_rule.execute(self, allocator, input, options);
@@ -537,9 +703,14 @@ pub const Client = struct {
         return get_gateway_target.execute(self, allocator, input, options);
     }
 
-    /// Operation to get a single Harness.
+    /// Operation to get a single harness.
     pub fn getHarness(self: *Self, allocator: std.mem.Allocator, input: get_harness.GetHarnessInput, options: CallOptions) !get_harness.GetHarnessOutput {
         return get_harness.execute(self, allocator, input, options);
+    }
+
+    /// Operation to get a single harness endpoint.
+    pub fn getHarnessEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_harness_endpoint.GetHarnessEndpointInput, options: CallOptions) !get_harness_endpoint.GetHarnessEndpointOutput {
+        return get_harness_endpoint.execute(self, allocator, input, options);
     }
 
     /// Retrieve an existing Amazon Bedrock AgentCore Memory resource.
@@ -589,12 +760,44 @@ pub const Client = struct {
         return get_policy_engine.execute(self, allocator, input, options);
     }
 
+    /// Retrieves a metadata-only summary of a specific policy engine without
+    /// decrypting customer content. This lightweight read operation returns
+    /// resource identifiers, status, timestamps, and the encryption key ARN, but
+    /// does not include the description or status reasons. Because this operation
+    /// does not require access to the customer's KMS key, it is suitable for
+    /// resource discovery, inventory, and integration scenarios where only metadata
+    /// is needed.
+    pub fn getPolicyEngineSummary(self: *Self, allocator: std.mem.Allocator, input: get_policy_engine_summary.GetPolicyEngineSummaryInput, options: CallOptions) !get_policy_engine_summary.GetPolicyEngineSummaryOutput {
+        return get_policy_engine_summary.execute(self, allocator, input, options);
+    }
+
     /// Retrieves information about a policy generation request within the AgentCore
     /// Policy system. Policy generation converts natural language descriptions into
-    /// Cedar policy statements using AI-powered translation, enabling non-technical
-    /// users to create policies.
+    /// Dogwood policy statements using AI-powered translation, enabling
+    /// non-technical users to create policies.
     pub fn getPolicyGeneration(self: *Self, allocator: std.mem.Allocator, input: get_policy_generation.GetPolicyGenerationInput, options: CallOptions) !get_policy_generation.GetPolicyGenerationOutput {
         return get_policy_generation.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a metadata-only summary of a specific policy generation request
+    /// without decrypting customer content. This lightweight read operation returns
+    /// resource identifiers, status, timestamps, and findings, but does not include
+    /// status reasons. Because this operation does not require access to the
+    /// customer's KMS key, it is suitable for resource discovery, inventory, and
+    /// integration scenarios where only metadata is needed.
+    pub fn getPolicyGenerationSummary(self: *Self, allocator: std.mem.Allocator, input: get_policy_generation_summary.GetPolicyGenerationSummaryInput, options: CallOptions) !get_policy_generation_summary.GetPolicyGenerationSummaryOutput {
+        return get_policy_generation_summary.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a metadata-only summary of a specific policy without decrypting
+    /// customer content. This lightweight read operation returns resource
+    /// identifiers, status, and timestamps, but does not include the policy
+    /// definition, description, or status reasons. Because this operation does not
+    /// require access to the customer's KMS key, it is suitable for resource
+    /// discovery, inventory, and integration scenarios where only metadata is
+    /// needed.
+    pub fn getPolicySummary(self: *Self, allocator: std.mem.Allocator, input: get_policy_summary.GetPolicySummaryInput, options: CallOptions) !get_policy_summary.GetPolicySummaryOutput {
+        return get_policy_summary.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a specific registry.
@@ -634,6 +837,14 @@ pub const Client = struct {
         return list_agent_runtime_versions.execute(self, allocator, input, options);
     }
 
+    /// Lists the agent runtime versions that are associated with a capacity
+    /// provider. Use this operation to identify the runtimes you must disassociate
+    /// before you can delete the capacity provider. Results are paginated; use the
+    /// `nextToken` parameter to retrieve additional results.
+    pub fn listAgentRuntimeVersionsByCapacityProvider(self: *Self, allocator: std.mem.Allocator, input: list_agent_runtime_versions_by_capacity_provider.ListAgentRuntimeVersionsByCapacityProviderInput, options: CallOptions) !list_agent_runtime_versions_by_capacity_provider.ListAgentRuntimeVersionsByCapacityProviderOutput {
+        return list_agent_runtime_versions_by_capacity_provider.execute(self, allocator, input, options);
+    }
+
     /// Lists all Amazon Secure Agents in your account.
     pub fn listAgentRuntimes(self: *Self, allocator: std.mem.Allocator, input: list_agent_runtimes.ListAgentRuntimesInput, options: CallOptions) !list_agent_runtimes.ListAgentRuntimesOutput {
         return list_agent_runtimes.execute(self, allocator, input, options);
@@ -654,6 +865,14 @@ pub const Client = struct {
         return list_browsers.execute(self, allocator, input, options);
     }
 
+    /// Lists the capacity providers in your account and returns summary information
+    /// for each one. To retrieve the full configuration for a specific capacity
+    /// provider, use `GetCapacityProvider`. Results are paginated; use the
+    /// `nextToken` parameter to retrieve additional results.
+    pub fn listCapacityProviders(self: *Self, allocator: std.mem.Allocator, input: list_capacity_providers.ListCapacityProvidersInput, options: CallOptions) !list_capacity_providers.ListCapacityProvidersOutput {
+        return list_capacity_providers.execute(self, allocator, input, options);
+    }
+
     /// Lists all custom code interpreters in your account.
     pub fn listCodeInterpreters(self: *Self, allocator: std.mem.Allocator, input: list_code_interpreters.ListCodeInterpretersInput, options: CallOptions) !list_code_interpreters.ListCodeInterpretersOutput {
         return list_code_interpreters.execute(self, allocator, input, options);
@@ -670,10 +889,39 @@ pub const Client = struct {
         return list_configuration_bundles.execute(self, allocator, input, options);
     }
 
+    /// Lists all of the consent portals in your account.
+    pub fn listConsentPortals(self: *Self, allocator: std.mem.Allocator, input: list_consent_portals.ListConsentPortalsInput, options: CallOptions) !list_consent_portals.ListConsentPortalsOutput {
+        return list_consent_portals.execute(self, allocator, input, options);
+    }
+
+    /// Returns paginated examples from the dataset. The server embeds the resolved
+    /// version in the pagination token. Once pagination begins, all subsequent
+    /// pages are pinned to that version regardless of concurrent mutations.
+    pub fn listDatasetExamples(self: *Self, allocator: std.mem.Allocator, input: list_dataset_examples.ListDatasetExamplesInput, options: CallOptions) !list_dataset_examples.ListDatasetExamplesOutput {
+        return list_dataset_examples.execute(self, allocator, input, options);
+    }
+
+    /// Lists all published versions of a dataset, sorted by version number
+    /// descending (newest first). Does not include the DRAFT working copy.
+    pub fn listDatasetVersions(self: *Self, allocator: std.mem.Allocator, input: list_dataset_versions.ListDatasetVersionsInput, options: CallOptions) !list_dataset_versions.ListDatasetVersionsOutput {
+        return list_dataset_versions.execute(self, allocator, input, options);
+    }
+
+    /// Lists all datasets in the caller's account, paginated.
+    pub fn listDatasets(self: *Self, allocator: std.mem.Allocator, input: list_datasets.ListDatasetsInput, options: CallOptions) !list_datasets.ListDatasetsOutput {
+        return list_datasets.execute(self, allocator, input, options);
+    }
+
     /// Lists all available evaluators, including both builtin evaluators provided
     /// by the service and custom evaluators created by the user.
     pub fn listEvaluators(self: *Self, allocator: std.mem.Allocator, input: list_evaluators.ListEvaluatorsInput, options: CallOptions) !list_evaluators.ListEvaluatorsOutput {
         return list_evaluators.execute(self, allocator, input, options);
+    }
+
+    /// Lists all rate limits for a gateway. Results are paginated. Use the
+    /// `nextToken` parameter to retrieve additional results.
+    pub fn listGatewayRateLimits(self: *Self, allocator: std.mem.Allocator, input: list_gateway_rate_limits.ListGatewayRateLimitsInput, options: CallOptions) !list_gateway_rate_limits.ListGatewayRateLimitsOutput {
+        return list_gateway_rate_limits.execute(self, allocator, input, options);
     }
 
     /// Lists all rules for a gateway.
@@ -691,7 +939,17 @@ pub const Client = struct {
         return list_gateways.execute(self, allocator, input, options);
     }
 
-    /// Operation to list Harnesses.
+    /// Operation to list the endpoints of a harness.
+    pub fn listHarnessEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_harness_endpoints.ListHarnessEndpointsInput, options: CallOptions) !list_harness_endpoints.ListHarnessEndpointsOutput {
+        return list_harness_endpoints.execute(self, allocator, input, options);
+    }
+
+    /// Operation to list the versions of a Harness.
+    pub fn listHarnessVersions(self: *Self, allocator: std.mem.Allocator, input: list_harness_versions.ListHarnessVersionsInput, options: CallOptions) !list_harness_versions.ListHarnessVersionsOutput {
+        return list_harness_versions.execute(self, allocator, input, options);
+    }
+
+    /// Operation to list harnesses.
     pub fn listHarnesses(self: *Self, allocator: std.mem.Allocator, input: list_harnesses.ListHarnessesInput, options: CallOptions) !list_harnesses.ListHarnessesOutput {
         return list_harnesses.execute(self, allocator, input, options);
     }
@@ -736,6 +994,17 @@ pub const Client = struct {
         return list_policies.execute(self, allocator, input, options);
     }
 
+    /// Retrieves a paginated list of metadata-only policy engine summaries without
+    /// decrypting customer content. This lightweight read operation returns
+    /// resource identifiers, status, and timestamps for each policy engine, but
+    /// does not include descriptions or status reasons. Because this operation does
+    /// not require access to the customer's KMS key, it is suitable for resource
+    /// discovery, inventory, and integration scenarios where only metadata is
+    /// needed.
+    pub fn listPolicyEngineSummaries(self: *Self, allocator: std.mem.Allocator, input: list_policy_engine_summaries.ListPolicyEngineSummariesInput, options: CallOptions) !list_policy_engine_summaries.ListPolicyEngineSummariesOutput {
+        return list_policy_engine_summaries.execute(self, allocator, input, options);
+    }
+
     /// Retrieves a list of policy engines within the AgentCore Policy system. This
     /// operation supports pagination to help administrators discover and manage
     /// policy engines across their account. Each policy engine serves as a
@@ -745,12 +1014,23 @@ pub const Client = struct {
     }
 
     /// Retrieves a list of generated policy assets from a policy generation request
-    /// within the AgentCore Policy system. This operation returns the actual Cedar
-    /// policies and related artifacts produced by the AI-powered policy generation
-    /// process, allowing users to review and select from multiple generated policy
-    /// options.
+    /// within the AgentCore Policy system. This operation returns the actual
+    /// Dogwood policies and related artifacts produced by the AI-powered policy
+    /// generation process, allowing users to review and select from multiple
+    /// generated policy options.
     pub fn listPolicyGenerationAssets(self: *Self, allocator: std.mem.Allocator, input: list_policy_generation_assets.ListPolicyGenerationAssetsInput, options: CallOptions) !list_policy_generation_assets.ListPolicyGenerationAssetsOutput {
         return list_policy_generation_assets.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a paginated list of metadata-only policy generation summaries
+    /// within a policy engine without decrypting customer content. This lightweight
+    /// read operation returns resource identifiers, status, timestamps, and
+    /// findings for each policy generation, but does not include status reasons.
+    /// Because this operation does not require access to the customer's KMS key, it
+    /// is suitable for resource discovery, inventory, and integration scenarios
+    /// where only metadata is needed.
+    pub fn listPolicyGenerationSummaries(self: *Self, allocator: std.mem.Allocator, input: list_policy_generation_summaries.ListPolicyGenerationSummariesInput, options: CallOptions) !list_policy_generation_summaries.ListPolicyGenerationSummariesOutput {
+        return list_policy_generation_summaries.execute(self, allocator, input, options);
     }
 
     /// Retrieves a list of policy generation requests within the AgentCore Policy
@@ -760,8 +1040,20 @@ pub const Client = struct {
         return list_policy_generations.execute(self, allocator, input, options);
     }
 
+    /// Retrieves a paginated list of metadata-only policy summaries within a policy
+    /// engine without decrypting customer content. This lightweight read operation
+    /// returns resource identifiers, status, and timestamps for each policy, but
+    /// does not include policy definitions, descriptions, or status reasons.
+    /// Because this operation does not require access to the customer's KMS key, it
+    /// is suitable for resource discovery, inventory, and integration scenarios
+    /// where only metadata is needed.
+    pub fn listPolicySummaries(self: *Self, allocator: std.mem.Allocator, input: list_policy_summaries.ListPolicySummariesInput, options: CallOptions) !list_policy_summaries.ListPolicySummariesOutput {
+        return list_policy_summaries.execute(self, allocator, input, options);
+    }
+
     /// Lists all registries in the account. You can optionally filter results by
-    /// status using the `status` parameter.
+    /// status using the `status` parameter, or by authorizer type using the
+    /// `authorizerType` parameter.
     pub fn listRegistries(self: *Self, allocator: std.mem.Allocator, input: list_registries.ListRegistriesInput, options: CallOptions) !list_registries.ListRegistriesOutput {
         return list_registries.execute(self, allocator, input, options);
     }
@@ -794,25 +1086,46 @@ pub const Client = struct {
         return put_resource_policy.execute(self, allocator, input, options);
     }
 
+    /// Replaces the service-managed credentials of a payment connector with newly
+    /// issued credentials.
+    ///
+    /// Use this operation only for payment connectors with a `provisionMode` of
+    /// `QUICK_CREATE`. For payment connectors with a `provisionMode` of `MANUAL`,
+    /// call `UpdatePaymentCredentialProvider` instead after rotating credentials
+    /// with the payment provider directly.
+    ///
+    /// The rotation finishes before the response is returned, and only one rotation
+    /// runs at a time for a given payment connector. When it succeeds, the new
+    /// credential is in effect and the payment connector stays in the `READY`
+    /// state. When it fails, an error is returned, the payment connector and its
+    /// existing credential are left unchanged, and you can retry the request.
+    ///
+    /// Rotation replaces the credential on the connector's credential provider, so
+    /// every payment connector that uses that provider is affected. Replace any
+    /// copy of the previous credential that you use outside AgentCore.
+    pub fn rotatePaymentConnectorCredentials(self: *Self, allocator: std.mem.Allocator, input: rotate_payment_connector_credentials.RotatePaymentConnectorCredentialsInput, options: CallOptions) !rotate_payment_connector_credentials.RotatePaymentConnectorCredentialsOutput {
+        return rotate_payment_connector_credentials.execute(self, allocator, input, options);
+    }
+
     /// Sets the customer master key (CMK) for a token vault.
     pub fn setTokenVaultCmk(self: *Self, allocator: std.mem.Allocator, input: set_token_vault_cmk.SetTokenVaultCMKInput, options: CallOptions) !set_token_vault_cmk.SetTokenVaultCMKOutput {
         return set_token_vault_cmk.execute(self, allocator, input, options);
     }
 
-    /// Initiates the AI-powered generation of Cedar policies from natural language
-    /// descriptions within the AgentCore Policy system. This feature enables both
-    /// technical and non-technical users to create policies by describing their
-    /// authorization requirements in plain English, which is then automatically
-    /// translated into formal Cedar policy statements. The generation process
-    /// analyzes the natural language input along with the Gateway's tool context to
-    /// produce validated policy options. Generated policy assets are automatically
-    /// deleted after 7 days, so you should review and create policies from the
-    /// generated assets within this timeframe. Once created, policies are permanent
-    /// and not subject to this expiration. Generated policies should be reviewed
-    /// and tested in log-only mode before deploying to production. Use this when
-    /// you want to describe policy intent naturally rather than learning Cedar
-    /// syntax, though generated policies may require refinement for complex
-    /// scenarios.
+    /// Initiates the AI-powered generation of Dogwood policies from natural
+    /// language descriptions within the AgentCore Policy system. This feature
+    /// enables both technical and non-technical users to create policies by
+    /// describing their authorization requirements in plain English, which is then
+    /// automatically translated into formal Dogwood policy statements. The
+    /// generation process analyzes the natural language input along with the
+    /// Gateway's tool context to produce validated policy options. Generated policy
+    /// assets are automatically deleted after 7 days, so you should review and
+    /// create policies from the generated assets within this timeframe. Once
+    /// created, policies are permanent and not subject to this expiration.
+    /// Generated policies should be reviewed and tested in log-only mode before
+    /// deploying to production. Use this when you want to describe policy intent
+    /// naturally rather than learning Dogwood syntax, though generated policies may
+    /// require refinement for complex scenarios.
     pub fn startPolicyGeneration(self: *Self, allocator: std.mem.Allocator, input: start_policy_generation.StartPolicyGenerationInput, options: CallOptions) !start_policy_generation.StartPolicyGenerationOutput {
         return start_policy_generation.execute(self, allocator, input, options);
     }
@@ -873,10 +1186,37 @@ pub const Client = struct {
         return update_api_key_credential_provider.execute(self, allocator, input, options);
     }
 
+    /// Updates a capacity provider. Only the description can be changed. To change
+    /// other configuration, such as instance types, networking, or storage, create
+    /// a new capacity provider.
+    pub fn updateCapacityProvider(self: *Self, allocator: std.mem.Allocator, input: update_capacity_provider.UpdateCapacityProviderInput, options: CallOptions) !update_capacity_provider.UpdateCapacityProviderOutput {
+        return update_capacity_provider.execute(self, allocator, input, options);
+    }
+
     /// Updates a configuration bundle by creating a new version with the specified
     /// changes. Each update creates a new version in the version history.
     pub fn updateConfigurationBundle(self: *Self, allocator: std.mem.Allocator, input: update_configuration_bundle.UpdateConfigurationBundleInput, options: CallOptions) !update_configuration_bundle.UpdateConfigurationBundleOutput {
         return update_configuration_bundle.execute(self, allocator, input, options);
+    }
+
+    /// Updates an existing consent portal.
+    pub fn updateConsentPortal(self: *Self, allocator: std.mem.Allocator, input: update_consent_portal.UpdateConsentPortalInput, options: CallOptions) !update_consent_portal.UpdateConsentPortalOutput {
+        return update_consent_portal.execute(self, allocator, input, options);
+    }
+
+    /// Updates a dataset's metadata. Synchronous operation. Only provided fields
+    /// are updated; omitted fields remain unchanged. To modify dataset content, use
+    /// `AddDatasetExamples`, `UpdateDatasetExamples`, or `DeleteDatasetExamples`.
+    pub fn updateDataset(self: *Self, allocator: std.mem.Allocator, input: update_dataset.UpdateDatasetInput, options: CallOptions) !update_dataset.UpdateDatasetOutput {
+        return update_dataset.execute(self, allocator, input, options);
+    }
+
+    /// Updates multiple existing examples in-place on DRAFT. All examples are
+    /// validated against the dataset's schema type before any writes occur. If any
+    /// example fails validation, the entire batch is rejected (all-or-nothing
+    /// semantics).
+    pub fn updateDatasetExamples(self: *Self, allocator: std.mem.Allocator, input: update_dataset_examples.UpdateDatasetExamplesInput, options: CallOptions) !update_dataset_examples.UpdateDatasetExamplesOutput {
+        return update_dataset_examples.execute(self, allocator, input, options);
     }
 
     /// Updates a custom evaluator's configuration, description, or evaluation
@@ -889,6 +1229,12 @@ pub const Client = struct {
     /// Updates an existing gateway.
     pub fn updateGateway(self: *Self, allocator: std.mem.Allocator, input: update_gateway.UpdateGatewayInput, options: CallOptions) !update_gateway.UpdateGatewayOutput {
         return update_gateway.execute(self, allocator, input, options);
+    }
+
+    /// Updates the entries of a gateway rate limit. The dimension keys are
+    /// immutable after creation.
+    pub fn updateGatewayRateLimit(self: *Self, allocator: std.mem.Allocator, input: update_gateway_rate_limit.UpdateGatewayRateLimitInput, options: CallOptions) !update_gateway_rate_limit.UpdateGatewayRateLimitOutput {
+        return update_gateway_rate_limit.execute(self, allocator, input, options);
     }
 
     /// Updates a gateway rule's priority, conditions, actions, or description.
@@ -906,9 +1252,14 @@ pub const Client = struct {
         return update_gateway_target.execute(self, allocator, input, options);
     }
 
-    /// Operation to update a Harness.
+    /// Operation to update a harness.
     pub fn updateHarness(self: *Self, allocator: std.mem.Allocator, input: update_harness.UpdateHarnessInput, options: CallOptions) !update_harness.UpdateHarnessOutput {
         return update_harness.execute(self, allocator, input, options);
+    }
+
+    /// Operation to update a harness endpoint.
+    pub fn updateHarnessEndpoint(self: *Self, allocator: std.mem.Allocator, input: update_harness_endpoint.UpdateHarnessEndpointInput, options: CallOptions) !update_harness_endpoint.UpdateHarnessEndpointOutput {
+        return update_harness_endpoint.execute(self, allocator, input, options);
     }
 
     /// Update an Amazon Bedrock AgentCore Memory resource memory.
@@ -952,6 +1303,12 @@ pub const Client = struct {
     /// the Cedar schema before being applied. This is an asynchronous operation.
     /// Use the `GetPolicy` operation to poll the `status` field to track
     /// completion.
+    ///
+    /// If the updated policy is a temporal policy, the policy engine invalidates
+    /// all active temporal sessions. If the update adds or removes temporal
+    /// operators, the policy engine also invalidates active temporal sessions. For
+    /// more information about temporal policy sessions, see [session-based temporal
+    /// policies](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy-session-based-temporal.html). The policy engine returns an HTTP 409 `ConflictException` to in-flight sessions. To resume, you must start a new session with a new session ID.
     pub fn updatePolicy(self: *Self, allocator: std.mem.Allocator, input: update_policy.UpdatePolicyInput, options: CallOptions) !update_policy.UpdatePolicyOutput {
         return update_policy.execute(self, allocator, input, options);
     }
@@ -1002,6 +1359,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn listAgentRuntimeVersionsByCapacityProviderPaginator(self: *Self, params: list_agent_runtime_versions_by_capacity_provider.ListAgentRuntimeVersionsByCapacityProviderInput) paginator.ListAgentRuntimeVersionsByCapacityProviderPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listAgentRuntimesPaginator(self: *Self, params: list_agent_runtimes.ListAgentRuntimesInput) paginator.ListAgentRuntimesPaginator {
         return .{
             .client = self,
@@ -1030,6 +1394,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn listCapacityProvidersPaginator(self: *Self, params: list_capacity_providers.ListCapacityProvidersInput) paginator.ListCapacityProvidersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listCodeInterpretersPaginator(self: *Self, params: list_code_interpreters.ListCodeInterpretersInput) paginator.ListCodeInterpretersPaginator {
         return .{
             .client = self,
@@ -1051,7 +1422,42 @@ pub const Client = struct {
         };
     }
 
+    pub fn listConsentPortalsPaginator(self: *Self, params: list_consent_portals.ListConsentPortalsInput) paginator.ListConsentPortalsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listDatasetExamplesPaginator(self: *Self, params: list_dataset_examples.ListDatasetExamplesInput) paginator.ListDatasetExamplesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listDatasetVersionsPaginator(self: *Self, params: list_dataset_versions.ListDatasetVersionsInput) paginator.ListDatasetVersionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listDatasetsPaginator(self: *Self, params: list_datasets.ListDatasetsInput) paginator.ListDatasetsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listEvaluatorsPaginator(self: *Self, params: list_evaluators.ListEvaluatorsInput) paginator.ListEvaluatorsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listGatewayRateLimitsPaginator(self: *Self, params: list_gateway_rate_limits.ListGatewayRateLimitsInput) paginator.ListGatewayRateLimitsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -1073,6 +1479,20 @@ pub const Client = struct {
     }
 
     pub fn listGatewaysPaginator(self: *Self, params: list_gateways.ListGatewaysInput) paginator.ListGatewaysPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listHarnessEndpointsPaginator(self: *Self, params: list_harness_endpoints.ListHarnessEndpointsInput) paginator.ListHarnessEndpointsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listHarnessVersionsPaginator(self: *Self, params: list_harness_versions.ListHarnessVersionsInput) paginator.ListHarnessVersionsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -1135,6 +1555,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn listPolicyEngineSummariesPaginator(self: *Self, params: list_policy_engine_summaries.ListPolicyEngineSummariesInput) paginator.ListPolicyEngineSummariesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listPolicyEnginesPaginator(self: *Self, params: list_policy_engines.ListPolicyEnginesInput) paginator.ListPolicyEnginesPaginator {
         return .{
             .client = self,
@@ -1149,7 +1576,21 @@ pub const Client = struct {
         };
     }
 
+    pub fn listPolicyGenerationSummariesPaginator(self: *Self, params: list_policy_generation_summaries.ListPolicyGenerationSummariesInput) paginator.ListPolicyGenerationSummariesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listPolicyGenerationsPaginator(self: *Self, params: list_policy_generations.ListPolicyGenerationsInput) paginator.ListPolicyGenerationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listPolicySummariesPaginator(self: *Self, params: list_policy_summaries.ListPolicySummariesInput) paginator.ListPolicySummariesPaginator {
         return .{
             .client = self,
             .params = params,

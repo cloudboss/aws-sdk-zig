@@ -47,6 +47,7 @@ pub const InvokeAssistantOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeAssistantInput, options: CallOptions) !InvokeAssistantOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -55,8 +56,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeAssis
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "iotsitewise", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -68,11 +67,9 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeAssis
         return error.ServiceError;
     }
 
-    stream_resp.deinitHeaders();
-    errdefer stream_resp.body.deinit();
-
-    const body = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
-    return .{ .body = body };
+    errdefer stream_resp.deinit();
+    const result = try deserializeStreamingResponse(allocator, &stream_resp);
+    return result;
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: InvokeAssistantInput, config: *aws.Config) !aws.http.Request {
@@ -115,4 +112,23 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeAssistantInput, c
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
+}
+
+fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !InvokeAssistantOutput {
+    var result: InvokeAssistantOutput = .{
+        .conversation_id = "",
+    };
+    errdefer {
+        allocator.free(result.conversation_id);
+    }
+    if (stream_resp.headers.get("x-amz-iotsitewise-assistant-conversation-id")) |value| {
+        result.conversation_id = try allocator.dupe(u8, value);
+    }
+    result.body = try aws.event_stream_reader.EventStreamReader.init(
+        allocator,
+        stream_resp.body,
+    );
+    stream_resp.deinitHeaders();
+
+    return result;
 }

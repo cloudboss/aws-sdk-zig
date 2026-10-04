@@ -121,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSelfUpgradesInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListSelfUpgradesOutput {
-    var result: ListSelfUpgradesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListSelfUpgradesOutput, body, allocator);
-    }
+    var result: ListSelfUpgradesOutput = try aws.json.parseJsonObject(
+        ListSelfUpgradesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

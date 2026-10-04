@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListWorkspaceMediaInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListWorkspaceMediaOutput {
-    var result: ListWorkspaceMediaOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListWorkspaceMediaOutput, body, allocator);
-    }
+    const result: ListWorkspaceMediaOutput = try aws.json.parseJsonObject(
+        ListWorkspaceMediaOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

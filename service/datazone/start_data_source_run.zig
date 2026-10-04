@@ -151,10 +151,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartDataSourceRunInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartDataSourceRunOutput {
-    var result: StartDataSourceRunOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartDataSourceRunOutput, body, allocator);
-    }
+    const result: StartDataSourceRunOutput = try aws.json.parseJsonObject(
+        StartDataSourceRunOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

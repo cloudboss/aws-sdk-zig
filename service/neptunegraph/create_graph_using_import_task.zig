@@ -72,7 +72,7 @@ pub const CreateGraphUsingImportTaskInput = struct {
     public_connectivity: ?bool = null,
 
     /// The number of replicas in other AZs to provision on the new graph after
-    /// import. Default = 0, Min = 0, Max = 2.
+    /// import. Default = 1, Min = 0, Max = 2.
     ///
     /// Additional charges equivalent to the m-NCUs selected for the graph apply for
     /// each replica.
@@ -300,10 +300,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateGraphUsingImportT
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateGraphUsingImportTaskOutput {
-    var result: CreateGraphUsingImportTaskOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateGraphUsingImportTaskOutput, body, allocator);
-    }
+    const result: CreateGraphUsingImportTaskOutput = try aws.json.parseJsonObject(
+        CreateGraphUsingImportTaskOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

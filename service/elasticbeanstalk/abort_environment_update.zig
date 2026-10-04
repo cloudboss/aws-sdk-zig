@@ -7,13 +7,11 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const AbortEnvironmentUpdateInput = struct {
     /// This specifies the ID of the environment with the in-progress update that
-    /// you want to
-    /// cancel.
+    /// you want to cancel.
     environment_id: ?[]const u8 = null,
 
     /// This specifies the name of the environment with the in-progress update that
-    /// you want to
-    /// cancel.
+    /// you want to cancel.
     environment_name: ?[]const u8 = null,
 };
 

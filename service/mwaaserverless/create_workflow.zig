@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const Code = @import("code.zig").Code;
 const DefinitionS3Location = @import("definition_s3_location.zig").DefinitionS3Location;
 const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
 const EngineVersion = @import("engine_version.zig").EngineVersion;
@@ -16,6 +17,10 @@ pub const CreateWorkflowInput = struct {
     /// idempotency of the request. This token prevents duplicate workflow creation
     /// requests.
     client_token: ?[]const u8 = null,
+
+    /// The location of code artifacts in Amazon S3 for the workflow. The service
+    /// copies the code from this location at the time of the request.
+    code: ?Code = null,
 
     /// The Amazon S3 location where the workflow definition file is stored. This
     /// must point to a valid YAML file that defines the workflow structure using
@@ -89,6 +94,7 @@ pub const CreateWorkflowInput = struct {
 
     pub const json_field_names = .{
         .client_token = "ClientToken",
+        .code = "Code",
         .definition_s3_location = "DefinitionS3Location",
         .description = "Description",
         .encryption_configuration = "EncryptionConfiguration",

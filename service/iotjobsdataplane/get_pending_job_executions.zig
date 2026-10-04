@@ -78,10 +78,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPendingJobExecutions
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPendingJobExecutionsOutput {
-    var result: GetPendingJobExecutionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPendingJobExecutionsOutput, body, allocator);
-    }
+    const result: GetPendingJobExecutionsOutput = try aws.json.parseJsonObject(
+        GetPendingJobExecutionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

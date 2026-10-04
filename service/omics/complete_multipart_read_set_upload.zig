@@ -94,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CompleteMultipartReadSe
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CompleteMultipartReadSetUploadOutput {
-    var result: CompleteMultipartReadSetUploadOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CompleteMultipartReadSetUploadOutput, body, allocator);
-    }
+    const result: CompleteMultipartReadSetUploadOutput = try aws.json.parseJsonObject(
+        CompleteMultipartReadSetUploadOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

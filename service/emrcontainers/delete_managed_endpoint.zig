@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteManagedEndpointIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteManagedEndpointOutput {
-    var result: DeleteManagedEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteManagedEndpointOutput, body, allocator);
-    }
+    const result: DeleteManagedEndpointOutput = try aws.json.parseJsonObject(
+        DeleteManagedEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

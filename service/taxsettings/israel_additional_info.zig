@@ -9,10 +9,8 @@ pub const IsraelAdditionalInfo = struct {
     customer_type: IsraelCustomerType,
 
     /// Dealer type for your TRN in Israel. If you're not a local authorized dealer
-    /// with an
-    /// Israeli VAT ID, specify your tax identification number so that Amazon Web
-    /// Services can send you
-    /// a compliant tax invoice.
+    /// with an Israeli VAT ID, specify your tax identification number so that
+    /// Amazon Web Services can send you a compliant tax invoice.
     dealer_type: IsraelDealerType,
 
     pub const json_field_names = .{

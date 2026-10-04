@@ -1,7 +1,7 @@
 const ErrorCategory = @import("error_category.zig").ErrorCategory;
 
-/// The error information for `CreateFHIRDatastore` and
-/// `DeleteFHIRDatastore` actions.
+/// The error information for `CreateFHIRDatastore` and `DeleteFHIRDatastore`
+/// actions.
 pub const ErrorCause = struct {
     /// The error category for `ErrorCause`.
     error_category: ?ErrorCategory = null,

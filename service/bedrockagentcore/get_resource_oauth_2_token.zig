@@ -205,10 +205,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetResourceOauth2TokenI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetResourceOauth2TokenOutput {
-    var result: GetResourceOauth2TokenOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetResourceOauth2TokenOutput, body, allocator);
-    }
+    const result: GetResourceOauth2TokenOutput = try aws.json.parseJsonObject(
+        GetResourceOauth2TokenOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

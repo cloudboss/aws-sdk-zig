@@ -15,7 +15,9 @@ pub const WrappedKey = struct {
     /// zero, with the key to be checked and retaining the 3 highest order bytes of
     /// the encrypted result. For AES keys, the KCV is computed using a CMAC
     /// algorithm where the input data is 16 bytes of zero and retaining the 3
-    /// highest order bytes of the encrypted result.
+    /// highest order bytes of the encrypted result. For HMAC keys, the KCV is
+    /// computed using the hash selected at key creation on a zero-length message,
+    /// taking the leftmost 3 bytes.
     key_check_value_algorithm: ?KeyCheckValueAlgorithm = null,
 
     /// Parameter information for generating a wrapped key using TR-31 or TR-34 skey

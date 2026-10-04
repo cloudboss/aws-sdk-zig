@@ -20,6 +20,14 @@ pub const GetUserAuthFactorsInput = struct {
 pub const GetUserAuthFactorsOutput = struct {
     /// The authentication types that are available to the user with `USER_AUTH`
     /// sign-in, for example `["PASSWORD", "WEB_AUTHN"]`.
+    ///
+    /// `PASSWORD` can only be used as a first authentication factor.
+    /// `SOFTWARE_TOKEN` can only be used as an MFA factor.
+    /// `EMAIL_OTP`, `SMS_OTP`, and `WEB_AUTHN` can be
+    /// used as either a first authentication factor or an MFA factor. `WEB_AUTHN`
+    /// is available as an MFA factor only when passkey MFA is enabled at the user
+    /// pool
+    /// level.
     configured_user_auth_factors: ?[]const AuthFactorType = null,
 
     /// The challenge method that Amazon Cognito returns to the user in response to

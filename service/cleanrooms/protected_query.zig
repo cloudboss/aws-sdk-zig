@@ -31,6 +31,9 @@ pub const ProtectedQuery = struct {
     /// The identifier for the membership.
     membership_id: []const u8,
 
+    /// The account ID of the member that pays for the query compute costs.
+    query_compute_payer_account_id: ?[]const u8 = null,
+
     /// The result of the protected query.
     result: ?ProtectedQueryResult = null,
 
@@ -54,6 +57,7 @@ pub const ProtectedQuery = struct {
         .id = "id",
         .membership_arn = "membershipArn",
         .membership_id = "membershipId",
+        .query_compute_payer_account_id = "queryComputePayerAccountId",
         .result = "result",
         .result_configuration = "resultConfiguration",
         .sql_parameters = "sqlParameters",

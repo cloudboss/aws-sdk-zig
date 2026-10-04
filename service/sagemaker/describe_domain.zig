@@ -10,6 +10,7 @@ const AuthMode = @import("auth_mode.zig").AuthMode;
 const DefaultSpaceSettings = @import("default_space_settings.zig").DefaultSpaceSettings;
 const UserSettings = @import("user_settings.zig").UserSettings;
 const DomainSettings = @import("domain_settings.zig").DomainSettings;
+const HomeEfsFileSystemCreation = @import("home_efs_file_system_creation.zig").HomeEfsFileSystemCreation;
 const DomainStatus = @import("domain_status.zig").DomainStatus;
 const TagPropagation = @import("tag_propagation.zig").TagPropagation;
 
@@ -66,6 +67,9 @@ pub const DescribeDomainOutput = struct {
     /// The failure reason.
     failure_reason: ?[]const u8 = null,
 
+    /// Indicates whether a home EFS file system is created for the domain.
+    home_efs_file_system_creation: ?HomeEfsFileSystemCreation = null,
+
     /// The ID of the Amazon Elastic File System managed by this Domain.
     home_efs_file_system_id: ?[]const u8 = null,
 
@@ -118,6 +122,7 @@ pub const DescribeDomainOutput = struct {
         .domain_name = "DomainName",
         .domain_settings = "DomainSettings",
         .failure_reason = "FailureReason",
+        .home_efs_file_system_creation = "HomeEfsFileSystemCreation",
         .home_efs_file_system_id = "HomeEfsFileSystemId",
         .home_efs_file_system_kms_key_id = "HomeEfsFileSystemKmsKeyId",
         .kms_key_id = "KmsKeyId",

@@ -129,10 +129,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchDashboardsInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchDashboardsOutput {
-    var result: SearchDashboardsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchDashboardsOutput, body, allocator);
-    }
+    var result: SearchDashboardsOutput = try aws.json.parseJsonObject(
+        SearchDashboardsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

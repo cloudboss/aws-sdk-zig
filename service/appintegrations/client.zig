@@ -86,9 +86,11 @@ pub const Client = struct {
         return create_event_integration.execute(self, allocator, input, options);
     }
 
-    /// Deletes the Application. Only Applications that don't have any Application
-    /// Associations
-    /// can be deleted.
+    /// Deletes an application. If the application has associations, you must delete
+    /// them first.
+    /// Alternatively, use the `force` option to delete the application and remove
+    /// its
+    /// associations.
     pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: CallOptions) !delete_application.DeleteApplicationOutput {
         return delete_application.execute(self, allocator, input, options);
     }

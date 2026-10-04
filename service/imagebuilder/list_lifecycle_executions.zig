@@ -7,15 +7,19 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const LifecycleExecution = @import("lifecycle_execution.zig").LifecycleExecution;
 
 pub const ListLifecycleExecutionsInput = struct {
-    /// Specify the maximum number of items to return in a request.
+    /// The maximum number of items to return in a single request.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
-    /// The Amazon Resource Name (ARN) of the resource for which to get a list of
-    /// lifecycle runtime instances.
+    /// The Amazon Resource Name (ARN) of the resource for which to list lifecycle
+    /// executions. Specify a
+    /// lifecycle policy ARN to list its executions, or an image build version ARN
+    /// to list the executions that StartResourceStateUpdate
+    /// started for that image. Other ARN types aren't valid for this
+    /// request.
     resource_arn: []const u8,
 
     pub const json_field_names = .{
@@ -109,10 +113,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListLifecycleExecutions
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListLifecycleExecutionsOutput {
-    var result: ListLifecycleExecutionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListLifecycleExecutionsOutput, body, allocator);
-    }
+    const result: ListLifecycleExecutionsOutput = try aws.json.parseJsonObject(
+        ListLifecycleExecutionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

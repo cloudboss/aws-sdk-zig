@@ -32,7 +32,8 @@ pub const PlatformSummary = struct {
     /// one for its branch.
     platform_lifecycle_state: ?[]const u8 = null,
 
-    /// The AWS account ID of the person who created the platform version.
+    /// The Amazon Web Services account ID of the person who created the platform
+    /// version.
     platform_owner: ?[]const u8 = null,
 
     /// The status of the platform version. You can create an environment from the

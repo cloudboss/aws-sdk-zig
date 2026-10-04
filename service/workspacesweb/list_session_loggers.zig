@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSessionLoggersInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListSessionLoggersOutput {
-    var result: ListSessionLoggersOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListSessionLoggersOutput, body, allocator);
-    }
+    const result: ListSessionLoggersOutput = try aws.json.parseJsonObject(
+        ListSessionLoggersOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

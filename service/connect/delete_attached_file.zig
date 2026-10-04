@@ -6,9 +6,10 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const DeleteAttachedFileInput = struct {
-    /// The resource to which the attached file is (being) uploaded to.
-    /// [Cases](https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html) are the only current supported
-    /// resource.
+    /// The resource to which the attached file is (being) uploaded to. The
+    /// supported resources are
+    /// [Cases](https://docs.aws.amazon.com/connect/latest/adminguide/cases.html),
+    /// [Email](https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html), and [Task](https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html).
     ///
     /// This value must be a valid ARN.
     associated_resource_arn: []const u8,

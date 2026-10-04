@@ -8,7 +8,7 @@ pub const NotificationRecipientType = struct {
     user_ids: ?[]const []const u8 = null,
 
     /// The tags used to organize, track, or control access for this resource. For
-    /// example, { "Tags": {"key1":"value1", "key2":"value2"} }. Amazon Connect
+    /// example, { "Tags": {"key1":"value1", "key2":"value2"} }. Connect Customer
     /// users with the specified tags will be notified.
     user_tags: ?[]const aws.map.StringMapEntry = null,
 

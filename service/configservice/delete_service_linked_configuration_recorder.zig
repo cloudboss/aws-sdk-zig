@@ -6,11 +6,20 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const DeleteServiceLinkedConfigurationRecorderInput = struct {
+    /// The Amazon Resource Name (ARN) of the service-linked configuration recorder
+    /// that you want to delete. For third-party service-linked configuration
+    /// recorders, you must use `Arn`. You must specify exactly one of `Arn` or
+    /// `ServicePrincipal`.
+    arn: ?[]const u8 = null,
+
     /// The service principal of the Amazon Web Services service for the
-    /// service-linked configuration recorder that you want to delete.
-    service_principal: []const u8,
+    /// service-linked configuration recorder that you want to delete. This field is
+    /// only supported for Amazon Web Services service principals. For third-party
+    /// service-linked configuration recorders, use `Arn` instead.
+    service_principal: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .arn = "Arn",
         .service_principal = "ServicePrincipal",
     };
 };

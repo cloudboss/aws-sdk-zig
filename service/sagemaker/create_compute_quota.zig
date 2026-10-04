@@ -29,7 +29,9 @@ pub const CreateComputeQuotaInput = struct {
     /// Description of the compute allocation definition.
     description: ?[]const u8 = null,
 
-    /// Name to the compute allocation definition.
+    /// The name of the compute allocation definition. The name must be unique
+    /// within the SageMaker AI HyperPod cluster specified by `ClusterArn`. You can
+    /// use the same name in other clusters within a Region or across Regions.
     name: []const u8,
 
     /// Tags of the compute allocation definition.

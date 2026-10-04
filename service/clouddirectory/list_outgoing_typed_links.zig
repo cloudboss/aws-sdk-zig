@@ -151,10 +151,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListOutgoingTypedLinksI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListOutgoingTypedLinksOutput {
-    var result: ListOutgoingTypedLinksOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListOutgoingTypedLinksOutput, body, allocator);
-    }
+    const result: ListOutgoingTypedLinksOutput = try aws.json.parseJsonObject(
+        ListOutgoingTypedLinksOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

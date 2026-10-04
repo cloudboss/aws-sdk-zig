@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAutomationRuleV2Inpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAutomationRuleV2Output {
-    var result: GetAutomationRuleV2Output = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAutomationRuleV2Output, body, allocator);
-    }
+    const result: GetAutomationRuleV2Output = try aws.json.parseJsonObject(
+        GetAutomationRuleV2Output,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

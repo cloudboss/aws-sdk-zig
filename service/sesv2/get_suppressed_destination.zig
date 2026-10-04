@@ -7,11 +7,18 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SuppressedDestination = @import("suppressed_destination.zig").SuppressedDestination;
 
 pub const GetSuppressedDestinationInput = struct {
-    /// The email address that's on the account suppression list.
+    /// The email address that's on the suppression list for your account or for the
+    /// specified tenant.
     email_address: []const u8,
+
+    /// The name of the tenant whose suppression list you want to query. If you omit
+    /// this
+    /// parameter, the operation targets the account-level suppression list.
+    tenant_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .email_address = "EmailAddress",
+        .tenant_name = "TenantName",
     };
 };
 
@@ -59,6 +66,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSuppressedDestinatio
     try path_buf.appendSlice(allocator, input.email_address);
     const path = try path_buf.toOwnedSlice(allocator);
 
+    var query_buf: std.ArrayList(u8) = .empty;
+    var query_has_prev = false;
+    if (input.tenant_name) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "TenantName=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
+    const query = try query_buf.toOwnedSlice(allocator);
+
     const body: ?[]const u8 = null;
 
     var request = aws.http.Request.init(ep.host);
@@ -67,16 +84,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSuppressedDestinatio
     request.tls = ep.tls;
     request.port = ep.port;
     request.body = body;
+    request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSuppressedDestinationOutput {
-    var result: GetSuppressedDestinationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSuppressedDestinationOutput, body, allocator);
-    }
+    const result: GetSuppressedDestinationOutput = try aws.json.parseJsonObject(
+        GetSuppressedDestinationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

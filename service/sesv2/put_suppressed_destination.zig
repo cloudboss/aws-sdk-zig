@@ -8,17 +8,25 @@ const SuppressionListReason = @import("suppression_list_reason.zig").Suppression
 
 pub const PutSuppressedDestinationInput = struct {
     /// The email address that should be added to the suppression list for your
-    /// account.
+    /// account or
+    /// for the specified tenant.
     email_address: []const u8,
 
     /// The factors that should cause the email address to be added to the
     /// suppression list
-    /// for your account.
+    /// for your account or for the specified tenant.
     reason: SuppressionListReason,
+
+    /// The name of the tenant whose suppression list you want to add the address
+    /// to. If you
+    /// omit this parameter, the address is added to the account-level suppression
+    /// list.
+    tenant_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .email_address = "EmailAddress",
         .reason = "Reason",
+        .tenant_name = "TenantName",
     };
 };
 
@@ -69,6 +77,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutSuppressedDestinatio
     try body_buf.appendSlice(allocator, "\"Reason\":");
     try aws.json.writeValue(@TypeOf(input.reason), input.reason, allocator, &body_buf);
     has_prev = true;
+    if (input.tenant_name) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"TenantName\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);

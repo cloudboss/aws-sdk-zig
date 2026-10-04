@@ -3,6 +3,7 @@ const std = @import("std");
 pub const AWSServiceName = enum {
     aws,
     ec2,
+    eks,
     elasticache,
     elb,
     rds,
@@ -11,6 +12,7 @@ pub const AWSServiceName = enum {
     pub const json_field_names = .{
         .aws = "AWS",
         .ec2 = "EC2",
+        .eks = "EKS",
         .elasticache = "ELASTICACHE",
         .elb = "ELB",
         .rds = "RDS",
@@ -21,6 +23,7 @@ pub const AWSServiceName = enum {
         return switch (self) {
             .aws => "AWS",
             .ec2 => "EC2",
+            .eks => "EKS",
             .elasticache => "ELASTICACHE",
             .elb => "ELB",
             .rds => "RDS",

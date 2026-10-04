@@ -139,10 +139,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFunctionUrlConfigInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetFunctionUrlConfigOutput {
-    var result: GetFunctionUrlConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetFunctionUrlConfigOutput, body, allocator);
-    }
+    const result: GetFunctionUrlConfigOutput = try aws.json.parseJsonObject(
+        GetFunctionUrlConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

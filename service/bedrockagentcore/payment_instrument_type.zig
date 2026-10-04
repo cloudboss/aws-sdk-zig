@@ -1,6 +1,6 @@
 const std = @import("std");
 
-/// The type of payment instrument
+/// The type of payment instrument.
 pub const PaymentInstrumentType = enum {
     embedded_crypto_wallet,
 

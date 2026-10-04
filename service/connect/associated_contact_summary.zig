@@ -10,7 +10,7 @@ pub const AssociatedContactSummary = struct {
     /// The Amazon Resource Name (ARN) of the contact
     contact_arn: ?[]const u8 = null,
 
-    /// The identifier of the contact in this instance of Amazon Connect.
+    /// The identifier of the contact in this instance of Connect Customer.
     contact_id: ?[]const u8 = null,
 
     /// The date and time that the customer endpoint disconnected from the current

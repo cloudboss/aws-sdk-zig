@@ -9,6 +9,9 @@ pub const ConfigurationBundleSummary = struct {
     /// The name of the configuration bundle.
     bundle_name: []const u8,
 
+    /// The timestamp when the configuration bundle was created.
+    created_at: ?i64 = null,
+
     /// The description of the configuration bundle.
     description: ?[]const u8 = null,
 
@@ -16,6 +19,7 @@ pub const ConfigurationBundleSummary = struct {
         .bundle_arn = "bundleArn",
         .bundle_id = "bundleId",
         .bundle_name = "bundleName",
+        .created_at = "createdAt",
         .description = "description",
     };
 };

@@ -16,6 +16,9 @@ pub const DeleteConfigurationBundleInput = struct {
 };
 
 pub const DeleteConfigurationBundleOutput = struct {
+    /// The Amazon Resource Name (ARN) of the deleted configuration bundle.
+    bundle_arn: []const u8,
+
     /// The unique identifier of the deleted configuration bundle.
     bundle_id: []const u8,
 
@@ -23,6 +26,7 @@ pub const DeleteConfigurationBundleOutput = struct {
     status: ConfigurationBundleStatus,
 
     pub const json_field_names = .{
+        .bundle_arn = "bundleArn",
         .bundle_id = "bundleId",
         .status = "status",
     };
@@ -77,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteConfigurationBund
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteConfigurationBundleOutput {
-    var result: DeleteConfigurationBundleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteConfigurationBundleOutput, body, allocator);
-    }
+    const result: DeleteConfigurationBundleOutput = try aws.json.parseJsonObject(
+        DeleteConfigurationBundleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

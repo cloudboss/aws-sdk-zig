@@ -11,6 +11,12 @@ pub const ListManagedNotificationEventsInput = struct {
     /// Latest time of events to return from this call.
     end_time: ?i64 = null,
 
+    /// Specifies whether to include sensitive events in the result. By default,
+    /// only non-sensitive events are returned. The
+    /// `notifications:AccessSensitiveEvents` permission controls access to
+    /// sensitive events.
+    include_sensitive_events: ?bool = null,
+
     /// The locale code of the language used for the retrieved NotificationEvent.
     /// The default locale is English (en_US).
     locale: ?LocaleCode = null,
@@ -39,6 +45,7 @@ pub const ListManagedNotificationEventsInput = struct {
 
     pub const json_field_names = .{
         .end_time = "endTime",
+        .include_sensitive_events = "includeSensitiveEvents",
         .locale = "locale",
         .max_results = "maxResults",
         .next_token = "nextToken",
@@ -106,6 +113,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListManagedNotification
         }
         query_has_prev = true;
     }
+    if (input.include_sensitive_events) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "includeSensitiveEvents=");
+        try query_buf.appendSlice(allocator, if (v) "true" else "false");
+        query_has_prev = true;
+    }
     if (input.locale) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "locale=");
@@ -171,10 +184,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListManagedNotification
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListManagedNotificationEventsOutput {
-    var result: ListManagedNotificationEventsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListManagedNotificationEventsOutput, body, allocator);
-    }
+    const result: ListManagedNotificationEventsOutput = try aws.json.parseJsonObject(
+        ListManagedNotificationEventsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

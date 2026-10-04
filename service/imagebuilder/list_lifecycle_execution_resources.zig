@@ -8,25 +8,26 @@ const LifecycleExecutionState = @import("lifecycle_execution_state.zig").Lifecyc
 const LifecycleExecutionResource = @import("lifecycle_execution_resource.zig").LifecycleExecutionResource;
 
 pub const ListLifecycleExecutionResourcesInput = struct {
-    /// Use the unique identifier for a runtime instance of the lifecycle policy to
-    /// get runtime details.
+    /// The unique identifier for a runtime instance of the lifecycle policy.
     lifecycle_execution_id: []const u8,
 
-    /// Specify the maximum number of items to return in a request.
+    /// The maximum number of items to return in a single request.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
-    /// You can leave this empty to get a list of Image Builder resources that were
-    /// identified for lifecycle actions.
-    ///
-    /// To get a list of associated resources that are impacted for an individual
-    /// resource (the parent), specify
-    /// its Amazon Resource Name (ARN). Associated resources are produced from your
-    /// image and distributed when you run a build, such as
-    /// AMIs or container images stored in ECR repositories.
+    /// The Amazon Resource Name (ARN) of an image build version to get the output
+    /// resources for,
+    /// such as AMIs or container images in Amazon ECR. You can get this value from
+    /// the
+    /// `resourceId` in the top-level response. If you leave this
+    /// property empty, the response lists the Image Builder resources that the
+    /// lifecycle
+    /// execution identified for lifecycle actions. If the image build version that
+    /// you specify in `parentResourceId` wasn't part of this
+    /// lifecycle execution, the response contains an empty list.
     parent_resource_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -38,7 +39,7 @@ pub const ListLifecycleExecutionResourcesInput = struct {
 };
 
 pub const ListLifecycleExecutionResourcesOutput = struct {
-    /// Runtime details for the specified runtime instance of the lifecycle policy.
+    /// The unique identifier for the runtime instance of the lifecycle policy.
     lifecycle_execution_id: ?[]const u8 = null,
 
     /// The current state of the lifecycle runtime instance.
@@ -135,10 +136,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListLifecycleExecutionR
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListLifecycleExecutionResourcesOutput {
-    var result: ListLifecycleExecutionResourcesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListLifecycleExecutionResourcesOutput, body, allocator);
-    }
+    const result: ListLifecycleExecutionResourcesOutput = try aws.json.parseJsonObject(
+        ListLifecycleExecutionResourcesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

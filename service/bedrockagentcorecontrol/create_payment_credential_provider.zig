@@ -9,16 +9,17 @@ const PaymentProviderConfigurationInput = @import("payment_provider_configuratio
 const PaymentProviderConfigurationOutput = @import("payment_provider_configuration_output.zig").PaymentProviderConfigurationOutput;
 
 pub const CreatePaymentCredentialProviderInput = struct {
-    /// The vendor type (e.g., CoinbaseCDP)
+    /// The vendor type for the payment credential provider (e.g., CoinbaseCDP,
+    /// StripePrivy).
     credential_provider_vendor: PaymentCredentialProviderVendorType,
 
-    /// Unique name for the payment credential provider
+    /// Unique name for the payment credential provider.
     name: []const u8,
 
-    /// Configuration specific to the vendor, including API credentials
+    /// Configuration specific to the vendor, including API credentials.
     provider_configuration_input: PaymentProviderConfigurationInput,
 
-    /// Optional tags for resource organization
+    /// Optional tags for resource organization.
     tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
@@ -33,12 +34,13 @@ pub const CreatePaymentCredentialProviderOutput = struct {
     /// The Amazon Resource Name (ARN) of the created payment credential provider.
     credential_provider_arn: []const u8,
 
+    /// The vendor type for the created payment credential provider.
     credential_provider_vendor: PaymentCredentialProviderVendorType,
 
     /// The name of the created payment credential provider.
     name: []const u8,
 
-    /// Output configuration (contains secret ARNs, excludes actual secret values)
+    /// Output configuration (contains secret ARNs, excludes actual secret values).
     provider_configuration_output: ?PaymentProviderConfigurationOutput = null,
 
     pub const json_field_names = .{
@@ -119,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePaymentCredential
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePaymentCredentialProviderOutput {
-    var result: CreatePaymentCredentialProviderOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePaymentCredentialProviderOutput, body, allocator);
-    }
+    const result: CreatePaymentCredentialProviderOutput = try aws.json.parseJsonObject(
+        CreatePaymentCredentialProviderOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -353,6 +353,17 @@ pub const Client = struct {
     /// default, it is set to 0. The limit is best effort and based on the duration
     /// of the
     /// selfie-video.
+    ///
+    /// You can use the `ChallengePreferences` option in the `Settings` parameter to
+    /// choose between the
+    /// 'FaceMovementAndLightChallenge' or FaceMovementChallenge' settings. See the
+    /// [Shared
+    /// Responsibility](https://docs.aws.amazon.com/rekognition/latest/dg/face-liveness-shared-responsibility-model.html)
+    /// page for details on guidance for which setting to choose between these two
+    /// settings depending on
+    /// your use case and preferences. This parameter is optional and if no
+    /// parameter is provided, then
+    /// the 'FaceMovementAndLightChallenge' settings is applied by default.
     pub fn createFaceLivenessSession(self: *Self, allocator: std.mem.Allocator, input: create_face_liveness_session.CreateFaceLivenessSessionInput, options: CallOptions) !create_face_liveness_session.CreateFaceLivenessSessionOutput {
         return create_face_liveness_session.execute(self, allocator, input, options);
     }
@@ -415,6 +426,14 @@ pub const Client = struct {
         return create_project_version.execute(self, allocator, input, options);
     }
 
+    /// Service availability notice: Streaming Video and Bulk Image Analysis is no
+    /// longer available to new customers. For more information, see
+    /// [Rekognition feature availability
+    /// changes](https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html).
+    ///
+    /// **This change does not impact the availability of other Amazon Rekognition
+    /// features.**
+    ///
     /// Creates an Amazon Rekognition stream processor that you can use to detect
     /// and recognize faces or to detect labels in a streaming video.
     ///
@@ -561,6 +580,14 @@ pub const Client = struct {
         return delete_project_version.execute(self, allocator, input, options);
     }
 
+    /// Service availability notice: Streaming Video and Bulk Image Analysis is no
+    /// longer available to new customers. For more information, see
+    /// [Rekognition feature availability
+    /// changes](https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html).
+    ///
+    /// **This change does not impact the availability of other Amazon Rekognition
+    /// features.**
+    ///
     /// Deletes the stream processor identified by `Name`. You assign the value for
     /// `Name` when you create the stream processor with
     /// CreateStreamProcessor. You might not be able to use the same name for a
@@ -624,6 +651,14 @@ pub const Client = struct {
         return describe_projects.execute(self, allocator, input, options);
     }
 
+    /// Service availability notice: Streaming Video and Bulk Image Analysis is no
+    /// longer available to new customers. For more information, see
+    /// [Rekognition feature availability
+    /// changes](https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html).
+    ///
+    /// **This change does not impact the availability of other Amazon Rekognition
+    /// features.**
+    ///
     /// Provides information about a stream processor created by
     /// CreateStreamProcessor. You can get information about the input and output
     /// streams, the input parameters for the face recognition being performed,
@@ -1203,6 +1238,11 @@ pub const Client = struct {
     /// defined by the `AuditImagesLimit` paramater when calling
     /// `CreateFaceLivenessSession`. Reference images are always returned when
     /// possible.
+    ///
+    /// For a session that has completed, the response can also include a `Feedback`
+    /// list describing conditions that were detected in the selfie-video, such as
+    /// low lighting or an
+    /// obstructed face, and `Metadata` about the client that streamed the session.
     pub fn getFaceLivenessSessionResults(self: *Self, allocator: std.mem.Allocator, input: get_face_liveness_session_results.GetFaceLivenessSessionResultsInput, options: CallOptions) !get_face_liveness_session_results.GetFaceLivenessSessionResultsOutput {
         return get_face_liveness_session_results.execute(self, allocator, input, options);
     }
@@ -1346,6 +1386,14 @@ pub const Client = struct {
         return get_label_detection.execute(self, allocator, input, options);
     }
 
+    /// Service availability notice: Streaming Video and Bulk Image Analysis is no
+    /// longer available to new customers. For more information, see
+    /// [Rekognition feature availability
+    /// changes](https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html).
+    ///
+    /// **This change does not impact the availability of other Amazon Rekognition
+    /// features.**
+    ///
     /// Retrieves the results for a given media analysis job.
     /// Takes a `JobId` returned by StartMediaAnalysisJob.
     pub fn getMediaAnalysisJob(self: *Self, allocator: std.mem.Allocator, input: get_media_analysis_job.GetMediaAnalysisJobInput, options: CallOptions) !get_media_analysis_job.GetMediaAnalysisJobOutput {
@@ -1677,6 +1725,14 @@ pub const Client = struct {
         return list_faces.execute(self, allocator, input, options);
     }
 
+    /// Service availability notice: Streaming Video and Bulk Image Analysis is no
+    /// longer available to new customers. For more information, see
+    /// [Rekognition feature availability
+    /// changes](https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html).
+    ///
+    /// **This change does not impact the availability of other Amazon Rekognition
+    /// features.**
+    ///
     /// Returns a list of media analysis jobs. Results are sorted by
     /// `CreationTimestamp` in descending order.
     pub fn listMediaAnalysisJobs(self: *Self, allocator: std.mem.Allocator, input: list_media_analysis_jobs.ListMediaAnalysisJobsInput, options: CallOptions) !list_media_analysis_jobs.ListMediaAnalysisJobsOutput {
@@ -1696,6 +1752,14 @@ pub const Client = struct {
         return list_project_policies.execute(self, allocator, input, options);
     }
 
+    /// Service availability notice: Streaming Video and Bulk Image Analysis is no
+    /// longer available to new customers. For more information, see
+    /// [Rekognition feature availability
+    /// changes](https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html).
+    ///
+    /// **This change does not impact the availability of other Amazon Rekognition
+    /// features.**
+    ///
     /// Gets a list of stream processors that you have created with
     /// CreateStreamProcessor.
     pub fn listStreamProcessors(self: *Self, allocator: std.mem.Allocator, input: list_stream_processors.ListStreamProcessorsInput, options: CallOptions) !list_stream_processors.ListStreamProcessorsOutput {
@@ -2060,6 +2124,14 @@ pub const Client = struct {
         return start_label_detection.execute(self, allocator, input, options);
     }
 
+    /// Service availability notice: Streaming Video and Bulk Image Analysis is no
+    /// longer available to new customers. For more information, see
+    /// [Rekognition feature availability
+    /// changes](https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html).
+    ///
+    /// **This change does not impact the availability of other Amazon Rekognition
+    /// features.**
+    ///
     /// Initiates a new media analysis job. Accepts a manifest file in an Amazon S3
     /// bucket. The
     /// output is a manifest file and a summary of the manifest stored in the Amazon
@@ -2149,6 +2221,14 @@ pub const Client = struct {
         return start_segment_detection.execute(self, allocator, input, options);
     }
 
+    /// Service availability notice: Streaming Video and Bulk Image Analysis is no
+    /// longer available to new customers. For more information, see
+    /// [Rekognition feature availability
+    /// changes](https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html).
+    ///
+    /// **This change does not impact the availability of other Amazon Rekognition
+    /// features.**
+    ///
     /// Starts processing a stream processor. You create a stream processor by
     /// calling CreateStreamProcessor.
     /// To tell `StartStreamProcessor` which stream processor to start, use the
@@ -2195,6 +2275,14 @@ pub const Client = struct {
         return stop_project_version.execute(self, allocator, input, options);
     }
 
+    /// Service availability notice: Streaming Video and Bulk Image Analysis is no
+    /// longer available to new customers. For more information, see
+    /// [Rekognition feature availability
+    /// changes](https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html).
+    ///
+    /// **This change does not impact the availability of other Amazon Rekognition
+    /// features.**
+    ///
     /// Stops a running stream processor that was created by CreateStreamProcessor.
     pub fn stopStreamProcessor(self: *Self, allocator: std.mem.Allocator, input: stop_stream_processor.StopStreamProcessorInput, options: CallOptions) !stop_stream_processor.StopStreamProcessorOutput {
         return stop_stream_processor.execute(self, allocator, input, options);
@@ -2263,6 +2351,14 @@ pub const Client = struct {
         return update_dataset_entries.execute(self, allocator, input, options);
     }
 
+    /// Service availability notice: Streaming Video and Bulk Image Analysis is no
+    /// longer available to new customers. For more information, see
+    /// [Rekognition feature availability
+    /// changes](https://docs.aws.amazon.com/rekognition/latest/dg/rekognition-availability-changes.html).
+    ///
+    /// **This change does not impact the availability of other Amazon Rekognition
+    /// features.**
+    ///
     /// Allows you to update a stream processor. You can change some settings and
     /// regions of interest and delete certain parameters.
     pub fn updateStreamProcessor(self: *Self, allocator: std.mem.Allocator, input: update_stream_processor.UpdateStreamProcessorInput, options: CallOptions) !update_stream_processor.UpdateStreamProcessorOutput {

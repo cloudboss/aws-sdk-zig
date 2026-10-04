@@ -1,4 +1,5 @@
 const LogExport = @import("log_export.zig").LogExport;
+const S3TablePublishStatus = @import("s3_table_publish_status.zig").S3TablePublishStatus;
 const NamespaceStatus = @import("namespace_status.zig").NamespaceStatus;
 
 /// A collection of database objects and users.
@@ -58,6 +59,11 @@ pub const Namespace = struct {
     /// the Amazon Redshift Database Developer Guide.
     namespace_name: ?[]const u8 = null,
 
+    /// The current Amazon S3 Tables log-publishing status for the namespace. Not
+    /// returned when S3 Tables publishing has never been configured for the
+    /// namespace.
+    s_3_table_publish_status: ?S3TablePublishStatus = null,
+
     /// The status of the namespace.
     status: ?NamespaceStatus = null,
 
@@ -76,6 +82,7 @@ pub const Namespace = struct {
         .namespace_arn = "namespaceArn",
         .namespace_id = "namespaceId",
         .namespace_name = "namespaceName",
+        .s_3_table_publish_status = "s3TablePublishStatus",
         .status = "status",
     };
 };

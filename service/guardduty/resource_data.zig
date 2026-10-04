@@ -1,5 +1,6 @@
 const AccessKey = @import("access_key.zig").AccessKey;
 const AutoscalingAutoScalingGroup = @import("autoscaling_auto_scaling_group.zig").AutoscalingAutoScalingGroup;
+const BedrockGuardrailResource = @import("bedrock_guardrail_resource.zig").BedrockGuardrailResource;
 const CloudformationStack = @import("cloudformation_stack.zig").CloudformationStack;
 const ContainerFindingResource = @import("container_finding_resource.zig").ContainerFindingResource;
 const Ec2Image = @import("ec_2_image.zig").Ec2Image;
@@ -25,6 +26,10 @@ pub const ResourceData = struct {
     /// Contains detailed information about the Auto Scaling Group associated with
     /// the activity that prompted GuardDuty to generate a finding.
     autoscaling_auto_scaling_group: ?AutoscalingAutoScalingGroup = null,
+
+    /// Contains detailed information about the Amazon Bedrock guardrail associated
+    /// with the activity that prompted GuardDuty to generate a finding.
+    bedrock_guardrail: ?BedrockGuardrailResource = null,
 
     /// Contains detailed information about the CloudFormation stack associated with
     /// the activity that prompted GuardDuty to generate a finding.
@@ -82,6 +87,7 @@ pub const ResourceData = struct {
     pub const json_field_names = .{
         .access_key = "AccessKey",
         .autoscaling_auto_scaling_group = "AutoscalingAutoScalingGroup",
+        .bedrock_guardrail = "BedrockGuardrail",
         .cloudformation_stack = "CloudformationStack",
         .container = "Container",
         .ec_2_image = "Ec2Image",

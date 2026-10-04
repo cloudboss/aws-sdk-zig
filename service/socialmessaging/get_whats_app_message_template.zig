@@ -10,11 +10,22 @@ pub const GetWhatsAppMessageTemplateInput = struct {
     id: []const u8,
 
     /// The numeric ID of the template assigned by Meta.
-    meta_template_id: []const u8,
+    meta_template_id: ?[]const u8 = null,
+
+    /// The language code of the message template (for example, `en` or `en_US`).
+    /// Use together with `templateName` as an alternative to `metaTemplateId` to
+    /// identify a template.
+    template_language_code: ?[]const u8 = null,
+
+    /// The name of the message template. Use together with `templateLanguageCode`
+    /// as an alternative to `metaTemplateId` to identify a template.
+    template_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "id",
         .meta_template_id = "metaTemplateId",
+        .template_language_code = "templateLanguageCode",
+        .template_name = "templateName",
     };
 };
 
@@ -65,10 +76,24 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetWhatsAppMessageTempl
     try query_buf.appendSlice(allocator, "id=");
     try aws.url.appendUrlEncoded(allocator, &query_buf, input.id);
     query_has_prev = true;
-    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-    try query_buf.appendSlice(allocator, "metaTemplateId=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, input.meta_template_id);
-    query_has_prev = true;
+    if (input.meta_template_id) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "metaTemplateId=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
+    if (input.template_language_code) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "templateLanguageCode=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
+    if (input.template_name) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "templateName=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
     const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
@@ -86,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetWhatsAppMessageTempl
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetWhatsAppMessageTemplateOutput {
-    var result: GetWhatsAppMessageTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetWhatsAppMessageTemplateOutput, body, allocator);
-    }
+    const result: GetWhatsAppMessageTemplateOutput = try aws.json.parseJsonObject(
+        GetWhatsAppMessageTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeDraftAppVersion
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeDraftAppVersionResourcesImportStatusOutput {
-    var result: DescribeDraftAppVersionResourcesImportStatusOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeDraftAppVersionResourcesImportStatusOutput, body, allocator);
-    }
+    const result: DescribeDraftAppVersionResourcesImportStatusOutput = try aws.json.parseJsonObject(
+        DescribeDraftAppVersionResourcesImportStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

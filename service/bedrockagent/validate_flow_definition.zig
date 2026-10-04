@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ValidateFlowDefinitionI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ValidateFlowDefinitionOutput {
-    var result: ValidateFlowDefinitionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ValidateFlowDefinitionOutput, body, allocator);
-    }
+    const result: ValidateFlowDefinitionOutput = try aws.json.parseJsonObject(
+        ValidateFlowDefinitionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

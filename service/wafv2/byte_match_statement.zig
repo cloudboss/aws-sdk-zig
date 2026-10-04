@@ -1,5 +1,6 @@
 const FieldToMatch = @import("field_to_match.zig").FieldToMatch;
 const PositionalConstraint = @import("positional_constraint.zig").PositionalConstraint;
+const PreParseTextTransformation = @import("pre_parse_text_transformation.zig").PreParseTextTransformation;
 const TextTransformation = @import("text_transformation.zig").TextTransformation;
 
 /// A rule statement that defines a string match search for WAF to apply to web
@@ -56,6 +57,15 @@ pub const ByteMatchStatement = struct {
     /// The value of `SearchString` must appear at the end of the specified part of
     /// the web request.
     positional_constraint: PositionalConstraint,
+
+    /// Pre-parse text transformations normalize the raw query string before WAF
+    /// parses it into individual
+    /// query arguments. They are applied before the standard text transformations.
+    /// Pre-parse text transformations
+    /// are only supported when `FieldToMatch` is `SingleQueryArgument` or
+    /// `AllQueryArguments`. You can specify up to 10 pre-parse text transformations
+    /// per rule statement.
+    pre_parse_text_transformations: ?[]const PreParseTextTransformation = null,
 
     /// A string value that you want WAF to search for. WAF searches only in the
     /// part of
@@ -126,6 +136,7 @@ pub const ByteMatchStatement = struct {
     pub const json_field_names = .{
         .field_to_match = "FieldToMatch",
         .positional_constraint = "PositionalConstraint",
+        .pre_parse_text_transformations = "PreParseTextTransformations",
         .search_string = "SearchString",
         .text_transformations = "TextTransformations",
     };

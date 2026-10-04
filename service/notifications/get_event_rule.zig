@@ -125,10 +125,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEventRuleInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetEventRuleOutput {
-    var result: GetEventRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetEventRuleOutput, body, allocator);
-    }
+    const result: GetEventRuleOutput = try aws.json.parseJsonObject(
+        GetEventRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

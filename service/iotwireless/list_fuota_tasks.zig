@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListFuotaTasksInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListFuotaTasksOutput {
-    var result: ListFuotaTasksOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListFuotaTasksOutput, body, allocator);
-    }
+    const result: ListFuotaTasksOutput = try aws.json.parseJsonObject(
+        ListFuotaTasksOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

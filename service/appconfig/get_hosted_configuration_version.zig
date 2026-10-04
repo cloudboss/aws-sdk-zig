@@ -120,6 +120,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetHostedConfigurationV
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetHostedConfigurationVersionOutput {
     var result: GetHostedConfigurationVersionOutput = .{};
+    errdefer {
+        if (result.application_id) |value| allocator.free(value);
+        if (result.configuration_profile_id) |value| allocator.free(value);
+        if (result.content_type) |value| allocator.free(value);
+        if (result.description) |value| allocator.free(value);
+        if (result.kms_key_arn) |value| allocator.free(value);
+        if (result.version_label) |value| allocator.free(value);
+        if (result.content) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.content = try allocator.dupe(u8, body);
     }

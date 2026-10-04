@@ -462,7 +462,7 @@ pub const ServerException = struct {
     };
 };
 
-/// The service deploy ARN that you specified in the `StopServiceDeployment`
+/// The service deploy ARN that you specified in the `ContinueServiceDeployment`
 /// doesn't exist. You can use `ListServiceDeployments` to retrieve the service
 /// deployment ARNs.
 pub const ServiceDeploymentNotFoundException = struct {

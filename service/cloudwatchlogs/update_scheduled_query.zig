@@ -8,6 +8,7 @@ const DestinationConfiguration = @import("destination_configuration.zig").Destin
 const QueryLanguage = @import("query_language.zig").QueryLanguage;
 const ScheduledQueryState = @import("scheduled_query_state.zig").ScheduledQueryState;
 const ExecutionStatus = @import("execution_status.zig").ExecutionStatus;
+const ScheduleType = @import("schedule_type.zig").ScheduleType;
 
 pub const UpdateScheduledQueryInput = struct {
     /// An updated description for the scheduled query.
@@ -15,6 +16,11 @@ pub const UpdateScheduledQueryInput = struct {
 
     /// The updated configuration for where to deliver query results.
     destination_configuration: ?DestinationConfiguration = null,
+
+    /// The updated time offset in seconds that defines the end of the lookback
+    /// period for
+    /// the query.
+    end_time_offset: ?i64 = null,
 
     /// The updated ARN of the IAM role that grants permissions to execute the query
     /// and deliver
@@ -55,6 +61,7 @@ pub const UpdateScheduledQueryInput = struct {
     pub const json_field_names = .{
         .description = "description",
         .destination_configuration = "destinationConfiguration",
+        .end_time_offset = "endTimeOffset",
         .execution_role_arn = "executionRoleArn",
         .identifier = "identifier",
         .log_group_identifiers = "logGroupIdentifiers",
@@ -78,6 +85,9 @@ pub const UpdateScheduledQueryOutput = struct {
 
     /// The destination configuration of the updated scheduled query.
     destination_configuration: ?DestinationConfiguration = null,
+
+    /// The end time offset in seconds of the updated scheduled query.
+    end_time_offset: ?i64 = null,
 
     /// The execution role ARN of the updated scheduled query.
     execution_role_arn: ?[]const u8 = null,
@@ -115,6 +125,9 @@ pub const UpdateScheduledQueryOutput = struct {
     /// The start time of the updated scheduled query.
     schedule_start_time: ?i64 = null,
 
+    /// The schedule type of the updated scheduled query.
+    schedule_type: ?ScheduleType = null,
+
     /// The time offset of the updated scheduled query.
     start_time_offset: ?i64 = null,
 
@@ -128,6 +141,7 @@ pub const UpdateScheduledQueryOutput = struct {
         .creation_time = "creationTime",
         .description = "description",
         .destination_configuration = "destinationConfiguration",
+        .end_time_offset = "endTimeOffset",
         .execution_role_arn = "executionRoleArn",
         .last_execution_status = "lastExecutionStatus",
         .last_triggered_time = "lastTriggeredTime",
@@ -140,6 +154,7 @@ pub const UpdateScheduledQueryOutput = struct {
         .schedule_end_time = "scheduleEndTime",
         .schedule_expression = "scheduleExpression",
         .schedule_start_time = "scheduleStartTime",
+        .schedule_type = "scheduleType",
         .start_time_offset = "startTimeOffset",
         .state = "state",
         .timezone = "timezone",

@@ -35,6 +35,8 @@ pub const ScanStatusReason = enum {
     scan_in_progress,
     image_archived,
     unsupported_code_artifacts,
+    resource_unmanaged,
+    resource_stopped,
 
     pub const json_field_names = .{
         .pending_initial_scan = "PENDING_INITIAL_SCAN",
@@ -71,6 +73,8 @@ pub const ScanStatusReason = enum {
         .scan_in_progress = "SCAN_IN_PROGRESS",
         .image_archived = "IMAGE_ARCHIVED",
         .unsupported_code_artifacts = "UNSUPPORTED_CODE_ARTIFACTS",
+        .resource_unmanaged = "RESOURCE_UNMANAGED",
+        .resource_stopped = "RESOURCE_STOPPED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -109,6 +113,8 @@ pub const ScanStatusReason = enum {
             .scan_in_progress => "SCAN_IN_PROGRESS",
             .image_archived => "IMAGE_ARCHIVED",
             .unsupported_code_artifacts => "UNSUPPORTED_CODE_ARTIFACTS",
+            .resource_unmanaged => "RESOURCE_UNMANAGED",
+            .resource_stopped => "RESOURCE_STOPPED",
         };
     }
 

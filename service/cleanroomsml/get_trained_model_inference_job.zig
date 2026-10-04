@@ -71,6 +71,10 @@ pub const GetTrainedModelInferenceJobOutput = struct {
     /// Details about the metrics status for the trained model inference job.
     metrics_status_details: ?[]const u8 = null,
 
+    /// The account ID of the member that is responsible for paying for model
+    /// inference costs.
+    ml_model_inference_payer_account_id: ?[]const u8 = null,
+
     /// The name of the trained model inference job.
     name: []const u8,
 
@@ -139,6 +143,7 @@ pub const GetTrainedModelInferenceJobOutput = struct {
         .membership_identifier = "membershipIdentifier",
         .metrics_status = "metricsStatus",
         .metrics_status_details = "metricsStatusDetails",
+        .ml_model_inference_payer_account_id = "mlModelInferencePayerAccountId",
         .name = "name",
         .output_configuration = "outputConfiguration",
         .resource_config = "resourceConfig",
@@ -203,10 +208,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTrainedModelInferenc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTrainedModelInferenceJobOutput {
-    var result: GetTrainedModelInferenceJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTrainedModelInferenceJobOutput, body, allocator);
-    }
+    const result: GetTrainedModelInferenceJobOutput = try aws.json.parseJsonObject(
+        GetTrainedModelInferenceJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

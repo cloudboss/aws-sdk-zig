@@ -150,10 +150,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateApiKeyInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateApiKeyOutput {
-    var result: CreateApiKeyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateApiKeyOutput, body, allocator);
-    }
+    const result: CreateApiKeyOutput = try aws.json.parseJsonObject(
+        CreateApiKeyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

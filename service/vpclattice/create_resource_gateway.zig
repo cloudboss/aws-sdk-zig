@@ -43,15 +43,19 @@ pub const CreateResourceGatewayInput = struct {
     /// The name of the resource gateway.
     name: []const u8,
 
-    /// Indicates how DNS is resolved for resource configurations associated to this
-    /// resource gateway. ResourceConfigDnsResolution is set at creation time and
-    /// cannot be changed.
+    /// Indicates how DNS is resolved for resource configurations associated with
+    /// this resource gateway. This value is set when you create the resource
+    /// gateway and can't be changed afterward. The default is `PUBLIC`.
     ///
     /// * `IN_VPC` - DNS resolution occurs privately within the resource gateway's
     ///   VPC. DNS queries for resources behind this resource gateway resolve using
     ///   the DNS resolvers defined in the VPC's DHCP option sets. Use this when
     ///   your resource domain names are hosted in private Route 53 hosted zones or
-    ///   on-premises DNS servers reachable from the VPC.
+    ///   on-premises DNS servers reachable from the VPC. A CIDR resource
+    ///   configuration requires a resource gateway that uses `IN_VPC`, and an
+    ///   `IN_VPC` resource gateway can't be used for ARN resource configurations,
+    ///   so a single resource gateway can't serve both ARN and CIDR resource
+    ///   configurations.
     /// * `PUBLIC` - DNS resolution occurs against public DNS resolvers. DNS queries
     ///   for resources behind this resource gateway resolve using standard public
     ///   DNS. Use this when your resource domain names are publicly resolvable.
@@ -233,10 +237,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateResourceGatewayIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateResourceGatewayOutput {
-    var result: CreateResourceGatewayOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateResourceGatewayOutput, body, allocator);
-    }
+    const result: CreateResourceGatewayOutput = try aws.json.parseJsonObject(
+        CreateResourceGatewayOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

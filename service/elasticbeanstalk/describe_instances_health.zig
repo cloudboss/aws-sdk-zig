@@ -10,15 +10,14 @@ const serde = @import("serde.zig");
 
 pub const DescribeInstancesHealthInput = struct {
     /// Specifies the response elements you wish to receive. To retrieve all
-    /// attributes, set to
-    /// `All`. If no attribute names are specified, returns a list of
-    /// instances.
+    /// attributes, set to `All`. If no attribute names are specified, returns
+    /// a list of instances.
     attribute_names: ?[]const InstancesHealthAttribute = null,
 
-    /// Specify the AWS Elastic Beanstalk environment by ID.
+    /// Specify the Elastic Beanstalk environment by ID.
     environment_id: ?[]const u8 = null,
 
-    /// Specify the AWS Elastic Beanstalk environment by name.
+    /// Specify the Elastic Beanstalk environment by name.
     environment_name: ?[]const u8 = null,
 
     /// Specify the pagination token returned by a previous call.
@@ -29,8 +28,8 @@ pub const DescribeInstancesHealthOutput = struct {
     /// Detailed health information about each instance.
     ///
     /// The output differs slightly between Linux and Windows environments. There is
-    /// a difference
-    /// in the members that are supported under the `` type.
+    /// a difference in the members that are supported under the
+    /// `` type.
     instance_health_list: ?[]const SingleInstanceHealth = null,
 
     /// Pagination token for the next page of results, if available.

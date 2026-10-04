@@ -1,3 +1,4 @@
+const OriginIpAddressTypeEnum = @import("origin_ip_address_type_enum.zig").OriginIpAddressTypeEnum;
 const OriginProtocolPolicyEnum = @import("origin_protocol_policy_enum.zig").OriginProtocolPolicyEnum;
 const RegionName = @import("region_name.zig").RegionName;
 
@@ -11,6 +12,13 @@ const RegionName = @import("region_name.zig").RegionName;
 /// viewers via a worldwide
 /// network of edge servers.
 pub const InputOrigin = struct {
+    /// The IP address type that the distribution uses when connecting to the
+    /// origin.
+    ///
+    /// The possible values are `ipv4` for IPv4 only, `ipv6` for IPv6 only,
+    /// and `dualstack` for IPv4 and IPv6.
+    ip_address_type: ?OriginIpAddressTypeEnum = null,
+
     /// The name of the origin resource.
     name: ?[]const u8 = null,
 
@@ -30,6 +38,7 @@ pub const InputOrigin = struct {
     response_timeout: ?i32 = null,
 
     pub const json_field_names = .{
+        .ip_address_type = "ipAddressType",
         .name = "name",
         .protocol_policy = "protocolPolicy",
         .region_name = "regionName",

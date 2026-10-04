@@ -8,51 +8,9 @@ const EgressAccessLogs = @import("egress_access_logs.zig").EgressAccessLogs;
 const HlsIngest = @import("hls_ingest.zig").HlsIngest;
 const IngressAccessLogs = @import("ingress_access_logs.zig").IngressAccessLogs;
 
-pub const UpdateChannelInput = struct {
-    /// A short text description of the Channel.
-    description: ?[]const u8 = null,
+pub const UpdateChannelInput = @import("update_channel_request.zig").UpdateChannelRequest;
 
-    /// The ID of the Channel to update.
-    id: []const u8,
-
-    pub const json_field_names = .{
-        .description = "Description",
-        .id = "Id",
-    };
-};
-
-pub const UpdateChannelOutput = struct {
-    /// The Amazon Resource Name (ARN) assigned to the Channel.
-    arn: ?[]const u8 = null,
-
-    /// The date and time the Channel was created.
-    created_at: ?[]const u8 = null,
-
-    /// A short text description of the Channel.
-    description: ?[]const u8 = null,
-
-    egress_access_logs: ?EgressAccessLogs = null,
-
-    hls_ingest: ?HlsIngest = null,
-
-    /// The ID of the Channel.
-    id: ?[]const u8 = null,
-
-    ingress_access_logs: ?IngressAccessLogs = null,
-
-    tags: ?[]const aws.map.StringMapEntry = null,
-
-    pub const json_field_names = .{
-        .arn = "Arn",
-        .created_at = "CreatedAt",
-        .description = "Description",
-        .egress_access_logs = "EgressAccessLogs",
-        .hls_ingest = "HlsIngest",
-        .id = "Id",
-        .ingress_access_logs = "IngressAccessLogs",
-        .tags = "Tags",
-    };
-};
+pub const UpdateChannelOutput = @import("update_channel_response.zig").UpdateChannelResponse;
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateChannelInput, options: CallOptions) !UpdateChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -115,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateChannelInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateChannelOutput {
-    var result: UpdateChannelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateChannelOutput, body, allocator);
-    }
+    const result: UpdateChannelOutput = try aws.json.parseJsonObject(
+        UpdateChannelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

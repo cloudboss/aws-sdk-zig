@@ -1,12 +1,15 @@
 const aws = @import("aws");
 
 const AccountRecoverySettingType = @import("account_recovery_setting_type.zig").AccountRecoverySettingType;
+const AcrLevelConfigType = @import("acr_level_config_type.zig").AcrLevelConfigType;
 const AdminCreateUserConfigType = @import("admin_create_user_config_type.zig").AdminCreateUserConfigType;
 const AliasAttributeType = @import("alias_attribute_type.zig").AliasAttributeType;
 const VerifiedAttributeType = @import("verified_attribute_type.zig").VerifiedAttributeType;
 const DeletionProtectionType = @import("deletion_protection_type.zig").DeletionProtectionType;
 const DeviceConfigurationType = @import("device_configuration_type.zig").DeviceConfigurationType;
 const EmailConfigurationType = @import("email_configuration_type.zig").EmailConfigurationType;
+const IssuerConfigurationType = @import("issuer_configuration_type.zig").IssuerConfigurationType;
+const KeyConfigurationType = @import("key_configuration_type.zig").KeyConfigurationType;
 const LambdaConfigType = @import("lambda_config_type.zig").LambdaConfigType;
 const UserPoolMfaType = @import("user_pool_mfa_type.zig").UserPoolMfaType;
 const UserPoolPolicyType = @import("user_pool_policy_type.zig").UserPoolPolicyType;
@@ -34,6 +37,19 @@ pub const UserPoolType = struct {
     /// behavior to determine the recovery method where SMS is preferred through
     /// email.
     account_recovery_setting: ?AccountRecoverySettingType = null,
+
+    /// The names of the authentication context class reference (ACR) levels for the
+    /// user
+    /// pool. Amazon Cognito always returns the effective configuration, with
+    /// default names
+    /// merged in for any level that you haven't customized.
+    ///
+    /// Configuring custom ACR level names requires the Essentials or Plus feature
+    /// plan.
+    /// To activate this setting, your user pool must be in the [
+    /// Essentials
+    /// tier](https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html) or higher.
+    acr_configuration: ?[]const aws.map.MapEntry(AcrLevelConfigType) = null,
 
     /// The configuration for `AdminCreateUser` requests.
     admin_create_user_config: ?AdminCreateUserConfigType = null,
@@ -114,6 +130,13 @@ pub const UserPoolType = struct {
 
     /// The ID of the user pool.
     id: ?[]const u8 = null,
+
+    /// The issuer configuration for the user pool, including token issuing
+    /// settings.
+    issuer_configuration: ?IssuerConfigurationType = null,
+
+    /// The key configuration for the user pool, including encryption settings.
+    key_configuration: ?KeyConfigurationType = null,
 
     /// A collection of user pool Lambda triggers. Amazon Cognito invokes triggers
     /// at several possible
@@ -264,6 +287,7 @@ pub const UserPoolType = struct {
 
     pub const json_field_names = .{
         .account_recovery_setting = "AccountRecoverySetting",
+        .acr_configuration = "AcrConfiguration",
         .admin_create_user_config = "AdminCreateUserConfig",
         .alias_attributes = "AliasAttributes",
         .arn = "Arn",
@@ -279,6 +303,8 @@ pub const UserPoolType = struct {
         .email_verification_subject = "EmailVerificationSubject",
         .estimated_number_of_users = "EstimatedNumberOfUsers",
         .id = "Id",
+        .issuer_configuration = "IssuerConfiguration",
+        .key_configuration = "KeyConfiguration",
         .lambda_config = "LambdaConfig",
         .last_modified_date = "LastModifiedDate",
         .mfa_configuration = "MfaConfiguration",

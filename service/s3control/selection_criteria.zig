@@ -5,9 +5,7 @@ pub const SelectionCriteria = struct {
     /// The max depth of the selection criteria
     max_depth: ?i32 = null,
 
-    /// The minimum number of storage bytes percentage whose metrics will be
-    /// selected.
-    ///
-    /// You must choose a value greater than or equal to `1.0`.
+    /// The minimum percentage of total bucket storage that a prefix must hold for
+    /// its metrics to be included.
     min_storage_bytes_percentage: ?f64 = null,
 };

@@ -10,7 +10,7 @@ pub const AttachedFilesConfigurationSummary = struct {
     /// The configuration for allowed file extensions.
     extension_configuration: ?ExtensionConfiguration = null,
 
-    /// The identifier of the Amazon Connect instance.
+    /// The identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     maximum_size_limit_in_bytes: ?i64 = null,

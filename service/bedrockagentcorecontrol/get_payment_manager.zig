@@ -33,6 +33,10 @@ pub const GetPaymentManagerOutput = struct {
     /// The description of the payment manager.
     description: ?[]const u8 = null,
 
+    /// The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive
+    /// payment manager data at rest, if configured.
+    kms_key_arn: ?[]const u8 = null,
+
     /// The timestamp when the payment manager was last updated.
     last_updated_at: i64,
 
@@ -64,6 +68,7 @@ pub const GetPaymentManagerOutput = struct {
         .authorizer_type = "authorizerType",
         .created_at = "createdAt",
         .description = "description",
+        .kms_key_arn = "kmsKeyArn",
         .last_updated_at = "lastUpdatedAt",
         .name = "name",
         .payment_manager_arn = "paymentManagerArn",
@@ -124,10 +129,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPaymentManagerInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPaymentManagerOutput {
-    var result: GetPaymentManagerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPaymentManagerOutput, body, allocator);
-    }
+    const result: GetPaymentManagerOutput = try aws.json.parseJsonObject(
+        GetPaymentManagerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

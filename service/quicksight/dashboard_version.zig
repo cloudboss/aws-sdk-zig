@@ -10,7 +10,7 @@ pub const DashboardVersion = struct {
     /// The time that this dashboard version was created.
     created_time: ?i64 = null,
 
-    /// The Amazon Resource Numbers (ARNs) for the datasets that are associated with
+    /// The Amazon Resource Names (ARNs) for the datasets that are associated with
     /// this
     /// version of the dashboard.
     data_set_arns: ?[]const []const u8 = null,
@@ -34,6 +34,11 @@ pub const DashboardVersion = struct {
     /// The ARN of the theme associated with a version of the dashboard.
     theme_arn: ?[]const u8 = null,
 
+    /// The Amazon Resource Names (ARNs) for the topics that are associated with
+    /// this
+    /// version of the dashboard.
+    topic_arns: ?[]const []const u8 = null,
+
     /// Version number for this version of the dashboard.
     version_number: ?i64 = null,
 
@@ -47,6 +52,7 @@ pub const DashboardVersion = struct {
         .source_entity_arn = "SourceEntityArn",
         .status = "Status",
         .theme_arn = "ThemeArn",
+        .topic_arns = "TopicArns",
         .version_number = "VersionNumber",
     };
 };

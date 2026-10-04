@@ -143,10 +143,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBrowserSettingsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateBrowserSettingsOutput {
-    var result: CreateBrowserSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateBrowserSettingsOutput, body, allocator);
-    }
+    const result: CreateBrowserSettingsOutput = try aws.json.parseJsonObject(
+        CreateBrowserSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

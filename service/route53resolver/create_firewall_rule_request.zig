@@ -4,6 +4,7 @@ const BlockResponse = @import("block_response.zig").BlockResponse;
 const ConfidenceThreshold = @import("confidence_threshold.zig").ConfidenceThreshold;
 const DnsThreatProtection = @import("dns_threat_protection.zig").DnsThreatProtection;
 const FirewallDomainRedirectionAction = @import("firewall_domain_redirection_action.zig").FirewallDomainRedirectionAction;
+const FirewallRuleType = @import("firewall_rule_type.zig").FirewallRuleType;
 
 pub const CreateFirewallRuleRequest = struct {
     /// The action that DNS Firewall should take on a DNS query when it matches one
@@ -75,7 +76,20 @@ pub const CreateFirewallRuleRequest = struct {
     /// any unique string, for example, a date/time stamp.
     creator_request_id: []const u8,
 
-    /// Use to create a DNS Firewall Advanced rule.
+    /// The type of the DNS Firewall Advanced rule. This setting is mutually
+    /// exclusive with `FirewallDomainListId` and `FirewallRuleType`. Valid values
+    /// are:
+    ///
+    /// * `DGA`: Domain generation algorithms detection. DGAs are used by attackers
+    ///   to generate a large number of domains to launch malware attacks.
+    ///
+    /// * `DNS_TUNNELING`: DNS tunneling detection. DNS tunneling is used by
+    ///   attackers to exfiltrate data from the client by using the DNS tunnel
+    ///   without making a network connection to the client.
+    ///
+    /// * `DICTIONARY_DGA`: Dictionary-based domain generation algorithms detection.
+    ///   Dictionary DGAs use wordlists to generate domains that appear more
+    ///   legitimate, making them harder to detect than traditional DGAs.
     dns_threat_protection: ?DnsThreatProtection = null,
 
     /// The ID of the domain list that you want to use in the rule. Can't be used
@@ -98,6 +112,28 @@ pub const CreateFirewallRuleRequest = struct {
     /// The unique identifier of the firewall rule group where you want to create
     /// the rule.
     firewall_rule_group_id: []const u8,
+
+    /// The rule type configuration for the firewall rule. This is a tagged union —
+    /// set exactly one of its members. This setting is mutually exclusive with the
+    /// top-level `FirewallDomainListId` and `DnsThreatProtection` fields. Use one
+    /// of:
+    ///
+    /// * `FirewallAdvancedContentCategory` — match an Amazon Web Services-managed
+    ///   content category (for example, `VIOLENCE_AND_HATE_SPEECH`).
+    ///
+    /// * `FirewallAdvancedThreatCategory` — match an Amazon Web Services-managed
+    ///   advanced threat category (for example, `PHISHING`).
+    ///
+    /// * `DnsThreatProtection` — match a built-in DNS Firewall Advanced threat
+    ///   detector (`DGA`, `DNS_TUNNELING`, or `DICTIONARY_DGA`).
+    ///
+    /// * `PartnerThreatProtection` — match a third-party threat feed delivered
+    ///   through Amazon Web Services Marketplace. The selected partner must be an
+    ///   active subscription on the calling account.
+    ///
+    /// To enumerate the values supported in your account, call
+    /// ListFirewallRuleTypes.
+    firewall_rule_type: ?FirewallRuleType = null,
 
     /// A name that lets you identify the rule in the rule group.
     name: []const u8,
@@ -144,7 +180,7 @@ pub const CreateFirewallRuleRequest = struct {
     /// * A query type you define by using the DNS type ID, for example 28 for AAAA.
     ///   The values must be
     /// defined as TYPENUMBER, where the
-    /// NUMBER can be 1-65334, for
+    /// NUMBER can be 1-65534, for
     /// example, TYPE28. For more information, see
     /// [List of DNS record
     /// types](https://en.wikipedia.org/wiki/List_of_DNS_record_types).
@@ -162,6 +198,7 @@ pub const CreateFirewallRuleRequest = struct {
         .firewall_domain_list_id = "FirewallDomainListId",
         .firewall_domain_redirection_action = "FirewallDomainRedirectionAction",
         .firewall_rule_group_id = "FirewallRuleGroupId",
+        .firewall_rule_type = "FirewallRuleType",
         .name = "Name",
         .priority = "Priority",
         .qtype = "Qtype",

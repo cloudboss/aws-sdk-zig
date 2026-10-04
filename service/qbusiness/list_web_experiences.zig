@@ -112,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListWebExperiencesInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListWebExperiencesOutput {
-    var result: ListWebExperiencesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListWebExperiencesOutput, body, allocator);
-    }
+    const result: ListWebExperiencesOutput = try aws.json.parseJsonObject(
+        ListWebExperiencesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

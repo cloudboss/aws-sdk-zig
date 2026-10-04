@@ -10,8 +10,7 @@ const ConsolidatedReportMetric = @import("consolidated_report_metric.zig").Conso
 pub const GetConsolidatedReportInput = struct {
     /// The format of the consolidated report.
     ///
-    /// For `PDF`, `Base64String` is returned. For `JSON`,
-    /// `Metrics` is returned.
+    /// For `PDF`, `Base64String` is returned. For `JSON`, `Metrics` is returned.
     format: ReportFormat,
 
     /// Set to `true` to have shared resources included in the report.
@@ -123,10 +122,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetConsolidatedReportIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetConsolidatedReportOutput {
-    var result: GetConsolidatedReportOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetConsolidatedReportOutput, body, allocator);
-    }
+    const result: GetConsolidatedReportOutput = try aws.json.parseJsonObject(
+        GetConsolidatedReportOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

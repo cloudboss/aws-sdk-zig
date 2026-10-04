@@ -4,10 +4,13 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const CallDistributionType = @import("call_distribution_type.zig").CallDistributionType;
 const VoiceConnectorItem = @import("voice_connector_item.zig").VoiceConnectorItem;
 const VoiceConnectorGroup = @import("voice_connector_group.zig").VoiceConnectorGroup;
 
 pub const UpdateVoiceConnectorGroupInput = struct {
+    call_distribution_type: ?CallDistributionType = null,
+
     /// The name of the Voice Connector group.
     name: []const u8,
 
@@ -19,6 +22,7 @@ pub const UpdateVoiceConnectorGroupInput = struct {
     voice_connector_items: []const VoiceConnectorItem,
 
     pub const json_field_names = .{
+        .call_distribution_type = "CallDistributionType",
         .name = "Name",
         .voice_connector_group_id = "VoiceConnectorGroupId",
         .voice_connector_items = "VoiceConnectorItems",
@@ -73,6 +77,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateVoiceConnectorGro
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.call_distribution_type) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"CallDistributionType\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"Name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
@@ -97,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateVoiceConnectorGro
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateVoiceConnectorGroupOutput {
-    var result: UpdateVoiceConnectorGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateVoiceConnectorGroupOutput, body, allocator);
-    }
+    const result: UpdateVoiceConnectorGroupOutput = try aws.json.parseJsonObject(
+        UpdateVoiceConnectorGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

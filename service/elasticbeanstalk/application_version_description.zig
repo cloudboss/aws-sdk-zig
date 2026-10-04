@@ -1,3 +1,5 @@
+const ImageBuildConfiguration = @import("image_build_configuration.zig").ImageBuildConfiguration;
+const ImageSource = @import("image_source.zig").ImageSource;
 const SourceBuildInformation = @import("source_build_information.zig").SourceBuildInformation;
 const S3Location = @import("s3_location.zig").S3Location;
 const ApplicationVersionStatus = @import("application_version_status.zig").ApplicationVersionStatus;
@@ -10,7 +12,7 @@ pub const ApplicationVersionDescription = struct {
     /// The Amazon Resource Name (ARN) of the application version.
     application_version_arn: ?[]const u8 = null,
 
-    /// Reference to the artifact from the AWS CodeBuild build.
+    /// Reference to the artifact from the CodeBuild build.
     build_arn: ?[]const u8 = null,
 
     /// The creation date of the application version.
@@ -22,8 +24,30 @@ pub const ApplicationVersionDescription = struct {
     /// The description of the application version.
     description: ?[]const u8 = null,
 
-    /// If the version's source code was retrieved from AWS CodeCommit, the location
-    /// of the
+    /// The settings that Elastic Beanstalk uses to build a container image from the
+    /// source bundle of the
+    /// application version. Not present for an application version created from an
+    /// image you
+    /// provide.
+    image_build_configuration: ?ImageBuildConfiguration = null,
+
+    /// The location of the container image for the application version.
+    ///
+    /// For an application version created from an image you provide, this is that
+    /// image. For one
+    /// that Elastic Beanstalk builds from your source bundle, Elastic Beanstalk
+    /// fills this in with the image it pushed after
+    /// the build succeeds.
+    image_source: ?ImageSource = null,
+
+    /// Indicates whether Elastic Beanstalk pre-processed and validated the
+    /// environment manifest
+    /// (`env.yaml`) and configuration files (`*.config` files in the
+    /// `.ebextensions` folder) in the source bundle of the application version.
+    process: ?bool = null,
+
+    /// If the version's source code was retrieved from CodeCommit, the location of
+    /// the
     /// source code for the application version.
     source_build_information: ?SourceBuildInformation = null,
 
@@ -47,14 +71,13 @@ pub const ApplicationVersionDescription = struct {
     /// * `Processing` – Elastic Beanstalk is currently processing the application
     ///   version.
     ///
-    /// * `Building` – Application version is currently undergoing an AWS CodeBuild
+    /// * `Building` – Application version is currently undergoing an CodeBuild
     ///   build.
     ///
     /// * `Processed` – Elastic Beanstalk was successfully pre-processed and
     ///   validated.
     ///
-    /// * `Failed` – Either the AWS CodeBuild build failed or configuration files
-    ///   didn't
+    /// * `Failed` – Either the CodeBuild build failed or configuration files didn't
     /// pass validation. This application version isn't usable.
     status: ?ApplicationVersionStatus = null,
 

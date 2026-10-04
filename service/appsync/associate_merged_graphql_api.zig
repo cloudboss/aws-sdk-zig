@@ -121,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateMergedGraphqlA
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateMergedGraphqlApiOutput {
-    var result: AssociateMergedGraphqlApiOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateMergedGraphqlApiOutput, body, allocator);
-    }
+    const result: AssociateMergedGraphqlApiOutput = try aws.json.parseJsonObject(
+        AssociateMergedGraphqlApiOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

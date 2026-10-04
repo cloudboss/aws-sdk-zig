@@ -39,6 +39,7 @@ pub const DataAutomationProjectType = @import("data_automation_project_type.zig"
 pub const DeleteEntitiesInfo = @import("delete_entities_info.zig").DeleteEntitiesInfo;
 pub const DesiredModality = @import("desired_modality.zig").DesiredModality;
 pub const DocumentBoundingBox = @import("document_bounding_box.zig").DocumentBoundingBox;
+pub const DocumentCustomOutputConfiguration = @import("document_custom_output_configuration.zig").DocumentCustomOutputConfiguration;
 pub const DocumentExtractionGranularity = @import("document_extraction_granularity.zig").DocumentExtractionGranularity;
 pub const DocumentExtractionGranularityType = @import("document_extraction_granularity_type.zig").DocumentExtractionGranularityType;
 pub const DocumentOutputAdditionalFileFormat = @import("document_output_additional_file_format.zig").DocumentOutputAdditionalFileFormat;

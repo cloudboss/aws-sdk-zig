@@ -1,4 +1,5 @@
 const Categories = @import("categories.zig").Categories;
+const ExtractedInformation = @import("extracted_information.zig").ExtractedInformation;
 const PostContactSummary = @import("post_contact_summary.zig").PostContactSummary;
 const Transcript = @import("transcript.zig").Transcript;
 
@@ -6,6 +7,9 @@ const Transcript = @import("transcript.zig").Transcript;
 pub const RealtimeContactAnalysisSegment = struct {
     /// The matched category rules.
     categories: ?Categories = null,
+
+    /// The extracted information from the conversation.
+    extracted_information: ?ExtractedInformation = null,
 
     /// Information about the post-contact summary.
     post_contact_summary: ?PostContactSummary = null,
@@ -15,6 +19,7 @@ pub const RealtimeContactAnalysisSegment = struct {
 
     pub const json_field_names = .{
         .categories = "Categories",
+        .extracted_information = "ExtractedInformation",
         .post_contact_summary = "PostContactSummary",
         .transcript = "Transcript",
     };

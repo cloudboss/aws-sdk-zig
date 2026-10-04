@@ -13,7 +13,7 @@ pub const CloudWatchDimensionConfiguration = struct {
     /// * Can only contain ASCII letters (a–z, A–Z), numbers (0–9),
     /// underscores (_), or dashes (-), at signs (@), and periods (.).
     ///
-    /// * It can contain no more than 256 characters.
+    /// * It can contain no more than 255 characters.
     default_dimension_value: []const u8,
 
     /// The name of an Amazon CloudWatch dimension associated with an email sending
@@ -23,7 +23,7 @@ pub const CloudWatchDimensionConfiguration = struct {
     /// * It can only contain ASCII letters (a–z, A–Z), numbers (0–9),
     /// underscores (_), or dashes (-).
     ///
-    /// * It can contain no more than 256 characters.
+    /// * It can contain no more than 255 characters.
     dimension_name: []const u8,
 
     /// The location where the Amazon SES API v2 finds the value of a dimension to

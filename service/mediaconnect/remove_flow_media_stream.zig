@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RemoveFlowMediaStreamIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RemoveFlowMediaStreamOutput {
-    var result: RemoveFlowMediaStreamOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RemoveFlowMediaStreamOutput, body, allocator);
-    }
+    const result: RemoveFlowMediaStreamOutput = try aws.json.parseJsonObject(
+        RemoveFlowMediaStreamOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

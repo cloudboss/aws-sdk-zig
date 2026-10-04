@@ -168,10 +168,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListUtteranceAnalyticsD
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListUtteranceAnalyticsDataOutput {
-    var result: ListUtteranceAnalyticsDataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListUtteranceAnalyticsDataOutput, body, allocator);
-    }
+    const result: ListUtteranceAnalyticsDataOutput = try aws.json.parseJsonObject(
+        ListUtteranceAnalyticsDataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

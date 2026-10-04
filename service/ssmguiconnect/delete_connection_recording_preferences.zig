@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteConnectionRecordi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteConnectionRecordingPreferencesOutput {
-    var result: DeleteConnectionRecordingPreferencesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteConnectionRecordingPreferencesOutput, body, allocator);
-    }
+    const result: DeleteConnectionRecordingPreferencesOutput = try aws.json.parseJsonObject(
+        DeleteConnectionRecordingPreferencesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

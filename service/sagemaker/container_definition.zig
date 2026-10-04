@@ -1,6 +1,7 @@
 const aws = @import("aws");
 
 const AdditionalModelDataSource = @import("additional_model_data_source.zig").AdditionalModelDataSource;
+const ContainerMetricsConfig = @import("container_metrics_config.zig").ContainerMetricsConfig;
 const ImageConfig = @import("image_config.zig").ImageConfig;
 const ContainerMode = @import("container_mode.zig").ContainerMode;
 const ModelDataSource = @import("model_data_source.zig").ModelDataSource;
@@ -20,6 +21,14 @@ pub const ContainerDefinition = struct {
     /// Inference
     /// Pipeline](https://docs.aws.amazon.com/sagemaker/latest/dg/inference-pipeline-logs-metrics.html). If you don't specify a value for this parameter for a `ContainerDefinition` that is part of an inference pipeline, a unique name is automatically assigned based on the position of the `ContainerDefinition` in the pipeline. If you specify a value for the `ContainerHostName` for any `ContainerDefinition` that is part of an inference pipeline, you must specify a value for the `ContainerHostName` parameter of every `ContainerDefinition` in that pipeline.
     container_hostname: ?[]const u8 = null,
+
+    /// The configuration for container metrics scraping. Specifies the metrics
+    /// endpoint path and publishing frequency. If not specified when
+    /// `EnableDetailedObservability` is `True`, the default path `/metrics` on port
+    /// `8080` is used. For first-party and Deep Learning Containers (DLC), the
+    /// endpoint path is determined automatically and this configuration is
+    /// optional.
+    container_metrics_config: ?ContainerMetricsConfig = null,
 
     /// The environment variables to set in the Docker container. Don't include any
     /// sensitive data in your environment variables.
@@ -101,6 +110,7 @@ pub const ContainerDefinition = struct {
     pub const json_field_names = .{
         .additional_model_data_sources = "AdditionalModelDataSources",
         .container_hostname = "ContainerHostname",
+        .container_metrics_config = "ContainerMetricsConfig",
         .environment = "Environment",
         .image = "Image",
         .image_config = "ImageConfig",

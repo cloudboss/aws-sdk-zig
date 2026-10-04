@@ -75,10 +75,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeElasticsearchDo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeElasticsearchDomainConfigOutput {
-    var result: DescribeElasticsearchDomainConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeElasticsearchDomainConfigOutput, body, allocator);
-    }
+    const result: DescribeElasticsearchDomainConfigOutput = try aws.json.parseJsonObject(
+        DescribeElasticsearchDomainConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

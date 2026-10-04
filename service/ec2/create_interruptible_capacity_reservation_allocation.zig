@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
+const ZeroSizePreference = @import("zero_size_preference.zig").ZeroSizePreference;
 const InterruptionType = @import("interruption_type.zig").InterruptionType;
 const InterruptibleCapacityReservationAllocationStatus = @import("interruptible_capacity_reservation_allocation_status.zig").InterruptibleCapacityReservationAllocationStatus;
 const serde = @import("serde.zig");
@@ -30,6 +31,14 @@ pub const CreateInterruptibleCapacityReservationAllocationInput = struct {
 
     /// The tags to apply to the interruptible Capacity Reservation during creation.
     tag_specifications: ?[]const TagSpecification = null,
+
+    /// Specifies the behavior for the interruptible Capacity Reservation when you
+    /// reduce its allocation to zero instances. Specify `retain` to keep the
+    /// interruptible Capacity Reservation active at zero capacity so that you can
+    /// allocate instances to it again later. Specify `default` to cancel the
+    /// interruptible Capacity Reservation and return the capacity to your source
+    /// Capacity Reservation. The default value is `default`.
+    zero_size_preference: ?ZeroSizePreference = null,
 };
 
 pub const CreateInterruptibleCapacityReservationAllocationOutput = struct {
@@ -125,6 +134,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInterruptibleCapa
                 }
             }
         }
+    }
+    if (input.zero_size_preference) |v| {
+        try body_buf.appendSlice(allocator, "&ZeroSizePreference=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

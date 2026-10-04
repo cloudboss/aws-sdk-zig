@@ -79,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPlaybackRestrictionP
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPlaybackRestrictionPolicyOutput {
-    var result: GetPlaybackRestrictionPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPlaybackRestrictionPolicyOutput, body, allocator);
-    }
+    const result: GetPlaybackRestrictionPolicyOutput = try aws.json.parseJsonObject(
+        GetPlaybackRestrictionPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

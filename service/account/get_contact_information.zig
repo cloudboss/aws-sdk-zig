@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ContactInformation = @import("contact_information.zig").ContactInformation;
+const PhoneNumberVerificationStatus = @import("phone_number_verification_status.zig").PhoneNumberVerificationStatus;
 
 pub const GetContactInformationInput = struct {
     /// Specifies the 12-digit account ID number of the Amazon Web Services account
@@ -33,8 +34,20 @@ pub const GetContactInformationOutput = struct {
     /// Amazon Web Services account.
     contact_information: ?ContactInformation = null,
 
+    /// The verification status of the phone number in the primary contact
+    /// information associated with an Amazon Web Services account. Valid values:
+    ///
+    /// * `PENDING` – A one-time passcode has been sent and is waiting to be
+    ///   submitted.
+    /// * `VERIFIED` – The phone number has been verified.
+    /// * `UNVERIFIED` – The phone number has not been verified.
+    /// * `NOT_SUPPORTED` – Phone number verification isn't available for this
+    ///   account.
+    verification_status: ?PhoneNumberVerificationStatus = null,
+
     pub const json_field_names = .{
         .contact_information = "ContactInformation",
+        .verification_status = "VerificationStatus",
     };
 };
 
@@ -96,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetContactInformationIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetContactInformationOutput {
-    var result: GetContactInformationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetContactInformationOutput, body, allocator);
-    }
+    const result: GetContactInformationOutput = try aws.json.parseJsonObject(
+        GetContactInformationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

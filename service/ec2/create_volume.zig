@@ -391,6 +391,8 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                     result.operator = try serde.deserializeOperatorResponse(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "outpostArn")) {
                     result.outpost_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ownerId")) {
+                    result.owner_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "size")) {
                     result.size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "snapshotId")) {
@@ -405,6 +407,8 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                     result.tags = try serde.deserializeTagList(allocator, &reader, "item");
                 } else if (std.mem.eql(u8, e.local, "throughput")) {
                     result.throughput = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "volumeArn")) {
+                    result.volume_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeId")) {
                     result.volume_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "volumeInitializationRate")) {

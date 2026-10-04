@@ -10,7 +10,7 @@ pub const InstanceHealthSummary = struct {
     /// **Green.** An operation is in progress on an instance.
     info: ?i32 = null,
 
-    /// **Grey.** AWS Elastic Beanstalk and the health agent are
+    /// **Grey.** Elastic Beanstalk and the health agent are
     /// reporting no data on an instance.
     no_data: ?i32 = null,
 
@@ -26,7 +26,7 @@ pub const InstanceHealthSummary = struct {
     /// request failures or other issues for an instance or environment.
     severe: ?i32 = null,
 
-    /// **Grey.** AWS Elastic Beanstalk and the health agent are
+    /// **Grey.** Elastic Beanstalk and the health agent are
     /// reporting an insufficient amount of data on an instance.
     unknown: ?i32 = null,
 

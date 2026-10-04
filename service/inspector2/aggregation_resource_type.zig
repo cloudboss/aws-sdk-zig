@@ -5,12 +5,18 @@ pub const AggregationResourceType = enum {
     aws_ecr_container_image,
     aws_lambda_function,
     code_repository,
+    microsoft_compute_virtual_machines,
+    microsoft_container_registry_registry_container_image,
+    microsoft_web_sites,
 
     pub const json_field_names = .{
         .aws_ec2_instance = "AWS_EC2_INSTANCE",
         .aws_ecr_container_image = "AWS_ECR_CONTAINER_IMAGE",
         .aws_lambda_function = "AWS_LAMBDA_FUNCTION",
         .code_repository = "CODE_REPOSITORY",
+        .microsoft_compute_virtual_machines = "Microsoft.Compute/virtualMachines",
+        .microsoft_container_registry_registry_container_image = "Microsoft.ContainerRegistry/registry/containerImage",
+        .microsoft_web_sites = "Microsoft.Web/sites",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +25,9 @@ pub const AggregationResourceType = enum {
             .aws_ecr_container_image => "AWS_ECR_CONTAINER_IMAGE",
             .aws_lambda_function => "AWS_LAMBDA_FUNCTION",
             .code_repository => "CODE_REPOSITORY",
+            .microsoft_compute_virtual_machines => "Microsoft.Compute/virtualMachines",
+            .microsoft_container_registry_registry_container_image => "Microsoft.ContainerRegistry/registry/containerImage",
+            .microsoft_web_sites => "Microsoft.Web/sites",
         };
     }
 

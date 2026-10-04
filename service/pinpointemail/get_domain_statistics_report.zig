@@ -117,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDomainStatisticsRepo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDomainStatisticsReportOutput {
-    var result: GetDomainStatisticsReportOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDomainStatisticsReportOutput, body, allocator);
-    }
+    const result: GetDomainStatisticsReportOutput = try aws.json.parseJsonObject(
+        GetDomainStatisticsReportOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

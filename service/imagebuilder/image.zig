@@ -17,12 +17,13 @@ const ImageType = @import("image_type.zig").ImageType;
 const WorkflowConfiguration = @import("workflow_configuration.zig").WorkflowConfiguration;
 
 /// An Image Builder image resource that keeps track of all of the settings used
-/// to create, configure,
-/// and distribute output for that image. You must specify exactly one recipe
-/// for the image –
-/// either a container recipe (`containerRecipe`), which creates a container
-/// image, or an
-/// image recipe (`imageRecipe`), which creates an AMI.
+/// to create,
+/// configure, and distribute output for that image. An image that Image Builder
+/// built
+/// from a recipe contains exactly one recipe – either a container recipe
+/// (`containerRecipe`), which creates a container image, or an image
+/// recipe (`imageRecipe`), which creates an AMI. Imported images
+/// don't contain a recipe.
 pub const Image = struct {
     /// The Amazon Resource Name (ARN) of the image.
     ///
@@ -88,13 +89,18 @@ pub const Image = struct {
     /// create the image. For container images, this is empty.
     image_recipe: ?ImageRecipe = null,
 
-    /// Contains settings for vulnerability scans.
+    /// Settings for the vulnerability scans that Amazon Inspector runs for this
+    /// image. For AMI output, Amazon Inspector scans the test instance during image
+    /// creation.
+    /// For container output, Amazon Inspector scans the container image in its
+    /// Amazon ECR
+    /// repository.
     image_scanning_configuration: ?ImageScanningConfiguration = null,
 
     /// The origin of the base image that Image Builder used to build this image.
     image_source: ?ImageSource = null,
 
-    /// The image tests that ran when that Image Builder created this image.
+    /// The image test settings that Image Builder used when it created this image.
     image_tests_configuration: ?ImageTestsConfiguration = null,
 
     /// The infrastructure that Image Builder used to create this image.
@@ -127,10 +133,13 @@ pub const Image = struct {
     scan_state: ?ImageScanState = null,
 
     /// The Amazon Resource Name (ARN) of the image pipeline that created this
-    /// image.
+    /// image. This field is only
+    /// present for images that a pipeline execution created.
     source_pipeline_arn: ?[]const u8 = null,
 
-    /// The name of the image pipeline that created this image.
+    /// The name of the image pipeline that created this image. Image Builder
+    /// doesn't return
+    /// this field for new images. Use `sourcePipelineArn` instead.
     source_pipeline_name: ?[]const u8 = null,
 
     /// The state of the image.
@@ -147,10 +156,10 @@ pub const Image = struct {
     /// The semantic version has four nodes: ../.
     /// You can assign values for the first three, and can filter on all of them.
     ///
-    /// **Assignment:** For the first three nodes you can assign any positive
+    /// **Assignment:** For the first three nodes, you can assign any positive
     /// integer value, including
-    /// zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image
-    /// Builder automatically assigns the
+    /// zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder
+    /// automatically assigns the
     /// build number to the fourth node.
     ///
     /// **Patterns:** You can use any numeric pattern that adheres to the assignment
@@ -159,16 +168,15 @@ pub const Image = struct {
     /// version pattern, such as 1.0.0, or
     /// a date, such as 2021.01.01.
     ///
-    /// **Filtering:** With semantic versioning, you have the flexibility to use
-    /// wildcards (x)
-    /// to specify the most recent versions or nodes when selecting the base image
-    /// or components for your
-    /// recipe. When you use a wildcard in any node, all nodes to the right of the
-    /// first wildcard must also be
-    /// wildcards.
+    /// **Filtering:** You can use wildcards (x) to specify the most recent versions
+    /// or nodes when
+    /// selecting the base image or components for your recipe. When you use a
+    /// wildcard in any node, all nodes
+    /// to the right of the first wildcard must also be wildcards.
     version: ?[]const u8 = null,
 
-    /// Contains the build and test workflows that are associated with the image.
+    /// The build, test, and distribution workflow configurations that are
+    /// associated with the image.
     workflows: ?[]const WorkflowConfiguration = null,
 
     pub const json_field_names = .{

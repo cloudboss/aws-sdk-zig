@@ -13,6 +13,9 @@ const CrawlerTargets = @import("crawler_targets.zig").CrawlerTargets;
 /// the data source
 /// in the Glue Data Catalog.
 pub const Crawler = struct {
+    /// The ID of the Data Catalog in which the crawler's output is stored.
+    catalog_id: ?[]const u8 = null,
+
     /// A list of UTF-8 strings that specify the custom classifiers that are
     /// associated
     /// with the crawler.
@@ -89,6 +92,7 @@ pub const Crawler = struct {
     version: i64 = 0,
 
     pub const json_field_names = .{
+        .catalog_id = "CatalogId",
         .classifiers = "Classifiers",
         .configuration = "Configuration",
         .crawl_elapsed_time = "CrawlElapsedTime",

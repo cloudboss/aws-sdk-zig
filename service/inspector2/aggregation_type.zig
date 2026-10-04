@@ -13,6 +13,9 @@ pub const AggregationType = enum {
     aws_lambda_function,
     lambda_layer,
     code_repository,
+    vm_instance,
+    container_image,
+    serverless_function,
 
     pub const json_field_names = .{
         .finding_type = "FINDING_TYPE",
@@ -27,6 +30,9 @@ pub const AggregationType = enum {
         .aws_lambda_function = "AWS_LAMBDA_FUNCTION",
         .lambda_layer = "LAMBDA_LAYER",
         .code_repository = "CODE_REPOSITORY",
+        .vm_instance = "VM_INSTANCE",
+        .container_image = "CONTAINER_IMAGE",
+        .serverless_function = "SERVERLESS_FUNCTION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -43,6 +49,9 @@ pub const AggregationType = enum {
             .aws_lambda_function => "AWS_LAMBDA_FUNCTION",
             .lambda_layer => "LAMBDA_LAYER",
             .code_repository => "CODE_REPOSITORY",
+            .vm_instance => "VM_INSTANCE",
+            .container_image => "CONTAINER_IMAGE",
+            .serverless_function => "SERVERLESS_FUNCTION",
         };
     }
 

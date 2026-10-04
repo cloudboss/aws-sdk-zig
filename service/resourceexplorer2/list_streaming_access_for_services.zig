@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListStreamingAccessForS
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListStreamingAccessForServicesOutput {
-    var result: ListStreamingAccessForServicesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListStreamingAccessForServicesOutput, body, allocator);
-    }
+    const result: ListStreamingAccessForServicesOutput = try aws.json.parseJsonObject(
+        ListStreamingAccessForServicesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

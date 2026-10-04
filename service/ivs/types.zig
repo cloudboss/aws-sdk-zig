@@ -26,6 +26,7 @@ pub const PlaybackKeyPair = @import("playback_key_pair.zig").PlaybackKeyPair;
 pub const PlaybackKeyPairSummary = @import("playback_key_pair_summary.zig").PlaybackKeyPairSummary;
 pub const PlaybackRestrictionPolicy = @import("playback_restriction_policy.zig").PlaybackRestrictionPolicy;
 pub const PlaybackRestrictionPolicySummary = @import("playback_restriction_policy_summary.zig").PlaybackRestrictionPolicySummary;
+pub const PostRollConfiguration = @import("post_roll_configuration.zig").PostRollConfiguration;
 pub const RecordingConfiguration = @import("recording_configuration.zig").RecordingConfiguration;
 pub const RecordingConfigurationState = @import("recording_configuration_state.zig").RecordingConfigurationState;
 pub const RecordingConfigurationSummary = @import("recording_configuration_summary.zig").RecordingConfigurationSummary;

@@ -85,6 +85,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSolFunctionPackageCo
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSolFunctionPackageContentOutput {
     var result: GetSolFunctionPackageContentOutput = .{};
+    errdefer {
+        if (result.package_content) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.package_content = try allocator.dupe(u8, body);
     }

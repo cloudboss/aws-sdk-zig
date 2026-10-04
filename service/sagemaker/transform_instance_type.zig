@@ -109,6 +109,14 @@ pub const TransformInstanceType = enum {
     ml_g6_16_xlarge,
     ml_g6_24_xlarge,
     ml_g6_48_xlarge,
+    ml_g6_e_xlarge,
+    ml_g6_e_2_xlarge,
+    ml_g6_e_4_xlarge,
+    ml_g6_e_8_xlarge,
+    ml_g6_e_12_xlarge,
+    ml_g6_e_16_xlarge,
+    ml_g6_e_24_xlarge,
+    ml_g6_e_48_xlarge,
 
     pub const json_field_names = .{
         .ml_m4_xlarge = "ml.m4.xlarge",
@@ -219,6 +227,14 @@ pub const TransformInstanceType = enum {
         .ml_g6_16_xlarge = "ml.g6.16xlarge",
         .ml_g6_24_xlarge = "ml.g6.24xlarge",
         .ml_g6_48_xlarge = "ml.g6.48xlarge",
+        .ml_g6_e_xlarge = "ml.g6e.xlarge",
+        .ml_g6_e_2_xlarge = "ml.g6e.2xlarge",
+        .ml_g6_e_4_xlarge = "ml.g6e.4xlarge",
+        .ml_g6_e_8_xlarge = "ml.g6e.8xlarge",
+        .ml_g6_e_12_xlarge = "ml.g6e.12xlarge",
+        .ml_g6_e_16_xlarge = "ml.g6e.16xlarge",
+        .ml_g6_e_24_xlarge = "ml.g6e.24xlarge",
+        .ml_g6_e_48_xlarge = "ml.g6e.48xlarge",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -331,6 +347,14 @@ pub const TransformInstanceType = enum {
             .ml_g6_16_xlarge => "ml.g6.16xlarge",
             .ml_g6_24_xlarge => "ml.g6.24xlarge",
             .ml_g6_48_xlarge => "ml.g6.48xlarge",
+            .ml_g6_e_xlarge => "ml.g6e.xlarge",
+            .ml_g6_e_2_xlarge => "ml.g6e.2xlarge",
+            .ml_g6_e_4_xlarge => "ml.g6e.4xlarge",
+            .ml_g6_e_8_xlarge => "ml.g6e.8xlarge",
+            .ml_g6_e_12_xlarge => "ml.g6e.12xlarge",
+            .ml_g6_e_16_xlarge => "ml.g6e.16xlarge",
+            .ml_g6_e_24_xlarge => "ml.g6e.24xlarge",
+            .ml_g6_e_48_xlarge => "ml.g6e.48xlarge",
         };
     }
 

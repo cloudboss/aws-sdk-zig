@@ -5,12 +5,14 @@ pub const SpendLimitName = enum {
     voice_message_monthly_spend_limit,
     media_message_monthly_spend_limit,
     notify_message_monthly_spend_limit,
+    rcs_message_monthly_spend_limit,
 
     pub const json_field_names = .{
         .text_message_monthly_spend_limit = "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT",
         .voice_message_monthly_spend_limit = "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT",
         .media_message_monthly_spend_limit = "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT",
         .notify_message_monthly_spend_limit = "NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT",
+        .rcs_message_monthly_spend_limit = "RCS_MESSAGE_MONTHLY_SPEND_LIMIT",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const SpendLimitName = enum {
             .voice_message_monthly_spend_limit => "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT",
             .media_message_monthly_spend_limit => "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT",
             .notify_message_monthly_spend_limit => "NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT",
+            .rcs_message_monthly_spend_limit => "RCS_MESSAGE_MONTHLY_SPEND_LIMIT",
         };
     }
 

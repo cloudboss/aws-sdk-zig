@@ -9,6 +9,10 @@ pub const EvaluationFormSearchSummary = struct {
     /// Active version of the evaluation form.
     active_version: ?i32 = null,
 
+    /// The AI version to use for the evaluation form. This specifies which AI model
+    /// version is used for automated evaluations.
+    ai_version: ?[]const u8 = null,
+
     /// Whether automated evaluation is enabled.
     auto_evaluation_enabled: bool = false,
 
@@ -60,6 +64,7 @@ pub const EvaluationFormSearchSummary = struct {
 
     pub const json_field_names = .{
         .active_version = "ActiveVersion",
+        .ai_version = "AIVersion",
         .auto_evaluation_enabled = "AutoEvaluationEnabled",
         .contact_interaction_type = "ContactInteractionType",
         .created_by = "CreatedBy",

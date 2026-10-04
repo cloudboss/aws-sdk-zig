@@ -1,7 +1,7 @@
 const PaymentInstrumentType = @import("payment_instrument_type.zig").PaymentInstrumentType;
 const PaymentInstrumentStatus = @import("payment_instrument_status.zig").PaymentInstrumentStatus;
 
-/// Summary of a payment instrument for list operations
+/// Summary of a payment instrument for list operations.
 pub const PaymentInstrumentSummary = struct {
     /// The timestamp when this payment instrument was created.
     created_at: i64,

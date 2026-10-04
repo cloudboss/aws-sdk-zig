@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartUserAccessTasksInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartUserAccessTasksOutput {
-    var result: StartUserAccessTasksOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartUserAccessTasksOutput, body, allocator);
-    }
+    const result: StartUserAccessTasksOutput = try aws.json.parseJsonObject(
+        StartUserAccessTasksOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

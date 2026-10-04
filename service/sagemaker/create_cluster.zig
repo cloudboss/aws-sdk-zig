@@ -10,6 +10,7 @@ const ClusterNodeProvisioningMode = @import("cluster_node_provisioning_mode.zig"
 const ClusterNodeRecovery = @import("cluster_node_recovery.zig").ClusterNodeRecovery;
 const ClusterOrchestrator = @import("cluster_orchestrator.zig").ClusterOrchestrator;
 const ClusterRestrictedInstanceGroupSpecification = @import("cluster_restricted_instance_group_specification.zig").ClusterRestrictedInstanceGroupSpecification;
+const ClusterRestrictedInstanceGroupsConfig = @import("cluster_restricted_instance_groups_config.zig").ClusterRestrictedInstanceGroupsConfig;
 const Tag = @import("tag.zig").Tag;
 const ClusterTieredStorageConfig = @import("cluster_tiered_storage_config.zig").ClusterTieredStorageConfig;
 const VpcConfig = @import("vpc_config.zig").VpcConfig;
@@ -61,6 +62,10 @@ pub const CreateClusterInput = struct {
     /// The specialized instance groups for training models like Amazon Nova to be
     /// created in the SageMaker HyperPod cluster.
     restricted_instance_groups: ?[]const ClusterRestrictedInstanceGroupSpecification = null,
+
+    /// The configuration for the restricted instance groups (RIG) in the SageMaker
+    /// HyperPod cluster.
+    restricted_instance_groups_config: ?ClusterRestrictedInstanceGroupsConfig = null,
 
     /// Custom tags for managing the SageMaker HyperPod cluster as an Amazon Web
     /// Services resource. You can add tags to your cluster in the same way you add
@@ -115,6 +120,7 @@ pub const CreateClusterInput = struct {
         .node_recovery = "NodeRecovery",
         .orchestrator = "Orchestrator",
         .restricted_instance_groups = "RestrictedInstanceGroups",
+        .restricted_instance_groups_config = "RestrictedInstanceGroupsConfig",
         .tags = "Tags",
         .tiered_storage_config = "TieredStorageConfig",
         .vpc_config = "VpcConfig",

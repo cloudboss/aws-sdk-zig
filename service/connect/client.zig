@@ -34,6 +34,8 @@ const batch_update_data_table_value = @import("batch_update_data_table_value.zig
 const claim_phone_number = @import("claim_phone_number.zig");
 const complete_attached_file_upload = @import("complete_attached_file_upload.zig");
 const create_agent_status = @import("create_agent_status.zig");
+const create_attached_file = @import("create_attached_file.zig");
+const create_auth_code = @import("create_auth_code.zig");
 const create_contact = @import("create_contact.zig");
 const create_contact_flow = @import("create_contact_flow.zig");
 const create_contact_flow_module = @import("create_contact_flow_module.zig");
@@ -44,10 +46,12 @@ const create_data_table = @import("create_data_table.zig");
 const create_data_table_attribute = @import("create_data_table_attribute.zig");
 const create_email_address = @import("create_email_address.zig");
 const create_evaluation_form = @import("create_evaluation_form.zig");
+const create_extraction_definition = @import("create_extraction_definition.zig");
 const create_hours_of_operation = @import("create_hours_of_operation.zig");
 const create_hours_of_operation_override = @import("create_hours_of_operation_override.zig");
 const create_instance = @import("create_instance.zig");
 const create_integration_association = @import("create_integration_association.zig");
+const create_metric = @import("create_metric.zig");
 const create_notification = @import("create_notification.zig");
 const create_participant = @import("create_participant.zig");
 const create_persistent_contact_association = @import("create_persistent_contact_association.zig");
@@ -72,6 +76,7 @@ const create_workspace = @import("create_workspace.zig");
 const create_workspace_page = @import("create_workspace_page.zig");
 const deactivate_evaluation_form = @import("deactivate_evaluation_form.zig");
 const delete_attached_file = @import("delete_attached_file.zig");
+const delete_contact_data = @import("delete_contact_data.zig");
 const delete_contact_evaluation = @import("delete_contact_evaluation.zig");
 const delete_contact_flow = @import("delete_contact_flow.zig");
 const delete_contact_flow_module = @import("delete_contact_flow_module.zig");
@@ -82,10 +87,12 @@ const delete_data_table = @import("delete_data_table.zig");
 const delete_data_table_attribute = @import("delete_data_table_attribute.zig");
 const delete_email_address = @import("delete_email_address.zig");
 const delete_evaluation_form = @import("delete_evaluation_form.zig");
+const delete_extraction_definition = @import("delete_extraction_definition.zig");
 const delete_hours_of_operation = @import("delete_hours_of_operation.zig");
 const delete_hours_of_operation_override = @import("delete_hours_of_operation_override.zig");
 const delete_instance = @import("delete_instance.zig");
 const delete_integration_association = @import("delete_integration_association.zig");
+const delete_metric = @import("delete_metric.zig");
 const delete_notification = @import("delete_notification.zig");
 const delete_predefined_attribute = @import("delete_predefined_attribute.zig");
 const delete_prompt = @import("delete_prompt.zig");
@@ -95,6 +102,7 @@ const delete_quick_connect = @import("delete_quick_connect.zig");
 const delete_routing_profile = @import("delete_routing_profile.zig");
 const delete_rule = @import("delete_rule.zig");
 const delete_security_profile = @import("delete_security_profile.zig");
+const delete_session = @import("delete_session.zig");
 const delete_task_template = @import("delete_task_template.zig");
 const delete_test_case = @import("delete_test_case.zig");
 const delete_traffic_distribution_group = @import("delete_traffic_distribution_group.zig");
@@ -119,11 +127,13 @@ const describe_data_table = @import("describe_data_table.zig");
 const describe_data_table_attribute = @import("describe_data_table_attribute.zig");
 const describe_email_address = @import("describe_email_address.zig");
 const describe_evaluation_form = @import("describe_evaluation_form.zig");
+const describe_extraction_definition = @import("describe_extraction_definition.zig");
 const describe_hours_of_operation = @import("describe_hours_of_operation.zig");
 const describe_hours_of_operation_override = @import("describe_hours_of_operation_override.zig");
 const describe_instance = @import("describe_instance.zig");
 const describe_instance_attribute = @import("describe_instance_attribute.zig");
 const describe_instance_storage_config = @import("describe_instance_storage_config.zig");
+const describe_metric = @import("describe_metric.zig");
 const describe_notification = @import("describe_notification.zig");
 const describe_phone_number = @import("describe_phone_number.zig");
 const describe_predefined_attribute = @import("describe_predefined_attribute.zig");
@@ -164,9 +174,11 @@ const evaluate_data_table_values = @import("evaluate_data_table_values.zig");
 const get_attached_file = @import("get_attached_file.zig");
 const get_contact_attributes = @import("get_contact_attributes.zig");
 const get_contact_metrics = @import("get_contact_metrics.zig");
+const get_cross_region_routing = @import("get_cross_region_routing.zig");
 const get_current_metric_data = @import("get_current_metric_data.zig");
 const get_current_user_data = @import("get_current_user_data.zig");
 const get_effective_hours_of_operations = @import("get_effective_hours_of_operations.zig");
+const get_evaluation_form_validation = @import("get_evaluation_form_validation.zig");
 const get_federation_token = @import("get_federation_token.zig");
 const get_flow_association = @import("get_flow_association.zig");
 const get_metric_data = @import("get_metric_data.zig");
@@ -199,8 +211,10 @@ const list_data_table_values = @import("list_data_table_values.zig");
 const list_data_tables = @import("list_data_tables.zig");
 const list_default_vocabularies = @import("list_default_vocabularies.zig");
 const list_entity_security_profiles = @import("list_entity_security_profiles.zig");
+const list_evaluation_form_ai_versions = @import("list_evaluation_form_ai_versions.zig");
 const list_evaluation_form_versions = @import("list_evaluation_form_versions.zig");
 const list_evaluation_forms = @import("list_evaluation_forms.zig");
+const list_extraction_definitions = @import("list_extraction_definitions.zig");
 const list_flow_associations = @import("list_flow_associations.zig");
 const list_hours_of_operation_overrides = @import("list_hours_of_operation_overrides.zig");
 const list_hours_of_operations = @import("list_hours_of_operations.zig");
@@ -210,6 +224,7 @@ const list_instances = @import("list_instances.zig");
 const list_integration_associations = @import("list_integration_associations.zig");
 const list_lambda_functions = @import("list_lambda_functions.zig");
 const list_lex_bots = @import("list_lex_bots.zig");
+const list_metrics = @import("list_metrics.zig");
 const list_notifications = @import("list_notifications.zig");
 const list_phone_numbers = @import("list_phone_numbers.zig");
 const list_phone_numbers_v2 = @import("list_phone_numbers_v2.zig");
@@ -225,6 +240,7 @@ const list_routing_profile_queues = @import("list_routing_profile_queues.zig");
 const list_routing_profiles = @import("list_routing_profiles.zig");
 const list_rules = @import("list_rules.zig");
 const list_security_keys = @import("list_security_keys.zig");
+const list_security_profile_ai_agents = @import("list_security_profile_ai_agents.zig");
 const list_security_profile_applications = @import("list_security_profile_applications.zig");
 const list_security_profile_flow_modules = @import("list_security_profile_flow_modules.zig");
 const list_security_profile_permissions = @import("list_security_profile_permissions.zig");
@@ -264,6 +280,7 @@ const search_email_addresses = @import("search_email_addresses.zig");
 const search_evaluation_forms = @import("search_evaluation_forms.zig");
 const search_hours_of_operation_overrides = @import("search_hours_of_operation_overrides.zig");
 const search_hours_of_operations = @import("search_hours_of_operations.zig");
+const search_metrics = @import("search_metrics.zig");
 const search_notifications = @import("search_notifications.zig");
 const search_predefined_attributes = @import("search_predefined_attributes.zig");
 const search_prompts = @import("search_prompts.zig");
@@ -271,6 +288,7 @@ const search_queues = @import("search_queues.zig");
 const search_quick_connects = @import("search_quick_connects.zig");
 const search_resource_tags = @import("search_resource_tags.zig");
 const search_routing_profiles = @import("search_routing_profiles.zig");
+const search_rules = @import("search_rules.zig");
 const search_security_profiles = @import("search_security_profiles.zig");
 const search_test_cases = @import("search_test_cases.zig");
 const search_user_hierarchy_groups = @import("search_user_hierarchy_groups.zig");
@@ -281,13 +299,17 @@ const search_workspace_associations = @import("search_workspace_associations.zig
 const search_workspaces = @import("search_workspaces.zig");
 const send_chat_integration_event = @import("send_chat_integration_event.zig");
 const send_outbound_email = @import("send_outbound_email.zig");
+const send_outbound_web_notification = @import("send_outbound_web_notification.zig");
+const start_assistant_contact = @import("start_assistant_contact.zig");
 const start_attached_file_upload = @import("start_attached_file_upload.zig");
 const start_chat_contact = @import("start_chat_contact.zig");
+const start_contact_conversational_analytics_job = @import("start_contact_conversational_analytics_job.zig");
 const start_contact_evaluation = @import("start_contact_evaluation.zig");
 const start_contact_media_processing = @import("start_contact_media_processing.zig");
 const start_contact_recording = @import("start_contact_recording.zig");
 const start_contact_streaming = @import("start_contact_streaming.zig");
 const start_email_contact = @import("start_email_contact.zig");
+const start_evaluation_form_validation = @import("start_evaluation_form_validation.zig");
 const start_outbound_chat_contact = @import("start_outbound_chat_contact.zig");
 const start_outbound_email_contact = @import("start_outbound_email_contact.zig");
 const start_outbound_voice_contact = @import("start_outbound_voice_contact.zig");
@@ -321,15 +343,20 @@ const update_contact_flow_module_metadata = @import("update_contact_flow_module_
 const update_contact_flow_name = @import("update_contact_flow_name.zig");
 const update_contact_routing_data = @import("update_contact_routing_data.zig");
 const update_contact_schedule = @import("update_contact_schedule.zig");
+const update_contact_task_template = @import("update_contact_task_template.zig");
+const update_cross_region_routing = @import("update_cross_region_routing.zig");
 const update_data_table_attribute = @import("update_data_table_attribute.zig");
 const update_data_table_metadata = @import("update_data_table_metadata.zig");
 const update_data_table_primary_values = @import("update_data_table_primary_values.zig");
 const update_email_address_metadata = @import("update_email_address_metadata.zig");
 const update_evaluation_form = @import("update_evaluation_form.zig");
+const update_extraction_definition = @import("update_extraction_definition.zig");
 const update_hours_of_operation = @import("update_hours_of_operation.zig");
 const update_hours_of_operation_override = @import("update_hours_of_operation_override.zig");
 const update_instance_attribute = @import("update_instance_attribute.zig");
 const update_instance_storage_config = @import("update_instance_storage_config.zig");
+const update_metric_content = @import("update_metric_content.zig");
+const update_metric_metadata = @import("update_metric_metadata.zig");
 const update_notification_content = @import("update_notification_content.zig");
 const update_participant_authentication = @import("update_participant_authentication.zig");
 const update_participant_role_config = @import("update_participant_role_config.zig");
@@ -401,31 +428,33 @@ pub const Client = struct {
         _ = self;
     }
 
-    /// Activates an evaluation form in the specified Amazon Connect instance. After
-    /// the evaluation form is
+    /// Activates an evaluation form in the specified Connect Customer instance.
+    /// After the evaluation form is
     /// activated, it is available to start new evaluations based on the form.
     pub fn activateEvaluationForm(self: *Self, allocator: std.mem.Allocator, input: activate_evaluation_form.ActivateEvaluationFormInput, options: CallOptions) !activate_evaluation_form.ActivateEvaluationFormOutput {
         return activate_evaluation_form.execute(self, allocator, input, options);
     }
 
-    /// Associates the specified dataset for a Amazon Connect instance with the
+    /// Associates the specified dataset for a Connect Customer instance with the
     /// target account. You can associate
     /// only one dataset in a single call.
     pub fn associateAnalyticsDataSet(self: *Self, allocator: std.mem.Allocator, input: associate_analytics_data_set.AssociateAnalyticsDataSetInput, options: CallOptions) !associate_analytics_data_set.AssociateAnalyticsDataSetOutput {
         return associate_analytics_data_set.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
-    /// Associates an approved origin to an Amazon Connect instance.
+    /// Associates an approved origin to an Connect Customer instance.
     pub fn associateApprovedOrigin(self: *Self, allocator: std.mem.Allocator, input: associate_approved_origin.AssociateApprovedOriginInput, options: CallOptions) !associate_approved_origin.AssociateApprovedOriginOutput {
         return associate_approved_origin.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
-    /// Allows the specified Amazon Connect instance to access the specified Amazon
-    /// Lex or Amazon Lex V2
+    /// Allows the specified Connect Customer instance to access the specified
+    /// Amazon Lex or Amazon Lex V2
     /// bot.
     pub fn associateBot(self: *Self, allocator: std.mem.Allocator, input: associate_bot.AssociateBotInput, options: CallOptions) !associate_bot.AssociateBotOutput {
         return associate_bot.execute(self, allocator, input, options);
@@ -445,8 +474,12 @@ pub const Client = struct {
     ///
     /// **Important things to know**
     ///
-    /// * Use this API with chat, email, and task contacts. It does not support
-    ///   voice contacts.
+    /// * Use this API with chat, email, task, and voice contacts. For voice
+    ///   callbacks, this API does not support customer-first mode.
+    ///
+    /// * This API can be used to offer a contact to an agent even if the agent is
+    ///   currently at maximum concurrency
+    /// for the channel.
     ///
     /// * Use it to associate contacts with users regardless of their current state,
     ///   including custom states. Ensure
@@ -465,24 +498,24 @@ pub const Client = struct {
     ///
     /// * The service quota *Queues per routing profile per instance* applies to
     ///   manually assigned
-    /// queues, too. For more information about this quota, see [Amazon Connect
-    /// quotas](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas) in the *Amazon Connect Administrator Guide*.
+    /// queues, too. For more information about this quota, see [Connect Customer
+    /// quotas](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas) in the *Connect Customer Administrator Guide*.
     ///
-    /// **Endpoints**: See [Amazon Connect endpoints and
+    /// **Endpoints**: See [Connect Customer endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
     pub fn associateContactWithUser(self: *Self, allocator: std.mem.Allocator, input: associate_contact_with_user.AssociateContactWithUserInput, options: CallOptions) !associate_contact_with_user.AssociateContactWithUserOutput {
         return associate_contact_with_user.execute(self, allocator, input, options);
     }
 
-    /// Associates an existing vocabulary as the default. Contact Lens for Amazon
-    /// Connect uses the vocabulary in post-call and real-time
+    /// Associates an existing vocabulary as the default. Contact Lens for Connect
+    /// Customer uses the vocabulary in post-call and real-time
     /// analysis sessions for the given language.
     pub fn associateDefaultVocabulary(self: *Self, allocator: std.mem.Allocator, input: associate_default_vocabulary.AssociateDefaultVocabularyInput, options: CallOptions) !associate_default_vocabulary.AssociateDefaultVocabularyOutput {
         return associate_default_vocabulary.execute(self, allocator, input, options);
     }
 
     /// Associates an email address alias with an existing email address in an
-    /// Amazon Connect instance. This creates
+    /// Connect Customer instance. This creates
     /// a forwarding relationship where emails sent to the alias email address are
     /// automatically forwarded to the primary
     /// email address.
@@ -504,7 +537,7 @@ pub const Client = struct {
     ///
     /// * **Brand management**: Enable you to use familiar brand-specific email
     ///   addresses
-    /// that forward to the appropriate Amazon Connect instance email address.
+    /// that forward to the appropriate Connect Customer instance email address.
     ///
     /// **Important things to know**
     ///
@@ -528,13 +561,13 @@ pub const Client = struct {
     ///
     /// * The status of the forwarding configuration.
     ///
-    /// **Endpoints**: See [Amazon Connect endpoints and
+    /// **Endpoints**: See [Connect Customer endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
     ///
     /// **Related operations**
     ///
     /// *
-    ///   [DisassociateEmailAddressAlias](https://docs.aws.amazon.com/connect/latest/APIReference/API_DisassociateEmailAddressAlias.html): Removes the alias association between two email addresses in an Amazon Connect instance.
+    ///   [DisassociateEmailAddressAlias](https://docs.aws.amazon.com/connect/latest/APIReference/API_DisassociateEmailAddressAlias.html): Removes the alias association between two email addresses in an Connect Customer instance.
     ///
     /// *
     ///   [DescribeEmailAddress](https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeEmailAddress.html): View current alias configurations for an email address.
@@ -559,14 +592,16 @@ pub const Client = struct {
         return associate_flow.execute(self, allocator, input, options);
     }
 
-    /// Associates a set of hours of operations with another hours of operation.
-    /// Refer to Administrator Guide [ here
-    /// ](https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html) for more information on inheriting overrides from parent hours of operation(s).
+    /// Associates a set of hours of operations with another hours of operation. For
+    /// more information about inheriting overrides from parent hours of operation,
+    /// see [Hours of operation
+    /// overrides](https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html) in the Administrator Guide.
     pub fn associateHoursOfOperations(self: *Self, allocator: std.mem.Allocator, input: associate_hours_of_operations.AssociateHoursOfOperationsInput, options: CallOptions) !associate_hours_of_operations.AssociateHoursOfOperationsOutput {
         return associate_hours_of_operations.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Associates a storage resource type for the first time. You can only
     /// associate one type of storage configuration
@@ -583,24 +618,26 @@ pub const Client = struct {
         return associate_instance_storage_config.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
-    /// Allows the specified Amazon Connect instance to access the specified Lambda
-    /// function.
+    /// Allows the specified Connect Customer instance to access the specified
+    /// Lambda function.
     pub fn associateLambdaFunction(self: *Self, allocator: std.mem.Allocator, input: associate_lambda_function.AssociateLambdaFunctionInput, options: CallOptions) !associate_lambda_function.AssociateLambdaFunctionOutput {
         return associate_lambda_function.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
-    /// Allows the specified Amazon Connect instance to access the specified Amazon
-    /// Lex V1 bot. This API
+    /// Allows the specified Connect Customer instance to access the specified
+    /// Amazon Lex V1 bot. This API
     /// only supports the association of Amazon Lex V1 bots.
     pub fn associateLexBot(self: *Self, allocator: std.mem.Allocator, input: associate_lex_bot.AssociateLexBotInput, options: CallOptions) !associate_lex_bot.AssociateLexBotOutput {
         return associate_lex_bot.execute(self, allocator, input, options);
     }
 
-    /// Associates a flow with a phone number claimed to your Amazon Connect
+    /// Associates a flow with a phone number claimed to your Connect Customer
     /// instance.
     ///
     /// If the number is claimed to a traffic distribution group, and you are
@@ -629,7 +666,7 @@ pub const Client = struct {
     /// * You can associate up to 49 additional email addresses with a single queue,
     ///   plus 1 default outbound email address, for a total of 50.
     ///
-    /// * The email addresses must already exist in the Amazon Connect instance
+    /// * The email addresses must already exist in the Connect Customer instance
     ///   before they can be associated with a queue.
     ///
     /// * Agents will be able to select from these associated email addresses when
@@ -655,7 +692,8 @@ pub const Client = struct {
         return associate_routing_profile_queues.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Associates a security key to the instance.
     pub fn associateSecurityKey(self: *Self, allocator: std.mem.Allocator, input: associate_security_key.AssociateSecurityKeyInput, options: CallOptions) !associate_security_key.AssociateSecurityKeyOutput {
@@ -686,8 +724,8 @@ pub const Client = struct {
         return associate_workspace.execute(self, allocator, input, options);
     }
 
-    /// Associates a list of analytics datasets for a given Amazon Connect instance
-    /// to a target account. You can
+    /// Associates a list of analytics datasets for a given Connect Customer
+    /// instance to a target account. You can
     /// associate multiple datasets in a single call.
     pub fn batchAssociateAnalyticsDataSet(self: *Self, allocator: std.mem.Allocator, input: batch_associate_analytics_data_set.BatchAssociateAnalyticsDataSetInput, options: CallOptions) !batch_associate_analytics_data_set.BatchAssociateAnalyticsDataSetOutput {
         return batch_associate_analytics_data_set.execute(self, allocator, input, options);
@@ -726,8 +764,8 @@ pub const Client = struct {
         return batch_describe_data_table_value.execute(self, allocator, input, options);
     }
 
-    /// Removes a list of analytics datasets associated with a given Amazon Connect
-    /// instance. You can disassociate
+    /// Removes a list of analytics datasets associated with a given Connect
+    /// Customer instance. You can disassociate
     /// multiple datasets in a single call.
     pub fn batchDisassociateAnalyticsDataSet(self: *Self, allocator: std.mem.Allocator, input: batch_disassociate_analytics_data_set.BatchDisassociateAnalyticsDataSetInput, options: CallOptions) !batch_disassociate_analytics_data_set.BatchDisassociateAnalyticsDataSetOutput {
         return batch_disassociate_analytics_data_set.execute(self, allocator, input, options);
@@ -746,11 +784,11 @@ pub const Client = struct {
         return batch_get_flow_association.execute(self, allocator, input, options);
     }
 
-    /// Only the Amazon Connect outbound campaigns service principal is allowed to
+    /// Only the Connect Customer outbound campaigns service principal is allowed to
     /// assume a role in your account
     /// and call this API.
     ///
-    /// Allows you to create a batch of contacts in Amazon Connect. The outbound
+    /// Allows you to create a batch of contacts in Connect Customer. The outbound
     /// campaigns capability ingests dial
     /// requests via the
     /// [PutDialRequestBatch](https://docs.aws.amazon.com/connect-outbound/latest/APIReference/API_PutDialRequestBatch.html) API. It then uses BatchPutContact to create contacts corresponding to those dial
@@ -770,17 +808,17 @@ pub const Client = struct {
         return batch_update_data_table_value.execute(self, allocator, input, options);
     }
 
-    /// Claims an available phone number to your Amazon Connect instance or traffic
-    /// distribution group. You can call
-    /// this API only in the same Amazon Web Services Region where the Amazon
-    /// Connect instance or traffic distribution group was
+    /// Claims an available phone number to your Connect Customer instance or
+    /// traffic distribution group. You can call
+    /// this API only in the same Amazon Web Services Region where the Connect
+    /// Customer instance or traffic distribution group was
     /// created.
     ///
     /// For more information about how to use this operation, see [Claim a phone
     /// number in your
     /// country](https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-number.html) and [Claim
     /// phone numbers to traffic distribution
-    /// groups](https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-numbers-traffic-distribution-groups.html) in the *Amazon Connect Administrator
+    /// groups](https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-numbers-traffic-distribution-groups.html) in the *Connect Customer Administrator
     /// Guide*.
     ///
     /// You can call the
@@ -824,9 +862,36 @@ pub const Client = struct {
         return complete_attached_file_upload.execute(self, allocator, input, options);
     }
 
-    /// Creates an agent status for the specified Amazon Connect instance.
+    /// Creates an agent status for the specified Connect Customer instance.
     pub fn createAgentStatus(self: *Self, allocator: std.mem.Allocator, input: create_agent_status.CreateAgentStatusInput, options: CallOptions) !create_agent_status.CreateAgentStatusOutput {
         return create_agent_status.execute(self, allocator, input, options);
+    }
+
+    /// Creates an attached file for a completed voice contact by copying a
+    /// recording from a source S3 URI into
+    /// Connect Customer managed storage. Use this API to attach voice recordings to
+    /// contacts for downstream
+    /// processing such as conversational analytics.
+    ///
+    /// The `AssociatedResourceArn` must be the ARN of a completed voice contact,
+    /// `FileUseCaseType`
+    /// must be set to `VOICE_RECORDING`, and `FileSourceUri` must be a valid S3
+    /// URI.
+    ///
+    /// For example, you can call `CreateContact`, then `CreateAttachedFile`, then
+    /// `StartContactConversationalAnalyticsJob` to create a contact, attach a
+    /// recording, and
+    /// run post-call analytics.
+    pub fn createAttachedFile(self: *Self, allocator: std.mem.Allocator, input: create_attached_file.CreateAttachedFileInput, options: CallOptions) !create_attached_file.CreateAttachedFileOutput {
+        return create_attached_file.execute(self, allocator, input, options);
+    }
+
+    /// Creates an authorization code for the specified Connect Customer instance.
+    /// The authorization code can be used
+    /// to establish a session with scoped permissions defined by the specified
+    /// scope parameters.
+    pub fn createAuthCode(self: *Self, allocator: std.mem.Allocator, input: create_auth_code.CreateAuthCodeInput, options: CallOptions) !create_auth_code.CreateAuthCodeOutput {
+        return create_auth_code.execute(self, allocator, input, options);
     }
 
     /// Only the VOICE, EMAIL, and TASK channels are supported.
@@ -855,16 +920,16 @@ pub const Client = struct {
         return create_contact.execute(self, allocator, input, options);
     }
 
-    /// Creates a flow for the specified Amazon Connect instance.
+    /// Creates a flow for the specified Connect Customer instance.
     ///
-    /// You can also create and update flows using the [Amazon Connect
+    /// You can also create and update flows using the [Connect Customer
     /// Flow
     /// language](https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html).
     pub fn createContactFlow(self: *Self, allocator: std.mem.Allocator, input: create_contact_flow.CreateContactFlowInput, options: CallOptions) !create_contact_flow.CreateContactFlowOutput {
         return create_contact_flow.execute(self, allocator, input, options);
     }
 
-    /// Creates a flow module for the specified Amazon Connect instance.
+    /// Creates a flow module for the specified Connect Customer instance.
     pub fn createContactFlowModule(self: *Self, allocator: std.mem.Allocator, input: create_contact_flow_module.CreateContactFlowModuleInput, options: CallOptions) !create_contact_flow_module.CreateContactFlowModuleOutput {
         return create_contact_flow_module.execute(self, allocator, input, options);
     }
@@ -914,15 +979,15 @@ pub const Client = struct {
         return create_data_table_attribute.execute(self, allocator, input, options);
     }
 
-    /// Create new email address in the specified Amazon Connect instance. For more
-    /// information about email
+    /// Create new email address in the specified Connect Customer instance. For
+    /// more information about email
     /// addresses, see [Create email
-    /// addresses](https://docs.aws.amazon.com/connect/latest/adminguide/create-email-address1.html) in the Amazon Connect Administrator Guide.
+    /// addresses](https://docs.aws.amazon.com/connect/latest/adminguide/create-email-address1.html) in the Connect Customer Administrator Guide.
     pub fn createEmailAddress(self: *Self, allocator: std.mem.Allocator, input: create_email_address.CreateEmailAddressInput, options: CallOptions) !create_email_address.CreateEmailAddressOutput {
         return create_email_address.execute(self, allocator, input, options);
     }
 
-    /// Creates an evaluation form in the specified Amazon Connect instance. The
+    /// Creates an evaluation form in the specified Connect Customer instance. The
     /// form can be used to define
     /// questions related to agent performance, and create sections to organize such
     /// questions. Question and section
@@ -931,30 +996,42 @@ pub const Client = struct {
         return create_evaluation_form.execute(self, allocator, input, options);
     }
 
+    /// Creates an extraction definition in the specified Connect Customer instance.
+    /// An extraction
+    /// definition specifies how structured data is extracted from customer
+    /// interactions using generative
+    /// AI, including the prompt hint that guides extraction and the behavior when a
+    /// value cannot be
+    /// found.
+    pub fn createExtractionDefinition(self: *Self, allocator: std.mem.Allocator, input: create_extraction_definition.CreateExtractionDefinitionInput, options: CallOptions) !create_extraction_definition.CreateExtractionDefinitionOutput {
+        return create_extraction_definition.execute(self, allocator, input, options);
+    }
+
     /// Creates hours of operation.
     pub fn createHoursOfOperation(self: *Self, allocator: std.mem.Allocator, input: create_hours_of_operation.CreateHoursOfOperationInput, options: CallOptions) !create_hours_of_operation.CreateHoursOfOperationOutput {
         return create_hours_of_operation.execute(self, allocator, input, options);
     }
 
-    /// Creates an hours of operation override in an Amazon Connect hours of
+    /// Creates an hours of operation override in an Connect Customer hours of
     /// operation resource.
     pub fn createHoursOfOperationOverride(self: *Self, allocator: std.mem.Allocator, input: create_hours_of_operation_override.CreateHoursOfOperationOverrideInput, options: CallOptions) !create_hours_of_operation_override.CreateHoursOfOperationOverrideOutput {
         return create_hours_of_operation_override.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
-    /// Initiates an Amazon Connect instance with all the supported channels
+    /// Initiates an Connect Customer instance with all the supported channels
     /// enabled. It does not attach any
     /// storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon
     /// Kinesis. It also does not allow for any
-    /// configurations on features, such as Contact Lens for Amazon Connect.
+    /// configurations on features, such as Contact Lens for Connect Customer.
     ///
-    /// For more information, see [Create an Amazon Connect
+    /// For more information, see [Create an Connect Customer
     /// instance](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instances.html) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     ///
-    /// Amazon Connect enforces a limit on the total number of instances that you
+    /// Connect Customer enforces a limit on the total number of instances that you
     /// can create or delete in 30 days.
     /// If you exceed this limit, you will get an error message indicating there has
     /// been an excessive number of attempts at creating or deleting instances.
@@ -964,10 +1041,18 @@ pub const Client = struct {
         return create_instance.execute(self, allocator, input, options);
     }
 
-    /// Creates an Amazon Web Services resource association with an Amazon Connect
+    /// Creates an Amazon Web Services resource association with an Connect Customer
     /// instance.
     pub fn createIntegrationAssociation(self: *Self, allocator: std.mem.Allocator, input: create_integration_association.CreateIntegrationAssociationInput, options: CallOptions) !create_integration_association.CreateIntegrationAssociationOutput {
         return create_integration_association.execute(self, allocator, input, options);
+    }
+
+    /// Creates a new metric definition for the specified Connect Customer instance.
+    /// You can create custom metrics
+    /// that use formulas referencing existing Amazon Web Services-managed metrics,
+    /// optionally with filters applied.
+    pub fn createMetric(self: *Self, allocator: std.mem.Allocator, input: create_metric.CreateMetricInput, options: CallOptions) !create_metric.CreateMetricOutput {
+        return create_metric.execute(self, allocator, input, options);
     }
 
     /// Creates a new notification to be delivered to specified recipients.
@@ -991,16 +1076,16 @@ pub const Client = struct {
     /// information about chat rehydration, see
     /// [Enable persistent
     /// chat](https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html) in
-    /// the *Amazon Connect Administrator Guide*.
+    /// the *Connect Customer Administrator Guide*.
     pub fn createPersistentContactAssociation(self: *Self, allocator: std.mem.Allocator, input: create_persistent_contact_association.CreatePersistentContactAssociationInput, options: CallOptions) !create_persistent_contact_association.CreatePersistentContactAssociationOutput {
         return create_persistent_contact_association.execute(self, allocator, input, options);
     }
 
-    /// Creates a new predefined attribute for the specified Amazon Connect
+    /// Creates a new predefined attribute for the specified Connect Customer
     /// instance. A *predefined attribute*
     /// is made up of a name and a value.
     ///
-    /// For the predefined attributes per instance quota, see [Amazon Connect
+    /// For the predefined attributes per instance quota, see [Connect Customer
     /// quotas](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas).
     ///
     /// **Use cases**
@@ -1020,7 +1105,7 @@ pub const Client = struct {
     /// information, see [Use contact segment
     /// attributes](https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html).
     ///
-    /// **Endpoints**: See [Amazon Connect endpoints and
+    /// **Endpoints**: See [Connect Customer endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
     pub fn createPredefinedAttribute(self: *Self, allocator: std.mem.Allocator, input: create_predefined_attribute.CreatePredefinedAttributeInput, options: CallOptions) !create_predefined_attribute.CreatePredefinedAttributeOutput {
         return create_predefined_attribute.execute(self, allocator, input, options);
@@ -1031,7 +1116,7 @@ pub const Client = struct {
     /// [Create
     /// prompts](https://docs.aws.amazon.com/connect/latest/adminguide/prompts.html)
     /// in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     pub fn createPrompt(self: *Self, allocator: std.mem.Allocator, input: create_prompt.CreatePromptInput, options: CallOptions) !create_prompt.CreatePromptOutput {
         return create_prompt.execute(self, allocator, input, options);
     }
@@ -1039,17 +1124,17 @@ pub const Client = struct {
     /// Creates registration for a device token and a chat contact to receive
     /// real-time push notifications. For more
     /// information about push notifications, see [Set up push notifications in
-    /// Amazon Connect for mobile
-    /// chat](https://docs.aws.amazon.com/connect/latest/adminguide/enable-push-notifications-for-mobile-chat.html) in the *Amazon Connect Administrator Guide*.
+    /// Connect Customer for mobile
+    /// chat](https://docs.aws.amazon.com/connect/latest/adminguide/enable-push-notifications-for-mobile-chat.html) in the *Connect Customer Administrator Guide*.
     pub fn createPushNotificationRegistration(self: *Self, allocator: std.mem.Allocator, input: create_push_notification_registration.CreatePushNotificationRegistrationInput, options: CallOptions) !create_push_notification_registration.CreatePushNotificationRegistrationOutput {
         return create_push_notification_registration.execute(self, allocator, input, options);
     }
 
-    /// Creates a new queue for the specified Amazon Connect instance.
+    /// Creates a new queue for the specified Connect Customer instance.
     ///
     /// * If the phone number is claimed to a traffic distribution group that was
     ///   created in the
-    /// same Region as the Amazon Connect instance where you are calling this API,
+    /// same Region as the Connect Customer instance where you are calling this API,
     /// then you can use a
     /// full phone number ARN or a UUID for `OutboundCallerIdNumberId`. However, if
     /// the phone number is claimed
@@ -1076,7 +1161,7 @@ pub const Client = struct {
         return create_queue.execute(self, allocator, input, options);
     }
 
-    /// Creates a quick connect for the specified Amazon Connect instance.
+    /// Creates a quick connect for the specified Connect Customer instance.
     pub fn createQuickConnect(self: *Self, allocator: std.mem.Allocator, input: create_quick_connect.CreateQuickConnectInput, options: CallOptions) !create_quick_connect.CreateQuickConnectOutput {
         return create_quick_connect.execute(self, allocator, input, options);
     }
@@ -1086,7 +1171,7 @@ pub const Client = struct {
         return create_routing_profile.execute(self, allocator, input, options);
     }
 
-    /// Creates a rule for the specified Amazon Connect instance.
+    /// Creates a rule for the specified Connect Customer instance.
     ///
     /// Use the [Rules Function
     /// language](https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html) to code conditions for the rule.
@@ -1097,7 +1182,7 @@ pub const Client = struct {
     /// Creates a security profile.
     ///
     /// For information about security profiles, see [Security
-    /// Profiles](https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html) in the *Amazon Connect Administrator Guide*. For a mapping of the API name and user interface name of the security
+    /// Profiles](https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html) in the *Connect Customer Administrator Guide*. For a mapping of the API name and user interface name of the security
     /// profile permissions, see [List
     /// of security profile
     /// permissions](https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html).
@@ -1105,7 +1190,7 @@ pub const Client = struct {
         return create_security_profile.execute(self, allocator, input, options);
     }
 
-    /// Creates a new task template in the specified Amazon Connect instance.
+    /// Creates a new task template in the specified Connect Customer instance.
     pub fn createTaskTemplate(self: *Self, allocator: std.mem.Allocator, input: create_task_template.CreateTaskTemplateInput, options: CallOptions) !create_task_template.CreateTaskTemplateOutput {
         return create_task_template.execute(self, allocator, input, options);
     }
@@ -1116,7 +1201,7 @@ pub const Client = struct {
         return create_test_case.execute(self, allocator, input, options);
     }
 
-    /// Creates a traffic distribution group given an Amazon Connect instance that
+    /// Creates a traffic distribution group given an Connect Customer instance that
     /// has been replicated.
     ///
     /// The `SignInConfig` distribution is available only on a
@@ -1130,7 +1215,7 @@ pub const Client = struct {
     /// For more information about creating traffic distribution groups, see [Set up
     /// traffic distribution
     /// groups](https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     pub fn createTrafficDistributionGroup(self: *Self, allocator: std.mem.Allocator, input: create_traffic_distribution_group.CreateTrafficDistributionGroupInput, options: CallOptions) !create_traffic_distribution_group.CreateTrafficDistributionGroupOutput {
         return create_traffic_distribution_group.execute(self, allocator, input, options);
     }
@@ -1140,11 +1225,11 @@ pub const Client = struct {
         return create_use_case.execute(self, allocator, input, options);
     }
 
-    /// Creates a user account for the specified Amazon Connect instance.
+    /// Creates a user account for the specified Connect Customer instance.
     ///
     /// Certain
     /// [UserIdentityInfo](https://docs.aws.amazon.com/connect/latest/APIReference/API_UserIdentityInfo.html) parameters are required in some situations. For example, `Email`,
-    /// `FirstName` and `LastName` are required if you are using Amazon Connect or
+    /// `FirstName` and `LastName` are required if you are using Connect Customer or
     /// SAML for
     /// identity management.
     ///
@@ -1167,9 +1252,9 @@ pub const Client = struct {
     /// `PersistentConnectionConfigs`, and `VoiceEnhancementConfigs` for per-channel
     /// configuration.
     ///
-    /// For information about how to create users using the Amazon Connect admin
+    /// For information about how to create users using the Connect Customer admin
     /// website, see [Add
-    /// Users](https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html) in the *Amazon Connect
+    /// Users](https://docs.aws.amazon.com/connect/latest/adminguide/user-management.html) in the *Connect Customer
     /// Administrator Guide*.
     pub fn createUser(self: *Self, allocator: std.mem.Allocator, input: create_user.CreateUserInput, options: CallOptions) !create_user.CreateUserOutput {
         return create_user.execute(self, allocator, input, options);
@@ -1207,10 +1292,10 @@ pub const Client = struct {
         return create_view_version.execute(self, allocator, input, options);
     }
 
-    /// Creates a custom vocabulary associated with your Amazon Connect instance.
+    /// Creates a custom vocabulary associated with your Connect Customer instance.
     /// You can set a custom vocabulary to
-    /// be your default vocabulary for a given language. Contact Lens for Amazon
-    /// Connect uses the default vocabulary in post-call and real-time
+    /// be your default vocabulary for a given language. Contact Lens for Connect
+    /// Customer uses the default vocabulary in post-call and real-time
     /// contact analysis sessions for that language.
     pub fn createVocabulary(self: *Self, allocator: std.mem.Allocator, input: create_vocabulary.CreateVocabularyInput, options: CallOptions) !create_vocabulary.CreateVocabularyOutput {
         return create_vocabulary.execute(self, allocator, input, options);
@@ -1229,7 +1314,7 @@ pub const Client = struct {
         return create_workspace_page.execute(self, allocator, input, options);
     }
 
-    /// Deactivates an evaluation form in the specified Amazon Connect instance.
+    /// Deactivates an evaluation form in the specified Connect Customer instance.
     /// After a form is deactivated, it is no longer
     /// available for users to start new evaluations based on the form.
     pub fn deactivateEvaluationForm(self: *Self, allocator: std.mem.Allocator, input: deactivate_evaluation_form.DeactivateEvaluationFormInput, options: CallOptions) !deactivate_evaluation_form.DeactivateEvaluationFormOutput {
@@ -1244,12 +1329,31 @@ pub const Client = struct {
         return delete_attached_file.execute(self, allocator, input, options);
     }
 
-    /// Deletes a contact evaluation in the specified Amazon Connect instance.
+    /// Deletes the specified fields containing personally identifiable information
+    /// (PII) from a
+    /// contact in the specified Connect Customer instance. We redact PII (such as
+    /// customer endpoints, additional email recipients, and the email subject) from
+    /// the contact and its
+    /// associated contact trace record (CTR). The contact must be in a terminated
+    /// state.
+    ///
+    /// **This deletion is permanent and cannot be undone.** Performing this
+    /// operation permanently deletes the specified PII. There is
+    /// no retention period; you cannot recover the data after deletion. We remove
+    /// only the fields
+    /// that Connect Customer identifies and stores as PII. Any PII that you place
+    /// in fields
+    /// outside the scope of this operation remains your responsibility to remove.
+    pub fn deleteContactData(self: *Self, allocator: std.mem.Allocator, input: delete_contact_data.DeleteContactDataInput, options: CallOptions) !delete_contact_data.DeleteContactDataOutput {
+        return delete_contact_data.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a contact evaluation in the specified Connect Customer instance.
     pub fn deleteContactEvaluation(self: *Self, allocator: std.mem.Allocator, input: delete_contact_evaluation.DeleteContactEvaluationInput, options: CallOptions) !delete_contact_evaluation.DeleteContactEvaluationOutput {
         return delete_contact_evaluation.execute(self, allocator, input, options);
     }
 
-    /// Deletes a flow for the specified Amazon Connect instance.
+    /// Deletes a flow for the specified Connect Customer instance.
     pub fn deleteContactFlow(self: *Self, allocator: std.mem.Allocator, input: delete_contact_flow.DeleteContactFlowInput, options: CallOptions) !delete_contact_flow.DeleteContactFlowOutput {
         return delete_contact_flow.execute(self, allocator, input, options);
     }
@@ -1294,12 +1398,12 @@ pub const Client = struct {
         return delete_data_table_attribute.execute(self, allocator, input, options);
     }
 
-    /// Deletes email address from the specified Amazon Connect instance.
+    /// Deletes email address from the specified Connect Customer instance.
     pub fn deleteEmailAddress(self: *Self, allocator: std.mem.Allocator, input: delete_email_address.DeleteEmailAddressInput, options: CallOptions) !delete_email_address.DeleteEmailAddressOutput {
         return delete_email_address.execute(self, allocator, input, options);
     }
 
-    /// Deletes an evaluation form in the specified Amazon Connect instance.
+    /// Deletes an evaluation form in the specified Connect Customer instance.
     ///
     /// * If the version property is provided, only the specified version of the
     ///   evaluation form is deleted.
@@ -1309,25 +1413,32 @@ pub const Client = struct {
         return delete_evaluation_form.execute(self, allocator, input, options);
     }
 
+    /// Deletes an extraction definition from the specified Connect Customer
+    /// instance.
+    pub fn deleteExtractionDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_extraction_definition.DeleteExtractionDefinitionInput, options: CallOptions) !delete_extraction_definition.DeleteExtractionDefinitionOutput {
+        return delete_extraction_definition.execute(self, allocator, input, options);
+    }
+
     /// Deletes an hours of operation.
     pub fn deleteHoursOfOperation(self: *Self, allocator: std.mem.Allocator, input: delete_hours_of_operation.DeleteHoursOfOperationInput, options: CallOptions) !delete_hours_of_operation.DeleteHoursOfOperationOutput {
         return delete_hours_of_operation.execute(self, allocator, input, options);
     }
 
-    /// Deletes an hours of operation override in an Amazon Connect hours of
+    /// Deletes an hours of operation override in an Connect Customer hours of
     /// operation resource.
     pub fn deleteHoursOfOperationOverride(self: *Self, allocator: std.mem.Allocator, input: delete_hours_of_operation_override.DeleteHoursOfOperationOverrideInput, options: CallOptions) !delete_hours_of_operation_override.DeleteHoursOfOperationOverrideOutput {
         return delete_hours_of_operation_override.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
-    /// Deletes the Amazon Connect instance. For more information, see [Delete your
-    /// Amazon Connect
+    /// Deletes the Connect Customer instance. For more information, see [Delete
+    /// your Connect Customer
     /// instance](https://docs.aws.amazon.com/connect/latest/adminguide/delete-connect-instance.html) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     ///
-    /// Amazon Connect enforces a limit on the total number of instances that you
+    /// Connect Customer enforces a limit on the total number of instances that you
     /// can create or delete in 30 days.
     /// If you exceed this limit, you will get an error message indicating there has
     /// been an excessive number of attempts at creating or deleting instances.
@@ -1337,11 +1448,18 @@ pub const Client = struct {
         return delete_instance.execute(self, allocator, input, options);
     }
 
-    /// Deletes an Amazon Web Services resource association from an Amazon Connect
+    /// Deletes an Amazon Web Services resource association from an Connect Customer
     /// instance. The association must not
     /// have any use cases associated with it.
     pub fn deleteIntegrationAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_integration_association.DeleteIntegrationAssociationInput, options: CallOptions) !delete_integration_association.DeleteIntegrationAssociationOutput {
         return delete_integration_association.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an existing metric from the specified Connect Customer instance.
+    /// This operation fails with `ResourceConflictException` if the metric is
+    /// currently in use in a dashboard.
+    pub fn deleteMetric(self: *Self, allocator: std.mem.Allocator, input: delete_metric.DeleteMetricInput, options: CallOptions) !delete_metric.DeleteMetricOutput {
+        return delete_metric.execute(self, allocator, input, options);
     }
 
     /// Deletes a notification. Once deleted, the notification is no longer visible
@@ -1350,7 +1468,7 @@ pub const Client = struct {
         return delete_notification.execute(self, allocator, input, options);
     }
 
-    /// Deletes a predefined attribute from the specified Amazon Connect instance.
+    /// Deletes a predefined attribute from the specified Connect Customer instance.
     pub fn deletePredefinedAttribute(self: *Self, allocator: std.mem.Allocator, input: delete_predefined_attribute.DeletePredefinedAttributeInput, options: CallOptions) !delete_predefined_attribute.DeletePredefinedAttributeOutput {
         return delete_predefined_attribute.execute(self, allocator, input, options);
     }
@@ -1380,9 +1498,9 @@ pub const Client = struct {
     ///
     /// * Remove deleted users so they don't appear to agents as transfer options.
     ///
-    /// * Avoid the disruption of other Amazon Connect processes, such as instance
+    /// * Avoid the disruption of other Connect Customer processes, such as instance
     ///   replication and syncing if
-    /// you're using [Amazon Connect Global
+    /// you're using [Connect Customer Global
     /// Resiliency](https://docs.aws.amazon.com/connect/latest/adminguide/setup-connect-global-resiliency.html).
     pub fn deleteQuickConnect(self: *Self, allocator: std.mem.Allocator, input: delete_quick_connect.DeleteQuickConnectInput, options: CallOptions) !delete_quick_connect.DeleteQuickConnectOutput {
         return delete_quick_connect.execute(self, allocator, input, options);
@@ -1393,7 +1511,7 @@ pub const Client = struct {
         return delete_routing_profile.execute(self, allocator, input, options);
     }
 
-    /// Deletes a rule for the specified Amazon Connect instance.
+    /// Deletes a rule for the specified Connect Customer instance.
     pub fn deleteRule(self: *Self, allocator: std.mem.Allocator, input: delete_rule.DeleteRuleInput, options: CallOptions) !delete_rule.DeleteRuleOutput {
         return delete_rule.execute(self, allocator, input, options);
     }
@@ -1401,6 +1519,11 @@ pub const Client = struct {
     /// Deletes a security profile.
     pub fn deleteSecurityProfile(self: *Self, allocator: std.mem.Allocator, input: delete_security_profile.DeleteSecurityProfileInput, options: CallOptions) !delete_security_profile.DeleteSecurityProfileOutput {
         return delete_security_profile.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a session for the specified Connect Customer instance.
+    pub fn deleteSession(self: *Self, allocator: std.mem.Allocator, input: delete_session.DeleteSessionInput, options: CallOptions) !delete_session.DeleteSessionOutput {
+        return delete_session.execute(self, allocator, input, options);
     }
 
     /// Deletes the task template.
@@ -1420,7 +1543,7 @@ pub const Client = struct {
     /// For more information about deleting traffic distribution groups, see [Delete
     /// traffic distribution
     /// groups](https://docs.aws.amazon.com/connect/latest/adminguide/delete-traffic-distribution-groups.html) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     pub fn deleteTrafficDistributionGroup(self: *Self, allocator: std.mem.Allocator, input: delete_traffic_distribution_group.DeleteTrafficDistributionGroupInput, options: CallOptions) !delete_traffic_distribution_group.DeleteTrafficDistributionGroupOutput {
         return delete_traffic_distribution_group.execute(self, allocator, input, options);
     }
@@ -1430,11 +1553,11 @@ pub const Client = struct {
         return delete_use_case.execute(self, allocator, input, options);
     }
 
-    /// Deletes a user account from the specified Amazon Connect instance.
+    /// Deletes a user account from the specified Connect Customer instance.
     ///
     /// For information about what happens to a user's data when their account is
-    /// deleted, see [Delete Users from Your Amazon Connect
-    /// Instance](https://docs.aws.amazon.com/connect/latest/adminguide/delete-users.html) in the *Amazon Connect Administrator Guide*.
+    /// deleted, see [Delete Users from Your Connect Customer
+    /// Instance](https://docs.aws.amazon.com/connect/latest/adminguide/delete-users.html) in the *Connect Customer Administrator Guide*.
     ///
     /// After calling DeleteUser, call
     /// [DeleteQuickConnect](https://docs.aws.amazon.com/connect/latest/APIReference/API_DeleteQuickConnect.html) to delete any records
@@ -1444,9 +1567,9 @@ pub const Client = struct {
     ///
     /// * Remove deleted users so they don't appear to agents as transfer options.
     ///
-    /// * Avoid the disruption of other Amazon Connect processes, such as instance
+    /// * Avoid the disruption of other Connect Customer processes, such as instance
     ///   replication and syncing if
-    /// you're using [Amazon Connect Global
+    /// you're using [Connect Customer Global
     /// Resiliency](https://docs.aws.amazon.com/connect/latest/adminguide/setup-connect-global-resiliency.html).
     pub fn deleteUser(self: *Self, allocator: std.mem.Allocator, input: delete_user.DeleteUserInput, options: CallOptions) !delete_user.DeleteUserOutput {
         return delete_user.execute(self, allocator, input, options);
@@ -1498,8 +1621,8 @@ pub const Client = struct {
         return describe_agent_status.execute(self, allocator, input, options);
     }
 
-    /// Describes the attached files configuration for the specified Amazon Connect
-    /// instance and attachment scope.
+    /// Describes the attached files configuration for the specified Connect
+    /// Customer instance and attachment scope.
     ///
     /// If a custom configuration exists for the specified attachment scope, the
     /// custom configuration is returned. If no custom configuration exists, the
@@ -1508,8 +1631,8 @@ pub const Client = struct {
         return describe_attached_files_configuration.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
-    /// To
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change. To
     /// request access to this API, contact Amazon Web Services Support.
     ///
     /// Describes the target authentication profile.
@@ -1517,7 +1640,8 @@ pub const Client = struct {
         return describe_authentication_profile.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Describes the specified contact.
     ///
@@ -1546,25 +1670,25 @@ pub const Client = struct {
     ///   MONITOR, QUEUE_TRANSFER,
     /// or CALLBACK
     ///
-    /// * Contact information remains available in Amazon Connect for 24 months from
-    ///   the
+    /// * Contact information remains available in Connect Customer for 24 months
+    ///   from the
     /// `InitiationTimestamp`, and then it is deleted. Only contact information that
-    /// is available in Amazon Connect is returned by this API.
+    /// is available in Connect Customer is returned by this API.
     ///
-    /// **Endpoints**: See [Amazon Connect endpoints and
+    /// **Endpoints**: See [Connect Customer endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
     pub fn describeContact(self: *Self, allocator: std.mem.Allocator, input: describe_contact.DescribeContactInput, options: CallOptions) !describe_contact.DescribeContactOutput {
         return describe_contact.execute(self, allocator, input, options);
     }
 
-    /// Describes a contact evaluation in the specified Amazon Connect instance.
+    /// Describes a contact evaluation in the specified Connect Customer instance.
     pub fn describeContactEvaluation(self: *Self, allocator: std.mem.Allocator, input: describe_contact_evaluation.DescribeContactEvaluationInput, options: CallOptions) !describe_contact_evaluation.DescribeContactEvaluationOutput {
         return describe_contact_evaluation.execute(self, allocator, input, options);
     }
 
     /// Describes the specified flow.
     ///
-    /// You can also create and update flows using the [Amazon Connect
+    /// You can also create and update flows using the [Connect Customer
     /// Flow
     /// language](https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html).
     ///
@@ -1621,16 +1745,22 @@ pub const Client = struct {
         return describe_data_table_attribute.execute(self, allocator, input, options);
     }
 
-    /// Describe email address form the specified Amazon Connect instance.
+    /// Describe email address form the specified Connect Customer instance.
     pub fn describeEmailAddress(self: *Self, allocator: std.mem.Allocator, input: describe_email_address.DescribeEmailAddressInput, options: CallOptions) !describe_email_address.DescribeEmailAddressOutput {
         return describe_email_address.execute(self, allocator, input, options);
     }
 
-    /// Describes an evaluation form in the specified Amazon Connect instance. If
+    /// Describes an evaluation form in the specified Connect Customer instance. If
     /// the version property is not
     /// provided, the latest version of the evaluation form is described.
     pub fn describeEvaluationForm(self: *Self, allocator: std.mem.Allocator, input: describe_evaluation_form.DescribeEvaluationFormInput, options: CallOptions) !describe_evaluation_form.DescribeEvaluationFormOutput {
         return describe_evaluation_form.execute(self, allocator, input, options);
+    }
+
+    /// Describes an extraction definition in the specified Connect Customer
+    /// instance.
+    pub fn describeExtractionDefinition(self: *Self, allocator: std.mem.Allocator, input: describe_extraction_definition.DescribeExtractionDefinitionInput, options: CallOptions) !describe_extraction_definition.DescribeExtractionDefinitionOutput {
+        return describe_extraction_definition.execute(self, allocator, input, options);
     }
 
     /// Describes the hours of operation.
@@ -1643,7 +1773,8 @@ pub const Client = struct {
         return describe_hours_of_operation_override.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Returns the current state of the specified instance identifier. It tracks
     /// the instance while it is being created
@@ -1657,14 +1788,16 @@ pub const Client = struct {
         return describe_instance.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Describes the specified instance attribute.
     pub fn describeInstanceAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_instance_attribute.DescribeInstanceAttributeInput, options: CallOptions) !describe_instance_attribute.DescribeInstanceAttributeOutput {
         return describe_instance_attribute.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Retrieves the current storage configurations for the specified resource
     /// type, association ID, and instance
@@ -1673,14 +1806,20 @@ pub const Client = struct {
         return describe_instance_storage_config.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the full definition of an existing metric from the specified
+    /// Connect Customer instance.
+    pub fn describeMetric(self: *Self, allocator: std.mem.Allocator, input: describe_metric.DescribeMetricInput, options: CallOptions) !describe_metric.DescribeMetricOutput {
+        return describe_metric.execute(self, allocator, input, options);
+    }
+
     /// Retrieves detailed information about a specific notification, including its
     /// content, priority, recipients, and metadata.
     pub fn describeNotification(self: *Self, allocator: std.mem.Allocator, input: describe_notification.DescribeNotificationInput, options: CallOptions) !describe_notification.DescribeNotificationOutput {
         return describe_notification.execute(self, allocator, input, options);
     }
 
-    /// Gets details and status of a phone number that’s claimed to your Amazon
-    /// Connect instance or traffic distribution group.
+    /// Gets details and status of a phone number that’s claimed to your Connect
+    /// Customer instance or traffic distribution group.
     ///
     /// If the number is claimed to a traffic distribution group, and you are
     /// calling in the Amazon Web Services Region where the traffic distribution
@@ -1697,8 +1836,8 @@ pub const Client = struct {
         return describe_phone_number.execute(self, allocator, input, options);
     }
 
-    /// Describes a predefined attribute for the specified Amazon Connect instance.
-    /// A *predefined attribute*
+    /// Describes a predefined attribute for the specified Connect Customer
+    /// instance. A *predefined attribute*
     /// is made up of a name and a value. You can use predefined attributes for:
     ///
     /// * Routing proficiency (for example, agent certification) that has predefined
@@ -1712,10 +1851,10 @@ pub const Client = struct {
     /// handling the contact. For more information, see [Use contact segment
     /// attributes](https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html).
     ///
-    /// For the predefined attributes per instance quota, see [Amazon Connect
+    /// For the predefined attributes per instance quota, see [Connect Customer
     /// quotas](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas).
     ///
-    /// **Endpoints**: See [Amazon Connect endpoints and
+    /// **Endpoints**: See [Connect Customer endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
     pub fn describePredefinedAttribute(self: *Self, allocator: std.mem.Allocator, input: describe_predefined_attribute.DescribePredefinedAttributeInput, options: CallOptions) !describe_predefined_attribute.DescribePredefinedAttributeOutput {
         return describe_predefined_attribute.execute(self, allocator, input, options);
@@ -1747,7 +1886,7 @@ pub const Client = struct {
         return describe_routing_profile.execute(self, allocator, input, options);
     }
 
-    /// Describes a rule for the specified Amazon Connect instance.
+    /// Describes a rule for the specified Connect Customer instance.
     pub fn describeRule(self: *Self, allocator: std.mem.Allocator, input: describe_rule.DescribeRuleInput, options: CallOptions) !describe_rule.DescribeRuleOutput {
         return describe_rule.execute(self, allocator, input, options);
     }
@@ -1755,7 +1894,7 @@ pub const Client = struct {
     /// Gets basic information about the security profile.
     ///
     /// For information about security profiles, see [Security
-    /// Profiles](https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html) in the *Amazon Connect Administrator Guide*. For a mapping of the API name and user interface name of the security
+    /// Profiles](https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html) in the *Connect Customer Administrator Guide*. For a mapping of the API name and user interface name of the security
     /// profile permissions, see [List
     /// of security profile
     /// permissions](https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html).
@@ -1774,8 +1913,8 @@ pub const Client = struct {
         return describe_traffic_distribution_group.execute(self, allocator, input, options);
     }
 
-    /// Describes the specified user. You can [find the instance ID in the Amazon
-    /// Connect
+    /// Describes the specified user. You can [find the instance ID in the Connect
+    /// Customer
     /// console](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) (it’s the final part of the ARN). The console does not display the user IDs. Instead, list the users
     /// and note the IDs provided in the output.
     pub fn describeUser(self: *Self, allocator: std.mem.Allocator, input: describe_user.DescribeUserInput, options: CallOptions) !describe_user.DescribeUserOutput {
@@ -1787,12 +1926,13 @@ pub const Client = struct {
         return describe_user_hierarchy_group.execute(self, allocator, input, options);
     }
 
-    /// Describes the hierarchy structure of the specified Amazon Connect instance.
+    /// Describes the hierarchy structure of the specified Connect Customer
+    /// instance.
     pub fn describeUserHierarchyStructure(self: *Self, allocator: std.mem.Allocator, input: describe_user_hierarchy_structure.DescribeUserHierarchyStructureInput, options: CallOptions) !describe_user_hierarchy_structure.DescribeUserHierarchyStructureOutput {
         return describe_user_hierarchy_structure.execute(self, allocator, input, options);
     }
 
-    /// Retrieves the view for the specified Amazon Connect instance and view
+    /// Retrieves the view for the specified Connect Customer instance and view
     /// identifier.
     ///
     /// The view identifier can be supplied as a ViewId or ARN.
@@ -1801,7 +1941,7 @@ pub const Client = struct {
     ///
     /// The view identifier can contain an optional qualifier, for example,
     /// `:$SAVED`, which
-    /// is either an actual version number or an Amazon Connect managed qualifier
+    /// is either an actual version number or an Connect Customer managed qualifier
     /// `$SAVED | $LATEST`. If it is
     /// not supplied, then `$LATEST` is assumed for customer managed views and an
     /// error is returned if there is no
@@ -1822,19 +1962,21 @@ pub const Client = struct {
         return describe_workspace.execute(self, allocator, input, options);
     }
 
-    /// Removes the dataset ID associated with a given Amazon Connect instance.
+    /// Removes the dataset ID associated with a given Connect Customer instance.
     pub fn disassociateAnalyticsDataSet(self: *Self, allocator: std.mem.Allocator, input: disassociate_analytics_data_set.DisassociateAnalyticsDataSetInput, options: CallOptions) !disassociate_analytics_data_set.DisassociateAnalyticsDataSetOutput {
         return disassociate_analytics_data_set.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
-    /// Revokes access to integrated applications from Amazon Connect.
+    /// Revokes access to integrated applications from Connect Customer.
     pub fn disassociateApprovedOrigin(self: *Self, allocator: std.mem.Allocator, input: disassociate_approved_origin.DisassociateApprovedOriginInput, options: CallOptions) !disassociate_approved_origin.DisassociateApprovedOriginOutput {
         return disassociate_approved_origin.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Revokes authorization from the specified instance to access the specified
     /// Amazon Lex or Amazon Lex V2 bot.
@@ -1842,8 +1984,8 @@ pub const Client = struct {
         return disassociate_bot.execute(self, allocator, input, options);
     }
 
-    /// Removes the alias association between two email addresses in an Amazon
-    /// Connect instance. After
+    /// Removes the alias association between two email addresses in an Connect
+    /// Customer instance. After
     /// disassociation, emails sent to the former alias email address are no longer
     /// forwarded to the primary email address.
     /// Both email addresses continue to exist independently and can receive emails
@@ -1889,14 +2031,14 @@ pub const Client = struct {
     ///
     /// * The timestamp of when the disassociation occurred.
     ///
-    /// **Endpoints**: See [Amazon Connect endpoints and
+    /// **Endpoints**: See [Connect Customer endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
     ///
     /// **Related operations**
     ///
     /// *
     ///   [AssociateEmailAddressAlias](https://docs.aws.amazon.com/connect/latest/APIReference/API_AssociateEmailAddressAlias.html): Associates an email address alias with an existing email address in an
-    /// Amazon Connect instance.
+    /// Connect Customer instance.
     ///
     /// *
     ///   [DescribeEmailAddress](https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeEmailAddress.html): View current alias configurations for an email address.
@@ -1922,13 +2064,15 @@ pub const Client = struct {
     }
 
     /// Disassociates a set of hours of operations with another hours of operation.
-    /// Refer to Administrator Guide [ here
-    /// ](https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html) for more information on inheriting overrides from parent hours of operation(s).
+    /// For more information about inheriting overrides from parent hours of
+    /// operation, see [Hours of operation
+    /// overrides](https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html) in the Administrator Guide.
     pub fn disassociateHoursOfOperations(self: *Self, allocator: std.mem.Allocator, input: disassociate_hours_of_operations.DisassociateHoursOfOperationsInput, options: CallOptions) !disassociate_hours_of_operations.DisassociateHoursOfOperationsOutput {
         return disassociate_hours_of_operations.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Removes the storage type configurations for the specified resource type and
     /// association ID.
@@ -1936,7 +2080,8 @@ pub const Client = struct {
         return disassociate_instance_storage_config.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Remove the Lambda function from the dropdown options available in the
     /// relevant flow blocks.
@@ -1944,7 +2089,8 @@ pub const Client = struct {
         return disassociate_lambda_function.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Revokes authorization from the specified instance to access the specified
     /// Amazon Lex bot.
@@ -1952,8 +2098,8 @@ pub const Client = struct {
         return disassociate_lex_bot.execute(self, allocator, input, options);
     }
 
-    /// Removes the flow association from a phone number claimed to your Amazon
-    /// Connect instance.
+    /// Removes the flow association from a phone number claimed to your Connect
+    /// Customer instance.
     ///
     /// If the number is claimed to a traffic distribution group, and you are
     /// calling this API using an instance in the Amazon Web Services Region where
@@ -2003,7 +2149,8 @@ pub const Client = struct {
         return disassociate_routing_profile_queues.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Deletes the specified security key.
     pub fn disassociateSecurityKey(self: *Self, allocator: std.mem.Allocator, input: disassociate_security_key.DisassociateSecurityKeyInput, options: CallOptions) !disassociate_security_key.DisassociateSecurityKeyOutput {
@@ -2097,18 +2244,30 @@ pub const Client = struct {
     /// * Metrics are only available while the contact is actively in queue.
     ///
     /// * For more information, see the [Position in
-    ///   queue](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) metric in the *Amazon Connect Administrator Guide*.
+    ///   queue](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) metric in the *Connect Customer Administrator Guide*.
     ///
-    /// **Endpoints**: See [Amazon Connect endpoints and
+    /// **Endpoints**: See [Connect Customer endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
     pub fn getContactMetrics(self: *Self, allocator: std.mem.Allocator, input: get_contact_metrics.GetContactMetricsInput, options: CallOptions) !get_contact_metrics.GetContactMetricsOutput {
         return get_contact_metrics.execute(self, allocator, input, options);
     }
 
-    /// Gets the real-time metric data from the specified Amazon Connect instance.
+    /// Retrieves the current cross-region routing configuration for an Amazon
+    /// Connect Global Resiliency instance
+    /// enabled for global routing. This operation returns whether cross-region
+    /// routing is currently enabled or disabled
+    /// (isolated) for the instance.
+    ///
+    /// This operation is available only for Amazon Connect Global Resiliency
+    /// instances enabled for global routing.
+    pub fn getCrossRegionRouting(self: *Self, allocator: std.mem.Allocator, input: get_cross_region_routing.GetCrossRegionRoutingInput, options: CallOptions) !get_cross_region_routing.GetCrossRegionRoutingOutput {
+        return get_cross_region_routing.execute(self, allocator, input, options);
+    }
+
+    /// Gets the real-time metric data from the specified Connect Customer instance.
     ///
     /// For a description of each metric, see [Metrics
-    /// definitions](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) in the *Amazon Connect Administrator Guide*.
+    /// definitions](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) in the *Connect Customer Administrator Guide*.
     ///
     /// When you make a successful API request, you can expect the following metric
     /// values in the response:
@@ -2137,7 +2296,7 @@ pub const Client = struct {
         return get_current_metric_data.execute(self, allocator, input, options);
     }
 
-    /// Gets the real-time active user data from the specified Amazon Connect
+    /// Gets the real-time active user data from the specified Connect Customer
     /// instance.
     pub fn getCurrentUserData(self: *Self, allocator: std.mem.Allocator, input: get_current_user_data.GetCurrentUserDataInput, options: CallOptions) !get_current_user_data.GetCurrentUserDataOutput {
         return get_current_user_data.execute(self, allocator, input, options);
@@ -2148,13 +2307,26 @@ pub const Client = struct {
         return get_effective_hours_of_operations.execute(self, allocator, input, options);
     }
 
-    /// Supports SAML sign-in for Amazon Connect. Retrieves a token for federation.
-    /// The token is for the Amazon Connect user which corresponds to the IAM
-    /// credentials that were used to invoke this action.
+    /// Retrieves the status and results of a validation process started by
+    /// [StartEvaluationFormValidation](https://docs.aws.amazon.com/connect/latest/APIReference/API_StartEvaluationFormValidation.html).
+    /// Returns the current execution status (`IN_PROGRESS`, `COMPLETED`, or
+    /// `FAILED`),
+    /// the validated form version, and when completed, a list of findings that
+    /// identify structural issues and quality
+    /// improvements for the evaluation form, and may include suggested fixes. If
+    /// the validation failed, a reason is provided
+    /// indicating the cause of the failure.
+    pub fn getEvaluationFormValidation(self: *Self, allocator: std.mem.Allocator, input: get_evaluation_form_validation.GetEvaluationFormValidationInput, options: CallOptions) !get_evaluation_form_validation.GetEvaluationFormValidationOutput {
+        return get_evaluation_form_validation.execute(self, allocator, input, options);
+    }
+
+    /// Supports SAML sign-in for Connect Customer. Retrieves a token for
+    /// federation. The token is for the Connect Customer user which corresponds to
+    /// the IAM credentials that were used to invoke this action.
     ///
-    /// For more information about how SAML sign-in works in Amazon Connect, see
-    /// [Configure SAML with IAM for Amazon Connect
-    /// in the *Amazon Connect Administrator
+    /// For more information about how SAML sign-in works in Connect Customer, see
+    /// [Configure SAML with IAM for Connect Customer
+    /// in the *Connect Customer Administrator
     /// Guide*.](https://docs.aws.amazon.com/connect/latest/adminguide/configure-saml.html )
     ///
     /// This API doesn't support root users. If you try to invoke GetFederationToken
@@ -2162,7 +2334,7 @@ pub const Client = struct {
     /// message similar to the following one appears:
     ///
     /// `Provided identity: Principal: .... User: .... cannot be used for federation
-    /// with Amazon Connect`
+    /// with Connect Customer`
     pub fn getFederationToken(self: *Self, allocator: std.mem.Allocator, input: get_federation_token.GetFederationTokenInput, options: CallOptions) !get_federation_token.GetFederationTokenOutput {
         return get_federation_token.execute(self, allocator, input, options);
     }
@@ -2172,10 +2344,10 @@ pub const Client = struct {
         return get_flow_association.execute(self, allocator, input, options);
     }
 
-    /// Gets historical metric data from the specified Amazon Connect instance.
+    /// Gets historical metric data from the specified Connect Customer instance.
     ///
     /// For a description of each historical metric, see [Metrics
-    /// definitions](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) in the *Amazon Connect Administrator Guide*.
+    /// definitions](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) in the *Connect Customer Administrator Guide*.
     ///
     /// We recommend using the
     /// [GetMetricDataV2](https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricDataV2.html) API. It provides more flexibility, features, and the ability to query longer time ranges
@@ -2190,7 +2362,7 @@ pub const Client = struct {
         return get_metric_data.execute(self, allocator, input, options);
     }
 
-    /// Gets metric data from the specified Amazon Connect instance.
+    /// Gets metric data from the specified Connect Customer instance.
     ///
     /// `GetMetricDataV2` offers more features than
     /// [GetMetricData](https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html), the previous version of this API. It
@@ -2203,7 +2375,7 @@ pub const Client = struct {
     /// For a description of the historical metrics that are supported by
     /// `GetMetricDataV2` and
     /// `GetMetricData`, see [Metrics
-    /// definitions](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) in the *Amazon Connect Administrator Guide*.
+    /// definitions](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) in the *Connect Customer Administrator Guide*.
     ///
     /// When you make a successful API request, you can expect the following metric
     /// values in the response:
@@ -2239,8 +2411,8 @@ pub const Client = struct {
         return get_prompt_file.execute(self, allocator, input, options);
     }
 
-    /// Gets details about a specific task template in the specified Amazon Connect
-    /// instance.
+    /// Gets details about a specific task template in the specified Connect
+    /// Customer instance.
     pub fn getTaskTemplate(self: *Self, allocator: std.mem.Allocator, input: get_task_template.GetTaskTemplateInput, options: CallOptions) !get_task_template.GetTaskTemplateOutput {
         return get_task_template.execute(self, allocator, input, options);
     }
@@ -2259,8 +2431,8 @@ pub const Client = struct {
 
     /// Imports a claimed phone number from an external service, such as Amazon Web
     /// Services End User Messaging, into an
-    /// Amazon Connect instance. You can call this API only in the same Amazon Web
-    /// Services Region where the Amazon Connect instance was created.
+    /// Connect Customer instance. You can call this API only in the same Amazon Web
+    /// Services Region where the Connect Customer instance was created.
     ///
     /// Call the
     /// [DescribePhoneNumber](https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html) API to verify the status of a previous `ImportPhoneNumber` operation.
@@ -2299,19 +2471,20 @@ pub const Client = struct {
         return list_agent_statuses.execute(self, allocator, input, options);
     }
 
-    /// Lists the association status of requested dataset ID for a given Amazon
-    /// Connect instance.
+    /// Lists the association status of requested dataset ID for a given Connect
+    /// Customer instance.
     pub fn listAnalyticsDataAssociations(self: *Self, allocator: std.mem.Allocator, input: list_analytics_data_associations.ListAnalyticsDataAssociationsInput, options: CallOptions) !list_analytics_data_associations.ListAnalyticsDataAssociationsOutput {
         return list_analytics_data_associations.execute(self, allocator, input, options);
     }
 
-    /// Lists the data lake datasets available to associate with for a given Amazon
-    /// Connect instance.
+    /// Lists the data lake datasets available to associate with for a given Connect
+    /// Customer instance.
     pub fn listAnalyticsDataLakeDataSets(self: *Self, allocator: std.mem.Allocator, input: list_analytics_data_lake_data_sets.ListAnalyticsDataLakeDataSetsInput, options: CallOptions) !list_analytics_data_lake_data_sets.ListAnalyticsDataLakeDataSetsOutput {
         return list_analytics_data_lake_data_sets.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Returns a paginated list of all approved origins associated with the
     /// instance.
@@ -2326,7 +2499,7 @@ pub const Client = struct {
     }
 
     /// Provides summary information about the attached files configurations for the
-    /// specified Amazon Connect instance.
+    /// specified Connect Customer instance.
     ///
     /// This API returns effective configurations (custom overrides or defaults) for
     /// each attachment scope. If no custom configuration exists for a scope, the
@@ -2335,18 +2508,19 @@ pub const Client = struct {
         return list_attached_files_configurations.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
-    /// To
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change. To
     /// request access to this API, contact Amazon Web Services Support.
     ///
     /// Provides summary information about the authentication profiles in a
-    /// specified Amazon Connect
+    /// specified Connect Customer
     /// instance.
     pub fn listAuthenticationProfiles(self: *Self, allocator: std.mem.Allocator, input: list_authentication_profiles.ListAuthenticationProfilesInput, options: CallOptions) !list_authentication_profiles.ListAuthenticationProfilesOutput {
         return list_authentication_profiles.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// For the specified version of Amazon Lex, returns a paginated list of all the
     /// Amazon Lex bots
@@ -2362,13 +2536,13 @@ pub const Client = struct {
     ///
     /// For more information about child hours of operations, see [Link overrides
     /// from different hours of
-    /// operation](https://docs.aws.amazon.com/connect/latest/adminguide/) in the
+    /// operation](https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html) in the
     /// * Administrator Guide*.
     pub fn listChildHoursOfOperations(self: *Self, allocator: std.mem.Allocator, input: list_child_hours_of_operations.ListChildHoursOfOperationsInput, options: CallOptions) !list_child_hours_of_operations.ListChildHoursOfOperationsOutput {
         return list_child_hours_of_operations.execute(self, allocator, input, options);
     }
 
-    /// Lists contact evaluations in the specified Amazon Connect instance.
+    /// Lists contact evaluations in the specified Connect Customer instance.
     pub fn listContactEvaluations(self: *Self, allocator: std.mem.Allocator, input: list_contact_evaluations.ListContactEvaluationsInput, options: CallOptions) !list_contact_evaluations.ListContactEvaluationsOutput {
         return list_contact_evaluations.execute(self, allocator, input, options);
     }
@@ -2386,33 +2560,34 @@ pub const Client = struct {
         return list_contact_flow_module_versions.execute(self, allocator, input, options);
     }
 
-    /// Provides information about the flow modules for the specified Amazon Connect
-    /// instance.
+    /// Provides information about the flow modules for the specified Connect
+    /// Customer instance.
     pub fn listContactFlowModules(self: *Self, allocator: std.mem.Allocator, input: list_contact_flow_modules.ListContactFlowModulesInput, options: CallOptions) !list_contact_flow_modules.ListContactFlowModulesOutput {
         return list_contact_flow_modules.execute(self, allocator, input, options);
     }
 
-    /// Returns all the available versions for the specified Amazon Connect instance
-    /// and flow identifier.
+    /// Returns all the available versions for the specified Connect Customer
+    /// instance and flow identifier.
     pub fn listContactFlowVersions(self: *Self, allocator: std.mem.Allocator, input: list_contact_flow_versions.ListContactFlowVersionsInput, options: CallOptions) !list_contact_flow_versions.ListContactFlowVersionsOutput {
         return list_contact_flow_versions.execute(self, allocator, input, options);
     }
 
-    /// Provides information about the flows for the specified Amazon Connect
+    /// Provides information about the flows for the specified Connect Customer
     /// instance.
     ///
-    /// You can also create and update flows using the [Amazon Connect
+    /// You can also create and update flows using the [Connect Customer
     /// Flow
     /// language](https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html).
     ///
     /// For more information about flows, see
-    /// [Flows](https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html) in the *Amazon Connect
+    /// [Flows](https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html) in the *Connect Customer
     /// Administrator Guide*.
     pub fn listContactFlows(self: *Self, allocator: std.mem.Allocator, input: list_contact_flows.ListContactFlowsInput, options: CallOptions) !list_contact_flows.ListContactFlowsOutput {
         return list_contact_flows.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// For the specified `referenceTypes`, returns a list of references associated
     /// with the contact.
@@ -2455,7 +2630,7 @@ pub const Client = struct {
         return list_data_tables.execute(self, allocator, input, options);
     }
 
-    /// Lists the default vocabularies for the specified Amazon Connect instance.
+    /// Lists the default vocabularies for the specified Connect Customer instance.
     pub fn listDefaultVocabularies(self: *Self, allocator: std.mem.Allocator, input: list_default_vocabularies.ListDefaultVocabulariesInput, options: CallOptions) !list_default_vocabularies.ListDefaultVocabulariesOutput {
         return list_default_vocabularies.execute(self, allocator, input, options);
     }
@@ -2466,15 +2641,26 @@ pub const Client = struct {
         return list_entity_security_profiles.execute(self, allocator, input, options);
     }
 
-    /// Lists versions of an evaluation form in the specified Amazon Connect
+    /// Lists the available AI versions for evaluation forms in the specified
+    /// Connect Customer instance.
+    pub fn listEvaluationFormAiVersions(self: *Self, allocator: std.mem.Allocator, input: list_evaluation_form_ai_versions.ListEvaluationFormAIVersionsInput, options: CallOptions) !list_evaluation_form_ai_versions.ListEvaluationFormAIVersionsOutput {
+        return list_evaluation_form_ai_versions.execute(self, allocator, input, options);
+    }
+
+    /// Lists versions of an evaluation form in the specified Connect Customer
     /// instance.
     pub fn listEvaluationFormVersions(self: *Self, allocator: std.mem.Allocator, input: list_evaluation_form_versions.ListEvaluationFormVersionsInput, options: CallOptions) !list_evaluation_form_versions.ListEvaluationFormVersionsOutput {
         return list_evaluation_form_versions.execute(self, allocator, input, options);
     }
 
-    /// Lists evaluation forms in the specified Amazon Connect instance.
+    /// Lists evaluation forms in the specified Connect Customer instance.
     pub fn listEvaluationForms(self: *Self, allocator: std.mem.Allocator, input: list_evaluation_forms.ListEvaluationFormsInput, options: CallOptions) !list_evaluation_forms.ListEvaluationFormsOutput {
         return list_evaluation_forms.execute(self, allocator, input, options);
+    }
+
+    /// Lists extraction definitions in the specified Connect Customer instance.
+    pub fn listExtractionDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_extraction_definitions.ListExtractionDefinitionsInput, options: CallOptions) !list_extraction_definitions.ListExtractionDefinitionsOutput {
+        return list_extraction_definitions.execute(self, allocator, input, options);
     }
 
     /// List the flow association based on the filters.
@@ -2487,25 +2673,27 @@ pub const Client = struct {
         return list_hours_of_operation_overrides.execute(self, allocator, input, options);
     }
 
-    /// Provides information about the hours of operation for the specified Amazon
-    /// Connect instance.
+    /// Provides information about the hours of operation for the specified Connect
+    /// Customer instance.
     ///
     /// For more information about hours of operation, see [Set the Hours of
     /// Operation for a
     /// Queue](https://docs.aws.amazon.com/connect/latest/adminguide/set-hours-operation.html) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     pub fn listHoursOfOperations(self: *Self, allocator: std.mem.Allocator, input: list_hours_of_operations.ListHoursOfOperationsInput, options: CallOptions) !list_hours_of_operations.ListHoursOfOperationsOutput {
         return list_hours_of_operations.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Returns a paginated list of all attribute types for the given instance.
     pub fn listInstanceAttributes(self: *Self, allocator: std.mem.Allocator, input: list_instance_attributes.ListInstanceAttributesInput, options: CallOptions) !list_instance_attributes.ListInstanceAttributesOutput {
         return list_instance_attributes.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Returns a paginated list of storage configs for the identified instance and
     /// resource type.
@@ -2513,7 +2701,8 @@ pub const Client = struct {
         return list_instance_storage_configs.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Return a list of instances which are in active state, creation-in-progress
     /// state, and failed state. Instances
@@ -2525,12 +2714,13 @@ pub const Client = struct {
     }
 
     /// Provides summary information about the Amazon Web Services resource
-    /// associations for the specified Amazon Connect instance.
+    /// associations for the specified Connect Customer instance.
     pub fn listIntegrationAssociations(self: *Self, allocator: std.mem.Allocator, input: list_integration_associations.ListIntegrationAssociationsInput, options: CallOptions) !list_integration_associations.ListIntegrationAssociationsOutput {
         return list_integration_associations.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Returns a paginated list of all Lambda functions that display in the
     /// dropdown options in the relevant flow
@@ -2539,7 +2729,8 @@ pub const Client = struct {
         return list_lambda_functions.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Returns a paginated list of all the Amazon Lex V1 bots currently associated
     /// with the instance. To return
@@ -2549,18 +2740,25 @@ pub const Client = struct {
         return list_lex_bots.execute(self, allocator, input, options);
     }
 
+    /// Retrieves a paginated list of metric summaries for the specified Connect
+    /// Customer instance. Use pagination to ensure that the operation returns
+    /// quickly and successfully.
+    pub fn listMetrics(self: *Self, allocator: std.mem.Allocator, input: list_metrics.ListMetricsInput, options: CallOptions) !list_metrics.ListMetricsOutput {
+        return list_metrics.execute(self, allocator, input, options);
+    }
+
     /// Retrieves a paginated list of all notifications in the Amazon Connect
     /// instance.
     pub fn listNotifications(self: *Self, allocator: std.mem.Allocator, input: list_notifications.ListNotificationsInput, options: CallOptions) !list_notifications.ListNotificationsOutput {
         return list_notifications.execute(self, allocator, input, options);
     }
 
-    /// Provides information about the phone numbers for the specified Amazon
-    /// Connect instance.
+    /// Provides information about the phone numbers for the specified Connect
+    /// Customer instance.
     ///
     /// For more information about phone numbers, see [Set Up Phone Numbers for Your
     /// Contact
-    /// Center](https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html) in the *Amazon Connect Administrator Guide*.
+    /// Center](https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html) in the *Connect Customer Administrator Guide*.
     ///
     /// * We recommend using
     ///   [ListPhoneNumbersV2](https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html) to return phone number types. ListPhoneNumbers doesn't support number types
@@ -2578,14 +2776,14 @@ pub const Client = struct {
         return list_phone_numbers.execute(self, allocator, input, options);
     }
 
-    /// Lists phone numbers claimed to your Amazon Connect instance or traffic
+    /// Lists phone numbers claimed to your Connect Customer instance or traffic
     /// distribution group. If the provided `TargetArn`
     /// is a traffic distribution group, you can call this API in both Amazon Web
     /// Services Regions associated with traffic distribution group.
     ///
     /// For more information about phone numbers, see [Set Up Phone Numbers for Your
     /// Contact
-    /// Center](https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html) in the *Amazon Connect Administrator Guide*.
+    /// Center](https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html) in the *Connect Customer Administrator Guide*.
     ///
     /// * When given an instance ARN, `ListPhoneNumbersV2` returns only the phone
     ///   numbers claimed to the
@@ -2598,7 +2796,7 @@ pub const Client = struct {
         return list_phone_numbers_v2.execute(self, allocator, input, options);
     }
 
-    /// Lists predefined attributes for the specified Amazon Connect instance. A
+    /// Lists predefined attributes for the specified Connect Customer instance. A
     /// *predefined attribute* is
     /// made up of a name and a value. You can use predefined attributes for:
     ///
@@ -2613,16 +2811,16 @@ pub const Client = struct {
     /// handling the contact. For more information, see [Use contact segment
     /// attributes](https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html).
     ///
-    /// For the predefined attributes per instance quota, see [Amazon Connect
+    /// For the predefined attributes per instance quota, see [Connect Customer
     /// quotas](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas).
     ///
-    /// **Endpoints**: See [Amazon Connect endpoints and
+    /// **Endpoints**: See [Connect Customer endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
     pub fn listPredefinedAttributes(self: *Self, allocator: std.mem.Allocator, input: list_predefined_attributes.ListPredefinedAttributesInput, options: CallOptions) !list_predefined_attributes.ListPredefinedAttributesOutput {
         return list_predefined_attributes.execute(self, allocator, input, options);
     }
 
-    /// Provides information about the prompts for the specified Amazon Connect
+    /// Provides information about the prompts for the specified Connect Customer
     /// instance.
     pub fn listPrompts(self: *Self, allocator: std.mem.Allocator, input: list_prompts.ListPromptsInput, options: CallOptions) !list_prompts.ListPromptsOutput {
         return list_prompts.execute(self, allocator, input, options);
@@ -2657,7 +2855,7 @@ pub const Client = struct {
         return list_queue_quick_connects.execute(self, allocator, input, options);
     }
 
-    /// Provides information about the queues for the specified Amazon Connect
+    /// Provides information about the queues for the specified Connect Customer
     /// instance.
     ///
     /// If you do not specify a `QueueTypes` parameter, both standard and
@@ -2667,13 +2865,13 @@ pub const Client = struct {
     ///
     /// For more information about queues, see [Queues: Standard and
     /// Agent](https://docs.aws.amazon.com/connect/latest/adminguide/concepts-queues-standard-and-agent.html) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     pub fn listQueues(self: *Self, allocator: std.mem.Allocator, input: list_queues.ListQueuesInput, options: CallOptions) !list_queues.ListQueuesOutput {
         return list_queues.execute(self, allocator, input, options);
     }
 
-    /// Provides information about the quick connects for the specified Amazon
-    /// Connect instance.
+    /// Provides information about the quick connects for the specified Connect
+    /// Customer instance.
     pub fn listQuickConnects(self: *Self, allocator: std.mem.Allocator, input: list_quick_connects.ListQuickConnectsInput, options: CallOptions) !list_quick_connects.ListQuickConnectsOutput {
         return list_quick_connects.execute(self, allocator, input, options);
     }
@@ -2702,8 +2900,8 @@ pub const Client = struct {
     /// invalid request exception will be thrown).
     ///
     /// For information about how manual contact assignment works in the agent
-    /// workspace, see the [Access the Worklist app in the Amazon Connect agent
-    /// workspace](https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html) in the *Amazon Connect Administrator Guide*.
+    /// workspace, see the [Access the Worklist app in the Connect Customer agent
+    /// workspace](https://docs.aws.amazon.com/connect/latest/adminguide/worklist-app.html) in the *Connect Customer Administrator Guide*.
     ///
     /// **Important things to know**
     ///
@@ -2712,7 +2910,7 @@ pub const Client = struct {
     /// ListRoutingProfileQueues API to list the auto assignment queues for the
     /// routing profile.
     ///
-    /// **Endpoints**: See [Amazon Connect endpoints and
+    /// **Endpoints**: See [Connect Customer endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
     pub fn listRoutingProfileManualAssignmentQueues(self: *Self, allocator: std.mem.Allocator, input: list_routing_profile_manual_assignment_queues.ListRoutingProfileManualAssignmentQueuesInput, options: CallOptions) !list_routing_profile_manual_assignment_queues.ListRoutingProfileManualAssignmentQueuesOutput {
         return list_routing_profile_manual_assignment_queues.execute(self, allocator, input, options);
@@ -2724,24 +2922,30 @@ pub const Client = struct {
     }
 
     /// Provides summary information about the routing profiles for the specified
-    /// Amazon Connect instance.
+    /// Connect Customer instance.
     ///
     /// For more information about routing profiles, see [Routing
-    /// Profiles](https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing.html) and [Create a Routing Profile](https://docs.aws.amazon.com/connect/latest/adminguide/routing-profiles.html) in the *Amazon Connect Administrator Guide*.
+    /// Profiles](https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing.html) and [Create a Routing Profile](https://docs.aws.amazon.com/connect/latest/adminguide/routing-profiles.html) in the *Connect Customer Administrator Guide*.
     pub fn listRoutingProfiles(self: *Self, allocator: std.mem.Allocator, input: list_routing_profiles.ListRoutingProfilesInput, options: CallOptions) !list_routing_profiles.ListRoutingProfilesOutput {
         return list_routing_profiles.execute(self, allocator, input, options);
     }
 
-    /// List all rules for the specified Amazon Connect instance.
+    /// List all rules for the specified Connect Customer instance.
     pub fn listRules(self: *Self, allocator: std.mem.Allocator, input: list_rules.ListRulesInput, options: CallOptions) !list_rules.ListRulesOutput {
         return list_rules.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Returns a paginated list of all security keys associated with the instance.
     pub fn listSecurityKeys(self: *Self, allocator: std.mem.Allocator, input: list_security_keys.ListSecurityKeysInput, options: CallOptions) !list_security_keys.ListSecurityKeysOutput {
         return list_security_keys.execute(self, allocator, input, options);
+    }
+
+    /// Returns a list of the allowed AI agents in a specific security profile.
+    pub fn listSecurityProfileAiAgents(self: *Self, allocator: std.mem.Allocator, input: list_security_profile_ai_agents.ListSecurityProfileAIAgentsInput, options: CallOptions) !list_security_profile_ai_agents.ListSecurityProfileAIAgentsOutput {
+        return list_security_profile_ai_agents.execute(self, allocator, input, options);
     }
 
     /// Returns a list of third-party applications or MCP Servers in a specific
@@ -2758,7 +2962,7 @@ pub const Client = struct {
     /// Lists the permissions granted to a security profile.
     ///
     /// For information about security profiles, see [Security
-    /// Profiles](https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html) in the *Amazon Connect Administrator Guide*. For a mapping of the API name and user interface name of the security
+    /// Profiles](https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html) in the *Connect Customer Administrator Guide*. For a mapping of the API name and user interface name of the security
     /// profile permissions, see [List
     /// of security profile
     /// permissions](https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html).
@@ -2767,10 +2971,10 @@ pub const Client = struct {
     }
 
     /// Provides summary information about the security profiles for the specified
-    /// Amazon Connect instance.
+    /// Connect Customer instance.
     ///
     /// For more information about security profiles, see [Security
-    /// Profiles](https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html) in the *Amazon Connect Administrator Guide*. For a mapping of the API name and user interface name of the security
+    /// Profiles](https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html) in the *Connect Customer Administrator Guide*. For a mapping of the API name and user interface name of the security
     /// profile permissions, see [List
     /// of security profile
     /// permissions](https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html).
@@ -2780,13 +2984,14 @@ pub const Client = struct {
 
     /// Lists the tags for the specified resource.
     ///
-    /// For sample policies that use tags, see [Amazon Connect Identity-Based Policy
-    /// Examples](https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html) in the *Amazon Connect Administrator Guide*.
+    /// For sample policies that use tags, see [Connect Customer Identity-Based
+    /// Policy
+    /// Examples](https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html) in the *Connect Customer Administrator Guide*.
     pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
-    /// Lists task templates for the specified Amazon Connect instance.
+    /// Lists task templates for the specified Connect Customer instance.
     pub fn listTaskTemplates(self: *Self, allocator: std.mem.Allocator, input: list_task_templates.ListTaskTemplatesInput, options: CallOptions) !list_task_templates.ListTaskTemplatesOutput {
         return list_task_templates.execute(self, allocator, input, options);
     }
@@ -2826,10 +3031,10 @@ pub const Client = struct {
     }
 
     /// Provides summary information about the hierarchy groups for the specified
-    /// Amazon Connect instance.
+    /// Connect Customer instance.
     ///
     /// For more information about agent hierarchies, see [Set Up Agent
-    /// Hierarchies](https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html) in the *Amazon Connect Administrator Guide*.
+    /// Hierarchies](https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html) in the *Connect Customer Administrator Guide*.
     pub fn listUserHierarchyGroups(self: *Self, allocator: std.mem.Allocator, input: list_user_hierarchy_groups.ListUserHierarchyGroupsInput, options: CallOptions) !list_user_hierarchy_groups.ListUserHierarchyGroupsOutput {
         return list_user_hierarchy_groups.execute(self, allocator, input, options);
     }
@@ -2845,14 +3050,14 @@ pub const Client = struct {
         return list_user_proficiencies.execute(self, allocator, input, options);
     }
 
-    /// Provides summary information about the users for the specified Amazon
-    /// Connect instance.
+    /// Provides summary information about the users for the specified Connect
+    /// Customer instance.
     pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: CallOptions) !list_users.ListUsersOutput {
         return list_users.execute(self, allocator, input, options);
     }
 
-    /// Returns all the available versions for the specified Amazon Connect instance
-    /// and view identifier.
+    /// Returns all the available versions for the specified Connect Customer
+    /// instance and view identifier.
     ///
     /// Results will be sorted from highest to lowest.
     pub fn listViewVersions(self: *Self, allocator: std.mem.Allocator, input: list_view_versions.ListViewVersionsInput, options: CallOptions) !list_view_versions.ListViewVersionsOutput {
@@ -2894,24 +3099,24 @@ pub const Client = struct {
         return pause_contact.execute(self, allocator, input, options);
     }
 
-    /// Changes the current status of a user or agent in Amazon Connect. If the
+    /// Changes the current status of a user or agent in Connect Customer. If the
     /// agent is currently handling a
     /// contact, this sets the agent's next status.
     ///
     /// For more information, see [Agent
     /// status](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-agent-status.html) and [Set your
     /// next
-    /// status](https://docs.aws.amazon.com/connect/latest/adminguide/set-next-status.html) in the *Amazon Connect Administrator Guide*.
+    /// status](https://docs.aws.amazon.com/connect/latest/adminguide/set-next-status.html) in the *Connect Customer Administrator Guide*.
     pub fn putUserStatus(self: *Self, allocator: std.mem.Allocator, input: put_user_status.PutUserStatusInput, options: CallOptions) !put_user_status.PutUserStatusOutput {
         return put_user_status.execute(self, allocator, input, options);
     }
 
-    /// Releases a phone number previously claimed to an Amazon Connect instance or
-    /// traffic distribution group. You can call this API
+    /// Releases a phone number previously claimed to an Connect Customer instance
+    /// or traffic distribution group. You can call this API
     /// only in the Amazon Web Services Region where the number was claimed.
     ///
     /// To release phone numbers from a traffic distribution group, use the
-    /// `ReleasePhoneNumber` API, not the Amazon Connect admin website.
+    /// `ReleasePhoneNumber` API, not the Connect Customer admin website.
     ///
     /// After releasing a phone number, the phone number enters into a cooldown
     /// period for up to 180 days. It cannot be
@@ -2946,13 +3151,14 @@ pub const Client = struct {
         return release_phone_number.execute(self, allocator, input, options);
     }
 
-    /// Replicates an Amazon Connect instance in the specified Amazon Web Services
+    /// Replicates an Connect Customer instance in the specified Amazon Web Services
     /// Region and copies configuration
-    /// information for Amazon Connect resources across Amazon Web Services Regions.
+    /// information for Connect Customer resources across Amazon Web Services
+    /// Regions.
     ///
-    /// For more information about replicating an Amazon Connect instance, see
-    /// [Create a replica of your existing Amazon Connect
-    /// instance](https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html) in the *Amazon Connect Administrator Guide*.
+    /// For more information about replicating an Connect Customer instance, see
+    /// [Create a replica of your existing Connect Customer
+    /// instance](https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html) in the *Connect Customer Administrator Guide*.
     pub fn replicateInstance(self: *Self, allocator: std.mem.Allocator, input: replicate_instance.ReplicateInstanceInput, options: CallOptions) !replicate_instance.ReplicateInstanceOutput {
         return replicate_instance.execute(self, allocator, input, options);
     }
@@ -2973,14 +3179,14 @@ pub const Client = struct {
         return resume_contact_recording.execute(self, allocator, input, options);
     }
 
-    /// Searches AgentStatuses in an Amazon Connect instance, with optional
+    /// Searches AgentStatuses in an Connect Customer instance, with optional
     /// filtering.
     pub fn searchAgentStatuses(self: *Self, allocator: std.mem.Allocator, input: search_agent_statuses.SearchAgentStatusesInput, options: CallOptions) !search_agent_statuses.SearchAgentStatusesOutput {
         return search_agent_statuses.execute(self, allocator, input, options);
     }
 
-    /// Searches for available phone numbers that you can claim to your Amazon
-    /// Connect instance or traffic distribution group. If the
+    /// Searches for available phone numbers that you can claim to your Connect
+    /// Customer instance or traffic distribution group. If the
     /// provided `TargetArn` is a traffic distribution group, you can call this API
     /// in both Amazon Web Services Regions associated with
     /// the traffic distribution group.
@@ -2988,7 +3194,7 @@ pub const Client = struct {
         return search_available_phone_numbers.execute(self, allocator, input, options);
     }
 
-    /// Searches contact evaluations in an Amazon Connect instance, with optional
+    /// Searches contact evaluations in an Connect Customer instance, with optional
     /// filtering.
     ///
     /// **Use cases**
@@ -3007,24 +3213,24 @@ pub const Client = struct {
     /// evaluations, try calling the API again
     /// in a few seconds.
     ///
-    /// **Endpoints**: See [Amazon Connect endpoints and
+    /// **Endpoints**: See [Connect Customer endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
     pub fn searchContactEvaluations(self: *Self, allocator: std.mem.Allocator, input: search_contact_evaluations.SearchContactEvaluationsInput, options: CallOptions) !search_contact_evaluations.SearchContactEvaluationsOutput {
         return search_contact_evaluations.execute(self, allocator, input, options);
     }
 
-    /// Searches the flow modules in an Amazon Connect instance, with optional
+    /// Searches the flow modules in an Connect Customer instance, with optional
     /// filtering.
     pub fn searchContactFlowModules(self: *Self, allocator: std.mem.Allocator, input: search_contact_flow_modules.SearchContactFlowModulesInput, options: CallOptions) !search_contact_flow_modules.SearchContactFlowModulesOutput {
         return search_contact_flow_modules.execute(self, allocator, input, options);
     }
 
-    /// Searches the flows in an Amazon Connect instance, with optional filtering.
+    /// Searches the flows in an Connect Customer instance, with optional filtering.
     pub fn searchContactFlows(self: *Self, allocator: std.mem.Allocator, input: search_contact_flows.SearchContactFlowsInput, options: CallOptions) !search_contact_flows.SearchContactFlowsOutput {
         return search_contact_flows.execute(self, allocator, input, options);
     }
 
-    /// Searches contacts in an Amazon Connect instance.
+    /// Searches contacts in an Connect Customer instance.
     pub fn searchContacts(self: *Self, allocator: std.mem.Allocator, input: search_contacts.SearchContactsInput, options: CallOptions) !search_contacts.SearchContactsOutput {
         return search_contacts.execute(self, allocator, input, options);
     }
@@ -3043,7 +3249,7 @@ pub const Client = struct {
         return search_email_addresses.execute(self, allocator, input, options);
     }
 
-    /// Searches evaluation forms in an Amazon Connect instance, with optional
+    /// Searches evaluation forms in an Connect Customer instance, with optional
     /// filtering.
     ///
     /// **Use cases**
@@ -3065,7 +3271,7 @@ pub const Client = struct {
     /// evaluations, try calling the API again
     /// in a few seconds.
     ///
-    /// **Endpoints**: See [Amazon Connect endpoints and
+    /// **Endpoints**: See [Connect Customer endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
     pub fn searchEvaluationForms(self: *Self, allocator: std.mem.Allocator, input: search_evaluation_forms.SearchEvaluationFormsInput, options: CallOptions) !search_evaluation_forms.SearchEvaluationFormsOutput {
         return search_evaluation_forms.execute(self, allocator, input, options);
@@ -3076,10 +3282,17 @@ pub const Client = struct {
         return search_hours_of_operation_overrides.execute(self, allocator, input, options);
     }
 
-    /// Searches the hours of operation in an Amazon Connect instance, with optional
-    /// filtering.
+    /// Searches the hours of operation in an Connect Customer instance, with
+    /// optional filtering.
     pub fn searchHoursOfOperations(self: *Self, allocator: std.mem.Allocator, input: search_hours_of_operations.SearchHoursOfOperationsInput, options: CallOptions) !search_hours_of_operations.SearchHoursOfOperationsOutput {
         return search_hours_of_operations.execute(self, allocator, input, options);
+    }
+
+    /// Searches for metrics in the specified Connect Customer instance using search
+    /// criteria and optional tag-based filters. Use pagination to ensure that the
+    /// operation returns quickly and successfully.
+    pub fn searchMetrics(self: *Self, allocator: std.mem.Allocator, input: search_metrics.SearchMetricsInput, options: CallOptions) !search_metrics.SearchMetricsOutput {
+        return search_metrics.execute(self, allocator, input, options);
     }
 
     /// Searches for notifications based on specified criteria and filters. Returns
@@ -3104,38 +3317,38 @@ pub const Client = struct {
     /// handling the contact. For more information, see [Use contact segment
     /// attributes](https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html).
     ///
-    /// For the predefined attributes per instance quota, see [Amazon Connect
+    /// For the predefined attributes per instance quota, see [Connect Customer
     /// quotas](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas).
     ///
-    /// **Endpoints**: See [Amazon Connect endpoints and
+    /// **Endpoints**: See [Connect Customer endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
     pub fn searchPredefinedAttributes(self: *Self, allocator: std.mem.Allocator, input: search_predefined_attributes.SearchPredefinedAttributesInput, options: CallOptions) !search_predefined_attributes.SearchPredefinedAttributesOutput {
         return search_predefined_attributes.execute(self, allocator, input, options);
     }
 
-    /// Searches prompts in an Amazon Connect instance, with optional filtering.
+    /// Searches prompts in an Connect Customer instance, with optional filtering.
     pub fn searchPrompts(self: *Self, allocator: std.mem.Allocator, input: search_prompts.SearchPromptsInput, options: CallOptions) !search_prompts.SearchPromptsOutput {
         return search_prompts.execute(self, allocator, input, options);
     }
 
-    /// Searches queues in an Amazon Connect instance, with optional filtering.
+    /// Searches queues in an Connect Customer instance, with optional filtering.
     pub fn searchQueues(self: *Self, allocator: std.mem.Allocator, input: search_queues.SearchQueuesInput, options: CallOptions) !search_queues.SearchQueuesOutput {
         return search_queues.execute(self, allocator, input, options);
     }
 
-    /// Searches quick connects in an Amazon Connect instance, with optional
+    /// Searches quick connects in an Connect Customer instance, with optional
     /// filtering.
     pub fn searchQuickConnects(self: *Self, allocator: std.mem.Allocator, input: search_quick_connects.SearchQuickConnectsInput, options: CallOptions) !search_quick_connects.SearchQuickConnectsOutput {
         return search_quick_connects.execute(self, allocator, input, options);
     }
 
-    /// Searches tags used in an Amazon Connect instance using optional search
+    /// Searches tags used in an Connect Customer instance using optional search
     /// criteria.
     pub fn searchResourceTags(self: *Self, allocator: std.mem.Allocator, input: search_resource_tags.SearchResourceTagsInput, options: CallOptions) !search_resource_tags.SearchResourceTagsOutput {
         return search_resource_tags.execute(self, allocator, input, options);
     }
 
-    /// Searches routing profiles in an Amazon Connect instance, with optional
+    /// Searches routing profiles in an Connect Customer instance, with optional
     /// filtering.
     ///
     /// `SearchRoutingProfiles` does not populate LastModifiedRegion,
@@ -3147,11 +3360,16 @@ pub const Client = struct {
         return search_routing_profiles.execute(self, allocator, input, options);
     }
 
-    /// Searches security profiles in an Amazon Connect instance, with optional
+    /// Searches rules in an Connect Customer instance, with optional filtering.
+    pub fn searchRules(self: *Self, allocator: std.mem.Allocator, input: search_rules.SearchRulesInput, options: CallOptions) !search_rules.SearchRulesOutput {
+        return search_rules.execute(self, allocator, input, options);
+    }
+
+    /// Searches security profiles in an Connect Customer instance, with optional
     /// filtering.
     ///
     /// For information about security profiles, see [Security
-    /// Profiles](https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html) in the *Amazon Connect Administrator Guide*. For a mapping of the API name and user interface name of the security
+    /// Profiles](https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html) in the *Connect Customer Administrator Guide*. For a mapping of the API name and user interface name of the security
     /// profile permissions, see [List
     /// of security profile
     /// permissions](https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html).
@@ -3165,7 +3383,7 @@ pub const Client = struct {
         return search_test_cases.execute(self, allocator, input, options);
     }
 
-    /// Searches UserHierarchyGroups in an Amazon Connect instance, with optional
+    /// Searches UserHierarchyGroups in an Connect Customer instance, with optional
     /// filtering.
     ///
     /// The UserHierarchyGroup with `"LevelId": "0"` is the foundation for building
@@ -3175,7 +3393,7 @@ pub const Client = struct {
         return search_user_hierarchy_groups.execute(self, allocator, input, options);
     }
 
-    /// Searches users in an Amazon Connect instance, with optional filtering.
+    /// Searches users in an Connect Customer instance, with optional filtering.
     ///
     /// `AfterContactWorkTimeLimit` is returned in milliseconds.
     pub fn searchUsers(self: *Self, allocator: std.mem.Allocator, input: search_users.SearchUsersInput, options: CallOptions) !search_users.SearchUsersOutput {
@@ -3187,7 +3405,7 @@ pub const Client = struct {
         return search_views.execute(self, allocator, input, options);
     }
 
-    /// Searches for vocabularies within a specific Amazon Connect instance using
+    /// Searches for vocabularies within a specific Connect Customer instance using
     /// `State`,
     /// `NameStartsWith`, and `LanguageCode`.
     pub fn searchVocabularies(self: *Self, allocator: std.mem.Allocator, input: search_vocabularies.SearchVocabulariesInput, options: CallOptions) !search_vocabularies.SearchVocabulariesOutput {
@@ -3206,7 +3424,7 @@ pub const Client = struct {
     }
 
     /// Processes chat integration events from Amazon Web Services or external
-    /// integrations to Amazon Connect. A chat
+    /// integrations to Connect Customer. A chat
     /// integration event includes:
     ///
     /// * SourceId, DestinationId, and Subtype: a set of identifiers, uniquely
@@ -3228,21 +3446,53 @@ pub const Client = struct {
     }
 
     /// Send outbound email for outbound campaigns. For more information about
-    /// outbound campaigns, see [Set up Amazon Connect
+    /// outbound campaigns, see [Set up Connect Customer
     /// outbound
     /// campaigns](https://docs.aws.amazon.com/connect/latest/adminguide/enable-outbound-campaigns.html).
     ///
-    /// Only the Amazon Connect outbound campaigns service principal is allowed to
+    /// Only the Connect Customer outbound campaigns service principal is allowed to
     /// assume a role in your account
     /// and call this API.
     pub fn sendOutboundEmail(self: *Self, allocator: std.mem.Allocator, input: send_outbound_email.SendOutboundEmailInput, options: CallOptions) !send_outbound_email.SendOutboundEmailOutput {
         return send_outbound_email.execute(self, allocator, input, options);
     }
 
+    /// Sends an outbound web notification to a customer's web browser for outbound
+    /// campaigns. For more information
+    /// about outbound campaigns, see [Set up Connect Customer outbound
+    /// campaigns](https://docs.aws.amazon.com/connect/latest/adminguide/enable-outbound-campaigns.html).
+    ///
+    /// Only the Connect Customer outbound campaigns service principal is allowed to
+    /// assume a role in your account
+    /// and call this API.
+    pub fn sendOutboundWebNotification(self: *Self, allocator: std.mem.Allocator, input: send_outbound_web_notification.SendOutboundWebNotificationInput, options: CallOptions) !send_outbound_web_notification.SendOutboundWebNotificationOutput {
+        return send_outbound_web_notification.execute(self, allocator, input, options);
+    }
+
+    /// Starts a chat contact with an AI agent.
+    ///
+    /// Use the returned `ParticipantToken` with the
+    /// [CreateParticipantConnection](https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html) operation.
+    ///
+    /// For more information about chat, see the following topics in the *Connect
+    /// Customer
+    /// Administrator Guide*:
+    ///
+    /// * [Concepts: Web and mobile messaging capabilities in Connect
+    ///   Customer](https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html)
+    ///
+    /// * [Connect Customer Chat security best
+    ///   practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat)
+    pub fn startAssistantContact(self: *Self, allocator: std.mem.Allocator, input: start_assistant_contact.StartAssistantContactInput, options: CallOptions) !start_assistant_contact.StartAssistantContactOutput {
+        return start_assistant_contact.execute(self, allocator, input, options);
+    }
+
     /// Provides a pre-signed Amazon S3 URL in response for uploading your content.
     ///
-    /// You may only use this API to upload attachments to an [Amazon Connect
-    /// Case](https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html) or [Amazon Connect Email](https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html).
+    /// You may only use this API to upload attachments to a [Connect Customer
+    /// Case](https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html), [Connect Customer Email](https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html), or
+    /// [Connect Customer
+    /// Task](https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html).
     pub fn startAttachedFileUpload(self: *Self, allocator: std.mem.Allocator, input: start_attached_file_upload.StartAttachedFileUploadInput, options: CallOptions) !start_attached_file_upload.StartAttachedFileUploadOutput {
         return start_attached_file_upload.execute(self, allocator, input, options);
     }
@@ -3250,12 +3500,18 @@ pub const Client = struct {
     /// Initiates a flow to start a new chat for the customer. Response of this API
     /// provides a token required to obtain
     /// credentials from the
-    /// [CreateParticipantConnection](https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html) API in the Amazon Connect Participant Service.
+    /// [CreateParticipantConnection](https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html) API in the Connect Customer Participant Service.
     ///
     /// When a new chat contact is successfully created, clients must subscribe to
     /// the participant’s connection for the
     /// created chat within 5 minutes. This is achieved by invoking
     /// [CreateParticipantConnection](https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html) with WEBSOCKET and CONNECTION_CREDENTIALS.
+    ///
+    /// To receive connection information directly in the response, set
+    /// `ConnectionTypes` on the request. To
+    /// initiate real-time message streaming when the chat is created, set
+    /// `ChatStreamingConfiguration` on the
+    /// request. Both parameters are optional.
     ///
     /// A 429 error occurs in the following situations:
     ///
@@ -3272,28 +3528,44 @@ pub const Client = struct {
     /// support the ability to configure custom chat durations. For more
     /// information, contact Amazon Web Services Support.
     ///
-    /// For more information about chat, see the following topics in the *Amazon
-    /// Connect
+    /// For more information about chat, see the following topics in the *Connect
+    /// Customer
     /// Administrator Guide*:
     ///
-    /// * [Concepts: Web and mobile messaging capabilities in Amazon
-    ///   Connect](https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html)
+    /// * [Concepts: Web and mobile messaging capabilities in Connect
+    ///   Customer](https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html)
     ///
-    /// * [Amazon Connect Chat security best
+    /// * [Connect Customer Chat security best
     ///   practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat)
     pub fn startChatContact(self: *Self, allocator: std.mem.Allocator, input: start_chat_contact.StartChatContactInput, options: CallOptions) !start_chat_contact.StartChatContactOutput {
         return start_chat_contact.execute(self, allocator, input, options);
     }
 
-    /// Starts an empty evaluation in the specified Amazon Connect instance, using
+    /// Starts a Contact Lens post-call analytics job for the specified contact.
+    /// This API runs Conversational
+    /// Analytics post-contact analysis on a voice recording that is already
+    /// attached to the contact, generating
+    /// transcription, sentiment analysis, redaction, and summarization results
+    /// based on the provided configuration.
+    ///
+    /// A voice recording must already be attached to the contact before calling
+    /// this API. Use
+    /// `CreateAttachedFile` to attach a recording from an S3 source URI.
+    ///
+    /// For example, you can call `CreateContact`, then `CreateAttachedFile`, then
+    /// `StartContactConversationalAnalyticsJob` to create a contact, attach a
+    /// recording, and
+    /// run post-call analytics.
+    pub fn startContactConversationalAnalyticsJob(self: *Self, allocator: std.mem.Allocator, input: start_contact_conversational_analytics_job.StartContactConversationalAnalyticsJobInput, options: CallOptions) !start_contact_conversational_analytics_job.StartContactConversationalAnalyticsJobOutput {
+        return start_contact_conversational_analytics_job.execute(self, allocator, input, options);
+    }
+
+    /// Starts an empty evaluation in the specified Connect Customer instance, using
     /// the given evaluation form for the
     /// particular contact. The evaluation form version used for the contact
     /// evaluation corresponds to the currently
     /// activated version. If no version is activated for the evaluation form, the
     /// contact evaluation cannot be started.
-    ///
-    /// Evaluations created through the public API do not contain answer values
-    /// suggested from automation.
     pub fn startContactEvaluation(self: *Self, allocator: std.mem.Allocator, input: start_contact_evaluation.StartContactEvaluationInput, options: CallOptions) !start_contact_evaluation.StartContactEvaluationOutput {
         return start_contact_evaluation.execute(self, allocator, input, options);
     }
@@ -3337,16 +3609,16 @@ pub const Client = struct {
     /// For more information about message streaming, see [Enable real-time chat
     /// message
     /// streaming](https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     ///
-    /// For more information about chat, see the following topics in the *Amazon
-    /// Connect
+    /// For more information about chat, see the following topics in the *Connect
+    /// Customer
     /// Administrator Guide*:
     ///
-    /// * [Concepts: Web and mobile messaging capabilities in Amazon
-    ///   Connect](https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html)
+    /// * [Concepts: Web and mobile messaging capabilities in Connect
+    ///   Customer](https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html)
     ///
-    /// * [Amazon Connect Chat security best
+    /// * [Connect Customer Chat security best
     ///   practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat)
     pub fn startContactStreaming(self: *Self, allocator: std.mem.Allocator, input: start_contact_streaming.StartContactStreamingInput, options: CallOptions) !start_contact_streaming.StartContactStreamingOutput {
         return start_contact_streaming.execute(self, allocator, input, options);
@@ -3357,6 +3629,19 @@ pub const Client = struct {
     /// this API provides the ContactId of the email contact created.
     pub fn startEmailContact(self: *Self, allocator: std.mem.Allocator, input: start_email_contact.StartEmailContactInput, options: CallOptions) !start_email_contact.StartEmailContactOutput {
         return start_email_contact.execute(self, allocator, input, options);
+    }
+
+    /// Starts an asynchronous validation process for an evaluation form version in
+    /// the specified Connect Customer
+    /// instance. The validation first performs structural checks on the form
+    /// content (such as verifying required fields,
+    /// valid scoring configuration, and correct conditional logic), then
+    /// asynchronously analyzes questions configured for
+    /// generative AI evaluation against a set of best practices. Use
+    /// [GetEvaluationFormValidation](https://docs.aws.amazon.com/connect/latest/APIReference/API_GetEvaluationFormValidation.html) to
+    /// retrieve the status and results once the validation completes.
+    pub fn startEvaluationFormValidation(self: *Self, allocator: std.mem.Allocator, input: start_evaluation_form_validation.StartEvaluationFormValidationInput, options: CallOptions) !start_evaluation_form_validation.StartEvaluationFormValidationOutput {
+        return start_evaluation_form_validation.execute(self, allocator, input, options);
     }
 
     /// Initiates a new outbound SMS or WhatsApp contact to a customer. Response of
@@ -3374,9 +3659,9 @@ pub const Client = struct {
     /// [StartOutboundChatContact](https://docs.aws.amazon.com/connect/latest/APIReference/API_StartOutboundChatContact.html) Flow
     /// Action.
     ///
-    /// For more information about using SMS or WhatsApp in Amazon Connect, see the
-    /// following topics in
-    /// the *Amazon Connect Administrator Guide*:
+    /// For more information about using SMS or WhatsApp in Connect Customer, see
+    /// the following topics in
+    /// the *Connect Customer Administrator Guide*:
     ///
     /// * [Set up SMS
     /// messaging](https://docs.aws.amazon.com/connect/latest/adminguide/setup-sms-messaging.html)
@@ -3417,15 +3702,15 @@ pub const Client = struct {
     ///
     /// UK numbers with a 447 prefix are not allowed by default. Before you can dial
     /// these UK mobile numbers, you must
-    /// submit a service quota increase request. For more information, see [Amazon
-    /// Connect Service
+    /// submit a service quota increase request. For more information, see [Connect
+    /// Customer Service
     /// Quotas](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     ///
     /// Campaign calls are not allowed by default. Before you can make a call with
     /// `TrafficType` =
     /// `CAMPAIGN`, you must submit a service quota increase request to the quota
-    /// [Amazon Connect
+    /// [Connect Customer
     /// campaigns](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#outbound-communications-quotas).
     ///
     /// For Preview dialing mode, only the Amazon Connect outbound campaigns service
@@ -3437,16 +3722,16 @@ pub const Client = struct {
 
     /// Starts screen sharing for a contact. For more information about screen
     /// sharing, see [Set up in-app, web, video calling, and screen sharing
-    /// capabilities](https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html) in the *Amazon Connect Administrator Guide*.
+    /// capabilities](https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html) in the *Connect Customer Administrator Guide*.
     pub fn startScreenSharing(self: *Self, allocator: std.mem.Allocator, input: start_screen_sharing.StartScreenSharingInput, options: CallOptions) !start_screen_sharing.StartScreenSharingOutput {
         return start_screen_sharing.execute(self, allocator, input, options);
     }
 
     /// Initiates a flow to start a new task contact. For more information about
-    /// task contacts, see [Concepts: Tasks in Amazon
-    /// Connect](https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html)
+    /// task contacts, see [Concepts: Tasks in Connect
+    /// Customer](https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html)
     /// in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     ///
     /// When using `PreviousContactId` and `RelatedContactId` input parameters, note
     /// the
@@ -3482,16 +3767,16 @@ pub const Client = struct {
     /// specified, or only the
     /// `TaskTemplateID` is specified but it does not have a flow configured, the
     /// request returns an error
-    /// because Amazon Connect cannot identify the unique flow to run when the task
-    /// is created.
+    /// because Connect Customer cannot identify the unique flow to run when the
+    /// task is created.
     ///
     /// A `ServiceQuotaExceededException` occurs when the number of open tasks
     /// exceeds the active tasks quota
     /// or there are already 12 tasks referencing the same `PreviousContactId`. For
     /// more information about service
-    /// quotas for task contacts, see [Amazon Connect service
+    /// quotas for task contacts, see [Connect Customer service
     /// quotas](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     pub fn startTaskContact(self: *Self, allocator: std.mem.Allocator, input: start_task_contact.StartTaskContactInput, options: CallOptions) !start_task_contact.StartTaskContactOutput {
         return start_task_contact.execute(self, allocator, input, options);
     }
@@ -3503,8 +3788,8 @@ pub const Client = struct {
 
     /// Places an inbound in-app, web, or video call to a contact, and then
     /// initiates the flow. It performs the actions
-    /// in the flow that are specified (in ContactFlowId) and present in the Amazon
-    /// Connect instance (specified as
+    /// in the flow that are specified (in ContactFlowId) and present in the Connect
+    /// Customer instance (specified as
     /// InstanceId).
     pub fn startWebRtcContact(self: *Self, allocator: std.mem.Allocator, input: start_web_rtc_contact.StartWebRTCContactInput, options: CallOptions) !start_web_rtc_contact.StartWebRTCContactOutput {
         return start_web_rtc_contact.execute(self, allocator, input, options);
@@ -3562,7 +3847,7 @@ pub const Client = struct {
         return stop_test_case_execution.execute(self, allocator, input, options);
     }
 
-    /// Submits a contact evaluation in the specified Amazon Connect instance.
+    /// Submits a contact evaluation in the specified Connect Customer instance.
     /// Answers included in the request are
     /// merged with existing answers for the given evaluation. If no answers or
     /// notes are passed, the evaluation is submitted
@@ -3596,7 +3881,7 @@ pub const Client = struct {
 
     /// Adds the specified tags to the contact resource. For more information about
     /// this API is used, see [Set up granular billing for a detailed
-    /// view of your Amazon Connect
+    /// view of your Connect Customer
     /// usage](https://docs.aws.amazon.com/connect/latest/adminguide/granular-billing.html).
     pub fn tagContact(self: *Self, allocator: std.mem.Allocator, input: tag_contact.TagContactInput, options: CallOptions) !tag_contact.TagContactOutput {
         return tag_contact.execute(self, allocator, input, options);
@@ -3606,12 +3891,14 @@ pub const Client = struct {
     ///
     /// Some of the supported resource types are agents, routing profiles, queues,
     /// quick connects, flows, agent
-    /// statuses, hours of operation, phone numbers, security profiles, and task
-    /// templates. For a complete list, see [Tagging resources in Amazon
-    /// Connect](https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html).
+    /// statuses, hours of operation, phone numbers, security profiles, task
+    /// templates, and custom metrics. For a complete list, see [Tagging resources
+    /// in Connect
+    /// Customer](https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html).
     ///
-    /// For sample policies that use tags, see [Amazon Connect Identity-Based Policy
-    /// Examples](https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html) in the *Amazon Connect Administrator Guide*.
+    /// For sample policies that use tags, see [Connect Customer Identity-Based
+    /// Policy
+    /// Examples](https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html) in the *Connect Customer Administrator Guide*.
     pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
@@ -3644,7 +3931,7 @@ pub const Client = struct {
 
     /// Removes the specified tags from the contact resource. For more information
     /// about this API is used, see [Set up granular billing for a detailed
-    /// view of your Amazon Connect
+    /// view of your Connect Customer
     /// usage](https://docs.aws.amazon.com/connect/latest/adminguide/granular-billing.html).
     pub fn untagContact(self: *Self, allocator: std.mem.Allocator, input: untag_contact.UntagContactInput, options: CallOptions) !untag_contact.UntagContactOutput {
         return untag_contact.execute(self, allocator, input, options);
@@ -3660,7 +3947,7 @@ pub const Client = struct {
         return update_agent_status.execute(self, allocator, input, options);
     }
 
-    /// Updates the attached files configuration for the specified Amazon Connect
+    /// Updates the attached files configuration for the specified Connect Customer
     /// instance and attachment scope.
     ///
     /// If no instance-specific configuration exists, this operation creates one.
@@ -3670,8 +3957,8 @@ pub const Client = struct {
         return update_attached_files_configuration.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
-    /// To
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change. To
     /// request access to this API, contact Amazon Web Services Support.
     ///
     /// Updates the selected authentication profile.
@@ -3679,7 +3966,8 @@ pub const Client = struct {
         return update_authentication_profile.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Adds or updates user-defined contact information associated with the
     /// specified contact. At least one field to be
@@ -3701,19 +3989,19 @@ pub const Client = struct {
     /// that the agent took during the call that display to the next agent that
     /// takes the call. You can also update
     /// attributes for a contact using data from your CRM application and save the
-    /// data with the contact in Amazon Connect. You could also flag calls for
+    /// data with the contact in Connect Customer. You could also flag calls for
     /// additional analysis, such as legal review or to identify abusive callers.
     ///
-    /// Contact attributes are available in Amazon Connect for 24 months, and are
+    /// Contact attributes are available in Connect Customer for 24 months, and are
     /// then deleted. For information
     /// about contact record retention and the maximum size of the contact record
     /// attributes section, see [Feature
-    /// specifications](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits) in the *Amazon Connect Administrator Guide*.
+    /// specifications](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits) in the *Connect Customer Administrator Guide*.
     pub fn updateContactAttributes(self: *Self, allocator: std.mem.Allocator, input: update_contact_attributes.UpdateContactAttributesInput, options: CallOptions) !update_contact_attributes.UpdateContactAttributesOutput {
         return update_contact_attributes.execute(self, allocator, input, options);
     }
 
-    /// Updates details about a contact evaluation in the specified Amazon Connect
+    /// Updates details about a contact evaluation in the specified Connect Customer
     /// instance. A contact evaluation
     /// must be in draft state. Answers included in the request are merged with
     /// existing answers for the given evaluation. An
@@ -3725,7 +4013,7 @@ pub const Client = struct {
 
     /// Updates the specified flow.
     ///
-    /// You can also create and update flows using the [Amazon Connect
+    /// You can also create and update flows using the [Connect Customer
     /// Flow
     /// language](https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html).
     ///
@@ -3749,7 +4037,7 @@ pub const Client = struct {
         return update_contact_flow_module_alias.execute(self, allocator, input, options);
     }
 
-    /// Updates specified flow module for the specified Amazon Connect instance.
+    /// Updates specified flow module for the specified Connect Customer instance.
     ///
     /// Use the `$SAVED` alias in the request to describe the `SAVED` content of a
     /// Flow. For
@@ -3767,7 +4055,7 @@ pub const Client = struct {
 
     /// The name of the flow.
     ///
-    /// You can also create and update flows using the [Amazon Connect
+    /// You can also create and update flows using the [Connect Customer
     /// Flow
     /// language](https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html).
     pub fn updateContactFlowName(self: *Self, allocator: std.mem.Allocator, input: update_contact_flow_name.UpdateContactFlowNameInput, options: CallOptions) !update_contact_flow_name.UpdateContactFlowNameOutput {
@@ -3798,6 +4086,70 @@ pub const Client = struct {
     /// Updates the scheduled time of a task contact that is already scheduled.
     pub fn updateContactSchedule(self: *Self, allocator: std.mem.Allocator, input: update_contact_schedule.UpdateContactScheduleInput, options: CallOptions) !update_contact_schedule.UpdateContactScheduleOutput {
         return update_contact_schedule.execute(self, allocator, input, options);
+    }
+
+    /// Updates the task template association on an existing task contact. You can
+    /// update the task template on a contact
+    /// before assignment to support tasks that are created without a template (for
+    /// example
+    /// [Rules](https://docs.aws.amazon.com/connect/latest/adminguide/connect-rules.html) or [disconnect flows](https://docs.aws.amazon.com/connect/latest/adminguide/set-disconnect-flow.html)) or change the agent interaction
+    /// form to represent the latest task data (for example an initial request that
+    /// was submitted as a refund gets updated to
+    /// an account cancellation and requires a new template).
+    ///
+    /// This operation can only be used with task contacts that are in progress and
+    /// not connected to an agent. A task
+    /// template can be updated a maximum of 5 times per contact.
+    ///
+    /// The task's references must be compatible with the fields of the target task
+    /// template. If the target template has
+    /// a required field, the task must have a corresponding reference with a
+    /// matching name and compatible type. The
+    /// following task template field types map to reference types:
+    ///
+    /// * `TEXT`, `TEXT_AREA`, `BOOLEAN`, and `SINGLE_SELECT` map to
+    /// references of type `STRING`.
+    ///
+    /// * `NUMBER` maps to references of type `NUMBER`.
+    ///
+    /// * `DATE_TIME` maps to references of type `DATE`.
+    ///
+    /// * `URL` maps to references of type `URL`.
+    ///
+    /// * `EMAIL` maps to references of type `EMAIL`.
+    ///
+    /// References corresponding to `TEXT` fields must be fewer than 512 characters.
+    /// `TEXT_AREA` fields must be fewer than 4,096 characters. `BOOLEAN` fields
+    /// must have a value
+    /// of `true` or `false`.
+    ///
+    /// An `InvalidRequestException` occurs when `UpdateContactTaskTemplate` is
+    /// called on a
+    /// connected or terminated task, when it is called on non-task contacts, and
+    /// when the task contact already uses the
+    /// provided task template. A `PropertyValidationException` occurs when the
+    /// task's references conflict with
+    /// the task template's fields, for example if the task is missing a reference
+    /// that matches a required field, or if the
+    /// task has a reference that matches a required field's name but not its
+    /// datatype.
+    pub fn updateContactTaskTemplate(self: *Self, allocator: std.mem.Allocator, input: update_contact_task_template.UpdateContactTaskTemplateInput, options: CallOptions) !update_contact_task_template.UpdateContactTaskTemplateOutput {
+        return update_contact_task_template.execute(self, allocator, input, options);
+    }
+
+    /// Updates the cross-region routing configuration for an Amazon Connect Global
+    /// Resiliency instance enabled
+    /// for global routing. When invoked with `IsolatedAll` set to `true`, this
+    /// operation disables
+    /// cross-region routing, meaning contacts originating in one Region will no
+    /// longer be routed to agents in
+    /// another Region.
+    ///
+    /// This operation is available only for Amazon Connect Global Resiliency
+    /// instances enabled for global routing. Reporting and contact
+    /// search continue to operate globally after you use this operation.
+    pub fn updateCrossRegionRouting(self: *Self, allocator: std.mem.Allocator, input: update_cross_region_routing.UpdateCrossRegionRoutingInput, options: CallOptions) !update_cross_region_routing.UpdateCrossRegionRoutingOutput {
+        return update_cross_region_routing.execute(self, allocator, input, options);
     }
 
     /// Updates all properties for an attribute using all properties from
@@ -3833,14 +4185,14 @@ pub const Client = struct {
 
     /// Updates an email address metadata. For more information about email
     /// addresses, see [Create email
-    /// addresses](https://docs.aws.amazon.com/connect/latest/adminguide/create-email-address1.html) in the Amazon Connect
+    /// addresses](https://docs.aws.amazon.com/connect/latest/adminguide/create-email-address1.html) in the Connect Customer
     /// Administrator Guide.
     pub fn updateEmailAddressMetadata(self: *Self, allocator: std.mem.Allocator, input: update_email_address_metadata.UpdateEmailAddressMetadataInput, options: CallOptions) !update_email_address_metadata.UpdateEmailAddressMetadataOutput {
         return update_email_address_metadata.execute(self, allocator, input, options);
     }
 
     /// Updates details about a specific evaluation form version in the specified
-    /// Amazon Connect instance. Question
+    /// Connect Customer instance. Question
     /// and section identifiers cannot be duplicated within the same evaluation
     /// form.
     ///
@@ -3849,6 +4201,11 @@ pub const Client = struct {
     /// content.
     pub fn updateEvaluationForm(self: *Self, allocator: std.mem.Allocator, input: update_evaluation_form.UpdateEvaluationFormInput, options: CallOptions) !update_evaluation_form.UpdateEvaluationFormOutput {
         return update_evaluation_form.execute(self, allocator, input, options);
+    }
+
+    /// Updates an extraction definition in the specified Connect Customer instance.
+    pub fn updateExtractionDefinition(self: *Self, allocator: std.mem.Allocator, input: update_extraction_definition.UpdateExtractionDefinitionInput, options: CallOptions) !update_extraction_definition.UpdateExtractionDefinitionOutput {
+        return update_extraction_definition.execute(self, allocator, input, options);
     }
 
     /// Updates the hours of operation.
@@ -3861,19 +4218,33 @@ pub const Client = struct {
         return update_hours_of_operation_override.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Updates the value for the specified attribute type.
     pub fn updateInstanceAttribute(self: *Self, allocator: std.mem.Allocator, input: update_instance_attribute.UpdateInstanceAttributeInput, options: CallOptions) !update_instance_attribute.UpdateInstanceAttributeOutput {
         return update_instance_attribute.execute(self, allocator, input, options);
     }
 
-    /// This API is in preview release for Amazon Connect and is subject to change.
+    /// This API is in preview release for Connect Customer and is subject to
+    /// change.
     ///
     /// Updates an existing configuration for a resource type. This API is
     /// idempotent.
     pub fn updateInstanceStorageConfig(self: *Self, allocator: std.mem.Allocator, input: update_instance_storage_config.UpdateInstanceStorageConfigInput, options: CallOptions) !update_instance_storage_config.UpdateInstanceStorageConfigOutput {
         return update_instance_storage_config.execute(self, allocator, input, options);
+    }
+
+    /// Updates the calculation, unit, and/or trend indicator of an existing metric
+    /// in the specified Connect Customer instance.
+    pub fn updateMetricContent(self: *Self, allocator: std.mem.Allocator, input: update_metric_content.UpdateMetricContentInput, options: CallOptions) !update_metric_content.UpdateMetricContentOutput {
+        return update_metric_content.execute(self, allocator, input, options);
+    }
+
+    /// Updates the name and/or description of an existing metric in the specified
+    /// Connect Customer instance.
+    pub fn updateMetricMetadata(self: *Self, allocator: std.mem.Allocator, input: update_metric_metadata.UpdateMetricMetadataInput, options: CallOptions) !update_metric_metadata.UpdateMetricMetadataOutput {
+        return update_metric_metadata.execute(self, allocator, input, options);
     }
 
     /// Updates the localized content of an existing notification. This operation
@@ -3882,7 +4253,7 @@ pub const Client = struct {
         return update_notification_content.execute(self, allocator, input, options);
     }
 
-    /// Instructs Amazon Connect to resume the authentication process. The
+    /// Instructs Connect Customer to resume the authentication process. The
     /// subsequent actions depend on the request
     /// body contents:
     ///
@@ -3920,9 +4291,9 @@ pub const Client = struct {
         return update_participant_role_config.execute(self, allocator, input, options);
     }
 
-    /// Updates your claimed phone number from its current Amazon Connect instance
-    /// or traffic distribution group to another Amazon Connect instance or traffic
-    /// distribution group in the same Amazon Web Services Region.
+    /// Updates your claimed phone number from its current Connect Customer instance
+    /// or traffic distribution group to another Connect Customer instance or
+    /// traffic distribution group in the same Amazon Web Services Region.
     ///
     /// After using this API, you must verify that the phone number is attached to
     /// the correct flow in the target
@@ -3946,11 +4317,11 @@ pub const Client = struct {
         return update_phone_number_metadata.execute(self, allocator, input, options);
     }
 
-    /// Updates a predefined attribute for the specified Amazon Connect instance. A
-    /// *predefined attribute* is
+    /// Updates a predefined attribute for the specified Connect Customer instance.
+    /// A *predefined attribute* is
     /// made up of a name and a value.
     ///
-    /// For the predefined attributes per instance quota, see [Amazon Connect
+    /// For the predefined attributes per instance quota, see [Connect Customer
     /// quotas](https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas).
     ///
     /// **Use cases**
@@ -3970,7 +4341,7 @@ pub const Client = struct {
     /// information, see [Use contact segment
     /// attributes](https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html).
     ///
-    /// **Endpoints**: See [Amazon Connect endpoints and
+    /// **Endpoints**: See [Connect Customer endpoints and
     /// quotas](https://docs.aws.amazon.com/general/latest/gr/connect_region.html).
     pub fn updatePredefinedAttribute(self: *Self, allocator: std.mem.Allocator, input: update_predefined_attribute.UpdatePredefinedAttributeInput, options: CallOptions) !update_predefined_attribute.UpdatePredefinedAttributeOutput {
         return update_predefined_attribute.execute(self, allocator, input, options);
@@ -4003,7 +4374,7 @@ pub const Client = struct {
     ///
     /// * If the phone number is claimed to a traffic distribution group that was
     ///   created in the
-    /// same Region as the Amazon Connect instance where you are calling this API,
+    /// same Region as the Connect Customer instance where you are calling this API,
     /// then you can use a
     /// full phone number ARN or a UUID for `OutboundCallerIdNumberId`. However, if
     /// the phone number is claimed
@@ -4083,7 +4454,7 @@ pub const Client = struct {
         return update_routing_profile_queues.execute(self, allocator, input, options);
     }
 
-    /// Updates a rule for the specified Amazon Connect instance.
+    /// Updates a rule for the specified Connect Customer instance.
     ///
     /// Use the [Rules Function
     /// language](https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html) to code conditions for the rule.
@@ -4094,7 +4465,7 @@ pub const Client = struct {
     /// Updates a security profile.
     ///
     /// For information about security profiles, see [Security
-    /// Profiles](https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html) in the *Amazon Connect Administrator Guide*. For a mapping of the API name and user interface name of the security
+    /// Profiles](https://docs.aws.amazon.com/connect/latest/adminguide/connect-security-profiles.html) in the *Connect Customer Administrator Guide*. For a mapping of the API name and user interface name of the security
     /// profile permissions, see [List
     /// of security profile
     /// permissions](https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html).
@@ -4102,8 +4473,8 @@ pub const Client = struct {
         return update_security_profile.execute(self, allocator, input, options);
     }
 
-    /// Updates details about a specific task template in the specified Amazon
-    /// Connect instance. This operation does
+    /// Updates details about a specific task template in the specified Connect
+    /// Customer instance. This operation does
     /// not support partial updates. Instead it does a full update of template
     /// content.
     pub fn updateTaskTemplate(self: *Self, allocator: std.mem.Allocator, input: update_task_template.UpdateTaskTemplateInput, options: CallOptions) !update_task_template.UpdateTaskTemplateOutput {
@@ -4137,7 +4508,7 @@ pub const Client = struct {
     /// For more information about updating a traffic distribution group, see
     /// [Update telephony traffic distribution
     /// across Amazon Web Services Regions
-    /// ](https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html) in the *Amazon Connect Administrator Guide*.
+    /// ](https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html) in the *Connect Customer Administrator Guide*.
     ///
     /// **Important things to know**
     ///
@@ -4185,7 +4556,7 @@ pub const Client = struct {
     /// reset the password through email. For more information, see [Best Practices
     /// for Security
     /// Profiles](https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-best-practices.html)
-    /// in the *Amazon Connect Administrator Guide*.
+    /// in the *Connect Customer Administrator Guide*.
     pub fn updateUserIdentityInfo(self: *Self, allocator: std.mem.Allocator, input: update_user_identity_info.UpdateUserIdentityInfoInput, options: CallOptions) !update_user_identity_info.UpdateUserIdentityInfoOutput {
         return update_user_identity_info.execute(self, allocator, input, options);
     }
@@ -4223,7 +4594,7 @@ pub const Client = struct {
     }
 
     /// Updates the view content of the given view identifier in the specified
-    /// Amazon Connect instance.
+    /// Connect Customer instance.
     ///
     /// It performs content validation if `Status` is set to `SAVED` and performs
     /// full content
@@ -4434,6 +4805,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn listEvaluationFormAiVersionsPaginator(self: *Self, params: list_evaluation_form_ai_versions.ListEvaluationFormAIVersionsInput) paginator.ListEvaluationFormAIVersionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listEvaluationFormVersionsPaginator(self: *Self, params: list_evaluation_form_versions.ListEvaluationFormVersionsInput) paginator.ListEvaluationFormVersionsPaginator {
         return .{
             .client = self,
@@ -4442,6 +4820,13 @@ pub const Client = struct {
     }
 
     pub fn listEvaluationFormsPaginator(self: *Self, params: list_evaluation_forms.ListEvaluationFormsInput) paginator.ListEvaluationFormsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listExtractionDefinitionsPaginator(self: *Self, params: list_extraction_definitions.ListExtractionDefinitionsInput) paginator.ListExtractionDefinitionsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -4505,6 +4890,13 @@ pub const Client = struct {
     }
 
     pub fn listLexBotsPaginator(self: *Self, params: list_lex_bots.ListLexBotsInput) paginator.ListLexBotsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listMetricsPaginator(self: *Self, params: list_metrics.ListMetricsInput) paginator.ListMetricsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -4596,6 +4988,13 @@ pub const Client = struct {
     }
 
     pub fn listSecurityKeysPaginator(self: *Self, params: list_security_keys.ListSecurityKeysInput) paginator.ListSecurityKeysPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listSecurityProfileAiAgentsPaginator(self: *Self, params: list_security_profile_ai_agents.ListSecurityProfileAIAgentsInput) paginator.ListSecurityProfileAIAgentsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -4770,6 +5169,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn searchMetricsPaginator(self: *Self, params: search_metrics.SearchMetricsInput) paginator.SearchMetricsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn searchPredefinedAttributesPaginator(self: *Self, params: search_predefined_attributes.SearchPredefinedAttributesInput) paginator.SearchPredefinedAttributesPaginator {
         return .{
             .client = self,
@@ -4806,6 +5212,13 @@ pub const Client = struct {
     }
 
     pub fn searchRoutingProfilesPaginator(self: *Self, params: search_routing_profiles.SearchRoutingProfilesInput) paginator.SearchRoutingProfilesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn searchRulesPaginator(self: *Self, params: search_rules.SearchRulesInput) paginator.SearchRulesPaginator {
         return .{
             .client = self,
             .params = params,

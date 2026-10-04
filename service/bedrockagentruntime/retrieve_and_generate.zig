@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const RetrieveAndGenerateConfiguration = @import("retrieve_and_generate_configuration.zig").RetrieveAndGenerateConfiguration;
 const RetrieveAndGenerateSessionConfiguration = @import("retrieve_and_generate_session_configuration.zig").RetrieveAndGenerateSessionConfiguration;
+const UserContext = @import("user_context.zig").UserContext;
 const Citation = @import("citation.zig").Citation;
 const GuadrailAction = @import("guadrail_action.zig").GuadrailAction;
 
@@ -71,6 +72,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RetrieveAndGenerateInpu
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.user_context) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"userContext\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -87,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RetrieveAndGenerateInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RetrieveAndGenerateOutput {
-    var result: RetrieveAndGenerateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RetrieveAndGenerateOutput, body, allocator);
-    }
+    const result: RetrieveAndGenerateOutput = try aws.json.parseJsonObject(
+        RetrieveAndGenerateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

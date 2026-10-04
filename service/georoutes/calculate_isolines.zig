@@ -283,7 +283,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CalculateIsolinesInput,
 
     const ep = try aws.url.parseEndpoint(endpoint);
 
-    const path = "/isolines";
+    const path = "/v2/isolines";
 
     var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
@@ -416,10 +416,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CalculateIsolinesInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CalculateIsolinesOutput {
-    var result: CalculateIsolinesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CalculateIsolinesOutput, body, allocator);
-    }
+    var result: CalculateIsolinesOutput = try aws.json.parseJsonObject(
+        CalculateIsolinesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("x-amz-geo-pricing-bucket")) |value| {
         result.pricing_bucket = try allocator.dupe(u8, value);

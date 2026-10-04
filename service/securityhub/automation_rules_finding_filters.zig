@@ -191,12 +191,25 @@ pub const AutomationRulesFindingFilters = struct {
     /// Array Members: Minimum number of 1 item. Maximum number of 100 items.
     resource_id: ?[]const StringFilter = null,
 
+    /// The unique identifier of the account that owns the resource that the finding
+    /// applies to, for example, Azure Subscription Id or Amazon Web Services
+    /// Account Id
+    resource_owner_account_id: ?[]const StringFilter = null,
+
+    /// The unique identifier of the organization that owns the resource that the
+    /// finding applies to, for example, Azure Tenant Id
+    resource_owner_org_id: ?[]const StringFilter = null,
+
     /// The partition in which the resource that the finding pertains to is located.
     /// A partition is a group of Amazon Web Services Regions. Each Amazon Web
     /// Services account is scoped to one partition.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
     resource_partition: ?[]const StringFilter = null,
+
+    /// The cloud provider that the resource belongs to. Valid values are `AWS` and
+    /// `Azure`.
+    resource_provider: ?[]const StringFilter = null,
 
     /// The Amazon Web Services Region where the resource that a finding pertains to
     /// is located.
@@ -292,7 +305,10 @@ pub const AutomationRulesFindingFilters = struct {
         .resource_application_name = "ResourceApplicationName",
         .resource_details_other = "ResourceDetailsOther",
         .resource_id = "ResourceId",
+        .resource_owner_account_id = "ResourceOwnerAccountId",
+        .resource_owner_org_id = "ResourceOwnerOrgId",
         .resource_partition = "ResourcePartition",
+        .resource_provider = "ResourceProvider",
         .resource_region = "ResourceRegion",
         .resource_tags = "ResourceTags",
         .resource_type = "ResourceType",

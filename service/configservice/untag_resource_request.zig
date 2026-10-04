@@ -17,6 +17,8 @@ pub const UntagResourceRequest = struct {
     /// * `AggregationAuthorization`
     ///
     /// * `StoredQuery`
+    ///
+    /// * `Connector`
     resource_arn: []const u8,
 
     /// The keys of the tags to be removed.

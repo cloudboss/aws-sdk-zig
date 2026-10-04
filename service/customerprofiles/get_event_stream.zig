@@ -104,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEventStreamInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetEventStreamOutput {
-    var result: GetEventStreamOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetEventStreamOutput, body, allocator);
-    }
+    const result: GetEventStreamOutput = try aws.json.parseJsonObject(
+        GetEventStreamOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

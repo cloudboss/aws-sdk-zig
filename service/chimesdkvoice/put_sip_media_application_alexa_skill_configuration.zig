@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutSipMediaApplicationA
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutSipMediaApplicationAlexaSkillConfigurationOutput {
-    var result: PutSipMediaApplicationAlexaSkillConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutSipMediaApplicationAlexaSkillConfigurationOutput, body, allocator);
-    }
+    const result: PutSipMediaApplicationAlexaSkillConfigurationOutput = try aws.json.parseJsonObject(
+        PutSipMediaApplicationAlexaSkillConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

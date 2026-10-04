@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const CustomModelDataSource = @import("custom_model_data_source.zig").CustomModelDataSource;
 const ModelDataSource = @import("model_data_source.zig").ModelDataSource;
 const Tag = @import("tag.zig").Tag;
 
@@ -14,6 +15,14 @@ pub const CreateCustomModelInput = struct {
     /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
     client_request_token: ?[]const u8 = null,
+
+    /// The data source for the custom model. Use this field to specify a SageMaker
+    /// AI model package ARN as the source for your custom model. Amazon Bedrock
+    /// resolves the model package to retrieve the model artifacts.
+    ///
+    /// You can specify either `customModelDataSource` or `modelSourceConfig`, but
+    /// not both.
+    custom_model_data_source: ?CustomModelDataSource = null,
 
     /// The Amazon Resource Name (ARN) of the customer managed KMS key to encrypt
     /// the custom model. If you don't provide a KMS key, Amazon Bedrock uses an
@@ -30,7 +39,7 @@ pub const CreateCustomModelInput = struct {
 
     /// The data source for the model. The Amazon S3 URI in the model source must be
     /// for the Amazon-managed Amazon S3 bucket containing your model artifacts.
-    model_source_config: ModelDataSource,
+    model_source_config: ?ModelDataSource = null,
 
     /// A list of key-value pairs to associate with the custom model resource. You
     /// can use these tags to organize and identify your resources.
@@ -45,10 +54,16 @@ pub const CreateCustomModelInput = struct {
     /// (if specified). For more information, see [Setting up an IAM service role
     /// for importing
     /// models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-import-iam-role.html) in the Amazon Bedrock User Guide.
+    ///
+    /// This field is required when you use `modelSourceConfig` with an Amazon S3
+    /// data source. It is not required when you use `customModelDataSource` with a
+    /// model package ARN, because Amazon Bedrock uses its own credentials to access
+    /// the model artifacts.
     role_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .client_request_token = "clientRequestToken",
+        .custom_model_data_source = "customModelDataSource",
         .model_kms_key_arn = "modelKmsKeyArn",
         .model_name = "modelName",
         .model_source_config = "modelSourceConfig",
@@ -108,6 +123,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCustomModelInput,
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.custom_model_data_source) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"customModelDataSource\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.model_kms_key_arn) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"modelKmsKeyArn\":");
@@ -118,10 +139,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCustomModelInput,
     try body_buf.appendSlice(allocator, "\"modelName\":");
     try aws.json.writeValue(@TypeOf(input.model_name), input.model_name, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"modelSourceConfig\":");
-    try aws.json.writeValue(@TypeOf(input.model_source_config), input.model_source_config, allocator, &body_buf);
-    has_prev = true;
+    if (input.model_source_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"modelSourceConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.model_tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"modelTags\":");
@@ -150,10 +173,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCustomModelInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCustomModelOutput {
-    var result: CreateCustomModelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCustomModelOutput, body, allocator);
-    }
+    const result: CreateCustomModelOutput = try aws.json.parseJsonObject(
+        CreateCustomModelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -136,10 +136,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSignalMapInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSignalMapOutput {
-    var result: GetSignalMapOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSignalMapOutput, body, allocator);
-    }
+    const result: GetSignalMapOutput = try aws.json.parseJsonObject(
+        GetSignalMapOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

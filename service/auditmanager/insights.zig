@@ -37,13 +37,13 @@ pub const Insights = struct {
     /// The number of compliance check evidence that Audit Manager classified as
     /// compliant
     /// on the `lastUpdated` date. This includes evidence that was collected from
-    /// Security Hub with a *Pass* ruling, or collected from
+    /// Security Hub CSPM with a *Pass* ruling, or collected from
     /// Config with a *Compliant* ruling.
     compliant_evidence_count: ?i32 = null,
 
     /// The number of evidence without a compliance check ruling. Evidence is
     /// inconclusive when
-    /// the associated control uses Security Hub or Config as a data
+    /// the associated control uses Security Hub CSPM or Config as a data
     /// source but you didn't enable those services. This is also the case when a
     /// control uses a
     /// data source that doesn’t support compliance checks (for example: manual
@@ -59,7 +59,7 @@ pub const Insights = struct {
 
     /// The number of compliance check evidence that Audit Manager classified as
     /// non-compliant on the `lastUpdated` date. This includes evidence that was
-    /// collected from Security Hub with a *Fail* ruling, or collected
+    /// collected from Security Hub CSPM with a *Fail* ruling, or collected
     /// from Config with a *Non-compliant* ruling.
     noncompliant_evidence_count: ?i32 = null,
 

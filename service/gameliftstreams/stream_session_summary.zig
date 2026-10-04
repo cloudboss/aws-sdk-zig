@@ -41,6 +41,11 @@ pub const StreamSessionSummary = struct {
     /// The data transfer protocol in use with the stream session.
     protocol: ?Protocol = null,
 
+    /// The ARN of the AWS Identity and Access Management (IAM) role that Amazon
+    /// GameLift Streams assumes on behalf of your application during the stream
+    /// session.
+    role_arn: ?[]const u8 = null,
+
     /// The current status of the stream session resource.
     ///
     /// * `ACTIVATING`: The stream session is starting and preparing to stream.
@@ -114,6 +119,7 @@ pub const StreamSessionSummary = struct {
         .last_updated_at = "LastUpdatedAt",
         .location = "Location",
         .protocol = "Protocol",
+        .role_arn = "RoleArn",
         .status = "Status",
         .status_reason = "StatusReason",
         .user_id = "UserId",

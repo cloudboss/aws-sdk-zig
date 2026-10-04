@@ -4,6 +4,7 @@ const ProfileQuestion = @import("profile_question.zig").ProfileQuestion;
 
 /// A profile.
 pub const Profile = struct {
+    /// The date and time when the profile was created.
     created_at: ?i64 = null,
 
     owner: ?[]const u8 = null,
@@ -29,6 +30,7 @@ pub const Profile = struct {
     /// The tags assigned to the profile.
     tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// The date and time when the profile was last updated.
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{

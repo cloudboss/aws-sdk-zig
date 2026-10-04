@@ -1,4 +1,5 @@
 const AuthorizationData = @import("authorization_data.zig").AuthorizationData;
+const CertificateConfiguration = @import("certificate_configuration.zig").CertificateConfiguration;
 const CredentialProviderConfiguration = @import("credential_provider_configuration.zig").CredentialProviderConfiguration;
 const MetadataConfiguration = @import("metadata_configuration.zig").MetadataConfiguration;
 const PrivateEndpoint = @import("private_endpoint.zig").PrivateEndpoint;
@@ -13,6 +14,10 @@ pub const GatewayTarget = struct {
     /// a target is configured with a credential provider with authorization code
     /// grant type and requires user federation.
     authorization_data: ?AuthorizationData = null,
+
+    /// The private certificate authority (CA) configurations for the gateway
+    /// target.
+    certificate_configurations: ?[]const CertificateConfiguration = null,
 
     /// The date and time at which the target was created.
     created_at: i64,
@@ -62,6 +67,7 @@ pub const GatewayTarget = struct {
 
     pub const json_field_names = .{
         .authorization_data = "authorizationData",
+        .certificate_configurations = "certificateConfigurations",
         .created_at = "createdAt",
         .credential_provider_configurations = "credentialProviderConfigurations",
         .description = "description",

@@ -64,10 +64,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListQuickSetupTypesInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListQuickSetupTypesOutput {
-    var result: ListQuickSetupTypesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListQuickSetupTypesOutput, body, allocator);
-    }
+    const result: ListQuickSetupTypesOutput = try aws.json.parseJsonObject(
+        ListQuickSetupTypesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

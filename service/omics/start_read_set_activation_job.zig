@@ -112,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartReadSetActivationJ
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartReadSetActivationJobOutput {
-    var result: StartReadSetActivationJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartReadSetActivationJobOutput, body, allocator);
-    }
+    const result: StartReadSetActivationJobOutput = try aws.json.parseJsonObject(
+        StartReadSetActivationJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

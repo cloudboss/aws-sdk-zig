@@ -112,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteThemeInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteThemeOutput {
-    var result: DeleteThemeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteThemeOutput, body, allocator);
-    }
+    var result: DeleteThemeOutput = try aws.json.parseJsonObject(
+        DeleteThemeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

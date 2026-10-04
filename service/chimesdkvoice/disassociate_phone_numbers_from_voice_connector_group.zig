@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisassociatePhoneNumber
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DisassociatePhoneNumbersFromVoiceConnectorGroupOutput {
-    var result: DisassociatePhoneNumbersFromVoiceConnectorGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DisassociatePhoneNumbersFromVoiceConnectorGroupOutput, body, allocator);
-    }
+    const result: DisassociatePhoneNumbersFromVoiceConnectorGroupOutput = try aws.json.parseJsonObject(
+        DisassociatePhoneNumbersFromVoiceConnectorGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

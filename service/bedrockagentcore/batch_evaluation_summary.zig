@@ -1,8 +1,9 @@
 const EvaluationJobResults = @import("evaluation_job_results.zig").EvaluationJobResults;
 const Evaluator = @import("evaluator.zig").Evaluator;
+const Insight = @import("insight.zig").Insight;
 const BatchEvaluationStatus = @import("batch_evaluation_status.zig").BatchEvaluationStatus;
 
-/// Summary representation for list responses
+/// Summary representation for list responses.
 pub const BatchEvaluationSummary = struct {
     /// The Amazon Resource Name (ARN) of the batch evaluation.
     batch_evaluation_arn: []const u8,
@@ -28,6 +29,12 @@ pub const BatchEvaluationSummary = struct {
     /// The list of evaluators applied during the batch evaluation.
     evaluators: ?[]const Evaluator = null,
 
+    /// The list of insight analyses applied during the batch evaluation.
+    insights: ?[]const Insight = null,
+
+    /// The ARN of the KMS key used to encrypt evaluation data.
+    kms_key_arn: ?[]const u8 = null,
+
     /// The current status of the batch evaluation.
     status: BatchEvaluationStatus,
 
@@ -43,6 +50,8 @@ pub const BatchEvaluationSummary = struct {
         .error_details = "errorDetails",
         .evaluation_results = "evaluationResults",
         .evaluators = "evaluators",
+        .insights = "insights",
+        .kms_key_arn = "kmsKeyArn",
         .status = "status",
         .updated_at = "updatedAt",
     };

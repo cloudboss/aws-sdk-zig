@@ -74,10 +74,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPendingMaintenanceAc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPendingMaintenanceActionOutput {
-    var result: GetPendingMaintenanceActionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPendingMaintenanceActionOutput, body, allocator);
-    }
+    const result: GetPendingMaintenanceActionOutput = try aws.json.parseJsonObject(
+        GetPendingMaintenanceActionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

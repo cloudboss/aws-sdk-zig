@@ -3,16 +3,19 @@ const std = @import("std");
 pub const ViewerMtlsMode = enum {
     required,
     optional,
+    passthrough,
 
     pub const json_field_names = .{
         .required = "required",
         .optional = "optional",
+        .passthrough = "passthrough",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .required => "required",
             .optional => "optional",
+            .passthrough => "passthrough",
         };
     }
 

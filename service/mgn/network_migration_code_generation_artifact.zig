@@ -12,8 +12,7 @@ pub const NetworkMigrationCodeGenerationArtifact = struct {
     /// The sub-type of the artifact for further classification.
     artifact_sub_type: ?NetworkMigrationCodeGenerationArtifactSubType = null,
 
-    /// The type of the artifact, such as CLOUDFORMATION_TEMPLATE or
-    /// TERRAFORM_MODULE.
+    /// The type of the generated artifact.
     artifact_type: ?NetworkMigrationCodeGenerationArtifactType = null,
 
     /// The checksum of the artifact for integrity verification.

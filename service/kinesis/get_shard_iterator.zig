@@ -7,6 +7,10 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ShardIteratorType = @import("shard_iterator_type.zig").ShardIteratorType;
 
 pub const GetShardIteratorInput = struct {
+    /// Checks if your request will succeed. `DryRun` is an optional
+    /// parameter.
+    dry_run: ?bool = null,
+
     /// The shard ID of the Kinesis Data Streams shard to get the iterator for.
     shard_id: []const u8,
 
@@ -65,6 +69,7 @@ pub const GetShardIteratorInput = struct {
     timestamp: ?i64 = null,
 
     pub const json_field_names = .{
+        .dry_run = "DryRun",
         .shard_id = "ShardId",
         .shard_iterator_type = "ShardIteratorType",
         .starting_sequence_number = "StartingSequenceNumber",

@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutRepositoryPermission
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutRepositoryPermissionsPolicyOutput {
-    var result: PutRepositoryPermissionsPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutRepositoryPermissionsPolicyOutput, body, allocator);
-    }
+    const result: PutRepositoryPermissionsPolicyOutput = try aws.json.parseJsonObject(
+        PutRepositoryPermissionsPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

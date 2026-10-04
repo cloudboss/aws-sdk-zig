@@ -134,10 +134,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListEksAnywhereSubscrip
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListEksAnywhereSubscriptionsOutput {
-    var result: ListEksAnywhereSubscriptionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListEksAnywhereSubscriptionsOutput, body, allocator);
-    }
+    const result: ListEksAnywhereSubscriptionsOutput = try aws.json.parseJsonObject(
+        ListEksAnywhereSubscriptionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

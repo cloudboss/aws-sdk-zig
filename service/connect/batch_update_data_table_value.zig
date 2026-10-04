@@ -104,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchUpdateDataTableVal
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchUpdateDataTableValueOutput {
-    var result: BatchUpdateDataTableValueOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchUpdateDataTableValueOutput, body, allocator);
-    }
+    const result: BatchUpdateDataTableValueOutput = try aws.json.parseJsonObject(
+        BatchUpdateDataTableValueOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

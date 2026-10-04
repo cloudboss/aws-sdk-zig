@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const AddReplicaLocationInput = @import("add_replica_location_input.zig").AddReplicaLocationInput;
 const ArtifactConfigInput = @import("artifact_config_input.zig").ArtifactConfigInput;
 const BrowserConfig = @import("browser_config.zig").BrowserConfig;
 const CanaryCodeInput = @import("canary_code_input.zig").CanaryCodeInput;
@@ -15,6 +16,12 @@ const VpcConfigInput = @import("vpc_config_input.zig").VpcConfigInput;
 const Canary = @import("canary.zig").Canary;
 
 pub const CreateCanaryInput = struct {
+    /// A list of locations (Amazon Web Services Regions) to add as replicas for the
+    /// canary. Each location specifies a Region and optional VPC configuration for
+    /// the replica.
+    /// You can add up to 50 replica locations.
+    add_replica_locations: ?[]const AddReplicaLocationInput = null,
+
     /// A structure that contains the configuration for canary artifacts, including
     /// the encryption-at-rest settings for artifacts that the canary uploads to
     /// Amazon S3.
@@ -70,6 +77,13 @@ pub const CreateCanaryInput = struct {
     /// [GetCanaryRuns](https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html), as well as
     /// the range of information displayed in the Synthetics console.
     failure_retention_period_in_days: ?i32 = null,
+
+    /// The Amazon Resource Name (ARN) of the customer-managed AWS Key Management
+    /// Service (AWS KMS) key used to encrypt the canary's
+    /// AWS Lambda function environment variables at rest. If you don't specify a
+    /// value,
+    /// the service uses an AWS-managed key.
+    kms_key_arn: ?[]const u8 = null,
 
     /// The name for this canary. Be sure to give it a descriptive name
     /// that distinguishes it from other canaries in your account.
@@ -157,12 +171,14 @@ pub const CreateCanaryInput = struct {
     vpc_config: ?VpcConfigInput = null,
 
     pub const json_field_names = .{
+        .add_replica_locations = "AddReplicaLocations",
         .artifact_config = "ArtifactConfig",
         .artifact_s3_location = "ArtifactS3Location",
         .browser_configs = "BrowserConfigs",
         .code = "Code",
         .execution_role_arn = "ExecutionRoleArn",
         .failure_retention_period_in_days = "FailureRetentionPeriodInDays",
+        .kms_key_arn = "KmsKeyArn",
         .name = "Name",
         .provisioned_resource_cleanup = "ProvisionedResourceCleanup",
         .resources_to_replicate_tags = "ResourcesToReplicateTags",
@@ -220,6 +236,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCanaryInput, conf
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.add_replica_locations) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AddReplicaLocations\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.artifact_config) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"ArtifactConfig\":");
@@ -247,6 +269,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCanaryInput, conf
     if (input.failure_retention_period_in_days) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"FailureRetentionPeriodInDays\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.kms_key_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"KmsKeyArn\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -314,10 +342,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCanaryInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCanaryOutput {
-    var result: CreateCanaryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCanaryOutput, body, allocator);
-    }
+    const result: CreateCanaryOutput = try aws.json.parseJsonObject(
+        CreateCanaryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

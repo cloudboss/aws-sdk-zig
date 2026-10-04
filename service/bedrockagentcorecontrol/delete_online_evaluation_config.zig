@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteOnlineEvaluationC
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteOnlineEvaluationConfigOutput {
-    var result: DeleteOnlineEvaluationConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteOnlineEvaluationConfigOutput, body, allocator);
-    }
+    const result: DeleteOnlineEvaluationConfigOutput = try aws.json.parseJsonObject(
+        DeleteOnlineEvaluationConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

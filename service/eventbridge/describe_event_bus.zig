@@ -45,9 +45,14 @@ pub const DescribeEventBusOutput = struct {
     /// The logging configuration settings for the event bus.
     ///
     /// For more information, see [Configuring logs for event
-    /// buses](https://docs.aws.amazon.com/eb-event-bus-logs.html) in the
-    /// *EventBridge User Guide*.
+    /// buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html) in the *EventBridge User Guide*.
     log_config: ?LogConfig = null,
+
+    /// If the event bus was created on behalf of your account by an Amazon Web
+    /// Services service,
+    /// this field displays the principal name of the service that created the event
+    /// bus.
+    managed_by: ?[]const u8 = null,
 
     /// The name of the event bus. Currently, this is always `default`.
     name: ?[]const u8 = null,
@@ -63,6 +68,7 @@ pub const DescribeEventBusOutput = struct {
         .kms_key_identifier = "KmsKeyIdentifier",
         .last_modified_time = "LastModifiedTime",
         .log_config = "LogConfig",
+        .managed_by = "ManagedBy",
         .name = "Name",
         .policy = "Policy",
     };

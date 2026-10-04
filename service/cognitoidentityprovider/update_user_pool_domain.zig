@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const CustomDomainConfigType = @import("custom_domain_config_type.zig").CustomDomainConfigType;
+const RoutingType = @import("routing_type.zig").RoutingType;
 
 pub const UpdateUserPoolDomainInput = struct {
     /// The configuration for a custom domain that hosts managed login for your
@@ -36,6 +37,11 @@ pub const UpdateUserPoolDomainInput = struct {
     /// login](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html).
     managed_login_version: ?i32 = null,
 
+    /// The routing configuration for the user pool domain. Specifies failover
+    /// settings for
+    /// multi-region deployments.
+    routing: ?RoutingType = null,
+
     /// The ID of the user pool that is associated with the domain you're updating.
     user_pool_id: []const u8,
 
@@ -43,6 +49,7 @@ pub const UpdateUserPoolDomainInput = struct {
         .custom_domain_config = "CustomDomainConfig",
         .domain = "Domain",
         .managed_login_version = "ManagedLoginVersion",
+        .routing = "Routing",
         .user_pool_id = "UserPoolId",
     };
 };
@@ -65,9 +72,13 @@ pub const UpdateUserPoolDomainOutput = struct {
     /// login](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html).
     managed_login_version: ?i32 = null,
 
+    /// The updated routing configuration for the user pool domain.
+    routing: ?RoutingType = null,
+
     pub const json_field_names = .{
         .cloud_front_domain = "CloudFrontDomain",
         .managed_login_version = "ManagedLoginVersion",
+        .routing = "Routing",
     };
 };
 

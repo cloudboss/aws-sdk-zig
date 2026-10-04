@@ -131,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchCreateCustomVocabu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchCreateCustomVocabularyItemOutput {
-    var result: BatchCreateCustomVocabularyItemOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchCreateCustomVocabularyItemOutput, body, allocator);
-    }
+    const result: BatchCreateCustomVocabularyItemOutput = try aws.json.parseJsonObject(
+        BatchCreateCustomVocabularyItemOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

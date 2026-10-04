@@ -27,6 +27,8 @@ const get_cluster_session_credentials = @import("get_cluster_session_credentials
 const get_managed_scaling_policy = @import("get_managed_scaling_policy.zig");
 const get_on_cluster_app_ui_presigned_url = @import("get_on_cluster_app_ui_presigned_url.zig");
 const get_persistent_app_ui_presigned_url = @import("get_persistent_app_ui_presigned_url.zig");
+const get_session = @import("get_session.zig");
+const get_session_endpoint = @import("get_session_endpoint.zig");
 const get_studio_session_mapping = @import("get_studio_session_mapping.zig");
 const list_bootstrap_actions = @import("list_bootstrap_actions.zig");
 const list_clusters = @import("list_clusters.zig");
@@ -36,6 +38,7 @@ const list_instances = @import("list_instances.zig");
 const list_notebook_executions = @import("list_notebook_executions.zig");
 const list_release_labels = @import("list_release_labels.zig");
 const list_security_configurations = @import("list_security_configurations.zig");
+const list_sessions = @import("list_sessions.zig");
 const list_steps = @import("list_steps.zig");
 const list_studio_session_mappings = @import("list_studio_session_mappings.zig");
 const list_studios = @import("list_studios.zig");
@@ -57,8 +60,10 @@ const set_termination_protection = @import("set_termination_protection.zig");
 const set_unhealthy_node_replacement = @import("set_unhealthy_node_replacement.zig");
 const set_visible_to_all_users = @import("set_visible_to_all_users.zig");
 const start_notebook_execution = @import("start_notebook_execution.zig");
+const start_session = @import("start_session.zig");
 const stop_notebook_execution = @import("stop_notebook_execution.zig");
 const terminate_job_flows = @import("terminate_job_flows.zig");
+const terminate_session = @import("terminate_session.zig");
 const update_studio = @import("update_studio.zig");
 const update_studio_session_mapping = @import("update_studio_session_mapping.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
@@ -329,6 +334,19 @@ pub const Client = struct {
         return get_persistent_app_ui_presigned_url.execute(self, allocator, input, options);
     }
 
+    /// Returns detailed information about a session.
+    pub fn getSession(self: *Self, allocator: std.mem.Allocator, input: get_session.GetSessionInput, options: CallOptions) !get_session.GetSessionOutput {
+        return get_session.execute(self, allocator, input, options);
+    }
+
+    /// Returns the Spark Connect endpoint URL and a time-limited authentication
+    /// token for the specified session. Use the endpoint and token to connect a
+    /// PySpark client to the session. Call this operation again when the token
+    /// expires to obtain a new one.
+    pub fn getSessionEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_session_endpoint.GetSessionEndpointInput, options: CallOptions) !get_session_endpoint.GetSessionEndpointOutput {
+        return get_session_endpoint.execute(self, allocator, input, options);
+    }
+
     /// Fetches mapping details for the specified Amazon EMR Studio and identity
     /// (user
     /// or group).
@@ -403,6 +421,12 @@ pub const Client = struct {
     /// ListSecurityConfigurations calls.
     pub fn listSecurityConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_security_configurations.ListSecurityConfigurationsInput, options: CallOptions) !list_security_configurations.ListSecurityConfigurationsOutput {
         return list_security_configurations.execute(self, allocator, input, options);
+    }
+
+    /// Lists the sessions on a cluster. You can filter the results by session
+    /// state. Newer sessions are returned first.
+    pub fn listSessions(self: *Self, allocator: std.mem.Allocator, input: list_sessions.ListSessionsInput, options: CallOptions) !list_sessions.ListSessionsOutput {
+        return list_sessions.execute(self, allocator, input, options);
     }
 
     /// Provides a list of steps for the cluster in reverse order unless you specify
@@ -677,6 +701,13 @@ pub const Client = struct {
         return start_notebook_execution.execute(self, allocator, input, options);
     }
 
+    /// Creates and starts a new Spark Connect session on the specified cluster. The
+    /// cluster must be in the `RUNNING` or `WAITING` state and have sessions
+    /// enabled. This operation is supported in Amazon EMR Spark 8.0.0 and later.
+    pub fn startSession(self: *Self, allocator: std.mem.Allocator, input: start_session.StartSessionInput, options: CallOptions) !start_session.StartSessionOutput {
+        return start_session.execute(self, allocator, input, options);
+    }
+
     /// Stops a notebook execution.
     pub fn stopNotebookExecution(self: *Self, allocator: std.mem.Allocator, input: stop_notebook_execution.StopNotebookExecutionInput, options: CallOptions) !stop_notebook_execution.StopNotebookExecutionOutput {
         return stop_notebook_execution.execute(self, allocator, input, options);
@@ -699,6 +730,12 @@ pub const Client = struct {
     /// Amazon EC2 instances.
     pub fn terminateJobFlows(self: *Self, allocator: std.mem.Allocator, input: terminate_job_flows.TerminateJobFlowsInput, options: CallOptions) !terminate_job_flows.TerminateJobFlowsOutput {
         return terminate_job_flows.execute(self, allocator, input, options);
+    }
+
+    /// Terminates an active session. After you call this operation, the session
+    /// enters the `TERMINATING` state and then transitions to `TERMINATED`.
+    pub fn terminateSession(self: *Self, allocator: std.mem.Allocator, input: terminate_session.TerminateSessionInput, options: CallOptions) !terminate_session.TerminateSessionOutput {
+        return terminate_session.execute(self, allocator, input, options);
     }
 
     /// Updates an Amazon EMR Studio configuration, including attributes such as
@@ -764,6 +801,13 @@ pub const Client = struct {
     }
 
     pub fn listSecurityConfigurationsPaginator(self: *Self, params: list_security_configurations.ListSecurityConfigurationsInput) paginator.ListSecurityConfigurationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listSessionsPaginator(self: *Self, params: list_sessions.ListSessionsInput) paginator.ListSessionsPaginator {
         return .{
             .client = self,
             .params = params,

@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetVoiceConnectorGroupI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetVoiceConnectorGroupOutput {
-    var result: GetVoiceConnectorGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetVoiceConnectorGroupOutput, body, allocator);
-    }
+    const result: GetVoiceConnectorGroupOutput = try aws.json.parseJsonObject(
+        GetVoiceConnectorGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

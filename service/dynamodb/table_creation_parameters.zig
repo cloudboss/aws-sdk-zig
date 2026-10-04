@@ -5,6 +5,7 @@ const KeySchemaElement = @import("key_schema_element.zig").KeySchemaElement;
 const OnDemandThroughput = @import("on_demand_throughput.zig").OnDemandThroughput;
 const ProvisionedThroughput = @import("provisioned_throughput.zig").ProvisionedThroughput;
 const SSESpecification = @import("sse_specification.zig").SSESpecification;
+const VectorIndex = @import("vector_index.zig").VectorIndex;
 
 /// The parameters for the table created as part of the import operation.
 pub const TableCreationParameters = struct {
@@ -34,6 +35,10 @@ pub const TableCreationParameters = struct {
     /// The name of the table created as part of the import operation.
     table_name: []const u8,
 
+    /// The vector indexes of the table to be created as part of the import
+    /// operation.
+    vector_indexes: ?[]const VectorIndex = null,
+
     pub const json_field_names = .{
         .attribute_definitions = "AttributeDefinitions",
         .billing_mode = "BillingMode",
@@ -43,5 +48,6 @@ pub const TableCreationParameters = struct {
         .provisioned_throughput = "ProvisionedThroughput",
         .sse_specification = "SSESpecification",
         .table_name = "TableName",
+        .vector_indexes = "VectorIndexes",
     };
 };

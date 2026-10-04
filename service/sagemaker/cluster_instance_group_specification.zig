@@ -1,3 +1,4 @@
+const ClusterAutoPatchConfig = @import("cluster_auto_patch_config.zig").ClusterAutoPatchConfig;
 const ClusterCapacityRequirements = @import("cluster_capacity_requirements.zig").ClusterCapacityRequirements;
 const ClusterInstanceRequirements = @import("cluster_instance_requirements.zig").ClusterInstanceRequirements;
 const ClusterInstanceStorageConfig = @import("cluster_instance_storage_config.zig").ClusterInstanceStorageConfig;
@@ -12,6 +13,10 @@ const ClusterSlurmConfig = @import("cluster_slurm_config.zig").ClusterSlurmConfi
 
 /// The specifications of an instance group that you need to define.
 pub const ClusterInstanceGroupSpecification = struct {
+    /// The configuration for automatic OS security patching. If present, the system
+    /// automatically applies PATCH AMI updates to this instance group.
+    auto_patch_config: ?ClusterAutoPatchConfig = null,
+
     /// Specifies the capacity requirements for the instance group.
     capacity_requirements: ?ClusterCapacityRequirements = null,
 
@@ -23,7 +28,9 @@ pub const ClusterInstanceGroupSpecification = struct {
     ///
     /// * `HyperPodPublicAmiId`: Use a HyperPod public AMI
     /// * `CustomAmiId`: Use your custom AMI
-    /// * `default`: Use the default latest system image
+    /// * `default`: Use the default latest system image. For clusters with
+    ///   continuous scaling node provisioning mode, new instance groups inherit the
+    ///   AMI from the earliest existing instance group
     ///
     /// If you choose to use a custom AMI (`CustomAmiId`), ensure it meets the
     /// following requirements:
@@ -40,6 +47,11 @@ pub const ClusterInstanceGroupSpecification = struct {
     /// instance group in your `UpdateClusterSoftware` request, then all of the
     /// instance groups are patched with the specified image.
     image_id: ?[]const u8 = null,
+
+    /// The version of the HyperPod-managed AMI to use for the instance group. Uses
+    /// semantic versioning in the format `MAJOR.MINOR.PATCH` (for example,
+    /// `1.2.3`). If omitted, the latest available version is used.
+    image_release_version: ?[]const u8 = null,
 
     /// Specifies the number of instances to add to the instance group of a
     /// SageMaker HyperPod cluster.
@@ -141,9 +153,11 @@ pub const ClusterInstanceGroupSpecification = struct {
     training_plan_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .auto_patch_config = "AutoPatchConfig",
         .capacity_requirements = "CapacityRequirements",
         .execution_role = "ExecutionRole",
         .image_id = "ImageId",
+        .image_release_version = "ImageReleaseVersion",
         .instance_count = "InstanceCount",
         .instance_group_name = "InstanceGroupName",
         .instance_requirements = "InstanceRequirements",

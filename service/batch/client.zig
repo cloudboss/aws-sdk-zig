@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const cancel_job = @import("cancel_job.zig");
+const cancel_jobs = @import("cancel_jobs.zig");
 const create_compute_environment = @import("create_compute_environment.zig");
 const create_consumable_resource = @import("create_consumable_resource.zig");
 const create_job_queue = @import("create_job_queue.zig");
@@ -37,7 +38,9 @@ const submit_job = @import("submit_job.zig");
 const submit_service_job = @import("submit_service_job.zig");
 const tag_resource = @import("tag_resource.zig");
 const terminate_job = @import("terminate_job.zig");
+const terminate_jobs = @import("terminate_jobs.zig");
 const terminate_service_job = @import("terminate_service_job.zig");
+const terminate_service_jobs = @import("terminate_service_jobs.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_compute_environment = @import("update_compute_environment.zig");
 const update_consumable_resource = @import("update_consumable_resource.zig");
@@ -80,22 +83,60 @@ pub const Client = struct {
     /// `PENDING`, or `RUNNABLE` state are cancelled and the job status is updated
     /// to `FAILED`.
     ///
-    /// A `PENDING` job is canceled after all dependency jobs are completed.
-    /// Therefore, it may take longer than expected to cancel a job in `PENDING`
+    /// A `PENDING` job is cancelled after all dependency jobs are completed.
+    /// Therefore, it might take longer than expected to cancel a job in `PENDING`
     /// status.
     ///
     /// When you try to cancel an array parent job in `PENDING`, Batch attempts to
-    /// cancel all child jobs. The array parent job is canceled when all child jobs
+    /// cancel all child jobs. The array parent job is cancelled when all child jobs
     /// are
     /// completed.
     ///
     /// Jobs that progressed to the `STARTING` or
-    /// `RUNNING` state aren't canceled. However, the API operation still succeeds,
+    /// `RUNNING` state aren't cancelled. However, the API operation still succeeds,
     /// even
-    /// if no job is canceled. These jobs must be terminated with the TerminateJob
-    /// operation.
+    /// if no job is cancelled. These jobs must be terminated with the TerminateJob
+    /// or
+    /// TerminateJobs operation.
     pub fn cancelJob(self: *Self, allocator: std.mem.Allocator, input: cancel_job.CancelJobInput, options: CallOptions) !cancel_job.CancelJobOutput {
         return cancel_job.execute(self, allocator, input, options);
+    }
+
+    /// Cancels up to 50 jobs in an Batch job queue. This is a bulk version of
+    /// CancelJob. Jobs that are in a
+    /// `SUBMITTED`, `PENDING`, or `RUNNABLE` state are cancelled
+    /// and the job status is updated to `FAILED`.
+    ///
+    /// A `PENDING` job is cancelled after all dependency jobs are completed.
+    /// Therefore, it might take longer than expected to cancel a job in `PENDING`
+    /// status.
+    ///
+    /// When you try to cancel an array parent job in `PENDING`, Batch attempts to
+    /// cancel all child jobs. The array parent job is cancelled when all child jobs
+    /// are
+    /// completed.
+    ///
+    /// Jobs that progressed to the `STARTING` or `RUNNING` state aren't
+    /// cancelled. These jobs must be terminated with the TerminateJob or
+    /// TerminateJobs operation.
+    ///
+    /// Batch reports the result for each job individually in the response. Jobs
+    /// that
+    /// were processed successfully are reported in the `successful` list. Jobs that
+    /// encountered errors are reported in the `errors` list. The response returns
+    /// an
+    /// HTTP status code of `200` even when some jobs encountered errors, so check
+    /// the
+    /// `errors` list. Jobs that can't be found are treated as successfully
+    /// processed.
+    ///
+    /// This operation requires `batch:CancelJob` permission for each job in the
+    /// request. There is no separate `batch:CancelJobs` IAM action. If a caller's
+    /// IAM
+    /// policy grants `batch:CancelJob`, they can use both the singular
+    /// CancelJob and bulk `CancelJobs` operations.
+    pub fn cancelJobs(self: *Self, allocator: std.mem.Allocator, input: cancel_jobs.CancelJobsInput, options: CallOptions) !cancel_jobs.CancelJobsOutput {
+        return cancel_jobs.execute(self, allocator, input, options);
     }
 
     /// Creates an Batch compute environment. You can create `MANAGED` or
@@ -414,9 +455,54 @@ pub const Client = struct {
         return terminate_job.execute(self, allocator, input, options);
     }
 
+    /// Terminates up to 50 jobs in a job queue. This is a bulk version of
+    /// TerminateJob. Jobs that are in the `STARTING` or
+    /// `RUNNING` state are terminated, which causes them to transition to
+    /// `FAILED`. Jobs that have not progressed to the `STARTING` state are
+    /// cancelled.
+    ///
+    /// Batch reports the result for each job individually in the response. Jobs
+    /// that
+    /// were processed successfully are reported in the `successful` list. Jobs that
+    /// encountered errors are reported in the `errors` list. The response returns
+    /// an
+    /// HTTP status code of `200` even when some jobs encountered errors, so check
+    /// the
+    /// `errors` list. Jobs that can't be found are treated as successfully
+    /// processed.
+    ///
+    /// This operation requires `batch:TerminateJob` permission for each job in the
+    /// request. There is no separate `batch:TerminateJobs` IAM action. If a
+    /// caller's IAM
+    /// policy grants `batch:TerminateJob`, they can use both the singular
+    /// TerminateJob and bulk `TerminateJobs` operations.
+    pub fn terminateJobs(self: *Self, allocator: std.mem.Allocator, input: terminate_jobs.TerminateJobsInput, options: CallOptions) !terminate_jobs.TerminateJobsOutput {
+        return terminate_jobs.execute(self, allocator, input, options);
+    }
+
     /// Terminates a service job in a job queue.
     pub fn terminateServiceJob(self: *Self, allocator: std.mem.Allocator, input: terminate_service_job.TerminateServiceJobInput, options: CallOptions) !terminate_service_job.TerminateServiceJobOutput {
         return terminate_service_job.execute(self, allocator, input, options);
+    }
+
+    /// Terminates up to 50 service jobs in a job queue. This is a bulk version of
+    /// TerminateServiceJob.
+    ///
+    /// Batch reports the result for each service job individually in the response.
+    /// Service jobs that were processed successfully are reported in the
+    /// `successful` list. Service jobs that encountered errors are reported in the
+    /// `errors` list. The response returns an HTTP status code of `200` even when
+    /// some service jobs encountered errors, so check the `errors` list. Service
+    /// jobs that can't be found are treated as successfully processed.
+    ///
+    /// This operation requires `batch:TerminateServiceJob` permission for each
+    /// service job in the
+    /// request. There is no separate `batch:TerminateServiceJobs` IAM action. If a
+    /// caller's IAM
+    /// policy grants `batch:TerminateServiceJob`, they can use both the singular
+    /// `TerminateServiceJob` and bulk `TerminateServiceJobs` operations.
+    pub fn terminateServiceJobs(self: *Self, allocator: std.mem.Allocator, input: terminate_service_jobs.TerminateServiceJobsInput, options: CallOptions) !terminate_service_jobs.TerminateServiceJobsOutput {
+        return terminate_service_jobs.execute(self, allocator, input, options);
     }
 
     /// Deletes specified tags from an Batch resource.

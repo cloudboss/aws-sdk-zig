@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const BuyerDomain = @import("buyer_domain.zig").BuyerDomain;
 const Contact = @import("contact.zig").Contact;
 const EinvoiceDeliveryPreference = @import("einvoice_delivery_preference.zig").EinvoiceDeliveryPreference;
+const MarketplacePunchOutPreference = @import("marketplace_punch_out_preference.zig").MarketplacePunchOutPreference;
 const ProcurementPortalName = @import("procurement_portal_name.zig").ProcurementPortalName;
 const ResourceTag = @import("resource_tag.zig").ResourceTag;
 const ProcurementPortalPreferenceSelector = @import("procurement_portal_preference_selector.zig").ProcurementPortalPreferenceSelector;
@@ -35,6 +36,12 @@ pub const CreateProcurementPortalPreferenceInput = struct {
     /// Specifies the e-invoice delivery configuration including document types,
     /// attachment types, and customization settings for the portal.
     einvoice_delivery_preference: ?EinvoiceDeliveryPreference = null,
+
+    /// Defaults to false if not provided.
+    marketplace_punch_out_enabled: ?bool = null,
+
+    /// Required for Coupa when MarketplacePunchOutEnabled is true.
+    marketplace_punch_out_preference: ?MarketplacePunchOutPreference = null,
 
     /// The endpoint URL where e-invoices will be delivered to the procurement
     /// portal. Must be a valid HTTPS URL.
@@ -76,6 +83,8 @@ pub const CreateProcurementPortalPreferenceInput = struct {
         .contacts = "Contacts",
         .einvoice_delivery_enabled = "EinvoiceDeliveryEnabled",
         .einvoice_delivery_preference = "EinvoiceDeliveryPreference",
+        .marketplace_punch_out_enabled = "MarketplacePunchOutEnabled",
+        .marketplace_punch_out_preference = "MarketplacePunchOutPreference",
         .procurement_portal_instance_endpoint = "ProcurementPortalInstanceEndpoint",
         .procurement_portal_name = "ProcurementPortalName",
         .procurement_portal_shared_secret = "ProcurementPortalSharedSecret",

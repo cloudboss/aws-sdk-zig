@@ -1,3 +1,4 @@
+const DeletionProtection = @import("deletion_protection.zig").DeletionProtection;
 const FipsEndpoints = @import("fips_endpoints.zig").FipsEndpoints;
 const StandbyReplicas = @import("standby_replicas.zig").StandbyReplicas;
 const CollectionStatus = @import("collection_status.zig").CollectionStatus;
@@ -23,6 +24,10 @@ pub const CollectionDetail = struct {
 
     /// Collection-specific endpoint used to access OpenSearch Dashboards.
     dashboard_endpoint: ?[]const u8 = null,
+
+    /// Indicates whether deletion protection is `ENABLED` or `DISABLED` for the
+    /// collection.
+    deletion_protection: ?DeletionProtection = null,
 
     /// A description of the collection.
     description: ?[]const u8 = null,
@@ -68,6 +73,7 @@ pub const CollectionDetail = struct {
         .collection_group_name = "collectionGroupName",
         .created_date = "createdDate",
         .dashboard_endpoint = "dashboardEndpoint",
+        .deletion_protection = "deletionProtection",
         .description = "description",
         .failure_code = "failureCode",
         .failure_message = "failureMessage",

@@ -9,6 +9,7 @@ const CapacityProviderStrategyItem = @import("capacity_provider_strategy_item.zi
 const DeploymentConfiguration = @import("deployment_configuration.zig").DeploymentConfiguration;
 const DeploymentController = @import("deployment_controller.zig").DeploymentController;
 const LoadBalancer = @import("load_balancer.zig").LoadBalancer;
+const MonitoringConfiguration = @import("monitoring_configuration.zig").MonitoringConfiguration;
 const NetworkConfiguration = @import("network_configuration.zig").NetworkConfiguration;
 const PlacementConstraint = @import("placement_constraint.zig").PlacementConstraint;
 const PlacementStrategy = @import("placement_strategy.zig").PlacementStrategy;
@@ -169,6 +170,12 @@ pub const UpdateServiceInput = struct {
     /// This parameter triggers a new service deployment.
     load_balancers: ?[]const LoadBalancer = null,
 
+    /// The optional monitoring configuration for the service, which defines the
+    /// resolution for the service-level `CPUUtilization` and `MemoryUtilization`
+    /// Amazon CloudWatch metrics. When not specified, Amazon ECS uses the default
+    /// resolution of `60` seconds.
+    monitoring: ?MonitoringConfiguration = null,
+
     /// An object representing the network configuration for the service.
     ///
     /// This parameter triggers a new service deployment.
@@ -286,6 +293,7 @@ pub const UpdateServiceInput = struct {
         .force_new_deployment = "forceNewDeployment",
         .health_check_grace_period_seconds = "healthCheckGracePeriodSeconds",
         .load_balancers = "loadBalancers",
+        .monitoring = "monitoring",
         .network_configuration = "networkConfiguration",
         .placement_constraints = "placementConstraints",
         .placement_strategy = "placementStrategy",
@@ -302,6 +310,12 @@ pub const UpdateServiceInput = struct {
 
 pub const UpdateServiceOutput = struct {
     /// The full description of your service following the update call.
+    ///
+    /// The response includes a `lifecycleHookDetails` field, which is an empty
+    /// array when the service is created or updated. The values are populated when
+    /// a lifecycle hook executes and are available as part of the service
+    /// deployment details
+    /// ([DescribeServiceDeployments](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html)).
     service: ?Service = null,
 
     pub const json_field_names = .{

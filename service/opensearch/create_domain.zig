@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AdvancedSecurityOptionsInput = @import("advanced_security_options_input.zig").AdvancedSecurityOptionsInput;
 const AIMLOptionsInput = @import("aiml_options_input.zig").AIMLOptionsInput;
+const AutomatedSnapshotPauseRequestOptions = @import("automated_snapshot_pause_request_options.zig").AutomatedSnapshotPauseRequestOptions;
 const AutoTuneOptionsInput = @import("auto_tune_options_input.zig").AutoTuneOptionsInput;
 const ClusterConfig = @import("cluster_config.zig").ClusterConfig;
 const CognitoOptions = @import("cognito_options.zig").CognitoOptions;
@@ -13,6 +14,7 @@ const DeploymentStrategyOptions = @import("deployment_strategy_options.zig").Dep
 const DomainEndpointOptions = @import("domain_endpoint_options.zig").DomainEndpointOptions;
 const EBSOptions = @import("ebs_options.zig").EBSOptions;
 const EncryptionAtRestOptions = @import("encryption_at_rest_options.zig").EncryptionAtRestOptions;
+const EngineMode = @import("engine_mode.zig").EngineMode;
 const IdentityCenterOptionsInput = @import("identity_center_options_input.zig").IdentityCenterOptionsInput;
 const IPAddressType = @import("ip_address_type.zig").IPAddressType;
 const LogPublishingOption = @import("log_publishing_option.zig").LogPublishingOption;
@@ -21,6 +23,7 @@ const OffPeakWindowOptions = @import("off_peak_window_options.zig").OffPeakWindo
 const SnapshotOptions = @import("snapshot_options.zig").SnapshotOptions;
 const SoftwareUpdateOptions = @import("software_update_options.zig").SoftwareUpdateOptions;
 const Tag = @import("tag.zig").Tag;
+const DomainUseCase = @import("domain_use_case.zig").DomainUseCase;
 const VPCOptions = @import("vpc_options.zig").VPCOptions;
 const DomainStatus = @import("domain_status.zig").DomainStatus;
 
@@ -71,6 +74,17 @@ pub const CreateDomainInput = struct {
     /// Options for all machine learning features for the specified domain.
     aiml_options: ?AIMLOptionsInput = null,
 
+    /// Specifies the automated snapshot pause options for the domain.
+    ///
+    /// Suspending snapshots reduces data protection. You cannot restore your domain
+    /// to
+    /// points in time when snapshots are suspended. Use this feature only for
+    /// short-term
+    /// operational needs such as migrations or maintenance windows.
+    ///
+    /// Maximum suspension duration: 3 days.
+    automated_snapshot_pause_options: ?AutomatedSnapshotPauseRequestOptions = null,
+
     /// Options for Auto-Tune.
     auto_tune_options: ?AutoTuneOptionsInput = null,
 
@@ -104,6 +118,10 @@ pub const CreateDomainInput = struct {
 
     /// Key-value pairs to enable encryption at rest.
     encryption_at_rest_options: ?EncryptionAtRestOptions = null,
+
+    /// The engine mode for the domain. For valid values and requirements, see
+    /// `EngineMode`.
+    engine_mode: ?EngineMode = null,
 
     /// String of format Elasticsearch_X.Y or OpenSearch_X.Y to specify the engine
     /// version for
@@ -155,6 +173,9 @@ pub const CreateDomainInput = struct {
     /// List of tags to add to the domain upon creation.
     tag_list: ?[]const Tag = null,
 
+    /// The primary use case for the domain. For valid values, see `DomainUseCase`.
+    use_case: ?DomainUseCase = null,
+
     /// Container for the values required to configure VPC access domains. If you
     /// don't specify
     /// these values, OpenSearch Service creates the domain with a public endpoint.
@@ -169,6 +190,7 @@ pub const CreateDomainInput = struct {
         .advanced_options = "AdvancedOptions",
         .advanced_security_options = "AdvancedSecurityOptions",
         .aiml_options = "AIMLOptions",
+        .automated_snapshot_pause_options = "AutomatedSnapshotPauseOptions",
         .auto_tune_options = "AutoTuneOptions",
         .cluster_config = "ClusterConfig",
         .cognito_options = "CognitoOptions",
@@ -177,6 +199,7 @@ pub const CreateDomainInput = struct {
         .domain_name = "DomainName",
         .ebs_options = "EBSOptions",
         .encryption_at_rest_options = "EncryptionAtRestOptions",
+        .engine_mode = "EngineMode",
         .engine_version = "EngineVersion",
         .identity_center_options = "IdentityCenterOptions",
         .ip_address_type = "IPAddressType",
@@ -186,6 +209,7 @@ pub const CreateDomainInput = struct {
         .snapshot_options = "SnapshotOptions",
         .software_update_options = "SoftwareUpdateOptions",
         .tag_list = "TagList",
+        .use_case = "UseCase",
         .vpc_options = "VPCOptions",
     };
 };
@@ -259,6 +283,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDomainInput, conf
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.automated_snapshot_pause_options) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AutomatedSnapshotPauseOptions\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.auto_tune_options) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"AutoTuneOptions\":");
@@ -302,6 +332,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDomainInput, conf
     if (input.encryption_at_rest_options) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"EncryptionAtRestOptions\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.engine_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"EngineMode\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -359,6 +395,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDomainInput, conf
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.use_case) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"UseCase\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.vpc_options) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"VPCOptions\":");
@@ -381,10 +423,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDomainInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDomainOutput {
-    var result: CreateDomainOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateDomainOutput, body, allocator);
-    }
+    const result: CreateDomainOutput = try aws.json.parseJsonObject(
+        CreateDomainOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

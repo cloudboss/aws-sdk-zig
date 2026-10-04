@@ -1,6 +1,10 @@
+const VpcLatticeAdvancedConfiguration = @import("vpc_lattice_advanced_configuration.zig").VpcLatticeAdvancedConfiguration;
+
 /// The VPC Lattice configuration for your service that holds the information
 /// for the target group(s) Amazon ECS tasks will be registered to.
 pub const VpcLatticeConfiguration = struct {
+    advanced_configuration: ?VpcLatticeAdvancedConfiguration = null,
+
     /// The name of the port mapping to register in the VPC Lattice target group.
     /// This is the name of the `portMapping` you defined in your task definition.
     port_name: []const u8,
@@ -16,6 +20,7 @@ pub const VpcLatticeConfiguration = struct {
     target_group_arn: []const u8,
 
     pub const json_field_names = .{
+        .advanced_configuration = "advancedConfiguration",
         .port_name = "portName",
         .role_arn = "roleArn",
         .target_group_arn = "targetGroupArn",

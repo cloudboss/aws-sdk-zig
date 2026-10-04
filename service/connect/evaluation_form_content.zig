@@ -7,6 +7,10 @@ const EvaluationFormTargetConfiguration = @import("evaluation_form_target_config
 
 /// Information about an evaluation form used in a contact evaluation.
 pub const EvaluationFormContent = struct {
+    /// The AI version to use for the evaluation form. This specifies which AI model
+    /// version is used for automated evaluations.
+    ai_version: ?[]const u8 = null,
+
     /// The configuration of the automated evaluation.
     auto_evaluation_configuration: ?EvaluationFormAutoEvaluationConfiguration = null,
 
@@ -44,6 +48,7 @@ pub const EvaluationFormContent = struct {
     title: []const u8,
 
     pub const json_field_names = .{
+        .ai_version = "AIVersion",
         .auto_evaluation_configuration = "AutoEvaluationConfiguration",
         .description = "Description",
         .evaluation_form_arn = "EvaluationFormArn",

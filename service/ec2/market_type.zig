@@ -4,11 +4,13 @@ pub const MarketType = enum {
     spot,
     capacity_block,
     interruptible_capacity_reservation,
+    on_demand,
 
     pub const json_field_names = .{
         .spot = "spot",
         .capacity_block = "capacity-block",
         .interruptible_capacity_reservation = "interruptible-capacity-reservation",
+        .on_demand = "on-demand",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const MarketType = enum {
             .spot => "spot",
             .capacity_block => "capacity-block",
             .interruptible_capacity_reservation => "interruptible-capacity-reservation",
+            .on_demand => "on-demand",
         };
     }
 

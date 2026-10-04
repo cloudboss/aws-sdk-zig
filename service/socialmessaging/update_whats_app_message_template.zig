@@ -14,7 +14,7 @@ pub const UpdateWhatsAppMessageTemplateInput = struct {
     id: []const u8,
 
     /// The numeric ID of the template assigned by Meta.
-    meta_template_id: []const u8,
+    meta_template_id: ?[]const u8 = null,
 
     /// The format specification for parameters in the template, this can be either
     /// 'named' or 'positional'.
@@ -27,6 +27,15 @@ pub const UpdateWhatsAppMessageTemplateInput = struct {
     /// characters).
     template_components: ?[]const u8 = null,
 
+    /// The language code of the message template (for example, `en` or `en_US`).
+    /// Use together with `templateName` as an alternative to `metaTemplateId` to
+    /// identify a template.
+    template_language_code: ?[]const u8 = null,
+
+    /// The name of the message template. Use together with `templateLanguageCode`
+    /// as an alternative to `metaTemplateId` to identify a template.
+    template_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .cta_url_link_tracking_opted_out = "ctaUrlLinkTrackingOptedOut",
         .id = "id",
@@ -34,6 +43,8 @@ pub const UpdateWhatsAppMessageTemplateInput = struct {
         .parameter_format = "parameterFormat",
         .template_category = "templateCategory",
         .template_components = "templateComponents",
+        .template_language_code = "templateLanguageCode",
+        .template_name = "templateName",
     };
 };
 
@@ -86,10 +97,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateWhatsAppMessageTe
     try body_buf.appendSlice(allocator, "\"id\":");
     try aws.json.writeValue(@TypeOf(input.id), input.id, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"metaTemplateId\":");
-    try aws.json.writeValue(@TypeOf(input.meta_template_id), input.meta_template_id, allocator, &body_buf);
-    has_prev = true;
+    if (input.meta_template_id) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"metaTemplateId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.parameter_format) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"parameterFormat\":");
@@ -105,6 +118,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateWhatsAppMessageTe
     if (input.template_components) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"templateComponents\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.template_language_code) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"templateLanguageCode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.template_name) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"templateName\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

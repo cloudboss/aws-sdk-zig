@@ -13,6 +13,10 @@ pub const KnowledgeBaseRetrievalResult = struct {
     /// Contains information about the content of the chunk.
     content: RetrievalResultContent,
 
+    /// The unique identifier of the document. Use with `GetDocumentContent` to
+    /// retrieve the full document.
+    document_id: ?[]const u8 = null,
+
     /// Contains information about the location of the data source.
     location: ?RetrievalResultLocation = null,
 
@@ -26,6 +30,7 @@ pub const KnowledgeBaseRetrievalResult = struct {
 
     pub const json_field_names = .{
         .content = "content",
+        .document_id = "documentId",
         .location = "location",
         .metadata = "metadata",
         .score = "score",

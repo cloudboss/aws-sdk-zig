@@ -1,5 +1,6 @@
 const DestinationConfiguration = @import("destination_configuration.zig").DestinationConfiguration;
 const ExecutionStatus = @import("execution_status.zig").ExecutionStatus;
+const ScheduleType = @import("schedule_type.zig").ScheduleType;
 const ScheduledQueryState = @import("scheduled_query_state.zig").ScheduledQueryState;
 
 /// Summary information about a scheduled query, including basic configuration
@@ -30,6 +31,10 @@ pub const ScheduledQuerySummary = struct {
     /// The cron expression that defines when the scheduled query runs.
     schedule_expression: ?[]const u8 = null,
 
+    /// The schedule type of the scheduled query. Valid values are
+    /// `CUSTOMER_MANAGED` and `AWS_MANAGED`.
+    schedule_type: ?ScheduleType = null,
+
     /// The current state of the scheduled query.
     state: ?ScheduledQueryState = null,
 
@@ -45,6 +50,7 @@ pub const ScheduledQuerySummary = struct {
         .name = "name",
         .scheduled_query_arn = "scheduledQueryArn",
         .schedule_expression = "scheduleExpression",
+        .schedule_type = "scheduleType",
         .state = "state",
         .timezone = "timezone",
     };

@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetStreamKeyInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetStreamKeyOutput {
-    var result: BatchGetStreamKeyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetStreamKeyOutput, body, allocator);
-    }
+    var result: BatchGetStreamKeyOutput = try aws.json.parseJsonObject(
+        BatchGetStreamKeyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("access-control-allow-origin")) |value| {
         result.access_control_allow_origin = try allocator.dupe(u8, value);

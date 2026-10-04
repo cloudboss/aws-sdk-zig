@@ -7,12 +7,12 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AdvancedConfiguration = @import("advanced_configuration.zig").AdvancedConfiguration;
 const CellTowers = @import("cell_towers.zig").CellTowers;
 const Gnss = @import("gnss.zig").Gnss;
+const GnssMultiFrame = @import("gnss_multi_frame.zig").GnssMultiFrame;
 const Ip = @import("ip.zig").Ip;
 const WiFiAccessPoint = @import("wi_fi_access_point.zig").WiFiAccessPoint;
 
 pub const GetPositionEstimateInput = struct {
-    /// Optional configuration to customize position estimates.
-    /// If not provided, defaults are applied.
+    /// Optional configuration for customizing position measurement data.
     advanced_configuration: ?AdvancedConfiguration = null,
 
     /// Retrieves an estimated device position by resolving measurement data from
@@ -24,8 +24,17 @@ pub const GetPositionEstimateInput = struct {
     /// satellite
     /// system (GNSS) scan data. The position is resolved using the GNSS solver
     /// powered by LoRa
-    /// Cloud.
+    /// Cloud. This field is mutually exclusive with the GnssMultiFrame field.
     gnss: ?Gnss = null,
+
+    /// Retrieves an estimated device position by resolving multiple global
+    /// navigation
+    /// satellite system (GNSS) scan captures. The position is resolved using the
+    /// multi-frame
+    /// GNSS solver powered by LoRa Cloud. This field is mutually exclusive with the
+    /// Gnss
+    /// field.
+    gnss_multi_frame: ?GnssMultiFrame = null,
 
     /// Retrieves an estimated device position by resolving the IP address
     /// information from
@@ -48,6 +57,7 @@ pub const GetPositionEstimateInput = struct {
         .advanced_configuration = "AdvancedConfiguration",
         .cell_towers = "CellTowers",
         .gnss = "Gnss",
+        .gnss_multi_frame = "GnssMultiFrame",
         .ip = "Ip",
         .timestamp = "Timestamp",
         .wi_fi_access_points = "WiFiAccessPoints",
@@ -126,6 +136,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPositionEstimateInpu
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.gnss_multi_frame) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"GnssMultiFrame\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.ip) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Ip\":");
@@ -161,6 +177,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPositionEstimateInpu
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPositionEstimateOutput {
     var result: GetPositionEstimateOutput = .{};
+    errdefer {
+        if (result.geo_json_payload) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.geo_json_payload = try allocator.dupe(u8, body);
     }

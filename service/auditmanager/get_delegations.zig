@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDelegationsInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDelegationsOutput {
-    var result: GetDelegationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDelegationsOutput, body, allocator);
-    }
+    const result: GetDelegationsOutput = try aws.json.parseJsonObject(
+        GetDelegationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

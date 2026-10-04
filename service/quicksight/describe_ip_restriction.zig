@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeIpRestrictionIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeIpRestrictionOutput {
-    var result: DescribeIpRestrictionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeIpRestrictionOutput, body, allocator);
-    }
+    var result: DescribeIpRestrictionOutput = try aws.json.parseJsonObject(
+        DescribeIpRestrictionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

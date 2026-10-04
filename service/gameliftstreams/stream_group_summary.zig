@@ -70,7 +70,8 @@ pub const StreamGroupSummary = struct {
     ///   extremely high 3D scene complexity which require maximum resources. Runs
     ///   applications on Microsoft Windows Server 2022 Base and supports DirectX
     ///   12. Compatible with Unreal Engine versions up through 5.6, 32 and 64-bit
-    ///   applications, and anti-cheat technology. Uses NVIDIA L4 Tensor Core GPU.
+    ///   applications, and anti-cheat technology. Powered by NVIDIA L4 Tensor Core
+    ///   GPUs.
     ///
     /// * Reference resolution: 1080p
     /// * Reference frame rate: 60 fps
@@ -78,8 +79,8 @@ pub const StreamGroupSummary = struct {
     /// * Tenancy: Supports 1 concurrent stream session
     ///
     /// * ** `gen6n_pro` (NVIDIA, pro)** Supports applications with extremely high
-    ///   3D scene complexity which require maximum resources. Uses dedicated NVIDIA
-    ///   L4 Tensor Core GPU.
+    ///   3D scene complexity which require maximum resources. Powered by NVIDIA L4
+    ///   Tensor Core GPUs.
     ///
     /// * Reference resolution: 1080p
     /// * Reference frame rate: 60 fps
@@ -89,8 +90,8 @@ pub const StreamGroupSummary = struct {
     /// * ** `gen6n_ultra_win2022` (NVIDIA, ultra)** Supports applications with high
     ///   3D scene complexity. Runs applications on Microsoft Windows Server 2022
     ///   Base and supports DirectX 12. Compatible with Unreal Engine versions up
-    ///   through 5.6, 32 and 64-bit applications, and anti-cheat technology. Uses
-    ///   NVIDIA L4 Tensor Core GPU.
+    ///   through 5.6, 32 and 64-bit applications, and anti-cheat technology.
+    ///   Powered by NVIDIA L4 Tensor Core GPUs.
     ///
     /// * Reference resolution: 1080p
     /// * Reference frame rate: 60 fps
@@ -98,7 +99,7 @@ pub const StreamGroupSummary = struct {
     /// * Tenancy: Supports 1 concurrent stream session
     ///
     /// * ** `gen6n_ultra` (NVIDIA, ultra)** Supports applications with high 3D
-    ///   scene complexity. Uses dedicated NVIDIA L4 Tensor Core GPU.
+    ///   scene complexity. Powered by NVIDIA L4 Tensor Core GPUs.
     ///
     /// * Reference resolution: 1080p
     /// * Reference frame rate: 60 fps
@@ -106,7 +107,7 @@ pub const StreamGroupSummary = struct {
     /// * Tenancy: Supports 1 concurrent stream session
     ///
     /// * ** `gen6n_high` (NVIDIA, high)** Supports applications with moderate to
-    ///   high 3D scene complexity. Uses NVIDIA L4 Tensor Core GPU.
+    ///   high 3D scene complexity. Powered by NVIDIA L4 Tensor Core GPUs.
     ///
     /// * Reference resolution: 1080p
     /// * Reference frame rate: 60 fps
@@ -114,7 +115,7 @@ pub const StreamGroupSummary = struct {
     /// * Tenancy: Supports up to 2 concurrent stream sessions
     ///
     /// * ** `gen6n_medium` (NVIDIA, medium)** Supports applications with moderate
-    ///   3D scene complexity. Uses NVIDIA L4 Tensor Core GPU.
+    ///   3D scene complexity. Powered by NVIDIA L4 Tensor Core GPUs.
     ///
     /// * Reference resolution: 1080p
     /// * Reference frame rate: 60 fps
@@ -122,7 +123,8 @@ pub const StreamGroupSummary = struct {
     /// * Tenancy: Supports up to 4 concurrent stream sessions
     ///
     /// * ** `gen6n_small` (NVIDIA, small)** Supports applications with lightweight
-    ///   3D scene complexity and low CPU usage. Uses NVIDIA L4 Tensor Core GPU.
+    ///   3D scene complexity and low CPU usage. Powered by NVIDIA L4 Tensor Core
+    ///   GPUs.
     ///
     /// * Reference resolution: 1080p
     /// * Reference frame rate: 60 fps
@@ -130,7 +132,7 @@ pub const StreamGroupSummary = struct {
     /// * Tenancy: Supports up to 12 concurrent stream sessions
     ///
     /// * ** `gen6n_medium_win2022` (NVIDIA, medium)** Supports applications with
-    ///   low 3D scene complexity. Uses NVIDIA L4 Tensor Core GPU.
+    ///   low 3D scene complexity. Powered by NVIDIA L4 Tensor Core GPUs.
     ///
     /// * Reference resolution: 1080p
     /// * Reference frame rate: 60 fps
@@ -138,18 +140,39 @@ pub const StreamGroupSummary = struct {
     /// * Tenancy: Supports 1 concurrent stream session
     ///
     /// * ** `gen6n_small_win2022` (NVIDIA, small)** Supports applications with low
-    ///   3D scene complexity. Uses NVIDIA L4 Tensor Core GPU.
+    ///   3D scene complexity. Powered by NVIDIA L4 Tensor Core GPUs.
     ///
     /// * Reference resolution: 1080p
     /// * Reference frame rate: 60 fps
     /// * Workload specifications: 2 vCPUs, 8 GB RAM, 3 GB VRAM
     /// * Tenancy: Supports 1 concurrent stream session
     ///
+    /// * ** `gen6e_pro_win2022` (NVIDIA, pro)** Supports applications with
+    ///   extremely high 3D scene complexity which require maximum resources. Runs
+    ///   applications on Microsoft Windows Server 2022 Base and supports DirectX
+    ///   12. Compatible with Unreal Engine versions up through 5.6, 32 and 64-bit
+    ///   applications, and anti-cheat technology. Powered by NVIDIA L40S Tensor
+    ///   Core GPUs.
+    ///
+    /// * Reference resolution: 1080p
+    /// * Reference frame rate: 60 fps
+    /// * Workload specifications: 16 vCPUs, 128 GB RAM, 48 GB VRAM
+    /// * Tenancy: Supports 1 concurrent stream session
+    ///
+    /// * ** `gen6e_pro` (NVIDIA, pro)** Supports applications with extremely high
+    ///   3D scene complexity which require maximum resources. Powered by NVIDIA
+    ///   L40S Tensor Core GPUs.
+    ///
+    /// * Reference resolution: 1080p
+    /// * Reference frame rate: 60 fps
+    /// * Workload specifications: 16 vCPUs, 128 GB RAM, 48 GB VRAM
+    /// * Tenancy: Supports 1 concurrent stream session
+    ///
     /// * ** `gen5n_win2022` (NVIDIA, ultra)** Supports applications with extremely
     ///   high 3D scene complexity. Runs applications on Microsoft Windows Server
     ///   2022 Base and supports DirectX 12. Compatible with Unreal Engine versions
     ///   up through 5.6, 32 and 64-bit applications, and anti-cheat technology.
-    ///   Uses NVIDIA A10G Tensor Core GPU.
+    ///   Powered by NVIDIA A10G Tensor Core GPUs.
     ///
     /// * Reference resolution: 1080p
     /// * Reference frame rate: 60 fps
@@ -157,7 +180,7 @@ pub const StreamGroupSummary = struct {
     /// * Tenancy: Supports 1 concurrent stream session
     ///
     /// * ** `gen5n_high` (NVIDIA, high)** Supports applications with moderate to
-    ///   high 3D scene complexity. Uses NVIDIA A10G Tensor Core GPU.
+    ///   high 3D scene complexity. Powered by NVIDIA A10G Tensor Core GPUs.
     ///
     /// * Reference resolution: 1080p
     /// * Reference frame rate: 60 fps
@@ -165,7 +188,7 @@ pub const StreamGroupSummary = struct {
     /// * Tenancy: Supports up to 2 concurrent stream sessions
     ///
     /// * ** `gen5n_ultra` (NVIDIA, ultra)** Supports applications with extremely
-    ///   high 3D scene complexity. Uses dedicated NVIDIA A10G Tensor Core GPU.
+    ///   high 3D scene complexity. Powered by NVIDIA A10G Tensor Core GPUs.
     ///
     /// * Reference resolution: 1080p
     /// * Reference frame rate: 60 fps
@@ -176,7 +199,7 @@ pub const StreamGroupSummary = struct {
     ///   high 3D scene complexity. Runs applications on Microsoft Windows Server
     ///   2022 Base and supports DirectX 12. Compatible with Unreal Engine versions
     ///   up through 5.6, 32 and 64-bit applications, and anti-cheat technology.
-    ///   Uses NVIDIA T4 Tensor Core GPU.
+    ///   Powered by NVIDIA T4 Tensor Core GPUs.
     ///
     /// * Reference resolution: 1080p
     /// * Reference frame rate: 60 fps
@@ -184,7 +207,7 @@ pub const StreamGroupSummary = struct {
     /// * Tenancy: Supports 1 concurrent stream session
     ///
     /// * ** `gen4n_high` (NVIDIA, high)** Supports applications with moderate to
-    ///   high 3D scene complexity. Uses NVIDIA T4 Tensor Core GPU.
+    ///   high 3D scene complexity. Powered by NVIDIA T4 Tensor Core GPUs.
     ///
     /// * Reference resolution: 1080p
     /// * Reference frame rate: 60 fps
@@ -192,7 +215,7 @@ pub const StreamGroupSummary = struct {
     /// * Tenancy: Supports up to 2 concurrent stream sessions
     ///
     /// * ** `gen4n_ultra` (NVIDIA, ultra)** Supports applications with high 3D
-    ///   scene complexity. Uses dedicated NVIDIA T4 Tensor Core GPU.
+    ///   scene complexity. Powered by NVIDIA T4 Tensor Core GPUs.
     ///
     /// * Reference resolution: 1080p
     /// * Reference frame rate: 60 fps

@@ -111,6 +111,7 @@ const get_load_balancers = @import("get_load_balancers.zig");
 const get_operation = @import("get_operation.zig");
 const get_operations = @import("get_operations.zig");
 const get_operations_for_resource = @import("get_operations_for_resource.zig");
+const get_profile = @import("get_profile.zig");
 const get_regions = @import("get_regions.zig");
 const get_relational_database = @import("get_relational_database.zig");
 const get_relational_database_blueprints = @import("get_relational_database_blueprints.zig");
@@ -1531,6 +1532,15 @@ pub const Client = struct {
     /// Gets operations for a specific resource (an instance or a static IP).
     pub fn getOperationsForResource(self: *Self, allocator: std.mem.Allocator, input: get_operations_for_resource.GetOperationsForResourceInput, options: CallOptions) !get_operations_for_resource.GetOperationsForResourceOutput {
         return get_operations_for_resource.execute(self, allocator, input, options);
+    }
+
+    /// Returns information about the profile of the Amazon Lightsail account that
+    /// makes the
+    /// request. The response includes the profile type and, for accounts enrolled
+    /// in the Lightsail
+    /// partner program, the partner membership details.
+    pub fn getProfile(self: *Self, allocator: std.mem.Allocator, input: get_profile.GetProfileInput, options: CallOptions) !get_profile.GetProfileOutput {
+        return get_profile.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all valid regions for Amazon Lightsail. Use the `include

@@ -30,6 +30,16 @@ pub const StoppingCondition = struct {
     ///
     /// `MaxPendingTimeInSeconds` only increments when jobs are actively waiting for
     /// capacity in an `Active` plan.
+    ///
+    /// * `MaxPendingTimeInSeconds` takes effect only for jobs that request
+    ///   accelerated computing instance types, such as instances in the `ml.p`,
+    ///   `ml.g`, and `ml.trn` families. It has no effect on jobs that request
+    ///   CPU-only instance types.
+    /// * If the job specifies `InstancePreferences`, `MaxPendingTimeInSeconds`
+    ///   bounds the total time SageMaker spends working through your list of
+    ///   instance types. It is not applied per instance type preference, and takes
+    ///   effect only when the list includes at least one accelerated computing
+    ///   instance type.
     max_pending_time_in_seconds: ?i32 = null,
 
     /// The maximum length of time, in seconds, that a training or compilation job

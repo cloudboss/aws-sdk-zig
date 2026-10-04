@@ -25,10 +25,18 @@ pub const ProvisionedThroughputDescription = struct {
     /// `ReadCapacityUnits`
     /// per second provides 100 eventually consistent `ReadCapacityUnits` per
     /// second.
+    ///
+    /// For a table or global secondary index that uses on-demand capacity mode
+    /// (`PAY_PER_REQUEST`), this value is `0`, because on-demand mode
+    /// does not use provisioned throughput.
     read_capacity_units: ?i64 = null,
 
     /// The maximum number of writes consumed per second before DynamoDB returns a
     /// `ThrottlingException`.
+    ///
+    /// For a table or global secondary index that uses on-demand capacity mode
+    /// (`PAY_PER_REQUEST`), this value is `0`, because on-demand mode
+    /// does not use provisioned throughput.
     write_capacity_units: ?i64 = null,
 
     pub const json_field_names = .{

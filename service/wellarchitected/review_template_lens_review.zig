@@ -29,6 +29,7 @@ pub const ReviewTemplateLensReview = struct {
     /// review.
     question_counts: ?[]const aws.map.MapEntry(i32) = null,
 
+    /// The date and time when the review template lens review was last updated.
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{

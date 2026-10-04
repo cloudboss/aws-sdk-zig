@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateCustomActionInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateCustomActionOutput {
-    var result: UpdateCustomActionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateCustomActionOutput, body, allocator);
-    }
+    const result: UpdateCustomActionOutput = try aws.json.parseJsonObject(
+        UpdateCustomActionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

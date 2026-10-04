@@ -25,7 +25,7 @@ pub const CreateHoursOfOperationOverrideInput = struct {
     /// The identifier for the hours of operation
     hours_of_operation_id: []const u8,
 
-    /// The identifier of the Amazon Connect instance.
+    /// The identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     /// The name of the hours of operation override.
@@ -36,7 +36,7 @@ pub const CreateHoursOfOperationOverrideInput = struct {
     ///
     /// For more information about how override types are applied, see [Build your
     /// list of
-    /// overrides](https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html) in the
+    /// overrides](https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html) in the
     /// * Administrator Guide*.
     override_type: ?OverrideType = null,
 
@@ -157,10 +157,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateHoursOfOperationO
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateHoursOfOperationOverrideOutput {
-    var result: CreateHoursOfOperationOverrideOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateHoursOfOperationOverrideOutput, body, allocator);
-    }
+    const result: CreateHoursOfOperationOverrideOutput = try aws.json.parseJsonObject(
+        CreateHoursOfOperationOverrideOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

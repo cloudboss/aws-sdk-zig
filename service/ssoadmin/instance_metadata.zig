@@ -1,9 +1,14 @@
+const RegionMetadata = @import("region_metadata.zig").RegionMetadata;
 const InstanceStatus = @import("instance_status.zig").InstanceStatus;
 
 /// Provides information about the IAM Identity Center instance.
 pub const InstanceMetadata = struct {
     /// The date and time that the Identity Center instance was created.
     created_date: ?i64 = null,
+
+    /// The ARN of the identity store that is connected to the Identity Center
+    /// instance.
+    identity_store_arn: ?[]const u8 = null,
 
     /// The identifier of the identity store that is connected to the Identity
     /// Center instance.
@@ -23,6 +28,14 @@ pub const InstanceMetadata = struct {
     /// Center instance.
     owner_account_id: ?[]const u8 = null,
 
+    /// The primary Region where the IAM Identity Center instance was originally
+    /// enabled. The primary Region cannot be removed.
+    primary_region: ?[]const u8 = null,
+
+    /// The list of Regions enabled in the IAM Identity Center instance, including
+    /// Regions with ACTIVE, ADDING, or REMOVING status.
+    regions: ?[]const RegionMetadata = null,
+
     /// The current status of this Identity Center instance.
     status: ?InstanceStatus = null,
 
@@ -35,10 +48,13 @@ pub const InstanceMetadata = struct {
 
     pub const json_field_names = .{
         .created_date = "CreatedDate",
+        .identity_store_arn = "IdentityStoreArn",
         .identity_store_id = "IdentityStoreId",
         .instance_arn = "InstanceArn",
         .name = "Name",
         .owner_account_id = "OwnerAccountId",
+        .primary_region = "PrimaryRegion",
+        .regions = "Regions",
         .status = "Status",
         .status_reason = "StatusReason",
     };

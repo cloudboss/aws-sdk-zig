@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateDefaultViewInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateDefaultViewOutput {
-    var result: AssociateDefaultViewOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateDefaultViewOutput, body, allocator);
-    }
+    const result: AssociateDefaultViewOutput = try aws.json.parseJsonObject(
+        AssociateDefaultViewOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

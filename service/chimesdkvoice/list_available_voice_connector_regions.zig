@@ -64,10 +64,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAvailableVoiceConne
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAvailableVoiceConnectorRegionsOutput {
-    var result: ListAvailableVoiceConnectorRegionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAvailableVoiceConnectorRegionsOutput, body, allocator);
-    }
+    const result: ListAvailableVoiceConnectorRegionsOutput = try aws.json.parseJsonObject(
+        ListAvailableVoiceConnectorRegionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

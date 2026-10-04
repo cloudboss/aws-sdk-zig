@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetConfiguredAudienceMo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetConfiguredAudienceModelPolicyOutput {
-    var result: GetConfiguredAudienceModelPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetConfiguredAudienceModelPolicyOutput, body, allocator);
-    }
+    const result: GetConfiguredAudienceModelPolicyOutput = try aws.json.parseJsonObject(
+        GetConfiguredAudienceModelPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

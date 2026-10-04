@@ -6,6 +6,7 @@ const add_user_pool_client_secret = @import("add_user_pool_client_secret.zig");
 const admin_add_user_to_group = @import("admin_add_user_to_group.zig");
 const admin_confirm_sign_up = @import("admin_confirm_sign_up.zig");
 const admin_create_user = @import("admin_create_user.zig");
+const admin_delete_software_token = @import("admin_delete_software_token.zig");
 const admin_delete_user = @import("admin_delete_user.zig");
 const admin_delete_user_attributes = @import("admin_delete_user_attributes.zig");
 const admin_disable_provider_for_user = @import("admin_disable_provider_for_user.zig");
@@ -14,6 +15,7 @@ const admin_enable_user = @import("admin_enable_user.zig");
 const admin_forget_device = @import("admin_forget_device.zig");
 const admin_get_device = @import("admin_get_device.zig");
 const admin_get_user = @import("admin_get_user.zig");
+const admin_get_user_auth_factors = @import("admin_get_user_auth_factors.zig");
 const admin_initiate_auth = @import("admin_initiate_auth.zig");
 const admin_link_provider_for_user = @import("admin_link_provider_for_user.zig");
 const admin_list_devices = @import("admin_list_devices.zig");
@@ -44,6 +46,7 @@ const create_user_import_job = @import("create_user_import_job.zig");
 const create_user_pool = @import("create_user_pool.zig");
 const create_user_pool_client = @import("create_user_pool_client.zig");
 const create_user_pool_domain = @import("create_user_pool_domain.zig");
+const create_user_pool_replica = @import("create_user_pool_replica.zig");
 const delete_group = @import("delete_group.zig");
 const delete_identity_provider = @import("delete_identity_provider.zig");
 const delete_managed_login_branding = @import("delete_managed_login_branding.zig");
@@ -55,6 +58,7 @@ const delete_user_pool = @import("delete_user_pool.zig");
 const delete_user_pool_client = @import("delete_user_pool_client.zig");
 const delete_user_pool_client_secret = @import("delete_user_pool_client_secret.zig");
 const delete_user_pool_domain = @import("delete_user_pool_domain.zig");
+const delete_user_pool_replica = @import("delete_user_pool_replica.zig");
 const delete_web_authn_credential = @import("delete_web_authn_credential.zig");
 const describe_identity_provider = @import("describe_identity_provider.zig");
 const describe_managed_login_branding = @import("describe_managed_login_branding.zig");
@@ -62,17 +66,20 @@ const describe_managed_login_branding_by_client = @import("describe_managed_logi
 const describe_resource_server = @import("describe_resource_server.zig");
 const describe_risk_configuration = @import("describe_risk_configuration.zig");
 const describe_terms = @import("describe_terms.zig");
+const describe_terms_by_client = @import("describe_terms_by_client.zig");
 const describe_user_import_job = @import("describe_user_import_job.zig");
 const describe_user_pool = @import("describe_user_pool.zig");
 const describe_user_pool_client = @import("describe_user_pool_client.zig");
 const describe_user_pool_domain = @import("describe_user_pool_domain.zig");
 const forget_device = @import("forget_device.zig");
 const forgot_password = @import("forgot_password.zig");
+const get_client_token = @import("get_client_token.zig");
 const get_csv_header = @import("get_csv_header.zig");
 const get_device = @import("get_device.zig");
 const get_group = @import("get_group.zig");
 const get_identity_provider_by_identifier = @import("get_identity_provider_by_identifier.zig");
 const get_log_delivery_configuration = @import("get_log_delivery_configuration.zig");
+const get_provisioned_limit = @import("get_provisioned_limit.zig");
 const get_signing_certificate = @import("get_signing_certificate.zig");
 const get_tokens_from_refresh_token = @import("get_tokens_from_refresh_token.zig");
 const get_ui_customization = @import("get_ui_customization.zig");
@@ -91,6 +98,7 @@ const list_terms = @import("list_terms.zig");
 const list_user_import_jobs = @import("list_user_import_jobs.zig");
 const list_user_pool_client_secrets = @import("list_user_pool_client_secrets.zig");
 const list_user_pool_clients = @import("list_user_pool_clients.zig");
+const list_user_pool_replicas = @import("list_user_pool_replicas.zig");
 const list_user_pools = @import("list_user_pools.zig");
 const list_users = @import("list_users.zig");
 const list_users_in_group = @import("list_users_in_group.zig");
@@ -115,12 +123,14 @@ const update_device_status = @import("update_device_status.zig");
 const update_group = @import("update_group.zig");
 const update_identity_provider = @import("update_identity_provider.zig");
 const update_managed_login_branding = @import("update_managed_login_branding.zig");
+const update_provisioned_limit = @import("update_provisioned_limit.zig");
 const update_resource_server = @import("update_resource_server.zig");
 const update_terms = @import("update_terms.zig");
 const update_user_attributes = @import("update_user_attributes.zig");
 const update_user_pool = @import("update_user_pool.zig");
 const update_user_pool_client = @import("update_user_pool_client.zig");
 const update_user_pool_domain = @import("update_user_pool_domain.zig");
+const update_user_pool_replica = @import("update_user_pool_replica.zig");
 const verify_software_token = @import("verify_software_token.zig");
 const verify_user_attribute = @import("verify_user_attribute.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
@@ -303,6 +313,33 @@ pub const Client = struct {
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
     pub fn adminCreateUser(self: *Self, allocator: std.mem.Allocator, input: admin_create_user.AdminCreateUserInput, options: CallOptions) !admin_create_user.AdminCreateUserOutput {
         return admin_create_user.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a user's registered time-based one-time password (TOTP) multi-factor
+    /// authentication (MFA) factor, also known as a software token. After this
+    /// operation, the
+    /// user can no longer sign in with TOTP MFA, and can register a new TOTP factor
+    /// with
+    /// `AssociateSoftwareToken`. Use this operation when a user loses access to
+    /// their TOTP-generating device, for example, a lost or reset phone, and needs
+    /// to register
+    /// a new one.
+    ///
+    /// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+    /// requests for this API operation. For
+    /// this operation, you must use IAM credentials to authorize requests, and you
+    /// must
+    /// grant yourself the corresponding IAM permission in a policy.
+    ///
+    /// **Learn more**
+    ///
+    /// * [Signing Amazon Web Services API
+    ///   Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+    ///
+    /// * [Using the Amazon Cognito user pools API and user pool
+    ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+    pub fn adminDeleteSoftwareToken(self: *Self, allocator: std.mem.Allocator, input: admin_delete_software_token.AdminDeleteSoftwareTokenInput, options: CallOptions) !admin_delete_software_token.AdminDeleteSoftwareTokenOutput {
+        return admin_delete_software_token.execute(self, allocator, input, options);
     }
 
     /// Deletes a user profile in your user pool.
@@ -511,6 +548,31 @@ pub const Client = struct {
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
     pub fn adminGetUser(self: *Self, allocator: std.mem.Allocator, input: admin_get_user.AdminGetUserInput, options: CallOptions) !admin_get_user.AdminGetUserOutput {
         return admin_get_user.execute(self, allocator, input, options);
+    }
+
+    /// Lists the authentication options for a user in a user pool. Returns the
+    /// following:
+    ///
+    /// * The user's multi-factor authentication (MFA) preferences.
+    ///
+    /// * The user's options for choice-based authentication with the
+    /// `USER_AUTH` flow.
+    ///
+    /// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+    /// requests for this API operation. For
+    /// this operation, you must use IAM credentials to authorize requests, and you
+    /// must
+    /// grant yourself the corresponding IAM permission in a policy.
+    ///
+    /// **Learn more**
+    ///
+    /// * [Signing Amazon Web Services API
+    ///   Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+    ///
+    /// * [Using the Amazon Cognito user pools API and user pool
+    ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+    pub fn adminGetUserAuthFactors(self: *Self, allocator: std.mem.Allocator, input: admin_get_user_auth_factors.AdminGetUserAuthFactorsInput, options: CallOptions) !admin_get_user_auth_factors.AdminGetUserAuthFactorsOutput {
+        return admin_get_user_auth_factors.execute(self, allocator, input, options);
     }
 
     /// Starts sign-in for applications with a server-side component, for example a
@@ -1525,6 +1587,30 @@ pub const Client = struct {
         return create_user_pool_domain.execute(self, allocator, input, options);
     }
 
+    /// Creates a replica of an existing user pool in a specified Amazon Web
+    /// Services Region. The replica
+    /// enables multi-region replication for high availability and disaster
+    /// recovery. To create
+    /// a replica, you must have permissions to create user pools in the target
+    /// Region.
+    ///
+    /// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+    /// requests for this API operation. For
+    /// this operation, you must use IAM credentials to authorize requests, and you
+    /// must
+    /// grant yourself the corresponding IAM permission in a policy.
+    ///
+    /// **Learn more**
+    ///
+    /// * [Signing Amazon Web Services API
+    ///   Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+    ///
+    /// * [Using the Amazon Cognito user pools API and user pool
+    ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+    pub fn createUserPoolReplica(self: *Self, allocator: std.mem.Allocator, input: create_user_pool_replica.CreateUserPoolReplicaInput, options: CallOptions) !create_user_pool_replica.CreateUserPoolReplicaOutput {
+        return create_user_pool_replica.execute(self, allocator, input, options);
+    }
+
     /// Deletes a group from the specified user pool. When you delete a group, that
     /// group no
     /// longer contributes to users' `cognito:preferred_group` or
@@ -1729,6 +1815,27 @@ pub const Client = struct {
         return delete_user_pool_domain.execute(self, allocator, input, options);
     }
 
+    /// Deletes a secondary replica user pool. You can only delete replicas that are
+    /// in the
+    /// INACTIVE status. This operation must be called from the primary Region.
+    ///
+    /// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+    /// requests for this API operation. For
+    /// this operation, you must use IAM credentials to authorize requests, and you
+    /// must
+    /// grant yourself the corresponding IAM permission in a policy.
+    ///
+    /// **Learn more**
+    ///
+    /// * [Signing Amazon Web Services API
+    ///   Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+    ///
+    /// * [Using the Amazon Cognito user pools API and user pool
+    ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+    pub fn deleteUserPoolReplica(self: *Self, allocator: std.mem.Allocator, input: delete_user_pool_replica.DeleteUserPoolReplicaInput, options: CallOptions) !delete_user_pool_replica.DeleteUserPoolReplicaOutput {
+        return delete_user_pool_replica.execute(self, allocator, input, options);
+    }
+
     /// Deletes a registered passkey, or WebAuthn, authenticator for the currently
     /// signed-in
     /// user.
@@ -1809,6 +1916,35 @@ pub const Client = struct {
         return describe_terms.execute(self, allocator, input, options);
     }
 
+    /// Returns details for the terms documents that are associated with an app
+    /// client,
+    /// identified by the app client ID, user pool ID, and terms name. For
+    /// more information, see [Terms
+    /// documents](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html#managed-login-terms-documents).
+    ///
+    /// To call `DescribeTermsByClient`, you must have the
+    /// `cognito-idp:DescribeTermsByClient` Identity and Access Management (IAM)
+    /// permission. An IAM
+    /// policy that denies `cognito-idp:DescribeTerms` also denies requests to
+    /// `DescribeTermsByClient`.
+    ///
+    /// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+    /// requests for this API operation. For
+    /// this operation, you must use IAM credentials to authorize requests, and you
+    /// must
+    /// grant yourself the corresponding IAM permission in a policy.
+    ///
+    /// **Learn more**
+    ///
+    /// * [Signing Amazon Web Services API
+    ///   Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+    ///
+    /// * [Using the Amazon Cognito user pools API and user pool
+    ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+    pub fn describeTermsByClient(self: *Self, allocator: std.mem.Allocator, input: describe_terms_by_client.DescribeTermsByClientInput, options: CallOptions) !describe_terms_by_client.DescribeTermsByClientOutput {
+        return describe_terms_by_client.execute(self, allocator, input, options);
+    }
+
     /// Describes a user import job. For more information about user CSV import, see
     /// [Importing users from a CSV
     /// file](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-using-import-tool.html).
@@ -1865,6 +2001,13 @@ pub const Client = struct {
 
     /// Given a user pool domain name, returns information about the domain
     /// configuration.
+    ///
+    /// This operation doesn't return results when you query a prefix domain in a
+    /// secondary Region. Prefix domains are Region-specific and can only be
+    /// described in
+    /// the Region where they were created. To describe a prefix domain for a
+    /// replica user
+    /// pool, make the request to the primary Region's endpoint.
     ///
     /// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
     /// requests for this API operation. For
@@ -1957,6 +2100,34 @@ pub const Client = struct {
     /// Developer Guide*.
     pub fn forgotPassword(self: *Self, allocator: std.mem.Allocator, input: forgot_password.ForgotPasswordInput, options: CallOptions) !forgot_password.ForgotPasswordOutput {
         return forgot_password.execute(self, allocator, input, options);
+    }
+
+    /// Issues an access token for machine-to-machine (M2M) authorization. Your app
+    /// client
+    /// provides its client ID and secret, and receives an access token that
+    /// authorizes requests
+    /// to your resource servers.
+    ///
+    /// To use this operation, you must configure the app client with a client
+    /// secret and
+    /// enable the `ALLOW_CLIENT_TOKEN_AUTH` authentication flow. The
+    /// `ALLOW_CLIENT_TOKEN_AUTH` flow is mutually exclusive with user
+    /// authentication
+    /// flows. It must be the only authentication flow that you configure for the
+    /// app client. For
+    /// more information, see [Scopes, M2M, and resource
+    /// servers](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-define-resource-servers.html).
+    ///
+    /// Amazon Cognito doesn't evaluate Identity and Access Management (IAM)
+    /// policies in requests for this API operation. For
+    /// this operation, you can't use IAM credentials to authorize requests, and you
+    /// can't
+    /// grant IAM permissions in policies. For more information about authorization
+    /// models in
+    /// Amazon Cognito, see [Using the Amazon Cognito user pools API and user pool
+    /// endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html).
+    pub fn getClientToken(self: *Self, allocator: std.mem.Allocator, input: get_client_token.GetClientTokenInput, options: CallOptions) !get_client_token.GetClientTokenOutput {
+        return get_client_token.execute(self, allocator, input, options);
     }
 
     /// Given a user pool ID, generates a comma-separated value (CSV) list populated
@@ -2060,6 +2231,25 @@ pub const Client = struct {
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
     pub fn getLogDeliveryConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_log_delivery_configuration.GetLogDeliveryConfigurationInput, options: CallOptions) !get_log_delivery_configuration.GetLogDeliveryConfigurationOutput {
         return get_log_delivery_configuration.execute(self, allocator, input, options);
+    }
+
+    /// Returns the current provisioned limit for a specific API category.
+    ///
+    /// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+    /// requests for this API operation. For
+    /// this operation, you must use IAM credentials to authorize requests, and you
+    /// must
+    /// grant yourself the corresponding IAM permission in a policy.
+    ///
+    /// **Learn more**
+    ///
+    /// * [Signing Amazon Web Services API
+    ///   Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+    ///
+    /// * [Using the Amazon Cognito user pools API and user pool
+    ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+    pub fn getProvisionedLimit(self: *Self, allocator: std.mem.Allocator, input: get_provisioned_limit.GetProvisionedLimitInput, options: CallOptions) !get_provisioned_limit.GetProvisionedLimitOutput {
+        return get_provisioned_limit.execute(self, allocator, input, options);
     }
 
     /// Given a user pool ID, returns the signing certificate for SAML 2.0
@@ -2506,6 +2696,28 @@ pub const Client = struct {
         return list_user_pool_clients.execute(self, allocator, input, options);
     }
 
+    /// Lists all replicas for a user pool, including both primary and secondary
+    /// replicas. We
+    /// recommend using pagination to ensure that the operation returns quickly and
+    /// successfully.
+    ///
+    /// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+    /// requests for this API operation. For
+    /// this operation, you must use IAM credentials to authorize requests, and you
+    /// must
+    /// grant yourself the corresponding IAM permission in a policy.
+    ///
+    /// **Learn more**
+    ///
+    /// * [Signing Amazon Web Services API
+    ///   Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+    ///
+    /// * [Using the Amazon Cognito user pools API and user pool
+    ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+    pub fn listUserPoolReplicas(self: *Self, allocator: std.mem.Allocator, input: list_user_pool_replicas.ListUserPoolReplicasInput, options: CallOptions) !list_user_pool_replicas.ListUserPoolReplicasOutput {
+        return list_user_pool_replicas.execute(self, allocator, input, options);
+    }
+
     /// Lists user pools and their details in the current Amazon Web Services
     /// account.
     ///
@@ -2746,6 +2958,13 @@ pub const Client = struct {
     /// request. To activate this setting, your user pool must be on the [
     /// Plus
     /// tier](https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html).
+    ///
+    /// In secondary regions for user pools with multi-region replication, only the
+    /// `SourceARN` and `From` attributes of
+    /// `NotifyConfiguration` can be modified to configure region-specific SES
+    /// integration. All other risk configuration settings must match the existing
+    /// values to
+    /// maintain consistency across replicas.
     pub fn setRiskConfiguration(self: *Self, allocator: std.mem.Allocator, input: set_risk_configuration.SetRiskConfigurationInput, options: CallOptions) !set_risk_configuration.SetRiskConfigurationOutput {
         return set_risk_configuration.execute(self, allocator, input, options);
     }
@@ -3131,6 +3350,31 @@ pub const Client = struct {
         return update_managed_login_branding.execute(self, allocator, input, options);
     }
 
+    /// Sets the provisioned limit for a specific API category. The value must be
+    /// between the
+    /// default limit and your account-level maximum limit in Service Quotas.
+    ///
+    /// Managed login user pools don't support adjustments to the
+    /// `UserAuthentication` or `UserFederation` categories. To
+    /// increase these limits, submit a Service Quotas increase request.
+    ///
+    /// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+    /// requests for this API operation. For
+    /// this operation, you must use IAM credentials to authorize requests, and you
+    /// must
+    /// grant yourself the corresponding IAM permission in a policy.
+    ///
+    /// **Learn more**
+    ///
+    /// * [Signing Amazon Web Services API
+    ///   Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+    ///
+    /// * [Using the Amazon Cognito user pools API and user pool
+    ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+    pub fn updateProvisionedLimit(self: *Self, allocator: std.mem.Allocator, input: update_provisioned_limit.UpdateProvisionedLimitInput, options: CallOptions) !update_provisioned_limit.UpdateProvisionedLimitOutput {
+        return update_provisioned_limit.execute(self, allocator, input, options);
+    }
+
     /// Updates the name and scopes of a resource server. All other fields are
     /// read-only. For
     /// more information about resource servers, see [Access control with resource
@@ -3252,8 +3496,15 @@ pub const Client = struct {
     /// your user
     /// pool, modified to include the changes that you want to make.
     ///
-    /// With the exception of `UserPoolTier`, if you don't provide a value for an
-    /// attribute, Amazon Cognito sets it to its default value.
+    /// If you don't provide a value for an attribute, Amazon Cognito sets it to its
+    /// default value.
+    ///
+    /// In secondary regions for user pools with multi-region replication, regional
+    /// configurations for email, SMS, Lambda functions, and tags can be updated.
+    /// Both global
+    /// and regional settings must be provided as inputs, with global settings
+    /// required to match
+    /// existing values to maintain consistency across replicas.
     ///
     /// This action might generate an SMS text message. Starting June 1, 2021, US
     /// telecom carriers
@@ -3382,6 +3633,29 @@ pub const Client = struct {
     ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
     pub fn updateUserPoolDomain(self: *Self, allocator: std.mem.Allocator, input: update_user_pool_domain.UpdateUserPoolDomainInput, options: CallOptions) !update_user_pool_domain.UpdateUserPoolDomainOutput {
         return update_user_pool_domain.execute(self, allocator, input, options);
+    }
+
+    /// Updates replica-specific settings for a user pool replica. You can modify
+    /// the status
+    /// to activate or deactivate the replica. This request can be made in both
+    /// primary and secondary
+    /// regions of the user pool.
+    ///
+    /// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+    /// requests for this API operation. For
+    /// this operation, you must use IAM credentials to authorize requests, and you
+    /// must
+    /// grant yourself the corresponding IAM permission in a policy.
+    ///
+    /// **Learn more**
+    ///
+    /// * [Signing Amazon Web Services API
+    ///   Requests](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
+    ///
+    /// * [Using the Amazon Cognito user pools API and user pool
+    ///   endpoints](https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+    pub fn updateUserPoolReplica(self: *Self, allocator: std.mem.Allocator, input: update_user_pool_replica.UpdateUserPoolReplicaInput, options: CallOptions) !update_user_pool_replica.UpdateUserPoolReplicaOutput {
+        return update_user_pool_replica.execute(self, allocator, input, options);
     }
 
     /// Registers the current user's time-based one-time password (TOTP)

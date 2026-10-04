@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListLoggerDefinitionsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListLoggerDefinitionsOutput {
-    var result: ListLoggerDefinitionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListLoggerDefinitionsOutput, body, allocator);
-    }
+    const result: ListLoggerDefinitionsOutput = try aws.json.parseJsonObject(
+        ListLoggerDefinitionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

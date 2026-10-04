@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchUpdateStandardsCon
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchUpdateStandardsControlAssociationsOutput {
-    var result: BatchUpdateStandardsControlAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchUpdateStandardsControlAssociationsOutput, body, allocator);
-    }
+    const result: BatchUpdateStandardsControlAssociationsOutput = try aws.json.parseJsonObject(
+        BatchUpdateStandardsControlAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

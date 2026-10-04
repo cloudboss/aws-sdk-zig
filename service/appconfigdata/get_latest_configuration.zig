@@ -121,6 +121,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLatestConfigurationI
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetLatestConfigurationOutput {
     var result: GetLatestConfigurationOutput = .{};
+    errdefer {
+        if (result.content_type) |value| allocator.free(value);
+        if (result.next_poll_configuration_token) |value| allocator.free(value);
+        if (result.version_label) |value| allocator.free(value);
+        if (result.configuration) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.configuration = try allocator.dupe(u8, body);
     }

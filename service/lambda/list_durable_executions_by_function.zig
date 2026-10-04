@@ -26,8 +26,8 @@ pub const ListDurableExecutionsByFunctionInput = struct {
     /// $LATEST version.
     qualifier: ?[]const u8 = null,
 
-    /// Set to true to return results in reverse chronological order (newest first).
-    /// Default is false.
+    /// Set to true to return results in chronological order (oldest first). Default
+    /// is false.
     reverse_order: ?bool = null,
 
     /// Filter executions that started after this timestamp (ISO 8601 format).
@@ -181,10 +181,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDurableExecutionsBy
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListDurableExecutionsByFunctionOutput {
-    var result: ListDurableExecutionsByFunctionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListDurableExecutionsByFunctionOutput, body, allocator);
-    }
+    const result: ListDurableExecutionsByFunctionOutput = try aws.json.parseJsonObject(
+        ListDurableExecutionsByFunctionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

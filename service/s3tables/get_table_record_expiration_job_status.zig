@@ -94,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTableRecordExpiratio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTableRecordExpirationJobStatusOutput {
-    var result: GetTableRecordExpirationJobStatusOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTableRecordExpirationJobStatusOutput, body, allocator);
-    }
+    const result: GetTableRecordExpirationJobStatusOutput = try aws.json.parseJsonObject(
+        GetTableRecordExpirationJobStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

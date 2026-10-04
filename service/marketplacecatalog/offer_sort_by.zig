@@ -12,6 +12,9 @@ pub const OfferSortBy = enum {
     targeting,
     last_modified_date,
     offer_set_id,
+    target_agreement_id,
+    target_agreement_intent,
+    created_by_source,
 
     pub const json_field_names = .{
         .entity_id = "EntityId",
@@ -25,6 +28,9 @@ pub const OfferSortBy = enum {
         .targeting = "Targeting",
         .last_modified_date = "LastModifiedDate",
         .offer_set_id = "OfferSetId",
+        .target_agreement_id = "TargetAgreementId",
+        .target_agreement_intent = "TargetAgreementIntent",
+        .created_by_source = "CreatedBySource",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -40,6 +46,9 @@ pub const OfferSortBy = enum {
             .targeting => "Targeting",
             .last_modified_date => "LastModifiedDate",
             .offer_set_id => "OfferSetId",
+            .target_agreement_id => "TargetAgreementId",
+            .target_agreement_intent => "TargetAgreementIntent",
+            .created_by_source => "CreatedBySource",
         };
     }
 

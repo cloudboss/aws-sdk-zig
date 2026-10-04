@@ -146,10 +146,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRecommendationFeedb
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListRecommendationFeedbackOutput {
-    var result: ListRecommendationFeedbackOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListRecommendationFeedbackOutput, body, allocator);
-    }
+    const result: ListRecommendationFeedbackOutput = try aws.json.parseJsonObject(
+        ListRecommendationFeedbackOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

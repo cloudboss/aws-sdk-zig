@@ -26,15 +26,20 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// The following are valid filter keys for a `GetMetricDataV2` request:
     ///
-    /// `AGENT` | `AGENT_HIERARCHY_LEVEL_ONE` | `AGENT_HIERARCHY_LEVEL_TWO` |
+    /// `AGENT` | `AI_AGENT` | `AI_AGENT_ID` | `AI_AGENT_NAME` |
+    /// `AI_AGENT_NAME_VERSION` | `AI_AGENT_TYPE` | `AI_PROMPT` | `AI_PROMPT_ID` |
+    /// `AI_PROMPT_NAME` | `AI_PROMPT_TYPE` | `AI_TOOL_ID` |
+    /// `AI_TOOL_NAME` | `AI_TOOL_TYPE` | `AI_USE_CASE` |
+    /// `AGENT_HIERARCHY_LEVEL_ONE` | `AGENT_HIERARCHY_LEVEL_TWO` |
     /// `AGENT_HIERARCHY_LEVEL_THREE` | `AGENT_HIERARCHY_LEVEL_FOUR` |
     /// `AGENT_HIERARCHY_LEVEL_FIVE` | `ANSWERING_MACHINE_DETECTION_STATUS` |
     /// `BOT_ALIAS` | `BOT_ID` | `BOT_INTENT_NAME` | `BOT_LOCALE` |
-    /// `BOT_VERSION` | `CAMPAIGN` | `CAMPAIGN_DELIVERY_EVENT_TYPE` |
+    /// `BOT_VERSION` | `BROWSER_NAME` | `CAMPAIGN` |
+    /// `CAMPAIGN_DELIVERY_EVENT_TYPE` |
     /// `CAMPAIGN_EXCLUDED_EVENT_TYPE` | `CASE_STATUS` | `CASE_TEMPLATE_ARN` |
     /// `CHANNEL` | `contact/segmentAttributes/connect:Subtype` |
-    /// `contact/segmentAttributes/connect:ValidationTestType` | `DISCONNECT_REASON`
-    /// |
+    /// `contact/segmentAttributes/connect:ValidationTestType` | `DEVICE_MODEL` |
+    /// `DEVICE_TYPE` | `DISCONNECT_REASON` |
     /// `EVALUATION_FORM` | `EVALUATION_QUESTION` | `EVALUATION_SECTION` |
     /// `EVALUATION_SOURCE` | `EVALUATOR_ID` | `FEATURE` |
     /// `FLOW_ACTION_ID` | `FLOW_TYPE` | `FLOWS_MODULE_RESOURCE_ID` |
@@ -42,13 +47,14 @@ pub const GetMetricDataV2Input = struct {
     /// `FLOWS_OUTCOME_TYPE` | `FLOWS_RESOURCE_ID` | `FORM_VERSION` |
     /// `INITIATING_FLOW` | `INITIATION_METHOD` |
     /// `INVOKING_RESOURCE_PUBLISHED_TIMESTAMP` | `INVOKING_RESOURCE_TYPE` |
-    /// `PARENT_FLOWS_RESOURCE_ID` | `Q_CONNECT_ENABLED` | `QUEUE` |
-    /// `RESOURCE_PUBLISHED_TIMESTAMP` | `ROUTING_PROFILE` |
-    /// `ROUTING_STEP_EXPRESSION` | `TEST_CASE` |
-    /// `TEST_CASE_EXECUTION_FAILURE_REASON` | `TEST_CASE_EXECUTION_RESULT` |
-    /// `TEST_CASE_EXECUTION_STATE`
+    /// `KNOWLEDGE_BASE_NAME` | `PARENT_FLOWS_RESOURCE_ID` |
+    /// `Q_CONNECT_ENABLED` | `QUEUE` | `RESOURCE_PUBLISHED_TIMESTAMP` |
+    /// `ROUTING_PROFILE` | `ROUTING_STEP_EXPRESSION` | `SESSION_ID` |
+    /// `TEST_CASE` | `TEST_CASE_EXECUTION_FAILURE_REASON` |
+    /// `TEST_CASE_EXECUTION_RESULT` | `TEST_CASE_EXECUTION_STATE` |
+    /// `WEB_NOTIFICATION_TYPE`
     ///
-    /// The following filter keys correspond to Amazon Connect resources and are
+    /// The following filter keys correspond to Connect Customer resources and are
     /// used for authorizing requests.
     /// A `GetMetricDataV2` request requires at least one of these filters:
     ///
@@ -81,10 +87,10 @@ pub const GetMetricDataV2Input = struct {
     /// `contact/segmentAttributes/connect:Subtype` filter key.
     ///
     /// * `ROUTING_STEP_EXPRESSION` accepts a filter value up to 3,000 characters in
-    ///   length. This filter
-    /// is case-sensitive and order-sensitive. JSON string fields must be sorted in
-    /// ascending order, and JSON array order
-    /// must be preserved.
+    ///   length. Filter values
+    /// are case-sensitive. JSON object key order and whitespace may be arbitrary;
+    /// array order and tree structure must be
+    /// preserved.
     ///
     /// * TRUE and FALSE are the only valid filter values for the
     ///   `Q_CONNECT_ENABLED` filter key.
@@ -106,7 +112,7 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// * To filter by phone number, see [Create a historical metrics
     ///   report](https://docs.aws.amazon.com/connect/latest/adminguide/create-historical-metrics-report.html) in
-    /// the *Amazon Connect Administrator Guide*.
+    /// the *Connect Customer Administrator Guide*.
     filters: []const FilterV2,
 
     /// The grouping applied to the metrics that are returned. For example, when
@@ -117,25 +123,35 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// If no grouping is specified, a summary of all metrics is returned.
     ///
-    /// Valid grouping keys: `AGENT` | `AGENT_HIERARCHY_LEVEL_ONE` |
+    /// Valid grouping keys: `AGENT` | `AI_AGENT` | `AI_AGENT_ID` |
+    /// `AI_AGENT_NAME` | `AI_AGENT_NAME_VERSION` | `AI_AGENT_TYPE` |
+    /// `AI_PROMPT` | `AI_PROMPT_ID` | `AI_PROMPT_NAME` |
+    /// `AI_PROMPT_NAME_VERSION` | `AI_PROMPT_TYPE` | `AI_TOOL_ID` |
+    /// `AI_TOOL_NAME` | `AI_TOOL_TYPE` | `AI_USE_CASE` |
+    /// `AGENT_HIERARCHY_LEVEL_ONE` |
     /// `AGENT_HIERARCHY_LEVEL_TWO` | `AGENT_HIERARCHY_LEVEL_THREE` |
     /// `AGENT_HIERARCHY_LEVEL_FOUR` | `AGENT_HIERARCHY_LEVEL_FIVE` |
     /// `ANSWERING_MACHINE_DETECTION_STATUS` | `BOT_ID` | `BOT_ALIAS` |
-    /// `BOT_VERSION` | `BOT_LOCALE` | `BOT_INTENT_NAME` | `CAMPAIGN` |
-    /// `CAMPAIGN_DELIVERY_EVENT_TYPE` | `CAMPAIGN_EXCLUDED_EVENT_TYPE` |
+    /// `BOT_VERSION` | `BOT_LOCALE` | `BOT_INTENT_NAME` | `BROWSER_NAME` |
+    /// `CAMPAIGN` | `CAMPAIGN_DELIVERY_EVENT_TYPE` | `CAMPAIGN_EXCLUDED_EVENT_TYPE`
+    /// |
     /// `CAMPAIGN_EXECUTION_TIMESTAMP` | `CASE_TEMPLATE_ARN` | `CASE_STATUS` |
-    /// `CHANNEL` | `contact/segmentAttributes/connect:Subtype` |
-    /// `DISCONNECT_REASON` |
+    /// `CHANNEL` | `contact/segmentAttributes/connect:Subtype` | `DEVICE_MODEL` |
+    /// `DEVICE_TYPE` | `DISCONNECT_REASON` |
     /// `EVALUATION_FORM` | `EVALUATION_SECTION` | `EVALUATION_QUESTION` |
     /// `EVALUATION_SOURCE` | `EVALUATOR_ID` | `FLOWS_RESOURCE_ID` |
     /// `FLOWS_MODULE_RESOURCE_ID` | `FLOW_ACTION_ID` | `FLOW_TYPE` |
     /// `FLOWS_OUTCOME_TYPE` | `FORM_VERSION` | `INITIATION_METHOD` |
     /// `INVOKING_RESOURCE_PUBLISHED_TIMESTAMP` | `INVOKING_RESOURCE_TYPE` |
+    /// `KNOWLEDGE_ARTICLE_NAME` | `KNOWLEDGE_BASE_NAME` |
     /// `PARENT_FLOWS_RESOURCE_ID` | `Q_CONNECT_ENABLED` | `QUEUE` |
     /// `RESOURCE_PUBLISHED_TIMESTAMP` | `ROUTING_PROFILE` |
     /// `ROUTING_STEP_EXPRESSION` |
-    /// `TEST_CASE` | `TEST_CASE_EXECUTION_FAILURE_REASON` |
-    /// `TEST_CASE_INVOCATION_METHOD`
+    /// `SESSION_ID` | `TEST_CASE` | `TEST_CASE_EXECUTION_FAILURE_REASON` |
+    /// `TEST_CASE_INVOCATION_METHOD` | `WEB_NOTIFICATION_TYPE`
+    ///
+    /// `AI_PROMPT_NAME_VERSION` and `KNOWLEDGE_ARTICLE_NAME` are valid groupings
+    /// but not valid filters.
     ///
     /// API, SCHEDULE, and EVENT are the only valid filterValues for
     /// TEST_CASE_INVOCATION_METHOD.
@@ -158,9 +174,9 @@ pub const GetMetricDataV2Input = struct {
     /// `DAY` | `WEEK` | `TOTAL`.
     ///
     /// For example, if `IntervalPeriod` is selected `THIRTY_MIN`, `StartTime` and
-    /// `EndTime` differs by 1 day, then Amazon Connect returns 48 results in the
+    /// `EndTime` differs by 1 day, then Connect Customer returns 48 results in the
     /// response. Each result is
-    /// aggregated by the THIRTY_MIN period. By default Amazon Connect aggregates
+    /// aggregated by the THIRTY_MIN period. By default Connect Customer aggregates
     /// results based on the
     /// `TOTAL` interval period.
     ///
@@ -198,7 +214,7 @@ pub const GetMetricDataV2Input = struct {
     /// filters for each metric. The following
     /// historical metrics are available. For a description of each metric, see
     /// [Metrics
-    /// definition](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) in the *Amazon Connect Administrator Guide*.
+    /// definition](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) in the *Connect Customer Administrator Guide*.
     ///
     /// MetricId should be used to reference custom metrics or out of the box
     /// metrics as Arn. If using MetricId, the
@@ -555,7 +571,7 @@ pub const GetMetricDataV2Input = struct {
     /// Unit: Seconds
     ///
     /// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-    /// Hierarchy, Feature,
+    /// Hierarchy, AI Use Case, Feature,
     /// contact/segmentAttributes/connect:Subtype, RoutingStepExpression
     ///
     /// UI name: [Average handle
@@ -567,9 +583,9 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// Unit: Count
     ///
-    /// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Type, AI Use
-    /// Case, Channel, Queue, Routing
-    /// Profile
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Use Case,
+    /// Channel, Queue, Routing Profile, Session ID
     ///
     /// UI name: [Active AI
     /// Agents](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#active-ai-agents)
@@ -578,7 +594,9 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// Unit: Percent
     ///
-    /// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name
+    /// Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
     ///
     /// UI name: [AI Handoff
     /// Rate](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-handoff-rate)
@@ -587,55 +605,75 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// Unit: Count
     ///
-    /// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name
+    /// Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
     ///
-    /// UI name: [AI
-    /// Handoffs](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-handoffs)
+    /// UI name: [AI Handoff
+    /// Count](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-handoffs)
     ///
     /// **AI_AGENT_INVOCATION_SUCCESS**
     ///
     /// Unit: Count
     ///
-    /// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version,
-    /// AI Agent Type, AI Use Case,
-    /// Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Use Case,
+    /// Channel, Queue, Routing Profile, Session ID
     ///
     /// UI name: [AI Agent Invocation
     /// Success](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocation-success)
-    ///
-    /// AI Agent Name Version is not a valid filter but a valid grouping.
     ///
     /// **AI_AGENT_INVOCATION_SUCCESS_RATE**
     ///
     /// Unit: Percent
     ///
-    /// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version,
-    /// AI Agent Type, AI Use Case,
-    /// Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Use Case,
+    /// Channel, Queue, Routing Profile, Session ID
     ///
     /// UI name: [AI Agent Invocation Success
     /// Rate](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocation-success-rate)
-    ///
-    /// AI Agent Name Version is not a valid filter but a valid grouping.
     ///
     /// **AI_AGENT_INVOCATIONS**
     ///
     /// Unit: Count
     ///
-    /// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Type, AI
-    /// Agent Name Version, AI Use Case,
-    /// Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Use Case,
+    /// Channel, Queue, Routing Profile, Session ID
     ///
-    /// UI name: [AI Agent
-    /// Invocations](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocations)
+    /// UI name: [AI Agent Invocation
+    /// Count](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-invocations)
     ///
-    /// AI Agent Name Version is not a valid filter but a valid grouping.
+    /// **AI_AGENT_RESPONSE_HELPFUL**
+    ///
+    /// Unit: Count
+    ///
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Use Case,
+    /// Channel, Queue, Routing Profile, Session ID
+    ///
+    /// UI name: [AI Agent Response
+    /// Helpful](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-response-helpful)
+    ///
+    /// **AI_AGENT_RESPONSE_NOT_HELPFUL**
+    ///
+    /// Unit: Count
+    ///
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Use Case,
+    /// Channel, Queue, Routing Profile, Session ID
+    ///
+    /// UI name: [AI Agent Response Not
+    /// Helpful](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-response-not-helpful)
     ///
     /// **AI_RESPONSE_COMPLETION_RATE**
     ///
     /// Unit: Percent
     ///
-    /// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name
+    /// Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
     ///
     /// UI name: [AI Response Completion
     /// Rate](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-response-completion-rate)
@@ -644,7 +682,9 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// Unit: Count
     ///
-    /// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name
+    /// Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
     ///
     /// UI name: [AI Involved
     /// Contacts](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-involved-contacts)
@@ -653,101 +693,92 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// Unit: Count
     ///
-    /// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version,
-    /// AI Agent Type, AI Prompt, AI
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Prompt, AI
     /// Prompt ID, AI Prompt Name, AI Prompt Type, AI Use Case, Channel, Queue,
-    /// Routing Profile
+    /// Routing Profile, Session ID
     ///
     /// UI name: [AI Prompt Invocation
     /// Success](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocation-success)
-    ///
-    /// AI Agent Name Version is not a valid filter but a valid grouping.
     ///
     /// **AI_PROMPT_INVOCATION_SUCCESS_RATE**
     ///
     /// Unit: Percent
     ///
-    /// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version,
-    /// AI Agent Type, AI Prompt, AI
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Prompt, AI
     /// Prompt ID, AI Prompt Name, AI Prompt Type, AI Use Case, Channel, Queue,
-    /// Routing Profile
+    /// Routing Profile, Session ID
     ///
     /// UI name: [AI Prompt Invocation Success
     /// Rate](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocation-success-rate)
-    ///
-    /// AI Agent Name Version is not a valid filter but a valid grouping.
     ///
     /// **AI_PROMPT_INVOCATIONS**
     ///
     /// Unit: Count
     ///
-    /// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version,
-    /// AI Agent Type, AI Prompt, AI
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Prompt, AI
     /// Prompt ID, AI Prompt Name, AI Prompt Type, AI Use Case, Channel, Queue,
-    /// Routing Profile
+    /// Routing Profile, Session ID
     ///
     /// UI name: [AI Prompt
     /// Invocations](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-prompt-invocations)
-    ///
-    /// AI Agent Name Version is not a valid filter but a valid grouping.
     ///
     /// **AI_TOOL_INVOCATION_SUCCESS**
     ///
     /// Unit: Count
     ///
-    /// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version,
-    /// AI Agent Type, AI Tool ID, AI
-    /// Tool Name, AI Tool Type, AI Use Case, Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Tool ID, AI
+    /// Tool Name, AI Tool Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
     ///
     /// UI name: [AI Tool Invocation
     /// Success](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocation-success)
-    ///
-    /// AI Agent Name Version is not a valid filter but a valid grouping.
     ///
     /// **AI_TOOL_INVOCATION_SUCCESS_RATE**
     ///
     /// Unit: Percent
     ///
-    /// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version,
-    /// AI Agent Type, AI Tool ID, AI
-    /// Tool Name, AI Tool Type, AI Use Case, Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Tool ID, AI
+    /// Tool Name, AI Tool Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
     ///
     /// UI name: [AI Tool Invocation Success
     /// Rate](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocation-success-rate)
-    ///
-    /// AI Agent Name Version is not a valid filter but a valid grouping.
     ///
     /// **AI_TOOL_INVOCATIONS**
     ///
     /// Unit: Count
     ///
-    /// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version,
-    /// AI Agent Type, AI Tool ID, AI
-    /// Tool Name, AI Tool Type, AI Use Case, Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Tool ID, AI
+    /// Tool Name, AI Tool Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
     ///
     /// UI name: [AI Tool
     /// Invocations](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocations)
-    ///
-    /// AI Agent Name Version is not a valid filter but a valid grouping.
     ///
     /// **AVG_AI_AGENT_CONVERSATION_TURNS**
     ///
     /// Unit: Count
     ///
-    /// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version,
-    /// AI Agent Type, AI Use Case,
-    /// Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Use Case,
+    /// Channel, Queue, Routing Profile, Session ID
     ///
     /// UI name: [Average AI Agent Conversation
     /// Turns](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-agent-conversation-turns)
-    ///
-    /// AI Agent Name Version is not a valid filter but a valid grouping.
     ///
     /// **AVG_AI_CONVERSATION_TURNS**
     ///
     /// Unit: Count
     ///
-    /// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name
+    /// Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
     ///
     /// UI name: [Average AI Conversation
     /// Turns](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-conversation-turns)
@@ -756,36 +787,102 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// Unit: Milliseconds
     ///
-    /// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version,
-    /// AI Agent Type, AI Prompt, AI
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Prompt, AI
     /// Prompt ID, AI Prompt Name, AI Prompt Type, AI Use Case, Channel, Queue,
-    /// Routing Profile
+    /// Routing Profile, Session ID
     ///
     /// UI name: [Average AI Prompt Invocation
     /// Latency](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-prompt-invocation-latency)
-    ///
-    /// AI Agent Name Version is not a valid filter but a valid grouping.
     ///
     /// **AVG_AI_TOOL_INVOCATION_LATENCY**
     ///
     /// Unit: Milliseconds
     ///
-    /// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Name Version,
-    /// AI Agent Type, AI Tool ID, AI
-    /// Tool Name, AI Tool Type, AI Use Case, Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Tool ID, AI
+    /// Tool Name, AI Tool Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
     ///
     /// UI name: [Average AI Tool Invocation
     /// Latency](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-tool-invocation-latency)
     ///
-    /// AI Agent Name Version is not a valid filter but a valid grouping.
+    /// **AI_TOOL_PARAMETER_ACCURACY**
+    ///
+    /// Unit: Double
+    ///
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Tool ID,
+    /// AI Tool Name, AI Tool Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
+    ///
+    /// UI name: [AI Tool Parameter
+    /// Accuracy](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-parameter-accuracy)
+    ///
+    /// **AI_TOOL_SELECTION_ACCURACY**
+    ///
+    /// Unit: Double
+    ///
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Tool ID,
+    /// AI Tool Name, AI Tool Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
+    ///
+    /// UI name: [AI Tool Selection
+    /// Accuracy](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-selection-accuracy)
+    ///
+    /// **AI_TOOL_UTILIZATION_ACCURACY**
+    ///
+    /// Unit: Double
+    ///
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Tool ID,
+    /// AI Tool Name, AI Tool Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
+    ///
+    /// UI name: [AI Tool Utilization
+    /// Accuracy](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-utilization-accuracy)
+    ///
+    /// **COMPLETENESS_SCORE**
+    ///
+    /// Unit: Double
+    ///
+    /// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name
+    /// Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
+    ///
+    /// UI name: [Completeness
+    /// Score](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#completeness-score)
+    ///
+    /// **FAITHFULNESS_SCORE**
+    ///
+    /// Unit: Double
+    ///
+    /// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name
+    /// Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
+    ///
+    /// UI name: [Faithfulness
+    /// Score](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#faithfulness-score)
+    ///
+    /// **GOAL_SUCCESS_RATE**
+    ///
+    /// Unit: Double
+    ///
+    /// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name
+    /// Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
+    ///
+    /// UI name: [Goal Success
+    /// Rate](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#goal-success-rate)
     ///
     /// **KNOWLEDGE_CONTENT_REFERENCES**
     ///
     /// Unit: Count
     ///
-    /// Valid groupings and filters: AI Agent, AI Agent Name, AI Agent Type, AI Use
-    /// Case, Channel, Knowledge Base
-    /// Name, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Use Case,
+    /// Channel, Knowledge Base Name, Queue, Routing Profile, Session ID
     ///
     /// UI name: [Knowledge Content
     /// References](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#knowledge-content-references)
@@ -794,7 +891,9 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// Unit: Percent
     ///
-    /// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name
+    /// Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
     ///
     /// UI name: [Proactive Intent Engagement
     /// Rate](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-engagement-rate)
@@ -803,7 +902,9 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// Unit: Percent
     ///
-    /// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name
+    /// Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
     ///
     /// UI name: [Proactive Intent Response
     /// Rate](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-response-rate)
@@ -812,7 +913,9 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// Unit: Count
     ///
-    /// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name
+    /// Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
     ///
     /// UI name: [Proactive Intents
     /// Answered](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-answered)
@@ -821,7 +924,9 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// Unit: Count
     ///
-    /// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name
+    /// Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
     ///
     /// UI name: [Proactive Intents
     /// Detected](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-detected)
@@ -830,7 +935,9 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// Unit: Count
     ///
-    /// Valid groupings and filters: AI Use Case, Channel, Queue, Routing Profile
+    /// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name
+    /// Version, AI Agent Type, AI Use Case, Channel, Queue, Routing Profile,
+    /// Session ID
     ///
     /// UI name: [Proactive Intents
     /// Engaged](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#proactive-intents-engaged)
@@ -1223,14 +1330,17 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// **CAMPAIGN_INTERACTIONS**
     ///
-    /// This metric is available only for outbound campaigns using the email
-    /// delivery mode.
+    /// This metric is available only for outbound campaigns using the email,
+    /// WhatsApp, and web notification
+    /// delivery modes.
     ///
     /// Unit: Count
     ///
     /// Valid metric filter key: CAMPAIGN_INTERACTION_EVENT_TYPE
     ///
-    /// Valid groupings and filters: Campaign
+    /// Valid groupings and filters: Browser Name, Campaign, Channel,
+    /// contact/segmentAttributes/connect:Subtype,
+    /// Device Model, Device Type, Web Notification Type
     ///
     /// UI name: [Campaign
     /// interactions](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-interactions)
@@ -1514,18 +1624,20 @@ pub const GetMetricDataV2Input = struct {
     /// `CAMPAIGN_DELIVERY_EVENT_TYPE`, `DISCONNECT_REASON`
     ///
     /// Valid groupings and filters: Agent, Answering Machine Detection Status,
-    /// Campaign, Campaign Delivery EventType, Channel,
-    /// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Queue, Routing
-    /// Profile
+    /// Browser Name, Campaign, Campaign Delivery EventType,
+    /// Channel, contact/segmentAttributes/connect:Subtype, Device Model, Device
+    /// Type, Disconnect Reason, Queue, Routing
+    /// Profile, Web Notification Type
     ///
     /// UI name: [Delivery
     /// attempts](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempts)
     ///
-    /// Campaign Delivery EventType filter and grouping are only available for SMS
-    /// and Email campaign delivery
-    /// modes. Agent, Queue, Routing Profile, Answering Machine Detection Status and
-    /// Disconnect Reason are only available
-    /// for agent assisted voice and automated voice delivery modes.
+    /// Campaign Delivery EventType filter and grouping are only available for SMS,
+    /// Email, WhatsApp, and web
+    /// notification campaign delivery modes. Agent, Queue, Routing Profile,
+    /// Answering Machine Detection Status and
+    /// Disconnect Reason are only available for agent assisted voice and automated
+    /// voice delivery modes.
     ///
     /// **DELIVERY_ATTEMPT_DISPOSITION_RATE**
     ///
@@ -1540,19 +1652,21 @@ pub const GetMetricDataV2Input = struct {
     /// `CAMPAIGN_DELIVERY_EVENT_TYPE`, `DISCONNECT_REASON`
     ///
     /// Valid groupings and filters: Agent, Answering Machine Detection Status,
-    /// Campaign, Channel,
-    /// contact/segmentAttributes/connect:Subtype, Disconnect Reason, Queue, Routing
-    /// Profile
+    /// Browser Name, Campaign, Channel,
+    /// contact/segmentAttributes/connect:Subtype, Device Model, Device Type,
+    /// Disconnect Reason, Queue, Routing Profile,
+    /// Web Notification Type
     ///
     /// UI name: [Delivery attempt
     /// disposition
     /// rate](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#delivery-attempt-disposition-rate)
     ///
-    /// Campaign Delivery Event Type filter and grouping are only available for SMS
-    /// and Email campaign delivery
-    /// modes. Agent, Queue, Routing Profile, Answering Machine Detection Status and
-    /// Disconnect Reason are only available
-    /// for agent assisted voice and automated voice delivery modes.
+    /// Campaign Delivery Event Type filter and grouping are only available for SMS,
+    /// Email, WhatsApp, and web
+    /// notification campaign delivery modes. Agent, Queue, Routing Profile,
+    /// Answering Machine Detection Status and
+    /// Disconnect Reason are only available for agent assisted voice and automated
+    /// voice delivery modes.
     ///
     /// **EVALUATIONS_PERFORMED**
     ///
@@ -1816,6 +1930,65 @@ pub const GetMetricDataV2Input = struct {
     ///
     /// UI name: [Recipients
     /// interacted](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#recipients-interacted)
+    ///
+    /// **AI_AGENT_COLLABORATORS**
+    ///
+    /// Unit: Count
+    ///
+    /// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name
+    /// Version, AI Agent Type, AI Use Case,
+    /// Channel, Queue, Routing Profile, Session ID
+    ///
+    /// UI name: [AI Agent
+    /// Collaborators](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-collaborators)
+    ///
+    /// **AI_AGENT_COLLABORATION_INVOCATIONS**
+    ///
+    /// Unit: Count
+    ///
+    /// Valid groupings and filters: AI Agent ID, AI Agent Name, AI Agent Name
+    /// Version, AI Agent Type, AI Use Case,
+    /// Channel, Queue, Routing Profile, Session ID
+    ///
+    /// UI name: [AI Agent Collaboration
+    /// Invocations](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-collaboration-invocations)
+    ///
+    /// **AI_AGENT_SELECTION_ACCURACY**
+    ///
+    /// Unit: Double
+    ///
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Use Case,
+    /// Channel, Queue, Routing Profile, Session ID
+    ///
+    /// UI name: [AI Agent Selection
+    /// Accuracy](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-agent-selection-accuracy)
+    ///
+    /// This metric is available as part of Connect Customer AI.
+    ///
+    /// **AVG_AI_AGENT_INVOCATION_LATENCY**
+    ///
+    /// Unit: Milliseconds
+    ///
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Use Case,
+    /// Channel, Queue, Routing Profile, Session ID
+    ///
+    /// UI name: [Average AI Agent Invocation
+    /// Latency](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-ai-agent-invocation-latency)
+    ///
+    /// **CONTEXT_FIDELITY_SCORE**
+    ///
+    /// Unit: Double
+    ///
+    /// Valid groupings and filters: AI Agent, AI Agent ID, AI Agent Name, AI Agent
+    /// Name Version, AI Agent Type, AI Use Case,
+    /// Channel, Queue, Routing Profile, Session ID
+    ///
+    /// UI name: [Context Fidelity
+    /// Score](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#context-fidelity-score)
+    ///
+    /// This metric is available as part of Connect Customer AI.
     ///
     /// **RECIPIENTS_TARGETED**
     ///
@@ -2081,7 +2254,7 @@ pub const GetMetricDataV2Input = struct {
     next_token: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the resource. This includes the
-    /// `instanceId` an Amazon Connect instance.
+    /// `instanceId` an Connect Customer instance.
     resource_arn: []const u8,
 
     /// The timestamp, in UNIX Epoch time format, at which to start the reporting
@@ -2218,10 +2391,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMetricDataV2Input, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMetricDataV2Output {
-    var result: GetMetricDataV2Output = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMetricDataV2Output, body, allocator);
-    }
+    const result: GetMetricDataV2Output = try aws.json.parseJsonObject(
+        GetMetricDataV2Output,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

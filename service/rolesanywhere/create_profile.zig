@@ -165,10 +165,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateProfileInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateProfileOutput {
-    var result: CreateProfileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateProfileOutput, body, allocator);
-    }
+    const result: CreateProfileOutput = try aws.json.parseJsonObject(
+        CreateProfileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

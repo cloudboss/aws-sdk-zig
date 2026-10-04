@@ -15,11 +15,13 @@ const list_indexes = @import("list_indexes.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_vector_buckets = @import("list_vector_buckets.zig");
 const list_vectors = @import("list_vectors.zig");
+const put_vector_bucket_default_index_mode = @import("put_vector_bucket_default_index_mode.zig");
 const put_vector_bucket_policy = @import("put_vector_bucket_policy.zig");
 const put_vectors = @import("put_vectors.zig");
 const query_vectors = @import("query_vectors.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const update_index_mode = @import("update_index_mode.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
@@ -235,6 +237,20 @@ pub const Client = struct {
         return list_vectors.execute(self, allocator, input, options);
     }
 
+    /// Updates the default index mode for a vector bucket. The updated default
+    /// applies to vector indexes that you create after the request succeeds. The
+    /// operation doesn't change existing vector indexes. To specify the vector
+    /// bucket, you must use either the vector bucket name or the vector bucket
+    /// Amazon Resource Name (ARN).
+    ///
+    /// **Permissions**
+    ///
+    /// You must have the `s3vectors:PutVectorBucketDefaultIndexMode` permission to
+    /// use this operation.
+    pub fn putVectorBucketDefaultIndexMode(self: *Self, allocator: std.mem.Allocator, input: put_vector_bucket_default_index_mode.PutVectorBucketDefaultIndexModeInput, options: CallOptions) !put_vector_bucket_default_index_mode.PutVectorBucketDefaultIndexModeOutput {
+        return put_vector_bucket_default_index_mode.execute(self, allocator, input, options);
+    }
+
     /// Creates a bucket policy for a vector bucket. To specify the bucket, you must
     /// use either the vector bucket name or the vector bucket Amazon Resource Name
     /// (ARN).
@@ -274,8 +290,8 @@ pub const Client = struct {
     /// Performs an approximate nearest neighbor search query in a vector index
     /// using a query vector. By default, it returns the keys of approximate nearest
     /// neighbors. You can optionally include the computed distance (between the
-    /// query vector and each vector in the response), the vector data, and metadata
-    /// of each vector in the response.
+    /// query vector and each vector in the response) and metadata of each vector in
+    /// the response.
     ///
     /// To specify the vector index, you can either use both the vector bucket name
     /// and the vector index name, or use the vector index Amazon Resource Name
@@ -290,13 +306,12 @@ pub const Client = struct {
     /// * With only `s3vectors:QueryVectors` permission, you can retrieve vector
     ///   keys of approximate nearest neighbors and computed distances between these
     ///   vectors. This permission is sufficient only when you don't set any
-    ///   metadata filters and don't request vector data or metadata (by keeping the
+    ///   metadata filters and don't request metadata (by keeping the
     ///   `returnMetadata` parameter set to `false` or not specified).
     /// * If you specify a metadata filter or set `returnMetadata` to true, you must
     ///   have both `s3vectors:QueryVectors` and `s3vectors:GetVectors` permissions.
     ///   The request fails with a `403 Forbidden error` if you request metadata
-    ///   filtering, vector data, or metadata without the `s3vectors:GetVectors`
-    ///   permission.
+    ///   filtering or metadata without the `s3vectors:GetVectors` permission.
     pub fn queryVectors(self: *Self, allocator: std.mem.Allocator, input: query_vectors.QueryVectorsInput, options: CallOptions) !query_vectors.QueryVectorsOutput {
         return query_vectors.execute(self, allocator, input, options);
     }
@@ -333,6 +348,21 @@ pub const Client = struct {
         return untag_resource.execute(self, allocator, input, options);
     }
 
+    /// Updates the mode for an existing vector index. You can set the mode to
+    /// `ENHANCED` for any vector index. You can set the mode to `CLASSIC` only for
+    /// a vector index in a vector bucket created before September 30, 2026. This
+    /// operation doesn't change the default index mode of the vector bucket or the
+    /// mode of other vector indexes. Specify the vector index by using its Amazon
+    /// Resource Name (ARN) or both the vector bucket name and vector index name.
+    ///
+    /// **Permissions**
+    ///
+    /// You must have the `s3vectors:UpdateIndexMode` permission to use this
+    /// operation.
+    pub fn updateIndexMode(self: *Self, allocator: std.mem.Allocator, input: update_index_mode.UpdateIndexModeInput, options: CallOptions) !update_index_mode.UpdateIndexModeOutput {
+        return update_index_mode.execute(self, allocator, input, options);
+    }
+
     pub fn listIndexesPaginator(self: *Self, params: list_indexes.ListIndexesInput) paginator.ListIndexesPaginator {
         return .{
             .client = self,
@@ -348,6 +378,13 @@ pub const Client = struct {
     }
 
     pub fn listVectorsPaginator(self: *Self, params: list_vectors.ListVectorsInput) paginator.ListVectorsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn queryVectorsPaginator(self: *Self, params: query_vectors.QueryVectorsInput) paginator.QueryVectorsPaginator {
         return .{
             .client = self,
             .params = params,

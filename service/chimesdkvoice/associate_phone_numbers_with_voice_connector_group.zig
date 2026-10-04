@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociatePhoneNumbersWi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociatePhoneNumbersWithVoiceConnectorGroupOutput {
-    var result: AssociatePhoneNumbersWithVoiceConnectorGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociatePhoneNumbersWithVoiceConnectorGroupOutput, body, allocator);
-    }
+    const result: AssociatePhoneNumbersWithVoiceConnectorGroupOutput = try aws.json.parseJsonObject(
+        AssociatePhoneNumbersWithVoiceConnectorGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

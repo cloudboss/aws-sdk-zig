@@ -1,4 +1,5 @@
 const TopicSingularFilterConstant = @import("topic_singular_filter_constant.zig").TopicSingularFilterConstant;
+const NullFilterType = @import("null_filter_type.zig").NullFilterType;
 const TopicRelativeDateFilterFunction = @import("topic_relative_date_filter_function.zig").TopicRelativeDateFilterFunction;
 const TopicTimeGranularity = @import("topic_time_granularity.zig").TopicTimeGranularity;
 
@@ -7,6 +8,9 @@ pub const TopicRelativeDateFilter = struct {
     /// The constant used in a
     /// relative date filter.
     constant: ?TopicSingularFilterConstant = null,
+
+    /// The `null` filter that is applied to the relative date filter.
+    null_filter: ?NullFilterType = null,
 
     /// The function to be used in a relative date filter to determine the range of
     /// dates to include in the results. Valid values for this structure are
@@ -18,6 +22,7 @@ pub const TopicRelativeDateFilter = struct {
 
     pub const json_field_names = .{
         .constant = "Constant",
+        .null_filter = "NullFilter",
         .relative_date_filter_function = "RelativeDateFilterFunction",
         .time_granularity = "TimeGranularity",
     };

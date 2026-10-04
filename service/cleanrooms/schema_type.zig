@@ -3,16 +3,19 @@ const std = @import("std");
 pub const SchemaType = enum {
     table,
     id_mapping_table,
+    intermediate_table,
 
     pub const json_field_names = .{
         .table = "TABLE",
         .id_mapping_table = "ID_MAPPING_TABLE",
+        .intermediate_table = "INTERMEDIATE_TABLE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .table => "TABLE",
             .id_mapping_table => "ID_MAPPING_TABLE",
+            .intermediate_table => "INTERMEDIATE_TABLE",
         };
     }
 

@@ -1,3 +1,4 @@
+const ManagedSearchConfiguration = @import("managed_search_configuration.zig").ManagedSearchConfiguration;
 const KnowledgeBaseVectorSearchConfiguration = @import("knowledge_base_vector_search_configuration.zig").KnowledgeBaseVectorSearchConfiguration;
 
 /// Contains configurations for knowledge base query. For more information, see
@@ -11,12 +12,17 @@ const KnowledgeBaseVectorSearchConfiguration = @import("knowledge_base_vector_se
 /// * [RetrieveAndGenerate
 ///   request](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax) – in the `retrievalConfiguration` field
 pub const KnowledgeBaseRetrievalConfiguration = struct {
+    /// Contains configurations for managed search. For more information, see [Query
+    /// configurations](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html).
+    managed_search_configuration: ?ManagedSearchConfiguration = null,
+
     /// Contains details about how the results from the vector search should be
     /// returned. For more information, see [Query
     /// configurations](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html).
-    vector_search_configuration: KnowledgeBaseVectorSearchConfiguration,
+    vector_search_configuration: ?KnowledgeBaseVectorSearchConfiguration = null,
 
     pub const json_field_names = .{
+        .managed_search_configuration = "managedSearchConfiguration",
         .vector_search_configuration = "vectorSearchConfiguration",
     };
 };

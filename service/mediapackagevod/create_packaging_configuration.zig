@@ -163,10 +163,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePackagingConfigur
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePackagingConfigurationOutput {
-    var result: CreatePackagingConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePackagingConfigurationOutput, body, allocator);
-    }
+    const result: CreatePackagingConfigurationOutput = try aws.json.parseJsonObject(
+        CreatePackagingConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

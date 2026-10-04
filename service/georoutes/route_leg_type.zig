@@ -4,11 +4,17 @@ pub const RouteLegType = enum {
     ferry,
     pedestrian,
     vehicle,
+    rental,
+    taxi,
+    transit,
 
     pub const json_field_names = .{
         .ferry = "Ferry",
         .pedestrian = "Pedestrian",
         .vehicle = "Vehicle",
+        .rental = "Rental",
+        .taxi = "Taxi",
+        .transit = "Transit",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +22,9 @@ pub const RouteLegType = enum {
             .ferry => "Ferry",
             .pedestrian => "Pedestrian",
             .vehicle => "Vehicle",
+            .rental => "Rental",
+            .taxi => "Taxi",
+            .transit => "Transit",
         };
     }
 

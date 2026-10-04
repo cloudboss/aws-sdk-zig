@@ -100,6 +100,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCodeBindingSourceInp
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCodeBindingSourceOutput {
     var result: GetCodeBindingSourceOutput = .{};
+    errdefer {
+        if (result.body) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.body = try allocator.dupe(u8, body);
     }

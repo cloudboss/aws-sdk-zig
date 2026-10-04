@@ -32,12 +32,14 @@ pub const ServiceError = struct {
         managed_login_branding_exists_exception: ManagedLoginBrandingExistsException,
         mfa_method_not_found_exception: MFAMethodNotFoundException,
         not_authorized_exception: NotAuthorizedException,
+        operation_not_enabled_exception: OperationNotEnabledException,
         password_history_policy_violation_exception: PasswordHistoryPolicyViolationException,
         password_reset_required_exception: PasswordResetRequiredException,
         precondition_not_met_exception: PreconditionNotMetException,
         refresh_token_reuse_exception: RefreshTokenReuseException,
         resource_not_found_exception: ResourceNotFoundException,
         scope_does_not_exist_exception: ScopeDoesNotExistException,
+        service_quota_exceeded_exception: ServiceQuotaExceededException,
         software_token_mfa_not_found_exception: SoftwareTokenMFANotFoundException,
         terms_exists_exception: TermsExistsException,
         tier_change_not_allowed_exception: TierChangeNotAllowedException,
@@ -93,12 +95,14 @@ pub const ServiceError = struct {
                 .managed_login_branding_exists_exception => "ManagedLoginBrandingExistsException",
                 .mfa_method_not_found_exception => "MFAMethodNotFoundException",
                 .not_authorized_exception => "NotAuthorizedException",
+                .operation_not_enabled_exception => "OperationNotEnabledException",
                 .password_history_policy_violation_exception => "PasswordHistoryPolicyViolationException",
                 .password_reset_required_exception => "PasswordResetRequiredException",
                 .precondition_not_met_exception => "PreconditionNotMetException",
                 .refresh_token_reuse_exception => "RefreshTokenReuseException",
                 .resource_not_found_exception => "ResourceNotFoundException",
                 .scope_does_not_exist_exception => "ScopeDoesNotExistException",
+                .service_quota_exceeded_exception => "ServiceQuotaExceededException",
                 .software_token_mfa_not_found_exception => "SoftwareTokenMFANotFoundException",
                 .terms_exists_exception => "TermsExistsException",
                 .tier_change_not_allowed_exception => "TierChangeNotAllowedException",
@@ -156,12 +160,14 @@ pub const ServiceError = struct {
                 .managed_login_branding_exists_exception => |e| e.message,
                 .mfa_method_not_found_exception => |e| e.message,
                 .not_authorized_exception => |e| e.message,
+                .operation_not_enabled_exception => |e| e.message,
                 .password_history_policy_violation_exception => |e| e.message,
                 .password_reset_required_exception => |e| e.message,
                 .precondition_not_met_exception => |e| e.message,
                 .refresh_token_reuse_exception => |e| e.message,
                 .resource_not_found_exception => |e| e.message,
                 .scope_does_not_exist_exception => |e| e.message,
+                .service_quota_exceeded_exception => |e| e.message,
                 .software_token_mfa_not_found_exception => |e| e.message,
                 .terms_exists_exception => |e| e.message,
                 .tier_change_not_allowed_exception => |e| e.message,
@@ -219,12 +225,14 @@ pub const ServiceError = struct {
                 .managed_login_branding_exists_exception => 400,
                 .mfa_method_not_found_exception => 400,
                 .not_authorized_exception => 403,
+                .operation_not_enabled_exception => 400,
                 .password_history_policy_violation_exception => 400,
                 .password_reset_required_exception => 400,
                 .precondition_not_met_exception => 400,
                 .refresh_token_reuse_exception => 400,
                 .resource_not_found_exception => 404,
                 .scope_does_not_exist_exception => 400,
+                .service_quota_exceeded_exception => 400,
                 .software_token_mfa_not_found_exception => 400,
                 .terms_exists_exception => 400,
                 .tier_change_not_allowed_exception => 403,
@@ -282,12 +290,14 @@ pub const ServiceError = struct {
                 .managed_login_branding_exists_exception => |e| e.request_id,
                 .mfa_method_not_found_exception => |e| e.request_id,
                 .not_authorized_exception => |e| e.request_id,
+                .operation_not_enabled_exception => |e| e.request_id,
                 .password_history_policy_violation_exception => |e| e.request_id,
                 .password_reset_required_exception => |e| e.request_id,
                 .precondition_not_met_exception => |e| e.request_id,
                 .refresh_token_reuse_exception => |e| e.request_id,
                 .resource_not_found_exception => |e| e.request_id,
                 .scope_does_not_exist_exception => |e| e.request_id,
+                .service_quota_exceeded_exception => |e| e.request_id,
                 .software_token_mfa_not_found_exception => |e| e.request_id,
                 .terms_exists_exception => |e| e.request_id,
                 .tier_change_not_allowed_exception => |e| e.request_id,
@@ -447,8 +457,19 @@ pub const ExpiredCodeException = struct {
     };
 };
 
-/// This exception is thrown when a feature you attempted to configure isn't
-/// available in your current feature plan.
+/// This exception is thrown when a feature that you attempted to use or
+/// configure
+/// isn't included in your user pool's current feature plan. This can occur
+/// when:
+///
+/// * You configure a feature that your feature plan doesn't support.
+///
+/// * You make a request that uses a feature that requires a higher feature
+/// plan.
+///
+/// To resolve this issue, upgrade your user pool to a feature plan that
+/// includes the
+/// feature.
 pub const FeatureUnavailableInTierException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
@@ -643,6 +664,19 @@ pub const NotAuthorizedException = struct {
     };
 };
 
+/// This exception is thrown when an operation is not available in the current
+/// region or for the current user pool configuration. This can occur when
+/// attempting to perform operations that are not supported in secondary replica
+/// regions.
+pub const OperationNotEnabledException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
+};
+
 /// The message returned when a user's new password matches a previous password
 /// and
 /// doesn't comply with the password-history policy.
@@ -701,6 +735,17 @@ pub const ResourceNotFoundException = struct {
 
 /// This exception is thrown when the specified scope doesn't exist.
 pub const ScopeDoesNotExistException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
+};
+
+/// The request exceeded your account's service quota. To increase your limit,
+/// use or submit a Service Quotas increase request.
+pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 
@@ -1329,6 +1374,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             return .{ .arena = arena, .kind = .{ .not_authorized_exception = typed_error } };
         }
     }
+    if (std.mem.eql(u8, error_code, "OperationNotEnabledException")) {
+        const parsed_error: ?OperationNotEnabledException = aws.json.parseJsonObject(OperationNotEnabledException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .operation_not_enabled_exception = typed_error } };
+        }
+    }
     if (std.mem.eql(u8, error_code, "PasswordHistoryPolicyViolationException")) {
         const parsed_error: ?PasswordHistoryPolicyViolationException = aws.json.parseJsonObject(PasswordHistoryPolicyViolationException, body, arena_alloc) catch |err| switch (err) {
             error.OutOfMemory => return error.OutOfMemory,
@@ -1399,6 +1456,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             typed_error.message = owned_message;
             typed_error.request_id = owned_request_id;
             return .{ .arena = arena, .kind = .{ .scope_does_not_exist_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        const parsed_error: ?ServiceQuotaExceededException = aws.json.parseJsonObject(ServiceQuotaExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = typed_error } };
         }
     }
     if (std.mem.eql(u8, error_code, "SoftwareTokenMFANotFoundException")) {

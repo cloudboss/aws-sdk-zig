@@ -129,10 +129,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMessageTemplateAt
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateMessageTemplateAttachmentOutput {
-    var result: CreateMessageTemplateAttachmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateMessageTemplateAttachmentOutput, body, allocator);
-    }
+    const result: CreateMessageTemplateAttachmentOutput = try aws.json.parseJsonObject(
+        CreateMessageTemplateAttachmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

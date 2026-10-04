@@ -34,11 +34,21 @@ pub const ResourceSpec = struct {
     /// for `SageMakerImageVersionArn`, pass `None` as the value.
     sage_maker_image_version_arn: ?[]const u8 = null,
 
+    /// The ARN of the SageMaker AI Training Plan to use for this app. When you
+    /// specify a training plan, the app launches on reserved GPU capacity. This
+    /// field is supported for JupyterLab and CodeEditor app types.
+    ///
+    /// For more information about how to reserve GPU capacity with SageMaker AI
+    /// Training Plans, see [Using training plans in Studio
+    /// applications](https://docs.aws.amazon.com/sagemaker/latest/dg/training-plan-utilization-for-studio-apps.html).
+    training_plan_arn: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .instance_type = "InstanceType",
         .lifecycle_config_arn = "LifecycleConfigArn",
         .sage_maker_image_arn = "SageMakerImageArn",
         .sage_maker_image_version_alias = "SageMakerImageVersionAlias",
         .sage_maker_image_version_arn = "SageMakerImageVersionArn",
+        .training_plan_arn = "TrainingPlanArn",
     };
 };

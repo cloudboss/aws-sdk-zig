@@ -31,8 +31,16 @@ pub const ListResourceTelemetryForOrganizationInput = struct {
     resource_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// A list of resource types used to filter resources in the organization. If
-    /// this parameter is provided, the resources will be returned in the same order
-    /// used in the request.
+    /// this parameter is provided, the service returns the resources in the same
+    /// order as specified in the request. Currently supported resource types for
+    /// discovery are:
+    ///
+    /// * `AWS::EC2::Instance`
+    /// * `AWS::EC2::VPC`
+    /// * `AWS::Lambda::Function`
+    /// * `AWS::EKS::Cluster`
+    /// * `AWS::WAFv2::WebACL`
+    /// * `AWS::ElasticLoadBalancingV2::LoadBalancer` (Network Load Balancers only)
     resource_types: ?[]const ResourceType = null,
 
     /// A key-value pair to filter resources in the organization based on the
@@ -160,10 +168,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListResourceTelemetryFo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListResourceTelemetryForOrganizationOutput {
-    var result: ListResourceTelemetryForOrganizationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListResourceTelemetryForOrganizationOutput, body, allocator);
-    }
+    const result: ListResourceTelemetryForOrganizationOutput = try aws.json.parseJsonObject(
+        ListResourceTelemetryForOrganizationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

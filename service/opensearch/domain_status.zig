@@ -2,6 +2,7 @@ const aws = @import("aws");
 
 const AdvancedSecurityOptions = @import("advanced_security_options.zig").AdvancedSecurityOptions;
 const AIMLOptionsOutput = @import("aiml_options_output.zig").AIMLOptionsOutput;
+const AutomatedSnapshotPauseOptions = @import("automated_snapshot_pause_options.zig").AutomatedSnapshotPauseOptions;
 const AutoTuneOptionsOutput = @import("auto_tune_options_output.zig").AutoTuneOptionsOutput;
 const ChangeProgressDetails = @import("change_progress_details.zig").ChangeProgressDetails;
 const ClusterConfig = @import("cluster_config.zig").ClusterConfig;
@@ -11,6 +12,7 @@ const DomainEndpointOptions = @import("domain_endpoint_options.zig").DomainEndpo
 const DomainProcessingStatusType = @import("domain_processing_status_type.zig").DomainProcessingStatusType;
 const EBSOptions = @import("ebs_options.zig").EBSOptions;
 const EncryptionAtRestOptions = @import("encryption_at_rest_options.zig").EncryptionAtRestOptions;
+const EngineMode = @import("engine_mode.zig").EngineMode;
 const IdentityCenterOptions = @import("identity_center_options.zig").IdentityCenterOptions;
 const IPAddressType = @import("ip_address_type.zig").IPAddressType;
 const LogPublishingOption = @import("log_publishing_option.zig").LogPublishingOption;
@@ -20,6 +22,7 @@ const OffPeakWindowOptions = @import("off_peak_window_options.zig").OffPeakWindo
 const ServiceSoftwareOptions = @import("service_software_options.zig").ServiceSoftwareOptions;
 const SnapshotOptions = @import("snapshot_options.zig").SnapshotOptions;
 const SoftwareUpdateOptions = @import("software_update_options.zig").SoftwareUpdateOptions;
+const DomainUseCase = @import("domain_use_case.zig").DomainUseCase;
 const VPCDerivedInfo = @import("vpc_derived_info.zig").VPCDerivedInfo;
 
 /// The current status of an OpenSearch Service domain.
@@ -42,6 +45,9 @@ pub const DomainStatus = struct {
     /// identifiers
     /// ](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in the *Amazon Web Services Identity and Access Management User Guide*.
     arn: []const u8,
+
+    /// The current status of the domain's automated snapshot pause options.
+    automated_snapshot_pause_options: ?AutomatedSnapshotPauseOptions = null,
 
     /// Auto-Tune settings for the domain.
     auto_tune_options: ?AutoTuneOptionsOutput = null,
@@ -119,6 +125,9 @@ pub const DomainStatus = struct {
     /// addresses.
     endpoint_v2: ?[]const u8 = null,
 
+    /// The engine mode for the domain.
+    engine_mode: ?EngineMode = null,
+
     /// Version of OpenSearch or Elasticsearch that the domain is running, in the
     /// format
     /// `Elasticsearch_X.Y` or `OpenSearch_X.Y`.
@@ -168,6 +177,9 @@ pub const DomainStatus = struct {
     /// if the configuration is active.
     upgrade_processing: ?bool = null,
 
+    /// The primary use case for the domain.
+    use_case: ?DomainUseCase = null,
+
     /// The VPC configuration for the domain.
     vpc_options: ?VPCDerivedInfo = null,
 
@@ -177,6 +189,7 @@ pub const DomainStatus = struct {
         .advanced_security_options = "AdvancedSecurityOptions",
         .aiml_options = "AIMLOptions",
         .arn = "ARN",
+        .automated_snapshot_pause_options = "AutomatedSnapshotPauseOptions",
         .auto_tune_options = "AutoTuneOptions",
         .change_progress_details = "ChangeProgressDetails",
         .cluster_config = "ClusterConfig",
@@ -194,6 +207,7 @@ pub const DomainStatus = struct {
         .endpoint = "Endpoint",
         .endpoints = "Endpoints",
         .endpoint_v2 = "EndpointV2",
+        .engine_mode = "EngineMode",
         .engine_version = "EngineVersion",
         .identity_center_options = "IdentityCenterOptions",
         .ip_address_type = "IPAddressType",
@@ -206,6 +220,7 @@ pub const DomainStatus = struct {
         .snapshot_options = "SnapshotOptions",
         .software_update_options = "SoftwareUpdateOptions",
         .upgrade_processing = "UpgradeProcessing",
+        .use_case = "UseCase",
         .vpc_options = "VPCOptions",
     };
 };

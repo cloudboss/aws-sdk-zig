@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteBotLocaleInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteBotLocaleOutput {
-    var result: DeleteBotLocaleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteBotLocaleOutput, body, allocator);
-    }
+    const result: DeleteBotLocaleOutput = try aws.json.parseJsonObject(
+        DeleteBotLocaleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

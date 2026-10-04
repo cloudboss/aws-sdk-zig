@@ -26,6 +26,9 @@ pub const NetworkMigrationCodeGenerationSegment = struct {
     /// The unique identifier of the network migration execution.
     network_migration_execution_id: ?[]const u8 = null,
 
+    /// A list of other segments that this segment depends on or references.
+    referenced_segments: ?[]const []const u8 = null,
+
     /// The unique identifier of the segment.
     segment_id: ?[]const u8 = null,
 
@@ -40,6 +43,7 @@ pub const NetworkMigrationCodeGenerationSegment = struct {
         .mapper_segment_id = "mapperSegmentID",
         .network_migration_definition_id = "networkMigrationDefinitionID",
         .network_migration_execution_id = "networkMigrationExecutionID",
+        .referenced_segments = "referencedSegments",
         .segment_id = "segmentID",
         .segment_type = "segmentType",
     };

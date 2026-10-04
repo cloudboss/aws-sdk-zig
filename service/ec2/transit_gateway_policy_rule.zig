@@ -5,8 +5,7 @@ pub const TransitGatewayPolicyRule = struct {
     /// The destination CIDR block for the transit gateway policy rule.
     destination_cidr_block: ?[]const u8 = null,
 
-    /// The port range for the transit gateway policy rule. Currently this is set to
-    /// * (all).
+    /// The destination port or port range for the transit gateway policy rule.
     destination_port_range: ?[]const u8 = null,
 
     /// The meta data tags used for the transit gateway policy rule.
@@ -18,7 +17,6 @@ pub const TransitGatewayPolicyRule = struct {
     /// The source CIDR block for the transit gateway policy rule.
     source_cidr_block: ?[]const u8 = null,
 
-    /// The port range for the transit gateway policy rule. Currently this is set to
-    /// * (all).
+    /// The source port or port range for the transit gateway policy rule.
     source_port_range: ?[]const u8 = null,
 };

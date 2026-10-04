@@ -9,7 +9,7 @@ const UserHierarchyGroupSearchFilter = @import("user_hierarchy_group_search_filt
 const HierarchyGroup = @import("hierarchy_group.zig").HierarchyGroup;
 
 pub const SearchUserHierarchyGroupsInput = struct {
-    /// The identifier of the Amazon Connect instance. You can find the instanceId
+    /// The identifier of the Connect Customer instance. You can find the instanceId
     /// in the ARN of the
     /// instance.
     instance_id: []const u8,
@@ -135,10 +135,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchUserHierarchyGrou
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchUserHierarchyGroupsOutput {
-    var result: SearchUserHierarchyGroupsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchUserHierarchyGroupsOutput, body, allocator);
-    }
+    const result: SearchUserHierarchyGroupsOutput = try aws.json.parseJsonObject(
+        SearchUserHierarchyGroupsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -308,10 +308,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateApiInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateApiOutput {
-    var result: UpdateApiOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateApiOutput, body, allocator);
-    }
+    const result: UpdateApiOutput = try aws.json.parseJsonObject(
+        UpdateApiOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

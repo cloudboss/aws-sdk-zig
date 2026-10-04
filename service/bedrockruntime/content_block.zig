@@ -6,6 +6,8 @@ const GuardrailConverseContentBlock = @import("guardrail_converse_content_block.
 const ImageBlock = @import("image_block.zig").ImageBlock;
 const ReasoningContentBlock = @import("reasoning_content_block.zig").ReasoningContentBlock;
 const SearchResultBlock = @import("search_result_block.zig").SearchResultBlock;
+const ToolAdditionBlock = @import("tool_addition_block.zig").ToolAdditionBlock;
+const ToolRemovalBlock = @import("tool_removal_block.zig").ToolRemovalBlock;
 const ToolResultBlock = @import("tool_result_block.zig").ToolResultBlock;
 const ToolUseBlock = @import("tool_use_block.zig").ToolUseBlock;
 const VideoBlock = @import("video_block.zig").VideoBlock;
@@ -43,6 +45,8 @@ pub const ContentBlock = union(enum) {
     search_result: ?SearchResultBlock,
     /// Text to include in the message.
     text: ?[]const u8,
+    tool_addition: ?ToolAdditionBlock,
+    tool_removal: ?ToolRemovalBlock,
     /// The result for a tool request that a model makes.
     tool_result: ?ToolResultBlock,
     /// Information about a tool use request from a model.
@@ -60,6 +64,8 @@ pub const ContentBlock = union(enum) {
         .reasoning_content = "reasoningContent",
         .search_result = "searchResult",
         .text = "text",
+        .tool_addition = "toolAddition",
+        .tool_removal = "toolRemoval",
         .tool_result = "toolResult",
         .tool_use = "toolUse",
         .video = "video",

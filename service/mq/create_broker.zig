@@ -97,6 +97,9 @@ pub const CreateBrokerInput = struct {
     /// brokers.
     security_groups: ?[]const []const u8 = null,
 
+    /// The broker's storage size in GB.
+    storage_size: ?i32 = null,
+
     /// The broker's storage type.
     storage_type: ?BrokerStorageType = null,
 
@@ -149,6 +152,7 @@ pub const CreateBrokerInput = struct {
         .maintenance_window_start_time = "MaintenanceWindowStartTime",
         .publicly_accessible = "PubliclyAccessible",
         .security_groups = "SecurityGroups",
+        .storage_size = "StorageSize",
         .storage_type = "StorageType",
         .subnet_ids = "SubnetIds",
         .tags = "Tags",
@@ -297,6 +301,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBrokerInput, conf
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.storage_size) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"StorageSize\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.storage_type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"StorageType\":");
@@ -337,10 +347,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBrokerInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateBrokerOutput {
-    var result: CreateBrokerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateBrokerOutput, body, allocator);
-    }
+    const result: CreateBrokerOutput = try aws.json.parseJsonObject(
+        CreateBrokerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

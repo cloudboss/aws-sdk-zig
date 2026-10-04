@@ -152,10 +152,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePermissionVersion
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePermissionVersionOutput {
-    var result: CreatePermissionVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePermissionVersionOutput, body, allocator);
-    }
+    const result: CreatePermissionVersionOutput = try aws.json.parseJsonObject(
+        CreatePermissionVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

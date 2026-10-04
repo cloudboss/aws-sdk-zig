@@ -86,10 +86,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetContentAssociationIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetContentAssociationOutput {
-    var result: GetContentAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetContentAssociationOutput, body, allocator);
-    }
+    const result: GetContentAssociationOutput = try aws.json.parseJsonObject(
+        GetContentAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

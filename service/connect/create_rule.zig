@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const RuleAction = @import("rule_action.zig").RuleAction;
+const PreEvaluationFilters = @import("pre_evaluation_filters.zig").PreEvaluationFilters;
 const RulePublishStatus = @import("rule_publish_status.zig").RulePublishStatus;
 const RuleTriggerEventSource = @import("rule_trigger_event_source.zig").RuleTriggerEventSource;
 
@@ -23,15 +24,27 @@ pub const CreateRuleInput = struct {
     /// The conditions of the rule.
     function: []const u8,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
     /// A unique name for the rule.
     name: []const u8,
 
+    /// The pre-evaluation filters for the rule, that restrict the rule to be
+    /// applied to only certain resources based
+    /// on the resource's attributes, such as tags assigned to a contact. The
+    /// pre-evaluation filters are applied even before
+    /// rule conditions are evaluated and are used to enforce
+    /// tag-based-access-control while applying rules.
+    pre_evaluation_filters: ?PreEvaluationFilters = null,
+
     /// The publish status of the rule.
     publish_status: RulePublishStatus,
+
+    /// The tags used to organize, track, or control access for this resource. For
+    /// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The event source to trigger the rule.
     trigger_event_source: RuleTriggerEventSource,
@@ -42,7 +55,9 @@ pub const CreateRuleInput = struct {
         .function = "Function",
         .instance_id = "InstanceId",
         .name = "Name",
+        .pre_evaluation_filters = "PreEvaluationFilters",
         .publish_status = "PublishStatus",
+        .tags = "Tags",
         .trigger_event_source = "TriggerEventSource",
     };
 };
@@ -117,10 +132,22 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRuleInput, config
     try body_buf.appendSlice(allocator, "\"Name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
     has_prev = true;
+    if (input.pre_evaluation_filters) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"PreEvaluationFilters\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"PublishStatus\":");
     try aws.json.writeValue(@TypeOf(input.publish_status), input.publish_status, allocator, &body_buf);
     has_prev = true;
+    if (input.tags) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"TriggerEventSource\":");
     try aws.json.writeValue(@TypeOf(input.trigger_event_source), input.trigger_event_source, allocator, &body_buf);
@@ -141,10 +168,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRuleInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateRuleOutput {
-    var result: CreateRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateRuleOutput, body, allocator);
-    }
+    const result: CreateRuleOutput = try aws.json.parseJsonObject(
+        CreateRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

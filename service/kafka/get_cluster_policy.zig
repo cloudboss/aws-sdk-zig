@@ -77,10 +77,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetClusterPolicyInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetClusterPolicyOutput {
-    var result: GetClusterPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetClusterPolicyOutput, body, allocator);
-    }
+    const result: GetClusterPolicyOutput = try aws.json.parseJsonObject(
+        GetClusterPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

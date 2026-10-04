@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeQuotaShareInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeQuotaShareOutput {
-    var result: DescribeQuotaShareOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeQuotaShareOutput, body, allocator);
-    }
+    const result: DescribeQuotaShareOutput = try aws.json.parseJsonObject(
+        DescribeQuotaShareOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

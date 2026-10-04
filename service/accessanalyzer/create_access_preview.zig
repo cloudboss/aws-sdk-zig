@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAccessPreviewInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAccessPreviewOutput {
-    var result: CreateAccessPreviewOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAccessPreviewOutput, body, allocator);
-    }
+    const result: CreateAccessPreviewOutput = try aws.json.parseJsonObject(
+        CreateAccessPreviewOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

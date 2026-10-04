@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateReviewTemplateLen
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateReviewTemplateLensReviewOutput {
-    var result: UpdateReviewTemplateLensReviewOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateReviewTemplateLensReviewOutput, body, allocator);
-    }
+    const result: UpdateReviewTemplateLensReviewOutput = try aws.json.parseJsonObject(
+        UpdateReviewTemplateLensReviewOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

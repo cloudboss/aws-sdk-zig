@@ -437,6 +437,25 @@ pub const ModifyDBInstanceInput = struct {
     ///   `--option-group-name`.
     engine: ?[]const u8 = null,
 
+    /// The lifecycle type for this DB instance.
+    ///
+    /// This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
+    /// Amazon Aurora DB instances, the engine lifecycle support is managed by the
+    /// DB cluster.
+    ///
+    /// You can use this setting to enroll your DB instance into Amazon RDS Extended
+    /// Support or to opt out. With RDS Extended Support, you can run the selected
+    /// major engine version on your DB instance past the end of standard support
+    /// for that engine version. For more information, see [Amazon RDS Extended
+    /// Support with Amazon
+    /// RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html) in the *Amazon RDS User Guide*.
+    ///
+    /// Valid Values: `open-source-rds-extended-support |
+    /// open-source-rds-extended-support-disabled`
+    ///
+    /// This setting doesn't apply to RDS Custom DB instances.
+    engine_lifecycle_support: ?[]const u8 = null,
+
     /// The version number of the database engine to upgrade to. Changing this
     /// parameter results in an outage and the change is applied during the next
     /// maintenance window unless the `ApplyImmediately` parameter is enabled for
@@ -512,7 +531,7 @@ pub const ModifyDBInstanceInput = struct {
     ///
     /// * RDS for Db2 - `bring-your-own-license`
     /// * RDS for MariaDB - `general-public-license`
-    /// * RDS for Microsoft SQL Server - `license-included`
+    /// * RDS for Microsoft SQL Server - `license-included | bring-your-own-media`
     /// * RDS for MySQL - `general-public-license`
     /// * RDS for Oracle - `bring-your-own-license | license-included`
     /// * RDS for PostgreSQL - `postgresql-license`
@@ -855,10 +874,10 @@ pub const ModifyDBInstanceInput = struct {
     ///
     /// **Db2**
     ///
-    /// Standby DB replicas are included in Db2 Advanced Edition (AE) and Db2
-    /// Standard Edition (SE). The main use case for standby replicas is
-    /// cross-Region disaster recovery. Because it doesn't accept user connections,
-    /// a standby replica can't serve a read-only workload.
+    /// Standby DB replicas are included in Db2 Advanced Edition (AE), Db2 Community
+    /// Edition (CE), and Db2 Standard Edition (SE). The main use case for standby
+    /// replicas is cross-Region disaster recovery. Because it doesn't accept user
+    /// connections, a standby replica can't serve a read-only workload.
     ///
     /// You can create a combination of standby and read-only DB replicas for the
     /// same primary DB instance. For more information, see [Working with replicas
@@ -1227,6 +1246,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBInstanceInput, 
     }
     if (input.engine) |v| {
         try body_buf.appendSlice(allocator, "&Engine=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.engine_lifecycle_support) |v| {
+        try body_buf.appendSlice(allocator, "&EngineLifecycleSupport=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.engine_version) |v| {

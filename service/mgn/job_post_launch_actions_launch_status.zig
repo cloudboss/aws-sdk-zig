@@ -4,8 +4,7 @@ const SsmDocumentType = @import("ssm_document_type.zig").SsmDocumentType;
 
 /// Launch Status of the Job Post Launch Actions.
 pub const JobPostLaunchActionsLaunchStatus = struct {
-    /// AWS Systems Manager Document's execution ID of the of the Job Post Launch
-    /// Actions.
+    /// AWS Systems Manager Document's execution ID of the Job Post Launch Actions.
     execution_id: ?[]const u8 = null,
 
     /// AWS Systems Manager Document's execution status.
@@ -14,7 +13,7 @@ pub const JobPostLaunchActionsLaunchStatus = struct {
     /// AWS Systems Manager Document's failure reason.
     failure_reason: ?[]const u8 = null,
 
-    /// AWS Systems Manager's Document of the of the Job Post Launch Actions.
+    /// AWS Systems Manager's Document of the Job Post Launch Actions.
     ssm_document: ?SsmDocument = null,
 
     /// AWS Systems Manager Document type.

@@ -65,10 +65,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPipelineBlueprintsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListPipelineBlueprintsOutput {
-    var result: ListPipelineBlueprintsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListPipelineBlueprintsOutput, body, allocator);
-    }
+    const result: ListPipelineBlueprintsOutput = try aws.json.parseJsonObject(
+        ListPipelineBlueprintsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

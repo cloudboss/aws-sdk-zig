@@ -13,20 +13,31 @@ pub const StartFHIRImportJobInput = struct {
     /// The optional user-provided token used for ensuring API idempotency.
     client_token: ?[]const u8 = null,
 
-    /// The Amazon Resource Name (ARN) that grants access permission to AWS
-    /// HealthLake.
+    /// The Amazon Resource Name (ARN) that grants access permission to HealthLake.
     data_access_role_arn: []const u8,
 
     /// The data store identifier.
     datastore_id: []const u8,
 
+    /// Specifies whether to enable drift detection for the import job.
+    drift_detection_enabled: ?bool = null,
+
     /// The input properties for the import job request.
     input_data_config: InputDataConfig,
+
+    /// The input format of the data to be imported.
+    input_format: ?[]const u8 = null,
 
     /// The import job name.
     job_name: ?[]const u8 = null,
 
     job_output_data_config: OutputDataConfig,
+
+    /// The data transformation profile identifier to use for the import job.
+    profile_id: ?[]const u8 = null,
+
+    /// Specifies whether to enable provenance for the import job.
+    provenance_enabled: ?bool = null,
 
     /// The validation level of the import job.
     validation_level: ?ValidationLevel = null,
@@ -35,9 +46,13 @@ pub const StartFHIRImportJobInput = struct {
         .client_token = "ClientToken",
         .data_access_role_arn = "DataAccessRoleArn",
         .datastore_id = "DatastoreId",
+        .drift_detection_enabled = "DriftDetectionEnabled",
         .input_data_config = "InputDataConfig",
+        .input_format = "InputFormat",
         .job_name = "JobName",
         .job_output_data_config = "JobOutputDataConfig",
+        .profile_id = "ProfileId",
+        .provenance_enabled = "ProvenanceEnabled",
         .validation_level = "ValidationLevel",
     };
 };

@@ -8,7 +8,7 @@ const QuickConnectType = @import("quick_connect_type.zig").QuickConnectType;
 const QuickConnectSummary = @import("quick_connect_summary.zig").QuickConnectSummary;
 
 pub const ListQuickConnectsInput = struct {
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance. Both Instance ID and Instance ARN are supported input formats.
     instance_id: []const u8,
 
@@ -21,7 +21,7 @@ pub const ListQuickConnectsInput = struct {
     /// response in the next request to retrieve the next set of results.
     next_token: ?[]const u8 = null,
 
-    /// The type of quick connect. In the Amazon Connect admin website, when you
+    /// The type of quick connect. In the Connect Customer admin website, when you
     /// create a quick connect, you are
     /// prompted to assign one of the following types: Agent (USER), External
     /// (PHONE_NUMBER), or Queue (QUEUE).
@@ -126,10 +126,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListQuickConnectsInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListQuickConnectsOutput {
-    var result: ListQuickConnectsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListQuickConnectsOutput, body, allocator);
-    }
+    const result: ListQuickConnectsOutput = try aws.json.parseJsonObject(
+        ListQuickConnectsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

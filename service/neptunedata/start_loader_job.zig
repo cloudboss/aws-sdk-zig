@@ -392,10 +392,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartLoaderJobInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartLoaderJobOutput {
-    var result: StartLoaderJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartLoaderJobOutput, body, allocator);
-    }
+    const result: StartLoaderJobOutput = try aws.json.parseJsonObject(
+        StartLoaderJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

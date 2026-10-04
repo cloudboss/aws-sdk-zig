@@ -26,10 +26,6 @@ pub const AdminLinkProviderForUserInput = struct {
     ///
     /// The `ProviderName` should be set to `Cognito` for users in
     /// Cognito user pools.
-    ///
-    /// All attributes in the DestinationUser profile must be mutable. If you have
-    /// assigned the user any immutable custom attributes, the operation won't
-    /// succeed.
     destination_user: ProviderUserIdentifierType,
 
     /// An external IdP account for a user who doesn't exist yet in the user pool.

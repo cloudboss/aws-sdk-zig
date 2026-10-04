@@ -40,6 +40,11 @@ pub const StartDeploymentInput = struct {
     /// ID to encrypt the configuration data using a customer managed key.
     kms_key_identifier: ?[]const u8 = null,
 
+    /// The number of the latest deployment. Use this value to ensure that the
+    /// deployment starts from the expected state and to prevent conflicting
+    /// updates.
+    latest_deployment_number: ?i32 = null,
+
     /// Metadata to assign to the deployment. Tags help organize and categorize your
     /// AppConfig resources. Each tag consists of a key and an optional value, both
     /// of which
@@ -55,6 +60,7 @@ pub const StartDeploymentInput = struct {
         .dynamic_extension_parameters = "DynamicExtensionParameters",
         .environment_id = "EnvironmentId",
         .kms_key_identifier = "KmsKeyIdentifier",
+        .latest_deployment_number = "LatestDeploymentNumber",
         .tags = "Tags",
     };
 };
@@ -241,6 +247,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartDeploymentInput, c
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.latest_deployment_number) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"LatestDeploymentNumber\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Tags\":");
@@ -263,10 +275,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartDeploymentInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartDeploymentOutput {
-    var result: StartDeploymentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartDeploymentOutput, body, allocator);
-    }
+    const result: StartDeploymentOutput = try aws.json.parseJsonObject(
+        StartDeploymentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

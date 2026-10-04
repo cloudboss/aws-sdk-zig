@@ -6,6 +6,7 @@ pub const HarnessGatewayOutboundAuth = union(enum) {
     aws_iam: ?struct {},
     /// No authentication.
     none: ?struct {},
+    /// Use OAuth credentials for outbound authentication to the gateway.
     oauth: ?OAuthCredentialProvider,
 
     pub const json_field_names = .{

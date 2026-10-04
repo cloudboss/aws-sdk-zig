@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGroupCertificateC
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateGroupCertificateConfigurationOutput {
-    var result: UpdateGroupCertificateConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateGroupCertificateConfigurationOutput, body, allocator);
-    }
+    const result: UpdateGroupCertificateConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateGroupCertificateConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

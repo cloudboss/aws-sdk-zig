@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetGroupProfileInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetGroupProfileOutput {
-    var result: GetGroupProfileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetGroupProfileOutput, body, allocator);
-    }
+    const result: GetGroupProfileOutput = try aws.json.parseJsonObject(
+        GetGroupProfileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

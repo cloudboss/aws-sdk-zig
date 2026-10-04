@@ -22,4 +22,8 @@ pub const TrustStore = struct {
 
     /// The trust store's status.
     status: ?TrustStoreStatus = null,
+
+    /// A Boolean that determines whether the trust store uses the CA certificate's
+    /// OCSP endpoint to check certificate revocation status.
+    use_client_certificate_ocsp_endpoint: ?bool = null,
 };

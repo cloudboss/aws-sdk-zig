@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExportFormsInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ExportFormsOutput {
-    var result: ExportFormsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ExportFormsOutput, body, allocator);
-    }
+    const result: ExportFormsOutput = try aws.json.parseJsonObject(
+        ExportFormsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

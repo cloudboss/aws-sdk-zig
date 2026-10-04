@@ -4,11 +4,11 @@ const SpekeKeyProvider = @import("speke_key_provider.zig").SpekeKeyProvider;
 /// Specifies DRM settings for DASH outputs.
 pub const DashIsoEncryptionSettings = struct {
     /// This setting can improve the compatibility of your output with video players
-    /// on obsolete devices. It applies only to DASH H.264 outputs with DRM
-    /// encryption. Choose Unencrypted SEI only to correct problems with playback on
-    /// older devices. Otherwise, keep the default setting CENC v1. If you choose
-    /// Unencrypted SEI, for that output, the service will exclude the access unit
-    /// delimiter and will leave the SEI NAL units unencrypted.
+    /// on obsolete devices. It applies only to DASH outputs with DRM encryption.
+    /// Choose Unencrypted SEI only to correct problems with playback on older H.264
+    /// devices. Choose CENC v1 unencrypted headers to leave NAL unit headers and
+    /// slice headers unencrypted for H.265 outputs, improving compatibility with
+    /// strict HEVC decoders. Otherwise, keep the default setting CENC v1.
     playback_device_compatibility: ?DashIsoPlaybackDeviceCompatibility = null,
 
     /// If your output group type is HLS, DASH, or Microsoft Smooth, use these

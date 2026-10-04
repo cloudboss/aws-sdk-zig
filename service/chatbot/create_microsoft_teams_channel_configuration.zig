@@ -197,10 +197,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMicrosoftTeamsCha
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateMicrosoftTeamsChannelConfigurationOutput {
-    var result: CreateMicrosoftTeamsChannelConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateMicrosoftTeamsChannelConfigurationOutput, body, allocator);
-    }
+    const result: CreateMicrosoftTeamsChannelConfigurationOutput = try aws.json.parseJsonObject(
+        CreateMicrosoftTeamsChannelConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

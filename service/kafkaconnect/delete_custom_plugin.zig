@@ -78,10 +78,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteCustomPluginInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteCustomPluginOutput {
-    var result: DeleteCustomPluginOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteCustomPluginOutput, body, allocator);
-    }
+    const result: DeleteCustomPluginOutput = try aws.json.parseJsonObject(
+        DeleteCustomPluginOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

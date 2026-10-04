@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPortfolioPreferences
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPortfolioPreferencesOutput {
-    var result: GetPortfolioPreferencesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPortfolioPreferencesOutput, body, allocator);
-    }
+    const result: GetPortfolioPreferencesOutput = try aws.json.parseJsonObject(
+        GetPortfolioPreferencesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

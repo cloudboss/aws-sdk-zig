@@ -17,8 +17,7 @@ pub const GetVirtualMachineInput = struct {
 
 pub const GetVirtualMachineOutput = struct {
     /// This object contains the basic attributes of `VirtualMachine` contained by
-    /// the output of
-    /// `GetVirtualMachine`
+    /// the output of `GetVirtualMachine`
     virtual_machine: ?VirtualMachineDetails = null,
 
     pub const json_field_names = .{

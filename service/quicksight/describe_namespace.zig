@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeNamespaceInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeNamespaceOutput {
-    var result: DescribeNamespaceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeNamespaceOutput, body, allocator);
-    }
+    var result: DescribeNamespaceOutput = try aws.json.parseJsonObject(
+        DescribeNamespaceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

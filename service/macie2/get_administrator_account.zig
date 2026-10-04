@@ -68,10 +68,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAdministratorAccount
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAdministratorAccountOutput {
-    var result: GetAdministratorAccountOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAdministratorAccountOutput, body, allocator);
-    }
+    const result: GetAdministratorAccountOutput = try aws.json.parseJsonObject(
+        GetAdministratorAccountOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

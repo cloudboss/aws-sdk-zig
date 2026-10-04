@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListStreamSessionsByAcc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListStreamSessionsByAccountOutput {
-    var result: ListStreamSessionsByAccountOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListStreamSessionsByAccountOutput, body, allocator);
-    }
+    const result: ListStreamSessionsByAccountOutput = try aws.json.parseJsonObject(
+        ListStreamSessionsByAccountOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

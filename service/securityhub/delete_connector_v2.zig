@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const EnablementStatus = @import("enablement_status.zig").EnablementStatus;
 
 pub const DeleteConnectorV2Input = struct {
     /// The UUID of the connectorV2 to identify connectorV2 resource.
@@ -15,6 +16,12 @@ pub const DeleteConnectorV2Input = struct {
 };
 
 pub const DeleteConnectorV2Output = struct {
+    /// The enablement status of the connector after deletion.
+    enablement_status: ?EnablementStatus = null,
+
+    pub const json_field_names = .{
+        .enablement_status = "EnablementStatus",
+    };
 };
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConnectorV2Input, options: CallOptions) !DeleteConnectorV2Output {
@@ -66,11 +73,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteConnectorV2Input,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteConnectorV2Output {
-    _ = allocator;
-    _ = body;
+    const result: DeleteConnectorV2Output = try aws.json.parseJsonObject(
+        DeleteConnectorV2Output,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
-    const result: DeleteConnectorV2Output = .{};
 
     return result;
 }

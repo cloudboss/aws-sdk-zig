@@ -73,7 +73,7 @@ pub const GetMetricStreamOutput = struct {
     /// additional
     /// statistics, see [
     /// CloudWatch statistics
-    /// definitions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html).
+    /// definitions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html).
     statistics_configurations: ?[]const MetricStreamStatisticsConfiguration = null,
 
     pub const json_field_names = .{

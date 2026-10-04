@@ -11,7 +11,8 @@ pub const CreatePaymentSessionInput = struct {
     /// The agent name associated with this request, used for observability.
     agent_name: ?[]const u8 = null,
 
-    /// Idempotency token to ensure request uniqueness.
+    /// A unique, case-sensitive identifier that you provide to ensure the
+    /// idempotency of the request.
     client_token: ?[]const u8 = null,
 
     /// The session expiry time in minutes. Must be between 15 and 480 minutes.
@@ -37,6 +38,7 @@ pub const CreatePaymentSessionInput = struct {
 };
 
 pub const CreatePaymentSessionOutput = struct {
+    /// The created payment session.
     payment_session: ?PaymentSession = null,
 
     pub const json_field_names = .{
@@ -122,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePaymentSessionInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePaymentSessionOutput {
-    var result: CreatePaymentSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePaymentSessionOutput, body, allocator);
-    }
+    const result: CreatePaymentSessionOutput = try aws.json.parseJsonObject(
+        CreatePaymentSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

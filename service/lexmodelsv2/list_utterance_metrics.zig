@@ -209,10 +209,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListUtteranceMetricsInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListUtteranceMetricsOutput {
-    var result: ListUtteranceMetricsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListUtteranceMetricsOutput, body, allocator);
-    }
+    const result: ListUtteranceMetricsOutput = try aws.json.parseJsonObject(
+        ListUtteranceMetricsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

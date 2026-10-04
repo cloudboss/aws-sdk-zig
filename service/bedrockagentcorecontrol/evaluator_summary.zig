@@ -1,5 +1,6 @@
 const EvaluatorType = @import("evaluator_type.zig").EvaluatorType;
 const EvaluatorLevel = @import("evaluator_level.zig").EvaluatorLevel;
+const Provider = @import("provider.zig").Provider;
 const EvaluatorStatus = @import("evaluator_status.zig").EvaluatorStatus;
 
 /// The summary information about an evaluator, including basic metadata and
@@ -37,6 +38,10 @@ pub const EvaluatorSummary = struct {
     /// active online evaluation configurations.
     locked_for_modification: ?bool = null,
 
+    /// The source of the evaluator's logic: Amazon Web Services, a third-party
+    /// library, or you.
+    provider: ?Provider = null,
+
     /// The current status of the evaluator.
     status: EvaluatorStatus,
 
@@ -53,6 +58,7 @@ pub const EvaluatorSummary = struct {
         .kms_key_arn = "kmsKeyArn",
         .level = "level",
         .locked_for_modification = "lockedForModification",
+        .provider = "provider",
         .status = "status",
         .updated_at = "updatedAt",
     };

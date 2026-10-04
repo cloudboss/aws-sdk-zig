@@ -125,10 +125,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDataIntegrationFl
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDataIntegrationFlowOutput {
-    var result: CreateDataIntegrationFlowOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateDataIntegrationFlowOutput, body, allocator);
-    }
+    const result: CreateDataIntegrationFlowOutput = try aws.json.parseJsonObject(
+        CreateDataIntegrationFlowOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

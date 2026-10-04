@@ -171,10 +171,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSecurityProfileIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateSecurityProfileOutput {
-    var result: CreateSecurityProfileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateSecurityProfileOutput, body, allocator);
-    }
+    const result: CreateSecurityProfileOutput = try aws.json.parseJsonObject(
+        CreateSecurityProfileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

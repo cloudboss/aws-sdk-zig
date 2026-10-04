@@ -126,10 +126,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeRecoverySnapsho
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeRecoverySnapshotsOutput {
-    var result: DescribeRecoverySnapshotsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeRecoverySnapshotsOutput, body, allocator);
-    }
+    const result: DescribeRecoverySnapshotsOutput = try aws.json.parseJsonObject(
+        DescribeRecoverySnapshotsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

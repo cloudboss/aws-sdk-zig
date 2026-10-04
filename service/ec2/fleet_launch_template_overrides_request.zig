@@ -1,6 +1,8 @@
 const FleetBlockDeviceMappingRequest = @import("fleet_block_device_mapping_request.zig").FleetBlockDeviceMappingRequest;
+const FleetIamInstanceProfileSpecificationRequest = @import("fleet_iam_instance_profile_specification_request.zig").FleetIamInstanceProfileSpecificationRequest;
 const InstanceRequirementsRequest = @import("instance_requirements_request.zig").InstanceRequirementsRequest;
 const InstanceType = @import("instance_type.zig").InstanceType;
+const FleetInstanceMetadataOptionsRequest = @import("fleet_instance_metadata_options_request.zig").FleetInstanceMetadataOptionsRequest;
 const Placement = @import("placement.zig").Placement;
 
 /// Describes overrides for a launch template.
@@ -31,6 +33,15 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     /// instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-device-mapping-concepts.html) in the *Amazon EC2 User
     /// Guide*.
     block_device_mappings: ?[]const FleetBlockDeviceMappingRequest = null,
+
+    /// The IAM instance profile to associate with the instances.
+    ///
+    /// Supported only for fleets of type `instant`.
+    ///
+    /// For more information, see [IAM roles for Amazon
+    /// EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)
+    /// in the *Amazon EC2 User Guide*.
+    iam_instance_profile: ?FleetIamInstanceProfileSpecificationRequest = null,
 
     /// The ID of the AMI in the format `ami-17characters00000`.
     ///
@@ -90,6 +101,15 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     /// `InstanceRequirements`.
     instance_type: ?InstanceType = null,
 
+    /// The name of the key pair to use for the instances.
+    ///
+    /// Supported only for fleets of type `instant`.
+    ///
+    /// For more information, see [Amazon EC2 key
+    /// pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
+    /// in the *Amazon EC2 User Guide*.
+    key_name: ?[]const u8 = null,
+
     /// The maximum price per unit hour that you are willing to pay for a Spot
     /// Instance. We do not
     /// recommend using this parameter because it can lead to increased
@@ -104,6 +124,15 @@ pub const FleetLaunchTemplateOverridesRequest = struct {
     /// below USD $0.001 will result in an `InvalidParameterValue` error
     /// message.
     max_price: ?[]const u8 = null,
+
+    /// The metadata options for the instances.
+    ///
+    /// Supported only for fleets of type `instant`.
+    ///
+    /// For more information, see [Configure the
+    /// instance metadata
+    /// service](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) in the *Amazon EC2 User Guide*.
+    metadata_options: ?FleetInstanceMetadataOptionsRequest = null,
 
     /// The location where the instance launched, if applicable.
     placement: ?Placement = null,

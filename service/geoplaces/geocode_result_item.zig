@@ -9,6 +9,7 @@ const GeocodeParsedQuery = @import("geocode_parsed_query.zig").GeocodeParsedQuer
 const PlaceType = @import("place_type.zig").PlaceType;
 const PostalCodeDetails = @import("postal_code_details.zig").PostalCodeDetails;
 const TimeZone = @import("time_zone.zig").TimeZone;
+const TranslationDetails = @import("translation_details.zig").TranslationDetails;
 
 /// The Geocoded result.
 pub const GeocodeResultItem = struct {
@@ -27,6 +28,10 @@ pub const GeocodeResultItem = struct {
 
     /// The distance in meters from the QueryPosition.
     distance: i64 = 0,
+
+    /// If `true`, indicates that the coordinates of the position and access points
+    /// of the point address are estimated.
+    estimated_point_address: ?bool = null,
 
     /// List of food types offered by this result.
     food_types: ?[]const FoodType = null,
@@ -85,12 +90,17 @@ pub const GeocodeResultItem = struct {
     /// `language`.
     title: []const u8,
 
+    /// All name translations and alternative names for the requested address fields
+    /// in all available languages.
+    translations: ?TranslationDetails = null,
+
     pub const json_field_names = .{
         .access_points = "AccessPoints",
         .address = "Address",
         .address_number_corrected = "AddressNumberCorrected",
         .categories = "Categories",
         .distance = "Distance",
+        .estimated_point_address = "EstimatedPointAddress",
         .food_types = "FoodTypes",
         .intersections = "Intersections",
         .main_address = "MainAddress",
@@ -105,5 +115,6 @@ pub const GeocodeResultItem = struct {
         .secondary_addresses = "SecondaryAddresses",
         .time_zone = "TimeZone",
         .title = "Title",
+        .translations = "Translations",
     };
 };

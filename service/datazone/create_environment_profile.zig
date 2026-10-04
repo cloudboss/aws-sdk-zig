@@ -195,10 +195,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEnvironmentProfil
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateEnvironmentProfileOutput {
-    var result: CreateEnvironmentProfileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateEnvironmentProfileOutput, body, allocator);
-    }
+    const result: CreateEnvironmentProfileOutput = try aws.json.parseJsonObject(
+        CreateEnvironmentProfileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

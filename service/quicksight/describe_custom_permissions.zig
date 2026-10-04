@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeCustomPermissio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeCustomPermissionsOutput {
-    var result: DescribeCustomPermissionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeCustomPermissionsOutput, body, allocator);
-    }
+    const result: DescribeCustomPermissionsOutput = try aws.json.parseJsonObject(
+        DescribeCustomPermissionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

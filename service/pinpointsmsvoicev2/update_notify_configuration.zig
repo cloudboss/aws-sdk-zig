@@ -11,8 +11,11 @@ const TierUpgradeStatus = @import("tier_upgrade_status.zig").TierUpgradeStatus;
 const NotifyConfigurationUseCase = @import("notify_configuration_use_case.zig").NotifyConfigurationUseCase;
 
 pub const UpdateNotifyConfigurationInput = struct {
-    /// The template ID to set as the default, or the special value
-    /// UNSET_DEFAULT_TEMPLATE to clear the current default template.
+    /// The default template identifier to associate with the notify configuration.
+    /// If specified, this template is used when sending messages without an
+    /// explicit template identifier. Pass the special value
+    /// `UNSET_DEFAULT_TEMPLATE` to clear the current default template from the
+    /// notify configuration.
     default_template_id: ?[]const u8 = null,
 
     /// When set to true the notify configuration can't be deleted.
@@ -31,8 +34,9 @@ pub const UpdateNotifyConfigurationInput = struct {
     /// operation.
     notify_configuration_id: []const u8,
 
-    /// The pool ID or ARN to associate, or the special value
-    /// UNSET_DEFAULT_POOL_FOR_NOTIFY to clear the current default pool.
+    /// The pool identifier or Amazon Resource Name (ARN) to associate with the
+    /// notify configuration. Pass the special value `UNSET_DEFAULT_POOL_FOR_NOTIFY`
+    /// to clear the current default pool from the notify configuration.
     pool_id: ?[]const u8 = null,
 
     pub const json_field_names = .{

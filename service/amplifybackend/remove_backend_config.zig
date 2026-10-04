@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RemoveBackendConfigInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RemoveBackendConfigOutput {
-    var result: RemoveBackendConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RemoveBackendConfigOutput, body, allocator);
-    }
+    const result: RemoveBackendConfigOutput = try aws.json.parseJsonObject(
+        RemoveBackendConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

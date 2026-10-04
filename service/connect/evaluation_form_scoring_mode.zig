@@ -3,16 +3,19 @@ const std = @import("std");
 pub const EvaluationFormScoringMode = enum {
     question_only,
     section_only,
+    points_based,
 
     pub const json_field_names = .{
         .question_only = "QUESTION_ONLY",
         .section_only = "SECTION_ONLY",
+        .points_based = "POINTS_BASED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .question_only => "QUESTION_ONLY",
             .section_only => "SECTION_ONLY",
+            .points_based => "POINTS_BASED",
         };
     }
 

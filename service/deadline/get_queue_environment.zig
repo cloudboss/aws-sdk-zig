@@ -117,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetQueueEnvironmentInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetQueueEnvironmentOutput {
-    var result: GetQueueEnvironmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetQueueEnvironmentOutput, body, allocator);
-    }
+    const result: GetQueueEnvironmentOutput = try aws.json.parseJsonObject(
+        GetQueueEnvironmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

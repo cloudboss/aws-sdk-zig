@@ -1,6 +1,8 @@
 const FilterCrossSheetControl = @import("filter_cross_sheet_control.zig").FilterCrossSheetControl;
 const FilterDateTimePickerControl = @import("filter_date_time_picker_control.zig").FilterDateTimePickerControl;
 const FilterDropDownControl = @import("filter_drop_down_control.zig").FilterDropDownControl;
+const HierarchyFilterDropDownControl = @import("hierarchy_filter_drop_down_control.zig").HierarchyFilterDropDownControl;
+const HierarchyFilterListControl = @import("hierarchy_filter_list_control.zig").HierarchyFilterListControl;
 const FilterListControl = @import("filter_list_control.zig").FilterListControl;
 const FilterRelativeDateTimeControl = @import("filter_relative_date_time_control.zig").FilterRelativeDateTimeControl;
 const FilterSliderControl = @import("filter_slider_control.zig").FilterSliderControl;
@@ -24,6 +26,16 @@ pub const FilterControl = struct {
     /// single value.
     dropdown: ?FilterDropDownControl = null,
 
+    /// A control from a hierarchy filter that displays the hierarchy as a dropdown
+    /// list. You can expand a value to see and select the values beneath it, and
+    /// select either a single value or multiple values.
+    hierarchy_dropdown: ?HierarchyFilterDropDownControl = null,
+
+    /// A control from a hierarchy filter that displays the hierarchy as a list. You
+    /// can expand a value to see and select the values beneath it, and select
+    /// either a single value or multiple values.
+    hierarchy_list: ?HierarchyFilterListControl = null,
+
     /// A control to display a list of buttons or boxes. This is used to select
     /// either a single value or multiple values.
     list: ?FilterListControl = null,
@@ -45,6 +57,8 @@ pub const FilterControl = struct {
         .cross_sheet = "CrossSheet",
         .date_time_picker = "DateTimePicker",
         .dropdown = "Dropdown",
+        .hierarchy_dropdown = "HierarchyDropdown",
+        .hierarchy_list = "HierarchyList",
         .list = "List",
         .relative_date_time = "RelativeDateTime",
         .slider = "Slider",

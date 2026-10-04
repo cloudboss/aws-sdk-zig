@@ -22,6 +22,7 @@ pub const LastUpdateStatusReasonCode = enum {
     invalid_runtime,
     invalid_zip_file_exception,
     function_error,
+    service_quota_exceeded_exception,
     vcpu_limit_exceeded,
     capacity_provider_scaling_limit_exceeded,
     insufficient_capacity,
@@ -35,6 +36,7 @@ pub const LastUpdateStatusReasonCode = enum {
     function_error_too_many_extensions,
     function_error_init_resource_exhausted,
     disallowed_by_vpc_encryption_control,
+    dependency_error,
 
     pub const json_field_names = .{
         .eni_limit_exceeded = "EniLimitExceeded",
@@ -58,6 +60,7 @@ pub const LastUpdateStatusReasonCode = enum {
         .invalid_runtime = "InvalidRuntime",
         .invalid_zip_file_exception = "InvalidZipFileException",
         .function_error = "FunctionError",
+        .service_quota_exceeded_exception = "ServiceQuotaExceededException",
         .vcpu_limit_exceeded = "VcpuLimitExceeded",
         .capacity_provider_scaling_limit_exceeded = "CapacityProviderScalingLimitExceeded",
         .insufficient_capacity = "InsufficientCapacity",
@@ -71,6 +74,7 @@ pub const LastUpdateStatusReasonCode = enum {
         .function_error_too_many_extensions = "FunctionError.TooManyExtensions",
         .function_error_init_resource_exhausted = "FunctionError.InitResourceExhausted",
         .disallowed_by_vpc_encryption_control = "DisallowedByVpcEncryptionControl",
+        .dependency_error = "DependencyError",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -96,6 +100,7 @@ pub const LastUpdateStatusReasonCode = enum {
             .invalid_runtime => "InvalidRuntime",
             .invalid_zip_file_exception => "InvalidZipFileException",
             .function_error => "FunctionError",
+            .service_quota_exceeded_exception => "ServiceQuotaExceededException",
             .vcpu_limit_exceeded => "VcpuLimitExceeded",
             .capacity_provider_scaling_limit_exceeded => "CapacityProviderScalingLimitExceeded",
             .insufficient_capacity => "InsufficientCapacity",
@@ -109,6 +114,7 @@ pub const LastUpdateStatusReasonCode = enum {
             .function_error_too_many_extensions => "FunctionError.TooManyExtensions",
             .function_error_init_resource_exhausted => "FunctionError.InitResourceExhausted",
             .disallowed_by_vpc_encryption_control => "DisallowedByVpcEncryptionControl",
+            .dependency_error => "DependencyError",
         };
     }
 

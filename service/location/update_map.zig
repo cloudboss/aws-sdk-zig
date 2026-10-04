@@ -124,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateMapInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateMapOutput {
-    var result: UpdateMapOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateMapOutput, body, allocator);
-    }
+    const result: UpdateMapOutput = try aws.json.parseJsonObject(
+        UpdateMapOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -3,7 +3,7 @@ const ModificationStateEnum = @import("modification_state_enum.zig").Modificatio
 
 /// Describes a WorkSpace modification.
 pub const ModificationState = struct {
-    /// The resource.
+    /// The WorkSpace property being modified.
     resource: ?ModificationResourceEnum = null,
 
     /// The modification state.

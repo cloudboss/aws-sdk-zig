@@ -165,6 +165,18 @@ pub const AppInstanceType = enum {
     ml_r6_id_24_xlarge,
     ml_r6_id_32_xlarge,
     ml_p5_4_xlarge,
+    ml_g7_2_xlarge,
+    ml_g7_4_xlarge,
+    ml_g7_8_xlarge,
+    ml_g7_12_xlarge,
+    ml_g7_24_xlarge,
+    ml_g7_48_xlarge,
+    ml_g7_e_2_xlarge,
+    ml_g7_e_4_xlarge,
+    ml_g7_e_8_xlarge,
+    ml_g7_e_12_xlarge,
+    ml_g7_e_24_xlarge,
+    ml_g7_e_48_xlarge,
 
     pub const json_field_names = .{
         .system = "system",
@@ -331,6 +343,18 @@ pub const AppInstanceType = enum {
         .ml_r6_id_24_xlarge = "ml.r6id.24xlarge",
         .ml_r6_id_32_xlarge = "ml.r6id.32xlarge",
         .ml_p5_4_xlarge = "ml.p5.4xlarge",
+        .ml_g7_2_xlarge = "ml.g7.2xlarge",
+        .ml_g7_4_xlarge = "ml.g7.4xlarge",
+        .ml_g7_8_xlarge = "ml.g7.8xlarge",
+        .ml_g7_12_xlarge = "ml.g7.12xlarge",
+        .ml_g7_24_xlarge = "ml.g7.24xlarge",
+        .ml_g7_48_xlarge = "ml.g7.48xlarge",
+        .ml_g7_e_2_xlarge = "ml.g7e.2xlarge",
+        .ml_g7_e_4_xlarge = "ml.g7e.4xlarge",
+        .ml_g7_e_8_xlarge = "ml.g7e.8xlarge",
+        .ml_g7_e_12_xlarge = "ml.g7e.12xlarge",
+        .ml_g7_e_24_xlarge = "ml.g7e.24xlarge",
+        .ml_g7_e_48_xlarge = "ml.g7e.48xlarge",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -499,6 +523,18 @@ pub const AppInstanceType = enum {
             .ml_r6_id_24_xlarge => "ml.r6id.24xlarge",
             .ml_r6_id_32_xlarge => "ml.r6id.32xlarge",
             .ml_p5_4_xlarge => "ml.p5.4xlarge",
+            .ml_g7_2_xlarge => "ml.g7.2xlarge",
+            .ml_g7_4_xlarge => "ml.g7.4xlarge",
+            .ml_g7_8_xlarge => "ml.g7.8xlarge",
+            .ml_g7_12_xlarge => "ml.g7.12xlarge",
+            .ml_g7_24_xlarge => "ml.g7.24xlarge",
+            .ml_g7_48_xlarge => "ml.g7.48xlarge",
+            .ml_g7_e_2_xlarge => "ml.g7e.2xlarge",
+            .ml_g7_e_4_xlarge => "ml.g7e.4xlarge",
+            .ml_g7_e_8_xlarge => "ml.g7e.8xlarge",
+            .ml_g7_e_12_xlarge => "ml.g7e.12xlarge",
+            .ml_g7_e_24_xlarge => "ml.g7e.24xlarge",
+            .ml_g7_e_48_xlarge => "ml.g7e.48xlarge",
         };
     }
 

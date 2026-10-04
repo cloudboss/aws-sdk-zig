@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteAccessSourceInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteAccessSourceOutput {
-    var result: DeleteAccessSourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteAccessSourceOutput, body, allocator);
-    }
+    const result: DeleteAccessSourceOutput = try aws.json.parseJsonObject(
+        DeleteAccessSourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

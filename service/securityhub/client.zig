@@ -20,6 +20,7 @@ const create_aggregator_v2 = @import("create_aggregator_v2.zig");
 const create_automation_rule = @import("create_automation_rule.zig");
 const create_automation_rule_v2 = @import("create_automation_rule_v2.zig");
 const create_configuration_policy = @import("create_configuration_policy.zig");
+const create_connector = @import("create_connector.zig");
 const create_connector_v2 = @import("create_connector_v2.zig");
 const create_finding_aggregator = @import("create_finding_aggregator.zig");
 const create_insight = @import("create_insight.zig");
@@ -30,6 +31,7 @@ const delete_action_target = @import("delete_action_target.zig");
 const delete_aggregator_v2 = @import("delete_aggregator_v2.zig");
 const delete_automation_rule_v2 = @import("delete_automation_rule_v2.zig");
 const delete_configuration_policy = @import("delete_configuration_policy.zig");
+const delete_connector = @import("delete_connector.zig");
 const delete_connector_v2 = @import("delete_connector_v2.zig");
 const delete_finding_aggregator = @import("delete_finding_aggregator.zig");
 const delete_insight = @import("delete_insight.zig");
@@ -46,6 +48,7 @@ const describe_standards_controls = @import("describe_standards_controls.zig");
 const disable_import_findings_for_product = @import("disable_import_findings_for_product.zig");
 const disable_organization_admin_account = @import("disable_organization_admin_account.zig");
 const disable_security_hub = @import("disable_security_hub.zig");
+const disable_security_hub_feature_v2 = @import("disable_security_hub_feature_v2.zig");
 const disable_security_hub_v2 = @import("disable_security_hub_v2.zig");
 const disassociate_from_administrator_account = @import("disassociate_from_administrator_account.zig");
 const disassociate_from_master_account = @import("disassociate_from_master_account.zig");
@@ -53,6 +56,7 @@ const disassociate_members = @import("disassociate_members.zig");
 const enable_import_findings_for_product = @import("enable_import_findings_for_product.zig");
 const enable_organization_admin_account = @import("enable_organization_admin_account.zig");
 const enable_security_hub = @import("enable_security_hub.zig");
+const enable_security_hub_feature_v2 = @import("enable_security_hub_feature_v2.zig");
 const enable_security_hub_v2 = @import("enable_security_hub_v2.zig");
 const generate_recommended_policy_v2 = @import("generate_recommended_policy_v2.zig");
 const get_administrator_account = @import("get_administrator_account.zig");
@@ -60,6 +64,7 @@ const get_aggregator_v2 = @import("get_aggregator_v2.zig");
 const get_automation_rule_v2 = @import("get_automation_rule_v2.zig");
 const get_configuration_policy = @import("get_configuration_policy.zig");
 const get_configuration_policy_association = @import("get_configuration_policy_association.zig");
+const get_connector = @import("get_connector.zig");
 const get_connector_v2 = @import("get_connector_v2.zig");
 const get_enabled_standards = @import("get_enabled_standards.zig");
 const get_finding_aggregator = @import("get_finding_aggregator.zig");
@@ -74,6 +79,7 @@ const get_invitations_count = @import("get_invitations_count.zig");
 const get_master_account = @import("get_master_account.zig");
 const get_members = @import("get_members.zig");
 const get_recommended_policy_v2 = @import("get_recommended_policy_v2.zig");
+const get_remediations_v2 = @import("get_remediations_v2.zig");
 const get_resources_statistics_v2 = @import("get_resources_statistics_v2.zig");
 const get_resources_trends_v2 = @import("get_resources_trends_v2.zig");
 const get_resources_v2 = @import("get_resources_v2.zig");
@@ -84,9 +90,12 @@ const list_automation_rules = @import("list_automation_rules.zig");
 const list_automation_rules_v2 = @import("list_automation_rules_v2.zig");
 const list_configuration_policies = @import("list_configuration_policies.zig");
 const list_configuration_policy_associations = @import("list_configuration_policy_associations.zig");
+const list_connectors = @import("list_connectors.zig");
 const list_connectors_v2 = @import("list_connectors_v2.zig");
 const list_enabled_products_for_import = @import("list_enabled_products_for_import.zig");
+const list_exposures_by_remediation_v2 = @import("list_exposures_by_remediation_v2.zig");
 const list_finding_aggregators = @import("list_finding_aggregators.zig");
+const list_free_trial_statuses_v2 = @import("list_free_trial_statuses_v2.zig");
 const list_invitations = @import("list_invitations.zig");
 const list_members = @import("list_members.zig");
 const list_organization_admin_accounts = @import("list_organization_admin_accounts.zig");
@@ -102,6 +111,7 @@ const update_action_target = @import("update_action_target.zig");
 const update_aggregator_v2 = @import("update_aggregator_v2.zig");
 const update_automation_rule_v2 = @import("update_automation_rule_v2.zig");
 const update_configuration_policy = @import("update_configuration_policy.zig");
+const update_connector = @import("update_connector.zig");
 const update_connector_v2 = @import("update_connector_v2.zig");
 const update_finding_aggregator = @import("update_finding_aggregator.zig");
 const update_findings = @import("update_findings.zig");
@@ -417,6 +427,14 @@ pub const Client = struct {
         return create_configuration_policy.execute(self, allocator, input, options);
     }
 
+    /// Creates a connector to a third-party cloud provider in Security Hub CSPM. A
+    /// connector establishes a connection between Security Hub CSPM and a
+    /// third-party cloud provider, enabling Security Hub CSPM to ingest security
+    /// findings and resource data from the connected environment.
+    pub fn createConnector(self: *Self, allocator: std.mem.Allocator, input: create_connector.CreateConnectorInput, options: CallOptions) !create_connector.CreateConnectorOutput {
+        return create_connector.execute(self, allocator, input, options);
+    }
+
     /// Grants permission to create a connectorV2 based on input parameters.
     pub fn createConnectorV2(self: *Self, allocator: std.mem.Allocator, input: create_connector_v2.CreateConnectorV2Input, options: CallOptions) !create_connector_v2.CreateConnectorV2Output {
         return create_connector_v2.execute(self, allocator, input, options);
@@ -551,6 +569,13 @@ pub const Client = struct {
     /// `StartConfigurationPolicyDisassociation` operation.
     pub fn deleteConfigurationPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_configuration_policy.DeleteConfigurationPolicyInput, options: CallOptions) !delete_configuration_policy.DeleteConfigurationPolicyOutput {
         return delete_configuration_policy.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a CSPM connector. When you delete a connector, Security Hub CSPM
+    /// stops ingesting findings and resource data from the connected cloud provider
+    /// environment.
+    pub fn deleteConnector(self: *Self, allocator: std.mem.Allocator, input: delete_connector.DeleteConnectorInput, options: CallOptions) !delete_connector.DeleteConnectorOutput {
+        return delete_connector.execute(self, allocator, input, options);
     }
 
     /// Grants permission to delete a connectorV2.
@@ -705,8 +730,17 @@ pub const Client = struct {
         return disable_security_hub.execute(self, allocator, input, options);
     }
 
+    /// Disables an opt-in feature for the calling account in the current Amazon Web
+    /// Services Region. The operation is idempotent. If the feature is already
+    /// disabled, no changes are made. You cannot disable a feature that is managed
+    /// by an organization policy.
+    pub fn disableSecurityHubFeatureV2(self: *Self, allocator: std.mem.Allocator, input: disable_security_hub_feature_v2.DisableSecurityHubFeatureV2Input, options: CallOptions) !disable_security_hub_feature_v2.DisableSecurityHubFeatureV2Output {
+        return disable_security_hub_feature_v2.execute(self, allocator, input, options);
+    }
+
     /// Disable the service for the current Amazon Web Services Region or specified
-    /// Amazon Web Services Region.
+    /// Amazon Web Services Region. Disabling the service also disables all opt-in
+    /// features that are currently enabled in that Region.
     pub fn disableSecurityHubV2(self: *Self, allocator: std.mem.Allocator, input: disable_security_hub_v2.DisableSecurityHubV2Input, options: CallOptions) !disable_security_hub_v2.DisableSecurityHubV2Output {
         return disable_security_hub_v2.execute(self, allocator, input, options);
     }
@@ -807,6 +841,15 @@ pub const Client = struct {
         return enable_security_hub.execute(self, allocator, input, options);
     }
 
+    /// Enables an opt-in feature for the calling account in the current Amazon Web
+    /// Services Region. The service must be enabled before you can enable a
+    /// feature. The operation is idempotent. If the feature is already enabled, no
+    /// changes are made. You cannot enable a feature that is managed by an
+    /// organization policy.
+    pub fn enableSecurityHubFeatureV2(self: *Self, allocator: std.mem.Allocator, input: enable_security_hub_feature_v2.EnableSecurityHubFeatureV2Input, options: CallOptions) !enable_security_hub_feature_v2.EnableSecurityHubFeatureV2Output {
+        return enable_security_hub_feature_v2.execute(self, allocator, input, options);
+    }
+
     /// Enables the service in account for the current Amazon Web Services Region or
     /// specified Amazon Web Services Region.
     pub fn enableSecurityHubV2(self: *Self, allocator: std.mem.Allocator, input: enable_security_hub_v2.EnableSecurityHubV2Input, options: CallOptions) !enable_security_hub_v2.EnableSecurityHubV2Output {
@@ -854,6 +897,11 @@ pub const Client = struct {
     /// invoke this operation from the home Region.
     pub fn getConfigurationPolicyAssociation(self: *Self, allocator: std.mem.Allocator, input: get_configuration_policy_association.GetConfigurationPolicyAssociationInput, options: CallOptions) !get_configuration_policy_association.GetConfigurationPolicyAssociationOutput {
         return get_configuration_policy_association.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves details for a CSPM connector based on the connector ID.
+    pub fn getConnector(self: *Self, allocator: std.mem.Allocator, input: get_connector.GetConnectorInput, options: CallOptions) !get_connector.GetConnectorOutput {
+        return get_connector.execute(self, allocator, input, options);
     }
 
     /// Grants permission to retrieve details for a connectorV2 based on connector
@@ -1011,6 +1059,16 @@ pub const Client = struct {
         return get_recommended_policy_v2.execute(self, allocator, input, options);
     }
 
+    /// Retrieves remediation targets for the account, or for all member accounts if
+    /// the caller is
+    /// the delegated administrator. Results are sorted by priority, highest first,
+    /// and are paginated.
+    /// Use `TargetUid` or `MetadataUid` to scope the request to a single target
+    /// or finding.
+    pub fn getRemediationsV2(self: *Self, allocator: std.mem.Allocator, input: get_remediations_v2.GetRemediationsV2Input, options: CallOptions) !get_remediations_v2.GetRemediationsV2Output {
+        return get_remediations_v2.execute(self, allocator, input, options);
+    }
+
     /// Retrieves statistical information about Amazon Web Services resources and
     /// their associated security findings.
     ///
@@ -1019,6 +1077,12 @@ pub const Client = struct {
     /// aggregate resources from your entire organization or from specific
     /// organizational units. Only the delegated administrator account can use
     /// `Scopes`.
+    ///
+    /// If you set `GroupByField` to `ResourceSubCategory`,
+    /// `ResourceInfo.AIDetails.HostResourceType`, or
+    /// `ResourceInfo.AIDetails.CanonicalId`, you must include a `ResourceCategory`
+    /// string filter with comparison set to `EQUALS` and value `AI/ML` in the
+    /// corresponding `ResourceGroupByRule`.
     pub fn getResourcesStatisticsV2(self: *Self, allocator: std.mem.Allocator, input: get_resources_statistics_v2.GetResourcesStatisticsV2Input, options: CallOptions) !get_resources_statistics_v2.GetResourcesStatisticsV2Output {
         return get_resources_statistics_v2.execute(self, allocator, input, options);
     }
@@ -1041,6 +1105,17 @@ pub const Client = struct {
     /// attributes. You can use `Scopes` and `Filters` independently or together.
     /// When both are provided, `Scopes` narrows the data set first, and then
     /// `Filters` refines results within that scoped data set.
+    ///
+    /// For AI/ML resources, the response includes the `ResourceSubCategory` field.
+    /// For self-hosted AI resources and their host resources, the response also
+    /// includes `ResourceInfo` with AI-specific details. Self-hosted AI resources
+    /// use a `ResourceType` with the `SelfHosted::AI::` prefix, such as
+    /// `SelfHosted::AI::Model`, `SelfHosted::AI::Agent`,
+    /// `SelfHosted::AI::InferenceEndpoint`, and `SelfHosted::AI::ExternalEndpoint`.
+    ///
+    /// If you filter by `ResourceSubCategory`, you must also include a
+    /// `ResourceCategory` string filter with comparison set to `EQUALS` and value
+    /// `AI/ML` in the same request.
     pub fn getResourcesV2(self: *Self, allocator: std.mem.Allocator, input: get_resources_v2.GetResourcesV2Input, options: CallOptions) !get_resources_v2.GetResourcesV2Output {
         return get_resources_v2.execute(self, allocator, input, options);
     }
@@ -1109,6 +1184,11 @@ pub const Client = struct {
         return list_configuration_policy_associations.execute(self, allocator, input, options);
     }
 
+    /// Lists the CSPM connectors and their metadata for the calling account.
+    pub fn listConnectors(self: *Self, allocator: std.mem.Allocator, input: list_connectors.ListConnectorsInput, options: CallOptions) !list_connectors.ListConnectorsOutput {
+        return list_connectors.execute(self, allocator, input, options);
+    }
+
     /// Grants permission to retrieve a list of connectorsV2 and their metadata for
     /// the calling account.
     pub fn listConnectorsV2(self: *Self, allocator: std.mem.Allocator, input: list_connectors_v2.ListConnectorsV2Input, options: CallOptions) !list_connectors_v2.ListConnectorsV2Output {
@@ -1122,12 +1202,27 @@ pub const Client = struct {
         return list_enabled_products_for_import.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the exposure findings tied to a specific remediation target.
+    /// Results are sorted by
+    /// previous severity, highest first, and are paginated.
+    pub fn listExposuresByRemediationV2(self: *Self, allocator: std.mem.Allocator, input: list_exposures_by_remediation_v2.ListExposuresByRemediationV2Input, options: CallOptions) !list_exposures_by_remediation_v2.ListExposuresByRemediationV2Output {
+        return list_exposures_by_remediation_v2.execute(self, allocator, input, options);
+    }
+
     /// If cross-Region aggregation is enabled, then `ListFindingAggregators`
     /// returns the Amazon Resource Name (ARN)
     /// of the finding aggregator. You can run this operation from any Amazon Web
     /// Services Region.
     pub fn listFindingAggregators(self: *Self, allocator: std.mem.Allocator, input: list_finding_aggregators.ListFindingAggregatorsInput, options: CallOptions) !list_finding_aggregators.ListFindingAggregatorsOutput {
         return list_finding_aggregators.execute(self, allocator, input, options);
+    }
+
+    /// Lists the free trial status of Security Hub features. A delegated Security
+    /// Hub administrator can list the status for accounts in its organization. Any
+    /// other account can list the status only for itself. Free trial status remains
+    /// available after a feature is disabled.
+    pub fn listFreeTrialStatusesV2(self: *Self, allocator: std.mem.Allocator, input: list_free_trial_statuses_v2.ListFreeTrialStatusesV2Input, options: CallOptions) !list_free_trial_statuses_v2.ListFreeTrialStatusesV2Output {
+        return list_free_trial_statuses_v2.execute(self, allocator, input, options);
     }
 
     /// We recommend using Organizations instead of Security Hub CSPM invitations to
@@ -1242,6 +1337,12 @@ pub const Client = struct {
     /// administrator can invoke this operation from the home Region.
     pub fn updateConfigurationPolicy(self: *Self, allocator: std.mem.Allocator, input: update_configuration_policy.UpdateConfigurationPolicyInput, options: CallOptions) !update_configuration_policy.UpdateConfigurationPolicyOutput {
         return update_configuration_policy.execute(self, allocator, input, options);
+    }
+
+    /// Updates a CSPM connector's configuration, such as the scope or regions for
+    /// the connected cloud provider.
+    pub fn updateConnector(self: *Self, allocator: std.mem.Allocator, input: update_connector.UpdateConnectorInput, options: CallOptions) !update_connector.UpdateConnectorOutput {
+        return update_connector.execute(self, allocator, input, options);
     }
 
     /// Grants permission to update a connectorV2 based on its id and input
@@ -1398,6 +1499,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn getRemediationsV2Paginator(self: *Self, params: get_remediations_v2.GetRemediationsV2Input) paginator.GetRemediationsV2Paginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn getResourcesTrendsV2Paginator(self: *Self, params: get_resources_trends_v2.GetResourcesTrendsV2Input) paginator.GetResourcesTrendsV2Paginator {
         return .{
             .client = self,
@@ -1440,7 +1548,21 @@ pub const Client = struct {
         };
     }
 
+    pub fn listExposuresByRemediationV2Paginator(self: *Self, params: list_exposures_by_remediation_v2.ListExposuresByRemediationV2Input) paginator.ListExposuresByRemediationV2Paginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listFindingAggregatorsPaginator(self: *Self, params: list_finding_aggregators.ListFindingAggregatorsInput) paginator.ListFindingAggregatorsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listFreeTrialStatusesV2Paginator(self: *Self, params: list_free_trial_statuses_v2.ListFreeTrialStatusesV2Input) paginator.ListFreeTrialStatusesV2Paginator {
         return .{
             .client = self,
             .params = params,

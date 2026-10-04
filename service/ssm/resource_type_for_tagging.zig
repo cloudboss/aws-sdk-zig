@@ -10,6 +10,7 @@ pub const ResourceTypeForTagging = enum {
     opsmetadata,
     automation,
     association,
+    cloud_connector,
 
     pub const json_field_names = .{
         .document = "Document",
@@ -21,6 +22,7 @@ pub const ResourceTypeForTagging = enum {
         .opsmetadata = "OpsMetadata",
         .automation = "Automation",
         .association = "Association",
+        .cloud_connector = "CloudConnector",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -34,6 +36,7 @@ pub const ResourceTypeForTagging = enum {
             .opsmetadata => "OpsMetadata",
             .automation => "Automation",
             .association => "Association",
+            .cloud_connector => "CloudConnector",
         };
     }
 

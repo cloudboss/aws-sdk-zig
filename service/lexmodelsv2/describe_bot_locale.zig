@@ -8,6 +8,7 @@ const AudioFillerSettings = @import("audio_filler_settings.zig").AudioFillerSett
 const BotLocaleHistoryEvent = @import("bot_locale_history_event.zig").BotLocaleHistoryEvent;
 const BotLocaleStatus = @import("bot_locale_status.zig").BotLocaleStatus;
 const GenerativeAISettings = @import("generative_ai_settings.zig").GenerativeAISettings;
+const SpeakerDiarizationSettings = @import("speaker_diarization_settings.zig").SpeakerDiarizationSettings;
 const SpeechDetectionSensitivity = @import("speech_detection_sensitivity.zig").SpeechDetectionSensitivity;
 const SpeechRecognitionSettings = @import("speech_recognition_settings.zig").SpeechRecognitionSettings;
 const UnifiedSpeechSettings = @import("unified_speech_settings.zig").UnifiedSpeechSettings;
@@ -96,6 +97,10 @@ pub const DescribeBotLocaleOutput = struct {
     /// The number of slot types defined for the locale.
     slot_types_count: ?i32 = null,
 
+    /// The speaker diarization settings configured for the bot
+    /// locale.
+    speaker_diarization_settings: ?SpeakerDiarizationSettings = null,
+
     /// The sensitivity level for voice activity detection (VAD) configured for the
     /// bot locale.
     speech_detection_sensitivity: ?SpeechDetectionSensitivity = null,
@@ -128,6 +133,7 @@ pub const DescribeBotLocaleOutput = struct {
         .nlu_intent_confidence_threshold = "nluIntentConfidenceThreshold",
         .recommended_actions = "recommendedActions",
         .slot_types_count = "slotTypesCount",
+        .speaker_diarization_settings = "speakerDiarizationSettings",
         .speech_detection_sensitivity = "speechDetectionSensitivity",
         .speech_recognition_settings = "speechRecognitionSettings",
         .unified_speech_settings = "unifiedSpeechSettings",
@@ -188,10 +194,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeBotLocaleInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeBotLocaleOutput {
-    var result: DescribeBotLocaleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeBotLocaleOutput, body, allocator);
-    }
+    const result: DescribeBotLocaleOutput = try aws.json.parseJsonObject(
+        DescribeBotLocaleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

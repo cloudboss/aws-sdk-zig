@@ -132,10 +132,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTemporaryDataLocatio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTemporaryDataLocationCredentialsOutput {
-    var result: GetTemporaryDataLocationCredentialsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTemporaryDataLocationCredentialsOutput, body, allocator);
-    }
+    const result: GetTemporaryDataLocationCredentialsOutput = try aws.json.parseJsonObject(
+        GetTemporaryDataLocationCredentialsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -3,6 +3,7 @@ const ConfigurableUpfrontPricingTerm = @import("configurable_upfront_pricing_ter
 const FixedUpfrontPricingTerm = @import("fixed_upfront_pricing_term.zig").FixedUpfrontPricingTerm;
 const FreeTrialPricingTerm = @import("free_trial_pricing_term.zig").FreeTrialPricingTerm;
 const LegalTerm = @import("legal_term.zig").LegalTerm;
+const NetPaymentTerm = @import("net_payment_term.zig").NetPaymentTerm;
 const PaymentScheduleTerm = @import("payment_schedule_term.zig").PaymentScheduleTerm;
 const RecurringPaymentTerm = @import("recurring_payment_term.zig").RecurringPaymentTerm;
 const RenewalTerm = @import("renewal_term.zig").RenewalTerm;
@@ -31,6 +32,9 @@ pub const AcceptedTerm = union(enum) {
     /// Defines the list of text agreements proposed to the acceptors. An example is
     /// the end user license agreement (EULA).
     legal_term: ?LegalTerm,
+    /// Defines the net payment due period for the agreement, specifying when
+    /// payment is due after an invoice is issued.
+    net_payment_term: ?NetPaymentTerm,
     /// Defines an installment-based pricing model where customers are charged a
     /// fixed price on different dates during the agreement validity period. This is
     /// used most commonly for flexible payment schedule pricing.
@@ -42,10 +46,12 @@ pub const AcceptedTerm = union(enum) {
     /// ends on its pre-defined end date), a new agreement will be created using the
     /// accepted terms on the existing agreement. In other words, the agreement will
     /// be renewed. Presence of `RenewalTerm` in the offer document means that
-    /// auto-renewal is allowed. Buyers will have the option to accept or decline
-    /// auto-renewal at the offer acceptance/agreement creation. Buyers can also
-    /// change this flag from `True` to `False` or `False` to `True` at anytime
-    /// during the agreement's lifecycle.
+    /// auto-renewal is allowed. The acceptor will have the option to accept or
+    /// decline auto-renewal at the offer acceptance/agreement creation. The
+    /// acceptor can also change this flag from `True` to `False` or `False` to
+    /// `True`, within the limits set by `LockoutPeriod` and `MaxRenewals`. Setting
+    /// the flag to `True` doesn't by itself guarantee that the agreement renews,
+    /// because the proposer can also opt out.
     renewal_term: ?RenewalTerm,
     /// Defines the customer support available for the acceptors when they purchase
     /// the software.
@@ -67,6 +73,7 @@ pub const AcceptedTerm = union(enum) {
         .fixed_upfront_pricing_term = "fixedUpfrontPricingTerm",
         .free_trial_pricing_term = "freeTrialPricingTerm",
         .legal_term = "legalTerm",
+        .net_payment_term = "netPaymentTerm",
         .payment_schedule_term = "paymentScheduleTerm",
         .recurring_payment_term = "recurringPaymentTerm",
         .renewal_term = "renewalTerm",

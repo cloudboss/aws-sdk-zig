@@ -26,7 +26,11 @@ pub const DescribeEventsInput = struct {
     /// events.
     operation_id: ?[]const u8 = null,
 
-    /// The name or unique stack ID for which you want to retrieve events.
+    /// The name or unique stack ID for which you want to retrieve events. If you
+    /// specified the
+    /// name of a change set, specify the stack name or ID (ARN) of the change set
+    /// you want to
+    /// describe.
     stack_name: ?[]const u8 = null,
 };
 

@@ -159,10 +159,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAccountPoolInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAccountPoolOutput {
-    var result: CreateAccountPoolOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAccountPoolOutput, body, allocator);
-    }
+    const result: CreateAccountPoolOutput = try aws.json.parseJsonObject(
+        CreateAccountPoolOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -7,16 +7,29 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const OriginTypeValue = @import("origin_type_value.zig").OriginTypeValue;
 
 pub const StartMetadataModelExportAsScriptInput = struct {
-    /// The name of the model file to create in the Amazon S3 bucket.
+    /// The name for the exported file. When you omit this parameter, the service
+    /// generates
+    /// a name from the data provider engine name and an export timestamp.
     file_name: ?[]const u8 = null,
 
     /// The migration project name or Amazon Resource Name (ARN).
     migration_project_identifier: []const u8,
 
-    /// Whether to export the metadata model from the source or the target.
+    /// Specifies the metadata tree to export from.
     origin: OriginTypeValue,
 
-    /// A value that specifies the database objects to export.
+    /// A JSON string that identifies the metadata models to export as a SQL script.
+    /// For the selection rule format and examples, see [Selection rules in DMS
+    /// Schema
+    /// Conversion](https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html).
+    ///
+    /// Usage:
+    ///
+    /// * Accepts source or target selection rules depending on the `Origin`
+    ///   parameter. The `server-name` in the object locator must match the
+    ///   corresponding data provider.
+    ///
+    /// * Supports `explicit`, `include`, and `exclude` rule actions.
     selection_rules: []const u8,
 
     pub const json_field_names = .{
@@ -28,7 +41,7 @@ pub const StartMetadataModelExportAsScriptInput = struct {
 };
 
 pub const StartMetadataModelExportAsScriptOutput = struct {
-    /// The identifier for the export operation.
+    /// The identifier for the export request.
     request_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{

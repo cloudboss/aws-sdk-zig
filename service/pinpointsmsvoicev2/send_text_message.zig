@@ -67,7 +67,8 @@ pub const SendTextMessageInput = struct {
     message_type: ?MessageType = null,
 
     /// The origination identity of the message. This can be either the PhoneNumber,
-    /// PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.
+    /// PhoneNumberId, PhoneNumberArn, RcsAgentId, RcsAgentArn, SenderId,
+    /// SenderIdArn, PoolId, or PoolArn.
     ///
     /// If you are using a shared End User Messaging SMS resource then you must use
     /// the full Amazon Resource Name(ARN).

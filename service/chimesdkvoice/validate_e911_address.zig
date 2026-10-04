@@ -156,10 +156,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ValidateE911AddressInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ValidateE911AddressOutput {
-    var result: ValidateE911AddressOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ValidateE911AddressOutput, body, allocator);
-    }
+    const result: ValidateE911AddressOutput = try aws.json.parseJsonObject(
+        ValidateE911AddressOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ActivateMessageTemplate
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ActivateMessageTemplateOutput {
-    var result: ActivateMessageTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ActivateMessageTemplateOutput, body, allocator);
-    }
+    const result: ActivateMessageTemplateOutput = try aws.json.parseJsonObject(
+        ActivateMessageTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

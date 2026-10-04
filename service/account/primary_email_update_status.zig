@@ -3,16 +3,22 @@ const std = @import("std");
 pub const PrimaryEmailUpdateStatus = enum {
     pending,
     accepted,
+    completed,
+    failed,
 
     pub const json_field_names = .{
         .pending = "PENDING",
         .accepted = "ACCEPTED",
+        .completed = "COMPLETED",
+        .failed = "FAILED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .pending => "PENDING",
             .accepted => "ACCEPTED",
+            .completed => "COMPLETED",
+            .failed => "FAILED",
         };
     }
 

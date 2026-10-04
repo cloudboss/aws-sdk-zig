@@ -409,6 +409,12 @@ pub const Client = struct {
     /// Cluster with express configuration and create cluster in seconds. Express
     /// configuration provides a cluster with a writer instance and feature specific
     /// values set to all other input parameters of this API.
+    ///
+    /// You can use the `AssociatedRoles` parameter to associate one or more Amazon
+    /// Web Services Identity and Access Management (IAM) roles with an Aurora DB
+    /// cluster. Each associated role lets the DB cluster access other Amazon Web
+    /// Services on your behalf, such as Amazon S3 for data import and export, or
+    /// Amazon Web Services Lambda for invoking functions.
     pub fn createDbCluster(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster.CreateDBClusterInput, options: CallOptions) !create_db_cluster.CreateDBClusterOutput {
         return create_db_cluster.execute(self, allocator, input, options);
     }
@@ -1870,6 +1876,10 @@ pub const Client = struct {
     ///
     /// This operation only applies to Aurora DB clusters. The source DB engine must
     /// be MySQL.
+    ///
+    /// You can use the `AssociatedRoles` parameter to associate one or more Amazon
+    /// Web Services Identity and Access Management (IAM) roles with the Aurora DB
+    /// cluster when you restore it from Amazon S3.
     pub fn restoreDbClusterFromS3(self: *Self, allocator: std.mem.Allocator, input: restore_db_cluster_from_s3.RestoreDBClusterFromS3Input, options: CallOptions) !restore_db_cluster_from_s3.RestoreDBClusterFromS3Output {
         return restore_db_cluster_from_s3.execute(self, allocator, input, options);
     }
@@ -1890,6 +1900,10 @@ pub const Client = struct {
     /// enabled using `EnableIAMDatabaseAuthentication`. Once the cluster is
     /// restored, you need to modify the DB cluster to update
     /// `MasterUserAuthenticationType` to `iam-db-auth`.
+    ///
+    /// You can use the `AssociatedRoles` parameter to associate one or more Amazon
+    /// Web Services Identity and Access Management (IAM) roles with an Aurora DB
+    /// cluster when you restore it from a snapshot.
     ///
     /// This operation only restores the DB cluster, not the DB instances for that
     /// DB cluster. You must invoke the `CreateDBInstance` operation to create DB
@@ -1927,6 +1941,10 @@ pub const Client = struct {
     /// enabled using `EnableIAMDatabaseAuthentication`. Once the cluster is
     /// restored, you need to modify the DB cluster to update
     /// `MasterUserAuthenticationType` to `iam-db-auth`.
+    ///
+    /// You can use the `AssociatedRoles` parameter to associate one or more Amazon
+    /// Web Services Identity and Access Management (IAM) roles with an Aurora DB
+    /// cluster when you restore it to a point in time.
     ///
     /// For Aurora, this operation only restores the DB cluster, not the DB
     /// instances for that DB cluster. You must invoke the `CreateDBInstance`

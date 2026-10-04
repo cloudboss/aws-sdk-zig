@@ -177,10 +177,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterCACertificateIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RegisterCACertificateOutput {
-    var result: RegisterCACertificateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RegisterCACertificateOutput, body, allocator);
-    }
+    const result: RegisterCACertificateOutput = try aws.json.parseJsonObject(
+        RegisterCACertificateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

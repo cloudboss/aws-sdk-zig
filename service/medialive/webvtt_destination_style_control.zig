@@ -4,16 +4,19 @@ const std = @import("std");
 pub const WebvttDestinationStyleControl = enum {
     no_style_data,
     passthrough,
+    manual,
 
     pub const json_field_names = .{
         .no_style_data = "NO_STYLE_DATA",
         .passthrough = "PASSTHROUGH",
+        .manual = "MANUAL",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .no_style_data => "NO_STYLE_DATA",
             .passthrough => "PASSTHROUGH",
+            .manual => "MANUAL",
         };
     }
 

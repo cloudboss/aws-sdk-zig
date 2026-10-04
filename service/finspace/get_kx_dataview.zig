@@ -164,10 +164,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetKxDataviewInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetKxDataviewOutput {
-    var result: GetKxDataviewOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetKxDataviewOutput, body, allocator);
-    }
+    const result: GetKxDataviewOutput = try aws.json.parseJsonObject(
+        GetKxDataviewOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

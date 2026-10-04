@@ -7,9 +7,8 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const AssociateGatewayToServerInput = struct {
     /// The Amazon Resource Name (ARN) of the gateway. Use the `ListGateways`
-    /// operation
-    /// to return a list of gateways for your account and Amazon Web Services
-    /// Region.
+    /// operation to return a list of gateways for your account and Amazon Web
+    /// Services Region.
     gateway_arn: []const u8,
 
     /// The Amazon Resource Name (ARN) of the server that hosts your virtual

@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPipelineChangeProgre
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPipelineChangeProgressOutput {
-    var result: GetPipelineChangeProgressOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPipelineChangeProgressOutput, body, allocator);
-    }
+    const result: GetPipelineChangeProgressOutput = try aws.json.parseJsonObject(
+        GetPipelineChangeProgressOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

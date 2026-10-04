@@ -91,10 +91,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExecuteOpenCypherQueryI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ExecuteOpenCypherQueryOutput {
-    var result: ExecuteOpenCypherQueryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ExecuteOpenCypherQueryOutput, body, allocator);
-    }
+    const result: ExecuteOpenCypherQueryOutput = try aws.json.parseJsonObject(
+        ExecuteOpenCypherQueryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

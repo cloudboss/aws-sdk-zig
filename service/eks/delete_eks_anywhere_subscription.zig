@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteEksAnywhereSubscr
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteEksAnywhereSubscriptionOutput {
-    var result: DeleteEksAnywhereSubscriptionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteEksAnywhereSubscriptionOutput, body, allocator);
-    }
+    const result: DeleteEksAnywhereSubscriptionOutput = try aws.json.parseJsonObject(
+        DeleteEksAnywhereSubscriptionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

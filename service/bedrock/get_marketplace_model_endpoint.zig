@@ -74,10 +74,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMarketplaceModelEndp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMarketplaceModelEndpointOutput {
-    var result: GetMarketplaceModelEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMarketplaceModelEndpointOutput, body, allocator);
-    }
+    const result: GetMarketplaceModelEndpointOutput = try aws.json.parseJsonObject(
+        GetMarketplaceModelEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

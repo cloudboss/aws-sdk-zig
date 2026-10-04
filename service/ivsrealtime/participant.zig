@@ -9,11 +9,10 @@ const ParticipantState = @import("participant_state.zig").ParticipantState;
 /// Object describing a participant that has joined a stage.
 pub const Participant = struct {
     /// Application-provided attributes to encode into the token and attach to a
-    /// stage. Map keys
-    /// and values can contain UTF-8 encoded text. The maximum length of this field
-    /// is 1 KB total.
-    /// *This field is exposed to all stage participants and should not be used for
-    /// personally identifying, confidential, or sensitive information*.
+    /// stage. Map keys and values can contain UTF-8 encoded text. The maximum
+    /// length of this field is 1 KB total. *This field is exposed to all stage
+    /// participants and should not be used for personally identifying,
+    /// confidential, or sensitive information*.
     attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The participant’s browser.
@@ -23,8 +22,7 @@ pub const Participant = struct {
     browser_version: ?[]const u8 = null,
 
     /// ISO 8601 timestamp (returned as a string) when the participant first joined
-    /// the stage
-    /// session.
+    /// the stage session.
     first_join_time: ?i64 = null,
 
     /// The participant’s ingest configuration.
@@ -49,23 +47,16 @@ pub const Participant = struct {
     published: bool = false,
 
     /// Name of the S3 bucket to where the participant is being recorded, if
-    /// individual
-    /// participant recording is enabled, or `""` (empty string), if recording is
-    /// not
-    /// enabled.
+    /// individual participant recording is enabled, or `""` (empty string), if
+    /// recording is not enabled.
     recording_s3_bucket_name: ?[]const u8 = null,
 
     /// S3 prefix of the S3 bucket where the participant is being recorded, if
-    /// individual
-    /// participant recording is enabled, or `""` (empty string), if recording is
-    /// not
-    /// enabled. If individual participant recording merge is enabled, and if a
-    /// stage publisher
-    /// disconnects from a stage and then reconnects, IVS tries to record to the
-    /// same S3 prefix as
-    /// the previous session. See
-    /// [
-    /// Merge Fragmented Individual Participant
+    /// individual participant recording is enabled, or `""` (empty string), if
+    /// recording is not enabled. If individual participant recording merge is
+    /// enabled, and if a stage publisher disconnects from a stage and then
+    /// reconnects, IVS tries to record to the same S3 prefix as the previous
+    /// session. See [ Merge Fragmented Individual Participant
     /// Recordings](/ivs/latest/RealTimeUserGuide/rt-individual-participant-recording.html#ind-part-rec-merge-frag).
     recording_s3_prefix: ?[]const u8 = null,
 
@@ -97,11 +88,10 @@ pub const Participant = struct {
     state: ?ParticipantState = null,
 
     /// Customer-assigned name to help identify the token; this can be used to link
-    /// a
-    /// participant to a user in the customer’s own systems. This can be any UTF-8
-    /// encoded text.
-    /// *This field is exposed to all stage participants and should not be used for
-    /// personally identifying, confidential, or sensitive information*.
+    /// a participant to a user in the customer’s own systems. This can be any UTF-8
+    /// encoded text. *This field is exposed to all stage participants and should
+    /// not be used for personally identifying, confidential, or sensitive
+    /// information*.
     user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{

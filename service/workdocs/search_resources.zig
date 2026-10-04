@@ -16,8 +16,8 @@ pub const SearchResourcesInput = struct {
     /// returned in a standard response.
     additional_response_fields: ?[]const AdditionalResponseFieldType = null,
 
-    /// Amazon WorkDocs authentication token. Not required when using Amazon Web
-    /// Services administrator credentials to access the API.
+    /// WorkDocs authentication token. Not required when using Amazon Web Services
+    /// administrator credentials to access the API.
     authentication_token: ?[]const u8 = null,
 
     /// Filters results based on entity metadata.
@@ -177,10 +177,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchResourcesInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchResourcesOutput {
-    var result: SearchResourcesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchResourcesOutput, body, allocator);
-    }
+    const result: SearchResourcesOutput = try aws.json.parseJsonObject(
+        SearchResourcesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

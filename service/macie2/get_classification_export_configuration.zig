@@ -66,10 +66,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetClassificationExport
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetClassificationExportConfigurationOutput {
-    var result: GetClassificationExportConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetClassificationExportConfigurationOutput, body, allocator);
-    }
+    const result: GetClassificationExportConfigurationOutput = try aws.json.parseJsonObject(
+        GetClassificationExportConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

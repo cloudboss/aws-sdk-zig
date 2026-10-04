@@ -131,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListConfigurationBundle
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListConfigurationBundleVersionsOutput {
-    var result: ListConfigurationBundleVersionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListConfigurationBundleVersionsOutput, body, allocator);
-    }
+    const result: ListConfigurationBundleVersionsOutput = try aws.json.parseJsonObject(
+        ListConfigurationBundleVersionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

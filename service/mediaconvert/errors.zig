@@ -13,6 +13,7 @@ pub const ServiceError = struct {
         not_found_exception: NotFoundException,
         service_quota_exceeded_exception: ServiceQuotaExceededException,
         too_many_requests_exception: TooManyRequestsException,
+        unprocessable_entity_exception: UnprocessableEntityException,
         unknown: UnknownServiceError,
 
         pub fn code(self: Kind) []const u8 {
@@ -24,6 +25,7 @@ pub const ServiceError = struct {
                 .not_found_exception => "NotFoundException",
                 .service_quota_exceeded_exception => "ServiceQuotaExceededException",
                 .too_many_requests_exception => "TooManyRequestsException",
+                .unprocessable_entity_exception => "UnprocessableEntityException",
                 .unknown => |e| e.code,
             };
         }
@@ -37,6 +39,7 @@ pub const ServiceError = struct {
                 .not_found_exception => |e| e.message,
                 .service_quota_exceeded_exception => |e| e.message,
                 .too_many_requests_exception => |e| e.message,
+                .unprocessable_entity_exception => |e| e.message,
                 .unknown => |e| e.message,
             };
         }
@@ -50,6 +53,7 @@ pub const ServiceError = struct {
                 .not_found_exception => 404,
                 .service_quota_exceeded_exception => 402,
                 .too_many_requests_exception => 429,
+                .unprocessable_entity_exception => 422,
                 .unknown => |e| e.http_status,
             };
         }
@@ -63,6 +67,7 @@ pub const ServiceError = struct {
                 .not_found_exception => |e| e.request_id,
                 .service_quota_exceeded_exception => |e| e.request_id,
                 .too_many_requests_exception => |e| e.request_id,
+                .unprocessable_entity_exception => |e| e.request_id,
                 .unknown => |e| e.request_id,
             };
         }
@@ -120,6 +125,11 @@ pub const ServiceQuotaExceededException = struct {
 };
 
 pub const TooManyRequestsException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const UnprocessableEntityException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -185,6 +195,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     }
     if (std.mem.eql(u8, error_code, "TooManyRequestsException")) {
         return .{ .arena = arena, .kind = .{ .too_many_requests_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "UnprocessableEntityException")) {
+        return .{ .arena = arena, .kind = .{ .unprocessable_entity_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

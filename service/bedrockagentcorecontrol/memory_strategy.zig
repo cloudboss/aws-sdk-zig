@@ -20,7 +20,8 @@ pub const MemoryStrategy = struct {
     /// The name of the memory strategy.
     name: []const u8,
 
-    /// The namespaces associated with the memory strategy.
+    /// This is a legacy parameter. The namespaces associated with the memory
+    /// strategy.
     namespaces: []const []const u8,
 
     /// The namespaceTemplates associated with the memory strategy.

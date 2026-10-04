@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListLakeFormationOptIns
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListLakeFormationOptInsOutput {
-    var result: ListLakeFormationOptInsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListLakeFormationOptInsOutput, body, allocator);
-    }
+    const result: ListLakeFormationOptInsOutput = try aws.json.parseJsonObject(
+        ListLakeFormationOptInsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

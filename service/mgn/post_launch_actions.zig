@@ -1,7 +1,7 @@
 const PostLaunchActionsDeploymentType = @import("post_launch_actions_deployment_type.zig").PostLaunchActionsDeploymentType;
 const SsmDocument = @import("ssm_document.zig").SsmDocument;
 
-/// Post Launch Actions to executed on the Test or Cutover instance.
+/// Post Launch Actions to be executed on the Test or Cutover instance.
 pub const PostLaunchActions = struct {
     /// AWS Systems Manager Command's CloudWatch log group name.
     cloud_watch_log_group_name: ?[]const u8 = null,

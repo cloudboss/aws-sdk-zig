@@ -1,4 +1,5 @@
 const CategoryFilter = @import("category_filter.zig").CategoryFilter;
+const HierarchyFilter = @import("hierarchy_filter.zig").HierarchyFilter;
 const NestedFilter = @import("nested_filter.zig").NestedFilter;
 const NumericEqualityFilter = @import("numeric_equality_filter.zig").NumericEqualityFilter;
 const NumericRangeFilter = @import("numeric_range_filter.zig").NumericRangeFilter;
@@ -18,6 +19,12 @@ pub const Filter = struct {
     /// For more information, see [Adding text
     /// filters](https://docs.aws.amazon.com/quicksight/latest/user/add-a-text-filter-data-prep.html) in the *Amazon Quick Suite User Guide*.
     category_filter: ?CategoryFilter = null,
+
+    /// A `HierarchyFilter` filters data by drilling down through an ordered list of
+    /// columns. Each level in the list narrows the data by one column, and the
+    /// selected values at each level determine which values are available at the
+    /// next.
+    hierarchy_filter: ?HierarchyFilter = null,
 
     /// A `NestedFilter` filters data with a subset of data that is defined by the
     /// nested inner filter.
@@ -49,6 +56,7 @@ pub const Filter = struct {
 
     pub const json_field_names = .{
         .category_filter = "CategoryFilter",
+        .hierarchy_filter = "HierarchyFilter",
         .nested_filter = "NestedFilter",
         .numeric_equality_filter = "NumericEqualityFilter",
         .numeric_range_filter = "NumericRangeFilter",

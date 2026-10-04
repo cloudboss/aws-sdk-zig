@@ -4,10 +4,12 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const BillingMode = @import("billing_mode.zig").BillingMode;
 const Connection = @import("connection.zig").Connection;
 const HasLogicalRedundancy = @import("has_logical_redundancy.zig").HasLogicalRedundancy;
 const LagState = @import("lag_state.zig").LagState;
 const MacSecKey = @import("mac_sec_key.zig").MacSecKey;
+const RateLimiterStatus = @import("rate_limiter_status.zig").RateLimiterStatus;
 const Tag = @import("tag.zig").Tag;
 
 pub const DeleteLagInput = struct {

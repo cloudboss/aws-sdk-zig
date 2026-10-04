@@ -78,10 +78,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeSafetyRuleInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeSafetyRuleOutput {
-    var result: DescribeSafetyRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeSafetyRuleOutput, body, allocator);
-    }
+    const result: DescribeSafetyRuleOutput = try aws.json.parseJsonObject(
+        DescribeSafetyRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

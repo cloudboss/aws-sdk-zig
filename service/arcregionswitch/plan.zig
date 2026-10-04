@@ -43,6 +43,14 @@ pub const Plan = struct {
     /// The report configuration for a plan.
     report_configuration: ?ReportConfiguration = null,
 
+    /// Indicates whether service quota checks are enabled for the Region switch
+    /// plan. When enabled, Region switch compares the applied service quota values
+    /// across the plan's Amazon Web Services Regions and creates a warning when a
+    /// quota in one Region is lower than the value required for the matching
+    /// resource in another Region. Service quota checks are advisory and don't
+    /// prevent you from creating, evaluating, or executing a plan.
+    service_quota_checks_enabled: ?bool = null,
+
     /// The triggers for a plan.
     triggers: ?[]const Trigger = null,
 
@@ -67,6 +75,7 @@ pub const Plan = struct {
         .recovery_time_objective_minutes = "recoveryTimeObjectiveMinutes",
         .regions = "regions",
         .report_configuration = "reportConfiguration",
+        .service_quota_checks_enabled = "serviceQuotaChecksEnabled",
         .triggers = "triggers",
         .updated_at = "updatedAt",
         .version = "version",

@@ -1,12 +1,12 @@
-/// StripePrivy token request parameters
+/// Stripe Privy token request parameters.
 pub const StripePrivyTokenRequestInput = struct {
-    /// Set to true to generate privy-authorization-signature
+    /// Set to true to generate privy-authorization-signature.
     include_authorization_signature: bool = false,
 
-    /// Request body JSON for the Privy API call
+    /// Request body JSON for the Privy API call.
     request_body: []const u8,
 
-    /// Optional - defaults to "api.privy.io"
+    /// The host for the Privy API request. Defaults to "api.privy.io".
     request_host: ?[]const u8 = null,
 
     /// The path of the Stripe Privy API request.

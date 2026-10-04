@@ -191,6 +191,16 @@ pub const DkimAttributes = struct {
     ///   by
     /// replicating signing attributes from a parent identity in US West (Oregon)
     /// region using Deterministic Easy-DKIM (DEED).
+    ///
+    /// * `AWS_SES_US_GOV_EAST_1` – Indicates that DKIM was configured for the
+    ///   identity by
+    /// replicating signing attributes from a parent identity in AWS GovCloud
+    /// (US-East) region using Deterministic Easy-DKIM (DEED).
+    ///
+    /// * `AWS_SES_US_GOV_WEST_1` – Indicates that DKIM was configured for the
+    ///   identity by
+    /// replicating signing attributes from a parent identity in AWS GovCloud
+    /// (US-West) region using Deterministic Easy-DKIM (DEED).
     signing_attributes_origin: ?DkimSigningAttributesOrigin = null,
 
     /// If the value is `true`, then the messages that you send from the identity

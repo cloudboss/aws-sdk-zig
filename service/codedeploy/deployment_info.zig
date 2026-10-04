@@ -2,6 +2,7 @@ const AutoRollbackConfiguration = @import("auto_rollback_configuration.zig").Aut
 const BlueGreenDeploymentConfiguration = @import("blue_green_deployment_configuration.zig").BlueGreenDeploymentConfiguration;
 const ComputePlatform = @import("compute_platform.zig").ComputePlatform;
 const DeploymentCreator = @import("deployment_creator.zig").DeploymentCreator;
+const DeploymentMode = @import("deployment_mode.zig").DeploymentMode;
 const DeploymentOverview = @import("deployment_overview.zig").DeploymentOverview;
 const DeploymentStyle = @import("deployment_style.zig").DeploymentStyle;
 const ErrorInformation = @import("error_information.zig").ErrorInformation;
@@ -62,6 +63,20 @@ pub const DeploymentInfo = struct {
 
     /// The unique ID of a deployment.
     deployment_id: ?[]const u8 = null,
+
+    /// The deployment's type. Valid values are:
+    ///
+    /// * `STANDARD`: The deployment installed the specified revision.
+    ///
+    /// * `RESTART`: The deployment restarted the application on the target
+    /// instances using the revision from the deployment group's last successful
+    /// deployment, without downloading a new revision.
+    ///
+    /// This field is absent for deployments created before `deploymentMode`
+    /// existed, and for `STANDARD` deployments. An absent value must not be
+    /// interpreted as `STANDARD`; it simply means no value was recorded either
+    /// way.
+    deployment_mode: ?DeploymentMode = null,
 
     /// A summary of the deployment status of the instances in the deployment.
     deployment_overview: ?DeploymentOverview = null,
@@ -195,6 +210,7 @@ pub const DeploymentInfo = struct {
         .deployment_config_name = "deploymentConfigName",
         .deployment_group_name = "deploymentGroupName",
         .deployment_id = "deploymentId",
+        .deployment_mode = "deploymentMode",
         .deployment_overview = "deploymentOverview",
         .deployment_status_messages = "deploymentStatusMessages",
         .deployment_style = "deploymentStyle",

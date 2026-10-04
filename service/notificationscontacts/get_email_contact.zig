@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEmailContactInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetEmailContactOutput {
-    var result: GetEmailContactOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetEmailContactOutput, body, allocator);
-    }
+    const result: GetEmailContactOutput = try aws.json.parseJsonObject(
+        GetEmailContactOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

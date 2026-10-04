@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutVoiceConnectorTermin
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutVoiceConnectorTerminationOutput {
-    var result: PutVoiceConnectorTerminationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutVoiceConnectorTerminationOutput, body, allocator);
-    }
+    const result: PutVoiceConnectorTerminationOutput = try aws.json.parseJsonObject(
+        PutVoiceConnectorTerminationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

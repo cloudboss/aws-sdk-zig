@@ -1,3 +1,4 @@
+const RouteVehicleAfterTravelStep = @import("route_vehicle_after_travel_step.zig").RouteVehicleAfterTravelStep;
 const RouteVehicleArrival = @import("route_vehicle_arrival.zig").RouteVehicleArrival;
 const RouteVehicleDeparture = @import("route_vehicle_departure.zig").RouteVehicleDeparture;
 const RouteVehicleIncident = @import("route_vehicle_incident.zig").RouteVehicleIncident;
@@ -12,6 +13,9 @@ const RouteZone = @import("route_zone.zig").RouteZone;
 
 /// Steps of a leg that correspond to the travel portion of the leg.
 pub const RouteVehicleLegDetails = struct {
+    /// Steps of a leg that must be performed after the travel portion of the leg.
+    after_travel_steps: []const RouteVehicleAfterTravelStep = &.{},
+
     /// Details corresponding to the arrival for the leg.
     arrival: RouteVehicleArrival,
 
@@ -68,6 +72,7 @@ pub const RouteVehicleLegDetails = struct {
     zones: []const RouteZone,
 
     pub const json_field_names = .{
+        .after_travel_steps = "AfterTravelSteps",
         .arrival = "Arrival",
         .departure = "Departure",
         .incidents = "Incidents",

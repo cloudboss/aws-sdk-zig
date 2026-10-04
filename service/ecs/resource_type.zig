@@ -3,16 +3,19 @@ const std = @import("std");
 pub const ResourceType = enum {
     gpu,
     inference_accelerator,
+    neuron_device,
 
     pub const json_field_names = .{
         .gpu = "GPU",
         .inference_accelerator = "InferenceAccelerator",
+        .neuron_device = "NeuronDevice",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .gpu => "GPU",
             .inference_accelerator => "InferenceAccelerator",
+            .neuron_device => "NeuronDevice",
         };
     }
 

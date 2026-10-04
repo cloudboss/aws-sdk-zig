@@ -1,7 +1,7 @@
 const BackupJobStatus = @import("backup_job_status.zig").BackupJobStatus;
 
 /// This is a summary of jobs created
-/// or running within the most recent 30 days.
+/// or running within the most recent 14 days.
 ///
 /// The returned summary may contain the following:
 /// Region, Account, State, RestourceType, MessageCategory,

@@ -105,10 +105,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListScramSecretsInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListScramSecretsOutput {
-    var result: ListScramSecretsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListScramSecretsOutput, body, allocator);
-    }
+    const result: ListScramSecretsOutput = try aws.json.parseJsonObject(
+        ListScramSecretsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

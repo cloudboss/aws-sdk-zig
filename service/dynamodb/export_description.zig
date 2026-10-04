@@ -1,6 +1,7 @@
 const ExportFormat = @import("export_format.zig").ExportFormat;
 const ExportStatus = @import("export_status.zig").ExportStatus;
 const ExportType = @import("export_type.zig").ExportType;
+const FilterSpecification = @import("filter_specification.zig").FilterSpecification;
 const IncrementalExportSpecification = @import("incremental_export_specification.zig").IncrementalExportSpecification;
 const S3SseAlgorithm = @import("s3_sse_algorithm.zig").S3SseAlgorithm;
 
@@ -44,6 +45,12 @@ pub const ExportDescription = struct {
 
     /// Export failure reason description.
     failure_message: ?[]const u8 = null,
+
+    /// The filter criteria applied to the export. When present, only items that
+    /// match the
+    /// specified key conditions and filter expressions are included in the export
+    /// output.
+    filter_specification: ?FilterSpecification = null,
 
     /// Optional object containing the parameters specific to an incremental export.
     incremental_export_specification: ?IncrementalExportSpecification = null,
@@ -99,6 +106,7 @@ pub const ExportDescription = struct {
         .export_type = "ExportType",
         .failure_code = "FailureCode",
         .failure_message = "FailureMessage",
+        .filter_specification = "FilterSpecification",
         .incremental_export_specification = "IncrementalExportSpecification",
         .item_count = "ItemCount",
         .s3_bucket = "S3Bucket",

@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateClusterConfigurat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateClusterConfigurationOutput {
-    var result: UpdateClusterConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateClusterConfigurationOutput, body, allocator);
-    }
+    const result: UpdateClusterConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateClusterConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

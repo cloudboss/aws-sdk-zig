@@ -16,6 +16,9 @@ pub const StartScanJobInput = struct {
     /// Pattern: `^[a-zA-Z0-9\-\_]{2,50}$`
     backup_vault_name: []const u8,
 
+    /// The point in time the scan job will scan up to for a continuous backup.
+    continuous_scan_end_time: ?i64 = null,
+
     /// Specifies the IAM role ARN used to create the target recovery point; for
     /// example,
     /// `arn:aws:iam::123456789012:role/S3Access`.
@@ -57,6 +60,7 @@ pub const StartScanJobInput = struct {
 
     pub const json_field_names = .{
         .backup_vault_name = "BackupVaultName",
+        .continuous_scan_end_time = "ContinuousScanEndTime",
         .iam_role_arn = "IamRoleArn",
         .idempotency_token = "IdempotencyToken",
         .malware_scanner = "MalwareScanner",
@@ -125,6 +129,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartScanJobInput, conf
     try body_buf.appendSlice(allocator, "\"BackupVaultName\":");
     try aws.json.writeValue(@TypeOf(input.backup_vault_name), input.backup_vault_name, allocator, &body_buf);
     has_prev = true;
+    if (input.continuous_scan_end_time) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ContinuousScanEndTime\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"IamRoleArn\":");
     try aws.json.writeValue(@TypeOf(input.iam_role_arn), input.iam_role_arn, allocator, &body_buf);
@@ -173,10 +183,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartScanJobInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartScanJobOutput {
-    var result: StartScanJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartScanJobOutput, body, allocator);
-    }
+    const result: StartScanJobOutput = try aws.json.parseJsonObject(
+        StartScanJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

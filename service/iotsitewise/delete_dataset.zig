@@ -15,9 +15,13 @@ pub const DeleteDatasetInput = struct {
     /// The ID of the dataset.
     dataset_id: []const u8,
 
+    /// The name of the workspace that contains the dataset.
+    workspace_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .client_token = "clientToken",
         .dataset_id = "datasetId",
+        .workspace_name = "workspaceName",
     };
 };
 
@@ -75,6 +79,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteDatasetInput, con
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
+    if (input.workspace_name) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "workspaceName=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
     const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
@@ -92,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteDatasetInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteDatasetOutput {
-    var result: DeleteDatasetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteDatasetOutput, body, allocator);
-    }
+    const result: DeleteDatasetOutput = try aws.json.parseJsonObject(
+        DeleteDatasetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

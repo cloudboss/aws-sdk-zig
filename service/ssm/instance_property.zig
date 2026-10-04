@@ -21,6 +21,9 @@ pub const InstanceProperty = struct {
     /// The status of the State Manager association applied to the managed node.
     association_status: ?[]const u8 = null,
 
+    /// The Availability Zone where the managed node is located.
+    availability_zone: ?[]const u8 = null,
+
     /// The fully qualified host name of the managed node.
     computer_name: ?[]const u8 = null,
 
@@ -92,7 +95,12 @@ pub const InstanceProperty = struct {
     /// The ID of the source resource.
     source_id: ?[]const u8 = null,
 
-    /// The type of the source resource.
+    /// The location of the source resource in the third-party cloud environment.
+    source_location: ?[]const u8 = null,
+
+    /// The type of the source resource. Valid values: `AWS::EC2::Instance` |
+    /// `AWS::SSM::ManagedInstance` | `AWS::IoT::Thing` |
+    /// `Microsoft.Compute/virtualMachines`.
     source_type: ?SourceType = null,
 
     pub const json_field_names = .{
@@ -101,6 +109,7 @@ pub const InstanceProperty = struct {
         .architecture = "Architecture",
         .association_overview = "AssociationOverview",
         .association_status = "AssociationStatus",
+        .availability_zone = "AvailabilityZone",
         .computer_name = "ComputerName",
         .iam_role = "IamRole",
         .instance_id = "InstanceId",
@@ -121,6 +130,7 @@ pub const InstanceProperty = struct {
         .registration_date = "RegistrationDate",
         .resource_type = "ResourceType",
         .source_id = "SourceId",
+        .source_location = "SourceLocation",
         .source_type = "SourceType",
     };
 };

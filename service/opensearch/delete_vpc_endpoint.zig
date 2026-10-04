@@ -74,10 +74,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteVpcEndpointInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteVpcEndpointOutput {
-    var result: DeleteVpcEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteVpcEndpointOutput, body, allocator);
-    }
+    const result: DeleteVpcEndpointOutput = try aws.json.parseJsonObject(
+        DeleteVpcEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

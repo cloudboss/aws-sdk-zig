@@ -1,11 +1,16 @@
 const aws = @import("aws");
 
+const StandardsProvider = @import("standards_provider.zig").StandardsProvider;
 const StandardsControlsUpdatable = @import("standards_controls_updatable.zig").StandardsControlsUpdatable;
 const StandardsStatus = @import("standards_status.zig").StandardsStatus;
 const StandardsStatusReason = @import("standards_status_reason.zig").StandardsStatusReason;
 
 /// A resource that represents your subscription to a supported standard.
 pub const StandardsSubscription = struct {
+    /// The cloud provider whose resources the standard evaluates. For example,
+    /// `AWS` or `Azure`.
+    provider: ?StandardsProvider = null,
+
     /// The ARN of the standard.
     standards_arn: []const u8,
 
@@ -48,6 +53,7 @@ pub const StandardsSubscription = struct {
     standards_subscription_arn: []const u8,
 
     pub const json_field_names = .{
+        .provider = "Provider",
         .standards_arn = "StandardsArn",
         .standards_controls_updatable = "StandardsControlsUpdatable",
         .standards_input = "StandardsInput",

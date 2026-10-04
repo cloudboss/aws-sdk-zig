@@ -16,36 +16,32 @@ pub const TerminateEnvironmentInput = struct {
     /// The ID of the environment to terminate.
     ///
     /// Condition: You must specify either this or an EnvironmentName, or both. If
-    /// you do not
-    /// specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter`
-    /// error.
+    /// you do not specify either, Elastic Beanstalk returns
+    /// `MissingRequiredParameter` error.
     environment_id: ?[]const u8 = null,
 
     /// The name of the environment to terminate.
     ///
     /// Condition: You must specify either this or an EnvironmentId, or both. If you
-    /// do not
-    /// specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter`
-    /// error.
+    /// do not specify either, Elastic Beanstalk returns
+    /// `MissingRequiredParameter` error.
     environment_name: ?[]const u8 = null,
 
     /// Terminates the target environment even if another environment in the same
-    /// group is
-    /// dependent on it.
+    /// group is dependent on it.
     force_terminate: ?bool = null,
 
-    /// Indicates whether the associated AWS resources should shut down when the
-    /// environment is
-    /// terminated:
+    /// Indicates whether the associated Amazon Web Services resources should shut
+    /// down when the environment is terminated:
     ///
-    /// * `true`: The specified environment as well as the associated AWS resources,
-    ///   such
-    /// as Auto Scaling group and LoadBalancer, are terminated.
+    /// * `true`: The specified environment as well as the associated Amazon Web
+    ///   Services resources, such as Auto Scaling group and LoadBalancer, are
+    /// terminated.
     ///
-    /// * `false`: AWS Elastic Beanstalk resource management is removed from the
-    /// environment, but the AWS resources continue to operate.
+    /// * `false`: Elastic Beanstalk resource management is removed from the
+    ///   environment, but the Amazon Web Services resources continue to operate.
     ///
-    /// For more information, see the [ AWS Elastic Beanstalk User Guide.
+    /// For more information, see the [ Elastic Beanstalk User Guide.
     /// ](https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/)
     ///
     /// Default: `true`

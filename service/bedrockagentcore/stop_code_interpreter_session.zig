@@ -126,10 +126,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StopCodeInterpreterSess
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StopCodeInterpreterSessionOutput {
-    var result: StopCodeInterpreterSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StopCodeInterpreterSessionOutput, body, allocator);
-    }
+    const result: StopCodeInterpreterSessionOutput = try aws.json.parseJsonObject(
+        StopCodeInterpreterSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

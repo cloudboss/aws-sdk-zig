@@ -144,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateResiliencyPolicyI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateResiliencyPolicyOutput {
-    var result: UpdateResiliencyPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateResiliencyPolicyOutput, body, allocator);
-    }
+    const result: UpdateResiliencyPolicyOutput = try aws.json.parseJsonObject(
+        UpdateResiliencyPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

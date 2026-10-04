@@ -107,6 +107,12 @@ pub const Client = struct {
         return add_tags.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Cancels a query if the query is not in a terminated state, such as
     /// `CANCELLED`, `FAILED`, `TIMED_OUT`, or
     /// `FINISHED`. You must specify an ARN value for `EventDataStore`.
@@ -117,6 +123,12 @@ pub const Client = struct {
         return cancel_query.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Creates a channel for CloudTrail to ingest events from a partner or external
     /// source.
     /// After you create a channel, a CloudTrail Lake event data store can log
@@ -126,6 +138,12 @@ pub const Client = struct {
         return create_channel.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Creates a custom dashboard or the Highlights dashboard.
     ///
     /// * **Custom dashboards** - Custom dashboards allow you to query
@@ -162,6 +180,12 @@ pub const Client = struct {
         return create_dashboard.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Creates a new event data store.
     pub fn createEventDataStore(self: *Self, allocator: std.mem.Allocator, input: create_event_data_store.CreateEventDataStoreInput, options: CallOptions) !create_event_data_store.CreateEventDataStoreOutput {
         return create_event_data_store.execute(self, allocator, input, options);
@@ -173,17 +197,35 @@ pub const Client = struct {
         return create_trail.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Deletes a channel.
     pub fn deleteChannel(self: *Self, allocator: std.mem.Allocator, input: delete_channel.DeleteChannelInput, options: CallOptions) !delete_channel.DeleteChannelOutput {
         return delete_channel.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Deletes the specified dashboard. You cannot delete a dashboard that has
     /// termination protection enabled.
     pub fn deleteDashboard(self: *Self, allocator: std.mem.Allocator, input: delete_dashboard.DeleteDashboardInput, options: CallOptions) !delete_dashboard.DeleteDashboardOutput {
         return delete_dashboard.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Disables the event data store specified by `EventDataStore`, which accepts
     /// an
     /// event data store ARN. After you run `DeleteEventDataStore`, the event data
@@ -242,6 +284,12 @@ pub const Client = struct {
         return deregister_organization_delegated_admin.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Returns metadata about a query, including query run time in milliseconds,
     /// number of
     /// events scanned and matched, and query status. If the query results were
@@ -264,6 +312,12 @@ pub const Client = struct {
         return describe_trails.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Disables Lake query federation on the specified event data store. When you
     /// disable federation, CloudTrail disables
     /// the integration with Glue, Lake Formation, and Amazon Athena.
@@ -276,6 +330,12 @@ pub const Client = struct {
         return disable_federation.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Enables Lake query federation on the specified event data store. Federating
     /// an event data store lets you view the metadata associated with the event
     /// data store in the Glue
@@ -302,6 +362,12 @@ pub const Client = struct {
         return enable_federation.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Generates a query from a natural language prompt. This operation uses
     /// generative artificial intelligence
     /// (generative AI) to produce a ready-to-use SQL query from the prompt.
@@ -328,11 +394,23 @@ pub const Client = struct {
         return generate_query.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Returns information about a specific channel.
     pub fn getChannel(self: *Self, allocator: std.mem.Allocator, input: get_channel.GetChannelInput, options: CallOptions) !get_channel.GetChannelOutput {
         return get_channel.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Returns the specified dashboard.
     pub fn getDashboard(self: *Self, allocator: std.mem.Allocator, input: get_dashboard.GetDashboardInput, options: CallOptions) !get_dashboard.GetDashboardOutput {
         return get_dashboard.execute(self, allocator, input, options);
@@ -346,6 +424,12 @@ pub const Client = struct {
         return get_event_configuration.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Returns information about an event data store specified as either an ARN or
     /// the ID
     /// portion of the ARN.
@@ -387,6 +471,12 @@ pub const Client = struct {
         return get_event_selectors.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Returns information about a specific import.
     pub fn getImport(self: *Self, allocator: std.mem.Allocator, input: get_import.GetImportInput, options: CallOptions) !get_import.GetImportOutput {
         return get_import.execute(self, allocator, input, options);
@@ -413,6 +503,12 @@ pub const Client = struct {
         return get_insight_selectors.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Gets event data results of a query. You must specify the `QueryID` value
     /// returned by the `StartQuery` operation.
     pub fn getQueryResults(self: *Self, allocator: std.mem.Allocator, input: get_query_results.GetQueryResultsInput, options: CallOptions) !get_query_results.GetQueryResultsOutput {
@@ -442,17 +538,35 @@ pub const Client = struct {
         return get_trail_status.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Lists the channels in the current account, and their source names.
     pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: CallOptions) !list_channels.ListChannelsOutput {
         return list_channels.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Returns information about all dashboards in the account, in the current
     /// Region.
     pub fn listDashboards(self: *Self, allocator: std.mem.Allocator, input: list_dashboards.ListDashboardsInput, options: CallOptions) !list_dashboards.ListDashboardsOutput {
         return list_dashboards.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Returns information about all event data stores in the account, in the
     /// current
     /// Region.
@@ -460,11 +574,23 @@ pub const Client = struct {
         return list_event_data_stores.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Returns a list of failures for the specified import.
     pub fn listImportFailures(self: *Self, allocator: std.mem.Allocator, input: list_import_failures.ListImportFailuresInput, options: CallOptions) !list_import_failures.ListImportFailuresOutput {
         return list_import_failures.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Returns information on all imports, or a select set of imports by
     /// `ImportStatus` or `Destination`.
     pub fn listImports(self: *Self, allocator: std.mem.Allocator, input: list_imports.ListImportsInput, options: CallOptions) !list_imports.ListImportsOutput {
@@ -491,6 +617,14 @@ pub const Client = struct {
     /// The rate of ListInsightsData requests is limited to two per second, per
     /// account, per Region. If
     /// this limit is exceeded, a throttling error occurs.
+    ///
+    /// For data event Insights on organization trails, only the management account
+    /// and delegated
+    /// administrator accounts can call `ListInsightsData`. For these callers, the
+    /// API returns
+    /// Insights events only for the caller's own account. Member accounts cannot
+    /// call this API on
+    /// organization trails.
     pub fn listInsightsData(self: *Self, allocator: std.mem.Allocator, input: list_insights_data.ListInsightsDataInput, options: CallOptions) !list_insights_data.ListInsightsDataOutput {
         return list_insights_data.execute(self, allocator, input, options);
     }
@@ -528,6 +662,14 @@ pub const Client = struct {
     ///   access to the `ListInsightsMetricData` API operation is linked to the
     ///   `cloudtrail:LookupEvents` action only. To use this operation,
     /// you must have permissions to perform the `cloudtrail:LookupEvents` action.
+    ///
+    /// For data event Insights on organization trails, only the management account
+    /// and delegated
+    /// administrator accounts can call `ListInsightsMetricData`. For these callers,
+    /// the API returns
+    /// Insights metrics only for the caller's own account. Member accounts cannot
+    /// call this API on
+    /// organization trails.
     pub fn listInsightsMetricData(self: *Self, allocator: std.mem.Allocator, input: list_insights_metric_data.ListInsightsMetricDataInput, options: CallOptions) !list_insights_metric_data.ListInsightsMetricDataOutput {
         return list_insights_metric_data.execute(self, allocator, input, options);
     }
@@ -549,6 +691,12 @@ pub const Client = struct {
         return list_public_keys.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Returns a list of queries and query statuses for the past seven days. You
     /// must specify
     /// an ARN value for `EventDataStore`. Optionally, to shorten the list of
@@ -782,6 +930,12 @@ pub const Client = struct {
         return remove_tags.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Restores a deleted event data store specified by `EventDataStore`, which
     /// accepts an event data store ARN. You can only restore a deleted event data
     /// store within the
@@ -792,6 +946,12 @@ pub const Client = struct {
         return restore_event_data_store.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Searches sample queries and returns a list of sample queries that are sorted
     /// by relevance.
     /// To search for sample queries, provide a natural language `SearchPhrase` in
@@ -800,6 +960,12 @@ pub const Client = struct {
         return search_sample_queries.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Starts a refresh of the specified dashboard.
     ///
     /// Each time a dashboard is refreshed, CloudTrail runs queries to populate the
@@ -813,6 +979,12 @@ pub const Client = struct {
         return start_dashboard_refresh.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Starts the ingestion of live events on an event data store specified as
     /// either an ARN or the ID portion of the ARN. To start ingestion, the event
     /// data store `Status` must be `STOPPED_INGESTION`
@@ -822,6 +994,12 @@ pub const Client = struct {
         return start_event_data_store_ingestion.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Starts an import of logged trail events from a source S3 bucket to a
     /// destination event
     /// data store. By default, CloudTrail only imports events contained in the S3
@@ -866,6 +1044,12 @@ pub const Client = struct {
         return start_logging.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Starts a CloudTrail Lake query. Use the `QueryStatement`
     /// parameter to provide your SQL query, enclosed in single quotation marks. Use
     /// the optional
@@ -880,6 +1064,12 @@ pub const Client = struct {
         return start_query.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Stops the ingestion of live events on an event data store specified as
     /// either an ARN or the ID portion of the ARN. To stop ingestion, the event
     /// data store `Status` must be `ENABLED`
@@ -889,6 +1079,12 @@ pub const Client = struct {
         return stop_event_data_store_ingestion.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Stops a specified import.
     pub fn stopImport(self: *Self, allocator: std.mem.Allocator, input: stop_import.StopImportInput, options: CallOptions) !stop_import.StopImportOutput {
         return stop_import.execute(self, allocator, input, options);
@@ -910,11 +1106,23 @@ pub const Client = struct {
         return stop_logging.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Updates a channel specified by a required channel ARN or UUID.
     pub fn updateChannel(self: *Self, allocator: std.mem.Allocator, input: update_channel.UpdateChannelInput, options: CallOptions) !update_channel.UpdateChannelOutput {
         return update_channel.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Updates the specified dashboard.
     ///
     /// To set a refresh schedule, CloudTrail must be granted permissions to run the
@@ -936,6 +1144,12 @@ pub const Client = struct {
         return update_dashboard.execute(self, allocator, input, options);
     }
 
+    /// CloudTrail Lake will no longer be open to new customers starting May 31,
+    /// 2026. If you would like to use CloudTrail Lake, sign up prior to that date.
+    /// Existing customers can continue to use the service as normal. For more
+    /// information, see [CloudTrail Lake availability
+    /// change](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html).
+    ///
     /// Updates an event data store. The required `EventDataStore` value is an ARN
     /// or
     /// the ID portion of the ARN. Other parameters are optional, but at least one

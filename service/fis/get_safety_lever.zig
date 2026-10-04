@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSafetyLeverInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSafetyLeverOutput {
-    var result: GetSafetyLeverOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSafetyLeverOutput, body, allocator);
-    }
+    const result: GetSafetyLeverOutput = try aws.json.parseJsonObject(
+        GetSafetyLeverOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

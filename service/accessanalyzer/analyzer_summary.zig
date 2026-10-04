@@ -24,6 +24,11 @@ pub const AnalyzerSummary = struct {
     /// The time at which the most recently analyzed resource was analyzed.
     last_resource_analyzed_at: ?i64 = null,
 
+    /// The service principal that manages this analyzer (for example,
+    /// `securityhubv2.amazonaws.com`). This field is only present for
+    /// service-linked analyzers and is not included for customer-managed analyzers.
+    managed_by: ?[]const u8 = null,
+
     /// The name of the analyzer.
     name: []const u8,
 
@@ -61,6 +66,7 @@ pub const AnalyzerSummary = struct {
         .created_at = "createdAt",
         .last_resource_analyzed = "lastResourceAnalyzed",
         .last_resource_analyzed_at = "lastResourceAnalyzedAt",
+        .managed_by = "managedBy",
         .name = "name",
         .status = "status",
         .status_reason = "statusReason",

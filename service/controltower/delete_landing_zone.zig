@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteLandingZoneInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteLandingZoneOutput {
-    var result: DeleteLandingZoneOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteLandingZoneOutput, body, allocator);
-    }
+    const result: DeleteLandingZoneOutput = try aws.json.parseJsonObject(
+        DeleteLandingZoneOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

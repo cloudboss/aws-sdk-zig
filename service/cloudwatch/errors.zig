@@ -17,11 +17,16 @@ pub const ServiceError = struct {
         invalid_next_token: InvalidNextToken,
         invalid_parameter_combination_exception: InvalidParameterCombinationException,
         invalid_parameter_value_exception: InvalidParameterValueException,
+        kms_access_denied_exception: KmsAccessDeniedException,
+        kms_key_disabled_exception: KmsKeyDisabledException,
+        kms_key_not_found_exception: KmsKeyNotFoundException,
         limit_exceeded_exception: LimitExceededException,
         limit_exceeded_fault: LimitExceededFault,
         missing_required_parameter_exception: MissingRequiredParameterException,
+        resource_conflict: ResourceConflict,
         resource_not_found: ResourceNotFound,
         resource_not_found_exception: ResourceNotFoundException,
+        validation_exception: ValidationException,
         unknown: UnknownServiceError,
 
         pub fn code(self: Kind) []const u8 {
@@ -35,11 +40,16 @@ pub const ServiceError = struct {
                 .invalid_next_token => "InvalidNextToken",
                 .invalid_parameter_combination_exception => "InvalidParameterCombinationException",
                 .invalid_parameter_value_exception => "InvalidParameterValueException",
+                .kms_access_denied_exception => "KmsAccessDeniedException",
+                .kms_key_disabled_exception => "KmsKeyDisabledException",
+                .kms_key_not_found_exception => "KmsKeyNotFoundException",
                 .limit_exceeded_exception => "LimitExceededException",
                 .limit_exceeded_fault => "LimitExceededFault",
                 .missing_required_parameter_exception => "MissingRequiredParameterException",
+                .resource_conflict => "ResourceConflict",
                 .resource_not_found => "ResourceNotFound",
                 .resource_not_found_exception => "ResourceNotFoundException",
+                .validation_exception => "ValidationException",
                 .unknown => |e| e.code,
             };
         }
@@ -55,11 +65,16 @@ pub const ServiceError = struct {
                 .invalid_next_token => |e| e.message,
                 .invalid_parameter_combination_exception => |e| e.message,
                 .invalid_parameter_value_exception => |e| e.message,
+                .kms_access_denied_exception => |e| e.message,
+                .kms_key_disabled_exception => |e| e.message,
+                .kms_key_not_found_exception => |e| e.message,
                 .limit_exceeded_exception => |e| e.message,
                 .limit_exceeded_fault => |e| e.message,
                 .missing_required_parameter_exception => |e| e.message,
+                .resource_conflict => |e| e.message,
                 .resource_not_found => |e| e.message,
                 .resource_not_found_exception => |e| e.message,
+                .validation_exception => |e| e.message,
                 .unknown => |e| e.message,
             };
         }
@@ -75,11 +90,16 @@ pub const ServiceError = struct {
                 .invalid_next_token => 400,
                 .invalid_parameter_combination_exception => 400,
                 .invalid_parameter_value_exception => 400,
+                .kms_access_denied_exception => 400,
+                .kms_key_disabled_exception => 400,
+                .kms_key_not_found_exception => 400,
                 .limit_exceeded_exception => 400,
                 .limit_exceeded_fault => 400,
                 .missing_required_parameter_exception => 400,
+                .resource_conflict => 409,
                 .resource_not_found => 404,
                 .resource_not_found_exception => 404,
+                .validation_exception => 400,
                 .unknown => |e| e.http_status,
             };
         }
@@ -95,11 +115,16 @@ pub const ServiceError = struct {
                 .invalid_next_token => |e| e.request_id,
                 .invalid_parameter_combination_exception => |e| e.request_id,
                 .invalid_parameter_value_exception => |e| e.request_id,
+                .kms_access_denied_exception => |e| e.request_id,
+                .kms_key_disabled_exception => |e| e.request_id,
+                .kms_key_not_found_exception => |e| e.request_id,
                 .limit_exceeded_exception => |e| e.request_id,
                 .limit_exceeded_fault => |e| e.request_id,
                 .missing_required_parameter_exception => |e| e.request_id,
+                .resource_conflict => |e| e.request_id,
                 .resource_not_found => |e| e.request_id,
                 .resource_not_found_exception => |e| e.request_id,
+                .validation_exception => |e| e.request_id,
                 .unknown => |e| e.request_id,
             };
         }
@@ -220,6 +245,56 @@ pub const InvalidParameterValueException = struct {
     };
 };
 
+/// The operation was denied because either the calling principal lacks the
+/// required
+/// Amazon Web Services Key Management Service (Amazon Web Services KMS)
+/// permission on the
+/// key, or the key policy does not grant Amazon CloudWatch the permissions it
+/// needs
+/// to use the key. Verify that the caller has `kms:Decrypt` permission on the
+/// key, and that the key policy grants the CloudWatch service principal the
+/// `kms:DescribeKey`, `kms:GenerateDataKey`,
+/// `kms:Encrypt`, `kms:Decrypt`, and `kms:ReEncrypt*`
+/// permissions described in
+/// [AssociateDatasetKmsKey](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_AssociateDatasetKmsKey.html).
+pub const KmsAccessDeniedException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
+};
+
+/// The specified Amazon Web Services Key Management Service (Amazon Web
+/// Services KMS) key
+/// is disabled or pending deletion. Re-enable the key (or restore it, if it is
+/// pending
+/// deletion) and retry the operation.
+pub const KmsKeyDisabledException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
+};
+
+/// The specified Amazon Web Services Key Management Service (Amazon Web
+/// Services KMS) key
+/// could not be found. Verify that the key Amazon Resource Name (ARN) is
+/// correct, that
+/// the key exists, and that it is in the same Amazon Web Services Region as the
+/// resource.
+pub const KmsKeyNotFoundException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
+};
+
 /// The operation exceeded one or more limits.
 pub const LimitExceededException = struct {
     message: []const u8 = "",
@@ -242,6 +317,17 @@ pub const LimitExceededFault = struct {
 
 /// An input parameter that is required is missing.
 pub const MissingRequiredParameterException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
+};
+
+/// The operation could not be completed because the request conflicts with the
+/// current state of the alarm or its underlying scheduled query resource.
+pub const ResourceConflict = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 
@@ -273,6 +359,18 @@ pub const ResourceNotFoundException = struct {
         .message = "Message",
         .resource_id = "ResourceId",
         .resource_type = "ResourceType",
+    };
+};
+
+/// The request failed validation. One or more input parameters do not satisfy
+/// the
+/// constraints that the operation requires.
+pub const ValidationException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
     };
 };
 
@@ -348,6 +446,24 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "KmsAccessDeniedException")) {
+        return .{ .arena = arena, .kind = .{ .kms_access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "KmsKeyDisabledException")) {
+        return .{ .arena = arena, .kind = .{ .kms_key_disabled_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "KmsKeyNotFoundException")) {
+        return .{ .arena = arena, .kind = .{ .kms_key_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "LimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = .{
             .message = owned_message,
@@ -366,6 +482,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "ResourceConflict")) {
+        return .{ .arena = arena, .kind = .{ .resource_conflict = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "ResourceNotFound")) {
         return .{ .arena = arena, .kind = .{ .resource_not_found = .{
             .message = owned_message,
@@ -374,6 +496,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         return .{ .arena = arena, .kind = .{ .resource_not_found_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        return .{ .arena = arena, .kind = .{ .validation_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

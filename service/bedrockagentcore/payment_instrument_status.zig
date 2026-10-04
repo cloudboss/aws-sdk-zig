@@ -1,17 +1,19 @@
 const std = @import("std");
 
-/// The status of a payment instrument
+/// The status of a payment instrument.
 pub const PaymentInstrumentStatus = enum {
     initiated,
     active,
     failed,
     deleted,
+    blocked,
 
     pub const json_field_names = .{
         .initiated = "INITIATED",
         .active = "ACTIVE",
         .failed = "FAILED",
         .deleted = "DELETED",
+        .blocked = "BLOCKED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -20,6 +22,7 @@ pub const PaymentInstrumentStatus = enum {
             .active => "ACTIVE",
             .failed => "FAILED",
             .deleted => "DELETED",
+            .blocked => "BLOCKED",
         };
     }
 

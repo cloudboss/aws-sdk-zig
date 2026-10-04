@@ -1,6 +1,8 @@
 const aws = @import("aws");
 
 const RouterInputConfiguration = @import("router_input_configuration.zig").RouterInputConfiguration;
+const RouterContentQualityAnalysisConfiguration = @import("router_content_quality_analysis_configuration.zig").RouterContentQualityAnalysisConfiguration;
+const RouterContentQualityAnalysisType = @import("router_content_quality_analysis_type.zig").RouterContentQualityAnalysisType;
 const RouterInputType = @import("router_input_type.zig").RouterInputType;
 const MaintenanceConfiguration = @import("maintenance_configuration.zig").MaintenanceConfiguration;
 const MaintenanceSchedule = @import("maintenance_schedule.zig").MaintenanceSchedule;
@@ -23,6 +25,12 @@ pub const RouterInput = struct {
     availability_zone: []const u8,
 
     configuration: RouterInputConfiguration,
+
+    /// The content quality analysis configuration for the router input.
+    content_quality_analysis_configuration: RouterContentQualityAnalysisConfiguration,
+
+    /// The type of content quality analysis applied to the router input.
+    content_quality_analysis_type: RouterContentQualityAnalysisType,
 
     /// The timestamp when the router input was created.
     created_at: i64,
@@ -91,6 +99,8 @@ pub const RouterInput = struct {
         .arn = "Arn",
         .availability_zone = "AvailabilityZone",
         .configuration = "Configuration",
+        .content_quality_analysis_configuration = "ContentQualityAnalysisConfiguration",
+        .content_quality_analysis_type = "ContentQualityAnalysisType",
         .created_at = "CreatedAt",
         .id = "Id",
         .input_type = "InputType",

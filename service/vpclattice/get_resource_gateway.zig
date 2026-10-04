@@ -37,7 +37,7 @@ pub const GetResourceGatewayOutput = struct {
     /// format.
     last_updated_at: ?i64 = null,
 
-    /// The AWS service that manages the resource gateway.
+    /// The Amazon Web Services service that manages the resource gateway.
     managed_by: ?[]const u8 = null,
 
     /// The name of the resource gateway.
@@ -50,7 +50,8 @@ pub const GetResourceGatewayOutput = struct {
     /// The security group IDs associated with the resource gateway.
     security_group_ids: ?[]const []const u8 = null,
 
-    /// Indicates whether the resource gateway is managed by an AWS service.
+    /// Indicates whether the resource gateway is managed by an Amazon Web Services
+    /// service.
     service_managed: ?bool = null,
 
     /// The status for the resource gateway.
@@ -129,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetResourceGatewayInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetResourceGatewayOutput {
-    var result: GetResourceGatewayOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetResourceGatewayOutput, body, allocator);
-    }
+    const result: GetResourceGatewayOutput = try aws.json.parseJsonObject(
+        GetResourceGatewayOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

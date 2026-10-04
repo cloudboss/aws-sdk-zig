@@ -147,10 +147,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTemporaryGluePartiti
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTemporaryGluePartitionCredentialsOutput {
-    var result: GetTemporaryGluePartitionCredentialsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTemporaryGluePartitionCredentialsOutput, body, allocator);
-    }
+    const result: GetTemporaryGluePartitionCredentialsOutput = try aws.json.parseJsonObject(
+        GetTemporaryGluePartitionCredentialsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,0 +1,2 @@
+pub const TagResourceResponse = struct {
+};

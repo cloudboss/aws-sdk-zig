@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeRoutingControlI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeRoutingControlOutput {
-    var result: DescribeRoutingControlOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeRoutingControlOutput, body, allocator);
-    }
+    const result: DescribeRoutingControlOutput = try aws.json.parseJsonObject(
+        DescribeRoutingControlOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

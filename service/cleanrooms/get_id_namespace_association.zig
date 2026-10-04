@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetIdNamespaceAssociati
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetIdNamespaceAssociationOutput {
-    var result: GetIdNamespaceAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetIdNamespaceAssociationOutput, body, allocator);
-    }
+    const result: GetIdNamespaceAssociationOutput = try aws.json.parseJsonObject(
+        GetIdNamespaceAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

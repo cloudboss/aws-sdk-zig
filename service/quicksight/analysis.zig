@@ -35,6 +35,9 @@ pub const Analysis = struct {
     /// The ARN of the theme of the analysis.
     theme_arn: ?[]const u8 = null,
 
+    /// The ARNs of the topics associated with the analysis.
+    topic_arns: ?[]const []const u8 = null,
+
     pub const json_field_names = .{
         .analysis_id = "AnalysisId",
         .arn = "Arn",
@@ -46,5 +49,6 @@ pub const Analysis = struct {
         .sheets = "Sheets",
         .status = "Status",
         .theme_arn = "ThemeArn",
+        .topic_arns = "TopicArns",
     };
 };

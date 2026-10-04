@@ -4,6 +4,11 @@ const StreamExceptionPolicy = @import("stream_exception_policy.zig").StreamExcep
 
 /// Configuration settings for the handling of the stateful rule groups in a
 /// firewall policy.
+///
+/// Updating any setting in `StatefulEngineOptions` may require a restart of the
+/// stateful engine in order to apply the changes. When this occurs, existing
+/// connections will be treated according to your stream exception policy
+/// configuration.
 pub const StatefulEngineOptions = struct {
     /// Configures the amount of time that can pass without any traffic sent through
     /// the firewall before the firewall determines that the connection is idle.

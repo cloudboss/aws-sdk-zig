@@ -23,6 +23,9 @@ pub const OnlineStoreConfig = struct {
     /// retrieval.
     ///
     /// * `Standard`: A managed low latency data store for feature groups.
+    /// * `Standard_V2`: A managed low latency data store for feature groups that
+    ///   supports partial updates to individual features using the
+    ///   [UpdateRecord](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_UpdateRecord.html) operation. Choose this storage type at feature group creation time if your use case requires updating specific feature values without rewriting the entire record.
     /// * `InMemory`: A managed data store for feature groups that supports very low
     ///   latency retrieval.
     storage_type: ?StorageType = null,

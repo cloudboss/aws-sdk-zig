@@ -5,6 +5,7 @@ const BrowserConfig = @import("browser_config.zig").BrowserConfig;
 const CanaryCodeOutput = @import("canary_code_output.zig").CanaryCodeOutput;
 const DryRunConfigOutput = @import("dry_run_config_output.zig").DryRunConfigOutput;
 const EngineConfig = @import("engine_config.zig").EngineConfig;
+const MultiLocationConfig = @import("multi_location_config.zig").MultiLocationConfig;
 const ProvisionedResourceCleanupSetting = @import("provisioned_resource_cleanup_setting.zig").ProvisionedResourceCleanupSetting;
 const CanaryRunConfigOutput = @import("canary_run_config_output.zig").CanaryRunConfigOutput;
 const CanaryScheduleOutput = @import("canary_schedule_output.zig").CanaryScheduleOutput;
@@ -69,6 +70,18 @@ pub const Canary = struct {
 
     /// The unique ID of this canary.
     id: ?[]const u8 = null,
+
+    /// The Amazon Resource Name (ARN) of the customer-managed AWS Key Management
+    /// Service (AWS KMS) key used to encrypt the canary's
+    /// AWS Lambda function environment variables at rest. If you don't specify a
+    /// value,
+    /// the service uses an AWS-managed key.
+    kms_key_arn: ?[]const u8 = null,
+
+    /// If this canary is part of a multi-location configuration, this structure
+    /// contains information about the canary's location type, primary location, and
+    /// replicas.
+    multi_location_config: ?MultiLocationConfig = null,
 
     /// The name of the canary.
     name: ?[]const u8 = null,
@@ -152,6 +165,8 @@ pub const Canary = struct {
         .execution_role_arn = "ExecutionRoleArn",
         .failure_retention_period_in_days = "FailureRetentionPeriodInDays",
         .id = "Id",
+        .kms_key_arn = "KmsKeyArn",
+        .multi_location_config = "MultiLocationConfig",
         .name = "Name",
         .provisioned_resource_cleanup = "ProvisionedResourceCleanup",
         .run_config = "RunConfig",

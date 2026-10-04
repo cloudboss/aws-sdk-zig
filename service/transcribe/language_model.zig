@@ -1,4 +1,5 @@
 const BaseModelName = @import("base_model_name.zig").BaseModelName;
+const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
 const InputDataConfig = @import("input_data_config.zig").InputDataConfig;
 const CLMLanguageCode = @import("clm_language_code.zig").CLMLanguageCode;
 const ModelStatus = @import("model_status.zig").ModelStatus;
@@ -32,6 +33,9 @@ pub const LanguageModel = struct {
     /// example, `2022-05-04T12:32:58.761000-07:00` represents 12:32 PM UTC-7 on May
     /// 4, 2022.
     create_time: ?i64 = null,
+
+    /// The encryption configuration used for your custom language model.
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// If `ModelStatus` is `FAILED`, `FailureReason`
     /// contains information about why the custom language model request failed. See
@@ -99,6 +103,7 @@ pub const LanguageModel = struct {
     pub const json_field_names = .{
         .base_model_name = "BaseModelName",
         .create_time = "CreateTime",
+        .encryption_configuration = "EncryptionConfiguration",
         .failure_reason = "FailureReason",
         .input_data_config = "InputDataConfig",
         .language_code = "LanguageCode",

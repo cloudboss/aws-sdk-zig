@@ -31,6 +31,7 @@ pub const DescribeDBEngineVersionsInput = struct {
     /// * `custom-oracle-se2`
     /// * `custom-oracle-se2-cdb`
     /// * `db2-ae`
+    /// * `db2-ce`
     /// * `db2-se`
     /// * `mariadb`
     /// * `mysql`
@@ -43,6 +44,7 @@ pub const DescribeDBEngineVersionsInput = struct {
     /// * `sqlserver-se`
     /// * `sqlserver-ex`
     /// * `sqlserver-web`
+    /// * `sqlserver-dev-ee`
     engine: ?[]const u8 = null,
 
     /// A specific database engine version to return details for.

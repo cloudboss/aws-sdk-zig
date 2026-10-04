@@ -17,7 +17,8 @@ pub const ListV2LoggingLevelsInput = struct {
     next_token: ?[]const u8 = null,
 
     /// The type of resource for which you are configuring logging. Must be
-    /// `THING_Group`.
+    /// `DEFAULT`, `THING_GROUP`, `CLIENT_ID`,
+    /// `SOURCE_IP`, or `PRINCIPAL_ID`.
     target_type: ?LogTargetType = null,
 
     pub const json_field_names = .{
@@ -113,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListV2LoggingLevelsInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListV2LoggingLevelsOutput {
-    var result: ListV2LoggingLevelsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListV2LoggingLevelsOutput, body, allocator);
-    }
+    const result: ListV2LoggingLevelsOutput = try aws.json.parseJsonObject(
+        ListV2LoggingLevelsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

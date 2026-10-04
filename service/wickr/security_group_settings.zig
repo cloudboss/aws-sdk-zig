@@ -104,6 +104,10 @@ pub const SecurityGroupSettings = struct {
     /// messages remain visible before auto-deletion after being read.
     max_bor: ?i32 = null,
 
+    /// Maximum session duration in minutes for non-SSO users. Set to 0 to disable.
+    /// Valid range is 60 to 525600 (1 hour to 365 days).
+    max_non_sso_session_minutes: ?i32 = null,
+
     /// The maximum time-to-live (TTL) in seconds for messages, after which they
     /// will be automatically deleted from all devices.
     max_ttl: ?i64 = null,
@@ -175,6 +179,7 @@ pub const SecurityGroupSettings = struct {
         .lockout_threshold = "lockoutThreshold",
         .max_auto_download_size = "maxAutoDownloadSize",
         .max_bor = "maxBor",
+        .max_non_sso_session_minutes = "maxNonSsoSessionMinutes",
         .max_ttl = "maxTtl",
         .message_forwarding_enabled = "messageForwardingEnabled",
         .password_requirements = "passwordRequirements",

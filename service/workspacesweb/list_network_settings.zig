@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListNetworkSettingsInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListNetworkSettingsOutput {
-    var result: ListNetworkSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListNetworkSettingsOutput, body, allocator);
-    }
+    const result: ListNetworkSettingsOutput = try aws.json.parseJsonObject(
+        ListNetworkSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

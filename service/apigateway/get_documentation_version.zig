@@ -71,10 +71,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDocumentationVersion
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDocumentationVersionOutput {
-    var result: GetDocumentationVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDocumentationVersionOutput, body, allocator);
-    }
+    const result: GetDocumentationVersionOutput = try aws.json.parseJsonObject(
+        GetDocumentationVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -14,7 +14,7 @@ pub const PersistentChat = struct {
     ///   past chat contact of the
     /// specified past ended chat session. To use this type, provide the
     /// `initialContactId` of the past ended
-    /// chat session in the `sourceContactId` field. In this type, Amazon Connect
+    /// chat session in the `sourceContactId` field. In this type, Connect Customer
     /// determines the most recent
     /// chat contact on the specified chat session that has ended, and uses it to
     /// start a persistent chat.

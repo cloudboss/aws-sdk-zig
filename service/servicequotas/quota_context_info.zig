@@ -1,3 +1,4 @@
+const AdjustableAtLevelEnum = @import("adjustable_at_level_enum.zig").AdjustableAtLevelEnum;
 const QuotaContextScope = @import("quota_context_scope.zig").QuotaContextScope;
 
 /// A structure that describes the context for a resource-level quota. For
@@ -10,6 +11,17 @@ const QuotaContextScope = @import("quota_context_scope.zig").QuotaContextScope;
 /// each Amazon Web Services Region, the `QuotaContext` field is absent. See the
 /// attribute descriptions below to further understand how to use them.
 pub const QuotaContextInfo = struct {
+    /// Specifies the level at which you can request an increase for this quota:
+    ///
+    /// * `ACCOUNT` – You can request an increase only at the account level.
+    ///
+    /// * `PER_RESOURCE` – You can request an increase only for an individual
+    ///   resource.
+    ///
+    /// * `ALL` – You can request an increase at either the account level or for an
+    ///   individual resource.
+    adjustable_at_level: ?AdjustableAtLevelEnum = null,
+
     /// Specifies the resource, or resources, to which the quota applies. The value
     /// for this field is either an Amazon Resource Name (ARN) or *. If the value is
     /// an ARN, the quota value applies to that resource. If the value is *, then
@@ -29,6 +41,7 @@ pub const QuotaContextInfo = struct {
     context_scope_type: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .adjustable_at_level = "AdjustableAtLevel",
         .context_id = "ContextId",
         .context_scope = "ContextScope",
         .context_scope_type = "ContextScopeType",

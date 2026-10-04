@@ -11,10 +11,10 @@ const RealtimeContactAnalysisSegment = @import("realtime_contact_analysis_segmen
 const RealTimeContactAnalysisStatus = @import("real_time_contact_analysis_status.zig").RealTimeContactAnalysisStatus;
 
 pub const ListRealtimeContactAnalysisSegmentsV2Input = struct {
-    /// The identifier of the contact in this instance of Amazon Connect.
+    /// The identifier of the contact in this instance of Connect Customer.
     contact_id: []const u8,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -149,10 +149,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRealtimeContactAnal
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListRealtimeContactAnalysisSegmentsV2Output {
-    var result: ListRealtimeContactAnalysisSegmentsV2Output = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListRealtimeContactAnalysisSegmentsV2Output, body, allocator);
-    }
+    const result: ListRealtimeContactAnalysisSegmentsV2Output = try aws.json.parseJsonObject(
+        ListRealtimeContactAnalysisSegmentsV2Output,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,6 +1,8 @@
+const BillingMode = @import("billing_mode.zig").BillingMode;
 const ConnectionState = @import("connection_state.zig").ConnectionState;
 const HasLogicalRedundancy = @import("has_logical_redundancy.zig").HasLogicalRedundancy;
 const MacSecKey = @import("mac_sec_key.zig").MacSecKey;
+const RateLimiterStatus = @import("rate_limiter_status.zig").RateLimiterStatus;
 const Tag = @import("tag.zig").Tag;
 
 /// Information about an Direct Connect connection.
@@ -18,6 +20,9 @@ pub const Connection = struct {
 
     /// The bandwidth of the connection.
     bandwidth: ?[]const u8 = null,
+
+    /// The billing mode of the connection.
+    billing_mode: ?BillingMode = null,
 
     /// The ID of the connection.
     connection_id: ?[]const u8 = null,
@@ -95,8 +100,32 @@ pub const Connection = struct {
     /// Connection Key Name, or `Encryption Down`.
     port_encryption_status: ?[]const u8 = null,
 
+    /// The total number of inbound IPv4 route prefixes you can allocate across the
+    /// virtual interfaces on the connection. Not applicable to hosted connections
+    /// or interconnects.
+    prefix_pool_size_ipv_4: ?i32 = null,
+
+    /// The total number of inbound IPv6 route prefixes you can allocate across the
+    /// virtual interfaces on the connection. Not applicable to hosted connections
+    /// or interconnects.
+    prefix_pool_size_ipv_6: ?i32 = null,
+
+    /// The number of inbound IPv4 route prefixes in the connection prefix pool not
+    /// yet allocated to a virtual interface. Not applicable to hosted connections
+    /// or interconnects.
+    prefix_pool_unallocated_count_ipv_4: ?i32 = null,
+
+    /// The number of inbound IPv6 route prefixes in the connection prefix pool not
+    /// yet allocated to a virtual interface. Not applicable to hosted connections
+    /// or interconnects.
+    prefix_pool_unallocated_count_ipv_6: ?i32 = null,
+
     /// The name of the service provider associated with the connection.
     provider_name: ?[]const u8 = null,
+
+    /// The rate limiter status for the connection, including how many rate limiters
+    /// are in use and the maximum allowed.
+    rate_limiter_status: ?RateLimiterStatus = null,
 
     /// The Amazon Web Services Region where the connection is located.
     region: ?[]const u8 = null,
@@ -112,6 +141,7 @@ pub const Connection = struct {
         .aws_device_v2 = "awsDeviceV2",
         .aws_logical_device_id = "awsLogicalDeviceId",
         .bandwidth = "bandwidth",
+        .billing_mode = "billingMode",
         .connection_id = "connectionId",
         .connection_name = "connectionName",
         .connection_state = "connectionState",
@@ -127,7 +157,12 @@ pub const Connection = struct {
         .partner_interconnect_mac_sec_capable = "partnerInterconnectMacSecCapable",
         .partner_name = "partnerName",
         .port_encryption_status = "portEncryptionStatus",
+        .prefix_pool_size_ipv_4 = "prefixPoolSizeIpv4",
+        .prefix_pool_size_ipv_6 = "prefixPoolSizeIpv6",
+        .prefix_pool_unallocated_count_ipv_4 = "prefixPoolUnallocatedCountIpv4",
+        .prefix_pool_unallocated_count_ipv_6 = "prefixPoolUnallocatedCountIpv6",
         .provider_name = "providerName",
+        .rate_limiter_status = "rateLimiterStatus",
         .region = "region",
         .tags = "tags",
         .vlan = "vlan",

@@ -7,9 +7,7 @@ const Tmpfs = @import("tmpfs.zig").Tmpfs;
 pub const LinuxParameters = struct {
     /// Any of the host devices to expose to the container. This parameter maps to
     /// `Devices` in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/)
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker Remote API](https://docs.docker.com/engine/api/latest/)
     /// and the `--device` option to [docker
     /// run](https://docs.docker.com/engine/reference/run/).
     ///

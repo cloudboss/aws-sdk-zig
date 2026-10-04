@@ -149,10 +149,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCanaryRunsInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCanaryRunsOutput {
-    var result: GetCanaryRunsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCanaryRunsOutput, body, allocator);
-    }
+    const result: GetCanaryRunsOutput = try aws.json.parseJsonObject(
+        GetCanaryRunsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

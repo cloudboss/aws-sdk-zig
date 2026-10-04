@@ -185,10 +185,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterClientInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RegisterClientOutput {
-    var result: RegisterClientOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RegisterClientOutput, body, allocator);
-    }
+    const result: RegisterClientOutput = try aws.json.parseJsonObject(
+        RegisterClientOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

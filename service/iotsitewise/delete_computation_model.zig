@@ -92,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteComputationModelI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteComputationModelOutput {
-    var result: DeleteComputationModelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteComputationModelOutput, body, allocator);
-    }
+    const result: DeleteComputationModelOutput = try aws.json.parseJsonObject(
+        DeleteComputationModelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

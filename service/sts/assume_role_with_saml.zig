@@ -42,6 +42,8 @@ pub const AssumeRoleWithSAMLInput = struct {
     /// *IAM User Guide*.
     duration_seconds: ?i32 = null,
 
+    minimum_session_token_size: ?i32 = null,
+
     /// An IAM policy in JSON format that you want to use as an inline session
     /// policy.
     ///
@@ -178,6 +180,10 @@ pub const AssumeRoleWithSAMLOutput = struct {
     /// which means the policies and tags exceeded the allowed space.
     packed_policy_size: ?i32 = null,
 
+    session_token_size: ?i32 = null,
+
+    session_token_utilization: ?i32 = null,
+
     /// The value in the `SourceIdentity` attribute in the SAML assertion. The
     /// source
     /// identity value persists across [chained
@@ -263,6 +269,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssumeRoleWithSAMLInput
         try body_buf.appendSlice(allocator, "&DurationSeconds=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
+    if (input.minimum_session_token_size) |v| {
+        try body_buf.appendSlice(allocator, "&MinimumSessionTokenSize=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
     if (input.policy) |v| {
         try body_buf.appendSlice(allocator, "&Policy=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
@@ -330,6 +340,10 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                     result.name_qualifier = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PackedPolicySize")) {
                     result.packed_policy_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "SessionTokenSize")) {
+                    result.session_token_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "SessionTokenUtilization")) {
+                    result.session_token_utilization = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "SourceIdentity")) {
                     result.source_identity = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Subject")) {

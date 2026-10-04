@@ -137,10 +137,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPackageVersionInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPackageVersionOutput {
-    var result: GetPackageVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPackageVersionOutput, body, allocator);
-    }
+    const result: GetPackageVersionOutput = try aws.json.parseJsonObject(
+        GetPackageVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

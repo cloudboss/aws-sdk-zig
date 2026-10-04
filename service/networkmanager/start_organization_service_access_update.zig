@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartOrganizationServic
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartOrganizationServiceAccessUpdateOutput {
-    var result: StartOrganizationServiceAccessUpdateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartOrganizationServiceAccessUpdateOutput, body, allocator);
-    }
+    const result: StartOrganizationServiceAccessUpdateOutput = try aws.json.parseJsonObject(
+        StartOrganizationServiceAccessUpdateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

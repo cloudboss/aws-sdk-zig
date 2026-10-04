@@ -4,11 +4,13 @@ pub const SageMakerResourceName = enum {
     training_job,
     hyperpod_cluster,
     endpoint,
+    studio_apps,
 
     pub const json_field_names = .{
         .training_job = "training-job",
         .hyperpod_cluster = "hyperpod-cluster",
         .endpoint = "endpoint",
+        .studio_apps = "studio-apps",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const SageMakerResourceName = enum {
             .training_job => "training-job",
             .hyperpod_cluster => "hyperpod-cluster",
             .endpoint => "endpoint",
+            .studio_apps => "studio-apps",
         };
     }
 

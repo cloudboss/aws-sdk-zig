@@ -84,10 +84,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteInfrastructureCon
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteInfrastructureConfigurationOutput {
-    var result: DeleteInfrastructureConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteInfrastructureConfigurationOutput, body, allocator);
-    }
+    const result: DeleteInfrastructureConfigurationOutput = try aws.json.parseJsonObject(
+        DeleteInfrastructureConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

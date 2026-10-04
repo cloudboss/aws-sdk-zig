@@ -6,10 +6,15 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Contact = @import("contact.zig").Contact;
 const EinvoiceDeliveryPreference = @import("einvoice_delivery_preference.zig").EinvoiceDeliveryPreference;
+const MarketplacePunchOutPreference = @import("marketplace_punch_out_preference.zig").MarketplacePunchOutPreference;
 const ProcurementPortalPreferenceSelector = @import("procurement_portal_preference_selector.zig").ProcurementPortalPreferenceSelector;
 const TestEnvPreferenceInput = @import("test_env_preference_input.zig").TestEnvPreferenceInput;
 
 pub const PutProcurementPortalPreferenceInput = struct {
+    /// A unique, case-sensitive identifier that you provide to ensure idempotency
+    /// of the request.
+    client_token: ?[]const u8 = null,
+
     /// Updated list of contact information for portal administrators and technical
     /// contacts.
     contacts: []const Contact,
@@ -21,6 +26,14 @@ pub const PutProcurementPortalPreferenceInput = struct {
     /// Updated e-invoice delivery configuration including document types,
     /// attachment types, and customization settings for the portal.
     einvoice_delivery_preference: ?EinvoiceDeliveryPreference = null,
+
+    /// Whether Marketplace PunchOut is enabled for this connection. Defaults to
+    /// false if not provided.
+    marketplace_punch_out_enabled: ?bool = null,
+
+    /// Configuration for Marketplace PunchOut. Required when
+    /// MarketplacePunchOutEnabled is true.
+    marketplace_punch_out_preference: ?MarketplacePunchOutPreference = null,
 
     /// The updated endpoint URL where e-invoices will be delivered to the
     /// procurement portal. Must be a valid HTTPS URL.
@@ -45,9 +58,12 @@ pub const PutProcurementPortalPreferenceInput = struct {
     test_env_preference: ?TestEnvPreferenceInput = null,
 
     pub const json_field_names = .{
+        .client_token = "ClientToken",
         .contacts = "Contacts",
         .einvoice_delivery_enabled = "EinvoiceDeliveryEnabled",
         .einvoice_delivery_preference = "EinvoiceDeliveryPreference",
+        .marketplace_punch_out_enabled = "MarketplacePunchOutEnabled",
+        .marketplace_punch_out_preference = "MarketplacePunchOutPreference",
         .procurement_portal_instance_endpoint = "ProcurementPortalInstanceEndpoint",
         .procurement_portal_preference_arn = "ProcurementPortalPreferenceArn",
         .procurement_portal_shared_secret = "ProcurementPortalSharedSecret",

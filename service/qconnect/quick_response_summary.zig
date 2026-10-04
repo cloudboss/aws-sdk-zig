@@ -4,7 +4,7 @@ const QuickResponseStatus = @import("quick_response_status.zig").QuickResponseSt
 
 /// The summary information about the quick response.
 pub const QuickResponseSummary = struct {
-    /// The Amazon Connect contact channels this quick response applies to. The
+    /// The Connect Customer contact channels this quick response applies to. The
     /// supported contact channel types include `Chat`.
     channels: ?[]const []const u8 = null,
 

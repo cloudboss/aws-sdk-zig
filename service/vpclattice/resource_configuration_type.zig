@@ -9,12 +9,15 @@ pub const ResourceConfigurationType = enum {
     single,
     /// Resource Configuration of type ARN
     arn,
+    /// Resource Configuration of type CIDR
+    cidr,
 
     pub const json_field_names = .{
         .group = "GROUP",
         .child = "CHILD",
         .single = "SINGLE",
         .arn = "ARN",
+        .cidr = "CIDR",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -23,6 +26,7 @@ pub const ResourceConfigurationType = enum {
             .child => "CHILD",
             .single => "SINGLE",
             .arn => "ARN",
+            .cidr => "CIDR",
         };
     }
 

@@ -21,7 +21,11 @@ pub const CreateLinkInput = struct {
     /// Boolean to specify if an HTTP responder is allowed.
     http_responder_allowed: ?bool = null,
 
-    /// Settings for the application logs.
+    /// Application log settings for the link. This value is required. Under
+    /// `applicationLogs.sampling`, the `errorLog` and `filterLog` fields set the
+    /// percentage of eligible events to log. Valid values range from `0` through
+    /// `100`. To turn off application logs, set both fields to `0`, as in
+    /// `{"applicationLogs":{"sampling":{"errorLog":0,"filterLog":0}}}`.
     log_settings: LinkLogSettings,
 
     /// The unique identifier of the peer gateway.
@@ -188,10 +192,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLinkInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateLinkOutput {
-    var result: CreateLinkOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateLinkOutput, body, allocator);
-    }
+    const result: CreateLinkOutput = try aws.json.parseJsonObject(
+        CreateLinkOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

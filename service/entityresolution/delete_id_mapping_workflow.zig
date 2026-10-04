@@ -72,10 +72,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteIdMappingWorkflow
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteIdMappingWorkflowOutput {
-    var result: DeleteIdMappingWorkflowOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteIdMappingWorkflowOutput, body, allocator);
-    }
+    const result: DeleteIdMappingWorkflowOutput = try aws.json.parseJsonObject(
+        DeleteIdMappingWorkflowOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

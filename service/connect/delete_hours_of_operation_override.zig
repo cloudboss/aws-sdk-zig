@@ -12,7 +12,7 @@ pub const DeleteHoursOfOperationOverrideInput = struct {
     /// The identifier for the hours of operation override.
     hours_of_operation_override_id: []const u8,
 
-    /// The identifier of the Amazon Connect instance.
+    /// The identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     pub const json_field_names = .{

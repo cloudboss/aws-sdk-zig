@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateConnectionRecordi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateConnectionRecordingPreferencesOutput {
-    var result: UpdateConnectionRecordingPreferencesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateConnectionRecordingPreferencesOutput, body, allocator);
-    }
+    const result: UpdateConnectionRecordingPreferencesOutput = try aws.json.parseJsonObject(
+        UpdateConnectionRecordingPreferencesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

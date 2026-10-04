@@ -14,6 +14,9 @@ pub const StartProtectedJobInput = struct {
     /// The compute configuration for the protected job.
     compute_configuration: ?ProtectedJobComputeConfiguration = null,
 
+    /// The account ID of the member that pays for the job compute costs.
+    job_compute_payer_account_id: ?[]const u8 = null,
+
     /// The job parameters.
     job_parameters: ProtectedJobParameters,
 
@@ -29,6 +32,7 @@ pub const StartProtectedJobInput = struct {
 
     pub const json_field_names = .{
         .compute_configuration = "computeConfiguration",
+        .job_compute_payer_account_id = "jobComputePayerAccountId",
         .job_parameters = "jobParameters",
         .membership_identifier = "membershipIdentifier",
         .result_configuration = "resultConfiguration",
@@ -91,6 +95,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartProtectedJobInput,
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.job_compute_payer_account_id) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"jobComputePayerAccountId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"jobParameters\":");
     try aws.json.writeValue(@TypeOf(input.job_parameters), input.job_parameters, allocator, &body_buf);
@@ -121,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartProtectedJobInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartProtectedJobOutput {
-    var result: StartProtectedJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartProtectedJobOutput, body, allocator);
-    }
+    const result: StartProtectedJobOutput = try aws.json.parseJsonObject(
+        StartProtectedJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

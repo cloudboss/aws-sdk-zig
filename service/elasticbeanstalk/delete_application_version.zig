@@ -10,9 +10,8 @@ pub const DeleteApplicationVersionInput = struct {
     application_name: []const u8,
 
     /// Set to `true` to delete the source bundle from your storage bucket.
-    /// Otherwise, the application version is deleted only from Elastic Beanstalk
-    /// and the source
-    /// bundle remains in Amazon S3.
+    /// Otherwise, the application version is deleted only from Elastic
+    /// Beanstalk and the source bundle remains in Amazon S3.
     delete_source_bundle: ?bool = null,
 
     /// The label of the version to delete.

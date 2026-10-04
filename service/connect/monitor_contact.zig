@@ -24,7 +24,7 @@ pub const MonitorContactInput = struct {
     /// The identifier of the contact.
     contact_id: []const u8,
 
-    /// The identifier of the Amazon Connect instance. You can find the instanceId
+    /// The identifier of the Connect Customer instance. You can find the instanceId
     /// in the ARN of the
     /// instance.
     instance_id: []const u8,
@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: MonitorContactInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !MonitorContactOutput {
-    var result: MonitorContactOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(MonitorContactOutput, body, allocator);
-    }
+    const result: MonitorContactOutput = try aws.json.parseJsonObject(
+        MonitorContactOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

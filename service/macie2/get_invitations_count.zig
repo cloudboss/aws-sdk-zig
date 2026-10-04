@@ -65,10 +65,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInvitationsCountInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetInvitationsCountOutput {
-    var result: GetInvitationsCountOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetInvitationsCountOutput, body, allocator);
-    }
+    const result: GetInvitationsCountOutput = try aws.json.parseJsonObject(
+        GetInvitationsCountOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

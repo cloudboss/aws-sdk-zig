@@ -122,10 +122,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAIPromptsInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAIPromptsOutput {
-    var result: ListAIPromptsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAIPromptsOutput, body, allocator);
-    }
+    const result: ListAIPromptsOutput = try aws.json.parseJsonObject(
+        ListAIPromptsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

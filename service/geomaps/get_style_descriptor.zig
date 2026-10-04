@@ -7,6 +7,8 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Buildings = @import("buildings.zig").Buildings;
 const ColorScheme = @import("color_scheme.zig").ColorScheme;
 const ContourDensity = @import("contour_density.zig").ContourDensity;
+const PoiCategory = @import("poi_category.zig").PoiCategory;
+const PoiDensity = @import("poi_density.zig").PoiDensity;
 const MapStyle = @import("map_style.zig").MapStyle;
 const Terrain = @import("terrain.zig").Terrain;
 const Traffic = @import("traffic.zig").Traffic;
@@ -44,6 +46,50 @@ pub const GetStyleDescriptorInput = struct {
     /// Optional: The API key to be used for authorization. Either an API key or
     /// valid SigV4 signature must be provided when making a request.
     key: ?[]const u8 = null,
+
+    /// Renders only the specified categories of points of interest. When you omit
+    /// this parameter, the map renders all categories.
+    ///
+    /// The following categories are currently supported:
+    ///
+    /// * `FoodAndDrink`
+    /// * `Entertainment`
+    /// * `SightsAndMuseums`
+    /// * `Transportation`
+    /// * `Accommodations`
+    /// * `LeisureAndOutdoor`
+    /// * `Shopping`
+    /// * `BusinessAndServices`
+    /// * `FacilitiesAndBuildings`
+    ///
+    /// Specify each category as a separate `poi-categories` query parameter.
+    /// Duplicate values are rejected.
+    ///
+    /// This parameter has no effect when `poi-density` is set to `Off`, which hides
+    /// all points of interest regardless of category.
+    ///
+    /// This parameter is valid only for the `Standard` and `Hybrid` map styles. In
+    /// `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, this parameter is valid only for the `Standard` map style.
+    poi_categories: ?[]const PoiCategory = null,
+
+    /// Controls how densely points of interest are rendered on the map. The density
+    /// value controls the zoom level at which each category of points of interest
+    /// appears, and how quickly less prominent points of interest are revealed as
+    /// you zoom in. Denser values display more points of interest at lower zoom
+    /// levels.
+    ///
+    /// Use `Off` to hide all points of interest. When you omit this parameter, the
+    /// map renders at `Default` density.
+    ///
+    /// The difference between density values is most noticeable at mid-range zoom
+    /// levels. At high zoom levels, all density values converge on displaying every
+    /// available point of interest.
+    ///
+    /// This parameter is valid only for the `Standard` and `Hybrid` map styles. In
+    /// `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, this parameter is valid only for the `Standard` map style.
+    poi_density: ?PoiDensity = null,
 
     /// Specifies the political view using ISO 3166-2 or ISO 3166-3 country code
     /// format. Not supported in `ap-southeast-1` and `ap-southeast-5` regions for
@@ -109,6 +155,8 @@ pub const GetStyleDescriptorInput = struct {
         .color_scheme = "ColorScheme",
         .contour_density = "ContourDensity",
         .key = "Key",
+        .poi_categories = "PoiCategories",
+        .poi_density = "PoiDensity",
         .political_view = "PoliticalView",
         .style = "Style",
         .terrain = "Terrain",
@@ -171,7 +219,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStyleDescriptorInput
     const ep = try aws.url.parseEndpoint(endpoint);
 
     var path_buf: std.ArrayList(u8) = .empty;
-    try path_buf.appendSlice(allocator, "/styles/");
+    try path_buf.appendSlice(allocator, "/v2/styles/");
     try path_buf.appendSlice(allocator, input.style);
     try path_buf.appendSlice(allocator, "/descriptor");
     const path = try path_buf.toOwnedSlice(allocator);
@@ -200,6 +248,20 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStyleDescriptorInput
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "key=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
+    if (input.poi_categories) |v| {
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "poi-categories=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item.wireName());
+            query_has_prev = true;
+        }
+    }
+    if (input.poi_density) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "poi-density=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
     if (input.political_view) |v| {
@@ -246,6 +308,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStyleDescriptorInput
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetStyleDescriptorOutput {
     var result: GetStyleDescriptorOutput = .{};
+    errdefer {
+        if (result.cache_control) |value| allocator.free(value);
+        if (result.content_type) |value| allocator.free(value);
+        if (result.e_tag) |value| allocator.free(value);
+        if (result.blob) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.blob = try allocator.dupe(u8, body);
     }

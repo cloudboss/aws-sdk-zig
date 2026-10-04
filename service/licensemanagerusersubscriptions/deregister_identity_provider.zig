@@ -18,7 +18,7 @@ pub const DeregisterIdentityProviderInput = struct {
     /// The name of the user-based subscription product.
     ///
     /// Valid values: `VISUAL_STUDIO_ENTERPRISE` | `VISUAL_STUDIO_PROFESSIONAL` |
-    /// `OFFICE_PROFESSIONAL_PLUS` | `REMOTE_DESKTOP_SERVICES`
+    /// `OFFICE_PROFESSIONAL_PLUS` | `OFFICE_STANDARD` | `REMOTE_DESKTOP_SERVICES`
     product: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeregisterIdentityProvi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeregisterIdentityProviderOutput {
-    var result: DeregisterIdentityProviderOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeregisterIdentityProviderOutput, body, allocator);
-    }
+    const result: DeregisterIdentityProviderOutput = try aws.json.parseJsonObject(
+        DeregisterIdentityProviderOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

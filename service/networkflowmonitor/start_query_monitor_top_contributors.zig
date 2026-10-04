@@ -142,10 +142,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartQueryMonitorTopCon
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartQueryMonitorTopContributorsOutput {
-    var result: StartQueryMonitorTopContributorsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartQueryMonitorTopContributorsOutput, body, allocator);
-    }
+    const result: StartQueryMonitorTopContributorsOutput = try aws.json.parseJsonObject(
+        StartQueryMonitorTopContributorsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAutomatedDiscoveryA
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAutomatedDiscoveryAccountsOutput {
-    var result: ListAutomatedDiscoveryAccountsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAutomatedDiscoveryAccountsOutput, body, allocator);
-    }
+    const result: ListAutomatedDiscoveryAccountsOutput = try aws.json.parseJsonObject(
+        ListAutomatedDiscoveryAccountsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

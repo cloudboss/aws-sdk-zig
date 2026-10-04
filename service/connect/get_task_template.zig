@@ -10,7 +10,7 @@ const TaskTemplateField = @import("task_template_field.zig").TaskTemplateField;
 const TaskTemplateStatus = @import("task_template_status.zig").TaskTemplateStatus;
 
 pub const GetTaskTemplateInput = struct {
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -33,6 +33,10 @@ pub const GetTaskTemplateOutput = struct {
     arn: []const u8,
 
     /// Constraints that are applicable to the fields listed.
+    /// Although this parameter is marked as optional in the API model, the service
+    /// requires it when calling `CreateTaskTemplate` or `UpdateTaskTemplate`.
+    /// The `RequiredFields` array must contain at least one element, and the field
+    /// of type `NAME` must be included in `RequiredFields`.
     constraints: ?TaskTemplateConstraints = null,
 
     /// The identifier of the flow that runs by default when a task is created by
@@ -55,7 +59,7 @@ pub const GetTaskTemplateOutput = struct {
     /// A unique identifier for the task template.
     id: []const u8,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: ?[]const u8 = null,
 
@@ -159,10 +163,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTaskTemplateInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTaskTemplateOutput {
-    var result: GetTaskTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTaskTemplateOutput, body, allocator);
-    }
+    const result: GetTaskTemplateOutput = try aws.json.parseJsonObject(
+        GetTaskTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

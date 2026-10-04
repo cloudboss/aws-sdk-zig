@@ -86,10 +86,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetGroupCertificateAuth
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetGroupCertificateAuthorityOutput {
-    var result: GetGroupCertificateAuthorityOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetGroupCertificateAuthorityOutput, body, allocator);
-    }
+    const result: GetGroupCertificateAuthorityOutput = try aws.json.parseJsonObject(
+        GetGroupCertificateAuthorityOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

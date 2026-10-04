@@ -53,8 +53,7 @@ pub const UpdateEventBusInput = struct {
     /// The logging configuration settings for the event bus.
     ///
     /// For more information, see [Configuring logs for event
-    /// buses](https://docs.aws.amazon.com/eb-event-bus-logs.html) in the
-    /// *EventBridge User Guide*.
+    /// buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html) in the *EventBridge User Guide*.
     log_config: ?LogConfig = null,
 
     /// The name of the event bus.
@@ -89,8 +88,7 @@ pub const UpdateEventBusOutput = struct {
     /// The logging configuration settings for the event bus.
     ///
     /// For more information, see [Configuring logs for event
-    /// buses](https://docs.aws.amazon.com/eb-event-bus-logs.html) in the
-    /// *EventBridge User Guide*.
+    /// buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html) in the *EventBridge User Guide*.
     log_config: ?LogConfig = null,
 
     /// The event bus name.

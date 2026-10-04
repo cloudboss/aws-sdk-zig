@@ -21,6 +21,7 @@ const delete_function_event_invoke_config = @import("delete_function_event_invok
 const delete_function_url_config = @import("delete_function_url_config.zig");
 const delete_layer_version = @import("delete_layer_version.zig");
 const delete_provisioned_concurrency_config = @import("delete_provisioned_concurrency_config.zig");
+const delete_resource_policy = @import("delete_resource_policy.zig");
 const get_account_settings = @import("get_account_settings.zig");
 const get_alias = @import("get_alias.zig");
 const get_capacity_provider = @import("get_capacity_provider.zig");
@@ -42,6 +43,7 @@ const get_layer_version_by_arn = @import("get_layer_version_by_arn.zig");
 const get_layer_version_policy = @import("get_layer_version_policy.zig");
 const get_policy = @import("get_policy.zig");
 const get_provisioned_concurrency_config = @import("get_provisioned_concurrency_config.zig");
+const get_resource_policy = @import("get_resource_policy.zig");
 const get_runtime_management_config = @import("get_runtime_management_config.zig");
 const invoke_ = @import("invoke.zig");
 const invoke_async = @import("invoke_async.zig");
@@ -69,6 +71,7 @@ const put_function_event_invoke_config = @import("put_function_event_invoke_conf
 const put_function_recursion_config = @import("put_function_recursion_config.zig");
 const put_function_scaling_config = @import("put_function_scaling_config.zig");
 const put_provisioned_concurrency_config = @import("put_provisioned_concurrency_config.zig");
+const put_resource_policy = @import("put_resource_policy.zig");
 const put_runtime_management_config = @import("put_runtime_management_config.zig");
 const remove_layer_version_permission = @import("remove_layer_version_permission.zig");
 const remove_permission = @import("remove_permission.zig");
@@ -383,6 +386,12 @@ pub const Client = struct {
         return delete_provisioned_concurrency_config.execute(self, allocator, input, options);
     }
 
+    /// Deletes a [resource-based
+    /// policy](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html) from a Lambda resource.
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
+        return delete_resource_policy.execute(self, allocator, input, options);
+    }
+
     /// Retrieves details about your account's
     /// [limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html) and usage
     /// in an Amazon Web Services Region.
@@ -523,6 +532,12 @@ pub const Client = struct {
     /// or version.
     pub fn getProvisionedConcurrencyConfig(self: *Self, allocator: std.mem.Allocator, input: get_provisioned_concurrency_config.GetProvisionedConcurrencyConfigInput, options: CallOptions) !get_provisioned_concurrency_config.GetProvisionedConcurrencyConfigOutput {
         return get_provisioned_concurrency_config.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the [resource-based
+    /// policy](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html) attached to a Lambda resource.
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
+        return get_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Retrieves the runtime management configuration for a function's version. If
@@ -797,6 +812,16 @@ pub const Client = struct {
     /// version.
     pub fn putProvisionedConcurrencyConfig(self: *Self, allocator: std.mem.Allocator, input: put_provisioned_concurrency_config.PutProvisionedConcurrencyConfigInput, options: CallOptions) !put_provisioned_concurrency_config.PutProvisionedConcurrencyConfigOutput {
         return put_provisioned_concurrency_config.execute(self, allocator, input, options);
+    }
+
+    /// Adds a [resource-based
+    /// policy](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html) to a Lambda resource. Resource-based policies grant access to other [Amazon Web Services accounts](https://docs.aws.amazon.com/lambda/latest/dg/permissions-function-cross-account.html), [organizations](https://docs.aws.amazon.com/lambda/latest/dg/permissions-function-organization.html), or [services](https://docs.aws.amazon.com/lambda/latest/dg/permissions-function-services.html). Resource-based policies apply to a single Lambda resource (for example, a function, function version, or function alias).
+    ///
+    /// This operation replaces any existing policy on the Lambda resource. If you
+    /// previously added permissions using the AddPermission operation, the new
+    /// policy overwrites those permissions.
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
+        return put_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Sets the runtime management configuration for a function's version. For more

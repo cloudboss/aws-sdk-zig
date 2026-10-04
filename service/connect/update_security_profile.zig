@@ -4,18 +4,22 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const AIAgent = @import("ai_agent.zig").AIAgent;
 const FlowModule = @import("flow_module.zig").FlowModule;
 const Application = @import("application.zig").Application;
 const GranularAccessControlConfiguration = @import("granular_access_control_configuration.zig").GranularAccessControlConfiguration;
 
 pub const UpdateSecurityProfileInput = struct {
     /// The identifier of the hierarchy group that a security profile uses to
-    /// restrict access to resources in Amazon Connect.
+    /// restrict access to resources in Connect Customer.
     allowed_access_control_hierarchy_group_id: ?[]const u8 = null,
 
     /// The list of tags that a security profile uses to restrict access to
-    /// resources in Amazon Connect.
+    /// resources in Connect Customer.
     allowed_access_control_tags: ?[]const aws.map.StringMapEntry = null,
+
+    /// A list of AI agents that the security profile will give access to.
+    allowed_ai_agents: ?[]const AIAgent = null,
 
     /// A list of Flow Modules an AI Agent can invoke as a tool
     allowed_flow_modules: ?[]const FlowModule = null,
@@ -31,11 +35,11 @@ pub const UpdateSecurityProfileInput = struct {
     granular_access_control_configuration: ?GranularAccessControlConfiguration = null,
 
     /// The list of resources that a security profile applies hierarchy restrictions
-    /// to in Amazon Connect. Following
+    /// to in Connect Customer. Following
     /// are acceptable ResourceNames: `User`.
     hierarchy_restricted_resources: ?[]const []const u8 = null,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -48,12 +52,13 @@ pub const UpdateSecurityProfileInput = struct {
     security_profile_id: []const u8,
 
     /// The list of resources that a security profile applies tag restrictions to in
-    /// Amazon Connect.
+    /// Connect Customer.
     tag_restricted_resources: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .allowed_access_control_hierarchy_group_id = "AllowedAccessControlHierarchyGroupId",
         .allowed_access_control_tags = "AllowedAccessControlTags",
+        .allowed_ai_agents = "AllowedAIAgents",
         .allowed_flow_modules = "AllowedFlowModules",
         .applications = "Applications",
         .description = "Description",
@@ -118,6 +123,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSecurityProfileIn
     if (input.allowed_access_control_tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"AllowedAccessControlTags\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.allowed_ai_agents) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AllowedAIAgents\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRemainingFreeTrialDa
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRemainingFreeTrialDaysOutput {
-    var result: GetRemainingFreeTrialDaysOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRemainingFreeTrialDaysOutput, body, allocator);
-    }
+    const result: GetRemainingFreeTrialDaysOutput = try aws.json.parseJsonObject(
+        GetRemainingFreeTrialDaysOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

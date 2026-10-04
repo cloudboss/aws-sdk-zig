@@ -8,6 +8,11 @@ pub const PaymentConnectorStatus = enum {
     create_failed,
     update_failed,
     delete_failed,
+    aws_marketplace_subscription_required,
+    pending_authentication,
+    provisioning,
+    authentication_expired,
+    authentication_failed,
 
     pub const json_field_names = .{
         .creating = "CREATING",
@@ -17,6 +22,11 @@ pub const PaymentConnectorStatus = enum {
         .create_failed = "CREATE_FAILED",
         .update_failed = "UPDATE_FAILED",
         .delete_failed = "DELETE_FAILED",
+        .aws_marketplace_subscription_required = "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED",
+        .pending_authentication = "PENDING_AUTHENTICATION",
+        .provisioning = "PROVISIONING",
+        .authentication_expired = "AUTHENTICATION_EXPIRED",
+        .authentication_failed = "AUTHENTICATION_FAILED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -28,6 +38,11 @@ pub const PaymentConnectorStatus = enum {
             .create_failed => "CREATE_FAILED",
             .update_failed => "UPDATE_FAILED",
             .delete_failed => "DELETE_FAILED",
+            .aws_marketplace_subscription_required => "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED",
+            .pending_authentication => "PENDING_AUTHENTICATION",
+            .provisioning => "PROVISIONING",
+            .authentication_expired => "AUTHENTICATION_EXPIRED",
+            .authentication_failed => "AUTHENTICATION_FAILED",
         };
     }
 

@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListEffectiveDeployment
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListEffectiveDeploymentsOutput {
-    var result: ListEffectiveDeploymentsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListEffectiveDeploymentsOutput, body, allocator);
-    }
+    const result: ListEffectiveDeploymentsOutput = try aws.json.parseJsonObject(
+        ListEffectiveDeploymentsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

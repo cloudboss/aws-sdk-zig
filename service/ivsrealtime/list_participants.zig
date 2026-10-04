@@ -10,29 +10,25 @@ const ParticipantSummary = @import("participant_summary.zig").ParticipantSummary
 
 pub const ListParticipantsInput = struct {
     /// Filters the response list to only show participants who published during the
-    /// stage session.
-    /// Only one of `filterByUserId`, `filterByPublished`,
+    /// stage session. Only one of `filterByUserId`, `filterByPublished`,
     /// `filterByState`, or `filterByRecordingState` can be provided per request.
     filter_by_published: ?bool = null,
 
     /// Filters the response list to only show participants with the specified
-    /// recording state.
-    /// Only one of `filterByUserId`, `filterByPublished`,
+    /// recording state. Only one of `filterByUserId`, `filterByPublished`,
     /// `filterByState`, or `filterByRecordingState` can be provided per request.
     filter_by_recording_state: ?ParticipantRecordingFilterByRecordingState = null,
 
     /// Filters the response list to only show participants in the specified state.
-    /// Only one of `filterByUserId`, `filterByPublished`,
-    /// `filterByState`, or `filterByRecordingState` can be provided per request.
+    /// Only one of `filterByUserId`, `filterByPublished`, `filterByState`, or
+    /// `filterByRecordingState` can be provided per request.
     filter_by_state: ?ParticipantState = null,
 
-    /// Filters the response list to match the specified user ID.
-    /// Only one of `filterByUserId`, `filterByPublished`,
-    /// `filterByState`, or `filterByRecordingState` can be provided per request.
-    /// A `userId` is a
+    /// Filters the response list to match the specified user ID. Only one of
+    /// `filterByUserId`, `filterByPublished`, `filterByState`, or
+    /// `filterByRecordingState` can be provided per request. A `userId` is a
     /// customer-assigned name to help identify the token; this can be used to link
-    /// a participant
-    /// to a user in the customer’s own systems.
+    /// a participant to a user in the customer’s own systems.
     filter_by_user_id: ?[]const u8 = null,
 
     /// Maximum number of results to return. Default: 50.
@@ -61,8 +57,8 @@ pub const ListParticipantsInput = struct {
 };
 
 pub const ListParticipantsOutput = struct {
-    /// If there are more participants than `maxResults`, use `nextToken`
-    /// in the request to get the next set.
+    /// If there are more participants than `maxResults`, use `nextToken` in the
+    /// request to get the next set.
     next_token: ?[]const u8 = null,
 
     /// List of the matching participants (summary information only).
@@ -170,10 +166,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListParticipantsInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListParticipantsOutput {
-    var result: ListParticipantsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListParticipantsOutput, body, allocator);
-    }
+    const result: ListParticipantsOutput = try aws.json.parseJsonObject(
+        ListParticipantsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

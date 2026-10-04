@@ -69,10 +69,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetHubConfigurationInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetHubConfigurationOutput {
-    var result: GetHubConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetHubConfigurationOutput, body, allocator);
-    }
+    const result: GetHubConfigurationOutput = try aws.json.parseJsonObject(
+        GetHubConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -11,13 +11,11 @@ const serde = @import("serde.zig");
 pub const RetrieveEnvironmentInfoInput = struct {
     /// The ID of the data's environment.
     ///
-    /// If no such environment is found, returns an `InvalidParameterValue`
-    /// error.
+    /// If no such environment is found, returns an `InvalidParameterValue` error.
     ///
     /// Condition: You must specify either this or an EnvironmentName, or both. If
-    /// you do not
-    /// specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter`
-    /// error.
+    /// you do not specify either, Elastic Beanstalk returns
+    /// `MissingRequiredParameter` error.
     environment_id: ?[]const u8 = null,
 
     /// The name of the data's environment.
@@ -25,9 +23,8 @@ pub const RetrieveEnvironmentInfoInput = struct {
     /// If no such environment is found, returns an `InvalidParameterValue` error.
     ///
     /// Condition: You must specify either this or an EnvironmentId, or both. If you
-    /// do not
-    /// specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter`
-    /// error.
+    /// do not specify either, Elastic Beanstalk returns
+    /// `MissingRequiredParameter` error.
     environment_name: ?[]const u8 = null,
 
     /// The type of information to retrieve.

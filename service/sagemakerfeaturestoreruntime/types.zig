@@ -1,6 +1,8 @@
 pub const BatchGetRecordError = @import("batch_get_record_error.zig").BatchGetRecordError;
 pub const BatchGetRecordIdentifier = @import("batch_get_record_identifier.zig").BatchGetRecordIdentifier;
 pub const BatchGetRecordResultDetail = @import("batch_get_record_result_detail.zig").BatchGetRecordResultDetail;
+pub const BatchWriteRecordEntry = @import("batch_write_record_entry.zig").BatchWriteRecordEntry;
+pub const BatchWriteRecordError = @import("batch_write_record_error.zig").BatchWriteRecordError;
 pub const DeletionMode = @import("deletion_mode.zig").DeletionMode;
 pub const ExpirationTimeResponse = @import("expiration_time_response.zig").ExpirationTimeResponse;
 pub const FeatureValue = @import("feature_value.zig").FeatureValue;

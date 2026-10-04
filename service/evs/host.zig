@@ -2,10 +2,7 @@ const HostState = @import("host_state.zig").HostState;
 const InstanceType = @import("instance_type.zig").InstanceType;
 const NetworkInterface = @import("network_interface.zig").NetworkInterface;
 
-/// An ESX host that runs on an Amazon EC2 bare metal instance. Four hosts are
-/// created in an Amazon EVS environment during environment creation. You can
-/// add hosts to an environment using the `CreateEnvironmentHost` operation.
-/// Amazon EVS supports 4-16 hosts per environment.
+/// An ESX host that runs on an Amazon EC2 bare metal instance.
 pub const Host = struct {
     /// The date and time that the host was created.
     created_at: ?i64 = null,

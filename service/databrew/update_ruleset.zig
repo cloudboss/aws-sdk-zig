@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateRulesetInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateRulesetOutput {
-    var result: UpdateRulesetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateRulesetOutput, body, allocator);
-    }
+    const result: UpdateRulesetOutput = try aws.json.parseJsonObject(
+        UpdateRulesetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

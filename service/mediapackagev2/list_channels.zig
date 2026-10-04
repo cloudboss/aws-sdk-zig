@@ -6,38 +6,9 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ChannelListConfiguration = @import("channel_list_configuration.zig").ChannelListConfiguration;
 
-pub const ListChannelsInput = struct {
-    /// The name that describes the channel group. The name is the primary
-    /// identifier for the channel group, and must be unique for your account in the
-    /// AWS Region.
-    channel_group_name: []const u8,
+pub const ListChannelsInput = @import("list_channels_request.zig").ListChannelsRequest;
 
-    /// The maximum number of results to return in the response.
-    max_results: ?i32 = null,
-
-    /// The pagination token from the GET list request. Use the token to fetch the
-    /// next page of results.
-    next_token: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .channel_group_name = "ChannelGroupName",
-        .max_results = "MaxResults",
-        .next_token = "NextToken",
-    };
-};
-
-pub const ListChannelsOutput = struct {
-    /// The objects being returned.
-    items: ?[]const ChannelListConfiguration = null,
-
-    /// The pagination token from the GET list request.
-    next_token: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .items = "Items",
-        .next_token = "NextToken",
-    };
-};
+pub const ListChannelsOutput = @import("list_channels_response.zig").ListChannelsResponse;
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListChannelsInput, options: CallOptions) !ListChannelsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -109,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListChannelsInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListChannelsOutput {
-    var result: ListChannelsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListChannelsOutput, body, allocator);
-    }
+    const result: ListChannelsOutput = try aws.json.parseJsonObject(
+        ListChannelsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -10,14 +10,33 @@ pub const StartMetadataModelImportInput = struct {
     /// The migration project name or Amazon Resource Name (ARN).
     migration_project_identifier: []const u8,
 
-    /// Whether to load metadata to the source or target database.
+    /// Specifies the metadata tree to import into.
+    ///
+    /// You cannot import from a virtual target data provider.
     origin: OriginTypeValue,
 
-    /// If `true`, DMS loads metadata for the specified objects from the source
-    /// database.
+    /// Specifies whether to refresh the selected metadata models from the data
+    /// provider.
+    ///
+    /// When `true`, the import reloads the selected metadata models with
+    /// current definitions and removes their existing subtree.
+    ///
+    /// When `false` (default), the import loads the full subtree that has not
+    /// yet been loaded into the metadata tree.
     refresh: ?bool = null,
 
-    /// A value that specifies the database objects to import.
+    /// A JSON string that identifies the metadata models to import from the data
+    /// provider. For the selection rule format and examples, see [Selection rules
+    /// in DMS Schema
+    /// Conversion](https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html).
+    ///
+    /// Usage:
+    ///
+    /// * Accepts source or target selection rules depending on the `Origin`
+    ///   parameter. The `server-name` in the object locator must match the
+    ///   corresponding data provider.
+    ///
+    /// * Supports `explicit`, `include`, and `exclude` rule actions.
     selection_rules: []const u8,
 
     pub const json_field_names = .{
@@ -29,7 +48,7 @@ pub const StartMetadataModelImportInput = struct {
 };
 
 pub const StartMetadataModelImportOutput = struct {
-    /// The identifier for the import operation.
+    /// The identifier for the import request.
     request_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{

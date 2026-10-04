@@ -74,10 +74,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetApiAssociationInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetApiAssociationOutput {
-    var result: GetApiAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetApiAssociationOutput, body, allocator);
-    }
+    const result: GetApiAssociationOutput = try aws.json.parseJsonObject(
+        GetApiAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

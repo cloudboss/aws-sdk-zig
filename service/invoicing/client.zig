@@ -12,12 +12,16 @@ const get_procurement_portal_preference = @import("get_procurement_portal_prefer
 const list_invoice_summaries = @import("list_invoice_summaries.zig");
 const list_invoice_units = @import("list_invoice_units.zig");
 const list_procurement_portal_preferences = @import("list_procurement_portal_preferences.zig");
+const list_procurement_portal_suppliers = @import("list_procurement_portal_suppliers.zig");
+const list_procurement_portals = @import("list_procurement_portals.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const put_procurement_portal_preference = @import("put_procurement_portal_preference.zig");
+const send_procurement_portal_validation = @import("send_procurement_portal_validation.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_invoice_unit = @import("update_invoice_unit.zig");
 const update_procurement_portal_preference_status = @import("update_procurement_portal_preference_status.zig");
+const verify_procurement_portal_validation = @import("verify_procurement_portal_validation.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
@@ -134,6 +138,22 @@ pub const Client = struct {
         return list_procurement_portal_preferences.execute(self, allocator, input, options);
     }
 
+    /// Returns the suppliers configured for a specified procurement portal,
+    /// including supplier identifiers and associated metadata. For faster, more
+    /// reliable responses, use pagination.
+    pub fn listProcurementPortalSuppliers(self: *Self, allocator: std.mem.Allocator, input: list_procurement_portal_suppliers.ListProcurementPortalSuppliersInput, options: CallOptions) !list_procurement_portal_suppliers.ListProcurementPortalSuppliersOutput {
+        return list_procurement_portal_suppliers.execute(self, allocator, input, options);
+    }
+
+    /// Returns the Amazon Web Services-supported procurement portals for e-invoice
+    /// delivery and purchase order retrieval. Each entry includes the portal
+    /// identifier, name, and default feature configurations, which define the
+    /// supported document and attachment types. For faster, more reliable
+    /// responses, use pagination.
+    pub fn listProcurementPortals(self: *Self, allocator: std.mem.Allocator, input: list_procurement_portals.ListProcurementPortalsInput, options: CallOptions) !list_procurement_portals.ListProcurementPortalsOutput {
+        return list_procurement_portals.execute(self, allocator, input, options);
+    }
+
     /// Lists the tags for a resource.
     pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
@@ -148,6 +168,19 @@ pub const Client = struct {
     /// retrieval.
     pub fn putProcurementPortalPreference(self: *Self, allocator: std.mem.Allocator, input: put_procurement_portal_preference.PutProcurementPortalPreferenceInput, options: CallOptions) !put_procurement_portal_preference.PutProcurementPortalPreferenceOutput {
         return put_procurement_portal_preference.execute(self, allocator, input, options);
+    }
+
+    /// * **This feature API is subject to changing at any time. For more
+    ///   information, see the [Amazon Web Services Service
+    ///   Terms](https://aws.amazon.com/service-terms/) (Betas and Previews).** *
+    ///
+    /// Sends a validation request for a procurement portal preference. This
+    /// operation initiates the validation process by issuing a validation code that
+    /// confirms ownership and connectivity of the configured procurement portal
+    /// endpoint. Use `VerifyProcurementPortalValidation` to submit the received
+    /// code and complete validation.
+    pub fn sendProcurementPortalValidation(self: *Self, allocator: std.mem.Allocator, input: send_procurement_portal_validation.SendProcurementPortalValidationInput, options: CallOptions) !send_procurement_portal_validation.SendProcurementPortalValidationOutput {
+        return send_procurement_portal_validation.execute(self, allocator, input, options);
     }
 
     /// Adds a tag to a resource.
@@ -177,6 +210,18 @@ pub const Client = struct {
         return update_procurement_portal_preference_status.execute(self, allocator, input, options);
     }
 
+    /// * **This feature API is subject to changing at any time. For more
+    ///   information, see the [Amazon Web Services Service
+    ///   Terms](https://aws.amazon.com/service-terms/) (Betas and Previews).** *
+    ///
+    /// Submits a validation code to complete the validation of a procurement portal
+    /// preference. Use this operation after calling
+    /// `SendProcurementPortalValidation` to confirm ownership and connectivity of
+    /// the configured procurement portal endpoint.
+    pub fn verifyProcurementPortalValidation(self: *Self, allocator: std.mem.Allocator, input: verify_procurement_portal_validation.VerifyProcurementPortalValidationInput, options: CallOptions) !verify_procurement_portal_validation.VerifyProcurementPortalValidationOutput {
+        return verify_procurement_portal_validation.execute(self, allocator, input, options);
+    }
+
     pub fn listInvoiceSummariesPaginator(self: *Self, params: list_invoice_summaries.ListInvoiceSummariesInput) paginator.ListInvoiceSummariesPaginator {
         return .{
             .client = self,
@@ -192,6 +237,20 @@ pub const Client = struct {
     }
 
     pub fn listProcurementPortalPreferencesPaginator(self: *Self, params: list_procurement_portal_preferences.ListProcurementPortalPreferencesInput) paginator.ListProcurementPortalPreferencesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listProcurementPortalSuppliersPaginator(self: *Self, params: list_procurement_portal_suppliers.ListProcurementPortalSuppliersInput) paginator.ListProcurementPortalSuppliersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listProcurementPortalsPaginator(self: *Self, params: list_procurement_portals.ListProcurementPortalsInput) paginator.ListProcurementPortalsPaginator {
         return .{
             .client = self,
             .params = params,

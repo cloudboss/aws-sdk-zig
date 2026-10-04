@@ -22,7 +22,10 @@ pub const CreateFleetError = struct {
     launch_template_and_overrides: ?LaunchTemplateAndOverridesResponse = null,
 
     /// Indicates if the instance that could not be launched was a Spot, On-Demand,
-    /// Capacity Block,
-    /// or Interruptible Capacity Reservation instance.
+    /// Capacity Block for ML,
+    /// or interruptible Capacity Reservation instance. If you are using
+    /// `ReservedCapacityOptions` with
+    /// `on-demand-capacity-reservation` in the `ReservationTypes` list, the
+    /// value can also be `on-demand-capacity-reservation`.
     lifecycle: ?InstanceLifecycle = null,
 };

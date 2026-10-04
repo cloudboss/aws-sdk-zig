@@ -21,8 +21,7 @@ pub const ListTaxRegistrationsInput = struct {
 
 pub const ListTaxRegistrationsOutput = struct {
     /// The list of account details. This contains account Ids and TRN Information
-    /// for each of the
-    /// linked accounts.
+    /// for each of the linked accounts.
     account_details: ?[]const AccountDetails = null,
 
     /// The token to retrieve the next set of results.
@@ -98,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTaxRegistrationsInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTaxRegistrationsOutput {
-    var result: ListTaxRegistrationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListTaxRegistrationsOutput, body, allocator);
-    }
+    const result: ListTaxRegistrationsOutput = try aws.json.parseJsonObject(
+        ListTaxRegistrationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

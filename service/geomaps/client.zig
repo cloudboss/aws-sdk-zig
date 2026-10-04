@@ -51,14 +51,12 @@ pub const Client = struct {
         return get_sprites.execute(self, allocator, input, options);
     }
 
-    /// This operation is not supported in `ap-southeast-1` and `ap-southeast-5`
-    /// regions for
-    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
-    ///
     /// `GetStaticMap` provides high-quality static map images with customizable
     /// options. You can modify the map's appearance and overlay additional
     /// information. It's an ideal solution for applications requiring tailored
-    /// static map snapshots.
+    /// static map snapshots. Not supported in `ap-southeast-1` and `ap-southeast-5`
+    /// regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// For more information, see the following topics in the *Amazon Location
     /// Service Developer Guide*:

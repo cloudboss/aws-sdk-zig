@@ -187,6 +187,8 @@ pub const UpdateServerInput = struct {
     ///   the `SetStatOption` parameter to `ENABLE_NO_OP`, Transfer Family generates
     ///   a log entry to Amazon CloudWatch Logs, so that you can determine when the
     ///   client is making a `SETSTAT` call.
+    /// * To specify which ports your Transfer Family server listens to, use the
+    ///   `SftpPorts` parameter.
     /// * To determine whether your Transfer Family server resumes recent,
     ///   negotiated sessions through a unique session ID, use the
     ///   `TlsSessionResumptionMode` parameter.
@@ -244,7 +246,7 @@ pub const UpdateServerInput = struct {
     /// To specify a log group, you must provide the ARN for an existing log group.
     /// In this case, the format of the log group is as follows:
     ///
-    /// `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    /// `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
     ///
     /// For example, `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
     ///

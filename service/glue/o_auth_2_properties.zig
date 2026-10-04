@@ -8,8 +8,8 @@ pub const OAuth2Properties = struct {
     /// The client application type. For example, AWS_MANAGED or USER_MANAGED.
     o_auth_2_client_application: ?OAuth2ClientApplication = null,
 
-    /// The OAuth2 grant type. For example, `AUTHORIZATION_CODE`, `JWT_BEARER`, or
-    /// `CLIENT_CREDENTIALS`.
+    /// The OAuth2 grant type. For example, `AUTHORIZATION_CODE`, `JWT_BEARER`,
+    /// `REFRESH_TOKEN`, or `CLIENT_CREDENTIALS`.
     o_auth_2_grant_type: ?OAuth2GrantType = null,
 
     /// The URL of the provider's authentication server, to exchange an

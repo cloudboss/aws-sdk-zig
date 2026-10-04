@@ -236,8 +236,8 @@ pub const Client = struct {
         return describe_job_log_items.execute(self, allocator, input, options);
     }
 
-    /// Returns a list of Jobs. Use the JobsID and fromDate and toData filters to
-    /// limit which jobs are returned. The response is sorted by creationDataTime -
+    /// Returns a list of Jobs. Use the jobIDs and fromDate and toDate filters to
+    /// limit which jobs are returned. The response is sorted by creationDateTime -
     /// latest date first. Jobs are normally created by the StartTest, StartCutover,
     /// and TerminateTargetInstances APIs. Jobs are also created by DiagnosticLaunch
     /// and TerminateDiagnosticInstances, which are APIs available only to *Support*
@@ -252,7 +252,8 @@ pub const Client = struct {
         return describe_launch_configuration_templates.execute(self, allocator, input, options);
     }
 
-    /// Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.
+    /// Lists all ReplicationConfigurationTemplates, filtered by replication
+    /// configuration template IDs.
     pub fn describeReplicationConfigurationTemplates(self: *Self, allocator: std.mem.Allocator, input: describe_replication_configuration_templates.DescribeReplicationConfigurationTemplatesInput, options: CallOptions) !describe_replication_configuration_templates.DescribeReplicationConfigurationTemplatesOutput {
         return describe_replication_configuration_templates.execute(self, allocator, input, options);
     }
@@ -282,11 +283,11 @@ pub const Client = struct {
     /// Migration Service for enabling the replication of these source servers will
     /// be terminated / deleted within 90 minutes. Launched Test or Cutover
     /// instances will NOT be terminated. If the agent on the source server has not
-    /// been prevented from communicating with the Application Migration Service
-    /// service, then it will receive a command to uninstall itself (within
-    /// approximately 10 minutes). The following properties of the SourceServer will
-    /// be changed immediately: dataReplicationInfo.dataReplicationState will be set
-    /// to DISCONNECTED; The totalStorageBytes property for each of
+    /// been prevented from communicating with Application Migration Service, then
+    /// it will receive a command to uninstall itself (within approximately 10
+    /// minutes). The following properties of the SourceServer will be changed
+    /// immediately: dataReplicationInfo.dataReplicationState will be set to
+    /// DISCONNECTED; The totalStorageBytes property for each of
     /// dataReplicationInfo.replicatedDisks will be set to zero;
     /// dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be
     /// nullified.
@@ -302,7 +303,7 @@ pub const Client = struct {
     /// minutes). The following properties of the SourceServer will be changed
     /// immediately: dataReplicationInfo.dataReplicationState will be changed to
     /// DISCONNECTED; The SourceServer.lifeCycle.state will be changed to CUTOVER;
-    /// The totalStorageBytes property fo each of
+    /// The totalStorageBytes property for each of
     /// dataReplicationInfo.replicatedDisks will be set to zero;
     /// dataReplicationInfo.lagDuration and dataReplicationInfo.lagDuration will be
     /// nullified.
@@ -470,7 +471,7 @@ pub const Client = struct {
 
     /// Archives specific Source Servers by setting the SourceServer.isArchived
     /// property to true for specified SourceServers by ID. This command only works
-    /// for SourceServers with a lifecycle. state which equals DISCONNECTED or
+    /// for SourceServers with a lifecycle state that equals DISCONNECTED or
     /// CUTOVER.
     pub fn markAsArchived(self: *Self, allocator: std.mem.Allocator, input: mark_as_archived.MarkAsArchivedInput, options: CallOptions) !mark_as_archived.MarkAsArchivedOutput {
         return mark_as_archived.execute(self, allocator, input, options);
@@ -627,7 +628,7 @@ pub const Client = struct {
 
     /// Updates multiple LaunchConfigurations by Source Server ID.
     ///
-    /// bootMode valid values are `LEGACY_BIOS | UEFI`
+    /// bootMode valid values are `LEGACY_BIOS | UEFI | USE_SOURCE`
     pub fn updateLaunchConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_launch_configuration.UpdateLaunchConfigurationInput, options: CallOptions) !update_launch_configuration.UpdateLaunchConfigurationOutput {
         return update_launch_configuration.execute(self, allocator, input, options);
     }
@@ -653,7 +654,7 @@ pub const Client = struct {
         return update_replication_configuration.execute(self, allocator, input, options);
     }
 
-    /// Updates multiple ReplicationConfigurationTemplates by ID.
+    /// Updates a ReplicationConfigurationTemplate by ID.
     pub fn updateReplicationConfigurationTemplate(self: *Self, allocator: std.mem.Allocator, input: update_replication_configuration_template.UpdateReplicationConfigurationTemplateInput, options: CallOptions) !update_replication_configuration_template.UpdateReplicationConfigurationTemplateOutput {
         return update_replication_configuration_template.execute(self, allocator, input, options);
     }

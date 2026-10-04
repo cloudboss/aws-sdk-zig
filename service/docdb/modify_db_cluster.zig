@@ -69,6 +69,10 @@ pub const ModifyDBClusterInput = struct {
     /// logs are exported (or not exported) to CloudWatch Logs.
     cloudwatch_logs_export_configuration: ?CloudwatchLogsExportConfiguration = null,
 
+    /// Specifies whether to copy all tags from the DB cluster to snapshots of the
+    /// DB cluster. The default is not to copy them.
+    copy_tags_to_snapshot: ?bool = null,
+
     /// The cluster identifier for the cluster that is being modified. This
     /// parameter is
     /// not case sensitive.
@@ -158,7 +162,7 @@ pub const ModifyDBClusterInput = struct {
     /// IPv6 protocols (`DUAL`).
     ///
     /// For more information, see [DocumentDB clusters in a
-    /// VPC](https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html) in the Amazon DocumentDB Developer Guide.
+    /// VPC](https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html) in the Amazon DocumentDB Developer Guide.
     ///
     /// Valid Values: `IPV4` | `DUAL`
     network_type: ?[]const u8 = null,
@@ -317,6 +321,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBClusterInput, c
                 try aws.url.appendUrlEncoded(allocator, &body_buf, item);
             }
         }
+    }
+    if (input.copy_tags_to_snapshot) |v| {
+        try body_buf.appendSlice(allocator, "&CopyTagsToSnapshot=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     try body_buf.appendSlice(allocator, "&DBClusterIdentifier=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.db_cluster_identifier);

@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchStartInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchStartOutput {
-    var result: BatchStartOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchStartOutput, body, allocator);
-    }
+    const result: BatchStartOutput = try aws.json.parseJsonObject(
+        BatchStartOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

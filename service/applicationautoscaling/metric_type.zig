@@ -30,6 +30,8 @@ pub const MetricType = enum {
     work_spaces_average_user_sessions_capacity_utilization,
     sage_maker_inference_component_concurrent_requests_per_copy_high_resolution,
     sage_maker_variant_concurrent_requests_per_model_high_resolution,
+    ecs_service_average_cpu_utilization_high_resolution,
+    ecs_service_average_memory_utilization_high_resolution,
 
     pub const json_field_names = .{
         .dynamo_db_read_capacity_utilization = "DynamoDBReadCapacityUtilization",
@@ -61,6 +63,8 @@ pub const MetricType = enum {
         .work_spaces_average_user_sessions_capacity_utilization = "WorkSpacesAverageUserSessionsCapacityUtilization",
         .sage_maker_inference_component_concurrent_requests_per_copy_high_resolution = "SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution",
         .sage_maker_variant_concurrent_requests_per_model_high_resolution = "SageMakerVariantConcurrentRequestsPerModelHighResolution",
+        .ecs_service_average_cpu_utilization_high_resolution = "ECSServiceAverageCPUUtilizationHighResolution",
+        .ecs_service_average_memory_utilization_high_resolution = "ECSServiceAverageMemoryUtilizationHighResolution",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -94,6 +98,8 @@ pub const MetricType = enum {
             .work_spaces_average_user_sessions_capacity_utilization => "WorkSpacesAverageUserSessionsCapacityUtilization",
             .sage_maker_inference_component_concurrent_requests_per_copy_high_resolution => "SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution",
             .sage_maker_variant_concurrent_requests_per_model_high_resolution => "SageMakerVariantConcurrentRequestsPerModelHighResolution",
+            .ecs_service_average_cpu_utilization_high_resolution => "ECSServiceAverageCPUUtilizationHighResolution",
+            .ecs_service_average_memory_utilization_high_resolution => "ECSServiceAverageMemoryUtilizationHighResolution",
         };
     }
 

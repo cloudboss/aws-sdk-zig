@@ -137,10 +137,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetRumMetricDefini
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetRumMetricDefinitionsOutput {
-    var result: BatchGetRumMetricDefinitionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetRumMetricDefinitionsOutput, body, allocator);
-    }
+    const result: BatchGetRumMetricDefinitionsOutput = try aws.json.parseJsonObject(
+        BatchGetRumMetricDefinitionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutNotificationSettings
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutNotificationSettingsOutput {
-    var result: PutNotificationSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutNotificationSettingsOutput, body, allocator);
-    }
+    const result: PutNotificationSettingsOutput = try aws.json.parseJsonObject(
+        PutNotificationSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

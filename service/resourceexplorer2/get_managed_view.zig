@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetManagedViewInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetManagedViewOutput {
-    var result: GetManagedViewOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetManagedViewOutput, body, allocator);
-    }
+    const result: GetManagedViewOutput = try aws.json.parseJsonObject(
+        GetManagedViewOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

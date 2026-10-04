@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListChallengeMetadataIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListChallengeMetadataOutput {
-    var result: ListChallengeMetadataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListChallengeMetadataOutput, body, allocator);
-    }
+    const result: ListChallengeMetadataOutput = try aws.json.parseJsonObject(
+        ListChallengeMetadataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -4,6 +4,7 @@ const CacheBehavior = @import("cache_behavior.zig").CacheBehavior;
 const RunLogLevel = @import("run_log_level.zig").RunLogLevel;
 const NetworkingMode = @import("networking_mode.zig").NetworkingMode;
 const RunRetentionMode = @import("run_retention_mode.zig").RunRetentionMode;
+const ScratchStorageMode = @import("scratch_storage_mode.zig").ScratchStorageMode;
 const StorageType = @import("storage_type.zig").StorageType;
 const WorkflowType = @import("workflow_type.zig").WorkflowType;
 
@@ -21,6 +22,11 @@ pub const DefaultRunSetting = struct {
     /// Optional configuration name to use for the workflow run.
     configuration_name: ?[]const u8 = null,
 
+    /// Engine-specific settings for the workflow run. Use this field to specify
+    /// configuration options that are specific to the workflow engine (for example,
+    /// Nextflow profiles).
+    engine_settings: ?[]const u8 = null,
+
     /// The verbosity level for CloudWatch Logs emitted during each run.
     log_level: ?RunLogLevel = null,
 
@@ -32,8 +38,8 @@ pub const DefaultRunSetting = struct {
     /// will default to RESTRICTED.
     networking_mode: ?NetworkingMode = null,
 
-    /// The expected AWS account ID of the owner of the output S3 bucket. Can be
-    /// overridden per run.
+    /// The expected Amazon Web Services account ID of the owner of the output S3
+    /// bucket. Can be overridden per run.
     output_bucket_owner_id: ?[]const u8 = null,
 
     /// The destination S3 URI for workflow outputs. Must begin with `s3://`. The
@@ -54,17 +60,27 @@ pub const DefaultRunSetting = struct {
     /// The retention behavior for runs after completion.
     retention_mode: ?RunRetentionMode = null,
 
-    /// The IAM role ARN that grants HealthOmics permissions to access required AWS
-    /// resources such as Amazon S3 and CloudWatch. The role must have the same
-    /// permissions required for individual `StartRun` calls.
+    /// The IAM role ARN that grants HealthOmics permissions to access required
+    /// Amazon Web Services resources such as Amazon S3 and CloudWatch. The role
+    /// must have the same permissions required for individual `StartRun` calls.
     role_arn: []const u8,
 
     /// The ID of the run group to contain all workflow runs in the batch.
     run_group_id: ?[]const u8 = null,
 
-    /// AWS tags to associate with each workflow run. Merged with per-run `runTags`;
-    /// run-specific values take precedence when keys overlap.
+    /// Amazon Web Services tags to associate with each workflow run. Merged with
+    /// per-run `runTags`; run-specific values take precedence when keys overlap.
     run_tags: ?[]const aws.map.StringMapEntry = null,
+
+    /// Optional configuration for enabling scratch ephemeral storage mounted at
+    /// /tmp. If not specified, this will default to SHARED. This configuration is
+    /// applicable only for CPU tasks. For tasks using GPUs, scratch storage is
+    /// always LOCAL.
+    scratch_storage_mode: ?ScratchStorageMode = null,
+
+    /// Optional inline policy json for scoping down permissions via a session
+    /// policy on the IAM role provided in the roleArn parameter.
+    session_policy: ?[]const u8 = null,
 
     /// The filesystem size in gibibytes (GiB) provisioned for each workflow run and
     /// shared by all tasks in that run. Defaults to 1200 GiB if not specified.
@@ -76,8 +92,8 @@ pub const DefaultRunSetting = struct {
     /// The identifier of the workflow to run.
     workflow_id: []const u8,
 
-    /// The AWS account ID of the workflow owner, used for cross-account workflow
-    /// sharing.
+    /// The Amazon Web Services account ID of the workflow owner, used for
+    /// cross-account workflow sharing.
     workflow_owner_id: ?[]const u8 = null,
 
     /// The type of the originating workflow. Batch runs are not supported with
@@ -91,6 +107,7 @@ pub const DefaultRunSetting = struct {
         .cache_behavior = "cacheBehavior",
         .cache_id = "cacheId",
         .configuration_name = "configurationName",
+        .engine_settings = "engineSettings",
         .log_level = "logLevel",
         .name = "name",
         .networking_mode = "networkingMode",
@@ -102,6 +119,8 @@ pub const DefaultRunSetting = struct {
         .role_arn = "roleArn",
         .run_group_id = "runGroupId",
         .run_tags = "runTags",
+        .scratch_storage_mode = "scratchStorageMode",
+        .session_policy = "sessionPolicy",
         .storage_capacity = "storageCapacity",
         .storage_type = "storageType",
         .workflow_id = "workflowId",

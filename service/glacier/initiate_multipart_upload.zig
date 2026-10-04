@@ -113,6 +113,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InitiateMultipartUpload
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !InitiateMultipartUploadOutput {
     var result: InitiateMultipartUploadOutput = .{};
+    errdefer {
+        if (result.location) |value| allocator.free(value);
+        if (result.upload_id) |value| allocator.free(value);
+    }
     _ = body;
     _ = status;
     if (headers.get("location")) |value| {

@@ -77,10 +77,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTopicRuleInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTopicRuleOutput {
-    var result: GetTopicRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTopicRuleOutput, body, allocator);
-    }
+    const result: GetTopicRuleOutput = try aws.json.parseJsonObject(
+        GetTopicRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

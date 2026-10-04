@@ -11,8 +11,7 @@ pub const ListEncoderConfigurationsInput = struct {
     max_results: ?i32 = null,
 
     /// The first encoder configuration to retrieve. This is used for pagination;
-    /// see the
-    /// `nextToken` response field.
+    /// see the `nextToken` response field.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -25,8 +24,8 @@ pub const ListEncoderConfigurationsOutput = struct {
     /// List of the matching EncoderConfigurations (summary information only).
     encoder_configurations: ?[]const EncoderConfigurationSummary = null,
 
-    /// If there are more encoder configurations than `maxResults`, use
-    /// `nextToken` in the request to get the next set.
+    /// If there are more encoder configurations than `maxResults`, use `nextToken`
+    /// in the request to get the next set.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -99,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListEncoderConfiguratio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListEncoderConfigurationsOutput {
-    var result: ListEncoderConfigurationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListEncoderConfigurationsOutput, body, allocator);
-    }
+    const result: ListEncoderConfigurationsOutput = try aws.json.parseJsonObject(
+        ListEncoderConfigurationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

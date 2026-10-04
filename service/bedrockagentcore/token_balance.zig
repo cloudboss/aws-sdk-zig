@@ -2,7 +2,7 @@ const BlockchainChainId = @import("blockchain_chain_id.zig").BlockchainChainId;
 const CryptoWalletNetwork = @import("crypto_wallet_network.zig").CryptoWalletNetwork;
 const InstrumentBalanceToken = @import("instrument_balance_token.zig").InstrumentBalanceToken;
 
-/// A single token balance entry
+/// A single token balance entry.
 pub const TokenBalance = struct {
     /// Raw balance in the smallest denomination (e.g., USDC base units where 1 USDC
     /// = 1000000).

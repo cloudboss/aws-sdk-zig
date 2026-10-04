@@ -10,10 +10,9 @@ pub const PatchRule = struct {
     /// patches are approved seven days after they are released.
     ///
     /// Patch Manager evaluates patch release dates using Coordinated Universal Time
-    /// (UTC). If the
-    /// day represented by `7` is `2025-11-16`, patches released between
-    /// `2025-11-16T00:00:00Z` and `2025-11-16T23:59:59Z` will be included in the
-    /// approval.
+    /// (UTC). If a
+    /// patch is released at `2025-11-09T18:00:00Z` and `ApproveAfterDays` is set to
+    /// `7`, the patch will be approved after `2025-11-16T18:00:00Z`.
     ///
     /// This parameter is marked as `Required: No`, but your request must include a
     /// value

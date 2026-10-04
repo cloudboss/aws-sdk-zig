@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteAnnotationStoreIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteAnnotationStoreOutput {
-    var result: DeleteAnnotationStoreOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteAnnotationStoreOutput, body, allocator);
-    }
+    const result: DeleteAnnotationStoreOutput = try aws.json.parseJsonObject(
+        DeleteAnnotationStoreOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,4 +1,5 @@
 const DataSourceParameters = @import("data_source_parameters.zig").DataSourceParameters;
+const CredentialStatus = @import("credential_status.zig").CredentialStatus;
 const DataSourceErrorInfo = @import("data_source_error_info.zig").DataSourceErrorInfo;
 const SslProperties = @import("ssl_properties.zig").SslProperties;
 const ResourceStatus = @import("resource_status.zig").ResourceStatus;
@@ -30,6 +31,15 @@ pub const DataSource = struct {
     /// The time that this data source was created.
     created_time: ?i64 = null,
 
+    /// The credential verification status of the data source. Valid values include:
+    ///
+    /// * `CONNECTED` – Credential validation succeeded.
+    ///
+    /// * `AUTH_FAILED` – Credential validation failed.
+    ///
+    /// * `NOT_VERIFIED` – Credential validation has not been performed.
+    credential_status: ?CredentialStatus = null,
+
     /// The ID of the data source. This ID is unique per Amazon Web Services Region
     /// for each
     /// Amazon Web Services account.
@@ -44,6 +54,9 @@ pub const DataSource = struct {
 
     /// Error information from the last update or the creation of the data source.
     error_info: ?DataSourceErrorInfo = null,
+
+    /// The time that the credentials were last verified.
+    last_credential_verified_at: ?i64 = null,
 
     /// The last time that this data source was updated.
     last_updated_time: ?i64 = null,
@@ -78,9 +91,11 @@ pub const DataSource = struct {
         .alternate_data_source_parameters = "AlternateDataSourceParameters",
         .arn = "Arn",
         .created_time = "CreatedTime",
+        .credential_status = "CredentialStatus",
         .data_source_id = "DataSourceId",
         .data_source_parameters = "DataSourceParameters",
         .error_info = "ErrorInfo",
+        .last_credential_verified_at = "LastCredentialVerifiedAt",
         .last_updated_time = "LastUpdatedTime",
         .name = "Name",
         .secret_arn = "SecretArn",

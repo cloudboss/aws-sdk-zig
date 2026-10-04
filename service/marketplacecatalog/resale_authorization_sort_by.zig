@@ -14,6 +14,9 @@ pub const ResaleAuthorizationSortBy = enum {
     created_date,
     availability_end_date,
     last_modified_date,
+    reseller_role,
+    source_authorization,
+    issuer_account_id,
 
     pub const json_field_names = .{
         .entity_id = "EntityId",
@@ -29,6 +32,9 @@ pub const ResaleAuthorizationSortBy = enum {
         .created_date = "CreatedDate",
         .availability_end_date = "AvailabilityEndDate",
         .last_modified_date = "LastModifiedDate",
+        .reseller_role = "ResellerRole",
+        .source_authorization = "SourceAuthorization",
+        .issuer_account_id = "IssuerAccountId",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -46,6 +52,9 @@ pub const ResaleAuthorizationSortBy = enum {
             .created_date => "CreatedDate",
             .availability_end_date => "AvailabilityEndDate",
             .last_modified_date => "LastModifiedDate",
+            .reseller_role => "ResellerRole",
+            .source_authorization => "SourceAuthorization",
+            .issuer_account_id => "IssuerAccountId",
         };
     }
 

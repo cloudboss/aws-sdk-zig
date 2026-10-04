@@ -12,7 +12,7 @@ pub const InsightVisual = struct {
     actions: ?[]const VisualCustomAction = null,
 
     /// The dataset that is used in the insight visual.
-    data_set_identifier: []const u8,
+    data_set_identifier: []const u8 = "",
 
     /// The configuration of an insight visual.
     insight_configuration: ?InsightConfiguration = null,
@@ -22,6 +22,9 @@ pub const InsightVisual = struct {
 
     /// The title that is displayed on the visual.
     title: ?VisualTitleLabelOptions = null,
+
+    /// The topic that is used in the insight visual.
+    topic_identifier: ?[]const u8 = null,
 
     /// The alt text for the visual.
     visual_content_alt_text: ?[]const u8 = null,
@@ -37,6 +40,7 @@ pub const InsightVisual = struct {
         .insight_configuration = "InsightConfiguration",
         .subtitle = "Subtitle",
         .title = "Title",
+        .topic_identifier = "TopicIdentifier",
         .visual_content_alt_text = "VisualContentAltText",
         .visual_id = "VisualId",
     };

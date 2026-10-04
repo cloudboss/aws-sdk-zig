@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteWorkspaceServiceA
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteWorkspaceServiceAccountOutput {
-    var result: DeleteWorkspaceServiceAccountOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteWorkspaceServiceAccountOutput, body, allocator);
-    }
+    const result: DeleteWorkspaceServiceAccountOutput = try aws.json.parseJsonObject(
+        DeleteWorkspaceServiceAccountOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

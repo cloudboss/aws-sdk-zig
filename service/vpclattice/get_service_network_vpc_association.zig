@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetServiceNetworkVpcAss
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetServiceNetworkVpcAssociationOutput {
-    var result: GetServiceNetworkVpcAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetServiceNetworkVpcAssociationOutput, body, allocator);
-    }
+    const result: GetServiceNetworkVpcAssociationOutput = try aws.json.parseJsonObject(
+        GetServiceNetworkVpcAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

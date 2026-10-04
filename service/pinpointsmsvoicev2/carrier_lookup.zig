@@ -7,6 +7,13 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const PhoneNumberType = @import("phone_number_type.zig").PhoneNumberType;
 
 pub const CarrierLookupInput = struct {
+    /// Specifies whether the service cleanses the phone number that you provide.
+    /// When set to `true`, the service normalizes the phone number according to the
+    /// destination country's national numbering plan and dialing rules. The service
+    /// returns the cleansed number in E.164 format in the `E164PhoneNumber` field
+    /// and returns the number that you provided in the `OriginalPhoneNumber` field.
+    enable_cleansing: ?bool = null,
+
     /// The phone number that you want to retrieve information about. You can
     /// provide the phone number in various formats including special characters
     /// such as parentheses, brackets, spaces, hyphens, periods, and commas. The
@@ -14,6 +21,7 @@ pub const CarrierLookupInput = struct {
     phone_number: []const u8,
 
     pub const json_field_names = .{
+        .enable_cleansing = "EnableCleansing",
         .phone_number = "PhoneNumber",
     };
 };
@@ -45,9 +53,16 @@ pub const CarrierLookupOutput = struct {
     /// The phone number's mobile network code, for mobile phone number types.
     mnc: ?[]const u8 = null,
 
+    /// The phone number exactly as you supplied it in the request. This field is
+    /// returned only when you set `EnableCleansing` to `true`, the phone number was
+    /// cleansed, and a normalized E.164 phone number was returned in the
+    /// `E164PhoneNumber` field.
+    original_phone_number: ?[]const u8 = null,
+
     /// Describes the type of phone number. Valid values are: MOBILE, LANDLINE,
-    /// OTHER, and INVALID. Avoid sending SMS or voice messages to INVALID phone
-    /// numbers, as these numbers are unlikely to belong to actual recipients.
+    /// VOIP, PREPAID, OTHER, and INVALID. Avoid sending SMS or voice messages to
+    /// INVALID phone numbers, as these numbers are unlikely to belong to actual
+    /// recipients.
     phone_number_type: PhoneNumberType,
 
     pub const json_field_names = .{
@@ -58,6 +73,7 @@ pub const CarrierLookupOutput = struct {
         .iso_country_code = "IsoCountryCode",
         .mcc = "MCC",
         .mnc = "MNC",
+        .original_phone_number = "OriginalPhoneNumber",
         .phone_number_type = "PhoneNumberType",
     };
 };

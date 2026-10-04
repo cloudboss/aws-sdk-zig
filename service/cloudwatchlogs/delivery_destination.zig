@@ -55,6 +55,11 @@ pub const DeliveryDestination = struct {
     /// The format of the logs that are sent to this delivery destination.
     output_format: ?OutputFormat = null,
 
+    /// The ARN of the IAM role that CloudWatch Logs assumes to deliver to this
+    /// delivery destination. This field is present only for X-Ray trace delivery
+    /// destinations that were created with a role.
+    role_arn: ?[]const u8 = null,
+
     /// The tags that have been assigned to this delivery destination.
     tags: ?[]const aws.map.StringMapEntry = null,
 
@@ -64,6 +69,7 @@ pub const DeliveryDestination = struct {
         .delivery_destination_type = "deliveryDestinationType",
         .name = "name",
         .output_format = "outputFormat",
+        .role_arn = "roleArn",
         .tags = "tags",
     };
 };

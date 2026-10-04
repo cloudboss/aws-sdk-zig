@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Certificate = @import("certificate.zig").Certificate;
 const BrowserEnterprisePolicy = @import("browser_enterprise_policy.zig").BrowserEnterprisePolicy;
 const BrowserExtension = @import("browser_extension.zig").BrowserExtension;
+const ToolsFileSystemConfiguration = @import("tools_file_system_configuration.zig").ToolsFileSystemConfiguration;
 const BrowserProfileConfiguration = @import("browser_profile_configuration.zig").BrowserProfileConfiguration;
 const ProxyConfiguration = @import("proxy_configuration.zig").ProxyConfiguration;
 const ViewPort = @import("view_port.zig").ViewPort;
@@ -33,6 +34,13 @@ pub const StartBrowserSessionInput = struct {
 
     /// A list of browser extensions to load into the browser session.
     extensions: ?[]const BrowserExtension = null,
+
+    /// The file system configurations to mount into the browser session. Use these
+    /// configurations to mount your own Amazon Simple Storage Service (Amazon S3)
+    /// Files or Amazon Elastic File System (Amazon EFS) access points. Your session
+    /// can then read and write your data. If you don't specify this field, no
+    /// additional file systems are mounted.
+    filesystem_configurations: ?[]const ToolsFileSystemConfiguration = null,
 
     /// The name of the browser session. This name helps you identify and manage the
     /// session. The name does not need to be unique.
@@ -75,6 +83,7 @@ pub const StartBrowserSessionInput = struct {
         .client_token = "clientToken",
         .enterprise_policies = "enterprisePolicies",
         .extensions = "extensions",
+        .filesystem_configurations = "filesystemConfigurations",
         .name = "name",
         .profile_configuration = "profileConfiguration",
         .proxy_configuration = "proxyConfiguration",
@@ -171,6 +180,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartBrowserSessionInpu
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.filesystem_configurations) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"filesystemConfigurations\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.name) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"name\":");
@@ -223,10 +238,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartBrowserSessionInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartBrowserSessionOutput {
-    var result: StartBrowserSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartBrowserSessionOutput, body, allocator);
-    }
+    const result: StartBrowserSessionOutput = try aws.json.parseJsonObject(
+        StartBrowserSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

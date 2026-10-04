@@ -63,6 +63,19 @@ pub const InvokeEndpointWithResponseStreamInput = struct {
     /// An identifier that you assign to your request.
     inference_id: ?[]const u8 = null,
 
+    /// An optional, stable identifier that serves as a routing hint for
+    /// prefix-aware routing.
+    /// The service routes requests with the same prefix and the same identifier to
+    /// the same
+    /// instance. If requests from different applications might have the same prompt
+    /// prefix, set
+    /// a different identifier for each application to differentiate their routing
+    /// decisions.
+    ///
+    /// Applies only to endpoints configured with a
+    /// `RoutingStrategy` of `PREFIX_AWARE`.
+    prefix_aware_id: ?[]const u8 = null,
+
     /// The ID of a stateful session to handle your request.
     ///
     /// You can't create a stateful session by using the
@@ -101,6 +114,7 @@ pub const InvokeEndpointWithResponseStreamInput = struct {
         .endpoint_name = "EndpointName",
         .inference_component_name = "InferenceComponentName",
         .inference_id = "InferenceId",
+        .prefix_aware_id = "PrefixAwareId",
         .session_id = "SessionId",
         .target_container_hostname = "TargetContainerHostname",
         .target_variant = "TargetVariant",
@@ -160,6 +174,7 @@ pub const InvokeEndpointWithResponseStreamOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeEndpointWithResponseStreamInput, options: CallOptions) !InvokeEndpointWithResponseStreamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -168,8 +183,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeEndpo
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "sagemaker", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -181,11 +194,9 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeEndpo
         return error.ServiceError;
     }
 
-    stream_resp.deinitHeaders();
-    errdefer stream_resp.body.deinit();
-
-    const body = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
-    return .{ .body = body };
+    errdefer stream_resp.deinit();
+    const result = try deserializeStreamingResponse(allocator, &stream_resp);
+    return result;
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: InvokeEndpointWithResponseStreamInput, config: *aws.Config) !aws.http.Request {
@@ -223,6 +234,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeEndpointWithRespo
     if (input.inference_id) |v| {
         try request.headers.put(allocator, "X-Amzn-SageMaker-Inference-Id", v);
     }
+    if (input.prefix_aware_id) |v| {
+        try request.headers.put(allocator, "X-Amzn-SageMaker-Prefix-Aware-Id", v);
+    }
     if (input.session_id) |v| {
         try request.headers.put(allocator, "X-Amzn-SageMaker-Session-Id", v);
     }
@@ -234,4 +248,29 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeEndpointWithRespo
     }
 
     return request;
+}
+
+fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !InvokeEndpointWithResponseStreamOutput {
+    var result: InvokeEndpointWithResponseStreamOutput = .{};
+    errdefer {
+        if (result.content_type) |value| allocator.free(value);
+        if (result.custom_attributes) |value| allocator.free(value);
+        if (result.invoked_production_variant) |value| allocator.free(value);
+    }
+    if (stream_resp.headers.get("x-amzn-sagemaker-content-type")) |value| {
+        result.content_type = try allocator.dupe(u8, value);
+    }
+    if (stream_resp.headers.get("x-amzn-sagemaker-custom-attributes")) |value| {
+        result.custom_attributes = try allocator.dupe(u8, value);
+    }
+    if (stream_resp.headers.get("x-amzn-invoked-production-variant")) |value| {
+        result.invoked_production_variant = try allocator.dupe(u8, value);
+    }
+    result.body = try aws.event_stream_reader.EventStreamReader.init(
+        allocator,
+        stream_resp.body,
+    );
+    stream_resp.deinitHeaders();
+
+    return result;
 }

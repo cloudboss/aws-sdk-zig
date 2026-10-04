@@ -10,6 +10,10 @@ pub const UsageType = enum {
     code_repository_iac,
     code_repository_sca,
     ec2_agentless_instance_hours,
+    azure_container_image_initial_scan,
+    azure_container_image_rescan,
+    azure_vm_agent_based_instance_hours,
+    azure_serverless_function_hours,
 
     pub const json_field_names = .{
         .ec2_instance_hours = "EC2_INSTANCE_HOURS",
@@ -21,6 +25,10 @@ pub const UsageType = enum {
         .code_repository_iac = "CODE_REPOSITORY_IAC",
         .code_repository_sca = "CODE_REPOSITORY_SCA",
         .ec2_agentless_instance_hours = "EC2_AGENTLESS_INSTANCE_HOURS",
+        .azure_container_image_initial_scan = "AZURE_CONTAINER_IMAGE_INITIAL_SCAN",
+        .azure_container_image_rescan = "AZURE_CONTAINER_IMAGE_RESCAN",
+        .azure_vm_agent_based_instance_hours = "AZURE_VM_AGENT_BASED_INSTANCE_HOURS",
+        .azure_serverless_function_hours = "AZURE_SERVERLESS_FUNCTION_HOURS",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -34,6 +42,10 @@ pub const UsageType = enum {
             .code_repository_iac => "CODE_REPOSITORY_IAC",
             .code_repository_sca => "CODE_REPOSITORY_SCA",
             .ec2_agentless_instance_hours => "EC2_AGENTLESS_INSTANCE_HOURS",
+            .azure_container_image_initial_scan => "AZURE_CONTAINER_IMAGE_INITIAL_SCAN",
+            .azure_container_image_rescan => "AZURE_CONTAINER_IMAGE_RESCAN",
+            .azure_vm_agent_based_instance_hours => "AZURE_VM_AGENT_BASED_INSTANCE_HOURS",
+            .azure_serverless_function_hours => "AZURE_SERVERLESS_FUNCTION_HOURS",
         };
     }
 

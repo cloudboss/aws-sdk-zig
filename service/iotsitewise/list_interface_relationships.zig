@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListInterfaceRelationsh
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListInterfaceRelationshipsOutput {
-    var result: ListInterfaceRelationshipsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListInterfaceRelationshipsOutput, body, allocator);
-    }
+    const result: ListInterfaceRelationshipsOutput = try aws.json.parseJsonObject(
+        ListInterfaceRelationshipsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

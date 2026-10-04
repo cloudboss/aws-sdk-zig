@@ -10,8 +10,8 @@ const serde = @import("serde.zig");
 
 pub const PutMetricDataInput = struct {
     /// Data for metrics that contain associated entity information. You can include
-    /// up to
-    /// two `EntityMetricData` objects, each of which can contain a single
+    /// up to two
+    /// `EntityMetricData` objects, each of which can contain a single
     /// `Entity` and associated metrics.
     ///
     /// The limit of metrics allowed, 1000, is the sum of both `EntityMetricData`
@@ -43,14 +43,15 @@ pub const PutMetricDataInput = struct {
     ///
     /// * When set to `false`: Validation errors in the entity will not
     /// associate the metric with the entity, but the metric data will still be
-    /// accepted and ingested. Validation errors in the metric data will fail the
-    /// entire request, and no data will be ingested.
+    /// accepted
+    /// and ingested. Validation errors in the metric data will fail the entire
+    /// request,
+    /// and no data will be ingested.
     ///
-    /// In the case of an invalid entity, the operation will return a
-    /// `200` status, but an additional response header will contain
-    /// information about the validation errors. The new header,
-    /// `X-Amzn-Failure-Message` is an enumeration of the following
-    /// values:
+    /// In the case of an invalid entity, the operation will return a `200`
+    /// status, but an additional response header will contain information about the
+    /// validation errors. The new header, `X-Amzn-Failure-Message` is an
+    /// enumeration of the following values:
     ///
     /// * `InvalidEntity` - The provided entity is invalid.
     ///
@@ -66,13 +67,12 @@ pub const PutMetricDataInput = struct {
     /// * `EntitySizeTooLarge` - The number of
     /// `EntityMetricData` objects allowed is 2.
     ///
-    /// * `MissingRequiredFields` - There are missing required
-    /// fields in the `KeyAttributes` for the provided
+    /// * `MissingRequiredFields` - There are missing required fields
+    /// in the `KeyAttributes` for the provided
     /// `Type`.
     ///
-    /// For details of the requirements for specifying an entity, see
-    /// [How
-    /// to add related information to
+    /// For details of the requirements for specifying an entity, see [How to add
+    /// related information to
     /// telemetry](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html) in the
     /// *CloudWatch User Guide*.
     ///

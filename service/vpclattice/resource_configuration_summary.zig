@@ -52,6 +52,8 @@ pub const ResourceConfigurationSummary = struct {
     /// * `CHILD` - A single resource that is part of a group resource
     ///   configuration.
     /// * `ARN` - An Amazon Web Services resource.
+    /// * `CIDR` - A network segment (a range of IP addresses) accessed through a
+    ///   `Tunnel` VPC endpoint.
     @"type": ?ResourceConfigurationType = null,
 
     pub const json_field_names = .{

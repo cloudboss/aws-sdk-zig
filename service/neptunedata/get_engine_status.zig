@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEngineStatusInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetEngineStatusOutput {
-    var result: GetEngineStatusOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetEngineStatusOutput, body, allocator);
-    }
+    const result: GetEngineStatusOutput = try aws.json.parseJsonObject(
+        GetEngineStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

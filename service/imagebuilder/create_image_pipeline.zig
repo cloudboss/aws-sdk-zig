@@ -12,30 +12,38 @@ const PipelineStatus = @import("pipeline_status.zig").PipelineStatus;
 const WorkflowConfiguration = @import("workflow_configuration.zig").WorkflowConfiguration;
 
 pub const CreateImagePipelineInput = struct {
-    /// Unique, case-sensitive identifier you provide to ensure
-    /// idempotency of the request. For more information, see [Ensuring
+    /// A unique, case-sensitive identifier you provide to ensure
+    /// that the operation runs no more than one time. If you retry a request with
+    /// the same client
+    /// token, Image Builder returns the original response without running the
+    /// operation again. For more
+    /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
     /// in the *Amazon EC2 API Reference*.
     client_token: []const u8,
 
     /// The Amazon Resource Name (ARN) of the container recipe that is used to
     /// configure
-    /// images created by this container pipeline.
+    /// images created by this container pipeline. You must specify either this
+    /// property or `imageRecipeArn`, but not both.
     container_recipe_arn: ?[]const u8 = null,
 
     /// The description of the image pipeline.
     description: ?[]const u8 = null,
 
-    /// The Amazon Resource Name (ARN) of the distribution configuration that will
-    /// be used to
-    /// configure and distribute images created by this image pipeline.
+    /// The Amazon Resource Name (ARN) of the distribution configuration that
+    /// configures and
+    /// distributes images created by this image pipeline.
     distribution_configuration_arn: ?[]const u8 = null,
 
-    /// Collects additional information about the image being created, including the
-    /// operating
-    /// system (OS) version and package list. This information is used to enhance
-    /// the overall
-    /// experience of using EC2 Image Builder. Enabled by default.
+    /// Validates the required permissions and request parameters without performing
+    /// the operation. If validation succeeds, the operation returns a
+    /// `DryRunOperationException` error response.
+    dry_run: ?bool = null,
+
+    /// Specifies whether to collect additional information about the image being
+    /// created, including the operating
+    /// system (OS) version and package list. Defaults to `true`.
     enhanced_image_metadata_enabled: ?bool = null,
 
     /// The name or Amazon Resource Name (ARN) for the IAM role you create that
@@ -43,41 +51,64 @@ pub const CreateImagePipelineInput = struct {
     /// Image Builder access to perform workflow actions.
     execution_role: ?[]const u8 = null,
 
-    /// The Amazon Resource Name (ARN) of the image recipe that will be used to
-    /// configure
-    /// images created by this image pipeline.
+    /// The Amazon Resource Name (ARN) of the image recipe that configures
+    /// images created by this image pipeline. You must specify either this property
+    /// or `containerRecipeArn`, but not both.
     image_recipe_arn: ?[]const u8 = null,
 
-    /// Contains settings for vulnerability scans.
+    /// Contains settings for vulnerability scans that Amazon Inspector runs against
+    /// the test instance
+    /// during image creation.
     image_scanning_configuration: ?ImageScanningConfiguration = null,
 
-    /// The tags to be applied to the images produced by this pipeline.
+    /// The tags that Image Builder applies to the Image Builder image resource that
+    /// this
+    /// pipeline's scheduled executions create. These tags don't apply to the
+    /// output AMI. To tag output AMIs, use `amiTags` in the
+    /// pipeline's distribution configuration.
     image_tags: ?[]const aws.map.StringMapEntry = null,
 
-    /// The image test configuration of the image pipeline.
+    /// Specifies the test settings that Image Builder applies to images that this
+    /// pipeline creates. If you don't provide test settings, Image Builder stores a
+    /// default
+    /// configuration with image tests enabled.
     image_tests_configuration: ?ImageTestsConfiguration = null,
 
-    /// The Amazon Resource Name (ARN) of the infrastructure configuration that will
-    /// be used
-    /// to build images created by this image pipeline.
+    /// The Amazon Resource Name (ARN) of the infrastructure configuration that
+    /// builds images created by this image pipeline.
     infrastructure_configuration_arn: []const u8,
 
-    /// Define logging configuration for the image build process.
+    /// Specifies the logging configuration for the image pipeline. Use this
+    /// to define custom CloudWatch Logs log groups for your pipeline execution
+    /// logs and image build logs. The service manages log groups with names
+    /// starting with `/aws/imagebuilder/` using the service-linked
+    /// role. For custom log group names outside of this prefix, you must also
+    /// provide an `executionRole`.
     logging_configuration: ?PipelineLoggingConfiguration = null,
 
-    /// The name of the image pipeline.
+    /// The name of the image pipeline. Pipeline names must be unique to your
+    /// account in each Amazon Web Services Region. Image Builder generates the
+    /// pipeline ARN from a
+    /// normalized form of the name, so names that differ only in case, spaces, or
+    /// underscores count as the same name.
     name: []const u8,
 
-    /// The schedule of the image pipeline.
+    /// The schedule of the image pipeline. If you don't provide a schedule, the
+    /// pipeline runs only when you call
+    /// StartImagePipelineExecution.
     schedule: ?Schedule = null,
 
-    /// The status of the image pipeline.
+    /// The status of the image pipeline. If you don't specify a status, it
+    /// defaults to `ENABLED`. A disabled pipeline doesn't run on its
+    /// schedule, but you can still start builds manually.
     status: ?PipelineStatus = null,
 
     /// The tags of the image pipeline.
     tags: ?[]const aws.map.StringMapEntry = null,
 
-    /// Contains an array of workflow configuration objects.
+    /// The array of workflow configuration objects for builds that this pipeline
+    /// starts. You must also specify `executionRole` when you provide
+    /// workflows.
     workflows: ?[]const WorkflowConfiguration = null,
 
     pub const json_field_names = .{
@@ -85,6 +116,7 @@ pub const CreateImagePipelineInput = struct {
         .container_recipe_arn = "containerRecipeArn",
         .description = "description",
         .distribution_configuration_arn = "distributionConfigurationArn",
+        .dry_run = "dryRun",
         .enhanced_image_metadata_enabled = "enhancedImageMetadataEnabled",
         .execution_role = "executionRole",
         .image_recipe_arn = "imageRecipeArn",
@@ -178,6 +210,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImagePipelineInpu
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.dry_run) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"dryRun\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.enhanced_image_metadata_enabled) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"enhancedImageMetadataEnabled\":");
@@ -268,10 +306,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImagePipelineInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateImagePipelineOutput {
-    var result: CreateImagePipelineOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateImagePipelineOutput, body, allocator);
-    }
+    const result: CreateImagePipelineOutput = try aws.json.parseJsonObject(
+        CreateImagePipelineOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

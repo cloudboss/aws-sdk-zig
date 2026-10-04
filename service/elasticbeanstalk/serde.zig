@@ -10,10 +10,12 @@ const ApplicationResourceLifecycleConfig = @import("application_resource_lifecyc
 const ApplicationVersionDescription = @import("application_version_description.zig").ApplicationVersionDescription;
 const ApplicationVersionLifecycleConfig = @import("application_version_lifecycle_config.zig").ApplicationVersionLifecycleConfig;
 const ApplicationVersionStatus = @import("application_version_status.zig").ApplicationVersionStatus;
+const ArchitectureType = @import("architecture_type.zig").ArchitectureType;
 const AutoScalingGroup = @import("auto_scaling_group.zig").AutoScalingGroup;
 const BuildConfiguration = @import("build_configuration.zig").BuildConfiguration;
 const Builder = @import("builder.zig").Builder;
 const CPUUtilization = @import("cpu_utilization.zig").CPUUtilization;
+const Cluster = @import("cluster.zig").Cluster;
 const ComputeType = @import("compute_type.zig").ComputeType;
 const ConfigurationDeploymentStatus = @import("configuration_deployment_status.zig").ConfigurationDeploymentStatus;
 const ConfigurationOptionDescription = @import("configuration_option_description.zig").ConfigurationOptionDescription;
@@ -36,6 +38,10 @@ const EnvironmentTier = @import("environment_tier.zig").EnvironmentTier;
 const EventDescription = @import("event_description.zig").EventDescription;
 const EventSeverity = @import("event_severity.zig").EventSeverity;
 const FailureType = @import("failure_type.zig").FailureType;
+const ImageBuildConfiguration = @import("image_build_configuration.zig").ImageBuildConfiguration;
+const ImageBuildType = @import("image_build_type.zig").ImageBuildType;
+const ImageConfiguration = @import("image_configuration.zig").ImageConfiguration;
+const ImageSource = @import("image_source.zig").ImageSource;
 const Instance = @import("instance.zig").Instance;
 const InstanceHealthSummary = @import("instance_health_summary.zig").InstanceHealthSummary;
 const InstancesHealthAttribute = @import("instances_health_attribute.zig").InstancesHealthAttribute;
@@ -840,6 +846,9 @@ pub fn deserializeApplicationVersionDescription(allocator: std.mem.Allocator, re
     result.date_created = null;
     result.date_updated = null;
     result.description = null;
+    result.image_build_configuration = null;
+    result.image_source = null;
+    result.process = null;
     result.source_build_information = null;
     result.source_bundle = null;
     result.status = null;
@@ -859,6 +868,12 @@ pub fn deserializeApplicationVersionDescription(allocator: std.mem.Allocator, re
                     result.date_updated = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Description")) {
                     result.description = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ImageBuildConfiguration")) {
+                    result.image_build_configuration = try deserializeImageBuildConfiguration(allocator, reader);
+                } else if (std.mem.eql(u8, e.local, "ImageSource")) {
+                    result.image_source = try deserializeImageSource(allocator, reader);
+                } else if (std.mem.eql(u8, e.local, "Process")) {
+                    result.process = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "SourceBuildInformation")) {
                     result.source_build_information = try deserializeSourceBuildInformation(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "SourceBundle")) {
@@ -968,6 +983,25 @@ pub fn deserializeCPUUtilization(allocator: std.mem.Allocator, reader: *aws.xml.
                     result.system = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "User")) {
                     result.user = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeCluster(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Cluster {
+    var result: Cluster = undefined;
+    result.cluster_arn = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ClusterArn")) {
+                    result.cluster_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -1284,6 +1318,7 @@ pub fn deserializeEnvironmentLink(allocator: std.mem.Allocator, reader: *aws.xml
 pub fn deserializeEnvironmentResourceDescription(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !EnvironmentResourceDescription {
     var result: EnvironmentResourceDescription = undefined;
     result.auto_scaling_groups = null;
+    result.cluster = null;
     result.environment_name = null;
     result.instances = null;
     result.launch_configurations = null;
@@ -1296,6 +1331,8 @@ pub fn deserializeEnvironmentResourceDescription(allocator: std.mem.Allocator, r
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AutoScalingGroups")) {
                     result.auto_scaling_groups = try deserializeAutoScalingGroupList(allocator, reader, "member");
+                } else if (std.mem.eql(u8, e.local, "Cluster")) {
+                    result.cluster = try deserializeCluster(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "EnvironmentName")) {
                     result.environment_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Instances")) {
@@ -1397,6 +1434,62 @@ pub fn deserializeEventDescription(allocator: std.mem.Allocator, reader: *aws.xm
                     result.template_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "VersionLabel")) {
                     result.version_label = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeImageBuildConfiguration(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ImageBuildConfiguration {
+    var result: ImageBuildConfiguration = undefined;
+    result.architecture = null;
+    result.buildpack = null;
+    result.code_build_service_role = null;
+    result.compute_type = null;
+    result.dockerfile_location = null;
+    result.timeout_in_minutes = null;
+    result.@"type" = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Architecture")) {
+                    result.architecture = ArchitectureType.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Buildpack")) {
+                    result.buildpack = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "CodeBuildServiceRole")) {
+                    result.code_build_service_role = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ComputeType")) {
+                    result.compute_type = ComputeType.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "DockerfileLocation")) {
+                    result.dockerfile_location = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "TimeoutInMinutes")) {
+                    result.timeout_in_minutes = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "Type")) {
+                    result.@"type" = ImageBuildType.fromWireName(try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeImageSource(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ImageSource {
+    var result: ImageSource = undefined;
+    result.uri = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Uri")) {
+                    result.uri = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2550,6 +2643,68 @@ pub fn serializeEnvironmentTier(allocator: std.mem.Allocator, buf: *std.ArrayLis
         try buf.appendSlice(allocator, "<Version>");
         try aws.xml.appendXmlEscaped(allocator, buf, v);
         try buf.appendSlice(allocator, "</Version>");
+    }
+}
+
+pub fn serializeImageBuildConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ImageBuildConfiguration) !void {
+    if (value.architecture) |v| {
+        try buf.appendSlice(allocator, "<Architecture>");
+        try buf.appendSlice(allocator, v.wireName());
+        try buf.appendSlice(allocator, "</Architecture>");
+    }
+    if (value.buildpack) |v| {
+        try buf.appendSlice(allocator, "<Buildpack>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Buildpack>");
+    }
+    if (value.code_build_service_role) |v| {
+        try buf.appendSlice(allocator, "<CodeBuildServiceRole>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</CodeBuildServiceRole>");
+    }
+    if (value.compute_type) |v| {
+        try buf.appendSlice(allocator, "<ComputeType>");
+        try buf.appendSlice(allocator, v.wireName());
+        try buf.appendSlice(allocator, "</ComputeType>");
+    }
+    if (value.dockerfile_location) |v| {
+        try buf.appendSlice(allocator, "<DockerfileLocation>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</DockerfileLocation>");
+    }
+    if (value.timeout_in_minutes) |v| {
+        try buf.appendSlice(allocator, "<TimeoutInMinutes>");
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
+        }
+        try buf.appendSlice(allocator, "</TimeoutInMinutes>");
+    }
+    if (value.@"type") |v| {
+        try buf.appendSlice(allocator, "<Type>");
+        try buf.appendSlice(allocator, v.wireName());
+        try buf.appendSlice(allocator, "</Type>");
+    }
+}
+
+pub fn serializeImageConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ImageConfiguration) !void {
+    if (value.build) |v| {
+        try buf.appendSlice(allocator, "<Build>");
+        try serializeImageBuildConfiguration(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Build>");
+    }
+    if (value.source) |v| {
+        try buf.appendSlice(allocator, "<Source>");
+        try serializeImageSource(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Source>");
+    }
+}
+
+pub fn serializeImageSource(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ImageSource) !void {
+    if (value.uri) |v| {
+        try buf.appendSlice(allocator, "<Uri>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Uri>");
     }
 }
 

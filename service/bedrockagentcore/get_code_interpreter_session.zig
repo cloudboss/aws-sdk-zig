@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Certificate = @import("certificate.zig").Certificate;
+const ToolsFileSystemConfiguration = @import("tools_file_system_configuration.zig").ToolsFileSystemConfiguration;
 const CodeInterpreterSessionStatus = @import("code_interpreter_session_status.zig").CodeInterpreterSessionStatus;
 
 pub const GetCodeInterpreterSessionInput = struct {
@@ -30,6 +31,10 @@ pub const GetCodeInterpreterSessionOutput = struct {
     /// The time at which the code interpreter session was created.
     created_at: i64,
 
+    /// The file system configurations for the code interpreter session. Each entry
+    /// describes an access point and its mount path.
+    filesystem_configurations: ?[]const ToolsFileSystemConfiguration = null,
+
     /// The name of the code interpreter session.
     name: ?[]const u8 = null,
 
@@ -47,6 +52,7 @@ pub const GetCodeInterpreterSessionOutput = struct {
         .certificates = "certificates",
         .code_interpreter_identifier = "codeInterpreterIdentifier",
         .created_at = "createdAt",
+        .filesystem_configurations = "filesystemConfigurations",
         .name = "name",
         .session_id = "sessionId",
         .session_timeout_seconds = "sessionTimeoutSeconds",
@@ -113,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCodeInterpreterSessi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCodeInterpreterSessionOutput {
-    var result: GetCodeInterpreterSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCodeInterpreterSessionOutput, body, allocator);
-    }
+    const result: GetCodeInterpreterSessionOutput = try aws.json.parseJsonObject(
+        GetCodeInterpreterSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

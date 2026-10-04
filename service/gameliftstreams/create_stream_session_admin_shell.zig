@@ -1,0 +1,115 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
+const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+
+pub const CreateStreamSessionAdminShellInput = struct {
+    /// The stream group that runs this stream session.
+    ///
+    /// This value is an [Amazon Resource Name
+    /// (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html)
+    /// or ID that uniquely identifies the stream group resource. Example ARN:
+    /// `arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4`.
+    /// Example ID: `sg-1AB2C3De4`.
+    identifier: []const u8,
+
+    /// An [Amazon Resource Name
+    /// (ARN)](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html)
+    /// or ID that uniquely identifies the stream session resource. Example ARN:
+    /// `arn:aws:gameliftstreams:us-west-2:111122223333:streamsession/sg-1AB2C3De4/ABC123def4567`. Example ID: `ABC123def4567`.
+    stream_session_identifier: []const u8,
+
+    pub const json_field_names = .{
+        .identifier = "Identifier",
+        .stream_session_identifier = "StreamSessionIdentifier",
+    };
+};
+
+pub const CreateStreamSessionAdminShellOutput = struct {
+    /// An Amazon Web Services Systems Manager session identifier that uniquely
+    /// identifies the requested terminal session. Use this value with the Amazon
+    /// Web Services Systems Manager Session Manager plugin.
+    session_id: ?[]const u8 = null,
+
+    /// An Amazon Web Services Systems Manager WebSocket connection endpoint for the
+    /// requested terminal session.
+    stream_url: ?[]const u8 = null,
+
+    /// An Amazon Web Services Systems Manager authentication token that
+    /// authenticates your access to the session ID and WebSocket URL. This token
+    /// must be treated with the same level of security as other user credentials.
+    /// The token value is only valid for establishing a new connection within 60
+    /// seconds of generation.
+    token_value: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .session_id = "SessionId",
+        .stream_url = "StreamUrl",
+        .token_value = "TokenValue",
+    };
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateStreamSessionAdminShellInput, options: CallOptions) !CreateStreamSessionAdminShellOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(client.allocator);
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "gameliftstreams", client.config.http_client.clock_skew_offset);
+
+    var response = try client.config.http_client.sendRequestWithOptions(&request, client.options);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = try parseErrorResponse(client.allocator, response.body, response.status);
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
+    return result;
+}
+
+fn serializeRequest(allocator: std.mem.Allocator, input: CreateStreamSessionAdminShellInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("gameliftstreams", "GameLiftStreams", allocator);
+
+    const ep = try aws.url.parseEndpoint(endpoint);
+
+    var path_buf: std.ArrayList(u8) = .empty;
+    try path_buf.appendSlice(allocator, "/streamgroups/");
+    try path_buf.appendSlice(allocator, input.identifier);
+    try path_buf.appendSlice(allocator, "/streamsessions/");
+    try path_buf.appendSlice(allocator, input.stream_session_identifier);
+    try path_buf.appendSlice(allocator, "/access");
+    const path = try path_buf.toOwnedSlice(allocator);
+
+    const body: ?[]const u8 = null;
+
+    var request = aws.http.Request.init(ep.host);
+    request.method = .POST;
+    request.path = path;
+    request.tls = ep.tls;
+    request.port = ep.port;
+    request.body = body;
+    try request.headers.put(allocator, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateStreamSessionAdminShellOutput {
+    const result: CreateStreamSessionAdminShellOutput = try aws.json.parseJsonObject(
+        CreateStreamSessionAdminShellOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
+    _ = status;
+    _ = headers;
+
+    return result;
+}

@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLicenseEndpointInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetLicenseEndpointOutput {
-    var result: GetLicenseEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetLicenseEndpointOutput, body, allocator);
-    }
+    const result: GetLicenseEndpointOutput = try aws.json.parseJsonObject(
+        GetLicenseEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

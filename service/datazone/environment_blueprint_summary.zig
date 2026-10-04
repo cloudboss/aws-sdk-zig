@@ -1,7 +1,12 @@
+const BlueprintCategory = @import("blueprint_category.zig").BlueprintCategory;
 const ProvisioningProperties = @import("provisioning_properties.zig").ProvisioningProperties;
 
 /// The details of an environment blueprint summary.
 pub const EnvironmentBlueprintSummary = struct {
+    /// The category of the environment blueprint. The only valid value is
+    /// `TOOLING`.
+    blueprint_category: ?BlueprintCategory = null,
+
     /// The timestamp of when an environment blueprint was created.
     created_at: ?i64 = null,
 
@@ -24,6 +29,7 @@ pub const EnvironmentBlueprintSummary = struct {
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{
+        .blueprint_category = "blueprintCategory",
         .created_at = "createdAt",
         .description = "description",
         .id = "id",

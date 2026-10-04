@@ -1,4 +1,4 @@
-const InstanceType = @import("instance_type.zig").InstanceType;
+const ProductionVariantInstanceType = @import("production_variant_instance_type.zig").ProductionVariantInstanceType;
 
 /// The infrastructure configuration for deploying the model to a real-time
 /// inference endpoint.
@@ -7,7 +7,7 @@ pub const RealTimeInferenceConfig = struct {
     instance_count: i32,
 
     /// The instance type the model is deployed to.
-    instance_type: InstanceType,
+    instance_type: ProductionVariantInstanceType,
 
     pub const json_field_names = .{
         .instance_count = "InstanceCount",

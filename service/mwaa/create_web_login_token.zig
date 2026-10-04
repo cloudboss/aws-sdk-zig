@@ -86,10 +86,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateWebLoginTokenInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateWebLoginTokenOutput {
-    var result: CreateWebLoginTokenOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateWebLoginTokenOutput, body, allocator);
-    }
+    const result: CreateWebLoginTokenOutput = try aws.json.parseJsonObject(
+        CreateWebLoginTokenOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

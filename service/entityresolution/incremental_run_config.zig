@@ -4,14 +4,14 @@ const IncrementalRunType = @import("incremental_run_type.zig").IncrementalRunTyp
 /// contains only the `incrementalRunType` field, which appears as "Automatic"
 /// in the console.
 ///
-/// For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
-/// incremental processing is not supported.
+/// For workflows where `resolutionType` is `PROVIDER`, incremental processing
+/// is not supported.
 pub const IncrementalRunConfig = struct {
     /// The type of incremental run. The only valid value is `IMMEDIATE`. This
     /// appears as "Automatic" in the console.
     ///
-    /// For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
-    /// incremental processing is not supported.
+    /// For workflows where `resolutionType` is `PROVIDER`, incremental processing
+    /// is not supported.
     incremental_run_type: ?IncrementalRunType = null,
 
     pub const json_field_names = .{

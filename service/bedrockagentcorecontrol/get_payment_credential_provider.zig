@@ -23,6 +23,7 @@ pub const GetPaymentCredentialProviderOutput = struct {
     /// The Amazon Resource Name (ARN) of the payment credential provider.
     credential_provider_arn: []const u8,
 
+    /// The vendor type for the payment credential provider.
     credential_provider_vendor: PaymentCredentialProviderVendorType,
 
     /// The timestamp when the payment credential provider was last updated.
@@ -31,7 +32,7 @@ pub const GetPaymentCredentialProviderOutput = struct {
     /// The name of the payment credential provider.
     name: []const u8,
 
-    /// Output configuration (contains secret ARNs, excludes actual secret values)
+    /// Output configuration (contains secret ARNs, excludes actual secret values).
     provider_configuration_output: ?PaymentProviderConfigurationOutput = null,
 
     /// The tags associated with the payment credential provider.
@@ -104,10 +105,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPaymentCredentialPro
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPaymentCredentialProviderOutput {
-    var result: GetPaymentCredentialProviderOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPaymentCredentialProviderOutput, body, allocator);
-    }
+    const result: GetPaymentCredentialProviderOutput = try aws.json.parseJsonObject(
+        GetPaymentCredentialProviderOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

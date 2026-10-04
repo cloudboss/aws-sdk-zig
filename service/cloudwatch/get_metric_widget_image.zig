@@ -15,7 +15,7 @@ pub const GetMetricWidgetImageInput = struct {
     ///
     /// For more information about the syntax of `MetricWidget` see
     /// [GetMetricWidgetImage: Metric Widget Structure and
-    /// Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Metric-Widget-Structure.html).
+    /// Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Widget-Structure.html).
     ///
     /// If any metric on the graph could not load all the requested data points, an
     /// orange

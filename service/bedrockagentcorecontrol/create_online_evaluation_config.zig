@@ -4,11 +4,13 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const ClusteringConfig = @import("clustering_config.zig").ClusteringConfig;
 const DataSourceConfig = @import("data_source_config.zig").DataSourceConfig;
 const EvaluatorReference = @import("evaluator_reference.zig").EvaluatorReference;
+const Insight = @import("insight.zig").Insight;
+const OutputConfig = @import("output_config.zig").OutputConfig;
 const Rule = @import("rule.zig").Rule;
 const OnlineEvaluationExecutionStatus = @import("online_evaluation_execution_status.zig").OnlineEvaluationExecutionStatus;
-const OutputConfig = @import("output_config.zig").OutputConfig;
 const OnlineEvaluationConfigStatus = @import("online_evaluation_config_status.zig").OnlineEvaluationConfigStatus;
 
 pub const CreateOnlineEvaluationConfigInput = struct {
@@ -19,6 +21,9 @@ pub const CreateOnlineEvaluationConfigInput = struct {
     /// [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
     client_token: ?[]const u8 = null,
+
+    /// Configuration for periodic batch evaluation clustering of insight results.
+    clustering_config: ?ClusteringConfig = null,
 
     /// The data source configuration that specifies CloudWatch log groups and
     /// service names to monitor for agent traces.
@@ -44,11 +49,16 @@ pub const CreateOnlineEvaluationConfigInput = struct {
 
     /// The list of evaluators to apply during online evaluation. Can include both
     /// built-in evaluators and custom evaluators created with `CreateEvaluator`.
-    evaluators: []const EvaluatorReference,
+    evaluators: ?[]const EvaluatorReference = null,
+
+    /// The list of insight types to run against agent sessions.
+    insights: ?[]const Insight = null,
 
     /// The name of the online evaluation configuration. Must be unique within your
     /// account.
     online_evaluation_config_name: []const u8,
+
+    output_config: ?OutputConfig = null,
 
     /// The evaluation rule that defines sampling configuration, filters, and
     /// session detection settings for the online evaluation.
@@ -61,12 +71,15 @@ pub const CreateOnlineEvaluationConfigInput = struct {
 
     pub const json_field_names = .{
         .client_token = "clientToken",
+        .clustering_config = "clusteringConfig",
         .data_source_config = "dataSourceConfig",
         .description = "description",
         .enable_on_create = "enableOnCreate",
         .evaluation_execution_role_arn = "evaluationExecutionRoleArn",
         .evaluators = "evaluators",
+        .insights = "insights",
         .online_evaluation_config_name = "onlineEvaluationConfigName",
+        .output_config = "outputConfig",
         .rule = "rule",
         .tags = "tags",
     };
@@ -149,6 +162,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateOnlineEvaluationC
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.clustering_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"clusteringConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"dataSourceConfig\":");
     try aws.json.writeValue(@TypeOf(input.data_source_config), input.data_source_config, allocator, &body_buf);
@@ -167,14 +186,28 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateOnlineEvaluationC
     try body_buf.appendSlice(allocator, "\"evaluationExecutionRoleArn\":");
     try aws.json.writeValue(@TypeOf(input.evaluation_execution_role_arn), input.evaluation_execution_role_arn, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"evaluators\":");
-    try aws.json.writeValue(@TypeOf(input.evaluators), input.evaluators, allocator, &body_buf);
-    has_prev = true;
+    if (input.evaluators) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"evaluators\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.insights) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"insights\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"onlineEvaluationConfigName\":");
     try aws.json.writeValue(@TypeOf(input.online_evaluation_config_name), input.online_evaluation_config_name, allocator, &body_buf);
     has_prev = true;
+    if (input.output_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"outputConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"rule\":");
     try aws.json.writeValue(@TypeOf(input.rule), input.rule, allocator, &body_buf);
@@ -201,10 +234,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateOnlineEvaluationC
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateOnlineEvaluationConfigOutput {
-    var result: CreateOnlineEvaluationConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateOnlineEvaluationConfigOutput, body, allocator);
-    }
+    const result: CreateOnlineEvaluationConfigOutput = try aws.json.parseJsonObject(
+        CreateOnlineEvaluationConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

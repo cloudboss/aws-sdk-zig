@@ -1,3 +1,5 @@
+const DashAudioTimelinePattern = @import("dash_audio_timeline_pattern.zig").DashAudioTimelinePattern;
+const DashAvailabilityStartTimeConfiguration = @import("dash_availability_start_time_configuration.zig").DashAvailabilityStartTimeConfiguration;
 const DashBaseUrl = @import("dash_base_url.zig").DashBaseUrl;
 const DashCompactness = @import("dash_compactness.zig").DashCompactness;
 const DashDrmSignaling = @import("dash_drm_signaling.zig").DashDrmSignaling;
@@ -14,6 +16,26 @@ const DashUtcTiming = @import("dash_utc_timing.zig").DashUtcTiming;
 
 /// Create a DASH manifest configuration.
 pub const CreateDashManifestConfiguration = struct {
+    /// How MediaPackage represents the audio timeline in the DASH manifest. This
+    /// setting applies DASH Segment Duration Patternization, as defined in the
+    /// MPEG-DASH specification, to audio adaptation sets. When set to `PATTERNED`,
+    /// MediaPackage uses a pattern-based segment template for audio, which reduces
+    /// manifest size by expressing repeating segment durations as a pattern instead
+    /// of listing each segment individually. When set to `NONE`, the manifest
+    /// contains an explicit timeline that lists each audio segment.
+    ///
+    /// Valid values: `NONE` | `PATTERNED`
+    ///
+    /// For information about audio timeline patterns, see [DASH audio timeline
+    /// pattern](https://docs.aws.amazon.com/mediapackage/latest/userguide/dash-audio-timeline-pattern.html) in the *Elemental MediaPackage v2 User Guide*.
+    audio_timeline_pattern: ?DashAudioTimelinePattern = null,
+
+    /// The configuration for the DASH `availabilityStartTime` attribute of the
+    /// Media Presentation Description (MPD). If you don't specify a value,
+    /// MediaPackage uses the default availability start time of
+    /// `2024-01-01T00:00:00Z`.
+    availability_start_time_configuration: ?DashAvailabilityStartTimeConfiguration = null,
+
     /// The base URLs to use for retrieving segments.
     base_urls: ?[]const DashBaseUrl = null,
 
@@ -100,6 +122,8 @@ pub const CreateDashManifestConfiguration = struct {
     utc_timing: ?DashUtcTiming = null,
 
     pub const json_field_names = .{
+        .audio_timeline_pattern = "AudioTimelinePattern",
+        .availability_start_time_configuration = "AvailabilityStartTimeConfiguration",
         .base_urls = "BaseUrls",
         .compactness = "Compactness",
         .drm_signaling = "DrmSignaling",

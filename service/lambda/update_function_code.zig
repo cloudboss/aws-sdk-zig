@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Architecture = @import("architecture.zig").Architecture;
 const FunctionVersionLatestPublished = @import("function_version_latest_published.zig").FunctionVersionLatestPublished;
+const S3ObjectStorageMode = @import("s3_object_storage_mode.zig").S3ObjectStorageMode;
 const CapacityProviderConfig = @import("capacity_provider_config.zig").CapacityProviderConfig;
 const DeadLetterConfig = @import("dead_letter_config.zig").DeadLetterConfig;
 const DurableConfig = @import("durable_config.zig").DurableConfig;
@@ -73,6 +74,13 @@ pub const UpdateFunctionCodeInput = struct {
     /// defined with a .zip file archive deployment package.
     s3_key: ?[]const u8 = null,
 
+    /// Specifies how the deployment package is stored. Valid values:
+    ///
+    /// * `COPY` (default) – Uploads a copy of your deployment package to Lambda.
+    /// * `REFERENCE` – Lambda references the deployment package from the specified
+    ///   Amazon S3 bucket.
+    s3_object_storage_mode: ?S3ObjectStorageMode = null,
+
     /// For versioned objects, the version of the deployment package object to use.
     s3_object_version: ?[]const u8 = null,
 
@@ -96,6 +104,7 @@ pub const UpdateFunctionCodeInput = struct {
         .revision_id = "RevisionId",
         .s3_bucket = "S3Bucket",
         .s3_key = "S3Key",
+        .s3_object_storage_mode = "S3ObjectStorageMode",
         .s3_object_version = "S3ObjectVersion",
         .source_kms_key_arn = "SourceKMSKeyArn",
         .zip_file = "ZipFile",
@@ -192,6 +201,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateFunctionCodeInput
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.s3_object_storage_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"S3ObjectStorageMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.s3_object_version) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"S3ObjectVersion\":");
@@ -226,10 +241,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateFunctionCodeInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateFunctionCodeOutput {
-    var result: UpdateFunctionCodeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateFunctionCodeOutput, body, allocator);
-    }
+    const result: UpdateFunctionCodeOutput = try aws.json.parseJsonObject(
+        UpdateFunctionCodeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

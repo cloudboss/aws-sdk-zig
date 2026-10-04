@@ -104,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterDeviceInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RegisterDeviceOutput {
-    var result: RegisterDeviceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RegisterDeviceOutput, body, allocator);
-    }
+    const result: RegisterDeviceOutput = try aws.json.parseJsonObject(
+        RegisterDeviceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

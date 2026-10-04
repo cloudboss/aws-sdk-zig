@@ -13,7 +13,8 @@ pub const Geometry = struct {
     /// Within the bounding box, a fine-grained polygon around the recognized item.
     polygon: ?[]const Point = null,
 
-    /// Provides a numerical value corresponding to the rotation of the text.
+    /// Provides a numerical value corresponding to the rotation of the WORD block.
+    /// Possible values are 0, 90, 180, and 270.
     rotation_angle: ?f32 = null,
 
     pub const json_field_names = .{

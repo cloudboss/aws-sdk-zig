@@ -18,8 +18,7 @@ pub const ListFHIRExportJobsInput = struct {
     job_status: ?JobStatus = null,
 
     /// Limits the number of results returned for a ListFHIRExportJobs to a maximum
-    /// quantity
-    /// specified by the user.
+    /// quantity specified by the user.
     max_results: ?i32 = null,
 
     /// A pagination token used to identify the next page of results to return.

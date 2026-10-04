@@ -89,10 +89,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartApprovalTeamBaseli
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartApprovalTeamBaselineOutput {
-    var result: StartApprovalTeamBaselineOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartApprovalTeamBaselineOutput, body, allocator);
-    }
+    const result: StartApprovalTeamBaselineOutput = try aws.json.parseJsonObject(
+        StartApprovalTeamBaselineOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

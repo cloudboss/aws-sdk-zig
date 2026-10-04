@@ -16,6 +16,7 @@ const ReplicationGroupUpdate = @import("replication_group_update.zig").Replicati
 const SSESpecification = @import("sse_specification.zig").SSESpecification;
 const StreamSpecification = @import("stream_specification.zig").StreamSpecification;
 const TableClass = @import("table_class.zig").TableClass;
+const VectorIndexUpdate = @import("vector_index_update.zig").VectorIndexUpdate;
 const WarmThroughput = @import("warm_throughput.zig").WarmThroughput;
 const TableDescription = @import("table_description.zig").TableDescription;
 
@@ -161,6 +162,16 @@ pub const UpdateTableInput = struct {
     /// in this parameter.
     table_name: []const u8,
 
+    /// A list of vector indexes to be added to or removed from the table. You can
+    /// add or
+    /// remove one vector index for each `UpdateTable` operation.
+    ///
+    /// To add a vector index, specify `IndexName`,
+    /// `VectorAttribute`, `Dimensions`,
+    /// `DistanceFunction`, and `Projection`. To remove a vector
+    /// index, specify only the `IndexName`.
+    vector_index_updates: ?[]const VectorIndexUpdate = null,
+
     /// Represents the warm throughput (in read units per second and write units per
     /// second)
     /// for updating a table.
@@ -181,6 +192,7 @@ pub const UpdateTableInput = struct {
         .stream_specification = "StreamSpecification",
         .table_class = "TableClass",
         .table_name = "TableName",
+        .vector_index_updates = "VectorIndexUpdates",
         .warm_throughput = "WarmThroughput",
     };
 };

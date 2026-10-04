@@ -1,5 +1,5 @@
-/// Contains runtime details for an instance of a workflow that ran for the
-/// associated image build version.
+/// Contains runtime details for a workflow step that has paused at a
+/// `WaitForAction` step, and is waiting for you to send an action.
 pub const WorkflowStepExecution = struct {
     /// The name of the step action.
     action: ?[]const u8 = null,

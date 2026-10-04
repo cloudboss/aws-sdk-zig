@@ -176,7 +176,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetProfileInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetProfileOutput {
-    var result: GetProfileOutput = .{};
+    var result: GetProfileOutput = .{
+        .content_type = "",
+        .profile = "",
+    };
+    errdefer {
+        if (result.content_encoding) |value| allocator.free(value);
+        allocator.free(result.content_type);
+        allocator.free(result.profile);
+    }
     result.profile = try allocator.dupe(u8, body);
     _ = status;
     if (headers.get("content-encoding")) |value| {

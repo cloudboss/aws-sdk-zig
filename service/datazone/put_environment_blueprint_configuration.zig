@@ -5,8 +5,14 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ProvisioningConfiguration = @import("provisioning_configuration.zig").ProvisioningConfiguration;
+const PutResourceConfiguration = @import("put_resource_configuration.zig").PutResourceConfiguration;
+const ResourceConfiguration = @import("resource_configuration.zig").ResourceConfiguration;
 
 pub const PutEnvironmentBlueprintConfigurationInput = struct {
+    /// Specifies whether user-provided resource configurations are allowed for the
+    /// environment blueprint.
+    allow_user_provided_configurations: ?bool = null,
+
     /// The identifier of the Amazon DataZone domain.
     domain_identifier: []const u8,
 
@@ -34,7 +40,11 @@ pub const PutEnvironmentBlueprintConfigurationInput = struct {
     /// The regional parameters in the environment blueprint.
     regional_parameters: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry) = null,
 
+    /// The resource configurations of the environment blueprint.
+    resource_configurations: ?[]const PutResourceConfiguration = null,
+
     pub const json_field_names = .{
+        .allow_user_provided_configurations = "allowUserProvidedConfigurations",
         .domain_identifier = "domainIdentifier",
         .enabled_regions = "enabledRegions",
         .environment_blueprint_identifier = "environmentBlueprintIdentifier",
@@ -44,10 +54,15 @@ pub const PutEnvironmentBlueprintConfigurationInput = struct {
         .provisioning_configurations = "provisioningConfigurations",
         .provisioning_role_arn = "provisioningRoleArn",
         .regional_parameters = "regionalParameters",
+        .resource_configurations = "resourceConfigurations",
     };
 };
 
 pub const PutEnvironmentBlueprintConfigurationOutput = struct {
+    /// Specifies whether user-provided resource configurations are allowed for the
+    /// environment blueprint.
+    allow_user_provided_configurations: ?bool = null,
+
     /// The timestamp of when the environment blueprint was created.
     created_at: ?i64 = null,
 
@@ -75,10 +90,14 @@ pub const PutEnvironmentBlueprintConfigurationOutput = struct {
     /// The regional parameters in the environment blueprint.
     regional_parameters: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry) = null,
 
+    /// The resource configurations of the environment blueprint.
+    resource_configurations: ?[]const ResourceConfiguration = null,
+
     /// The timestamp of when the environment blueprint was updated.
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{
+        .allow_user_provided_configurations = "allowUserProvidedConfigurations",
         .created_at = "createdAt",
         .domain_id = "domainId",
         .enabled_regions = "enabledRegions",
@@ -88,6 +107,7 @@ pub const PutEnvironmentBlueprintConfigurationOutput = struct {
         .provisioning_configurations = "provisioningConfigurations",
         .provisioning_role_arn = "provisioningRoleArn",
         .regional_parameters = "regionalParameters",
+        .resource_configurations = "resourceConfigurations",
         .updated_at = "updatedAt",
     };
 };
@@ -133,6 +153,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutEnvironmentBlueprint
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.allow_user_provided_configurations) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"allowUserProvidedConfigurations\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"enabledRegions\":");
     try aws.json.writeValue(@TypeOf(input.enabled_regions), input.enabled_regions, allocator, &body_buf);
@@ -173,6 +199,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutEnvironmentBlueprint
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.resource_configurations) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"resourceConfigurations\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -189,10 +221,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutEnvironmentBlueprint
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutEnvironmentBlueprintConfigurationOutput {
-    var result: PutEnvironmentBlueprintConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutEnvironmentBlueprintConfigurationOutput, body, allocator);
-    }
+    const result: PutEnvironmentBlueprintConfigurationOutput = try aws.json.parseJsonObject(
+        PutEnvironmentBlueprintConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

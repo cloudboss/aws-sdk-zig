@@ -1,0 +1,36 @@
+const std = @import("std");
+
+/// The state of a web function. Possible values: `Pending` (function is being
+/// created), `Active` (function is ready to use), `Failed` (function creation
+/// or update failed), `Deleting` (function is being deleted).
+pub const FunctionState = enum {
+    pending,
+    active,
+    failed,
+    deleting,
+
+    pub const json_field_names = .{
+        .pending = "Pending",
+        .active = "Active",
+        .failed = "Failed",
+        .deleting = "Deleting",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .pending => "Pending",
+            .active => "Active",
+            .failed => "Failed",
+            .deleting => "Deleting",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
+};

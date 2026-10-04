@@ -1,6 +1,7 @@
 const std = @import("std");
 
-/// The network access type for a notebook run in Amazon DataZone.
+/// The network access type for a notebook run in Amazon SageMaker Unified
+/// Studio.
 pub const NetworkAccessType = enum {
     /// The notebook run uses public internet access only.
     public_internet_only,

@@ -28,6 +28,7 @@ pub const GetPaymentSessionInput = struct {
 };
 
 pub const GetPaymentSessionOutput = struct {
+    /// The payment session details.
     payment_session: ?PaymentSession = null,
 
     pub const json_field_names = .{
@@ -101,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPaymentSessionInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPaymentSessionOutput {
-    var result: GetPaymentSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPaymentSessionOutput, body, allocator);
-    }
+    const result: GetPaymentSessionOutput = try aws.json.parseJsonObject(
+        GetPaymentSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

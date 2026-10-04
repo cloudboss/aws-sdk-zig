@@ -100,6 +100,10 @@ pub const StepExecution = struct {
     /// automation to go to another specific step.
     valid_next_steps: ?[]const []const u8 = null,
 
+    /// A message that describes a non-critical issue that occurred during the step
+    /// execution. Present only if the step status includes a warning.
+    warning_message: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .action = "Action",
         .execution_end_time = "ExecutionEndTime",
@@ -125,5 +129,6 @@ pub const StepExecution = struct {
         .timeout_seconds = "TimeoutSeconds",
         .triggered_alarms = "TriggeredAlarms",
         .valid_next_steps = "ValidNextSteps",
+        .warning_message = "WarningMessage",
     };
 };

@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ValidateTelemetryPipeli
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ValidateTelemetryPipelineConfigurationOutput {
-    var result: ValidateTelemetryPipelineConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ValidateTelemetryPipelineConfigurationOutput, body, allocator);
-    }
+    const result: ValidateTelemetryPipelineConfigurationOutput = try aws.json.parseJsonObject(
+        ValidateTelemetryPipelineConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

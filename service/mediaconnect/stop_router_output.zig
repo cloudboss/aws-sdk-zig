@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StopRouterOutputInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StopRouterOutputOutput {
-    var result: StopRouterOutputOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StopRouterOutputOutput, body, allocator);
-    }
+    const result: StopRouterOutputOutput = try aws.json.parseJsonObject(
+        StopRouterOutputOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

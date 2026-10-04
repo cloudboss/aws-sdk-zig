@@ -120,10 +120,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRepositoryEndpointIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRepositoryEndpointOutput {
-    var result: GetRepositoryEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRepositoryEndpointOutput, body, allocator);
-    }
+    const result: GetRepositoryEndpointOutput = try aws.json.parseJsonObject(
+        GetRepositoryEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

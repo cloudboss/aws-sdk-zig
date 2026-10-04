@@ -81,6 +81,8 @@ pub const UpdateResourceConfigurationOutput = struct {
     /// * `CHILD` - A single resource that is part of a group resource
     ///   configuration.
     /// * `ARN` - An Amazon Web Services resource.
+    /// * `CIDR` - A network segment (a range of IP addresses) accessed through a
+    ///   `Tunnel` VPC endpoint.
     @"type": ?ResourceConfigurationType = null,
 
     pub const json_field_names = .{
@@ -171,10 +173,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateResourceConfigura
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateResourceConfigurationOutput {
-    var result: UpdateResourceConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateResourceConfigurationOutput, body, allocator);
-    }
+    const result: UpdateResourceConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateResourceConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

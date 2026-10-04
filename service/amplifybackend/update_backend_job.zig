@@ -140,10 +140,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateBackendJobInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateBackendJobOutput {
-    var result: UpdateBackendJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateBackendJobOutput, body, allocator);
-    }
+    const result: UpdateBackendJobOutput = try aws.json.parseJsonObject(
+        UpdateBackendJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

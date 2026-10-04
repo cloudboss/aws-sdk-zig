@@ -1,3 +1,4 @@
+const CapacityProviderVolumeConfiguration = @import("capacity_provider_volume_configuration.zig").CapacityProviderVolumeConfiguration;
 const EfsAccessPointConfiguration = @import("efs_access_point_configuration.zig").EfsAccessPointConfiguration;
 const S3FilesAccessPointConfiguration = @import("s3_files_access_point_configuration.zig").S3FilesAccessPointConfiguration;
 const SessionStorageConfiguration = @import("session_storage_configuration.zig").SessionStorageConfiguration;
@@ -5,6 +6,10 @@ const SessionStorageConfiguration = @import("session_storage_configuration.zig")
 /// Configuration for a filesystem that can be mounted into the AgentCore
 /// Runtime.
 pub const FilesystemConfiguration = union(enum) {
+    /// Configuration for a capacity provider volume to mount into the AgentCore
+    /// Runtime. This mounts a persistent volume that is defined on the capacity
+    /// provider, referenced by its logical name.
+    capacity_provider_volume: ?CapacityProviderVolumeConfiguration,
     /// Configuration for an Amazon EFS access point to mount into the AgentCore
     /// Runtime.
     efs_access_point: ?EfsAccessPointConfiguration,
@@ -16,6 +21,7 @@ pub const FilesystemConfiguration = union(enum) {
     session_storage: ?SessionStorageConfiguration,
 
     pub const json_field_names = .{
+        .capacity_provider_volume = "capacityProviderVolume",
         .efs_access_point = "efsAccessPoint",
         .s_3_files_access_point = "s3FilesAccessPoint",
         .session_storage = "sessionStorage",

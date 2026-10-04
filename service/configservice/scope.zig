@@ -19,6 +19,12 @@ pub const Scope = struct {
     /// `ComplianceResourceId`.
     compliance_resource_types: ?[]const []const u8 = null,
 
+    /// The service principals of the Amazon Web Services services for the rule.
+    ///
+    /// The field is populated only if the service-linked rule is created by a
+    /// service. The field is empty if you create your own rule.
+    service_principals: ?[]const []const u8 = null,
+
     /// The tag key that is applied to only those Amazon Web Services resources that
     /// you want to trigger an evaluation for the rule.
     tag_key: ?[]const u8 = null,
@@ -33,6 +39,7 @@ pub const Scope = struct {
     pub const json_field_names = .{
         .compliance_resource_id = "ComplianceResourceId",
         .compliance_resource_types = "ComplianceResourceTypes",
+        .service_principals = "ServicePrincipals",
         .tag_key = "TagKey",
         .tag_value = "TagValue",
     };

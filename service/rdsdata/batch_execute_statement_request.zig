@@ -1,8 +1,7 @@
 const SqlParameter = @import("sql_parameter.zig").SqlParameter;
 
 /// The request parameters represent the input of a SQL statement over an array
-/// of
-/// data.
+/// of data.
 pub const BatchExecuteStatementRequest = struct {
     /// The name of the database.
     database: ?[]const u8 = null,
@@ -10,12 +9,10 @@ pub const BatchExecuteStatementRequest = struct {
     /// The parameter set for the batch operation.
     ///
     /// The SQL statement is executed as many times as the number of parameter sets
-    /// provided.
-    /// To execute a SQL statement with no parameters, use one of the following
-    /// options:
+    /// provided. To execute a SQL statement with no parameters, use one of the
+    /// following options:
     ///
     /// * Specify one or more empty parameter sets.
-    ///
     /// * Use the `ExecuteStatement` operation instead of the
     ///   `BatchExecuteStatement` operation.
     ///
@@ -31,8 +28,7 @@ pub const BatchExecuteStatementRequest = struct {
     schema: ?[]const u8 = null,
 
     /// The ARN of the secret that enables access to the DB cluster. Enter the
-    /// database user name and password for the credentials in
-    /// the secret.
+    /// database user name and password for the credentials in the secret.
     ///
     /// For information about creating the secret, see [Create a database
     /// secret](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html).
@@ -43,11 +39,10 @@ pub const BatchExecuteStatementRequest = struct {
     sql: []const u8,
 
     /// The identifier of a transaction that was started by using the
-    /// `BeginTransaction` operation. Specify the transaction ID of the
-    /// transaction that you want to include the SQL statement in.
+    /// `BeginTransaction` operation. Specify the transaction ID of the transaction
+    /// that you want to include the SQL statement in.
     ///
-    /// If the SQL statement is not part of a transaction, don't set this
-    /// parameter.
+    /// If the SQL statement is not part of a transaction, don't set this parameter.
     transaction_id: ?[]const u8 = null,
 
     pub const json_field_names = .{

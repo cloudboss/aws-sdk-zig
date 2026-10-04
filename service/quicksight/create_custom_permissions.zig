@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Capabilities = @import("capabilities.zig").Capabilities;
+const Governance = @import("governance.zig").Governance;
 const Tag = @import("tag.zig").Tag;
 
 pub const CreateCustomPermissionsInput = struct {
@@ -18,6 +19,13 @@ pub const CreateCustomPermissionsInput = struct {
     /// The name of the custom permissions profile that you want to create.
     custom_permissions_name: []const u8,
 
+    /// The governance configuration for the custom permissions profile. When
+    /// governance controls are defined for a category, any capabilities in that
+    /// category not explicitly set to `ALLOW` in `Capabilities` are denied. Even
+    /// newly added capabilities in the category are implicitly disabled when Amazon
+    /// Quick releases them.
+    governance: ?Governance = null,
+
     /// The tags to associate with the custom permissions profile.
     tags: ?[]const Tag = null,
 
@@ -25,6 +33,7 @@ pub const CreateCustomPermissionsInput = struct {
         .aws_account_id = "AwsAccountId",
         .capabilities = "Capabilities",
         .custom_permissions_name = "CustomPermissionsName",
+        .governance = "Governance",
         .tags = "Tags",
     };
 };
@@ -96,6 +105,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCustomPermissions
     try body_buf.appendSlice(allocator, "\"CustomPermissionsName\":");
     try aws.json.writeValue(@TypeOf(input.custom_permissions_name), input.custom_permissions_name, allocator, &body_buf);
     has_prev = true;
+    if (input.governance) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Governance\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Tags\":");
@@ -118,10 +133,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCustomPermissions
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCustomPermissionsOutput {
-    var result: CreateCustomPermissionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCustomPermissionsOutput, body, allocator);
-    }
+    const result: CreateCustomPermissionsOutput = try aws.json.parseJsonObject(
+        CreateCustomPermissionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

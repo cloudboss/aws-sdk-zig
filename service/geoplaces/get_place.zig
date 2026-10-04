@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const GetPlaceAdditionalFeature = @import("get_place_additional_feature.zig").GetPlaceAdditionalFeature;
+const GetPlaceAddressNamesMode = @import("get_place_address_names_mode.zig").GetPlaceAddressNamesMode;
 const GetPlaceIntendedUse = @import("get_place_intended_use.zig").GetPlaceIntendedUse;
 const AccessPoint = @import("access_point.zig").AccessPoint;
 const AccessRestriction = @import("access_restriction.zig").AccessRestriction;
@@ -12,10 +13,12 @@ const Address = @import("address.zig").Address;
 const BusinessChain = @import("business_chain.zig").BusinessChain;
 const Category = @import("category.zig").Category;
 const Contacts = @import("contacts.zig").Contacts;
+const CrossReference = @import("cross_reference.zig").CrossReference;
 const FoodType = @import("food_type.zig").FoodType;
 const RelatedPlace = @import("related_place.zig").RelatedPlace;
 const OpeningHours = @import("opening_hours.zig").OpeningHours;
 const PhonemeDetails = @import("phoneme_details.zig").PhonemeDetails;
+const PlaceAttribute = @import("place_attribute.zig").PlaceAttribute;
 const PlaceType = @import("place_type.zig").PlaceType;
 const PostalCodeDetails = @import("postal_code_details.zig").PostalCodeDetails;
 const TimeZone = @import("time_zone.zig").TimeZone;
@@ -25,6 +28,11 @@ pub const GetPlaceInput = struct {
     /// requested for each result. For
     /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the `TimeZone` value.
     additional_features: ?[]const GetPlaceAdditionalFeature = null,
+
+    /// Specifies how address names are returned. When set to `Administrative`, the
+    /// service returns the official administrative names for address components.
+    /// `Administrative` currently applies only to addresses in the United States.
+    address_names_mode: ?GetPlaceAddressNamesMode = null,
 
     /// Indicates if the query results will be persisted in customer infrastructure.
     /// Defaults to `SingleUse` (not stored). Not supported in `ap-southeast-1` and
@@ -43,11 +51,8 @@ pub const GetPlaceInput = struct {
     /// valid SigV4 signature must be provided when making a request.
     key: ?[]const u8 = null,
 
-    /// A list of [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag)
-    /// compliant language codes for the results to be rendered in. If there is no
-    /// data for the result in the requested language, data will be returned in the
-    /// default language for the entry. For
-    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the following codes: `en, id, km, lo, ms, my, pt, th, tl, vi, zh`
+    /// A list of [BCP
+    /// 47](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry) compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the following codes: `en, id, km, lo, ms, my, pt, th, tl, vi, zh`
     language: ?[]const u8 = null,
 
     /// The `PlaceId` of the place you wish to receive the information for.
@@ -62,6 +67,7 @@ pub const GetPlaceInput = struct {
 
     pub const json_field_names = .{
         .additional_features = "AdditionalFeatures",
+        .address_names_mode = "AddressNamesMode",
         .intended_use = "IntendedUse",
         .key = "Key",
         .language = "Language",
@@ -103,6 +109,14 @@ pub const GetPlaceOutput = struct {
     /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     contacts: ?Contacts = null,
 
+    /// The list of supplier references available for this place. Requires the
+    /// `CrossReferences` additional feature to be enabled.
+    cross_references: ?[]const CrossReference = null,
+
+    /// If `true`, indicates that the coordinates of the position and access points
+    /// of the point address are estimated.
+    estimated_point_address: ?bool = null,
+
     /// List of food types offered by this result. Not available in `ap-southeast-1`
     /// and `ap-southeast-5` regions for
     /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
@@ -130,6 +144,10 @@ pub const GetPlaceOutput = struct {
     /// for
     /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     phonemes: ?PhonemeDetails = null,
+
+    /// A list of place attributes for the result, such as whether the business
+    /// offers drive-through service.
+    place_attributes: ?[]const PlaceAttribute = null,
 
     /// The `PlaceId` of the place you wish to receive the information for.
     place_id: []const u8,
@@ -184,11 +202,14 @@ pub const GetPlaceOutput = struct {
         .business_chains = "BusinessChains",
         .categories = "Categories",
         .contacts = "Contacts",
+        .cross_references = "CrossReferences",
+        .estimated_point_address = "EstimatedPointAddress",
         .food_types = "FoodTypes",
         .main_address = "MainAddress",
         .map_view = "MapView",
         .opening_hours = "OpeningHours",
         .phonemes = "Phonemes",
+        .place_attributes = "PlaceAttributes",
         .place_id = "PlaceId",
         .place_type = "PlaceType",
         .political_view = "PoliticalView",
@@ -246,6 +267,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPlaceInput, config: 
             query_has_prev = true;
         }
     }
+    if (input.address_names_mode) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "address-names-mode=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
+        query_has_prev = true;
+    }
     if (input.intended_use) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "intended-use=");
@@ -287,10 +314,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPlaceInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPlaceOutput {
-    var result: GetPlaceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPlaceOutput, body, allocator);
-    }
+    var result: GetPlaceOutput = try aws.json.parseJsonObject(
+        GetPlaceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("x-amz-geo-pricing-bucket")) |value| {
         result.pricing_bucket = try allocator.dupe(u8, value);

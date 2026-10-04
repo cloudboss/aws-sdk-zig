@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFunctionConcurrencyI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetFunctionConcurrencyOutput {
-    var result: GetFunctionConcurrencyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetFunctionConcurrencyOutput, body, allocator);
-    }
+    const result: GetFunctionConcurrencyOutput = try aws.json.parseJsonObject(
+        GetFunctionConcurrencyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

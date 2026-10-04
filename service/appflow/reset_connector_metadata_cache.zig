@@ -42,8 +42,8 @@ pub const ResetConnectorMetadataCacheInput = struct {
     ///
     /// You can omit this parameter if you're resetting the cache for any of the
     /// following
-    /// connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for Metrics,
-    /// Amazon S3, or Upsolver. If you're resetting the cache for any other
+    /// connectors: Connect Customer, Amazon EventBridge, Amazon Lookout for
+    /// Metrics, Amazon S3, or Upsolver. If you're resetting the cache for any other
     /// connector, you must include this
     /// parameter in your request.
     connector_profile_name: ?[]const u8 = null,
@@ -52,8 +52,8 @@ pub const ResetConnectorMetadataCacheInput = struct {
     ///
     /// You must include this parameter in your request if you're resetting the
     /// cache for any of
-    /// the following connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout
-    /// for Metrics,
+    /// the following connectors: Connect Customer, Amazon EventBridge, Amazon
+    /// Lookout for Metrics,
     /// Amazon S3, or Upsolver. If you're resetting the cache for any other
     /// connector, you
     /// can omit this parameter from your request.

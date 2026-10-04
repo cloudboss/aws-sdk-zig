@@ -1,4 +1,4 @@
-/// An evaluator to run against sessions
+/// An evaluator to run against sessions during batch evaluation.
 pub const Evaluator = struct {
     /// The unique identifier of the evaluator. Can reference built-in evaluators
     /// (e.g., `Builtin.Helpfulness`) or custom evaluators.

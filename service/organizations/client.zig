@@ -119,6 +119,28 @@ pub const Client = struct {
     ///
     /// For more information, see [Responding to
     /// invitations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_accept-decline-invite.html) and [Enabling all features](https://docs.aws.amazon.com/organizations/latest/userguide/manage-begin-all-features-standard-migration.html#manage-approve-all-features-invite) in the *Organizations User Guide*.
+    ///
+    /// When a handshake is accepted, Organizations logs membership events in
+    /// CloudTrail, available
+    /// only in the management account's event history. If the account was
+    /// standalone and joined
+    /// a new organization, an `AccountJoinedOrganization` event is logged with
+    /// `joinedMethod:INVITED` and `joinedTime` fields. If the account
+    /// departed one organization and joined another, both an
+    /// `AccountDepartedOrganization` event with `departureMethod:LEFT`
+    /// and `departureTime` and an `AccountJoinedOrganization` event with
+    /// `joinedMethod:INVITED` and `joinedTime` are logged in their
+    /// respective management accounts.
+    ///
+    /// When a billing transfer (`TRANSFER_RESPONSIBILITY`) handshake is accepted,
+    /// Organizations publishes a `ResponsibilityTransferAccepted` service event to
+    /// CloudTrail.
+    /// Each affected account receives this event, including upstream participants
+    /// such as
+    /// distributors in a chained transfer. For an example log entry, see [Example
+    /// log entries:
+    /// AcceptResponsibilityTransfer](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_cloudtrail-integration.html#Log-entries-accept-responsibility-transfer) in the
+    /// *Organizations User Guide*.
     pub fn acceptHandshake(self: *Self, allocator: std.mem.Allocator, input: accept_handshake.AcceptHandshakeInput, options: CallOptions) !accept_handshake.AcceptHandshakeOutput {
         return accept_handshake.execute(self, allocator, input, options);
     }
@@ -166,6 +188,9 @@ pub const Client = struct {
     ///
     /// *
     ///   [NETWORK_SECURITY_DIRECTOR_POLICY](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html)
+    ///
+    /// *
+    ///   [GUARDDUTY_POLICY](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_guardduty.html)
     ///
     /// You can only call this operation from the management account or a member
     /// account that is a delegated administrator.
@@ -243,6 +268,13 @@ pub const Client = struct {
     /// Closing an Amazon Web Services GovCloud (US)
     /// account](https://docs.aws.amazon.com/govcloud-us/latest/UserGuide/Closing-govcloud-account.html) in the *
     /// Amazon Web Services GovCloud User Guide*.
+    ///
+    /// After the permanent termination of the account after the 90-day waiting
+    /// period,
+    /// Organizations logs a membership event in CloudTrail. The event is an
+    /// `AccountDepartedOrganization` event with
+    /// `departureMethod:CLEANED` and `departureTime`. This event is
+    /// available only in the management account's event history.
     pub fn closeAccount(self: *Self, allocator: std.mem.Allocator, input: close_account.CloseAccountInput, options: CallOptions) !close_account.CloseAccountOutput {
         return close_account.execute(self, allocator, input, options);
     }
@@ -267,6 +299,13 @@ pub const Client = struct {
     /// monitoring in
     /// Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration) in the
     /// *Organizations User Guide*.
+    ///
+    /// Additionally, the `AccountJoinedOrganization` event is logged in CloudTrail
+    /// and
+    /// is available only in the management account's event history. This event
+    /// includes
+    /// `joinedMethod:Created` and `joinedTime` fields to provide context
+    /// on how and when the account joined the organization.
     ///
     /// The user who calls the API to create an account must have the
     /// `organizations:CreateAccount` permission. If you enabled all features in
@@ -404,7 +443,7 @@ pub const Client = struct {
     /// do one of
     /// the following:
     ///
-    /// * Use the `OperationId` response element from this operation to
+    /// * Use the `Id` response element from this operation to
     /// provide as a parameter to the DescribeCreateAccountStatus
     /// operation.
     ///
@@ -413,6 +452,14 @@ pub const Client = struct {
     /// monitoring in
     /// Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html) in the
     /// *Organizations User Guide*.
+    ///
+    /// Additionally, the `AccountJoinedOrganization` event is logged in CloudTrail
+    /// and
+    /// is available only in the management account's event history only for the
+    /// linked
+    /// commercial account. This event includes `joinedMethod:Created` and
+    /// `joinedTime` fields to provide context on how and when the account joined
+    /// the organization.
     ///
     /// When you call the `CreateGovCloudAccount` action, you create two accounts:
     /// a standalone account in the Amazon Web Services GovCloud (US) Region and an
@@ -509,6 +556,12 @@ pub const Client = struct {
     /// `FeatureSet`
     /// parameter to `CONSOLIDATED_BILLING`, no policy types are enabled by default
     /// and you can't use organization policies.
+    ///
+    /// The `AccountJoinedOrganization` event is logged in CloudTrail and
+    /// is available only in the management account's event history. This event
+    /// includes
+    /// `joinedMethod:INVITED` and `joinedTime` fields to provide
+    /// context on how and when the account joined the organization.
     pub fn createOrganization(self: *Self, allocator: std.mem.Allocator, input: create_organization.CreateOrganizationInput, options: CallOptions) !create_organization.CreateOrganizationOutput {
         return create_organization.execute(self, allocator, input, options);
     }
@@ -569,6 +622,12 @@ pub const Client = struct {
     /// credentials
     /// from the management account. The organization must be empty of member
     /// accounts.
+    ///
+    /// When an organization is deleted, Organizations logs a membership event in
+    /// CloudTrail. The
+    /// event is an `AccountDepartedOrganization` event with
+    /// `departureMethod:LEFT` and `departureTime`. This event is available
+    /// only in the management account's event history.
     pub fn deleteOrganization(self: *Self, allocator: std.mem.Allocator, input: delete_organization.DeleteOrganizationInput, options: CallOptions) !delete_organization.DeleteOrganizationOutput {
         return delete_organization.execute(self, allocator, input, options);
     }
@@ -1000,6 +1059,12 @@ pub const Client = struct {
     /// instead.
     ///
     /// You can only call from operation from a member account.
+    ///
+    /// When an account leaves an organization, Organizations logs a membership
+    /// event in
+    /// CloudTrail. The event is an `AccountDepartedOrganization` event with
+    /// `departureMethod:LEFT` and `departureTime`. This event is available
+    /// only in the management account's event history.
     ///
     /// * The management account in an organization with all features enabled can
     /// set service control policies (SCPs) that can restrict what administrators of
@@ -1435,6 +1500,13 @@ pub const Client = struct {
     /// You can only call this operation from the management account. Member
     /// accounts can remove themselves with LeaveOrganization instead.
     ///
+    /// When an account is removed from an organization, Organizations logs a
+    /// membership
+    /// event in CloudTrail. The event is an
+    /// `AccountDepartedOrganization` event with
+    /// `departureMethod:REMOVED` and `departureTime`. This event is
+    /// available only in the management account's event history.
+    ///
     /// * You can remove an account from your organization only if the account is
     /// configured with the information required to operate as a standalone account.
     /// When you create an account in an organization using the Organizations
@@ -1481,6 +1553,15 @@ pub const Client = struct {
     /// Ends a transfer. A *transfer* is an arrangement between two
     /// management accounts where one account designates the other with specified
     /// responsibilities for their organization.
+    ///
+    /// When a transfer ends, Organizations publishes a
+    /// `ResponsibilityTransferTerminated` service event to CloudTrail. Each
+    /// affected
+    /// account receives this event, including upstream participants such as
+    /// distributors in a
+    /// chained transfer. For an example log entry, see [Example log entries:
+    /// TerminateResponsibilityTransfer](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_cloudtrail-integration.html#Log-entries-terminate-responsibility-transfer) in the
+    /// *Organizations User Guide*.
     pub fn terminateResponsibilityTransfer(self: *Self, allocator: std.mem.Allocator, input: terminate_responsibility_transfer.TerminateResponsibilityTransferInput, options: CallOptions) !terminate_responsibility_transfer.TerminateResponsibilityTransferOutput {
         return terminate_responsibility_transfer.execute(self, allocator, input, options);
     }

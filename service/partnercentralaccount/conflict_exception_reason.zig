@@ -13,6 +13,7 @@ pub const ConflictExceptionReason = enum {
     incompatible_connection_preferences_revision,
     account_already_verified,
     verification_already_in_progress,
+    incompatible_qualifications_association_task_state,
 
     pub const json_field_names = .{
         .conflict_client_token = "CONFLICT_CLIENT_TOKEN",
@@ -27,6 +28,7 @@ pub const ConflictExceptionReason = enum {
         .incompatible_connection_preferences_revision = "INCOMPATIBLE_CONNECTION_PREFERENCES_REVISION",
         .account_already_verified = "ACCOUNT_ALREADY_VERIFIED",
         .verification_already_in_progress = "VERIFICATION_ALREADY_IN_PROGRESS",
+        .incompatible_qualifications_association_task_state = "INCOMPATIBLE_QUALIFICATIONS_ASSOCIATION_TASK_STATE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -43,6 +45,7 @@ pub const ConflictExceptionReason = enum {
             .incompatible_connection_preferences_revision => "INCOMPATIBLE_CONNECTION_PREFERENCES_REVISION",
             .account_already_verified => "ACCOUNT_ALREADY_VERIFIED",
             .verification_already_in_progress => "VERIFICATION_ALREADY_IN_PROGRESS",
+            .incompatible_qualifications_association_task_state => "INCOMPATIBLE_QUALIFICATIONS_ASSOCIATION_TASK_STATE",
         };
     }
 

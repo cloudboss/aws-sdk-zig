@@ -192,10 +192,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateEnvironmentProfil
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateEnvironmentProfileOutput {
-    var result: UpdateEnvironmentProfileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateEnvironmentProfileOutput, body, allocator);
-    }
+    const result: UpdateEnvironmentProfileOutput = try aws.json.parseJsonObject(
+        UpdateEnvironmentProfileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

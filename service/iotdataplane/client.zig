@@ -3,11 +3,14 @@ const std = @import("std");
 
 const delete_connection = @import("delete_connection.zig");
 const delete_thing_shadow = @import("delete_thing_shadow.zig");
+const get_connection = @import("get_connection.zig");
 const get_retained_message = @import("get_retained_message.zig");
 const get_thing_shadow = @import("get_thing_shadow.zig");
 const list_named_shadows_for_thing = @import("list_named_shadows_for_thing.zig");
 const list_retained_messages = @import("list_retained_messages.zig");
+const list_subscriptions = @import("list_subscriptions.zig");
 const publish_ = @import("publish.zig");
+const send_direct_message = @import("send_direct_message.zig");
 const update_thing_shadow = @import("update_thing_shadow.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
@@ -42,6 +45,9 @@ pub const Client = struct {
     /// Disconnects a connected MQTT client from Amazon Web Services IoT Core. When
     /// you disconnect a client, Amazon Web Services IoT Core closes the client's
     /// network connection and optionally cleans the session state.
+    ///
+    /// Requires permission to access the
+    /// [DeleteConnection](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
     pub fn deleteConnection(self: *Self, allocator: std.mem.Allocator, input: delete_connection.DeleteConnectionInput, options: CallOptions) !delete_connection.DeleteConnectionOutput {
         return delete_connection.execute(self, allocator, input, options);
     }
@@ -55,6 +61,14 @@ pub const Client = struct {
     /// [DeleteThingShadow](http://docs.aws.amazon.com/iot/latest/developerguide/API_DeleteThingShadow.html) in the IoT Developer Guide.
     pub fn deleteThingShadow(self: *Self, allocator: std.mem.Allocator, input: delete_thing_shadow.DeleteThingShadowInput, options: CallOptions) !delete_thing_shadow.DeleteThingShadowOutput {
         return delete_thing_shadow.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves connection information for the specified MQTT client.
+    ///
+    /// Requires permission to access the
+    /// [GetConnection](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
+    pub fn getConnection(self: *Self, allocator: std.mem.Allocator, input: get_connection.GetConnectionInput, options: CallOptions) !get_connection.GetConnectionOutput {
+        return get_connection.execute(self, allocator, input, options);
     }
 
     /// Gets the details of a single retained message for the specified topic.
@@ -117,6 +131,15 @@ pub const Client = struct {
         return list_retained_messages.execute(self, allocator, input, options);
     }
 
+    /// Returns a list of all subscriptions for MQTT clients with active sessions,
+    /// including offline clients with persistent sessions.
+    ///
+    /// Requires permission to access the
+    /// [ListSubscriptions](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
+    pub fn listSubscriptions(self: *Self, allocator: std.mem.Allocator, input: list_subscriptions.ListSubscriptionsInput, options: CallOptions) !list_subscriptions.ListSubscriptionsOutput {
+        return list_subscriptions.execute(self, allocator, input, options);
+    }
+
     /// Publishes an MQTT message.
     ///
     /// Requires permission to access the
@@ -135,6 +158,24 @@ pub const Client = struct {
         return publish_.execute(self, allocator, input, options);
     }
 
+    /// Sends an MQTT message directly to a specific client identified by its client
+    /// ID.
+    ///
+    /// `SendDirectMessage` targets a single client ID. The receiving client does
+    /// not
+    /// need to subscribe to the topic, but the receiver's policy must allow
+    /// `iot:Receive` on the specified topic.
+    ///
+    /// Requires permission to access the
+    /// [SendDirectMessage](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
+    ///
+    /// For more information about messaging costs, see [Amazon Web Services IoT
+    /// Core
+    /// pricing](http://aws.amazon.com/iot-core/pricing/).
+    pub fn sendDirectMessage(self: *Self, allocator: std.mem.Allocator, input: send_direct_message.SendDirectMessageInput, options: CallOptions) !send_direct_message.SendDirectMessageOutput {
+        return send_direct_message.execute(self, allocator, input, options);
+    }
+
     /// Updates the shadow for the specified thing.
     ///
     /// Requires permission to access the
@@ -148,6 +189,13 @@ pub const Client = struct {
     }
 
     pub fn listRetainedMessagesPaginator(self: *Self, params: list_retained_messages.ListRetainedMessagesInput) paginator.ListRetainedMessagesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listSubscriptionsPaginator(self: *Self, params: list_subscriptions.ListSubscriptionsInput) paginator.ListSubscriptionsPaginator {
         return .{
             .client = self,
             .params = params,

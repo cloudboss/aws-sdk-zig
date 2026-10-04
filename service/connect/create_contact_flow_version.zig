@@ -18,7 +18,7 @@ pub const CreateContactFlowVersionInput = struct {
     /// Indicates the checksum value of the flow content.
     flow_content_sha_256: ?[]const u8 = null,
 
-    /// The identifier of the Amazon Connect instance.
+    /// The identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     /// The Amazon Web Services Region where this resource was last modified.
@@ -139,10 +139,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateContactFlowVersio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateContactFlowVersionOutput {
-    var result: CreateContactFlowVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateContactFlowVersionOutput, body, allocator);
-    }
+    const result: CreateContactFlowVersionOutput = try aws.json.parseJsonObject(
+        CreateContactFlowVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

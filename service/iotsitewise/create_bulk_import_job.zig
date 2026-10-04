@@ -16,6 +16,11 @@ pub const CreateBulkImportJobInput = struct {
     /// is.
     adaptive_ingestion: ?bool = null,
 
+    /// The ID of the session dataset to ingest data into. Specify this field,
+    /// together with
+    /// `workspaceName`, to ingest data into a session dataset in a workspace.
+    dataset_id: ?[]const u8 = null,
+
     /// If set to true, your data files is deleted from S3, after ingestion into IoT
     /// SiteWise storage.
     delete_files_after_import: ?bool = null,
@@ -24,12 +29,18 @@ pub const CreateBulkImportJobInput = struct {
     /// request are saved.
     error_report_location: ErrorReportLocation,
 
-    /// The files in the specified Amazon S3 bucket that contain your data.
+    /// The files in the specified Amazon S3 bucket that contain your data. You can
+    /// specify up to 100 files for each bulk import job. Each file supports the
+    /// following size limits:
+    ///
+    /// * Parquet files – Up to 256 MiB.
+    ///
+    /// * Other file formats – Up to 5 GiB.
     files: []const File,
 
     /// Contains the configuration information of a job, such as the file format
     /// used to save data in Amazon S3.
-    job_configuration: JobConfiguration,
+    job_configuration: ?JobConfiguration = null,
 
     /// The unique name that helps identify the job request.
     job_name: []const u8,
@@ -38,14 +49,21 @@ pub const CreateBulkImportJobInput = struct {
     /// [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role that allows IoT SiteWise to read Amazon S3 data.
     job_role_arn: []const u8,
 
+    /// The name of the workspace that contains the session dataset. Specify this
+    /// field together
+    /// with `datasetId`.
+    workspace_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .adaptive_ingestion = "adaptiveIngestion",
+        .dataset_id = "datasetId",
         .delete_files_after_import = "deleteFilesAfterImport",
         .error_report_location = "errorReportLocation",
         .files = "files",
         .job_configuration = "jobConfiguration",
         .job_name = "jobName",
         .job_role_arn = "jobRoleArn",
+        .workspace_name = "workspaceName",
     };
 };
 
@@ -129,6 +147,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBulkImportJobInpu
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.dataset_id) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"datasetId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.delete_files_after_import) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"deleteFilesAfterImport\":");
@@ -143,10 +167,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBulkImportJobInpu
     try body_buf.appendSlice(allocator, "\"files\":");
     try aws.json.writeValue(@TypeOf(input.files), input.files, allocator, &body_buf);
     has_prev = true;
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"jobConfiguration\":");
-    try aws.json.writeValue(@TypeOf(input.job_configuration), input.job_configuration, allocator, &body_buf);
-    has_prev = true;
+    if (input.job_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"jobConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"jobName\":");
     try aws.json.writeValue(@TypeOf(input.job_name), input.job_name, allocator, &body_buf);
@@ -155,6 +181,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBulkImportJobInpu
     try body_buf.appendSlice(allocator, "\"jobRoleArn\":");
     try aws.json.writeValue(@TypeOf(input.job_role_arn), input.job_role_arn, allocator, &body_buf);
     has_prev = true;
+    if (input.workspace_name) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"workspaceName\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -171,10 +203,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBulkImportJobInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateBulkImportJobOutput {
-    var result: CreateBulkImportJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateBulkImportJobOutput, body, allocator);
-    }
+    const result: CreateBulkImportJobOutput = try aws.json.parseJsonObject(
+        CreateBulkImportJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

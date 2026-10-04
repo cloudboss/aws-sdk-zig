@@ -107,11 +107,15 @@ pub const CreateAssetModelCompositeModelOutput = struct {
     /// The path to the composite model listing the parent composite models.
     asset_model_composite_model_path: ?[]const AssetModelCompositeModelPathSegment = null,
 
+    /// The ID of the asset model.
+    asset_model_id: ?[]const u8 = null,
+
     asset_model_status: ?AssetModelStatus = null,
 
     pub const json_field_names = .{
         .asset_model_composite_model_id = "assetModelCompositeModelId",
         .asset_model_composite_model_path = "assetModelCompositeModelPath",
+        .asset_model_id = "assetModelId",
         .asset_model_status = "assetModelStatus",
     };
 };
@@ -231,10 +235,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAssetModelComposi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAssetModelCompositeModelOutput {
-    var result: CreateAssetModelCompositeModelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAssetModelCompositeModelOutput, body, allocator);
-    }
+    const result: CreateAssetModelCompositeModelOutput = try aws.json.parseJsonObject(
+        CreateAssetModelCompositeModelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

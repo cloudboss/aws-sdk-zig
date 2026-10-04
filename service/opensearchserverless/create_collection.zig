@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DeletionProtection = @import("deletion_protection.zig").DeletionProtection;
 const EncryptionConfig = @import("encryption_config.zig").EncryptionConfig;
 const StandbyReplicas = @import("standby_replicas.zig").StandbyReplicas;
 const Tag = @import("tag.zig").Tag;
@@ -17,6 +18,10 @@ pub const CreateCollectionInput = struct {
 
     /// The name of the collection group to associate with the collection.
     collection_group_name: ?[]const u8 = null,
+
+    /// Indicates whether to enable deletion protection for the collection. When set
+    /// to `ENABLED`, the collection cannot be deleted.
+    deletion_protection: ?DeletionProtection = null,
 
     /// Description of the collection.
     description: ?[]const u8 = null,
@@ -43,6 +48,7 @@ pub const CreateCollectionInput = struct {
     pub const json_field_names = .{
         .client_token = "clientToken",
         .collection_group_name = "collectionGroupName",
+        .deletion_protection = "deletionProtection",
         .description = "description",
         .encryption_config = "encryptionConfig",
         .name = "name",

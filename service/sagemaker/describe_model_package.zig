@@ -4,10 +4,12 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const IncludedData = @import("included_data.zig").IncludedData;
 const AdditionalInferenceSpecificationDefinition = @import("additional_inference_specification_definition.zig").AdditionalInferenceSpecificationDefinition;
 const UserContext = @import("user_context.zig").UserContext;
 const DriftCheckBaselines = @import("drift_check_baselines.zig").DriftCheckBaselines;
 const InferenceSpecification = @import("inference_specification.zig").InferenceSpecification;
+const ManagedStorageType = @import("managed_storage_type.zig").ManagedStorageType;
 const MetadataProperties = @import("metadata_properties.zig").MetadataProperties;
 const ModelApprovalStatus = @import("model_approval_status.zig").ModelApprovalStatus;
 const ModelPackageModelCard = @import("model_package_model_card.zig").ModelPackageModelCard;
@@ -22,6 +24,27 @@ const SourceAlgorithmSpecification = @import("source_algorithm_specification.zig
 const ModelPackageValidationSpecification = @import("model_package_validation_specification.zig").ModelPackageValidationSpecification;
 
 pub const DescribeModelPackageInput = struct {
+    /// Specifies the level of model package data to include in the response. Use
+    /// this parameter to call `DescribeModelPackage` on a model package that has an
+    /// associated model card without requiring `kms:Decrypt` permission on the
+    /// customer-managed KMS key associated with the embedded model card.
+    ///
+    /// * `AllData`: Returns the full model package response, including the
+    ///   unredacted `ModelCard.ModelCardContent`. This option requires
+    ///   `kms:Decrypt` permission on the customer-managed key, if one is associated
+    ///   with the embedded model card. This is the default.
+    /// * `MetadataOnly`: Returns the full model package response, but with the
+    ///   embedded `ModelCard.ModelCardContent` sanitized to include only a small
+    ///   set of unencrypted metadata fields. This option does not require
+    ///   `kms:Decrypt` permission. All other top-level response fields, including
+    ///   `InferenceSpecification`, `ModelMetrics`, `DriftCheckBaselines`, and
+    ///   `SecurityConfig`, are returned unchanged. For the list of fields preserved
+    ///   within `ModelCardContent`, see
+    ///   [ModelCard](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeModelPackage.html#sagemaker-DescribeModelPackage-response-ModelCard).
+    ///
+    /// If you don't specify a value, SageMaker returns `AllData`.
+    included_data: ?IncludedData = null,
+
     /// The name or Amazon Resource Name (ARN) of the model package to describe.
     ///
     /// When you specify a name, the name must have 1 to 63 characters. Valid
@@ -29,6 +52,7 @@ pub const DescribeModelPackageInput = struct {
     model_package_name: []const u8,
 
     pub const json_field_names = .{
+        .included_data = "IncludedData",
         .model_package_name = "ModelPackageName",
     };
 };
@@ -75,6 +99,9 @@ pub const DescribeModelPackageOutput = struct {
     /// The last time that the model package was modified.
     last_modified_time: ?i64 = null,
 
+    /// The storage type of the model package.
+    managed_storage_type: ?ManagedStorageType = null,
+
     metadata_properties: ?MetadataProperties = null,
 
     /// The approval status of the model package.
@@ -88,6 +115,23 @@ pub const DescribeModelPackageOutput = struct {
     /// `model_creator` and `model_artifact` properties. For more information about
     /// the model package model card schema, see [Model package model card
     /// schema](https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema). For more information about the model card associated with the model package, see [View the Details of a Model Version](https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html).
+    ///
+    /// When you set `IncludedData` to `MetadataOnly` in the request,
+    /// `ModelCardStatus` is preserved and `ModelCardContent` is sanitized to
+    /// include only the following JSON paths, when present in the model card:
+    ///
+    /// * `model_overview.model_id`
+    /// * `model_overview.model_name`
+    /// * `intended_uses.risk_rating`
+    /// * `model_package_details.model_package_group_name`
+    /// * `model_package_details.model_package_arn`
+    ///
+    /// Because the `ModelPackageModelCard` schema does not include
+    /// `model_package_details` and limits `model_overview` to `model_creator` and
+    /// `model_artifact`, the sanitized `ModelCardContent` for a model package
+    /// typically contains only `intended_uses.risk_rating` if it was provided when
+    /// the model card was created. To retrieve the complete `ModelCardContent`, set
+    /// `IncludedData` to `AllData` or omit the parameter.
     model_card: ?ModelPackageModelCard = null,
 
     /// A structure describing the current state of the model in its life cycle.
@@ -160,6 +204,7 @@ pub const DescribeModelPackageOutput = struct {
         .inference_specification = "InferenceSpecification",
         .last_modified_by = "LastModifiedBy",
         .last_modified_time = "LastModifiedTime",
+        .managed_storage_type = "ManagedStorageType",
         .metadata_properties = "MetadataProperties",
         .model_approval_status = "ModelApprovalStatus",
         .model_card = "ModelCard",

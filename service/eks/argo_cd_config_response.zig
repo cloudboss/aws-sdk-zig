@@ -8,6 +8,10 @@ pub const ArgoCdConfigResponse = struct {
     /// The IAM Identity CenterIAM; Identity Center integration configuration.
     aws_idc: ?ArgoCdAwsIdcConfigResponse = null,
 
+    /// The prefix that was configured for the hostname of the Argo CD server
+    /// endpoint when the capability was created.
+    endpoint_prefix: ?[]const u8 = null,
+
     /// The Kubernetes namespace where Argo CD resources are monitored by your Argo
     /// CD Capability.
     namespace: ?[]const u8 = null,
@@ -28,6 +32,7 @@ pub const ArgoCdConfigResponse = struct {
 
     pub const json_field_names = .{
         .aws_idc = "awsIdc",
+        .endpoint_prefix = "endpointPrefix",
         .namespace = "namespace",
         .network_access = "networkAccess",
         .rbac_role_mappings = "rbacRoleMappings",

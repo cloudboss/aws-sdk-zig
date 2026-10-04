@@ -5,12 +5,15 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AccountRecoverySettingType = @import("account_recovery_setting_type.zig").AccountRecoverySettingType;
+const AcrLevelConfigType = @import("acr_level_config_type.zig").AcrLevelConfigType;
 const AdminCreateUserConfigType = @import("admin_create_user_config_type.zig").AdminCreateUserConfigType;
 const AliasAttributeType = @import("alias_attribute_type.zig").AliasAttributeType;
 const VerifiedAttributeType = @import("verified_attribute_type.zig").VerifiedAttributeType;
 const DeletionProtectionType = @import("deletion_protection_type.zig").DeletionProtectionType;
 const DeviceConfigurationType = @import("device_configuration_type.zig").DeviceConfigurationType;
 const EmailConfigurationType = @import("email_configuration_type.zig").EmailConfigurationType;
+const IssuerConfigurationType = @import("issuer_configuration_type.zig").IssuerConfigurationType;
+const KeyConfigurationType = @import("key_configuration_type.zig").KeyConfigurationType;
 const LambdaConfigType = @import("lambda_config_type.zig").LambdaConfigType;
 const UserPoolMfaType = @import("user_pool_mfa_type.zig").UserPoolMfaType;
 const UserPoolPolicyType = @import("user_pool_policy_type.zig").UserPoolPolicyType;
@@ -42,6 +45,33 @@ pub const CreateUserPoolInput = struct {
     /// `verified_phone_number`, with one having a higher priority than the
     /// other.
     account_recovery_setting: ?AccountRecoverySettingType = null,
+
+    /// The custom names for the authentication context class reference
+    /// (ACR) levels in your user pool. Amazon Cognito defines four fixed ACR levels
+    /// that
+    /// represent increasing authentication assurance. The combination of
+    /// authentication factors
+    /// that satisfies each level is fixed and you can't change it. With this
+    /// configuration, you
+    /// customize only the URI name that Amazon Cognito reports for each level in
+    /// the
+    /// `acr` token claim.
+    ///
+    /// You can override a subset of the levels. By default, the levels are named
+    /// `urn:cognito:loa:1` through `urn:cognito:loa:4`, and Amazon Cognito
+    /// applies the default name to any level that you don't specify. Each name must
+    /// be
+    /// unique across all four levels, including any default names that apply to
+    /// levels you
+    /// don't override. A name can contain any character
+    /// that is valid in a URL or a URN.
+    ///
+    /// Configuring custom ACR level names requires the Essentials or Plus feature
+    /// plan.
+    /// To activate this setting, your user pool must be in the [
+    /// Essentials
+    /// tier](https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html) or higher.
+    acr_configuration: ?[]const aws.map.MapEntry(AcrLevelConfigType) = null,
 
     /// The configuration for administrative creation of users. Includes the
     /// template for the
@@ -106,6 +136,16 @@ pub const CreateUserPoolInput = struct {
     /// This parameter is no longer used.
     email_verification_subject: ?[]const u8 = null,
 
+    /// The issuer configuration for the user pool. Specifies the issuer type for
+    /// token
+    /// generation.
+    issuer_configuration: ?IssuerConfigurationType = null,
+
+    /// The key configuration for the user pool. Specifies the key type and KMS key
+    /// ARN for
+    /// encryption.
+    key_configuration: ?KeyConfigurationType = null,
+
     /// A collection of user pool Lambda triggers. Amazon Cognito invokes triggers
     /// at several possible
     /// stages of authentication operations. Triggers can modify the outcome of the
@@ -125,6 +165,19 @@ pub const CreateUserPoolInput = struct {
     /// API responses and in managed login for users who have chosen and configured
     /// a preferred
     /// MFA factor.
+    ///
+    /// The `CreateUserPool` operation supports only SMS MFA configuration. If you
+    /// set `MfaConfiguration` to either of these values, include an
+    /// `SmsConfiguration` in the same request:
+    ///
+    /// * `ON` – Requires MFA for all users
+    ///
+    /// * `OPTIONAL` – Makes MFA optional for each user
+    ///
+    /// If you omit `SmsConfiguration`, the operation returns an
+    /// `InvalidParameterException`. To configure TOTP or email MFA, use the
+    /// [SetUserPoolMfaConfig](https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html) operation. You can also use
+    /// `SetUserPoolMfaConfig` to add MFA factors later.
     mfa_configuration: ?UserPoolMfaType = null,
 
     /// The password policy and sign-in policy in the user pool. The password policy
@@ -239,6 +292,7 @@ pub const CreateUserPoolInput = struct {
 
     pub const json_field_names = .{
         .account_recovery_setting = "AccountRecoverySetting",
+        .acr_configuration = "AcrConfiguration",
         .admin_create_user_config = "AdminCreateUserConfig",
         .alias_attributes = "AliasAttributes",
         .auto_verified_attributes = "AutoVerifiedAttributes",
@@ -247,6 +301,8 @@ pub const CreateUserPoolInput = struct {
         .email_configuration = "EmailConfiguration",
         .email_verification_message = "EmailVerificationMessage",
         .email_verification_subject = "EmailVerificationSubject",
+        .issuer_configuration = "IssuerConfiguration",
+        .key_configuration = "KeyConfiguration",
         .lambda_config = "LambdaConfig",
         .mfa_configuration = "MfaConfiguration",
         .policies = "Policies",

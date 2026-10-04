@@ -32,6 +32,7 @@ pub const GetPaymentInstrumentInput = struct {
 };
 
 pub const GetPaymentInstrumentOutput = struct {
+    /// The payment instrument details.
     payment_instrument: ?PaymentInstrument = null,
 
     pub const json_field_names = .{
@@ -111,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPaymentInstrumentInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPaymentInstrumentOutput {
-    var result: GetPaymentInstrumentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPaymentInstrumentOutput, body, allocator);
-    }
+    const result: GetPaymentInstrumentOutput = try aws.json.parseJsonObject(
+        GetPaymentInstrumentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

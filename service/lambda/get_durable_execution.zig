@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DurableConfig = @import("durable_config.zig").DurableConfig;
 const ErrorObject = @import("error_object.zig").ErrorObject;
 const ExecutionStatus = @import("execution_status.zig").ExecutionStatus;
 const TraceHeader = @import("trace_header.zig").TraceHeader;
@@ -12,12 +13,26 @@ pub const GetDurableExecutionInput = struct {
     /// The Amazon Resource Name (ARN) of the durable execution.
     durable_execution_arn: []const u8,
 
+    /// Specifies whether to include execution data such as input payload, result,
+    /// and error information in the response. Set to `false` for a more compact
+    /// response that includes only execution metadata. The default value is set to
+    /// `true`.
+    include_execution_data: ?bool = null,
+
     pub const json_field_names = .{
         .durable_execution_arn = "DurableExecutionArn",
+        .include_execution_data = "IncludeExecutionData",
     };
 };
 
 pub const GetDurableExecutionOutput = struct {
+    /// Configuration settings for the durable execution, including execution
+    /// timeout, retention period for execution history, and an optional ARN of the
+    /// Key Management Service (KMS) customer managed key that is used to encrypt
+    /// your durable execution's payload data, including input, output, and error
+    /// payloads.
+    durable_config: ?DurableConfig = null,
+
     /// The Amazon Resource Name (ARN) of the durable execution.
     durable_execution_arn: []const u8,
 
@@ -35,6 +50,10 @@ pub const GetDurableExecutionOutput = struct {
     /// present when the execution status is `FAILED`, `TIMED_OUT`, or `STOPPED`.
     /// The combined size of all error fields is limited to 256 KB.
     @"error": ?ErrorObject = null,
+
+    /// Indicates whether execution data is included in this response. Returns
+    /// `false` when `IncludeExecutionData` is set to `false` in the request.
+    execution_data_included: ?bool = null,
 
     /// The Amazon Resource Name (ARN) of the Lambda function that was invoked to
     /// start this durable execution.
@@ -67,10 +86,12 @@ pub const GetDurableExecutionOutput = struct {
     version: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .durable_config = "DurableConfig",
         .durable_execution_arn = "DurableExecutionArn",
         .durable_execution_name = "DurableExecutionName",
         .end_timestamp = "EndTimestamp",
         .@"error" = "Error",
+        .execution_data_included = "ExecutionDataIncluded",
         .function_arn = "FunctionArn",
         .input_payload = "InputPayload",
         .result = "Result",
@@ -116,6 +137,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDurableExecutionInpu
     try path_buf.appendSlice(allocator, input.durable_execution_arn);
     const path = try path_buf.toOwnedSlice(allocator);
 
+    var query_buf: std.ArrayList(u8) = .empty;
+    var query_has_prev = false;
+    if (input.include_execution_data) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "IncludeExecutionData=");
+        try query_buf.appendSlice(allocator, if (v) "true" else "false");
+        query_has_prev = true;
+    }
+    const query = try query_buf.toOwnedSlice(allocator);
+
     const body: ?[]const u8 = null;
 
     var request = aws.http.Request.init(ep.host);
@@ -124,16 +155,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDurableExecutionInpu
     request.tls = ep.tls;
     request.port = ep.port;
     request.body = body;
+    request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDurableExecutionOutput {
-    var result: GetDurableExecutionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDurableExecutionOutput, body, allocator);
-    }
+    const result: GetDurableExecutionOutput = try aws.json.parseJsonObject(
+        GetDurableExecutionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

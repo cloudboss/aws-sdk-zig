@@ -166,10 +166,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAuthorizerInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAuthorizerOutput {
-    var result: GetAuthorizerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAuthorizerOutput, body, allocator);
-    }
+    const result: GetAuthorizerOutput = try aws.json.parseJsonObject(
+        GetAuthorizerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

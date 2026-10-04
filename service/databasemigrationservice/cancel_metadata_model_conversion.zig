@@ -21,6 +21,9 @@ pub const CancelMetadataModelConversionInput = struct {
 };
 
 pub const CancelMetadataModelConversionOutput = struct {
+    /// The metadata model conversion request.
+    ///
+    /// DMS never populates the `ExportSqlDetails` field for this operation.
     request: ?SchemaConversionRequest = null,
 
     pub const json_field_names = .{

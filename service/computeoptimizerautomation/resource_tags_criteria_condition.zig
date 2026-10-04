@@ -3,8 +3,8 @@ const ComparisonOperator = @import("comparison_operator.zig").ComparisonOperator
 /// Criteria condition for filtering resources based on their tags, including
 /// comparison operators and values.
 pub const ResourceTagsCriteriaCondition = struct {
-    /// The comparison operator used to evaluate the tag criteria, such as equals,
-    /// not equals, or contains.
+    /// The comparison operator used to evaluate the attribute against the specified
+    /// values.
     comparison: ?ComparisonOperator = null,
 
     /// The tag key to use for comparison when filtering resources.

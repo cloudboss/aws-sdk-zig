@@ -2,7 +2,7 @@ const PaymentInstrumentDetails = @import("payment_instrument_details.zig").Payme
 const PaymentInstrumentType = @import("payment_instrument_type.zig").PaymentInstrumentType;
 const PaymentInstrumentStatus = @import("payment_instrument_status.zig").PaymentInstrumentStatus;
 
-/// Represents a payment instrument
+/// Represents a payment instrument.
 pub const PaymentInstrument = struct {
     /// The timestamp when this payment instrument was created.
     created_at: i64,

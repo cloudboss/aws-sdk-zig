@@ -50,6 +50,9 @@ pub const EnablePolicyTypeInput = struct {
     ///
     /// *
     ///   [NETWORK_SECURITY_DIRECTOR_POLICY](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html)
+    ///
+    /// *
+    ///   [GUARDDUTY_POLICY](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_guardduty.html)
     policy_type: PolicyType,
 
     /// ID for the root in which you want to enable a policy type. You can get the

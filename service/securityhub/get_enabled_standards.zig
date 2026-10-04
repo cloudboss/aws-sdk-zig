@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const StandardsProvider = @import("standards_provider.zig").StandardsProvider;
 const StandardsSubscription = @import("standards_subscription.zig").StandardsSubscription;
 
 pub const GetEnabledStandardsInput = struct {
@@ -19,12 +20,18 @@ pub const GetEnabledStandardsInput = struct {
     /// parameter to the value returned from the previous response.
     next_token: ?[]const u8 = null,
 
+    /// A list of cloud providers to filter the enabled standards by. For example,
+    /// specify `Azure` to return only enabled standards that evaluate Azure
+    /// resources.
+    providers: ?[]const StandardsProvider = null,
+
     /// The list of the standards subscription ARNs for the standards to retrieve.
     standards_subscription_arns: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .max_results = "MaxResults",
         .next_token = "NextToken",
+        .providers = "Providers",
         .standards_subscription_arns = "StandardsSubscriptionArns",
     };
 };
@@ -91,6 +98,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEnabledStandardsInpu
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.providers) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Providers\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.standards_subscription_arns) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"StandardsSubscriptionArns\":");
@@ -113,10 +126,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEnabledStandardsInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetEnabledStandardsOutput {
-    var result: GetEnabledStandardsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetEnabledStandardsOutput, body, allocator);
-    }
+    const result: GetEnabledStandardsOutput = try aws.json.parseJsonObject(
+        GetEnabledStandardsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

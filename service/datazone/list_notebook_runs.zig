@@ -9,7 +9,8 @@ const NotebookRunStatus = @import("notebook_run_status.zig").NotebookRunStatus;
 const NotebookRunSummary = @import("notebook_run_summary.zig").NotebookRunSummary;
 
 pub const ListNotebookRunsInput = struct {
-    /// The identifier of the Amazon DataZone domain in which to list notebook runs.
+    /// The identifier of the Amazon SageMaker Unified Studio domain in which to
+    /// list notebook runs.
     domain_identifier: []const u8,
 
     /// The maximum number of notebook runs to return in a single call. When the
@@ -168,10 +169,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListNotebookRunsInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListNotebookRunsOutput {
-    var result: ListNotebookRunsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListNotebookRunsOutput, body, allocator);
-    }
+    const result: ListNotebookRunsOutput = try aws.json.parseJsonObject(
+        ListNotebookRunsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

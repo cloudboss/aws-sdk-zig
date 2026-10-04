@@ -161,10 +161,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSourceLocationInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateSourceLocationOutput {
-    var result: UpdateSourceLocationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateSourceLocationOutput, body, allocator);
-    }
+    const result: UpdateSourceLocationOutput = try aws.json.parseJsonObject(
+        UpdateSourceLocationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

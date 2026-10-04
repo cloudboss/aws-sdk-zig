@@ -85,10 +85,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetFindingDetailsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetFindingDetailsOutput {
-    var result: BatchGetFindingDetailsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetFindingDetailsOutput, body, allocator);
-    }
+    const result: BatchGetFindingDetailsOutput = try aws.json.parseJsonObject(
+        BatchGetFindingDetailsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

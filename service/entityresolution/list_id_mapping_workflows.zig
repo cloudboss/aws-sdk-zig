@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListIdMappingWorkflowsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListIdMappingWorkflowsOutput {
-    var result: ListIdMappingWorkflowsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListIdMappingWorkflowsOutput, body, allocator);
-    }
+    const result: ListIdMappingWorkflowsOutput = try aws.json.parseJsonObject(
+        ListIdMappingWorkflowsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

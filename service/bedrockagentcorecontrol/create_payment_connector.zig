@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const CredentialsProviderConfiguration = @import("credentials_provider_configuration.zig").CredentialsProviderConfiguration;
+const PaymentConnectorProvisionMode = @import("payment_connector_provision_mode.zig").PaymentConnectorProvisionMode;
 const PaymentConnectorType = @import("payment_connector_type.zig").PaymentConnectorType;
 const PaymentConnectorStatus = @import("payment_connector_status.zig").PaymentConnectorStatus;
 
@@ -31,6 +32,14 @@ pub const CreatePaymentConnectorInput = struct {
     /// The unique identifier of the payment manager to create the connector for.
     payment_manager_id: []const u8,
 
+    /// The provision mode for creating the payment connector. If you don't specify
+    /// a value, the default is `MANUAL`.
+    ///
+    /// * `MANUAL` - You provide the credential provider configurations directly.
+    /// * `QUICK_CREATE` - The service orchestrates OAuth consent and provisions the
+    ///   credential provider for you.
+    provision_mode: ?PaymentConnectorProvisionMode = null,
+
     /// The type of payment connector, which determines the payment provider
     /// integration.
     @"type": PaymentConnectorType,
@@ -41,11 +50,16 @@ pub const CreatePaymentConnectorInput = struct {
         .description = "description",
         .name = "name",
         .payment_manager_id = "paymentManagerId",
+        .provision_mode = "provisionMode",
         .@"type" = "type",
     };
 };
 
 pub const CreatePaymentConnectorOutput = struct {
+    /// The URL that the user must open to complete OAuth consent. This field is
+    /// only present when the payment connector status is `PENDING_AUTHENTICATION`.
+    authorization_url: ?[]const u8 = null,
+
     /// The timestamp when the payment connector was created.
     created_at: i64,
 
@@ -70,6 +84,7 @@ pub const CreatePaymentConnectorOutput = struct {
     @"type": PaymentConnectorType,
 
     pub const json_field_names = .{
+        .authorization_url = "authorizationUrl",
         .created_at = "createdAt",
         .credential_provider_configurations = "credentialProviderConfigurations",
         .name = "name",
@@ -140,6 +155,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePaymentConnectorI
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
     has_prev = true;
+    if (input.provision_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"provisionMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
     try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
@@ -160,10 +181,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePaymentConnectorI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePaymentConnectorOutput {
-    var result: CreatePaymentConnectorOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePaymentConnectorOutput, body, allocator);
-    }
+    const result: CreatePaymentConnectorOutput = try aws.json.parseJsonObject(
+        CreatePaymentConnectorOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

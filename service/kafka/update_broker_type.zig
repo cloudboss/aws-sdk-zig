@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateBrokerTypeInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateBrokerTypeOutput {
-    var result: UpdateBrokerTypeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateBrokerTypeOutput, body, allocator);
-    }
+    const result: UpdateBrokerTypeOutput = try aws.json.parseJsonObject(
+        UpdateBrokerTypeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

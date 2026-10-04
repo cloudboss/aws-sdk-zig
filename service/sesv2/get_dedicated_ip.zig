@@ -76,10 +76,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDedicatedIpInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDedicatedIpOutput {
-    var result: GetDedicatedIpOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDedicatedIpOutput, body, allocator);
-    }
+    const result: GetDedicatedIpOutput = try aws.json.parseJsonObject(
+        GetDedicatedIpOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

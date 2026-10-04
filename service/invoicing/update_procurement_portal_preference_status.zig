@@ -7,6 +7,10 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ProcurementPortalPreferenceStatus = @import("procurement_portal_preference_status.zig").ProcurementPortalPreferenceStatus;
 
 pub const UpdateProcurementPortalPreferenceStatusInput = struct {
+    /// A unique, case-sensitive identifier that you provide to ensure idempotency
+    /// of the request.
+    client_token: ?[]const u8 = null,
+
     /// The updated status of the e-invoice delivery preference.
     einvoice_delivery_preference_status: ?ProcurementPortalPreferenceStatus = null,
 
@@ -26,6 +30,7 @@ pub const UpdateProcurementPortalPreferenceStatusInput = struct {
     purchase_order_retrieval_preference_status_reason: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .client_token = "ClientToken",
         .einvoice_delivery_preference_status = "EinvoiceDeliveryPreferenceStatus",
         .einvoice_delivery_preference_status_reason = "EinvoiceDeliveryPreferenceStatusReason",
         .procurement_portal_preference_arn = "ProcurementPortalPreferenceArn",

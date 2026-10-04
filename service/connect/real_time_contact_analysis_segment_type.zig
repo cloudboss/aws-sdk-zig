@@ -7,6 +7,7 @@ pub const RealTimeContactAnalysisSegmentType = enum {
     event,
     attachments,
     post_contact_summary,
+    extracted_information,
 
     pub const json_field_names = .{
         .transcript = "Transcript",
@@ -15,6 +16,7 @@ pub const RealTimeContactAnalysisSegmentType = enum {
         .event = "Event",
         .attachments = "Attachments",
         .post_contact_summary = "PostContactSummary",
+        .extracted_information = "ExtractedInformation",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +27,7 @@ pub const RealTimeContactAnalysisSegmentType = enum {
             .event => "Event",
             .attachments => "Attachments",
             .post_contact_summary => "PostContactSummary",
+            .extracted_information => "ExtractedInformation",
         };
     }
 

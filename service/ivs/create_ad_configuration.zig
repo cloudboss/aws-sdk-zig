@@ -5,14 +5,23 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const MediaTailorPlaybackConfiguration = @import("media_tailor_playback_configuration.zig").MediaTailorPlaybackConfiguration;
+const PostRollConfiguration = @import("post_roll_configuration.zig").PostRollConfiguration;
 const AdConfiguration = @import("ad_configuration.zig").AdConfiguration;
 
 pub const CreateAdConfigurationInput = struct {
-    /// List of integration configurations with media tailor resources.
+    /// List of integration configurations with MediaTailor resources. The first
+    /// item in the list is the default playback configuration used for the ad
+    /// configuration. To select a different configuration per viewing session, see
+    /// [Generate and Sign IVS Playback
+    /// Tokens](https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html).
     media_tailor_playback_configurations: []const MediaTailorPlaybackConfiguration,
 
     /// Ad configuration name. Defaults to “”.
     name: ?[]const u8 = null,
+
+    /// Configuration for the post-roll ad break to use for this ad configuration.
+    /// Default: disabled (`enabled` set to false, `durationSeconds` set to 15).
+    post_roll_configuration: ?PostRollConfiguration = null,
 
     /// Array of 1-50 maps, each of the form `string:string (key:value)`. See [Best
     /// practices and
@@ -22,6 +31,7 @@ pub const CreateAdConfigurationInput = struct {
     pub const json_field_names = .{
         .media_tailor_playback_configurations = "mediaTailorPlaybackConfigurations",
         .name = "name",
+        .post_roll_configuration = "postRollConfiguration",
         .tags = "tags",
     };
 };
@@ -80,6 +90,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAdConfigurationIn
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.post_roll_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"postRollConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"tags\":");
@@ -102,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAdConfigurationIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAdConfigurationOutput {
-    var result: CreateAdConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAdConfigurationOutput, body, allocator);
-    }
+    const result: CreateAdConfigurationOutput = try aws.json.parseJsonObject(
+        CreateAdConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -195,10 +195,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListIntentStageMetricsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListIntentStageMetricsOutput {
-    var result: ListIntentStageMetricsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListIntentStageMetricsOutput, body, allocator);
-    }
+    const result: ListIntentStageMetricsOutput = try aws.json.parseJsonObject(
+        ListIntentStageMetricsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

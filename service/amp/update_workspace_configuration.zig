@@ -17,8 +17,16 @@ pub const UpdateWorkspaceConfigurationInput = struct {
     /// label sets. Each label name in a label set must be unique.
     limits_per_label_set: ?[]const LimitsPerLabelSet = null,
 
+    /// Specifies the time window in seconds for accepting out of order samples. Out
+    /// of order samples older than this window are rejected.
+    out_of_order_time_window_in_seconds: ?i32 = null,
+
     /// Specifies how many days that metrics will be retained in the workspace.
     retention_period_in_days: ?i32 = null,
+
+    /// Specifies the duration in seconds to offset rule evaluation queries into the
+    /// past. This allows ingested samples to be available before rule evaluation.
+    rule_query_offset_in_seconds: ?i32 = null,
 
     /// The ID of the workspace that you want to update. To find the IDs of your
     /// workspaces, use the
@@ -28,7 +36,9 @@ pub const UpdateWorkspaceConfigurationInput = struct {
     pub const json_field_names = .{
         .client_token = "clientToken",
         .limits_per_label_set = "limitsPerLabelSet",
+        .out_of_order_time_window_in_seconds = "outOfOrderTimeWindowInSeconds",
         .retention_period_in_days = "retentionPeriodInDays",
+        .rule_query_offset_in_seconds = "ruleQueryOffsetInSeconds",
         .workspace_id = "workspaceId",
     };
 };
@@ -94,9 +104,21 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateWorkspaceConfigur
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.out_of_order_time_window_in_seconds) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"outOfOrderTimeWindowInSeconds\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.retention_period_in_days) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"retentionPeriodInDays\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.rule_query_offset_in_seconds) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ruleQueryOffsetInSeconds\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -116,10 +138,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateWorkspaceConfigur
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateWorkspaceConfigurationOutput {
-    var result: UpdateWorkspaceConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateWorkspaceConfigurationOutput, body, allocator);
-    }
+    const result: UpdateWorkspaceConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateWorkspaceConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

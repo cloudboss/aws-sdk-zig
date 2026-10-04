@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Certificate = @import("certificate.zig").Certificate;
 const BrowserEnterprisePolicy = @import("browser_enterprise_policy.zig").BrowserEnterprisePolicy;
 const BrowserExtension = @import("browser_extension.zig").BrowserExtension;
+const ToolsFileSystemConfiguration = @import("tools_file_system_configuration.zig").ToolsFileSystemConfiguration;
 const BrowserProfileConfiguration = @import("browser_profile_configuration.zig").BrowserProfileConfiguration;
 const ProxyConfiguration = @import("proxy_configuration.zig").ProxyConfiguration;
 const BrowserSessionStatus = @import("browser_session_status.zig").BrowserSessionStatus;
@@ -41,6 +42,10 @@ pub const GetBrowserSessionOutput = struct {
 
     /// The list of browser extensions that are configured in the browser session.
     extensions: ?[]const BrowserExtension = null,
+
+    /// The file system configurations for the browser session. Each entry describes
+    /// an access point and its mount path.
+    filesystem_configurations: ?[]const ToolsFileSystemConfiguration = null,
 
     /// The time at which the browser session was last updated.
     last_updated_at: ?i64 = null,
@@ -84,6 +89,7 @@ pub const GetBrowserSessionOutput = struct {
         .created_at = "createdAt",
         .enterprise_policies = "enterprisePolicies",
         .extensions = "extensions",
+        .filesystem_configurations = "filesystemConfigurations",
         .last_updated_at = "lastUpdatedAt",
         .name = "name",
         .profile_configuration = "profileConfiguration",
@@ -156,10 +162,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBrowserSessionInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBrowserSessionOutput {
-    var result: GetBrowserSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBrowserSessionOutput, body, allocator);
-    }
+    const result: GetBrowserSessionOutput = try aws.json.parseJsonObject(
+        GetBrowserSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

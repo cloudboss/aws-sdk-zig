@@ -274,7 +274,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CalculateRoutesInput, c
 
     const ep = try aws.url.parseEndpoint(endpoint);
 
-    const path = "/routes";
+    const path = "/v2/routes";
 
     var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
@@ -447,10 +447,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CalculateRoutesInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CalculateRoutesOutput {
-    var result: CalculateRoutesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CalculateRoutesOutput, body, allocator);
-    }
+    var result: CalculateRoutesOutput = try aws.json.parseJsonObject(
+        CalculateRoutesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("x-amz-geo-pricing-bucket")) |value| {
         result.pricing_bucket = try allocator.dupe(u8, value);

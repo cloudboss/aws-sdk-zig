@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterCertificateWith
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RegisterCertificateWithoutCAOutput {
-    var result: RegisterCertificateWithoutCAOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RegisterCertificateWithoutCAOutput, body, allocator);
-    }
+    const result: RegisterCertificateWithoutCAOutput = try aws.json.parseJsonObject(
+        RegisterCertificateWithoutCAOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

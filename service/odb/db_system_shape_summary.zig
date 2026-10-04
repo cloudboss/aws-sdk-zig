@@ -1,4 +1,5 @@
 const ComputeModel = @import("compute_model.zig").ComputeModel;
+const ShapeAttribute = @import("shape_attribute.zig").ShapeAttribute;
 const ShapeType = @import("shape_type.zig").ShapeType;
 
 /// Information about a hardware system model (shape) that's available for an
@@ -90,6 +91,10 @@ pub const DbSystemShapeSummary = struct {
     /// The runtime minimum number of CPU cores that can be enabled for the shape.
     runtime_minimum_core_count: ?i32 = null,
 
+    /// If provided and applicable, return DB System shape parameters based on the
+    /// shape attribute provided.
+    shape_attributes: ?[]const ShapeAttribute = null,
+
     /// The family of the shape.
     shape_family: ?[]const u8 = null,
 
@@ -119,6 +124,7 @@ pub const DbSystemShapeSummary = struct {
         .min_storage_count = "minStorageCount",
         .name = "name",
         .runtime_minimum_core_count = "runtimeMinimumCoreCount",
+        .shape_attributes = "shapeAttributes",
         .shape_family = "shapeFamily",
         .shape_type = "shapeType",
     };

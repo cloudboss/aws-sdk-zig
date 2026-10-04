@@ -3,6 +3,7 @@ pub const JiraConfiguration = struct {
     /// The URL of the associated Jira issue.
     jira_issue_url: ?[]const u8 = null,
 
+    /// The date and time when the Jira configuration was last synced.
     last_synced_time: ?i64 = null,
 
     pub const json_field_names = .{

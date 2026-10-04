@@ -51,6 +51,9 @@ pub const Container = struct {
     /// The network interfaces associated with the container.
     network_interfaces: ?[]const NetworkInterface = null,
 
+    /// The IDs of each Neuron device assigned to the container.
+    neuron_device_ids: ?[]const []const u8 = null,
+
     /// A short (1024 max characters) human-readable string to provide additional
     /// details about a running or stopped container.
     reason: ?[]const u8 = null,
@@ -76,6 +79,7 @@ pub const Container = struct {
         .name = "name",
         .network_bindings = "networkBindings",
         .network_interfaces = "networkInterfaces",
+        .neuron_device_ids = "neuronDeviceIds",
         .reason = "reason",
         .runtime_id = "runtimeId",
         .task_arn = "taskArn",

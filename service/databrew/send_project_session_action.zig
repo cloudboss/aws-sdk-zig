@@ -143,10 +143,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendProjectSessionActio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SendProjectSessionActionOutput {
-    var result: SendProjectSessionActionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SendProjectSessionActionOutput, body, allocator);
-    }
+    const result: SendProjectSessionActionOutput = try aws.json.parseJsonObject(
+        SendProjectSessionActionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

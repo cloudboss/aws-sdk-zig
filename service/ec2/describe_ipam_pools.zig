@@ -24,7 +24,10 @@ pub const DescribeIpamPoolsInput = struct {
     /// The IDs of the IPAM pools you would like information on.
     ipam_pool_ids: ?[]const []const u8 = null,
 
-    /// The maximum number of results to return in the request.
+    /// The maximum number of items to return for this request. To get the next page
+    /// of items, make another request with the token returned in the output. For
+    /// more information, see
+    /// [Pagination](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination).
     max_results: ?i32 = null,
 
     /// The token for the next page of results.

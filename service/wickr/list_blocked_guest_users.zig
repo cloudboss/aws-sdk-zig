@@ -154,10 +154,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListBlockedGuestUsersIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListBlockedGuestUsersOutput {
-    var result: ListBlockedGuestUsersOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListBlockedGuestUsersOutput, body, allocator);
-    }
+    const result: ListBlockedGuestUsersOutput = try aws.json.parseJsonObject(
+        ListBlockedGuestUsersOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

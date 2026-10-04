@@ -120,10 +120,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RerankInput, config: *a
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RerankOutput {
-    var result: RerankOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RerankOutput, body, allocator);
-    }
+    const result: RerankOutput = try aws.json.parseJsonObject(
+        RerankOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

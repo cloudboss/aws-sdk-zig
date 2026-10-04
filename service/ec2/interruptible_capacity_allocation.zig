@@ -1,5 +1,6 @@
 const InterruptionType = @import("interruption_type.zig").InterruptionType;
 const InterruptibleCapacityReservationAllocationStatus = @import("interruptible_capacity_reservation_allocation_status.zig").InterruptibleCapacityReservationAllocationStatus;
+const ZeroSizePreference = @import("zero_size_preference.zig").ZeroSizePreference;
 
 /// Represents the allocation of capacity from a source reservation to an
 /// interruptible reservation, tracking current and target instance counts for
@@ -22,4 +23,12 @@ pub const InterruptibleCapacityAllocation = struct {
     /// After your modify request, the requested number of instances allocated to
     /// interruptible reservation.
     target_instance_count: ?i32 = null,
+
+    /// Specifies how Amazon EC2 handles the interruptible Capacity Reservation when
+    /// you reduce its allocation to zero instances. A value of `retain` keeps the
+    /// interruptible Capacity Reservation active at zero capacity so that you can
+    /// allocate instances to it again later. A value of `default` cancels the
+    /// interruptible Capacity Reservation and returns the capacity to your source
+    /// Capacity Reservation.
+    zero_size_preference: ?ZeroSizePreference = null,
 };

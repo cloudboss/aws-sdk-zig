@@ -97,8 +97,8 @@ pub const UpdateUserPoolClientInput = struct {
     /// In Amazon Web Services Regions where Amazon Pinpoint isn't available, user
     /// pools might not have access to
     /// analytics or might be configurable with campaigns in the US East (N.
-    /// Virginia) Region.
-    /// For more information, see [Using Amazon Pinpoint
+    /// Virginia) Region. For
+    /// more information, see [Using Amazon Pinpoint
     /// analytics](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-pinpoint-integration.html).
     analytics_configuration: ?AnalyticsConfigurationType = null,
 

@@ -102,6 +102,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetIntrospectionSchemaI
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetIntrospectionSchemaOutput {
     var result: GetIntrospectionSchemaOutput = .{};
+    errdefer {
+        if (result.schema) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.schema = try allocator.dupe(u8, body);
     }

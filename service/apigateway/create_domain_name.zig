@@ -256,10 +256,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDomainNameInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDomainNameOutput {
-    var result: CreateDomainNameOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateDomainNameOutput, body, allocator);
-    }
+    const result: CreateDomainNameOutput = try aws.json.parseJsonObject(
+        CreateDomainNameOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

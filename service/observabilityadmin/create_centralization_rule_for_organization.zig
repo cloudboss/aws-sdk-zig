@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCentralizationRul
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCentralizationRuleForOrganizationOutput {
-    var result: CreateCentralizationRuleForOrganizationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCentralizationRuleForOrganizationOutput, body, allocator);
-    }
+    const result: CreateCentralizationRuleForOrganizationOutput = try aws.json.parseJsonObject(
+        CreateCentralizationRuleForOrganizationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

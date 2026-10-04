@@ -16,7 +16,9 @@ const SystemsManagerAgent = @import("systems_manager_agent.zig").SystemsManagerA
 /// the Systems Manager agent, you can
 /// choose whether to keep it for the AMI that you create.
 pub const AdditionalInstanceConfiguration = struct {
-    /// Contains settings for the Systems Manager agent on your build instance.
+    /// The Systems Manager agent settings for your build instance. This setting
+    /// applies to Linux and macOS build instances only. Requests that set it for a
+    /// recipe with a Windows base image are rejected.
     systems_manager_agent: ?SystemsManagerAgent = null,
 
     /// Use this property to provide commands or a command script to run when you
@@ -34,7 +36,7 @@ pub const AdditionalInstanceConfiguration = struct {
     /// The user data is always base 64 encoded. For example, the following commands
     /// are
     /// encoded as
-    /// `IyEvYmluL2Jhc2gKbWtkaXIgLXAgL3Zhci9iYi8KdG91Y2ggL3Zhci$`:
+    /// `IyEvYmluL2Jhc2gKbWtkaXIgLXAgL3Zhci9iYi8KdG91Y2ggL3Zhcg==`:
     ///
     /// *#!/bin/bash*
     ///

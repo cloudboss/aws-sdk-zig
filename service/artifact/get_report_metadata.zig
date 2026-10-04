@@ -92,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetReportMetadataInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetReportMetadataOutput {
-    var result: GetReportMetadataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetReportMetadataOutput, body, allocator);
-    }
+    const result: GetReportMetadataOutput = try aws.json.parseJsonObject(
+        GetReportMetadataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

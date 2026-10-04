@@ -10,8 +10,7 @@ pub const TestHypervisorConfigurationInput = struct {
     gateway_arn: []const u8,
 
     /// The server host of the hypervisor. This can be either an IP address or a
-    /// fully-qualified
-    /// domain name (FQDN).
+    /// fully-qualified domain name (FQDN).
     host: []const u8,
 
     /// The password for the hypervisor.

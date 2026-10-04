@@ -19,6 +19,7 @@ const assign_ipv_6_addresses = @import("assign_ipv_6_addresses.zig");
 const assign_private_ip_addresses = @import("assign_private_ip_addresses.zig");
 const assign_private_nat_gateway_address = @import("assign_private_nat_gateway_address.zig");
 const associate_address = @import("associate_address.zig");
+const associate_application_status_check = @import("associate_application_status_check.zig");
 const associate_capacity_reservation_billing_owner = @import("associate_capacity_reservation_billing_owner.zig");
 const associate_client_vpn_target_network = @import("associate_client_vpn_target_network.zig");
 const associate_dhcp_options = @import("associate_dhcp_options.zig");
@@ -38,6 +39,7 @@ const associate_transit_gateway_route_table = @import("associate_transit_gateway
 const associate_trunk_interface = @import("associate_trunk_interface.zig");
 const associate_vpc_cidr_block = @import("associate_vpc_cidr_block.zig");
 const attach_classic_link_vpc = @import("attach_classic_link_vpc.zig");
+const attach_image_watermark = @import("attach_image_watermark.zig");
 const attach_internet_gateway = @import("attach_internet_gateway.zig");
 const attach_network_interface = @import("attach_network_interface.zig");
 const attach_verified_access_trust_provider = @import("attach_verified_access_trust_provider.zig");
@@ -46,6 +48,7 @@ const attach_vpn_gateway = @import("attach_vpn_gateway.zig");
 const authorize_client_vpn_ingress = @import("authorize_client_vpn_ingress.zig");
 const authorize_security_group_egress = @import("authorize_security_group_egress.zig");
 const authorize_security_group_ingress = @import("authorize_security_group_ingress.zig");
+const batch_modify_ipam_routing_policy_registrations = @import("batch_modify_ipam_routing_policy_registrations.zig");
 const bundle_instance = @import("bundle_instance.zig");
 const cancel_bundle_task = @import("cancel_bundle_task.zig");
 const cancel_capacity_reservation = @import("cancel_capacity_reservation.zig");
@@ -63,9 +66,12 @@ const copy_fpga_image = @import("copy_fpga_image.zig");
 const copy_image = @import("copy_image.zig");
 const copy_snapshot = @import("copy_snapshot.zig");
 const copy_volumes = @import("copy_volumes.zig");
+const create_application_status_check = @import("create_application_status_check.zig");
 const create_capacity_manager_data_export = @import("create_capacity_manager_data_export.zig");
 const create_capacity_reservation = @import("create_capacity_reservation.zig");
 const create_capacity_reservation_by_splitting = @import("create_capacity_reservation_by_splitting.zig");
+const create_capacity_reservation_cancellation_quote = @import("create_capacity_reservation_cancellation_quote.zig");
+const create_capacity_reservation_date_change_quote = @import("create_capacity_reservation_date_change_quote.zig");
 const create_capacity_reservation_fleet = @import("create_capacity_reservation_fleet.zig");
 const create_carrier_gateway = @import("create_carrier_gateway.zig");
 const create_client_vpn_endpoint = @import("create_client_vpn_endpoint.zig");
@@ -90,11 +96,13 @@ const create_internet_gateway = @import("create_internet_gateway.zig");
 const create_interruptible_capacity_reservation_allocation = @import("create_interruptible_capacity_reservation_allocation.zig");
 const create_ipam = @import("create_ipam.zig");
 const create_ipam_external_resource_verification_token = @import("create_ipam_external_resource_verification_token.zig");
+const create_ipam_internet_registry_association = @import("create_ipam_internet_registry_association.zig");
 const create_ipam_policy = @import("create_ipam_policy.zig");
 const create_ipam_pool = @import("create_ipam_pool.zig");
 const create_ipam_prefix_list_resolver = @import("create_ipam_prefix_list_resolver.zig");
 const create_ipam_prefix_list_resolver_target = @import("create_ipam_prefix_list_resolver_target.zig");
 const create_ipam_resource_discovery = @import("create_ipam_resource_discovery.zig");
+const create_ipam_routing_policy_registration = @import("create_ipam_routing_policy_registration.zig");
 const create_ipam_scope = @import("create_ipam_scope.zig");
 const create_key_pair = @import("create_key_pair.zig");
 const create_launch_template = @import("create_launch_template.zig");
@@ -146,6 +154,7 @@ const create_transit_gateway_metering_policy_entry = @import("create_transit_gat
 const create_transit_gateway_multicast_domain = @import("create_transit_gateway_multicast_domain.zig");
 const create_transit_gateway_peering_attachment = @import("create_transit_gateway_peering_attachment.zig");
 const create_transit_gateway_policy_table = @import("create_transit_gateway_policy_table.zig");
+const create_transit_gateway_policy_table_entry = @import("create_transit_gateway_policy_table_entry.zig");
 const create_transit_gateway_prefix_list_reference = @import("create_transit_gateway_prefix_list_reference.zig");
 const create_transit_gateway_route = @import("create_transit_gateway_route.zig");
 const create_transit_gateway_route_table = @import("create_transit_gateway_route_table.zig");
@@ -167,9 +176,11 @@ const create_vpn_concentrator = @import("create_vpn_concentrator.zig");
 const create_vpn_connection = @import("create_vpn_connection.zig");
 const create_vpn_connection_route = @import("create_vpn_connection_route.zig");
 const create_vpn_gateway = @import("create_vpn_gateway.zig");
+const delete_application_status_check = @import("delete_application_status_check.zig");
 const delete_capacity_manager_data_export = @import("delete_capacity_manager_data_export.zig");
 const delete_carrier_gateway = @import("delete_carrier_gateway.zig");
 const delete_client_vpn_endpoint = @import("delete_client_vpn_endpoint.zig");
+const delete_client_vpn_endpoint_authorization_policy = @import("delete_client_vpn_endpoint_authorization_policy.zig");
 const delete_client_vpn_route = @import("delete_client_vpn_route.zig");
 const delete_coip_cidr = @import("delete_coip_cidr.zig");
 const delete_coip_pool = @import("delete_coip_pool.zig");
@@ -185,11 +196,13 @@ const delete_instance_event_window = @import("delete_instance_event_window.zig")
 const delete_internet_gateway = @import("delete_internet_gateway.zig");
 const delete_ipam = @import("delete_ipam.zig");
 const delete_ipam_external_resource_verification_token = @import("delete_ipam_external_resource_verification_token.zig");
+const delete_ipam_internet_registry_association = @import("delete_ipam_internet_registry_association.zig");
 const delete_ipam_policy = @import("delete_ipam_policy.zig");
 const delete_ipam_pool = @import("delete_ipam_pool.zig");
 const delete_ipam_prefix_list_resolver = @import("delete_ipam_prefix_list_resolver.zig");
 const delete_ipam_prefix_list_resolver_target = @import("delete_ipam_prefix_list_resolver_target.zig");
 const delete_ipam_resource_discovery = @import("delete_ipam_resource_discovery.zig");
+const delete_ipam_routing_policy_registration = @import("delete_ipam_routing_policy_registration.zig");
 const delete_ipam_scope = @import("delete_ipam_scope.zig");
 const delete_key_pair = @import("delete_key_pair.zig");
 const delete_launch_template = @import("delete_launch_template.zig");
@@ -239,6 +252,7 @@ const delete_transit_gateway_metering_policy_entry = @import("delete_transit_gat
 const delete_transit_gateway_multicast_domain = @import("delete_transit_gateway_multicast_domain.zig");
 const delete_transit_gateway_peering_attachment = @import("delete_transit_gateway_peering_attachment.zig");
 const delete_transit_gateway_policy_table = @import("delete_transit_gateway_policy_table.zig");
+const delete_transit_gateway_policy_table_entry = @import("delete_transit_gateway_policy_table_entry.zig");
 const delete_transit_gateway_prefix_list_reference = @import("delete_transit_gateway_prefix_list_reference.zig");
 const delete_transit_gateway_route = @import("delete_transit_gateway_route.zig");
 const delete_transit_gateway_route_table = @import("delete_transit_gateway_route_table.zig");
@@ -269,10 +283,14 @@ const deregister_instance_event_notification_attributes = @import("deregister_in
 const deregister_transit_gateway_multicast_group_members = @import("deregister_transit_gateway_multicast_group_members.zig");
 const deregister_transit_gateway_multicast_group_sources = @import("deregister_transit_gateway_multicast_group_sources.zig");
 const describe_account_attributes = @import("describe_account_attributes.zig");
+const describe_account_vpc_encryption_control = @import("describe_account_vpc_encryption_control.zig");
 const describe_address_transfers = @import("describe_address_transfers.zig");
 const describe_addresses = @import("describe_addresses.zig");
 const describe_addresses_attribute = @import("describe_addresses_attribute.zig");
 const describe_aggregate_id_format = @import("describe_aggregate_id_format.zig");
+const describe_application_status = @import("describe_application_status.zig");
+const describe_application_status_check_associations = @import("describe_application_status_check_associations.zig");
+const describe_application_status_checks = @import("describe_application_status_checks.zig");
 const describe_availability_zones = @import("describe_availability_zones.zig");
 const describe_aws_network_performance_metric_subscriptions = @import("describe_aws_network_performance_metric_subscriptions.zig");
 const describe_bundle_tasks = @import("describe_bundle_tasks.zig");
@@ -284,6 +302,8 @@ const describe_capacity_block_status = @import("describe_capacity_block_status.z
 const describe_capacity_blocks = @import("describe_capacity_blocks.zig");
 const describe_capacity_manager_data_exports = @import("describe_capacity_manager_data_exports.zig");
 const describe_capacity_reservation_billing_requests = @import("describe_capacity_reservation_billing_requests.zig");
+const describe_capacity_reservation_cancellation_quotes = @import("describe_capacity_reservation_cancellation_quotes.zig");
+const describe_capacity_reservation_date_change_quotes = @import("describe_capacity_reservation_date_change_quotes.zig");
 const describe_capacity_reservation_fleets = @import("describe_capacity_reservation_fleets.zig");
 const describe_capacity_reservation_topology = @import("describe_capacity_reservation_topology.zig");
 const describe_capacity_reservations = @import("describe_capacity_reservations.zig");
@@ -340,7 +360,9 @@ const describe_instances = @import("describe_instances.zig");
 const describe_internet_gateways = @import("describe_internet_gateways.zig");
 const describe_ipam_byoasn = @import("describe_ipam_byoasn.zig");
 const describe_ipam_external_resource_verification_tokens = @import("describe_ipam_external_resource_verification_tokens.zig");
+const describe_ipam_internet_registry_associations = @import("describe_ipam_internet_registry_associations.zig");
 const describe_ipam_policies = @import("describe_ipam_policies.zig");
+const describe_ipam_pool_allocations = @import("describe_ipam_pool_allocations.zig");
 const describe_ipam_pools = @import("describe_ipam_pools.zig");
 const describe_ipam_prefix_list_resolver_targets = @import("describe_ipam_prefix_list_resolver_targets.zig");
 const describe_ipam_prefix_list_resolvers = @import("describe_ipam_prefix_list_resolvers.zig");
@@ -454,6 +476,7 @@ const describe_vpn_concentrators = @import("describe_vpn_concentrators.zig");
 const describe_vpn_connections = @import("describe_vpn_connections.zig");
 const describe_vpn_gateways = @import("describe_vpn_gateways.zig");
 const detach_classic_link_vpc = @import("detach_classic_link_vpc.zig");
+const detach_image_watermark = @import("detach_image_watermark.zig");
 const detach_internet_gateway = @import("detach_internet_gateway.zig");
 const detach_network_interface = @import("detach_network_interface.zig");
 const detach_verified_access_trust_provider = @import("detach_verified_access_trust_provider.zig");
@@ -461,6 +484,7 @@ const detach_volume = @import("detach_volume.zig");
 const detach_vpn_gateway = @import("detach_vpn_gateway.zig");
 const disable_address_transfer = @import("disable_address_transfer.zig");
 const disable_allowed_images_settings = @import("disable_allowed_images_settings.zig");
+const disable_application_status_check_suppression = @import("disable_application_status_check_suppression.zig");
 const disable_aws_network_performance_metric_subscription = @import("disable_aws_network_performance_metric_subscription.zig");
 const disable_capacity_manager = @import("disable_capacity_manager.zig");
 const disable_ebs_encryption_by_default = @import("disable_ebs_encryption_by_default.zig");
@@ -481,6 +505,7 @@ const disable_vgw_route_propagation = @import("disable_vgw_route_propagation.zig
 const disable_vpc_classic_link = @import("disable_vpc_classic_link.zig");
 const disable_vpc_classic_link_dns_support = @import("disable_vpc_classic_link_dns_support.zig");
 const disassociate_address = @import("disassociate_address.zig");
+const disassociate_application_status_check = @import("disassociate_application_status_check.zig");
 const disassociate_capacity_reservation_billing_owner = @import("disassociate_capacity_reservation_billing_owner.zig");
 const disassociate_client_vpn_target_network = @import("disassociate_client_vpn_target_network.zig");
 const disassociate_enclave_certificate_iam_role = @import("disassociate_enclave_certificate_iam_role.zig");
@@ -500,6 +525,7 @@ const disassociate_trunk_interface = @import("disassociate_trunk_interface.zig")
 const disassociate_vpc_cidr_block = @import("disassociate_vpc_cidr_block.zig");
 const enable_address_transfer = @import("enable_address_transfer.zig");
 const enable_allowed_images_settings = @import("enable_allowed_images_settings.zig");
+const enable_application_status_check_suppression = @import("enable_application_status_check_suppression.zig");
 const enable_aws_network_performance_metric_subscription = @import("enable_aws_network_performance_metric_subscription.zig");
 const enable_capacity_manager = @import("enable_capacity_manager.zig");
 const enable_ebs_encryption_by_default = @import("enable_ebs_encryption_by_default.zig");
@@ -510,6 +536,7 @@ const enable_image_block_public_access = @import("enable_image_block_public_acce
 const enable_image_deprecation = @import("enable_image_deprecation.zig");
 const enable_image_deregistration_protection = @import("enable_image_deregistration_protection.zig");
 const enable_instance_sql_ha_standby_detections = @import("enable_instance_sql_ha_standby_detections.zig");
+const enable_ipam_internet_registry_association = @import("enable_ipam_internet_registry_association.zig");
 const enable_ipam_organization_admin_account = @import("enable_ipam_organization_admin_account.zig");
 const enable_ipam_policy = @import("enable_ipam_policy.zig");
 const enable_reachability_analyzer_organization_sharing = @import("enable_reachability_analyzer_organization_sharing.zig");
@@ -536,6 +563,7 @@ const get_capacity_manager_metric_data = @import("get_capacity_manager_metric_da
 const get_capacity_manager_metric_dimensions = @import("get_capacity_manager_metric_dimensions.zig");
 const get_capacity_manager_monitored_tag_keys = @import("get_capacity_manager_monitored_tag_keys.zig");
 const get_capacity_reservation_usage = @import("get_capacity_reservation_usage.zig");
+const get_client_vpn_endpoint_authorization_policy = @import("get_client_vpn_endpoint_authorization_policy.zig");
 const get_coip_pool_usage = @import("get_coip_pool_usage.zig");
 const get_console_output = @import("get_console_output.zig");
 const get_console_screenshot = @import("get_console_screenshot.zig");
@@ -557,6 +585,9 @@ const get_ipam_address_history = @import("get_ipam_address_history.zig");
 const get_ipam_discovered_accounts = @import("get_ipam_discovered_accounts.zig");
 const get_ipam_discovered_public_addresses = @import("get_ipam_discovered_public_addresses.zig");
 const get_ipam_discovered_resource_cidrs = @import("get_ipam_discovered_resource_cidrs.zig");
+const get_ipam_discovered_routes = @import("get_ipam_discovered_routes.zig");
+const get_ipam_internet_registry_association_asns = @import("get_ipam_internet_registry_association_asns.zig");
+const get_ipam_internet_registry_association_cidrs = @import("get_ipam_internet_registry_association_cidrs.zig");
 const get_ipam_policy_allocation_rules = @import("get_ipam_policy_allocation_rules.zig");
 const get_ipam_policy_organization_targets = @import("get_ipam_policy_organization_targets.zig");
 const get_ipam_pool_allocations = @import("get_ipam_pool_allocations.zig");
@@ -565,6 +596,10 @@ const get_ipam_prefix_list_resolver_rules = @import("get_ipam_prefix_list_resolv
 const get_ipam_prefix_list_resolver_version_entries = @import("get_ipam_prefix_list_resolver_version_entries.zig");
 const get_ipam_prefix_list_resolver_versions = @import("get_ipam_prefix_list_resolver_versions.zig");
 const get_ipam_resource_cidrs = @import("get_ipam_resource_cidrs.zig");
+const get_ipam_route_origin_authorizations = @import("get_ipam_route_origin_authorizations.zig");
+const get_ipam_route_protection_findings = @import("get_ipam_route_protection_findings.zig");
+const get_ipam_routing_policy_registration_deltas = @import("get_ipam_routing_policy_registration_deltas.zig");
+const get_ipam_routing_policy_registrations = @import("get_ipam_routing_policy_registrations.zig");
 const get_launch_template_data = @import("get_launch_template_data.zig");
 const get_managed_prefix_list_associations = @import("get_managed_prefix_list_associations.zig");
 const get_managed_prefix_list_entries = @import("get_managed_prefix_list_entries.zig");
@@ -606,11 +641,14 @@ const list_images_in_recycle_bin = @import("list_images_in_recycle_bin.zig");
 const list_snapshots_in_recycle_bin = @import("list_snapshots_in_recycle_bin.zig");
 const list_volumes_in_recycle_bin = @import("list_volumes_in_recycle_bin.zig");
 const lock_snapshot = @import("lock_snapshot.zig");
+const modify_account_vpc_encryption_control = @import("modify_account_vpc_encryption_control.zig");
 const modify_address_attribute = @import("modify_address_attribute.zig");
+const modify_application_status_check = @import("modify_application_status_check.zig");
 const modify_availability_zone_group = @import("modify_availability_zone_group.zig");
 const modify_capacity_reservation = @import("modify_capacity_reservation.zig");
 const modify_capacity_reservation_fleet = @import("modify_capacity_reservation_fleet.zig");
 const modify_client_vpn_endpoint = @import("modify_client_vpn_endpoint.zig");
+const modify_client_vpn_endpoint_authorization_policy = @import("modify_client_vpn_endpoint_authorization_policy.zig");
 const modify_default_credit_specification = @import("modify_default_credit_specification.zig");
 const modify_ebs_default_kms_key_id = @import("modify_ebs_default_kms_key_id.zig");
 const modify_fleet = @import("modify_fleet.zig");
@@ -634,10 +672,12 @@ const modify_instance_placement = @import("modify_instance_placement.zig");
 const modify_ipam = @import("modify_ipam.zig");
 const modify_ipam_policy_allocation_rules = @import("modify_ipam_policy_allocation_rules.zig");
 const modify_ipam_pool = @import("modify_ipam_pool.zig");
+const modify_ipam_pool_allocation = @import("modify_ipam_pool_allocation.zig");
 const modify_ipam_prefix_list_resolver = @import("modify_ipam_prefix_list_resolver.zig");
 const modify_ipam_prefix_list_resolver_target = @import("modify_ipam_prefix_list_resolver_target.zig");
 const modify_ipam_resource_cidr = @import("modify_ipam_resource_cidr.zig");
 const modify_ipam_resource_discovery = @import("modify_ipam_resource_discovery.zig");
+const modify_ipam_routing_policy_registration = @import("modify_ipam_routing_policy_registration.zig");
 const modify_ipam_scope = @import("modify_ipam_scope.zig");
 const modify_launch_template = @import("modify_launch_template.zig");
 const modify_local_gateway_route = @import("modify_local_gateway_route.zig");
@@ -658,6 +698,7 @@ const modify_traffic_mirror_filter_rule = @import("modify_traffic_mirror_filter_
 const modify_traffic_mirror_session = @import("modify_traffic_mirror_session.zig");
 const modify_transit_gateway = @import("modify_transit_gateway.zig");
 const modify_transit_gateway_metering_policy = @import("modify_transit_gateway_metering_policy.zig");
+const modify_transit_gateway_policy_table_entry = @import("modify_transit_gateway_policy_table_entry.zig");
 const modify_transit_gateway_prefix_list_reference = @import("modify_transit_gateway_prefix_list_reference.zig");
 const modify_transit_gateway_vpc_attachment = @import("modify_transit_gateway_vpc_attachment.zig");
 const modify_verified_access_endpoint = @import("modify_verified_access_endpoint.zig");
@@ -675,6 +716,7 @@ const modify_vpc_block_public_access_options = @import("modify_vpc_block_public_
 const modify_vpc_encryption_control = @import("modify_vpc_encryption_control.zig");
 const modify_vpc_endpoint = @import("modify_vpc_endpoint.zig");
 const modify_vpc_endpoint_connection_notification = @import("modify_vpc_endpoint_connection_notification.zig");
+const modify_vpc_endpoint_payer_responsibility = @import("modify_vpc_endpoint_payer_responsibility.zig");
 const modify_vpc_endpoint_service_configuration = @import("modify_vpc_endpoint_service_configuration.zig");
 const modify_vpc_endpoint_service_payer_responsibility = @import("modify_vpc_endpoint_service_payer_responsibility.zig");
 const modify_vpc_endpoint_service_permissions = @import("modify_vpc_endpoint_service_permissions.zig");
@@ -714,6 +756,7 @@ const release_hosts = @import("release_hosts.zig");
 const release_ipam_pool_allocation = @import("release_ipam_pool_allocation.zig");
 const replace_iam_instance_profile_association = @import("replace_iam_instance_profile_association.zig");
 const replace_image_criteria_in_allowed_images_settings = @import("replace_image_criteria_in_allowed_images_settings.zig");
+const replace_image_instance_type_specification = @import("replace_image_instance_type_specification.zig");
 const replace_network_acl_association = @import("replace_network_acl_association.zig");
 const replace_network_acl_entry = @import("replace_network_acl_entry.zig");
 const replace_route = @import("replace_route.zig");
@@ -763,6 +806,7 @@ const update_capacity_manager_organizations_access = @import("update_capacity_ma
 const update_interruptible_capacity_reservation_allocation = @import("update_interruptible_capacity_reservation_allocation.zig");
 const update_security_group_rule_descriptions_egress = @import("update_security_group_rule_descriptions_egress.zig");
 const update_security_group_rule_descriptions_ingress = @import("update_security_group_rule_descriptions_ingress.zig");
+const validate_security_group_quotas_for_interface = @import("validate_security_group_quotas_for_interface.zig");
 const withdraw_byoip_cidr = @import("withdraw_byoip_cidr.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
@@ -1064,6 +1108,31 @@ pub const Client = struct {
         return associate_address.execute(self, allocator, input, options);
     }
 
+    /// Associates an application status check with instances or
+    /// [tags](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html).
+    /// Once you create an association, health monitoring automatically begins for
+    /// the specified instances or for instances that match the specified tags. The
+    /// following rules apply:
+    ///
+    /// * You must specify either `TargetTagAssociations` or `InstanceIds`, but not
+    ///   both. Specifying both results in an `InvalidParameterCombination` error.
+    ///
+    /// * You must own the application status check. The check must already exist in
+    ///   your account.
+    ///
+    /// * You must not leave tag keys blank.
+    ///
+    /// * You can create a maximum of 50 tag associations for each application
+    ///   status check.
+    ///
+    /// * You can use `DisassociateApplicationStatusCheck` to remove associations.
+    ///
+    /// * You can associate
+    ///   [tags](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) so that the application status check automatically monitors all current and future instances that have the specified tags.
+    pub fn associateApplicationStatusCheck(self: *Self, allocator: std.mem.Allocator, input: associate_application_status_check.AssociateApplicationStatusCheckInput, options: CallOptions) !associate_application_status_check.AssociateApplicationStatusCheckOutput {
+        return associate_application_status_check.execute(self, allocator, input, options);
+    }
+
     /// Initiates a request to assign billing of the unused capacity of a shared
     /// Capacity
     /// Reservation to a consumer account that is consolidated under the same Amazon
@@ -1329,6 +1398,19 @@ pub const Client = struct {
         return attach_classic_link_vpc.execute(self, allocator, input, options);
     }
 
+    /// Attaches a watermark to a non-public AMI. The watermark is a structured
+    /// identifier that
+    /// automatically propagates to all derivative images created through
+    /// [CreateImage](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html), and
+    /// [CopyImage](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopyImage.html).
+    ///
+    /// Only the AMI owner can attach watermarks. Watermarks cannot be added to
+    /// public
+    /// AMIs.
+    pub fn attachImageWatermark(self: *Self, allocator: std.mem.Allocator, input: attach_image_watermark.AttachImageWatermarkInput, options: CallOptions) !attach_image_watermark.AttachImageWatermarkOutput {
+        return attach_image_watermark.execute(self, allocator, input, options);
+    }
+
     /// Attaches an internet gateway or a virtual private gateway to a VPC, enabling
     /// connectivity
     /// between the internet and the VPC. For more information, see [Internet
@@ -1478,15 +1560,21 @@ pub const Client = struct {
         return authorize_security_group_ingress.execute(self, allocator, input, options);
     }
 
+    /// Modifies multiple routing policy registrations in a single operation. You
+    /// can create, update, or delete Route Origin Authorizations (ROAs) in batch.
+    pub fn batchModifyIpamRoutingPolicyRegistrations(self: *Self, allocator: std.mem.Allocator, input: batch_modify_ipam_routing_policy_registrations.BatchModifyIpamRoutingPolicyRegistrationsInput, options: CallOptions) !batch_modify_ipam_routing_policy_registrations.BatchModifyIpamRoutingPolicyRegistrationsOutput {
+        return batch_modify_ipam_routing_policy_registrations.execute(self, allocator, input, options);
+    }
+
     /// Bundles an Amazon instance store-backed Windows instance.
     ///
     /// During bundling, only the root device volume (C:\) is bundled. Data on other
     /// instance
     /// store volumes is not preserved.
     ///
-    /// This action is no longer supported. To create an AMI, use
-    /// [CreateImage](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html).
-    /// For more information, see [
+    /// BundleInstance is no longer supported. To create an AMI, use
+    /// [CreateImage](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html) instead.
+    /// For more information about creating an Amazon EBS-backed AMI, see [
     /// Create an Amazon EBS-backed
     /// AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html) in the *Amazon EC2 User Guide*.
     pub fn bundleInstance(self: *Self, allocator: std.mem.Allocator, input: bundle_instance.BundleInstanceInput, options: CallOptions) !bundle_instance.BundleInstanceOutput {
@@ -1494,6 +1582,10 @@ pub const Client = struct {
     }
 
     /// Cancels a bundling operation for an instance store-backed Windows instance.
+    ///
+    /// CancelBundleTask is no longer supported because
+    /// [BundleInstance](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BundleInstance.html),
+    /// the operation it cancels, is no longer supported.
     pub fn cancelBundleTask(self: *Self, allocator: std.mem.Allocator, input: cancel_bundle_task.CancelBundleTaskInput, options: CallOptions) !cancel_bundle_task.CancelBundleTaskOutput {
         return cancel_bundle_task.execute(self, allocator, input, options);
     }
@@ -1506,18 +1598,28 @@ pub const Client = struct {
     ///
     /// * `assessing`
     ///
+    /// * `scheduled` — requires a cancellation quote. Use
+    /// `CreateCapacityReservationCancellationQuote` to generate a quote,
+    /// then pass the quote ID with `ApplyCancellationCharges` set to
+    /// `commitment-wind-down`. The cancellation charge depends on how
+    /// close the reservation is to its start date.
+    ///
     /// * `active` and there is no commitment duration or the commitment
-    /// duration has elapsed. You can't cancel a future-dated Capacity Reservation
-    /// during the commitment duration.
+    /// duration has elapsed.
+    ///
+    /// * `active` during the commitment duration — requires a
+    /// cancellation quote. Use
+    /// `CreateCapacityReservationCancellationQuote` to generate a quote,
+    /// then pass the quote ID with `ApplyCancellationCharges` set to
+    /// `commitment-wind-down`. The Capacity Reservation transitions to
+    /// `cancelling` while charges are applied.
+    ///
+    /// * `delayed` — the commitment duration is waived, so no
+    /// cancellation charge applies.
     ///
     /// You can't modify or cancel a Capacity Block. For more information, see
     /// [Capacity Blocks for
     /// ML](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-blocks.html).
-    ///
-    /// If a future-dated Capacity Reservation enters the `delayed` state, the
-    /// commitment duration is waived, and you can cancel it as soon as it enters
-    /// the
-    /// `active` state.
     ///
     /// Instances running in the reserved capacity continue running until you stop
     /// them.
@@ -1798,6 +1900,35 @@ pub const Client = struct {
         return copy_volumes.execute(self, allocator, input, options);
     }
 
+    /// Creates an application status check for monitoring the health of
+    /// applications running on your instances. You can configure the protocol,
+    /// port, path, and thresholds for the health check. The following rules apply:
+    ///
+    /// * You can create a maximum of 50 application status checks for each account.
+    ///
+    /// * You must associate the check with instances or tags using
+    ///   `AssociateApplicationStatusCheck` before health checks start.
+    ///
+    /// * You must set the `Timeout` value to less than the `Interval` value.
+    ///
+    /// * You must start the `Path` with a forward slash (`/`). Default: `/`.
+    ///
+    /// * You can specify `Aggregation` as `included` or `excluded`. If you do not
+    ///   specify a value, it defaults to `included`, which means the check
+    ///   contributes to the instance-level application status.
+    ///
+    /// * You can use the following default values: `Interval` is 60 seconds,
+    ///   `Timeout` is 6 seconds, `FailureThreshold` is 2, `SuccessThreshold` is 2,
+    ///   `StatusCodeMatcher` is `200`, `InitializationGracePeriodSeconds` is 300
+    ///   seconds.
+    ///
+    /// * You can tag the application status check during creation. For more
+    ///   information, see [Tag your Amazon EC2
+    ///   resources](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html).
+    pub fn createApplicationStatusCheck(self: *Self, allocator: std.mem.Allocator, input: create_application_status_check.CreateApplicationStatusCheckInput, options: CallOptions) !create_application_status_check.CreateApplicationStatusCheckOutput {
+        return create_application_status_check.execute(self, allocator, input, options);
+    }
+
     /// Creates a new data export configuration for EC2 Capacity Manager. This
     /// allows you to automatically export capacity usage data to an S3 bucket on a
     /// scheduled basis.
@@ -1851,6 +1982,32 @@ pub const Client = struct {
     /// `active` and owned by your Amazon Web Services account.
     pub fn createCapacityReservationBySplitting(self: *Self, allocator: std.mem.Allocator, input: create_capacity_reservation_by_splitting.CreateCapacityReservationBySplittingInput, options: CallOptions) !create_capacity_reservation_by_splitting.CreateCapacityReservationBySplittingOutput {
         return create_capacity_reservation_by_splitting.execute(self, allocator, input, options);
+    }
+
+    /// Generates a cancellation quote for a future-dated Capacity Reservation that
+    /// is
+    /// within its commitment duration. The quote includes the cancellation terms
+    /// and a quote ID
+    /// that you can pass to the `CancelCapacityReservation` action. Cancellation
+    /// quotes are valid for 24 hours.
+    pub fn createCapacityReservationCancellationQuote(self: *Self, allocator: std.mem.Allocator, input: create_capacity_reservation_cancellation_quote.CreateCapacityReservationCancellationQuoteInput, options: CallOptions) !create_capacity_reservation_cancellation_quote.CreateCapacityReservationCancellationQuoteOutput {
+        return create_capacity_reservation_cancellation_quote.execute(self, allocator, input, options);
+    }
+
+    /// Generates a quote for changing the start date of a future-dated Capacity
+    /// Reservation
+    /// that has not yet been delivered. The quote includes the new start date, the
+    /// resulting
+    /// commitment end date, and a quote ID. Pass the quote ID to
+    /// `ModifyCapacityReservation` to apply the change.
+    ///
+    /// The cumulative pushout across all changes is limited to 30 days from the
+    /// Capacity
+    /// Reservation's original start date. Quotes are valid for 24 hours, and always
+    /// expire at
+    /// least one hour before the start date.
+    pub fn createCapacityReservationDateChangeQuote(self: *Self, allocator: std.mem.Allocator, input: create_capacity_reservation_date_change_quote.CreateCapacityReservationDateChangeQuoteInput, options: CallOptions) !create_capacity_reservation_date_change_quote.CreateCapacityReservationDateChangeQuoteOutput {
+        return create_capacity_reservation_date_change_quote.execute(self, allocator, input, options);
     }
 
     /// Creates a Capacity Reservation Fleet. For more information, see [Create a
@@ -2109,6 +2266,13 @@ pub const Client = struct {
     ///   the same
     /// Local Zone or in its parent Region.
     ///
+    /// * If the source instance is on an Outpost that supports local snapshots, you
+    ///   can create
+    /// the snapshots on the same Outpost or in the parent Region of that Outpost.
+    /// In this case,
+    /// you must use the `SnapshotLocation` parameter to specify where to create the
+    /// snapshots.
+    ///
     /// For more information, see [Create an Amazon EBS-backed
     /// AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html) in
     /// the *Amazon Elastic Compute Cloud User Guide*.
@@ -2229,6 +2393,15 @@ pub const Client = struct {
         return create_ipam_external_resource_verification_token.execute(self, allocator, input, options);
     }
 
+    /// Creates an association between an IPAM and a Regional Internet Registry
+    /// (RIR) for Resource Public Key Infrastructure (RPKI) management. You can use
+    /// this association to create Route Origin Authorizations (ROAs) for IP address
+    /// prefixes registered with the internet registry. Your IPAM must be in the
+    /// Advanced tier to use this feature.
+    pub fn createIpamInternetRegistryAssociation(self: *Self, allocator: std.mem.Allocator, input: create_ipam_internet_registry_association.CreateIpamInternetRegistryAssociationInput, options: CallOptions) !create_ipam_internet_registry_association.CreateIpamInternetRegistryAssociationOutput {
+        return create_ipam_internet_registry_association.execute(self, allocator, input, options);
+    }
+
     /// Creates an IPAM policy.
     ///
     /// An IPAM policy is a set of rules that define how public IPv4 addresses from
@@ -2294,6 +2467,12 @@ pub const Client = struct {
     /// the owning account.
     pub fn createIpamResourceDiscovery(self: *Self, allocator: std.mem.Allocator, input: create_ipam_resource_discovery.CreateIpamResourceDiscoveryInput, options: CallOptions) !create_ipam_resource_discovery.CreateIpamResourceDiscoveryOutput {
         return create_ipam_resource_discovery.execute(self, allocator, input, options);
+    }
+
+    /// Creates a routing policy registration and publishes Route Origin
+    /// Authorizations (ROAs) to the RPKI for the specified CIDR prefix and ASNs.
+    pub fn createIpamRoutingPolicyRegistration(self: *Self, allocator: std.mem.Allocator, input: create_ipam_routing_policy_registration.CreateIpamRoutingPolicyRegistrationInput, options: CallOptions) !create_ipam_routing_policy_registration.CreateIpamRoutingPolicyRegistrationOutput {
+        return create_ipam_routing_policy_registration.execute(self, allocator, input, options);
     }
 
     /// Create an IPAM scope. In IPAM, a scope is the highest-level container within
@@ -2603,7 +2782,10 @@ pub const Client = struct {
     /// `partition` placement group places groups of instances in different
     /// partitions, where instances in one partition do not share the same hardware
     /// with
-    /// instances in another partition.
+    /// instances in another partition. A `precision-time` placement group places
+    /// instances on supported hardware with direct access to high-precision time
+    /// sources in
+    /// Amazon Web Services infrastructure.
     ///
     /// For more information, see [Placement
     /// groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the
@@ -2625,9 +2807,11 @@ pub const Client = struct {
     /// Replaces the EBS-backed root volume for a `running` instance with a new
     /// volume that is restored to the original root volume's launch state, that is
     /// restored to a
-    /// specific snapshot taken from the original root volume, or that is restored
-    /// from an AMI
-    /// that has the same key characteristics as that of the instance.
+    /// specific snapshot taken from the original root volume, that is restored from
+    /// an AMI
+    /// that has the same key characteristics as that of the instance, or that is
+    /// replaced by
+    /// a specified volume.
     ///
     /// For more information, see [Replace a root
     /// volume](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replace-root.html) in the *Amazon EC2 User Guide*.
@@ -3175,6 +3359,12 @@ pub const Client = struct {
         return create_transit_gateway_policy_table.execute(self, allocator, input, options);
     }
 
+    /// Creates an entry in a transit gateway policy table to route matching traffic
+    /// to a specified route table.
+    pub fn createTransitGatewayPolicyTableEntry(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_policy_table_entry.CreateTransitGatewayPolicyTableEntryInput, options: CallOptions) !create_transit_gateway_policy_table_entry.CreateTransitGatewayPolicyTableEntryOutput {
+        return create_transit_gateway_policy_table_entry.execute(self, allocator, input, options);
+    }
+
     /// Creates a reference (route) to a prefix list in a specified transit gateway
     /// route table.
     pub fn createTransitGatewayPrefixListReference(self: *Self, allocator: std.mem.Allocator, input: create_transit_gateway_prefix_list_reference.CreateTransitGatewayPrefixListReferenceInput, options: CallOptions) !create_transit_gateway_prefix_list_reference.CreateTransitGatewayPrefixListReferenceOutput {
@@ -3469,6 +3659,16 @@ pub const Client = struct {
         return create_vpn_gateway.execute(self, allocator, input, options);
     }
 
+    /// Deletes an application status check. The following rules apply:
+    ///
+    /// * Deleting a check automatically removes all of its associations.
+    ///
+    /// * Use `DescribeApplicationStatusChecks` to view existing checks before
+    ///   deleting.
+    pub fn deleteApplicationStatusCheck(self: *Self, allocator: std.mem.Allocator, input: delete_application_status_check.DeleteApplicationStatusCheckInput, options: CallOptions) !delete_application_status_check.DeleteApplicationStatusCheckOutput {
+        return delete_application_status_check.execute(self, allocator, input, options);
+    }
+
     /// Deletes an existing Capacity Manager data export configuration. This stops
     /// future scheduled exports but does not delete previously exported files from
     /// S3.
@@ -3491,6 +3691,11 @@ pub const Client = struct {
     /// can delete a Client VPN endpoint.
     pub fn deleteClientVpnEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_client_vpn_endpoint.DeleteClientVpnEndpointInput, options: CallOptions) !delete_client_vpn_endpoint.DeleteClientVpnEndpointOutput {
         return delete_client_vpn_endpoint.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the authorization policy for a Client VPN endpoint.
+    pub fn deleteClientVpnEndpointAuthorizationPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_client_vpn_endpoint_authorization_policy.DeleteClientVpnEndpointAuthorizationPolicyInput, options: CallOptions) !delete_client_vpn_endpoint_authorization_policy.DeleteClientVpnEndpointAuthorizationPolicyOutput {
+        return delete_client_vpn_endpoint_authorization_policy.execute(self, allocator, input, options);
     }
 
     /// Deletes a route from a Client VPN endpoint. You can only delete routes that
@@ -3651,6 +3856,13 @@ pub const Client = struct {
         return delete_ipam_external_resource_verification_token.execute(self, allocator, input, options);
     }
 
+    /// Deletes an IPAM internet registry association. Before deleting, you must
+    /// remove all routing policy registrations associated with the internet
+    /// registry.
+    pub fn deleteIpamInternetRegistryAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_internet_registry_association.DeleteIpamInternetRegistryAssociationInput, options: CallOptions) !delete_ipam_internet_registry_association.DeleteIpamInternetRegistryAssociationOutput {
+        return delete_ipam_internet_registry_association.execute(self, allocator, input, options);
+    }
+
     /// Deletes an IPAM policy.
     ///
     /// An IPAM policy is a set of rules that define how public IPv4 addresses from
@@ -3703,6 +3915,11 @@ pub const Client = struct {
     /// the owning account.
     pub fn deleteIpamResourceDiscovery(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_resource_discovery.DeleteIpamResourceDiscoveryInput, options: CallOptions) !delete_ipam_resource_discovery.DeleteIpamResourceDiscoveryOutput {
         return delete_ipam_resource_discovery.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a routing policy registration for a specified CIDR prefix.
+    pub fn deleteIpamRoutingPolicyRegistration(self: *Self, allocator: std.mem.Allocator, input: delete_ipam_routing_policy_registration.DeleteIpamRoutingPolicyRegistrationInput, options: CallOptions) !delete_ipam_routing_policy_registration.DeleteIpamRoutingPolicyRegistrationOutput {
+        return delete_ipam_routing_policy_registration.execute(self, allocator, input, options);
     }
 
     /// Delete the scope for an IPAM. You cannot delete the default scopes.
@@ -3844,8 +4061,11 @@ pub const Client = struct {
 
     /// Deletes the specified placement group. You must terminate all instances in
     /// the
-    /// placement group before you can delete the placement group. For more
-    /// information, see
+    /// placement group before you can delete the placement group. You cannot delete
+    /// a
+    /// placement group that is a parent of a cluster placement group. Delete the
+    /// cluster
+    /// placement groups first. For more information, see
     /// [Placement
     /// groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in the *Amazon EC2 User Guide*.
     pub fn deletePlacementGroup(self: *Self, allocator: std.mem.Allocator, input: delete_placement_group.DeletePlacementGroupInput, options: CallOptions) !delete_placement_group.DeletePlacementGroupOutput {
@@ -4078,6 +4298,11 @@ pub const Client = struct {
     /// Deletes the specified transit gateway policy table.
     pub fn deleteTransitGatewayPolicyTable(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_policy_table.DeleteTransitGatewayPolicyTableInput, options: CallOptions) !delete_transit_gateway_policy_table.DeleteTransitGatewayPolicyTableOutput {
         return delete_transit_gateway_policy_table.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the specified transit gateway policy table entry.
+    pub fn deleteTransitGatewayPolicyTableEntry(self: *Self, allocator: std.mem.Allocator, input: delete_transit_gateway_policy_table_entry.DeleteTransitGatewayPolicyTableEntryInput, options: CallOptions) !delete_transit_gateway_policy_table_entry.DeleteTransitGatewayPolicyTableEntryOutput {
+        return delete_transit_gateway_policy_table_entry.execute(self, allocator, input, options);
     }
 
     /// Deletes a reference (route) to a prefix list in a specified transit gateway
@@ -4405,6 +4630,16 @@ pub const Client = struct {
         return describe_account_attributes.execute(self, allocator, input, options);
     }
 
+    /// Describes the account-level VPC Encryption Control configuration for your
+    /// account. VPC Encryption Control enables you to enforce encryption for all
+    /// data in transit within and between VPCs to meet compliance requirements.
+    ///
+    /// For more information, see [Enforce VPC encryption in
+    /// transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.
+    pub fn describeAccountVpcEncryptionControl(self: *Self, allocator: std.mem.Allocator, input: describe_account_vpc_encryption_control.DescribeAccountVpcEncryptionControlInput, options: CallOptions) !describe_account_vpc_encryption_control.DescribeAccountVpcEncryptionControlOutput {
+        return describe_account_vpc_encryption_control.execute(self, allocator, input, options);
+    }
+
     /// Describes an Elastic IP address transfer. For more information, see
     /// [Transfer Elastic IP
     /// addresses](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#transfer-EIPs-intro) in the *Amazon VPC User Guide*.
@@ -4459,6 +4694,48 @@ pub const Client = struct {
     /// `vpc-peering-connection` | `vpn-connection` | `vpn-gateway`.
     pub fn describeAggregateIdFormat(self: *Self, allocator: std.mem.Allocator, input: describe_aggregate_id_format.DescribeAggregateIdFormatInput, options: CallOptions) !describe_aggregate_id_format.DescribeAggregateIdFormatOutput {
         return describe_aggregate_id_format.execute(self, allocator, input, options);
+    }
+
+    /// Describes the aggregated application health status for the specified
+    /// instances. The following rules apply:
+    ///
+    /// * The instance-level status is derived from all application status checks
+    ///   with the aggregation setting set to `included`.
+    ///
+    /// * Use `DescribeApplicationStatusChecks` to view the configuration of
+    ///   individual checks.
+    ///
+    /// * Use `EnableApplicationStatusCheckSuppression` to temporarily suppress
+    ///   health check results from affecting the instance-level status.
+    pub fn describeApplicationStatus(self: *Self, allocator: std.mem.Allocator, input: describe_application_status.DescribeApplicationStatusInput, options: CallOptions) !describe_application_status.DescribeApplicationStatusOutput {
+        return describe_application_status.execute(self, allocator, input, options);
+    }
+
+    /// Describes the associations for one or more application status checks. For
+    /// more
+    /// information, see [Application
+    /// status
+    /// checks](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-application-status-checks.html). To avoid timeouts and retrieve complete results, use the
+    /// pagination parameters.
+    ///
+    /// The order of the elements in the response, including those within nested
+    /// structures, might vary.
+    pub fn describeApplicationStatusCheckAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_application_status_check_associations.DescribeApplicationStatusCheckAssociationsInput, options: CallOptions) !describe_application_status_check_associations.DescribeApplicationStatusCheckAssociationsOutput {
+        return describe_application_status_check_associations.execute(self, allocator, input, options);
+    }
+
+    /// Describes application status checks, including configuration details such as
+    /// protocol, port, path, thresholds, and associations. Results are paginated.
+    /// Use the `NextToken` parameter to retrieve additional results. The following
+    /// rules apply:
+    ///
+    /// * If you do not specify any application status check IDs, all checks in your
+    ///   account are returned.
+    ///
+    /// * Use `DescribeApplicationStatus` to see the actual health status of
+    ///   instances.
+    pub fn describeApplicationStatusChecks(self: *Self, allocator: std.mem.Allocator, input: describe_application_status_checks.DescribeApplicationStatusChecksInput, options: CallOptions) !describe_application_status_checks.DescribeApplicationStatusChecksOutput {
+        return describe_application_status_checks.execute(self, allocator, input, options);
     }
 
     /// Describes the Availability Zones, Local Zones, and Wavelength Zones that are
@@ -4560,6 +4837,21 @@ pub const Client = struct {
     /// Reservations](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/transfer-billing.html).
     pub fn describeCapacityReservationBillingRequests(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_reservation_billing_requests.DescribeCapacityReservationBillingRequestsInput, options: CallOptions) !describe_capacity_reservation_billing_requests.DescribeCapacityReservationBillingRequestsOutput {
         return describe_capacity_reservation_billing_requests.execute(self, allocator, input, options);
+    }
+
+    /// Describes one or more Capacity Reservation cancellation quotes. The results
+    /// describe
+    /// only the quotes that you have previously generated by using the
+    /// `CreateCapacityReservationCancellationQuote` action.
+    pub fn describeCapacityReservationCancellationQuotes(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_reservation_cancellation_quotes.DescribeCapacityReservationCancellationQuotesInput, options: CallOptions) !describe_capacity_reservation_cancellation_quotes.DescribeCapacityReservationCancellationQuotesOutput {
+        return describe_capacity_reservation_cancellation_quotes.execute(self, allocator, input, options);
+    }
+
+    /// Describes one or more Capacity Reservation date change quotes that you
+    /// generated by using
+    /// the `CreateCapacityReservationDateChangeQuote` operation.
+    pub fn describeCapacityReservationDateChangeQuotes(self: *Self, allocator: std.mem.Allocator, input: describe_capacity_reservation_date_change_quotes.DescribeCapacityReservationDateChangeQuotesInput, options: CallOptions) !describe_capacity_reservation_date_change_quotes.DescribeCapacityReservationDateChangeQuotesOutput {
+        return describe_capacity_reservation_date_change_quotes.execute(self, allocator, input, options);
     }
 
     /// Describes one or more Capacity Reservation Fleets.
@@ -5059,9 +5351,9 @@ pub const Client = struct {
     /// If you specify one or more instance IDs, Amazon EC2 returns the credit
     /// option
     /// (`standard` or `unlimited`) of those instances. If you specify
-    /// an instance ID that is not valid, such as an instance that is not a
-    /// burstable
-    /// performance instance, an error is returned.
+    /// an instance ID that is not a burstable performance instance, Amazon EC2
+    /// returns the
+    /// `standard` credit option.
     ///
     /// Recently terminated instances might appear in the returned results. This
     /// interval is
@@ -5177,6 +5469,11 @@ pub const Client = struct {
     /// instances with failed status
     /// checks](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstances.html) in the *Amazon EC2 User
     /// Guide*.
+    ///
+    /// * **Application status checks** - Amazon EC2 reports
+    /// application-level health status for instances, indicating whether
+    /// applications
+    /// running on the instance are functioning properly.
     ///
     /// * **Scheduled events** - Amazon EC2 can schedule
     /// events (such as reboot, stop, or terminate) for your instances related to
@@ -5353,6 +5650,13 @@ pub const Client = struct {
         return describe_ipam_external_resource_verification_tokens.execute(self, allocator, input, options);
     }
 
+    /// Describes one or more IPAM internet registry associations. We recommend
+    /// using pagination to ensure that the operation returns quickly and
+    /// successfully.
+    pub fn describeIpamInternetRegistryAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_internet_registry_associations.DescribeIpamInternetRegistryAssociationsInput, options: CallOptions) !describe_ipam_internet_registry_associations.DescribeIpamInternetRegistryAssociationsOutput {
+        return describe_ipam_internet_registry_associations.execute(self, allocator, input, options);
+    }
+
     /// Describes one or more IPAM policies.
     ///
     /// An IPAM policy is a set of rules that define how public IPv4 addresses from
@@ -5365,6 +5669,22 @@ pub const Client = struct {
     /// Amazon Web Services Organizations.
     pub fn describeIpamPolicies(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_policies.DescribeIpamPoliciesInput, options: CallOptions) !describe_ipam_policies.DescribeIpamPoliciesOutput {
         return describe_ipam_policies.execute(self, allocator, input, options);
+    }
+
+    /// Describes IPAM pool allocations. You can describe all allocations owned by
+    /// you across all pools, or you can describe specific allocations by ID.
+    ///
+    /// If you specify `IpamPoolAllocationIds`, the results include only the
+    /// specified allocations. If you do not specify `IpamPoolAllocationIds`, the
+    /// results include all allocations owned by you. You can use `Filters` to
+    /// narrow the results.
+    ///
+    /// This action returns only allocations directly owned by you. To view all
+    /// allocations in a pool you own or that has been shared with you, including
+    /// allocations owned by other accounts, use
+    /// [GetIpamPoolAllocations](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetIpamPoolAllocations.html).
+    pub fn describeIpamPoolAllocations(self: *Self, allocator: std.mem.Allocator, input: describe_ipam_pool_allocations.DescribeIpamPoolAllocationsInput, options: CallOptions) !describe_ipam_pool_allocations.DescribeIpamPoolAllocationsOutput {
+        return describe_ipam_pool_allocations.execute(self, allocator, input, options);
     }
 
     /// Get information about your IPAM pools.
@@ -6536,6 +6856,19 @@ pub const Client = struct {
         return detach_classic_link_vpc.execute(self, allocator, input, options);
     }
 
+    /// Removes a watermark from the specified AMI. This is an idempotent operation.
+    /// It succeeds
+    /// even if the watermark does not exist on the image.
+    ///
+    /// Removing a watermark from an image does not affect derivative images that
+    /// already carry
+    /// the watermark.
+    ///
+    /// Only the AMI owner can detach watermarks.
+    pub fn detachImageWatermark(self: *Self, allocator: std.mem.Allocator, input: detach_image_watermark.DetachImageWatermarkInput, options: CallOptions) !detach_image_watermark.DetachImageWatermarkOutput {
+        return detach_image_watermark.execute(self, allocator, input, options);
+    }
+
     /// Detaches an internet gateway from a VPC, disabling connectivity between the
     /// internet
     /// and the VPC. The VPC must not contain any running instances with Elastic IP
@@ -6627,6 +6960,14 @@ pub const Client = struct {
     /// *Amazon EC2 User Guide*.
     pub fn disableAllowedImagesSettings(self: *Self, allocator: std.mem.Allocator, input: disable_allowed_images_settings.DisableAllowedImagesSettingsInput, options: CallOptions) !disable_allowed_images_settings.DisableAllowedImagesSettingsOutput {
         return disable_allowed_images_settings.execute(self, allocator, input, options);
+    }
+
+    /// Disables suppression of application status checks for the specified
+    /// instances. After suppression is disabled, health check results resume
+    /// affecting the instance-level application status. You can specify a maximum
+    /// of 100 instance IDs for each request.
+    pub fn disableApplicationStatusCheckSuppression(self: *Self, allocator: std.mem.Allocator, input: disable_application_status_check_suppression.DisableApplicationStatusCheckSuppressionInput, options: CallOptions) !disable_application_status_check_suppression.DisableApplicationStatusCheckSuppressionOutput {
+        return disable_application_status_check_suppression.execute(self, allocator, input, options);
     }
 
     /// Disables Infrastructure Performance metric subscriptions.
@@ -6899,6 +7240,22 @@ pub const Client = struct {
         return disassociate_address.execute(self, allocator, input, options);
     }
 
+    /// Disassociates an application status check from instances or
+    /// [tags](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html).
+    /// After disassociation, health monitoring stops for the affected instances.
+    /// The following rules apply:
+    ///
+    /// * You must specify either `TargetTagAssociations` or `InstanceIds`, but not
+    ///   both. Specifying both results in an `InvalidParameterCombination` error.
+    ///
+    /// * The application status check must already exist and belong to your
+    ///   account.
+    ///
+    /// * Tag keys must not be blank.
+    pub fn disassociateApplicationStatusCheck(self: *Self, allocator: std.mem.Allocator, input: disassociate_application_status_check.DisassociateApplicationStatusCheckInput, options: CallOptions) !disassociate_application_status_check.DisassociateApplicationStatusCheckOutput {
+        return disassociate_application_status_check.execute(self, allocator, input, options);
+    }
+
     /// Cancels a pending request to assign billing of the unused capacity of a
     /// Capacity
     /// Reservation to a consumer account, or revokes a request that has already
@@ -7112,6 +7469,21 @@ pub const Client = struct {
         return enable_allowed_images_settings.execute(self, allocator, input, options);
     }
 
+    /// Suppresses application status checks for the specified instances. While
+    /// suppressed, health checks continue to run but do not affect the
+    /// instance-level application status. The following rules apply:
+    ///
+    /// * You can specify a maximum of 100 instance IDs for each request.
+    ///
+    /// * Use `DisableApplicationStatusCheckSuppression` to resume normal health
+    ///   check reporting.
+    ///
+    /// * If you do not specify `DurationSeconds`, suppression continues
+    ///   indefinitely until you call `DisableApplicationStatusCheckSuppression`.
+    pub fn enableApplicationStatusCheckSuppression(self: *Self, allocator: std.mem.Allocator, input: enable_application_status_check_suppression.EnableApplicationStatusCheckSuppressionInput, options: CallOptions) !enable_application_status_check_suppression.EnableApplicationStatusCheckSuppressionOutput {
+        return enable_application_status_check_suppression.execute(self, allocator, input, options);
+    }
+
     /// Enables Infrastructure Performance subscriptions.
     pub fn enableAwsNetworkPerformanceMetricSubscription(self: *Self, allocator: std.mem.Allocator, input: enable_aws_network_performance_metric_subscription.EnableAwsNetworkPerformanceMetricSubscriptionInput, options: CallOptions) !enable_aws_network_performance_metric_subscription.EnableAwsNetworkPerformanceMetricSubscriptionOutput {
         return enable_aws_network_performance_metric_subscription.execute(self, allocator, input, options);
@@ -7260,6 +7632,14 @@ pub const Client = struct {
     /// detection](https://docs.aws.amazon.com/sql-server-ec2/latest/userguide/prerequisites-and-requirements.html).
     pub fn enableInstanceSqlHaStandbyDetections(self: *Self, allocator: std.mem.Allocator, input: enable_instance_sql_ha_standby_detections.EnableInstanceSqlHaStandbyDetectionsInput, options: CallOptions) !enable_instance_sql_ha_standby_detections.EnableInstanceSqlHaStandbyDetectionsOutput {
         return enable_instance_sql_ha_standby_detections.execute(self, allocator, input, options);
+    }
+
+    /// Enables Resource Public Key Infrastructure (RPKI) on an existing IPAM
+    /// internet registry association by providing BGP Public Key Infrastructure
+    /// (BPKI) certificate details. After enabling, you can create Route Origin
+    /// Authorizations (ROAs) for prefixes registered with the internet registry.
+    pub fn enableIpamInternetRegistryAssociation(self: *Self, allocator: std.mem.Allocator, input: enable_ipam_internet_registry_association.EnableIpamInternetRegistryAssociationInput, options: CallOptions) !enable_ipam_internet_registry_association.EnableIpamInternetRegistryAssociationOutput {
+        return enable_ipam_internet_registry_association.execute(self, allocator, input, options);
     }
 
     /// Enable an Organizations member account as the IPAM admin account. You cannot
@@ -7535,6 +7915,11 @@ pub const Client = struct {
         return get_capacity_reservation_usage.execute(self, allocator, input, options);
     }
 
+    /// Describes the authorization policy for a Client VPN endpoint.
+    pub fn getClientVpnEndpointAuthorizationPolicy(self: *Self, allocator: std.mem.Allocator, input: get_client_vpn_endpoint_authorization_policy.GetClientVpnEndpointAuthorizationPolicyInput, options: CallOptions) !get_client_vpn_endpoint_authorization_policy.GetClientVpnEndpointAuthorizationPolicyOutput {
+        return get_client_vpn_endpoint_authorization_policy.execute(self, allocator, input, options);
+    }
+
     /// Describes the allocations from the specified customer-owned address pool.
     pub fn getCoipPoolUsage(self: *Self, allocator: std.mem.Allocator, input: get_coip_pool_usage.GetCoipPoolUsageInput, options: CallOptions) !get_coip_pool_usage.GetCoipPoolUsageOutput {
         return get_coip_pool_usage.execute(self, allocator, input, options);
@@ -7785,6 +8170,29 @@ pub const Client = struct {
         return get_ipam_discovered_resource_cidrs.execute(self, allocator, input, options);
     }
 
+    /// Retrieves Border Gateway Protocol (BGP) routes discovered by IPAM resource
+    /// discovery for a specified Region. Use this operation to view the Bring Your
+    /// Own IP (BYOIP) address ranges that are currently advertised through BGP. We
+    /// recommend using pagination to ensure that the operation returns quickly and
+    /// successfully.
+    pub fn getIpamDiscoveredRoutes(self: *Self, allocator: std.mem.Allocator, input: get_ipam_discovered_routes.GetIpamDiscoveredRoutesInput, options: CallOptions) !get_ipam_discovered_routes.GetIpamDiscoveredRoutesOutput {
+        return get_ipam_discovered_routes.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves Autonomous System Numbers (ASNs) registered with an internet
+    /// registry for an IPAM internet registry association. We recommend using
+    /// pagination to ensure that the operation returns quickly and successfully.
+    pub fn getIpamInternetRegistryAssociationAsns(self: *Self, allocator: std.mem.Allocator, input: get_ipam_internet_registry_association_asns.GetIpamInternetRegistryAssociationAsnsInput, options: CallOptions) !get_ipam_internet_registry_association_asns.GetIpamInternetRegistryAssociationAsnsOutput {
+        return get_ipam_internet_registry_association_asns.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves IP address CIDRs registered with an internet registry for an IPAM
+    /// internet registry association. We recommend using pagination to ensure that
+    /// the operation returns quickly and successfully.
+    pub fn getIpamInternetRegistryAssociationCidrs(self: *Self, allocator: std.mem.Allocator, input: get_ipam_internet_registry_association_cidrs.GetIpamInternetRegistryAssociationCidrsInput, options: CallOptions) !get_ipam_internet_registry_association_cidrs.GetIpamInternetRegistryAssociationCidrsOutput {
+        return get_ipam_internet_registry_association_cidrs.execute(self, allocator, input, options);
+    }
+
     /// Gets the allocation rules for an IPAM policy.
     ///
     /// An IPAM policy is a set of rules that define how public IPv4 addresses from
@@ -7890,6 +8298,38 @@ pub const Client = struct {
     /// the owning account.
     pub fn getIpamResourceCidrs(self: *Self, allocator: std.mem.Allocator, input: get_ipam_resource_cidrs.GetIpamResourceCidrsInput, options: CallOptions) !get_ipam_resource_cidrs.GetIpamResourceCidrsOutput {
         return get_ipam_resource_cidrs.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the current Route Origin Authorizations (ROAs) published to the
+    /// RPKI for an IPAM internet registry association. We recommend using
+    /// pagination to ensure that the operation returns quickly and successfully.
+    pub fn getIpamRouteOriginAuthorizations(self: *Self, allocator: std.mem.Allocator, input: get_ipam_route_origin_authorizations.GetIpamRouteOriginAuthorizationsInput, options: CallOptions) !get_ipam_route_origin_authorizations.GetIpamRouteOriginAuthorizationsOutput {
+        return get_ipam_route_origin_authorizations.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves route protection findings for an IPAM. Route protection findings
+    /// show the Resource Public Key Infrastructure (RPKI) validation status of your
+    /// Bring Your Own IP (BYOIP) routes. Findings identify routes that have valid,
+    /// invalid, or unknown validation states. We recommend using pagination to
+    /// ensure that the operation returns quickly and successfully.
+    pub fn getIpamRouteProtectionFindings(self: *Self, allocator: std.mem.Allocator, input: get_ipam_route_protection_findings.GetIpamRouteProtectionFindingsInput, options: CallOptions) !get_ipam_route_protection_findings.GetIpamRouteProtectionFindingsOutput {
+        return get_ipam_route_protection_findings.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the history of routing policy registration changes for an IPAM
+    /// internet registry association. We recommend using pagination to ensure that
+    /// the operation returns quickly and successfully.
+    pub fn getIpamRoutingPolicyRegistrationDeltas(self: *Self, allocator: std.mem.Allocator, input: get_ipam_routing_policy_registration_deltas.GetIpamRoutingPolicyRegistrationDeltasInput, options: CallOptions) !get_ipam_routing_policy_registration_deltas.GetIpamRoutingPolicyRegistrationDeltasOutput {
+        return get_ipam_routing_policy_registration_deltas.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves routing policy registrations for an IPAM internet registry
+    /// association. Each registration represents a Route Origin Authorization (ROA)
+    /// that has been created or is pending publication to the RPKI. We recommend
+    /// using pagination to ensure that the operation returns quickly and
+    /// successfully.
+    pub fn getIpamRoutingPolicyRegistrations(self: *Self, allocator: std.mem.Allocator, input: get_ipam_routing_policy_registrations.GetIpamRoutingPolicyRegistrationsInput, options: CallOptions) !get_ipam_routing_policy_registrations.GetIpamRoutingPolicyRegistrationsOutput {
+        return get_ipam_routing_policy_registrations.execute(self, allocator, input, options);
     }
 
     /// Retrieves the configuration data of the specified instance. You can use this
@@ -8328,11 +8768,34 @@ pub const Client = struct {
         return lock_snapshot.execute(self, allocator, input, options);
     }
 
+    /// Modifies the account-level VPC Encryption Control configuration. This sets
+    /// the encryption control mode and resource exclusions that apply to the VPCs
+    /// in your account. VPC Encryption Control enables you to enforce encryption
+    /// for all data in transit within and between VPCs to meet compliance
+    /// requirements.
+    ///
+    /// For more information, see [Enforce VPC encryption in
+    /// transit](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-encryption-controls.html) in the *Amazon VPC User Guide*.
+    pub fn modifyAccountVpcEncryptionControl(self: *Self, allocator: std.mem.Allocator, input: modify_account_vpc_encryption_control.ModifyAccountVpcEncryptionControlInput, options: CallOptions) !modify_account_vpc_encryption_control.ModifyAccountVpcEncryptionControlOutput {
+        return modify_account_vpc_encryption_control.execute(self, allocator, input, options);
+    }
+
     /// Modifies an attribute of the specified Elastic IP address. For requirements,
     /// see [Using reverse DNS for email
     /// applications](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS).
     pub fn modifyAddressAttribute(self: *Self, allocator: std.mem.Allocator, input: modify_address_attribute.ModifyAddressAttributeInput, options: CallOptions) !modify_address_attribute.ModifyAddressAttributeOutput {
         return modify_address_attribute.execute(self, allocator, input, options);
+    }
+
+    /// Modifies an existing application status check. You can update the protocol,
+    /// port, path, thresholds, and other configuration settings. The following
+    /// rules apply:
+    ///
+    /// * The application status check must exist and belong to your account.
+    ///
+    /// * Changes take effect on the next health check interval.
+    pub fn modifyApplicationStatusCheck(self: *Self, allocator: std.mem.Allocator, input: modify_application_status_check.ModifyApplicationStatusCheckInput, options: CallOptions) !modify_application_status_check.ModifyApplicationStatusCheckOutput {
+        return modify_application_status_check.execute(self, allocator, input, options);
     }
 
     /// Changes the opt-in status of the specified zone group for your account.
@@ -8372,6 +8835,14 @@ pub const Client = struct {
     /// * `expired`, `cancelled`, `unsupported`, or
     /// `failed` state - You can't modify the Capacity Reservation in any
     /// way.
+    ///
+    /// For a future-dated Capacity Reservation that has not yet been delivered,
+    /// pushing out the
+    /// start date requires a quote generated by
+    /// `CreateCapacityReservationDateChangeQuote`. For more information, see
+    /// [Modify an active
+    /// Capacity
+    /// Reservation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-modify.html) in the *Amazon EC2 User Guide*.
     pub fn modifyCapacityReservation(self: *Self, allocator: std.mem.Allocator, input: modify_capacity_reservation.ModifyCapacityReservationInput, options: CallOptions) !modify_capacity_reservation.ModifyCapacityReservationOutput {
         return modify_capacity_reservation.execute(self, allocator, input, options);
     }
@@ -8395,6 +8866,15 @@ pub const Client = struct {
     /// existing client connections.
     pub fn modifyClientVpnEndpoint(self: *Self, allocator: std.mem.Allocator, input: modify_client_vpn_endpoint.ModifyClientVpnEndpointInput, options: CallOptions) !modify_client_vpn_endpoint.ModifyClientVpnEndpointOutput {
         return modify_client_vpn_endpoint.execute(self, allocator, input, options);
+    }
+
+    /// Creates or updates the authorization policy for a Client VPN endpoint. A
+    /// Client VPN endpoint can have one authorization policy. If a policy already
+    /// exists for the endpoint, the values that you specify replace the
+    /// corresponding values in the existing policy, and values that you do not
+    /// specify remain unchanged.
+    pub fn modifyClientVpnEndpointAuthorizationPolicy(self: *Self, allocator: std.mem.Allocator, input: modify_client_vpn_endpoint_authorization_policy.ModifyClientVpnEndpointAuthorizationPolicyInput, options: CallOptions) !modify_client_vpn_endpoint_authorization_policy.ModifyClientVpnEndpointAuthorizationPolicyOutput {
+        return modify_client_vpn_endpoint_authorization_policy.execute(self, allocator, input, options);
     }
 
     /// Modifies the default credit option for CPU usage of burstable performance
@@ -8830,6 +9310,13 @@ pub const Client = struct {
         return modify_ipam_pool.execute(self, allocator, input, options);
     }
 
+    /// Modifies the description of an IPAM pool allocation. For more information,
+    /// see [Modify an IPAM pool
+    /// allocation](https://docs.aws.amazon.com/vpc/latest/ipam/modify-alloc-ipam.html) in the *Amazon VPC IPAM User Guide*.
+    pub fn modifyIpamPoolAllocation(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_pool_allocation.ModifyIpamPoolAllocationInput, options: CallOptions) !modify_ipam_pool_allocation.ModifyIpamPoolAllocationOutput {
+        return modify_ipam_pool_allocation.execute(self, allocator, input, options);
+    }
+
     /// Modifies an IPAM prefix list resolver. You can update the description and
     /// CIDR selection rules. Changes to rules will trigger re-evaluation and
     /// potential updates to associated prefix lists.
@@ -8862,6 +9349,13 @@ pub const Client = struct {
     /// account.
     pub fn modifyIpamResourceDiscovery(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_resource_discovery.ModifyIpamResourceDiscoveryInput, options: CallOptions) !modify_ipam_resource_discovery.ModifyIpamResourceDiscoveryOutput {
         return modify_ipam_resource_discovery.execute(self, allocator, input, options);
+    }
+
+    /// Modifies an existing routing policy registration. You can update the
+    /// authorized ASNs, maximum prefix length, and other properties of a Route
+    /// Origin Authorization (ROA).
+    pub fn modifyIpamRoutingPolicyRegistration(self: *Self, allocator: std.mem.Allocator, input: modify_ipam_routing_policy_registration.ModifyIpamRoutingPolicyRegistrationInput, options: CallOptions) !modify_ipam_routing_policy_registration.ModifyIpamRoutingPolicyRegistrationOutput {
+        return modify_ipam_routing_policy_registration.execute(self, allocator, input, options);
     }
 
     /// Modify an IPAM scope.
@@ -9119,6 +9613,11 @@ pub const Client = struct {
         return modify_transit_gateway_metering_policy.execute(self, allocator, input, options);
     }
 
+    /// Modifies the specified transit gateway policy table entry.
+    pub fn modifyTransitGatewayPolicyTableEntry(self: *Self, allocator: std.mem.Allocator, input: modify_transit_gateway_policy_table_entry.ModifyTransitGatewayPolicyTableEntryInput, options: CallOptions) !modify_transit_gateway_policy_table_entry.ModifyTransitGatewayPolicyTableEntryOutput {
+        return modify_transit_gateway_policy_table_entry.execute(self, allocator, input, options);
+    }
+
     /// Modifies a reference (route) to a prefix list in a specified transit gateway
     /// route table.
     pub fn modifyTransitGatewayPrefixListReference(self: *Self, allocator: std.mem.Allocator, input: modify_transit_gateway_prefix_list_reference.ModifyTransitGatewayPrefixListReferenceInput, options: CallOptions) !modify_transit_gateway_prefix_list_reference.ModifyTransitGatewayPrefixListReferenceOutput {
@@ -9276,6 +9775,11 @@ pub const Client = struct {
     /// notified.
     pub fn modifyVpcEndpointConnectionNotification(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_endpoint_connection_notification.ModifyVpcEndpointConnectionNotificationInput, options: CallOptions) !modify_vpc_endpoint_connection_notification.ModifyVpcEndpointConnectionNotificationOutput {
         return modify_vpc_endpoint_connection_notification.execute(self, allocator, input, options);
+    }
+
+    /// Modifies the billing account for VPC endpoint usage/charges.
+    pub fn modifyVpcEndpointPayerResponsibility(self: *Self, allocator: std.mem.Allocator, input: modify_vpc_endpoint_payer_responsibility.ModifyVpcEndpointPayerResponsibilityInput, options: CallOptions) !modify_vpc_endpoint_payer_responsibility.ModifyVpcEndpointPayerResponsibilityOutput {
+        return modify_vpc_endpoint_payer_responsibility.execute(self, allocator, input, options);
     }
 
     /// Modifies the attributes of the specified VPC endpoint service configuration.
@@ -9507,6 +10011,9 @@ pub const Client = struct {
     /// created an
     /// RPKI ROA to authorize Amazon ASNs 16509 and 14618 to advertise the address
     /// range.
+    /// For the Amazon Web Services GovCloud (US) Regions, authorize only ASN 8987.
+    /// For the Amazon Web Services
+    /// European Sovereign Cloud, authorize ASNs 16509 and 214101.
     /// For more information, see [Bring your own IP addresses
     /// (BYOIP)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html)
     /// in the *Amazon EC2 User Guide*.
@@ -9876,6 +10383,10 @@ pub const Client = struct {
 
     /// Sets or replaces the criteria for Allowed AMIs.
     ///
+    /// The `ImageCriteria` can include up to:
+    ///
+    /// * 10 `ImageCriterion`
+    ///
     /// The Allowed AMIs feature does not restrict the AMIs owned by your account.
     /// Regardless of
     /// the criteria you set, the AMIs created by your account will always be
@@ -9888,6 +10399,44 @@ pub const Client = struct {
     /// *Amazon EC2 User Guide*.
     pub fn replaceImageCriteriaInAllowedImagesSettings(self: *Self, allocator: std.mem.Allocator, input: replace_image_criteria_in_allowed_images_settings.ReplaceImageCriteriaInAllowedImagesSettingsInput, options: CallOptions) !replace_image_criteria_in_allowed_images_settings.ReplaceImageCriteriaInAllowedImagesSettingsOutput {
         return replace_image_criteria_in_allowed_images_settings.execute(self, allocator, input, options);
+    }
+
+    /// Replaces or removes the instance type specification for an AMI. The instance
+    /// type
+    /// specification defines which instance types are compatible with the AMI.
+    ///
+    /// When you launch an instance using
+    /// [RunInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html), Amazon EC2 validates the requested instance type against the AMI's
+    /// instance type specification. If the instance type is not compatible, the
+    /// request fails with an
+    /// `InvalidParameterCombination` error.
+    ///
+    /// You can specify supported instance types, unsupported instance types, or
+    /// both. The
+    /// evaluation logic is as follows:
+    ///
+    /// * No specification set – all instance types are allowed.
+    ///
+    /// * Only `UnsupportedInstanceTypes` set – All instance types are allowed
+    /// except those that match the unsupported list.
+    ///
+    /// * `SupportedInstanceTypes` set – The instance type must match the
+    /// supported list and must not match the unsupported list.
+    ///
+    /// Instance type entries support wildcard patterns using `*` (for example,
+    /// `t3.*` matches all t3 sizes).
+    ///
+    /// To remove an existing instance type specification, omit the
+    /// `InstanceTypeSpecification` parameter or set it to `null`.
+    ///
+    /// To set the instance type specification, you must be the AMI owner. You
+    /// cannot set an instance
+    /// type specification on an AMI that is listed in Amazon Web Services
+    /// Marketplace, and you cannot list an AMI
+    /// in Amazon Web Services Marketplace if it has an instance type specification
+    /// set.
+    pub fn replaceImageInstanceTypeSpecification(self: *Self, allocator: std.mem.Allocator, input: replace_image_instance_type_specification.ReplaceImageInstanceTypeSpecificationInput, options: CallOptions) !replace_image_instance_type_specification.ReplaceImageInstanceTypeSpecificationOutput {
+        return replace_image_instance_type_specification.execute(self, allocator, input, options);
     }
 
     /// Changes which network ACL a subnet is associated with. By default when you
@@ -10728,6 +11277,22 @@ pub const Client = struct {
         return update_security_group_rule_descriptions_ingress.execute(self, allocator, input, options);
     }
 
+    /// Validates whether the specified security groups can be associated with a
+    /// single
+    /// network interface. The operation checks Amazon Virtual Private Cloud (Amazon
+    /// VPC)
+    /// quotas. It checks inbound or outbound rules per security group and security
+    /// groups
+    /// per network interface. Only authorized Amazon Web Services services can call
+    /// this operation.
+    ///
+    /// For more information about security group quotas, see [Amazon
+    /// VPC
+    /// quotas](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-security-groups) in the *Amazon VPC User Guide*.
+    pub fn validateSecurityGroupQuotasForInterface(self: *Self, allocator: std.mem.Allocator, input: validate_security_group_quotas_for_interface.ValidateSecurityGroupQuotasForInterfaceInput, options: CallOptions) !validate_security_group_quotas_for_interface.ValidateSecurityGroupQuotasForInterfaceOutput {
+        return validate_security_group_quotas_for_interface.execute(self, allocator, input, options);
+    }
+
     /// Stops advertising an address range that is provisioned as an address pool.
     ///
     /// You can perform this operation at most once every 10 seconds, even if you
@@ -10812,6 +11377,13 @@ pub const Client = struct {
     }
 
     pub fn describeCapacityReservationBillingRequestsPaginator(self: *Self, params: describe_capacity_reservation_billing_requests.DescribeCapacityReservationBillingRequestsInput) paginator.DescribeCapacityReservationBillingRequestsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn describeCapacityReservationDateChangeQuotesPaginator(self: *Self, params: describe_capacity_reservation_date_change_quotes.DescribeCapacityReservationDateChangeQuotesInput) paginator.DescribeCapacityReservationDateChangeQuotesPaginator {
         return .{
             .client = self,
             .params = params,
@@ -11078,6 +11650,13 @@ pub const Client = struct {
     }
 
     pub fn describeInternetGatewaysPaginator(self: *Self, params: describe_internet_gateways.DescribeInternetGatewaysInput) paginator.DescribeInternetGatewaysPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn describeIpamPoolAllocationsPaginator(self: *Self, params: describe_ipam_pool_allocations.DescribeIpamPoolAllocationsInput) paginator.DescribeIpamPoolAllocationsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -11848,6 +12427,13 @@ pub const Client = struct {
     }
 
     pub fn getTransitGatewayPolicyTableAssociationsPaginator(self: *Self, params: get_transit_gateway_policy_table_associations.GetTransitGatewayPolicyTableAssociationsInput) paginator.GetTransitGatewayPolicyTableAssociationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn getTransitGatewayPolicyTableEntriesPaginator(self: *Self, params: get_transit_gateway_policy_table_entries.GetTransitGatewayPolicyTableEntriesInput) paginator.GetTransitGatewayPolicyTableEntriesPaginator {
         return .{
             .client = self,
             .params = params,

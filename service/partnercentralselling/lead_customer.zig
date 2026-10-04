@@ -1,13 +1,12 @@
-const AddressSummary = @import("address_summary.zig").AddressSummary;
-const Industry = @import("industry.zig").Industry;
-const MarketSegment = @import("market_segment.zig").MarketSegment;
+const LeadAddress = @import("lead_address.zig").LeadAddress;
 
 /// Contains detailed information about the customer associated with the lead,
 /// including company details, industry classification, and AWS maturity level.
 /// This information helps qualify and categorize the lead for appropriate
 /// engagement strategies.
 pub const LeadCustomer = struct {
-    address: AddressSummary,
+    /// The address information for the lead customer.
+    address: ?LeadAddress = null,
 
     /// Indicates the customer's level of experience and adoption with AWS services.
     /// This assessment helps determine the appropriate engagement approach and
@@ -21,12 +20,12 @@ pub const LeadCustomer = struct {
     /// Specifies the industry sector to which the lead customer's company belongs.
     /// This categorization helps in understanding the customer's business context
     /// and tailoring appropriate solutions.
-    industry: ?Industry = null,
+    industry: ?[]const u8 = null,
 
     /// Specifies the market segment classification of the lead customer, such as
     /// enterprise, mid-market, or small business. This segmentation helps in
     /// targeting appropriate solutions and engagement strategies.
-    market_segment: ?MarketSegment = null,
+    market_segment: ?[]const u8 = null,
 
     /// The website URL of the lead customer's company. This provides additional
     /// context about the customer organization and helps verify company legitimacy

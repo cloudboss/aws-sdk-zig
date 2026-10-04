@@ -8,7 +8,14 @@ const Image = @import("image.zig").Image;
 const LatestVersionReferences = @import("latest_version_references.zig").LatestVersionReferences;
 
 pub const GetImageInput = struct {
-    /// The Amazon Resource Name (ARN) of the image that you want to get.
+    /// The Amazon Resource Name (ARN) of the image that you want to get. You can
+    /// specify a full build
+    /// version ARN, or a version ARN with or without wildcards
+    /// (`x.x.x`, `1.x.x`, or `1.0.x`). A version or
+    /// wildcard ARN resolves to the latest matching build version that has reached
+    /// `AVAILABLE` status. Builds that were later deprecated, disabled,
+    /// or deleted don't resolve. To get an image in any other state, such as a
+    /// failed or in-progress build, specify the full build version ARN.
     image_build_version_arn: []const u8,
 
     pub const json_field_names = .{
@@ -20,7 +27,10 @@ pub const GetImageOutput = struct {
     /// The image object.
     image: ?Image = null,
 
-    /// The resource ARNs with different wildcard variations of semantic versioning.
+    /// A set of wildcard version ARNs that always reference the latest
+    /// version of the resource. ARNs are included for the latest version overall,
+    /// and for the latest
+    /// versions within the same major, minor, and patch levels.
     latest_version_references: ?LatestVersionReferences = null,
 
     /// The request ID that uniquely identifies this request.
@@ -88,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetImageInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetImageOutput {
-    var result: GetImageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetImageOutput, body, allocator);
-    }
+    const result: GetImageOutput = try aws.json.parseJsonObject(
+        GetImageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

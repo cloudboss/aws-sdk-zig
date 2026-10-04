@@ -10,6 +10,9 @@ pub const Endpoint = struct {
     /// The ARN of the endpoint.
     arn: ?[]const u8 = null,
 
+    /// The authentication proxy URL of the endpoint.
+    auth_proxy_url: ?[]const u8 = null,
+
     /// The certificate ARN of the endpoint. This field is under deprecation and
     /// will be removed
     /// in future.
@@ -69,6 +72,7 @@ pub const Endpoint = struct {
 
     pub const json_field_names = .{
         .arn = "arn",
+        .auth_proxy_url = "authProxyUrl",
         .certificate_arn = "certificateArn",
         .certificate_authority = "certificateAuthority",
         .configuration_overrides = "configurationOverrides",

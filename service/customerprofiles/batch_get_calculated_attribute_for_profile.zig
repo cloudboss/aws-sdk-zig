@@ -116,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetCalculatedAttri
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetCalculatedAttributeForProfileOutput {
-    var result: BatchGetCalculatedAttributeForProfileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetCalculatedAttributeForProfileOutput, body, allocator);
-    }
+    const result: BatchGetCalculatedAttributeForProfileOutput = try aws.json.parseJsonObject(
+        BatchGetCalculatedAttributeForProfileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

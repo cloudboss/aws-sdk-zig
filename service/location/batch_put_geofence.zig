@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchPutGeofenceInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchPutGeofenceOutput {
-    var result: BatchPutGeofenceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchPutGeofenceOutput, body, allocator);
-    }
+    const result: BatchPutGeofenceOutput = try aws.json.parseJsonObject(
+        BatchPutGeofenceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

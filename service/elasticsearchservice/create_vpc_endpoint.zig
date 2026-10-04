@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpcEndpointInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateVpcEndpointOutput {
-    var result: CreateVpcEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateVpcEndpointOutput, body, allocator);
-    }
+    const result: CreateVpcEndpointOutput = try aws.json.parseJsonObject(
+        CreateVpcEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -8,6 +8,9 @@ pub const ConnectorOperationState = enum {
     rollback_in_progress,
     rollback_failed,
     rollback_complete,
+    restart_in_progress,
+    restart_complete,
+    restart_failed,
 
     pub const json_field_names = .{
         .pending = "PENDING",
@@ -17,6 +20,9 @@ pub const ConnectorOperationState = enum {
         .rollback_in_progress = "ROLLBACK_IN_PROGRESS",
         .rollback_failed = "ROLLBACK_FAILED",
         .rollback_complete = "ROLLBACK_COMPLETE",
+        .restart_in_progress = "RESTART_IN_PROGRESS",
+        .restart_complete = "RESTART_COMPLETE",
+        .restart_failed = "RESTART_FAILED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -28,6 +34,9 @@ pub const ConnectorOperationState = enum {
             .rollback_in_progress => "ROLLBACK_IN_PROGRESS",
             .rollback_failed => "ROLLBACK_FAILED",
             .rollback_complete => "ROLLBACK_COMPLETE",
+            .restart_in_progress => "RESTART_IN_PROGRESS",
+            .restart_complete => "RESTART_COMPLETE",
+            .restart_failed => "RESTART_FAILED",
         };
     }
 

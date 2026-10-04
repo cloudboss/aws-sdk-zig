@@ -6235,6 +6235,7 @@ pub fn deserializeTrustStore(allocator: std.mem.Allocator, reader: *aws.xml.Read
     result.number_of_ca_certificates = null;
     result.reason = null;
     result.status = null;
+    result.use_client_certificate_ocsp_endpoint = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -6252,6 +6253,8 @@ pub fn deserializeTrustStore(allocator: std.mem.Allocator, reader: *aws.xml.Read
                     result.reason = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = TrustStoreStatus.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "UseClientCertificateOCSPEndpoint")) {
+                    result.use_client_certificate_ocsp_endpoint = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else {
                     try reader.skipElement();
                 }

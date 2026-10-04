@@ -183,10 +183,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeAddonVersionsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeAddonVersionsOutput {
-    var result: DescribeAddonVersionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeAddonVersionsOutput, body, allocator);
-    }
+    const result: DescribeAddonVersionsOutput = try aws.json.parseJsonObject(
+        DescribeAddonVersionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

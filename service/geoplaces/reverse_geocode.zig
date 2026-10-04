@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ReverseGeocodeAdditionalFeature = @import("reverse_geocode_additional_feature.zig").ReverseGeocodeAdditionalFeature;
+const ReverseGeocodeAddressNamesMode = @import("reverse_geocode_address_names_mode.zig").ReverseGeocodeAddressNamesMode;
 const ReverseGeocodeFilter = @import("reverse_geocode_filter.zig").ReverseGeocodeFilter;
 const ReverseGeocodeIntendedUse = @import("reverse_geocode_intended_use.zig").ReverseGeocodeIntendedUse;
 const ReverseGeocodeResultItem = @import("reverse_geocode_result_item.zig").ReverseGeocodeResultItem;
@@ -14,6 +15,11 @@ pub const ReverseGeocodeInput = struct {
     /// requested for each result. For
     /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the `TimeZone` value.
     additional_features: ?[]const ReverseGeocodeAdditionalFeature = null,
+
+    /// Specifies how address names are returned. When set to `Administrative`, the
+    /// service returns the official administrative names for address components.
+    /// `Administrative` currently applies only to addresses in the United States.
+    address_names_mode: ?ReverseGeocodeAddressNamesMode = null,
 
     /// A structure which contains a set of inclusion/exclusion properties that
     /// results must possess in order to be returned as a result.
@@ -41,11 +47,8 @@ pub const ReverseGeocodeInput = struct {
     /// valid SigV4 signature must be provided when making a request.
     key: ?[]const u8 = null,
 
-    /// A list of [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag)
-    /// compliant language codes for the results to be rendered in. If there is no
-    /// data for the result in the requested language, data will be returned in the
-    /// default language for the entry. For
-    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the following codes: `en, id, km, lo, ms, my, pt, th, tl, vi, zh`
+    /// A list of [BCP
+    /// 47](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry) compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the following codes: `en, id, km, lo, ms, my, pt, th, tl, vi, zh`
     language: ?[]const u8 = null,
 
     /// An optional limit for the number of results returned in a single call.
@@ -72,6 +75,7 @@ pub const ReverseGeocodeInput = struct {
 
     pub const json_field_names = .{
         .additional_features = "AdditionalFeatures",
+        .address_names_mode = "AddressNamesMode",
         .filter = "Filter",
         .heading = "Heading",
         .intended_use = "IntendedUse",
@@ -152,6 +156,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ReverseGeocodeInput, co
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.address_names_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AddressNamesMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.filter) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Filter\":");
@@ -215,10 +225,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ReverseGeocodeInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ReverseGeocodeOutput {
-    var result: ReverseGeocodeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ReverseGeocodeOutput, body, allocator);
-    }
+    var result: ReverseGeocodeOutput = try aws.json.parseJsonObject(
+        ReverseGeocodeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("x-amz-geo-pricing-bucket")) |value| {
         result.pricing_bucket = try allocator.dupe(u8, value);

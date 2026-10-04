@@ -93,6 +93,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InitiateVaultLockInput,
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !InitiateVaultLockOutput {
     var result: InitiateVaultLockOutput = .{};
+    errdefer {
+        if (result.lock_id) |value| allocator.free(value);
+    }
     _ = body;
     _ = status;
     if (headers.get("x-amz-lock-id")) |value| {

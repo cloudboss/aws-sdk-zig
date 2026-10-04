@@ -2,16 +2,19 @@ const aws = @import("aws");
 const std = @import("std");
 
 const create_centralization_rule_for_organization = @import("create_centralization_rule_for_organization.zig");
+const create_dataset_integration = @import("create_dataset_integration.zig");
 const create_s3_table_integration = @import("create_s3_table_integration.zig");
 const create_telemetry_pipeline = @import("create_telemetry_pipeline.zig");
 const create_telemetry_rule = @import("create_telemetry_rule.zig");
 const create_telemetry_rule_for_organization = @import("create_telemetry_rule_for_organization.zig");
 const delete_centralization_rule_for_organization = @import("delete_centralization_rule_for_organization.zig");
+const delete_dataset_integration = @import("delete_dataset_integration.zig");
 const delete_s3_table_integration = @import("delete_s3_table_integration.zig");
 const delete_telemetry_pipeline = @import("delete_telemetry_pipeline.zig");
 const delete_telemetry_rule = @import("delete_telemetry_rule.zig");
 const delete_telemetry_rule_for_organization = @import("delete_telemetry_rule_for_organization.zig");
 const get_centralization_rule_for_organization = @import("get_centralization_rule_for_organization.zig");
+const get_dataset_integration = @import("get_dataset_integration.zig");
 const get_s3_table_integration = @import("get_s3_table_integration.zig");
 const get_telemetry_enrichment_status = @import("get_telemetry_enrichment_status.zig");
 const get_telemetry_evaluation_status = @import("get_telemetry_evaluation_status.zig");
@@ -20,6 +23,7 @@ const get_telemetry_pipeline = @import("get_telemetry_pipeline.zig");
 const get_telemetry_rule = @import("get_telemetry_rule.zig");
 const get_telemetry_rule_for_organization = @import("get_telemetry_rule_for_organization.zig");
 const list_centralization_rules_for_organization = @import("list_centralization_rules_for_organization.zig");
+const list_dataset_integrations = @import("list_dataset_integrations.zig");
 const list_resource_telemetry = @import("list_resource_telemetry.zig");
 const list_resource_telemetry_for_organization = @import("list_resource_telemetry_for_organization.zig");
 const list_s3_table_integrations = @import("list_s3_table_integrations.zig");
@@ -37,6 +41,7 @@ const tag_resource = @import("tag_resource.zig");
 const test_telemetry_pipeline = @import("test_telemetry_pipeline.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_centralization_rule_for_organization = @import("update_centralization_rule_for_organization.zig");
+const update_dataset_integration = @import("update_dataset_integration.zig");
 const update_telemetry_pipeline = @import("update_telemetry_pipeline.zig");
 const update_telemetry_rule = @import("update_telemetry_rule.zig");
 const update_telemetry_rule_for_organization = @import("update_telemetry_rule_for_organization.zig");
@@ -78,6 +83,19 @@ pub const Client = struct {
         return create_centralization_rule_for_organization.execute(self, allocator, input, options);
     }
 
+    /// Creates a dataset integration for the caller's account in the current region
+    /// and returns its ARN.
+    ///
+    /// To use this operation, you must have permission to access the dataset
+    /// integration resources through the IAM role specified in the `RoleArn`
+    /// parameter.
+    ///
+    /// If a dataset integration already exists for the account, this operation
+    /// fails with a `ConflictException`.
+    pub fn createDatasetIntegration(self: *Self, allocator: std.mem.Allocator, input: create_dataset_integration.CreateDatasetIntegrationInput, options: CallOptions) !create_dataset_integration.CreateDatasetIntegrationOutput {
+        return create_dataset_integration.execute(self, allocator, input, options);
+    }
+
     /// Creates an integration between CloudWatch and S3 Tables for analytics. This
     /// integration enables querying CloudWatch telemetry data using analytics
     /// engines like Amazon Athena, Amazon Redshift, and Apache Spark.
@@ -114,6 +132,13 @@ pub const Client = struct {
         return delete_centralization_rule_for_organization.execute(self, allocator, input, options);
     }
 
+    /// Deletes a dataset integration for the caller's account in the current
+    /// region. This operation is idempotent; if you submit the same delete more
+    /// than once, each call succeeds.
+    pub fn deleteDatasetIntegration(self: *Self, allocator: std.mem.Allocator, input: delete_dataset_integration.DeleteDatasetIntegrationInput, options: CallOptions) !delete_dataset_integration.DeleteDatasetIntegrationOutput {
+        return delete_dataset_integration.execute(self, allocator, input, options);
+    }
+
     /// Deletes an S3 Table integration and its associated data. This operation
     /// removes the connection between CloudWatch Observability Admin and S3 Tables.
     pub fn deleteS3TableIntegration(self: *Self, allocator: std.mem.Allocator, input: delete_s3_table_integration.DeleteS3TableIntegrationInput, options: CallOptions) !delete_s3_table_integration.DeleteS3TableIntegrationOutput {
@@ -145,6 +170,12 @@ pub const Client = struct {
     /// delegated administrator account.
     pub fn getCentralizationRuleForOrganization(self: *Self, allocator: std.mem.Allocator, input: get_centralization_rule_for_organization.GetCentralizationRuleForOrganizationInput, options: CallOptions) !get_centralization_rule_for_organization.GetCentralizationRuleForOrganizationOutput {
         return get_centralization_rule_for_organization.execute(self, allocator, input, options);
+    }
+
+    /// Returns the dataset integration for the caller's account in the current
+    /// region.
+    pub fn getDatasetIntegration(self: *Self, allocator: std.mem.Allocator, input: get_dataset_integration.GetDatasetIntegrationInput, options: CallOptions) !get_dataset_integration.GetDatasetIntegrationOutput {
+        return get_dataset_integration.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a specific S3 Table integration, including its
@@ -198,6 +229,11 @@ pub const Client = struct {
     /// administrator account.
     pub fn listCentralizationRulesForOrganization(self: *Self, allocator: std.mem.Allocator, input: list_centralization_rules_for_organization.ListCentralizationRulesForOrganizationInput, options: CallOptions) !list_centralization_rules_for_organization.ListCentralizationRulesForOrganizationOutput {
         return list_centralization_rules_for_organization.execute(self, allocator, input, options);
+    }
+
+    /// Returns the dataset integrations in your account.
+    pub fn listDatasetIntegrations(self: *Self, allocator: std.mem.Allocator, input: list_dataset_integrations.ListDatasetIntegrationsInput, options: CallOptions) !list_dataset_integrations.ListDatasetIntegrationsOutput {
+        return list_dataset_integrations.execute(self, allocator, input, options);
     }
 
     /// Returns a list of telemetry configurations for Amazon Web Services resources
@@ -309,6 +345,13 @@ pub const Client = struct {
         return update_centralization_rule_for_organization.execute(self, allocator, input, options);
     }
 
+    /// Updates a dataset integration for the caller's account in the current
+    /// region. This operation is idempotent; if you submit the same update more
+    /// than once, each call succeeds.
+    pub fn updateDatasetIntegration(self: *Self, allocator: std.mem.Allocator, input: update_dataset_integration.UpdateDatasetIntegrationInput, options: CallOptions) !update_dataset_integration.UpdateDatasetIntegrationOutput {
+        return update_dataset_integration.execute(self, allocator, input, options);
+    }
+
     /// Updates the configuration of an existing telemetry pipeline.
     ///
     /// The following attributes cannot be updated after pipeline creation:
@@ -397,6 +440,13 @@ pub const Client = struct {
     }
 
     pub fn listCentralizationRulesForOrganizationPaginator(self: *Self, params: list_centralization_rules_for_organization.ListCentralizationRulesForOrganizationInput) paginator.ListCentralizationRulesForOrganizationPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listDatasetIntegrationsPaginator(self: *Self, params: list_dataset_integrations.ListDatasetIntegrationsInput) paginator.ListDatasetIntegrationsPaginator {
         return .{
             .client = self,
             .params = params,

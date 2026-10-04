@@ -21,7 +21,7 @@ pub const AgentContactReference = struct {
     /// The time at which the contact was connected to an agent.
     connected_to_agent_timestamp: ?i64 = null,
 
-    /// The identifier of the contact in this instance of Amazon Connect.
+    /// The identifier of the contact in this instance of Connect Customer.
     contact_id: ?[]const u8 = null,
 
     /// How the contact was initiated.

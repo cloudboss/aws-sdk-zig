@@ -1,5 +1,6 @@
 const ContainerDependency = @import("container_dependency.zig").ContainerDependency;
 const ContainerEnvironment = @import("container_environment.zig").ContainerEnvironment;
+const LinuxCapabilities = @import("linux_capabilities.zig").LinuxCapabilities;
 const ContainerMountPoint = @import("container_mount_point.zig").ContainerMountPoint;
 const ContainerPortConfiguration = @import("container_port_configuration.zig").ContainerPortConfiguration;
 
@@ -21,8 +22,10 @@ const ContainerPortConfiguration = @import("container_port_configuration.zig").C
 /// [ContainerGroupDefinition](https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html)
 ///
 /// **Returned by:**
+/// [CreateContainerGroupDefinition](https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerGroupDefinition.html),
 /// [DescribeContainerGroupDefinition](https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeContainerGroupDefinition.html),
 /// [ListContainerGroupDefinitions](https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitions.html),
+/// [ListContainerGroupDefinitionVersions](https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListContainerGroupDefinitionVersions.html),
 /// [UpdateContainerGroupDefinition](https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateContainerGroupDefinition.html)
 pub const GameServerContainerDefinition = struct {
     /// The container definition identifier. Container names are unique within a
@@ -47,6 +50,12 @@ pub const GameServerContainerDefinition = struct {
     /// container to a container fleet.
     /// For a more specific identifier, see `ResolvedImageDigest`.
     image_uri: ?[]const u8 = null,
+
+    /// Linux-specific modifications that are applied to the default Docker
+    /// container configuration, such as Linux capabilities. For more information
+    /// see
+    /// [LinuxCapabilities](https://docs.aws.amazon.com/gamelift/latest/apireference/API_LinuxCapabilities.html).
+    linux_capabilities: ?LinuxCapabilities = null,
 
     /// A mount point that binds a path inside the container to a file or directory
     /// on the host
@@ -79,6 +88,7 @@ pub const GameServerContainerDefinition = struct {
         .depends_on = "DependsOn",
         .environment_override = "EnvironmentOverride",
         .image_uri = "ImageUri",
+        .linux_capabilities = "LinuxCapabilities",
         .mount_points = "MountPoints",
         .port_configuration = "PortConfiguration",
         .resolved_image_digest = "ResolvedImageDigest",

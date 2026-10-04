@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DbBackupConfiguration = @import("db_backup_configuration.zig").DbBackupConfiguration;
 const DbInstanceType = @import("db_instance_type.zig").DbInstanceType;
 const FailoverMode = @import("failover_mode.zig").FailoverMode;
 const LogDeliveryConfiguration = @import("log_delivery_configuration.zig").LogDeliveryConfiguration;
@@ -11,6 +12,9 @@ const MaintenanceSchedule = @import("maintenance_schedule.zig").MaintenanceSched
 const ClusterStatus = @import("cluster_status.zig").ClusterStatus;
 
 pub const UpdateDbClusterInput = struct {
+    /// A list of backup configurations to update for the DB cluster.
+    db_backup_configurations: ?[]const DbBackupConfiguration = null,
+
     /// Service-generated unique identifier of the DB cluster to update.
     db_cluster_id: []const u8,
 
@@ -34,6 +38,7 @@ pub const UpdateDbClusterInput = struct {
     port: ?i32 = null,
 
     pub const json_field_names = .{
+        .db_backup_configurations = "dbBackupConfigurations",
         .db_cluster_id = "dbClusterId",
         .db_instance_type = "dbInstanceType",
         .db_parameter_group_identifier = "dbParameterGroupIdentifier",

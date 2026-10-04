@@ -47,6 +47,12 @@ pub const DescribeVolumesModificationsInput = struct {
     /// * `volume-id` - The ID of the volume.
     filters: ?[]const Filter = null,
 
+    /// Indicates whether to include managed resources in the output. If this
+    /// parameter is set to `true`, the output includes resources that are managed
+    /// by Amazon Web Services services, even if managed resource visibility is set
+    /// to hidden.
+    include_managed_resources: ?bool = null,
+
     /// The maximum number of results (up to a limit of 500) to be returned in a
     /// paginated
     /// request. For more information, see
@@ -131,6 +137,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeVolumesModifica
                 }
             }
         }
+    }
+    if (input.include_managed_resources) |v| {
+        try body_buf.appendSlice(allocator, "&IncludeManagedResources=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.max_results) |v| {
         try body_buf.appendSlice(allocator, "&MaxResults=");

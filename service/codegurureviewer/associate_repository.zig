@@ -149,10 +149,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateRepositoryInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateRepositoryOutput {
-    var result: AssociateRepositoryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateRepositoryOutput, body, allocator);
-    }
+    const result: AssociateRepositoryOutput = try aws.json.parseJsonObject(
+        AssociateRepositoryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

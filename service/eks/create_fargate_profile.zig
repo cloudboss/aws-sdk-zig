@@ -155,10 +155,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFargateProfileInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateFargateProfileOutput {
-    var result: CreateFargateProfileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateFargateProfileOutput, body, allocator);
-    }
+    const result: CreateFargateProfileOutput = try aws.json.parseJsonObject(
+        CreateFargateProfileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -8,8 +8,7 @@ const Tag = @import("tag.zig").Tag;
 
 pub const ImportHypervisorConfigurationInput = struct {
     /// The server host of the hypervisor. This can be either an IP address or a
-    /// fully-qualified
-    /// domain name (FQDN).
+    /// fully-qualified domain name (FQDN).
     host: []const u8,
 
     /// The Key Management Service for the hypervisor.

@@ -139,10 +139,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRevocationStatusInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRevocationStatusOutput {
-    var result: GetRevocationStatusOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRevocationStatusOutput, body, allocator);
-    }
+    const result: GetRevocationStatusOutput = try aws.json.parseJsonObject(
+        GetRevocationStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

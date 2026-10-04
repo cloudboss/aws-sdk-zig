@@ -14,6 +14,11 @@ pub const ExecutionBlockType = enum {
     documentdb,
     rds_promote_read_replica,
     rds_create_cross_region_replica,
+    lambda_event_source_mapping,
+    aurora_serverless_scaling,
+    aurora_provisioned_scaling,
+    neptune,
+    rds_switchover_read_replica,
 
     pub const json_field_names = .{
         .custom_action_lambda = "CustomActionLambda",
@@ -29,6 +34,11 @@ pub const ExecutionBlockType = enum {
         .documentdb = "DocumentDb",
         .rds_promote_read_replica = "RdsPromoteReadReplica",
         .rds_create_cross_region_replica = "RdsCreateCrossRegionReplica",
+        .lambda_event_source_mapping = "LambdaEventSourceMapping",
+        .aurora_serverless_scaling = "AuroraServerlessScaling",
+        .aurora_provisioned_scaling = "AuroraProvisionedScaling",
+        .neptune = "NeptuneGlobalDatabase",
+        .rds_switchover_read_replica = "RdsSwitchoverReadReplica",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -46,6 +56,11 @@ pub const ExecutionBlockType = enum {
             .documentdb => "DocumentDb",
             .rds_promote_read_replica => "RdsPromoteReadReplica",
             .rds_create_cross_region_replica => "RdsCreateCrossRegionReplica",
+            .lambda_event_source_mapping => "LambdaEventSourceMapping",
+            .aurora_serverless_scaling => "AuroraServerlessScaling",
+            .aurora_provisioned_scaling => "AuroraProvisionedScaling",
+            .neptune => "NeptuneGlobalDatabase",
+            .rds_switchover_read_replica => "RdsSwitchoverReadReplica",
         };
     }
 

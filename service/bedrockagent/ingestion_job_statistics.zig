@@ -10,6 +10,9 @@ pub const IngestionJobStatistics = struct {
     /// updated, and unchanged documents.
     number_of_documents_scanned: i64 = 0,
 
+    /// The number of source documents that were skipped during ingestion.
+    number_of_documents_skipped: i64 = 0,
+
     /// The number of metadata files that were updated or deleted.
     number_of_metadata_documents_modified: i64 = 0,
 
@@ -29,6 +32,7 @@ pub const IngestionJobStatistics = struct {
         .number_of_documents_deleted = "numberOfDocumentsDeleted",
         .number_of_documents_failed = "numberOfDocumentsFailed",
         .number_of_documents_scanned = "numberOfDocumentsScanned",
+        .number_of_documents_skipped = "numberOfDocumentsSkipped",
         .number_of_metadata_documents_modified = "numberOfMetadataDocumentsModified",
         .number_of_metadata_documents_scanned = "numberOfMetadataDocumentsScanned",
         .number_of_modified_documents_indexed = "numberOfModifiedDocumentsIndexed",

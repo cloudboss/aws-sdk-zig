@@ -4,8 +4,8 @@ const CheckResult = @import("check_result.zig").CheckResult;
 const ConnectorType = @import("connector_type.zig").ConnectorType;
 
 /// An object that represents a connector for an Amazon EVS environment. A
-/// connector establishes a vCenter connection using the credentials stored in
-/// Amazon Web Services Secrets Manager.
+/// connector establishes a connection to the given appliance type using the
+/// credentials stored in Amazon Web Services Secrets Manager.
 pub const Connector = struct {
     /// The fully qualified domain name (FQDN) of the VCF appliance that the
     /// connector connects to.

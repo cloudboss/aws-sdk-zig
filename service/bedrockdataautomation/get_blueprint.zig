@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBlueprintInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBlueprintOutput {
-    var result: GetBlueprintOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBlueprintOutput, body, allocator);
-    }
+    const result: GetBlueprintOutput = try aws.json.parseJsonObject(
+        GetBlueprintOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

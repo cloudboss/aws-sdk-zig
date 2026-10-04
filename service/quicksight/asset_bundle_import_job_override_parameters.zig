@@ -6,6 +6,7 @@ const AssetBundleImportJobFolderOverrideParameters = @import("asset_bundle_impor
 const AssetBundleImportJobRefreshScheduleOverrideParameters = @import("asset_bundle_import_job_refresh_schedule_override_parameters.zig").AssetBundleImportJobRefreshScheduleOverrideParameters;
 const AssetBundleImportJobResourceIdOverrideConfiguration = @import("asset_bundle_import_job_resource_id_override_configuration.zig").AssetBundleImportJobResourceIdOverrideConfiguration;
 const AssetBundleImportJobThemeOverrideParameters = @import("asset_bundle_import_job_theme_override_parameters.zig").AssetBundleImportJobThemeOverrideParameters;
+const AssetBundleImportJobTopicV2OverrideParameters = @import("asset_bundle_import_job_topic_v2_override_parameters.zig").AssetBundleImportJobTopicV2OverrideParameters;
 const AssetBundleImportJobVPCConnectionOverrideParameters = @import("asset_bundle_import_job_vpc_connection_override_parameters.zig").AssetBundleImportJobVPCConnectionOverrideParameters;
 
 /// A list of overrides that modify the asset bundle resource configuration
@@ -46,6 +47,10 @@ pub const AssetBundleImportJobOverrideParameters = struct {
     /// bundle that is imported.
     themes: ?[]const AssetBundleImportJobThemeOverrideParameters = null,
 
+    /// A list of overrides for any `Topic` resources that are present in the asset
+    /// bundle that is imported.
+    topics_v2: ?[]const AssetBundleImportJobTopicV2OverrideParameters = null,
+
     /// A list of overrides for any `VPCConnection` resources that are present in
     /// the
     /// asset bundle that is imported.
@@ -60,6 +65,7 @@ pub const AssetBundleImportJobOverrideParameters = struct {
         .refresh_schedules = "RefreshSchedules",
         .resource_id_override_configuration = "ResourceIdOverrideConfiguration",
         .themes = "Themes",
+        .topics_v2 = "TopicsV2",
         .vpc_connections = "VPCConnections",
     };
 };

@@ -10,6 +10,11 @@ const AnalyticsConfiguration = @import("analytics_configuration.zig").AnalyticsC
 const AnalyticsExportDestination = @import("analytics_export_destination.zig").AnalyticsExportDestination;
 const AnalyticsS3BucketDestination = @import("analytics_s3_bucket_destination.zig").AnalyticsS3BucketDestination;
 const AnalyticsS3ExportFileFormat = @import("analytics_s3_export_file_format.zig").AnalyticsS3ExportFileFormat;
+const AnnotationConfigurationState = @import("annotation_configuration_state.zig").AnnotationConfigurationState;
+const AnnotationEntry = @import("annotation_entry.zig").AnnotationEntry;
+const AnnotationTableConfiguration = @import("annotation_table_configuration.zig").AnnotationTableConfiguration;
+const AnnotationTableConfigurationResult = @import("annotation_table_configuration_result.zig").AnnotationTableConfigurationResult;
+const AnnotationTableConfigurationUpdates = @import("annotation_table_configuration_updates.zig").AnnotationTableConfigurationUpdates;
 const BlockedEncryptionTypes = @import("blocked_encryption_types.zig").BlockedEncryptionTypes;
 const Bucket = @import("bucket.zig").Bucket;
 const BucketAbacStatus = @import("bucket_abac_status.zig").BucketAbacStatus;
@@ -53,6 +58,7 @@ const ErrorDetails = @import("error_details.zig").ErrorDetails;
 const ErrorDocument = @import("error_document.zig").ErrorDocument;
 const Event = @import("event.zig").Event;
 const EventBridgeConfiguration = @import("event_bridge_configuration.zig").EventBridgeConfiguration;
+const EventHoldDuration = @import("event_hold_duration.zig").EventHoldDuration;
 const ExistingObjectReplication = @import("existing_object_replication.zig").ExistingObjectReplication;
 const ExistingObjectReplicationStatus = @import("existing_object_replication_status.zig").ExistingObjectReplicationStatus;
 const ExpirationState = @import("expiration_state.zig").ExpirationState;
@@ -124,6 +130,7 @@ const ObjectCannedACL = @import("object_canned_acl.zig").ObjectCannedACL;
 const ObjectIdentifier = @import("object_identifier.zig").ObjectIdentifier;
 const ObjectLockConfiguration = @import("object_lock_configuration.zig").ObjectLockConfiguration;
 const ObjectLockEnabled = @import("object_lock_enabled.zig").ObjectLockEnabled;
+const ObjectLockEventHold = @import("object_lock_event_hold.zig").ObjectLockEventHold;
 const ObjectLockLegalHold = @import("object_lock_legal_hold.zig").ObjectLockLegalHold;
 const ObjectLockLegalHoldStatus = @import("object_lock_legal_hold_status.zig").ObjectLockLegalHoldStatus;
 const ObjectLockRetention = @import("object_lock_retention.zig").ObjectLockRetention;
@@ -162,6 +169,7 @@ const ReplicationRule = @import("replication_rule.zig").ReplicationRule;
 const ReplicationRuleAndOperator = @import("replication_rule_and_operator.zig").ReplicationRuleAndOperator;
 const ReplicationRuleFilter = @import("replication_rule_filter.zig").ReplicationRuleFilter;
 const ReplicationRuleStatus = @import("replication_rule_status.zig").ReplicationRuleStatus;
+const ReplicationStatus = @import("replication_status.zig").ReplicationStatus;
 const ReplicationTime = @import("replication_time.zig").ReplicationTime;
 const ReplicationTimeStatus = @import("replication_time_status.zig").ReplicationTimeStatus;
 const ReplicationTimeValue = @import("replication_time_value.zig").ReplicationTimeValue;
@@ -268,6 +276,24 @@ pub fn deserializeAnalyticsConfigurationList(allocator: std.mem.Allocator, reade
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
                     try list.append(allocator, try deserializeAnalyticsConfiguration(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeAnnotationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const AnnotationEntry {
+    var list: std.ArrayList(AnnotationEntry) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeAnnotationEntry(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -1052,6 +1078,70 @@ pub fn deserializeAnalyticsS3BucketDestination(allocator: std.mem.Allocator, rea
     return result;
 }
 
+pub fn deserializeAnnotationEntry(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !AnnotationEntry {
+    var result: AnnotationEntry = undefined;
+    result.checksum_algorithm = null;
+    result.e_tag = null;
+    result.replication_status = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AnnotationName")) {
+                    result.annotation_name = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ChecksumAlgorithm")) {
+                    result.checksum_algorithm = try deserializeChecksumAlgorithmList(allocator, reader, "member");
+                } else if (std.mem.eql(u8, e.local, "ETag")) {
+                    result.e_tag = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "LastModified")) {
+                    result.last_modified = try aws.date.parseIso8601(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ReplicationStatus")) {
+                    result.replication_status = ReplicationStatus.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Size")) {
+                    result.size = try std.fmt.parseInt(i64, try reader.readElementText(), 10);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeAnnotationTableConfigurationResult(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !AnnotationTableConfigurationResult {
+    var result: AnnotationTableConfigurationResult = undefined;
+    result.@"error" = null;
+    result.role = null;
+    result.table_arn = null;
+    result.table_name = null;
+    result.table_status = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ConfigurationState")) {
+                    result.configuration_state = AnnotationConfigurationState.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
+                } else if (std.mem.eql(u8, e.local, "Error")) {
+                    result.@"error" = try deserializeErrorDetails(allocator, reader);
+                } else if (std.mem.eql(u8, e.local, "Role")) {
+                    result.role = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "TableArn")) {
+                    result.table_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "TableName")) {
+                    result.table_name = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "TableStatus")) {
+                    result.table_status = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
 pub fn deserializeBlockedEncryptionTypes(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !BlockedEncryptionTypes {
     var result: BlockedEncryptionTypes = undefined;
     result.encryption_type = null;
@@ -1329,9 +1419,9 @@ pub fn deserializeCopyPartResult(allocator: std.mem.Allocator, reader: *aws.xml.
 }
 
 pub fn deserializeDefaultRetention(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !DefaultRetention {
-    _ = allocator;
     var result: DefaultRetention = undefined;
     result.days = null;
+    result.default_event_hold = null;
     result.mode = null;
     result.years = null;
     while (try reader.next()) |event| {
@@ -1339,6 +1429,8 @@ pub fn deserializeDefaultRetention(allocator: std.mem.Allocator, reader: *aws.xm
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Days")) {
                     result.days = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "DefaultEventHold")) {
+                    result.default_event_hold = try deserializeEventHoldDuration(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Mode")) {
                     result.mode = ObjectLockRetentionMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Years")) {
@@ -1588,6 +1680,29 @@ pub fn deserializeEventBridgeConfiguration(allocator: std.mem.Allocator, reader:
         switch (event) {
             .element_start => {
                 try reader.skipElement();
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeEventHoldDuration(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !EventHoldDuration {
+    _ = allocator;
+    var result: EventHoldDuration = undefined;
+    result.days = null;
+    result.years = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Days")) {
+                    result.days = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "Years")) {
+                    result.years = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else {
+                    try reader.skipElement();
+                }
             },
             .element_end => break,
             else => {},
@@ -2253,12 +2368,15 @@ pub fn deserializeLoggingEnabled(allocator: std.mem.Allocator, reader: *aws.xml.
 
 pub fn deserializeMetadataConfigurationResult(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !MetadataConfigurationResult {
     var result: MetadataConfigurationResult = undefined;
+    result.annotation_table_configuration_result = null;
     result.inventory_table_configuration_result = null;
     result.journal_table_configuration_result = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
-                if (std.mem.eql(u8, e.local, "DestinationResult")) {
+                if (std.mem.eql(u8, e.local, "AnnotationTableConfigurationResult")) {
+                    result.annotation_table_configuration_result = try deserializeAnnotationTableConfigurationResult(allocator, reader);
+                } else if (std.mem.eql(u8, e.local, "DestinationResult")) {
                     result.destination_result = try deserializeDestinationResult(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "InventoryTableConfigurationResult")) {
                     result.inventory_table_configuration_result = try deserializeInventoryTableConfigurationResult(allocator, reader);
@@ -2529,14 +2647,19 @@ pub fn deserializeObjectLockLegalHold(allocator: std.mem.Allocator, reader: *aws
 }
 
 pub fn deserializeObjectLockRetention(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ObjectLockRetention {
-    _ = allocator;
     var result: ObjectLockRetention = undefined;
+    result.event_hold = null;
+    result.event_hold_duration = null;
     result.mode = null;
     result.retain_until_date = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
-                if (std.mem.eql(u8, e.local, "Mode")) {
+                if (std.mem.eql(u8, e.local, "EventHold")) {
+                    result.event_hold = ObjectLockEventHold.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "EventHoldDuration")) {
+                    result.event_hold_duration = try deserializeEventHoldDuration(allocator, reader);
+                } else if (std.mem.eql(u8, e.local, "Mode")) {
                     result.mode = ObjectLockRetentionMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "RetainUntilDate")) {
                     result.retain_until_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
@@ -3997,6 +4120,38 @@ pub fn serializeAnalyticsS3BucketDestination(allocator: std.mem.Allocator, buf: 
     }
 }
 
+pub fn serializeAnnotationTableConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: AnnotationTableConfiguration) !void {
+    try buf.appendSlice(allocator, "<ConfigurationState>");
+    try buf.appendSlice(allocator, value.configuration_state.wireName());
+    try buf.appendSlice(allocator, "</ConfigurationState>");
+    if (value.encryption_configuration) |v| {
+        try buf.appendSlice(allocator, "<EncryptionConfiguration>");
+        try serializeMetadataTableEncryptionConfiguration(allocator, buf, v);
+        try buf.appendSlice(allocator, "</EncryptionConfiguration>");
+    }
+    if (value.role) |v| {
+        try buf.appendSlice(allocator, "<Role>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Role>");
+    }
+}
+
+pub fn serializeAnnotationTableConfigurationUpdates(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: AnnotationTableConfigurationUpdates) !void {
+    try buf.appendSlice(allocator, "<ConfigurationState>");
+    try buf.appendSlice(allocator, value.configuration_state.wireName());
+    try buf.appendSlice(allocator, "</ConfigurationState>");
+    if (value.encryption_configuration) |v| {
+        try buf.appendSlice(allocator, "<EncryptionConfiguration>");
+        try serializeMetadataTableEncryptionConfiguration(allocator, buf, v);
+        try buf.appendSlice(allocator, "</EncryptionConfiguration>");
+    }
+    if (value.role) |v| {
+        try buf.appendSlice(allocator, "<Role>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</Role>");
+    }
+}
+
 pub fn serializeBlockedEncryptionTypes(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: BlockedEncryptionTypes) !void {
     if (value.encryption_type) |v| {
         try serializeEncryptionTypeList(allocator, buf, v, "EncryptionType");
@@ -4239,6 +4394,11 @@ pub fn serializeDefaultRetention(allocator: std.mem.Allocator, buf: *std.ArrayLi
         }
         try buf.appendSlice(allocator, "</Days>");
     }
+    if (value.default_event_hold) |v| {
+        try buf.appendSlice(allocator, "<DefaultEventHold>");
+        try serializeEventHoldDuration(allocator, buf, v);
+        try buf.appendSlice(allocator, "</DefaultEventHold>");
+    }
     if (value.mode) |v| {
         try buf.appendSlice(allocator, "<Mode>");
         try buf.appendSlice(allocator, v.wireName());
@@ -4341,6 +4501,25 @@ pub fn serializeEventBridgeConfiguration(allocator: std.mem.Allocator, buf: *std
     _ = allocator;
     _ = buf;
     _ = value;
+}
+
+pub fn serializeEventHoldDuration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: EventHoldDuration) !void {
+    if (value.days) |v| {
+        try buf.appendSlice(allocator, "<Days>");
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
+        }
+        try buf.appendSlice(allocator, "</Days>");
+    }
+    if (value.years) |v| {
+        try buf.appendSlice(allocator, "<Years>");
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
+        }
+        try buf.appendSlice(allocator, "</Years>");
+    }
 }
 
 pub fn serializeExistingObjectReplication(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ExistingObjectReplication) !void {
@@ -4795,6 +4974,11 @@ pub fn serializeLoggingEnabled(allocator: std.mem.Allocator, buf: *std.ArrayList
 }
 
 pub fn serializeMetadataConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: MetadataConfiguration) !void {
+    if (value.annotation_table_configuration) |v| {
+        try buf.appendSlice(allocator, "<AnnotationTableConfiguration>");
+        try serializeAnnotationTableConfiguration(allocator, buf, v);
+        try buf.appendSlice(allocator, "</AnnotationTableConfiguration>");
+    }
     if (value.inventory_table_configuration) |v| {
         try buf.appendSlice(allocator, "<InventoryTableConfiguration>");
         try serializeInventoryTableConfiguration(allocator, buf, v);
@@ -4974,6 +5158,16 @@ pub fn serializeObjectLockLegalHold(allocator: std.mem.Allocator, buf: *std.Arra
 }
 
 pub fn serializeObjectLockRetention(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ObjectLockRetention) !void {
+    if (value.event_hold) |v| {
+        try buf.appendSlice(allocator, "<EventHold>");
+        try buf.appendSlice(allocator, v.wireName());
+        try buf.appendSlice(allocator, "</EventHold>");
+    }
+    if (value.event_hold_duration) |v| {
+        try buf.appendSlice(allocator, "<EventHoldDuration>");
+        try serializeEventHoldDuration(allocator, buf, v);
+        try buf.appendSlice(allocator, "</EventHoldDuration>");
+    }
     if (value.mode) |v| {
         try buf.appendSlice(allocator, "<Mode>");
         try buf.appendSlice(allocator, v.wireName());

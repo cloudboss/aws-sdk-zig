@@ -4,6 +4,16 @@ pub const BatchConfig = struct {
     /// HTTP request.
     /// By default, only messages from the same topic are batched together. The
     /// default value is `false`.
+    ///
+    /// When `batchAcrossTopics` is enabled, the error payload format changes: the
+    /// `topic` field moves from the top level to inside each entry in the
+    /// `payloadsWithMetadata` array, since each message in the batch may originate
+    /// from a different topic.
+    ///
+    /// Messages are always batched within the scope of the same account, rule name,
+    /// target HTTP endpoint URL, and billing group. Messages that differ in any of
+    /// these attributes are never combined into the same batch, regardless of the
+    /// `batchAcrossTopics` setting.
     batch_across_topics: bool = false,
 
     /// The maximum amount of time (in milliseconds) that an outgoing call waits for

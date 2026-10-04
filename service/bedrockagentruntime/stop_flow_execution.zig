@@ -92,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StopFlowExecutionInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StopFlowExecutionOutput {
-    var result: StopFlowExecutionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StopFlowExecutionOutput, body, allocator);
-    }
+    const result: StopFlowExecutionOutput = try aws.json.parseJsonObject(
+        StopFlowExecutionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

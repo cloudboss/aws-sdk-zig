@@ -35,10 +35,10 @@ pub const DBEngineVersion = struct {
     /// A list of the supported CA certificate identifiers.
     ///
     /// For more information, see [Updating Your Amazon DocumentDB TLS
-    /// Certificates](https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html) and
+    /// Certificates](https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html) and
     /// [
     /// Encrypting Data in
-    /// Transit](https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html) in the *Amazon DocumentDB Developer
+    /// Transit](https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html) in the *Amazon DocumentDB Developer
     /// Guide*.
     supported_ca_certificate_identifiers: ?[]const []const u8 = null,
 

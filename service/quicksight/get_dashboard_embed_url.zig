@@ -223,10 +223,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDashboardEmbedUrlInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDashboardEmbedUrlOutput {
-    var result: GetDashboardEmbedUrlOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDashboardEmbedUrlOutput, body, allocator);
-    }
+    var result: GetDashboardEmbedUrlOutput = try aws.json.parseJsonObject(
+        GetDashboardEmbedUrlOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

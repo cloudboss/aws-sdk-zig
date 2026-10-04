@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListLFTagExpressionsInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListLFTagExpressionsOutput {
-    var result: ListLFTagExpressionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListLFTagExpressionsOutput, body, allocator);
-    }
+    const result: ListLFTagExpressionsOutput = try aws.json.parseJsonObject(
+        ListLFTagExpressionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

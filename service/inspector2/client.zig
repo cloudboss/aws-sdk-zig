@@ -15,12 +15,14 @@ const cancel_sbom_export = @import("cancel_sbom_export.zig");
 const create_cis_scan_configuration = @import("create_cis_scan_configuration.zig");
 const create_code_security_integration = @import("create_code_security_integration.zig");
 const create_code_security_scan_configuration = @import("create_code_security_scan_configuration.zig");
+const create_connector = @import("create_connector.zig");
 const create_filter = @import("create_filter.zig");
 const create_findings_report = @import("create_findings_report.zig");
 const create_sbom_export = @import("create_sbom_export.zig");
 const delete_cis_scan_configuration = @import("delete_cis_scan_configuration.zig");
 const delete_code_security_integration = @import("delete_code_security_integration.zig");
 const delete_code_security_scan_configuration = @import("delete_code_security_scan_configuration.zig");
+const delete_connector = @import("delete_connector.zig");
 const delete_filter = @import("delete_filter.zig");
 const describe_organization_configuration = @import("describe_organization_configuration.zig");
 const disable_ = @import("disable.zig");
@@ -49,6 +51,8 @@ const list_cis_scans = @import("list_cis_scans.zig");
 const list_code_security_integrations = @import("list_code_security_integrations.zig");
 const list_code_security_scan_configuration_associations = @import("list_code_security_scan_configuration_associations.zig");
 const list_code_security_scan_configurations = @import("list_code_security_scan_configurations.zig");
+const list_connector_scan_configurations = @import("list_connector_scan_configurations.zig");
+const list_connectors = @import("list_connectors.zig");
 const list_coverage = @import("list_coverage.zig");
 const list_coverage_statistics = @import("list_coverage_statistics.zig");
 const list_delegated_admin_accounts = @import("list_delegated_admin_accounts.zig");
@@ -71,6 +75,8 @@ const update_cis_scan_configuration = @import("update_cis_scan_configuration.zig
 const update_code_security_integration = @import("update_code_security_integration.zig");
 const update_code_security_scan_configuration = @import("update_code_security_scan_configuration.zig");
 const update_configuration = @import("update_configuration.zig");
+const update_connector = @import("update_connector.zig");
+const update_connector_scan_configuration = @import("update_connector_scan_configuration.zig");
 const update_ec_2_deep_inspection_configuration = @import("update_ec_2_deep_inspection_configuration.zig");
 const update_encryption_key = @import("update_encryption_key.zig");
 const update_filter = @import("update_filter.zig");
@@ -203,6 +209,12 @@ pub const Client = struct {
         return create_code_security_scan_configuration.execute(self, allocator, input, options);
     }
 
+    /// Creates a connector that links an external cloud provider to Amazon
+    /// Inspector for vulnerability scanning.
+    pub fn createConnector(self: *Self, allocator: std.mem.Allocator, input: create_connector.CreateConnectorInput, options: CallOptions) !create_connector.CreateConnectorOutput {
+        return create_connector.execute(self, allocator, input, options);
+    }
+
     /// Creates a filter resource using specified filter criteria. When the filter
     /// action is set
     /// to `SUPPRESS` this action creates a suppression rule.
@@ -235,6 +247,11 @@ pub const Client = struct {
     /// Deletes a code security scan configuration.
     pub fn deleteCodeSecurityScanConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_code_security_scan_configuration.DeleteCodeSecurityScanConfigurationInput, options: CallOptions) !delete_code_security_scan_configuration.DeleteCodeSecurityScanConfigurationOutput {
         return delete_code_security_scan_configuration.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a connector from your account.
+    pub fn deleteConnector(self: *Self, allocator: std.mem.Allocator, input: delete_connector.DeleteConnectorInput, options: CallOptions) !delete_connector.DeleteConnectorOutput {
+        return delete_connector.execute(self, allocator, input, options);
     }
 
     /// Deletes a filter resource.
@@ -307,7 +324,13 @@ pub const Client = struct {
         return get_code_security_scan_configuration.execute(self, allocator, input, options);
     }
 
-    /// Retrieves setting configurations for Inspector scans.
+    /// Retrieves setting configurations for Amazon Inspector scans. If you specify
+    /// an
+    /// `accountId`, this operation returns the scan configuration for that member
+    /// account. You must be the delegated administrator for the specified member
+    /// account.
+    /// If you do not specify an `accountId`, this operation returns your own
+    /// scan configuration.
     pub fn getConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_configuration.GetConfigurationInput, options: CallOptions) !get_configuration.GetConfigurationOutput {
         return get_configuration.execute(self, allocator, input, options);
     }
@@ -388,6 +411,19 @@ pub const Client = struct {
     /// Lists all code security scan configurations in your account.
     pub fn listCodeSecurityScanConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_code_security_scan_configurations.ListCodeSecurityScanConfigurationsInput, options: CallOptions) !list_code_security_scan_configurations.ListCodeSecurityScanConfigurationsOutput {
         return list_code_security_scan_configurations.execute(self, allocator, input, options);
+    }
+
+    /// Lists scan configurations for Amazon Web Services Config connectors. Results
+    /// are paginated. Use the `nextToken` parameter to retrieve the next page of
+    /// results.
+    pub fn listConnectorScanConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_connector_scan_configurations.ListConnectorScanConfigurationsInput, options: CallOptions) !list_connector_scan_configurations.ListConnectorScanConfigurationsOutput {
+        return list_connector_scan_configurations.execute(self, allocator, input, options);
+    }
+
+    /// Lists connectors in your account. Results are paginated. Use the `nextToken`
+    /// parameter to retrieve the next page of results.
+    pub fn listConnectors(self: *Self, allocator: std.mem.Allocator, input: list_connectors.ListConnectorsInput, options: CallOptions) !list_connectors.ListConnectorsOutput {
+        return list_connectors.execute(self, allocator, input, options);
     }
 
     /// Lists coverage details for your environment.
@@ -523,13 +559,29 @@ pub const Client = struct {
         return update_code_security_scan_configuration.execute(self, allocator, input, options);
     }
 
-    /// Updates setting configurations for your Amazon Inspector account. When you
-    /// use this API as an Amazon Inspector
-    /// delegated administrator this updates the setting for all accounts you
-    /// manage. Member
-    /// accounts in an organization cannot update this setting.
+    /// Updates the scan configuration for your Amazon Inspector account. If you
+    /// don't specify an
+    /// `accountId`, this operation updates the delegated administrator's
+    /// configuration
+    /// and propagates it to member accounts that have not been individually
+    /// configured. If you
+    /// specify an `accountId`, this operation updates that member account's
+    /// configuration. Only the delegated administrator can specify an `accountId`;
+    /// member accounts cannot call this operation.
     pub fn updateConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_configuration.UpdateConfigurationInput, options: CallOptions) !update_configuration.UpdateConfigurationOutput {
         return update_configuration.execute(self, allocator, input, options);
+    }
+
+    /// Updates the description or provider-specific configuration details of an
+    /// existing connector.
+    pub fn updateConnector(self: *Self, allocator: std.mem.Allocator, input: update_connector.UpdateConnectorInput, options: CallOptions) !update_connector.UpdateConnectorOutput {
+        return update_connector.execute(self, allocator, input, options);
+    }
+
+    /// Updates scan configuration settings for resources associated with an Amazon
+    /// Web Services Config connector.
+    pub fn updateConnectorScanConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_connector_scan_configuration.UpdateConnectorScanConfigurationInput, options: CallOptions) !update_connector_scan_configuration.UpdateConnectorScanConfigurationOutput {
+        return update_connector_scan_configuration.execute(self, allocator, input, options);
     }
 
     /// Activates, deactivates Amazon Inspector deep inspection, or updates custom
@@ -605,6 +657,20 @@ pub const Client = struct {
     }
 
     pub fn listCisScansPaginator(self: *Self, params: list_cis_scans.ListCisScansInput) paginator.ListCisScansPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listConnectorScanConfigurationsPaginator(self: *Self, params: list_connector_scan_configurations.ListConnectorScanConfigurationsInput) paginator.ListConnectorScanConfigurationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listConnectorsPaginator(self: *Self, params: list_connectors.ListConnectorsInput) paginator.ListConnectorsPaginator {
         return .{
             .client = self,
             .params = params,

@@ -1,3 +1,4 @@
+pub const Code = @import("code.zig").Code;
 pub const DefinitionS3Location = @import("definition_s3_location.zig").DefinitionS3Location;
 pub const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
 pub const EncryptionType = @import("encryption_type.zig").EncryptionType;
@@ -8,6 +9,7 @@ pub const LoggingConfiguration = @import("logging_configuration.zig").LoggingCon
 pub const NetworkConfiguration = @import("network_configuration.zig").NetworkConfiguration;
 pub const RunDetailSummary = @import("run_detail_summary.zig").RunDetailSummary;
 pub const RunType = @import("run_type.zig").RunType;
+pub const S3Location = @import("s3_location.zig").S3Location;
 pub const ScheduleConfiguration = @import("schedule_configuration.zig").ScheduleConfiguration;
 pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
 pub const TagResourceResponse = @import("tag_resource_response.zig").TagResourceResponse;

@@ -27,7 +27,17 @@ pub const PutRecordsRequestEntry = struct {
     /// data records to shards. As a result of this hashing mechanism, all data
     /// records with the
     /// same partition key map to the same shard within the stream.
-    partition_key: []const u8,
+    ///
+    /// If the stream uses the `USER_PARTITION_KEY` record distribution strategy
+    /// (the default), a partition key is required for each record. If the stream
+    /// uses the
+    /// `AUTO` record distribution strategy, the partition key is optional and any
+    /// value you provide is ignored, along with any `ExplicitHashKey` you provide.
+    /// In that case, Amazon Kinesis Data Streams distributes records across shards
+    /// using
+    /// service-managed algorithms. For more information, see
+    /// `UpdateStreamRecordDistributionStrategy`.
+    partition_key: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .data = "Data",

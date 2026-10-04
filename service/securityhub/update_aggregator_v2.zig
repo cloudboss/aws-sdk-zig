@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAggregatorV2Input
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateAggregatorV2Output {
-    var result: UpdateAggregatorV2Output = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateAggregatorV2Output, body, allocator);
-    }
+    const result: UpdateAggregatorV2Output = try aws.json.parseJsonObject(
+        UpdateAggregatorV2Output,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetVoiceProfileDomainIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetVoiceProfileDomainOutput {
-    var result: GetVoiceProfileDomainOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetVoiceProfileDomainOutput, body, allocator);
-    }
+    const result: GetVoiceProfileDomainOutput = try aws.json.parseJsonObject(
+        GetVoiceProfileDomainOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

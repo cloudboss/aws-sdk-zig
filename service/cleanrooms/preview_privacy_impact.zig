@@ -92,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PreviewPrivacyImpactInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PreviewPrivacyImpactOutput {
-    var result: PreviewPrivacyImpactOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PreviewPrivacyImpactOutput, body, allocator);
-    }
+    const result: PreviewPrivacyImpactOutput = try aws.json.parseJsonObject(
+        PreviewPrivacyImpactOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -2,16 +2,19 @@ const std = @import("std");
 
 pub const StorageType = enum {
     standard,
+    standard_v2,
     in_memory,
 
     pub const json_field_names = .{
         .standard = "Standard",
+        .standard_v2 = "Standard_V2",
         .in_memory = "InMemory",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .standard => "Standard",
+            .standard_v2 => "Standard_V2",
             .in_memory => "InMemory",
         };
     }

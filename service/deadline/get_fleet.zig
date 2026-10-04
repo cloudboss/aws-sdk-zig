@@ -166,10 +166,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFleetInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetFleetOutput {
-    var result: GetFleetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetFleetOutput, body, allocator);
-    }
+    const result: GetFleetOutput = try aws.json.parseJsonObject(
+        GetFleetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

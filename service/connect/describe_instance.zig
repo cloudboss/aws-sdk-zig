@@ -8,7 +8,7 @@ const Instance = @import("instance.zig").Instance;
 const ReplicationConfiguration = @import("replication_configuration.zig").ReplicationConfiguration;
 
 pub const DescribeInstanceInput = struct {
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -24,10 +24,10 @@ pub const DescribeInstanceOutput = struct {
     /// Status information about the replication process. This field is included
     /// only when you are using the
     /// [ReplicateInstance](https://docs.aws.amazon.com/connect/latest/APIReference/API_ReplicateInstance.html) API to
-    /// replicate an Amazon Connect instance across Amazon Web Services Regions. For
-    /// information about replicating Amazon Connect instances, see [Create a
-    /// replica of your existing Amazon Connect
-    /// instance](https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html) in the *Amazon Connect Administrator Guide*.
+    /// replicate an Connect Customer instance across Amazon Web Services Regions.
+    /// For information about replicating Connect Customer instances, see [Create a
+    /// replica of your existing Connect Customer
+    /// instance](https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html) in the *Connect Customer Administrator Guide*.
     replication_configuration: ?ReplicationConfiguration = null,
 
     pub const json_field_names = .{
@@ -85,10 +85,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeInstanceInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeInstanceOutput {
-    var result: DescribeInstanceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeInstanceOutput, body, allocator);
-    }
+    const result: DescribeInstanceOutput = try aws.json.parseJsonObject(
+        DescribeInstanceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -9,7 +9,7 @@ const GroupingConfiguration = @import("grouping_configuration.zig").GroupingConf
 const QuickResponseData = @import("quick_response_data.zig").QuickResponseData;
 
 pub const CreateQuickResponseInput = struct {
-    /// The Amazon Connect channels this quick response applies to.
+    /// The Connect Customer channels this quick response applies to.
     channels: ?[]const []const u8 = null,
 
     /// A unique, case-sensitive identifier that you provide to ensure the
@@ -202,10 +202,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateQuickResponseInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateQuickResponseOutput {
-    var result: CreateQuickResponseOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateQuickResponseOutput, body, allocator);
-    }
+    const result: CreateQuickResponseOutput = try aws.json.parseJsonObject(
+        CreateQuickResponseOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

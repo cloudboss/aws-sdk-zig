@@ -1,5 +1,6 @@
 const DestinationOptionsResponse = @import("destination_options_response.zig").DestinationOptionsResponse;
 const LogDestinationType = @import("log_destination_type.zig").LogDestinationType;
+const TagFieldSpecificationResponse = @import("tag_field_specification_response.zig").TagFieldSpecificationResponse;
 const Tag = @import("tag.zig").Tag;
 const TrafficType = @import("traffic_type.zig").TrafficType;
 
@@ -63,6 +64,10 @@ pub const FlowLog = struct {
 
     /// The ID of the resource being monitored.
     resource_id: ?[]const u8 = null,
+
+    /// The tag configuration associated with the Flow Logs Amazon EC2 Tags feature
+    /// fields in your custom log format.
+    tag_field_specifications: ?[]const TagFieldSpecificationResponse = null,
 
     /// The tags for the flow log.
     tags: ?[]const Tag = null,

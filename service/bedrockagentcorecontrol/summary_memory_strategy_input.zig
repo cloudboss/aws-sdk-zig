@@ -11,7 +11,8 @@ pub const SummaryMemoryStrategyInput = struct {
     /// The name of the summary memory strategy.
     name: []const u8,
 
-    /// The namespaces associated with the summary memory strategy.
+    /// This is a legacy parameter, use `namespaceTemplates`. The namespaces
+    /// associated with the summary memory strategy.
     namespaces: ?[]const []const u8 = null,
 
     /// The namespaceTemplates associated with the summary memory strategy.

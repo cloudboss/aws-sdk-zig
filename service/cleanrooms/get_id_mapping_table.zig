@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetIdMappingTableInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetIdMappingTableOutput {
-    var result: GetIdMappingTableOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetIdMappingTableOutput, body, allocator);
-    }
+    const result: GetIdMappingTableOutput = try aws.json.parseJsonObject(
+        GetIdMappingTableOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

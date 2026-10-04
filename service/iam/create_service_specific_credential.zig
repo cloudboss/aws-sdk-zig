@@ -10,9 +10,14 @@ const serde = @import("serde.zig");
 pub const CreateServiceSpecificCredentialInput = struct {
     /// The number of days until the service specific credential expires. This field
     /// is only
-    /// valid for Bedrock and CloudWatch Logs API keys and must be a positive
-    /// integer. When not specified, the
-    /// credential will not expire.
+    /// valid for services that support long-term API keys and must be a positive
+    /// integer. When
+    /// not specified, the credential will not expire.
+    ///
+    /// To see which services support long-term API keys, refer to [API keys
+    /// for Amazon Web Services
+    /// services](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_api_keys_for_aws_services.html) in the
+    /// *IAM User Guide*.
     credential_age_days: ?i32 = null,
 
     /// The name of the Amazon Web Services service that is to be associated with

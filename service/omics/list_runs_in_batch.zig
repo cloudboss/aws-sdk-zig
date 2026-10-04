@@ -138,10 +138,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRunsInBatchInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListRunsInBatchOutput {
-    var result: ListRunsInBatchOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListRunsInBatchOutput, body, allocator);
-    }
+    const result: ListRunsInBatchOutput = try aws.json.parseJsonObject(
+        ListRunsInBatchOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

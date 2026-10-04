@@ -7,8 +7,9 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const InstanceAttributeName = @import("instance_attribute_name.zig").InstanceAttributeName;
 const InstanceBlockDeviceMappingSpecification = @import("instance_block_device_mapping_specification.zig").InstanceBlockDeviceMappingSpecification;
 const AttributeBooleanValue = @import("attribute_boolean_value.zig").AttributeBooleanValue;
+const EnclaveOptionsRequest = @import("enclave_options_request.zig").EnclaveOptionsRequest;
 const AttributeValue = @import("attribute_value.zig").AttributeValue;
-const BlobAttributeValue = @import("blob_attribute_value.zig").BlobAttributeValue;
+const SecureBlobAttributeValue = @import("secure_blob_attribute_value.zig").SecureBlobAttributeValue;
 const serde = @import("serde.zig");
 
 pub const ModifyInstanceAttributeInput = struct {
@@ -86,6 +87,12 @@ pub const ModifyInstanceAttributeInput = struct {
     /// instance can make it unreachable.
     ena_support: ?AttributeBooleanValue = null,
 
+    /// Enables or disables the instance for Amazon Web Services Nitro Enclaves. For
+    /// more
+    /// information, see the [Amazon Web Services Nitro Enclaves User
+    /// Guide](https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html).
+    enclave_options: ?EnclaveOptionsRequest = null,
+
     /// Replaces the security groups of the instance with the specified security
     /// groups.
     /// You must specify the ID of at least one security group, even if it's just
@@ -148,7 +155,7 @@ pub const ModifyInstanceAttributeInput = struct {
     /// performed for you.
     /// For more information, see [Work with instance user
     /// data](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-add-user-data.html).
-    user_data: ?BlobAttributeValue = null,
+    user_data: ?SecureBlobAttributeValue = null,
 
     /// A new value for the attribute. Use only with the `kernel`,
     /// `ramdisk`, `userData`, `disableApiTermination`, or
@@ -267,6 +274,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyInstanceAttribute
     if (input.ena_support) |v| {
         if (v.value) |sv| {
             try body_buf.appendSlice(allocator, "&EnaSupport.Value=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
+        }
+    }
+    if (input.enclave_options) |v| {
+        if (v.enabled) |sv| {
+            try body_buf.appendSlice(allocator, "&EnclaveOptions.Enabled=");
             try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
         }
     }

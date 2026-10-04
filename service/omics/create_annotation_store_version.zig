@@ -147,10 +147,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAnnotationStoreVe
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAnnotationStoreVersionOutput {
-    var result: CreateAnnotationStoreVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAnnotationStoreVersionOutput, body, allocator);
-    }
+    const result: CreateAnnotationStoreVersionOutput = try aws.json.parseJsonObject(
+        CreateAnnotationStoreVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

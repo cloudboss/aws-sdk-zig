@@ -1,6 +1,7 @@
 const aws = @import("aws");
 
 const AdvancedSecurityOptions = @import("advanced_security_options.zig").AdvancedSecurityOptions;
+const AutomatedSnapshotPauseOptions = @import("automated_snapshot_pause_options.zig").AutomatedSnapshotPauseOptions;
 const AutoTuneOptionsOutput = @import("auto_tune_options_output.zig").AutoTuneOptionsOutput;
 const ChangeProgressDetails = @import("change_progress_details.zig").ChangeProgressDetails;
 const CognitoOptions = @import("cognito_options.zig").CognitoOptions;
@@ -10,11 +11,13 @@ const DomainProcessingStatusType = @import("domain_processing_status_type.zig").
 const EBSOptions = @import("ebs_options.zig").EBSOptions;
 const ElasticsearchClusterConfig = @import("elasticsearch_cluster_config.zig").ElasticsearchClusterConfig;
 const EncryptionAtRestOptions = @import("encryption_at_rest_options.zig").EncryptionAtRestOptions;
+const DomainEngineMode = @import("domain_engine_mode.zig").DomainEngineMode;
 const LogPublishingOption = @import("log_publishing_option.zig").LogPublishingOption;
 const ModifyingProperties = @import("modifying_properties.zig").ModifyingProperties;
 const NodeToNodeEncryptionOptions = @import("node_to_node_encryption_options.zig").NodeToNodeEncryptionOptions;
 const ServiceSoftwareOptions = @import("service_software_options.zig").ServiceSoftwareOptions;
 const SnapshotOptions = @import("snapshot_options.zig").SnapshotOptions;
+const DomainUseCase = @import("domain_use_case.zig").DomainUseCase;
 const VPCDerivedInfo = @import("vpc_derived_info.zig").VPCDerivedInfo;
 
 /// The current status of an Elasticsearch domain.
@@ -32,6 +35,10 @@ pub const ElasticsearchDomainStatus = struct {
     /// for IAM
     /// Entities](http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html) in *Using AWS Identity and Access Management* for more information.
     arn: []const u8,
+
+    /// The current status of the Elasticsearch domain's automated snapshot pause
+    /// options.
+    automated_snapshot_pause_options: ?AutomatedSnapshotPauseOptions = null,
 
     /// The current status of the Elasticsearch domain's Auto-Tune options.
     auto_tune_options: ?AutoTuneOptionsOutput = null,
@@ -94,6 +101,9 @@ pub const ElasticsearchDomainStatus = struct {
     /// `'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'`.
     endpoints: ?[]const aws.map.StringMapEntry = null,
 
+    /// The engine mode for the domain.
+    engine_mode: ?DomainEngineMode = null,
+
     /// Log publishing options for the given domain.
     log_publishing_options: ?[]const aws.map.MapEntry(LogPublishingOption) = null,
 
@@ -119,6 +129,9 @@ pub const ElasticsearchDomainStatus = struct {
     /// configuration is active.
     upgrade_processing: ?bool = null,
 
+    /// The primary use case for the domain.
+    use_case: ?DomainUseCase = null,
+
     /// The `VPCOptions` for the specified domain. For more information, see [VPC
     /// Endpoints for Amazon Elasticsearch Service
     /// Domains](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html).
@@ -129,6 +142,7 @@ pub const ElasticsearchDomainStatus = struct {
         .advanced_options = "AdvancedOptions",
         .advanced_security_options = "AdvancedSecurityOptions",
         .arn = "ARN",
+        .automated_snapshot_pause_options = "AutomatedSnapshotPauseOptions",
         .auto_tune_options = "AutoTuneOptions",
         .change_progress_details = "ChangeProgressDetails",
         .cognito_options = "CognitoOptions",
@@ -145,6 +159,7 @@ pub const ElasticsearchDomainStatus = struct {
         .encryption_at_rest_options = "EncryptionAtRestOptions",
         .endpoint = "Endpoint",
         .endpoints = "Endpoints",
+        .engine_mode = "EngineMode",
         .log_publishing_options = "LogPublishingOptions",
         .modifying_properties = "ModifyingProperties",
         .node_to_node_encryption_options = "NodeToNodeEncryptionOptions",
@@ -152,6 +167,7 @@ pub const ElasticsearchDomainStatus = struct {
         .service_software_options = "ServiceSoftwareOptions",
         .snapshot_options = "SnapshotOptions",
         .upgrade_processing = "UpgradeProcessing",
+        .use_case = "UseCase",
         .vpc_options = "VPCOptions",
     };
 };

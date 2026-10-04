@@ -161,7 +161,8 @@ pub const AccessDeniedException = struct {
 
 /// Amazon Textract isn't able to read the document. For more information on the
 /// document
-/// limits in Amazon Textract, see limits.
+/// limits in Amazon Textract, see [Hard
+/// limits](https://docs.aws.amazon.com/textract/latest/dg/limits.html).
 pub const BadDocumentException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",

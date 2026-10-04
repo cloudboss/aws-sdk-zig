@@ -1,6 +1,6 @@
 const std = @import("std");
 
-/// The status of a notebook run in Amazon DataZone.
+/// The status of a notebook run in Amazon SageMaker Unified Studio.
 pub const NotebookRunStatus = enum {
     /// The notebook run is queued.
     queued,

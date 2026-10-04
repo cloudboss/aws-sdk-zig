@@ -29,8 +29,8 @@ pub const HlsImageBasedTrickPlaySettings = struct {
     /// Must be divisible by 8.
     thumbnail_width: ?i32 = null,
 
-    /// Number of thumbnails in each column of a tile image. Set a value between 2
-    /// and 2048. Must be divisible by 2.
+    /// Number of thumbnails in each column of a tile image. Set a value between 1
+    /// and 2048.
     tile_height: ?i32 = null,
 
     /// Number of thumbnails in each row of a tile image. Set a value between 1 and

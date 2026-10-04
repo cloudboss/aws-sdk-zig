@@ -382,6 +382,13 @@ pub const Client = struct {
         return attach_principal_policy.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Associates a Device Defender security profile with a thing group or this
     /// account. Each
     /// thing group or account can have up to five security profiles associated with
@@ -442,6 +449,13 @@ pub const Client = struct {
         return cancel_certificate_transfer.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Cancels a Device Defender ML Detect mitigation action.
     ///
     /// Requires permission to access the
@@ -610,6 +624,13 @@ pub const Client = struct {
         return create_command.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Use this API to define a
     /// Custom
     /// Metric
@@ -621,6 +642,13 @@ pub const Client = struct {
         return create_custom_metric.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Create a dimension that you can use to limit the scope of a metric used in a
     /// security profile for IoT Device Defender.
     /// For example, using a `TOPIC_FILTER` dimension, you can narrow down the scope
@@ -806,6 +834,13 @@ pub const Client = struct {
         return create_scheduled_audit.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Creates a Device Defender security profile.
     ///
     /// Requires permission to access the
@@ -974,6 +1009,13 @@ pub const Client = struct {
         return delete_command_execution.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Deletes a Device Defender detect custom metric.
     ///
     /// Requires permission to access the
@@ -991,6 +1033,13 @@ pub const Client = struct {
         return delete_custom_metric.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Removes the specified dimension from your Amazon Web Services accounts.
     ///
     /// Requires permission to access the
@@ -1171,6 +1220,13 @@ pub const Client = struct {
         return delete_scheduled_audit.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Deletes a Device Defender security profile.
     ///
     /// Requires permission to access the
@@ -1336,6 +1392,13 @@ pub const Client = struct {
         return describe_certificate_provider.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Gets information about a Device Defender detect custom metric.
     ///
     /// Requires permission to access the
@@ -1352,6 +1415,13 @@ pub const Client = struct {
         return describe_default_authorizer.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Gets information about a Device Defender ML Detect mitigation action.
     ///
     /// Requires permission to access the
@@ -1360,6 +1430,13 @@ pub const Client = struct {
         return describe_detect_mitigation_actions_task.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Provides details about a dimension that is defined in your Amazon Web
     /// Services accounts.
     ///
@@ -1489,6 +1566,13 @@ pub const Client = struct {
         return describe_scheduled_audit.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Gets information about a Device Defender security profile.
     ///
     /// Requires permission to access the
@@ -1561,6 +1645,13 @@ pub const Client = struct {
         return detach_principal_policy.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Disassociates a Device Defender security profile from a thing group or from
     /// this account.
     ///
@@ -1611,6 +1702,13 @@ pub const Client = struct {
         return enable_topic_rule.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Returns a Device Defender's ML Detect Security Profile training model's
     /// status.
     ///
@@ -1782,7 +1880,11 @@ pub const Client = struct {
         return get_statistics.execute(self, allocator, input, options);
     }
 
-    /// Retrieves the live connectivity status per device.
+    /// Retrieves the live connectivity status per device. If a device has never
+    /// connected to IoT Core or was disconnected for more than 1 hour before fleet
+    /// indexing's `thingConnectivityIndexingMode` was enabled, the response will
+    /// have the `connected` field set to `false` with no additional session
+    /// details.
     pub fn getThingConnectivityData(self: *Self, allocator: std.mem.Allocator, input: get_thing_connectivity_data.GetThingConnectivityDataInput, options: CallOptions) !get_thing_connectivity_data.GetThingConnectivityDataOutput {
         return get_thing_connectivity_data.execute(self, allocator, input, options);
     }
@@ -1811,6 +1913,13 @@ pub const Client = struct {
         return get_v2_logging_options.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Lists the active violations for a given Device Defender security profile.
     ///
     /// Requires permission to access the
@@ -1954,6 +2063,13 @@ pub const Client = struct {
         return list_commands.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Lists your Device Defender detect custom metrics.
     ///
     /// Requires permission to access the
@@ -1962,6 +2078,13 @@ pub const Client = struct {
         return list_custom_metrics.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Lists mitigation actions executions for a Device Defender ML Detect Security
     /// Profile.
     ///
@@ -1971,6 +2094,13 @@ pub const Client = struct {
         return list_detect_mitigation_actions_executions.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// List of Device Defender ML Detect mitigation actions tasks.
     ///
     /// Requires permission to access the
@@ -1979,6 +2109,13 @@ pub const Client = struct {
         return list_detect_mitigation_actions_tasks.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// List the set of dimensions that are defined for your Amazon Web Services
     /// accounts.
     ///
@@ -2238,6 +2375,13 @@ pub const Client = struct {
         return list_scheduled_audits.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Lists the Device Defender security profiles
     /// you've
     /// created. You can filter security profiles by dimension or custom metric.
@@ -2250,6 +2394,13 @@ pub const Client = struct {
         return list_security_profiles.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Lists the Device Defender security profiles attached to a target (thing
     /// group).
     ///
@@ -2283,6 +2434,13 @@ pub const Client = struct {
         return list_targets_for_policy.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Lists the targets (thing groups) associated with a given Device Defender
     /// security profile.
     ///
@@ -2411,6 +2569,13 @@ pub const Client = struct {
         return list_v2_logging_levels.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Lists the Device Defender security profile violations discovered during the
     /// given time period.
     /// You can use filters to limit the results to those alerts issued for a
@@ -2423,6 +2588,13 @@ pub const Client = struct {
         return list_violation_events.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Set a verification state and provide a description of that verification
     /// state on a violation (detect alarm).
     pub fn putVerificationStateOnViolation(self: *Self, allocator: std.mem.Allocator, input: put_verification_state_on_violation.PutVerificationStateOnViolationInput, options: CallOptions) !put_verification_state_on_violation.PutVerificationStateOnViolationOutput {
@@ -2530,7 +2702,12 @@ pub const Client = struct {
         return replace_topic_rule.execute(self, allocator, input, options);
     }
 
-    /// The query search index.
+    /// Searches the specified index.
+    ///
+    /// If a device has never connected to IoT Core or was disconnected for more
+    /// than 1 hour before fleet indexing's `thingConnectivityIndexingMode` was
+    /// enabled, the `connectivity` object for this device in the response will have
+    /// the `connected` field set to `false` with no additional session details.
     ///
     /// Requires permission to access the
     /// [SearchIndex](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions) action.
@@ -2597,6 +2774,13 @@ pub const Client = struct {
         return start_audit_mitigation_actions_task.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Starts a Device Defender ML Detect mitigation actions task.
     ///
     /// Requires permission to access the
@@ -2787,6 +2971,13 @@ pub const Client = struct {
         return update_command.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Updates a
     /// Device Defender detect custom metric.
     ///
@@ -2796,6 +2987,13 @@ pub const Client = struct {
         return update_custom_metric.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Updates the definition for a dimension. You
     /// cannot
     /// change the type of a dimension after
@@ -2940,6 +3138,13 @@ pub const Client = struct {
         return update_scheduled_audit.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Updates a Device Defender security profile.
     ///
     /// Requires permission to access the
@@ -2995,6 +3200,13 @@ pub const Client = struct {
         return update_topic_rule_destination.execute(self, allocator, input, options);
     }
 
+    /// The IoT Device Defender detect feature will no longer be available to new
+    /// customers starting August 31, 2026. If you would like to use the detect
+    /// feature, sign up prior to August 31, 2026. To learn about alternatives to
+    /// IoT Device Defender detect, see IoT Device Defender detect feature
+    /// availability change in the IoT Device Defender Developer Guide. There is no
+    /// change to IoT Device Defender audit availability.
+    ///
     /// Validates a Device Defender security profile behaviors specification.
     ///
     /// Requires permission to access the

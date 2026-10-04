@@ -144,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RevokeRevisionInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RevokeRevisionOutput {
-    var result: RevokeRevisionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RevokeRevisionOutput, body, allocator);
-    }
+    const result: RevokeRevisionOutput = try aws.json.parseJsonObject(
+        RevokeRevisionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -217,10 +217,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGuardrailInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateGuardrailOutput {
-    var result: UpdateGuardrailOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateGuardrailOutput, body, allocator);
-    }
+    const result: UpdateGuardrailOutput = try aws.json.parseJsonObject(
+        UpdateGuardrailOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

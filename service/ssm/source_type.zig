@@ -4,11 +4,13 @@ pub const SourceType = enum {
     aws_ec2_instance,
     aws_iot_thing,
     aws_ssm_managedinstance,
+    azure_instance,
 
     pub const json_field_names = .{
         .aws_ec2_instance = "AWS::EC2::Instance",
         .aws_iot_thing = "AWS::IoT::Thing",
         .aws_ssm_managedinstance = "AWS::SSM::ManagedInstance",
+        .azure_instance = "Microsoft.Compute/virtualMachines",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const SourceType = enum {
             .aws_ec2_instance => "AWS::EC2::Instance",
             .aws_iot_thing => "AWS::IoT::Thing",
             .aws_ssm_managedinstance => "AWS::SSM::ManagedInstance",
+            .azure_instance => "Microsoft.Compute/virtualMachines",
         };
     }
 

@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetChangeLogsInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetChangeLogsOutput {
-    var result: GetChangeLogsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetChangeLogsOutput, body, allocator);
-    }
+    const result: GetChangeLogsOutput = try aws.json.parseJsonObject(
+        GetChangeLogsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

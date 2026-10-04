@@ -171,10 +171,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBucketStatisticsInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBucketStatisticsOutput {
-    var result: GetBucketStatisticsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBucketStatisticsOutput, body, allocator);
-    }
+    const result: GetBucketStatisticsOutput = try aws.json.parseJsonObject(
+        GetBucketStatisticsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

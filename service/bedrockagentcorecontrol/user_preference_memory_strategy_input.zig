@@ -11,7 +11,8 @@ pub const UserPreferenceMemoryStrategyInput = struct {
     /// The name of the user preference memory strategy.
     name: []const u8,
 
-    /// The namespaces associated with the user preference memory strategy.
+    /// This is a legacy parameter, use `namespaceTemplates`. The namespaces
+    /// associated with the user preference memory strategy.
     namespaces: ?[]const []const u8 = null,
 
     /// The namespaceTemplates associated with the user preference memory strategy.

@@ -72,10 +72,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteDataflowEndpointG
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteDataflowEndpointGroupOutput {
-    var result: DeleteDataflowEndpointGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteDataflowEndpointGroupOutput, body, allocator);
-    }
+    const result: DeleteDataflowEndpointGroupOutput = try aws.json.parseJsonObject(
+        DeleteDataflowEndpointGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

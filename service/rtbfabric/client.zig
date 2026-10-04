@@ -2,21 +2,29 @@ const aws = @import("aws");
 const std = @import("std");
 
 const accept_link = @import("accept_link.zig");
+const associate_certificate = @import("associate_certificate.zig");
 const create_inbound_external_link = @import("create_inbound_external_link.zig");
 const create_link = @import("create_link.zig");
+const create_link_routing_rule = @import("create_link_routing_rule.zig");
 const create_outbound_external_link = @import("create_outbound_external_link.zig");
 const create_requester_gateway = @import("create_requester_gateway.zig");
 const create_responder_gateway = @import("create_responder_gateway.zig");
 const delete_inbound_external_link = @import("delete_inbound_external_link.zig");
 const delete_link = @import("delete_link.zig");
+const delete_link_routing_rule = @import("delete_link_routing_rule.zig");
 const delete_outbound_external_link = @import("delete_outbound_external_link.zig");
 const delete_requester_gateway = @import("delete_requester_gateway.zig");
 const delete_responder_gateway = @import("delete_responder_gateway.zig");
+const disassociate_certificate = @import("disassociate_certificate.zig");
+const get_certificate_association = @import("get_certificate_association.zig");
 const get_inbound_external_link = @import("get_inbound_external_link.zig");
 const get_link = @import("get_link.zig");
+const get_link_routing_rule = @import("get_link_routing_rule.zig");
 const get_outbound_external_link = @import("get_outbound_external_link.zig");
 const get_requester_gateway = @import("get_requester_gateway.zig");
 const get_responder_gateway = @import("get_responder_gateway.zig");
+const list_certificate_associations = @import("list_certificate_associations.zig");
+const list_link_routing_rules = @import("list_link_routing_rules.zig");
 const list_links = @import("list_links.zig");
 const list_requester_gateways = @import("list_requester_gateways.zig");
 const list_responder_gateways = @import("list_responder_gateways.zig");
@@ -26,6 +34,7 @@ const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_link = @import("update_link.zig");
 const update_link_module_flow = @import("update_link_module_flow.zig");
+const update_link_routing_rule = @import("update_link_routing_rule.zig");
 const update_requester_gateway = @import("update_requester_gateway.zig");
 const update_responder_gateway = @import("update_responder_gateway.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
@@ -68,6 +77,11 @@ pub const Client = struct {
         return accept_link.execute(self, allocator, input, options);
     }
 
+    /// Associates an ACM certificate with a responder gateway.
+    pub fn associateCertificate(self: *Self, allocator: std.mem.Allocator, input: associate_certificate.AssociateCertificateInput, options: CallOptions) !associate_certificate.AssociateCertificateOutput {
+        return associate_certificate.execute(self, allocator, input, options);
+    }
+
     /// Creates an inbound external link.
     pub fn createInboundExternalLink(self: *Self, allocator: std.mem.Allocator, input: create_inbound_external_link.CreateInboundExternalLinkInput, options: CallOptions) !create_inbound_external_link.CreateInboundExternalLinkOutput {
         return create_inbound_external_link.execute(self, allocator, input, options);
@@ -79,6 +93,15 @@ pub const Client = struct {
     /// bid requests and responses.
     pub fn createLink(self: *Self, allocator: std.mem.Allocator, input: create_link.CreateLinkInput, options: CallOptions) !create_link.CreateLinkOutput {
         return create_link.execute(self, allocator, input, options);
+    }
+
+    /// Creates a routing rule for a link.
+    ///
+    /// Routing rules use priority-based evaluation where lower priority numbers are
+    /// evaluated first. Each rule specifies conditions that must all match for the
+    /// rule to apply.
+    pub fn createLinkRoutingRule(self: *Self, allocator: std.mem.Allocator, input: create_link_routing_rule.CreateLinkRoutingRuleInput, options: CallOptions) !create_link_routing_rule.CreateLinkRoutingRuleOutput {
+        return create_link_routing_rule.execute(self, allocator, input, options);
     }
 
     /// Creates an outbound external link.
@@ -111,6 +134,11 @@ pub const Client = struct {
         return delete_link.execute(self, allocator, input, options);
     }
 
+    /// Deletes a routing rule from a link.
+    pub fn deleteLinkRoutingRule(self: *Self, allocator: std.mem.Allocator, input: delete_link_routing_rule.DeleteLinkRoutingRuleInput, options: CallOptions) !delete_link_routing_rule.DeleteLinkRoutingRuleOutput {
+        return delete_link_routing_rule.execute(self, allocator, input, options);
+    }
+
     /// Deletes an outbound external link.
     pub fn deleteOutboundExternalLink(self: *Self, allocator: std.mem.Allocator, input: delete_outbound_external_link.DeleteOutboundExternalLinkInput, options: CallOptions) !delete_outbound_external_link.DeleteOutboundExternalLinkOutput {
         return delete_outbound_external_link.execute(self, allocator, input, options);
@@ -126,6 +154,16 @@ pub const Client = struct {
         return delete_responder_gateway.execute(self, allocator, input, options);
     }
 
+    /// Removes a certificate association from a responder gateway.
+    pub fn disassociateCertificate(self: *Self, allocator: std.mem.Allocator, input: disassociate_certificate.DisassociateCertificateInput, options: CallOptions) !disassociate_certificate.DisassociateCertificateOutput {
+        return disassociate_certificate.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the details of a certificate association with a responder gateway.
+    pub fn getCertificateAssociation(self: *Self, allocator: std.mem.Allocator, input: get_certificate_association.GetCertificateAssociationInput, options: CallOptions) !get_certificate_association.GetCertificateAssociationOutput {
+        return get_certificate_association.execute(self, allocator, input, options);
+    }
+
     /// Retrieves information about an inbound external link.
     pub fn getInboundExternalLink(self: *Self, allocator: std.mem.Allocator, input: get_inbound_external_link.GetInboundExternalLinkInput, options: CallOptions) !get_inbound_external_link.GetInboundExternalLinkOutput {
         return get_inbound_external_link.execute(self, allocator, input, options);
@@ -137,6 +175,11 @@ pub const Client = struct {
     /// associated gateways.
     pub fn getLink(self: *Self, allocator: std.mem.Allocator, input: get_link.GetLinkInput, options: CallOptions) !get_link.GetLinkOutput {
         return get_link.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the details of a routing rule for a link.
+    pub fn getLinkRoutingRule(self: *Self, allocator: std.mem.Allocator, input: get_link_routing_rule.GetLinkRoutingRuleInput, options: CallOptions) !get_link_routing_rule.GetLinkRoutingRuleOutput {
+        return get_link_routing_rule.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about an outbound external link.
@@ -152,6 +195,16 @@ pub const Client = struct {
     /// Retrieves information about a responder gateway.
     pub fn getResponderGateway(self: *Self, allocator: std.mem.Allocator, input: get_responder_gateway.GetResponderGatewayInput, options: CallOptions) !get_responder_gateway.GetResponderGatewayOutput {
         return get_responder_gateway.execute(self, allocator, input, options);
+    }
+
+    /// Lists the certificate associations for a responder gateway.
+    pub fn listCertificateAssociations(self: *Self, allocator: std.mem.Allocator, input: list_certificate_associations.ListCertificateAssociationsInput, options: CallOptions) !list_certificate_associations.ListCertificateAssociationsOutput {
+        return list_certificate_associations.execute(self, allocator, input, options);
+    }
+
+    /// Lists the routing rules for a link.
+    pub fn listLinkRoutingRules(self: *Self, allocator: std.mem.Allocator, input: list_link_routing_rules.ListLinkRoutingRulesInput, options: CallOptions) !list_link_routing_rules.ListLinkRoutingRulesOutput {
+        return list_link_routing_rules.execute(self, allocator, input, options);
     }
 
     /// Lists links associated with gateways.
@@ -207,14 +260,40 @@ pub const Client = struct {
         return update_link_module_flow.execute(self, allocator, input, options);
     }
 
+    /// Updates a routing rule for a link.
+    pub fn updateLinkRoutingRule(self: *Self, allocator: std.mem.Allocator, input: update_link_routing_rule.UpdateLinkRoutingRuleInput, options: CallOptions) !update_link_routing_rule.UpdateLinkRoutingRuleOutput {
+        return update_link_routing_rule.execute(self, allocator, input, options);
+    }
+
     /// Updates a requester gateway.
     pub fn updateRequesterGateway(self: *Self, allocator: std.mem.Allocator, input: update_requester_gateway.UpdateRequesterGatewayInput, options: CallOptions) !update_requester_gateway.UpdateRequesterGatewayOutput {
         return update_requester_gateway.execute(self, allocator, input, options);
     }
 
-    /// Updates a responder gateway.
+    /// Updates the description, Auto Scaling group managed endpoint configuration,
+    /// trust store configuration, and client routing policy of a responder gateway.
+    /// This operation also updates the `protocols` list in the listener
+    /// configuration.
+    ///
+    /// You cannot change the `domainName`, `port`, and `protocol` values that you
+    /// set when you create a responder gateway. To change any of them, delete the
+    /// gateway and create a new one.
     pub fn updateResponderGateway(self: *Self, allocator: std.mem.Allocator, input: update_responder_gateway.UpdateResponderGatewayInput, options: CallOptions) !update_responder_gateway.UpdateResponderGatewayOutput {
         return update_responder_gateway.execute(self, allocator, input, options);
+    }
+
+    pub fn listCertificateAssociationsPaginator(self: *Self, params: list_certificate_associations.ListCertificateAssociationsInput) paginator.ListCertificateAssociationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listLinkRoutingRulesPaginator(self: *Self, params: list_link_routing_rules.ListLinkRoutingRulesInput) paginator.ListLinkRoutingRulesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
     }
 
     pub fn listLinksPaginator(self: *Self, params: list_links.ListLinksInput) paginator.ListLinksPaginator {
@@ -236,6 +315,16 @@ pub const Client = struct {
             .client = self,
             .params = params,
         };
+    }
+
+    pub fn waitUntilCertificateAssociated(self: *Self, params: get_certificate_association.GetCertificateAssociationInput) aws.waiter.WaiterError!void {
+        var w = waiters.CertificateAssociatedWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilCertificateDisassociated(self: *Self, params: get_certificate_association.GetCertificateAssociationInput) aws.waiter.WaiterError!void {
+        var w = waiters.CertificateDisassociatedWaiter{ .client = self, .params = params };
+        return w.wait();
     }
 
     pub fn waitUntilInboundExternalLinkActive(self: *Self, params: get_inbound_external_link.GetInboundExternalLinkInput) aws.waiter.WaiterError!void {
@@ -260,6 +349,16 @@ pub const Client = struct {
 
     pub fn waitUntilLinkDeleted(self: *Self, params: get_link.GetLinkInput) aws.waiter.WaiterError!void {
         var w = waiters.LinkDeletedWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilLinkRoutingRuleActive(self: *Self, params: get_link_routing_rule.GetLinkRoutingRuleInput) aws.waiter.WaiterError!void {
+        var w = waiters.LinkRoutingRuleActiveWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilLinkRoutingRuleDeleted(self: *Self, params: get_link_routing_rule.GetLinkRoutingRuleInput) aws.waiter.WaiterError!void {
+        var w = waiters.LinkRoutingRuleDeletedWaiter{ .client = self, .params = params };
         return w.wait();
     }
 

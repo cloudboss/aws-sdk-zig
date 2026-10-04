@@ -1,5 +1,6 @@
 const AutomaticFailoverStatus = @import("automatic_failover_status.zig").AutomaticFailoverStatus;
 const DataTieringStatus = @import("data_tiering_status.zig").DataTieringStatus;
+const Durability = @import("durability.zig").Durability;
 const NodeSnapshot = @import("node_snapshot.zig").NodeSnapshot;
 
 /// Represents a copy of an entire Valkey or Redis OSS cluster as of the time
@@ -208,6 +209,14 @@ pub const Snapshot = struct {
     /// information, see [Data
     /// tiering](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/data-tiering.html).
     data_tiering: ?DataTieringStatus = null,
+
+    /// The durability setting of the cluster when the snapshot was taken. When
+    /// restoring from this snapshot,
+    /// the cluster uses this durability setting unless overridden in the restore
+    /// request. For more information,
+    /// see
+    /// [Durability](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html).
+    durability: ?Durability = null,
 
     /// The name of the cache engine (`memcached` or `redis`) used by
     /// the source cluster.

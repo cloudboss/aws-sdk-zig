@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetRouterOutputInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetRouterOutputOutput {
-    var result: BatchGetRouterOutputOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetRouterOutputOutput, body, allocator);
-    }
+    const result: BatchGetRouterOutputOutput = try aws.json.parseJsonObject(
+        BatchGetRouterOutputOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

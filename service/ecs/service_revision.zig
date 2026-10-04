@@ -4,7 +4,9 @@ const ECSManagedResources = @import("ecs_managed_resources.zig").ECSManagedResou
 const DeploymentEphemeralStorage = @import("deployment_ephemeral_storage.zig").DeploymentEphemeralStorage;
 const LaunchType = @import("launch_type.zig").LaunchType;
 const LoadBalancer = @import("load_balancer.zig").LoadBalancer;
+const MonitoringConfiguration = @import("monitoring_configuration.zig").MonitoringConfiguration;
 const NetworkConfiguration = @import("network_configuration.zig").NetworkConfiguration;
+const ServiceRevisionOverrides = @import("service_revision_overrides.zig").ServiceRevisionOverrides;
 const ResolvedConfiguration = @import("resolved_configuration.zig").ResolvedConfiguration;
 const ServiceConnectConfiguration = @import("service_connect_configuration.zig").ServiceConnectConfiguration;
 const ServiceRegistry = @import("service_registry.zig").ServiceRegistry;
@@ -48,7 +50,18 @@ pub const ServiceRevision = struct {
     /// The load balancers the service revision uses.
     load_balancers: ?[]const LoadBalancer = null,
 
+    /// The optional monitoring configuration for the service, which defines the
+    /// resolution for the service-level `CPUUtilization` and `MemoryUtilization`
+    /// Amazon CloudWatch metrics. When not specified, Amazon ECS uses the default
+    /// resolution of `60` seconds.
+    monitoring: ?MonitoringConfiguration = null,
+
     network_configuration: ?NetworkConfiguration = null,
+
+    /// The effective runtime overrides that Amazon ECS applies to this service
+    /// revision. This value is present only when Amazon ECS detects a difference
+    /// between the task definition and the actual runtime configuration.
+    overrides: ?ServiceRevisionOverrides = null,
 
     /// The platform family the service revision uses.
     platform_family: ?[]const u8 = null,
@@ -92,7 +105,9 @@ pub const ServiceRevision = struct {
         .guard_duty_enabled = "guardDutyEnabled",
         .launch_type = "launchType",
         .load_balancers = "loadBalancers",
+        .monitoring = "monitoring",
         .network_configuration = "networkConfiguration",
+        .overrides = "overrides",
         .platform_family = "platformFamily",
         .platform_version = "platformVersion",
         .resolved_configuration = "resolvedConfiguration",

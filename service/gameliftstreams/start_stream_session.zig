@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DisplayConfiguration = @import("display_configuration.zig").DisplayConfiguration;
 const PerformanceStatsConfiguration = @import("performance_stats_configuration.zig").PerformanceStatsConfiguration;
 const Protocol = @import("protocol.zig").Protocol;
 const ExportFilesMetadata = @import("export_files_metadata.zig").ExportFilesMetadata;
@@ -63,6 +64,13 @@ pub const StartStreamSessionInput = struct {
     /// later.
     description: ?[]const u8 = null,
 
+    /// The configuration for the stream session's virtual monitor, including the
+    /// resolution settings.
+    ///
+    /// If not specified, Amazon GameLift Streams uses the default resolution of
+    /// 1920 × 1080.
+    display_configuration: ?DisplayConfiguration = null,
+
     /// The stream group to run this stream session with.
     ///
     /// This value is an [Amazon Resource Name
@@ -89,6 +97,14 @@ pub const StartStreamSessionInput = struct {
 
     /// The data transport protocol to use for the stream session.
     protocol: Protocol,
+
+    /// The ARN of an AWS Identity and Access Management (IAM) role that Amazon
+    /// GameLift Streams assumes on your behalf during the stream session. The role
+    /// grants Amazon GameLift Streams permission to obtain temporary credentials
+    /// for your application. The role's trust policy must allow the
+    /// `gameliftstreams.amazonaws.com` service principal to assume it. The role
+    /// name must start with `GameLiftStreams-`.
+    role_arn: ?[]const u8 = null,
 
     /// The maximum duration of a session. Amazon GameLift Streams will
     /// automatically terminate a session after this amount of time has elapsed,
@@ -117,10 +133,12 @@ pub const StartStreamSessionInput = struct {
         .client_token = "ClientToken",
         .connection_timeout_seconds = "ConnectionTimeoutSeconds",
         .description = "Description",
+        .display_configuration = "DisplayConfiguration",
         .identifier = "Identifier",
         .locations = "Locations",
         .performance_stats_configuration = "PerformanceStatsConfiguration",
         .protocol = "Protocol",
+        .role_arn = "RoleArn",
         .session_length_seconds = "SessionLengthSeconds",
         .signal_request = "SignalRequest",
         .user_id = "UserId",
@@ -189,6 +207,9 @@ pub const StartStreamSessionOutput = struct {
     /// any time.
     description: ?[]const u8 = null,
 
+    /// The configuration for the stream session's virtual monitor.
+    display_configuration: ?DisplayConfiguration = null,
+
     /// Provides details about the stream session's exported files.
     export_files_metadata: ?ExportFilesMetadata = null,
 
@@ -214,6 +235,11 @@ pub const StartStreamSessionOutput = struct {
 
     /// The data transfer protocol in use with the stream session.
     protocol: ?Protocol = null,
+
+    /// The ARN of the AWS Identity and Access Management (IAM) role that Amazon
+    /// GameLift Streams assumes on behalf of your application during the stream
+    /// session.
+    role_arn: ?[]const u8 = null,
 
     /// The maximum duration of a session. Amazon GameLift Streams will
     /// automatically terminate a session after this amount of time has elapsed,
@@ -310,12 +336,14 @@ pub const StartStreamSessionOutput = struct {
         .connection_timeout_seconds = "ConnectionTimeoutSeconds",
         .created_at = "CreatedAt",
         .description = "Description",
+        .display_configuration = "DisplayConfiguration",
         .export_files_metadata = "ExportFilesMetadata",
         .last_updated_at = "LastUpdatedAt",
         .location = "Location",
         .log_file_location_uri = "LogFileLocationUri",
         .performance_stats_configuration = "PerformanceStatsConfiguration",
         .protocol = "Protocol",
+        .role_arn = "RoleArn",
         .session_length_seconds = "SessionLengthSeconds",
         .signal_request = "SignalRequest",
         .signal_response = "SignalResponse",
@@ -401,6 +429,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartStreamSessionInput
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.display_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"DisplayConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.locations) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Locations\":");
@@ -417,6 +451,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartStreamSessionInput
     try body_buf.appendSlice(allocator, "\"Protocol\":");
     try aws.json.writeValue(@TypeOf(input.protocol), input.protocol, allocator, &body_buf);
     has_prev = true;
+    if (input.role_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"RoleArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.session_length_seconds) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"SessionLengthSeconds\":");
@@ -449,10 +489,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartStreamSessionInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartStreamSessionOutput {
-    var result: StartStreamSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartStreamSessionOutput, body, allocator);
-    }
+    const result: StartStreamSessionOutput = try aws.json.parseJsonObject(
+        StartStreamSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

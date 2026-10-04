@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRouteCalculatorsInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListRouteCalculatorsOutput {
-    var result: ListRouteCalculatorsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListRouteCalculatorsOutput, body, allocator);
-    }
+    const result: ListRouteCalculatorsOutput = try aws.json.parseJsonObject(
+        ListRouteCalculatorsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

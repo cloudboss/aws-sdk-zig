@@ -1,3 +1,4 @@
+const FilterConfiguration = @import("filter_configuration.zig").FilterConfiguration;
 const PaginationConfiguration = @import("pagination_configuration.zig").PaginationConfiguration;
 const HTTPMethod = @import("http_method.zig").HTTPMethod;
 const ConnectorProperty = @import("connector_property.zig").ConnectorProperty;
@@ -6,6 +7,11 @@ const ResponseConfiguration = @import("response_configuration.zig").ResponseConf
 /// Configuration that defines how to make requests to endpoints, including
 /// request methods, paths, parameters, and response handling.
 pub const SourceConfiguration = struct {
+    /// Configuration for applying filter pushdown to REST API requests, defining
+    /// how filter predicates are translated into query parameters or filter
+    /// strings.
+    filter_configuration: ?FilterConfiguration = null,
+
     /// Configuration for handling paginated responses from the REST API, supporting
     /// both cursor-based and offset-based pagination strategies.
     pagination_configuration: ?PaginationConfiguration = null,
@@ -26,6 +32,7 @@ pub const SourceConfiguration = struct {
     response_configuration: ?ResponseConfiguration = null,
 
     pub const json_field_names = .{
+        .filter_configuration = "FilterConfiguration",
         .pagination_configuration = "PaginationConfiguration",
         .request_method = "RequestMethod",
         .request_parameters = "RequestParameters",

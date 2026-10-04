@@ -1,7 +1,7 @@
 const CopyJobStatus = @import("copy_job_status.zig").CopyJobStatus;
 
 /// This is a summary of copy jobs created
-/// or running within the most recent 30 days.
+/// or running within the most recent 14 days.
 ///
 /// The returned summary may contain the following:
 /// Region, Account, State, RestourceType, MessageCategory,

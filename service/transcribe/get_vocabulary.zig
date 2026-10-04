@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
 const LanguageCode = @import("language_code.zig").LanguageCode;
 const VocabularyState = @import("vocabulary_state.zig").VocabularyState;
 
@@ -19,10 +20,18 @@ pub const GetVocabularyInput = struct {
 };
 
 pub const GetVocabularyOutput = struct {
+    /// The Amazon Resource Name (ARN) of the IAM role used to access the
+    /// Amazon S3 bucket that contains your input files and, if applicable, the
+    /// KMS key specified in `EncryptionConfiguration`.
+    data_access_role_arn: ?[]const u8 = null,
+
     /// The Amazon S3 location where the custom vocabulary is stored; use this URI
     /// to view or
     /// download the custom vocabulary.
     download_uri: ?[]const u8 = null,
+
+    /// The encryption configuration used for your custom vocabulary.
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// If `VocabularyState` is `FAILED`, `FailureReason`
     /// contains information about why the custom vocabulary request failed. See
@@ -49,7 +58,9 @@ pub const GetVocabularyOutput = struct {
     vocabulary_state: ?VocabularyState = null,
 
     pub const json_field_names = .{
+        .data_access_role_arn = "DataAccessRoleArn",
         .download_uri = "DownloadUri",
+        .encryption_configuration = "EncryptionConfiguration",
         .failure_reason = "FailureReason",
         .language_code = "LanguageCode",
         .last_modified_time = "LastModifiedTime",

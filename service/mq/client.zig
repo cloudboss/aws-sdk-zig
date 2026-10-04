@@ -14,6 +14,7 @@ const describe_broker_engine_types = @import("describe_broker_engine_types.zig")
 const describe_broker_instance_options = @import("describe_broker_instance_options.zig");
 const describe_configuration = @import("describe_configuration.zig");
 const describe_configuration_revision = @import("describe_configuration_revision.zig");
+const describe_shared_resources = @import("describe_shared_resources.zig");
 const describe_user = @import("describe_user.zig");
 const list_brokers = @import("list_brokers.zig");
 const list_configuration_revisions = @import("list_configuration_revisions.zig");
@@ -152,6 +153,11 @@ pub const Client = struct {
         return describe_configuration_revision.execute(self, allocator, input, options);
     }
 
+    /// Returns the resources shared to a broker.
+    pub fn describeSharedResources(self: *Self, allocator: std.mem.Allocator, input: describe_shared_resources.DescribeSharedResourcesInput, options: CallOptions) !describe_shared_resources.DescribeSharedResourcesOutput {
+        return describe_shared_resources.execute(self, allocator, input, options);
+    }
+
     /// Returns information about an ActiveMQ user.
     pub fn describeUser(self: *Self, allocator: std.mem.Allocator, input: describe_user.DescribeUserInput, options: CallOptions) !describe_user.DescribeUserOutput {
         return describe_user.execute(self, allocator, input, options);
@@ -205,6 +211,13 @@ pub const Client = struct {
     /// Updates the information for an ActiveMQ user.
     pub fn updateUser(self: *Self, allocator: std.mem.Allocator, input: update_user.UpdateUserInput, options: CallOptions) !update_user.UpdateUserOutput {
         return update_user.execute(self, allocator, input, options);
+    }
+
+    pub fn describeSharedResourcesPaginator(self: *Self, params: describe_shared_resources.DescribeSharedResourcesInput) paginator.DescribeSharedResourcesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
     }
 
     pub fn listBrokersPaginator(self: *Self, params: list_brokers.ListBrokersInput) paginator.ListBrokersPaginator {

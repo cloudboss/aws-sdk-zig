@@ -5,6 +5,9 @@ const associate_firewall_rule_group = @import("associate_firewall_rule_group.zig
 const associate_resolver_endpoint_ip_address = @import("associate_resolver_endpoint_ip_address.zig");
 const associate_resolver_query_log_config = @import("associate_resolver_query_log_config.zig");
 const associate_resolver_rule = @import("associate_resolver_rule.zig");
+const batch_create_firewall_rule = @import("batch_create_firewall_rule.zig");
+const batch_delete_firewall_rule = @import("batch_delete_firewall_rule.zig");
+const batch_update_firewall_rule = @import("batch_update_firewall_rule.zig");
 const create_firewall_domain_list = @import("create_firewall_domain_list.zig");
 const create_firewall_rule = @import("create_firewall_rule.zig");
 const create_firewall_rule_group = @import("create_firewall_rule_group.zig");
@@ -44,6 +47,7 @@ const list_firewall_domain_lists = @import("list_firewall_domain_lists.zig");
 const list_firewall_domains = @import("list_firewall_domains.zig");
 const list_firewall_rule_group_associations = @import("list_firewall_rule_group_associations.zig");
 const list_firewall_rule_groups = @import("list_firewall_rule_groups.zig");
+const list_firewall_rule_types = @import("list_firewall_rule_types.zig");
 const list_firewall_rules = @import("list_firewall_rules.zig");
 const list_outpost_resolvers = @import("list_outpost_resolvers.zig");
 const list_resolver_configs = @import("list_resolver_configs.zig");
@@ -101,6 +105,11 @@ pub const Client = struct {
 
     /// Associates a FirewallRuleGroup with a VPC, to provide DNS filtering for the
     /// VPC.
+    ///
+    /// If the rule group contains any rule configured with the
+    /// `PartnerThreatProtection` rule type, the calling account must hold an active
+    /// Amazon Web Services Marketplace subscription to the named partner. If the
+    /// subscription is missing, the association request is rejected.
     pub fn associateFirewallRuleGroup(self: *Self, allocator: std.mem.Allocator, input: associate_firewall_rule_group.AssociateFirewallRuleGroupInput, options: CallOptions) !associate_firewall_rule_group.AssociateFirewallRuleGroupOutput {
         return associate_firewall_rule_group.execute(self, allocator, input, options);
     }
@@ -142,6 +151,21 @@ pub const Client = struct {
         return associate_resolver_rule.execute(self, allocator, input, options);
     }
 
+    /// Creates multiple DNS Firewall rules in the specified rule group.
+    pub fn batchCreateFirewallRule(self: *Self, allocator: std.mem.Allocator, input: batch_create_firewall_rule.BatchCreateFirewallRuleInput, options: CallOptions) !batch_create_firewall_rule.BatchCreateFirewallRuleOutput {
+        return batch_create_firewall_rule.execute(self, allocator, input, options);
+    }
+
+    /// Deletes multiple DNS Firewall rules from the specified rule group.
+    pub fn batchDeleteFirewallRule(self: *Self, allocator: std.mem.Allocator, input: batch_delete_firewall_rule.BatchDeleteFirewallRuleInput, options: CallOptions) !batch_delete_firewall_rule.BatchDeleteFirewallRuleOutput {
+        return batch_delete_firewall_rule.execute(self, allocator, input, options);
+    }
+
+    /// Updates multiple DNS Firewall rules in the specified rule group.
+    pub fn batchUpdateFirewallRule(self: *Self, allocator: std.mem.Allocator, input: batch_update_firewall_rule.BatchUpdateFirewallRuleInput, options: CallOptions) !batch_update_firewall_rule.BatchUpdateFirewallRuleOutput {
+        return batch_update_firewall_rule.execute(self, allocator, input, options);
+    }
+
     /// Creates an empty firewall domain list for use in DNS Firewall rules. You can
     /// populate the domains for the new list with a file, using
     /// ImportFirewallDomains, or with domain strings, using UpdateFirewallDomains.
@@ -149,8 +173,30 @@ pub const Client = struct {
         return create_firewall_domain_list.execute(self, allocator, input, options);
     }
 
-    /// Creates a single DNS Firewall rule in the specified rule group, using the
-    /// specified domain list.
+    /// Creates a single DNS Firewall rule in the specified rule group. The rule can
+    /// use any one of the following match sources, and the chosen source must be
+    /// supplied through the matching request field — they are mutually exclusive:
+    ///
+    /// * `FirewallDomainListId` — match a customer-managed or Amazon Web
+    ///   Services-managed domain list.
+    ///
+    /// * `DnsThreatProtection` — match a built-in DNS Firewall Advanced threat
+    ///   detector (`DGA`, `DNS_TUNNELING`, or `DICTIONARY_DGA`).
+    ///
+    /// * `FirewallRuleType` — match one of the rule-type variants returned by
+    ///   ListFirewallRuleTypes: `FirewallAdvancedContentCategory`,
+    ///   `FirewallAdvancedThreatCategory`, `DnsThreatProtection`, or
+    ///   `PartnerThreatProtection`. The `PartnerThreatProtection` variant requires
+    ///   an active Amazon Web Services Marketplace subscription to the named
+    ///   partner product.
+    ///
+    /// For rules that require asynchronous provisioning (today, the
+    /// `PartnerThreatProtection` rule type), the rule's `Status` begins at
+    /// `CREATING` and transitions to `COMPLETE` once the rule is provisioned and
+    /// the marketplace entitlement is verified. If provisioning fails, `Status`
+    /// becomes `CREATION_FAILED` and `StatusMessage` contains a human-readable
+    /// reason; the rule is then immutable and must be removed with
+    /// DeleteFirewallRule.
     pub fn createFirewallRule(self: *Self, allocator: std.mem.Allocator, input: create_firewall_rule.CreateFirewallRuleInput, options: CallOptions) !create_firewall_rule.CreateFirewallRuleOutput {
         return create_firewall_rule.execute(self, allocator, input, options);
     }
@@ -163,6 +209,11 @@ pub const Client = struct {
     }
 
     /// Creates a Route 53 Resolver on an Outpost.
+    ///
+    /// This operation applies to first-generation Outposts only. On
+    /// second-generation Outposts, Resolver
+    /// is enabled by default and managed automatically by Amazon Web Services, so
+    /// you don't need to create it.
     pub fn createOutpostResolver(self: *Self, allocator: std.mem.Allocator, input: create_outpost_resolver.CreateOutpostResolverInput, options: CallOptions) !create_outpost_resolver.CreateOutpostResolverOutput {
         return create_outpost_resolver.execute(self, allocator, input, options);
     }
@@ -213,7 +264,13 @@ pub const Client = struct {
         return delete_firewall_domain_list.execute(self, allocator, input, options);
     }
 
-    /// Deletes the specified firewall rule.
+    /// Deletes the specified firewall rule. Identify the rule using either
+    /// `FirewallDomainListId` (for domain-list and DNS Firewall Advanced rules) or
+    /// `FirewallThreatProtectionId` (for partner-managed and DNS Firewall Advanced
+    /// rules) — together with `FirewallRuleGroupId`.
+    ///
+    /// `DeleteFirewallRule` is the only operation that succeeds against a rule
+    /// whose `Status` is `CREATION_FAILED`.
     pub fn deleteFirewallRule(self: *Self, allocator: std.mem.Allocator, input: delete_firewall_rule.DeleteFirewallRuleInput, options: CallOptions) !delete_firewall_rule.DeleteFirewallRuleOutput {
         return delete_firewall_rule.execute(self, allocator, input, options);
     }
@@ -224,6 +281,12 @@ pub const Client = struct {
     }
 
     /// Deletes a Resolver on the Outpost.
+    ///
+    /// This operation applies to first-generation Outposts only. On
+    /// second-generation Outposts, Resolver
+    /// is managed automatically by Amazon Web Services and can't be deleted
+    /// directly. To opt out of Resolver on
+    /// second-generation Outposts, contact Amazon Web Services Support.
     pub fn deleteOutpostResolver(self: *Self, allocator: std.mem.Allocator, input: delete_outpost_resolver.DeleteOutpostResolverInput, options: CallOptions) !delete_outpost_resolver.DeleteOutpostResolverOutput {
         return delete_outpost_resolver.execute(self, allocator, input, options);
     }
@@ -479,12 +542,34 @@ pub const Client = struct {
         return list_firewall_rule_groups.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the rule-type variants that can be used in the `FirewallRuleType`
+    /// field of CreateFirewallRule and UpdateFirewallRule. Each returned
+    /// FirewallRuleTypeDefinition identifies one variant + value combination — for
+    /// example, `FirewallAdvancedContentCategory` + `VIOLENCE_AND_HATE_SPEECH`, or
+    /// `PartnerThreatProtection` + a partner-managed feed.
+    ///
+    /// The supported `RuleType` filter values are
+    /// `FirewallAdvancedContentCategory`, `FirewallAdvancedThreatCategory`,
+    /// `DnsThreatProtection`, and `PartnerThreatProtection`. When a returned
+    /// definition's variant requires an external subscription (currently only
+    /// `PartnerThreatProtection`), the response also includes a SubscriptionInfo
+    /// identifying the Amazon Web Services Marketplace product that backs it;
+    /// absence of `SubscriptionInfo` means the variant is fully managed by Amazon
+    /// Web Services and requires no separate subscription.
+    pub fn listFirewallRuleTypes(self: *Self, allocator: std.mem.Allocator, input: list_firewall_rule_types.ListFirewallRuleTypesInput, options: CallOptions) !list_firewall_rule_types.ListFirewallRuleTypesOutput {
+        return list_firewall_rule_types.execute(self, allocator, input, options);
+    }
+
     /// Retrieves the firewall rules that you have defined for the specified
     /// firewall rule group. DNS Firewall uses the rules in a rule group to filter
     /// DNS network traffic for a VPC.
     ///
     /// A single call might return only a partial list of the rules. For
     /// information, see `MaxResults`.
+    ///
+    /// For rules that require asynchronous provisioning, the response includes
+    /// `Status` (see FirewallRuleStatus) and, on failure, `StatusMessage` with the
+    /// reason.
     pub fn listFirewallRules(self: *Self, allocator: std.mem.Allocator, input: list_firewall_rules.ListFirewallRulesInput, options: CallOptions) !list_firewall_rules.ListFirewallRulesOutput {
         return list_firewall_rules.execute(self, allocator, input, options);
     }
@@ -597,7 +682,11 @@ pub const Client = struct {
         return update_firewall_domains.execute(self, allocator, input, options);
     }
 
-    /// Updates the specified firewall rule.
+    /// Updates the specified firewall rule. The rule's `FirewallRuleType`,
+    /// `FirewallDomainListId`, and top-level `DnsThreatProtection` match source
+    /// cannot be changed after creation. Rules whose `Status` is `CREATING` or
+    /// `CREATION_FAILED` cannot be updated; remove a failed rule with
+    /// DeleteFirewallRule.
     pub fn updateFirewallRule(self: *Self, allocator: std.mem.Allocator, input: update_firewall_rule.UpdateFirewallRuleInput, options: CallOptions) !update_firewall_rule.UpdateFirewallRuleOutput {
         return update_firewall_rule.execute(self, allocator, input, options);
     }
@@ -610,6 +699,11 @@ pub const Client = struct {
 
     /// You can use `UpdateOutpostResolver` to update the instance count, type, or
     /// name of a Resolver on an Outpost.
+    ///
+    /// This operation applies to first-generation Outposts only. On
+    /// second-generation Outposts, Resolver
+    /// is managed automatically by Amazon Web Services and can't be updated
+    /// directly.
     pub fn updateOutpostResolver(self: *Self, allocator: std.mem.Allocator, input: update_outpost_resolver.UpdateOutpostResolverInput, options: CallOptions) !update_outpost_resolver.UpdateOutpostResolverOutput {
         return update_outpost_resolver.execute(self, allocator, input, options);
     }
@@ -671,6 +765,13 @@ pub const Client = struct {
     }
 
     pub fn listFirewallRuleGroupsPaginator(self: *Self, params: list_firewall_rule_groups.ListFirewallRuleGroupsInput) paginator.ListFirewallRuleGroupsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listFirewallRuleTypesPaginator(self: *Self, params: list_firewall_rule_types.ListFirewallRuleTypesInput) paginator.ListFirewallRuleTypesPaginator {
         return .{
             .client = self,
             .params = params,

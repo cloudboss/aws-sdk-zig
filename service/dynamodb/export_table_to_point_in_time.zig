@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ExportFormat = @import("export_format.zig").ExportFormat;
 const ExportType = @import("export_type.zig").ExportType;
+const FilterSpecification = @import("filter_specification.zig").FilterSpecification;
 const IncrementalExportSpecification = @import("incremental_export_specification.zig").IncrementalExportSpecification;
 const S3SseAlgorithm = @import("s3_sse_algorithm.zig").S3SseAlgorithm;
 const ExportDescription = @import("export_description.zig").ExportDescription;
@@ -47,6 +48,13 @@ pub const ExportTableToPointInTimeInput = struct {
     /// be
     /// used.
     export_type: ?ExportType = null,
+
+    /// The criteria used to filter which items are included in the point-in-time
+    /// export.
+    /// When you specify this parameter, only items that match the key conditions
+    /// and filter
+    /// expressions are exported.
+    filter_specification: ?FilterSpecification = null,
 
     /// Optional object containing the parameters specific to an incremental export.
     incremental_export_specification: ?IncrementalExportSpecification = null,
@@ -90,6 +98,7 @@ pub const ExportTableToPointInTimeInput = struct {
         .export_format = "ExportFormat",
         .export_time = "ExportTime",
         .export_type = "ExportType",
+        .filter_specification = "FilterSpecification",
         .incremental_export_specification = "IncrementalExportSpecification",
         .s3_bucket = "S3Bucket",
         .s3_bucket_owner = "S3BucketOwner",

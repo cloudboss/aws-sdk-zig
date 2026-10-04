@@ -7,10 +7,8 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const DisconnectParticipantInput = struct {
     /// Identifier of the participant to be disconnected. IVS assigns this; it is
-    /// returned
-    /// by CreateParticipantToken (for streams using WebRTC ingest) or
-    /// CreateIngestConfiguration (for
-    /// streams using RTMP ingest).
+    /// returned by CreateParticipantToken (for streams using WebRTC ingest) or
+    /// CreateIngestConfiguration (for streams using RTMP ingest).
     participant_id: []const u8,
 
     /// Description of why this participant is being disconnected.

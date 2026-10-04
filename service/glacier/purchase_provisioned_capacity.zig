@@ -80,6 +80,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PurchaseProvisionedCapa
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PurchaseProvisionedCapacityOutput {
     var result: PurchaseProvisionedCapacityOutput = .{};
+    errdefer {
+        if (result.capacity_id) |value| allocator.free(value);
+    }
     _ = body;
     _ = status;
     if (headers.get("x-amz-capacity-id")) |value| {

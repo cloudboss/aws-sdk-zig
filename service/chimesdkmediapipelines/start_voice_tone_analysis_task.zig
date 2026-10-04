@@ -121,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartVoiceToneAnalysisT
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartVoiceToneAnalysisTaskOutput {
-    var result: StartVoiceToneAnalysisTaskOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartVoiceToneAnalysisTaskOutput, body, allocator);
-    }
+    const result: StartVoiceToneAnalysisTaskOutput = try aws.json.parseJsonObject(
+        StartVoiceToneAnalysisTaskOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

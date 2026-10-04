@@ -4,16 +4,19 @@ const std = @import("std");
 pub const ImageType = enum {
     custom,
     native,
+    byol,
 
     pub const json_field_names = .{
         .custom = "CUSTOM",
         .native = "NATIVE",
+        .byol = "BYOL",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .custom => "CUSTOM",
             .native => "NATIVE",
+            .byol => "BYOL",
         };
     }
 

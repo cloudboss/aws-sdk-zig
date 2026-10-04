@@ -238,10 +238,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateResolverInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateResolverOutput {
-    var result: UpdateResolverOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateResolverOutput, body, allocator);
-    }
+    const result: UpdateResolverOutput = try aws.json.parseJsonObject(
+        UpdateResolverOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

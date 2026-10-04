@@ -64,6 +64,7 @@ const list_knowledge_bases = @import("list_knowledge_bases.zig");
 const list_message_template_versions = @import("list_message_template_versions.zig");
 const list_message_templates = @import("list_message_templates.zig");
 const list_messages = @import("list_messages.zig");
+const list_models = @import("list_models.zig");
 const list_quick_responses = @import("list_quick_responses.zig");
 const list_spans = @import("list_spans.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
@@ -196,7 +197,7 @@ pub const Client = struct {
     /// * You can associate a step-by-step guide with multiple content resources.
     ///
     /// For more information, see [Integrate Amazon Q in Connect with step-by-step
-    /// guides](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html) in the *Amazon Connect Administrator Guide*.
+    /// guides](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html) in the *Connect Customer Administrator Guide*.
     pub fn createContentAssociation(self: *Self, allocator: std.mem.Allocator, input: create_content_association.CreateContentAssociationInput, options: CallOptions) !create_content_association.CreateContentAssociationOutput {
         return create_content_association.execute(self, allocator, input, options);
     }
@@ -261,7 +262,7 @@ pub const Client = struct {
     }
 
     /// Creates a session. A session is a contextual container used for generating
-    /// recommendations. Amazon Connect creates a new Amazon Q in Connect session
+    /// recommendations. Connect Customer creates a new Amazon Q in Connect session
     /// for each contact on which Amazon Q in Connect is enabled.
     pub fn createSession(self: *Self, allocator: std.mem.Allocator, input: create_session.CreateSessionInput, options: CallOptions) !create_session.CreateSessionOutput {
         return create_session.execute(self, allocator, input, options);
@@ -323,7 +324,7 @@ pub const Client = struct {
     ///
     /// For more information about content associations--what they are and when they
     /// are used--see [Integrate Amazon Q in Connect with step-by-step
-    /// guides](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html) in the *Amazon Connect Administrator Guide*.
+    /// guides](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html) in the *Connect Customer Administrator Guide*.
     pub fn deleteContentAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_content_association.DeleteContentAssociationInput, options: CallOptions) !delete_content_association.DeleteContentAssociationOutput {
         return delete_content_association.execute(self, allocator, input, options);
     }
@@ -398,7 +399,7 @@ pub const Client = struct {
     ///
     /// For more information about content associations--what they are and when they
     /// are used--see [Integrate Amazon Q in Connect with step-by-step
-    /// guides](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html) in the *Amazon Connect Administrator Guide*.
+    /// guides](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html) in the *Connect Customer Administrator Guide*.
     pub fn getContentAssociation(self: *Self, allocator: std.mem.Allocator, input: get_content_association.GetContentAssociationInput, options: CallOptions) !get_content_association.GetContentAssociationOutput {
         return get_content_association.execute(self, allocator, input, options);
     }
@@ -439,8 +440,8 @@ pub const Client = struct {
 
     /// This API will be discontinued starting June 1, 2024. To receive generative
     /// responses after March 1, 2024, you will need to create a new Assistant in
-    /// the Amazon Connect console and integrate the Amazon Q in Connect JavaScript
-    /// library (amazon-q-connectjs) into your applications.
+    /// the Connect Customer console and integrate the Amazon Q in Connect
+    /// JavaScript library (amazon-q-connectjs) into your applications.
     ///
     /// Retrieves recommendations for the specified session. To avoid retrieving the
     /// same recommendations in subsequent calls, use
@@ -498,7 +499,7 @@ pub const Client = struct {
     ///
     /// For more information about content associations--what they are and when they
     /// are used--see [Integrate Amazon Q in Connect with step-by-step
-    /// guides](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html) in the *Amazon Connect Administrator Guide*.
+    /// guides](https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html) in the *Connect Customer Administrator Guide*.
     pub fn listContentAssociations(self: *Self, allocator: std.mem.Allocator, input: list_content_associations.ListContentAssociationsInput, options: CallOptions) !list_content_associations.ListContentAssociationsOutput {
         return list_content_associations.execute(self, allocator, input, options);
     }
@@ -535,6 +536,13 @@ pub const Client = struct {
         return list_messages.execute(self, allocator, input, options);
     }
 
+    /// Lists the models available to an Amazon Q in Connect assistant in the
+    /// assistant's Amazon Web Services Region. The available models are determined
+    /// by the region of the specified assistant.
+    pub fn listModels(self: *Self, allocator: std.mem.Allocator, input: list_models.ListModelsInput, options: CallOptions) !list_models.ListModelsOutput {
+        return list_models.execute(self, allocator, input, options);
+    }
+
     /// Lists information about quick response.
     pub fn listQuickResponses(self: *Self, allocator: std.mem.Allocator, input: list_quick_responses.ListQuickResponsesInput, options: CallOptions) !list_quick_responses.ListQuickResponsesOutput {
         return list_quick_responses.execute(self, allocator, input, options);
@@ -567,8 +575,8 @@ pub const Client = struct {
 
     /// This API will be discontinued starting June 1, 2024. To receive generative
     /// responses after March 1, 2024, you will need to create a new Assistant in
-    /// the Amazon Connect console and integrate the Amazon Q in Connect JavaScript
-    /// library (amazon-q-connectjs) into your applications.
+    /// the Connect Customer console and integrate the Amazon Q in Connect
+    /// JavaScript library (amazon-q-connectjs) into your applications.
     ///
     /// Performs a manual search against the specified assistant. To retrieve
     /// recommendations for an assistant, use
@@ -722,7 +730,7 @@ pub const Client = struct {
     }
 
     /// Updates a session. A session is a contextual container used for generating
-    /// recommendations. Amazon Connect updates the existing Amazon Q in Connect
+    /// recommendations. Connect Customer updates the existing Amazon Q in Connect
     /// session for each contact on which Amazon Q in Connect is enabled.
     pub fn updateSession(self: *Self, allocator: std.mem.Allocator, input: update_session.UpdateSessionInput, options: CallOptions) !update_session.UpdateSessionOutput {
         return update_session.execute(self, allocator, input, options);
@@ -832,6 +840,13 @@ pub const Client = struct {
     }
 
     pub fn listMessagesPaginator(self: *Self, params: list_messages.ListMessagesInput) paginator.ListMessagesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listModelsPaginator(self: *Self, params: list_models.ListModelsInput) paginator.ListModelsPaginator {
         return .{
             .client = self,
             .params = params,

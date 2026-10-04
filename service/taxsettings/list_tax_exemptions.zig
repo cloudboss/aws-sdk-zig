@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTaxExemptionsInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTaxExemptionsOutput {
-    var result: ListTaxExemptionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListTaxExemptionsOutput, body, allocator);
-    }
+    const result: ListTaxExemptionsOutput = try aws.json.parseJsonObject(
+        ListTaxExemptionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

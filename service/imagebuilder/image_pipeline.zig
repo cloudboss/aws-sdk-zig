@@ -9,7 +9,11 @@ const Schedule = @import("schedule.zig").Schedule;
 const PipelineStatus = @import("pipeline_status.zig").PipelineStatus;
 const WorkflowConfiguration = @import("workflow_configuration.zig").WorkflowConfiguration;
 
-/// Details of an image pipeline.
+/// Defines the automation configuration for building, testing, and
+/// distributing images. A pipeline references the resources that its builds
+/// use, such as the recipe and infrastructure configuration. It also holds
+/// the settings that control its builds, such as the schedule and custom
+/// workflows.
 pub const ImagePipeline = struct {
     /// The Amazon Resource Name (ARN) of the image pipeline.
     arn: ?[]const u8 = null,
@@ -23,8 +27,8 @@ pub const ImagePipeline = struct {
     /// failures resets to zero.
     ///
     /// * If the pipeline execution fails, Image Builder increments the number of
-    /// consecutive failures. If the failure count exceeds the limit defined in the
-    /// `AutoDisablePolicy`, Image Builder disables the pipeline.
+    /// consecutive failures. If the failure count reaches the limit defined in the
+    /// AutoDisablePolicy, Image Builder disables the pipeline.
     ///
     /// The consecutive failure count is also reset to zero under the following
     /// conditions:
@@ -45,7 +49,7 @@ pub const ImagePipeline = struct {
     /// The date on which this image pipeline was created.
     date_created: ?[]const u8 = null,
 
-    /// This is no longer supported, and does not return a value.
+    /// The date on which this image pipeline was last run.
     date_last_run: ?[]const u8 = null,
 
     /// The next date when the pipeline is scheduled to run.
@@ -62,11 +66,9 @@ pub const ImagePipeline = struct {
     /// image pipeline.
     distribution_configuration_arn: ?[]const u8 = null,
 
-    /// Collects additional information about the image being created, including the
-    /// operating
-    /// system (OS) version and package list. This information is used to enhance
-    /// the overall
-    /// experience of using EC2 Image Builder. Enabled by default.
+    /// Specifies whether to collect additional information about the image being
+    /// created, including the operating
+    /// system (OS) version and package list. Defaults to `true`.
     enhanced_image_metadata_enabled: ?bool = null,
 
     /// The name or Amazon Resource Name (ARN) for the IAM role you create that
@@ -79,10 +81,16 @@ pub const ImagePipeline = struct {
     /// pipeline.
     image_recipe_arn: ?[]const u8 = null,
 
-    /// Contains settings for vulnerability scans.
+    /// Contains settings for vulnerability scans that Amazon Inspector runs against
+    /// the test instance
+    /// during image creation.
     image_scanning_configuration: ?ImageScanningConfiguration = null,
 
-    /// The tags to be applied to the images produced by this pipeline.
+    /// The tags that Image Builder applies to the Image Builder image resource that
+    /// this
+    /// pipeline's scheduled executions create. These tags don't apply to the
+    /// output AMI. Builds that you start manually use the tags from the
+    /// [StartImagePipelineExecution](https://docs.aws.amazon.com/imagebuilder/latest/APIReference/API_StartImagePipelineExecution.html) request instead.
     image_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The image tests configuration of the image pipeline.
@@ -98,19 +106,24 @@ pub const ImagePipeline = struct {
     /// or `AVAILABLE`.
     last_run_status: ?ImageStatus = null,
 
-    /// Defines logging configuration for the output image.
+    /// The CloudWatch Logs configuration for the pipeline: the log group for
+    /// image build logs and the log group for pipeline execution logs.
     logging_configuration: ?PipelineLoggingConfiguration = null,
 
     /// The name of the image pipeline.
     name: ?[]const u8 = null,
 
-    /// The platform of the image pipeline.
+    /// The platform of the image pipeline, inherited from the recipe that the
+    /// pipeline uses.
     platform: ?Platform = null,
 
     /// The schedule of the image pipeline.
     schedule: ?Schedule = null,
 
-    /// The status of the image pipeline.
+    /// The status of the image pipeline. A disabled pipeline doesn't run on its
+    /// schedule, but you can still start builds manually. Image Builder can also
+    /// disable a
+    /// pipeline automatically when consecutive scheduled builds fail.
     status: ?PipelineStatus = null,
 
     /// The tags of this image pipeline.

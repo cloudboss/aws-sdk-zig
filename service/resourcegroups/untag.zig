@@ -94,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UntagInput, config: *aw
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UntagOutput {
-    var result: UntagOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UntagOutput, body, allocator);
-    }
+    const result: UntagOutput = try aws.json.parseJsonObject(
+        UntagOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

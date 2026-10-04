@@ -11,8 +11,7 @@ pub const Destination = struct {
     detail: ?DestinationDetail = null,
 
     /// UTC time of the destination end. This is an ISO 8601 timestamp; *note that
-    /// this
-    /// is returned as a string*.
+    /// this is returned as a string*.
     end_time: ?i64 = null,
 
     /// Unique identifier for this destination, assigned by IVS.

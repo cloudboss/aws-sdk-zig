@@ -81,7 +81,14 @@ pub const OptimizeWaypointsInput = struct {
     /// Travel mode related options for the provided travel mode.
     travel_mode_options: ?WaypointOptimizationTravelModeOptions = null,
 
-    /// List of waypoints between the `Origin` and `Destination`.
+    /// List of waypoints between the `Origin` and `Destination`, in World Geodetic
+    /// System (WGS 84) format: [longitude, latitude].
+    ///
+    /// The maximum number of waypoints allowed per request:
+    ///
+    /// * Maximum 50 waypoints per request
+    /// * Maximum 20 waypoints when using constraints (`AccessHours`,
+    ///   `AppointmentTime`, `ServiceDuration`, `Heading`, `SideOfStreet`, `Before`)
     waypoints: ?[]const WaypointOptimizationWaypoint = null,
 
     pub const json_field_names = .{
@@ -170,7 +177,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: OptimizeWaypointsInput,
 
     const ep = try aws.url.parseEndpoint(endpoint);
 
-    const path = "/optimize-waypoints";
+    const path = "/v2/optimize-waypoints";
 
     var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
@@ -285,10 +292,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: OptimizeWaypointsInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !OptimizeWaypointsOutput {
-    var result: OptimizeWaypointsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(OptimizeWaypointsOutput, body, allocator);
-    }
+    var result: OptimizeWaypointsOutput = try aws.json.parseJsonObject(
+        OptimizeWaypointsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("x-amz-geo-pricing-bucket")) |value| {
         result.pricing_bucket = try allocator.dupe(u8, value);

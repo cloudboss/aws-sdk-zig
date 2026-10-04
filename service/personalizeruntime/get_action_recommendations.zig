@@ -154,10 +154,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetActionRecommendation
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetActionRecommendationsOutput {
-    var result: GetActionRecommendationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetActionRecommendationsOutput, body, allocator);
-    }
+    const result: GetActionRecommendationsOutput = try aws.json.parseJsonObject(
+        GetActionRecommendationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

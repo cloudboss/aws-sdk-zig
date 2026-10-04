@@ -113,10 +113,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateBackendStorageInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateBackendStorageOutput {
-    var result: UpdateBackendStorageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateBackendStorageOutput, body, allocator);
-    }
+    const result: UpdateBackendStorageOutput = try aws.json.parseJsonObject(
+        UpdateBackendStorageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

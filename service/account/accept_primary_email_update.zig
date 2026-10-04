@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AcceptPrimaryEmailUpdat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AcceptPrimaryEmailUpdateOutput {
-    var result: AcceptPrimaryEmailUpdateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AcceptPrimaryEmailUpdateOutput, body, allocator);
-    }
+    const result: AcceptPrimaryEmailUpdateOutput = try aws.json.parseJsonObject(
+        AcceptPrimaryEmailUpdateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

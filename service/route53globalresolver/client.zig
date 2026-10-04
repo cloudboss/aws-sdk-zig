@@ -38,6 +38,7 @@ const list_firewall_rules = @import("list_firewall_rules.zig");
 const list_global_resolvers = @import("list_global_resolvers.zig");
 const list_hosted_zone_associations = @import("list_hosted_zone_associations.zig");
 const list_managed_firewall_domain_lists = @import("list_managed_firewall_domain_lists.zig");
+const list_shared_dns_views = @import("list_shared_dns_views.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
@@ -491,8 +492,10 @@ pub const Client = struct {
         return list_global_resolvers.execute(self, allocator, input, options);
     }
 
-    /// Lists all hosted zone associations for a Route 53 Global Resolver resource
-    /// with pagination support.
+    /// Lists hosted zone associations with pagination support. Specify a DNS view
+    /// through the `resourceArn` parameter to list the hosted zone associations for
+    /// that DNS view, or omit it to list all hosted zone associations in your
+    /// Amazon Web Services account.
     ///
     /// Route 53 Global Resolver is a global service that supports resolvers in
     /// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
@@ -514,6 +517,19 @@ pub const Client = struct {
     /// Services CLI commands.
     pub fn listManagedFirewallDomainLists(self: *Self, allocator: std.mem.Allocator, input: list_managed_firewall_domain_lists.ListManagedFirewallDomainListsInput, options: CallOptions) !list_managed_firewall_domain_lists.ListManagedFirewallDomainListsOutput {
         return list_managed_firewall_domain_lists.execute(self, allocator, input, options);
+    }
+
+    /// Lists the DNS views that have been shared with your Amazon Web Services
+    /// account through Amazon Web Services Resource Access Manager (Amazon Web
+    /// Services RAM), with pagination support.
+    ///
+    /// Route 53 Global Resolver is a global service that supports resolvers in
+    /// multiple Amazon Web Services Regions but you must specify the US East (Ohio)
+    /// Region to create, update, or otherwise work with Route 53 Global Resolver
+    /// resources. That is, for example, specify `--region us-east-2` on Amazon Web
+    /// Services CLI commands.
+    pub fn listSharedDnsViews(self: *Self, allocator: std.mem.Allocator, input: list_shared_dns_views.ListSharedDNSViewsInput, options: CallOptions) !list_shared_dns_views.ListSharedDNSViewsOutput {
+        return list_shared_dns_views.execute(self, allocator, input, options);
     }
 
     /// Lists the tags associated with a Route 53 Global Resolver resource.
@@ -685,6 +701,13 @@ pub const Client = struct {
     }
 
     pub fn listManagedFirewallDomainListsPaginator(self: *Self, params: list_managed_firewall_domain_lists.ListManagedFirewallDomainListsInput) paginator.ListManagedFirewallDomainListsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listSharedDnsViewsPaginator(self: *Self, params: list_shared_dns_views.ListSharedDNSViewsInput) paginator.ListSharedDNSViewsPaginator {
         return .{
             .client = self,
             .params = params,

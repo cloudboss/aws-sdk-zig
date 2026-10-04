@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBotReplicaInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateBotReplicaOutput {
-    var result: CreateBotReplicaOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateBotReplicaOutput, body, allocator);
-    }
+    const result: CreateBotReplicaOutput = try aws.json.parseJsonObject(
+        CreateBotReplicaOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

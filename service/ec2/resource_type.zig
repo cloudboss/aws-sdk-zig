@@ -103,11 +103,16 @@ pub const ResourceType = enum {
     ipam_prefix_list_resolver,
     ipam_policy,
     ipam_prefix_list_resolver_target,
+    ipam_internet_registry_association,
     secondary_interface,
     secondary_network,
     secondary_subnet,
     capacity_manager_data_export,
     vpn_concentrator,
+    ipam_pool_allocation,
+    capacity_reservation_cancellation_quote,
+    application_status_check,
+    capacity_reservation_modification_quote,
 
     pub const json_field_names = .{
         .capacity_reservation = "capacity-reservation",
@@ -212,11 +217,16 @@ pub const ResourceType = enum {
         .ipam_prefix_list_resolver = "ipam-prefix-list-resolver",
         .ipam_policy = "ipam-policy",
         .ipam_prefix_list_resolver_target = "ipam-prefix-list-resolver-target",
+        .ipam_internet_registry_association = "ipam-internet-registry-association",
         .secondary_interface = "secondary-interface",
         .secondary_network = "secondary-network",
         .secondary_subnet = "secondary-subnet",
         .capacity_manager_data_export = "capacity-manager-data-export",
         .vpn_concentrator = "vpn-concentrator",
+        .ipam_pool_allocation = "ipam-pool-allocation",
+        .capacity_reservation_cancellation_quote = "capacity-reservation-cancellation-quote",
+        .application_status_check = "application-status-check",
+        .capacity_reservation_modification_quote = "capacity-reservation-modification-quote",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -323,11 +333,16 @@ pub const ResourceType = enum {
             .ipam_prefix_list_resolver => "ipam-prefix-list-resolver",
             .ipam_policy => "ipam-policy",
             .ipam_prefix_list_resolver_target => "ipam-prefix-list-resolver-target",
+            .ipam_internet_registry_association => "ipam-internet-registry-association",
             .secondary_interface => "secondary-interface",
             .secondary_network => "secondary-network",
             .secondary_subnet => "secondary-subnet",
             .capacity_manager_data_export => "capacity-manager-data-export",
             .vpn_concentrator => "vpn-concentrator",
+            .ipam_pool_allocation => "ipam-pool-allocation",
+            .capacity_reservation_cancellation_quote => "capacity-reservation-cancellation-quote",
+            .application_status_check => "application-status-check",
+            .capacity_reservation_modification_quote => "capacity-reservation-modification-quote",
         };
     }
 

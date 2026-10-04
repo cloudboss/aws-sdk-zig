@@ -94,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGatewayInstanceIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateGatewayInstanceOutput {
-    var result: UpdateGatewayInstanceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateGatewayInstanceOutput, body, allocator);
-    }
+    const result: UpdateGatewayInstanceOutput = try aws.json.parseJsonObject(
+        UpdateGatewayInstanceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

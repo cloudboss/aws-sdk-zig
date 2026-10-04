@@ -94,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetWorkflowDefinitionIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetWorkflowDefinitionOutput {
-    var result: GetWorkflowDefinitionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetWorkflowDefinitionOutput, body, allocator);
-    }
+    const result: GetWorkflowDefinitionOutput = try aws.json.parseJsonObject(
+        GetWorkflowDefinitionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

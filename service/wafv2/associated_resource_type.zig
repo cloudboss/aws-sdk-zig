@@ -6,6 +6,7 @@ pub const AssociatedResourceType = enum {
     cognito_user_pool,
     app_runner_service,
     verified_access_instance,
+    agentcore_gateway,
 
     pub const json_field_names = .{
         .cloudfront = "CLOUDFRONT",
@@ -13,6 +14,7 @@ pub const AssociatedResourceType = enum {
         .cognito_user_pool = "COGNITO_USER_POOL",
         .app_runner_service = "APP_RUNNER_SERVICE",
         .verified_access_instance = "VERIFIED_ACCESS_INSTANCE",
+        .agentcore_gateway = "AGENTCORE_GATEWAY",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +24,7 @@ pub const AssociatedResourceType = enum {
             .cognito_user_pool => "COGNITO_USER_POOL",
             .app_runner_service => "APP_RUNNER_SERVICE",
             .verified_access_instance => "VERIFIED_ACCESS_INSTANCE",
+            .agentcore_gateway => "AGENTCORE_GATEWAY",
         };
     }
 

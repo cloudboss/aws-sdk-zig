@@ -16,14 +16,20 @@ pub const ImportComponentInput = struct {
     /// of the component.
     change_description: ?[]const u8 = null,
 
-    /// Unique, case-sensitive identifier you provide to ensure
-    /// idempotency of the request. For more information, see [Ensuring
+    /// A unique, case-sensitive identifier you provide to ensure
+    /// that the operation runs no more than one time. If you retry a request with
+    /// the same client
+    /// token, Image Builder returns the original response without running the
+    /// operation again. For more
+    /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
     /// in the *Amazon EC2 API Reference*.
     client_token: []const u8,
 
-    /// The data of the component. Used to specify the data inline. Either `data`
-    /// or `uri` can be used to specify the data within the component.
+    /// The data of the component. For the `SHELL` format, this is the
+    /// plain script content. You must specify exactly one of the `data`
+    /// or `uri` properties. For scripts that exceed the inline length
+    /// constraint, use the `uri` property.
     data: ?[]const u8 = null,
 
     /// The description of the component. Describes the contents of the component.
@@ -32,14 +38,24 @@ pub const ImportComponentInput = struct {
     /// The format of the resource that you want to import as a component.
     format: ComponentFormat,
 
-    /// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
-    /// encrypt this component. This can be either the Key ARN or the Alias ARN. For
-    /// more information, see [Key identifiers
+    /// The Amazon Resource Name (ARN) of the KMS key that is used to encrypt this
+    /// component.
+    /// This can be either the Key ARN or the Alias ARN. For more information, see
+    /// [Key identifiers
     /// (KeyId)](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN)
-    /// in the *Key Management Service Developer Guide*.
+    /// in the *Key Management Service Developer Guide*. If you don't specify a key,
+    /// Image Builder encrypts the
+    /// component data with a KMS key that Image Builder owns.
     kms_key_id: ?[]const u8 = null,
 
-    /// The name of the component.
+    /// The name of the component. Image Builder generates the component ARN from a
+    /// normalized form of the name, so names that differ only in case, spaces, or
+    /// underscores count as the same name. If a component with the same name and
+    /// semantic version already exists in your account in the same Amazon Web
+    /// Services Region,
+    /// the request creates a new build version for it. If the content is also
+    /// identical to the latest build version, the request fails because the
+    /// component already exists.
     name: []const u8,
 
     /// The platform of the component.
@@ -52,13 +68,17 @@ pub const ImportComponentInput = struct {
     /// The semantic version has four nodes: ../.
     /// You can assign values for the first three, and can filter on all of them.
     ///
-    /// **Filtering:** With semantic versioning, you have the flexibility to use
-    /// wildcards (x)
-    /// to specify the most recent versions or nodes when selecting the base image
-    /// or components for your
-    /// recipe. When you use a wildcard in any node, all nodes to the right of the
-    /// first wildcard must also be
-    /// wildcards.
+    /// **Assignment:** For the first three nodes, you can assign any positive
+    /// integer value, including
+    /// zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder
+    /// automatically assigns the
+    /// build number to the fourth node.
+    ///
+    /// **Patterns:** You can use any numeric pattern that adheres to the assignment
+    /// requirements for
+    /// the nodes that you can assign. For example, you might choose a software
+    /// version pattern, such as 1.0.0, or
+    /// a date, such as 2021.01.01.
     semantic_version: []const u8,
 
     /// The tags of the component.
@@ -69,8 +89,8 @@ pub const ImportComponentInput = struct {
     /// only to test it.
     @"type": ComponentType,
 
-    /// The uri of the component. Must be an Amazon S3 URL and the requester must
-    /// have permission
+    /// The uri of the component. Must be an Amazon S3 URL and you must have
+    /// permission
     /// to access the Amazon S3 bucket. If you use Amazon S3, you can specify
     /// component content up to your
     /// service quota. Either `data` or `uri` can be used to specify the
@@ -222,10 +242,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportComponentInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ImportComponentOutput {
-    var result: ImportComponentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ImportComponentOutput, body, allocator);
-    }
+    const result: ImportComponentOutput = try aws.json.parseJsonObject(
+        ImportComponentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

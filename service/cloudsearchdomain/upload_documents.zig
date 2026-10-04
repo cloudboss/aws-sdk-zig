@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UploadDocumentsInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UploadDocumentsOutput {
-    var result: UploadDocumentsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UploadDocumentsOutput, body, allocator);
-    }
+    const result: UploadDocumentsOutput = try aws.json.parseJsonObject(
+        UploadDocumentsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

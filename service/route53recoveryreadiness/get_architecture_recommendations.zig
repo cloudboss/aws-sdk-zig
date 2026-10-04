@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetArchitectureRecommen
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetArchitectureRecommendationsOutput {
-    var result: GetArchitectureRecommendationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetArchitectureRecommendationsOutput, body, allocator);
-    }
+    const result: GetArchitectureRecommendationsOutput = try aws.json.parseJsonObject(
+        GetArchitectureRecommendationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

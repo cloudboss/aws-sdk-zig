@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetOutboundExternalLink
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetOutboundExternalLinkOutput {
-    var result: GetOutboundExternalLinkOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetOutboundExternalLinkOutput, body, allocator);
-    }
+    const result: GetOutboundExternalLinkOutput = try aws.json.parseJsonObject(
+        GetOutboundExternalLinkOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

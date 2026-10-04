@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchUpdateRecommendati
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchUpdateRecommendationResourceExclusionOutput {
-    var result: BatchUpdateRecommendationResourceExclusionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchUpdateRecommendationResourceExclusionOutput, body, allocator);
-    }
+    const result: BatchUpdateRecommendationResourceExclusionOutput = try aws.json.parseJsonObject(
+        BatchUpdateRecommendationResourceExclusionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

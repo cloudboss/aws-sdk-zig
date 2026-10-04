@@ -200,10 +200,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDevEnvironmentInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDevEnvironmentOutput {
-    var result: CreateDevEnvironmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateDevEnvironmentOutput, body, allocator);
-    }
+    const result: CreateDevEnvironmentOutput = try aws.json.parseJsonObject(
+        CreateDevEnvironmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

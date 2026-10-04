@@ -220,6 +220,11 @@ pub const RunJobFlowInput = struct {
     /// must specify it for the service role when you launch your cluster.
     service_role: ?[]const u8 = null,
 
+    /// Indicates whether Spark Connect sessions are enabled on the cluster. When
+    /// set to `true`, you can start Spark Connect sessions using the `StartSession`
+    /// operation.
+    session_enabled: ?bool = null,
+
     /// Specifies the number of steps that can be executed concurrently. The default
     /// value is
     /// `1`. The maximum value is `256`.
@@ -311,6 +316,7 @@ pub const RunJobFlowInput = struct {
         .scale_down_behavior = "ScaleDownBehavior",
         .security_configuration = "SecurityConfiguration",
         .service_role = "ServiceRole",
+        .session_enabled = "SessionEnabled",
         .step_concurrency_level = "StepConcurrencyLevel",
         .step_execution_role_arn = "StepExecutionRoleArn",
         .steps = "Steps",

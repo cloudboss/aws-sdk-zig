@@ -7,7 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ViewVersionSummary = @import("view_version_summary.zig").ViewVersionSummary;
 
 pub const ListViewVersionsInput = struct {
-    /// The identifier of the Amazon Connect instance. You can find the instanceId
+    /// The identifier of the Connect Customer instance. You can find the instanceId
     /// in the ARN of the
     /// instance.
     instance_id: []const u8,
@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListViewVersionsInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListViewVersionsOutput {
-    var result: ListViewVersionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListViewVersionsOutput, body, allocator);
-    }
+    const result: ListViewVersionsOutput = try aws.json.parseJsonObject(
+        ListViewVersionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

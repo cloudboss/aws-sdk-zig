@@ -84,10 +84,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTelemetryEvaluationS
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTelemetryEvaluationStatusOutput {
-    var result: GetTelemetryEvaluationStatusOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTelemetryEvaluationStatusOutput, body, allocator);
-    }
+    const result: GetTelemetryEvaluationStatusOutput = try aws.json.parseJsonObject(
+        GetTelemetryEvaluationStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

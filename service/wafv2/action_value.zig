@@ -6,6 +6,7 @@ pub const ActionValue = enum {
     count,
     captcha,
     challenge,
+    monetize,
     excluded_as_count,
 
     pub const json_field_names = .{
@@ -14,6 +15,7 @@ pub const ActionValue = enum {
         .count = "COUNT",
         .captcha = "CAPTCHA",
         .challenge = "CHALLENGE",
+        .monetize = "MONETIZE",
         .excluded_as_count = "EXCLUDED_AS_COUNT",
     };
 
@@ -24,6 +26,7 @@ pub const ActionValue = enum {
             .count => "COUNT",
             .captcha => "CAPTCHA",
             .challenge => "CHALLENGE",
+            .monetize => "MONETIZE",
             .excluded_as_count => "EXCLUDED_AS_COUNT",
         };
     }

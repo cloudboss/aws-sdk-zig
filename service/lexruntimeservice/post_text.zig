@@ -345,10 +345,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PostTextInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PostTextOutput {
-    var result: PostTextOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PostTextOutput, body, allocator);
-    }
+    const result: PostTextOutput = try aws.json.parseJsonObject(
+        PostTextOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

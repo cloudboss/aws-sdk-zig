@@ -29,9 +29,7 @@ pub const WorkflowSummary = struct {
     /// Contains a list of tags that are defined for the workflow.
     tags: ?[]const aws.map.StringMapEntry = null,
 
-    /// The image creation stage that this workflow applies to. Image Builder
-    /// currently
-    /// supports build and test stage workflows.
+    /// The image creation stage that this workflow applies to.
     @"type": ?WorkflowType = null,
 
     /// The version of the workflow.

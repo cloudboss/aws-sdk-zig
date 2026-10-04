@@ -53,7 +53,8 @@ pub const GetServiceNetworkResourceAssociationOutput = struct {
     /// association.
     private_dns_enabled: ?bool = null,
 
-    /// The private DNS entry for the service.
+    /// The private DNS entry for the service. This entry includes only the domain
+    /// name.
     private_dns_entry: ?DnsEntry = null,
 
     /// The Amazon Resource Name (ARN) of the association.
@@ -154,10 +155,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetServiceNetworkResour
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetServiceNetworkResourceAssociationOutput {
-    var result: GetServiceNetworkResourceAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetServiceNetworkResourceAssociationOutput, body, allocator);
-    }
+    const result: GetServiceNetworkResourceAssociationOutput = try aws.json.parseJsonObject(
+        GetServiceNetworkResourceAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

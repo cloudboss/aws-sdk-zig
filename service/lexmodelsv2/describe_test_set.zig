@@ -112,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeTestSetInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeTestSetOutput {
-    var result: DescribeTestSetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeTestSetOutput, body, allocator);
-    }
+    const result: DescribeTestSetOutput = try aws.json.parseJsonObject(
+        DescribeTestSetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

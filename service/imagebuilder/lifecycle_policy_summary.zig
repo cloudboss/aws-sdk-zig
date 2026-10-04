@@ -5,7 +5,7 @@ const LifecyclePolicyStatus = @import("lifecycle_policy_status.zig").LifecyclePo
 
 /// Contains a summary of lifecycle policy resources.
 pub const LifecyclePolicySummary = struct {
-    /// The Amazon Resource Name (ARN) of the lifecycle policy summary resource.
+    /// The Amazon Resource Name (ARN) of the lifecycle policy.
     arn: ?[]const u8 = null,
 
     /// The timestamp when Image Builder created the lifecycle policy resource.

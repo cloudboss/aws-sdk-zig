@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRoleMembershipInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateRoleMembershipOutput {
-    var result: CreateRoleMembershipOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateRoleMembershipOutput, body, allocator);
-    }
+    var result: CreateRoleMembershipOutput = try aws.json.parseJsonObject(
+        CreateRoleMembershipOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

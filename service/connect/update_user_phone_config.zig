@@ -7,7 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const UserPhoneConfig = @import("user_phone_config.zig").UserPhoneConfig;
 
 pub const UpdateUserPhoneConfigInput = struct {
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 

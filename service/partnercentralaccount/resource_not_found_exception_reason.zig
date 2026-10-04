@@ -10,6 +10,8 @@ pub const ResourceNotFoundExceptionReason = enum {
     connection_invitation_not_found,
     connection_not_found,
     verification_not_found,
+    qualifications_association_task_not_found,
+    qualifications_disassociation_task_not_found,
 
     pub const json_field_names = .{
         .partner_not_found = "PARTNER_NOT_FOUND",
@@ -21,6 +23,8 @@ pub const ResourceNotFoundExceptionReason = enum {
         .connection_invitation_not_found = "CONNECTION_INVITATION_NOT_FOUND",
         .connection_not_found = "CONNECTION_NOT_FOUND",
         .verification_not_found = "VERIFICATION_NOT_FOUND",
+        .qualifications_association_task_not_found = "QUALIFICATIONS_ASSOCIATION_TASK_NOT_FOUND",
+        .qualifications_disassociation_task_not_found = "QUALIFICATIONS_DISASSOCIATION_TASK_NOT_FOUND",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -34,6 +38,8 @@ pub const ResourceNotFoundExceptionReason = enum {
             .connection_invitation_not_found => "CONNECTION_INVITATION_NOT_FOUND",
             .connection_not_found => "CONNECTION_NOT_FOUND",
             .verification_not_found => "VERIFICATION_NOT_FOUND",
+            .qualifications_association_task_not_found => "QUALIFICATIONS_ASSOCIATION_TASK_NOT_FOUND",
+            .qualifications_disassociation_task_not_found => "QUALIFICATIONS_DISASSOCIATION_TASK_NOT_FOUND",
         };
     }
 

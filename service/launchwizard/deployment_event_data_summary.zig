@@ -1,9 +1,13 @@
+const aws = @import("aws");
+
 const EventStatus = @import("event_status.zig").EventStatus;
 
 /// A summary of the deployment event data.
 pub const DeploymentEventDataSummary = struct {
     /// The description of the deployment event.
     description: ?[]const u8 = null,
+
+    metadata: ?[]const aws.map.StringMapEntry = null,
 
     /// The name of the deployment event.
     name: ?[]const u8 = null,
@@ -19,6 +23,7 @@ pub const DeploymentEventDataSummary = struct {
 
     pub const json_field_names = .{
         .description = "description",
+        .metadata = "metadata",
         .name = "name",
         .status = "status",
         .status_reason = "statusReason",

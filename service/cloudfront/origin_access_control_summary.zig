@@ -27,10 +27,14 @@ pub const OriginAccessControlSummary = struct {
     ///   contains the `Authorization` header, CloudFront doesn't sign the origin
     ///   request, but instead passes along the `Authorization` header that it
     ///   received in the viewer request.
+    /// * `always-amz-auth` – CloudFront signs all origin requests with Amazon
+    ///   authentication headers, and forwards the viewer's `Authorization` header
+    ///   to the origin if one is present. This value is only valid with Lambda-Web
+    ///   origins.
     signing_behavior: OriginAccessControlSigningBehaviors,
 
     /// The signing protocol of the origin access control. The signing protocol
     /// determines how CloudFront signs (authenticates) requests. The only valid
-    /// value is `sigv4`.
+    /// values are `sigv4` and `sigv4a`.
     signing_protocol: OriginAccessControlSigningProtocols,
 };

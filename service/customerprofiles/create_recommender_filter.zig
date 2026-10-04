@@ -129,10 +129,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRecommenderFilter
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateRecommenderFilterOutput {
-    var result: CreateRecommenderFilterOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateRecommenderFilterOutput, body, allocator);
-    }
+    const result: CreateRecommenderFilterOutput = try aws.json.parseJsonObject(
+        CreateRecommenderFilterOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

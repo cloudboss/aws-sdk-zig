@@ -10,6 +10,8 @@ pub const EvaluationReferenceInput = struct {
     /// during the session.
     assertions: ?[]const EvaluationContent = null,
 
+    /// The span context that identifies which session or trace this reference input
+    /// applies to, used for correlating ground truth with agent output.
     context: Context,
 
     /// The expected response for trace-level evaluation. Built-in evaluators that

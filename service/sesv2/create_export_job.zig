@@ -89,10 +89,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateExportJobInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateExportJobOutput {
-    var result: CreateExportJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateExportJobOutput, body, allocator);
-    }
+    const result: CreateExportJobOutput = try aws.json.parseJsonObject(
+        CreateExportJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

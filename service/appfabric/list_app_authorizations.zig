@@ -125,10 +125,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAppAuthorizationsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAppAuthorizationsOutput {
-    var result: ListAppAuthorizationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAppAuthorizationsOutput, body, allocator);
-    }
+    const result: ListAppAuthorizationsOutput = try aws.json.parseJsonObject(
+        ListAppAuthorizationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

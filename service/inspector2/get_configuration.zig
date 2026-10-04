@@ -8,6 +8,17 @@ const Ec2ConfigurationState = @import("ec_2_configuration_state.zig").Ec2Configu
 const EcrConfigurationState = @import("ecr_configuration_state.zig").EcrConfigurationState;
 
 pub const GetConfigurationInput = struct {
+    /// The 12-digit Amazon Web Services account ID of the member account whose scan
+    /// configuration you want
+    /// to retrieve. When specified, you must be the delegated administrator for
+    /// this
+    /// member account. If not specified, the operation returns your own
+    /// configuration.
+    account_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .account_id = "accountId",
+    };
 };
 
 pub const GetConfigurationOutput = struct {
@@ -53,14 +64,25 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetConfigur
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: GetConfigurationInput, config: *aws.Config) !aws.http.Request {
-    _ = input;
     const endpoint = try config.getEndpointForService("inspector2", "Inspector2", allocator);
 
     const ep = try aws.url.parseEndpoint(endpoint);
 
     const path = "/configuration/get";
 
-    const body: ?[]const u8 = null;
+    var body_buf: std.ArrayList(u8) = .empty;
+    var has_prev = false;
+    try body_buf.appendSlice(allocator, "{");
+
+    if (input.account_id) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"accountId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+
+    try body_buf.appendSlice(allocator, "}");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(ep.host);
     request.method = .POST;
@@ -74,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetConfigurationInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetConfigurationOutput {
-    var result: GetConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetConfigurationOutput, body, allocator);
-    }
+    const result: GetConfigurationOutput = try aws.json.parseJsonObject(
+        GetConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

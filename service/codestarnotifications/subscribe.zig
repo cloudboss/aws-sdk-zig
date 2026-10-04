@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SubscribeInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SubscribeOutput {
-    var result: SubscribeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SubscribeOutput, body, allocator);
-    }
+    const result: SubscribeOutput = try aws.json.parseJsonObject(
+        SubscribeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

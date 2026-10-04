@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ManageSparqlStatisticsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ManageSparqlStatisticsOutput {
-    var result: ManageSparqlStatisticsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ManageSparqlStatisticsOutput, body, allocator);
-    }
+    const result: ManageSparqlStatisticsOutput = try aws.json.parseJsonObject(
+        ManageSparqlStatisticsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

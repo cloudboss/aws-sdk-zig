@@ -104,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDirectQueryDataSourc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDirectQueryDataSourceOutput {
-    var result: GetDirectQueryDataSourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDirectQueryDataSourceOutput, body, allocator);
-    }
+    const result: GetDirectQueryDataSourceOutput = try aws.json.parseJsonObject(
+        GetDirectQueryDataSourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -4,7 +4,7 @@ const ScanResultStatus = @import("scan_result_status.zig").ScanResultStatus;
 pub const ScanResultInfo = struct {
     /// The status of the scan results.
     ///
-    /// Valid values: `THREATS_FOUND` | `NO_THREATS_FOUND`.
+    /// Valid values: `THREATS_FOUND` | `NO_THREATS_FOUND` | `UNKNOWN`.
     scan_result_status: ScanResultStatus,
 
     pub const json_field_names = .{

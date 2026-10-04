@@ -1,3 +1,4 @@
+const RoutePedestrianAfterTravelStep = @import("route_pedestrian_after_travel_step.zig").RoutePedestrianAfterTravelStep;
 const RoutePedestrianArrival = @import("route_pedestrian_arrival.zig").RoutePedestrianArrival;
 const RoutePedestrianDeparture = @import("route_pedestrian_departure.zig").RoutePedestrianDeparture;
 const RoutePedestrianNotice = @import("route_pedestrian_notice.zig").RoutePedestrianNotice;
@@ -8,6 +9,9 @@ const RoutePedestrianTravelStep = @import("route_pedestrian_travel_step.zig").Ro
 
 /// Details that are specific to a pedestrian leg.
 pub const RoutePedestrianLegDetails = struct {
+    /// Steps of a leg that must be performed after the travel portion of the leg.
+    after_travel_steps: []const RoutePedestrianAfterTravelStep = &.{},
+
     /// Details corresponding to the arrival for the leg.
     arrival: RoutePedestrianArrival,
 
@@ -36,6 +40,7 @@ pub const RoutePedestrianLegDetails = struct {
     travel_steps: []const RoutePedestrianTravelStep,
 
     pub const json_field_names = .{
+        .after_travel_steps = "AfterTravelSteps",
         .arrival = "Arrival",
         .departure = "Departure",
         .notices = "Notices",

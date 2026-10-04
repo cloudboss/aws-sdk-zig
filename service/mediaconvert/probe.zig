@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ProbeInput, config: *aw
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ProbeOutput {
-    var result: ProbeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ProbeOutput, body, allocator);
-    }
+    const result: ProbeOutput = try aws.json.parseJsonObject(
+        ProbeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

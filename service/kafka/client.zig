@@ -3,18 +3,21 @@ const std = @import("std");
 
 const batch_associate_scram_secret = @import("batch_associate_scram_secret.zig");
 const batch_disassociate_scram_secret = @import("batch_disassociate_scram_secret.zig");
+const create_channel = @import("create_channel.zig");
 const create_cluster = @import("create_cluster.zig");
 const create_cluster_v2 = @import("create_cluster_v2.zig");
 const create_configuration = @import("create_configuration.zig");
 const create_replicator = @import("create_replicator.zig");
 const create_topic = @import("create_topic.zig");
 const create_vpc_connection = @import("create_vpc_connection.zig");
+const delete_channel = @import("delete_channel.zig");
 const delete_cluster = @import("delete_cluster.zig");
 const delete_cluster_policy = @import("delete_cluster_policy.zig");
 const delete_configuration = @import("delete_configuration.zig");
 const delete_replicator = @import("delete_replicator.zig");
 const delete_topic = @import("delete_topic.zig");
 const delete_vpc_connection = @import("delete_vpc_connection.zig");
+const describe_channel = @import("describe_channel.zig");
 const describe_cluster = @import("describe_cluster.zig");
 const describe_cluster_operation = @import("describe_cluster_operation.zig");
 const describe_cluster_operation_v2 = @import("describe_cluster_operation_v2.zig");
@@ -28,6 +31,7 @@ const describe_vpc_connection = @import("describe_vpc_connection.zig");
 const get_bootstrap_brokers = @import("get_bootstrap_brokers.zig");
 const get_cluster_policy = @import("get_cluster_policy.zig");
 const get_compatible_kafka_versions = @import("get_compatible_kafka_versions.zig");
+const list_channels = @import("list_channels.zig");
 const list_client_vpc_connections = @import("list_client_vpc_connections.zig");
 const list_cluster_operations = @import("list_cluster_operations.zig");
 const list_cluster_operations_v2 = @import("list_cluster_operations_v2.zig");
@@ -50,6 +54,7 @@ const untag_resource = @import("untag_resource.zig");
 const update_broker_count = @import("update_broker_count.zig");
 const update_broker_storage = @import("update_broker_storage.zig");
 const update_broker_type = @import("update_broker_type.zig");
+const update_channel = @import("update_channel.zig");
 const update_cluster_configuration = @import("update_cluster_configuration.zig");
 const update_cluster_kafka_version = @import("update_cluster_kafka_version.zig");
 const update_configuration = @import("update_configuration.zig");
@@ -100,6 +105,12 @@ pub const Client = struct {
         return batch_disassociate_scram_secret.execute(self, allocator, input, options);
     }
 
+    /// Creates a Channel that streams records from an Amazon MSK Express cluster
+    /// topic to Amazon S3 or Apache Iceberg.
+    pub fn createChannel(self: *Self, allocator: std.mem.Allocator, input: create_channel.CreateChannelInput, options: CallOptions) !create_channel.CreateChannelOutput {
+        return create_channel.execute(self, allocator, input, options);
+    }
+
     /// Creates a new MSK cluster.
     pub fn createCluster(self: *Self, allocator: std.mem.Allocator, input: create_cluster.CreateClusterInput, options: CallOptions) !create_cluster.CreateClusterOutput {
         return create_cluster.execute(self, allocator, input, options);
@@ -128,6 +139,13 @@ pub const Client = struct {
     /// Creates a new MSK VPC connection.
     pub fn createVpcConnection(self: *Self, allocator: std.mem.Allocator, input: create_vpc_connection.CreateVpcConnectionInput, options: CallOptions) !create_vpc_connection.CreateVpcConnectionOutput {
         return create_vpc_connection.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the channel specified by channelArn from the cluster specified by
+    /// clusterArn. The channel transitions through DELETING and is removed when the
+    /// asynchronous delete completes.
+    pub fn deleteChannel(self: *Self, allocator: std.mem.Allocator, input: delete_channel.DeleteChannelInput, options: CallOptions) !delete_channel.DeleteChannelOutput {
+        return delete_channel.execute(self, allocator, input, options);
     }
 
     /// Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in the
@@ -160,6 +178,11 @@ pub const Client = struct {
     /// Deletes a MSK VPC connection.
     pub fn deleteVpcConnection(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_connection.DeleteVpcConnectionInput, options: CallOptions) !delete_vpc_connection.DeleteVpcConnectionOutput {
         return delete_vpc_connection.execute(self, allocator, input, options);
+    }
+
+    /// Returns the current configuration and state of a channel.
+    pub fn describeChannel(self: *Self, allocator: std.mem.Allocator, input: describe_channel.DescribeChannelInput, options: CallOptions) !describe_channel.DescribeChannelOutput {
+        return describe_channel.execute(self, allocator, input, options);
     }
 
     /// Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is
@@ -233,6 +256,11 @@ pub const Client = struct {
     /// Gets the Apache Kafka versions to which you can update the MSK cluster.
     pub fn getCompatibleKafkaVersions(self: *Self, allocator: std.mem.Allocator, input: get_compatible_kafka_versions.GetCompatibleKafkaVersionsInput, options: CallOptions) !get_compatible_kafka_versions.GetCompatibleKafkaVersionsOutput {
         return get_compatible_kafka_versions.execute(self, allocator, input, options);
+    }
+
+    /// Returns the list of channels in a cluster.
+    pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: CallOptions) !list_channels.ListChannelsOutput {
+        return list_channels.execute(self, allocator, input, options);
     }
 
     /// Returns a list of all the VPC connections in this Region.
@@ -346,6 +374,12 @@ pub const Client = struct {
     /// Updates EC2 instance type.
     pub fn updateBrokerType(self: *Self, allocator: std.mem.Allocator, input: update_broker_type.UpdateBrokerTypeInput, options: CallOptions) !update_broker_type.UpdateBrokerTypeOutput {
         return update_broker_type.execute(self, allocator, input, options);
+    }
+
+    /// Updates the destination configuration of an existing channel. Exactly one of
+    /// icebergDestinationUpdate or s3DestinationUpdate must be supplied.
+    pub fn updateChannel(self: *Self, allocator: std.mem.Allocator, input: update_channel.UpdateChannelInput, options: CallOptions) !update_channel.UpdateChannelOutput {
+        return update_channel.execute(self, allocator, input, options);
     }
 
     /// Updates the cluster with the configuration that is specified in the request

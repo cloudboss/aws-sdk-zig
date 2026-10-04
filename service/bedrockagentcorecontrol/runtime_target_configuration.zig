@@ -1,3 +1,5 @@
+const HttpApiSchemaConfiguration = @import("http_api_schema_configuration.zig").HttpApiSchemaConfiguration;
+
 /// Configuration for an AgentCore Runtime target. Specifies the agent runtime
 /// to route requests to via HTTP.
 pub const RuntimeTargetConfiguration = struct {
@@ -9,8 +11,13 @@ pub const RuntimeTargetConfiguration = struct {
     /// version. If not specified, the default endpoint is used.
     qualifier: ?[]const u8 = null,
 
+    /// The API schema configuration that defines the structure of the runtime
+    /// target's API.
+    schema: ?HttpApiSchemaConfiguration = null,
+
     pub const json_field_names = .{
         .arn = "arn",
         .qualifier = "qualifier",
+        .schema = "schema",
     };
 };

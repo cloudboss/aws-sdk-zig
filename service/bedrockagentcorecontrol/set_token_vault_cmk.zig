@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SetTokenVaultCMKInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SetTokenVaultCMKOutput {
-    var result: SetTokenVaultCMKOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SetTokenVaultCMKOutput, body, allocator);
-    }
+    const result: SetTokenVaultCMKOutput = try aws.json.parseJsonObject(
+        SetTokenVaultCMKOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

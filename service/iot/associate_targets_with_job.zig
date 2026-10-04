@@ -132,10 +132,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateTargetsWithJob
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateTargetsWithJobOutput {
-    var result: AssociateTargetsWithJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateTargetsWithJobOutput, body, allocator);
-    }
+    const result: AssociateTargetsWithJobOutput = try aws.json.parseJsonObject(
+        AssociateTargetsWithJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

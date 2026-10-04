@@ -8,6 +8,7 @@ const CacheBehavior = @import("cache_behavior.zig").CacheBehavior;
 const RunLogLevel = @import("run_log_level.zig").RunLogLevel;
 const NetworkingMode = @import("networking_mode.zig").NetworkingMode;
 const RunRetentionMode = @import("run_retention_mode.zig").RunRetentionMode;
+const ScratchStorageMode = @import("scratch_storage_mode.zig").ScratchStorageMode;
 const StorageType = @import("storage_type.zig").StorageType;
 const WorkflowType = @import("workflow_type.zig").WorkflowType;
 const ConfigurationDetails = @import("configuration_details.zig").ConfigurationDetails;
@@ -26,6 +27,11 @@ pub const StartRunInput = struct {
 
     /// Optional configuration name to use for the workflow run.
     configuration_name: ?[]const u8 = null,
+
+    /// Engine-specific settings for the workflow run. Use this field to specify
+    /// configuration options that are specific to the workflow engine (for example,
+    /// Nextflow profiles).
+    engine_settings: ?[]const u8 = null,
 
     /// A log level for the run.
     log_level: ?RunLogLevel = null,
@@ -79,8 +85,8 @@ pub const StartRunInput = struct {
     /// A service role for the run. The `roleArn` requires access to Amazon Web
     /// Services HealthOmics, S3, Cloudwatch logs, and EC2. An example `roleArn` is
     /// `arn:aws:iam::123456789012:role/omics-service-role-serviceRole-W8O1XMPL7QZ`.
-    /// In this example, the AWS account ID is `123456789012` and the role name is
-    /// `omics-service-role-serviceRole-W8O1XMPL7QZ`.
+    /// In this example, the Amazon Web Services account ID is `123456789012` and
+    /// the role name is `omics-service-role-serviceRole-W8O1XMPL7QZ`.
     role_arn: []const u8,
 
     /// The run's group ID. Use a run group to cap the compute resources (and number
@@ -89,6 +95,16 @@ pub const StartRunInput = struct {
 
     /// The ID of a run to duplicate.
     run_id: ?[]const u8 = null,
+
+    /// Optional configuration for enabling scratch ephemeral storage mounted at
+    /// /tmp. If not specified, this will default to SHARED. This configuration is
+    /// applicable only for CPU tasks. For tasks using GPUs, scratch storage is
+    /// always LOCAL.
+    scratch_storage_mode: ?ScratchStorageMode = null,
+
+    /// Optional inline policy json for scoping down permissions via a session
+    /// policy on the IAM role provided in the roleArn parameter.
+    session_policy: ?[]const u8 = null,
 
     /// The `STATIC` storage capacity (in gibibytes, GiB) for this run. The default
     /// run storage capacity is 1200 GiB. If your requested storage capacity is
@@ -138,6 +154,7 @@ pub const StartRunInput = struct {
         .cache_behavior = "cacheBehavior",
         .cache_id = "cacheId",
         .configuration_name = "configurationName",
+        .engine_settings = "engineSettings",
         .log_level = "logLevel",
         .name = "name",
         .networking_mode = "networkingMode",
@@ -149,6 +166,8 @@ pub const StartRunInput = struct {
         .role_arn = "roleArn",
         .run_group_id = "runGroupId",
         .run_id = "runId",
+        .scratch_storage_mode = "scratchStorageMode",
+        .session_policy = "sessionPolicy",
         .storage_capacity = "storageCapacity",
         .storage_type = "storageType",
         .tags = "tags",
@@ -250,6 +269,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartRunInput, config: 
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.engine_settings) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"engineSettings\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.log_level) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"logLevel\":");
@@ -307,6 +332,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartRunInput, config: 
     if (input.run_id) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"runId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.scratch_storage_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"scratchStorageMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.session_policy) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"sessionPolicy\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -368,10 +405,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartRunInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartRunOutput {
-    var result: StartRunOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartRunOutput, body, allocator);
-    }
+    const result: StartRunOutput = try aws.json.parseJsonObject(
+        StartRunOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

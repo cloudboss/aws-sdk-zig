@@ -150,10 +150,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TestInvokeAuthorizerInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !TestInvokeAuthorizerOutput {
-    var result: TestInvokeAuthorizerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(TestInvokeAuthorizerOutput, body, allocator);
-    }
+    const result: TestInvokeAuthorizerOutput = try aws.json.parseJsonObject(
+        TestInvokeAuthorizerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

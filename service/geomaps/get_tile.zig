@@ -101,7 +101,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTileInput, config: *
     const ep = try aws.url.parseEndpoint(endpoint);
 
     var path_buf: std.ArrayList(u8) = .empty;
-    try path_buf.appendSlice(allocator, "/tiles/");
+    try path_buf.appendSlice(allocator, "/v2/tiles/");
     try path_buf.appendSlice(allocator, input.tileset);
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.z);
@@ -144,7 +144,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTileInput, config: *
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTileOutput {
-    var result: GetTileOutput = .{};
+    var result: GetTileOutput = .{
+        .pricing_bucket = "",
+    };
+    errdefer {
+        if (result.cache_control) |value| allocator.free(value);
+        if (result.content_type) |value| allocator.free(value);
+        if (result.e_tag) |value| allocator.free(value);
+        allocator.free(result.pricing_bucket);
+        if (result.blob) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.blob = try allocator.dupe(u8, body);
     }

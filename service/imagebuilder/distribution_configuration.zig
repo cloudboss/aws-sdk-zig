@@ -2,7 +2,15 @@ const aws = @import("aws");
 
 const Distribution = @import("distribution.zig").Distribution;
 
-/// A distribution configuration.
+/// Defines how Image Builder distributes the output of an image build. You can
+/// configure:
+///
+/// * The Regions to distribute the image to.
+///
+/// * The Region-specific settings to apply, such as output AMI names,
+/// launch permissions for other Amazon Web Services accounts, and target
+/// container
+/// repositories.
 pub const DistributionConfiguration = struct {
     /// The Amazon Resource Name (ARN) of the distribution configuration.
     arn: ?[]const u8 = null,
@@ -27,7 +35,9 @@ pub const DistributionConfiguration = struct {
     /// The tags of the distribution configuration.
     tags: ?[]const aws.map.StringMapEntry = null,
 
-    /// The maximum duration in minutes for this distribution configuration.
+    /// A property that Image Builder doesn't use. You can't set this property
+    /// when you create or update a distribution configuration, and it has no
+    /// effect on distribution behavior.
     timeout_minutes: i32,
 
     pub const json_field_names = .{

@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ChannelFlowCallbackInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ChannelFlowCallbackOutput {
-    var result: ChannelFlowCallbackOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ChannelFlowCallbackOutput, body, allocator);
-    }
+    const result: ChannelFlowCallbackOutput = try aws.json.parseJsonObject(
+        ChannelFlowCallbackOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

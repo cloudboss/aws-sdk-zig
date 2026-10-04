@@ -91,10 +91,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CancelMetadataTransferJ
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CancelMetadataTransferJobOutput {
-    var result: CancelMetadataTransferJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CancelMetadataTransferJobOutput, body, allocator);
-    }
+    const result: CancelMetadataTransferJobOutput = try aws.json.parseJsonObject(
+        CancelMetadataTransferJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

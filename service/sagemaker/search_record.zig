@@ -2,7 +2,9 @@ const Endpoint = @import("endpoint.zig").Endpoint;
 const Experiment = @import("experiment.zig").Experiment;
 const FeatureGroup = @import("feature_group.zig").FeatureGroup;
 const FeatureMetadata = @import("feature_metadata.zig").FeatureMetadata;
+const HubContent = @import("hub_content.zig").HubContent;
 const HyperParameterTuningJobSearchEntity = @import("hyper_parameter_tuning_job_search_entity.zig").HyperParameterTuningJobSearchEntity;
+const Job = @import("job.zig").Job;
 const ModelDashboardModel = @import("model_dashboard_model.zig").ModelDashboardModel;
 const ModelCard = @import("model_card.zig").ModelCard;
 const ModelPackage = @import("model_package.zig").ModelPackage;
@@ -28,8 +30,14 @@ pub const SearchRecord = struct {
     /// The feature metadata used to search through the features.
     feature_metadata: ?FeatureMetadata = null,
 
+    /// The properties of a hub content resource.
+    hub_content: ?HubContent = null,
+
     /// The properties of a hyperparameter tuning job.
     hyper_parameter_tuning_job: ?HyperParameterTuningJobSearchEntity = null,
+
+    /// The properties of a job.
+    job: ?Job = null,
 
     model: ?ModelDashboardModel = null,
 
@@ -65,7 +73,9 @@ pub const SearchRecord = struct {
         .experiment = "Experiment",
         .feature_group = "FeatureGroup",
         .feature_metadata = "FeatureMetadata",
+        .hub_content = "HubContent",
         .hyper_parameter_tuning_job = "HyperParameterTuningJob",
+        .job = "Job",
         .model = "Model",
         .model_card = "ModelCard",
         .model_package = "ModelPackage",

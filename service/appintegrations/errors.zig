@@ -7,6 +7,7 @@ pub const ServiceError = struct {
 
     pub const Kind = union(enum) {
         access_denied_exception: AccessDeniedException,
+        conflict_exception: ConflictException,
         duplicate_resource_exception: DuplicateResourceException,
         internal_service_error: InternalServiceError,
         invalid_request_exception: InvalidRequestException,
@@ -19,6 +20,7 @@ pub const ServiceError = struct {
         pub fn code(self: Kind) []const u8 {
             return switch (self) {
                 .access_denied_exception => "AccessDeniedException",
+                .conflict_exception => "ConflictException",
                 .duplicate_resource_exception => "DuplicateResourceException",
                 .internal_service_error => "InternalServiceError",
                 .invalid_request_exception => "InvalidRequestException",
@@ -33,6 +35,7 @@ pub const ServiceError = struct {
         pub fn message(self: Kind) []const u8 {
             return switch (self) {
                 .access_denied_exception => |e| e.message,
+                .conflict_exception => |e| e.message,
                 .duplicate_resource_exception => |e| e.message,
                 .internal_service_error => |e| e.message,
                 .invalid_request_exception => |e| e.message,
@@ -47,6 +50,7 @@ pub const ServiceError = struct {
         pub fn httpStatus(self: Kind) u16 {
             return switch (self) {
                 .access_denied_exception => 403,
+                .conflict_exception => 409,
                 .duplicate_resource_exception => 409,
                 .internal_service_error => 500,
                 .invalid_request_exception => 400,
@@ -61,6 +65,7 @@ pub const ServiceError = struct {
         pub fn requestId(self: Kind) []const u8 {
             return switch (self) {
                 .access_denied_exception => |e| e.request_id,
+                .conflict_exception => |e| e.request_id,
                 .duplicate_resource_exception => |e| e.request_id,
                 .internal_service_error => |e| e.request_id,
                 .invalid_request_exception => |e| e.request_id,
@@ -95,6 +100,11 @@ pub const ServiceError = struct {
 };
 
 pub const AccessDeniedException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -159,6 +169,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
 
     if (std.mem.eql(u8, error_code, "AccessDeniedException")) {
         return .{ .arena = arena, .kind = .{ .access_denied_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

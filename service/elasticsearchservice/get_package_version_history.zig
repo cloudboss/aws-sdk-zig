@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPackageVersionHistor
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPackageVersionHistoryOutput {
-    var result: GetPackageVersionHistoryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPackageVersionHistoryOutput, body, allocator);
-    }
+    const result: GetPackageVersionHistoryOutput = try aws.json.parseJsonObject(
+        GetPackageVersionHistoryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

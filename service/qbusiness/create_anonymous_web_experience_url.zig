@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAnonymousWebExper
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAnonymousWebExperienceUrlOutput {
-    var result: CreateAnonymousWebExperienceUrlOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAnonymousWebExperienceUrlOutput, body, allocator);
-    }
+    const result: CreateAnonymousWebExperienceUrlOutput = try aws.json.parseJsonObject(
+        CreateAnonymousWebExperienceUrlOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

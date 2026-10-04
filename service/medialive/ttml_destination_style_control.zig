@@ -4,16 +4,19 @@ const std = @import("std");
 pub const TtmlDestinationStyleControl = enum {
     passthrough,
     use_configured,
+    manual,
 
     pub const json_field_names = .{
         .passthrough = "PASSTHROUGH",
         .use_configured = "USE_CONFIGURED",
+        .manual = "MANUAL",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .passthrough => "PASSTHROUGH",
             .use_configured => "USE_CONFIGURED",
+            .manual => "MANUAL",
         };
     }
 

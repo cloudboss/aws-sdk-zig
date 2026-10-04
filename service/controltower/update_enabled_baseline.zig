@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateEnabledBaselineIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateEnabledBaselineOutput {
-    var result: UpdateEnabledBaselineOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateEnabledBaselineOutput, body, allocator);
-    }
+    const result: UpdateEnabledBaselineOutput = try aws.json.parseJsonObject(
+        UpdateEnabledBaselineOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

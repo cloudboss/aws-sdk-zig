@@ -213,10 +213,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateProfileJobInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateProfileJobOutput {
-    var result: UpdateProfileJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateProfileJobOutput, body, allocator);
-    }
+    const result: UpdateProfileJobOutput = try aws.json.parseJsonObject(
+        UpdateProfileJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

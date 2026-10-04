@@ -9,7 +9,7 @@ pub const GetContactAttributesInput = struct {
     /// The identifier of the initial contact.
     initial_contact_id: []const u8,
 
-    /// The identifier of the Amazon Connect instance.
+    /// The identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     pub const json_field_names = .{
@@ -78,10 +78,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetContactAttributesInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetContactAttributesOutput {
-    var result: GetContactAttributesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetContactAttributesOutput, body, allocator);
-    }
+    const result: GetContactAttributesOutput = try aws.json.parseJsonObject(
+        GetContactAttributesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

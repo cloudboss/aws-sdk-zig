@@ -147,6 +147,7 @@ pub const GetJobOutputOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetJobOutputInput, options: CallOptions) !GetJobOutputOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -155,8 +156,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetJobOutpu
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "glacier", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -168,6 +167,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetJobOutpu
         return error.ServiceError;
     }
 
+    errdefer stream_resp.deinit();
     const result = try deserializeStreamingResponse(allocator, &stream_resp);
     return result;
 }
@@ -205,7 +205,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetJobOutputInput, conf
 
 fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !GetJobOutputOutput {
     var result: GetJobOutputOutput = .{};
-    result.body = stream_resp.body;
+    errdefer {
+        if (result.accept_ranges) |value| allocator.free(value);
+        if (result.archive_description) |value| allocator.free(value);
+        if (result.checksum) |value| allocator.free(value);
+        if (result.content_range) |value| allocator.free(value);
+        if (result.content_type) |value| allocator.free(value);
+    }
     result.status = @intCast(stream_resp.status);
     if (stream_resp.headers.get("accept-ranges")) |value| {
         result.accept_ranges = try allocator.dupe(u8, value);
@@ -222,6 +228,7 @@ fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.
     if (stream_resp.headers.get("content-type")) |value| {
         result.content_type = try allocator.dupe(u8, value);
     }
+    result.body = stream_resp.body;
     stream_resp.deinitHeaders();
 
     return result;

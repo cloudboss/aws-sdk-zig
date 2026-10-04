@@ -144,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetKxEnvironmentInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetKxEnvironmentOutput {
-    var result: GetKxEnvironmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetKxEnvironmentOutput, body, allocator);
-    }
+    const result: GetKxEnvironmentOutput = try aws.json.parseJsonObject(
+        GetKxEnvironmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

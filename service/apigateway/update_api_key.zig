@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateApiKeyInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateApiKeyOutput {
-    var result: UpdateApiKeyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateApiKeyOutput, body, allocator);
-    }
+    const result: UpdateApiKeyOutput = try aws.json.parseJsonObject(
+        UpdateApiKeyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

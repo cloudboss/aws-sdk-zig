@@ -1,5 +1,6 @@
 const CreationDateConditionRequest = @import("creation_date_condition_request.zig").CreationDateConditionRequest;
 const DeprecationTimeConditionRequest = @import("deprecation_time_condition_request.zig").DeprecationTimeConditionRequest;
+const ImageWatermarkFilterRequest = @import("image_watermark_filter_request.zig").ImageWatermarkFilterRequest;
 
 /// The criteria that are evaluated to determine which AMIs are discoverable and
 /// usable in
@@ -16,6 +17,8 @@ const DeprecationTimeConditionRequest = @import("deprecation_time_condition_requ
 /// * 50 values for `ImageNames`
 ///
 /// * 50 values for `MarketplaceProductCodes`
+///
+/// * 50 values for `ImageWatermarks`
 ///
 /// For more information, see [How Allowed AMIs
 /// works](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-allowed-amis.html#how-allowed-amis-works) in the *Amazon EC2 User Guide*.
@@ -65,6 +68,17 @@ pub const ImageCriterionRequest = struct {
     ///
     /// Maximum: 200 values
     image_providers: ?[]const []const u8 = null,
+
+    /// The watermark criteria that an AMI must match to be allowed. An AMI is
+    /// allowed if it
+    /// carries at least one watermark that satisfies an ImageWatermarkFilter. A
+    /// watermark satisfies a
+    /// filter when all specified fields in the ImageWatermarkFilter match the
+    /// corresponding values on
+    /// the watermark of the AMI.
+    ///
+    /// Maximum: 50 values
+    image_watermarks: ?[]const ImageWatermarkFilterRequest = null,
 
     /// The Amazon Web Services Marketplace product codes for allowed images.
     ///

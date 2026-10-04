@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTaxRegistrationDocum
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTaxRegistrationDocumentOutput {
-    var result: GetTaxRegistrationDocumentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTaxRegistrationDocumentOutput, body, allocator);
-    }
+    const result: GetTaxRegistrationDocumentOutput = try aws.json.parseJsonObject(
+        GetTaxRegistrationDocumentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

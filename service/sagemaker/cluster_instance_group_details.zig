@@ -1,6 +1,7 @@
 const aws = @import("aws");
 
 const DeploymentConfiguration = @import("deployment_configuration.zig").DeploymentConfiguration;
+const ClusterAutoPatchConfigDetails = @import("cluster_auto_patch_config_details.zig").ClusterAutoPatchConfigDetails;
 const ClusterCapacityRequirements = @import("cluster_capacity_requirements.zig").ClusterCapacityRequirements;
 const ClusterImageVersionStatus = @import("cluster_image_version_status.zig").ClusterImageVersionStatus;
 const ClusterInstanceRequirementDetails = @import("cluster_instance_requirement_details.zig").ClusterInstanceRequirementDetails;
@@ -26,6 +27,10 @@ pub const ClusterInstanceGroupDetails = struct {
 
     active_software_update_config: ?DeploymentConfiguration = null,
 
+    /// The auto-patching configuration for the instance group, including the
+    /// current patching strategy and next scheduled patch date.
+    auto_patch_config: ?ClusterAutoPatchConfigDetails = null,
+
     /// The instance capacity requirements for the instance group.
     capacity_requirements: ?ClusterCapacityRequirements = null,
 
@@ -37,8 +42,16 @@ pub const ClusterInstanceGroupDetails = struct {
     /// group.
     current_image_id: ?[]const u8 = null,
 
+    /// The version of the HyperPod-managed AMI currently running on the instance
+    /// group.
+    current_image_release_version: ?[]const u8 = null,
+
     /// The ID of the Amazon Machine Image (AMI) desired for the instance group.
     desired_image_id: ?[]const u8 = null,
+
+    /// The desired version of the HyperPod-managed AMI for the instance group. This
+    /// may differ from the current version when an update is pending.
+    desired_image_release_version: ?[]const u8 = null,
 
     /// The execution role for the instance group to assume.
     execution_role: ?[]const u8 = null,
@@ -162,10 +175,13 @@ pub const ClusterInstanceGroupDetails = struct {
     pub const json_field_names = .{
         .active_operations = "ActiveOperations",
         .active_software_update_config = "ActiveSoftwareUpdateConfig",
+        .auto_patch_config = "AutoPatchConfig",
         .capacity_requirements = "CapacityRequirements",
         .current_count = "CurrentCount",
         .current_image_id = "CurrentImageId",
+        .current_image_release_version = "CurrentImageReleaseVersion",
         .desired_image_id = "DesiredImageId",
+        .desired_image_release_version = "DesiredImageReleaseVersion",
         .execution_role = "ExecutionRole",
         .image_version_status = "ImageVersionStatus",
         .instance_group_name = "InstanceGroupName",

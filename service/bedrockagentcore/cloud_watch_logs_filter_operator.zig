@@ -1,5 +1,6 @@
 const std = @import("std");
 
+/// The comparison operator used to filter CloudWatch Logs entries.
 pub const CloudWatchLogsFilterOperator = enum {
     equals,
     not_equals,

@@ -13,7 +13,7 @@ pub const StopMaterializedViewRefreshTaskRunInput = struct {
     /// The name of the database where the table resides.
     database_name: []const u8,
 
-    /// The name of the table to generate statistics.
+    /// The name of the materialized view.
     table_name: []const u8,
 
     pub const json_field_names = .{

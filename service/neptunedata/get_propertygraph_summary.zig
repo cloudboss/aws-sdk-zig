@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPropertygraphSummary
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPropertygraphSummaryOutput {
-    var result: GetPropertygraphSummaryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPropertygraphSummaryOutput, body, allocator);
-    }
+    var result: GetPropertygraphSummaryOutput = try aws.json.parseJsonObject(
+        GetPropertygraphSummaryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status_code = @intCast(status);
     _ = headers;
 

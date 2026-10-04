@@ -10,6 +10,7 @@ pub const EvaluationFormLanguageCode = enum {
     ja_jp,
     ko_kr,
     zh_cn,
+    ms_my,
 
     pub const json_field_names = .{
         .de_de = "de-DE",
@@ -21,6 +22,7 @@ pub const EvaluationFormLanguageCode = enum {
         .ja_jp = "ja-JP",
         .ko_kr = "ko-KR",
         .zh_cn = "zh-CN",
+        .ms_my = "ms-MY",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -34,6 +36,7 @@ pub const EvaluationFormLanguageCode = enum {
             .ja_jp => "ja-JP",
             .ko_kr => "ko-KR",
             .zh_cn => "zh-CN",
+            .ms_my => "ms-MY",
         };
     }
 

@@ -122,10 +122,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeManagedJobTempl
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeManagedJobTemplateOutput {
-    var result: DescribeManagedJobTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeManagedJobTemplateOutput, body, allocator);
-    }
+    const result: DescribeManagedJobTemplateOutput = try aws.json.parseJsonObject(
+        DescribeManagedJobTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

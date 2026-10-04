@@ -15,7 +15,8 @@ pub const Address = struct {
     /// The name of the contact.
     contact_name: []const u8,
 
-    /// The phone number of the contact.
+    /// The phone number of the contact, including the country code (for example,
+    /// `+12065550100`).
     contact_phone_number: []const u8,
 
     /// The ISO-3166 two-letter country code for the address.

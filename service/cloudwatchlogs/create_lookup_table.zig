@@ -23,10 +23,23 @@ pub const CreateLookupTableInput = struct {
     /// 256 characters long.
     lookup_table_name: []const u8,
 
+    /// The ID of a completed or cancelled CloudWatch Logs query whose results
+    /// populate
+    /// the lookup table. A cancelled query populates the table with the partial
+    /// results that were
+    /// available when the query was stopped.
+    ///
+    /// You must specify either `tableBody` or `queryId`, but not
+    /// both.
+    query_id: ?[]const u8 = null,
+
     /// The CSV content of the lookup table. The first row must be a header row with
     /// column
     /// names. The content must use UTF-8 encoding and not exceed 10 MB.
-    table_body: []const u8,
+    ///
+    /// You must specify either `tableBody` or `queryId`, but not
+    /// both.
+    table_body: ?[]const u8 = null,
 
     /// A list of key-value pairs to associate with the lookup table. You can
     /// associate as many
@@ -39,6 +52,7 @@ pub const CreateLookupTableInput = struct {
         .description = "description",
         .kms_key_id = "kmsKeyId",
         .lookup_table_name = "lookupTableName",
+        .query_id = "queryId",
         .table_body = "tableBody",
         .tags = "tags",
     };

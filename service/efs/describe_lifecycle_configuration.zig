@@ -76,10 +76,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeLifecycleConfig
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeLifecycleConfigurationOutput {
-    var result: DescribeLifecycleConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeLifecycleConfigurationOutput, body, allocator);
-    }
+    const result: DescribeLifecycleConfigurationOutput = try aws.json.parseJsonObject(
+        DescribeLifecycleConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

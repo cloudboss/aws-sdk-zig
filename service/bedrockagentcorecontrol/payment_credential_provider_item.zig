@@ -8,6 +8,7 @@ pub const PaymentCredentialProviderItem = struct {
     /// The Amazon Resource Name (ARN) of the payment credential provider.
     credential_provider_arn: []const u8,
 
+    /// The vendor type for the payment credential provider.
     credential_provider_vendor: PaymentCredentialProviderVendorType,
 
     /// The timestamp when the payment credential provider was last updated.

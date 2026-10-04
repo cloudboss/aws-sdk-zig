@@ -1,5 +1,15 @@
 const std = @import("std");
 
+/// The confidence threshold for a DNS Firewall Advanced rule. One of:
+///
+/// * `LOW` — Provides the highest detection rate for threats, but also
+///   increases false positives.
+///
+/// * `MEDIUM` — Provides a balance between detecting threats and false
+///   positives.
+///
+/// * `HIGH` — Detects only the most well-corroborated threats with a low rate
+///   of false positives.
 pub const ConfidenceThreshold = enum {
     low,
     medium,

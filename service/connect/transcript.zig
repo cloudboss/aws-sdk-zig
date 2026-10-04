@@ -3,7 +3,7 @@ const SearchContactsMatchType = @import("search_contacts_match_type.zig").Search
 
 /// A structure that defines search criteria and matching logic to search for
 /// contacts by matching text with
-/// transcripts analyzed by Amazon Connect Contact Lens.
+/// transcripts analyzed by Connect Customer Contact Lens.
 pub const Transcript = struct {
     /// The list of search criteria based on Contact Lens conversational analytics
     /// transcript.

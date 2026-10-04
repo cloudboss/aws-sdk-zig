@@ -11,7 +11,9 @@ const GatewayInterceptorConfiguration = @import("gateway_interceptor_configurati
 const GatewayPolicyEngineConfiguration = @import("gateway_policy_engine_configuration.zig").GatewayPolicyEngineConfiguration;
 const GatewayProtocolConfiguration = @import("gateway_protocol_configuration.zig").GatewayProtocolConfiguration;
 const GatewayProtocolType = @import("gateway_protocol_type.zig").GatewayProtocolType;
+const CustomTransformConfiguration = @import("custom_transform_configuration.zig").CustomTransformConfiguration;
 const GatewayStatus = @import("gateway_status.zig").GatewayStatus;
+const WafConfiguration = @import("waf_configuration.zig").WafConfiguration;
 const WorkloadIdentityDetails = @import("workload_identity_details.zig").WorkloadIdentityDetails;
 
 pub const CreateGatewayInput = @import("create_gateway_request.zig").CreateGatewayRequest;
@@ -142,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateGatewayInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateGatewayOutput {
-    var result: CreateGatewayOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateGatewayOutput, body, allocator);
-    }
+    const result: CreateGatewayOutput = try aws.json.parseJsonObject(
+        CreateGatewayOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

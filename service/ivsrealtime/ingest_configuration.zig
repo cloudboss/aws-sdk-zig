@@ -10,13 +10,10 @@ pub const IngestConfiguration = struct {
     arn: []const u8,
 
     /// Application-provided attributes to to store in the IngestConfiguration and
-    /// attach to a
-    /// stage. Map keys and values can contain UTF-8 encoded text. The maximum
-    /// length of this field
-    /// is 1 KB total. *This field is exposed to all stage participants and should
-    /// not be
-    /// used for personally identifying, confidential, or sensitive
-    /// information.*
+    /// attach to a stage. Map keys and values can contain UTF-8 encoded text. The
+    /// maximum length of this field is 1 KB total. *This field is exposed to all
+    /// stage participants and should not be used for personally identifying,
+    /// confidential, or sensitive information.*
     attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// Type of ingest protocol that the user employs for broadcasting.
@@ -32,41 +29,30 @@ pub const IngestConfiguration = struct {
     redundant_ingest: bool = false,
 
     /// A list of redundant ingest credentials, present only when `redundantIngest`
-    /// is set to `true`.
-    /// See [Redundant
-    /// Ingest](https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html#redundant-ingest) in
-    /// *IVS RTMP Publishing* for details.
+    /// is set to `true`. See [Redundant
+    /// Ingest](https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html#redundant-ingest) in *IVS RTMP Publishing* for details.
     redundant_ingest_credentials: ?[]const RedundantIngestCredential = null,
 
     /// ARN of the stage with which the IngestConfiguration is associated.
     stage_arn: []const u8,
 
     /// State of the ingest configuration. It is `ACTIVE` if a publisher currently
-    /// is
-    /// publishing to the stage associated with the ingest configuration.
+    /// is publishing to the stage associated with the ingest configuration.
     state: IngestConfigurationState,
 
     /// Ingest-key value for the RTMP(S) protocol.
     stream_key: []const u8,
 
     /// Tags attached to the resource. Array of maps, each of the form
-    /// `string:string
-    /// (key:value)`. See [Best practices and
-    /// strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging AWS Resources and Tag
-    /// Editor* for details, including restrictions that apply to tags and "Tag
-    /// naming
-    /// limits and requirements"; Amazon IVS has no constraints on tags beyond what
-    /// is documented
-    /// there.
+    /// `string:string (key:value)`. See [Best practices and
+    /// strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging AWS Resources and Tag Editor* for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Customer-assigned name to help identify the participant using the
-    /// IngestConfiguration;
-    /// this can be used to link a participant to a user in the customer’s own
-    /// systems. This can be
-    /// any UTF-8 encoded text. *This field is exposed to all stage participants and
-    /// should not be used for personally identifying, confidential, or sensitive
-    /// information.*
+    /// IngestConfiguration; this can be used to link a participant to a user in the
+    /// customer’s own systems. This can be any UTF-8 encoded text. *This field is
+    /// exposed to all stage participants and should not be used for personally
+    /// identifying, confidential, or sensitive information.*
     user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{

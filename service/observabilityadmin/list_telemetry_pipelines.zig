@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTelemetryPipelinesI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTelemetryPipelinesOutput {
-    var result: ListTelemetryPipelinesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListTelemetryPipelinesOutput, body, allocator);
-    }
+    const result: ListTelemetryPipelinesOutput = try aws.json.parseJsonObject(
+        ListTelemetryPipelinesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

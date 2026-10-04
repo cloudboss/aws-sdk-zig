@@ -6,6 +6,10 @@ pub const GroupKey = enum {
     account_id,
     resource_type,
     ecr_repository_name,
+    provider,
+    provider_account_id,
+    provider_region,
+    provider_org_id,
 
     pub const json_field_names = .{
         .scan_status_code = "SCAN_STATUS_CODE",
@@ -13,6 +17,10 @@ pub const GroupKey = enum {
         .account_id = "ACCOUNT_ID",
         .resource_type = "RESOURCE_TYPE",
         .ecr_repository_name = "ECR_REPOSITORY_NAME",
+        .provider = "PROVIDER",
+        .provider_account_id = "PROVIDER_ACCOUNT_ID",
+        .provider_region = "PROVIDER_REGION",
+        .provider_org_id = "PROVIDER_ORG_ID",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +30,10 @@ pub const GroupKey = enum {
             .account_id => "ACCOUNT_ID",
             .resource_type => "RESOURCE_TYPE",
             .ecr_repository_name => "ECR_REPOSITORY_NAME",
+            .provider => "PROVIDER",
+            .provider_account_id => "PROVIDER_ACCOUNT_ID",
+            .provider_region => "PROVIDER_REGION",
+            .provider_org_id => "PROVIDER_ORG_ID",
         };
     }
 

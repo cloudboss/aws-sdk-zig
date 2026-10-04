@@ -5,12 +5,14 @@ pub const SuggestAdditionalFeature = enum {
     time_zone,
     phonemes,
     access,
+    cross_references,
 
     pub const json_field_names = .{
         .core = "Core",
         .time_zone = "TimeZone",
         .phonemes = "Phonemes",
         .access = "Access",
+        .cross_references = "CrossReferences",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const SuggestAdditionalFeature = enum {
             .time_zone => "TimeZone",
             .phonemes => "Phonemes",
             .access => "Access",
+            .cross_references => "CrossReferences",
         };
     }
 

@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTableBucketPolicyInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTableBucketPolicyOutput {
-    var result: GetTableBucketPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTableBucketPolicyOutput, body, allocator);
-    }
+    const result: GetTableBucketPolicyOutput = try aws.json.parseJsonObject(
+        GetTableBucketPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

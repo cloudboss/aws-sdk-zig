@@ -130,6 +130,9 @@ pub const DescribeBrokerOutput = struct {
     /// The list of pending security groups to authorize connections to brokers.
     pending_security_groups: ?[]const []const u8 = null,
 
+    /// The pending storage size in GB, to be applied on the next broker restart.
+    pending_storage_size: ?i32 = null,
+
     /// Enables connections from applications outside of the VPC that hosts the
     /// broker's subnets.
     publicly_accessible: ?bool = null,
@@ -137,6 +140,9 @@ pub const DescribeBrokerOutput = struct {
     /// The list of rules (1 minimum, 125 maximum) that authorize connections to
     /// brokers.
     security_groups: ?[]const []const u8 = null,
+
+    /// The broker's storage size in GB.
+    storage_size: ?i32 = null,
 
     /// The broker's storage type.
     storage_type: ?BrokerStorageType = null,
@@ -179,8 +185,10 @@ pub const DescribeBrokerOutput = struct {
         .pending_host_instance_type = "PendingHostInstanceType",
         .pending_ldap_server_metadata = "PendingLdapServerMetadata",
         .pending_security_groups = "PendingSecurityGroups",
+        .pending_storage_size = "PendingStorageSize",
         .publicly_accessible = "PubliclyAccessible",
         .security_groups = "SecurityGroups",
+        .storage_size = "StorageSize",
         .storage_type = "StorageType",
         .subnet_ids = "SubnetIds",
         .tags = "Tags",
@@ -237,10 +245,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeBrokerInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeBrokerOutput {
-    var result: DescribeBrokerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeBrokerOutput, body, allocator);
-    }
+    const result: DescribeBrokerOutput = try aws.json.parseJsonObject(
+        DescribeBrokerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

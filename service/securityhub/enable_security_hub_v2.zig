@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: EnableSecurityHubV2Inpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !EnableSecurityHubV2Output {
-    var result: EnableSecurityHubV2Output = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(EnableSecurityHubV2Output, body, allocator);
-    }
+    const result: EnableSecurityHubV2Output = try aws.json.parseJsonObject(
+        EnableSecurityHubV2Output,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

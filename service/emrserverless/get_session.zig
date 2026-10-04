@@ -6,27 +6,9 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Session = @import("session.zig").Session;
 
-pub const GetSessionInput = struct {
-    /// The ID of the application that the session belongs to.
-    application_id: []const u8,
+pub const GetSessionInput = @import("get_session_request.zig").GetSessionRequest;
 
-    /// The ID of the session.
-    session_id: []const u8,
-
-    pub const json_field_names = .{
-        .application_id = "applicationId",
-        .session_id = "sessionId",
-    };
-};
-
-pub const GetSessionOutput = struct {
-    /// The output displays information about the session.
-    session: ?Session = null,
-
-    pub const json_field_names = .{
-        .session = "session",
-    };
-};
+pub const GetSessionOutput = @import("get_session_response.zig").GetSessionResponse;
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSessionInput, options: CallOptions) !GetSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -79,10 +61,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSessionInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSessionOutput {
-    var result: GetSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSessionOutput, body, allocator);
-    }
+    const result: GetSessionOutput = try aws.json.parseJsonObject(
+        GetSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

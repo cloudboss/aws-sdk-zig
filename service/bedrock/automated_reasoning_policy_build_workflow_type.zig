@@ -6,6 +6,8 @@ pub const AutomatedReasoningPolicyBuildWorkflowType = enum {
     import_policy,
     generate_fidelity_report,
     generate_policy_scenarios,
+    resolve_policy_ambiguities,
+    iteratively_refine_policy,
 
     pub const json_field_names = .{
         .ingest_content = "INGEST_CONTENT",
@@ -13,6 +15,8 @@ pub const AutomatedReasoningPolicyBuildWorkflowType = enum {
         .import_policy = "IMPORT_POLICY",
         .generate_fidelity_report = "GENERATE_FIDELITY_REPORT",
         .generate_policy_scenarios = "GENERATE_POLICY_SCENARIOS",
+        .resolve_policy_ambiguities = "RESOLVE_POLICY_AMBIGUITIES",
+        .iteratively_refine_policy = "ITERATIVELY_REFINE_POLICY",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +26,8 @@ pub const AutomatedReasoningPolicyBuildWorkflowType = enum {
             .import_policy => "IMPORT_POLICY",
             .generate_fidelity_report => "GENERATE_FIDELITY_REPORT",
             .generate_policy_scenarios => "GENERATE_POLICY_SCENARIOS",
+            .resolve_policy_ambiguities => "RESOLVE_POLICY_AMBIGUITIES",
+            .iteratively_refine_policy => "ITERATIVELY_REFINE_POLICY",
         };
     }
 

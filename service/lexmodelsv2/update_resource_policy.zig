@@ -123,10 +123,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateResourcePolicyInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateResourcePolicyOutput {
-    var result: UpdateResourcePolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateResourcePolicyOutput, body, allocator);
-    }
+    const result: UpdateResourcePolicyOutput = try aws.json.parseJsonObject(
+        UpdateResourcePolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -89,10 +89,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSchemaAnalysisRuleIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSchemaAnalysisRuleOutput {
-    var result: GetSchemaAnalysisRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSchemaAnalysisRuleOutput, body, allocator);
-    }
+    const result: GetSchemaAnalysisRuleOutput = try aws.json.parseJsonObject(
+        GetSchemaAnalysisRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

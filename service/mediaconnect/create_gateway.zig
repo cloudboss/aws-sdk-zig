@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateGatewayInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateGatewayOutput {
-    var result: CreateGatewayOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateGatewayOutput, body, allocator);
-    }
+    const result: CreateGatewayOutput = try aws.json.parseJsonObject(
+        CreateGatewayOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

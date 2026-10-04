@@ -310,6 +310,7 @@ pub const SlotValueRegexFilter = @import("slot_value_regex_filter.zig").SlotValu
 pub const SlotValueResolutionStrategy = @import("slot_value_resolution_strategy.zig").SlotValueResolutionStrategy;
 pub const SlotValueSelectionSetting = @import("slot_value_selection_setting.zig").SlotValueSelectionSetting;
 pub const SortOrder = @import("sort_order.zig").SortOrder;
+pub const SpeakerDiarizationSettings = @import("speaker_diarization_settings.zig").SpeakerDiarizationSettings;
 pub const Specifications = @import("specifications.zig").Specifications;
 pub const SpeechDetectionSensitivity = @import("speech_detection_sensitivity.zig").SpeechDetectionSensitivity;
 pub const SpeechFoundationModel = @import("speech_foundation_model.zig").SpeechFoundationModel;

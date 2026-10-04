@@ -95,9 +95,9 @@ pub const GetMetricStatisticsInput = struct {
     /// * Start time greater than 63 days ago - Round down to the nearest 1-hour
     /// clock interval. For example, 12:32:34 is rounded down to 12:00:00.
     ///
-    /// If you set `Period` to 5, 10, 20, or 30, the start time of your request is
-    /// rounded down to the nearest time that corresponds to even 5-, 10-, 20-, or
-    /// 30-second
+    /// If you set `Period` to 5, 10, 20, or 30, the start time of your request
+    /// is rounded down to the nearest time that corresponds to even 5-, 10-, 20-,
+    /// or 30-second
     /// divisions of a minute. For example, if you make a query at (HH:mm:ss)
     /// 01:05:23 for the
     /// previous 10-second period, the start time of your request is rounded down

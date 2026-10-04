@@ -1,4 +1,5 @@
 const HttpUrlDestinationSummary = @import("http_url_destination_summary.zig").HttpUrlDestinationSummary;
+const InfluxDBDestinationSummary = @import("influx_db_destination_summary.zig").InfluxDBDestinationSummary;
 const TopicRuleDestinationStatus = @import("topic_rule_destination_status.zig").TopicRuleDestinationStatus;
 const VpcDestinationSummary = @import("vpc_destination_summary.zig").VpcDestinationSummary;
 
@@ -12,6 +13,10 @@ pub const TopicRuleDestinationSummary = struct {
 
     /// Information about the HTTP URL.
     http_url_summary: ?HttpUrlDestinationSummary = null,
+
+    /// A summary of an InfluxDB topic rule destination, as returned by
+    /// `ListTopicRuleDestinations`.
+    influx_db_summary: ?InfluxDBDestinationSummary = null,
 
     /// The date and time when the topic rule destination was last updated.
     last_updated_at: ?i64 = null,
@@ -61,6 +66,7 @@ pub const TopicRuleDestinationSummary = struct {
         .arn = "arn",
         .created_at = "createdAt",
         .http_url_summary = "httpUrlSummary",
+        .influx_db_summary = "influxDBSummary",
         .last_updated_at = "lastUpdatedAt",
         .status = "status",
         .status_reason = "statusReason",

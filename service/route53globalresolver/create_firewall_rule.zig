@@ -305,10 +305,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFirewallRuleInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateFirewallRuleOutput {
-    var result: CreateFirewallRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateFirewallRuleOutput, body, allocator);
-    }
+    const result: CreateFirewallRuleOutput = try aws.json.parseJsonObject(
+        CreateFirewallRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

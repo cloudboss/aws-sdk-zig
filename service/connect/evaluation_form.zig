@@ -3,6 +3,7 @@ const aws = @import("aws");
 const EvaluationFormAutoEvaluationConfiguration = @import("evaluation_form_auto_evaluation_configuration.zig").EvaluationFormAutoEvaluationConfiguration;
 const EvaluationFormItem = @import("evaluation_form_item.zig").EvaluationFormItem;
 const EvaluationFormLanguageConfiguration = @import("evaluation_form_language_configuration.zig").EvaluationFormLanguageConfiguration;
+const EvaluationFormValidationStatus = @import("evaluation_form_validation_status.zig").EvaluationFormValidationStatus;
 const EvaluationReviewConfiguration = @import("evaluation_review_configuration.zig").EvaluationReviewConfiguration;
 const EvaluationFormScoringStrategy = @import("evaluation_form_scoring_strategy.zig").EvaluationFormScoringStrategy;
 const EvaluationFormVersionStatus = @import("evaluation_form_version_status.zig").EvaluationFormVersionStatus;
@@ -10,6 +11,10 @@ const EvaluationFormTargetConfiguration = @import("evaluation_form_target_config
 
 /// Information about the evaluation form.
 pub const EvaluationForm = struct {
+    /// The AI version to use for the evaluation form. This specifies which AI model
+    /// version is used for automated evaluations.
+    ai_version: ?[]const u8 = null,
+
     /// The automatic evaluation configuration of an evaluation form.
     auto_evaluation_configuration: ?EvaluationFormAutoEvaluationConfiguration = null,
 
@@ -46,6 +51,15 @@ pub const EvaluationForm = struct {
     /// The timestamp for when the evaluation form was last updated.
     last_modified_time: i64,
 
+    /// The timestamp when the most recent validation was started for this
+    /// evaluation form.
+    last_validation_time: ?i64 = null,
+
+    /// The status of the most recent validation run for this evaluation form. Valid
+    /// values:
+    /// `IN_PROGRESS`, `COMPLETED`, `FAILED`.
+    latest_validation_status: ?EvaluationFormValidationStatus = null,
+
     /// The flag indicating whether the evaluation form is locked for changes.
     locked: bool = false,
 
@@ -69,6 +83,7 @@ pub const EvaluationForm = struct {
     title: []const u8,
 
     pub const json_field_names = .{
+        .ai_version = "AIVersion",
         .auto_evaluation_configuration = "AutoEvaluationConfiguration",
         .created_by = "CreatedBy",
         .created_time = "CreatedTime",
@@ -80,6 +95,8 @@ pub const EvaluationForm = struct {
         .language_configuration = "LanguageConfiguration",
         .last_modified_by = "LastModifiedBy",
         .last_modified_time = "LastModifiedTime",
+        .last_validation_time = "LastValidationTime",
+        .latest_validation_status = "LatestValidationStatus",
         .locked = "Locked",
         .review_configuration = "ReviewConfiguration",
         .scoring_strategy = "ScoringStrategy",

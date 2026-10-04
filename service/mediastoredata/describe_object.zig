@@ -96,6 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeObjectInput, co
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeObjectOutput {
     var result: DescribeObjectOutput = .{};
+    errdefer {
+        if (result.cache_control) |value| allocator.free(value);
+        if (result.content_type) |value| allocator.free(value);
+        if (result.e_tag) |value| allocator.free(value);
+    }
     _ = body;
     _ = status;
     if (headers.get("cache-control")) |value| {

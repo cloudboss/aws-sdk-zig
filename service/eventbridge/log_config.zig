@@ -4,8 +4,7 @@ const Level = @import("level.zig").Level;
 /// The logging configuration settings for the event bus.
 ///
 /// For more information, see [Configuring logs for event
-/// buses](https://docs.aws.amazon.com/eb-event-bus-logs.html) in the
-/// *EventBridge User Guide*.
+/// buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html) in the *EventBridge User Guide*.
 pub const LogConfig = struct {
     /// Whether EventBridge include detailed event information in the records it
     /// generates.

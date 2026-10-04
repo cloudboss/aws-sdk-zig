@@ -276,10 +276,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSecurityProfileIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateSecurityProfileOutput {
-    var result: UpdateSecurityProfileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateSecurityProfileOutput, body, allocator);
-    }
+    const result: UpdateSecurityProfileOutput = try aws.json.parseJsonObject(
+        UpdateSecurityProfileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

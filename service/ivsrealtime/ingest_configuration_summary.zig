@@ -22,17 +22,14 @@ pub const IngestConfigurationSummary = struct {
     stage_arn: []const u8,
 
     /// State of the ingest configuration. It is `ACTIVE` if a publisher currently
-    /// is
-    /// publishing to the stage associated with the ingest configuration.
+    /// is publishing to the stage associated with the ingest configuration.
     state: IngestConfigurationState,
 
     /// Customer-assigned name to help identify the participant using the
-    /// IngestConfiguration;
-    /// this can be used to link a participant to a user in the customer’s own
-    /// systems. This can be
-    /// any UTF-8 encoded text. *This field is exposed to all stage participants and
-    /// should not be used for personally identifying, confidential, or sensitive
-    /// information.*
+    /// IngestConfiguration; this can be used to link a participant to a user in the
+    /// customer’s own systems. This can be any UTF-8 encoded text. *This field is
+    /// exposed to all stage participants and should not be used for personally
+    /// identifying, confidential, or sensitive information.*
     user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{

@@ -74,10 +74,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetVoiceConnectorProxyI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetVoiceConnectorProxyOutput {
-    var result: GetVoiceConnectorProxyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetVoiceConnectorProxyOutput, body, allocator);
-    }
+    const result: GetVoiceConnectorProxyOutput = try aws.json.parseJsonObject(
+        GetVoiceConnectorProxyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

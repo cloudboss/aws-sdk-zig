@@ -1,10 +1,16 @@
+const aws = @import("aws");
+
 const LastRefreshType = @import("last_refresh_type.zig").LastRefreshType;
 const ViewRepresentationInput = @import("view_representation_input.zig").ViewRepresentationInput;
+const SubObjectStatistics = @import("sub_object_statistics.zig").SubObjectStatistics;
 
 /// A structure containing details for creating or updating an Glue view.
 pub const ViewDefinitionInput = struct {
     /// The definer of a view in SQL.
     definer: ?[]const u8 = null,
+
+    /// Specifies whether the materialized view is managed by Glue.
+    is_managed: ?bool = null,
 
     /// You can set this flag as true to instruct the engine not to push
     /// user-provided operations into the logical plan of the view during query
@@ -26,8 +32,19 @@ pub const ViewDefinitionInput = struct {
     /// that defines the view.
     representations: ?[]const ViewRepresentationInput = null,
 
+    /// A map of key-value pairs containing Spark Declarative Pipelines (SDP)
+    /// information for the
+    /// materialized view.
+    spark_pipeline_info: ?[]const aws.map.StringMapEntry = null,
+
     /// A list of base table ARNs that make up the view.
     sub_objects: ?[]const []const u8 = null,
+
+    /// Statistics for each sub-object referenced by the materialized view, such as
+    /// the source
+    /// type, Glue version ID, and the partition, file, and byte counts. Each entry
+    /// describes one sub-object, identified by its source type.
+    sub_objects_statistics: ?[]const SubObjectStatistics = null,
 
     /// List of the Apache Iceberg table versions referenced by the materialized
     /// view.
@@ -42,11 +59,14 @@ pub const ViewDefinitionInput = struct {
 
     pub const json_field_names = .{
         .definer = "Definer",
+        .is_managed = "IsManaged",
         .is_protected = "IsProtected",
         .last_refresh_type = "LastRefreshType",
         .refresh_seconds = "RefreshSeconds",
         .representations = "Representations",
+        .spark_pipeline_info = "SparkPipelineInfo",
         .sub_objects = "SubObjects",
+        .sub_objects_statistics = "SubObjectsStatistics",
         .sub_object_version_ids = "SubObjectVersionIds",
         .view_version_id = "ViewVersionId",
         .view_version_token = "ViewVersionToken",

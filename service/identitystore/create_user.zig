@@ -36,6 +36,10 @@ pub const CreateUserInput = struct {
     extensions: ?[]const aws.map.StringMapEntry = null,
 
     /// The globally unique identifier for the identity store.
+    ///
+    /// You can specify the identity store by ID or by Amazon Resource Name (ARN).
+    /// For example, identity store ID `d-1234567890` or identity store ARN
+    /// `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
     identity_store_id: []const u8,
 
     /// A string containing the geographical region or location of the user.
@@ -117,11 +121,21 @@ pub const CreateUserOutput = struct {
     /// The globally unique identifier for the identity store.
     identity_store_id: []const u8,
 
+    /// The revision of the newly created user in the identity store.
+    revision: []const u8,
+
+    /// The Amazon Resource Name (ARN) of the newly created user in the identity
+    /// store. For example,
+    /// `arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
+    user_arn: []const u8,
+
     /// The identifier of the newly created user in the identity store.
     user_id: []const u8,
 
     pub const json_field_names = .{
         .identity_store_id = "IdentityStoreId",
+        .revision = "Revision",
+        .user_arn = "UserArn",
         .user_id = "UserId",
     };
 };

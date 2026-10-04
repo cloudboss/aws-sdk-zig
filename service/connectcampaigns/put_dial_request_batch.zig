@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutDialRequestBatchInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutDialRequestBatchOutput {
-    var result: PutDialRequestBatchOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutDialRequestBatchOutput, body, allocator);
-    }
+    const result: PutDialRequestBatchOutput = try aws.json.parseJsonObject(
+        PutDialRequestBatchOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -12,7 +12,7 @@ pub const UpdateContactFlowNameInput = struct {
     /// The description of the flow.
     description: ?[]const u8 = null,
 
-    /// The identifier of the Amazon Connect instance.
+    /// The identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     /// The name of the flow.

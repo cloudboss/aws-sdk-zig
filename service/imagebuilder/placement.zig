@@ -15,16 +15,12 @@ pub const Placement = struct {
 
     /// The ID of the Dedicated Host on which build and test instances run. This
     /// only
-    /// applies if `tenancy` is `host`. If you specify the host ID, you
-    /// must not specify the resource group ARN. If you specify both, Image Builder
-    /// returns an error.
+    /// applies if `tenancy` is `host`.
     host_id: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the host resource group in which to launch
     /// build and test instances.
-    /// This only applies if `tenancy` is `host`. If you specify the resource
-    /// group ARN, you must not specify the host ID. If you specify both, Image
-    /// Builder returns an error.
+    /// This only applies if `tenancy` is `host`.
     host_resource_group_arn: ?[]const u8 = null,
 
     /// The tenancy of the instance. An instance with a tenancy of `dedicated`

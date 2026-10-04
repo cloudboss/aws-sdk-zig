@@ -164,10 +164,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateGlossaryInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateGlossaryOutput {
-    var result: CreateGlossaryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateGlossaryOutput, body, allocator);
-    }
+    const result: CreateGlossaryOutput = try aws.json.parseJsonObject(
+        CreateGlossaryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

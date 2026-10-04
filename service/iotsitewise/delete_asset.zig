@@ -25,12 +25,16 @@ pub const DeleteAssetInput = struct {
 };
 
 pub const DeleteAssetOutput = struct {
+    /// The ID of the asset.
+    asset_id: ?[]const u8 = null,
+
     /// The status of the asset, which contains a state (`DELETING` after
     /// successfully
     /// calling this operation) and any error message.
     asset_status: ?AssetStatus = null,
 
     pub const json_field_names = .{
+        .asset_id = "assetId",
         .asset_status = "assetStatus",
     };
 };
@@ -95,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteAssetInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteAssetOutput {
-    var result: DeleteAssetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteAssetOutput, body, allocator);
-    }
+    const result: DeleteAssetOutput = try aws.json.parseJsonObject(
+        DeleteAssetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

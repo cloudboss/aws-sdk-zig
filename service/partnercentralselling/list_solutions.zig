@@ -9,6 +9,10 @@ const SolutionStatus = @import("solution_status.zig").SolutionStatus;
 const SolutionBase = @import("solution_base.zig").SolutionBase;
 
 pub const ListSolutionsInput = struct {
+    /// Filters results by AWS Marketplace solution ARN. You can provide up to 10
+    /// ARNs.
+    aws_marketplace_solution_arn: ?[]const []const u8 = null,
+
     /// Specifies the catalog associated with the request. This field takes a string
     /// value from a predefined list: `AWS` or `Sandbox`. The catalog determines
     /// which environment the solutions are listed in. Use `AWS` to list solutions
@@ -46,6 +50,7 @@ pub const ListSolutionsInput = struct {
     status: ?[]const SolutionStatus = null,
 
     pub const json_field_names = .{
+        .aws_marketplace_solution_arn = "AwsMarketplaceSolutionArn",
         .catalog = "Catalog",
         .category = "Category",
         .identifier = "Identifier",

@@ -49,9 +49,13 @@ pub const DeleteAssetModelCompositeModelInput = struct {
 };
 
 pub const DeleteAssetModelCompositeModelOutput = struct {
+    /// The ID of the asset model.
+    asset_model_id: ?[]const u8 = null,
+
     asset_model_status: ?AssetModelStatus = null,
 
     pub const json_field_names = .{
+        .asset_model_id = "assetModelId",
         .asset_model_status = "assetModelStatus",
     };
 };
@@ -127,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteAssetModelComposi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteAssetModelCompositeModelOutput {
-    var result: DeleteAssetModelCompositeModelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteAssetModelCompositeModelOutput, body, allocator);
-    }
+    const result: DeleteAssetModelCompositeModelOutput = try aws.json.parseJsonObject(
+        DeleteAssetModelCompositeModelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

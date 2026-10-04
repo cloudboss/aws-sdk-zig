@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetJobEntityInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetJobEntityOutput {
-    var result: BatchGetJobEntityOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetJobEntityOutput, body, allocator);
-    }
+    const result: BatchGetJobEntityOutput = try aws.json.parseJsonObject(
+        BatchGetJobEntityOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

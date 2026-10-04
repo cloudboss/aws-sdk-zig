@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMLModelTransformJobI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMLModelTransformJobOutput {
-    var result: GetMLModelTransformJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMLModelTransformJobOutput, body, allocator);
-    }
+    const result: GetMLModelTransformJobOutput = try aws.json.parseJsonObject(
+        GetMLModelTransformJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

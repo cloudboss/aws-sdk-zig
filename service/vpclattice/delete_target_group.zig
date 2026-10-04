@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteTargetGroupInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteTargetGroupOutput {
-    var result: DeleteTargetGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteTargetGroupOutput, body, allocator);
-    }
+    const result: DeleteTargetGroupOutput = try aws.json.parseJsonObject(
+        DeleteTargetGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

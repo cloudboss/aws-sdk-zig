@@ -27,6 +27,10 @@ pub const UpdatePaymentManagerInput = struct {
     /// The updated description of the payment manager.
     description: ?[]const u8 = null,
 
+    /// The updated Amazon Resource Name (ARN) of the customer managed KMS key used
+    /// to encrypt sensitive payment manager data at rest.
+    kms_key_arn: ?[]const u8 = null,
+
     /// The unique identifier of the payment manager to update.
     payment_manager_id: []const u8,
 
@@ -39,6 +43,7 @@ pub const UpdatePaymentManagerInput = struct {
         .authorizer_type = "authorizerType",
         .client_token = "clientToken",
         .description = "description",
+        .kms_key_arn = "kmsKeyArn",
         .payment_manager_id = "paymentManagerId",
         .role_arn = "roleArn",
     };
@@ -47,6 +52,10 @@ pub const UpdatePaymentManagerInput = struct {
 pub const UpdatePaymentManagerOutput = struct {
     /// The type of authorizer for the updated payment manager.
     authorizer_type: PaymentsAuthorizerType,
+
+    /// The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive
+    /// payment manager data at rest, if configured.
+    kms_key_arn: ?[]const u8 = null,
 
     /// The timestamp when the payment manager was last updated.
     last_updated_at: i64,
@@ -73,6 +82,7 @@ pub const UpdatePaymentManagerOutput = struct {
 
     pub const json_field_names = .{
         .authorizer_type = "authorizerType",
+        .kms_key_arn = "kmsKeyArn",
         .last_updated_at = "lastUpdatedAt",
         .name = "name",
         .payment_manager_arn = "paymentManagerArn",
@@ -146,6 +156,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePaymentManagerInp
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.kms_key_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"kmsKeyArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.role_arn) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"roleArn\":");
@@ -168,10 +184,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePaymentManagerInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdatePaymentManagerOutput {
-    var result: UpdatePaymentManagerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdatePaymentManagerOutput, body, allocator);
-    }
+    const result: UpdatePaymentManagerOutput = try aws.json.parseJsonObject(
+        UpdatePaymentManagerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

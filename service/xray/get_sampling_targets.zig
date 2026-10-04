@@ -113,10 +113,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSamplingTargetsInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSamplingTargetsOutput {
-    var result: GetSamplingTargetsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSamplingTargetsOutput, body, allocator);
-    }
+    const result: GetSamplingTargetsOutput = try aws.json.parseJsonObject(
+        GetSamplingTargetsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

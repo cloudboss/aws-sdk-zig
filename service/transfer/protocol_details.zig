@@ -1,5 +1,7 @@
 const As2Transport = @import("as_2_transport.zig").As2Transport;
+const ProxyConfig = @import("proxy_config.zig").ProxyConfig;
 const SetStatOption = @import("set_stat_option.zig").SetStatOption;
+const SftpPortWithOptions = @import("sftp_port_with_options.zig").SftpPortWithOptions;
 const TlsSessionResumptionMode = @import("tls_session_resumption_mode.zig").TlsSessionResumptionMode;
 
 /// The protocol settings that are configured for your server.
@@ -53,6 +55,11 @@ pub const ProtocolDetails = struct {
     /// response.
     passive_ip: ?[]const u8 = null,
 
+    /// The configuration for PROXY protocol version 2 (PPv2) support on the
+    /// Transfer Family server. For more information, see [Working with Network Load
+    /// Balancers](https://docs.aws.amazon.com/transfer/latest/userguide/working-with-nlb.html).
+    proxy_config: ?ProxyConfig = null,
+
     /// Use the `SetStatOption` to ignore the error that is generated when the
     /// client attempts to use `SETSTAT` on a file you are uploading to an S3
     /// bucket.
@@ -74,6 +81,32 @@ pub const ProtocolDetails = struct {
     /// other file attributes using `SETSTAT`, you can use Amazon EFS as backend
     /// storage with Transfer Family.
     set_stat_option: ?SetStatOption = null,
+
+    /// A property used with Transfer Family servers that use the SFTP protocol and
+    /// have `PUBLIC` endpoints. This property accepts a list of up to three port
+    /// configurations that the service opens on the server endpoint.
+    ///
+    /// Each entry in the list consists of two parameters, the `SftpPort` and the
+    /// `CommunicationMode`. The `SftpPort` takes any integer from 2000 to 65535, or
+    /// 22. `CommunicationMode` can be one of the following options:
+    ///
+    /// * `SERVER_TALK_FIRST`: The server responds to initial TCP connections first.
+    ///   Many older clients expect that an SFTP server responds with its server
+    ///   string before starting SSH negotiations.
+    /// * `CLIENT_TALK_FIRST`: The server responds to the initial TCP connection
+    ///   only after receiving a data packet. Most modern clients support this
+    ///   behavior and send their client string along with the initial data packets
+    ///   for SSH negotiation. Additionally, this mode is more resilient to TCP
+    ///   retransmissions that can occur during the initial TCP connection.
+    ///
+    /// The following is an `SftpPorts` example for port 2222 with
+    /// `CLIENT_TALK_FIRST`.
+    ///
+    /// `[ { "SftpPort": 2222, "CommunicationMode": "CLIENT_TALK_FIRST" } ]`
+    ///
+    /// If you don't specify any configurations during `CreateServer`, the service
+    /// uses port 22 with `SERVER_TALK_FIRST` by default.
+    sftp_ports: ?[]const SftpPortWithOptions = null,
 
     /// A property used with Transfer Family servers that use the FTPS protocol. TLS
     /// Session Resumption provides a mechanism to resume or share a negotiated
@@ -103,7 +136,9 @@ pub const ProtocolDetails = struct {
     pub const json_field_names = .{
         .as_2_transports = "As2Transports",
         .passive_ip = "PassiveIp",
+        .proxy_config = "ProxyConfig",
         .set_stat_option = "SetStatOption",
+        .sftp_ports = "SftpPorts",
         .tls_session_resumption_mode = "TlsSessionResumptionMode",
     };
 };

@@ -11,6 +11,10 @@ pub const MemorySummary = struct {
     /// The unique identifier of the memory.
     id: ?[]const u8 = null,
 
+    /// ARN of the resource managing this memory (e.g. a harness). Null if not
+    /// managed.
+    managed_by_resource_arn: ?[]const u8 = null,
+
     /// The current status of the memory.
     status: ?MemoryStatus = null,
 
@@ -21,6 +25,7 @@ pub const MemorySummary = struct {
         .arn = "arn",
         .created_at = "createdAt",
         .id = "id",
+        .managed_by_resource_arn = "managedByResourceArn",
         .status = "status",
         .updated_at = "updatedAt",
     };

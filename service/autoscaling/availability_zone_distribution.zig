@@ -12,5 +12,9 @@ pub const AvailabilityZoneDistribution = struct {
     /// * `balanced-best-effort` - If launches fail in an Availability Zone, Auto
     ///   Scaling will attempt to launch in another healthy Availability Zone
     ///   instead.
+    ///
+    /// * `reservations-then-balanced` - Auto Scaling will first attempt to launch
+    ///   into your Capacity Reservations, and then balance any remaining capacity
+    ///   across healthy Availability Zones.
     capacity_distribution_strategy: ?CapacityDistributionStrategy = null,
 };

@@ -24,7 +24,10 @@ pub const Component = struct {
     /// The description of the component.
     description: ?[]const u8 = null,
 
-    /// The encryption status of the component.
+    /// Indicates whether the component data is encrypted at rest. Image Builder
+    /// encrypts
+    /// all component data at rest, so this value is always `true`. This
+    /// field is retained for backward compatibility.
     encrypted: ?bool = null,
 
     /// The KMS key identifier used to encrypt the component. This can be either the
@@ -41,7 +44,9 @@ pub const Component = struct {
     /// component detail results for API, CLI, or SDK operations.
     obfuscate: bool = false,
 
-    /// The owner of the component.
+    /// The owner of the component. The value is your account ID for components
+    /// that you own, the sharing account's ID for shared components, or
+    /// `Amazon`, `ThirdParty`, or `AWSMarketplace`.
     owner: ?[]const u8 = null,
 
     /// Contains parameter details for each of the parameters that the component

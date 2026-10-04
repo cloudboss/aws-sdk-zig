@@ -91,7 +91,7 @@ pub const CreateContainerFleetInput = struct {
     /// Amazon GameLift Servers uses the following formula: `4192 + [# of game
     /// server container
     /// groups per fleet instance] * [# of container ports in the game server
-    /// container group definition] + [# of container ports in the game server
+    /// container group definition] + [# of container ports in the per instance
     /// container group definition]`
     ///
     /// You can also choose to manually set this parameter. When manually setting
@@ -130,7 +130,7 @@ pub const CreateContainerFleetInput = struct {
     ///   Amazon GameLift Servers uses the
     /// following formula: `4192 + [# of game server container groups per fleet
     /// instance] * [# of container ports in the game server container group
-    /// definition] + [# of container ports in the game server container group
+    /// definition] + [# of container ports in the per instance container group
     /// definition]`
     ///
     /// You can also choose to manually set this parameter. When manually setting
@@ -158,13 +158,14 @@ pub const CreateContainerFleetInput = struct {
     /// networking
     /// capacity.
     ///
-    /// By default, Amazon GameLift Servers selects an instance type that fits the
-    /// needs of your container
-    /// groups and is available in all selected fleet locations. You can also choose
-    /// to manually
-    /// set this parameter. See [Amazon Elastic Compute Cloud
-    /// Instance Types](http://aws.amazon.com/ec2/instance-types/) for detailed
-    /// descriptions of Amazon EC2 instance types.
+    /// By default, Amazon GameLift Servers uses the `c5.large` instance type. If
+    /// this instance
+    /// type does not have sufficient resources for your container groups, you can
+    /// choose a
+    /// different instance type that better fits your needs. See [Amazon Elastic
+    /// Compute Cloud Instance Types](http://aws.amazon.com/ec2/instance-types/) for
+    /// detailed descriptions
+    /// of Amazon EC2 instance types.
     ///
     /// You can't update this fleet property later.
     instance_type: ?[]const u8 = null,

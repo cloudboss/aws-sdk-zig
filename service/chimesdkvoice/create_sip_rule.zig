@@ -18,7 +18,7 @@ pub const CreateSipRuleInput = struct {
 
     /// List of SIP media applications, with priority and AWS Region. Only one SIP
     /// application per AWS Region can be used.
-    target_applications: ?[]const SipRuleTargetApplication = null,
+    target_applications: []const SipRuleTargetApplication,
 
     /// The type of trigger assigned to the SIP rule in `TriggerValue`,
     /// currently `RequestUriHostname` or `ToPhoneNumber`.
@@ -99,12 +99,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSipRuleInput, con
     try body_buf.appendSlice(allocator, "\"Name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
     has_prev = true;
-    if (input.target_applications) |v| {
-        if (has_prev) try body_buf.appendSlice(allocator, ",");
-        try body_buf.appendSlice(allocator, "\"TargetApplications\":");
-        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
-        has_prev = true;
-    }
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"TargetApplications\":");
+    try aws.json.writeValue(@TypeOf(input.target_applications), input.target_applications, allocator, &body_buf);
+    has_prev = true;
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"TriggerType\":");
     try aws.json.writeValue(@TypeOf(input.trigger_type), input.trigger_type, allocator, &body_buf);
@@ -129,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSipRuleInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateSipRuleOutput {
-    var result: CreateSipRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateSipRuleOutput, body, allocator);
-    }
+    const result: CreateSipRuleOutput = try aws.json.parseJsonObject(
+        CreateSipRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

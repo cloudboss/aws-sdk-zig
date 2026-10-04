@@ -86,10 +86,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchDeleteFirewallRule
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchDeleteFirewallRuleOutput {
-    var result: BatchDeleteFirewallRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchDeleteFirewallRuleOutput, body, allocator);
-    }
+    const result: BatchDeleteFirewallRuleOutput = try aws.json.parseJsonObject(
+        BatchDeleteFirewallRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

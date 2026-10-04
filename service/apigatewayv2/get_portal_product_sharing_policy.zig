@@ -77,10 +77,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPortalProductSharing
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPortalProductSharingPolicyOutput {
-    var result: GetPortalProductSharingPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPortalProductSharingPolicyOutput, body, allocator);
-    }
+    const result: GetPortalProductSharingPolicyOutput = try aws.json.parseJsonObject(
+        GetPortalProductSharingPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

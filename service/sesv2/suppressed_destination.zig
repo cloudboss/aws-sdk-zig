@@ -3,14 +3,17 @@ const SuppressionListReason = @import("suppression_list_reason.zig").Suppression
 
 /// An object that contains information about an email address that is on the
 /// suppression
-/// list for your account.
+/// list for your account or for a specific tenant.
 pub const SuppressedDestination = struct {
     /// An optional value that can contain additional information about the reasons
     /// that the
-    /// address was added to the suppression list for your account.
+    /// address was added to the suppression list for your account or for a specific
+    /// tenant.
     attributes: ?SuppressedDestinationAttributes = null,
 
-    /// The email address that is on the suppression list for your account.
+    /// The email address that is on the suppression list for your account or for a
+    /// specific
+    /// tenant.
     email_address: []const u8,
 
     /// The date and time when the suppressed destination was last updated, shown in
@@ -19,13 +22,21 @@ pub const SuppressedDestination = struct {
     last_update_time: i64,
 
     /// The reason that the address was added to the suppression list for your
-    /// account.
+    /// account or for
+    /// a specific tenant.
     reason: SuppressionListReason,
+
+    /// The name of the tenant that the suppressed destination belongs to. This
+    /// field is
+    /// present only when the suppressed destination is on a tenant's suppression
+    /// list.
+    tenant_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",
         .email_address = "EmailAddress",
         .last_update_time = "LastUpdateTime",
         .reason = "Reason",
+        .tenant_name = "TenantName",
     };
 };

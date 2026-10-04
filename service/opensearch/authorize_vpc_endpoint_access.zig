@@ -116,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeVpcEndpointAcc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AuthorizeVpcEndpointAccessOutput {
-    var result: AuthorizeVpcEndpointAccessOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AuthorizeVpcEndpointAccessOutput, body, allocator);
-    }
+    const result: AuthorizeVpcEndpointAccessOutput = try aws.json.parseJsonObject(
+        AuthorizeVpcEndpointAccessOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

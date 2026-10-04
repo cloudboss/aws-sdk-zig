@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartReportJobInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartReportJobOutput {
-    var result: StartReportJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartReportJobOutput, body, allocator);
-    }
+    const result: StartReportJobOutput = try aws.json.parseJsonObject(
+        StartReportJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

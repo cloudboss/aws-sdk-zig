@@ -9,12 +9,12 @@ pub const CancelJobInput = struct {
     /// The Batch job ID of the job to cancel.
     job_id: []const u8,
 
-    /// A message to attach to the job that explains the reason for canceling it.
+    /// A message to attach to the job that explains the reason for cancelling it.
     /// This message is
     /// returned by future DescribeJobs operations on the job. It is also
     /// recorded in the Batch activity logs.
     ///
-    /// This parameter has as limit of 1024 characters.
+    /// This parameter has a limit of 1024 characters.
     reason: []const u8,
 
     pub const json_field_names = .{

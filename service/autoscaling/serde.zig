@@ -29,6 +29,7 @@ const CpuPerformanceFactorRequest = @import("cpu_performance_factor_request.zig"
 const CustomizedMetricSpecification = @import("customized_metric_specification.zig").CustomizedMetricSpecification;
 const DeletionProtection = @import("deletion_protection.zig").DeletionProtection;
 const DesiredConfiguration = @import("desired_configuration.zig").DesiredConfiguration;
+const DistributionSegment = @import("distribution_segment.zig").DistributionSegment;
 const Ebs = @import("ebs.zig").Ebs;
 const EnabledMetric = @import("enabled_metric.zig").EnabledMetric;
 const FailedScheduledUpdateGroupActionRequest = @import("failed_scheduled_update_group_action_request.zig").FailedScheduledUpdateGroupActionRequest;
@@ -78,6 +79,7 @@ const MixedInstancesPolicy = @import("mixed_instances_policy.zig").MixedInstance
 const NetworkBandwidthGbpsRequest = @import("network_bandwidth_gbps_request.zig").NetworkBandwidthGbpsRequest;
 const NetworkInterfaceCountRequest = @import("network_interface_count_request.zig").NetworkInterfaceCountRequest;
 const NotificationConfiguration = @import("notification_configuration.zig").NotificationConfiguration;
+const Operator = @import("operator.zig").Operator;
 const PerformanceFactorReferenceRequest = @import("performance_factor_reference_request.zig").PerformanceFactorReferenceRequest;
 const PredefinedLoadMetricType = @import("predefined_load_metric_type.zig").PredefinedLoadMetricType;
 const PredefinedMetricPairType = @import("predefined_metric_pair_type.zig").PredefinedMetricPairType;
@@ -109,6 +111,7 @@ const StepAdjustment = @import("step_adjustment.zig").StepAdjustment;
 const SuspendedProcess = @import("suspended_process.zig").SuspendedProcess;
 const Tag = @import("tag.zig").Tag;
 const TagDescription = @import("tag_description.zig").TagDescription;
+const TargetCapacityType = @import("target_capacity_type.zig").TargetCapacityType;
 const TargetTrackingConfiguration = @import("target_tracking_configuration.zig").TargetTrackingConfiguration;
 const TargetTrackingMetricDataQuery = @import("target_tracking_metric_data_query.zig").TargetTrackingMetricDataQuery;
 const TargetTrackingMetricStat = @import("target_tracking_metric_stat.zig").TargetTrackingMetricStat;
@@ -451,6 +454,24 @@ pub fn deserializeCpuManufacturers(allocator: std.mem.Allocator, reader: *aws.xm
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
                     if (CpuManufacturer.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeDistributionSegments(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const DistributionSegment {
+    var list: std.ArrayList(DistributionSegment) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeDistributionSegment(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -1056,6 +1077,24 @@ pub fn deserializeTagDescriptionList(allocator: std.mem.Allocator, reader: *aws.
     return list.toOwnedSlice(allocator);
 }
 
+pub fn deserializeTargetCapacityTypes(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const TargetCapacityType {
+    var list: std.ArrayList(TargetCapacityType) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    if (TargetCapacityType.fromWireName(try reader.readElementText())) |v| try list.append(allocator, v);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
 pub fn deserializeTargetGroupARNs(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
     var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
@@ -1322,6 +1361,7 @@ pub fn deserializeAutoScalingGroup(allocator: std.mem.Allocator, reader: *aws.xm
     result.max_instance_lifetime = null;
     result.mixed_instances_policy = null;
     result.new_instances_protected_from_scale_in = null;
+    result.operator = null;
     result.placement_group = null;
     result.predicted_capacity = null;
     result.service_linked_role_arn = null;
@@ -1395,6 +1435,8 @@ pub fn deserializeAutoScalingGroup(allocator: std.mem.Allocator, reader: *aws.xm
                     result.mixed_instances_policy = try deserializeMixedInstancesPolicy(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "NewInstancesProtectedFromScaleIn")) {
                     result.new_instances_protected_from_scale_in = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "Operator")) {
+                    result.operator = try deserializeOperator(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "PlacementGroup")) {
                     result.placement_group = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PredictedCapacity")) {
@@ -1719,6 +1761,25 @@ pub fn deserializeDesiredConfiguration(allocator: std.mem.Allocator, reader: *aw
                     result.launch_template = try deserializeLaunchTemplateSpecification(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "MixedInstancesPolicy")) {
                     result.mixed_instances_policy = try deserializeMixedInstancesPolicy(allocator, reader);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeDistributionSegment(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !DistributionSegment {
+    var result: DistributionSegment = undefined;
+    result.target_capacity_types = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "TargetCapacityTypes")) {
+                    result.target_capacity_types = try deserializeTargetCapacityTypes(allocator, reader, "member");
                 } else {
                     try reader.skipElement();
                 }
@@ -2213,6 +2274,7 @@ pub fn deserializeInstanceReusePolicy(allocator: std.mem.Allocator, reader: *aws
 
 pub fn deserializeInstancesDistribution(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !InstancesDistribution {
     var result: InstancesDistribution = undefined;
+    result.distribution_segments = null;
     result.on_demand_allocation_strategy = null;
     result.on_demand_base_capacity = null;
     result.on_demand_percentage_above_base_capacity = null;
@@ -2222,7 +2284,9 @@ pub fn deserializeInstancesDistribution(allocator: std.mem.Allocator, reader: *a
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
-                if (std.mem.eql(u8, e.local, "OnDemandAllocationStrategy")) {
+                if (std.mem.eql(u8, e.local, "DistributionSegments")) {
+                    result.distribution_segments = try deserializeDistributionSegments(allocator, reader, "member");
+                } else if (std.mem.eql(u8, e.local, "OnDemandAllocationStrategy")) {
                     result.on_demand_allocation_strategy = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OnDemandBaseCapacity")) {
                     result.on_demand_base_capacity = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
@@ -2802,6 +2866,24 @@ pub fn deserializeNotificationConfiguration(allocator: std.mem.Allocator, reader
                     result.notification_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TopicARN")) {
                     result.topic_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeOperator(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Operator {
+    var result: Operator = undefined;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Principal")) {
+                    result.principal = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -3775,6 +3857,18 @@ pub fn serializeCpuManufacturers(allocator: std.mem.Allocator, buf: *std.ArrayLi
     }
 }
 
+pub fn serializeDistributionSegments(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const DistributionSegment, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializeDistributionSegment(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
 pub fn serializeExcludedInstanceTypes(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
         try buf.appendSlice(allocator, "<");
@@ -4075,6 +4169,18 @@ pub fn serializeTags(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), valu
     }
 }
 
+pub fn serializeTargetCapacityTypes(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const TargetCapacityType, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try buf.appendSlice(allocator, item.wireName());
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
 pub fn serializeTargetGroupARNs(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
         try buf.appendSlice(allocator, "<");
@@ -4093,6 +4199,18 @@ pub fn serializeTargetTrackingMetricDataQueries(allocator: std.mem.Allocator, bu
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
         try serializeTargetTrackingMetricDataQuery(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
+pub fn serializeTerminationInstanceIds(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -4335,6 +4453,14 @@ pub fn serializeDesiredConfiguration(allocator: std.mem.Allocator, buf: *std.Arr
         try buf.appendSlice(allocator, "<MixedInstancesPolicy>");
         try serializeMixedInstancesPolicy(allocator, buf, v);
         try buf.appendSlice(allocator, "</MixedInstancesPolicy>");
+    }
+}
+
+pub fn serializeDistributionSegment(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: DistributionSegment) !void {
+    if (value.target_capacity_types) |v| {
+        try buf.appendSlice(allocator, "<TargetCapacityTypes>");
+        try serializeTargetCapacityTypes(allocator, buf, v, "member");
+        try buf.appendSlice(allocator, "</TargetCapacityTypes>");
     }
 }
 
@@ -4596,6 +4722,11 @@ pub fn serializeInstanceReusePolicy(allocator: std.mem.Allocator, buf: *std.Arra
 }
 
 pub fn serializeInstancesDistribution(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: InstancesDistribution) !void {
+    if (value.distribution_segments) |v| {
+        try buf.appendSlice(allocator, "<DistributionSegments>");
+        try serializeDistributionSegments(allocator, buf, v, "member");
+        try buf.appendSlice(allocator, "</DistributionSegments>");
+    }
     if (value.on_demand_allocation_strategy) |v| {
         try buf.appendSlice(allocator, "<OnDemandAllocationStrategy>");
         try aws.xml.appendXmlEscaped(allocator, buf, v);
@@ -4881,6 +5012,12 @@ pub fn serializeNetworkInterfaceCountRequest(allocator: std.mem.Allocator, buf: 
         }
         try buf.appendSlice(allocator, "</Min>");
     }
+}
+
+pub fn serializeOperator(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: Operator) !void {
+    try buf.appendSlice(allocator, "<Principal>");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.principal);
+    try buf.appendSlice(allocator, "</Principal>");
 }
 
 pub fn serializePerformanceFactorReferenceRequest(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: PerformanceFactorReferenceRequest) !void {

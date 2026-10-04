@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisassociateWorkspaceIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DisassociateWorkspaceOutput {
-    var result: DisassociateWorkspaceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DisassociateWorkspaceOutput, body, allocator);
-    }
+    const result: DisassociateWorkspaceOutput = try aws.json.parseJsonObject(
+        DisassociateWorkspaceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -13,7 +13,12 @@ pub const ModifyTransitGatewayVpcAttachmentRequestOptions = struct {
     /// Enable or disable DNS support. The default is `enable`.
     dns_support: ?DnsSupportValue = null,
 
-    /// Enable or disable IPv6 support. The default is `enable`.
+    /// Specifies whether IPv6 support is enabled for the attachment. When enabled,
+    /// the transit gateway network interface receives an IPv6 address. When you
+    /// enable route propagation, IPv6 VPC CIDRs propagate to the transit gateway
+    /// route tables. When disabled, the network interface does not receive an IPv6
+    /// address, and IPv6 routes do not propagate. The setting does not filter IPv6
+    /// traffic.
     ipv_6_support: ?Ipv6SupportValue = null,
 
     /// Enables you to reference a security group across VPCs attached to a transit

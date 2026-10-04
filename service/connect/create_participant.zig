@@ -16,7 +16,7 @@ pub const CreateParticipantInput = struct {
     /// APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
     client_token: ?[]const u8 = null,
 
-    /// The identifier of the contact in this instance of Amazon Connect. Supports
+    /// The identifier of the contact in this instance of Connect Customer. Supports
     /// contacts in the CHAT channel and VOICE (WebRTC) channels. For WebRTC calls,
     /// this should be
     /// the initial contact ID that was generated when the contact was first created
@@ -24,7 +24,7 @@ pub const CreateParticipantInput = struct {
     /// VOICE channel
     contact_id: []const u8,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateParticipantInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateParticipantOutput {
-    var result: CreateParticipantOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateParticipantOutput, body, allocator);
-    }
+    const result: CreateParticipantOutput = try aws.json.parseJsonObject(
+        CreateParticipantOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,8 +1,11 @@
 const AvailabilityZoneMapping = @import("availability_zone_mapping.zig").AvailabilityZoneMapping;
 const EnabledAnalysisType = @import("enabled_analysis_type.zig").EnabledAnalysisType;
 const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
+const NatGatewayMapping = @import("nat_gateway_mapping.zig").NatGatewayMapping;
+const ProxySettings = @import("proxy_settings.zig").ProxySettings;
 const SubnetMapping = @import("subnet_mapping.zig").SubnetMapping;
 const Tag = @import("tag.zig").Tag;
+const VpcEndpoint = @import("vpc_endpoint.zig").VpcEndpoint;
 
 /// A firewall defines the behavior of a firewall, the main VPC where the
 /// firewall is used, the Availability Zones where the firewall can be used, and
@@ -76,8 +79,22 @@ pub const Firewall = struct {
     /// `TRUE`.
     firewall_policy_change_protection: bool = false,
 
+    /// The NAT gateways that the firewall uses to proxy traffic. This is set for
+    /// proxy mode firewalls, where `NoSourcePreservation` is `TRUE`.
+    nat_gateway_mappings: ?[]const NatGatewayMapping = null,
+
+    /// Indicates whether the firewall operates in proxy mode, in which the source
+    /// IP address of the traffic is not preserved. When this value is `TRUE`, the
+    /// firewall proxies traffic through a NAT gateway and uses the NAT gateway's IP
+    /// address as the source for traffic reaching the destination.
+    no_source_preservation: bool = false,
+
     /// The number of `VpcEndpointAssociation` resources that use this firewall.
     number_of_associations: ?i32 = null,
+
+    /// The listener configuration for the firewall's proxy. This is set for proxy
+    /// mode firewalls, where `NoSourcePreservation` is `TRUE`.
+    proxy_settings: ?ProxySettings = null,
 
     /// A setting indicating whether the firewall is protected against changes to
     /// the subnet associations.
@@ -115,6 +132,10 @@ pub const Firewall = struct {
     /// transit gateway.
     transit_gateway_owner_account_id: ?[]const u8 = null,
 
+    /// The VPC and subnets for the firewall endpoint. This is set for proxy mode
+    /// firewalls, where `NoSourcePreservation` is `TRUE`.
+    vpc_endpoint: ?VpcEndpoint = null,
+
     /// The unique identifier of the VPC where the firewall is in use.
     vpc_id: []const u8,
 
@@ -130,12 +151,16 @@ pub const Firewall = struct {
         .firewall_name = "FirewallName",
         .firewall_policy_arn = "FirewallPolicyArn",
         .firewall_policy_change_protection = "FirewallPolicyChangeProtection",
+        .nat_gateway_mappings = "NatGatewayMappings",
+        .no_source_preservation = "NoSourcePreservation",
         .number_of_associations = "NumberOfAssociations",
+        .proxy_settings = "ProxySettings",
         .subnet_change_protection = "SubnetChangeProtection",
         .subnet_mappings = "SubnetMappings",
         .tags = "Tags",
         .transit_gateway_id = "TransitGatewayId",
         .transit_gateway_owner_account_id = "TransitGatewayOwnerAccountId",
+        .vpc_endpoint = "VpcEndpoint",
         .vpc_id = "VpcId",
     };
 };

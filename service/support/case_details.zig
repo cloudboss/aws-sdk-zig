@@ -8,7 +8,7 @@ const RecentCaseCommunications = @import("recent_case_communications.zig").Recen
 /// * **caseId** - The support case ID requested
 /// or returned in the call. The case ID is an alphanumeric string formatted as
 /// shown in this example:
-/// case-*12345678910-2013-c4c1d2bf33c5cf47*.
+/// case-*12345678910-exen-2025-c4c1d2bf33c5cf47*.
 ///
 /// * **categoryCode** - The category of problem
 /// for the support case. Corresponds to the `CategoryCode` values
@@ -19,8 +19,9 @@ const RecentCaseCommunications = @import("recent_case_communications.zig").Recen
 ///
 /// * **language** - The language in which Amazon Web Services Support handles
 ///   the case. Amazon Web Services Support
-/// currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and
-/// Korean (“ko”). You must specify the ISO 639-1
+/// currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese
+/// ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and
+/// Turkish ("tr"). You must specify the ISO 639-1
 /// code for the `language` parameter if you want support in that language.
 ///
 /// * **nextToken** - A resumption point for
@@ -72,7 +73,7 @@ pub const CaseDetails = struct {
     /// The support case ID requested or returned in the call. The case ID is an
     /// alphanumeric
     /// string formatted as shown in this example:
-    /// case-*12345678910-2013-c4c1d2bf33c5cf47*
+    /// case-*12345678910-exen-2025-c4c1d2bf33c5cf47*
     case_id: ?[]const u8 = null,
 
     /// The category of problem for the support case.
@@ -88,8 +89,9 @@ pub const CaseDetails = struct {
 
     /// The language in which Amazon Web Services Support handles the case. Amazon
     /// Web Services Support
-    /// currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and
-    /// Korean (“ko”). You must specify the ISO 639-1
+    /// currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese
+    /// ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and
+    /// Turkish ("tr"). You must specify the ISO 639-1
     /// code for the `language` parameter if you want support in that language.
     language: ?[]const u8 = null,
 

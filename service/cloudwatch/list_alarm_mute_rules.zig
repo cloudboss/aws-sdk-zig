@@ -9,18 +9,22 @@ const AlarmMuteRuleSummary = @import("alarm_mute_rule_summary.zig").AlarmMuteRul
 const serde = @import("serde.zig");
 
 pub const ListAlarmMuteRulesInput = struct {
-    /// Filter results to show only mute rules that target the specified alarm name.
+    /// Filter results to show only mute rules that target the specified alarm
+    /// name.
     alarm_name: ?[]const u8 = null,
 
-    /// The maximum number of mute rules to return in one call. The default is 50.
+    /// The maximum number of mute rules to return in one call. The default is
+    /// 50.
     max_records: ?i32 = null,
 
     /// The token returned from a previous call to indicate where to continue
-    /// retrieving results.
+    /// retrieving
+    /// results.
     next_token: ?[]const u8 = null,
 
     /// Filter results to show only mute rules with the specified statuses. Valid
-    /// values are `SCHEDULED`, `ACTIVE`, or `EXPIRED`.
+    /// values
+    /// are `SCHEDULED`, `ACTIVE`, or `EXPIRED`.
     statuses: ?[]const AlarmMuteRuleStatus = null,
 
     pub const json_field_names = .{
@@ -36,7 +40,8 @@ pub const ListAlarmMuteRulesOutput = struct {
     alarm_mute_rule_summaries: ?[]const AlarmMuteRuleSummary = null,
 
     /// The token to use when requesting the next set of results. If this field is
-    /// absent, there are no more results to retrieve.
+    /// absent,
+    /// there are no more results to retrieve.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{

@@ -3,16 +3,19 @@ const std = @import("std");
 pub const EngagementContextType = enum {
     customer_project,
     lead,
+    prospecting_result,
 
     pub const json_field_names = .{
         .customer_project = "CustomerProject",
         .lead = "Lead",
+        .prospecting_result = "ProspectingResult",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .customer_project => "CustomerProject",
             .lead => "Lead",
+            .prospecting_result => "ProspectingResult",
         };
     }
 

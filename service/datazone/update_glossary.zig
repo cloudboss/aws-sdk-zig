@@ -153,10 +153,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGlossaryInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateGlossaryOutput {
-    var result: UpdateGlossaryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateGlossaryOutput, body, allocator);
-    }
+    const result: UpdateGlossaryOutput = try aws.json.parseJsonObject(
+        UpdateGlossaryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,0 +1,10 @@
+/// Allows filtering on the `SourceAuthorization` of a ResaleAuthorization.
+pub const ResaleAuthorizationSourceAuthorizationFilter = struct {
+    /// Allows filtering on the `SourceAuthorization` of a ResaleAuthorization with
+    /// list input.
+    value_list: ?[]const []const u8 = null,
+
+    pub const json_field_names = .{
+        .value_list = "ValueList",
+    };
+};

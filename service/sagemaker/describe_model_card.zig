@@ -4,12 +4,28 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const IncludedData = @import("included_data.zig").IncludedData;
 const UserContext = @import("user_context.zig").UserContext;
 const ModelCardProcessingStatus = @import("model_card_processing_status.zig").ModelCardProcessingStatus;
 const ModelCardStatus = @import("model_card_status.zig").ModelCardStatus;
 const ModelCardSecurityConfig = @import("model_card_security_config.zig").ModelCardSecurityConfig;
 
 pub const DescribeModelCardInput = struct {
+    /// Specifies the level of model card data to include in the response. Use this
+    /// parameter to call `DescribeModelCard` without requiring `kms:Decrypt`
+    /// permission on the customer-managed Amazon Web Services KMS key.
+    ///
+    /// * `AllData`: Returns the full model card `Content`. This option requires
+    ///   `kms:Decrypt` permission on the customer-managed key, if one is associated
+    ///   with the model card. This is the default.
+    /// * `MetadataOnly`: Returns the model card with sanitized `Content` that
+    ///   includes only a small set of unencrypted metadata fields. This option does
+    ///   not require `kms:Decrypt` permission. For the list of fields preserved in
+    ///   the response, see `Content`.
+    ///
+    /// If you don't specify a value, SageMaker returns `AllData`.
+    included_data: ?IncludedData = null,
+
     /// The name or Amazon Resource Name (ARN) of the model card to describe.
     model_card_name: []const u8,
 
@@ -18,13 +34,31 @@ pub const DescribeModelCardInput = struct {
     model_card_version: ?i32 = null,
 
     pub const json_field_names = .{
+        .included_data = "IncludedData",
         .model_card_name = "ModelCardName",
         .model_card_version = "ModelCardVersion",
     };
 };
 
 pub const DescribeModelCardOutput = struct {
-    /// The content of the model card.
+    /// The content of the model card. Content is provided as a string in the [model
+    /// card JSON
+    /// schema](https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html#model-cards-json-schema).
+    ///
+    /// When you set `IncludedData` to `MetadataOnly` in the request, SageMaker
+    /// returns a sanitized version of `Content` that includes only the following
+    /// JSON paths, when present in the model card:
+    ///
+    /// * `model_overview.model_id`
+    /// * `model_overview.model_name`
+    /// * `intended_uses.risk_rating`
+    /// * `model_package_details.model_package_group_name`
+    /// * `model_package_details.model_package_arn`
+    ///
+    /// All other fields are removed from `Content` when `IncludedData` is
+    /// `MetadataOnly`, including model description, training details, evaluation
+    /// details, business details, and additional information. To retrieve the
+    /// complete `Content`, set `IncludedData` to `AllData` or omit the parameter.
     content: []const u8,
 
     created_by: ?UserContext = null,

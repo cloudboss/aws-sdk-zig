@@ -84,10 +84,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCompatibleElasticsea
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCompatibleElasticsearchVersionsOutput {
-    var result: GetCompatibleElasticsearchVersionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCompatibleElasticsearchVersionsOutput, body, allocator);
-    }
+    const result: GetCompatibleElasticsearchVersionsOutput = try aws.json.parseJsonObject(
+        GetCompatibleElasticsearchVersionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

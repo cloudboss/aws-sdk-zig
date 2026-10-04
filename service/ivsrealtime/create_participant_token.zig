@@ -9,16 +9,14 @@ const ParticipantToken = @import("participant_token.zig").ParticipantToken;
 
 pub const CreateParticipantTokenInput = struct {
     /// Application-provided attributes to encode into the token and attach to a
-    /// stage. Map keys
-    /// and values can contain UTF-8 encoded text. The maximum length of this field
-    /// is 1 KB total.
-    /// *This field is exposed to all stage participants and should not be used for
-    /// personally identifying, confidential, or sensitive information.*
+    /// stage. Map keys and values can contain UTF-8 encoded text. The maximum
+    /// length of this field is 1 KB total. *This field is exposed to all stage
+    /// participants and should not be used for personally identifying,
+    /// confidential, or sensitive information.*
     attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// Set of capabilities that the user is allowed to perform in the stage.
-    /// Default:
-    /// `PUBLISH, SUBSCRIBE`.
+    /// Default: `PUBLISH, SUBSCRIBE`.
     capabilities: ?[]const ParticipantTokenCapability = null,
 
     /// Duration (in minutes), after which the token expires. Default: 720 (12
@@ -29,10 +27,9 @@ pub const CreateParticipantTokenInput = struct {
     stage_arn: []const u8,
 
     /// Name that can be specified to help identify the token. This can be any UTF-8
-    /// encoded
-    /// text. *This field is exposed to all stage participants and should not be
-    /// used for
-    /// personally identifying, confidential, or sensitive information.*
+    /// encoded text. *This field is exposed to all stage participants and should
+    /// not be used for personally identifying, confidential, or sensitive
+    /// information.*
     user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -133,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateParticipantTokenI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateParticipantTokenOutput {
-    var result: CreateParticipantTokenOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateParticipantTokenOutput, body, allocator);
-    }
+    const result: CreateParticipantTokenOutput = try aws.json.parseJsonObject(
+        CreateParticipantTokenOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

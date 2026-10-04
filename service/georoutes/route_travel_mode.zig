@@ -5,12 +5,16 @@ pub const RouteTravelMode = enum {
     pedestrian,
     scooter,
     truck,
+    intermodal,
+    transit,
 
     pub const json_field_names = .{
         .car = "Car",
         .pedestrian = "Pedestrian",
         .scooter = "Scooter",
         .truck = "Truck",
+        .intermodal = "Intermodal",
+        .transit = "Transit",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +23,8 @@ pub const RouteTravelMode = enum {
             .pedestrian => "Pedestrian",
             .scooter => "Scooter",
             .truck => "Truck",
+            .intermodal => "Intermodal",
+            .transit => "Transit",
         };
     }
 

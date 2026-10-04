@@ -124,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListLFTagsInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListLFTagsOutput {
-    var result: ListLFTagsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListLFTagsOutput, body, allocator);
-    }
+    const result: ListLFTagsOutput = try aws.json.parseJsonObject(
+        ListLFTagsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

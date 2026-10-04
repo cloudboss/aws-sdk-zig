@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetQAppSessionMetadataI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetQAppSessionMetadataOutput {
-    var result: GetQAppSessionMetadataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetQAppSessionMetadataOutput, body, allocator);
-    }
+    const result: GetQAppSessionMetadataOutput = try aws.json.parseJsonObject(
+        GetQAppSessionMetadataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

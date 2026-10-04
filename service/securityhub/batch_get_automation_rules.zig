@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetAutomationRules
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetAutomationRulesOutput {
-    var result: BatchGetAutomationRulesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetAutomationRulesOutput, body, allocator);
-    }
+    const result: BatchGetAutomationRulesOutput = try aws.json.parseJsonObject(
+        BatchGetAutomationRulesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

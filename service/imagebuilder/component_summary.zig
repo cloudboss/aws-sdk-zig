@@ -9,10 +9,10 @@ pub const ComponentSummary = struct {
     /// The Amazon Resource Name (ARN) of the component.
     arn: ?[]const u8 = null,
 
-    /// The change description for the current version of the component.
+    /// The change description for this version of the component.
     change_description: ?[]const u8 = null,
 
-    /// The original creation date of the component.
+    /// The date that Image Builder created this version of the component.
     date_created: ?[]const u8 = null,
 
     /// The description of the component.
@@ -26,7 +26,9 @@ pub const ComponentSummary = struct {
     /// component detail results for API, CLI, or SDK operations.
     obfuscate: bool = false,
 
-    /// The owner of the component.
+    /// The owner of the component. The value is your account ID for components
+    /// that you own, the sharing account's ID for shared components, or
+    /// `Amazon`, `ThirdParty`, or `AWSMarketplace`.
     owner: ?[]const u8 = null,
 
     /// The operating system platform of the component.

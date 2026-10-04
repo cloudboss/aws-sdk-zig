@@ -200,10 +200,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePodIdentityAssoci
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdatePodIdentityAssociationOutput {
-    var result: UpdatePodIdentityAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdatePodIdentityAssociationOutput, body, allocator);
-    }
+    const result: UpdatePodIdentityAssociationOutput = try aws.json.parseJsonObject(
+        UpdatePodIdentityAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCampaignStateBatchIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCampaignStateBatchOutput {
-    var result: GetCampaignStateBatchOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCampaignStateBatchOutput, body, allocator);
-    }
+    const result: GetCampaignStateBatchOutput = try aws.json.parseJsonObject(
+        GetCampaignStateBatchOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

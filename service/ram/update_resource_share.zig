@@ -137,10 +137,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateResourceShareInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateResourceShareOutput {
-    var result: UpdateResourceShareOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateResourceShareOutput, body, allocator);
-    }
+    const result: UpdateResourceShareOutput = try aws.json.parseJsonObject(
+        UpdateResourceShareOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

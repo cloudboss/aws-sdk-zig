@@ -131,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDirectConnectGate
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDirectConnectGatewayAttachmentOutput {
-    var result: CreateDirectConnectGatewayAttachmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateDirectConnectGatewayAttachmentOutput, body, allocator);
-    }
+    const result: CreateDirectConnectGatewayAttachmentOutput = try aws.json.parseJsonObject(
+        CreateDirectConnectGatewayAttachmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

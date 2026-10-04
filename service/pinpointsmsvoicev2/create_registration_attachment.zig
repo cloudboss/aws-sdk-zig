@@ -8,8 +8,8 @@ const Tag = @import("tag.zig").Tag;
 const AttachmentStatus = @import("attachment_status.zig").AttachmentStatus;
 
 pub const CreateRegistrationAttachmentInput = struct {
-    /// The registration file to upload. The maximum file size is 500KB and valid
-    /// file extensions are PDF, JPEG and PNG.
+    /// The registration file to upload. The maximum file size is 5MB and valid file
+    /// extensions are PDF, JPEG and PNG.
     attachment_body: ?[]const u8 = null,
 
     /// Registration files have to be stored in an Amazon S3 bucket. The URI to use

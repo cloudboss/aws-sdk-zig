@@ -25,6 +25,12 @@ pub const BackupVaultEvent = enum {
     eks_restore_object_failed,
     eks_restore_object_skipped,
     eks_backup_object_failed,
+    access_point_available,
+    access_point_creation_failed,
+    access_point_deleted,
+    access_point_deletion_failed,
+    access_point_expired,
+    access_point_disassociated,
 
     pub const json_field_names = .{
         .backup_job_started = "BACKUP_JOB_STARTED",
@@ -51,6 +57,12 @@ pub const BackupVaultEvent = enum {
         .eks_restore_object_failed = "EKS_RESTORE_OBJECT_FAILED",
         .eks_restore_object_skipped = "EKS_RESTORE_OBJECT_SKIPPED",
         .eks_backup_object_failed = "EKS_BACKUP_OBJECT_FAILED",
+        .access_point_available = "ACCESS_POINT_AVAILABLE",
+        .access_point_creation_failed = "ACCESS_POINT_CREATION_FAILED",
+        .access_point_deleted = "ACCESS_POINT_DELETED",
+        .access_point_deletion_failed = "ACCESS_POINT_DELETION_FAILED",
+        .access_point_expired = "ACCESS_POINT_EXPIRED",
+        .access_point_disassociated = "ACCESS_POINT_DISASSOCIATED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -79,6 +91,12 @@ pub const BackupVaultEvent = enum {
             .eks_restore_object_failed => "EKS_RESTORE_OBJECT_FAILED",
             .eks_restore_object_skipped => "EKS_RESTORE_OBJECT_SKIPPED",
             .eks_backup_object_failed => "EKS_BACKUP_OBJECT_FAILED",
+            .access_point_available => "ACCESS_POINT_AVAILABLE",
+            .access_point_creation_failed => "ACCESS_POINT_CREATION_FAILED",
+            .access_point_deleted => "ACCESS_POINT_DELETED",
+            .access_point_deletion_failed => "ACCESS_POINT_DELETION_FAILED",
+            .access_point_expired => "ACCESS_POINT_EXPIRED",
+            .access_point_disassociated => "ACCESS_POINT_DISASSOCIATED",
         };
     }
 

@@ -17,6 +17,7 @@ pub const RecommendationType = enum {
     suggested_message,
     notes_chunk,
     blocked_notes_chunk,
+    proactive_recommendation,
 
     pub const json_field_names = .{
         .knowledge_content = "KNOWLEDGE_CONTENT",
@@ -35,6 +36,7 @@ pub const RecommendationType = enum {
         .suggested_message = "SUGGESTED_MESSAGE",
         .notes_chunk = "NOTES_CHUNK",
         .blocked_notes_chunk = "BLOCKED_NOTES_CHUNK",
+        .proactive_recommendation = "PROACTIVE_RECOMMENDATION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -55,6 +57,7 @@ pub const RecommendationType = enum {
             .suggested_message => "SUGGESTED_MESSAGE",
             .notes_chunk => "NOTES_CHUNK",
             .blocked_notes_chunk => "BLOCKED_NOTES_CHUNK",
+            .proactive_recommendation => "PROACTIVE_RECOMMENDATION",
         };
     }
 

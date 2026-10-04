@@ -8,6 +8,7 @@ pub const DataSourceType = enum {
     sharepoint,
     custom,
     redshift_metadata,
+    managed_knowledge_base_connector,
 
     pub const json_field_names = .{
         .s3 = "S3",
@@ -17,6 +18,7 @@ pub const DataSourceType = enum {
         .sharepoint = "SHAREPOINT",
         .custom = "CUSTOM",
         .redshift_metadata = "REDSHIFT_METADATA",
+        .managed_knowledge_base_connector = "MANAGED_KNOWLEDGE_BASE_CONNECTOR",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -28,6 +30,7 @@ pub const DataSourceType = enum {
             .sharepoint => "SHAREPOINT",
             .custom => "CUSTOM",
             .redshift_metadata => "REDSHIFT_METADATA",
+            .managed_knowledge_base_connector => "MANAGED_KNOWLEDGE_BASE_CONNECTOR",
         };
     }
 

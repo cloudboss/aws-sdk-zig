@@ -3,12 +3,14 @@ const std = @import("std");
 pub const ServerSideEncryption = enum {
     aes256,
     aws_fsx,
+    aws_backup,
     aws_kms,
     aws_kms_dsse,
 
     pub const json_field_names = .{
         .aes256 = "AES256",
         .aws_fsx = "aws:fsx",
+        .aws_backup = "aws:backup",
         .aws_kms = "aws:kms",
         .aws_kms_dsse = "aws:kms:dsse",
     };
@@ -17,6 +19,7 @@ pub const ServerSideEncryption = enum {
         return switch (self) {
             .aes256 => "AES256",
             .aws_fsx => "aws:fsx",
+            .aws_backup => "aws:backup",
             .aws_kms => "aws:kms",
             .aws_kms_dsse => "aws:kms:dsse",
         };

@@ -232,6 +232,9 @@ pub const FleetAttributes = struct {
     /// * ERROR -- An error occurred when downloading,
     /// validating, building, or activating the fleet.
     ///
+    /// * EXPIRED -- The fleet has been expired. The fleet is scaled down to zero
+    /// instances and cannot host new game sessions.
+    ///
     /// * DELETING -- Hosts are responding to a delete fleet request.
     ///
     /// * TERMINATED -- The fleet no longer exists.

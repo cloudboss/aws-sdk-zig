@@ -91,10 +91,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchUpdatePhoneNumberI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchUpdatePhoneNumberOutput {
-    var result: BatchUpdatePhoneNumberOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchUpdatePhoneNumberOutput, body, allocator);
-    }
+    const result: BatchUpdatePhoneNumberOutput = try aws.json.parseJsonObject(
+        BatchUpdatePhoneNumberOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

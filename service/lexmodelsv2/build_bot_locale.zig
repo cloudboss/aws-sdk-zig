@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BuildBotLocaleInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BuildBotLocaleOutput {
-    var result: BuildBotLocaleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BuildBotLocaleOutput, body, allocator);
-    }
+    const result: BuildBotLocaleOutput = try aws.json.parseJsonObject(
+        BuildBotLocaleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

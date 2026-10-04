@@ -10,8 +10,12 @@ const LifecyclePolicyResourceType = @import("lifecycle_policy_resource_type.zig"
 const LifecyclePolicyStatus = @import("lifecycle_policy_status.zig").LifecyclePolicyStatus;
 
 pub const CreateLifecyclePolicyInput = struct {
-    /// Unique, case-sensitive identifier you provide to ensure
-    /// idempotency of the request. For more information, see [Ensuring
+    /// A unique, case-sensitive identifier you provide to ensure
+    /// that the operation runs no more than one time. If you retry a request with
+    /// the same client
+    /// token, Image Builder returns the original response without running the
+    /// operation again. For more
+    /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
     /// in the *Amazon EC2 API Reference*.
     client_token: []const u8,
@@ -19,24 +23,49 @@ pub const CreateLifecyclePolicyInput = struct {
     /// Optional description for the lifecycle policy.
     description: ?[]const u8 = null,
 
+    /// Validates the required permissions and request parameters without performing
+    /// the operation. If validation succeeds, the operation returns a
+    /// `DryRunOperationException` error response.
+    dry_run: ?bool = null,
+
     /// The name or Amazon Resource Name (ARN) for the IAM role you create that
-    /// grants
-    /// Image Builder access to run lifecycle actions.
+    /// grants Image Builder access to run
+    /// lifecycle actions. You must have permission to pass the role, and the
+    /// role's trust policy must allow the Image Builder service principal to assume
+    /// it.
     execution_role: []const u8,
 
-    /// The name of the lifecycle policy to create.
+    /// The name of the lifecycle policy to create. Policy names must be unique to
+    /// your account in each Amazon Web Services Region. Image Builder generates the
+    /// policy ARN from a
+    /// normalized form of the name, so names that differ only in case, spaces, or
+    /// underscores count as the same name. You can't change the name after
+    /// creation.
     name: []const u8,
 
-    /// Configuration details for the lifecycle policy rules.
+    /// Configuration details for the lifecycle policy rules. A policy can contain
+    /// at most one rule per action type: one `DELETE`, one
+    /// `DEPRECATE`, and one `DISABLE`.
     policy_details: []const LifecyclePolicyDetail,
 
     /// Selection criteria for the resources that the lifecycle policy applies to.
+    /// You must specify exactly one selection criteria: either recipes or a tag
+    /// map, not both.
     resource_selection: LifecyclePolicyResourceSelection,
 
-    /// The type of Image Builder resource that the lifecycle policy applies to.
+    /// The type of Image Builder resource that the lifecycle policy applies to. The
+    /// resource
+    /// type determines the allowed rule actions: policies for AMI-based Image
+    /// Builder images
+    /// support `DELETE`, `DEPRECATE`, and
+    /// `DISABLE`, and policies for container-based Image Builder images support
+    /// only `DELETE`. You can't
+    /// change the resource type after creation.
     resource_type: LifecyclePolicyResourceType,
 
-    /// Indicates whether the lifecycle policy resource is enabled.
+    /// Indicates whether the lifecycle policy resource is enabled. If you don't
+    /// specify a status, it defaults to `ENABLED`. Only enabled policies
+    /// run on their schedule.
     status: ?LifecyclePolicyStatus = null,
 
     /// Tags to apply to the lifecycle policy resource.
@@ -45,6 +74,7 @@ pub const CreateLifecyclePolicyInput = struct {
     pub const json_field_names = .{
         .client_token = "clientToken",
         .description = "description",
+        .dry_run = "dryRun",
         .execution_role = "executionRole",
         .name = "name",
         .policy_details = "policyDetails",
@@ -115,6 +145,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLifecyclePolicyIn
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.dry_run) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"dryRun\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"executionRole\":");
     try aws.json.writeValue(@TypeOf(input.execution_role), input.execution_role, allocator, &body_buf);
@@ -163,10 +199,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLifecyclePolicyIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateLifecyclePolicyOutput {
-    var result: CreateLifecyclePolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateLifecyclePolicyOutput, body, allocator);
-    }
+    const result: CreateLifecyclePolicyOutput = try aws.json.parseJsonObject(
+        CreateLifecyclePolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

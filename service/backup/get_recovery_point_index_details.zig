@@ -151,10 +151,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRecoveryPointIndexDe
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRecoveryPointIndexDetailsOutput {
-    var result: GetRecoveryPointIndexDetailsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRecoveryPointIndexDetailsOutput, body, allocator);
-    }
+    const result: GetRecoveryPointIndexDetailsOutput = try aws.json.parseJsonObject(
+        GetRecoveryPointIndexDetailsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

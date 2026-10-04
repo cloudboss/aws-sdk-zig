@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendWhatsAppMessageInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SendWhatsAppMessageOutput {
-    var result: SendWhatsAppMessageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SendWhatsAppMessageOutput, body, allocator);
-    }
+    const result: SendWhatsAppMessageOutput = try aws.json.parseJsonObject(
+        SendWhatsAppMessageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -55,7 +55,7 @@ pub const JobDetail = struct {
     /// jobs.
     eks_properties: ?EksPropertiesDetail = null,
 
-    /// Indicates whether the job is canceled.
+    /// Indicates whether the job is cancelled.
     is_cancelled: ?bool = null,
 
     /// Indicates whether the job is terminated.
@@ -96,7 +96,8 @@ pub const JobDetail = struct {
     /// The platform capabilities required by the job definition. If no value is
     /// specified, it
     /// defaults to `EC2`. Jobs run on Fargate resources specify
-    /// `FARGATE`.
+    /// `FARGATE`. Jobs run on Amazon ECS Managed Instances specify
+    /// `MANAGED_INSTANCES`.
     platform_capabilities: ?[]const PlatformCapability = null,
 
     /// Specifies whether to propagate the tags from the job or job definition to

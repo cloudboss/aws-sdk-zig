@@ -263,10 +263,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePodIdentityAssoci
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePodIdentityAssociationOutput {
-    var result: CreatePodIdentityAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePodIdentityAssociationOutput, body, allocator);
-    }
+    const result: CreatePodIdentityAssociationOutput = try aws.json.parseJsonObject(
+        CreatePodIdentityAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

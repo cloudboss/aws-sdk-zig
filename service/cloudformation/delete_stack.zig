@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DeletionMode = @import("deletion_mode.zig").DeletionMode;
+const DeploymentConfig = @import("deployment_config.zig").DeploymentConfig;
 const serde = @import("serde.zig");
 
 pub const DeleteStackInput = struct {
@@ -40,6 +41,11 @@ pub const DeleteStackInput = struct {
     /// * `FORCE_DELETE_STACK` - Delete the stack if it's stuck in a
     /// `DELETE_FAILED` state due to resource deletion failure.
     deletion_mode: ?DeletionMode = null,
+
+    /// The deployment configuration for this stack operation, including the
+    /// deployment
+    /// mode.
+    deployment_config: ?DeploymentConfig = null,
 
     /// For stacks in the `DELETE_FAILED` state, a list of resource logical IDs that
     /// are associated with the resources you want to retain. During deletion,
@@ -109,6 +115,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteStackInput, confi
     if (input.deletion_mode) |v| {
         try body_buf.appendSlice(allocator, "&DeletionMode=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
+    }
+    if (input.deployment_config) |v| {
+        if (v.disable_rollback) |sv| {
+            try body_buf.appendSlice(allocator, "&DeploymentConfig.DisableRollback=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
+        }
+        if (v.mode) |sv| {
+            try body_buf.appendSlice(allocator, "&DeploymentConfig.Mode=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
+        }
     }
     if (input.retain_resources) |list| {
         for (list, 0..) |item, idx| {

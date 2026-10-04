@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const RollbackConfig = @import("rollback_config.zig").RollbackConfig;
 const Update = @import("update.zig").Update;
 
 pub const UpdateClusterVersionInput = struct {
@@ -11,12 +12,16 @@ pub const UpdateClusterVersionInput = struct {
     /// the idempotency of the request.
     client_request_token: ?[]const u8 = null,
 
-    /// Set this value to `true` to override upgrade-blocking readiness checks when
+    /// Set this value to `true` to override upgrade-blocking or rollback-blocking
+    /// readiness checks when
     /// updating a cluster.
     force: ?bool = null,
 
     /// The name of the Amazon EKS cluster to update.
     name: []const u8,
+
+    /// The rollback configuration for the cluster version rollback.
+    rollback_config: ?RollbackConfig = null,
 
     /// The desired Kubernetes version following a successful update.
     version: []const u8,
@@ -25,6 +30,7 @@ pub const UpdateClusterVersionInput = struct {
         .client_request_token = "clientRequestToken",
         .force = "force",
         .name = "name",
+        .rollback_config = "rollbackConfig",
         .version = "version",
     };
 };
@@ -90,6 +96,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateClusterVersionInp
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.rollback_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"rollbackConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"version\":");
     try aws.json.writeValue(@TypeOf(input.version), input.version, allocator, &body_buf);
@@ -110,10 +122,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateClusterVersionInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateClusterVersionOutput {
-    var result: UpdateClusterVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateClusterVersionOutput, body, allocator);
-    }
+    const result: UpdateClusterVersionOutput = try aws.json.parseJsonObject(
+        UpdateClusterVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

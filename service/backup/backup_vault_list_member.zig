@@ -111,7 +111,9 @@ pub const BackupVaultListMember = struct {
     /// affected.
     min_retention_days: ?i64 = null,
 
-    /// The number of recovery points that are stored in a backup vault.
+    /// The number of recovery points that are stored in a backup vault. Recovery
+    /// point count
+    /// value displayed in the console can be an approximation.
     number_of_recovery_points: i64 = 0,
 
     /// The current state of the vault.

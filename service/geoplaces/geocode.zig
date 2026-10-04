@@ -5,8 +5,11 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const GeocodeAdditionalFeature = @import("geocode_additional_feature.zig").GeocodeAdditionalFeature;
+const GeocodeAddressNamesMode = @import("geocode_address_names_mode.zig").GeocodeAddressNamesMode;
+const AddressTranslationComponent = @import("address_translation_component.zig").AddressTranslationComponent;
 const GeocodeFilter = @import("geocode_filter.zig").GeocodeFilter;
 const GeocodeIntendedUse = @import("geocode_intended_use.zig").GeocodeIntendedUse;
+const PostalCodeMode = @import("postal_code_mode.zig").PostalCodeMode;
 const GeocodeQueryComponents = @import("geocode_query_components.zig").GeocodeQueryComponents;
 const GeocodeResultItem = @import("geocode_result_item.zig").GeocodeResultItem;
 
@@ -14,6 +17,20 @@ pub const GeocodeInput = struct {
     /// A list of optional additional parameters, such as time zone, that can be
     /// requested for each result.
     additional_features: ?[]const GeocodeAdditionalFeature = null,
+
+    /// Specifies how address names are returned. If not set, the service returns
+    /// normalized (official) names by default. When set to `Matched`, address names
+    /// in the response are based on the input query rather than official names.
+    /// When set to `Administrative`, the service returns the official
+    /// administrative names for address components. `Administrative` currently
+    /// applies only to addresses in the United States.
+    address_names_mode: ?GeocodeAddressNamesMode = null,
+
+    /// Specifies which address components to include translations for. Translations
+    /// include all name variants and alternative names for the requested fields in
+    /// all available languages. Valid values are `District`, `Locality`, `Region`,
+    /// and `SubRegion`.
+    address_translations: ?[]const AddressTranslationComponent = null,
 
     /// The position, in longitude and latitude, that the results should be close
     /// to. Typically, place results returned are ranked higher the closer they are
@@ -41,10 +58,8 @@ pub const GeocodeInput = struct {
     /// valid SigV4 signature must be provided when making a request.
     key: ?[]const u8 = null,
 
-    /// A list of [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag)
-    /// compliant language codes for the results to be rendered in. If there is no
-    /// data for the result in the requested language, data will be returned in the
-    /// default language for the entry.
+    /// A list of [BCP
+    /// 47](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry) compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.
     language: ?[]const u8 = null,
 
     /// An optional limit for the number of results returned in a single call.
@@ -58,6 +73,15 @@ pub const GeocodeInput = struct {
     /// country.
     political_view: ?[]const u8 = null,
 
+    /// The `PostalCodeMode` affects how postal code results are returned. If a
+    /// postal code spans multiple localities and this value is empty, partial
+    /// district or locality information may be returned under a single postal code
+    /// result entry. If it's populated with the value `EnumerateSpannedLocalities`,
+    /// all cities in that postal code are returned. If it's populated with the
+    /// value `EnumerateSpannedDistricts`, all combinations of the postal code with
+    /// the corresponding district and city names are returned.
+    postal_code_mode: ?PostalCodeMode = null,
+
     query_components: ?GeocodeQueryComponents = null,
 
     /// The free-form text query to match addresses against. This is usually a
@@ -66,6 +90,8 @@ pub const GeocodeInput = struct {
 
     pub const json_field_names = .{
         .additional_features = "AdditionalFeatures",
+        .address_names_mode = "AddressNamesMode",
+        .address_translations = "AddressTranslations",
         .bias_position = "BiasPosition",
         .filter = "Filter",
         .intended_use = "IntendedUse",
@@ -73,6 +99,7 @@ pub const GeocodeInput = struct {
         .language = "Language",
         .max_results = "MaxResults",
         .political_view = "PoliticalView",
+        .postal_code_mode = "PostalCodeMode",
         .query_components = "QueryComponents",
         .query_text = "QueryText",
     };
@@ -147,6 +174,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GeocodeInput, config: *
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.address_names_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AddressNamesMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.address_translations) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AddressTranslations\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.bias_position) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"BiasPosition\":");
@@ -183,6 +222,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GeocodeInput, config: *
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.postal_code_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"PostalCodeMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.query_components) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"QueryComponents\":");
@@ -212,10 +257,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GeocodeInput, config: *
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GeocodeOutput {
-    var result: GeocodeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GeocodeOutput, body, allocator);
-    }
+    var result: GeocodeOutput = try aws.json.parseJsonObject(
+        GeocodeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("x-amz-geo-pricing-bucket")) |value| {
         result.pricing_bucket = try allocator.dupe(u8, value);

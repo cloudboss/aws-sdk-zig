@@ -202,10 +202,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDataProductInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDataProductOutput {
-    var result: CreateDataProductOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateDataProductOutput, body, allocator);
-    }
+    const result: CreateDataProductOutput = try aws.json.parseJsonObject(
+        CreateDataProductOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -14,6 +14,9 @@ pub const HarnessSummary = struct {
     /// The name of the harness.
     harness_name: []const u8,
 
+    /// The latest version of the harness.
+    harness_version: ?[]const u8 = null,
+
     /// The current status of the harness.
     status: HarnessStatus,
 
@@ -25,6 +28,7 @@ pub const HarnessSummary = struct {
         .created_at = "createdAt",
         .harness_id = "harnessId",
         .harness_name = "harnessName",
+        .harness_version = "harnessVersion",
         .status = "status",
         .updated_at = "updatedAt",
     };

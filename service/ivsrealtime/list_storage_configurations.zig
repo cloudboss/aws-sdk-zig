@@ -8,8 +8,7 @@ const StorageConfigurationSummary = @import("storage_configuration_summary.zig")
 
 pub const ListStorageConfigurationsInput = struct {
     /// Maximum number of storage configurations to return. Default: your service
-    /// quota or 100,
-    /// whichever is smaller.
+    /// quota or 100, whichever is smaller.
     max_results: ?i32 = null,
 
     /// The first storage configuration to retrieve. This is used for pagination;
@@ -100,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListStorageConfiguratio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListStorageConfigurationsOutput {
-    var result: ListStorageConfigurationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListStorageConfigurationsOutput, body, allocator);
-    }
+    const result: ListStorageConfigurationsOutput = try aws.json.parseJsonObject(
+        ListStorageConfigurationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

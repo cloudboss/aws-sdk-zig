@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateChannelClassInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateChannelClassOutput {
-    var result: UpdateChannelClassOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateChannelClassOutput, body, allocator);
-    }
+    const result: UpdateChannelClassOutput = try aws.json.parseJsonObject(
+        UpdateChannelClassOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -4,8 +4,16 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const ApplyCancellationCharges = @import("apply_cancellation_charges.zig").ApplyCancellationCharges;
 
 pub const CancelCapacityReservationInput = struct {
+    /// Specifies the cancellation charge type to apply when cancelling a
+    /// future-dated Capacity
+    /// Reservation during its commitment duration. Possible values include
+    /// `commitment-wind-down`, which continues billing for the remaining commitment
+    /// duration without delivering capacity.
+    apply_cancellation_charges: ?ApplyCancellationCharges = null,
+
     /// The ID of the Capacity Reservation to be cancelled.
     capacity_reservation_id: []const u8,
 
@@ -14,6 +22,12 @@ pub const CancelCapacityReservationInput = struct {
     /// required permissions, the error response is `DryRunOperation`. Otherwise, it
     /// is `UnauthorizedOperation`.
     dry_run: ?bool = null,
+
+    /// The ID of the cancellation quote to use for the cancellation. You can
+    /// generate a
+    /// cancellation quote by using the `CreateCapacityReservationCancellationQuote`
+    /// action. The cancellation quote must be in an `active` state.
+    quote_id: ?[]const u8 = null,
 };
 
 pub const CancelCapacityReservationOutput = struct {
@@ -54,11 +68,19 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CancelCapacityReservati
     var body_buf: std.ArrayList(u8) = .empty;
 
     try body_buf.appendSlice(allocator, "Action=CancelCapacityReservation&Version=2016-11-15");
+    if (input.apply_cancellation_charges) |v| {
+        try body_buf.appendSlice(allocator, "&ApplyCancellationCharges=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
+    }
     try body_buf.appendSlice(allocator, "&CapacityReservationId=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.capacity_reservation_id);
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
+    if (input.quote_id) |v| {
+        try body_buf.appendSlice(allocator, "&QuoteId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
 
     const body = try body_buf.toOwnedSlice(allocator);

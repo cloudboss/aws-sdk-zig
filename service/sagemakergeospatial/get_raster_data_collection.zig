@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRasterDataCollection
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRasterDataCollectionOutput {
-    var result: GetRasterDataCollectionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRasterDataCollectionOutput, body, allocator);
-    }
+    const result: GetRasterDataCollectionOutput = try aws.json.parseJsonObject(
+        GetRasterDataCollectionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

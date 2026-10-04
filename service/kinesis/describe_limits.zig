@@ -9,6 +9,12 @@ pub const DescribeLimitsInput = struct {
 };
 
 pub const DescribeLimitsOutput = struct {
+    /// The number of channels in the account.
+    channel_count: ?i32 = null,
+
+    /// The maximum number of channels allowed in the account.
+    channel_count_limit: ?i32 = null,
+
     /// Indicates the number of data streams with the on-demand capacity mode.
     on_demand_stream_count: i32,
 
@@ -22,6 +28,8 @@ pub const DescribeLimitsOutput = struct {
     shard_limit: i32,
 
     pub const json_field_names = .{
+        .channel_count = "ChannelCount",
+        .channel_count_limit = "ChannelCountLimit",
         .on_demand_stream_count = "OnDemandStreamCount",
         .on_demand_stream_count_limit = "OnDemandStreamCountLimit",
         .open_shard_count = "OpenShardCount",

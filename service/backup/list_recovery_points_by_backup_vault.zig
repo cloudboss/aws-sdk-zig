@@ -243,10 +243,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRecoveryPointsByBac
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListRecoveryPointsByBackupVaultOutput {
-    var result: ListRecoveryPointsByBackupVaultOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListRecoveryPointsByBackupVaultOutput, body, allocator);
-    }
+    const result: ListRecoveryPointsByBackupVaultOutput = try aws.json.parseJsonObject(
+        ListRecoveryPointsByBackupVaultOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

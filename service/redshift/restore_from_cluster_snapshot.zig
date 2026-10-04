@@ -28,8 +28,8 @@ pub const RestoreFromClusterSnapshotInput = struct {
     /// you can
     /// still create manual snapshots when you want with CreateClusterSnapshot.
     ///
-    /// You can't disable automated snapshots for RA3 node types. Set the automated
-    /// retention period from 1-35 days.
+    /// You can't disable automated snapshots for RG or RA3 node types. Set the
+    /// automated retention period from 1-35 days.
     ///
     /// Default: The value selected for the cluster from which the snapshot was
     /// taken.
@@ -236,7 +236,7 @@ pub const RestoreFromClusterSnapshotInput = struct {
     /// Default: The same port as the original cluster.
     ///
     /// Valid values: For clusters with DC2 nodes, must be within the range
-    /// `1150`-`65535`. For clusters with ra3 nodes, must be
+    /// `1150`-`65535`. For clusters with RG or RA3 nodes, must be
     /// within the ranges `5431`-`5455` or `8191`-`8215`.
     port: ?i32 = null,
 

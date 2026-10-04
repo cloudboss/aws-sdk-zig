@@ -205,7 +205,16 @@ pub const M2tsSettings = struct {
     /// specified must be in the range of 32 (or 0x20)..8182 (or 0x1ff6).
     scte_27_pids: ?[]const u8 = null,
 
-    /// Optionally pass SCTE-35 signals from the input source to this output.
+    /// SCTE-35 control. Option "none" indicates that a SCTE-35 marker will not be
+    /// inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the
+    /// segment be segmented. Option "scte35WithoutIdr" indicates that a SCTE-35
+    /// marker will be inserted to indicate the cue point, but MediaLive will not
+    /// insert an IDR on that frame nor will it introduce a new segment boundary
+    /// there if it wasn't already going to be one (this option is required for use
+    /// with downstream multiview bitstream stitching workflows). Option
+    /// "passthrough" indicates that a SCTE-35 marker will be inserted to indicate
+    /// the cue point, and an IDR will be inserted on that frame, and MediaLive
+    /// itself will introduce a new segment boundary there.
     scte_35_control: ?M2tsScte35Control = null,
 
     /// Packet Identifier (PID) of the SCTE-35 stream in the transport stream. Can

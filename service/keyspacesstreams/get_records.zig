@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Record = @import("record.zig").Record;
+const IteratorDescription = @import("iterator_description.zig").IteratorDescription;
 
 pub const GetRecordsInput = struct {
     /// The maximum number of records to return in a single `GetRecords` request.
@@ -32,6 +33,10 @@ pub const GetRecordsOutput = struct {
     /// and information about what data was modified.
     change_records: ?[]const Record = null,
 
+    /// Provides information about the current iterator at the time GetRecords
+    /// request was processed by Keyspaces.
+    iterator_description: ?IteratorDescription = null,
+
     /// The next position in the shard from which to start sequentially reading data
     /// records. If null, the shard has been closed and the requested iterator will
     /// not return any more data.
@@ -39,6 +44,7 @@ pub const GetRecordsOutput = struct {
 
     pub const json_field_names = .{
         .change_records = "changeRecords",
+        .iterator_description = "iteratorDescription",
         .next_shard_iterator = "nextShardIterator",
     };
 };

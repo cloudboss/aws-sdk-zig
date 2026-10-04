@@ -1,3 +1,5 @@
+const MultiviewFilterConfiguration = @import("multiview_filter_configuration.zig").MultiviewFilterConfiguration;
+
 /// Filter configuration includes settings for manifest filtering, start and end
 /// times, and time delay that apply to all of your egress requests for this
 /// manifest.
@@ -23,6 +25,16 @@ pub const FilterConfiguration = struct {
     /// endpoint URL.
     manifest_filter: ?[]const u8 = null,
 
+    /// Optionally pin this manifest to a single multiview combination, so that
+    /// players request it without an `aws.multiview` query parameter. When you pin
+    /// a combination, note that you cannot use the `aws.multiview` query parameter
+    /// for this manifest's endpoint URL, even when that parameter requests the same
+    /// combination.
+    ///
+    /// This setting is valid only on an origin endpoint whose channel has an
+    /// `InputType` of `MULTIVIEW`.
+    multiview: ?MultiviewFilterConfiguration = null,
+
     /// Optionally specify the start time for all of your manifest egress requests.
     /// When you include start time, note that you cannot use start time query
     /// parameters for this manifest's endpoint URL.
@@ -39,6 +51,7 @@ pub const FilterConfiguration = struct {
         .drm_settings = "DrmSettings",
         .end = "End",
         .manifest_filter = "ManifestFilter",
+        .multiview = "Multiview",
         .start = "Start",
         .time_delay_seconds = "TimeDelaySeconds",
     };

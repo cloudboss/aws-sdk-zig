@@ -7,6 +7,7 @@ pub const AwsMemberBusinessTitle = enum {
     pdm,
     psm,
     isvsm,
+    signatory,
 
     pub const json_field_names = .{
         .aws_sales_rep = "AWSSalesRep",
@@ -15,6 +16,7 @@ pub const AwsMemberBusinessTitle = enum {
         .pdm = "PDM",
         .psm = "PSM",
         .isvsm = "ISVSM",
+        .signatory = "Signatory",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +27,7 @@ pub const AwsMemberBusinessTitle = enum {
             .pdm => "PDM",
             .psm => "PSM",
             .isvsm => "ISVSM",
+            .signatory => "Signatory",
         };
     }
 

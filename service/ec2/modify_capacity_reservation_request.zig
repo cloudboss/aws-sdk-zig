@@ -5,6 +5,11 @@ pub const ModifyCapacityReservationRequest = struct {
     /// Reserved. Capacity Reservations you have created are accepted by default.
     accept: ?bool = null,
 
+    /// Indicates that you accept the modification terms of the quote identified by
+    /// `QuoteId`. To apply a quoted modification, set this parameter to
+    /// `true`.
+    accept_modification_terms: ?bool = null,
+
     /// Reserved for future use.
     additional_info: ?[]const u8 = null,
 
@@ -68,4 +73,20 @@ pub const ModifyCapacityReservationRequest = struct {
     /// completely idle
     /// (zero usage).
     instance_match_criteria: ?InstanceMatchCriteria = null,
+
+    /// The ID of the quote that describes the modification you want to apply.
+    /// Generate a quote
+    /// by using `CreateCapacityReservationDateChangeQuote`. The quote must be in
+    /// the
+    /// `active` state, and each quote can be used only once.
+    quote_id: ?[]const u8 = null,
+
+    /// The new start date for the Capacity Reservation, in the ISO8601 format in
+    /// the UTC time
+    /// zone (`YYYY-MM-DDThh:mm:ss.sssZ`). Applies to future-dated Capacity
+    /// Reservations only. Requires a quote from
+    /// `CreateCapacityReservationDateChangeQuote`; pass the quote ID in
+    /// `QuoteId` with `AcceptModificationTerms` set to
+    /// `true`.
+    start_date: ?i64 = null,
 };

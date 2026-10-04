@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartResourceGroupingRe
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartResourceGroupingRecommendationTaskOutput {
-    var result: StartResourceGroupingRecommendationTaskOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartResourceGroupingRecommendationTaskOutput, body, allocator);
-    }
+    const result: StartResourceGroupingRecommendationTaskOutput = try aws.json.parseJsonObject(
+        StartResourceGroupingRecommendationTaskOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

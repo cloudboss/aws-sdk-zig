@@ -84,10 +84,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetContentSummaryInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetContentSummaryOutput {
-    var result: GetContentSummaryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetContentSummaryOutput, body, allocator);
-    }
+    const result: GetContentSummaryOutput = try aws.json.parseJsonObject(
+        GetContentSummaryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

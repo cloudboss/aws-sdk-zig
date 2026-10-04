@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ProvisioningConfiguration = @import("provisioning_configuration.zig").ProvisioningConfiguration;
+const ResourceConfiguration = @import("resource_configuration.zig").ResourceConfiguration;
 
 pub const GetEnvironmentBlueprintConfigurationInput = struct {
     /// The ID of the Amazon DataZone domain where this blueprint exists.
@@ -20,6 +21,10 @@ pub const GetEnvironmentBlueprintConfigurationInput = struct {
 };
 
 pub const GetEnvironmentBlueprintConfigurationOutput = struct {
+    /// Specifies whether user-provided resource configurations are allowed for the
+    /// environment blueprint.
+    allow_user_provided_configurations: ?bool = null,
+
     /// The timestamp of when this blueprint was created.
     created_at: ?i64 = null,
 
@@ -47,10 +52,14 @@ pub const GetEnvironmentBlueprintConfigurationOutput = struct {
     /// The regional parameters of the blueprint.
     regional_parameters: ?[]const aws.map.MapEntry([]const aws.map.StringMapEntry) = null,
 
+    /// The resource configurations of the environment blueprint.
+    resource_configurations: ?[]const ResourceConfiguration = null,
+
     /// The timestamp of when this blueprint was upated.
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{
+        .allow_user_provided_configurations = "allowUserProvidedConfigurations",
         .created_at = "createdAt",
         .domain_id = "domainId",
         .enabled_regions = "enabledRegions",
@@ -60,6 +69,7 @@ pub const GetEnvironmentBlueprintConfigurationOutput = struct {
         .provisioning_configurations = "provisioningConfigurations",
         .provisioning_role_arn = "provisioningRoleArn",
         .regional_parameters = "regionalParameters",
+        .resource_configurations = "resourceConfigurations",
         .updated_at = "updatedAt",
     };
 };
@@ -115,10 +125,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEnvironmentBlueprint
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetEnvironmentBlueprintConfigurationOutput {
-    var result: GetEnvironmentBlueprintConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetEnvironmentBlueprintConfigurationOutput, body, allocator);
-    }
+    const result: GetEnvironmentBlueprintConfigurationOutput = try aws.json.parseJsonObject(
+        GetEnvironmentBlueprintConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

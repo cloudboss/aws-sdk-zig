@@ -69,10 +69,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPricingPlanInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPricingPlanOutput {
-    var result: GetPricingPlanOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPricingPlanOutput, body, allocator);
-    }
+    const result: GetPricingPlanOutput = try aws.json.parseJsonObject(
+        GetPricingPlanOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

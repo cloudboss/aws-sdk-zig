@@ -18,6 +18,8 @@ pub const AssumeRootInput = struct {
     /// By default, the value is set to `900` seconds.
     duration_seconds: ?i32 = null,
 
+    minimum_session_token_size: ?i32 = null,
+
     /// The member account principal ARN or account ID.
     target_principal: []const u8,
 
@@ -55,6 +57,10 @@ pub const AssumeRootOutput = struct {
     /// We
     /// strongly recommend that you make no assumptions about the maximum size.
     credentials: ?Credentials = null,
+
+    session_token_size: ?i32 = null,
+
+    session_token_utilization: ?i32 = null,
 
     /// The source identity specified by the principal that is calling the
     /// `AssumeRoot` operation.
@@ -112,6 +118,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssumeRootInput, config
         try body_buf.appendSlice(allocator, "&DurationSeconds=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
+    if (input.minimum_session_token_size) |v| {
+        try body_buf.appendSlice(allocator, "&MinimumSessionTokenSize=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
     try body_buf.appendSlice(allocator, "&TargetPrincipal=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.target_principal);
     if (input.task_policy_arn.arn) |sv| {
@@ -152,6 +162,10 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Credentials")) {
                     result.credentials = try serde.deserializeCredentials(allocator, &reader);
+                } else if (std.mem.eql(u8, e.local, "SessionTokenSize")) {
+                    result.session_token_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "SessionTokenUtilization")) {
+                    result.session_token_utilization = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "SourceIdentity")) {
                     result.source_identity = try allocator.dupe(u8, try reader.readElementText());
                 } else {

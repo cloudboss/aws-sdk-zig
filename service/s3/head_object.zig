@@ -8,6 +8,7 @@ const ChecksumMode = @import("checksum_mode.zig").ChecksumMode;
 const RequestPayer = @import("request_payer.zig").RequestPayer;
 const ArchiveStatus = @import("archive_status.zig").ArchiveStatus;
 const ChecksumType = @import("checksum_type.zig").ChecksumType;
+const ObjectLockEventHold = @import("object_lock_event_hold.zig").ObjectLockEventHold;
 const ObjectLockLegalHoldStatus = @import("object_lock_legal_hold_status.zig").ObjectLockLegalHoldStatus;
 const ObjectLockMode = @import("object_lock_mode.zig").ObjectLockMode;
 const ReplicationStatus = @import("replication_status.zig").ReplicationStatus;
@@ -396,6 +397,27 @@ pub const HeadObjectOutput = struct {
     ///
     /// This functionality is not supported for directory buckets.
     missing_meta: ?i32 = null,
+
+    /// The event hold status for this object. This header is only returned if the
+    /// requester has the
+    /// `s3:GetObjectRetention` permission.
+    ///
+    /// This functionality is not supported for directory buckets.
+    object_lock_event_hold: ?ObjectLockEventHold = null,
+
+    /// The event hold duration in days for this object. Only returned when the
+    /// event hold is
+    /// enabled.
+    ///
+    /// This functionality is not supported for directory buckets.
+    object_lock_event_hold_duration_days: ?i32 = null,
+
+    /// The event hold duration in years for this object. Only returned when the
+    /// event hold is
+    /// enabled.
+    ///
+    /// This functionality is not supported for directory buckets.
+    object_lock_event_hold_duration_years: ?i32 = null,
 
     /// Specifies whether a legal hold is in effect for this object. This header is
     /// only returned if the
@@ -855,6 +877,15 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     }
     if (headers.get("x-amz-missing-meta")) |value| {
         result.missing_meta = std.fmt.parseInt(i32, value, 10) catch null;
+    }
+    if (headers.get("x-amz-object-lock-event-hold")) |value| {
+        result.object_lock_event_hold = ObjectLockEventHold.fromWireName(value);
+    }
+    if (headers.get("x-amz-object-lock-event-hold-duration-days")) |value| {
+        result.object_lock_event_hold_duration_days = std.fmt.parseInt(i32, value, 10) catch null;
+    }
+    if (headers.get("x-amz-object-lock-event-hold-duration-years")) |value| {
+        result.object_lock_event_hold_duration_years = std.fmt.parseInt(i32, value, 10) catch null;
     }
     if (headers.get("x-amz-object-lock-legal-hold")) |value| {
         result.object_lock_legal_hold_status = ObjectLockLegalHoldStatus.fromWireName(value);

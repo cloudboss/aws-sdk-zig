@@ -42,7 +42,7 @@ pub const LifecycleExecutionResource = struct {
     /// resource.
     start_time: ?i64 = null,
 
-    /// The runtime state for the lifecycle execution.
+    /// The runtime state of the lifecycle action for this resource.
     state: ?LifecycleExecutionResourceState = null,
 
     pub const json_field_names = .{

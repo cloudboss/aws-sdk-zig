@@ -124,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateSbomWithPackag
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateSbomWithPackageVersionOutput {
-    var result: AssociateSbomWithPackageVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateSbomWithPackageVersionOutput, body, allocator);
-    }
+    const result: AssociateSbomWithPackageVersionOutput = try aws.json.parseJsonObject(
+        AssociateSbomWithPackageVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

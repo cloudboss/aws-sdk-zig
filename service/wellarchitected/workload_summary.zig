@@ -18,6 +18,7 @@ pub const WorkloadSummary = struct {
 
     risk_counts: ?[]const aws.map.MapEntry(i32) = null,
 
+    /// The date and time when the workload was last updated.
     updated_at: ?i64 = null,
 
     workload_arn: ?[]const u8 = null,

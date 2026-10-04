@@ -5,12 +5,16 @@ pub const RelatedEntityType = enum {
     aws_products,
     aws_marketplace_offers,
     aws_marketplace_offer_sets,
+    aws_marketplace_solutions,
+    aws_marketplace_products,
 
     pub const json_field_names = .{
         .solutions = "Solutions",
         .aws_products = "AwsProducts",
         .aws_marketplace_offers = "AwsMarketplaceOffers",
         .aws_marketplace_offer_sets = "AwsMarketplaceOfferSets",
+        .aws_marketplace_solutions = "AwsMarketplaceSolutions",
+        .aws_marketplace_products = "AwsMarketplaceProducts",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +23,8 @@ pub const RelatedEntityType = enum {
             .aws_products => "AwsProducts",
             .aws_marketplace_offers => "AwsMarketplaceOffers",
             .aws_marketplace_offer_sets => "AwsMarketplaceOfferSets",
+            .aws_marketplace_solutions => "AwsMarketplaceSolutions",
+            .aws_marketplace_products => "AwsMarketplaceProducts",
         };
     }
 

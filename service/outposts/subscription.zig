@@ -1,3 +1,4 @@
+const CurrencyCode = @import("currency_code.zig").CurrencyCode;
 const SubscriptionStatus = @import("subscription_status.zig").SubscriptionStatus;
 const SubscriptionType = @import("subscription_type.zig").SubscriptionType;
 
@@ -5,6 +6,10 @@ const SubscriptionType = @import("subscription_type.zig").SubscriptionType;
 pub const Subscription = struct {
     /// The date your subscription starts.
     begin_date: ?i64 = null,
+
+    /// The currency of the subscription price. Currently only `USD` is
+    /// supported.
+    currency: ?CurrencyCode = null,
 
     /// The date your subscription ends.
     end_date: ?i64 = null,
@@ -51,6 +56,7 @@ pub const Subscription = struct {
 
     pub const json_field_names = .{
         .begin_date = "BeginDate",
+        .currency = "Currency",
         .end_date = "EndDate",
         .monthly_recurring_price = "MonthlyRecurringPrice",
         .order_ids = "OrderIds",

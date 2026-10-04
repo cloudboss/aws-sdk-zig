@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListIntentPathsInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListIntentPathsOutput {
-    var result: ListIntentPathsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListIntentPathsOutput, body, allocator);
-    }
+    const result: ListIntentPathsOutput = try aws.json.parseJsonObject(
+        ListIntentPathsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -120,10 +120,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetManagedResourceInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetManagedResourceOutput {
-    var result: GetManagedResourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetManagedResourceOutput, body, allocator);
-    }
+    const result: GetManagedResourceOutput = try aws.json.parseJsonObject(
+        GetManagedResourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

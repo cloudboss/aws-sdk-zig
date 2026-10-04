@@ -5,9 +5,8 @@ const GatewayType = @import("gateway_type.zig").GatewayType;
 /// Services Cloud.
 pub const Gateway = struct {
     /// The Amazon Resource Name (ARN) of the gateway. Use the `ListGateways`
-    /// operation
-    /// to return a list of gateways for your account and Amazon Web Services
-    /// Region.
+    /// operation to return a list of gateways for your account and Amazon Web
+    /// Services Region.
     gateway_arn: ?[]const u8 = null,
 
     /// The display name of the gateway.
@@ -20,8 +19,7 @@ pub const Gateway = struct {
     hypervisor_id: ?[]const u8 = null,
 
     /// The last time Backup gateway communicated with the gateway, in Unix format
-    /// and
-    /// UTC time.
+    /// and UTC time.
     last_seen_time: ?i64 = null,
 
     pub const json_field_names = .{

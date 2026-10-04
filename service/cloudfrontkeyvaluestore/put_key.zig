@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutKeyInput, config: *a
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutKeyOutput {
-    var result: PutKeyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutKeyOutput, body, allocator);
-    }
+    var result: PutKeyOutput = try aws.json.parseJsonObject(
+        PutKeyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("etag")) |value| {
         result.e_tag = try allocator.dupe(u8, value);

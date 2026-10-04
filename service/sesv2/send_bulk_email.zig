@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const BulkEmailEntry = @import("bulk_email_entry.zig").BulkEmailEntry;
+const ConfigurationOverrides = @import("configuration_overrides.zig").ConfigurationOverrides;
 const BulkEmailContent = @import("bulk_email_content.zig").BulkEmailContent;
 const MessageTag = @import("message_tag.zig").MessageTag;
 const BulkEmailEntryResult = @import("bulk_email_entry_result.zig").BulkEmailEntryResult;
@@ -12,6 +13,13 @@ const BulkEmailEntryResult = @import("bulk_email_entry_result.zig").BulkEmailEnt
 pub const SendBulkEmailInput = struct {
     /// The list of bulk email entry objects.
     bulk_email_entries: []const BulkEmailEntry,
+
+    /// An object that overrides, for the messages in this request only, settings
+    /// that would
+    /// otherwise apply to them. The overrides apply to every message in the
+    /// request. Each
+    /// setting that you don't override keeps the value that already applies.
+    configuration_overrides: ?ConfigurationOverrides = null,
 
     /// The name of the configuration set to use when sending the email.
     configuration_set_name: ?[]const u8 = null,
@@ -90,6 +98,7 @@ pub const SendBulkEmailInput = struct {
 
     pub const json_field_names = .{
         .bulk_email_entries = "BulkEmailEntries",
+        .configuration_overrides = "ConfigurationOverrides",
         .configuration_set_name = "ConfigurationSetName",
         .default_content = "DefaultContent",
         .default_email_tags = "DefaultEmailTags",
@@ -154,6 +163,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendBulkEmailInput, con
     try body_buf.appendSlice(allocator, "\"BulkEmailEntries\":");
     try aws.json.writeValue(@TypeOf(input.bulk_email_entries), input.bulk_email_entries, allocator, &body_buf);
     has_prev = true;
+    if (input.configuration_overrides) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ConfigurationOverrides\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.configuration_set_name) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"ConfigurationSetName\":");
@@ -228,10 +243,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendBulkEmailInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SendBulkEmailOutput {
-    var result: SendBulkEmailOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SendBulkEmailOutput, body, allocator);
-    }
+    const result: SendBulkEmailOutput = try aws.json.parseJsonObject(
+        SendBulkEmailOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

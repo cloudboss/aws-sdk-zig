@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeGeofenceCollect
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeGeofenceCollectionOutput {
-    var result: DescribeGeofenceCollectionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeGeofenceCollectionOutput, body, allocator);
-    }
+    const result: DescribeGeofenceCollectionOutput = try aws.json.parseJsonObject(
+        DescribeGeofenceCollectionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

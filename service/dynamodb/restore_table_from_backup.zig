@@ -10,6 +10,7 @@ const LocalSecondaryIndex = @import("local_secondary_index.zig").LocalSecondaryI
 const OnDemandThroughput = @import("on_demand_throughput.zig").OnDemandThroughput;
 const ProvisionedThroughput = @import("provisioned_throughput.zig").ProvisionedThroughput;
 const SSESpecification = @import("sse_specification.zig").SSESpecification;
+const VectorIndex = @import("vector_index.zig").VectorIndex;
 const TableDescription = @import("table_description.zig").TableDescription;
 
 pub const RestoreTableFromBackupInput = struct {
@@ -44,6 +45,14 @@ pub const RestoreTableFromBackupInput = struct {
     /// The name of the new table to which the backup must be restored.
     target_table_name: []const u8,
 
+    /// The vector indexes for the restored table. If not specified, all vector
+    /// indexes
+    /// from the backup are restored. The indexes provided must match existing
+    /// vector
+    /// indexes from the backup. You can choose to exclude some or all of the vector
+    /// indexes at the time of restore.
+    vector_index_override: ?[]const VectorIndex = null,
+
     pub const json_field_names = .{
         .backup_arn = "BackupArn",
         .billing_mode_override = "BillingModeOverride",
@@ -53,6 +62,7 @@ pub const RestoreTableFromBackupInput = struct {
         .provisioned_throughput_override = "ProvisionedThroughputOverride",
         .sse_specification_override = "SSESpecificationOverride",
         .target_table_name = "TargetTableName",
+        .vector_index_override = "VectorIndexOverride",
     };
 };
 

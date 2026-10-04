@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetNetworkAnalyzerConfi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetNetworkAnalyzerConfigurationOutput {
-    var result: GetNetworkAnalyzerConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetNetworkAnalyzerConfigurationOutput, body, allocator);
-    }
+    const result: GetNetworkAnalyzerConfigurationOutput = try aws.json.parseJsonObject(
+        GetNetworkAnalyzerConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

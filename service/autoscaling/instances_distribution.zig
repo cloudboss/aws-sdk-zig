@@ -1,9 +1,21 @@
-/// Use this structure to specify the distribution of On-Demand Instances and
-/// Spot
-/// Instances and the allocation strategies used to fulfill On-Demand and Spot
-/// capacities
-/// for a mixed instances policy.
+const DistributionSegment = @import("distribution_segment.zig").DistributionSegment;
+
+/// Use this structure to specify how a mixed instances policy distributes
+/// capacity across
+/// On-Demand, Spot, and supported Capacity Reservation types, and to specify
+/// the allocation
+/// strategies that are used to fulfill the capacity.
 pub const InstancesDistribution = struct {
+    /// The Distribution Segments configuration. Each segment contains an ordered
+    /// list of
+    /// capacity types to prioritize.
+    ///
+    /// For more information, see [Use Distribution
+    /// Segments to target multiple capacity
+    /// types](https://docs.aws.amazon.com/autoscaling/ec2/userguide/use-distribution-segments.html) in the
+    /// *Amazon EC2 Auto Scaling User Guide*.
+    distribution_segments: ?[]const DistributionSegment = null,
+
     /// The allocation strategy to apply to your On-Demand Instances when they are
     /// launched.
     /// Possible instance types are determined by the launch template overrides that

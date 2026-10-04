@@ -7,6 +7,7 @@ pub const FileUseCaseType = enum {
     email_message_redacted,
     email_message_plain_text_redacted,
     attachment,
+    voice_recording,
 
     pub const json_field_names = .{
         .contact_analysis = "CONTACT_ANALYSIS",
@@ -15,6 +16,7 @@ pub const FileUseCaseType = enum {
         .email_message_redacted = "EMAIL_MESSAGE_REDACTED",
         .email_message_plain_text_redacted = "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED",
         .attachment = "ATTACHMENT",
+        .voice_recording = "VOICE_RECORDING",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +27,7 @@ pub const FileUseCaseType = enum {
             .email_message_redacted => "EMAIL_MESSAGE_REDACTED",
             .email_message_plain_text_redacted => "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED",
             .attachment => "ATTACHMENT",
+            .voice_recording => "VOICE_RECORDING",
         };
     }
 

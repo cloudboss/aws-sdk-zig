@@ -10,10 +10,10 @@ const RoutePedestrianPlace = @import("route_pedestrian_place.zig").RoutePedestri
 ///
 /// `2020-04-22T17:57:24+02:00`
 pub const RoutePedestrianArrival = struct {
-    /// The place details.
+    /// Place details corresponding to the arrival.
     place: RoutePedestrianPlace,
 
-    /// The time.
+    /// The arrival time.
     time: ?[]const u8 = null,
 
     pub const json_field_names = .{

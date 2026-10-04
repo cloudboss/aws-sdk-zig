@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutSinkPolicyInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutSinkPolicyOutput {
-    var result: PutSinkPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutSinkPolicyOutput, body, allocator);
-    }
+    const result: PutSinkPolicyOutput = try aws.json.parseJsonObject(
+        PutSinkPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

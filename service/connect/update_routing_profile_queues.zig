@@ -7,7 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const RoutingProfileQueueConfig = @import("routing_profile_queue_config.zig").RoutingProfileQueueConfig;
 
 pub const UpdateRoutingProfileQueuesInput = struct {
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 

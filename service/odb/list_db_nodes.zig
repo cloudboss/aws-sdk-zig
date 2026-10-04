@@ -7,8 +7,13 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DbNodeSummary = @import("db_node_summary.zig").DbNodeSummary;
 
 pub const ListDbNodesInput = struct {
-    /// The unique identifier of the VM cluster.
-    cloud_vm_cluster_id: []const u8,
+    /// The unique identifier of the VM cluster. You must specify either this
+    /// parameter or `exadbVmClusterId`.
+    cloud_vm_cluster_id: ?[]const u8 = null,
+
+    /// The unique identifier of the Exascale VM cluster. You must specify either
+    /// this parameter or `cloudVmClusterId`.
+    exadb_vm_cluster_id: ?[]const u8 = null,
 
     /// The maximum number of items to return for this request. To get the next page
     /// of items, make another request with the token returned in the output.
@@ -22,6 +27,7 @@ pub const ListDbNodesInput = struct {
 
     pub const json_field_names = .{
         .cloud_vm_cluster_id = "cloudVmClusterId",
+        .exadb_vm_cluster_id = "exadbVmClusterId",
         .max_results = "maxResults",
         .next_token = "nextToken",
     };

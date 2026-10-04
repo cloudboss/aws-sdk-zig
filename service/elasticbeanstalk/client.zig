@@ -85,21 +85,19 @@ pub const Client = struct {
     }
 
     /// Applies a scheduled managed action immediately. A managed action can be
-    /// applied only if
-    /// its status is `Scheduled`. Get the status and action ID of a managed action
-    /// with
-    /// DescribeEnvironmentManagedActions.
+    /// applied only if its status is `Scheduled`. Get the status and
+    /// action ID of a managed action with DescribeEnvironmentManagedActions.
     pub fn applyEnvironmentManagedAction(self: *Self, allocator: std.mem.Allocator, input: apply_environment_managed_action.ApplyEnvironmentManagedActionInput, options: CallOptions) !apply_environment_managed_action.ApplyEnvironmentManagedActionOutput {
         return apply_environment_managed_action.execute(self, allocator, input, options);
     }
 
+    /// The operations role feature of Elastic Beanstalk is in beta release and is
+    /// subject to change.
+    ///
     /// Add or change the operations role used by an environment. After this call is
-    /// made, Elastic Beanstalk
-    /// uses the associated operations role for permissions to downstream services
-    /// during subsequent
-    /// calls acting on this environment. For more information, see [Operations
-    /// roles](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html) in the
-    /// *AWS Elastic Beanstalk Developer Guide*.
+    /// made, Elastic Beanstalk uses the associated operations role for permissions
+    /// to
+    /// downstream services during subsequent calls acting on this environment.
     pub fn associateEnvironmentOperationsRole(self: *Self, allocator: std.mem.Allocator, input: associate_environment_operations_role.AssociateEnvironmentOperationsRoleInput, options: CallOptions) !associate_environment_operations_role.AssociateEnvironmentOperationsRoleOutput {
         return associate_environment_operations_role.execute(self, allocator, input, options);
     }
@@ -110,55 +108,47 @@ pub const Client = struct {
     }
 
     /// Create or update a group of environments that each run a separate component
-    /// of a single
-    /// application. Takes a list of version labels that specify application source
-    /// bundles for each
-    /// of the environments to create or update. The name of each environment and
-    /// other required
-    /// information must be included in the source bundles in an environment
-    /// manifest named
-    /// `env.yaml`. See [Compose
-    /// Environments](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html)
-    /// for details.
+    /// of a single application. Takes a list of version labels that specify
+    /// application source bundles for each of the environments to create or update.
+    /// The name of each environment and other required information must be included
+    /// in the source bundles in an environment manifest named `env.yaml`. See
+    /// [Compose
+    /// Environments](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html) for details.
     pub fn composeEnvironments(self: *Self, allocator: std.mem.Allocator, input: compose_environments.ComposeEnvironmentsInput, options: CallOptions) !compose_environments.ComposeEnvironmentsOutput {
         return compose_environments.execute(self, allocator, input, options);
     }
 
     /// Creates an application that has one configuration template named `default`
-    /// and no application versions.
+    /// and
+    /// no application versions.
     pub fn createApplication(self: *Self, allocator: std.mem.Allocator, input: create_application.CreateApplicationInput, options: CallOptions) !create_application.CreateApplicationOutput {
         return create_application.execute(self, allocator, input, options);
     }
 
     /// Creates an application version for the specified application. You can create
-    /// an
-    /// application version from a source bundle in Amazon S3, a commit in AWS
-    /// CodeCommit, or the
-    /// output of an AWS CodeBuild build as follows:
+    /// an application version from a source bundle in Amazon S3, a commit in
+    /// CodeCommit, or the output of an CodeBuild build as follows:
     ///
-    /// Specify a commit in an AWS CodeCommit repository with
-    /// `SourceBuildInformation`.
+    /// Specify a commit in an CodeCommit repository with `SourceBuildInformation`.
     ///
-    /// Specify a build in an AWS CodeBuild with `SourceBuildInformation` and
+    /// Specify a build in an CodeBuild with `SourceBuildInformation` and
     /// `BuildConfiguration`.
     ///
-    /// Specify a source bundle in S3 with `SourceBundle`
+    /// Specify a source bundle in Amazon S3 with `SourceBundle`
     ///
-    /// Omit both `SourceBuildInformation` and `SourceBundle` to use the
-    /// default sample application.
+    /// Omit both `SourceBuildInformation` and `SourceBundle` to use the default
+    /// sample application.
     ///
     /// After you create an application version with a specified Amazon S3 bucket
-    /// and key
-    /// location, you can't change that Amazon S3 location. If you change the Amazon
-    /// S3 location,
-    /// you receive an exception when you attempt to launch an environment from the
-    /// application
-    /// version.
+    /// and key location, you can't change that Amazon S3 location. If you change
+    /// the Amazon S3
+    /// location, you receive an exception when you attempt to launch an environment
+    /// from the application version.
     pub fn createApplicationVersion(self: *Self, allocator: std.mem.Allocator, input: create_application_version.CreateApplicationVersionInput, options: CallOptions) !create_application_version.CreateApplicationVersionOutput {
         return create_application_version.execute(self, allocator, input, options);
     }
 
-    /// Creates an AWS Elastic Beanstalk configuration template, associated with a
+    /// Creates an Elastic Beanstalk configuration template, associated with a
     /// specific Elastic Beanstalk
     /// application. You define application configuration settings in a
     /// configuration template. You
@@ -180,9 +170,8 @@ pub const Client = struct {
         return create_configuration_template.execute(self, allocator, input, options);
     }
 
-    /// Launches an AWS Elastic Beanstalk environment for the specified application
-    /// using the specified
-    /// configuration.
+    /// Launches an Elastic Beanstalk environment for the specified application
+    /// using the specified configuration.
     pub fn createEnvironment(self: *Self, allocator: std.mem.Allocator, input: create_environment.CreateEnvironmentInput, options: CallOptions) !create_environment.CreateEnvironmentOutput {
         return create_environment.execute(self, allocator, input, options);
     }
@@ -193,22 +182,18 @@ pub const Client = struct {
     }
 
     /// Creates a bucket in Amazon S3 to store application versions, logs, and other
-    /// files used
-    /// by Elastic Beanstalk environments. The Elastic Beanstalk console and EB CLI
-    /// call this API the
-    /// first time you create an environment in a region. If the storage location
-    /// already exists,
+    /// files used by Elastic Beanstalk environments. The Elastic Beanstalk
+    /// console and EB CLI call this API the first time you create an environment in
+    /// a region. If the storage location already exists,
     /// `CreateStorageLocation` still returns the bucket name but does not create a
-    /// new
-    /// bucket.
+    /// new bucket.
     pub fn createStorageLocation(self: *Self, allocator: std.mem.Allocator, input: create_storage_location.CreateStorageLocationInput, options: CallOptions) !create_storage_location.CreateStorageLocationOutput {
         return create_storage_location.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified application along with all associated versions and
-    /// configurations. The application versions will not be deleted from your
-    /// Amazon S3
-    /// bucket.
+    /// configurations.
+    /// The application versions will not be deleted from your Amazon S3 bucket.
     ///
     /// You cannot delete an application that has a running environment.
     pub fn deleteApplication(self: *Self, allocator: std.mem.Allocator, input: delete_application.DeleteApplicationInput, options: CallOptions) !delete_application.DeleteApplicationOutput {
@@ -255,21 +240,80 @@ pub const Client = struct {
         return delete_platform_version.execute(self, allocator, input, options);
     }
 
-    /// Returns attributes related to AWS Elastic Beanstalk that are associated with
-    /// the calling AWS
-    /// account.
+    /// Returns attributes related to Elastic Beanstalk that are associated with the
+    /// calling Amazon Web Services account.
     ///
     /// The result currently has one set of attributes—resource quotas.
+    ///
+    /// This action only returns information about resources that the calling
+    /// principle has IAM permissions to access. For example, consider a case where
+    /// a
+    /// user only has permission to access one of three resources. When the user
+    /// calls the this action, the response will only include the one resource that
+    /// the
+    /// user has permission to access instead of all three resources. If the user
+    /// doesn’t have access to any of the resources an empty result is returned.
+    ///
+    /// The
+    /// [AWSElasticBeanstalkReadOnly](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html)
+    /// managed policy allows operators to view information about resources related
+    /// to Elastic Beanstalk. For more information, see [ Managing Elastic Beanstalk
+    /// user
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) in the *Elastic Beanstalk Developer
+    /// Guide*. For detailed instructions to attach a policy to a user or group, see
+    /// the section [ Controlling access with managed
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed) in the
+    /// same topic.
     pub fn describeAccountAttributes(self: *Self, allocator: std.mem.Allocator, input: describe_account_attributes.DescribeAccountAttributesInput, options: CallOptions) !describe_account_attributes.DescribeAccountAttributesOutput {
         return describe_account_attributes.execute(self, allocator, input, options);
     }
 
     /// Retrieve a list of application versions.
+    ///
+    /// This action only returns information about resources that the calling
+    /// principle has IAM permissions to access. For example, consider a case where
+    /// a
+    /// user only has permission to access one of three resources. When the user
+    /// calls the this action, the response will only include the one resource that
+    /// the
+    /// user has permission to access instead of all three resources. If the user
+    /// doesn’t have access to any of the resources an empty result is returned.
+    ///
+    /// The
+    /// [AWSElasticBeanstalkReadOnly](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html)
+    /// managed policy allows operators to view information about resources related
+    /// to Elastic Beanstalk. For more information, see [ Managing Elastic Beanstalk
+    /// user
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) in the *Elastic Beanstalk Developer
+    /// Guide*. For detailed instructions to attach a policy to a user or group, see
+    /// the section [ Controlling access with managed
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed) in the
+    /// same topic.
     pub fn describeApplicationVersions(self: *Self, allocator: std.mem.Allocator, input: describe_application_versions.DescribeApplicationVersionsInput, options: CallOptions) !describe_application_versions.DescribeApplicationVersionsOutput {
         return describe_application_versions.execute(self, allocator, input, options);
     }
 
     /// Returns the descriptions of existing applications.
+    ///
+    /// This action only returns information about applications that the calling
+    /// principle has IAM permissions to
+    /// access. For example, consider a case where a user only has permission to
+    /// access two of three
+    /// applications. When the user calls the *DescribeApplications* action, the
+    /// response will only include the two applications that the user has permission
+    /// to access
+    /// instead of all three applications. If the user doesn’t have access to any of
+    /// the applications
+    /// an empty result is returned.
+    ///
+    /// The *AWSElasticBeanstalkReadOnly* managed policy allows operators to
+    /// view information about resources related to Elastic Beanstalk environments.
+    /// For more
+    /// information, see [ Managing Elastic Beanstalk user
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) in the *Elastic Beanstalk Developer Guide*. For detailed
+    /// instructions to attach a policy to a user or group, see the section [
+    /// Controlling access with managed
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed) in the same topic.
     pub fn describeApplications(self: *Self, allocator: std.mem.Allocator, input: describe_applications.DescribeApplicationsInput, options: CallOptions) !describe_applications.DescribeApplicationsOutput {
         return describe_applications.execute(self, allocator, input, options);
     }
@@ -281,6 +325,28 @@ pub const Client = struct {
     /// the values the options, their default values, and an indication of the
     /// required action on a
     /// running environment if an option value is changed.
+    ///
+    /// This action only returns information about resources that the calling
+    /// principle has IAM permissions to
+    /// access. For example, consider a case where a user only has permission to
+    /// access one of three
+    /// resources. When the user calls the this action, the
+    /// response will only include the one resource that the user has permission to
+    /// access instead
+    /// of all three resources. If the user doesn’t have access to any of the
+    /// resources an empty
+    /// result is returned.
+    ///
+    /// The
+    /// [AWSElasticBeanstalkReadOnly](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html)
+    /// managed policy allows operators to view information about resources related
+    /// to Elastic Beanstalk. For more information, see [ Managing Elastic Beanstalk
+    /// user
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) in the *Elastic Beanstalk Developer
+    /// Guide*. For detailed instructions to attach a policy to a user or group, see
+    /// the section [ Controlling access with managed
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed) in the
+    /// same topic.
     pub fn describeConfigurationOptions(self: *Self, allocator: std.mem.Allocator, input: describe_configuration_options.DescribeConfigurationOptionsInput, options: CallOptions) !describe_configuration_options.DescribeConfigurationOptionsOutput {
         return describe_configuration_options.execute(self, allocator, input, options);
     }
@@ -299,6 +365,28 @@ pub const Client = struct {
     /// that is either in
     /// the process of deployment or that failed to deploy.
     ///
+    /// This action only returns information about resources that the calling
+    /// principle has IAM permissions to
+    /// access. For example, consider a case where a user only has permission to
+    /// access one of three
+    /// resources. When the user calls the this action, the
+    /// response will only include the one resource that the user has permission to
+    /// access instead
+    /// of all three resources. If the user doesn’t have access to any of the
+    /// resources an empty
+    /// result is returned.
+    ///
+    /// The
+    /// [AWSElasticBeanstalkReadOnly](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html)
+    /// managed policy allows operators to view information about resources related
+    /// to Elastic Beanstalk. For more information, see [ Managing Elastic Beanstalk
+    /// user
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) in the *Elastic Beanstalk Developer
+    /// Guide*. For detailed instructions to attach a policy to a user or group, see
+    /// the section [ Controlling access with managed
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed) in the
+    /// same topic.
+    ///
     /// Related Topics
     ///
     /// * DeleteEnvironmentConfiguration
@@ -307,9 +395,28 @@ pub const Client = struct {
     }
 
     /// Returns information about the overall health of the specified environment.
+    /// The **DescribeEnvironmentHealth** operation is
+    /// only available with Elastic Beanstalk Enhanced Health.
+    ///
+    /// This action only returns information about environments that the calling
+    /// principle has IAM permissions to access. For example, consider a case where
+    /// a user only has permission to access one of three environments. When the
+    /// user calls this action, the response will only include the one environment
+    /// that
+    /// the user has permission to access instead of all three environments. If the
+    /// user doesn’t have access to any of the environments an empty result is
+    /// returned.
+    ///
     /// The
-    /// **DescribeEnvironmentHealth** operation is only available with
-    /// AWS Elastic Beanstalk Enhanced Health.
+    /// [AWSElasticBeanstalkReadOnly](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html)
+    /// managed policy allows operators to view information about resources related
+    /// to Elastic Beanstalk environments. For more information, see [ Managing
+    /// Elastic Beanstalk user
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) in the *Elastic Beanstalk Developer
+    /// Guide*. For detailed instructions to attach a policy to a user or group, see
+    /// the section [ Controlling access with managed
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed) in the
+    /// same topic.
     pub fn describeEnvironmentHealth(self: *Self, allocator: std.mem.Allocator, input: describe_environment_health.DescribeEnvironmentHealthInput, options: CallOptions) !describe_environment_health.DescribeEnvironmentHealthOutput {
         return describe_environment_health.execute(self, allocator, input, options);
     }
@@ -320,16 +427,55 @@ pub const Client = struct {
     }
 
     /// Lists an environment's upcoming and in-progress managed actions.
+    ///
+    /// This action only returns information about environments that the calling
+    /// principle has IAM permissions to access. For example, consider a case where
+    /// a user only has permission to access one of three environments. When the
+    /// user calls this action, the response will only include the one environment
+    /// that
+    /// the user has permission to access instead of all three environments. If the
+    /// user doesn’t have access to any of the environments an empty result is
+    /// returned.
+    ///
+    /// The
+    /// [AWSElasticBeanstalkReadOnly](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html)
+    /// managed policy allows operators to view information about resources related
+    /// to Elastic Beanstalk environments. For more information, see [ Managing
+    /// Elastic Beanstalk user
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) in the *Elastic Beanstalk Developer
+    /// Guide*. For detailed instructions to attach a policy to a user or group, see
+    /// the section [ Controlling access with managed
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed) in the
+    /// same topic.
     pub fn describeEnvironmentManagedActions(self: *Self, allocator: std.mem.Allocator, input: describe_environment_managed_actions.DescribeEnvironmentManagedActionsInput, options: CallOptions) !describe_environment_managed_actions.DescribeEnvironmentManagedActionsOutput {
         return describe_environment_managed_actions.execute(self, allocator, input, options);
     }
 
-    /// Returns AWS resources for this environment.
+    /// Returns Amazon Web Services resources for this environment.
     pub fn describeEnvironmentResources(self: *Self, allocator: std.mem.Allocator, input: describe_environment_resources.DescribeEnvironmentResourcesInput, options: CallOptions) !describe_environment_resources.DescribeEnvironmentResourcesOutput {
         return describe_environment_resources.execute(self, allocator, input, options);
     }
 
     /// Returns descriptions for existing environments.
+    ///
+    /// This action only returns information about environments that the calling
+    /// principle has IAM permissions to access. For example, consider a case where
+    /// a user only has permission to access one of three environments. When the
+    /// user calls the *DescribeEnvironments* action, the response
+    /// will only include the one environment that the user has permission to access
+    /// instead of all three environments. If the user doesn’t have access to any of
+    /// the environments an empty result is returned.
+    ///
+    /// The
+    /// [AWSElasticBeanstalkReadOnly](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html)
+    /// managed policy allows operators to view information about resources related
+    /// to Elastic Beanstalk environments. For more information, see [ Managing
+    /// Elastic Beanstalk user
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) in the *Elastic Beanstalk Developer
+    /// Guide*. For detailed instructions to attach a policy to a user or group, see
+    /// the section [ Controlling access with managed
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed) in the
+    /// same topic.
     pub fn describeEnvironments(self: *Self, allocator: std.mem.Allocator, input: describe_environments.DescribeEnvironmentsInput, options: CallOptions) !describe_environments.DescribeEnvironmentsOutput {
         return describe_environments.execute(self, allocator, input, options);
     }
@@ -338,109 +484,239 @@ pub const Client = struct {
     ///
     /// This action returns the most recent 1,000 events from the specified
     /// `NextToken`.
+    ///
+    /// This action only returns information about resources that the calling
+    /// principle has IAM permissions to access. For example, consider a case where
+    /// a
+    /// user only has permission to access one of three resources. When the user
+    /// calls the this action, the response will only include the one resource that
+    /// the
+    /// user has permission to access instead of all three resources. If the user
+    /// doesn’t have access to any of the resources an empty result is returned.
+    ///
+    /// The
+    /// [AWSElasticBeanstalkReadOnly](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html)
+    /// managed policy allows operators to view information about resources related
+    /// to Elastic Beanstalk. For more information, see [ Managing Elastic Beanstalk
+    /// user
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) in the *Elastic Beanstalk Developer
+    /// Guide*. For detailed instructions to attach a policy to a user or group, see
+    /// the section [ Controlling access with managed
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed) in the
+    /// same topic.
     pub fn describeEvents(self: *Self, allocator: std.mem.Allocator, input: describe_events.DescribeEventsInput, options: CallOptions) !describe_events.DescribeEventsOutput {
         return describe_events.execute(self, allocator, input, options);
     }
 
-    /// Retrieves detailed information about the health of instances in your AWS
-    /// Elastic
-    /// Beanstalk. This operation requires [enhanced health
+    /// Retrieves detailed information about the health of instances in your Elastic
+    /// Beanstalk environments. This operation requires [enhanced health
     /// reporting](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html).
+    ///
+    /// This action only returns information about environments that the calling
+    /// principle has IAM permissions to access. For example, consider a case where
+    /// a user only has permission to access one of three environments. When the
+    /// user calls this action, the response will only include the one environment
+    /// that
+    /// the user has permission to access instead of all three environments. If the
+    /// user doesn’t have access to any of the environments an empty result is
+    /// returned.
+    ///
+    /// The
+    /// [AWSElasticBeanstalkReadOnly](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html)
+    /// managed policy allows operators to view information about resources related
+    /// to Elastic Beanstalk environments. For more information, see [ Managing
+    /// Elastic Beanstalk user
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) in the *Elastic Beanstalk Developer
+    /// Guide*. For detailed instructions to attach a policy to a user or group, see
+    /// the section [ Controlling access with managed
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed) in the
+    /// same topic.
     pub fn describeInstancesHealth(self: *Self, allocator: std.mem.Allocator, input: describe_instances_health.DescribeInstancesHealthInput, options: CallOptions) !describe_instances_health.DescribeInstancesHealthOutput {
         return describe_instances_health.execute(self, allocator, input, options);
     }
 
     /// Describes a platform version. Provides full details. Compare to
-    /// ListPlatformVersions, which provides summary information about a list of
-    /// platform versions.
+    /// ListPlatformVersions, which provides summary information about a
+    /// list of platform versions.
     ///
     /// For definitions of platform version and other platform-related terms, see
-    /// [AWS Elastic Beanstalk
-    /// Platforms
+    /// [Elastic Beanstalk Platforms
     /// Glossary](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html).
+    ///
+    /// This action only returns information about resources that the calling
+    /// principle has IAM permissions to access. For example, consider a case where
+    /// a
+    /// user only has permission to access one of three resources. When the user
+    /// calls the this action, the response will only include the one resource that
+    /// the
+    /// user has permission to access instead of all three resources. If the user
+    /// doesn’t have access to any of the resources an empty result is returned.
+    ///
+    /// The
+    /// [AWSElasticBeanstalkReadOnly](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html)
+    /// managed policy allows operators to view information about resources related
+    /// to Elastic Beanstalk. For more information, see [ Managing Elastic Beanstalk
+    /// user
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) in the *Elastic Beanstalk Developer
+    /// Guide*. For detailed instructions to attach a policy to a user or group, see
+    /// the section [ Controlling access with managed
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed) in the
+    /// same topic.
     pub fn describePlatformVersion(self: *Self, allocator: std.mem.Allocator, input: describe_platform_version.DescribePlatformVersionInput, options: CallOptions) !describe_platform_version.DescribePlatformVersionOutput {
         return describe_platform_version.execute(self, allocator, input, options);
     }
 
+    /// The operations role feature of Elastic Beanstalk is in beta release and is
+    /// subject to change.
+    ///
     /// Disassociate the operations role from an environment. After this call is
-    /// made, Elastic Beanstalk uses
-    /// the caller's permissions for permissions to downstream services during
-    /// subsequent calls acting
-    /// on this environment. For more information, see [Operations
-    /// roles](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html) in the
-    /// *AWS Elastic Beanstalk Developer Guide*.
+    /// made, Elastic Beanstalk uses the caller's permissions for permissions to
+    /// downstream
+    /// services during subsequent calls acting on this environment.
     pub fn disassociateEnvironmentOperationsRole(self: *Self, allocator: std.mem.Allocator, input: disassociate_environment_operations_role.DisassociateEnvironmentOperationsRoleInput, options: CallOptions) !disassociate_environment_operations_role.DisassociateEnvironmentOperationsRoleOutput {
         return disassociate_environment_operations_role.execute(self, allocator, input, options);
     }
 
     /// Returns a list of the available solution stack names, with the public
-    /// version first and
-    /// then in reverse chronological order.
+    /// version first and then in reverse chronological order.
+    ///
+    /// This action only returns information about resources that the calling
+    /// principle has IAM permissions to access. For example, consider a case where
+    /// a
+    /// user only has permission to access one of three resources. When the user
+    /// calls the this action, the response will only include the one resource that
+    /// the
+    /// user has permission to access instead of all three resources. If the user
+    /// doesn’t have access to any of the resources an empty result is returned.
+    ///
+    /// The
+    /// [AWSElasticBeanstalkReadOnly](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html)
+    /// managed policy allows operators to view information about resources related
+    /// to Elastic Beanstalk. For more information, see [ Managing Elastic Beanstalk
+    /// user
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) in the *Elastic Beanstalk Developer
+    /// Guide*. For detailed instructions to attach a policy to a user or group, see
+    /// the section [ Controlling access with managed
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed) in the
+    /// same topic.
     pub fn listAvailableSolutionStacks(self: *Self, allocator: std.mem.Allocator, input: list_available_solution_stacks.ListAvailableSolutionStacksInput, options: CallOptions) !list_available_solution_stacks.ListAvailableSolutionStacksOutput {
         return list_available_solution_stacks.execute(self, allocator, input, options);
     }
 
-    /// Lists the platform branches available for your account in an AWS Region.
-    /// Provides
-    /// summary information about each platform branch.
+    /// Lists the platform branches available for your account in an Amazon Web
+    /// Services Region. Provides summary information about each platform branch.
     ///
     /// For definitions of platform branch and other platform-related terms, see
-    /// [AWS Elastic Beanstalk
-    /// Platforms
+    /// [Elastic Beanstalk Platforms
     /// Glossary](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html).
+    ///
+    /// This action only returns information about resources that the calling
+    /// principle has IAM permissions to access. For example, consider a case where
+    /// a
+    /// user only has permission to access one of three resources. When the user
+    /// calls the this action, the response will only include the one resource that
+    /// the
+    /// user has permission to access instead of all three resources. If the user
+    /// doesn’t have access to any of the resources an empty result is returned.
+    ///
+    /// The
+    /// [AWSElasticBeanstalkReadOnly](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html)
+    /// managed policy allows operators to view information about resources related
+    /// to Elastic Beanstalk. For more information, see [ Managing Elastic Beanstalk
+    /// user
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) in the *Elastic Beanstalk Developer
+    /// Guide*. For detailed instructions to attach a policy to a user or group, see
+    /// the section [ Controlling access with managed
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed) in the
+    /// same topic.
     pub fn listPlatformBranches(self: *Self, allocator: std.mem.Allocator, input: list_platform_branches.ListPlatformBranchesInput, options: CallOptions) !list_platform_branches.ListPlatformBranchesOutput {
         return list_platform_branches.execute(self, allocator, input, options);
     }
 
-    /// Lists the platform versions available for your account in an AWS Region.
-    /// Provides
-    /// summary information about each platform version. Compare to
-    /// DescribePlatformVersion, which provides full details about a single platform
-    /// version.
+    /// Lists the platform versions available for your account in an Amazon Web
+    /// Services Region. Provides summary information about each platform version.
+    /// Compare to DescribePlatformVersion, which provides full details about a
+    /// single platform version.
+    ///
+    /// This action only returns information about platform versions that the
+    /// calling principle has IAM permissions to access. For example, consider a
+    /// case
+    /// where a user only has permission to access one of ten platform versions.
+    /// When the user calls the *ListPlatformVersions* action, the
+    /// response will only include the one platform version that the user has
+    /// permission to access instead of all ten platform versions. If the user
+    /// doesn’t have
+    /// access to any of the platform versions an empty result is returned.
+    ///
+    /// The *AWSElasticBeanstalkReadOnly* managed policy allows operators to view
+    /// information about resources related to Elastic Beanstalk
+    /// environments. For more information, see [ Managing Elastic Beanstalk
+    /// user
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) in the *Elastic Beanstalk Developer Guide*. For detailed instructions to attach a policy to a user or group, see the
+    /// section [ Controlling access
+    /// with managed
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed) in the same topic.
     ///
     /// For definitions of platform version and other platform-related terms, see
-    /// [AWS Elastic Beanstalk
-    /// Platforms
+    /// [Elastic Beanstalk Platforms
     /// Glossary](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html).
     pub fn listPlatformVersions(self: *Self, allocator: std.mem.Allocator, input: list_platform_versions.ListPlatformVersionsInput, options: CallOptions) !list_platform_versions.ListPlatformVersionsOutput {
         return list_platform_versions.execute(self, allocator, input, options);
     }
 
-    /// Return the tags applied to an AWS Elastic Beanstalk resource. The response
+    /// Return the tags applied to an Elastic Beanstalk resource. The response
     /// contains a list of tag key-value pairs.
     ///
     /// Elastic Beanstalk supports tagging of all of its resources. For details
-    /// about resource tagging, see
-    /// [Tagging Application
+    /// about resource tagging, see [Tagging Application
     /// Resources](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-tagging-resources.html).
+    ///
+    /// This action only returns information about resources that the calling
+    /// principle has IAM permissions to access. For example, consider a case where
+    /// a
+    /// user only has permission to access one of three resources. When the user
+    /// calls the this action, the response will only include the one resource that
+    /// the
+    /// user has permission to access instead of all three resources. If the user
+    /// doesn’t have access to any of the resources an empty result is returned.
+    ///
+    /// The
+    /// [AWSElasticBeanstalkReadOnly](https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html)
+    /// managed policy allows operators to view information about resources related
+    /// to Elastic Beanstalk. For more information, see [ Managing Elastic Beanstalk
+    /// user
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html) in the *Elastic Beanstalk Developer
+    /// Guide*. For detailed instructions to attach a policy to a user or group, see
+    /// the section [ Controlling access with managed
+    /// policies](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed) in the
+    /// same topic.
     pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
-    /// Deletes and recreates all of the AWS resources (for example: the Auto
-    /// Scaling group,
-    /// load balancer, etc.) for a specified environment and forces a restart.
+    /// Deletes and recreates all of the Amazon Web Services resources (for example:
+    /// the Auto Scaling group, load balancer, etc.) for a specified environment and
+    /// forces a
+    /// restart.
     pub fn rebuildEnvironment(self: *Self, allocator: std.mem.Allocator, input: rebuild_environment.RebuildEnvironmentInput, options: CallOptions) !rebuild_environment.RebuildEnvironmentOutput {
         return rebuild_environment.execute(self, allocator, input, options);
     }
 
     /// Initiates a request to compile the specified type of information of the
-    /// deployed
-    /// environment.
+    /// deployed environment.
     ///
-    /// Setting the `InfoType` to `tail` compiles the last lines from
-    /// the application server log files of every Amazon EC2 instance in your
-    /// environment.
+    /// Setting the `InfoType` to `tail` compiles the last lines from the
+    /// application server log files of every Amazon EC2 instance in
+    /// your environment.
     ///
-    /// Setting the `InfoType` to `bundle` compresses the application
-    /// server log files for every Amazon EC2 instance into a `.zip` file. Legacy
-    /// and .NET
-    /// containers do not support bundle logs.
+    /// Setting the `InfoType` to `bundle` compresses the application server log
+    /// files for every Amazon EC2 instance into a
+    /// `.zip` file. Legacy and .NET containers do not support bundle logs.
     ///
-    /// Setting the `InfoType` to `analyze` collects recent events,
-    /// instance health, and logs from your environment and sends them to Amazon
-    /// Bedrock in your
-    /// account to generate diagnostic insights and recommended next steps.
+    /// Setting the `InfoType` to `analyze` collects recent events, instance health,
+    /// and logs from your environment and sends them to
+    /// Amazon Bedrock in your account to generate diagnostic insights and
+    /// recommended next steps.
     ///
     /// Use RetrieveEnvironmentInfo to obtain the set of logs.
     ///
@@ -452,14 +728,12 @@ pub const Client = struct {
     }
 
     /// Causes the environment to restart the application container server running
-    /// on each
-    /// Amazon EC2 instance.
+    /// on each Amazon EC2 instance.
     pub fn restartAppServer(self: *Self, allocator: std.mem.Allocator, input: restart_app_server.RestartAppServerInput, options: CallOptions) !restart_app_server.RestartAppServerOutput {
         return restart_app_server.execute(self, allocator, input, options);
     }
 
-    /// Retrieves the compiled information from a RequestEnvironmentInfo
-    /// request.
+    /// Retrieves the compiled information from a RequestEnvironmentInfo request.
     ///
     /// Related Topics
     ///
@@ -481,7 +755,8 @@ pub const Client = struct {
     /// Updates the specified application to have the specified properties.
     ///
     /// If a property (for example, `description`) is not provided, the value
-    /// remains unchanged. To clear these properties, specify an empty string.
+    /// remains
+    /// unchanged. To clear these properties, specify an empty string.
     pub fn updateApplication(self: *Self, allocator: std.mem.Allocator, input: update_application.UpdateApplicationInput, options: CallOptions) !update_application.UpdateApplicationOutput {
         return update_application.execute(self, allocator, input, options);
     }
@@ -494,7 +769,8 @@ pub const Client = struct {
     /// Updates the specified application version to have the specified properties.
     ///
     /// If a property (for example, `description`) is not provided, the value
-    /// remains unchanged. To clear properties, specify an empty string.
+    /// remains unchanged. To clear properties, specify an empty
+    /// string.
     pub fn updateApplicationVersion(self: *Self, allocator: std.mem.Allocator, input: update_application_version.UpdateApplicationVersionInput, options: CallOptions) !update_application_version.UpdateApplicationVersionOutput {
         return update_application_version.execute(self, allocator, input, options);
     }
@@ -514,44 +790,38 @@ pub const Client = struct {
     }
 
     /// Updates the environment description, deploys a new application version,
-    /// updates the
-    /// configuration settings to an entirely new configuration template, or updates
-    /// select
-    /// configuration option values in the running environment.
+    /// updates the configuration settings to an entirely new configuration
+    /// template,
+    /// or updates select configuration option values in the running environment.
     ///
     /// Attempting to update both the release and configuration is not allowed and
-    /// AWS Elastic
-    /// Beanstalk returns an `InvalidParameterCombination` error.
+    /// Elastic Beanstalk returns an `InvalidParameterCombination` error.
     ///
     /// When updating the configuration settings to a new template or individual
-    /// settings, a
-    /// draft configuration is created and DescribeConfigurationSettings for this
-    /// environment returns two setting descriptions with different
-    /// `DeploymentStatus`
-    /// values.
+    /// settings, a draft configuration is created and DescribeConfigurationSettings
+    /// for this environment returns two setting descriptions with different
+    /// `DeploymentStatus` values.
     pub fn updateEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_environment.UpdateEnvironmentInput, options: CallOptions) !update_environment.UpdateEnvironmentOutput {
         return update_environment.execute(self, allocator, input, options);
     }
 
-    /// Update the list of tags applied to an AWS Elastic Beanstalk resource. Two
-    /// lists can be passed: `TagsToAdd`
-    /// for tags to add or update, and `TagsToRemove`.
+    /// Update the list of tags applied to an Elastic Beanstalk resource. Two lists
+    /// can be passed: `TagsToAdd` for tags to add or update, and
+    /// `TagsToRemove`.
     ///
     /// Elastic Beanstalk supports tagging of all of its resources. For details
-    /// about resource tagging, see
-    /// [Tagging Application
+    /// about resource tagging, see [Tagging Application
     /// Resources](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-tagging-resources.html).
     ///
-    /// If you create a custom IAM user policy to control permission to this
-    /// operation, specify
-    /// one of the following two virtual actions (or both) instead of the API
+    /// If you create a custom policy to control permission to this operation,
+    /// specify one of the following two virtual actions (or both) instead of the
+    /// API
     /// operation name:
     ///
     /// **elasticbeanstalk:AddTags**
     ///
     /// Controls permission to call `UpdateTagsForResource` and pass a list of tags
-    /// to add in the `TagsToAdd`
-    /// parameter.
+    /// to add in the `TagsToAdd` parameter.
     ///
     /// **elasticbeanstalk:RemoveTags**
     ///

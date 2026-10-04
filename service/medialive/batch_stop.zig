@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchStopInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchStopOutput {
-    var result: BatchStopOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchStopOutput, body, allocator);
-    }
+    const result: BatchStopOutput = try aws.json.parseJsonObject(
+        BatchStopOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

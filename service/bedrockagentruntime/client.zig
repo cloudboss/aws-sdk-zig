@@ -1,6 +1,8 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const agentic_retrieve_stream = @import("agentic_retrieve_stream.zig");
+const check_ingested_document_acl = @import("check_ingested_document_acl.zig");
 const create_invocation = @import("create_invocation.zig");
 const create_session = @import("create_session.zig");
 const delete_agent_memory = @import("delete_agent_memory.zig");
@@ -8,8 +10,10 @@ const delete_session = @import("delete_session.zig");
 const end_session = @import("end_session.zig");
 const generate_query = @import("generate_query.zig");
 const get_agent_memory = @import("get_agent_memory.zig");
+const get_document_content = @import("get_document_content.zig");
 const get_execution_flow_snapshot = @import("get_execution_flow_snapshot.zig");
 const get_flow_execution = @import("get_flow_execution.zig");
+const get_ingested_document_acl = @import("get_ingested_document_acl.zig");
 const get_invocation_step = @import("get_invocation_step.zig");
 const get_session = @import("get_session.zig");
 const invoke_agent = @import("invoke_agent.zig");
@@ -60,6 +64,29 @@ pub const Client = struct {
 
     pub fn deinit(self: *Self) void {
         _ = self;
+    }
+
+    /// Retrieves information from one or more knowledge bases using an agentic
+    /// approach. Agentic retrieval uses a foundation model to intelligently
+    /// decompose complex queries into sub-queries and iteratively retrieve relevant
+    /// information from your knowledge bases. This approach improves retrieval
+    /// accuracy for complex, multi-step questions that a single retrieval pass
+    /// might not fully address.
+    ///
+    /// The operation returns results through a stream that includes retrieval
+    /// results, trace events for visibility into the process, and a generated
+    /// response synthesized from the results by default, which can be turned off.
+    pub fn agenticRetrieveStream(self: *Self, allocator: std.mem.Allocator, input: agentic_retrieve_stream.AgenticRetrieveStreamInput, options: CallOptions) !agentic_retrieve_stream.AgenticRetrieveStreamOutput {
+        return agentic_retrieve_stream.execute(self, allocator, input, options);
+    }
+
+    /// Checks whether a user has access to a specific document by verifying against
+    /// the ingested access control list (ACL) in a knowledge base. Use this
+    /// operation to validate that document-level access control is working as
+    /// expected after ingestion. To use this operation, you must have the
+    /// `bedrock:CheckIngestedDocumentAcl` permission.
+    pub fn checkIngestedDocumentAcl(self: *Self, allocator: std.mem.Allocator, input: check_ingested_document_acl.CheckIngestedDocumentAclInput, options: CallOptions) !check_ingested_document_acl.CheckIngestedDocumentAclOutput {
+        return check_ingested_document_acl.execute(self, allocator, input, options);
     }
 
     /// Creates a new invocation within a session. An invocation groups the related
@@ -146,6 +173,12 @@ pub const Client = struct {
         return get_agent_memory.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the content of an ingested document from a knowledge base. Returns
+    /// a pre-signed URL for secure document access.
+    pub fn getDocumentContent(self: *Self, allocator: std.mem.Allocator, input: get_document_content.GetDocumentContentInput, options: CallOptions) !get_document_content.GetDocumentContentOutput {
+        return get_document_content.execute(self, allocator, input, options);
+    }
+
     /// Retrieves the flow definition snapshot used for a flow execution. The
     /// snapshot represents the flow metadata and definition as it existed at the
     /// time the execution was started. Note that even if the flow is edited after
@@ -164,6 +197,15 @@ pub const Client = struct {
         return get_flow_execution.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the ingested access control list (ACL) for a specific document in
+    /// a knowledge base. Use this operation to inspect the allow and deny lists
+    /// that were ingested for a document to troubleshoot access control issues. To
+    /// use this operation, you must have the `bedrock:GetIngestedDocumentAcl`
+    /// permission.
+    pub fn getIngestedDocumentAcl(self: *Self, allocator: std.mem.Allocator, input: get_ingested_document_acl.GetIngestedDocumentAclInput, options: CallOptions) !get_ingested_document_acl.GetIngestedDocumentAclOutput {
+        return get_ingested_document_acl.execute(self, allocator, input, options);
+    }
+
     /// Retrieves the details of a specific invocation step within an invocation in
     /// a session. For more information about sessions, see [Store and retrieve
     /// conversation history and context with Amazon Bedrock
@@ -180,6 +222,13 @@ pub const Client = struct {
         return get_session.execute(self, allocator, input, options);
     }
 
+    /// Amazon Bedrock Agents (now Amazon Bedrock Agents Classic) is no longer open
+    /// to new customers. For capabilities similar to Bedrock Agents Classic,
+    /// explore Amazon Bedrock AgentCore. Existing customers can continue to use the
+    /// service as normal. For more information, see [Amazon Bedrock Agents Classic
+    /// availability
+    /// change](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html).
+    ///
     /// Sends a prompt for the agent to process and respond to. Note the following
     /// fields for the request:
     ///
@@ -335,12 +384,18 @@ pub const Client = struct {
     /// Queries a knowledge base and generates responses based on the retrieved
     /// results and using the specified foundation model or [inference
     /// profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html). The response only cites sources that are relevant to the query.
+    ///
+    /// This API cannot be used with managed knowledge bases. Use
+    /// [AgenticRetrieveStream](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_AgenticRetrieveStream.html) or [Retrieve](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html) with managed knowledge bases.
     pub fn retrieveAndGenerate(self: *Self, allocator: std.mem.Allocator, input: retrieve_and_generate.RetrieveAndGenerateInput, options: CallOptions) !retrieve_and_generate.RetrieveAndGenerateOutput {
         return retrieve_and_generate.execute(self, allocator, input, options);
     }
 
     /// Queries a knowledge base and generates responses based on the retrieved
     /// results, with output in streaming format.
+    ///
+    /// This API cannot be used with managed knowledge bases. Use
+    /// [AgenticRetrieveStream](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_AgenticRetrieveStream.html) or [Retrieve](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html) with managed knowledge bases.
     ///
     /// The CLI doesn't support streaming operations in Amazon Bedrock, including
     /// `InvokeModelWithResponseStream`.

@@ -79,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRenewalPricingInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRenewalPricingOutput {
-    var result: GetRenewalPricingOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRenewalPricingOutput, body, allocator);
-    }
+    const result: GetRenewalPricingOutput = try aws.json.parseJsonObject(
+        GetRenewalPricingOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

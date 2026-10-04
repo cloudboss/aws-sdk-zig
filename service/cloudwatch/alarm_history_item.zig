@@ -6,12 +6,15 @@ const HistoryItemType = @import("history_item_type.zig").HistoryItemType;
 /// Represents the history of a specific alarm.
 pub const AlarmHistoryItem = struct {
     /// A map of attributes that describe the alarm contributor associated with this
-    /// history item, providing context about the contributor's characteristics at
-    /// the time of the event.
+    /// history
+    /// item, providing context about the contributor's characteristics at the time
+    /// of the
+    /// event.
     alarm_contributor_attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The unique identifier of the alarm contributor associated with this history
-    /// item, if applicable.
+    /// item, if
+    /// applicable.
     alarm_contributor_id: ?[]const u8 = null,
 
     /// The descriptive name for the alarm.

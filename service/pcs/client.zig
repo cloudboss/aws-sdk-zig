@@ -166,8 +166,11 @@ pub const Client = struct {
         return untag_resource.execute(self, allocator, input, options);
     }
 
-    /// Updates a cluster configuration. You can modify Slurm scheduler settings,
-    /// accounting configuration, and security groups for an existing cluster.
+    /// Updates a cluster configuration. You can update the scheduler version,
+    /// modify scheduler settings, and update accounting configuration for an
+    /// existing cluster. For more information about updating the scheduler version,
+    /// see [Updating the scheduler version on a
+    /// cluster](https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html) in the *PCS User Guide*.
     ///
     /// You can only update clusters that are in `ACTIVE`, `UPDATE_FAILED`, or
     /// `SUSPENDED` state. All associated resources (queues and compute node groups)

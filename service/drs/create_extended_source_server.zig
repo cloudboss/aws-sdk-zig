@@ -91,10 +91,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateExtendedSourceSer
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateExtendedSourceServerOutput {
-    var result: CreateExtendedSourceServerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateExtendedSourceServerOutput, body, allocator);
-    }
+    const result: CreateExtendedSourceServerOutput = try aws.json.parseJsonObject(
+        CreateExtendedSourceServerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

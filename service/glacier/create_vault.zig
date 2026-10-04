@@ -86,6 +86,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVaultInput, confi
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateVaultOutput {
     var result: CreateVaultOutput = .{};
+    errdefer {
+        if (result.location) |value| allocator.free(value);
+    }
     _ = body;
     _ = status;
     if (headers.get("location")) |value| {

@@ -1,5 +1,6 @@
 const AdditionalEnis = @import("additional_enis.zig").AdditionalEnis;
 const CapacityReservation = @import("capacity_reservation.zig").CapacityReservation;
+const InstanceRequirementsEniConfiguration = @import("instance_requirements_eni_configuration.zig").InstanceRequirementsEniConfiguration;
 
 /// Metadata information about an instance in a HyperPod cluster.
 pub const InstanceMetadata = struct {
@@ -18,6 +19,11 @@ pub const InstanceMetadata = struct {
     /// applicable.
     failure_message: ?[]const u8 = null,
 
+    /// The ENI configurations for the instance types in the instance requirements,
+    /// grouped by network interface category (for example, ENI-only or EFA with
+    /// ENIs). At most one configuration per category.
+    instance_requirements_eni_configurations: ?[]const InstanceRequirementsEniConfiguration = null,
+
     /// The execution state of the Lifecycle Script (LCS) for the instance.
     lcs_execution_state: ?[]const u8 = null,
 
@@ -30,6 +36,7 @@ pub const InstanceMetadata = struct {
         .capacity_reservation = "CapacityReservation",
         .customer_eni = "CustomerEni",
         .failure_message = "FailureMessage",
+        .instance_requirements_eni_configurations = "InstanceRequirementsEniConfigurations",
         .lcs_execution_state = "LcsExecutionState",
         .node_logical_id = "NodeLogicalId",
     };

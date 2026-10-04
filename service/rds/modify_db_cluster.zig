@@ -282,6 +282,24 @@ pub const ModifyDBClusterInput = struct {
     /// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
     enable_performance_insights: ?bool = null,
 
+    /// The lifecycle type for this DB cluster.
+    ///
+    /// You can use this setting to enroll your DB cluster into Amazon RDS Extended
+    /// Support or to opt out. With RDS Extended Support, you can run the selected
+    /// major engine version on your DB cluster past the end of standard support for
+    /// that engine version. For more information, see the following sections:
+    ///
+    /// * Amazon Aurora - [Amazon RDS Extended Support with Amazon
+    ///   Aurora](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html) in the *Amazon Aurora User Guide*
+    /// * Amazon RDS - [Amazon RDS Extended Support with Amazon
+    ///   RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html) in the *Amazon RDS User Guide*
+    ///
+    /// Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters
+    ///
+    /// Valid Values: `open-source-rds-extended-support |
+    /// open-source-rds-extended-support-disabled`
+    engine_lifecycle_support: ?[]const u8 = null,
+
     /// The DB engine mode of the DB cluster, either `provisioned` or `serverless`.
     ///
     /// The DB engine mode can be modified only from `serverless` to `provisioned`.
@@ -760,6 +778,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBClusterInput, c
     if (input.enable_performance_insights) |v| {
         try body_buf.appendSlice(allocator, "&EnablePerformanceInsights=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
+    if (input.engine_lifecycle_support) |v| {
+        try body_buf.appendSlice(allocator, "&EngineLifecycleSupport=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.engine_mode) |v| {
         try body_buf.appendSlice(allocator, "&EngineMode=");

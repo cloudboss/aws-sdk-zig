@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSolFunctionPackag
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateSolFunctionPackageOutput {
-    var result: CreateSolFunctionPackageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateSolFunctionPackageOutput, body, allocator);
-    }
+    const result: CreateSolFunctionPackageOutput = try aws.json.parseJsonObject(
+        CreateSolFunctionPackageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

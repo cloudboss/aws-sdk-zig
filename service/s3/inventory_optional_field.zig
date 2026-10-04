@@ -11,12 +11,15 @@ pub const InventoryOptionalField = enum {
     object_lock_retain_until_date,
     object_lock_mode,
     object_lock_legal_hold_status,
+    object_lock_event_hold_status,
+    object_lock_event_hold_duration,
     intelligent_tiering_access_tier,
     bucket_key_status,
     checksum_algorithm,
     object_access_control_list,
     object_owner,
     lifecycle_expiration_date,
+    intelligent_tiering_reference_date,
 
     pub const json_field_names = .{
         .size = "Size",
@@ -29,12 +32,15 @@ pub const InventoryOptionalField = enum {
         .object_lock_retain_until_date = "ObjectLockRetainUntilDate",
         .object_lock_mode = "ObjectLockMode",
         .object_lock_legal_hold_status = "ObjectLockLegalHoldStatus",
+        .object_lock_event_hold_status = "ObjectLockEventHoldStatus",
+        .object_lock_event_hold_duration = "ObjectLockEventHoldDuration",
         .intelligent_tiering_access_tier = "IntelligentTieringAccessTier",
         .bucket_key_status = "BucketKeyStatus",
         .checksum_algorithm = "ChecksumAlgorithm",
         .object_access_control_list = "ObjectAccessControlList",
         .object_owner = "ObjectOwner",
         .lifecycle_expiration_date = "LifecycleExpirationDate",
+        .intelligent_tiering_reference_date = "IntelligentTieringReferenceDate",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -49,12 +55,15 @@ pub const InventoryOptionalField = enum {
             .object_lock_retain_until_date => "ObjectLockRetainUntilDate",
             .object_lock_mode => "ObjectLockMode",
             .object_lock_legal_hold_status => "ObjectLockLegalHoldStatus",
+            .object_lock_event_hold_status => "ObjectLockEventHoldStatus",
+            .object_lock_event_hold_duration => "ObjectLockEventHoldDuration",
             .intelligent_tiering_access_tier => "IntelligentTieringAccessTier",
             .bucket_key_status => "BucketKeyStatus",
             .checksum_algorithm => "ChecksumAlgorithm",
             .object_access_control_list => "ObjectAccessControlList",
             .object_owner => "ObjectOwner",
             .lifecycle_expiration_date => "LifecycleExpirationDate",
+            .intelligent_tiering_reference_date => "IntelligentTieringReferenceDate",
         };
     }
 

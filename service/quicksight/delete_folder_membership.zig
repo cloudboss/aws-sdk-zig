@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteFolderMembershipI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteFolderMembershipOutput {
-    var result: DeleteFolderMembershipOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteFolderMembershipOutput, body, allocator);
-    }
+    const result: DeleteFolderMembershipOutput = try aws.json.parseJsonObject(
+        DeleteFolderMembershipOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

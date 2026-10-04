@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAppInstanceAdminsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAppInstanceAdminsOutput {
-    var result: ListAppInstanceAdminsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAppInstanceAdminsOutput, body, allocator);
-    }
+    const result: ListAppInstanceAdminsOutput = try aws.json.parseJsonObject(
+        ListAppInstanceAdminsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

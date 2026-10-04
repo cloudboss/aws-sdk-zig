@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListEventBridgeRuleTemp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListEventBridgeRuleTemplateGroupsOutput {
-    var result: ListEventBridgeRuleTemplateGroupsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListEventBridgeRuleTemplateGroupsOutput, body, allocator);
-    }
+    const result: ListEventBridgeRuleTemplateGroupsOutput = try aws.json.parseJsonObject(
+        ListEventBridgeRuleTemplateGroupsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

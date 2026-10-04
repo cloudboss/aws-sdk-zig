@@ -12,9 +12,8 @@ const UploadUrlMetadata = @import("upload_url_metadata.zig").UploadUrlMetadata;
 pub const StartAttachedFileUploadInput = struct {
     /// The resource to which the attached file is (being) uploaded to. The
     /// supported resources are
-    /// [Cases](https://docs.aws.amazon.com/connect/latest/adminguide/cases.html)
-    /// and
-    /// [Email](https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html).
+    /// [Cases](https://docs.aws.amazon.com/connect/latest/adminguide/cases.html),
+    /// [Email](https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html), and [Task](https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html).
     ///
     /// This value must be a valid ARN.
     associated_resource_arn: []const u8,
@@ -41,7 +40,7 @@ pub const StartAttachedFileUploadInput = struct {
     /// Only `ATTACHMENTS` are supported.
     file_use_case_type: FileUseCaseType,
 
-    /// The unique identifier of the Amazon Connect instance.
+    /// The unique identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     /// The tags used to organize, track, or control access for this resource. For
@@ -197,10 +196,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartAttachedFileUpload
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartAttachedFileUploadOutput {
-    var result: StartAttachedFileUploadOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartAttachedFileUploadOutput, body, allocator);
-    }
+    const result: StartAttachedFileUploadOutput = try aws.json.parseJsonObject(
+        StartAttachedFileUploadOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -3,16 +3,19 @@ const std = @import("std");
 pub const WorkerComputeType = enum {
     cr1_x,
     cr4_x,
+    cr8_x,
 
     pub const json_field_names = .{
         .cr1_x = "CR.1X",
         .cr4_x = "CR.4X",
+        .cr8_x = "CR.8X",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .cr1_x => "CR.1X",
             .cr4_x => "CR.4X",
+            .cr8_x => "CR.8X",
         };
     }
 

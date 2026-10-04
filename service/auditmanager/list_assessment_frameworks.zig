@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAssessmentFramework
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAssessmentFrameworksOutput {
-    var result: ListAssessmentFrameworksOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAssessmentFrameworksOutput, body, allocator);
-    }
+    const result: ListAssessmentFrameworksOutput = try aws.json.parseJsonObject(
+        ListAssessmentFrameworksOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

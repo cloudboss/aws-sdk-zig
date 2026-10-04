@@ -12,6 +12,12 @@ pub const SchemaStatusReasonCode = enum {
     additional_analyses_not_allowed,
     result_receivers_not_allowed,
     analysis_rule_types_not_compatible,
+    intermediate_table_not_populated,
+    intermediate_table_analysis_rule_missing,
+    intermediate_table_base_table_removed,
+    intermediate_table_inherited_constraints_violated,
+    intermediate_table_disallowed_by_data_provider,
+    intermediate_table_retention_period_expired,
 
     pub const json_field_names = .{
         .analysis_rule_missing = "ANALYSIS_RULE_MISSING",
@@ -25,6 +31,12 @@ pub const SchemaStatusReasonCode = enum {
         .additional_analyses_not_allowed = "ADDITIONAL_ANALYSES_NOT_ALLOWED",
         .result_receivers_not_allowed = "RESULT_RECEIVERS_NOT_ALLOWED",
         .analysis_rule_types_not_compatible = "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE",
+        .intermediate_table_not_populated = "INTERMEDIATE_TABLE_NOT_POPULATED",
+        .intermediate_table_analysis_rule_missing = "INTERMEDIATE_TABLE_ANALYSIS_RULE_MISSING",
+        .intermediate_table_base_table_removed = "INTERMEDIATE_TABLE_BASE_TABLE_REMOVED",
+        .intermediate_table_inherited_constraints_violated = "INTERMEDIATE_TABLE_INHERITED_CONSTRAINTS_VIOLATED",
+        .intermediate_table_disallowed_by_data_provider = "INTERMEDIATE_TABLE_DISALLOWED_BY_DATA_PROVIDER",
+        .intermediate_table_retention_period_expired = "INTERMEDIATE_TABLE_RETENTION_PERIOD_EXPIRED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -40,6 +52,12 @@ pub const SchemaStatusReasonCode = enum {
             .additional_analyses_not_allowed => "ADDITIONAL_ANALYSES_NOT_ALLOWED",
             .result_receivers_not_allowed => "RESULT_RECEIVERS_NOT_ALLOWED",
             .analysis_rule_types_not_compatible => "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE",
+            .intermediate_table_not_populated => "INTERMEDIATE_TABLE_NOT_POPULATED",
+            .intermediate_table_analysis_rule_missing => "INTERMEDIATE_TABLE_ANALYSIS_RULE_MISSING",
+            .intermediate_table_base_table_removed => "INTERMEDIATE_TABLE_BASE_TABLE_REMOVED",
+            .intermediate_table_inherited_constraints_violated => "INTERMEDIATE_TABLE_INHERITED_CONSTRAINTS_VIOLATED",
+            .intermediate_table_disallowed_by_data_provider => "INTERMEDIATE_TABLE_DISALLOWED_BY_DATA_PROVIDER",
+            .intermediate_table_retention_period_expired => "INTERMEDIATE_TABLE_RETENTION_PERIOD_EXPIRED",
         };
     }
 

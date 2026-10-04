@@ -7,6 +7,11 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const TenantInfo = @import("tenant_info.zig").TenantInfo;
 
 pub const ListTenantsInput = struct {
+    /// An object that contains filters to apply when listing tenants. You can
+    /// filter
+    /// by tenant name or sending status.
+    filter: ?[]const aws.map.StringMapEntry = null,
+
     /// A token returned from a previous call to `ListTenants` to indicate the
     /// position in the list of tenants.
     next_token: ?[]const u8 = null,
@@ -19,6 +24,7 @@ pub const ListTenantsInput = struct {
     page_size: ?i32 = null,
 
     pub const json_field_names = .{
+        .filter = "Filter",
         .next_token = "NextToken",
         .page_size = "PageSize",
     };
@@ -76,6 +82,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTenantsInput, confi
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.filter) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Filter\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.next_token) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"NextToken\":");
@@ -104,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTenantsInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTenantsOutput {
-    var result: ListTenantsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListTenantsOutput, body, allocator);
-    }
+    const result: ListTenantsOutput = try aws.json.parseJsonObject(
+        ListTenantsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

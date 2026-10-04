@@ -8,6 +8,7 @@ const create_security_configuration = @import("create_security_configuration.zig
 const create_virtual_cluster = @import("create_virtual_cluster.zig");
 const delete_job_template = @import("delete_job_template.zig");
 const delete_managed_endpoint = @import("delete_managed_endpoint.zig");
+const delete_security_configuration = @import("delete_security_configuration.zig");
 const delete_virtual_cluster = @import("delete_virtual_cluster.zig");
 const describe_job_run = @import("describe_job_run.zig");
 const describe_job_template = @import("describe_job_template.zig");
@@ -24,6 +25,7 @@ const list_virtual_clusters = @import("list_virtual_clusters.zig");
 const start_job_run = @import("start_job_run.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const update_virtual_cluster = @import("update_virtual_cluster.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
@@ -91,8 +93,8 @@ pub const Client = struct {
     }
 
     /// Creates a virtual cluster. Virtual cluster is a managed entity on Amazon EMR
-    /// on EKS. You can create, describe, list and delete virtual clusters. They do
-    /// not consume any
+    /// on EKS. You can create, update, describe, list and delete virtual clusters.
+    /// They do not consume any
     /// additional resource in your system. A single virtual cluster maps to a
     /// single Kubernetes
     /// namespace. Given this relationship, you can model virtual clusters the same
@@ -120,9 +122,14 @@ pub const Client = struct {
         return delete_managed_endpoint.execute(self, allocator, input, options);
     }
 
+    /// Deletes a security configuration.
+    pub fn deleteSecurityConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_security_configuration.DeleteSecurityConfigurationInput, options: CallOptions) !delete_security_configuration.DeleteSecurityConfigurationOutput {
+        return delete_security_configuration.execute(self, allocator, input, options);
+    }
+
     /// Deletes a virtual cluster. Virtual cluster is a managed entity on Amazon EMR
-    /// on EKS. You can create, describe, list and delete virtual clusters. They do
-    /// not consume any
+    /// on EKS. You can create, update, describe, list and delete virtual clusters.
+    /// They do not consume any
     /// additional resource in your system. A single virtual cluster maps to a
     /// single Kubernetes
     /// namespace. Given this relationship, you can model virtual clusters the same
@@ -174,8 +181,8 @@ pub const Client = struct {
 
     /// Displays detailed information about a specified virtual cluster. Virtual
     /// cluster is a
-    /// managed entity on Amazon EMR on EKS. You can create, describe, list and
-    /// delete virtual
+    /// managed entity on Amazon EMR on EKS. You can create, update, describe, list
+    /// and delete virtual
     /// clusters. They do not consume any additional resource in your system. A
     /// single virtual
     /// cluster maps to a single Kubernetes namespace. Given this relationship, you
@@ -238,8 +245,8 @@ pub const Client = struct {
 
     /// Lists information about the specified virtual cluster. Virtual cluster is a
     /// managed
-    /// entity on Amazon EMR on EKS. You can create, describe, list and delete
-    /// virtual
+    /// entity on Amazon EMR on EKS. You can create, update, describe, list and
+    /// delete virtual
     /// clusters. They do not consume any additional resource in your system. A
     /// single virtual
     /// cluster maps to a single Kubernetes namespace. Given this relationship, you
@@ -281,6 +288,18 @@ pub const Client = struct {
     /// Removes tags from resources.
     pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
+    }
+
+    /// Updates a virtual cluster. Virtual cluster is a managed entity on Amazon EMR
+    /// on EKS. You can create, update, describe, list and delete virtual clusters.
+    /// They do not consume any
+    /// additional resource in your system. A single virtual cluster maps to a
+    /// single Kubernetes
+    /// namespace. Given this relationship, you can model virtual clusters the same
+    /// way you model
+    /// Kubernetes namespaces to meet your requirements.
+    pub fn updateVirtualCluster(self: *Self, allocator: std.mem.Allocator, input: update_virtual_cluster.UpdateVirtualClusterInput, options: CallOptions) !update_virtual_cluster.UpdateVirtualClusterOutput {
+        return update_virtual_cluster.execute(self, allocator, input, options);
     }
 
     pub fn listJobRunsPaginator(self: *Self, params: list_job_runs.ListJobRunsInput) paginator.ListJobRunsPaginator {

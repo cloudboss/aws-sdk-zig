@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestorePhoneNumberInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RestorePhoneNumberOutput {
-    var result: RestorePhoneNumberOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RestorePhoneNumberOutput, body, allocator);
-    }
+    const result: RestorePhoneNumberOutput = try aws.json.parseJsonObject(
+        RestorePhoneNumberOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

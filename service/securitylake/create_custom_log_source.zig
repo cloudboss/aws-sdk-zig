@@ -122,10 +122,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCustomLogSourceIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCustomLogSourceOutput {
-    var result: CreateCustomLogSourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCustomLogSourceOutput, body, allocator);
-    }
+    const result: CreateCustomLogSourceOutput = try aws.json.parseJsonObject(
+        CreateCustomLogSourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

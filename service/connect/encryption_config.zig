@@ -9,7 +9,7 @@ pub const EncryptionConfig = struct {
     ///
     /// Be sure to provide the full ARN of the encryption key, not just the ID.
     ///
-    /// Amazon Connect supports only KMS keys with the default key spec of [
+    /// Connect Customer supports only KMS keys with the default key spec of [
     /// `SYMMETRIC_DEFAULT`
     /// ](https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-symmetric-default).
     key_id: []const u8,

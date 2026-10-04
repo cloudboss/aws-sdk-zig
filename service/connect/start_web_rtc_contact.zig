@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AllowedCapabilities = @import("allowed_capabilities.zig").AllowedCapabilities;
 const ParticipantDetails = @import("participant_details.zig").ParticipantDetails;
 const Reference = @import("reference.zig").Reference;
+const SegmentAttributeValue = @import("segment_attribute_value.zig").SegmentAttributeValue;
 const ConnectionData = @import("connection_data.zig").ConnectionData;
 
 pub const StartWebRTCContactInput = struct {
@@ -15,7 +16,7 @@ pub const StartWebRTCContactInput = struct {
     allowed_capabilities: ?AllowedCapabilities = null,
 
     /// A custom key-value pair using an attribute map. The attributes are standard
-    /// Amazon Connect attributes, and
+    /// Connect Customer attributes, and
     /// can be accessed in flows just like any other contact attributes.
     ///
     /// There can be up to 32,768 UTF-8 bytes across all key-value pairs per
@@ -36,7 +37,7 @@ pub const StartWebRTCContactInput = struct {
     client_token: ?[]const u8 = null,
 
     /// The identifier of the flow for the call. To see the ContactFlowId in the
-    /// Amazon Connect admin website, on the navigation menu go to
+    /// Connect Customer admin website, on the navigation menu go to
     /// **Routing**, **Flows**. Choose the flow. On the flow page,
     /// under the name of the flow, choose **Show additional flow information**. The
     /// ContactFlowId is the last part of the ARN, shown here in bold:
@@ -48,7 +49,7 @@ pub const StartWebRTCContactInput = struct {
     /// Panel (CCP).
     description: ?[]const u8 = null,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -61,10 +62,15 @@ pub const StartWebRTCContactInput = struct {
     /// creation.
     references: ?[]const aws.map.MapEntry(Reference) = null,
 
-    /// The unique identifier for an Amazon Connect contact. This identifier is
+    /// The unique identifier for an Connect Customer contact. This identifier is
     /// related to the contact
     /// starting.
     related_contact_id: ?[]const u8 = null,
+
+    /// A map of system-defined attributes for the WebRTC contact segment. Use the
+    /// `connect:Subtype` attribute to specify the channel subtype, such as
+    /// `connect:WebRTC`.
+    segment_attributes: ?[]const aws.map.MapEntry(SegmentAttributeValue) = null,
 
     pub const json_field_names = .{
         .allowed_capabilities = "AllowedCapabilities",
@@ -76,6 +82,7 @@ pub const StartWebRTCContactInput = struct {
         .participant_details = "ParticipantDetails",
         .references = "References",
         .related_contact_id = "RelatedContactId",
+        .segment_attributes = "SegmentAttributes",
     };
 };
 
@@ -84,7 +91,7 @@ pub const StartWebRTCContactOutput = struct {
     /// website) to connect to the call.
     connection_data: ?ConnectionData = null,
 
-    /// The identifier of the contact in this instance of Amazon Connect.
+    /// The identifier of the contact in this instance of Connect Customer.
     contact_id: ?[]const u8 = null,
 
     /// The identifier for a contact participant. The `ParticipantId` for a contact
@@ -189,6 +196,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartWebRTCContactInput
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.segment_attributes) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"SegmentAttributes\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -205,10 +218,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartWebRTCContactInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartWebRTCContactOutput {
-    var result: StartWebRTCContactOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartWebRTCContactOutput, body, allocator);
-    }
+    const result: StartWebRTCContactOutput = try aws.json.parseJsonObject(
+        StartWebRTCContactOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

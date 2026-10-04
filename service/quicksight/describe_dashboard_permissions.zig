@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeDashboardPermis
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeDashboardPermissionsOutput {
-    var result: DescribeDashboardPermissionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeDashboardPermissionsOutput, body, allocator);
-    }
+    var result: DescribeDashboardPermissionsOutput = try aws.json.parseJsonObject(
+        DescribeDashboardPermissionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

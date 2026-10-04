@@ -8,7 +8,7 @@ const QuickResponseSearchExpression = @import("quick_response_search_expression.
 const QuickResponseSearchResultData = @import("quick_response_search_result_data.zig").QuickResponseSearchResultData;
 
 pub const SearchQuickResponsesInput = struct {
-    /// The [user-defined Amazon Connect contact
+    /// The [user-defined Connect Customer contact
     /// attributes](https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes) to be resolved when search results are returned.
     attributes: ?[]const aws.map.StringMapEntry = null,
 
@@ -136,10 +136,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchQuickResponsesInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchQuickResponsesOutput {
-    var result: SearchQuickResponsesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchQuickResponsesOutput, body, allocator);
-    }
+    const result: SearchQuickResponsesOutput = try aws.json.parseJsonObject(
+        SearchQuickResponsesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

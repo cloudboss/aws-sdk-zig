@@ -7,6 +7,10 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const InvoiceUnitRule = @import("invoice_unit_rule.zig").InvoiceUnitRule;
 
 pub const UpdateInvoiceUnitInput = struct {
+    /// A unique, case-sensitive identifier that you provide to ensure idempotency
+    /// of the request.
+    client_token: ?[]const u8 = null,
+
     /// The assigned description for an invoice unit. This information can't be
     /// modified or deleted.
     description: ?[]const u8 = null,
@@ -23,6 +27,7 @@ pub const UpdateInvoiceUnitInput = struct {
     tax_inheritance_disabled: ?bool = null,
 
     pub const json_field_names = .{
+        .client_token = "ClientToken",
         .description = "Description",
         .invoice_unit_arn = "InvoiceUnitArn",
         .rule = "Rule",

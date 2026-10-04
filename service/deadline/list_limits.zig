@@ -113,10 +113,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListLimitsInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListLimitsOutput {
-    var result: ListLimitsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListLimitsOutput, body, allocator);
-    }
+    const result: ListLimitsOutput = try aws.json.parseJsonObject(
+        ListLimitsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

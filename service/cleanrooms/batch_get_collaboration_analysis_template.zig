@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetCollaborationAn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetCollaborationAnalysisTemplateOutput {
-    var result: BatchGetCollaborationAnalysisTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetCollaborationAnalysisTemplateOutput, body, allocator);
-    }
+    const result: BatchGetCollaborationAnalysisTemplateOutput = try aws.json.parseJsonObject(
+        BatchGetCollaborationAnalysisTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

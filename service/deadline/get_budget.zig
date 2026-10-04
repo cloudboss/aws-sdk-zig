@@ -147,10 +147,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBudgetInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBudgetOutput {
-    var result: GetBudgetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBudgetOutput, body, allocator);
-    }
+    const result: GetBudgetOutput = try aws.json.parseJsonObject(
+        GetBudgetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

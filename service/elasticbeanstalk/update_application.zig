@@ -14,7 +14,7 @@ pub const UpdateApplicationInput = struct {
 
     /// A new description for the application.
     ///
-    /// Default: If not specified, AWS Elastic Beanstalk does not update the
+    /// Default: If not specified, Elastic Beanstalk does not update the
     /// description.
     description: ?[]const u8 = null,
 };

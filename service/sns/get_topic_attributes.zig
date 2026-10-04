@@ -20,10 +20,19 @@ pub const GetTopicAttributesOutput = struct {
     ///
     /// * `DisplayName` – The human-readable name used in the
     /// `From` field for notifications to `email` and
-    /// `email-json` endpoints.
+    /// `email-json` endpoints. For subscription confirmation and
+    /// unsubscribe confirmation emails, the sender name is always
+    /// "Amazon Web Services Notifications" regardless of this attribute.
     ///
     /// * `EffectiveDeliveryPolicy` – The JSON serialization of the
     /// effective delivery policy, taking system defaults into account.
+    ///
+    /// * `MaximumMessageSize` – The maximum size, in bytes, of a
+    /// message that can be published to the topic. Amazon SNS returns this
+    /// attribute only if
+    /// you explicitly set it. If Amazon SNS doesn't return it, the topic uses the
+    /// default of
+    /// `262144` (256 KiB).
     ///
     /// * `Owner` – The Amazon Web Services account ID of the topic's owner.
     ///

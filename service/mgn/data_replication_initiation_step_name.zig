@@ -12,6 +12,7 @@ pub const DataReplicationInitiationStepName = enum {
     pair_replication_server_with_agent,
     connect_agent_to_replication_server,
     start_data_transfer,
+    setup_fsx_proxy,
 
     pub const json_field_names = .{
         .wait = "WAIT",
@@ -25,6 +26,7 @@ pub const DataReplicationInitiationStepName = enum {
         .pair_replication_server_with_agent = "PAIR_REPLICATION_SERVER_WITH_AGENT",
         .connect_agent_to_replication_server = "CONNECT_AGENT_TO_REPLICATION_SERVER",
         .start_data_transfer = "START_DATA_TRANSFER",
+        .setup_fsx_proxy = "SETUP_FSX_PROXY",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -40,6 +42,7 @@ pub const DataReplicationInitiationStepName = enum {
             .pair_replication_server_with_agent => "PAIR_REPLICATION_SERVER_WITH_AGENT",
             .connect_agent_to_replication_server => "CONNECT_AGENT_TO_REPLICATION_SERVER",
             .start_data_transfer => "START_DATA_TRANSFER",
+            .setup_fsx_proxy => "SETUP_FSX_PROXY",
         };
     }
 

@@ -92,8 +92,10 @@ pub fn build(b: *std.Build) void {
     });
     modeled_error_module.addImport("aws", aws_module);
     for ([_][]const u8{
-        "backupgateway", "cognitoidentity", "dynamodb", "ec2",
-        "lambda",        "s3",              "sts",      "verifiedpermissions",
+        "backupgateway",  "cognitoidentity", "dynamodb",        "ec2",
+        "lambda",         "s3",              "sts",             "verifiedpermissions",
+        "iotsitewise",    "lambda-core",     "lambda-microvms", "lambda-web",
+        "bedrockruntime", "kinesis",
     }) |name| {
         modeled_error_module.addImport(name, service_modules.get(name).?);
     }
@@ -116,6 +118,11 @@ pub fn build(b: *std.Build) void {
         });
         test_step.dependOn(&svc_check.step);
     }
+
+    const compile_integration_tests = b.step(
+        "integration-test-compile",
+        "Compile all integration tests without running them",
+    );
 
     // Integration tests: auto-discover scenarios from tests/integration/scenarios-localstack/
     const scenarios_path = "tests/integration/scenarios-localstack";
@@ -151,6 +158,7 @@ pub fn build(b: *std.Build) void {
                 .mode = .simple,
             },
         });
+        compile_integration_tests.dependOn(&integration_test.step);
 
         const run_integration = b.addRunArtifact(integration_test);
         const step_name = b.fmt("integration-test-localstack-{s}", .{entry.name});
@@ -203,6 +211,7 @@ pub fn build(b: *std.Build) void {
                 .mode = .simple,
             },
         });
+        compile_integration_tests.dependOn(&live_test.step);
 
         const run_live_test = b.addRunArtifact(live_test);
         const live_step_name = b.fmt("integration-test-live-{s}", .{entry.name});

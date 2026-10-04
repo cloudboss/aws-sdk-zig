@@ -22,7 +22,7 @@ pub const GetDashboardOutput = struct {
     /// included
     /// and their location on the dashboard. For more information about the
     /// `DashboardBody` syntax, see [Dashboard Body Structure and
-    /// Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html).
+    /// Syntax](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Dashboard-Body-Structure.html).
     dashboard_body: ?[]const u8 = null,
 
     /// The name of the dashboard.

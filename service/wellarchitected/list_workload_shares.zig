@@ -126,10 +126,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListWorkloadSharesInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListWorkloadSharesOutput {
-    var result: ListWorkloadSharesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListWorkloadSharesOutput, body, allocator);
-    }
+    const result: ListWorkloadSharesOutput = try aws.json.parseJsonObject(
+        ListWorkloadSharesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

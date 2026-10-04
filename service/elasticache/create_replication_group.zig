@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ClusterMode = @import("cluster_mode.zig").ClusterMode;
+const Durability = @import("durability.zig").Durability;
 const IpDiscovery = @import("ip_discovery.zig").IpDiscovery;
 const LogDeliveryConfigurationRequest = @import("log_delivery_configuration_request.zig").LogDeliveryConfigurationRequest;
 const NetworkType = @import("network_type.zig").NetworkType;
@@ -15,18 +16,15 @@ const ReplicationGroup = @import("replication_group.zig").ReplicationGroup;
 const serde = @import("serde.zig");
 
 pub const CreateReplicationGroupInput = struct {
-    /// A flag that enables encryption at rest when set to `true`.
+    /// A flag that enables encryption at-rest on the replication group when set to
+    /// `true`.
+    /// In some cases, encryption at-rest may be enabled even when this value is
+    /// false.
+    /// Use `StorageEncryptionType` to view the effective encryption state of a
+    /// cluster.
     ///
     /// You cannot modify the value of `AtRestEncryptionEnabled` after the
-    /// replication group is created. To enable encryption at rest on a replication
-    /// group you
-    /// must set `AtRestEncryptionEnabled` to `true` when you create the
-    /// replication group.
-    ///
-    /// **Required:** Only available when creating a replication
-    /// group in an Amazon VPC using Valkey `7.2` and later, Redis OSS version
-    /// `3.2.6`, or Redis OSS `4.x` and
-    /// later.
+    /// replication group is created.
     ///
     /// Default: `true` when using Valkey, `false` when using Redis OSS
     at_rest_encryption_enabled: ?bool = null,
@@ -292,6 +290,16 @@ pub const CreateReplicationGroupInput = struct {
     /// information, see [Data
     /// tiering](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/data-tiering.html).
     data_tiering_enabled: ?bool = null,
+
+    /// Specifies the durability setting for the replication group.
+    /// When set to `default`, the service determines the effective durability based
+    /// on
+    /// the engine version, cluster mode, and other parameters. The resolved setting
+    /// is reflected
+    /// in the `EffectiveDurability` property of the replication group. For more
+    /// information, see
+    /// [Durability](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html).
+    durability: ?Durability = null,
 
     /// The name of the cache engine to be used for the clusters in this replication
     /// group.
@@ -654,6 +662,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationGroupI
     if (input.data_tiering_enabled) |v| {
         try body_buf.appendSlice(allocator, "&DataTieringEnabled=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
+    if (input.durability) |v| {
+        try body_buf.appendSlice(allocator, "&Durability=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
     if (input.engine) |v| {
         try body_buf.appendSlice(allocator, "&Engine=");

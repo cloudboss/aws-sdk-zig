@@ -70,6 +70,9 @@ pub const GetRunTaskOutput = struct {
     /// The task's ID.
     task_id: ?[]const u8 = null,
 
+    /// The universally unique identifier (UUID) for the workflow task.
+    uuid: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .cache_hit = "cacheHit",
         .cache_s3_uri = "cacheS3Uri",
@@ -87,6 +90,7 @@ pub const GetRunTaskOutput = struct {
         .status_message = "statusMessage",
         .stop_time = "stopTime",
         .task_id = "taskId",
+        .uuid = "uuid",
     };
 };
 
@@ -141,10 +145,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRunTaskInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRunTaskOutput {
-    var result: GetRunTaskOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRunTaskOutput, body, allocator);
-    }
+    const result: GetRunTaskOutput = try aws.json.parseJsonObject(
+        GetRunTaskOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

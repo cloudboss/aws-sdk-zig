@@ -8,11 +8,11 @@ const Filter = @import("filter.zig").Filter;
 const InstanceProfile = @import("instance_profile.zig").InstanceProfile;
 
 pub const DescribeInstanceProfilesInput = struct {
-    /// Filters applied to the instance profiles described in the form of key-value
-    /// pairs.
+    /// The filters to apply to the instance profiles.
     ///
-    /// Valid filter names and values: instance-profile-identifier, instance profile
-    /// arn or name
+    /// The following filter names are supported:
+    ///
+    /// * `instance-profile-identifier` – The instance profile name or ARN.
     filters: ?[]const Filter = null,
 
     /// Specifies the unique pagination token that makes it possible to display the

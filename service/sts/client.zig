@@ -917,6 +917,8 @@ pub const Client = struct {
     /// support OIDC discovery.
     /// The token is signed by Amazon Web Services STS and can be publicly verified
     /// using the verification keys published at the issuer's JWKS endpoint.
+    ///
+    /// The `GetWebIdentityToken` API is not available on the STS Global endpoint.
     pub fn getWebIdentityToken(self: *Self, allocator: std.mem.Allocator, input: get_web_identity_token.GetWebIdentityTokenInput, options: CallOptions) !get_web_identity_token.GetWebIdentityTokenOutput {
         return get_web_identity_token.execute(self, allocator, input, options);
     }

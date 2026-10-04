@@ -79,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeletePricingRuleInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeletePricingRuleOutput {
-    var result: DeletePricingRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeletePricingRuleOutput, body, allocator);
-    }
+    const result: DeletePricingRuleOutput = try aws.json.parseJsonObject(
+        DeletePricingRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

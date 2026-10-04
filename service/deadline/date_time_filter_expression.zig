@@ -1,6 +1,6 @@
 const ComparisonOperator = @import("comparison_operator.zig").ComparisonOperator;
 
-/// The time stamp in date-time format.
+/// The timestamp in date-time format.
 pub const DateTimeFilterExpression = struct {
     /// The date and time.
     date_time: i64,

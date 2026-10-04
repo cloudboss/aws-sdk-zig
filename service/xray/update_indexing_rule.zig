@@ -89,10 +89,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateIndexingRuleInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateIndexingRuleOutput {
-    var result: UpdateIndexingRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateIndexingRuleOutput, body, allocator);
-    }
+    const result: UpdateIndexingRuleOutput = try aws.json.parseJsonObject(
+        UpdateIndexingRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

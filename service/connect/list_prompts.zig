@@ -7,7 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const PromptSummary = @import("prompt_summary.zig").PromptSummary;
 
 pub const ListPromptsInput = struct {
-    /// The identifier of the Amazon Connect instance.
+    /// The identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     /// The maximum number of results to return per page. The default MaxResult size
@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPromptsInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListPromptsOutput {
-    var result: ListPromptsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListPromptsOutput, body, allocator);
-    }
+    const result: ListPromptsOutput = try aws.json.parseJsonObject(
+        ListPromptsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

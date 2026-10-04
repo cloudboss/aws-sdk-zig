@@ -1,6 +1,6 @@
 const std = @import("std");
 
-/// Supported currency codes
+/// Supported currency codes.
 pub const Currency = enum {
     usd,
 

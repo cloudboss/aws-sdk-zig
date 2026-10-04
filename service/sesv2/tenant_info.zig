@@ -1,7 +1,11 @@
+const SendingStatus = @import("sending_status.zig").SendingStatus;
+
 /// A structure that contains basic information about a tenant.
 pub const TenantInfo = struct {
     /// The date and time when the tenant was created.
     created_timestamp: ?i64 = null,
+
+    sending_status: ?SendingStatus = null,
 
     /// The Amazon Resource Name (ARN) of the tenant.
     tenant_arn: ?[]const u8 = null,
@@ -14,6 +18,7 @@ pub const TenantInfo = struct {
 
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",
+        .sending_status = "SendingStatus",
         .tenant_arn = "TenantArn",
         .tenant_id = "TenantId",
         .tenant_name = "TenantName",

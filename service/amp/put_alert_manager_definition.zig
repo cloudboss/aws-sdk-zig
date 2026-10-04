@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutAlertManagerDefiniti
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutAlertManagerDefinitionOutput {
-    var result: PutAlertManagerDefinitionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutAlertManagerDefinitionOutput, body, allocator);
-    }
+    const result: PutAlertManagerDefinitionOutput = try aws.json.parseJsonObject(
+        PutAlertManagerDefinitionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -8,8 +8,9 @@ const PlayerSession = @import("player_session.zig").PlayerSession;
 
 pub const CreatePlayerSessionInput = struct {
     /// An identifier for the game session that is unique across all regions to add
-    /// a player to. The value is always a full ARN in the following format:
-    /// `arn:aws:gamelift:::gamesession//`.
+    /// a player to. The value is always a full ARN in the following format: For
+    /// Home Region game session - `arn:aws:gamelift:::gamesession//`. For Remote
+    /// Location game session - `arn:aws:gamelift:::gamesession///`.
     game_session_id: []const u8,
 
     /// Developer-defined information related to a player. Amazon GameLift Servers

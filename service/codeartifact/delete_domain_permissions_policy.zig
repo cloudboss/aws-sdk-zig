@@ -104,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteDomainPermissions
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteDomainPermissionsPolicyOutput {
-    var result: DeleteDomainPermissionsPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteDomainPermissionsPolicyOutput, body, allocator);
-    }
+    const result: DeleteDomainPermissionsPolicyOutput = try aws.json.parseJsonObject(
+        DeleteDomainPermissionsPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

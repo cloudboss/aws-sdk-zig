@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteResourceExplorerS
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteResourceExplorerSetupOutput {
-    var result: DeleteResourceExplorerSetupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteResourceExplorerSetupOutput, body, allocator);
-    }
+    const result: DeleteResourceExplorerSetupOutput = try aws.json.parseJsonObject(
+        DeleteResourceExplorerSetupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

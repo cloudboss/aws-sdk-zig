@@ -12,16 +12,15 @@ pub const LifecycleExecution = struct {
     /// The Amazon Resource Name (ARN) of the lifecycle policy that ran.
     lifecycle_policy_arn: ?[]const u8 = null,
 
-    /// Contains information about associated resources that are identified for
-    /// action by
-    /// the runtime instance of the lifecycle policy.
+    /// A summary flag that indicates whether the lifecycle execution identified any
+    /// resources to take lifecycle actions on.
     resources_impacted_summary: ?LifecycleExecutionResourcesImpactedSummary = null,
 
     /// The timestamp when the lifecycle runtime instance started.
     start_time: ?i64 = null,
 
-    /// Runtime state that reports if the policy action ran successfully,
-    /// failed, or was skipped.
+    /// Runtime state that reports whether the lifecycle execution is in progress,
+    /// succeeded, or failed.
     state: ?LifecycleExecutionState = null,
 
     pub const json_field_names = .{

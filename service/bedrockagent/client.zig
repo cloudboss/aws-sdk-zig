@@ -13,6 +13,7 @@ const create_flow_version = @import("create_flow_version.zig");
 const create_knowledge_base = @import("create_knowledge_base.zig");
 const create_prompt = @import("create_prompt.zig");
 const create_prompt_version = @import("create_prompt_version.zig");
+const create_vpc_configuration = @import("create_vpc_configuration.zig");
 const delete_agent = @import("delete_agent.zig");
 const delete_agent_action_group = @import("delete_agent_action_group.zig");
 const delete_agent_alias = @import("delete_agent_alias.zig");
@@ -24,6 +25,8 @@ const delete_flow_version = @import("delete_flow_version.zig");
 const delete_knowledge_base = @import("delete_knowledge_base.zig");
 const delete_knowledge_base_documents = @import("delete_knowledge_base_documents.zig");
 const delete_prompt = @import("delete_prompt.zig");
+const delete_resource_policy = @import("delete_resource_policy.zig");
+const delete_vpc_configuration = @import("delete_vpc_configuration.zig");
 const disassociate_agent_collaborator = @import("disassociate_agent_collaborator.zig");
 const disassociate_agent_knowledge_base = @import("disassociate_agent_knowledge_base.zig");
 const get_agent = @import("get_agent.zig");
@@ -40,6 +43,8 @@ const get_ingestion_job = @import("get_ingestion_job.zig");
 const get_knowledge_base = @import("get_knowledge_base.zig");
 const get_knowledge_base_documents = @import("get_knowledge_base_documents.zig");
 const get_prompt = @import("get_prompt.zig");
+const get_resource_policy = @import("get_resource_policy.zig");
+const get_vpc_configuration = @import("get_vpc_configuration.zig");
 const ingest_knowledge_base_documents = @import("ingest_knowledge_base_documents.zig");
 const list_agent_action_groups = @import("list_agent_action_groups.zig");
 const list_agent_aliases = @import("list_agent_aliases.zig");
@@ -56,8 +61,10 @@ const list_knowledge_base_documents = @import("list_knowledge_base_documents.zig
 const list_knowledge_bases = @import("list_knowledge_bases.zig");
 const list_prompts = @import("list_prompts.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
+const list_vpc_configurations = @import("list_vpc_configurations.zig");
 const prepare_agent = @import("prepare_agent.zig");
 const prepare_flow = @import("prepare_flow.zig");
+const put_resource_policy = @import("put_resource_policy.zig");
 const start_ingestion_job = @import("start_ingestion_job.zig");
 const stop_ingestion_job = @import("stop_ingestion_job.zig");
 const tag_resource = @import("tag_resource.zig");
@@ -115,6 +122,13 @@ pub const Client = struct {
         return associate_agent_knowledge_base.execute(self, allocator, input, options);
     }
 
+    /// Amazon Bedrock Agents (now Amazon Bedrock Agents Classic) is no longer open
+    /// to new customers. For capabilities similar to Bedrock Agents Classic,
+    /// explore Amazon Bedrock AgentCore. Existing customers can continue to use the
+    /// service as normal. For more information, see [Amazon Bedrock Agents Classic
+    /// availability
+    /// change](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html).
+    ///
     /// Creates an agent that orchestrates interactions between foundation models,
     /// data sources, software applications, user conversations, and APIs to carry
     /// out tasks to help customers.
@@ -212,18 +226,23 @@ pub const Client = struct {
     /// vector store. For more information, see [Set up a knowledge
     /// base](https://docs.aws.amazon.com/bedrock/latest/userguide/knowlege-base-prereq.html).
     ///
-    /// If you prefer to let Amazon Bedrock create and manage a vector store for you
-    /// in Amazon OpenSearch Service, use the console. For more information, see
-    /// [Create a knowledge
-    /// base](https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create).
+    /// To create a managed knowledge base, provide a
+    /// `managedKnowledgeBaseConfiguration` during creation. For more information,
+    /// see [Build a managed knowledge
+    /// base](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html).
     ///
     /// * Provide the `name` and an optional `description`.
     /// * Provide the Amazon Resource Name (ARN) with permissions to create a
     ///   knowledge base in the `roleArn` field.
-    /// * Provide the embedding model to use in the `embeddingModelArn` field in the
-    ///   `knowledgeBaseConfiguration` object.
-    /// * Provide the configuration for your vector store in the
-    ///   `storageConfiguration` object.
+    /// * For managed knowledge bases, set `embeddingModelType` to `MANAGED` to use
+    ///   the service-managed embedding model, or `CUSTOM` with an
+    ///   `embeddingModelArn` to use your own. To use your own KMS key for
+    ///   encryption, provide the ARN in `serverSideEncryptionConfiguration`. No
+    ///   vector store configuration is required for managed knowledge bases.
+    /// * For self-managed knowledge bases, provide the embedding model to use in
+    ///   the `embeddingModelArn` field in the `knowledgeBaseConfiguration` object.
+    /// * For self-managed knowledge bases, provide the configuration for your
+    ///   vector store in the `storageConfiguration` object.
     ///
     /// * For an Amazon OpenSearch Service database, use the
     ///   `opensearchServerlessConfiguration` object. For more information, see
@@ -256,6 +275,14 @@ pub const Client = struct {
     /// versions](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-deploy.html) in the Amazon Bedrock User Guide.
     pub fn createPromptVersion(self: *Self, allocator: std.mem.Allocator, input: create_prompt_version.CreatePromptVersionInput, options: CallOptions) !create_prompt_version.CreatePromptVersionOutput {
         return create_prompt_version.execute(self, allocator, input, options);
+    }
+
+    /// Creates a VPC configuration that lets a knowledge base connect to a resource
+    /// in your private VPC. This operation is asynchronous: it returns a
+    /// `vpcConfigurationId` with status `CREATING`. Poll `GetVpcConfiguration`
+    /// until the status becomes `CREATED` or `CREATE_FAILED`.
+    pub fn createVpcConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_vpc_configuration.CreateVpcConfigurationInput, options: CallOptions) !create_vpc_configuration.CreateVpcConfigurationOutput {
+        return create_vpc_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes an agent.
@@ -320,6 +347,21 @@ pub const Client = struct {
     /// tool](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-delete.html) and [Delete a version of a prompt from the Prompt management tool](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-deploy.html#prompt-management-versions-delete.html) in the Amazon Bedrock User Guide.
     pub fn deletePrompt(self: *Self, allocator: std.mem.Allocator, input: delete_prompt.DeletePromptInput, options: CallOptions) !delete_prompt.DeletePromptOutput {
         return delete_prompt.execute(self, allocator, input, options);
+    }
+
+    /// Removes the resource policy associated with a knowledge base. After
+    /// deletion, other AWS accounts can no longer access the knowledge base using
+    /// cross-account permissions.
+    pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
+        return delete_resource_policy.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a VPC configuration. This operation is asynchronous: it returns
+    /// status `DELETING`. Poll `GetVpcConfiguration` until it returns a
+    /// `ResourceNotFoundException`, indicating the configuration is deleted. Delete
+    /// requests are idempotent and safe to retry.
+    pub fn deleteVpcConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_configuration.DeleteVpcConfigurationInput, options: CallOptions) !delete_vpc_configuration.DeleteVpcConfigurationOutput {
+        return delete_vpc_configuration.execute(self, allocator, input, options);
     }
 
     /// Disassociates an agent collaborator.
@@ -414,6 +456,17 @@ pub const Client = struct {
     /// management](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-manage.html#prompt-management-view.html) and [View information about a version of your prompt](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management-deploy.html#prompt-management-versions-view.html) in the Amazon Bedrock User Guide.
     pub fn getPrompt(self: *Self, allocator: std.mem.Allocator, input: get_prompt.GetPromptInput, options: CallOptions) !get_prompt.GetPromptOutput {
         return get_prompt.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the resource policy associated with a knowledge base.
+    pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
+        return get_resource_policy.execute(self, allocator, input, options);
+    }
+
+    /// Returns the details and current status of a single VPC configuration. Use
+    /// this operation to poll for the outcome of an asynchronous create or delete.
+    pub fn getVpcConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_vpc_configuration.GetVpcConfigurationInput, options: CallOptions) !get_vpc_configuration.GetVpcConfigurationOutput {
+        return get_vpc_configuration.execute(self, allocator, input, options);
     }
 
     /// Ingests documents directly into the knowledge base that is connected to the
@@ -514,6 +567,13 @@ pub const Client = struct {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
+    /// Returns a paginated list of the VPC configurations for a knowledge base. You
+    /// can optionally filter by status. Use the `nextToken` parameter to retrieve
+    /// additional results.
+    pub fn listVpcConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_vpc_configurations.ListVpcConfigurationsInput, options: CallOptions) !list_vpc_configurations.ListVpcConfigurationsOutput {
+        return list_vpc_configurations.execute(self, allocator, input, options);
+    }
+
     /// Creates a `DRAFT` version of the agent that can be used for internal
     /// testing.
     pub fn prepareAgent(self: *Self, allocator: std.mem.Allocator, input: prepare_agent.PrepareAgentInput, options: CallOptions) !prepare_agent.PrepareAgentOutput {
@@ -525,6 +585,14 @@ pub const Client = struct {
     /// Bedrock](https://docs.aws.amazon.com/bedrock/latest/userguide/flows-test.html) in the Amazon Bedrock User Guide.
     pub fn prepareFlow(self: *Self, allocator: std.mem.Allocator, input: prepare_flow.PrepareFlowInput, options: CallOptions) !prepare_flow.PrepareFlowOutput {
         return prepare_flow.execute(self, allocator, input, options);
+    }
+
+    /// Associates a resource policy with a knowledge base. A resource policy allows
+    /// other AWS accounts to access the knowledge base. For more information, see
+    /// [Cross-account access for knowledge
+    /// bases](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-managed-cross-account.html).
+    pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
+        return put_resource_policy.execute(self, allocator, input, options);
     }
 
     /// Begins a data ingestion job. Data sources are ingested into your knowledge
@@ -723,6 +791,13 @@ pub const Client = struct {
     }
 
     pub fn listPromptsPaginator(self: *Self, params: list_prompts.ListPromptsInput) paginator.ListPromptsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listVpcConfigurationsPaginator(self: *Self, params: list_vpc_configurations.ListVpcConfigurationsInput) paginator.ListVpcConfigurationsPaginator {
         return .{
             .client = self,
             .params = params,

@@ -8,8 +8,14 @@ const Filter = @import("filter.zig").Filter;
 const SchemaConversionRequest = @import("schema_conversion_request.zig").SchemaConversionRequest;
 
 pub const DescribeMetadataModelConversionsInput = struct {
-    /// Filters applied to the metadata model conversions described in the form of
-    /// key-value pairs.
+    /// The filters to apply to the metadata model conversion requests.
+    ///
+    /// The following filter names are supported:
+    ///
+    /// * `request-id` – The request identifier.
+    ///
+    /// * `status` – The request status. Valid values: `RECEIVED`, `IN_PROGRESS`,
+    ///   `SUCCESS`, `FAILED`, `CANCELING`, `CANCELED`.
     filters: ?[]const Filter = null,
 
     /// Specifies the unique pagination token that makes it possible to display the
@@ -58,7 +64,9 @@ pub const DescribeMetadataModelConversionsOutput = struct {
     /// unchanged.
     marker: ?[]const u8 = null,
 
-    /// A paginated list of metadata model conversions.
+    /// A paginated list of metadata model conversion requests.
+    ///
+    /// DMS never populates the `ExportSqlDetails` field for this operation.
     requests: ?[]const SchemaConversionRequest = null,
 
     pub const json_field_names = .{

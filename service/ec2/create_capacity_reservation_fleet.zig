@@ -63,7 +63,7 @@ pub const CreateCapacityReservationFleetInput = struct {
     instance_match_criteria: ?FleetInstanceMatchCriteria = null,
 
     /// Information about the instance types for which to reserve the capacity.
-    instance_type_specifications: []const ReservationFleetInstanceSpecification,
+    instance_type_specifications: ?[]const ReservationFleetInstanceSpecification = null,
 
     /// The tags to assign to the Capacity Reservation Fleet. The tags are
     /// automatically
@@ -188,62 +188,64 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityReservati
         try body_buf.appendSlice(allocator, "&InstanceMatchCriteria=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
-    for (input.instance_type_specifications, 0..) |item, idx| {
-        const n = idx + 1;
-        {
-            var prefix_buf: [256]u8 = undefined;
-            if (item.availability_zone) |fv_1| {
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.{d}.AvailabilityZone=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+    if (input.instance_type_specifications) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.availability_zone) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.{d}.AvailabilityZone=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                }
             }
-        }
-        {
-            var prefix_buf: [256]u8 = undefined;
-            if (item.availability_zone_id) |fv_1| {
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.{d}.AvailabilityZoneId=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.availability_zone_id) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.{d}.AvailabilityZoneId=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                }
             }
-        }
-        {
-            var prefix_buf: [256]u8 = undefined;
-            if (item.ebs_optimized) |fv_1| {
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.{d}.EbsOptimized=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_1) "true" else "false");
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.ebs_optimized) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.{d}.EbsOptimized=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_1) "true" else "false");
+                }
             }
-        }
-        {
-            var prefix_buf: [256]u8 = undefined;
-            if (item.instance_platform) |fv_1| {
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.{d}.InstancePlatform=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.instance_platform) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.{d}.InstancePlatform=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
+                }
             }
-        }
-        {
-            var prefix_buf: [256]u8 = undefined;
-            if (item.instance_type) |fv_1| {
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.{d}.InstanceType=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.instance_type) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.{d}.InstanceType=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
+                }
             }
-        }
-        {
-            var prefix_buf: [256]u8 = undefined;
-            if (item.priority) |fv_1| {
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.{d}.Priority=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.priority) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.{d}.Priority=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
+                }
             }
-        }
-        {
-            var prefix_buf: [256]u8 = undefined;
-            if (item.weight) |fv_1| {
-                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.{d}.Weight=", .{n}) catch continue;
-                try body_buf.appendSlice(allocator, field_prefix);
-                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.weight) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&InstanceTypeSpecification.{d}.Weight=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_1}) catch "");
+                }
             }
         }
     }

@@ -20,6 +20,9 @@ pub const SearchCertificatesSortBy = enum {
     export_option,
     validation_method,
     imported_at,
+    acme_endpoint_arn,
+    acme_account_id,
+    certificate_key_pair_origin,
 
     pub const json_field_names = .{
         .created_at = "CREATED_AT",
@@ -40,6 +43,9 @@ pub const SearchCertificatesSortBy = enum {
         .export_option = "EXPORT_OPTION",
         .validation_method = "VALIDATION_METHOD",
         .imported_at = "IMPORTED_AT",
+        .acme_endpoint_arn = "ACME_ENDPOINT_ARN",
+        .acme_account_id = "ACME_ACCOUNT_ID",
+        .certificate_key_pair_origin = "CERTIFICATE_KEY_PAIR_ORIGIN",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -62,6 +68,9 @@ pub const SearchCertificatesSortBy = enum {
             .export_option => "EXPORT_OPTION",
             .validation_method => "VALIDATION_METHOD",
             .imported_at => "IMPORTED_AT",
+            .acme_endpoint_arn => "ACME_ENDPOINT_ARN",
+            .acme_account_id => "ACME_ACCOUNT_ID",
+            .certificate_key_pair_origin => "CERTIFICATE_KEY_PAIR_ORIGIN",
         };
     }
 

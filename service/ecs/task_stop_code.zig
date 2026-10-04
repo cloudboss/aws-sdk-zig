@@ -7,6 +7,7 @@ pub const TaskStopCode = enum {
     service_scheduler_initiated,
     spot_interruption,
     termination_notice,
+    infrastructure_health,
 
     pub const json_field_names = .{
         .task_failed_to_start = "TaskFailedToStart",
@@ -15,6 +16,7 @@ pub const TaskStopCode = enum {
         .service_scheduler_initiated = "ServiceSchedulerInitiated",
         .spot_interruption = "SpotInterruption",
         .termination_notice = "TerminationNotice",
+        .infrastructure_health = "InfrastructureHealth",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +27,7 @@ pub const TaskStopCode = enum {
             .service_scheduler_initiated => "ServiceSchedulerInitiated",
             .spot_interruption => "SpotInterruption",
             .termination_notice => "TerminationNotice",
+            .infrastructure_health => "InfrastructureHealth",
         };
     }
 

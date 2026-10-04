@@ -134,10 +134,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSoftwareUpdateJob
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateSoftwareUpdateJobOutput {
-    var result: CreateSoftwareUpdateJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateSoftwareUpdateJobOutput, body, allocator);
-    }
+    const result: CreateSoftwareUpdateJobOutput = try aws.json.parseJsonObject(
+        CreateSoftwareUpdateJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

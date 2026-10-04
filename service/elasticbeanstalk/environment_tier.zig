@@ -4,9 +4,12 @@ pub const EnvironmentTier = struct {
     ///
     /// Valid values:
     ///
-    /// * For *Web server tier* – `WebServer`
+    /// * For *Standard-mode EC2-based web server* – `WebServer`
     ///
-    /// * For *Worker tier* – `Worker`
+    /// * For *Standard-mode EC2-based backend application with Amazon SQS* –
+    ///   `Worker`
+    ///
+    /// * For *Cluster-mode Amazon EKS-based applications* – `Cluster`
     name: ?[]const u8 = null,
 
     /// The type of this environment tier.
@@ -16,6 +19,8 @@ pub const EnvironmentTier = struct {
     /// * For *Web server tier* – `Standard`
     ///
     /// * For *Worker tier* – `SQS/HTTP`
+    ///
+    /// * For *Cluster tier* – `EKS`
     @"type": ?[]const u8 = null,
 
     /// The version of this environment tier. When you don't set a value to it,

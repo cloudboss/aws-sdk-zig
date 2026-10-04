@@ -124,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateNotificationConfi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateNotificationConfigurationOutput {
-    var result: UpdateNotificationConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateNotificationConfigurationOutput, body, allocator);
-    }
+    const result: UpdateNotificationConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateNotificationConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

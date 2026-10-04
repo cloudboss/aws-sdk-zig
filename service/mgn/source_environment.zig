@@ -8,6 +8,7 @@ pub const SourceEnvironment = enum {
     cisco_aci,
     logical_model,
     modelize_it,
+    aws_discovery_collector,
 
     pub const json_field_names = .{
         .nsx = "NSX",
@@ -17,6 +18,7 @@ pub const SourceEnvironment = enum {
         .cisco_aci = "CISCO_ACI",
         .logical_model = "LOGICAL_MODEL",
         .modelize_it = "MODELIZE_IT",
+        .aws_discovery_collector = "AWS_DISCOVERY_COLLECTOR",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -28,6 +30,7 @@ pub const SourceEnvironment = enum {
             .cisco_aci => "CISCO_ACI",
             .logical_model => "LOGICAL_MODEL",
             .modelize_it => "MODELIZE_IT",
+            .aws_discovery_collector => "AWS_DISCOVERY_COLLECTOR",
         };
     }
 

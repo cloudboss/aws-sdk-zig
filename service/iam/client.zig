@@ -2,6 +2,7 @@ const aws = @import("aws");
 const std = @import("std");
 
 const accept_delegation_request = @import("accept_delegation_request.zig");
+const acquire_role = @import("acquire_role.zig");
 const add_client_id_to_open_id_connect_provider = @import("add_client_id_to_open_id_connect_provider.zig");
 const add_role_to_instance_profile = @import("add_role_to_instance_profile.zig");
 const add_user_to_group = @import("add_user_to_group.zig");
@@ -65,6 +66,7 @@ const generate_service_last_accessed_details = @import("generate_service_last_ac
 const get_access_key_last_used = @import("get_access_key_last_used.zig");
 const get_account_authorization_details = @import("get_account_authorization_details.zig");
 const get_account_password_policy = @import("get_account_password_policy.zig");
+const get_account_properties = @import("get_account_properties.zig");
 const get_account_summary = @import("get_account_summary.zig");
 const get_context_keys_for_custom_policy = @import("get_context_keys_for_custom_policy.zig");
 const get_context_keys_for_principal_policy = @import("get_context_keys_for_principal_policy.zig");
@@ -83,6 +85,7 @@ const get_policy = @import("get_policy.zig");
 const get_policy_version = @import("get_policy_version.zig");
 const get_role = @import("get_role.zig");
 const get_role_policy = @import("get_role_policy.zig");
+const get_role_template_version = @import("get_role_template_version.zig");
 const get_saml_provider = @import("get_saml_provider.zig");
 const get_server_certificate = @import("get_server_certificate.zig");
 const get_service_last_accessed_details = @import("get_service_last_accessed_details.zig");
@@ -127,6 +130,7 @@ const list_user_policies = @import("list_user_policies.zig");
 const list_user_tags = @import("list_user_tags.zig");
 const list_users = @import("list_users.zig");
 const list_virtual_mfa_devices = @import("list_virtual_mfa_devices.zig");
+const put_account_properties = @import("put_account_properties.zig");
 const put_group_policy = @import("put_group_policy.zig");
 const put_role_permissions_boundary = @import("put_role_permissions_boundary.zig");
 const put_role_policy = @import("put_role_policy.zig");
@@ -224,6 +228,23 @@ pub const Client = struct {
     /// partner.
     pub fn acceptDelegationRequest(self: *Self, allocator: std.mem.Allocator, input: accept_delegation_request.AcceptDelegationRequestInput, options: CallOptions) !accept_delegation_request.AcceptDelegationRequestOutput {
         return accept_delegation_request.execute(self, allocator, input, options);
+    }
+
+    /// Creates an IAM role from the specified role template. The new role takes its
+    /// configuration—including its name, path, trust policy, inline and managed
+    /// policies,
+    /// permissions boundary, tags, and maximum session duration—from the role
+    /// template version that you specify. For more information about roles, see
+    /// [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
+    /// in the
+    /// *IAM User Guide*.
+    ///
+    /// If the template version defines parameters, use the `ReplacementValues`
+    /// parameter to supply the values that the service substitutes into the role
+    /// during
+    /// creation.
+    pub fn acquireRole(self: *Self, allocator: std.mem.Allocator, input: acquire_role.AcquireRoleInput, options: CallOptions) !acquire_role.AcquireRoleOutput {
+        return acquire_role.execute(self, allocator, input, options);
     }
 
     /// Adds a new client ID (also known as audience) to the list of client IDs
@@ -659,15 +680,27 @@ pub const Client = struct {
     /// supported
     /// service per user.
     ///
-    /// You can create service-specific credentials for Amazon Bedrock, Amazon
-    /// CloudWatch Logs, CodeCommit and Amazon Keyspaces (for Apache Cassandra).
-    ///
     /// You can reset the password to a new service-generated value by calling
     /// [ResetServiceSpecificCredential](https://docs.aws.amazon.com/IAM/latest/APIReference/API_ResetServiceSpecificCredential.html).
     ///
-    /// For more information about service-specific credentials, see
-    /// [Service-specific credentials for IAM
-    /// users](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_bedrock.html) in the
+    /// For more information about using service-specific credentials to
+    /// authenticate to an
+    /// Amazon Web Services service, refer to the following docs:
+    ///
+    /// * For service-specific credentials with CodeCommit, refer to [IAM
+    ///   credentials for CodeCommit: Git credentials, SSH keys, and Amazon Web
+    ///   Services access
+    /// keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_ssh-keys.html) in the *IAM User Guide*.
+    ///
+    /// * For service-specific credentials with Amazon Keyspaces (for Apache
+    ///   Cassandra), refer to [Use IAM with
+    /// Amazon Keyspaces (for Apache
+    /// Cassandra)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_keyspaces.html) in the
+    /// *IAM User Guide*.
+    ///
+    /// * For services that support long-term API keys, refer to [API
+    /// keys for Amazon Web Services
+    /// services](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_api_keys_for_aws_services.html) in the
     /// *IAM User Guide*.
     pub fn createServiceSpecificCredential(self: *Self, allocator: std.mem.Allocator, input: create_service_specific_credential.CreateServiceSpecificCredentialInput, options: CallOptions) !create_service_specific_credential.CreateServiceSpecificCredentialOutput {
         return create_service_specific_credential.execute(self, allocator, input, options);
@@ -1553,6 +1586,20 @@ pub const Client = struct {
         return get_account_password_policy.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the account-level properties for the caller's Amazon Web Services
+    /// account. Account
+    /// properties are configuration settings that control account-wide IAM features
+    /// such as
+    /// Role Manager.
+    ///
+    /// The service returns properties as key-value pairs in
+    /// `Namespace/PropertyName` format. Each namespace groups related
+    /// configuration settings. Use
+    /// [PutAccountProperties](https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutAccountProperties.html) to modify these properties.
+    pub fn getAccountProperties(self: *Self, allocator: std.mem.Allocator, input: get_account_properties.GetAccountPropertiesInput, options: CallOptions) !get_account_properties.GetAccountPropertiesOutput {
+        return get_account_properties.execute(self, allocator, input, options);
+    }
+
     /// Retrieves information about IAM entity usage and IAM quotas in the Amazon
     /// Web Services
     /// account.
@@ -1613,7 +1660,12 @@ pub const Client = struct {
     /// against a value in an IAM policy. Use
     /// [GetContextKeysForPrincipalPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetContextKeysForPrincipalPolicy.html) to understand what key names and values
     /// you must supply when you call
-    /// [SimulatePrincipalPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html).
+    /// [SimulatePrincipalPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html). This operation doesn't return context keys
+    /// referenced by service control policies (SCPs). Only context keys referenced
+    /// by the
+    /// identity-based policies attached to the specified entity, and any additional
+    /// policies
+    /// that you provide, are included.
     pub fn getContextKeysForPrincipalPolicy(self: *Self, allocator: std.mem.Allocator, input: get_context_keys_for_principal_policy.GetContextKeysForPrincipalPolicyInput, options: CallOptions) !get_context_keys_for_principal_policy.GetContextKeysForPrincipalPolicyOutput {
         return get_context_keys_for_principal_policy.execute(self, allocator, input, options);
     }
@@ -1906,6 +1958,21 @@ pub const Client = struct {
     /// *IAM User Guide*.
     pub fn getRolePolicy(self: *Self, allocator: std.mem.Allocator, input: get_role_policy.GetRolePolicyInput, options: CallOptions) !get_role_policy.GetRolePolicyOutput {
         return get_role_policy.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves information about a version of the specified role template. Role
+    /// templates
+    /// define a reusable configuration—including role name and path patterns, trust
+    /// policy, inline and managed policies, permissions boundary, tags, and maximum
+    /// session
+    /// duration—that you use to create IAM roles with
+    /// [AcquireRole](https://docs.aws.amazon.com/IAM/latest/APIReference/API_AcquireRole.html).
+    ///
+    /// If you do not specify a minor version, the service returns the template's
+    /// default
+    /// minor version.
+    pub fn getRoleTemplateVersion(self: *Self, allocator: std.mem.Allocator, input: get_role_template_version.GetRoleTemplateVersionInput, options: CallOptions) !get_role_template_version.GetRoleTemplateVersionOutput {
+        return get_role_template_version.execute(self, allocator, input, options);
     }
 
     /// Returns the SAML provider metadocument that was uploaded when the IAM SAML
@@ -2591,10 +2658,24 @@ pub const Client = struct {
     /// authenticating
     /// the IAM user to a specific service. For more information about using
     /// service-specific
-    /// credentials to authenticate to an Amazon Web Services service, see [Set up
-    /// service-specific
-    /// credentials](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html)
-    /// in the CodeCommit User Guide.
+    /// credentials to authenticate to an Amazon Web Services service, refer to the
+    /// following docs:
+    ///
+    /// * For service-specific credentials with CodeCommit, refer to [IAM
+    ///   credentials for CodeCommit: Git credentials, SSH keys, and Amazon Web
+    ///   Services access
+    /// keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_ssh-keys.html) in the *IAM User Guide*.
+    ///
+    /// * For service-specific credentials with Amazon Keyspaces (for Apache
+    ///   Cassandra), refer to [Use IAM with
+    /// Amazon Keyspaces (for Apache
+    /// Cassandra)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_keyspaces.html) in the
+    /// *IAM User Guide*.
+    ///
+    /// * For services that support long-term API keys, refer to [API
+    /// keys for Amazon Web Services
+    /// services](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_api_keys_for_aws_services.html) in the
+    /// *IAM User Guide*.
     pub fn listServiceSpecificCredentials(self: *Self, allocator: std.mem.Allocator, input: list_service_specific_credentials.ListServiceSpecificCredentialsInput, options: CallOptions) !list_service_specific_credentials.ListServiceSpecificCredentialsOutput {
         return list_service_specific_credentials.execute(self, allocator, input, options);
     }
@@ -2707,6 +2788,19 @@ pub const Client = struct {
     /// parameters.
     pub fn listVirtualMfaDevices(self: *Self, allocator: std.mem.Allocator, input: list_virtual_mfa_devices.ListVirtualMFADevicesInput, options: CallOptions) !list_virtual_mfa_devices.ListVirtualMFADevicesOutput {
         return list_virtual_mfa_devices.execute(self, allocator, input, options);
+    }
+
+    /// Sets account-level properties for the caller's Amazon Web Services account.
+    /// Account properties are
+    /// configuration settings that control account-wide IAM features such as Role
+    /// Manager.
+    ///
+    /// Specify properties as key-value pairs in
+    /// `Namespace/PropertyName` format. All properties in a single request must
+    /// belong to the same namespace. Use
+    /// [GetAccountProperties](https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountProperties.html) to view the current properties.
+    pub fn putAccountProperties(self: *Self, allocator: std.mem.Allocator, input: put_account_properties.PutAccountPropertiesInput, options: CallOptions) !put_account_properties.PutAccountPropertiesOutput {
+        return put_account_properties.execute(self, allocator, input, options);
     }
 
     /// Adds or updates an inline policy document that is embedded in the specified
@@ -3040,12 +3134,11 @@ pub const Client = struct {
     /// If the output is long, you can use `MaxItems` and `Marker`
     /// parameters to paginate the results.
     ///
-    /// The IAM policy simulator evaluates statements in the identity-based policy
-    /// and
-    /// the inputs that you provide during simulation. The policy simulator results
-    /// can
-    /// differ from your live Amazon Web Services environment. We recommend that you
-    /// check your policies
+    /// The IAM policy simulator evaluates statements in identity-based policies,
+    /// service control policies (SCPs) including their condition keys and resource
+    /// scoping, and the inputs that you provide during simulation. The policy
+    /// simulator results can differ from your live Amazon Web Services environment.
+    /// We recommend that you check your policies
     /// against your live Amazon Web Services environment after testing using the
     /// policy simulator to
     /// confirm that you have the desired results. For more information about using
@@ -3083,6 +3176,13 @@ pub const Client = struct {
     /// authorization
     /// to determine if the simulated policies allow or deny the operations.
     ///
+    /// For cross-account simulations, `EvalDecisionDetails` returns the decision
+    /// for each policy type (identity-based policy, resource-based policy, and
+    /// permissions
+    /// boundary). This helps you identify which policy type is responsible for an
+    /// allow or
+    /// deny decision when policies span multiple accounts.
+    ///
     /// **Note:** This operation discloses information about the
     /// permissions granted to other users. If you do not want users to see other
     /// user's
@@ -3100,12 +3200,11 @@ pub const Client = struct {
     /// If the output is long, you can use the `MaxItems` and `Marker`
     /// parameters to paginate the results.
     ///
-    /// The IAM policy simulator evaluates statements in the identity-based policy
-    /// and
-    /// the inputs that you provide during simulation. The policy simulator results
-    /// can
-    /// differ from your live Amazon Web Services environment. We recommend that you
-    /// check your policies
+    /// The IAM policy simulator evaluates statements in identity-based policies,
+    /// service control policies (SCPs) including their condition keys and resource
+    /// scoping, and the inputs that you provide during simulation. The policy
+    /// simulator results can differ from your live Amazon Web Services environment.
+    /// We recommend that you check your policies
     /// against your live Amazon Web Services environment after testing using the
     /// policy simulator to
     /// confirm that you have the desired results. For more information about using

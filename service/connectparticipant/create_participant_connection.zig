@@ -122,10 +122,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateParticipantConnec
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateParticipantConnectionOutput {
-    var result: CreateParticipantConnectionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateParticipantConnectionOutput, body, allocator);
-    }
+    const result: CreateParticipantConnectionOutput = try aws.json.parseJsonObject(
+        CreateParticipantConnectionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

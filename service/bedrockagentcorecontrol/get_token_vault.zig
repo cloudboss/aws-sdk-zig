@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTokenVaultInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTokenVaultOutput {
-    var result: GetTokenVaultOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTokenVaultOutput, body, allocator);
-    }
+    const result: GetTokenVaultOutput = try aws.json.parseJsonObject(
+        GetTokenVaultOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

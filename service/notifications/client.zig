@@ -39,6 +39,7 @@ const register_notification_hub = @import("register_notification_hub.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_event_rule = @import("update_event_rule.zig");
+const update_managed_notification_channel_association = @import("update_managed_notification_channel_association.zig");
 const update_notification_configuration = @import("update_notification_configuration.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
@@ -118,12 +119,12 @@ pub const Client = struct {
         return delete_notification_configuration.execute(self, allocator, input, options);
     }
 
-    /// Deregisters a `NotificationConfiguration` in the specified Region.
+    /// Deregisters a `NotificationHub` in the specified Region.
     ///
     /// You can't deregister the last `NotificationHub` in the account.
-    /// `NotificationEvents` stored in the deregistered `NotificationConfiguration`
-    /// are no longer be visible. Recreating a new `NotificationConfiguration` in
-    /// the same Region restores access to those `NotificationEvents`.
+    /// `NotificationEvents` stored in the deregistered `NotificationHub` are no
+    /// longer visible. Recreating a new `NotificationHub` in the same Region
+    /// restores access to those `NotificationEvents`.
     pub fn deregisterNotificationHub(self: *Self, allocator: std.mem.Allocator, input: deregister_notification_hub.DeregisterNotificationHubInput, options: CallOptions) !deregister_notification_hub.DeregisterNotificationHubOutput {
         return deregister_notification_hub.execute(self, allocator, input, options);
     }
@@ -299,10 +300,10 @@ pub const Client = struct {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
-    /// Registers a `NotificationConfiguration` in the specified Region.
+    /// Registers a `NotificationHub` in the specified Region.
     ///
-    /// There is a maximum of one `NotificationConfiguration` per Region. You can
-    /// have a maximum of 3 `NotificationHub` resources at a time.
+    /// There is a maximum of one `NotificationHub` per Region. You can have a
+    /// maximum of 3 `NotificationHub` resources at a time.
     pub fn registerNotificationHub(self: *Self, allocator: std.mem.Allocator, input: register_notification_hub.RegisterNotificationHubInput, options: CallOptions) !register_notification_hub.RegisterNotificationHubOutput {
         return register_notification_hub.execute(self, allocator, input, options);
     }
@@ -328,6 +329,12 @@ pub const Client = struct {
     /// Updates an existing `EventRule`.
     pub fn updateEventRule(self: *Self, allocator: std.mem.Allocator, input: update_event_rule.UpdateEventRuleInput, options: CallOptions) !update_event_rule.UpdateEventRuleOutput {
         return update_event_rule.execute(self, allocator, input, options);
+    }
+
+    /// Updates the `isSensitiveEventsSubscribed` property of a particular
+    /// ManagedNotification channel association.
+    pub fn updateManagedNotificationChannelAssociation(self: *Self, allocator: std.mem.Allocator, input: update_managed_notification_channel_association.UpdateManagedNotificationChannelAssociationInput, options: CallOptions) !update_managed_notification_channel_association.UpdateManagedNotificationChannelAssociationOutput {
+        return update_managed_notification_channel_association.execute(self, allocator, input, options);
     }
 
     /// Updates a `NotificationConfiguration`.

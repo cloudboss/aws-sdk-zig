@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetCaseRuleInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetCaseRuleOutput {
-    var result: BatchGetCaseRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetCaseRuleOutput, body, allocator);
-    }
+    const result: BatchGetCaseRuleOutput = try aws.json.parseJsonObject(
+        BatchGetCaseRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

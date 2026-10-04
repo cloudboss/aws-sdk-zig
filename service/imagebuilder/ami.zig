@@ -18,6 +18,8 @@ pub const Ami = struct {
     /// The Amazon Web Services Region of the Amazon EC2 AMI.
     region: ?[]const u8 = null,
 
+    /// The state of the AMI, which includes the status and, if applicable,
+    /// the reason for that status.
     state: ?ImageState = null,
 
     pub const json_field_names = .{

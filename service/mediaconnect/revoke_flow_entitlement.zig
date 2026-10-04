@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RevokeFlowEntitlementIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RevokeFlowEntitlementOutput {
-    var result: RevokeFlowEntitlementOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RevokeFlowEntitlementOutput, body, allocator);
-    }
+    const result: RevokeFlowEntitlementOutput = try aws.json.parseJsonObject(
+        RevokeFlowEntitlementOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -99,8 +99,8 @@ pub const CreateFileSystemInput = struct {
     /// file system that you're creating. Required if `ThroughputMode` is set to
     /// `provisioned`. Valid values are 1-3414 MiBps, with the upper limit depending
     /// on
-    /// Region. To increase this limit, contact Amazon Web ServicesSupport. For more
-    /// information, see [Amazon EFS quotas
+    /// Region. To increase this limit, contact Amazon Web Services Support. For
+    /// more information, see [Amazon EFS quotas
     /// that you can
     /// increase](https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits)
     /// in the *Amazon EFS User
@@ -251,10 +251,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFileSystemInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateFileSystemOutput {
-    var result: CreateFileSystemOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateFileSystemOutput, body, allocator);
-    }
+    const result: CreateFileSystemOutput = try aws.json.parseJsonObject(
+        CreateFileSystemOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

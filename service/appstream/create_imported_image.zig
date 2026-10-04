@@ -38,7 +38,7 @@ pub const CreateImportedImageInput = struct {
     /// AMI. The role must have permissions to modify image attributes and describe
     /// images, with a trust relationship allowing appstream.amazonaws.com to assume
     /// the role.
-    iam_role_arn: []const u8,
+    iam_role_arn: ?[]const u8 = null,
 
     /// A unique name for the imported image. The name must be between 1 and 100
     /// characters and can contain letters, numbers, underscores, periods, and
@@ -50,14 +50,15 @@ pub const CreateImportedImageInput = struct {
     /// functionality, which helps ensure the image is suitable for use.
     runtime_validation_config: ?RuntimeValidationConfig = null,
 
-    /// The ID of the EC2 AMI to import. The AMI must meet specific requirements
-    /// including Windows Server 2022 Full Base, UEFI boot mode, TPM 2.0 support,
-    /// and proper drivers.
-    source_ami_id: []const u8,
+    /// The ID of the EC2 AMI to import.
+    source_ami_id: ?[]const u8 = null,
 
     /// The tags to apply to the imported image. Tags help you organize and manage
     /// your WorkSpaces Applications resources.
     tags: ?[]const aws.map.StringMapEntry = null,
+
+    /// The ID of the Workspaces Image to import.
+    workspace_image_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .agent_software_version = "AgentSoftwareVersion",
@@ -70,6 +71,7 @@ pub const CreateImportedImageInput = struct {
         .runtime_validation_config = "RuntimeValidationConfig",
         .source_ami_id = "SourceAmiId",
         .tags = "Tags",
+        .workspace_image_id = "WorkspaceImageId",
     };
 };
 

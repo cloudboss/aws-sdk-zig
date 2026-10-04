@@ -44,6 +44,10 @@ pub const CreateLicenseVersionInput = struct {
     /// Product name.
     product_name: []const u8,
 
+    /// Specifies whether to reset the license usage for the new license version. If
+    /// you don't specify a value, the license usage is not reset.
+    reset_usage: ?bool = null,
+
     /// Current version of the license.
     source_version: ?[]const u8 = null,
 
@@ -64,6 +68,7 @@ pub const CreateLicenseVersionInput = struct {
         .license_metadata = "LicenseMetadata",
         .license_name = "LicenseName",
         .product_name = "ProductName",
+        .reset_usage = "ResetUsage",
         .source_version = "SourceVersion",
         .status = "Status",
         .validity = "Validity",

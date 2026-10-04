@@ -2,14 +2,17 @@ const std = @import("std");
 
 pub const ProfileType = enum {
     frequency,
+    volume,
 
     pub const json_field_names = .{
         .frequency = "FREQUENCY",
+        .volume = "VOLUME",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .frequency => "FREQUENCY",
+            .volume => "VOLUME",
         };
     }
 

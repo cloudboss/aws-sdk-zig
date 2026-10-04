@@ -6,6 +6,10 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const ListConfigurationSetsInput = struct {
+    /// An object that contains filters to apply when listing configuration sets.
+    /// You can filter by configuration set name.
+    filter: ?[]const aws.map.StringMapEntry = null,
+
     /// A token returned from a previous call to `ListConfigurationSets` to
     /// indicate the position in the list of configuration sets.
     next_token: ?[]const u8 = null,
@@ -18,6 +22,7 @@ pub const ListConfigurationSetsInput = struct {
     page_size: ?i32 = null,
 
     pub const json_field_names = .{
+        .filter = "Filter",
         .next_token = "NextToken",
         .page_size = "PageSize",
     };
@@ -72,46 +77,51 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListConfigurationSetsIn
 
     const ep = try aws.url.parseEndpoint(endpoint);
 
-    const path = "/v2/email/configuration-sets";
+    const path = "/v2/email/list-configuration-sets";
 
-    var query_buf: std.ArrayList(u8) = .empty;
-    var query_has_prev = false;
+    var body_buf: std.ArrayList(u8) = .empty;
+    var has_prev = false;
+    try body_buf.appendSlice(allocator, "{");
+
+    if (input.filter) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"Filter\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.next_token) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "NextToken=");
-        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
-        query_has_prev = true;
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"NextToken\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
     }
     if (input.page_size) |v| {
-        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
-        try query_buf.appendSlice(allocator, "PageSize=");
-        {
-            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
-            try query_buf.appendSlice(allocator, num_str);
-        }
-        query_has_prev = true;
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"PageSize\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
     }
-    const query = try query_buf.toOwnedSlice(allocator);
 
-    const body: ?[]const u8 = null;
+    try body_buf.appendSlice(allocator, "}");
+    const body = try body_buf.toOwnedSlice(allocator);
 
     var request = aws.http.Request.init(ep.host);
-    request.method = .GET;
+    request.method = .POST;
     request.path = path;
     request.tls = ep.tls;
     request.port = ep.port;
     request.body = body;
-    request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListConfigurationSetsOutput {
-    var result: ListConfigurationSetsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListConfigurationSetsOutput, body, allocator);
-    }
+    const result: ListConfigurationSetsOutput = try aws.json.parseJsonObject(
+        ListConfigurationSetsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

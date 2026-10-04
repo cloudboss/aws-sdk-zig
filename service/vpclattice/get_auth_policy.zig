@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAuthPolicyInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAuthPolicyOutput {
-    var result: GetAuthPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAuthPolicyOutput, body, allocator);
-    }
+    const result: GetAuthPolicyOutput = try aws.json.parseJsonObject(
+        GetAuthPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -132,10 +132,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListNetworkMigrationMap
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListNetworkMigrationMapperSegmentConstructsOutput {
-    var result: ListNetworkMigrationMapperSegmentConstructsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListNetworkMigrationMapperSegmentConstructsOutput, body, allocator);
-    }
+    const result: ListNetworkMigrationMapperSegmentConstructsOutput = try aws.json.parseJsonObject(
+        ListNetworkMigrationMapperSegmentConstructsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

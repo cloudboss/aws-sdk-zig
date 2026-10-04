@@ -168,10 +168,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFolderInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateFolderOutput {
-    var result: CreateFolderOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateFolderOutput, body, allocator);
-    }
+    var result: CreateFolderOutput = try aws.json.parseJsonObject(
+        CreateFolderOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

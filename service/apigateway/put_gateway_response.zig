@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutGatewayResponseInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutGatewayResponseOutput {
-    var result: PutGatewayResponseOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutGatewayResponseOutput, body, allocator);
-    }
+    const result: PutGatewayResponseOutput = try aws.json.parseJsonObject(
+        PutGatewayResponseOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

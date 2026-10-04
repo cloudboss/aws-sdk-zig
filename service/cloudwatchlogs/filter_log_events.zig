@@ -74,10 +74,31 @@ pub const FilterLogEventsInput = struct {
     /// previous call.)
     next_token: ?[]const u8 = null,
 
+    /// If the value is true, the earliest log events are returned first. If the
+    /// value is
+    /// false, the latest log events are returned first. The default value is true.
+    ///
+    /// The `startFromHead` parameter sets the sort direction on the first request.
+    /// On subsequent requests, the `nextToken` determines the sort direction. To
+    /// continue
+    /// paginating in the same direction, provide the returned `nextToken`. If you
+    /// provide
+    /// both `nextToken` and `startFromHead`, the direction of the
+    /// `nextToken` is used.
+    ///
+    /// Setting `startFromHead` to `false` is supported only when
+    /// `startTime` is on or after `Jan 1, 2024 00:00:00 UTC`. A request with
+    /// `startFromHead` set to `false` and a `startTime` before
+    /// this date returns an `InvalidParameterException`.
+    start_from_head: ?bool = null,
+
     /// The start of the time range, expressed as the number of milliseconds after
     /// `Jan 1,
     /// 1970 00:00:00 UTC`. Events with a timestamp before this time are not
     /// returned.
+    ///
+    /// Set `startTime` explicitly to reduce the chances of empty pages in the
+    /// response.
     start_time: ?i64 = null,
 
     /// Specify `true` to display the log event fields with all sensitive data
@@ -99,6 +120,7 @@ pub const FilterLogEventsInput = struct {
         .log_stream_name_prefix = "logStreamNamePrefix",
         .log_stream_names = "logStreamNames",
         .next_token = "nextToken",
+        .start_from_head = "startFromHead",
         .start_time = "startTime",
         .unmask = "unmask",
     };
@@ -108,8 +130,9 @@ pub const FilterLogEventsOutput = struct {
     /// The matched events.
     events: ?[]const FilteredLogEvent = null,
 
-    /// The token to use when requesting the next set of items. The token expires
-    /// after 24
+    /// The token for the next set of items in the sorting direction specified by
+    /// the
+    /// `startFromHead` parameter in the first request. The token expires after 24
     /// hours.
     ///
     /// If the results don't include a `nextToken`, then pagination is finished.

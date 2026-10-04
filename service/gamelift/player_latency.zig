@@ -2,9 +2,10 @@
 /// session.
 /// This value indicates the amount of time lag that exists when the player is
 /// connected to
-/// a fleet in the specified Region. The relative difference between a player's
-/// latency
-/// values for multiple Regions are used to determine which fleets are best
+/// a fleet in the specified location (an Amazon Web Services Region or a custom
+/// location for Amazon GameLift Servers Anywhere fleets). The relative
+/// difference between a player's latency
+/// values for multiple locations are used to determine which fleets are best
 /// suited to place
 /// a new game session for the player.
 pub const PlayerLatency = struct {
@@ -16,7 +17,9 @@ pub const PlayerLatency = struct {
     /// A unique identifier for a player associated with the latency data.
     player_id: ?[]const u8 = null,
 
-    /// Name of the Region that is associated with the latency value.
+    /// Name of the Region or custom location that is associated with the latency
+    /// value. For
+    /// Amazon GameLift Servers Anywhere fleets, use the custom location name.
     region_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{

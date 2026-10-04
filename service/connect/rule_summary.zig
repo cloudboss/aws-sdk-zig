@@ -1,6 +1,7 @@
 const ActionSummary = @import("action_summary.zig").ActionSummary;
 const EventSourceName = @import("event_source_name.zig").EventSourceName;
 const RulePublishStatus = @import("rule_publish_status.zig").RulePublishStatus;
+const RuleCapabilityTier = @import("rule_capability_tier.zig").RuleCapabilityTier;
 
 /// A list of `ActionTypes` associated with a rule.
 pub const RuleSummary = struct {
@@ -25,6 +26,11 @@ pub const RuleSummary = struct {
     /// The Amazon Resource Name (ARN) of the rule.
     rule_arn: []const u8,
 
+    /// The list of capability tiers associated with the rule. Used for categorizing
+    /// rules by capability (for example,
+    /// `GenerativeAI`).
+    rule_capability_tiers: ?[]const RuleCapabilityTier = null,
+
     /// A unique identifier for the rule.
     rule_id: []const u8,
 
@@ -36,6 +42,7 @@ pub const RuleSummary = struct {
         .name = "Name",
         .publish_status = "PublishStatus",
         .rule_arn = "RuleArn",
+        .rule_capability_tiers = "RuleCapabilityTiers",
         .rule_id = "RuleId",
     };
 };

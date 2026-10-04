@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const UpdateGatewaySoftwareNowInput = struct {
-    /// The Amazon Resource Name (ARN) of the gateway
-    /// to be updated.
+    /// The Amazon Resource Name (ARN) of the gateway to be updated.
     gateway_arn: []const u8,
 
     pub const json_field_names = .{
@@ -16,8 +15,7 @@ pub const UpdateGatewaySoftwareNowInput = struct {
 };
 
 pub const UpdateGatewaySoftwareNowOutput = struct {
-    /// The Amazon Resource Name (ARN) of the gateway
-    /// you updated.
+    /// The Amazon Resource Name (ARN) of the gateway you updated.
     gateway_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{

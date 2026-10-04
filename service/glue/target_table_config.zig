@@ -3,6 +3,9 @@ const UnnestSpec = @import("unnest_spec.zig").UnnestSpec;
 
 /// Properties used by the target leg to partition the data on the target.
 pub const TargetTableConfig = struct {
+    /// The ARN of the integration that owns this target table configuration.
+    integration_arn: ?[]const u8 = null,
+
     /// Determines the file layout on the target.
     partition_spec: ?[]const IntegrationPartition = null,
 
@@ -14,6 +17,7 @@ pub const TargetTableConfig = struct {
     unnest_spec: ?UnnestSpec = null,
 
     pub const json_field_names = .{
+        .integration_arn = "IntegrationArn",
         .partition_spec = "PartitionSpec",
         .target_table_name = "TargetTableName",
         .unnest_spec = "UnnestSpec",

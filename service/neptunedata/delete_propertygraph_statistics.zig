@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeletePropertygraphStat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeletePropertygraphStatisticsOutput {
-    var result: DeletePropertygraphStatisticsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeletePropertygraphStatisticsOutput, body, allocator);
-    }
+    var result: DeletePropertygraphStatisticsOutput = try aws.json.parseJsonObject(
+        DeletePropertygraphStatisticsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status_code = @intCast(status);
     _ = headers;
 

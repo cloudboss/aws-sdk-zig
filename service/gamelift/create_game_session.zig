@@ -79,9 +79,10 @@ pub const CreateGameSessionInput = struct {
     /// `GameSession` object, with an updated status. Maximum token length is 48
     /// characters. If provided, this string is included in the new game session's
     /// ID.
-    /// The value is always a full ARN in the following format:
-    /// `arn:aws:gamelift:::gamesession//`. Idempotency tokens remain in use for 30
-    /// days after a game session has ended;
+    /// The value is always a full ARN in the following format: For Home Region game
+    /// session - `arn:aws:gamelift:::gamesession//`. For Remote Location game
+    /// session - `arn:aws:gamelift:::gamesession///`. Idempotency tokens remain in
+    /// use for 30 days after a game session has ended;
     /// game session objects are retained for this time period and then deleted.
     idempotency_token: ?[]const u8 = null,
 

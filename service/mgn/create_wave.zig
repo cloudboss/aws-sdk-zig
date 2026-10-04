@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateWaveInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateWaveOutput {
-    var result: CreateWaveOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateWaveOutput, body, allocator);
-    }
+    const result: CreateWaveOutput = try aws.json.parseJsonObject(
+        CreateWaveOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

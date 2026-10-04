@@ -3,7 +3,7 @@
 /// volumes](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/s3files-volumes.html) in the *Amazon Elastic Container Service Developer Guide*.
 ///
 /// Your task definition must include a Task IAM Role. See [ IAM role for
-/// attaching your file system to AWS compute
+/// attaching your file system to Amazon Web Services compute
 /// resources](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-files-prereq-policies.html#s3-files-prereq-iam-compute-role) for required permissions.
 pub const S3FilesVolumeConfiguration = struct {
     /// The full ARN of the S3 Files access point to use. If an access point is

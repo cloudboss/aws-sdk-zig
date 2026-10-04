@@ -9,7 +9,7 @@ const GroupingConfiguration = @import("grouping_configuration.zig").GroupingConf
 const QuickResponseData = @import("quick_response_data.zig").QuickResponseData;
 
 pub const UpdateQuickResponseInput = struct {
-    /// The Amazon Connect contact channels this quick response applies to. The
+    /// The Connect Customer contact channels this quick response applies to. The
     /// supported contact channel types include `Chat`.
     channels: ?[]const []const u8 = null,
 
@@ -217,10 +217,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateQuickResponseInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateQuickResponseOutput {
-    var result: UpdateQuickResponseOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateQuickResponseOutput, body, allocator);
-    }
+    const result: UpdateQuickResponseOutput = try aws.json.parseJsonObject(
+        UpdateQuickResponseOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

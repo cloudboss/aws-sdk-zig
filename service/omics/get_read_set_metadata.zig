@@ -151,10 +151,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetReadSetMetadataInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetReadSetMetadataOutput {
-    var result: GetReadSetMetadataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetReadSetMetadataOutput, body, allocator);
-    }
+    const result: GetReadSetMetadataOutput = try aws.json.parseJsonObject(
+        GetReadSetMetadataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

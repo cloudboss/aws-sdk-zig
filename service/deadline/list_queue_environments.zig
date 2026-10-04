@@ -120,10 +120,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListQueueEnvironmentsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListQueueEnvironmentsOutput {
-    var result: ListQueueEnvironmentsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListQueueEnvironmentsOutput, body, allocator);
-    }
+    const result: ListQueueEnvironmentsOutput = try aws.json.parseJsonObject(
+        ListQueueEnvironmentsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

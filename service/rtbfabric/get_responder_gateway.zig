@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const ClientRoutingPolicy = @import("client_routing_policy.zig").ClientRoutingPolicy;
 const GatewayType = @import("gateway_type.zig").GatewayType;
 const ListenerConfig = @import("listener_config.zig").ListenerConfig;
 const ManagedEndpointConfiguration = @import("managed_endpoint_configuration.zig").ManagedEndpointConfiguration;
@@ -24,6 +25,15 @@ pub const GetResponderGatewayOutput = struct {
     /// The count of active links for the responder gateway.
     active_links_count: ?i32 = null,
 
+    /// The client routing policy of the gateway. This policy controls which
+    /// Availability Zones RTB Fabric uses to reach the gateway for the requester
+    /// gateways that send traffic to it. RTB Fabric omits this member if the
+    /// gateway has never had a client routing policy. An omitted value means that
+    /// the gateway uses `AVAILABILITY_ZONE_AFFINITY`. For more information, see
+    /// [Configuring Availability Zone
+    /// affinity](https://docs.aws.amazon.com/rtb-fabric/latest/userguide/working-with-responder-gateways.html#configuring-availability-zone-affinity) in the *Amazon Web Services RTB Fabric User Guide*.
+    client_routing_policy: ?ClientRoutingPolicy = null,
+
     /// The timestamp of when the responder gateway was created.
     created_at: ?i64 = null,
 
@@ -42,8 +52,9 @@ pub const GetResponderGatewayOutput = struct {
     /// The type of gateway. Valid values are `EXTERNAL` or `INTERNAL`.
     gateway_type: ?GatewayType = null,
 
-    /// The count of inbound links for the responder gateway.
-    inbound_links_count: ?i32 = null,
+    /// The count of requested links waiting for the responder gateway to accept or
+    /// reject.
+    links_requested_count: ?i32 = null,
 
     /// The listener configuration for the responder gateway.
     listener_config: ?ListenerConfig = null,
@@ -84,13 +95,14 @@ pub const GetResponderGatewayOutput = struct {
 
     pub const json_field_names = .{
         .active_links_count = "activeLinksCount",
+        .client_routing_policy = "clientRoutingPolicy",
         .created_at = "createdAt",
         .description = "description",
         .domain_name = "domainName",
         .external_inbound_endpoint = "externalInboundEndpoint",
         .gateway_id = "gatewayId",
         .gateway_type = "gatewayType",
-        .inbound_links_count = "inboundLinksCount",
+        .links_requested_count = "linksRequestedCount",
         .listener_config = "listenerConfig",
         .managed_endpoint_configuration = "managedEndpointConfiguration",
         .port = "port",
@@ -155,10 +167,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetResponderGatewayInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetResponderGatewayOutput {
-    var result: GetResponderGatewayOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetResponderGatewayOutput, body, allocator);
-    }
+    const result: GetResponderGatewayOutput = try aws.json.parseJsonObject(
+        GetResponderGatewayOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

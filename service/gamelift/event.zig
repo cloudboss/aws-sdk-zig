@@ -220,6 +220,10 @@ pub const Event = struct {
     ///
     /// * FLEET_DELETED -- A request to delete a fleet was initiated.
     ///
+    /// * FLEET_EXPIRED -- The fleet has been expired. The fleet is scaled down to
+    ///   zero
+    /// instances and can no longer host game sessions.
+    ///
     /// * GENERIC_EVENT -- An unspecified event has occurred.
     event_code: ?EventCode = null,
 

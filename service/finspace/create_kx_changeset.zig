@@ -192,10 +192,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateKxChangesetInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateKxChangesetOutput {
-    var result: CreateKxChangesetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateKxChangesetOutput, body, allocator);
-    }
+    const result: CreateKxChangesetOutput = try aws.json.parseJsonObject(
+        CreateKxChangesetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

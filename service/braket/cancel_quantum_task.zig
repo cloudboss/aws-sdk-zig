@@ -92,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CancelQuantumTaskInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CancelQuantumTaskOutput {
-    var result: CancelQuantumTaskOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CancelQuantumTaskOutput, body, allocator);
-    }
+    const result: CancelQuantumTaskOutput = try aws.json.parseJsonObject(
+        CancelQuantumTaskOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

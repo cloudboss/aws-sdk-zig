@@ -156,10 +156,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePromptVersionInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePromptVersionOutput {
-    var result: CreatePromptVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePromptVersionOutput, body, allocator);
-    }
+    const result: CreatePromptVersionOutput = try aws.json.parseJsonObject(
+        CreatePromptVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

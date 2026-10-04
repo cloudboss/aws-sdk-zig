@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RetryDataReplicationInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RetryDataReplicationOutput {
-    var result: RetryDataReplicationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RetryDataReplicationOutput, body, allocator);
-    }
+    const result: RetryDataReplicationOutput = try aws.json.parseJsonObject(
+        RetryDataReplicationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const RouterInputConfiguration = @import("router_input_configuration.zig").RouterInputConfiguration;
+const RouterContentQualityAnalysisConfiguration = @import("router_content_quality_analysis_configuration.zig").RouterContentQualityAnalysisConfiguration;
 const MaintenanceConfiguration = @import("maintenance_configuration.zig").MaintenanceConfiguration;
 const RoutingScope = @import("routing_scope.zig").RoutingScope;
 const RouterInputTier = @import("router_input_tier.zig").RouterInputTier;
@@ -18,6 +19,9 @@ pub const UpdateRouterInputInput = struct {
     /// The updated configuration settings for the router input. Changing the type
     /// of the configuration is not supported.
     configuration: ?RouterInputConfiguration = null,
+
+    /// The content quality analysis configuration for the router input.
+    content_quality_analysis_configuration: ?RouterContentQualityAnalysisConfiguration = null,
 
     /// The updated maintenance configuration settings for the router input,
     /// including any changes to preferred maintenance windows and schedules.
@@ -43,6 +47,7 @@ pub const UpdateRouterInputInput = struct {
     pub const json_field_names = .{
         .arn = "Arn",
         .configuration = "Configuration",
+        .content_quality_analysis_configuration = "ContentQualityAnalysisConfiguration",
         .maintenance_configuration = "MaintenanceConfiguration",
         .maximum_bitrate = "MaximumBitrate",
         .name = "Name",
@@ -106,6 +111,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateRouterInputInput,
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.content_quality_analysis_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ContentQualityAnalysisConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.maintenance_configuration) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"MaintenanceConfiguration\":");
@@ -158,10 +169,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateRouterInputInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateRouterInputOutput {
-    var result: UpdateRouterInputOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateRouterInputOutput, body, allocator);
-    }
+    const result: UpdateRouterInputOutput = try aws.json.parseJsonObject(
+        UpdateRouterInputOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

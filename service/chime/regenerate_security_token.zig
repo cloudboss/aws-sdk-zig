@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegenerateSecurityToken
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RegenerateSecurityTokenOutput {
-    var result: RegenerateSecurityTokenOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RegenerateSecurityTokenOutput, body, allocator);
-    }
+    const result: RegenerateSecurityTokenOutput = try aws.json.parseJsonObject(
+        RegenerateSecurityTokenOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -91,10 +91,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGlobalNetworkInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateGlobalNetworkOutput {
-    var result: UpdateGlobalNetworkOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateGlobalNetworkOutput, body, allocator);
-    }
+    const result: UpdateGlobalNetworkOutput = try aws.json.parseJsonObject(
+        UpdateGlobalNetworkOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

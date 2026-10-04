@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AutoRollbackConfiguration = @import("auto_rollback_configuration.zig").AutoRollbackConfiguration;
+const DeploymentMode = @import("deployment_mode.zig").DeploymentMode;
 const FileExistsBehavior = @import("file_exists_behavior.zig").FileExistsBehavior;
 const AlarmConfiguration = @import("alarm_configuration.zig").AlarmConfiguration;
 const RevisionLocation = @import("revision_location.zig").RevisionLocation;
@@ -32,6 +33,31 @@ pub const CreateDeploymentInput = struct {
 
     /// The name of the deployment group.
     deployment_group_name: ?[]const u8 = null,
+
+    /// The type of deployment to create. Valid values are:
+    ///
+    /// * `STANDARD`: Deploys the specified revision. This is the default
+    /// behavior if `deploymentMode` is not specified.
+    ///
+    /// * `RESTART`: Restarts the application on the target instances using
+    /// the revision from the deployment group's last successful deployment, without
+    /// downloading a new revision. `RESTART` is supported only for
+    /// EC2/On-premises in-place deployments.
+    ///
+    /// When `deploymentMode` is `RESTART`, the following
+    /// apply:
+    ///
+    /// * The call is rejected for Amazon ECS and Lambda
+    /// deployments.
+    ///
+    /// * The `revision` parameter (including its
+    /// `s3Location` and `gitHubLocation`) must not be
+    /// specified, and is rejected if provided. The revision is resolved by the
+    /// service from the deployment group's last successful deployment.
+    ///
+    /// * The `updateOutdatedInstancesOnly` parameter must not be
+    /// set to `true`, and is rejected if provided.
+    deployment_mode: ?DeploymentMode = null,
 
     /// A comment about the deployment.
     description: ?[]const u8 = null,
@@ -129,6 +155,7 @@ pub const CreateDeploymentInput = struct {
         .auto_rollback_configuration = "autoRollbackConfiguration",
         .deployment_config_name = "deploymentConfigName",
         .deployment_group_name = "deploymentGroupName",
+        .deployment_mode = "deploymentMode",
         .description = "description",
         .file_exists_behavior = "fileExistsBehavior",
         .ignore_application_stop_failures = "ignoreApplicationStopFailures",

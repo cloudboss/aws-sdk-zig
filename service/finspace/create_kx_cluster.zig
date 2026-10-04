@@ -500,10 +500,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateKxClusterInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateKxClusterOutput {
-    var result: CreateKxClusterOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateKxClusterOutput, body, allocator);
-    }
+    const result: CreateKxClusterOutput = try aws.json.parseJsonObject(
+        CreateKxClusterOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,3 +1,4 @@
+const EnablementStatus = @import("enablement_status.zig").EnablementStatus;
 const ProviderSummary = @import("provider_summary.zig").ProviderSummary;
 
 /// A condensed overview of the connectorV2..
@@ -14,6 +15,13 @@ pub const ConnectorSummary = struct {
     /// The description of the connectorV2.
     description: ?[]const u8 = null,
 
+    /// The enablement status of the connector.
+    enablement_status: ?EnablementStatus = null,
+
+    /// The reason for the current enablement status. Provides additional context
+    /// when the connector is in a failed state.
+    enablement_status_reason: ?[]const u8 = null,
+
     /// The Name field contains the user-defined name assigned to the integration
     /// connector. This helps identify and manage multiple connectors within
     /// Security Hub.
@@ -27,6 +35,8 @@ pub const ConnectorSummary = struct {
         .connector_id = "ConnectorId",
         .created_at = "CreatedAt",
         .description = "Description",
+        .enablement_status = "EnablementStatus",
+        .enablement_status_reason = "EnablementStatusReason",
         .name = "Name",
         .provider_summary = "ProviderSummary",
     };

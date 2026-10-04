@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportPlaybackKeyPairIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ImportPlaybackKeyPairOutput {
-    var result: ImportPlaybackKeyPairOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ImportPlaybackKeyPairOutput, body, allocator);
-    }
+    const result: ImportPlaybackKeyPairOutput = try aws.json.parseJsonObject(
+        ImportPlaybackKeyPairOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

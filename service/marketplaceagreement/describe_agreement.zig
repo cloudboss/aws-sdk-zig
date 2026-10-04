@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Acceptor = @import("acceptor.zig").Acceptor;
+const EndTimeBehavior = @import("end_time_behavior.zig").EndTimeBehavior;
 const EstimatedCharges = @import("estimated_charges.zig").EstimatedCharges;
 const ProposalSummary = @import("proposal_summary.zig").ProposalSummary;
 const Proposer = @import("proposer.zig").Proposer;
@@ -41,8 +42,24 @@ pub const DescribeAgreementOutput = struct {
     /// pay-as-you-go agreements, which don’t have end dates.
     end_time: ?i64 = null,
 
+    /// The behavior of the agreement when it reaches its end date. For example,
+    /// whether the agreement renews, and if it doesn't, the reason why.
+    ///
+    /// This field is present for every active agreement that has an end date. It is
+    /// not present for an agreement that has no end date, because such an agreement
+    /// never reaches an end time. Pay-as-you-go agreements are the most common
+    /// example. It is also not present for an agreement that is no longer active.
+    end_time_behavior: ?EndTimeBehavior = null,
+
     /// The estimated cost of the agreement.
     estimated_charges: ?EstimatedCharges = null,
+
+    /// The unique identifier of the very first agreement in a chain of related
+    /// agreements, such as renewals or replacements. It stays the same across all
+    /// agreements in that chain, which lets you trace an agreement back to the
+    /// original. When an agreement isn't derived from another agreement, its
+    /// `InitialAgreementId` is its own `AgreementId`.
+    initial_agreement_id: ?[]const u8 = null,
 
     /// A summary of the proposal received from the proposer.
     proposal_summary: ?ProposalSummary = null,
@@ -59,7 +76,6 @@ pub const DescribeAgreementOutput = struct {
     /// Statuses include:
     ///
     /// * `ACTIVE` – The terms of the agreement are active.
-    /// * `ARCHIVED` – The agreement ended without a specified reason.
     /// * `CANCELLED` – The acceptor ended the agreement before the defined end
     ///   date.
     /// * `EXPIRED` – The agreement ended on the defined end date.
@@ -77,7 +93,9 @@ pub const DescribeAgreementOutput = struct {
         .agreement_id = "agreementId",
         .agreement_type = "agreementType",
         .end_time = "endTime",
+        .end_time_behavior = "endTimeBehavior",
         .estimated_charges = "estimatedCharges",
+        .initial_agreement_id = "initialAgreementId",
         .proposal_summary = "proposalSummary",
         .proposer = "proposer",
         .start_time = "startTime",

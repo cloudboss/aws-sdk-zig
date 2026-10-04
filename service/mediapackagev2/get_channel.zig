@@ -7,7 +7,9 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const IngestEndpoint = @import("ingest_endpoint.zig").IngestEndpoint;
 const InputSwitchConfiguration = @import("input_switch_configuration.zig").InputSwitchConfiguration;
 const InputType = @import("input_type.zig").InputType;
+const MultiviewConfiguration = @import("multiview_configuration.zig").MultiviewConfiguration;
 const OutputHeaderConfiguration = @import("output_header_configuration.zig").OutputHeaderConfiguration;
+const OutputLockingMode = @import("output_locking_mode.zig").OutputLockingMode;
 
 pub const GetChannelInput = struct {
     /// The name that describes the channel group. The name is the primary
@@ -29,6 +31,12 @@ pub const GetChannelInput = struct {
 pub const GetChannelOutput = struct {
     /// The Amazon Resource Name (ARN) associated with the resource.
     arn: []const u8,
+
+    /// The multiview channels, in the same channel group, that list this channel as
+    /// an available source. This is a read-only field. You can't delete a channel
+    /// while any multiview channel still lists it as a source. Use this field to
+    /// find the multiview channels that you need to update first.
+    attached_multiview_channels: ?[]const []const u8 = null,
 
     /// The name that describes the channel group. The name is the primary
     /// identifier for the channel group, and must be unique for your account in the
@@ -57,9 +65,9 @@ pub const GetChannelOutput = struct {
     /// only when `InputType` is `CMAF`.
     input_switch_configuration: ?InputSwitchConfiguration = null,
 
-    /// The input type will be an immutable field which will be used to define
-    /// whether the channel will allow CMAF ingest or HLS ingest. If unprovided, it
-    /// will default to HLS to preserve current behavior.
+    /// The input type is an immutable field. It defines whether the channel allows
+    /// CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels
+    /// receive no ingest of their own. If unprovided, the value defaults to HLS.
     ///
     /// The allowed values are:
     ///
@@ -67,15 +75,33 @@ pub const GetChannelOutput = struct {
     ///   TS segments).
     /// * `CMAF` - The DASH-IF CMAF Ingest specification (which defines CMAF
     ///   segments with optional DASH manifests).
+    /// * `MULTIVIEW` – Server-side multiview. The channel receives no ingest of its
+    ///   own. Instead, it composites video from the source channels in its
+    ///   `MultiviewConfiguration` into a single tiled output stream.
     input_type: ?InputType = null,
 
     /// The date and time the channel was modified.
     modified_at: i64,
 
+    /// The multiview configuration for the channel. This is present only when
+    /// `InputType` is `MULTIVIEW`.
+    multiview_configuration: ?MultiviewConfiguration = null,
+
     /// The settings for what common media server data (CMSD) headers AWS Elemental
     /// MediaPackage includes in responses to the CDN. This setting is valid only
     /// when `InputType` is `CMAF`.
     output_header_configuration: ?OutputHeaderConfiguration = null,
+
+    /// The output locking mode configured for the channel.
+    ///
+    /// The allowed values are:
+    ///
+    /// * `EPOCH_LOCKED` - The channel uses epoch-locked behavior with deterministic
+    ///   sequence numbering and fixed segment boundaries aligned to epoch time.
+    /// * `NON_EPOCH_LOCKED` - The channel uses non-epoch-locked behavior with
+    ///   duration-based segment combining and monotonically increasing sequence
+    ///   numbers starting from 0.
+    output_locking_mode: ?OutputLockingMode = null,
 
     /// The time that the channel was last reset.
     reset_at: ?i64 = null,
@@ -85,6 +111,7 @@ pub const GetChannelOutput = struct {
 
     pub const json_field_names = .{
         .arn = "Arn",
+        .attached_multiview_channels = "AttachedMultiviewChannels",
         .channel_group_name = "ChannelGroupName",
         .channel_name = "ChannelName",
         .created_at = "CreatedAt",
@@ -94,7 +121,9 @@ pub const GetChannelOutput = struct {
         .input_switch_configuration = "InputSwitchConfiguration",
         .input_type = "InputType",
         .modified_at = "ModifiedAt",
+        .multiview_configuration = "MultiviewConfiguration",
         .output_header_configuration = "OutputHeaderConfiguration",
+        .output_locking_mode = "OutputLockingMode",
         .reset_at = "ResetAt",
         .tags = "Tags",
     };
@@ -152,10 +181,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetChannelInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetChannelOutput {
-    var result: GetChannelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetChannelOutput, body, allocator);
-    }
+    const result: GetChannelOutput = try aws.json.parseJsonObject(
+        GetChannelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

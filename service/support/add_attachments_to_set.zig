@@ -26,9 +26,18 @@ pub const AddAttachmentsToSetInput = struct {
     /// specified set, if it exists.
     attachment_set_id: ?[]const u8 = null,
 
+    /// Specifies whether to validate the request without actually adding the
+    /// attachments. When set
+    /// to `true`, the request is validated but no attachments are stored, and the
+    /// operation
+    /// returns a `DryRunOperationException`. When omitted or set to `false`, the
+    /// request runs normally.
+    dry_run: ?bool = null,
+
     pub const json_field_names = .{
         .attachments = "attachments",
         .attachment_set_id = "attachmentSetId",
+        .dry_run = "dryRun",
     };
 };
 

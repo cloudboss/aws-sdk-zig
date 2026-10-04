@@ -4,9 +4,15 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const IncludedData = @import("included_data.zig").IncludedData;
 const PromptVariant = @import("prompt_variant.zig").PromptVariant;
 
 pub const GetPromptInput = struct {
+    /// Controls the scope of data returned. Set to `METADATA_ONLY` to return only
+    /// resource metadata. Set to `ALL_DATA` or omit this field to return the full
+    /// response.
+    included_data: ?IncludedData = null,
+
     /// The unique identifier of the prompt.
     prompt_identifier: []const u8,
 
@@ -15,6 +21,7 @@ pub const GetPromptInput = struct {
     prompt_version: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .included_data = "includedData",
         .prompt_identifier = "promptIdentifier",
         .prompt_version = "promptVersion",
     };
@@ -107,6 +114,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPromptInput, config:
 
     var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
+    if (input.included_data) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "includedData=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
+        query_has_prev = true;
+    }
     if (input.prompt_version) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "promptVersion=");
@@ -130,10 +143,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPromptInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPromptOutput {
-    var result: GetPromptOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPromptOutput, body, allocator);
-    }
+    const result: GetPromptOutput = try aws.json.parseJsonObject(
+        GetPromptOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

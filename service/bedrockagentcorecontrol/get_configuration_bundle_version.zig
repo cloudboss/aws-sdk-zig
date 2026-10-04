@@ -39,6 +39,9 @@ pub const GetConfigurationBundleVersionOutput = struct {
     /// The description of the configuration bundle.
     description: ?[]const u8 = null,
 
+    /// KMS key ARN used to encrypt component configurations, if CMK was provided.
+    kms_key_arn: ?[]const u8 = null,
+
     /// The version lineage metadata, including parent versions, branch name, and
     /// creation source.
     lineage_metadata: ?VersionLineageMetadata = null,
@@ -56,6 +59,7 @@ pub const GetConfigurationBundleVersionOutput = struct {
         .components = "components",
         .created_at = "createdAt",
         .description = "description",
+        .kms_key_arn = "kmsKeyArn",
         .lineage_metadata = "lineageMetadata",
         .version_created_at = "versionCreatedAt",
         .version_id = "versionId",
@@ -113,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetConfigurationBundleV
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetConfigurationBundleVersionOutput {
-    var result: GetConfigurationBundleVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetConfigurationBundleVersionOutput, body, allocator);
-    }
+    const result: GetConfigurationBundleVersionOutput = try aws.json.parseJsonObject(
+        GetConfigurationBundleVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

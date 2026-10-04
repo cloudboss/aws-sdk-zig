@@ -5,14 +5,16 @@ const aws = @import("aws");
 /// state.
 pub const AlarmContributor = struct {
     /// A map of attributes that describe the contributor, such as metric dimensions
-    /// and other identifying characteristics.
+    /// and other
+    /// identifying characteristics.
     contributor_attributes: []const aws.map.StringMapEntry,
 
     /// The unique identifier for this alarm contributor.
     contributor_id: []const u8,
 
     /// An explanation for the contributor's current state, providing context about
-    /// why it is in its current condition.
+    /// why it is
+    /// in its current condition.
     state_reason: []const u8,
 
     /// The timestamp when the contributor last transitioned to its current state.

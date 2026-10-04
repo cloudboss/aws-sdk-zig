@@ -19,7 +19,11 @@ pub const Filters = struct {
     routing_profiles: ?[]const []const u8 = null,
 
     /// A list of expressions as a filter, in which an expression is an object of a
-    /// step in a routing criteria.
+    /// step in a routing
+    /// criteria. Accepts filter values up to 3,000 characters in length. Filter
+    /// values are case-sensitive.
+    /// JSON object key order and whitespace may be arbitrary; array order and tree
+    /// structure must be preserved.
     routing_step_expressions: ?[]const []const u8 = null,
 
     /// A list of up to 10 subtypes can be provided.

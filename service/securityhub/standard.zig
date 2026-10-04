@@ -1,3 +1,4 @@
+const StandardsProvider = @import("standards_provider.zig").StandardsProvider;
 const StandardsManagedBy = @import("standards_managed_by.zig").StandardsManagedBy;
 
 /// Provides information about a specific security standard.
@@ -20,6 +21,10 @@ pub const Standard = struct {
     /// The name of the standard.
     name: ?[]const u8 = null,
 
+    /// The cloud provider whose resources the standard evaluates. For example,
+    /// `AWS` or `Azure`.
+    provider: ?StandardsProvider = null,
+
     /// The ARN of the standard.
     standards_arn: ?[]const u8 = null,
 
@@ -30,6 +35,7 @@ pub const Standard = struct {
         .description = "Description",
         .enabled_by_default = "EnabledByDefault",
         .name = "Name",
+        .provider = "Provider",
         .standards_arn = "StandardsArn",
         .standards_managed_by = "StandardsManagedBy",
     };

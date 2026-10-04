@@ -117,6 +117,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StopRuntimeSessionInput
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StopRuntimeSessionOutput {
     var result: StopRuntimeSessionOutput = .{};
+    errdefer {
+        if (result.runtime_session_id) |value| allocator.free(value);
+    }
     _ = body;
     result.status_code = @intCast(status);
     if (headers.get("x-amzn-bedrock-agentcore-runtime-session-id")) |value| {

@@ -17,7 +17,7 @@ pub const LeadInteraction = struct {
     /// Describes the action taken by the customer during or as a result of the
     /// interaction, such as requesting information, scheduling a meeting, or
     /// expressing interest in a solution.
-    customer_action: []const u8,
+    customer_action: []const u8 = "",
 
     /// The date and time when the lead interaction occurred, in ISO 8601 format
     /// (UTC). This timestamp helps track the chronology of lead engagement
@@ -27,17 +27,17 @@ pub const LeadInteraction = struct {
     /// The unique identifier of the specific source that generated the lead
     /// interaction. This ID provides traceability back to the original lead
     /// generation activity.
-    source_id: []const u8,
+    source_id: []const u8 = "",
 
     /// The descriptive name of the source that generated the lead interaction,
     /// providing a human-readable identifier for the lead generation channel or
     /// activity.
-    source_name: []const u8,
+    source_name: []const u8 = "",
 
     /// Specifies the type of source that generated the lead interaction, such as
     /// "Event", "Website", "Referral", or "Campaign". This categorization helps
     /// track lead generation effectiveness across different channels.
-    source_type: []const u8,
+    source_type: []const u8 = "",
 
     /// Describes the specific use case or business scenario discussed during the
     /// lead interaction. This helps categorize the customer's interests and

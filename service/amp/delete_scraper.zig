@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteScraperInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteScraperOutput {
-    var result: DeleteScraperOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteScraperOutput, body, allocator);
-    }
+    const result: DeleteScraperOutput = try aws.json.parseJsonObject(
+        DeleteScraperOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

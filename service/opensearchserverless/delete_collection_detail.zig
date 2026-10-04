@@ -1,7 +1,12 @@
+const DeletionProtection = @import("deletion_protection.zig").DeletionProtection;
 const CollectionStatus = @import("collection_status.zig").CollectionStatus;
 
 /// Details about a deleted OpenSearch Serverless collection.
 pub const DeleteCollectionDetail = struct {
+    /// Indicates whether deletion protection is `ENABLED` or `DISABLED` for the
+    /// collection.
+    deletion_protection: ?DeletionProtection = null,
+
     /// The unique identifier of the collection.
     id: ?[]const u8 = null,
 
@@ -12,6 +17,7 @@ pub const DeleteCollectionDetail = struct {
     status: ?CollectionStatus = null,
 
     pub const json_field_names = .{
+        .deletion_protection = "deletionProtection",
         .id = "id",
         .name = "name",
         .status = "status",

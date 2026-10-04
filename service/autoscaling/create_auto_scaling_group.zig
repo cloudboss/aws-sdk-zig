@@ -13,6 +13,7 @@ const InstanceMaintenancePolicy = @import("instance_maintenance_policy.zig").Ins
 const LaunchTemplateSpecification = @import("launch_template_specification.zig").LaunchTemplateSpecification;
 const LifecycleHookSpecification = @import("lifecycle_hook_specification.zig").LifecycleHookSpecification;
 const MixedInstancesPolicy = @import("mixed_instances_policy.zig").MixedInstancesPolicy;
+const Operator = @import("operator.zig").Operator;
 const Tag = @import("tag.zig").Tag;
 const TrafficSourceIdentifier = @import("traffic_source_identifier.zig").TrafficSourceIdentifier;
 const serde = @import("serde.zig");
@@ -270,6 +271,11 @@ pub const CreateAutoScalingGroupInput = struct {
     /// The mixed instances policy. For more information, see [Auto Scaling
     /// groups with multiple instance types and purchase
     /// options](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html) in the
+    /// *Amazon EC2 Auto Scaling User Guide*. To learn how to prioritize multiple
+    /// capacity
+    /// types, see [Use Distribution
+    /// Segments to target multiple capacity
+    /// types](https://docs.aws.amazon.com/autoscaling/ec2/userguide/use-distribution-segments.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
     mixed_instances_policy: ?MixedInstancesPolicy = null,
 
@@ -282,6 +288,15 @@ pub const CreateAutoScalingGroupInput = struct {
     /// protection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html) in the
     /// *Amazon EC2 Auto Scaling User Guide*.
     new_instances_protected_from_scale_in: ?bool = null,
+
+    /// The entity that manages the Auto Scaling group. If you specify this
+    /// parameter, Amazon EC2 Auto Scaling
+    /// passes the operator identity to EC2 for instance launches and only allows
+    /// the
+    /// designated operator to make changes to the Auto Scaling group. All mutating
+    /// API calls from
+    /// non-operator callers are rejected with an `AccessDenied` exception.
+    operator: ?Operator = null,
 
     /// The name of the placement group into which to launch your instances. For
     /// more
@@ -619,6 +634,22 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAutoScalingGroupI
     try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.min_size}) catch "");
     if (input.mixed_instances_policy) |v| {
         if (v.instances_distribution) |sv| {
+            if (sv.distribution_segments) |list_d1| {
+                for (list_d1, 0..) |item, idx| {
+                    const n = idx + 1;
+                    if (item.target_capacity_types) |lst_2| {
+                        for (lst_2, 0..) |item_2, idx_2| {
+                            const n_2 = idx_2 + 1;
+                            {
+                                var prefix_buf: [256]u8 = undefined;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.InstancesDistribution.DistributionSegments.member.{d}.TargetCapacityTypes.member.{d}=", .{n, n_2}) catch continue;
+                                try body_buf.appendSlice(allocator, field_prefix);
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, item_2.wireName());
+                            }
+                        }
+                    }
+                }
+            }
             if (sv.on_demand_allocation_strategy) |sv2| {
                 try body_buf.appendSlice(allocator, "&MixedInstancesPolicy.InstancesDistribution.OnDemandAllocationStrategy=");
                 try aws.url.appendUrlEncoded(allocator, &body_buf, sv2);
@@ -1036,6 +1067,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAutoScalingGroupI
     if (input.new_instances_protected_from_scale_in) |v| {
         try body_buf.appendSlice(allocator, "&NewInstancesProtectedFromScaleIn=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
+    if (input.operator) |v| {
+        try body_buf.appendSlice(allocator, "&Operator.Principal=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.principal);
     }
     if (input.placement_group) |v| {
         try body_buf.appendSlice(allocator, "&PlacementGroup=");

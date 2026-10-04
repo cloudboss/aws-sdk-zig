@@ -10,11 +10,17 @@ pub const DeleteHarnessInput = struct {
     /// A unique, case-sensitive identifier to ensure idempotency of the request.
     client_token: ?[]const u8 = null,
 
+    /// Whether to delete the managed memory on harness deletion. Default: true. If
+    /// false, the memory is disassociated and becomes a regular customer-owned
+    /// resource.
+    delete_managed_memory: ?bool = null,
+
     /// The ID of the harness to delete.
     harness_id: []const u8,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
+        .delete_managed_memory = "deleteManagedMemory",
         .harness_id = "harnessId",
     };
 };
@@ -71,6 +77,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteHarnessInput, con
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
+    if (input.delete_managed_memory) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "deleteManagedMemory=");
+        try query_buf.appendSlice(allocator, if (v) "true" else "false");
+        query_has_prev = true;
+    }
     const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
@@ -88,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteHarnessInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteHarnessOutput {
-    var result: DeleteHarnessOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteHarnessOutput, body, allocator);
-    }
+    const result: DeleteHarnessOutput = try aws.json.parseJsonObject(
+        DeleteHarnessOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

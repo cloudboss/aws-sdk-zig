@@ -15,6 +15,11 @@ pub const MessageComponents = struct {
     /// A sentence long summary. For example, titles or an email subject line.
     headline: ?[]const u8 = null,
 
+    /// A rich description in Portable Text format, which you can convert to markup
+    /// formats such as HTML, Markdown, or plain text. Channels that don't support
+    /// rich rendering ignore this field and use the plain text components instead.
+    markup_description: ?[]const u8 = null,
+
     /// A paragraph long or multiple sentence summary. For example, Amazon Q
     /// Developer in chat applications notifications.
     paragraph_summary: ?[]const u8 = null,
@@ -23,6 +28,7 @@ pub const MessageComponents = struct {
         .complete_description = "completeDescription",
         .dimensions = "dimensions",
         .headline = "headline",
+        .markup_description = "markupDescription",
         .paragraph_summary = "paragraphSummary",
     };
 };

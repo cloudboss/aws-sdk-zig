@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendAlexaOfferToMasterI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SendAlexaOfferToMasterOutput {
-    var result: SendAlexaOfferToMasterOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SendAlexaOfferToMasterOutput, body, allocator);
-    }
+    const result: SendAlexaOfferToMasterOutput = try aws.json.parseJsonObject(
+        SendAlexaOfferToMasterOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

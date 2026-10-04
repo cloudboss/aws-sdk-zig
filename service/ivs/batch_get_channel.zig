@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetChannelInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetChannelOutput {
-    var result: BatchGetChannelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetChannelOutput, body, allocator);
-    }
+    var result: BatchGetChannelOutput = try aws.json.parseJsonObject(
+        BatchGetChannelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("access-control-allow-origin")) |value| {
         result.access_control_allow_origin = try allocator.dupe(u8, value);

@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListWirelessDeviceImpor
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListWirelessDeviceImportTasksOutput {
-    var result: ListWirelessDeviceImportTasksOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListWirelessDeviceImportTasksOutput, body, allocator);
-    }
+    const result: ListWirelessDeviceImportTasksOutput = try aws.json.parseJsonObject(
+        ListWirelessDeviceImportTasksOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

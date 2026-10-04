@@ -12,14 +12,16 @@ pub const AutocompleteResultItem = struct {
     /// result is.
     distance: i64 = 0,
 
+    /// If `true`, indicates that the coordinates of the position and access points
+    /// of the point address are estimated.
+    estimated_point_address: ?bool = null,
+
     /// Indicates the starting and ending index of the place in the text query that
     /// match the found title.
     highlights: ?AutocompleteHighlights = null,
 
-    /// A list of [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag)
-    /// compliant language codes for the results to be rendered in. If there is no
-    /// data for the result in the requested language, data will be returned in the
-    /// default language for the entry.
+    /// A list of [BCP
+    /// 47](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry) compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.
     language: ?[]const u8 = null,
 
     /// The PlaceId of the place associated with this result. This can be used to
@@ -41,6 +43,7 @@ pub const AutocompleteResultItem = struct {
     pub const json_field_names = .{
         .address = "Address",
         .distance = "Distance",
+        .estimated_point_address = "EstimatedPointAddress",
         .highlights = "Highlights",
         .language = "Language",
         .place_id = "PlaceId",

@@ -153,10 +153,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateServiceLevelObjec
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateServiceLevelObjectiveOutput {
-    var result: UpdateServiceLevelObjectiveOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateServiceLevelObjectiveOutput, body, allocator);
-    }
+    const result: UpdateServiceLevelObjectiveOutput = try aws.json.parseJsonObject(
+        UpdateServiceLevelObjectiveOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

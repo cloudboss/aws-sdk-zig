@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAppliedSchemaVersion
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAppliedSchemaVersionOutput {
-    var result: GetAppliedSchemaVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAppliedSchemaVersionOutput, body, allocator);
-    }
+    const result: GetAppliedSchemaVersionOutput = try aws.json.parseJsonObject(
+        GetAppliedSchemaVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

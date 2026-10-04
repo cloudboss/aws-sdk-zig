@@ -152,10 +152,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: VerifyAuthRequestCrypto
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !VerifyAuthRequestCryptogramOutput {
-    var result: VerifyAuthRequestCryptogramOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(VerifyAuthRequestCryptogramOutput, body, allocator);
-    }
+    const result: VerifyAuthRequestCryptogramOutput = try aws.json.parseJsonObject(
+        VerifyAuthRequestCryptogramOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const SecurityControlsProvider = @import("security_controls_provider.zig").SecurityControlsProvider;
 const SecurityControlDefinition = @import("security_control_definition.zig").SecurityControlDefinition;
 
 pub const ListSecurityControlDefinitionsInput = struct {
@@ -21,6 +22,11 @@ pub const ListSecurityControlDefinitionsInput = struct {
     /// Optional pagination parameter.
     next_token: ?[]const u8 = null,
 
+    /// A list of cloud providers to filter the security control definitions by. For
+    /// example, specify `Azure` to return only controls that evaluate Azure
+    /// resources.
+    providers: ?[]const SecurityControlsProvider = null,
+
     /// The Amazon Resource Name (ARN) of the standard that you want to view
     /// controls for.
     standards_arn: ?[]const u8 = null,
@@ -28,6 +34,7 @@ pub const ListSecurityControlDefinitionsInput = struct {
     pub const json_field_names = .{
         .max_results = "MaxResults",
         .next_token = "NextToken",
+        .providers = "Providers",
         .standards_arn = "StandardsArn",
     };
 };
@@ -96,6 +103,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSecurityControlDefi
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
+    if (input.providers) |v| {
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "Providers=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item.wireName());
+            query_has_prev = true;
+        }
+    }
     if (input.standards_arn) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "StandardsArn=");
@@ -119,10 +134,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSecurityControlDefi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListSecurityControlDefinitionsOutput {
-    var result: ListSecurityControlDefinitionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListSecurityControlDefinitionsOutput, body, allocator);
-    }
+    const result: ListSecurityControlDefinitionsOutput = try aws.json.parseJsonObject(
+        ListSecurityControlDefinitionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

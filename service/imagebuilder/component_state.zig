@@ -5,7 +5,9 @@ pub const ComponentState = struct {
     /// Describes how or why the component changed state.
     reason: ?[]const u8 = null,
 
-    /// The current state of the component.
+    /// The current state of the component. Components with a status of
+    /// `DEPRECATED` or `DISABLED` can't be added to new
+    /// recipes.
     status: ?ComponentStatus = null,
 
     pub const json_field_names = .{

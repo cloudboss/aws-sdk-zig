@@ -22,11 +22,19 @@ pub const CreateOrderInput = struct {
     /// The payment terms.
     payment_term: ?PaymentTerm = null,
 
+    /// The ID of the quote to use for the order.
+    quote_identifier: ?[]const u8 = null,
+
+    /// The ID of the quote option to use for the order.
+    quote_option_identifier: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .line_items = "LineItems",
         .outpost_identifier = "OutpostIdentifier",
         .payment_option = "PaymentOption",
         .payment_term = "PaymentTerm",
+        .quote_identifier = "QuoteIdentifier",
+        .quote_option_identifier = "QuoteOptionIdentifier",
     };
 };
 
@@ -95,6 +103,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateOrderInput, confi
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.quote_identifier) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"QuoteIdentifier\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.quote_option_identifier) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"QuoteOptionIdentifier\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -111,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateOrderInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateOrderOutput {
-    var result: CreateOrderOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateOrderOutput, body, allocator);
-    }
+    const result: CreateOrderOutput = try aws.json.parseJsonObject(
+        CreateOrderOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

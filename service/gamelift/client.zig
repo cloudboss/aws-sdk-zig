@@ -526,11 +526,11 @@ pub const Client = struct {
     ///
     /// * `ContainerGroupType` (`GAME_SERVER`)
     ///
-    /// * `OperatingSystem` (omit to use default value)
+    /// * `OperatingSystem`
     ///
-    /// * `TotalMemoryLimitMebibytes` (omit to use default value)
+    /// * `TotalMemoryLimitMebibytes`
     ///
-    /// * `TotalVcpuLimit `(omit to use default value)
+    /// * `TotalVcpuLimit`
     ///
     /// * At least one `GameServerContainerDefinition`
     ///
@@ -540,7 +540,7 @@ pub const Client = struct {
     ///
     /// * `PortConfiguration`
     ///
-    /// * `ServerSdkVersion` (omit to use default value)
+    /// * `ServerSdkVersion`
     ///
     /// * Create a per-instance container group definition. Provide the following
     ///   required parameter
@@ -550,11 +550,11 @@ pub const Client = struct {
     ///
     /// * `ContainerGroupType` (`PER_INSTANCE`)
     ///
-    /// * `OperatingSystem` (omit to use default value)
+    /// * `OperatingSystem`
     ///
-    /// * `TotalMemoryLimitMebibytes` (omit to use default value)
+    /// * `TotalMemoryLimitMebibytes`
     ///
-    /// * `TotalVcpuLimit `(omit to use default value)
+    /// * `TotalVcpuLimit`
     ///
     /// * At least one `SupportContainerDefinition`
     ///
@@ -673,7 +673,7 @@ pub const Client = struct {
         return create_fleet.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** EC2, Container
+    /// **This API works with the following fleet types:** EC2, Anywhere, Container
     ///
     /// Adds remote locations to an EC2 and begins populating the new locations with
     /// instances. The new instances conform to the fleet's instance type,
@@ -1178,6 +1178,23 @@ pub const Client = struct {
     /// create or
     /// delete the peering connection while the authorization is valid.
     ///
+    /// Amazon GameLift Servers uses the caller's credentials to update peer-VPC
+    /// resources. The IAM user
+    /// that calls this operation must have the following Amazon EC2 permissions
+    /// enabled:
+    ///
+    /// * `ec2:AcceptVpcPeeringConnection`
+    ///
+    /// * `ec2:AuthorizeSecurityGroupEgress`
+    ///
+    /// * `ec2:AuthorizeSecurityGroupIngress`
+    ///
+    /// * `ec2:CreateRoute`
+    ///
+    /// * `ec2:DescribeRouteTables`
+    ///
+    /// * `ec2:DescribeSecurityGroups`
+    ///
     /// **Related actions**
     ///
     /// [All APIs by
@@ -1225,6 +1242,23 @@ pub const Client = struct {
     /// [DescribeVpcPeeringConnections](https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeVpcPeeringConnections.html) , or by monitoring fleet events for success
     /// or failure using
     /// [DescribeFleetEvents](https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html) .
+    ///
+    /// Amazon GameLift Servers uses the caller's credentials to update peer-VPC
+    /// resources. The IAM user
+    /// that calls this operation must have the following Amazon EC2 permissions
+    /// enabled:
+    ///
+    /// * `ec2:AcceptVpcPeeringConnection`
+    ///
+    /// * `ec2:AuthorizeSecurityGroupEgress`
+    ///
+    /// * `ec2:AuthorizeSecurityGroupIngress`
+    ///
+    /// * `ec2:CreateRoute`
+    ///
+    /// * `ec2:DescribeRouteTables`
+    ///
+    /// * `ec2:DescribeSecurityGroups`
     ///
     /// **Related actions**
     ///
@@ -1336,7 +1370,7 @@ pub const Client = struct {
         return delete_container_group_definition.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** EC2, Anywhere, Container
+    /// **This API works with the following fleet types:** EC2, Anywhere
     ///
     /// Deletes all resources and information related to a fleet and shuts down any
     /// currently
@@ -1362,7 +1396,7 @@ pub const Client = struct {
         return delete_fleet.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** EC2, Container
+    /// **This API works with the following fleet types:** EC2, Anywhere, Container
     ///
     /// Removes locations from a multi-location fleet. When deleting a location, all
     /// game
@@ -1478,7 +1512,7 @@ pub const Client = struct {
         return delete_matchmaking_rule_set.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** EC2
+    /// **This API works with the following fleet types:** EC2, Container
     ///
     /// Deletes a fleet scaling policy. Once deleted, the policy is no longer in
     /// force and
@@ -1758,7 +1792,8 @@ pub const Client = struct {
     ///
     /// **Results**
     ///
-    /// This operation returns the fleet ID, location, container group definition
+    /// This operation returns the fleet ID, fleet ARN, location, container group
+    /// definition
     /// ARN, container group type, compute name (for game server container groups),
     /// instance ID,
     /// and a list of `ContainerGroupPortMapping` objects. Each object contains the
@@ -1974,7 +2009,7 @@ pub const Client = struct {
         return describe_fleet_events.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** EC2, Container
+    /// **This API works with the following fleet types:** EC2, Anywhere, Container
     ///
     /// Retrieves information on a fleet's remote locations, including life-cycle
     /// status and
@@ -1997,9 +2032,6 @@ pub const Client = struct {
     /// If successful, a `LocationAttributes` object is returned for each requested
     /// location. If the fleet does not have a requested location, no information is
     /// returned.
-    /// This operation does not return the home Region. To get information on a
-    /// fleet's home
-    /// Region, call `DescribeFleetAttributes`.
     ///
     /// **Learn more**
     ///
@@ -2014,7 +2046,7 @@ pub const Client = struct {
         return describe_fleet_location_attributes.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** EC2, Container
+    /// **This API works with the following fleet types:** EC2, Anywhere, Container
     ///
     /// Retrieves the resource capacity settings for a fleet location. The data
     /// returned
@@ -2048,7 +2080,7 @@ pub const Client = struct {
         return describe_fleet_location_capacity.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** EC2, Anywhere, Container
+    /// **This API works with the following fleet types:** EC2, Anywhere
     ///
     /// Retrieves current usage data for a fleet location. Utilization data provides
     /// a
@@ -2078,7 +2110,7 @@ pub const Client = struct {
         return describe_fleet_location_utilization.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** EC2, Container
+    /// **This API works with the following fleet types:** EC2
     ///
     /// Retrieves a fleet's inbound connection permissions. Connection permissions
     /// specify IP
@@ -2112,7 +2144,7 @@ pub const Client = struct {
         return describe_fleet_port_settings.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** EC2, Container
+    /// **This API works with the following fleet types:** EC2
     ///
     /// Retrieves utilization statistics for one or more fleets. Utilization data
     /// provides a
@@ -2564,7 +2596,7 @@ pub const Client = struct {
         return describe_runtime_configuration.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** EC2
+    /// **This API works with the following fleet types:** EC2, Container
     ///
     /// Retrieves all scaling policies applied to a fleet.
     ///
@@ -3142,7 +3174,7 @@ pub const Client = struct {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** EC2
+    /// **This API works with the following fleet types:** EC2, Container
     ///
     /// Creates or updates a scaling policy for a fleet. Scaling policies are used
     /// to
@@ -3250,7 +3282,7 @@ pub const Client = struct {
         return put_scaling_policy.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** Anywhere, Container
+    /// **This API works with the following fleet types:** Anywhere
     ///
     /// Registers a compute resource in an Amazon GameLift Servers Anywhere fleet.
     ///
@@ -4140,8 +4172,9 @@ pub const Client = struct {
     /// change only.
     /// All other values remain the same as the source version.
     ///
-    /// * Change a game server container definition. Provide the updated container
-    /// definition.
+    /// * Change a game server container definition. Provide a complete set of
+    ///   container
+    /// definitions, including the updated definition.
     ///
     /// * Add or change a support container definition. Provide a complete set of
     ///   container
@@ -4168,7 +4201,7 @@ pub const Client = struct {
         return update_container_group_definition.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** EC2, Anywhere, Container
+    /// **This API works with the following fleet types:** EC2, Anywhere
     ///
     /// Updates a fleet's mutable attributes, such as game session protection and
     /// resource
@@ -4278,7 +4311,7 @@ pub const Client = struct {
         return update_fleet_capacity.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:** EC2, Container
+    /// **This API works with the following fleet types:** EC2
     ///
     /// Updates permissions that allow inbound traffic to connect to game sessions
     /// in the
@@ -4291,8 +4324,8 @@ pub const Client = struct {
     /// `InboundPermissionRevocations`. Permissions to be removed must match
     /// existing fleet permissions.
     ///
-    /// If successful, the fleet ID for the updated fleet is returned. For fleets
-    /// with remote
+    /// If successful, the fleet identifiers for the updated fleet are returned. For
+    /// fleets with remote
     /// locations, port setting updates can take time to propagate across all
     /// locations. You can
     /// check the status of updates in each location by calling
@@ -4365,6 +4398,13 @@ pub const Client = struct {
     /// Amazon GameLift Servers FleetIQ can continue to perform instance balancing
     /// activity. If successful, a
     /// `GameServerGroup` object is returned.
+    ///
+    /// Target tracking Auto Scaling policies on the Auto Scaling group cannot be
+    /// updated through the Amazon Web Services Management Console. Instead, use the
+    /// Amazon Elastic Compute Cloud Auto Scaling
+    /// [
+    /// `PutScalingPolicy`
+    /// ](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PutScalingPolicy.html) API action to update these policies.
     ///
     /// **Learn more**
     ///

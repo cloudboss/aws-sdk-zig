@@ -84,6 +84,7 @@ pub const OperationType = enum {
     start_gui_session,
     stop_gui_session,
     setup_instance_https,
+    get_profile,
 
     pub const json_field_names = .{
         .delete_known_host_keys = "DeleteKnownHostKeys",
@@ -169,6 +170,7 @@ pub const OperationType = enum {
         .start_gui_session = "StartGUISession",
         .stop_gui_session = "StopGUISession",
         .setup_instance_https = "SetupInstanceHttps",
+        .get_profile = "GetProfile",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -256,6 +258,7 @@ pub const OperationType = enum {
             .start_gui_session => "StartGUISession",
             .stop_gui_session => "StopGUISession",
             .setup_instance_https => "SetupInstanceHttps",
+            .get_profile => "GetProfile",
         };
     }
 

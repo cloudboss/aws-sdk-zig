@@ -36,12 +36,24 @@ pub const ListRetirableGrantsInput = struct {
     /// ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns) in the *
     /// Identity and Access Management User Guide*
     /// .
-    retiring_principal: []const u8,
+    ///
+    /// You must specify either `RetiringPrincipal` or
+    /// `RetiringServicePrincipal`, but not both.
+    retiring_principal: ?[]const u8 = null,
+
+    /// The retiring service principal for which to list grants. This filter is only
+    /// usable by
+    /// callers in a service principal.
+    ///
+    /// You must specify either `RetiringPrincipal` or
+    /// `RetiringServicePrincipal`, but not both.
+    retiring_service_principal: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .limit = "Limit",
         .marker = "Marker",
         .retiring_principal = "RetiringPrincipal",
+        .retiring_service_principal = "RetiringServicePrincipal",
     };
 };
 

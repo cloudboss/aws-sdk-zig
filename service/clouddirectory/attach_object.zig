@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AttachObjectInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AttachObjectOutput {
-    var result: AttachObjectOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AttachObjectOutput, body, allocator);
-    }
+    const result: AttachObjectOutput = try aws.json.parseJsonObject(
+        AttachObjectOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

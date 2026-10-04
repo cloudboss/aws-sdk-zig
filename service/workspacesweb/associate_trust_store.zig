@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateTrustStoreInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateTrustStoreOutput {
-    var result: AssociateTrustStoreOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateTrustStoreOutput, body, allocator);
-    }
+    const result: AssociateTrustStoreOutput = try aws.json.parseJsonObject(
+        AssociateTrustStoreOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

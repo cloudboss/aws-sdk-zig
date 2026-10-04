@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListClassificationScope
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListClassificationScopesOutput {
-    var result: ListClassificationScopesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListClassificationScopesOutput, body, allocator);
-    }
+    const result: ListClassificationScopesOutput = try aws.json.parseJsonObject(
+        ListClassificationScopesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

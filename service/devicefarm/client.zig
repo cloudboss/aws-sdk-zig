@@ -307,13 +307,12 @@ pub const Client = struct {
     }
 
     /// A session is an instance of a browser created through a `RemoteWebDriver`
-    /// with the URL from CreateTestGridUrlResult$url. You can use the following to
-    /// look up sessions:
+    /// with the URL from `
+    /// CreateTestGridUrlResult`. You can use the following to look up sessions:
     ///
-    /// * The session ARN (GetTestGridSessionRequest$sessionArn).
+    /// * The session ARN.
     ///
-    /// * The project ARN and a session ID (GetTestGridSessionRequest$projectArn and
-    ///   GetTestGridSessionRequest$sessionId).
+    /// * The project ARN and a session ID.
     pub fn getTestGridSession(self: *Self, allocator: std.mem.Allocator, input: get_test_grid_session.GetTestGridSessionInput, options: CallOptions) !get_test_grid_session.GetTestGridSessionOutput {
         return get_test_grid_session.execute(self, allocator, input, options);
     }
@@ -426,6 +425,9 @@ pub const Client = struct {
     }
 
     /// Gets information about samples, given an AWS Device Farm job ARN.
+    ///
+    /// Device Farm does not support performance data samples during test
+    /// executions.
     pub fn listSamples(self: *Self, allocator: std.mem.Allocator, input: list_samples.ListSamplesInput, options: CallOptions) !list_samples.ListSamplesOutput {
         return list_samples.execute(self, allocator, input, options);
     }

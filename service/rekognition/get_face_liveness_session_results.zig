@@ -6,6 +6,8 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AuditImage = @import("audit_image.zig").AuditImage;
 const Challenge = @import("challenge.zig").Challenge;
+const FeedbackItem = @import("feedback_item.zig").FeedbackItem;
+const SessionMetadata = @import("session_metadata.zig").SessionMetadata;
 const LivenessSessionStatus = @import("liveness_session_status.zig").LivenessSessionStatus;
 
 pub const GetFaceLivenessSessionResultsInput = struct {
@@ -40,6 +42,18 @@ pub const GetFaceLivenessSessionResultsOutput = struct {
     /// as a float value between 0 to 100.
     confidence: ?f32 = null,
 
+    /// A list of conditions that were detected in the Face Liveness video and that
+    /// contributed to
+    /// the returned `Confidence` score. Each item contains a code and a
+    /// human-readable
+    /// message. Feedback is returned only for sessions with a `Status` of
+    /// `SUCCEEDED`, and the list is empty when no such conditions were detected.
+    feedback: ?[]const FeedbackItem = null,
+
+    /// Metadata about the client that streamed the video for the Face Liveness
+    /// session.
+    metadata: ?SessionMetadata = null,
+
     /// A high-quality image from the Face Liveness video that can be used for face
     /// comparison or
     /// search. It includes a bounding box of the face and the Base64-encoded bytes
@@ -63,6 +77,8 @@ pub const GetFaceLivenessSessionResultsOutput = struct {
         .audit_images = "AuditImages",
         .challenge = "Challenge",
         .confidence = "Confidence",
+        .feedback = "Feedback",
+        .metadata = "Metadata",
         .reference_image = "ReferenceImage",
         .session_id = "SessionId",
         .status = "Status",

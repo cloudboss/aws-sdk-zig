@@ -308,6 +308,10 @@ pub const UpdateItemOutput = struct {
     /// more information, see [Capacity unity consumption for write
     /// operations](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html#write-operation-consumption) in the *Amazon
     /// DynamoDB Developer Guide*.
+    ///
+    /// If the table has vector indexes, the response includes a
+    /// `VectorIndexes` field with `VectorWriteRequestBytes` consumed
+    /// for each affected vector index.
     consumed_capacity: ?ConsumedCapacity = null,
 
     /// Information about item collections, if any, that were affected by the

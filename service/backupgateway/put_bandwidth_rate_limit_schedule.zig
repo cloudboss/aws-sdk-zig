@@ -12,11 +12,8 @@ pub const PutBandwidthRateLimitScheduleInput = struct {
     /// empty.
     bandwidth_rate_limit_intervals: []const BandwidthRateLimitInterval,
 
-    /// The Amazon Resource Name (ARN) of the gateway. Use the
-    /// [
-    /// `ListGateways`
-    /// ](https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html) operation to return a list of gateways
-    /// for your account and Amazon Web Services Region.
+    /// The Amazon Resource Name (ARN) of the gateway. Use the [ `ListGateways`
+    /// ](https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html) operation to return a list of gateways for your account and Amazon Web Services Region.
     gateway_arn: []const u8,
 
     pub const json_field_names = .{
@@ -26,11 +23,8 @@ pub const PutBandwidthRateLimitScheduleInput = struct {
 };
 
 pub const PutBandwidthRateLimitScheduleOutput = struct {
-    /// The Amazon Resource Name (ARN) of the gateway. Use the
-    /// [
-    /// `ListGateways`
-    /// ](https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html) operation to return a list of gateways
-    /// for your account and Amazon Web Services Region.
+    /// The Amazon Resource Name (ARN) of the gateway. Use the [ `ListGateways`
+    /// ](https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_ListGateways.html) operation to return a list of gateways for your account and Amazon Web Services Region.
     gateway_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{

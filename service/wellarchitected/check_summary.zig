@@ -32,6 +32,7 @@ pub const CheckSummary = struct {
     /// Status associated to the check.
     status: ?CheckStatus = null,
 
+    /// The date and time when the check summary was last updated.
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{

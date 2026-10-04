@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMLModelTrainingJobIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMLModelTrainingJobOutput {
-    var result: GetMLModelTrainingJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMLModelTrainingJobOutput, body, allocator);
-    }
+    const result: GetMLModelTrainingJobOutput = try aws.json.parseJsonObject(
+        GetMLModelTrainingJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

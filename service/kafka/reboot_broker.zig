@@ -92,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RebootBrokerInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RebootBrokerOutput {
-    var result: RebootBrokerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RebootBrokerOutput, body, allocator);
-    }
+    const result: RebootBrokerOutput = try aws.json.parseJsonObject(
+        RebootBrokerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

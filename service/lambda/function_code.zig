@@ -1,3 +1,5 @@
+const S3ObjectStorageMode = @import("s3_object_storage_mode.zig").S3ObjectStorageMode;
+
 /// The code for the Lambda function. You can either specify an object in Amazon
 /// S3, upload a .zip file archive deployment package directly, or specify the
 /// URI of a container image.
@@ -13,6 +15,13 @@ pub const FunctionCode = struct {
 
     /// The Amazon S3 key of the deployment package.
     s3_key: ?[]const u8 = null,
+
+    /// Specifies how the deployment package is stored. Valid values:
+    ///
+    /// * `COPY` (default) – Uploads a copy of your deployment package to Lambda.
+    /// * `REFERENCE` – Lambda references the deployment package from the specified
+    ///   Amazon S3 bucket.
+    s3_object_storage_mode: ?S3ObjectStorageMode = null,
 
     /// For versioned objects, the version of the deployment package object to use.
     s3_object_version: ?[]const u8 = null,
@@ -31,6 +40,7 @@ pub const FunctionCode = struct {
         .image_uri = "ImageUri",
         .s3_bucket = "S3Bucket",
         .s3_key = "S3Key",
+        .s3_object_storage_mode = "S3ObjectStorageMode",
         .s3_object_version = "S3ObjectVersion",
         .source_kms_key_arn = "SourceKMSKeyArn",
         .zip_file = "ZipFile",

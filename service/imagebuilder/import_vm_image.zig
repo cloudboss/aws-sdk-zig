@@ -8,8 +8,12 @@ const ImageLoggingConfiguration = @import("image_logging_configuration.zig").Ima
 const Platform = @import("platform.zig").Platform;
 
 pub const ImportVmImageInput = struct {
-    /// Unique, case-sensitive identifier you provide to ensure
-    /// idempotency of the request. For more information, see [Ensuring
+    /// A unique, case-sensitive identifier you provide to ensure
+    /// that the operation runs no more than one time. If you retry a request with
+    /// the same client
+    /// token, Image Builder returns the original response without running the
+    /// operation again. For more
+    /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
     /// in the *Amazon EC2 API Reference*.
     client_token: []const u8,
@@ -17,10 +21,19 @@ pub const ImportVmImageInput = struct {
     /// The description for the base image that is created by the import process.
     description: ?[]const u8 = null,
 
-    /// Define logging configuration for the image build process.
+    /// The CloudWatch Logs log group where Image Builder sends the import logs. For
+    /// ImportVmImage, the log group name must be within the
+    /// `/aws/imagebuilder/` namespace.
     logging_configuration: ?ImageLoggingConfiguration = null,
 
-    /// The name of the base image that is created by the import process.
+    /// The name of the base image that is created by the import process. Image
+    /// Builder
+    /// generates the image ARN from a normalized form of the name, so names that
+    /// differ only in case, spaces, or underscores count as the same name. If an
+    /// image with the same name and semantic version already exists in your
+    /// account in the same Amazon Web Services Region, the import creates a new
+    /// build version
+    /// for it.
     name: []const u8,
 
     /// The operating system version for the imported VM.
@@ -36,10 +49,10 @@ pub const ImportVmImageInput = struct {
     /// The semantic version has four nodes: ../.
     /// You can assign values for the first three, and can filter on all of them.
     ///
-    /// **Assignment:** For the first three nodes you can assign any positive
+    /// **Assignment:** For the first three nodes, you can assign any positive
     /// integer value, including
-    /// zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image
-    /// Builder automatically assigns the
+    /// zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder
+    /// automatically assigns the
     /// build number to the fourth node.
     ///
     /// **Patterns:** You can use any numeric pattern that adheres to the assignment
@@ -53,10 +66,11 @@ pub const ImportVmImageInput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The `importTaskId` (API) or `ImportTaskId` (CLI) from the
-    /// Amazon EC2 VM import process. Image Builder retrieves information from the
-    /// import process to pull in
-    /// the AMI that is created from the VM source as the base image for your
-    /// recipe.
+    /// Amazon EC2 VM import process. The import task doesn't need to be complete
+    /// when you
+    /// call ImportVmImage - Image Builder monitors the task and finishes creating
+    /// the image
+    /// when the task completes.
     vm_import_task_id: []const u8,
 
     pub const json_field_names = .{
@@ -76,10 +90,10 @@ pub const ImportVmImageOutput = struct {
     /// The client token that uniquely identifies the request.
     client_token: ?[]const u8 = null,
 
-    /// The Amazon Resource Name (ARN) of the AMI that was created during the VM
-    /// import
-    /// process. This AMI is used as the base image for the recipe that imported the
-    /// VM.
+    /// The Amazon Resource Name (ARN) of the Image Builder image resource that this
+    /// request created. Image Builder
+    /// records the AMI from the VM import task in the image's output resources
+    /// after the task completes.
     image_arn: ?[]const u8 = null,
 
     /// The request ID that uniquely identifies this request.
@@ -188,10 +202,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportVmImageInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ImportVmImageOutput {
-    var result: ImportVmImageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ImportVmImageOutput, body, allocator);
-    }
+    const result: ImportVmImageOutput = try aws.json.parseJsonObject(
+        ImportVmImageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportApplicationUsageI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ImportApplicationUsageOutput {
-    var result: ImportApplicationUsageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ImportApplicationUsageOutput, body, allocator);
-    }
+    const result: ImportApplicationUsageOutput = try aws.json.parseJsonObject(
+        ImportApplicationUsageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

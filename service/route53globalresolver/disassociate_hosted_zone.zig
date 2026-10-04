@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisassociateHostedZoneI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DisassociateHostedZoneOutput {
-    var result: DisassociateHostedZoneOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DisassociateHostedZoneOutput, body, allocator);
-    }
+    const result: DisassociateHostedZoneOutput = try aws.json.parseJsonObject(
+        DisassociateHostedZoneOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

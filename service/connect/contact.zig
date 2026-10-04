@@ -33,7 +33,7 @@ pub const Contact = struct {
     agent_info: ?AgentInfo = null,
 
     /// Indicates how an [outbound
-    /// campaign](https://docs.aws.amazon.com/connect/latest/adminguide/how-to-create-campaigns.html) call is actually disposed if the contact is connected to Amazon Connect.
+    /// campaign](https://docs.aws.amazon.com/connect/latest/adminguide/how-to-create-campaigns.html) call is actually disposed if the contact is connected to Connect Customer.
     answering_machine_detection_status: ?AnsweringMachineDetectionStatus = null,
 
     /// The Amazon Resource Name (ARN) for the contact.
@@ -50,7 +50,7 @@ pub const Contact = struct {
     /// Information about how agent, bot, and customer interact in a chat contact.
     chat_metrics: ?ChatMetrics = null,
 
-    /// The timestamp when customer endpoint connected to Amazon Connect.
+    /// The timestamp when customer endpoint connected to Connect Customer.
     connected_to_system_timestamp: ?i64 = null,
 
     /// This is the root contactId which is used as a unique identifier for all
@@ -78,8 +78,8 @@ pub const Contact = struct {
     /// customer number from
     /// your CRM. You can create a Lambda function to pull the unique customer ID of
     /// the caller from your CRM system. If you
-    /// enable Amazon Connect Voice ID capability, this attribute is populated with
-    /// the `CustomerSpeakerId` of
+    /// enable Connect Customer Voice ID capability, this attribute is populated
+    /// with the `CustomerSpeakerId` of
     /// the caller.
     customer_id: ?[]const u8 = null,
 
@@ -96,7 +96,7 @@ pub const Contact = struct {
     /// possible disconnect reasons by
     /// channel, see DisconnectReason under
     /// [ContactTraceRecord](https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     disconnect_reason: ?[]const u8 = null,
 
     /// The date and time that the customer endpoint disconnected from the current
@@ -194,7 +194,7 @@ pub const Contact = struct {
 
     /// A set of system defined key-value pairs stored on individual contact
     /// segments using an attribute map. The
-    /// attributes are standard Amazon Connect attributes and can be accessed in
+    /// attributes are standard Connect Customer attributes and can be accessed in
     /// flows. Attribute keys can include only
     /// alphanumeric, -, and _ characters. This field can be used to show channel
     /// subtype. For example,
@@ -224,7 +224,7 @@ pub const Contact = struct {
     /// Total pause duration for a contact in seconds.
     total_pause_duration_in_seconds: ?i32 = null,
 
-    /// Information about Amazon Connect Wisdom.
+    /// Information about Connect Customer Wisdom.
     wisdom_info: ?WisdomInfo = null,
 
     pub const json_field_names = .{

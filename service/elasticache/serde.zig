@@ -23,14 +23,17 @@ const ChangeType = @import("change_type.zig").ChangeType;
 const CloudWatchLogsDestinationDetails = @import("cloud_watch_logs_destination_details.zig").CloudWatchLogsDestinationDetails;
 const ClusterMode = @import("cluster_mode.zig").ClusterMode;
 const ConfigureShard = @import("configure_shard.zig").ConfigureShard;
+const ConnectionType = @import("connection_type.zig").ConnectionType;
 const CustomerNodeEndpoint = @import("customer_node_endpoint.zig").CustomerNodeEndpoint;
 const DataStorage = @import("data_storage.zig").DataStorage;
 const DataStorageUnit = @import("data_storage_unit.zig").DataStorageUnit;
 const DataTieringStatus = @import("data_tiering_status.zig").DataTieringStatus;
 const DestinationDetails = @import("destination_details.zig").DestinationDetails;
 const DestinationType = @import("destination_type.zig").DestinationType;
+const Durability = @import("durability.zig").Durability;
 const EC2SecurityGroup = @import("ec2_security_group.zig").EC2SecurityGroup;
 const ECPUPerSecond = @import("ecpu_per_second.zig").ECPUPerSecond;
+const EffectiveDurability = @import("effective_durability.zig").EffectiveDurability;
 const Endpoint = @import("endpoint.zig").Endpoint;
 const EngineDefaults = @import("engine_defaults.zig").EngineDefaults;
 const Event = @import("event.zig").Event;
@@ -85,6 +88,7 @@ const SlaMet = @import("sla_met.zig").SlaMet;
 const SlotMigration = @import("slot_migration.zig").SlotMigration;
 const Snapshot = @import("snapshot.zig").Snapshot;
 const SourceType = @import("source_type.zig").SourceType;
+const StorageEncryptionType = @import("storage_encryption_type.zig").StorageEncryptionType;
 const Subnet = @import("subnet.zig").Subnet;
 const SubnetOutpost = @import("subnet_outpost.zig").SubnetOutpost;
 const Tag = @import("tag.zig").Tag;
@@ -2314,6 +2318,8 @@ pub fn deserializeReplicationGroup(allocator: std.mem.Allocator, reader: *aws.xm
     result.configuration_endpoint = null;
     result.data_tiering = null;
     result.description = null;
+    result.durability = null;
+    result.effective_durability = null;
     result.engine = null;
     result.global_replication_group_info = null;
     result.ip_discovery = null;
@@ -2331,6 +2337,7 @@ pub fn deserializeReplicationGroup(allocator: std.mem.Allocator, reader: *aws.xm
     result.snapshotting_cluster_id = null;
     result.snapshot_window = null;
     result.status = null;
+    result.storage_encryption_type = null;
     result.transit_encryption_enabled = null;
     result.transit_encryption_mode = null;
     result.user_group_ids = null;
@@ -2361,6 +2368,10 @@ pub fn deserializeReplicationGroup(allocator: std.mem.Allocator, reader: *aws.xm
                     result.data_tiering = DataTieringStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Description")) {
                     result.description = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Durability")) {
+                    result.durability = Durability.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "EffectiveDurability")) {
+                    result.effective_durability = EffectiveDurability.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Engine")) {
                     result.engine = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "GlobalReplicationGroupInfo")) {
@@ -2395,6 +2406,8 @@ pub fn deserializeReplicationGroup(allocator: std.mem.Allocator, reader: *aws.xm
                     result.snapshot_window = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "StorageEncryptionType")) {
+                    result.storage_encryption_type = StorageEncryptionType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TransitEncryptionEnabled")) {
                     result.transit_encryption_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "TransitEncryptionMode")) {
@@ -2618,6 +2631,7 @@ pub fn deserializeServerlessCache(allocator: std.mem.Allocator, reader: *aws.xml
     var result: ServerlessCache = undefined;
     result.arn = null;
     result.cache_usage_limits = null;
+    result.connection_type = null;
     result.create_time = null;
     result.daily_snapshot_time = null;
     result.description = null;
@@ -2632,6 +2646,7 @@ pub fn deserializeServerlessCache(allocator: std.mem.Allocator, reader: *aws.xml
     result.serverless_cache_name = null;
     result.snapshot_retention_limit = null;
     result.status = null;
+    result.storage_encryption_type = null;
     result.subnet_ids = null;
     result.user_group_id = null;
     while (try reader.next()) |event| {
@@ -2641,6 +2656,8 @@ pub fn deserializeServerlessCache(allocator: std.mem.Allocator, reader: *aws.xml
                     result.arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CacheUsageLimits")) {
                     result.cache_usage_limits = try deserializeCacheUsageLimits(allocator, reader);
+                } else if (std.mem.eql(u8, e.local, "ConnectionType")) {
+                    result.connection_type = ConnectionType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CreateTime")) {
                     result.create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "DailySnapshotTime")) {
@@ -2669,6 +2686,8 @@ pub fn deserializeServerlessCache(allocator: std.mem.Allocator, reader: *aws.xml
                     result.snapshot_retention_limit = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "StorageEncryptionType")) {
+                    result.storage_encryption_type = StorageEncryptionType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "SubnetIds")) {
                     result.subnet_ids = try deserializeSubnetIdsList(allocator, reader, "SubnetId");
                 } else if (std.mem.eql(u8, e.local, "UserGroupId")) {
@@ -2835,6 +2854,7 @@ pub fn deserializeSnapshot(allocator: std.mem.Allocator, reader: *aws.xml.Reader
     result.cache_parameter_group_name = null;
     result.cache_subnet_group_name = null;
     result.data_tiering = null;
+    result.durability = null;
     result.engine = null;
     result.engine_version = null;
     result.kms_key_id = null;
@@ -2875,6 +2895,8 @@ pub fn deserializeSnapshot(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                     result.cache_subnet_group_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DataTiering")) {
                     result.data_tiering = DataTieringStatus.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Durability")) {
+                    result.durability = Durability.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Engine")) {
                     result.engine = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EngineVersion")) {

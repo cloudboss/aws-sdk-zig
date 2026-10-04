@@ -9,7 +9,11 @@ const Workflow = @import("workflow.zig").Workflow;
 
 pub const GetWorkflowInput = struct {
     /// The Amazon Resource Name (ARN) of the workflow resource that you want to
-    /// get.
+    /// get. You can specify a
+    /// build version ARN, or a version ARN with or without wildcards (`x`)
+    /// in its version segments. Image Builder resolves version and wildcard ARNs to
+    /// the most
+    /// recent matching build version.
     workflow_build_version_arn: []const u8,
 
     pub const json_field_names = .{
@@ -18,7 +22,10 @@ pub const GetWorkflowInput = struct {
 };
 
 pub const GetWorkflowOutput = struct {
-    /// The resource ARNs with different wildcard variations of semantic versioning.
+    /// A set of wildcard version ARNs that always reference the latest
+    /// version of the resource. ARNs are included for the latest version overall,
+    /// and for the latest
+    /// versions within the same major, minor, and patch levels.
     latest_version_references: ?LatestVersionReferences = null,
 
     /// The workflow resource specified in the request.
@@ -85,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetWorkflowInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetWorkflowOutput {
-    var result: GetWorkflowOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetWorkflowOutput, body, allocator);
-    }
+    const result: GetWorkflowOutput = try aws.json.parseJsonObject(
+        GetWorkflowOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

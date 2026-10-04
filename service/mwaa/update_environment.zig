@@ -165,6 +165,11 @@ pub const UpdateEnvironmentInput = struct {
     /// The Apache Airflow *Web server* access mode. For more information, refer to
     /// [Apache Airflow access
     /// modes](https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html).
+    ///
+    /// If set to `PUBLIC_AND_PRIVATE`, creates both a public network load balancer
+    /// (NLB) for browser access and a private VPC endpoint (VPCE) for
+    /// worker-to-webserver communication. This mode is only available for Apache
+    /// Airflow version 3.2 and later.
     webserver_access_mode: ?WebserverAccessMode = null,
 
     /// The day and time of the week in Coordinated Universal Time (UTC) 24-hour
@@ -407,10 +412,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateEnvironmentInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateEnvironmentOutput {
-    var result: UpdateEnvironmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateEnvironmentOutput, body, allocator);
-    }
+    const result: UpdateEnvironmentOutput = try aws.json.parseJsonObject(
+        UpdateEnvironmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

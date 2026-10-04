@@ -198,10 +198,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetModelInvocationJobIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetModelInvocationJobOutput {
-    var result: GetModelInvocationJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetModelInvocationJobOutput, body, allocator);
-    }
+    const result: GetModelInvocationJobOutput = try aws.json.parseJsonObject(
+        GetModelInvocationJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

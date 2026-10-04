@@ -11,8 +11,8 @@ pub const StopNotebookRunInput = struct {
     /// This field is automatically populated if not provided.
     client_token: ?[]const u8 = null,
 
-    /// The identifier of the Amazon DataZone domain in which the notebook run is
-    /// stopped.
+    /// The identifier of the Amazon SageMaker Unified Studio domain in which the
+    /// notebook run is stopped.
     domain_identifier: []const u8,
 
     /// The identifier of the notebook run to stop.
@@ -26,7 +26,7 @@ pub const StopNotebookRunInput = struct {
 };
 
 pub const StopNotebookRunOutput = struct {
-    /// The identifier of the Amazon DataZone domain.
+    /// The identifier of the Amazon SageMaker Unified Studio domain.
     domain_id: []const u8,
 
     /// The identifier of the notebook run.
@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StopNotebookRunInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StopNotebookRunOutput {
-    var result: StopNotebookRunOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StopNotebookRunOutput, body, allocator);
-    }
+    const result: StopNotebookRunOutput = try aws.json.parseJsonObject(
+        StopNotebookRunOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

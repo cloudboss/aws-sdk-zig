@@ -8,16 +8,20 @@ const Filter = @import("filter.zig").Filter;
 const MigrationProject = @import("migration_project.zig").MigrationProject;
 
 pub const DescribeMigrationProjectsInput = struct {
-    /// Filters applied to the migration projects described in the form of key-value
-    /// pairs.
+    /// The filters to apply to the migration projects.
     ///
-    /// Valid filter names and values:
+    /// The following filter names are supported:
     ///
-    /// * instance-profile-identifier, instance profile arn or name
+    /// * `migration-project-identifier` – The migration project name or ARN.
     ///
-    /// * data-provider-identifier, data provider arn or name
+    /// * `instance-profile-identifier` – The instance profile name or ARN.
     ///
-    /// * migration-project-identifier, migration project arn or name
+    /// * `data-provider-identifier` – The source or target data provider name or
+    ///   ARN.
+    ///
+    /// * `source-data-provider-identifier` – The source data provider name or ARN.
+    ///
+    /// * `target-data-provider-identifier` – The target data provider name or ARN.
     filters: ?[]const Filter = null,
 
     /// Specifies the unique pagination token that makes it possible to display the

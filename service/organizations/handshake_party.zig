@@ -10,6 +10,11 @@ pub const HandshakeParty = struct {
     id: []const u8,
 
     /// The type of ID for the participant.
+    ///
+    /// ORGANIZATION is valid only in the response context (identifying the inviting
+    /// organization). Valid input values for the Target parameter are ACCOUNT and
+    /// EMAIL
+    /// only.
     @"type": HandshakePartyType,
 
     pub const json_field_names = .{

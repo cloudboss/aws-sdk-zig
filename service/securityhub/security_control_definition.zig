@@ -3,6 +3,7 @@ const aws = @import("aws");
 const RegionAvailabilityStatus = @import("region_availability_status.zig").RegionAvailabilityStatus;
 const SecurityControlProperty = @import("security_control_property.zig").SecurityControlProperty;
 const ParameterDefinition = @import("parameter_definition.zig").ParameterDefinition;
+const SecurityControlsProvider = @import("security_controls_provider.zig").SecurityControlsProvider;
 const SeverityRating = @import("severity_rating.zig").SeverityRating;
 
 /// Provides metadata for a security control, including its unique
@@ -31,6 +32,10 @@ pub const SecurityControlDefinition = struct {
     /// the options for customizing it. This
     /// object is excluded for a control that doesn't support custom parameters.
     parameter_definitions: ?[]const aws.map.MapEntry(ParameterDefinition) = null,
+
+    /// The cloud provider whose resources the security control evaluates. For
+    /// example, `AWS` or `Azure`.
+    provider: ?SecurityControlsProvider = null,
 
     /// A link to Security Hub CSPM documentation that explains how to remediate a
     /// failed finding for a security control.
@@ -61,6 +66,7 @@ pub const SecurityControlDefinition = struct {
         .customizable_properties = "CustomizableProperties",
         .description = "Description",
         .parameter_definitions = "ParameterDefinitions",
+        .provider = "Provider",
         .remediation_url = "RemediationUrl",
         .security_control_id = "SecurityControlId",
         .severity_rating = "SeverityRating",

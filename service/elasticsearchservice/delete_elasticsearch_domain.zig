@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteElasticsearchDoma
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteElasticsearchDomainOutput {
-    var result: DeleteElasticsearchDomainOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteElasticsearchDomainOutput, body, allocator);
-    }
+    const result: DeleteElasticsearchDomainOutput = try aws.json.parseJsonObject(
+        DeleteElasticsearchDomainOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

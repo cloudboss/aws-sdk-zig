@@ -105,10 +105,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateTargetAccountConf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateTargetAccountConfigurationOutput {
-    var result: UpdateTargetAccountConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateTargetAccountConfigurationOutput, body, allocator);
-    }
+    const result: UpdateTargetAccountConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateTargetAccountConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

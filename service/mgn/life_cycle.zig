@@ -4,7 +4,7 @@ const LifeCycleState = @import("life_cycle_state.zig").LifeCycleState;
 
 /// Lifecycle.
 pub const LifeCycle = struct {
-    /// Lifecycle added to service data and time.
+    /// Lifecycle added to service date and time.
     added_to_service_date_time: ?[]const u8 = null,
 
     /// Lifecycle elapsed time and duration.

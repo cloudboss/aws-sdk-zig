@@ -21,6 +21,7 @@ pub const ServiceError = struct {
         automation_execution_not_found_exception: AutomationExecutionNotFoundException,
         automation_step_not_found_exception: AutomationStepNotFoundException,
         compliance_type_count_limit_exceeded_exception: ComplianceTypeCountLimitExceededException,
+        conflict_exception: ConflictException,
         custom_schema_count_limit_exceeded_exception: CustomSchemaCountLimitExceededException,
         document_already_exists: DocumentAlreadyExists,
         document_limit_exceeded: DocumentLimitExceeded,
@@ -164,6 +165,7 @@ pub const ServiceError = struct {
                 .automation_execution_not_found_exception => "AutomationExecutionNotFoundException",
                 .automation_step_not_found_exception => "AutomationStepNotFoundException",
                 .compliance_type_count_limit_exceeded_exception => "ComplianceTypeCountLimitExceededException",
+                .conflict_exception => "ConflictException",
                 .custom_schema_count_limit_exceeded_exception => "CustomSchemaCountLimitExceededException",
                 .document_already_exists => "DocumentAlreadyExists",
                 .document_limit_exceeded => "DocumentLimitExceeded",
@@ -309,6 +311,7 @@ pub const ServiceError = struct {
                 .automation_execution_not_found_exception => |e| e.message,
                 .automation_step_not_found_exception => |e| e.message,
                 .compliance_type_count_limit_exceeded_exception => |e| e.message,
+                .conflict_exception => |e| e.message,
                 .custom_schema_count_limit_exceeded_exception => |e| e.message,
                 .document_already_exists => |e| e.message,
                 .document_limit_exceeded => |e| e.message,
@@ -454,6 +457,7 @@ pub const ServiceError = struct {
                 .automation_execution_not_found_exception => 400,
                 .automation_step_not_found_exception => 400,
                 .compliance_type_count_limit_exceeded_exception => 400,
+                .conflict_exception => 400,
                 .custom_schema_count_limit_exceeded_exception => 400,
                 .document_already_exists => 400,
                 .document_limit_exceeded => 400,
@@ -599,6 +603,7 @@ pub const ServiceError = struct {
                 .automation_execution_not_found_exception => |e| e.request_id,
                 .automation_step_not_found_exception => |e| e.request_id,
                 .compliance_type_count_limit_exceeded_exception => |e| e.request_id,
+                .conflict_exception => |e| e.request_id,
                 .custom_schema_count_limit_exceeded_exception => |e| e.request_id,
                 .document_already_exists => |e| e.request_id,
                 .document_limit_exceeded => |e| e.request_id,
@@ -895,6 +900,18 @@ pub const AutomationStepNotFoundException = struct {
 /// 10 different
 /// types.
 pub const ComplianceTypeCountLimitExceededException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
+};
+
+/// An error occurred because of a conflict with a concurrent request or the
+/// current state of
+/// the resource. Retry your request.
+pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 
@@ -2585,6 +2602,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             typed_error.message = owned_message;
             typed_error.request_id = owned_request_id;
             return .{ .arena = arena, .kind = .{ .compliance_type_count_limit_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        const parsed_error: ?ConflictException = aws.json.parseJsonObject(ConflictException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .conflict_exception = typed_error } };
         }
     }
     if (std.mem.eql(u8, error_code, "CustomSchemaCountLimitExceededException")) {

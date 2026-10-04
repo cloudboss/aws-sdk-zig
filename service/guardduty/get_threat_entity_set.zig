@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetThreatEntitySetInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetThreatEntitySetOutput {
-    var result: GetThreatEntitySetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetThreatEntitySetOutput, body, allocator);
-    }
+    const result: GetThreatEntitySetOutput = try aws.json.parseJsonObject(
+        GetThreatEntitySetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

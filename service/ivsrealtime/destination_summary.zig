@@ -3,8 +3,7 @@ const DestinationState = @import("destination_state.zig").DestinationState;
 /// Summary information about a Destination.
 pub const DestinationSummary = struct {
     /// UTC time of the destination end. This is an ISO 8601 timestamp; *note that
-    /// this
-    /// is returned as a string*.
+    /// this is returned as a string*.
     end_time: ?i64 = null,
 
     /// Unique identifier for this destination, assigned by IVS.

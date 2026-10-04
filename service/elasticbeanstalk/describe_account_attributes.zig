@@ -10,8 +10,8 @@ const serde = @import("serde.zig");
 pub const DescribeAccountAttributesInput = struct {};
 
 pub const DescribeAccountAttributesOutput = struct {
-    /// The Elastic Beanstalk resource quotas associated with the calling AWS
-    /// account.
+    /// The Elastic Beanstalk resource quotas associated with the calling Amazon Web
+    /// Services account.
     resource_quotas: ?ResourceQuotas = null,
 };
 

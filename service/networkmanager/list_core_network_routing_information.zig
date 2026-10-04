@@ -180,10 +180,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCoreNetworkRoutingI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListCoreNetworkRoutingInformationOutput {
-    var result: ListCoreNetworkRoutingInformationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListCoreNetworkRoutingInformationOutput, body, allocator);
-    }
+    const result: ListCoreNetworkRoutingInformationOutput = try aws.json.parseJsonObject(
+        ListCoreNetworkRoutingInformationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

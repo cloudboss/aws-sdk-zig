@@ -9,7 +9,7 @@ pub const MetricV2 = struct {
     metric_filters: ?[]const MetricFilterV2 = null,
 
     /// Historical metrics or custom metrics can be referenced via this field. This
-    /// field is a valid Amazon Connect
+    /// field is a valid Connect Customer
     /// Arn or a UUID
     metric_id: ?[]const u8 = null,
 

@@ -66,6 +66,9 @@ pub const InvokeModelInput = struct {
     /// Model performance settings for the request.
     performance_config_latency: ?PerformanceConfigLatency = null,
 
+    /// Key-value pairs that you can use to filter invocation logs.
+    request_metadata: ?[]const u8 = null,
+
     /// Specifies the processing tier type used for serving the request.
     service_tier: ?ServiceTierType = null,
 
@@ -81,6 +84,7 @@ pub const InvokeModelInput = struct {
         .guardrail_version = "guardrailVersion",
         .model_id = "modelId",
         .performance_config_latency = "performanceConfigLatency",
+        .request_metadata = "requestMetadata",
         .service_tier = "serviceTier",
         .trace = "trace",
     };
@@ -170,6 +174,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeModelInput, confi
     if (input.performance_config_latency) |v| {
         try request.headers.put(allocator, "X-Amzn-Bedrock-PerformanceConfig-Latency", v.wireName());
     }
+    if (input.request_metadata) |v| {
+        try request.headers.put(allocator, "X-Amzn-Bedrock-Request-Metadata", v);
+    }
     if (input.service_tier) |v| {
         try request.headers.put(allocator, "X-Amzn-Bedrock-Service-Tier", v.wireName());
     }
@@ -181,7 +188,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeModelInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !InvokeModelOutput {
-    var result: InvokeModelOutput = .{};
+    var result: InvokeModelOutput = .{
+        .body = "",
+        .content_type = "",
+    };
+    errdefer {
+        allocator.free(result.content_type);
+        allocator.free(result.body);
+    }
     result.body = try allocator.dupe(u8, body);
     _ = status;
     if (headers.get("content-type")) |value| {

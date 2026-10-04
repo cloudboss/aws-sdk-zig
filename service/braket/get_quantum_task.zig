@@ -164,10 +164,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetQuantumTaskInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetQuantumTaskOutput {
-    var result: GetQuantumTaskOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetQuantumTaskOutput, body, allocator);
-    }
+    const result: GetQuantumTaskOutput = try aws.json.parseJsonObject(
+        GetQuantumTaskOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

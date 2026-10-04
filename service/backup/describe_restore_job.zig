@@ -194,10 +194,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeRestoreJobInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeRestoreJobOutput {
-    var result: DescribeRestoreJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeRestoreJobOutput, body, allocator);
-    }
+    const result: DescribeRestoreJobOutput = try aws.json.parseJsonObject(
+        DescribeRestoreJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -289,10 +289,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateGraphqlApiInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateGraphqlApiOutput {
-    var result: CreateGraphqlApiOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateGraphqlApiOutput, body, allocator);
-    }
+    const result: CreateGraphqlApiOutput = try aws.json.parseJsonObject(
+        CreateGraphqlApiOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

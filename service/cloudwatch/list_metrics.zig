@@ -11,9 +11,10 @@ const serde = @import("serde.zig");
 
 pub const ListMetricsInput = struct {
     /// The dimensions to filter against. Only the dimension with names that match
-    /// exactly will be
-    /// returned. If you specify one dimension name and a metric has that dimension
-    /// and also other dimensions, it will be returned.
+    /// exactly
+    /// will be returned. If you specify one dimension name and a metric has that
+    /// dimension and
+    /// also other dimensions, it will be returned.
     dimensions: ?[]const DimensionFilter = null,
 
     /// If you are using this operation in a monitoring account, specify `true` to

@@ -91,10 +91,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAccessPointInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAccessPointOutput {
-    var result: CreateAccessPointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAccessPointOutput, body, allocator);
-    }
+    const result: CreateAccessPointOutput = try aws.json.parseJsonObject(
+        CreateAccessPointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

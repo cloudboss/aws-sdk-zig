@@ -178,8 +178,11 @@ pub const CreateFunctionInput = struct {
     tenancy_config: ?TenancyConfig = null,
 
     /// The amount of time (in seconds) that Lambda allows a function to run before
-    /// stopping it. The default is 3 seconds. The maximum allowed value is 900
-    /// seconds. For more information, see [Lambda execution
+    /// stopping it. The default is 3 seconds, and the maximum allowed value is 900
+    /// seconds. For functions using Lambda Managed Instances, asynchronous
+    /// invocations and event source mapping invocations (except Amazon MQ and
+    /// Amazon DocumentDB) support a maximum allowed value of 5,400 seconds (90
+    /// minutes). For more information, see [Lambda execution
     /// environment](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html).
     timeout: ?i32 = null,
 
@@ -444,10 +447,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFunctionInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateFunctionOutput {
-    var result: CreateFunctionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateFunctionOutput, body, allocator);
-    }
+    const result: CreateFunctionOutput = try aws.json.parseJsonObject(
+        CreateFunctionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -123,10 +123,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeEphemerisInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeEphemerisOutput {
-    var result: DescribeEphemerisOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeEphemerisOutput, body, allocator);
-    }
+    const result: DescribeEphemerisOutput = try aws.json.parseJsonObject(
+        DescribeEphemerisOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

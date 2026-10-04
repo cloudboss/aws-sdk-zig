@@ -70,10 +70,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRestApiInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRestApiOutput {
-    var result: GetRestApiOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRestApiOutput, body, allocator);
-    }
+    const result: GetRestApiOutput = try aws.json.parseJsonObject(
+        GetRestApiOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

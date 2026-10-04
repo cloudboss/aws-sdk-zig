@@ -45,6 +45,7 @@ const query_ = @import("query.zig");
 const restore_table_from_backup = @import("restore_table_from_backup.zig");
 const restore_table_to_point_in_time = @import("restore_table_to_point_in_time.zig");
 const scan_ = @import("scan.zig");
+const search_vectors = @import("search_vectors.zig");
 const tag_resource = @import("tag_resource.zig");
 const transact_get_items = @import("transact_get_items.zig");
 const transact_write_items = @import("transact_write_items.zig");
@@ -217,16 +218,13 @@ pub const Client = struct {
     /// items and submit a new `BatchWriteItem` request with those unprocessed items
     /// until all items have been processed.
     ///
-    /// For tables and indexes with provisioned capacity, if none of the items can
-    /// be
-    /// processed due to insufficient provisioned throughput on all of the tables in
-    /// the
-    /// request, then `BatchWriteItem` returns a
-    /// `ProvisionedThroughputExceededException`. For all tables and indexes, if
-    /// none of the items can be processed due to other throttling scenarios (such
-    /// as exceeding
-    /// partition level limits), then `BatchWriteItem` returns a
-    /// `ThrottlingException`.
+    /// If `BatchWriteItem` cannot process any items due to throttling (for
+    /// example, insufficient provisioned throughput on the tables in the request,
+    /// or
+    /// partition-level or account-level limits), it returns a
+    /// `ProvisionedThroughputExceededException` or a
+    /// `ThrottlingException`. Both indicate that the request was throttled;
+    /// check the `ThrottlingReason` field in the returned exception for details.
     ///
     /// If DynamoDB returns any unprocessed items, you should retry the batch
     /// operation on
@@ -1170,6 +1168,28 @@ pub const Client = struct {
     /// the table when the scan operation was requested.
     pub fn scan(self: *Self, allocator: std.mem.Allocator, input: scan_.ScanInput, options: CallOptions) !scan_.ScanOutput {
         return scan_.execute(self, allocator, input, options);
+    }
+
+    /// Performs a vector similarity search on a vector index associated with an
+    /// Amazon
+    /// DynamoDB table, and returns the most similar items sorted by similarity
+    /// score
+    /// based on the distance function configured for the index.
+    ///
+    /// Score interpretation depends on the distance function:
+    ///
+    /// * `COSINE` - Returns the items with the *k
+    /// smallest* scores. Scores range from 0 (identical) to 2 (opposite).
+    /// Lower scores indicate higher similarity.
+    ///
+    /// * `EUCLIDEAN` - Returns the items with the *k
+    /// smallest* scores. Scores represent the Euclidean distance between
+    /// vectors. Lower scores indicate higher similarity.
+    ///
+    /// * `DOT_PRODUCT` - Returns the items with the *k
+    /// highest* scores. Higher scores indicate higher similarity.
+    pub fn searchVectors(self: *Self, allocator: std.mem.Allocator, input: search_vectors.SearchVectorsInput, options: CallOptions) !search_vectors.SearchVectorsOutput {
+        return search_vectors.execute(self, allocator, input, options);
     }
 
     /// Associate a set of tags with an Amazon DynamoDB resource. You can then

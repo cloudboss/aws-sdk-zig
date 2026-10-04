@@ -137,10 +137,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeBotAnalyzerReco
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeBotAnalyzerRecommendationOutput {
-    var result: DescribeBotAnalyzerRecommendationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeBotAnalyzerRecommendationOutput, body, allocator);
-    }
+    const result: DescribeBotAnalyzerRecommendationOutput = try aws.json.parseJsonObject(
+        DescribeBotAnalyzerRecommendationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

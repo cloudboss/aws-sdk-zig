@@ -26,6 +26,9 @@ pub const ByoipCidr = struct {
     /// The description of the address range.
     description: ?[]const u8 = null,
 
+    /// The ID of the IPAM pool associated with the CIDR.
+    ipam_pool_id: ?[]const u8 = null,
+
     /// If you have [Local
     /// Zones](https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html) enabled, you can choose a network border group for Local Zones when you provision and advertise a BYOIPv4 CIDR. Choose the network border group carefully as the EIP and the Amazon Web Services resource it is associated with must reside in the same network border group.
     ///
@@ -41,6 +44,9 @@ pub const ByoipCidr = struct {
     /// You cannot provision or advertise BYOIPv6 address ranges in Local Zones at
     /// this time.
     network_border_group: ?[]const u8 = null,
+
+    /// The ID of the address pool associated with the CIDR.
+    pool_id: ?[]const u8 = null,
 
     /// The state of the address range.
     ///

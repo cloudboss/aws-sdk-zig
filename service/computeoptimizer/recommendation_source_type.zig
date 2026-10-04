@@ -11,6 +11,12 @@ pub const RecommendationSourceType = enum {
     rds_db_instance_storage,
     aurora_db_cluster_storage,
     nat_gateway,
+    dynamo_db_table,
+    elasti_cache_cluster,
+    memory_db_cluster,
+    document_db_cluster,
+    workspaces,
+    sage_maker_endpoint,
 
     pub const json_field_names = .{
         .ec2_instance = "Ec2Instance",
@@ -23,6 +29,12 @@ pub const RecommendationSourceType = enum {
         .rds_db_instance_storage = "RdsDBInstanceStorage",
         .aurora_db_cluster_storage = "AuroraDBClusterStorage",
         .nat_gateway = "NatGateway",
+        .dynamo_db_table = "DynamoDBTable",
+        .elasti_cache_cluster = "ElastiCacheCluster",
+        .memory_db_cluster = "MemoryDBCluster",
+        .document_db_cluster = "DocumentDBCluster",
+        .workspaces = "WorkSpaces",
+        .sage_maker_endpoint = "SageMakerEndpoint",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -37,6 +49,12 @@ pub const RecommendationSourceType = enum {
             .rds_db_instance_storage => "RdsDBInstanceStorage",
             .aurora_db_cluster_storage => "AuroraDBClusterStorage",
             .nat_gateway => "NatGateway",
+            .dynamo_db_table => "DynamoDBTable",
+            .elasti_cache_cluster => "ElastiCacheCluster",
+            .memory_db_cluster => "MemoryDBCluster",
+            .document_db_cluster => "DocumentDBCluster",
+            .workspaces => "WorkSpaces",
+            .sage_maker_endpoint => "SageMakerEndpoint",
         };
     }
 

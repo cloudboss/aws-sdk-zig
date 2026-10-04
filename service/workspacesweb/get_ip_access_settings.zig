@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetIpAccessSettingsInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetIpAccessSettingsOutput {
-    var result: GetIpAccessSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetIpAccessSettingsOutput, body, allocator);
-    }
+    const result: GetIpAccessSettingsOutput = try aws.json.parseJsonObject(
+        GetIpAccessSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

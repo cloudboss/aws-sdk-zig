@@ -10,8 +10,12 @@ pub const PutLoggingOptionsInput = struct {
     /// The logging options to set.
     logging_options: LoggingOptions,
 
+    /// The name of the workspace.
+    workspace_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .logging_options = "loggingOptions",
+        .workspace_name = "workspaceName",
     };
 };
 
@@ -58,6 +62,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutLoggingOptionsInput,
     try body_buf.appendSlice(allocator, "\"loggingOptions\":");
     try aws.json.writeValue(@TypeOf(input.logging_options), input.logging_options, allocator, &body_buf);
     has_prev = true;
+    if (input.workspace_name) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"workspaceName\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);

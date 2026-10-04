@@ -7,31 +7,27 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const StartParticipantReplicationInput = struct {
     /// Application-provided attributes to set on the replicated participant in the
-    /// destination stage.
-    /// Map keys and values can contain UTF-8 encoded text. The maximum length of
-    /// this field is 1 KB total.
-    /// *This field is exposed to all stage participants and should not be used for
-    /// personally identifying,
+    /// destination stage. Map keys and values can contain UTF-8 encoded text. The
+    /// maximum length of this field is 1 KB total. *This field is exposed to all
+    /// stage participants and should not be used for personally identifying,
     /// confidential, or sensitive information.*
     ///
     /// These attributes are merged with any attributes set for this participant
-    /// when creating the token.
-    /// If there is overlap in keys, the values in these attributes are replaced.
+    /// when creating the token. If there is overlap in keys, the values in these
+    /// attributes are replaced.
     attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// ARN of the stage to which the participant will be replicated.
     destination_stage_arn: []const u8,
 
     /// Participant ID of the publisher that will be replicated. This is assigned by
-    /// IVS and returned by
-    /// CreateParticipantToken
-    /// or the `jti` (JWT ID) used to [create a self signed
+    /// IVS and returned by CreateParticipantToken or the `jti` (JWT ID) used to
+    /// [create a self signed
     /// token](https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed).
     participant_id: []const u8,
 
     /// If the participant disconnects and then reconnects within the specified
-    /// interval, replication will continue to be `ACTIVE`.
-    /// Default: 0.
+    /// interval, replication will continue to be `ACTIVE`. Default: 0.
     reconnect_window_seconds: ?i32 = null,
 
     /// ARN of the stage where the participant is publishing.
@@ -163,6 +159,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartParticipantReplica
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartParticipantReplicationOutput {
     var result: StartParticipantReplicationOutput = .{};
+    errdefer {
+        if (result.access_control_allow_origin) |value| allocator.free(value);
+        if (result.access_control_expose_headers) |value| allocator.free(value);
+        if (result.cache_control) |value| allocator.free(value);
+        if (result.content_security_policy) |value| allocator.free(value);
+        if (result.strict_transport_security) |value| allocator.free(value);
+        if (result.x_content_type_options) |value| allocator.free(value);
+        if (result.x_frame_options) |value| allocator.free(value);
+    }
     _ = body;
     _ = status;
     if (headers.get("access-control-allow-origin")) |value| {

@@ -21,6 +21,10 @@ pub const CopyDBParameterGroupInput = struct {
     ///
     /// * Must specify a valid DB parameter group identifier, for example
     /// `my-db-param-group`, or a valid ARN.
+    ///
+    /// * The source DB parameter group must be in the same Amazon Region as the
+    /// copy. Neptune does not support cross-Region copying of parameter
+    /// groups.
     source_db_parameter_group_identifier: []const u8,
 
     /// The tags to be assigned to the copied DB parameter group.

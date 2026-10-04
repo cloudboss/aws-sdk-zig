@@ -32,7 +32,7 @@ pub const DescribePlacementGroupsInput = struct {
     ///
     /// * `strategy` - The strategy of the placement group
     /// (`cluster` | `spread` |
-    /// `partition`).
+    /// `partition` | `precision-time`).
     ///
     /// * `tag:` - The key/value combination of a tag assigned to the resource. Use
     ///   the tag key in the filter name and the tag value as the filter value.

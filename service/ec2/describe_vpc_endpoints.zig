@@ -45,7 +45,7 @@ pub const DescribeVpcEndpointsInput = struct {
     ///
     /// * `vpc-endpoint-type` - The type of VPC endpoint (`Interface` |
     /// `Gateway` | `GatewayLoadBalancer` | `Resource` |
-    /// `ServiceNetwork`).
+    /// `ServiceNetwork` | `Tunnel`).
     filters: ?[]const Filter = null,
 
     /// The maximum number of items to return for this request. The request returns

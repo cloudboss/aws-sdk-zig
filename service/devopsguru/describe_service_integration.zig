@@ -64,10 +64,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeServiceIntegrat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeServiceIntegrationOutput {
-    var result: DescribeServiceIntegrationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeServiceIntegrationOutput, body, allocator);
-    }
+    const result: DescribeServiceIntegrationOutput = try aws.json.parseJsonObject(
+        DescribeServiceIntegrationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -116,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetImportFileTaskInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetImportFileTaskOutput {
-    var result: GetImportFileTaskOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetImportFileTaskOutput, body, allocator);
-    }
+    const result: GetImportFileTaskOutput = try aws.json.parseJsonObject(
+        GetImportFileTaskOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

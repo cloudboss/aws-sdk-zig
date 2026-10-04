@@ -1,6 +1,6 @@
 const AiAgentInfo = @import("ai_agent_info.zig").AiAgentInfo;
 
-/// Information about Amazon Connect Wisdom.
+/// Information about Connect Customer Wisdom.
 pub const WisdomInfo = struct {
     /// The array of AI agents involved in the contact.
     ai_agents: ?[]const AiAgentInfo = null,

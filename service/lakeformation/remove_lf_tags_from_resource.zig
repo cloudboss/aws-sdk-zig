@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RemoveLFTagsFromResourc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RemoveLFTagsFromResourceOutput {
-    var result: RemoveLFTagsFromResourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RemoveLFTagsFromResourceOutput, body, allocator);
-    }
+    const result: RemoveLFTagsFromResourceOutput = try aws.json.parseJsonObject(
+        RemoveLFTagsFromResourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

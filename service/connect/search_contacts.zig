@@ -10,7 +10,7 @@ const SearchContactsTimeRange = @import("search_contacts_time_range.zig").Search
 const ContactSearchSummary = @import("contact_search_summary.zig").ContactSearchSummary;
 
 pub const SearchContactsInput = struct {
-    /// The identifier of Amazon Connect instance. You can find the instance ID in
+    /// The identifier of Connect Customer instance. You can find the instance ID in
     /// the Amazon Resource Name (ARN) of
     /// the instance.
     instance_id: []const u8,
@@ -144,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchContactsInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchContactsOutput {
-    var result: SearchContactsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchContactsOutput, body, allocator);
-    }
+    const result: SearchContactsOutput = try aws.json.parseJsonObject(
+        SearchContactsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

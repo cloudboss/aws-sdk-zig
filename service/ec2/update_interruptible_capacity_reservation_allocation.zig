@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const ZeroSizePreference = @import("zero_size_preference.zig").ZeroSizePreference;
 const InterruptionType = @import("interruption_type.zig").InterruptionType;
 const InterruptibleCapacityReservationAllocationStatus = @import("interruptible_capacity_reservation_allocation_status.zig").InterruptibleCapacityReservationAllocationStatus;
 
@@ -19,7 +20,15 @@ pub const UpdateInterruptibleCapacityReservationAllocationInput = struct {
     /// The new number of instances to allocate. Enter a higher number to add more
     /// capacity to share, or a lower number to reclaim capacity to your source
     /// Capacity Reservation.
-    target_instance_count: i32,
+    target_instance_count: ?i32 = null,
+
+    /// Specifies the updated behavior for the interruptible Capacity Reservation
+    /// when you reduce its allocation to zero instances. Specify `retain` to keep
+    /// the interruptible Capacity Reservation active at zero capacity so that you
+    /// can allocate instances to it again later. Specify `default` to cancel the
+    /// interruptible Capacity Reservation and return the capacity to your source
+    /// Capacity Reservation.
+    zero_size_preference: ?ZeroSizePreference = null,
 };
 
 pub const UpdateInterruptibleCapacityReservationAllocationOutput = struct {
@@ -84,8 +93,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateInterruptibleCapa
         try body_buf.appendSlice(allocator, "&DryRun=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
-    try body_buf.appendSlice(allocator, "&TargetInstanceCount=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{input.target_instance_count}) catch "");
+    if (input.target_instance_count) |v| {
+        try body_buf.appendSlice(allocator, "&TargetInstanceCount=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
+    if (input.zero_size_preference) |v| {
+        try body_buf.appendSlice(allocator, "&ZeroSizePreference=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
+    }
 
     const body = try body_buf.toOwnedSlice(allocator);
 

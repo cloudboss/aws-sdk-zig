@@ -149,6 +149,11 @@ pub const DBInstance = struct {
     /// Specifies if the DB instance is a Multi-AZ deployment.
     multi_az: ?bool = null,
 
+    /// The network type of the DB instance. Inherited from the DB cluster.
+    ///
+    /// Valid Values: `IPV4`, `DUAL`
+    network_type: ?[]const u8 = null,
+
     /// *(Not supported by Neptune)*
     option_group_memberships: ?[]const OptionGroupMembership = null,
 

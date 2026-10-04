@@ -1,6 +1,9 @@
 pub const Categories = @import("categories.zig").Categories;
 pub const CategoryDetails = @import("category_details.zig").CategoryDetails;
 pub const CharacterOffsets = @import("character_offsets.zig").CharacterOffsets;
+pub const ExtractedInformation = @import("extracted_information.zig").ExtractedInformation;
+pub const ExtractedInformationFailureCode = @import("extracted_information_failure_code.zig").ExtractedInformationFailureCode;
+pub const ExtractedInformationValue = @import("extracted_information_value.zig").ExtractedInformationValue;
 pub const IssueDetected = @import("issue_detected.zig").IssueDetected;
 pub const PointOfInterest = @import("point_of_interest.zig").PointOfInterest;
 pub const PostContactSummary = @import("post_contact_summary.zig").PostContactSummary;

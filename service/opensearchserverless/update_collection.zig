@@ -4,12 +4,17 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DeletionProtection = @import("deletion_protection.zig").DeletionProtection;
 const VectorOptions = @import("vector_options.zig").VectorOptions;
 const UpdateCollectionDetail = @import("update_collection_detail.zig").UpdateCollectionDetail;
 
 pub const UpdateCollectionInput = struct {
     /// Unique, case-sensitive identifier to ensure idempotency of the request.
     client_token: ?[]const u8 = null,
+
+    /// Indicates whether to enable or disable deletion protection for the
+    /// collection. When set to `ENABLED`, the collection cannot be deleted.
+    deletion_protection: ?DeletionProtection = null,
 
     /// A description of the collection.
     description: ?[]const u8 = null,
@@ -22,6 +27,7 @@ pub const UpdateCollectionInput = struct {
 
     pub const json_field_names = .{
         .client_token = "clientToken",
+        .deletion_protection = "deletionProtection",
         .description = "description",
         .id = "id",
         .vector_options = "vectorOptions",

@@ -4,11 +4,13 @@ pub const PurchaseOption = enum {
     ondemand,
     spot,
     capacity_block,
+    interruptible_capacity_reservation,
 
     pub const json_field_names = .{
         .ondemand = "ONDEMAND",
         .spot = "SPOT",
         .capacity_block = "CAPACITY_BLOCK",
+        .interruptible_capacity_reservation = "INTERRUPTIBLE_CAPACITY_RESERVATION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const PurchaseOption = enum {
             .ondemand => "ONDEMAND",
             .spot => "SPOT",
             .capacity_block => "CAPACITY_BLOCK",
+            .interruptible_capacity_reservation => "INTERRUPTIBLE_CAPACITY_RESERVATION",
         };
     }
 

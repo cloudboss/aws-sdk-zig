@@ -1,13 +1,15 @@
 const AlarmMuteRuleStatus = @import("alarm_mute_rule_status.zig").AlarmMuteRuleStatus;
 
 /// Summary information about an alarm mute rule, including its name, status,
-/// and configuration details.
+/// and
+/// configuration details.
 pub const AlarmMuteRuleSummary = struct {
     /// The Amazon Resource Name (ARN) of the alarm mute rule.
     alarm_mute_rule_arn: ?[]const u8 = null,
 
     /// The date and time when the mute rule expires and is no longer evaluated.
-    /// This field is only present if an expiration date was configured.
+    /// This field
+    /// is only present if an expiration date was configured.
     expire_date: ?i64 = null,
 
     /// The date and time when the mute rule was last updated.

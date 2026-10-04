@@ -1,12 +1,15 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const activate_certificate_authority = @import("activate_certificate_authority.zig");
 const associate_access_policy = @import("associate_access_policy.zig");
 const associate_encryption_config = @import("associate_encryption_config.zig");
 const associate_identity_provider_config = @import("associate_identity_provider_config.zig");
+const cancel_update = @import("cancel_update.zig");
 const create_access_entry = @import("create_access_entry.zig");
 const create_addon = @import("create_addon.zig");
 const create_capability = @import("create_capability.zig");
+const create_certificate_authority = @import("create_certificate_authority.zig");
 const create_cluster = @import("create_cluster.zig");
 const create_eks_anywhere_subscription = @import("create_eks_anywhere_subscription.zig");
 const create_fargate_profile = @import("create_fargate_profile.zig");
@@ -15,6 +18,7 @@ const create_pod_identity_association = @import("create_pod_identity_association
 const delete_access_entry = @import("delete_access_entry.zig");
 const delete_addon = @import("delete_addon.zig");
 const delete_capability = @import("delete_capability.zig");
+const delete_certificate_authority = @import("delete_certificate_authority.zig");
 const delete_cluster = @import("delete_cluster.zig");
 const delete_eks_anywhere_subscription = @import("delete_eks_anywhere_subscription.zig");
 const delete_fargate_profile = @import("delete_fargate_profile.zig");
@@ -26,6 +30,7 @@ const describe_addon = @import("describe_addon.zig");
 const describe_addon_configuration = @import("describe_addon_configuration.zig");
 const describe_addon_versions = @import("describe_addon_versions.zig");
 const describe_capability = @import("describe_capability.zig");
+const describe_certificate_authority = @import("describe_certificate_authority.zig");
 const describe_cluster = @import("describe_cluster.zig");
 const describe_cluster_versions = @import("describe_cluster_versions.zig");
 const describe_eks_anywhere_subscription = @import("describe_eks_anywhere_subscription.zig");
@@ -43,6 +48,7 @@ const list_access_policies = @import("list_access_policies.zig");
 const list_addons = @import("list_addons.zig");
 const list_associated_access_policies = @import("list_associated_access_policies.zig");
 const list_capabilities = @import("list_capabilities.zig");
+const list_certificate_authorities = @import("list_certificate_authorities.zig");
 const list_clusters = @import("list_clusters.zig");
 const list_eks_anywhere_subscriptions = @import("list_eks_anywhere_subscriptions.zig");
 const list_fargate_profiles = @import("list_fargate_profiles.zig");
@@ -96,6 +102,40 @@ pub const Client = struct {
         _ = self;
     }
 
+    /// Activates a successor certificate authority (CA) as the signing certificate
+    /// authority
+    /// for your cluster, completing a CA rotation.
+    ///
+    /// When you activate a successor CA, Amazon EKS promotes it to be the cluster's
+    /// signer (its
+    /// `signingStatus` becomes `IN_USE`) and the outgoing CA is
+    /// retired (`NOT_USED`). The outgoing CA remains in the cluster's trust bundle
+    /// but
+    /// no longer signs certificates. The successor CA you activate must already be
+    /// present on
+    /// the cluster and fully distributed (its `distributionStatus` must be
+    /// `COMPLETE`). This is an asynchronous operation that returns an
+    /// `update` object you can track with [
+    /// `DescribeUpdate`
+    /// ](https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeUpdate.html).
+    ///
+    /// Before you activate the successor CA, make sure the worker nodes you manage
+    /// and your
+    /// external clients have been updated to trust it, so they maintain
+    /// connectivity to the API
+    /// server after activation. For a limited period after activation, CA rollback
+    /// is available
+    /// to revert to the outgoing CA if needed. If you don't activate the successor
+    /// CA yourself,
+    /// Amazon EKS activates it automatically as the expiration deadline approaches.
+    /// For more
+    /// information, see [Rotate the Amazon EKS
+    /// cluster certificate
+    /// authority](https://docs.aws.amazon.com/eks/latest/userguide/certificate-authority-rotation.html) in the *Amazon EKS User Guide*.
+    pub fn activateCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: activate_certificate_authority.ActivateCertificateAuthorityInput, options: CallOptions) !activate_certificate_authority.ActivateCertificateAuthorityOutput {
+        return activate_certificate_authority.execute(self, allocator, input, options);
+    }
+
     /// Associates an access policy and its scope to an access entry. For more
     /// information
     /// about associating access policies, see [Associating and disassociating
@@ -129,6 +169,22 @@ pub const Client = struct {
     /// Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) in the Kubernetes documentation.
     pub fn associateIdentityProviderConfig(self: *Self, allocator: std.mem.Allocator, input: associate_identity_provider_config.AssociateIdentityProviderConfigInput, options: CallOptions) !associate_identity_provider_config.AssociateIdentityProviderConfigOutput {
         return associate_identity_provider_config.execute(self, allocator, input, options);
+    }
+
+    /// Cancels an in-progress update to an Amazon EKS cluster on a best-effort
+    /// basis. Cancellation
+    /// is only performed if the update can be cancelled. Currently, this is
+    /// supported for
+    /// `VersionRollback` update types on EKS Auto Mode clusters when nodes are
+    /// rolling back.
+    ///
+    /// A successful cancellation stops the node rollback. After cancellation, nodes
+    /// converge
+    /// to the current cluster version honoring configured disruption controls. If
+    /// the control
+    /// plane rollback has already begun, the cancellation request fails.
+    pub fn cancelUpdate(self: *Self, allocator: std.mem.Allocator, input: cancel_update.CancelUpdateInput, options: CallOptions) !cancel_update.CancelUpdateOutput {
+        return cancel_update.execute(self, allocator, input, options);
     }
 
     /// Creates an access entry.
@@ -183,6 +239,48 @@ pub const Client = struct {
     /// Capabilities](https://docs.aws.amazon.com/eks/latest/userguide/capabilities.html) in the *Amazon EKS User Guide*.
     pub fn createCapability(self: *Self, allocator: std.mem.Allocator, input: create_capability.CreateCapabilityInput, options: CallOptions) !create_capability.CreateCapabilityOutput {
         return create_capability.execute(self, allocator, input, options);
+    }
+
+    /// Appends a successor certificate authority (CA) to your cluster, beginning
+    /// the CA
+    /// rotation process.
+    ///
+    /// A cluster certificate authority is the root of trust for your cluster's
+    /// control plane.
+    /// It signs the certificates that secure communication between the Kubernetes
+    /// API server and its
+    /// clients, and its public certificate is distributed to your cluster's trust
+    /// bundle so that
+    /// worker nodes and clients can verify the API server's identity. Each cluster
+    /// can have at
+    /// most two certificate authorities at a time: the outgoing CA that's currently
+    /// signing (its
+    /// `signingStatus` is `IN_USE`) and one successor CA
+    /// (`signingStatus` of `NOT_USED`) that you can later activate to
+    /// complete the rotation.
+    ///
+    /// Appending a successor CA adds its public certificate to the cluster's trust
+    /// bundle so
+    /// that the cluster trusts both CAs simultaneously (the dual trust period), but
+    /// it doesn't
+    /// begin signing certificates. Amazon EKS then distributes the successor CA to
+    /// the Amazon Web Services managed
+    /// components in your cluster; you can track this through the CA's
+    /// `distributionStatus`. The successor CA can't be activated until its
+    /// `distributionStatus` is `COMPLETE`. To activate it as the
+    /// cluster's signer, use [
+    /// `ActivateCertificateAuthority`
+    /// ](https://docs.aws.amazon.com/eks/latest/APIReference/API_ActivateCertificateAuthority.html). This is an asynchronous operation
+    /// that returns an `update` object. If you don't append a successor CA
+    /// yourself,
+    /// Amazon EKS appends one automatically before the outgoing CA approaches
+    /// expiration.
+    ///
+    /// For more information, see [Rotate the Amazon EKS
+    /// cluster certificate
+    /// authority](https://docs.aws.amazon.com/eks/latest/userguide/certificate-authority-rotation.html) in the *Amazon EKS User Guide*.
+    pub fn createCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: create_certificate_authority.CreateCertificateAuthorityInput, options: CallOptions) !create_certificate_authority.CreateCertificateAuthorityOutput {
+        return create_certificate_authority.execute(self, allocator, input, options);
     }
 
     /// Creates an Amazon EKS control plane.
@@ -434,6 +532,25 @@ pub const Client = struct {
         return delete_capability.execute(self, allocator, input, options);
     }
 
+    /// Deletes a certificate authority (CA) from your cluster.
+    ///
+    /// Deleting a certificate authority removes its public certificate from the
+    /// cluster's
+    /// trust bundle. You can't delete the certificate authority that's currently
+    /// signing
+    /// certificates for the cluster (its `signingStatus` is `IN_USE`) — to
+    /// remove the outgoing CA, first activate the successor CA with [
+    /// `ActivateCertificateAuthority`
+    /// ](https://docs.aws.amazon.com/eks/latest/APIReference/API_ActivateCertificateAuthority.html). Amazon EKS also protects a successor CA
+    /// from deletion in certain cases to keep a valid rotation path — for example,
+    /// a successor
+    /// that Amazon EKS appended can't be deleted while it's the only successor on
+    /// the cluster. This is
+    /// an asynchronous operation that returns an `update` object.
+    pub fn deleteCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: delete_certificate_authority.DeleteCertificateAuthorityInput, options: CallOptions) !delete_certificate_authority.DeleteCertificateAuthorityOutput {
+        return delete_certificate_authority.execute(self, allocator, input, options);
+    }
+
     /// Deletes an Amazon EKS cluster control plane.
     ///
     /// If you have active services and ingress resources in your cluster that are
@@ -539,6 +656,15 @@ pub const Client = struct {
     /// information, and any issues that may be affecting its operation.
     pub fn describeCapability(self: *Self, allocator: std.mem.Allocator, input: describe_capability.DescribeCapabilityInput, options: CallOptions) !describe_capability.DescribeCapabilityOutput {
         return describe_capability.execute(self, allocator, input, options);
+    }
+
+    /// Returns detailed information about a certificate authority (CA) in your
+    /// cluster,
+    /// including its validity period, signing and distribution status, provenance,
+    /// scheduled
+    /// auto-activation events, and public certificate data.
+    pub fn describeCertificateAuthority(self: *Self, allocator: std.mem.Allocator, input: describe_certificate_authority.DescribeCertificateAuthorityInput, options: CallOptions) !describe_certificate_authority.DescribeCertificateAuthorityOutput {
+        return describe_certificate_authority.execute(self, allocator, input, options);
     }
 
     /// Describes an Amazon EKS cluster.
@@ -655,6 +781,15 @@ pub const Client = struct {
     /// operation to get an overview of all capabilities and their current status.
     pub fn listCapabilities(self: *Self, allocator: std.mem.Allocator, input: list_capabilities.ListCapabilitiesInput, options: CallOptions) !list_capabilities.ListCapabilitiesOutput {
         return list_capabilities.execute(self, allocator, input, options);
+    }
+
+    /// Lists the certificate authorities (CAs) for your cluster. A cluster has at
+    /// most two
+    /// certificate authorities: the outgoing CA that's currently signing and,
+    /// during a rotation,
+    /// one successor CA.
+    pub fn listCertificateAuthorities(self: *Self, allocator: std.mem.Allocator, input: list_certificate_authorities.ListCertificateAuthoritiesInput, options: CallOptions) !list_certificate_authorities.ListCertificateAuthoritiesOutput {
+        return list_certificate_authorities.execute(self, allocator, input, options);
     }
 
     /// Lists the Amazon EKS clusters in your Amazon Web Services account in the
@@ -1044,6 +1179,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn listCertificateAuthoritiesPaginator(self: *Self, params: list_certificate_authorities.ListCertificateAuthoritiesInput) paginator.ListCertificateAuthoritiesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listClustersPaginator(self: *Self, params: list_clusters.ListClustersInput) paginator.ListClustersPaginator {
         return .{
             .client = self,
@@ -1107,6 +1249,11 @@ pub const Client = struct {
 
     pub fn waitUntilAddonDeleted(self: *Self, params: describe_addon.DescribeAddonInput) aws.waiter.WaiterError!void {
         var w = waiters.AddonDeletedWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilCertificateAuthorityUpdateComplete(self: *Self, params: describe_update.DescribeUpdateInput) aws.waiter.WaiterError!void {
+        var w = waiters.CertificateAuthorityUpdateCompleteWaiter{ .client = self, .params = params };
         return w.wait();
     }
 

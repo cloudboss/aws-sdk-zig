@@ -162,10 +162,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetKxScalingGroupInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetKxScalingGroupOutput {
-    var result: GetKxScalingGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetKxScalingGroupOutput, body, allocator);
-    }
+    const result: GetKxScalingGroupOutput = try aws.json.parseJsonObject(
+        GetKxScalingGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -86,10 +86,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetExternalDataViewAcce
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetExternalDataViewAccessDetailsOutput {
-    var result: GetExternalDataViewAccessDetailsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetExternalDataViewAccessDetailsOutput, body, allocator);
-    }
+    const result: GetExternalDataViewAccessDetailsOutput = try aws.json.parseJsonObject(
+        GetExternalDataViewAccessDetailsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

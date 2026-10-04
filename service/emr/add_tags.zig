@@ -7,6 +7,10 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
 pub const AddTagsInput = struct {
+    /// The ID of the cluster that scopes the tag operation. Required when the
+    /// resource being tagged is a session-scoped resource.
+    cluster_id: ?[]const u8 = null,
+
     /// The Amazon EMR resource identifier to which tags will be added. For example,
     /// a
     /// cluster identifier or an Amazon EMR Studio ID.
@@ -20,6 +24,7 @@ pub const AddTagsInput = struct {
     tags: []const Tag,
 
     pub const json_field_names = .{
+        .cluster_id = "ClusterId",
         .resource_id = "ResourceId",
         .tags = "Tags",
     };

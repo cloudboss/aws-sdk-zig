@@ -3,6 +3,7 @@ const Oauth2Discovery = @import("oauth_2_discovery.zig").Oauth2Discovery;
 const OnBehalfOfTokenExchangeConfigType = @import("on_behalf_of_token_exchange_config_type.zig").OnBehalfOfTokenExchangeConfigType;
 const PrivateEndpoint = @import("private_endpoint.zig").PrivateEndpoint;
 const PrivateEndpointOverride = @import("private_endpoint_override.zig").PrivateEndpointOverride;
+const PrivateKeyJwtConfig = @import("private_key_jwt_config.zig").PrivateKeyJwtConfig;
 
 /// Output configuration for a custom OAuth2 provider.
 pub const CustomOauth2ProviderConfigOutput = struct {
@@ -26,6 +27,10 @@ pub const CustomOauth2ProviderConfigOutput = struct {
     /// The private endpoint overrides for the custom OAuth2 provider configuration.
     private_endpoint_overrides: ?[]const PrivateEndpointOverride = null,
 
+    /// The configuration for private_key_jwt client authentication used by this
+    /// OAuth2 credential provider.
+    private_key_jwt_config: ?PrivateKeyJwtConfig = null,
+
     pub const json_field_names = .{
         .client_authentication_method = "clientAuthenticationMethod",
         .client_id = "clientId",
@@ -33,5 +38,6 @@ pub const CustomOauth2ProviderConfigOutput = struct {
         .on_behalf_of_token_exchange_config = "onBehalfOfTokenExchangeConfig",
         .private_endpoint = "privateEndpoint",
         .private_endpoint_overrides = "privateEndpointOverrides",
+        .private_key_jwt_config = "privateKeyJwtConfig",
     };
 };

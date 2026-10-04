@@ -8,7 +8,7 @@ const ResourceTagsSearchCriteria = @import("resource_tags_search_criteria.zig").
 const TagSet = @import("tag_set.zig").TagSet;
 
 pub const SearchResourceTagsInput = struct {
-    /// The identifier of the Amazon Connect instance. You can find the instanceId
+    /// The identifier of the Connect Customer instance. You can find the instanceId
     /// in the Amazon Resource Name (ARN)
     /// of the instance.
     instance_id: []const u8,
@@ -47,6 +47,8 @@ pub const SearchResourceTagsInput = struct {
     /// * flow- module
     ///
     /// * transfer-destination (also known as quick connect)
+    ///
+    /// * metric
     resource_types: ?[]const []const u8 = null,
 
     /// The search criteria to be used to return tags.
@@ -66,7 +68,7 @@ pub const SearchResourceTagsOutput = struct {
     /// results.
     next_token: ?[]const u8 = null,
 
-    /// A list of tags used in the Amazon Connect instance.
+    /// A list of tags used in the Connect Customer instance.
     tags: ?[]const TagSet = null,
 
     pub const json_field_names = .{
@@ -155,10 +157,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchResourceTagsInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchResourceTagsOutput {
-    var result: SearchResourceTagsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchResourceTagsOutput, body, allocator);
-    }
+    const result: SearchResourceTagsOutput = try aws.json.parseJsonObject(
+        SearchResourceTagsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

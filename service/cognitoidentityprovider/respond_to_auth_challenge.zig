@@ -353,6 +353,15 @@ pub const RespondToAuthChallengeOutput = struct {
     /// tokens (JWTs) that indicate successful sign-in.
     authentication_result: ?AuthenticationResultType = null,
 
+    /// This response parameter lists the available authentication challenges that
+    /// users can
+    /// select from in [choice-based
+    /// authentication](https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flows-selection-sdk.html#authentication-flows-selection-choice). For example, they might be
+    /// able to choose between passkey authentication, a one-time password from an
+    /// SMS message,
+    /// and a traditional password.
+    available_challenges: ?[]const ChallengeNameType = null,
+
     /// The name of the next challenge that you must respond to.
     ///
     /// Possible challenges include the following:
@@ -462,6 +471,7 @@ pub const RespondToAuthChallengeOutput = struct {
 
     pub const json_field_names = .{
         .authentication_result = "AuthenticationResult",
+        .available_challenges = "AvailableChallenges",
         .challenge_name = "ChallengeName",
         .challenge_parameters = "ChallengeParameters",
         .session = "Session",

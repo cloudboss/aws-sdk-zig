@@ -6,6 +6,10 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const StartColumnStatisticsTaskRunScheduleInput = struct {
+    /// The ID of the Data Catalog where the table resides. If none is supplied, the
+    /// Amazon Web Services account ID is used by default.
+    catalog_id: ?[]const u8 = null,
+
     /// The name of the database where the table resides.
     database_name: []const u8,
 
@@ -14,6 +18,7 @@ pub const StartColumnStatisticsTaskRunScheduleInput = struct {
     table_name: []const u8,
 
     pub const json_field_names = .{
+        .catalog_id = "CatalogID",
         .database_name = "DatabaseName",
         .table_name = "TableName",
     };

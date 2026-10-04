@@ -85,10 +85,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteDataTableAttribut
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteDataTableAttributeOutput {
-    var result: DeleteDataTableAttributeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteDataTableAttributeOutput, body, allocator);
-    }
+    const result: DeleteDataTableAttributeOutput = try aws.json.parseJsonObject(
+        DeleteDataTableAttributeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

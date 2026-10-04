@@ -121,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMatchingWorkflowInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMatchingWorkflowOutput {
-    var result: GetMatchingWorkflowOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMatchingWorkflowOutput, body, allocator);
-    }
+    const result: GetMatchingWorkflowOutput = try aws.json.parseJsonObject(
+        GetMatchingWorkflowOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

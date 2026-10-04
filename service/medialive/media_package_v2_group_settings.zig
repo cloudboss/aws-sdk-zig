@@ -7,6 +7,7 @@ const Scte35Type = @import("scte_35_type.zig").Scte35Type;
 const CmafIngestSegmentLengthUnits = @import("cmaf_ingest_segment_length_units.zig").CmafIngestSegmentLengthUnits;
 const CmafTimedMetadataId3Frame = @import("cmaf_timed_metadata_id_3_frame.zig").CmafTimedMetadataId3Frame;
 const CmafTimedMetadataPassthrough = @import("cmaf_timed_metadata_passthrough.zig").CmafTimedMetadataPassthrough;
+const MediaPackageV2WatermarkingSettings = @import("media_package_v2_watermarking_settings.zig").MediaPackageV2WatermarkingSettings;
 
 /// Media Package V2 Group Settings
 pub const MediaPackageV2GroupSettings = struct {
@@ -31,7 +32,17 @@ pub const MediaPackageV2GroupSettings = struct {
     /// the output.
     nielsen_id_3_behavior: ?CmafNielsenId3Behavior = null,
 
-    /// Type of scte35 track to add. none or scte35WithoutSegmentation
+    /// SCTE-35 insertion type. Option "none" indicates that a SCTE-35 marker will
+    /// not be inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor
+    /// will the segment be segmented. Option "scte35WithoutIdr" indicates that a
+    /// SCTE-35 marker will be inserted to indicate the cue point, but MediaLive
+    /// will not insert an IDR on that frame nor will it introduce a new segment
+    /// boundary there if it wasn't already going to be one (this option is required
+    /// for use with downstream multiview bitstream stitching workflows). Option
+    /// "scte35WithoutSegmentation" indicates that a SCTE-35 marker will be inserted
+    /// to indicate the cue point, and an IDR will be inserted on that frame so that
+    /// a downstream re-packager might split the segment there, but MediaLive itself
+    /// will not introduce a new segment boundary there.
     scte_35_type: ?Scte35Type = null,
 
     /// The nominal duration of segments. The units are specified in
@@ -54,6 +65,9 @@ pub const MediaPackageV2GroupSettings = struct {
     /// Set to enabled to pass through ID3 metadata from the input sources.
     timed_metadata_passthrough: ?CmafTimedMetadataPassthrough = null,
 
+    /// Specifies the type of watermarking technology to use.
+    watermarking_settings: ?MediaPackageV2WatermarkingSettings = null,
+
     pub const json_field_names = .{
         .additional_destinations = "AdditionalDestinations",
         .caption_language_mappings = "CaptionLanguageMappings",
@@ -66,5 +80,6 @@ pub const MediaPackageV2GroupSettings = struct {
         .timed_metadata_id_3_frame = "TimedMetadataId3Frame",
         .timed_metadata_id_3_period = "TimedMetadataId3Period",
         .timed_metadata_passthrough = "TimedMetadataPassthrough",
+        .watermarking_settings = "WatermarkingSettings",
     };
 };

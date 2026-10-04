@@ -211,10 +211,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateGlobalResolverInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateGlobalResolverOutput {
-    var result: CreateGlobalResolverOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateGlobalResolverOutput, body, allocator);
-    }
+    const result: CreateGlobalResolverOutput = try aws.json.parseJsonObject(
+        CreateGlobalResolverOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -53,8 +53,8 @@ pub const GetBatchOutput = struct {
     /// setup), `PENDING` (ready to submit runs), `SUBMITTING` (submitting runs),
     /// `INPROGRESS` (runs executing), `STOPPING` (cancellation in progress),
     /// `PROCESSED` (all runs completed), `CANCELLED` (batch cancelled), `FAILED`
-    /// (batch failed), `RUNS_DELETING` (deleting runs), `RUNS_DELETED` (runs
-    /// deleted).
+    /// (batch failed), `RUNS_DELETING` (deleting runs), `RUNS_DELETE_FAILED` (run
+    /// deletion failed for some or all runs), `RUNS_DELETED` (runs deleted).
     status: ?BatchStatus = null,
 
     /// A summary of run submission outcomes. See `SubmissionSummary`.
@@ -63,7 +63,7 @@ pub const GetBatchOutput = struct {
     /// The timestamp when all run submissions completed.
     submitted_time: ?i64 = null,
 
-    /// AWS tags associated with the run batch.
+    /// Amazon Web Services tags associated with the run batch.
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The total number of runs in the batch.
@@ -140,10 +140,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBatchInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBatchOutput {
-    var result: GetBatchOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBatchOutput, body, allocator);
-    }
+    const result: GetBatchOutput = try aws.json.parseJsonObject(
+        GetBatchOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

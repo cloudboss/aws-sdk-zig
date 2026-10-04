@@ -174,10 +174,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListChannelMessagesInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListChannelMessagesOutput {
-    var result: ListChannelMessagesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListChannelMessagesOutput, body, allocator);
-    }
+    const result: ListChannelMessagesOutput = try aws.json.parseJsonObject(
+        ListChannelMessagesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

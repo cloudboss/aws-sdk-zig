@@ -17,8 +17,8 @@ pub const CreateMatchingWorkflowInput = struct {
     /// contains only the `incrementalRunType` field, which appears as "Automatic"
     /// in the console.
     ///
-    /// For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
-    /// incremental processing is not supported.
+    /// For workflows where `resolutionType` is `PROVIDER`, incremental processing
+    /// is not supported.
     incremental_run_config: ?IncrementalRunConfig = null,
 
     /// A list of `InputSource` objects, which have the fields `InputSourceARN` and
@@ -187,10 +187,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMatchingWorkflowI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateMatchingWorkflowOutput {
-    var result: CreateMatchingWorkflowOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateMatchingWorkflowOutput, body, allocator);
-    }
+    const result: CreateMatchingWorkflowOutput = try aws.json.parseJsonObject(
+        CreateMatchingWorkflowOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

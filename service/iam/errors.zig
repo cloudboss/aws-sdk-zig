@@ -28,6 +28,7 @@ pub const ServiceError = struct {
         limit_exceeded_exception: LimitExceededException,
         malformed_certificate_exception: MalformedCertificateException,
         malformed_policy_document_exception: MalformedPolicyDocumentException,
+        name_conflict_exception: NameConflictException,
         no_such_entity_exception: NoSuchEntityException,
         open_id_idp_communication_error_exception: OpenIdIdpCommunicationErrorException,
         organization_not_found_exception: OrganizationNotFoundException,
@@ -36,6 +37,8 @@ pub const ServiceError = struct {
         policy_evaluation_exception: PolicyEvaluationException,
         policy_not_attachable_exception: PolicyNotAttachableException,
         report_generation_limit_exceeded_exception: ReportGenerationLimitExceededException,
+        role_modified_exception: RoleModifiedException,
+        role_template_disabled_exception: RoleTemplateDisabledException,
         service_access_not_enabled_exception: ServiceAccessNotEnabledException,
         service_failure_exception: ServiceFailureException,
         service_not_supported_exception: ServiceNotSupportedException,
@@ -67,6 +70,7 @@ pub const ServiceError = struct {
                 .limit_exceeded_exception => "LimitExceededException",
                 .malformed_certificate_exception => "MalformedCertificateException",
                 .malformed_policy_document_exception => "MalformedPolicyDocumentException",
+                .name_conflict_exception => "NameConflictException",
                 .no_such_entity_exception => "NoSuchEntityException",
                 .open_id_idp_communication_error_exception => "OpenIdIdpCommunicationErrorException",
                 .organization_not_found_exception => "OrganizationNotFoundException",
@@ -75,6 +79,8 @@ pub const ServiceError = struct {
                 .policy_evaluation_exception => "PolicyEvaluationException",
                 .policy_not_attachable_exception => "PolicyNotAttachableException",
                 .report_generation_limit_exceeded_exception => "ReportGenerationLimitExceededException",
+                .role_modified_exception => "RoleModifiedException",
+                .role_template_disabled_exception => "RoleTemplateDisabledException",
                 .service_access_not_enabled_exception => "ServiceAccessNotEnabledException",
                 .service_failure_exception => "ServiceFailureException",
                 .service_not_supported_exception => "ServiceNotSupportedException",
@@ -108,6 +114,7 @@ pub const ServiceError = struct {
                 .limit_exceeded_exception => |e| e.message,
                 .malformed_certificate_exception => |e| e.message,
                 .malformed_policy_document_exception => |e| e.message,
+                .name_conflict_exception => |e| e.message,
                 .no_such_entity_exception => |e| e.message,
                 .open_id_idp_communication_error_exception => |e| e.message,
                 .organization_not_found_exception => |e| e.message,
@@ -116,6 +123,8 @@ pub const ServiceError = struct {
                 .policy_evaluation_exception => |e| e.message,
                 .policy_not_attachable_exception => |e| e.message,
                 .report_generation_limit_exceeded_exception => |e| e.message,
+                .role_modified_exception => |e| e.message,
+                .role_template_disabled_exception => |e| e.message,
                 .service_access_not_enabled_exception => |e| e.message,
                 .service_failure_exception => |e| e.message,
                 .service_not_supported_exception => |e| e.message,
@@ -149,6 +158,7 @@ pub const ServiceError = struct {
                 .limit_exceeded_exception => 409,
                 .malformed_certificate_exception => 400,
                 .malformed_policy_document_exception => 400,
+                .name_conflict_exception => 409,
                 .no_such_entity_exception => 404,
                 .open_id_idp_communication_error_exception => 400,
                 .organization_not_found_exception => 400,
@@ -157,6 +167,8 @@ pub const ServiceError = struct {
                 .policy_evaluation_exception => 500,
                 .policy_not_attachable_exception => 400,
                 .report_generation_limit_exceeded_exception => 409,
+                .role_modified_exception => 409,
+                .role_template_disabled_exception => 400,
                 .service_access_not_enabled_exception => 400,
                 .service_failure_exception => 500,
                 .service_not_supported_exception => 404,
@@ -190,6 +202,7 @@ pub const ServiceError = struct {
                 .limit_exceeded_exception => |e| e.request_id,
                 .malformed_certificate_exception => |e| e.request_id,
                 .malformed_policy_document_exception => |e| e.request_id,
+                .name_conflict_exception => |e| e.request_id,
                 .no_such_entity_exception => |e| e.request_id,
                 .open_id_idp_communication_error_exception => |e| e.request_id,
                 .organization_not_found_exception => |e| e.request_id,
@@ -198,6 +211,8 @@ pub const ServiceError = struct {
                 .policy_evaluation_exception => |e| e.request_id,
                 .policy_not_attachable_exception => |e| e.request_id,
                 .report_generation_limit_exceeded_exception => |e| e.request_id,
+                .role_modified_exception => |e| e.request_id,
+                .role_template_disabled_exception => |e| e.request_id,
                 .service_access_not_enabled_exception => |e| e.request_id,
                 .service_failure_exception => |e| e.request_id,
                 .service_not_supported_exception => |e| e.request_id,
@@ -339,6 +354,11 @@ pub const MalformedPolicyDocumentException = struct {
     request_id: []const u8 = "",
 };
 
+pub const NameConflictException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
 pub const NoSuchEntityException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
@@ -375,6 +395,16 @@ pub const PolicyNotAttachableException = struct {
 };
 
 pub const ReportGenerationLimitExceededException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const RoleModifiedException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const RoleTemplateDisabledException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -554,6 +584,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             .request_id = owned_request_id,
         } } };
     }
+    if (std.mem.eql(u8, error_code, "NameConflictException")) {
+        return .{ .arena = arena, .kind = .{ .name_conflict_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
     if (std.mem.eql(u8, error_code, "NoSuchEntityException")) {
         return .{ .arena = arena, .kind = .{ .no_such_entity_exception = .{
             .message = owned_message,
@@ -598,6 +634,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     }
     if (std.mem.eql(u8, error_code, "ReportGenerationLimitExceededException")) {
         return .{ .arena = arena, .kind = .{ .report_generation_limit_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "RoleModifiedException")) {
+        return .{ .arena = arena, .kind = .{ .role_modified_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "RoleTemplateDisabledException")) {
+        return .{ .arena = arena, .kind = .{ .role_template_disabled_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

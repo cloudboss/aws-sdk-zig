@@ -1,7 +1,7 @@
 const NotebookRunStatus = @import("notebook_run_status.zig").NotebookRunStatus;
 const TriggerSource = @import("trigger_source.zig").TriggerSource;
 
-/// The summary of a notebook run in Amazon DataZone.
+/// The summary of a notebook run in Amazon SageMaker Unified Studio.
 pub const NotebookRunSummary = struct {
     /// The timestamp of when the notebook run completed.
     completed_at: ?i64 = null,
@@ -12,7 +12,7 @@ pub const NotebookRunSummary = struct {
     /// The identifier of the user who created the notebook run.
     created_by: ?[]const u8 = null,
 
-    /// The identifier of the Amazon DataZone domain.
+    /// The identifier of the Amazon SageMaker Unified Studio domain.
     domain_id: []const u8,
 
     /// The identifier of the notebook run.

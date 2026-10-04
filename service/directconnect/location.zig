@@ -1,5 +1,11 @@
+const AvailableBillingMode = @import("available_billing_mode.zig").AvailableBillingMode;
+
 /// Information about an Direct Connect location.
 pub const Location = struct {
+    /// The billing modes available at the location, including the port speeds and
+    /// Amazon Web Services Regions supported by each mode.
+    available_billing_modes: ?[]const AvailableBillingMode = null,
+
     /// The available MAC Security (MACsec) port speeds for the location.
     available_mac_sec_port_speeds: ?[]const []const u8 = null,
 
@@ -20,6 +26,7 @@ pub const Location = struct {
     region: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .available_billing_modes = "availableBillingModes",
         .available_mac_sec_port_speeds = "availableMacSecPortSpeeds",
         .available_port_speeds = "availablePortSpeeds",
         .available_providers = "availableProviders",

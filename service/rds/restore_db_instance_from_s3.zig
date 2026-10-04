@@ -157,7 +157,7 @@ pub const RestoreDBInstanceFromS3Input = struct {
     /// Valid Values: `mysql`
     engine: []const u8,
 
-    /// The life cycle type for this DB instance.
+    /// The lifecycle type for this DB instance.
     ///
     /// By default, this value is set to `open-source-rds-extended-support`, which
     /// enrolls your DB instance into Amazon RDS Extended Support. At the end of
@@ -173,8 +173,8 @@ pub const RestoreDBInstanceFromS3Input = struct {
     /// RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html) in the *Amazon RDS User Guide*.
     ///
     /// This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
-    /// Amazon Aurora DB instances, the life cycle type is managed by the DB
-    /// cluster.
+    /// Amazon Aurora DB instances, the engine lifecycle support is managed by the
+    /// DB cluster.
     ///
     /// Valid Values: `open-source-rds-extended-support |
     /// open-source-rds-extended-support-disabled`

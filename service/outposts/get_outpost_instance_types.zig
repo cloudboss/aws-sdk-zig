@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetOutpostInstanceTypes
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetOutpostInstanceTypesOutput {
-    var result: GetOutpostInstanceTypesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetOutpostInstanceTypesOutput, body, allocator);
-    }
+    const result: GetOutpostInstanceTypesOutput = try aws.json.parseJsonObject(
+        GetOutpostInstanceTypesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -171,10 +171,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListEnvironmentProfiles
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListEnvironmentProfilesOutput {
-    var result: ListEnvironmentProfilesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListEnvironmentProfilesOutput, body, allocator);
-    }
+    const result: ListEnvironmentProfilesOutput = try aws.json.parseJsonObject(
+        ListEnvironmentProfilesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

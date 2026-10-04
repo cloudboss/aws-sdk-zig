@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTableBucketMaintenan
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTableBucketMaintenanceConfigurationOutput {
-    var result: GetTableBucketMaintenanceConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTableBucketMaintenanceConfigurationOutput, body, allocator);
-    }
+    const result: GetTableBucketMaintenanceConfigurationOutput = try aws.json.parseJsonObject(
+        GetTableBucketMaintenanceConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

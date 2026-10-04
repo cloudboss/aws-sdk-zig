@@ -139,10 +139,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeFolderPermissio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeFolderPermissionsOutput {
-    var result: DescribeFolderPermissionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeFolderPermissionsOutput, body, allocator);
-    }
+    var result: DescribeFolderPermissionsOutput = try aws.json.parseJsonObject(
+        DescribeFolderPermissionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

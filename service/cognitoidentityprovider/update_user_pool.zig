@@ -5,11 +5,14 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AccountRecoverySettingType = @import("account_recovery_setting_type.zig").AccountRecoverySettingType;
+const AcrLevelConfigType = @import("acr_level_config_type.zig").AcrLevelConfigType;
 const AdminCreateUserConfigType = @import("admin_create_user_config_type.zig").AdminCreateUserConfigType;
 const VerifiedAttributeType = @import("verified_attribute_type.zig").VerifiedAttributeType;
 const DeletionProtectionType = @import("deletion_protection_type.zig").DeletionProtectionType;
 const DeviceConfigurationType = @import("device_configuration_type.zig").DeviceConfigurationType;
 const EmailConfigurationType = @import("email_configuration_type.zig").EmailConfigurationType;
+const IssuerConfigurationType = @import("issuer_configuration_type.zig").IssuerConfigurationType;
+const KeyConfigurationType = @import("key_configuration_type.zig").KeyConfigurationType;
 const LambdaConfigType = @import("lambda_config_type.zig").LambdaConfigType;
 const UserPoolMfaType = @import("user_pool_mfa_type.zig").UserPoolMfaType;
 const UserPoolPolicyType = @import("user_pool_policy_type.zig").UserPoolPolicyType;
@@ -32,6 +35,23 @@ pub const UpdateUserPoolInput = struct {
     /// behavior to determine the recovery method where SMS is preferred through
     /// email.
     account_recovery_setting: ?AccountRecoverySettingType = null,
+
+    /// The custom names for the authentication context class reference
+    /// (ACR) levels in your user pool. This configuration has the same behavior as
+    /// it does when
+    /// you create a user pool: you customize only the URI name that Amazon Cognito
+    /// reports for
+    /// each of the four fixed ACR levels, and any level that you don't specify
+    /// keeps its default
+    /// name. Each name must be unique across all four levels, including default
+    /// names.
+    ///
+    /// Configuring custom ACR level names requires the Essentials or Plus feature
+    /// plan.
+    /// To activate this setting, your user pool must be in the [
+    /// Essentials
+    /// tier](https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html) or higher.
+    acr_configuration: ?[]const aws.map.MapEntry(AcrLevelConfigType) = null,
 
     /// The configuration for administrative creation of users. Includes the
     /// template for the
@@ -90,6 +110,16 @@ pub const UpdateUserPoolInput = struct {
 
     /// This parameter is no longer used.
     email_verification_subject: ?[]const u8 = null,
+
+    /// The issuer configuration for the user pool. In secondary regions, this
+    /// parameter must
+    /// match the existing configuration and cannot be modified.
+    issuer_configuration: ?IssuerConfigurationType = null,
+
+    /// The key configuration for the user pool. In secondary regions, this
+    /// parameter must
+    /// match the existing configuration and cannot be modified.
+    key_configuration: ?KeyConfigurationType = null,
 
     /// A collection of user pool Lambda triggers. Amazon Cognito invokes triggers
     /// at several possible
@@ -192,6 +222,7 @@ pub const UpdateUserPoolInput = struct {
 
     pub const json_field_names = .{
         .account_recovery_setting = "AccountRecoverySetting",
+        .acr_configuration = "AcrConfiguration",
         .admin_create_user_config = "AdminCreateUserConfig",
         .auto_verified_attributes = "AutoVerifiedAttributes",
         .deletion_protection = "DeletionProtection",
@@ -199,6 +230,8 @@ pub const UpdateUserPoolInput = struct {
         .email_configuration = "EmailConfiguration",
         .email_verification_message = "EmailVerificationMessage",
         .email_verification_subject = "EmailVerificationSubject",
+        .issuer_configuration = "IssuerConfiguration",
+        .key_configuration = "KeyConfiguration",
         .lambda_config = "LambdaConfig",
         .mfa_configuration = "MfaConfiguration",
         .policies = "Policies",

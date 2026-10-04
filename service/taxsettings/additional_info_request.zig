@@ -1,6 +1,9 @@
+const BelgiumAdditionalInfo = @import("belgium_additional_info.zig").BelgiumAdditionalInfo;
 const CanadaAdditionalInfo = @import("canada_additional_info.zig").CanadaAdditionalInfo;
+const ChileAdditionalInfo = @import("chile_additional_info.zig").ChileAdditionalInfo;
 const EgyptAdditionalInfo = @import("egypt_additional_info.zig").EgyptAdditionalInfo;
 const EstoniaAdditionalInfo = @import("estonia_additional_info.zig").EstoniaAdditionalInfo;
+const FranceAdditionalInfo = @import("france_additional_info.zig").FranceAdditionalInfo;
 const GeorgiaAdditionalInfo = @import("georgia_additional_info.zig").GeorgiaAdditionalInfo;
 const GreeceAdditionalInfo = @import("greece_additional_info.zig").GreeceAdditionalInfo;
 const IndonesiaAdditionalInfo = @import("indonesia_additional_info.zig").IndonesiaAdditionalInfo;
@@ -8,6 +11,8 @@ const IsraelAdditionalInfo = @import("israel_additional_info.zig").IsraelAdditio
 const ItalyAdditionalInfo = @import("italy_additional_info.zig").ItalyAdditionalInfo;
 const KenyaAdditionalInfo = @import("kenya_additional_info.zig").KenyaAdditionalInfo;
 const MalaysiaAdditionalInfo = @import("malaysia_additional_info.zig").MalaysiaAdditionalInfo;
+const MonacoAdditionalInfo = @import("monaco_additional_info.zig").MonacoAdditionalInfo;
+const PhilippinesAdditionalInfo = @import("philippines_additional_info.zig").PhilippinesAdditionalInfo;
 const PolandAdditionalInfo = @import("poland_additional_info.zig").PolandAdditionalInfo;
 const RomaniaAdditionalInfo = @import("romania_additional_info.zig").RomaniaAdditionalInfo;
 const SaudiArabiaAdditionalInfo = @import("saudi_arabia_additional_info.zig").SaudiArabiaAdditionalInfo;
@@ -19,28 +24,33 @@ const UzbekistanAdditionalInfo = @import("uzbekistan_additional_info.zig").Uzbek
 const VietnamAdditionalInfo = @import("vietnam_additional_info.zig").VietnamAdditionalInfo;
 
 /// Additional tax information associated with your tax registration number
-/// (TRN). Depending
-/// on the TRN for a specific country, you might need to specify this
-/// information when you set
-/// your TRN.
+/// (TRN). Depending on the TRN for a specific country, you might need to
+/// specify this information when you set your TRN.
 ///
 /// You can only specify one of the following parameters and the value can't be
 /// empty.
 ///
 /// The parameter that you specify must match the country for the TRN, if
-/// available. For
-/// example, if you set a TRN in Canada for specific provinces, you must also
-/// specify the
-/// `canadaAdditionalInfo` parameter.
+/// available. For example, if you set a TRN in Canada for specific provinces,
+/// you must also specify the `canadaAdditionalInfo` parameter.
 pub const AdditionalInfoRequest = struct {
+    /// Additional tax information to specify for a TRN in Belgium.
+    belgium_additional_info: ?BelgiumAdditionalInfo = null,
+
     /// Additional tax information associated with your TRN in Canada.
     canada_additional_info: ?CanadaAdditionalInfo = null,
+
+    /// Additional tax information to specify for a TRN in Chile.
+    chile_additional_info: ?ChileAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Egypt.
     egypt_additional_info: ?EgyptAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Estonia.
     estonia_additional_info: ?EstoniaAdditionalInfo = null,
+
+    /// Additional tax information to specify for a TRN in France.
+    france_additional_info: ?FranceAdditionalInfo = null,
 
     /// Additional tax information to specify for a TRN in Georgia.
     georgia_additional_info: ?GeorgiaAdditionalInfo = null,
@@ -61,6 +71,12 @@ pub const AdditionalInfoRequest = struct {
 
     /// Additional tax information to specify for a TRN in Malaysia.
     malaysia_additional_info: ?MalaysiaAdditionalInfo = null,
+
+    /// Additional tax information to specify for a TRN in Monaco.
+    monaco_additional_info: ?MonacoAdditionalInfo = null,
+
+    /// Additional tax information to specify for a TRN in the Philippines.
+    philippines_additional_info: ?PhilippinesAdditionalInfo = null,
 
     /// Additional tax information associated with your TRN in Poland.
     poland_additional_info: ?PolandAdditionalInfo = null,
@@ -90,9 +106,12 @@ pub const AdditionalInfoRequest = struct {
     vietnam_additional_info: ?VietnamAdditionalInfo = null,
 
     pub const json_field_names = .{
+        .belgium_additional_info = "belgiumAdditionalInfo",
         .canada_additional_info = "canadaAdditionalInfo",
+        .chile_additional_info = "chileAdditionalInfo",
         .egypt_additional_info = "egyptAdditionalInfo",
         .estonia_additional_info = "estoniaAdditionalInfo",
+        .france_additional_info = "franceAdditionalInfo",
         .georgia_additional_info = "georgiaAdditionalInfo",
         .greece_additional_info = "greeceAdditionalInfo",
         .indonesia_additional_info = "indonesiaAdditionalInfo",
@@ -100,6 +119,8 @@ pub const AdditionalInfoRequest = struct {
         .italy_additional_info = "italyAdditionalInfo",
         .kenya_additional_info = "kenyaAdditionalInfo",
         .malaysia_additional_info = "malaysiaAdditionalInfo",
+        .monaco_additional_info = "monacoAdditionalInfo",
+        .philippines_additional_info = "philippinesAdditionalInfo",
         .poland_additional_info = "polandAdditionalInfo",
         .romania_additional_info = "romaniaAdditionalInfo",
         .saudi_arabia_additional_info = "saudiArabiaAdditionalInfo",

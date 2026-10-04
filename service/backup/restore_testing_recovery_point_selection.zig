@@ -63,7 +63,11 @@ pub const RestoreTestingRecoveryPointSelection = struct {
     /// for `Algorithm`.
     recovery_point_types: ?[]const RestoreTestingRecoveryPointType = null,
 
-    /// Accepted values are integers from 1 to 365.
+    /// Accepted values are integers from 1 to 365. If not included, the value
+    /// defaults to 30.
+    /// The selection window is calculated from the actual job execution time, not
+    /// the plan's
+    /// scheduled start time.
     selection_window_days: i32 = 0,
 
     pub const json_field_names = .{

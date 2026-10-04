@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateNodeInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateNodeOutput {
-    var result: CreateNodeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateNodeOutput, body, allocator);
-    }
+    const result: CreateNodeOutput = try aws.json.parseJsonObject(
+        CreateNodeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

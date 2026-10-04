@@ -7,6 +7,8 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const CapacityProviderScalingConfig = @import("capacity_provider_scaling_config.zig").CapacityProviderScalingConfig;
 const InstanceRequirements = @import("instance_requirements.zig").InstanceRequirements;
 const CapacityProviderPermissionsConfig = @import("capacity_provider_permissions_config.zig").CapacityProviderPermissionsConfig;
+const PropagateTags = @import("propagate_tags.zig").PropagateTags;
+const CapacityProviderTelemetryConfig = @import("capacity_provider_telemetry_config.zig").CapacityProviderTelemetryConfig;
 const CapacityProviderVpcConfig = @import("capacity_provider_vpc_config.zig").CapacityProviderVpcConfig;
 const CapacityProvider = @import("capacity_provider.zig").CapacityProvider;
 
@@ -30,8 +32,16 @@ pub const CreateCapacityProviderInput = struct {
     /// capacity provider to manage compute resources.
     permissions_config: CapacityProviderPermissionsConfig,
 
+    /// The tag propagation configuration for the capacity provider. Specifies tags
+    /// to apply to managed resources at launch.
+    propagate_tags: ?PropagateTags = null,
+
     /// A list of tags to associate with the capacity provider.
     tags: ?[]const aws.map.StringMapEntry = null,
+
+    /// The telemetry configuration for the capacity provider. Specifies logging
+    /// settings for managed resources.
+    telemetry_config: ?CapacityProviderTelemetryConfig = null,
 
     /// The VPC configuration for the capacity provider, including subnet IDs and
     /// security group IDs where compute instances will be launched.
@@ -43,7 +53,9 @@ pub const CreateCapacityProviderInput = struct {
         .instance_requirements = "InstanceRequirements",
         .kms_key_arn = "KmsKeyArn",
         .permissions_config = "PermissionsConfig",
+        .propagate_tags = "PropagateTags",
         .tags = "Tags",
+        .telemetry_config = "TelemetryConfig",
         .vpc_config = "VpcConfig",
     };
 };
@@ -119,9 +131,21 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityProviderI
     try body_buf.appendSlice(allocator, "\"PermissionsConfig\":");
     try aws.json.writeValue(@TypeOf(input.permissions_config), input.permissions_config, allocator, &body_buf);
     has_prev = true;
+    if (input.propagate_tags) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"PropagateTags\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.telemetry_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"TelemetryConfig\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -145,10 +169,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapacityProviderI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCapacityProviderOutput {
-    var result: CreateCapacityProviderOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCapacityProviderOutput, body, allocator);
-    }
+    const result: CreateCapacityProviderOutput = try aws.json.parseJsonObject(
+        CreateCapacityProviderOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

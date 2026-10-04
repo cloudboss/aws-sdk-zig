@@ -214,10 +214,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSlackChannelConfi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateSlackChannelConfigurationOutput {
-    var result: UpdateSlackChannelConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateSlackChannelConfigurationOutput, body, allocator);
-    }
+    const result: UpdateSlackChannelConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateSlackChannelConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

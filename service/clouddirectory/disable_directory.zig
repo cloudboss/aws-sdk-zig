@@ -70,10 +70,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisableDirectoryInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DisableDirectoryOutput {
-    var result: DisableDirectoryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DisableDirectoryOutput, body, allocator);
-    }
+    const result: DisableDirectoryOutput = try aws.json.parseJsonObject(
+        DisableDirectoryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

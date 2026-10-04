@@ -141,8 +141,8 @@ pub const ResourceNotFoundException = struct {
     };
 };
 
-/// TPS has been limited to protect against intentional or unintentional
-/// high request volumes.
+/// TPS has been limited to protect against intentional or unintentional high
+/// request volumes.
 pub const ThrottlingException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",

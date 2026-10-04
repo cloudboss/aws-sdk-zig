@@ -37,6 +37,14 @@ pub const FirewallPolicy = struct {
     ///
     /// * aws:alert_established
     ///
+    /// * aws:drop_established_app_layer
+    ///
+    /// * aws:alert_established_app_layer
+    ///
+    /// * aws:drop_established_app_layer_to_server
+    ///
+    /// * aws:alert_established_app_layer_to_server
+    ///
     /// For more information, see
     /// [Strict evaluation
     /// order](https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html#suricata-strict-rule-evaluation-order.html) in the *Network Firewall Developer Guide*.

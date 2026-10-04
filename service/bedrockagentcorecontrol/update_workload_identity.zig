@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateWorkloadIdentityI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateWorkloadIdentityOutput {
-    var result: UpdateWorkloadIdentityOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateWorkloadIdentityOutput, body, allocator);
-    }
+    const result: UpdateWorkloadIdentityOutput = try aws.json.parseJsonObject(
+        UpdateWorkloadIdentityOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

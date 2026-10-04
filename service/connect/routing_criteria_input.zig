@@ -2,7 +2,7 @@ const RoutingCriteriaInputStep = @import("routing_criteria_input_step.zig").Rout
 
 /// An object to define the RoutingCriteria.
 pub const RoutingCriteriaInput = struct {
-    /// When Amazon Connect does not find an available agent meeting the
+    /// When Connect Customer does not find an available agent meeting the
     /// requirements in a step for a given step
     /// duration, the routing criteria will move on to the next step sequentially
     /// until a join is completed with an agent.

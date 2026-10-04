@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutSupplementalTaxRegis
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutSupplementalTaxRegistrationOutput {
-    var result: PutSupplementalTaxRegistrationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutSupplementalTaxRegistrationOutput, body, allocator);
-    }
+    const result: PutSupplementalTaxRegistrationOutput = try aws.json.parseJsonObject(
+        PutSupplementalTaxRegistrationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

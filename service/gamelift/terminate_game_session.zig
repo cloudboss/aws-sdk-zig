@@ -9,8 +9,9 @@ const GameSession = @import("game_session.zig").GameSession;
 
 pub const TerminateGameSessionInput = struct {
     /// An identifier for the game session that is unique across all regions to be
-    /// terminated. The value is always a full ARN in the following format:
-    /// `arn:aws:gamelift:::gamesession//`.
+    /// terminated. The value is always a full ARN in the following format: For Home
+    /// Region game session - `arn:aws:gamelift:::gamesession//`. For Remote
+    /// Location game session - `arn:aws:gamelift:::gamesession///`.
     game_session_id: []const u8,
 
     /// The method to use to terminate the game session. Available methods include:

@@ -422,6 +422,14 @@ pub const Client = struct {
     /// delete it without
     /// changing your key policies or IAM policies.
     ///
+    /// You can create a grant for an Amazon Web Services principal (IAM user, IAM
+    /// role, or Amazon Web Services account) by
+    /// specifying the `GranteePrincipal` parameter. You can also create a grant for
+    /// an
+    /// Amazon Web Services service principal by specifying the
+    /// `GranteeServicePrincipal`
+    /// parameter.
+    ///
     /// For detailed information about grants, including grant terminology, see
     /// [Grants in
     /// KMS](https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) in
@@ -2674,8 +2682,8 @@ pub const Client = struct {
     /// Gets a list of all grants for the specified KMS key.
     ///
     /// You must specify the KMS key in all requests. You can filter the grant list
-    /// by grant ID or
-    /// grantee principal.
+    /// by grant ID,
+    /// grantee principal, or grantee service principal.
     ///
     /// For detailed information about grants, including grant terminology, see
     /// [Grants in
@@ -2688,14 +2696,21 @@ pub const Client = struct {
     /// or
     /// CLI](https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_CreateGrant_section.html).
     ///
-    /// The `GranteePrincipal` field in the `ListGrants` response usually contains
-    /// the
-    /// user or role designated as the grantee principal in the grant. However, when
-    /// the grantee
-    /// principal in the grant is an Amazon Web Services service, the
-    /// `GranteePrincipal` field contains
-    /// the [service
-    /// principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services), which might represent several different grantee principals.
+    /// When a grant is created with the `GranteePrincipal` field, the `ListGrants`
+    /// response usually contains the user or role designated as the grantee
+    /// principal in the grant. However, if the grantee principal
+    /// is an Amazon Web Services service, the `GranteePrincipal` field contains an
+    /// Amazon Web Services [service
+    /// principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services), which
+    /// might correspond to several different grantee principals, such as an IAM
+    /// user, IAM role, or Amazon Web Services account.
+    ///
+    /// When a grant is created with the `GranteeServicePrincipal` field, the
+    /// `ListGrants`
+    /// response always includes a `GranteeServicePrincipal` that indicates the
+    /// grantee is actually
+    /// an Amazon Web Services [service
+    /// principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services).
     ///
     /// **Cross-account use**: Yes. To perform this operation on a KMS key in a
     /// different Amazon Web Services account, specify the key
@@ -2849,7 +2864,7 @@ pub const Client = struct {
 
     /// Returns information about all grants in the Amazon Web Services account and
     /// Region that have the
-    /// specified retiring principal.
+    /// specified retiring principal or retiring service principal.
     ///
     /// You can specify any principal in your Amazon Web Services account. The
     /// grants that are returned include
@@ -2884,13 +2899,17 @@ pub const Client = struct {
     /// [kms:ListRetirableGrants](https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html) (IAM policy) in your
     /// Amazon Web Services account.
     ///
-    /// KMS authorizes `ListRetirableGrants` requests by evaluating the caller
+    /// When listing retirable grants by `RetiringPrincipal`, KMS authorizes
+    /// `ListRetirableGrants` requests by evaluating the caller
     /// account's kms:ListRetirableGrants permissions. The authorized resource in
     /// `ListRetirableGrants` calls is the retiring principal specified in the
     /// request.
     /// KMS does not evaluate the caller's permissions to verify their access to any
     /// KMS keys or
     /// grants that might be returned by the `ListRetirableGrants` call.
+    ///
+    /// The `RetiringServicePrincipal` filter is only usable by callers in a
+    /// service principal.
     ///
     /// **Related operations:**
     ///
@@ -3009,6 +3028,11 @@ pub const Client = struct {
     /// details, see [Key states of KMS
     /// keys](https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
     /// in the *Key Management Service Developer Guide*.
+    ///
+    /// When using grants with `SourceArn` constraints for
+    /// `ReEncrypt` operations, the grants on both the source KMS key (for
+    /// `ReEncryptFrom`) and the destination KMS key (for `ReEncryptTo`)
+    /// must specify the same `SourceArn` value.
     ///
     /// **Cross-account use**: Yes. The source KMS key and
     /// destination KMS key can be in different Amazon Web Services accounts. Either

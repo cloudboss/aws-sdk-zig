@@ -17,7 +17,7 @@ pub const CreateContactFlowModuleInput = struct {
 
     /// The JSON string that represents the content of the flow. For an example, see
     /// [Example
-    /// flow in Amazon Connect Flow
+    /// flow in Connect Customer Flow
     /// language](https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html).
     content: []const u8,
 
@@ -27,7 +27,7 @@ pub const CreateContactFlowModuleInput = struct {
     /// The external invocation configuration for the flow module.
     external_invocation_configuration: ?ExternalInvocationConfiguration = null,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -159,10 +159,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateContactFlowModule
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateContactFlowModuleOutput {
-    var result: CreateContactFlowModuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateContactFlowModuleOutput, body, allocator);
-    }
+    const result: CreateContactFlowModuleOutput = try aws.json.parseJsonObject(
+        CreateContactFlowModuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

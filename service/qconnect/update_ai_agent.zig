@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAIAgentInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateAIAgentOutput {
-    var result: UpdateAIAgentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateAIAgentOutput, body, allocator);
-    }
+    const result: UpdateAIAgentOutput = try aws.json.parseJsonObject(
+        UpdateAIAgentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

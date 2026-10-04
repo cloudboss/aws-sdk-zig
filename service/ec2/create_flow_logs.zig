@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DestinationOptionsRequest = @import("destination_options_request.zig").DestinationOptionsRequest;
 const LogDestinationType = @import("log_destination_type.zig").LogDestinationType;
 const FlowLogsResourceType = @import("flow_logs_resource_type.zig").FlowLogsResourceType;
+const TagFieldSpecificationRequest = @import("tag_field_specification_request.zig").TagFieldSpecificationRequest;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TrafficType = @import("traffic_type.zig").TrafficType;
 const UnsuccessfulItem = @import("unsuccessful_item.zig").UnsuccessfulItem;
@@ -106,12 +107,16 @@ pub const CreateFlowLogsInput = struct {
     /// `VPC`, specify the IDs of the VPCs.
     ///
     /// Constraints: Maximum of 25 for transit gateway resource types. Maximum of
-    /// 1000 for the
+    /// 300 for the
     /// other resource types.
     resource_ids: []const []const u8,
 
     /// The type of resource to monitor.
     resource_type: FlowLogsResourceType,
+
+    /// The tag configuration associated with the Flow Logs Amazon EC2 Tags feature
+    /// fields in your custom log format.
+    tag_field_specifications: ?[]const TagFieldSpecificationRequest = null,
 
     /// The tags to apply to the flow logs.
     tag_specifications: ?[]const TagSpecification = null,
@@ -229,6 +234,30 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFlowLogsInput, co
     }
     try body_buf.appendSlice(allocator, "&ResourceType=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.resource_type.wireName());
+    if (input.tag_field_specifications) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.resource_type) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagFieldSpecification.{d}.ResourceType=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
+                }
+            }
+            if (item.tag_keys) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagFieldSpecification.{d}.TagKey.{d}=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
+                    }
+                }
+            }
+        }
+    }
     if (input.tag_specifications) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;

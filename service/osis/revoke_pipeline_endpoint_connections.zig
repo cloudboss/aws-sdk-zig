@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RevokePipelineEndpointC
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RevokePipelineEndpointConnectionsOutput {
-    var result: RevokePipelineEndpointConnectionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RevokePipelineEndpointConnectionsOutput, body, allocator);
-    }
+    const result: RevokePipelineEndpointConnectionsOutput = try aws.json.parseJsonObject(
+        RevokePipelineEndpointConnectionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

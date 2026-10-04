@@ -6,62 +6,9 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SessionConfigurationOverrides = @import("session_configuration_overrides.zig").SessionConfigurationOverrides;
 
-pub const StartSessionInput = struct {
-    /// The ID of the application on which to start the session.
-    application_id: []const u8,
+pub const StartSessionInput = @import("start_session_request.zig").StartSessionRequest;
 
-    /// A unique, case-sensitive identifier that you provide to ensure the
-    /// idempotency of the request. If you retry a request that completed
-    /// successfully using the same client token, the server returns the successful
-    /// response without performing the operation again.
-    client_token: []const u8,
-
-    /// The configuration overrides for the session. Only runtime configuration
-    /// overrides are supported.
-    configuration_overrides: ?SessionConfigurationOverrides = null,
-
-    /// The execution role ARN for the session. Amazon EMR Serverless uses this role
-    /// to access Amazon Web Services resources on your behalf during session
-    /// execution.
-    execution_role_arn: []const u8,
-
-    /// The idle timeout in minutes for the session. After the session remains idle
-    /// for this duration, Amazon EMR Serverless automatically terminates it.
-    idle_timeout_minutes: ?i64 = null,
-
-    /// The optional name for the session.
-    name: ?[]const u8 = null,
-
-    /// The tags to assign to the session.
-    tags: ?[]const aws.map.StringMapEntry = null,
-
-    pub const json_field_names = .{
-        .application_id = "applicationId",
-        .client_token = "clientToken",
-        .configuration_overrides = "configurationOverrides",
-        .execution_role_arn = "executionRoleArn",
-        .idle_timeout_minutes = "idleTimeoutMinutes",
-        .name = "name",
-        .tags = "tags",
-    };
-};
-
-pub const StartSessionOutput = struct {
-    /// The output contains the application ID on which the session was started.
-    application_id: []const u8,
-
-    /// The output contains the ARN of the session.
-    arn: []const u8,
-
-    /// The output contains the ID of the session.
-    session_id: []const u8,
-
-    pub const json_field_names = .{
-        .application_id = "applicationId",
-        .arn = "arn",
-        .session_id = "sessionId",
-    };
-};
+pub const StartSessionOutput = @import("start_session_response.zig").StartSessionResponse;
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartSessionInput, options: CallOptions) !StartSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -151,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartSessionInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartSessionOutput {
-    var result: StartSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartSessionOutput, body, allocator);
-    }
+    const result: StartSessionOutput = try aws.json.parseJsonObject(
+        StartSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -18,7 +18,7 @@ pub const InstanceSummary = struct {
     /// Whether inbound calls are enabled.
     inbound_calls_enabled: ?bool = null,
 
-    /// This URL allows contact center users to access the Amazon Connect admin
+    /// This URL allows contact center users to access the Connect Customer admin
     /// website.
     instance_access_url: ?[]const u8 = null,
 

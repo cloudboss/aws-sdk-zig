@@ -140,10 +140,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFindingsReportAccoun
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetFindingsReportAccountSummaryOutput {
-    var result: GetFindingsReportAccountSummaryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetFindingsReportAccountSummaryOutput, body, allocator);
-    }
+    const result: GetFindingsReportAccountSummaryOutput = try aws.json.parseJsonObject(
+        GetFindingsReportAccountSummaryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -73,6 +73,11 @@ pub const ParameterExceptionField = enum {
     acp_rule_set_response_inspection,
     data_protection_config,
     low_reputation_mode,
+    monetization_config,
+    wallet_address,
+    price_amount,
+    payment_network,
+    pre_parse_text_transformation,
 
     pub const json_field_names = .{
         .web_acl = "WEB_ACL",
@@ -147,6 +152,11 @@ pub const ParameterExceptionField = enum {
         .acp_rule_set_response_inspection = "ACP_RULE_SET_RESPONSE_INSPECTION",
         .data_protection_config = "DATA_PROTECTION_CONFIG",
         .low_reputation_mode = "LOW_REPUTATION_MODE",
+        .monetization_config = "MONETIZATION_CONFIG",
+        .wallet_address = "WALLET_ADDRESS",
+        .price_amount = "PRICE_AMOUNT",
+        .payment_network = "PAYMENT_NETWORK",
+        .pre_parse_text_transformation = "PRE_PARSE_TEXT_TRANSFORMATION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -223,6 +233,11 @@ pub const ParameterExceptionField = enum {
             .acp_rule_set_response_inspection => "ACP_RULE_SET_RESPONSE_INSPECTION",
             .data_protection_config => "DATA_PROTECTION_CONFIG",
             .low_reputation_mode => "LOW_REPUTATION_MODE",
+            .monetization_config => "MONETIZATION_CONFIG",
+            .wallet_address => "WALLET_ADDRESS",
+            .price_amount => "PRICE_AMOUNT",
+            .payment_network => "PAYMENT_NETWORK",
+            .pre_parse_text_transformation => "PRE_PARSE_TEXT_TRANSFORMATION",
         };
     }
 

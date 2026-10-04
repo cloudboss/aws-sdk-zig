@@ -16,6 +16,7 @@ pub const ServiceError = struct {
         runtime_client_error: RuntimeClientError,
         service_exception: ServiceException,
         service_quota_exceeded_exception: ServiceQuotaExceededException,
+        subscription_required_exception: SubscriptionRequiredException,
         throttled_exception: ThrottledException,
         throttling_exception: ThrottlingException,
         unauthorized_exception: UnauthorizedException,
@@ -34,6 +35,7 @@ pub const ServiceError = struct {
                 .runtime_client_error => "RuntimeClientError",
                 .service_exception => "ServiceException",
                 .service_quota_exceeded_exception => "ServiceQuotaExceededException",
+                .subscription_required_exception => "SubscriptionRequiredException",
                 .throttled_exception => "ThrottledException",
                 .throttling_exception => "ThrottlingException",
                 .unauthorized_exception => "UnauthorizedException",
@@ -54,6 +56,7 @@ pub const ServiceError = struct {
                 .runtime_client_error => |e| e.message,
                 .service_exception => |e| e.message,
                 .service_quota_exceeded_exception => |e| e.message,
+                .subscription_required_exception => |e| e.message,
                 .throttled_exception => |e| e.message,
                 .throttling_exception => |e| e.message,
                 .unauthorized_exception => |e| e.message,
@@ -74,6 +77,7 @@ pub const ServiceError = struct {
                 .runtime_client_error => 424,
                 .service_exception => 500,
                 .service_quota_exceeded_exception => 402,
+                .subscription_required_exception => 403,
                 .throttled_exception => 429,
                 .throttling_exception => 429,
                 .unauthorized_exception => 401,
@@ -94,6 +98,7 @@ pub const ServiceError = struct {
                 .runtime_client_error => |e| e.request_id,
                 .service_exception => |e| e.request_id,
                 .service_quota_exceeded_exception => |e| e.request_id,
+                .subscription_required_exception => |e| e.request_id,
                 .throttled_exception => |e| e.request_id,
                 .throttling_exception => |e| e.request_id,
                 .unauthorized_exception => |e| e.request_id,
@@ -170,6 +175,11 @@ pub const ServiceException = struct {
 };
 
 pub const ServiceQuotaExceededException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const SubscriptionRequiredException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -273,6 +283,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     }
     if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
         return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "SubscriptionRequiredException")) {
+        return .{ .arena = arena, .kind = .{ .subscription_required_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

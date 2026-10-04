@@ -248,7 +248,7 @@ pub const LimitExceededException = struct {
     };
 };
 
-/// The requested resources was not found. The resource was either not created
+/// The requested resource was not found. The resource was either not created
 /// yet or deleted.
 pub const NotFoundException = struct {
     message: []const u8 = "",

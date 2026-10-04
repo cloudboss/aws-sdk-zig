@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutTraceSegmentsInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutTraceSegmentsOutput {
-    var result: PutTraceSegmentsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutTraceSegmentsOutput, body, allocator);
-    }
+    const result: PutTraceSegmentsOutput = try aws.json.parseJsonObject(
+        PutTraceSegmentsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

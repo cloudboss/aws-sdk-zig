@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const LaunchDisposition = @import("launch_disposition.zig").LaunchDisposition;
 const LaunchIntoInstanceProperties = @import("launch_into_instance_properties.zig").LaunchIntoInstanceProperties;
 const Licensing = @import("licensing.zig").Licensing;
+const RecoveryMode = @import("recovery_mode.zig").RecoveryMode;
 const TargetInstanceTypeRightSizingMethod = @import("target_instance_type_right_sizing_method.zig").TargetInstanceTypeRightSizingMethod;
 
 pub const UpdateLaunchConfigurationInput = struct {
@@ -33,6 +34,9 @@ pub const UpdateLaunchConfigurationInput = struct {
     /// Whether we want to enable post-launch actions for the Source Server.
     post_launch_enabled: ?bool = null,
 
+    /// Recovery mode.
+    recovery_mode: ?RecoveryMode = null,
+
     /// The ID of the Source Server that we want to retrieve a Launch Configuration
     /// for.
     source_server_id: []const u8,
@@ -49,6 +53,7 @@ pub const UpdateLaunchConfigurationInput = struct {
         .licensing = "licensing",
         .name = "name",
         .post_launch_enabled = "postLaunchEnabled",
+        .recovery_mode = "recoveryMode",
         .source_server_id = "sourceServerID",
         .target_instance_type_right_sizing_method = "targetInstanceTypeRightSizingMethod",
     };
@@ -81,6 +86,9 @@ pub const UpdateLaunchConfigurationOutput = struct {
     /// Whether we want to activate post-launch actions for the Source Server.
     post_launch_enabled: ?bool = null,
 
+    /// Recovery mode.
+    recovery_mode: ?RecoveryMode = null,
+
     /// The ID of the Source Server for this launch configuration.
     source_server_id: ?[]const u8 = null,
 
@@ -97,6 +105,7 @@ pub const UpdateLaunchConfigurationOutput = struct {
         .licensing = "licensing",
         .name = "name",
         .post_launch_enabled = "postLaunchEnabled",
+        .recovery_mode = "recoveryMode",
         .source_server_id = "sourceServerID",
         .target_instance_type_right_sizing_method = "targetInstanceTypeRightSizingMethod",
     };
@@ -180,6 +189,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateLaunchConfigurati
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.recovery_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"recoveryMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"sourceServerID\":");
     try aws.json.writeValue(@TypeOf(input.source_server_id), input.source_server_id, allocator, &body_buf);
@@ -206,10 +221,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateLaunchConfigurati
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateLaunchConfigurationOutput {
-    var result: UpdateLaunchConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateLaunchConfigurationOutput, body, allocator);
-    }
+    const result: UpdateLaunchConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateLaunchConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

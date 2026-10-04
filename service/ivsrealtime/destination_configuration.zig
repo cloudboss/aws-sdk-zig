@@ -4,8 +4,7 @@ const S3DestinationConfiguration = @import("s3_destination_configuration.zig").S
 /// Complex data type that defines destination-configuration objects.
 pub const DestinationConfiguration = struct {
     /// An IVS channel to be used for broadcasting, for server-side composition.
-    /// Either a
-    /// `channel` or an `s3` must be specified.
+    /// Either a `channel` or an `s3` must be specified.
     channel: ?ChannelDestinationConfiguration = null,
 
     /// Name that can be specified to help identify the destination.

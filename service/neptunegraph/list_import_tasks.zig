@@ -7,6 +7,11 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ImportTaskSummary = @import("import_task_summary.zig").ImportTaskSummary;
 
 pub const ListImportTasksInput = struct {
+    /// The unique identifier of the Neptune Analytics graph. When provided, the
+    /// service returns only import tasks associated with this graph. If not
+    /// specified, the service returns all import tasks.
+    graph_identifier: ?[]const u8 = null,
+
     /// The total number of records to return in the command's output.
     ///
     /// If the total number of records available is more than the value specified,
@@ -24,6 +29,7 @@ pub const ListImportTasksInput = struct {
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .graph_identifier = "graphIdentifier",
         .max_results = "maxResults",
         .next_token = "nextToken",
     };
@@ -80,6 +86,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListImportTasksInput, c
 
     var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
+    if (input.graph_identifier) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "graphIdentifier=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
     if (input.max_results) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "maxResults=");
@@ -112,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListImportTasksInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListImportTasksOutput {
-    var result: ListImportTasksOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListImportTasksOutput, body, allocator);
-    }
+    const result: ListImportTasksOutput = try aws.json.parseJsonObject(
+        ListImportTasksOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

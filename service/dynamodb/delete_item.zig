@@ -201,6 +201,10 @@ pub const DeleteItemOutput = struct {
     /// more information, see [Provisioned capacity
     /// mode](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html) in the *Amazon DynamoDB Developer
     /// Guide*.
+    ///
+    /// If the table has vector indexes, the response includes a
+    /// `VectorIndexes` field with `VectorWriteRequestBytes` consumed
+    /// for each affected vector index.
     consumed_capacity: ?ConsumedCapacity = null,
 
     /// Information about item collections, if any, that were affected by the

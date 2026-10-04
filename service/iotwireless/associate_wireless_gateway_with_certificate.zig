@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateWirelessGatewa
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateWirelessGatewayWithCertificateOutput {
-    var result: AssociateWirelessGatewayWithCertificateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateWirelessGatewayWithCertificateOutput, body, allocator);
-    }
+    const result: AssociateWirelessGatewayWithCertificateOutput = try aws.json.parseJsonObject(
+        AssociateWirelessGatewayWithCertificateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

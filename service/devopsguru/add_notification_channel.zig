@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AddNotificationChannelI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AddNotificationChannelOutput {
-    var result: AddNotificationChannelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AddNotificationChannelOutput, body, allocator);
-    }
+    const result: AddNotificationChannelOutput = try aws.json.parseJsonObject(
+        AddNotificationChannelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSensitiveDataOccurre
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSensitiveDataOccurrencesOutput {
-    var result: GetSensitiveDataOccurrencesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSensitiveDataOccurrencesOutput, body, allocator);
-    }
+    const result: GetSensitiveDataOccurrencesOutput = try aws.json.parseJsonObject(
+        GetSensitiveDataOccurrencesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

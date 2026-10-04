@@ -175,10 +175,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEnvironmentInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateEnvironmentOutput {
-    var result: CreateEnvironmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateEnvironmentOutput, body, allocator);
-    }
+    const result: CreateEnvironmentOutput = try aws.json.parseJsonObject(
+        CreateEnvironmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

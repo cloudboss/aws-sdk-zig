@@ -3,16 +3,22 @@ const std = @import("std");
 pub const TableAttributes = enum {
     name,
     table_type,
+    default,
+    latest_iceberg_metadata,
 
     pub const json_field_names = .{
         .name = "NAME",
         .table_type = "TABLE_TYPE",
+        .default = "DEFAULT",
+        .latest_iceberg_metadata = "LATEST_ICEBERG_METADATA",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .name => "NAME",
             .table_type => "TABLE_TYPE",
+            .default => "DEFAULT",
+            .latest_iceberg_metadata => "LATEST_ICEBERG_METADATA",
         };
     }
 

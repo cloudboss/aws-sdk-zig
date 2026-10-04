@@ -7,6 +7,10 @@ const PropertyType = @import("property_type.zig").PropertyType;
 pub const AssetModelPropertyDefinition = struct {
     /// The data type of the property definition.
     ///
+    /// The `VIDEO`, `ANNOTATION`, and `JSON` data types aren't supported for asset
+    /// model properties. These types are used only by time series that store data
+    /// for datasets in a workspace.
+    ///
     /// If you specify `STRUCT`, you must also specify `dataTypeSpec` to
     /// identify the type of the structure for this property.
     data_type: PropertyDataType,

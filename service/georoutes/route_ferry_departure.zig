@@ -2,10 +2,10 @@ const RouteFerryPlace = @import("route_ferry_place.zig").RouteFerryPlace;
 
 /// Details corresponding to the departure for the leg.
 pub const RouteFerryDeparture = struct {
-    /// The place details.
+    /// Place details corresponding to the departure.
     place: RouteFerryPlace,
 
-    /// The time.
+    /// The departure time.
     time: ?[]const u8 = null,
 
     pub const json_field_names = .{

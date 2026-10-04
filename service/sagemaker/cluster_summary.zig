@@ -1,4 +1,5 @@
 const ClusterStatus = @import("cluster_status.zig").ClusterStatus;
+const ClusterImageVersionStatus = @import("cluster_image_version_status.zig").ClusterImageVersionStatus;
 
 /// Lists a summary of the properties of a SageMaker HyperPod cluster.
 pub const ClusterSummary = struct {
@@ -14,6 +15,10 @@ pub const ClusterSummary = struct {
     /// The time when the SageMaker HyperPod cluster is created.
     creation_time: i64,
 
+    /// The aggregate status of the image version across the cluster's instance
+    /// groups.
+    image_version_status: ?ClusterImageVersionStatus = null,
+
     /// A list of Amazon Resource Names (ARNs) of the training plans associated with
     /// this cluster.
     ///
@@ -27,6 +32,7 @@ pub const ClusterSummary = struct {
         .cluster_name = "ClusterName",
         .cluster_status = "ClusterStatus",
         .creation_time = "CreationTime",
+        .image_version_status = "ImageVersionStatus",
         .training_plan_arns = "TrainingPlanArns",
     };
 };

@@ -21,6 +21,16 @@ pub const IncrementalExportSpecification = struct {
     /// The view type that was chosen for the export. Valid values are
     /// `NEW_AND_OLD_IMAGES` and `NEW_IMAGES`. The default value is
     /// `NEW_AND_OLD_IMAGES`.
+    ///
+    /// `NEW_AND_OLD_IMAGES` exports both the new and old images of each changed
+    /// item, while `NEW_IMAGES` exports only the new (latest) image. The view type
+    /// you choose determines the structure of each item in the output for
+    /// `insert`, `update`, and `delete` operations. For
+    /// details and examples of how each view type shapes the export output, see
+    /// [DynamoDB table
+    /// export output
+    /// format](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/S3DataExport.Output.html) in the *Amazon DynamoDB Developer
+    /// Guide*.
     export_view_type: ?ExportViewType = null,
 
     pub const json_field_names = .{

@@ -24,6 +24,15 @@ pub const Runtime = enum {
     ruby_3_2,
     dotnet_10,
     nodejs_24_x,
+    nodejs_22_x,
+    java_21,
+    java_25,
+    python_3_12,
+    python_3_13,
+    python_3_14,
+    ruby_3_3,
+    dotnet_8,
+    nodejs_20_x,
 
     pub const json_field_names = .{
         .nodejs = "NODEJS",
@@ -49,6 +58,15 @@ pub const Runtime = enum {
         .ruby_3_2 = "RUBY_3_2",
         .dotnet_10 = "DOTNET_10",
         .nodejs_24_x = "NODEJS_24_X",
+        .nodejs_22_x = "NODEJS_22_X",
+        .java_21 = "JAVA_21",
+        .java_25 = "JAVA_25",
+        .python_3_12 = "PYTHON_3_12",
+        .python_3_13 = "PYTHON_3_13",
+        .python_3_14 = "PYTHON_3_14",
+        .ruby_3_3 = "RUBY_3_3",
+        .dotnet_8 = "DOTNET_8",
+        .nodejs_20_x = "NODEJS_20_X",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -76,6 +94,15 @@ pub const Runtime = enum {
             .ruby_3_2 => "RUBY_3_2",
             .dotnet_10 => "DOTNET_10",
             .nodejs_24_x => "NODEJS_24_X",
+            .nodejs_22_x => "NODEJS_22_X",
+            .java_21 => "JAVA_21",
+            .java_25 => "JAVA_25",
+            .python_3_12 => "PYTHON_3_12",
+            .python_3_13 => "PYTHON_3_13",
+            .python_3_14 => "PYTHON_3_14",
+            .ruby_3_3 => "RUBY_3_3",
+            .dotnet_8 => "DOTNET_8",
+            .nodejs_20_x => "NODEJS_20_X",
         };
     }
 

@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GenerateEmbedUrlForRegi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GenerateEmbedUrlForRegisteredUserWithIdentityOutput {
-    var result: GenerateEmbedUrlForRegisteredUserWithIdentityOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GenerateEmbedUrlForRegisteredUserWithIdentityOutput, body, allocator);
-    }
+    var result: GenerateEmbedUrlForRegisteredUserWithIdentityOutput = try aws.json.parseJsonObject(
+        GenerateEmbedUrlForRegisteredUserWithIdentityOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

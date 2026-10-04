@@ -120,8 +120,9 @@ pub const CloudVmCluster = struct {
     /// expressed as a percentage.
     percent_progress: ?f32 = null,
 
-    /// The FQDN of the DNS record for the Single Client Access Name (SCAN) IP
-    /// addresses that are associated with the VM cluster.
+    /// The fully qualified domain name (FQDN) of the DNS record for the Single
+    /// Client Access Name (SCAN) IP addresses that are associated with the VM
+    /// cluster.
     scan_dns_name: ?[]const u8 = null,
 
     /// The OCID of the DNS record for the SCAN IP addresses that are associated

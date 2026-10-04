@@ -453,6 +453,9 @@ pub const ChannelStoppedWaiter = struct {
                 if (std.mem.eql(u8, diagnostic.code(), "InternalServerErrorException")) {
                     return .retry;
                 }
+                if (std.mem.eql(u8, diagnostic.code(), "NotFoundException")) {
+                    return .failure;
+                }
             }
             return .retry;
         };
@@ -465,6 +468,16 @@ pub const ChannelStoppedWaiter = struct {
         if (output.state) |val_0| {
             if (std.mem.eql(u8, val_0.wireName(), "STOPPING")) {
                 return .retry;
+            }
+        }
+        if (output.state) |val_0| {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETING")) {
+                return .success;
+            }
+        }
+        if (output.state) |val_0| {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETED")) {
+                return .success;
             }
         }
         return .retry;

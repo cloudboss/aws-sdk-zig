@@ -1,8 +1,8 @@
 /// Describes the amount of time that can pass without any traffic sent through
 /// the firewall before the firewall determines that the connection is idle and
 /// Network Firewall removes the flow entry from its flow table.
-/// Existing connections and flows are not impacted when you update this value.
-/// Only new connections after you update this value are impacted.
+/// When you update this value, existing connections will be treated according
+/// to your stream exception policy configuration.
 pub const FlowTimeouts = struct {
     /// The number of seconds that can pass without any TCP traffic sent through the
     /// firewall before the firewall determines that the connection is idle.

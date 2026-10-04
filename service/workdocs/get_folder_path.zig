@@ -122,10 +122,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFolderPathInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetFolderPathOutput {
-    var result: GetFolderPathOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetFolderPathOutput, body, allocator);
-    }
+    const result: GetFolderPathOutput = try aws.json.parseJsonObject(
+        GetFolderPathOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

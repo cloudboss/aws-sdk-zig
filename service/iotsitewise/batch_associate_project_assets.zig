@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchAssociateProjectAs
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchAssociateProjectAssetsOutput {
-    var result: BatchAssociateProjectAssetsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchAssociateProjectAssetsOutput, body, allocator);
-    }
+    const result: BatchAssociateProjectAssetsOutput = try aws.json.parseJsonObject(
+        BatchAssociateProjectAssetsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

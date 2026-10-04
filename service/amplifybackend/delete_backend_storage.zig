@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteBackendStorageInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteBackendStorageOutput {
-    var result: DeleteBackendStorageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteBackendStorageOutput, body, allocator);
-    }
+    const result: DeleteBackendStorageOutput = try aws.json.parseJsonObject(
+        DeleteBackendStorageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

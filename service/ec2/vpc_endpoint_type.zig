@@ -6,6 +6,7 @@ pub const VpcEndpointType = enum {
     gateway_load_balancer,
     resource,
     service_network,
+    tunnel,
 
     pub const json_field_names = .{
         .interface = "Interface",
@@ -13,6 +14,7 @@ pub const VpcEndpointType = enum {
         .gateway_load_balancer = "GatewayLoadBalancer",
         .resource = "Resource",
         .service_network = "ServiceNetwork",
+        .tunnel = "Tunnel",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +24,7 @@ pub const VpcEndpointType = enum {
             .gateway_load_balancer => "GatewayLoadBalancer",
             .resource => "Resource",
             .service_network => "ServiceNetwork",
+            .tunnel => "Tunnel",
         };
     }
 

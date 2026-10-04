@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchAssociateClientDev
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchAssociateClientDeviceWithCoreDeviceOutput {
-    var result: BatchAssociateClientDeviceWithCoreDeviceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchAssociateClientDeviceWithCoreDeviceOutput, body, allocator);
-    }
+    const result: BatchAssociateClientDeviceWithCoreDeviceOutput = try aws.json.parseJsonObject(
+        BatchAssociateClientDeviceWithCoreDeviceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

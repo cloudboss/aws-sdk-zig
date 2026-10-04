@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetConfigurationPolicyI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetConfigurationPolicyOutput {
-    var result: GetConfigurationPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetConfigurationPolicyOutput, body, allocator);
-    }
+    const result: GetConfigurationPolicyOutput = try aws.json.parseJsonObject(
+        GetConfigurationPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

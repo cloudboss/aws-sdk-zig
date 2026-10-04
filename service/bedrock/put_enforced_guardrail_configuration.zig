@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutEnforcedGuardrailCon
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutEnforcedGuardrailConfigurationOutput {
-    var result: PutEnforcedGuardrailConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutEnforcedGuardrailConfigurationOutput, body, allocator);
-    }
+    const result: PutEnforcedGuardrailConfigurationOutput = try aws.json.parseJsonObject(
+        PutEnforcedGuardrailConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CommitTransactionInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CommitTransactionOutput {
-    var result: CommitTransactionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CommitTransactionOutput, body, allocator);
-    }
+    const result: CommitTransactionOutput = try aws.json.parseJsonObject(
+        CommitTransactionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

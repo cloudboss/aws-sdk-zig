@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTelemetryRulesForOr
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTelemetryRulesForOrganizationOutput {
-    var result: ListTelemetryRulesForOrganizationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListTelemetryRulesForOrganizationOutput, body, allocator);
-    }
+    const result: ListTelemetryRulesForOrganizationOutput = try aws.json.parseJsonObject(
+        ListTelemetryRulesForOrganizationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

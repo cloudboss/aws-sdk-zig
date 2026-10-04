@@ -7,6 +7,8 @@ pub const EcrRescanDuration = enum {
     days_14,
     days_60,
     days_90,
+    days_3,
+    days_7,
 
     pub const json_field_names = .{
         .lifetime = "LIFETIME",
@@ -15,6 +17,8 @@ pub const EcrRescanDuration = enum {
         .days_14 = "DAYS_14",
         .days_60 = "DAYS_60",
         .days_90 = "DAYS_90",
+        .days_3 = "DAYS_3",
+        .days_7 = "DAYS_7",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +29,8 @@ pub const EcrRescanDuration = enum {
             .days_14 => "DAYS_14",
             .days_60 => "DAYS_60",
             .days_90 => "DAYS_90",
+            .days_3 => "DAYS_3",
+            .days_7 => "DAYS_7",
         };
     }
 

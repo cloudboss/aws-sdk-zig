@@ -17,7 +17,7 @@ pub const UpdateIdentityProviderSettingsInput = struct {
     /// The name of the user-based subscription product.
     ///
     /// Valid values: `VISUAL_STUDIO_ENTERPRISE` | `VISUAL_STUDIO_PROFESSIONAL` |
-    /// `OFFICE_PROFESSIONAL_PLUS` | `REMOTE_DESKTOP_SERVICES`
+    /// `OFFICE_PROFESSIONAL_PLUS` | `OFFICE_STANDARD` | `REMOTE_DESKTOP_SERVICES`
     product: ?[]const u8 = null,
 
     /// Updates the registered identity provider’s product related configuration
@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateIdentityProviderS
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateIdentityProviderSettingsOutput {
-    var result: UpdateIdentityProviderSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateIdentityProviderSettingsOutput, body, allocator);
-    }
+    const result: UpdateIdentityProviderSettingsOutput = try aws.json.parseJsonObject(
+        UpdateIdentityProviderSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

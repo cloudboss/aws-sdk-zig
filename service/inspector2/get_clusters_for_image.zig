@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetClustersForImageInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetClustersForImageOutput {
-    var result: GetClustersForImageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetClustersForImageOutput, body, allocator);
-    }
+    const result: GetClustersForImageOutput = try aws.json.parseJsonObject(
+        GetClustersForImageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -131,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeAccountCustomiz
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeAccountCustomizationOutput {
-    var result: DescribeAccountCustomizationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeAccountCustomizationOutput, body, allocator);
-    }
+    var result: DescribeAccountCustomizationOutput = try aws.json.parseJsonObject(
+        DescribeAccountCustomizationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

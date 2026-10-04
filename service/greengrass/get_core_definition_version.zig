@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCoreDefinitionVersio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCoreDefinitionVersionOutput {
-    var result: GetCoreDefinitionVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCoreDefinitionVersionOutput, body, allocator);
-    }
+    const result: GetCoreDefinitionVersionOutput = try aws.json.parseJsonObject(
+        GetCoreDefinitionVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

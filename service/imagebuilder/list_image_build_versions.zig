@@ -21,14 +21,19 @@ pub const ListImageBuildVersionsInput = struct {
     /// * `version`
     filters: ?[]const Filter = null,
 
-    /// The Amazon Resource Name (ARN) of the image whose build versions you want to
-    /// retrieve.
+    /// The Amazon Resource Name (ARN) of the image version whose build versions you
+    /// want to retrieve.
+    /// The ARN must specify an exact version
+    /// (`..`) - wildcards aren't allowed.
+    /// This parameter is optional. If you don't specify it, Image Builder returns
+    /// build
+    /// versions for all of the images in your account.
     image_version_arn: ?[]const u8 = null,
 
-    /// Specify the maximum number of items to return in a request.
+    /// The maximum number of items to return in a single request.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
@@ -136,10 +141,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListImageBuildVersionsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListImageBuildVersionsOutput {
-    var result: ListImageBuildVersionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListImageBuildVersionsOutput, body, allocator);
-    }
+    const result: ListImageBuildVersionsOutput = try aws.json.parseJsonObject(
+        ListImageBuildVersionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

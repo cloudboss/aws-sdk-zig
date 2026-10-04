@@ -16,7 +16,29 @@ pub const GetTransitGatewayPolicyTableEntriesInput = struct {
     /// Otherwise, it is `UnauthorizedOperation`.
     dry_run: ?bool = null,
 
-    /// The filters associated with the transit gateway policy table.
+    /// One or more filters. The possible values are:
+    ///
+    /// * `policy-rule-number` - The rule number for the transit gateway policy
+    ///   table entry.
+    ///
+    /// * `target-route-table-id` - The ID of the target route table.
+    ///
+    /// * `policy-rule.source-ip` - The source CIDR block for the policy rule.
+    ///
+    /// * `policy-rule.destination-ip` - The destination CIDR block for the policy
+    ///   rule.
+    ///
+    /// * `policy-rule.source-port` - The source port or port range for the policy
+    ///   rule.
+    ///
+    /// * `policy-rule.destination-port` - The destination port or port range for
+    ///   the policy rule.
+    ///
+    /// * `policy-rule.protocol` - The protocol for the policy rule.
+    ///
+    /// * `policy-rule.meta-data.key` - The metadata key for the policy rule.
+    ///
+    /// * `policy-rule.meta-data.value` - The metadata value for the policy rule.
     filters: ?[]const Filter = null,
 
     /// The maximum number of results to return with a single call.
@@ -32,6 +54,10 @@ pub const GetTransitGatewayPolicyTableEntriesInput = struct {
 };
 
 pub const GetTransitGatewayPolicyTableEntriesOutput = struct {
+    /// The token to use to retrieve the next page of results. This value is `null`
+    /// when there are no more results to return.
+    next_token: ?[]const u8 = null,
+
     /// The entries for the transit gateway policy table.
     transit_gateway_policy_table_entries: ?[]const TransitGatewayPolicyTableEntry = null,
 };
@@ -137,7 +163,9 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
-                if (std.mem.eql(u8, e.local, "transitGatewayPolicyTableEntries")) {
+                if (std.mem.eql(u8, e.local, "nextToken")) {
+                    result.next_token = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "transitGatewayPolicyTableEntries")) {
                     result.transit_gateway_policy_table_entries = try serde.deserializeTransitGatewayPolicyTableEntryList(allocator, &reader, "item");
                 } else {
                     try reader.skipElement();

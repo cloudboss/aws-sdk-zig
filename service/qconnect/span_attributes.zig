@@ -1,6 +1,9 @@
 const AIAgentType = @import("ai_agent_type.zig").AIAgentType;
+const SpanGuardrailAssessment = @import("span_guardrail_assessment.zig").SpanGuardrailAssessment;
 const SpanMessage = @import("span_message.zig").SpanMessage;
+const InteractionMode = @import("interaction_mode.zig").InteractionMode;
 const AIPromptType = @import("ai_prompt_type.zig").AIPromptType;
+const ReturnReason = @import("return_reason.zig").ReturnReason;
 const SpanMessageValue = @import("span_message_value.zig").SpanMessageValue;
 
 /// Contextual attributes capturing operation details, LLM configuration, usage
@@ -42,6 +45,10 @@ pub const SpanAttributes = struct {
     /// Error classification if span failed (e.g., throttle, timeout)
     error_type: ?[]const u8 = null,
 
+    /// Guardrail assessments for the inference span. Absent on other span types and
+    /// when no AI Guardrail is attached to the AI Agent.
+    guardrail_assessments: ?[]const SpanGuardrailAssessment = null,
+
     /// Amazon Connect contact identifier
     initial_contact_id: ?[]const u8 = null,
 
@@ -50,6 +57,10 @@ pub const SpanAttributes = struct {
 
     /// Amazon Connect instance ARN
     instance_arn: ?[]const u8 = null,
+
+    /// How the orchestrator engaged the collaborator agent. Present on spans that
+    /// invoke a collaborator agent.
+    interaction_mode: ?InteractionMode = null,
 
     /// Action being performed
     operation_name: ?[]const u8 = null,
@@ -87,11 +98,20 @@ pub const SpanAttributes = struct {
     /// Actual model used for response (usually matches requestModel)
     response_model: ?[]const u8 = null,
 
+    /// Reason a sub-agent returned control to the calling agent. Present on
+    /// return_to_agent spans.
+    return_reason: ?ReturnReason = null,
+
     /// Session name
     session_name: ?[]const u8 = null,
 
     /// System prompt instructions
     system_instructions: ?[]const SpanMessageValue = null,
+
+    /// Identifier of the collaborator agent being invoked. For first-party
+    /// collaborators this is the Amazon Connect AI agent ID; for third-party
+    /// collaborators this is the external application ID.
+    target_agent_id: ?[]const u8 = null,
 
     /// Sampling temperature for generation
     temperature: ?f32 = null,
@@ -125,9 +145,11 @@ pub const SpanAttributes = struct {
         .cache_write_input_tokens = "cacheWriteInputTokens",
         .contact_id = "contactId",
         .error_type = "errorType",
+        .guardrail_assessments = "guardrailAssessments",
         .initial_contact_id = "initialContactId",
         .input_messages = "inputMessages",
         .instance_arn = "instanceArn",
+        .interaction_mode = "interactionMode",
         .operation_name = "operationName",
         .output_messages = "outputMessages",
         .prompt_arn = "promptArn",
@@ -140,8 +162,10 @@ pub const SpanAttributes = struct {
         .request_model = "requestModel",
         .response_finish_reasons = "responseFinishReasons",
         .response_model = "responseModel",
+        .return_reason = "returnReason",
         .session_name = "sessionName",
         .system_instructions = "systemInstructions",
+        .target_agent_id = "targetAgentId",
         .temperature = "temperature",
         .time_to_first_token_ms = "timeToFirstTokenMs",
         .top_p = "topP",

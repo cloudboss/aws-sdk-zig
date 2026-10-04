@@ -11,7 +11,7 @@ pub const FilterAttribute = struct {
     /// The name that the metadata attribute must match.
     key: []const u8,
 
-    /// The value to whcih to compare the value of the metadata attribute.
+    /// The value to which to compare the value of the metadata attribute.
     value: []const u8,
 
     pub const json_field_names = .{

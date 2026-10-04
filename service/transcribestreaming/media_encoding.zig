@@ -4,11 +4,17 @@ pub const MediaEncoding = enum {
     pcm,
     ogg_opus,
     flac,
+    g711_alaw,
+    g711_ulaw,
+    g729,
 
     pub const json_field_names = .{
         .pcm = "pcm",
         .ogg_opus = "ogg-opus",
         .flac = "flac",
+        .g711_alaw = "g711-alaw",
+        .g711_ulaw = "g711-ulaw",
+        .g729 = "g729",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +22,9 @@ pub const MediaEncoding = enum {
             .pcm => "pcm",
             .ogg_opus => "ogg-opus",
             .flac => "flac",
+            .g711_alaw => "g711-alaw",
+            .g711_ulaw => "g711-ulaw",
+            .g729 => "g729",
         };
     }
 

@@ -9,9 +9,7 @@ pub const ParticipantReplica = struct {
     destination_stage_arn: []const u8,
 
     /// Participant ID of the publisher that will be replicated. This is assigned by
-    /// IVS and returned by
-    /// CreateParticipantToken
-    /// or the `jti` (JWT ID) used to [
+    /// IVS and returned by CreateParticipantToken or the `jti` (JWT ID) used to [
     /// create a self signed
     /// token](https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/getting-started-distribute-tokens.html#getting-started-distribute-tokens-self-signed).
     participant_id: []const u8,

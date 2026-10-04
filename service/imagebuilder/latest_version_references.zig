@@ -1,4 +1,7 @@
-/// The resource ARNs with different wildcard variations of semantic versioning.
+/// A set of wildcard version ARNs that always reference the latest
+/// version of the resource. ARNs are included for the latest version overall,
+/// and for the latest
+/// versions within the same major, minor, and patch levels.
 pub const LatestVersionReferences = struct {
     /// The latest version Amazon Resource Name (ARN) with the same `major` version
     /// of the Image Builder resource.

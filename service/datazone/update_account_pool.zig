@@ -170,10 +170,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAccountPoolInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateAccountPoolOutput {
-    var result: UpdateAccountPoolOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateAccountPoolOutput, body, allocator);
-    }
+    const result: UpdateAccountPoolOutput = try aws.json.parseJsonObject(
+        UpdateAccountPoolOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

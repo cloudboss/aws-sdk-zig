@@ -4,11 +4,13 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DbBackupConfiguration = @import("db_backup_configuration.zig").DbBackupConfiguration;
 const DbInstanceType = @import("db_instance_type.zig").DbInstanceType;
 const DbStorageType = @import("db_storage_type.zig").DbStorageType;
 const DeploymentType = @import("deployment_type.zig").DeploymentType;
 const LogDeliveryConfiguration = @import("log_delivery_configuration.zig").LogDeliveryConfiguration;
 const MaintenanceSchedule = @import("maintenance_schedule.zig").MaintenanceSchedule;
+const DbBackupConfigurationOutput = @import("db_backup_configuration_output.zig").DbBackupConfigurationOutput;
 const InstanceMode = @import("instance_mode.zig").InstanceMode;
 const NetworkType = @import("network_type.zig").NetworkType;
 const Status = @import("status.zig").Status;
@@ -16,6 +18,9 @@ const Status = @import("status.zig").Status;
 pub const UpdateDbInstanceInput = struct {
     /// The amount of storage to allocate for your DB storage type (in gibibytes).
     allocated_storage: ?i32 = null,
+
+    /// A list of backup configurations to update for the DB instance.
+    db_backup_configurations: ?[]const DbBackupConfiguration = null,
 
     /// The Timestream for InfluxDB DB instance type to run InfluxDB on.
     db_instance_type: ?DbInstanceType = null,
@@ -56,6 +61,7 @@ pub const UpdateDbInstanceInput = struct {
 
     pub const json_field_names = .{
         .allocated_storage = "allocatedStorage",
+        .db_backup_configurations = "dbBackupConfigurations",
         .db_instance_type = "dbInstanceType",
         .db_parameter_group_identifier = "dbParameterGroupIdentifier",
         .db_storage_type = "dbStorageType",
@@ -76,6 +82,9 @@ pub const UpdateDbInstanceOutput = struct {
 
     /// The Availability Zone in which the DB instance resides.
     availability_zone: ?[]const u8 = null,
+
+    /// The backup configurations for the DB instance.
+    db_backup_configurations: ?[]const DbBackupConfigurationOutput = null,
 
     /// Specifies the DbCluster to which this DbInstance belongs to.
     db_cluster_id: ?[]const u8 = null,
@@ -110,6 +119,9 @@ pub const UpdateDbInstanceOutput = struct {
 
     /// Specifies the DbInstance's roles in the cluster.
     instance_modes: ?[]const InstanceMode = null,
+
+    /// The Amazon Web Services KMS key ARN used for encryption of the DB instance.
+    kms_key_id: ?[]const u8 = null,
 
     /// The timestamp of the last completed maintenance operation on the DB
     /// instance.
@@ -159,6 +171,7 @@ pub const UpdateDbInstanceOutput = struct {
         .allocated_storage = "allocatedStorage",
         .arn = "arn",
         .availability_zone = "availabilityZone",
+        .db_backup_configurations = "dbBackupConfigurations",
         .db_cluster_id = "dbClusterId",
         .db_instance_type = "dbInstanceType",
         .db_parameter_group_identifier = "dbParameterGroupIdentifier",
@@ -169,6 +182,7 @@ pub const UpdateDbInstanceOutput = struct {
         .influx_auth_parameters_secret_arn = "influxAuthParametersSecretArn",
         .instance_mode = "instanceMode",
         .instance_modes = "instanceModes",
+        .kms_key_id = "kmsKeyId",
         .last_maintenance_time = "lastMaintenanceTime",
         .log_delivery_configuration = "logDeliveryConfiguration",
         .maintenance_schedule = "maintenanceSchedule",

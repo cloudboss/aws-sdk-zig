@@ -132,10 +132,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDataTableMetadata
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateDataTableMetadataOutput {
-    var result: UpdateDataTableMetadataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateDataTableMetadataOutput, body, allocator);
-    }
+    const result: UpdateDataTableMetadataOutput = try aws.json.parseJsonObject(
+        UpdateDataTableMetadataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,5 +1,6 @@
 const AutoEvaluationStatus = @import("auto_evaluation_status.zig").AutoEvaluationStatus;
 const ContactParticipantRole = @import("contact_participant_role.zig").ContactParticipantRole;
+const PerformanceCategoryName = @import("performance_category_name.zig").PerformanceCategoryName;
 
 /// Metadata information about an evaluation search.
 pub const EvaluationSearchMetadata = struct {
@@ -24,7 +25,7 @@ pub const EvaluationSearchMetadata = struct {
     /// The unique ID of the agent who handled the contact.
     contact_agent_id: ?[]const u8 = null,
 
-    /// The identifier of the contact in this instance of Amazon Connect.
+    /// The identifier of the contact in this instance of Connect Customer.
     contact_id: []const u8,
 
     /// Identifier for a contact participant in the evaluation.
@@ -33,8 +34,17 @@ pub const EvaluationSearchMetadata = struct {
     /// Role of a contact participant in the evaluation.
     contact_participant_role: ?ContactParticipantRole = null,
 
+    /// The points earned for the evaluation.
+    earned_points: ?i32 = null,
+
     /// The Amazon Resource Name (ARN) of the person who evaluated the contact.
     evaluator_arn: []const u8,
+
+    /// The maximum base points possible for the evaluation.
+    max_base_point: ?i32 = null,
+
+    /// The performance category for the evaluation score.
+    performance_category: ?PerformanceCategoryName = null,
 
     /// Identifier for the review.
     review_id: ?[]const u8 = null,
@@ -64,7 +74,10 @@ pub const EvaluationSearchMetadata = struct {
         .contact_id = "ContactId",
         .contact_participant_id = "ContactParticipantId",
         .contact_participant_role = "ContactParticipantRole",
+        .earned_points = "EarnedPoints",
         .evaluator_arn = "EvaluatorArn",
+        .max_base_point = "MaxBasePoint",
+        .performance_category = "PerformanceCategory",
         .review_id = "ReviewId",
         .sampling_job_id = "SamplingJobId",
         .score_automatic_fail = "ScoreAutomaticFail",

@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteImageRecipeInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteImageRecipeOutput {
-    var result: DeleteImageRecipeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteImageRecipeOutput, body, allocator);
-    }
+    const result: DeleteImageRecipeOutput = try aws.json.parseJsonObject(
+        DeleteImageRecipeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

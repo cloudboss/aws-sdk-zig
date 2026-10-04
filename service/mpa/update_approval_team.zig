@@ -124,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateApprovalTeamInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateApprovalTeamOutput {
-    var result: UpdateApprovalTeamOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateApprovalTeamOutput, body, allocator);
-    }
+    const result: UpdateApprovalTeamOutput = try aws.json.parseJsonObject(
+        UpdateApprovalTeamOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

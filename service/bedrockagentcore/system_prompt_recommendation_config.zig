@@ -9,7 +9,7 @@ pub const SystemPromptRecommendationConfig = struct {
 
     /// The evaluation configuration specifying which evaluator to use for assessing
     /// recommendation quality.
-    evaluation_config: RecommendationEvaluationConfig,
+    evaluation_config: ?RecommendationEvaluationConfig = null,
 
     /// The current system prompt to optimize.
     system_prompt: SystemPromptConfig,

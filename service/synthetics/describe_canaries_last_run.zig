@@ -142,10 +142,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeCanariesLastRun
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeCanariesLastRunOutput {
-    var result: DescribeCanariesLastRunOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeCanariesLastRunOutput, body, allocator);
-    }
+    const result: DescribeCanariesLastRunOutput = try aws.json.parseJsonObject(
+        DescribeCanariesLastRunOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

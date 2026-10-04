@@ -4,11 +4,13 @@ pub const SpeechModelPreference = enum {
     standard,
     neural,
     deepgram,
+    advanced,
 
     pub const json_field_names = .{
         .standard = "Standard",
         .neural = "Neural",
         .deepgram = "Deepgram",
+        .advanced = "Advanced",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const SpeechModelPreference = enum {
             .standard => "Standard",
             .neural => "Neural",
             .deepgram => "Deepgram",
+            .advanced => "Advanced",
         };
     }
 

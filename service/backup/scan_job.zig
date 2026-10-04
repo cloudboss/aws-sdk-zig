@@ -32,6 +32,12 @@ pub const ScanJob = struct {
     /// AM.
     completion_date: ?i64 = null,
 
+    /// The point in time the scan job scanned up to for a continuous backup.
+    continuous_scan_end_time: ?i64 = null,
+
+    /// The point in time the scan job started scan from for a continuous backup.
+    continuous_scan_start_time: ?i64 = null,
+
     /// Contains identifying information about the creation of a scan job.
     created_by: ScanJobCreator,
 
@@ -111,6 +117,8 @@ pub const ScanJob = struct {
         .backup_vault_arn = "BackupVaultArn",
         .backup_vault_name = "BackupVaultName",
         .completion_date = "CompletionDate",
+        .continuous_scan_end_time = "ContinuousScanEndTime",
+        .continuous_scan_start_time = "ContinuousScanStartTime",
         .created_by = "CreatedBy",
         .creation_date = "CreationDate",
         .iam_role_arn = "IamRoleArn",

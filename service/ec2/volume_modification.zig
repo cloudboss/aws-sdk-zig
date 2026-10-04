@@ -10,6 +10,7 @@ pub const VolumeModification = struct {
     /// The current modification state.
     modification_state: ?VolumeModificationState = null,
 
+    /// The service provider that manages the resource.
     operator: ?OperatorResponse = null,
 
     /// The original IOPS rate of the volume.

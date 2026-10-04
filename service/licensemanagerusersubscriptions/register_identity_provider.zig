@@ -15,7 +15,7 @@ pub const RegisterIdentityProviderInput = struct {
     /// The name of the user-based subscription product.
     ///
     /// Valid values: `VISUAL_STUDIO_ENTERPRISE` | `VISUAL_STUDIO_PROFESSIONAL` |
-    /// `OFFICE_PROFESSIONAL_PLUS` | `REMOTE_DESKTOP_SERVICES`
+    /// `OFFICE_PROFESSIONAL_PLUS` | `OFFICE_STANDARD` | `REMOTE_DESKTOP_SERVICES`
     product: []const u8,
 
     /// The registered identity provider’s product related configuration settings
@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterIdentityProvide
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RegisterIdentityProviderOutput {
-    var result: RegisterIdentityProviderOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RegisterIdentityProviderOutput, body, allocator);
-    }
+    const result: RegisterIdentityProviderOutput = try aws.json.parseJsonObject(
+        RegisterIdentityProviderOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

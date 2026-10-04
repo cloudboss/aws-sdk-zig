@@ -1,6 +1,6 @@
-/// Summary of a payment session for list operations
+/// Summary information about a payment session.
 pub const PaymentSessionSummary = struct {
-    /// The timestamp when this payment session was created.
+    /// The timestamp when the session was created.
     created_at: i64,
 
     /// The session expiry time in minutes.
@@ -9,13 +9,13 @@ pub const PaymentSessionSummary = struct {
     /// The ARN of the payment manager that owns this session.
     payment_manager_arn: []const u8,
 
-    /// The unique identifier for this payment session.
+    /// The unique identifier of the payment session.
     payment_session_id: []const u8,
 
-    /// The timestamp when this payment session was last updated.
+    /// The timestamp when the session was last updated.
     updated_at: i64,
 
-    /// The user ID associated with this payment session.
+    /// The user ID associated with this session.
     user_id: []const u8,
 
     pub const json_field_names = .{

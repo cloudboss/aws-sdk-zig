@@ -1,11 +1,17 @@
+const ApplicationStatusSummary = @import("application_status_summary.zig").ApplicationStatusSummary;
 const EbsStatusSummary = @import("ebs_status_summary.zig").EbsStatusSummary;
 const InstanceStatusEvent = @import("instance_status_event.zig").InstanceStatusEvent;
 const InstanceState = @import("instance_state.zig").InstanceState;
 const InstanceStatusSummary = @import("instance_status_summary.zig").InstanceStatusSummary;
 const OperatorResponse = @import("operator_response.zig").OperatorResponse;
 
-/// Describes the status of an instance.
+/// Describes the status of an instance, including system status, instance
+/// status,
+/// attached EBS status, and application status.
 pub const InstanceStatus = struct {
+    /// Reports the application-level health status for the instance.
+    application_status: ?ApplicationStatusSummary = null,
+
     /// Reports impaired functionality that stems from an attached Amazon EBS volume
     /// that is
     /// unreachable and unable to complete I/O operations.

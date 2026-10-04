@@ -1,4 +1,5 @@
 const IpamPoolAllocationResourceType = @import("ipam_pool_allocation_resource_type.zig").IpamPoolAllocationResourceType;
+const Tag = @import("tag.zig").Tag;
 
 /// In IPAM, an allocation is a CIDR assignment from an IPAM pool to another
 /// IPAM pool or to a resource.
@@ -26,4 +27,7 @@ pub const IpamPoolAllocation = struct {
 
     /// The type of the resource.
     resource_type: ?IpamPoolAllocationResourceType = null,
+
+    /// The tags for the IPAM pool allocation.
+    tags: ?[]const Tag = null,
 };

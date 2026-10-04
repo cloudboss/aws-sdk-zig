@@ -1,5 +1,9 @@
 const std = @import("std");
 
+/// An ADS interaction log event type that MediaTailor emits by default and that
+/// you can suppress. For descriptions of each event type, see [MediaTailor ADS
+/// logs description and event
+/// types](https://docs.aws.amazon.com/mediatailor/latest/ug/ads-log-format.html) in Elemental MediaTailor User Guide.
 pub const AdsInteractionExcludeEventType = enum {
     ad_marker_found,
     non_ad_marker_found,
@@ -44,6 +48,11 @@ pub const AdsInteractionExcludeEventType = enum {
     interstitial_vod_failure,
     pre_ads_request_hook_error,
     pre_ads_request_function_error,
+    beacon_received,
+    post_ads_response_hook_error,
+    post_ads_response_function_error,
+    pre_manifest_insertion_hook_error,
+    pre_manifest_insertion_function_error,
 
     pub const json_field_names = .{
         .ad_marker_found = "AD_MARKER_FOUND",
@@ -89,6 +98,11 @@ pub const AdsInteractionExcludeEventType = enum {
         .interstitial_vod_failure = "INTERSTITIAL_VOD_FAILURE",
         .pre_ads_request_hook_error = "PRE_ADS_REQUEST_HOOK_ERROR",
         .pre_ads_request_function_error = "PRE_ADS_REQUEST_FUNCTION_ERROR",
+        .beacon_received = "BEACON_RECEIVED",
+        .post_ads_response_hook_error = "POST_ADS_RESPONSE_HOOK_ERROR",
+        .post_ads_response_function_error = "POST_ADS_RESPONSE_FUNCTION_ERROR",
+        .pre_manifest_insertion_hook_error = "PRE_MANIFEST_INSERTION_HOOK_ERROR",
+        .pre_manifest_insertion_function_error = "PRE_MANIFEST_INSERTION_FUNCTION_ERROR",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -136,6 +150,11 @@ pub const AdsInteractionExcludeEventType = enum {
             .interstitial_vod_failure => "INTERSTITIAL_VOD_FAILURE",
             .pre_ads_request_hook_error => "PRE_ADS_REQUEST_HOOK_ERROR",
             .pre_ads_request_function_error => "PRE_ADS_REQUEST_FUNCTION_ERROR",
+            .beacon_received => "BEACON_RECEIVED",
+            .post_ads_response_hook_error => "POST_ADS_RESPONSE_HOOK_ERROR",
+            .post_ads_response_function_error => "POST_ADS_RESPONSE_FUNCTION_ERROR",
+            .pre_manifest_insertion_hook_error => "PRE_MANIFEST_INSERTION_HOOK_ERROR",
+            .pre_manifest_insertion_function_error => "PRE_MANIFEST_INSERTION_FUNCTION_ERROR",
         };
     }
 

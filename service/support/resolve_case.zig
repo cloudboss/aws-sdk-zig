@@ -9,11 +9,20 @@ pub const ResolveCaseInput = struct {
     /// The support case ID requested or returned in the call. The case ID is an
     /// alphanumeric
     /// string formatted as shown in this example:
-    /// case-*12345678910-2013-c4c1d2bf33c5cf47*
+    /// case-*12345678910-exen-2025-c4c1d2bf33c5cf47*
     case_id: ?[]const u8 = null,
+
+    /// Specifies whether to validate the request without actually resolving the
+    /// case. When set
+    /// to `true`, the request is validated but the case isn't resolved, and the
+    /// operation
+    /// returns a `DryRunOperationException`. When omitted or set to `false`, the
+    /// request runs normally.
+    dry_run: ?bool = null,
 
     pub const json_field_names = .{
         .case_id = "caseId",
+        .dry_run = "dryRun",
     };
 };
 

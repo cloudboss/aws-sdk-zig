@@ -1,4 +1,5 @@
 const SendingStatus = @import("sending_status.zig").SendingStatus;
+const TenantSuppressionAttributes = @import("tenant_suppression_attributes.zig").TenantSuppressionAttributes;
 const Tag = @import("tag.zig").Tag;
 
 /// A structure that contains details about a tenant.
@@ -8,6 +9,10 @@ pub const Tenant = struct {
 
     /// The status of sending capability for the tenant.
     sending_status: ?SendingStatus = null,
+
+    /// An object that contains information about the suppression list preferences
+    /// for the tenant.
+    suppression_attributes: ?TenantSuppressionAttributes = null,
 
     /// An array of objects that define the tags (keys and values) associated with
     /// the tenant.
@@ -25,6 +30,7 @@ pub const Tenant = struct {
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",
         .sending_status = "SendingStatus",
+        .suppression_attributes = "SuppressionAttributes",
         .tags = "Tags",
         .tenant_arn = "TenantArn",
         .tenant_id = "TenantId",

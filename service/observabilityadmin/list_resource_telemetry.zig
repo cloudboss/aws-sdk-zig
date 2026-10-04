@@ -26,8 +26,16 @@ pub const ListResourceTelemetryInput = struct {
     resource_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// A list of resource types used to filter resources supported by telemetry
-    /// config. If this parameter is provided, the resources will be returned in the
-    /// same order used in the request.
+    /// config. If this parameter is provided, the service returns the resources in
+    /// the same order as specified in the request. Currently supported resource
+    /// types for discovery are:
+    ///
+    /// * `AWS::EC2::Instance`
+    /// * `AWS::EC2::VPC`
+    /// * `AWS::Lambda::Function`
+    /// * `AWS::EKS::Cluster`
+    /// * `AWS::WAFv2::WebACL`
+    /// * `AWS::ElasticLoadBalancingV2::LoadBalancer` (Network Load Balancers only)
     resource_types: ?[]const ResourceType = null,
 
     /// A key-value pair to filter resources based on the telemetry type and the
@@ -148,10 +156,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListResourceTelemetryIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListResourceTelemetryOutput {
-    var result: ListResourceTelemetryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListResourceTelemetryOutput, body, allocator);
-    }
+    const result: ListResourceTelemetryOutput = try aws.json.parseJsonObject(
+        ListResourceTelemetryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

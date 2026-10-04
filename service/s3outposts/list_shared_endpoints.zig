@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSharedEndpointsInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListSharedEndpointsOutput {
-    var result: ListSharedEndpointsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListSharedEndpointsOutput, body, allocator);
-    }
+    const result: ListSharedEndpointsOutput = try aws.json.parseJsonObject(
+        ListSharedEndpointsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

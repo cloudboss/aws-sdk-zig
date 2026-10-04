@@ -6,7 +6,7 @@ pub const PredefinedAttribute = struct {
     /// Custom metadata that is associated to predefined attributes to control
     /// behavior
     /// in upstream services, such as controlling
-    /// how a predefined attribute should be displayed in the Amazon Connect admin
+    /// how a predefined attribute should be displayed in the Connect Customer admin
     /// website.
     attribute_configuration: ?PredefinedAttributeConfiguration = null,
 
@@ -20,7 +20,7 @@ pub const PredefinedAttribute = struct {
     name: ?[]const u8 = null,
 
     /// Values that enable you to categorize your predefined attributes. You can use
-    /// them in custom UI elements across the Amazon Connect admin website.
+    /// them in custom UI elements across the Connect Customer admin website.
     purposes: ?[]const []const u8 = null,
 
     /// The values of the predefined attribute.

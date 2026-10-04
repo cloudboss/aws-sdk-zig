@@ -5,11 +5,13 @@
 ///
 /// VMware VCF requires the deployment of two NSX Edge nodes, and three NSX
 /// Manager virtual machines.
+///
+/// Not supported when `vcfVersion` is `SELF_DEPLOYED`.
 pub const VcfHostnames = struct {
     /// The hostname for VMware Cloud Builder.
     cloud_builder: []const u8,
 
-    /// The VMware NSX hostname.
+    /// The VMware NSX Virtual IP (VIP) hostname.
     nsx: []const u8,
 
     /// The hostname for the first NSX Edge node.

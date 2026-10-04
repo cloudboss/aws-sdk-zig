@@ -1,4 +1,5 @@
 const ApiGatewayTargetConfiguration = @import("api_gateway_target_configuration.zig").ApiGatewayTargetConfiguration;
+const ConnectorTargetConfiguration = @import("connector_target_configuration.zig").ConnectorTargetConfiguration;
 const McpLambdaTargetConfiguration = @import("mcp_lambda_target_configuration.zig").McpLambdaTargetConfiguration;
 const McpServerTargetConfiguration = @import("mcp_server_target_configuration.zig").McpServerTargetConfiguration;
 const ApiSchemaConfiguration = @import("api_schema_configuration.zig").ApiSchemaConfiguration;
@@ -8,6 +9,10 @@ const ApiSchemaConfiguration = @import("api_schema_configuration.zig").ApiSchema
 pub const McpTargetConfiguration = union(enum) {
     /// The configuration for an Amazon API Gateway target.
     api_gateway: ?ApiGatewayTargetConfiguration,
+    /// The connector integration configuration for the Model Context Protocol
+    /// target. This configuration defines how the gateway uses a pre-built
+    /// connector to communicate with the target.
+    connector: ?ConnectorTargetConfiguration,
     /// The Lambda configuration for the Model Context Protocol target. This
     /// configuration defines how the gateway uses a Lambda function to communicate
     /// with the target.
@@ -23,6 +28,7 @@ pub const McpTargetConfiguration = union(enum) {
 
     pub const json_field_names = .{
         .api_gateway = "apiGateway",
+        .connector = "connector",
         .lambda = "lambda",
         .mcp_server = "mcpServer",
         .open_api_schema = "openApiSchema",

@@ -138,10 +138,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateWorkspaceInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateWorkspaceOutput {
-    var result: CreateWorkspaceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateWorkspaceOutput, body, allocator);
-    }
+    const result: CreateWorkspaceOutput = try aws.json.parseJsonObject(
+        CreateWorkspaceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

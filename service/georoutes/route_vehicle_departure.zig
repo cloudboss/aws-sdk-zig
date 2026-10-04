@@ -2,7 +2,7 @@ const RouteVehiclePlace = @import("route_vehicle_place.zig").RouteVehiclePlace;
 
 /// Details corresponding to the departure for the leg.
 pub const RouteVehicleDeparture = struct {
-    /// The place details.
+    /// Place details corresponding to the departure.
     place: RouteVehiclePlace,
 
     /// The departure time.

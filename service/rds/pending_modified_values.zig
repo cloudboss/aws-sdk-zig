@@ -57,7 +57,7 @@ pub const PendingModifiedValues = struct {
     /// The license model for the DB instance.
     ///
     /// Valid values: `license-included` | `bring-your-own-license` |
-    /// `general-public-license`
+    /// `general-public-license` | `bring-your-own-media`
     license_model: ?[]const u8 = null,
 
     /// The master credentials for the DB instance.

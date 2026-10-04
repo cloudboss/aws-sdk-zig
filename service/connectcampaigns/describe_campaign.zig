@@ -71,10 +71,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeCampaignInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeCampaignOutput {
-    var result: DescribeCampaignOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeCampaignOutput, body, allocator);
-    }
+    const result: DescribeCampaignOutput = try aws.json.parseJsonObject(
+        DescribeCampaignOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -48,6 +48,9 @@ pub const OrderableDBInstanceOption = struct {
     /// level.
     storage_type: ?[]const u8 = null,
 
+    /// The network types supported by the orderable DB instance option.
+    supported_network_types: ?[]const []const u8 = null,
+
     /// Indicates whether a DB instance supports Enhanced Monitoring at intervals
     /// from 1 to 60
     /// seconds.

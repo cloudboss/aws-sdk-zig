@@ -30,7 +30,7 @@ pub const GetSegmentSnapshotOutput = struct {
 
     /// The destination to which the segment will be exported. This field must be
     /// provided if
-    /// the request is not submitted from the Amazon Connect Admin Website.
+    /// the request is not submitted from the Connect Customer Admin Website.
     destination_uri: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the KMS key used to encrypt the exported
@@ -116,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSegmentSnapshotInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSegmentSnapshotOutput {
-    var result: GetSegmentSnapshotOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSegmentSnapshotOutput, body, allocator);
-    }
+    const result: GetSegmentSnapshotOutput = try aws.json.parseJsonObject(
+        GetSegmentSnapshotOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

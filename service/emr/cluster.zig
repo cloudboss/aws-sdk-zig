@@ -174,6 +174,9 @@ pub const Cluster = struct {
     /// resources on your behalf.
     service_role: ?[]const u8 = null,
 
+    /// Indicates whether Spark Connect sessions are enabled on the cluster.
+    session_enabled: ?bool = null,
+
     /// The current status details about the cluster.
     status: ?ClusterStatus = null,
 
@@ -238,6 +241,7 @@ pub const Cluster = struct {
         .scale_down_behavior = "ScaleDownBehavior",
         .security_configuration = "SecurityConfiguration",
         .service_role = "ServiceRole",
+        .session_enabled = "SessionEnabled",
         .status = "Status",
         .step_concurrency_level = "StepConcurrencyLevel",
         .tags = "Tags",

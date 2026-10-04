@@ -4,9 +4,9 @@ const InstanceBlockDeviceMapping = @import("instance_block_device_mapping.zig").
 /// instance used
 /// for building and testing container images.
 pub const InstanceConfiguration = struct {
-    /// Defines the block devices to attach for building an instance from this Image
-    /// Builder
-    /// AMI.
+    /// Defines the block device mappings for the EC2 instance that Image Builder
+    /// launches
+    /// to build and test your container image.
     block_device_mappings: ?[]const InstanceBlockDeviceMapping = null,
 
     /// The base image for a container build and test instance. This can contain an

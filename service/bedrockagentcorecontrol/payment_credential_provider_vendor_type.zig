@@ -1,11 +1,11 @@
 const std = @import("std");
 
 /// Supported vendor types for payment providers using non-standard auth
-/// protocols
+/// protocols.
 pub const PaymentCredentialProviderVendorType = enum {
-    /// Coinbase Developer Platform - https://docs.cdp.coinbase.com/
+    /// Coinbase Developer Platform.
     coinbase_cdp,
-    /// Stripe + Privy - https://docs.privy.io/
+    /// Stripe and Privy.
     stripe_privy,
 
     pub const json_field_names = .{

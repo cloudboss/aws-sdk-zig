@@ -1,6 +1,7 @@
 const PackageConfig = @import("package_config.zig").PackageConfig;
 
-/// The environment configuration for a notebook run in Amazon DataZone.
+/// The environment configuration for a notebook run in Amazon SageMaker Unified
+/// Studio.
 pub const EnvironmentConfig = struct {
     /// The image version for the notebook run environment.
     image_version: ?[]const u8 = null,

@@ -104,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateProfileResourceAs
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateProfileResourceAssociationOutput {
-    var result: UpdateProfileResourceAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateProfileResourceAssociationOutput, body, allocator);
-    }
+    const result: UpdateProfileResourceAssociationOutput = try aws.json.parseJsonObject(
+        UpdateProfileResourceAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

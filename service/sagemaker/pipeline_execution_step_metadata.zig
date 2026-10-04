@@ -11,6 +11,7 @@ const EndpointStepMetadata = @import("endpoint_step_metadata.zig").EndpointStepM
 const EndpointConfigStepMetadata = @import("endpoint_config_step_metadata.zig").EndpointConfigStepMetadata;
 const FailStepMetadata = @import("fail_step_metadata.zig").FailStepMetadata;
 const InferenceComponentMetadata = @import("inference_component_metadata.zig").InferenceComponentMetadata;
+const JobStepMetadata = @import("job_step_metadata.zig").JobStepMetadata;
 const LambdaStepMetadata = @import("lambda_step_metadata.zig").LambdaStepMetadata;
 const LineageMetadata = @import("lineage_metadata.zig").LineageMetadata;
 const ModelStepMetadata = @import("model_step_metadata.zig").ModelStepMetadata;
@@ -81,6 +82,9 @@ pub const PipelineExecutionStepMetadata = struct {
     /// The metadata of the inference component used in pipeline execution step.
     inference_component: ?InferenceComponentMetadata = null,
 
+    /// The metadata for a SageMaker job used in a pipeline execution step.
+    job: ?JobStepMetadata = null,
+
     /// The Amazon Resource Name (ARN) of the Lambda function that was run by this
     /// step execution and a list of output parameters.
     lambda: ?LambdaStepMetadata = null,
@@ -142,6 +146,7 @@ pub const PipelineExecutionStepMetadata = struct {
         .endpoint_config = "EndpointConfig",
         .fail = "Fail",
         .inference_component = "InferenceComponent",
+        .job = "Job",
         .lambda = "Lambda",
         .lineage = "Lineage",
         .model = "Model",

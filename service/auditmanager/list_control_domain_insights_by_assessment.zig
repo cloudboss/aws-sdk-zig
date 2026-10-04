@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListControlDomainInsigh
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListControlDomainInsightsByAssessmentOutput {
-    var result: ListControlDomainInsightsByAssessmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListControlDomainInsightsByAssessmentOutput, body, allocator);
-    }
+    const result: ListControlDomainInsightsByAssessmentOutput = try aws.json.parseJsonObject(
+        ListControlDomainInsightsByAssessmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -87,7 +87,10 @@ pub const UpdateDashboardInput = struct {
     /// Use the `DataSetReferences` entity within `SourceTemplate` to
     /// list the replacement datasets for the placeholders listed in the original.
     /// The schema in
-    /// each dataset must match its placeholder.
+    /// each dataset must match its placeholder. Use the `TopicReferences`
+    /// entity to list the replacement topics for the topic placeholders listed in
+    /// the original.
+    /// The schema in each topic must match its placeholder.
     source_entity: ?DashboardSourceEntity = null,
 
     /// The Amazon Resource Name (ARN) of the theme that is being used for this
@@ -253,10 +256,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDashboardInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateDashboardOutput {
-    var result: UpdateDashboardOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateDashboardOutput, body, allocator);
-    }
+    const result: UpdateDashboardOutput = try aws.json.parseJsonObject(
+        UpdateDashboardOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

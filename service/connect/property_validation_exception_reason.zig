@@ -7,6 +7,7 @@ pub const PropertyValidationExceptionReason = enum {
     resource_name_already_exists,
     required_property_missing,
     not_supported,
+    type_mismatch,
 
     pub const json_field_names = .{
         .invalid_format = "INVALID_FORMAT",
@@ -15,6 +16,7 @@ pub const PropertyValidationExceptionReason = enum {
         .resource_name_already_exists = "RESOURCE_NAME_ALREADY_EXISTS",
         .required_property_missing = "REQUIRED_PROPERTY_MISSING",
         .not_supported = "NOT_SUPPORTED",
+        .type_mismatch = "TYPE_MISMATCH",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +27,7 @@ pub const PropertyValidationExceptionReason = enum {
             .resource_name_already_exists => "RESOURCE_NAME_ALREADY_EXISTS",
             .required_property_missing => "REQUIRED_PROPERTY_MISSING",
             .not_supported => "NOT_SUPPORTED",
+            .type_mismatch => "TYPE_MISMATCH",
         };
     }
 

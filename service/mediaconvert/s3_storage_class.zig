@@ -12,6 +12,7 @@ pub const S3StorageClass = enum {
     intelligent_tiering,
     glacier,
     deep_archive,
+    glacier_ir,
 
     pub const json_field_names = .{
         .standard = "STANDARD",
@@ -21,6 +22,7 @@ pub const S3StorageClass = enum {
         .intelligent_tiering = "INTELLIGENT_TIERING",
         .glacier = "GLACIER",
         .deep_archive = "DEEP_ARCHIVE",
+        .glacier_ir = "GLACIER_IR",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -32,6 +34,7 @@ pub const S3StorageClass = enum {
             .intelligent_tiering => "INTELLIGENT_TIERING",
             .glacier => "GLACIER",
             .deep_archive => "DEEP_ARCHIVE",
+            .glacier_ir => "GLACIER_IR",
         };
     }
 

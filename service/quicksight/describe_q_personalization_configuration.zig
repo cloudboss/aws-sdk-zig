@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeQPersonalizatio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeQPersonalizationConfigurationOutput {
-    var result: DescribeQPersonalizationConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeQPersonalizationConfigurationOutput, body, allocator);
-    }
+    var result: DescribeQPersonalizationConfigurationOutput = try aws.json.parseJsonObject(
+        DescribeQPersonalizationConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

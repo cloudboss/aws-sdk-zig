@@ -92,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeletePromptInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeletePromptOutput {
-    var result: DeletePromptOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeletePromptOutput, body, allocator);
-    }
+    const result: DeletePromptOutput = try aws.json.parseJsonObject(
+        DeletePromptOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

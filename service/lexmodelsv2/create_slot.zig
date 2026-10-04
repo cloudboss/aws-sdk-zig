@@ -244,10 +244,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSlotInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateSlotOutput {
-    var result: CreateSlotOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateSlotOutput, body, allocator);
-    }
+    const result: CreateSlotOutput = try aws.json.parseJsonObject(
+        CreateSlotOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

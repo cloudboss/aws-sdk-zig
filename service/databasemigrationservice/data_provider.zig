@@ -20,12 +20,13 @@ pub const DataProvider = struct {
     /// with a letter.
     description: ?[]const u8 = null,
 
-    /// The type of database engine for the data provider. Valid values include
-    /// `"aurora"`,
-    /// `"aurora-postgresql"`, `"mysql"`, `"oracle"`, `"postgres"`,
-    /// `"sqlserver"`, `redshift`, `mariadb`, `mongodb`, `db2`, `db2-zos`, `docdb`,
-    /// and `sybase`. A value of `"aurora"` represents Amazon Aurora
-    /// MySQL-Compatible Edition.
+    /// The type of database engine for the data provider.
+    ///
+    /// Valid values: `aurora`, `aurora-postgresql`, `db2`,
+    /// `db2-zos`, `docdb`, `mariadb`, `mongodb`,
+    /// `mysql`, `oracle`, `postgres`, `redshift`,
+    /// `sqlserver`, and `sybase`. A value of `aurora` represents
+    /// Amazon Aurora MySQL-Compatible Edition.
     engine: ?[]const u8 = null,
 
     /// The settings in JSON format for a data provider.

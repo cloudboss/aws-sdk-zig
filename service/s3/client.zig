@@ -25,6 +25,7 @@ const delete_bucket_replication = @import("delete_bucket_replication.zig");
 const delete_bucket_tagging = @import("delete_bucket_tagging.zig");
 const delete_bucket_website = @import("delete_bucket_website.zig");
 const delete_object = @import("delete_object.zig");
+const delete_object_annotation = @import("delete_object_annotation.zig");
 const delete_object_tagging = @import("delete_object_tagging.zig");
 const delete_objects = @import("delete_objects.zig");
 const delete_public_access_block = @import("delete_public_access_block.zig");
@@ -53,6 +54,7 @@ const get_bucket_versioning = @import("get_bucket_versioning.zig");
 const get_bucket_website = @import("get_bucket_website.zig");
 const get_object = @import("get_object.zig");
 const get_object_acl = @import("get_object_acl.zig");
+const get_object_annotation = @import("get_object_annotation.zig");
 const get_object_attributes = @import("get_object_attributes.zig");
 const get_object_legal_hold = @import("get_object_legal_hold.zig");
 const get_object_lock_configuration = @import("get_object_lock_configuration.zig");
@@ -69,6 +71,7 @@ const list_bucket_metrics_configurations = @import("list_bucket_metrics_configur
 const list_buckets = @import("list_buckets.zig");
 const list_directory_buckets = @import("list_directory_buckets.zig");
 const list_multipart_uploads = @import("list_multipart_uploads.zig");
+const list_object_annotations = @import("list_object_annotations.zig");
 const list_object_versions = @import("list_object_versions.zig");
 const list_objects = @import("list_objects.zig");
 const list_objects_v2 = @import("list_objects_v2.zig");
@@ -94,6 +97,7 @@ const put_bucket_versioning = @import("put_bucket_versioning.zig");
 const put_bucket_website = @import("put_bucket_website.zig");
 const put_object = @import("put_object.zig");
 const put_object_acl = @import("put_object_acl.zig");
+const put_object_annotation = @import("put_object_annotation.zig");
 const put_object_legal_hold = @import("put_object_legal_hold.zig");
 const put_object_lock_configuration = @import("put_object_lock_configuration.zig");
 const put_object_retention = @import("put_object_retention.zig");
@@ -102,6 +106,7 @@ const put_public_access_block = @import("put_public_access_block.zig");
 const rename_object = @import("rename_object.zig");
 const restore_object = @import("restore_object.zig");
 const select_object_content = @import("select_object_content.zig");
+const update_bucket_metadata_annotation_table_configuration = @import("update_bucket_metadata_annotation_table_configuration.zig");
 const update_bucket_metadata_inventory_table_configuration = @import("update_bucket_metadata_inventory_table_configuration.zig");
 const update_bucket_metadata_journal_table_configuration = @import("update_bucket_metadata_journal_table_configuration.zig");
 const update_object_encryption = @import("update_object_encryption.zig");
@@ -855,9 +860,14 @@ pub const Client = struct {
     ///
     /// * `s3tables:PutTablePolicy`
     ///
+    /// * `s3tables:PutTableBucketPolicy`
+    ///
     /// * `s3tables:PutTableEncryption`
     ///
     /// * `kms:DescribeKey`
+    ///
+    /// * `iam:PassRole` - required if you include an
+    /// `AnnotationTableConfiguration` with an IAM role.
     ///
     /// The following operations are related to `CreateBucketMetadataConfiguration`:
     ///
@@ -872,6 +882,18 @@ pub const Client = struct {
     ///
     /// *
     ///   [UpdateBucketMetadataJournalTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataJournalTableConfiguration.html)
+    ///
+    /// *
+    ///   [UpdateBucketMetadataAnnotationTableConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_UpdateBucketMetadataAnnotationTableConfiguration.html)
+    ///
+    /// If you include an `AnnotationTableConfiguration` with an IAM role, the role
+    /// must
+    /// have a trust policy that allows the Amazon S3 metadata service to assume it,
+    /// and a permissions policy
+    /// that grants the actions needed to read annotations from your bucket. The
+    /// following examples show
+    /// a trust policy and a permissions policy that you can adapt for your bucket
+    /// and account.
     ///
     /// You must URL encode any signed header values that contain spaces. For
     /// example, if your header value is `my file.txt`, containing two spaces after
@@ -2287,6 +2309,42 @@ pub const Client = struct {
     /// directory buckets.
     pub fn deleteObject(self: *Self, allocator: std.mem.Allocator, input: delete_object.DeleteObjectInput, options: CallOptions) !delete_object.DeleteObjectOutput {
         return delete_object.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a specific annotation from an Amazon S3 object. Use the
+    /// `x-amz-object-if-match`
+    /// header to perform a conditional delete that only succeeds if the object's
+    /// ETag matches the
+    /// provided value, preventing race conditions during concurrent updates.
+    ///
+    /// Deleting an annotation is permanent. Annotations are not independently
+    /// versioned, so there is no
+    /// delete marker or way to recover a deleted annotation.
+    ///
+    /// To use this operation, you must have the `s3:DeleteObjectAnnotation`
+    /// permission. If
+    /// the object is protected by Object Lock in governance mode, you must also
+    /// include the
+    /// `x-amz-bypass-governance-retention` header.
+    ///
+    /// Annotations are not supported by the following features: S3 Inventory
+    /// Reports,
+    /// API Gateway, S3 Storage Lens, Amazon S3 File Gateway, Amazon FSx, S3 on
+    /// Outposts, and
+    /// S3 Express One Zone (directory buckets).
+    ///
+    /// The following operations are related to `DeleteObjectAnnotation`:
+    ///
+    /// *
+    ///   [PutObjectAnnotation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectAnnotation.html)
+    ///
+    /// *
+    ///   [GetObjectAnnotation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAnnotation.html)
+    ///
+    /// *
+    ///   [ListObjectAnnotations](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectAnnotations.html)
+    pub fn deleteObjectAnnotation(self: *Self, allocator: std.mem.Allocator, input: delete_object_annotation.DeleteObjectAnnotationInput, options: CallOptions) !delete_object_annotation.DeleteObjectAnnotationOutput {
+        return delete_object_annotation.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -3778,6 +3836,34 @@ pub const Client = struct {
         return get_object_acl.execute(self, allocator, input, options);
     }
 
+    /// Retrieves an annotation from an Amazon S3 object. To use this operation, you
+    /// must have the
+    /// `s3:GetObjectAnnotation` permission.
+    ///
+    /// If checksum mode is enabled via the `x-amz-checksum-mode` header, Amazon S3
+    /// returns the stored checksum in the response headers for client-side
+    /// validation.
+    ///
+    /// Annotations are not supported by the following features: S3 Inventory
+    /// Reports,
+    /// API Gateway, S3 Storage Lens, Amazon S3 File Gateway, Amazon FSx, S3 on
+    /// Outposts, and
+    /// S3 Express One Zone (directory buckets).
+    ///
+    /// The following operations are related to `GetObjectAnnotation`:
+    ///
+    /// *
+    ///   [PutObjectAnnotation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectAnnotation.html)
+    ///
+    /// *
+    ///   [ListObjectAnnotations](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectAnnotations.html)
+    ///
+    /// *
+    ///   [DeleteObjectAnnotation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectAnnotation.html)
+    pub fn getObjectAnnotation(self: *Self, allocator: std.mem.Allocator, input: get_object_annotation.GetObjectAnnotationInput, options: CallOptions) !get_object_annotation.GetObjectAnnotationOutput {
+        return get_object_annotation.execute(self, allocator, input, options);
+    }
+
     /// Retrieves all of the metadata from an object without returning the object
     /// itself. This operation is
     /// useful if you're interested only in an object's metadata.
@@ -4883,6 +4969,35 @@ pub const Client = struct {
     /// `my`, you must URL encode this value to `my%20%20file.txt`.
     pub fn listMultipartUploads(self: *Self, allocator: std.mem.Allocator, input: list_multipart_uploads.ListMultipartUploadsInput, options: CallOptions) !list_multipart_uploads.ListMultipartUploadsOutput {
         return list_multipart_uploads.execute(self, allocator, input, options);
+    }
+
+    /// Lists the annotations attached to an Amazon S3 object. Results are
+    /// paginated, with a maximum of
+    /// 1,000 annotations per object. Use the `AnnotationPrefix` parameter to filter
+    /// the
+    /// results by name prefix.
+    ///
+    /// To use this operation, you must have the `s3:ListObjectAnnotations`
+    /// permission.
+    ///
+    /// Annotations are not supported by the following features: S3 Inventory
+    /// Reports,
+    /// API Gateway, S3 Storage Lens, Amazon S3 File Gateway, Amazon FSx, S3 on
+    /// Outposts, and
+    /// S3 Express One Zone (directory buckets).
+    ///
+    /// The following operations are related to `ListObjectAnnotations`:
+    ///
+    /// *
+    ///   [PutObjectAnnotation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectAnnotation.html)
+    ///
+    /// *
+    ///   [GetObjectAnnotation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAnnotation.html)
+    ///
+    /// *
+    ///   [DeleteObjectAnnotation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectAnnotation.html)
+    pub fn listObjectAnnotations(self: *Self, allocator: std.mem.Allocator, input: list_object_annotations.ListObjectAnnotationsInput, options: CallOptions) !list_object_annotations.ListObjectAnnotationsOutput {
+        return list_object_annotations.execute(self, allocator, input, options);
     }
 
     /// This operation is not supported for directory buckets.
@@ -7148,6 +7263,47 @@ pub const Client = struct {
         return put_object_acl.execute(self, allocator, input, options);
     }
 
+    /// Attaches an annotation to an Amazon S3 object. An annotation is a named
+    /// payload of 1 byte to 1 MiB
+    /// that you can associate with a specific object or object version. Each object
+    /// can have up to 1,000
+    /// annotations.
+    ///
+    /// For annotation naming rules and restrictions, see [Annotation naming
+    /// guidelines](https://docs.aws.amazon.com/AmazonS3/latest/userguide/annotations-overview.html)
+    /// in the *Amazon S3 User Guide*.
+    ///
+    /// Annotations inherit the encryption of their parent object. For objects
+    /// without server-side
+    /// encryption, annotations are encrypted with SSE-S3 (the default for new
+    /// objects). Objects
+    /// encrypted with SSE-C cannot have annotations.
+    ///
+    /// To use this operation, you must have the `s3:PutObjectAnnotation`
+    /// permission. If the
+    /// bucket has Requester Pays enabled, you must include the
+    /// `x-amz-request-payer` header.
+    ///
+    /// Annotations are not supported by the following features: S3 Inventory
+    /// Reports,
+    /// API Gateway, S3 Storage Lens, Amazon S3 File Gateway, Amazon FSx, S3 on
+    /// Outposts, and
+    /// S3 Express One Zone (directory buckets).
+    ///
+    /// The following operations are related to `PutObjectAnnotation`:
+    ///
+    /// *
+    ///   [GetObjectAnnotation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAnnotation.html)
+    ///
+    /// *
+    ///   [ListObjectAnnotations](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListObjectAnnotations.html)
+    ///
+    /// *
+    ///   [DeleteObjectAnnotation](https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteObjectAnnotation.html)
+    pub fn putObjectAnnotation(self: *Self, allocator: std.mem.Allocator, input: put_object_annotation.PutObjectAnnotationInput, options: CallOptions) !put_object_annotation.PutObjectAnnotationOutput {
+        return put_object_annotation.execute(self, allocator, input, options);
+    }
+
     /// This operation is not supported for directory buckets.
     ///
     /// Applies a legal hold configuration to the specified object. For more
@@ -7710,6 +7866,43 @@ pub const Client = struct {
         return select_object_content.execute(self, allocator, input, options);
     }
 
+    /// Updates the annotation table configuration for an Amazon S3 bucket's
+    /// metadata configuration. Use this
+    /// operation to enable or disable the annotation table, or to update its
+    /// associated IAM role.
+    ///
+    /// An annotation table is a queryable Iceberg table that contains records of
+    /// all annotations
+    /// attached to objects in the bucket. To use this operation, the bucket must
+    /// have an existing Amazon S3
+    /// Metadata configuration.
+    ///
+    /// To use this operation, you must have the
+    /// `s3:UpdateBucketMetadataAnnotationTableConfiguration` permission. If you are
+    /// specifying
+    /// or changing the IAM role, you must also have `iam:PassRole` permission for
+    /// the role.
+    ///
+    /// The IAM role must have a trust policy that allows the Amazon S3 metadata
+    /// service to assume it, and a
+    /// permissions policy that grants the actions needed to read annotations from
+    /// your bucket. The
+    /// following examples show a trust policy and a permissions policy that you can
+    /// adapt for your bucket
+    /// and account.
+    ///
+    /// The following operations are related to
+    /// `UpdateBucketMetadataAnnotationTableConfiguration`:
+    ///
+    /// *
+    ///   [CreateBucketMetadataConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html)
+    ///
+    /// *
+    ///   [GetBucketMetadataConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketMetadataConfiguration.html)
+    pub fn updateBucketMetadataAnnotationTableConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_bucket_metadata_annotation_table_configuration.UpdateBucketMetadataAnnotationTableConfigurationInput, options: CallOptions) !update_bucket_metadata_annotation_table_configuration.UpdateBucketMetadataAnnotationTableConfigurationOutput {
+        return update_bucket_metadata_annotation_table_configuration.execute(self, allocator, input, options);
+    }
+
     /// Enables or disables a live inventory table for an S3 Metadata configuration
     /// on a general
     /// purpose bucket. For more information, see
@@ -7868,8 +8061,6 @@ pub const Client = struct {
     ///
     /// * To use the `UpdateObjectEncryption` operation, you must have the following
     /// permissions:
-    ///
-    /// * `s3:PutObject`
     ///
     /// * `s3:UpdateObjectEncryption`
     ///
@@ -8485,6 +8676,13 @@ pub const Client = struct {
     }
 
     pub fn listDirectoryBucketsPaginator(self: *Self, params: list_directory_buckets.ListDirectoryBucketsInput) paginator.ListDirectoryBucketsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listObjectAnnotationsPaginator(self: *Self, params: list_object_annotations.ListObjectAnnotationsInput) paginator.ListObjectAnnotationsPaginator {
         return .{
             .client = self,
             .params = params,

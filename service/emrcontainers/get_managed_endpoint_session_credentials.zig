@@ -48,6 +48,9 @@ pub const GetManagedEndpointSessionCredentialsOutput = struct {
     /// The structure containing the session credentials.
     credentials: ?Credentials = null,
 
+    /// The session credentials that the operation returns.
+    endpoint_credentials: ?Credentials = null,
+
     /// The date and time when the session token will expire.
     expires_at: ?i64 = null,
 
@@ -56,6 +59,7 @@ pub const GetManagedEndpointSessionCredentialsOutput = struct {
 
     pub const json_field_names = .{
         .credentials = "credentials",
+        .endpoint_credentials = "endpointCredentials",
         .expires_at = "expiresAt",
         .id = "id",
     };
@@ -145,10 +149,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetManagedEndpointSessi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetManagedEndpointSessionCredentialsOutput {
-    var result: GetManagedEndpointSessionCredentialsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetManagedEndpointSessionCredentialsOutput, body, allocator);
-    }
+    const result: GetManagedEndpointSessionCredentialsOutput = try aws.json.parseJsonObject(
+        GetManagedEndpointSessionCredentialsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeMediaStorageCon
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeMediaStorageConfigurationOutput {
-    var result: DescribeMediaStorageConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeMediaStorageConfigurationOutput, body, allocator);
-    }
+    const result: DescribeMediaStorageConfigurationOutput = try aws.json.parseJsonObject(
+        DescribeMediaStorageConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -16,6 +16,7 @@ const list_connectors = @import("list_connectors.zig");
 const list_custom_plugins = @import("list_custom_plugins.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_worker_configurations = @import("list_worker_configurations.zig");
+const restart_connector = @import("restart_connector.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_connector = @import("update_connector.zig");
@@ -125,6 +126,14 @@ pub const Client = struct {
     /// Region.
     pub fn listWorkerConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_worker_configurations.ListWorkerConfigurationsInput, options: CallOptions) !list_worker_configurations.ListWorkerConfigurationsOutput {
         return list_worker_configurations.execute(self, allocator, input, options);
+    }
+
+    /// Restarts the specified connector. By default, this operation restarts the
+    /// connector and all of its tasks. This operation is asynchronous and returns a
+    /// connector operation ARN that you can pass to `DescribeConnectorOperation` to
+    /// track the state of the restart.
+    pub fn restartConnector(self: *Self, allocator: std.mem.Allocator, input: restart_connector.RestartConnectorInput, options: CallOptions) !restart_connector.RestartConnectorOutput {
+        return restart_connector.execute(self, allocator, input, options);
     }
 
     /// Attaches tags to the specified resource.

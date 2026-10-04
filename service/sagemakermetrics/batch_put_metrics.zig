@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchPutMetricsInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchPutMetricsOutput {
-    var result: BatchPutMetricsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchPutMetricsOutput, body, allocator);
-    }
+    const result: BatchPutMetricsOutput = try aws.json.parseJsonObject(
+        BatchPutMetricsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

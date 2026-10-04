@@ -15,6 +15,10 @@ pub const CreateGroupInput = struct {
     display_name: ?[]const u8 = null,
 
     /// The globally unique identifier for the identity store.
+    ///
+    /// You can specify the identity store by ID or by Amazon Resource Name (ARN).
+    /// For example, identity store ID `d-1234567890` or identity store ARN
+    /// `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
     identity_store_id: []const u8,
 
     pub const json_field_names = .{
@@ -25,15 +29,25 @@ pub const CreateGroupInput = struct {
 };
 
 pub const CreateGroupOutput = struct {
+    /// The Amazon Resource Name (ARN) of the newly created group in the identity
+    /// store. For example,
+    /// `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
+    group_arn: []const u8,
+
     /// The identifier of the newly created group in the identity store.
     group_id: []const u8,
 
     /// The globally unique identifier for the identity store.
     identity_store_id: []const u8,
 
+    /// The revision of the newly created group in the identity store.
+    revision: []const u8,
+
     pub const json_field_names = .{
+        .group_arn = "GroupArn",
         .group_id = "GroupId",
         .identity_store_id = "IdentityStoreId",
+        .revision = "Revision",
     };
 };
 

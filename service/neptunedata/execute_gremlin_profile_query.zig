@@ -129,6 +129,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExecuteGremlinProfileQu
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ExecuteGremlinProfileQueryOutput {
     var result: ExecuteGremlinProfileQueryOutput = .{};
+    errdefer {
+        if (result.output) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.output = try allocator.dupe(u8, body);
     }

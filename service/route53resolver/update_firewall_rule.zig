@@ -10,6 +10,7 @@ const BlockResponse = @import("block_response.zig").BlockResponse;
 const ConfidenceThreshold = @import("confidence_threshold.zig").ConfidenceThreshold;
 const DnsThreatProtection = @import("dns_threat_protection.zig").DnsThreatProtection;
 const FirewallDomainRedirectionAction = @import("firewall_domain_redirection_action.zig").FirewallDomainRedirectionAction;
+const FirewallRuleType = @import("firewall_rule_type.zig").FirewallRuleType;
 const FirewallRule = @import("firewall_rule.zig").FirewallRule;
 
 pub const UpdateFirewallRuleInput = @import("update_firewall_rule_request.zig").UpdateFirewallRuleRequest;

@@ -11,6 +11,7 @@ const verifiedpermissions = @import("verifiedpermissions");
 
 test {
     _ = @import("error_parser.zig");
+    _ = @import("generated_clients.zig");
 }
 
 const TestServer = struct {

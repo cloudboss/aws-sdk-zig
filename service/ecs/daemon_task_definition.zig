@@ -1,4 +1,6 @@
 const DaemonContainerDefinition = @import("daemon_container_definition.zig").DaemonContainerDefinition;
+const DaemonIpcMode = @import("daemon_ipc_mode.zig").DaemonIpcMode;
+const DaemonPidMode = @import("daemon_pid_mode.zig").DaemonPidMode;
 const DaemonTaskDefinitionStatus = @import("daemon_task_definition_status.zig").DaemonTaskDefinitionStatus;
 const DaemonVolume = @import("daemon_volume.zig").DaemonVolume;
 
@@ -29,8 +31,28 @@ pub const DaemonTaskDefinition = struct {
     /// The name of a family that this daemon task definition is registered to.
     family: ?[]const u8 = null,
 
+    /// The IPC namespace mode for the daemon. The valid values are `none` and
+    /// `shared`. The default is `none`.
+    ///
+    /// If `none` is specified or no value is provided, the daemon runs with its own
+    /// IPC namespace, isolated from other tasks. If `shared` is specified, the
+    /// daemon joins the host IPC namespace, making it accessible to non-daemon
+    /// tasks that use `ipcMode: "host"` or other daemons that use `ipcMode:
+    /// "shared"`.
+    ipc_mode: ?DaemonIpcMode = null,
+
     /// The amount of memory (in MiB) used by the daemon task.
     memory: ?[]const u8 = null,
+
+    /// The PID namespace mode for the daemon. The valid values are `none` and
+    /// `shared`. The default is `none`.
+    ///
+    /// If `none` is specified or no value is provided, the daemon runs with its own
+    /// PID namespace, isolated from other tasks. If `shared` is specified, the
+    /// daemon joins the host PID namespace, making it accessible to non-daemon
+    /// tasks that use `pidMode: "host"` or other daemons that use `pidMode:
+    /// "shared"`.
+    pid_mode: ?DaemonPidMode = null,
 
     /// The Unix timestamp for the time when the daemon task definition was
     /// registered.
@@ -65,7 +87,9 @@ pub const DaemonTaskDefinition = struct {
         .delete_requested_at = "deleteRequestedAt",
         .execution_role_arn = "executionRoleArn",
         .family = "family",
+        .ipc_mode = "ipcMode",
         .memory = "memory",
+        .pid_mode = "pidMode",
         .registered_at = "registeredAt",
         .registered_by = "registeredBy",
         .revision = "revision",

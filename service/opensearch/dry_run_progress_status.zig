@@ -2,6 +2,10 @@ const ValidationFailure = @import("validation_failure.zig").ValidationFailure;
 
 /// Information about the progress of a pre-upgrade dry run analysis.
 pub const DryRunProgressStatus = struct {
+    /// The list of advisory warning codes that were accepted for the configuration
+    /// change.
+    accepted_warnings: ?[]const []const u8 = null,
+
     /// The timestamp when the dry run was initiated.
     creation_date: []const u8,
 
@@ -14,10 +18,11 @@ pub const DryRunProgressStatus = struct {
     /// The timestamp when the dry run was last updated.
     update_date: []const u8,
 
-    /// Any validation failures that occurred as a result of the dry run.
+    /// The validation failures that occurred as a result of the dry run.
     validation_failures: ?[]const ValidationFailure = null,
 
     pub const json_field_names = .{
+        .accepted_warnings = "AcceptedWarnings",
         .creation_date = "CreationDate",
         .dry_run_id = "DryRunId",
         .dry_run_status = "DryRunStatus",

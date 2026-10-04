@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetStandardsContro
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetStandardsControlAssociationsOutput {
-    var result: BatchGetStandardsControlAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetStandardsControlAssociationsOutput, body, allocator);
-    }
+    const result: BatchGetStandardsControlAssociationsOutput = try aws.json.parseJsonObject(
+        BatchGetStandardsControlAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

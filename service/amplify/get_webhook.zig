@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetWebhookInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetWebhookOutput {
-    var result: GetWebhookOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetWebhookOutput, body, allocator);
-    }
+    const result: GetWebhookOutput = try aws.json.parseJsonObject(
+        GetWebhookOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

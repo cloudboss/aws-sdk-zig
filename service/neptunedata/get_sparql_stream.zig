@@ -174,10 +174,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSparqlStreamInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSparqlStreamOutput {
-    var result: GetSparqlStreamOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSparqlStreamOutput, body, allocator);
-    }
+    const result: GetSparqlStreamOutput = try aws.json.parseJsonObject(
+        GetSparqlStreamOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

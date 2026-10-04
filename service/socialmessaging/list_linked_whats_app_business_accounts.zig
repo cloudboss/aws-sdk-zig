@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListLinkedWhatsAppBusin
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListLinkedWhatsAppBusinessAccountsOutput {
-    var result: ListLinkedWhatsAppBusinessAccountsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListLinkedWhatsAppBusinessAccountsOutput, body, allocator);
-    }
+    const result: ListLinkedWhatsAppBusinessAccountsOutput = try aws.json.parseJsonObject(
+        ListLinkedWhatsAppBusinessAccountsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

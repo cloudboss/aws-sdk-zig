@@ -102,8 +102,8 @@ pub const Client = struct {
     /// processing job. The workflow name must be unique. To modify an existing
     /// workflow, use `UpdateMatchingWorkflow`.
     ///
-    /// For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
-    /// incremental processing is not supported.
+    /// For workflows where `resolutionType` is `PROVIDER`, incremental processing
+    /// is not supported.
     pub fn createMatchingWorkflow(self: *Self, allocator: std.mem.Allocator, input: create_matching_workflow.CreateMatchingWorkflowInput, options: CallOptions) !create_matching_workflow.CreateMatchingWorkflowOutput {
         return create_matching_workflow.execute(self, allocator, input, options);
     }
@@ -116,19 +116,23 @@ pub const Client = struct {
         return create_schema_mapping.execute(self, allocator, input, options);
     }
 
-    /// Deletes the `IdMappingWorkflow` with a given name. This operation will
-    /// succeed even if a workflow with the given name does not exist.
+    /// Deletes the `IdMappingWorkflow` with a given name. This operation returns a
+    /// `ResourceNotFoundException` if a workflow with the given name does not
+    /// exist.
     pub fn deleteIdMappingWorkflow(self: *Self, allocator: std.mem.Allocator, input: delete_id_mapping_workflow.DeleteIdMappingWorkflowInput, options: CallOptions) !delete_id_mapping_workflow.DeleteIdMappingWorkflowOutput {
         return delete_id_mapping_workflow.execute(self, allocator, input, options);
     }
 
-    /// Deletes the `IdNamespace` with a given name.
+    /// Deletes the `IdNamespace` with a given name. This operation returns a
+    /// `ResourceNotFoundException` if an ID namespace with the given name does not
+    /// exist.
     pub fn deleteIdNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_id_namespace.DeleteIdNamespaceInput, options: CallOptions) !delete_id_namespace.DeleteIdNamespaceOutput {
         return delete_id_namespace.execute(self, allocator, input, options);
     }
 
-    /// Deletes the `MatchingWorkflow` with a given name. This operation will
-    /// succeed even if a workflow with the given name does not exist.
+    /// Deletes the `MatchingWorkflow` with a given name. This operation returns a
+    /// `ResourceNotFoundException` if a workflow with the given name does not
+    /// exist.
     pub fn deleteMatchingWorkflow(self: *Self, allocator: std.mem.Allocator, input: delete_matching_workflow.DeleteMatchingWorkflowInput, options: CallOptions) !delete_matching_workflow.DeleteMatchingWorkflowOutput {
         return delete_matching_workflow.execute(self, allocator, input, options);
     }
@@ -138,10 +142,10 @@ pub const Client = struct {
         return delete_policy_statement.execute(self, allocator, input, options);
     }
 
-    /// Deletes the `SchemaMapping` with a given name. This operation will succeed
-    /// even if a schema with the given name does not exist. This operation will
-    /// fail if there is a `MatchingWorkflow` object that references the
-    /// `SchemaMapping` in the workflow's `InputSourceConfig`.
+    /// Deletes the `SchemaMapping` with a given name. This operation returns a
+    /// `ResourceNotFoundException` if a schema with the given name does not exist.
+    /// This operation will fail if there is a `MatchingWorkflow` object that
+    /// references the `SchemaMapping` in the workflow's `InputSourceConfig`.
     pub fn deleteSchemaMapping(self: *Self, allocator: std.mem.Allocator, input: delete_schema_mapping.DeleteSchemaMappingInput, options: CallOptions) !delete_schema_mapping.DeleteSchemaMappingOutput {
         return delete_schema_mapping.execute(self, allocator, input, options);
     }
@@ -314,8 +318,8 @@ pub const Client = struct {
     /// Updates an existing matching workflow. The workflow must already exist for
     /// this operation to succeed.
     ///
-    /// For workflows where `resolutionType` is `ML_MATCHING` or `PROVIDER`,
-    /// incremental processing is not supported.
+    /// For workflows where `resolutionType` is `PROVIDER`, incremental processing
+    /// is not supported.
     pub fn updateMatchingWorkflow(self: *Self, allocator: std.mem.Allocator, input: update_matching_workflow.UpdateMatchingWorkflowInput, options: CallOptions) !update_matching_workflow.UpdateMatchingWorkflowOutput {
         return update_matching_workflow.execute(self, allocator, input, options);
     }

@@ -12,7 +12,7 @@ pub const UserSummary = struct {
     /// The timestamp when this resource was last modified.
     last_modified_time: ?i64 = null,
 
-    /// The Amazon Connect user name of the user account.
+    /// The Connect Customer user name of the user account.
     username: ?[]const u8 = null,
 
     pub const json_field_names = .{

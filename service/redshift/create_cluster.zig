@@ -35,8 +35,8 @@ pub const CreateClusterInput = struct {
     /// you can
     /// still create manual snapshots when you want with CreateClusterSnapshot.
     ///
-    /// You can't disable automated snapshots for RA3 node types. Set the automated
-    /// retention period from 1-35 days.
+    /// You can't disable automated snapshots for RG or RA3 node types. Set the
+    /// automated retention period from 1-35 days.
     ///
     /// Default: `1`
     ///
@@ -335,7 +335,8 @@ pub const CreateClusterInput = struct {
     /// Clusters](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes) in the *Amazon Redshift Cluster Management Guide*.
     ///
     /// Valid Values:
-    /// `dc2.large` | `dc2.8xlarge` |
+    /// `dc2.large` | `dc2.8xlarge` | `rg.large` | `rg.xlarge` | `rg.4xlarge` |
+    /// `rg.12xlarge` |
     /// `ra3.large` | `ra3.xlplus` | `ra3.4xlarge` | `ra3.16xlarge`
     node_type: []const u8,
 
@@ -371,9 +372,10 @@ pub const CreateClusterInput = struct {
     ///
     /// Valid Values:
     ///
-    /// * For clusters with ra3 nodes - Select a port within the ranges `5431-5455`
-    ///   or `8191-8215`. (If you have an existing cluster
-    /// with ra3 nodes, it isn't required that you change the port to these ranges.)
+    /// * For clusters with RG or RA3 nodes - Select a port within the ranges
+    ///   `5431-5455` or `8191-8215`. (If you have an existing cluster
+    /// with RG or RA3 nodes, it isn't required that you change the port to these
+    /// ranges.)
     ///
     /// * For clusters with dc2 nodes - Select a port within the range `1150-65535`.
     port: ?i32 = null,

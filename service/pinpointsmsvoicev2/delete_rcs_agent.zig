@@ -53,6 +53,10 @@ pub const DeleteRcsAgentOutput = struct {
     /// text messages from your end recipients.
     two_way_enabled: ?bool = null,
 
+    /// The list of RCS event types that were enabled for two-way messaging on the
+    /// deleted agent.
+    two_way_rcs_events_enabled: ?[]const []const u8 = null,
+
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",
         .deletion_protection_enabled = "DeletionProtectionEnabled",
@@ -64,6 +68,7 @@ pub const DeleteRcsAgentOutput = struct {
         .two_way_channel_arn = "TwoWayChannelArn",
         .two_way_channel_role = "TwoWayChannelRole",
         .two_way_enabled = "TwoWayEnabled",
+        .two_way_rcs_events_enabled = "TwoWayRcsEventsEnabled",
     };
 };
 

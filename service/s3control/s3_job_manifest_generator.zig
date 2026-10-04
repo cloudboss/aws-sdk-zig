@@ -6,10 +6,10 @@ pub const S3JobManifestGenerator = struct {
     /// Determines whether or not to write the job's generated manifest to a bucket.
     enable_manifest_output: bool = false,
 
-    /// The Amazon Web Services account ID that owns the bucket the generated
-    /// manifest is written to. If
-    /// provided the generated manifest bucket's owner Amazon Web Services account
-    /// ID must match this value, else
+    /// The Amazon Web Services account ID that owns the source bucket specified in
+    /// `SourceBucket`. If
+    /// provided, the manifest source bucket owner's Amazon Web Services account ID
+    /// must match this value, else
     /// the job fails.
     expected_bucket_owner: ?[]const u8 = null,
 

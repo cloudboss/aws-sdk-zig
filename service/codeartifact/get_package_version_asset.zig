@@ -99,6 +99,7 @@ pub const GetPackageVersionAssetOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetPackageVersionAssetInput, options: CallOptions) !GetPackageVersionAssetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -107,8 +108,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetPackageV
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "codeartifact", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -120,6 +119,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetPackageV
         return error.ServiceError;
     }
 
+    errdefer stream_resp.deinit();
     const result = try deserializeStreamingResponse(allocator, &stream_resp);
     return result;
 }
@@ -193,7 +193,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPackageVersionAssetI
 
 fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !GetPackageVersionAssetOutput {
     var result: GetPackageVersionAssetOutput = .{};
-    result.asset = stream_resp.body;
+    errdefer {
+        if (result.asset_name) |value| allocator.free(value);
+        if (result.package_version) |value| allocator.free(value);
+        if (result.package_version_revision) |value| allocator.free(value);
+    }
     if (stream_resp.headers.get("x-assetname")) |value| {
         result.asset_name = try allocator.dupe(u8, value);
     }
@@ -203,6 +207,7 @@ fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.
     if (stream_resp.headers.get("x-packageversionrevision")) |value| {
         result.package_version_revision = try allocator.dupe(u8, value);
     }
+    result.asset = stream_resp.body;
     stream_resp.deinitHeaders();
 
     return result;

@@ -22,6 +22,7 @@ pub const ConfigurationDetail = @import("configuration_detail.zig").Configuratio
 pub const ConfigurationItem = @import("configuration_item.zig").ConfigurationItem;
 pub const ContextDefinition = @import("context_definition.zig").ContextDefinition;
 pub const Decision = @import("decision.zig").Decision;
+pub const DeletionMode = @import("deletion_mode.zig").DeletionMode;
 pub const DeletionProtection = @import("deletion_protection.zig").DeletionProtection;
 pub const DeterminingPolicyItem = @import("determining_policy_item.zig").DeterminingPolicyItem;
 pub const EncryptionSettings = @import("encryption_settings.zig").EncryptionSettings;

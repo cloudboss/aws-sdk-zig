@@ -1,4 +1,5 @@
 const DeliveryModel = @import("delivery_model.zig").DeliveryModel;
+const ExpectedContractDuration = @import("expected_contract_duration.zig").ExpectedContractDuration;
 const ExpectedCustomerSpend = @import("expected_customer_spend.zig").ExpectedCustomerSpend;
 const SalesActivity = @import("sales_activity.zig").SalesActivity;
 
@@ -12,6 +13,10 @@ pub const ProjectView = struct {
     /// offering. This field indicates how the project's solution will be delivered
     /// or implemented for the customer.
     delivery_models: ?[]const DeliveryModel = null,
+
+    /// Optional. The expected contract duration for this opportunity, representing
+    /// the anticipated length of the contract in the unit specified by `Term`.
+    expected_contract_duration: ?ExpectedContractDuration = null,
 
     /// Provides information about the anticipated customer spend related to this
     /// project. This may include details such as amount, frequency, and currency of
@@ -31,6 +36,7 @@ pub const ProjectView = struct {
     pub const json_field_names = .{
         .customer_use_case = "CustomerUseCase",
         .delivery_models = "DeliveryModels",
+        .expected_contract_duration = "ExpectedContractDuration",
         .expected_customer_spend = "ExpectedCustomerSpend",
         .other_solution_description = "OtherSolutionDescription",
         .sales_activities = "SalesActivities",

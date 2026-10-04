@@ -15,9 +15,9 @@ pub const DescribeConfigurationSettingsInput = struct {
     ///
     /// Condition: You must specify either this or a TemplateName, but not both. If
     /// you
-    /// specify both, AWS Elastic Beanstalk returns an `InvalidParameterCombination`
+    /// specify both, Elastic Beanstalk returns an `InvalidParameterCombination`
     /// error.
-    /// If you do not specify either, AWS Elastic Beanstalk returns
+    /// If you do not specify either, Elastic Beanstalk returns
     /// `MissingRequiredParameter` error.
     environment_name: ?[]const u8 = null,
 
@@ -25,10 +25,10 @@ pub const DescribeConfigurationSettingsInput = struct {
     ///
     /// Conditional: You must specify either this parameter or an EnvironmentName,
     /// but not
-    /// both. If you specify both, AWS Elastic Beanstalk returns an
-    /// `InvalidParameterCombination` error. If you do not specify either, AWS
-    /// Elastic
-    /// Beanstalk returns a `MissingRequiredParameter` error.
+    /// both. If you specify both, Elastic Beanstalk returns an
+    /// `InvalidParameterCombination` error. If you do not specify either, Elastic
+    /// Beanstalk
+    /// returns a `MissingRequiredParameter` error.
     template_name: ?[]const u8 = null,
 };
 

@@ -8,6 +8,25 @@ const IdentityProviderTypeType = @import("identity_provider_type_type.zig").Iden
 const IdentityProviderType = @import("identity_provider_type.zig").IdentityProviderType;
 
 pub const CreateIdentityProviderInput = struct {
+    /// A mapping between the authentication context class reference (ACR) levels of
+    /// your user
+    /// pool and the ACR values of the external OpenID Connect (OIDC) identity
+    /// provider (IdP).
+    /// The map is keyed by level, from `Level1` through `Level4`, and each
+    /// value is the ACR value that the IdP uses for the corresponding level. Amazon
+    /// Cognito uses
+    /// this mapping to translate a requested user pool ACR level to the value that
+    /// the IdP
+    /// expects, and to map an ACR value that the IdP returns back to a user pool
+    /// level. When the
+    /// IdP returns an ACR value that isn't mapped, Amazon Cognito resolves it to
+    /// the lowest
+    /// level. Only OIDC IdPs support ACR mapping.
+    ///
+    /// Setting `AcrMapping` is available in all feature plans. It isn't restricted
+    /// to the Essentials or Plus feature plan.
+    acr_mapping: ?[]const aws.map.StringMapEntry = null,
+
     /// A mapping of IdP attributes to standard and custom user pool attributes.
     /// Specify a
     /// user pool attribute as the key of the key-value pair, and the IdP attribute
@@ -168,6 +187,7 @@ pub const CreateIdentityProviderInput = struct {
     user_pool_id: []const u8,
 
     pub const json_field_names = .{
+        .acr_mapping = "AcrMapping",
         .attribute_mapping = "AttributeMapping",
         .idp_identifiers = "IdpIdentifiers",
         .provider_details = "ProviderDetails",

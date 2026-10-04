@@ -4,6 +4,7 @@ const HlsRenditionGroupSettings = @import("hls_rendition_group_settings.zig").Hl
 const LanguageCode = @import("language_code.zig").LanguageCode;
 const RemixSettings = @import("remix_settings.zig").RemixSettings;
 const AudioSelectorType = @import("audio_selector_type.zig").AudioSelectorType;
+const AudioSmpte337Passthrough = @import("audio_smpte_337_passthrough.zig").AudioSmpte337Passthrough;
 
 /// Use Audio selectors to specify a track or set of tracks from the input that
 /// you will use in your outputs. You can use multiple Audio selectors per
@@ -113,6 +114,14 @@ pub const AudioSelector = struct {
     /// recognized in the future, these numberings will not shift.
     selector_type: ?AudioSelectorType = null,
 
+    /// Specify whether to pass SMPTE 337M-wrapped audio (such as Dolby E) through
+    /// without unwrapping. Choose Enabled to pass the SMPTE 337M container through
+    /// unchanged, treating the track as raw PCM. Choose Disabled (default) to
+    /// automatically detect and unwrap SMPTE 337M data, extracting the underlying
+    /// Dolby E programs as separate audio tracks for encoding. When this field is
+    /// absent, the service defaults to Disabled (auto-unwrap).
+    smpte_337_passthrough: ?AudioSmpte337Passthrough = null,
+
     /// Identify a track from the input audio to include in this selector by
     /// entering the stream index number. These numberings count all tracks in the
     /// input file, but only a track containing audio data may be used here. To
@@ -142,6 +151,7 @@ pub const AudioSelector = struct {
         .program_selection = "ProgramSelection",
         .remix_settings = "RemixSettings",
         .selector_type = "SelectorType",
+        .smpte_337_passthrough = "Smpte337Passthrough",
         .streams = "Streams",
         .tracks = "Tracks",
     };

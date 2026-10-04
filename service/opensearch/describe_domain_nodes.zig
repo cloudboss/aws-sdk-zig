@@ -75,10 +75,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeDomainNodesInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeDomainNodesOutput {
-    var result: DescribeDomainNodesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeDomainNodesOutput, body, allocator);
-    }
+    const result: DescribeDomainNodesOutput = try aws.json.parseJsonObject(
+        DescribeDomainNodesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

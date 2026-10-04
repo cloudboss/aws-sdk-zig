@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTransitGatewayConnec
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTransitGatewayConnectPeerAssociationsOutput {
-    var result: GetTransitGatewayConnectPeerAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTransitGatewayConnectPeerAssociationsOutput, body, allocator);
-    }
+    const result: GetTransitGatewayConnectPeerAssociationsOutput = try aws.json.parseJsonObject(
+        GetTransitGatewayConnectPeerAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

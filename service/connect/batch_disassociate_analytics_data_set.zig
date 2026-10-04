@@ -10,14 +10,14 @@ pub const BatchDisassociateAnalyticsDataSetInput = struct {
     /// An array of associated dataset identifiers to remove.
     data_set_ids: []const []const u8,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
     /// The identifier of the target account. Use to disassociate a dataset from a
     /// different account than the one containing
-    /// the Amazon Connect instance. If not specified, by default this value is the
-    /// Amazon Web Services account that has the Amazon Connect instance.
+    /// the Connect Customer instance. If not specified, by default this value is
+    /// the Amazon Web Services account that has the Connect Customer instance.
     target_account_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchDisassociateAnalyt
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchDisassociateAnalyticsDataSetOutput {
-    var result: BatchDisassociateAnalyticsDataSetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchDisassociateAnalyticsDataSetOutput, body, allocator);
-    }
+    const result: BatchDisassociateAnalyticsDataSetOutput = try aws.json.parseJsonObject(
+        BatchDisassociateAnalyticsDataSetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

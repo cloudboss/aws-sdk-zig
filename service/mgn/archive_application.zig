@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ArchiveApplicationInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ArchiveApplicationOutput {
-    var result: ArchiveApplicationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ArchiveApplicationOutput, body, allocator);
-    }
+    const result: ArchiveApplicationOutput = try aws.json.parseJsonObject(
+        ArchiveApplicationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

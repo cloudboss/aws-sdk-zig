@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetIngestConfigurationI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetIngestConfigurationOutput {
-    var result: GetIngestConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetIngestConfigurationOutput, body, allocator);
-    }
+    const result: GetIngestConfigurationOutput = try aws.json.parseJsonObject(
+        GetIngestConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

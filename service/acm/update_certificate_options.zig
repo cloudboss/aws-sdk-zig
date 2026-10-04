@@ -12,11 +12,11 @@ pub const UpdateCertificateOptionsInput = struct {
     /// `arn:aws:acm:us-east-1:*account*:certificate/*12345678-1234-1234-1234-123456789012* `
     certificate_arn: []const u8,
 
-    /// Use to update the options for your certificate. Currently, you can specify
-    /// whether to add your certificate to a transparency log or export your
-    /// certificate. Certificate transparency makes it possible to detect SSL/TLS
-    /// certificates that have been mistakenly or maliciously issued. Certificates
-    /// that have not been logged typically produce an error message in a browser.
+    /// Use to update the options for your certificate. Currently, you can change
+    /// the domain validation method or specify whether to export your certificate.
+    /// For more information about migrating from email to DNS validation, see
+    /// [Migrate from email to DNS
+    /// validation](https://docs.aws.amazon.com/acm/latest/userguide/email-to-dns-migration.html).
     options: CertificateOptions,
 
     pub const json_field_names = .{

@@ -57,12 +57,32 @@ pub const EcsTaskProperties = struct {
     /// settings](https://docs.docker.com/engine/reference/run/#ipc-settings---ipc)
     /// in
     /// the Docker run reference.
+    ///
+    /// This parameter is not supported for jobs that run on Fargate resources.
     ipc_mode: ?[]const u8 = null,
 
     /// The network configuration for jobs that are running on Fargate resources.
     /// Jobs that are
-    /// running on Amazon EC2 resources must not specify this parameter.
+    /// running on Amazon EC2 resources or Amazon ECS Managed Instances must not
+    /// specify this parameter.
     network_configuration: ?NetworkConfiguration = null,
+
+    /// The network mode to use for the task. Valid values: `host`. When not
+    /// specified,
+    /// the default is `host`.
+    ///
+    /// With `host` mode, the container shares the host instance's network stack
+    /// directly. When running tasks that use the `host` network mode, do not run
+    /// containers
+    /// using the root user (UID 0). Running as root grants unrestricted access to
+    /// host resources and
+    /// increases the attack surface.
+    ///
+    /// This parameter only applies to jobs running on Amazon ECS Managed Instances
+    /// (`MANAGED_INSTANCES` platform capability). It cannot be specified for
+    /// Fargate or
+    /// Amazon EC2 platform job definitions.
+    network_mode: ?[]const u8 = null,
 
     /// The process namespace to use for the containers in the task. The valid
     /// values are
@@ -100,7 +120,15 @@ pub const EcsTaskProperties = struct {
 
     /// An object that represents the compute environment architecture for Batch
     /// jobs on
-    /// Fargate.
+    /// Fargate or Amazon ECS Managed Instances. Use this to specify the operating
+    /// system family
+    /// (`operatingSystemFamily`) and CPU architecture
+    /// (`cpuArchitecture`).
+    ///
+    /// For Amazon ECS Managed Instances, the valid value for
+    /// `operatingSystemFamily` is
+    /// `LINUX` (default). The valid values for `cpuArchitecture` are
+    /// `X86_64` and `ARM64`.
     runtime_platform: ?RuntimePlatform = null,
 
     /// The Amazon Resource Name (ARN) that's associated with the Amazon ECS task.
@@ -119,6 +147,7 @@ pub const EcsTaskProperties = struct {
         .execution_role_arn = "executionRoleArn",
         .ipc_mode = "ipcMode",
         .network_configuration = "networkConfiguration",
+        .network_mode = "networkMode",
         .pid_mode = "pidMode",
         .platform_version = "platformVersion",
         .runtime_platform = "runtimePlatform",

@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TerminateTargetInstance
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !TerminateTargetInstancesOutput {
-    var result: TerminateTargetInstancesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(TerminateTargetInstancesOutput, body, allocator);
-    }
+    const result: TerminateTargetInstancesOutput = try aws.json.parseJsonObject(
+        TerminateTargetInstancesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

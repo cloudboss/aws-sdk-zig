@@ -15,6 +15,7 @@ pub const DeploymentConfigInfo = @import("deployment_config_info.zig").Deploymen
 pub const DeploymentCreator = @import("deployment_creator.zig").DeploymentCreator;
 pub const DeploymentGroupInfo = @import("deployment_group_info.zig").DeploymentGroupInfo;
 pub const DeploymentInfo = @import("deployment_info.zig").DeploymentInfo;
+pub const DeploymentMode = @import("deployment_mode.zig").DeploymentMode;
 pub const DeploymentOption = @import("deployment_option.zig").DeploymentOption;
 pub const DeploymentOverview = @import("deployment_overview.zig").DeploymentOverview;
 pub const DeploymentReadyAction = @import("deployment_ready_action.zig").DeploymentReadyAction;

@@ -28,7 +28,7 @@ pub const UpdateHoursOfOperationOverrideInput = struct {
     /// The identifier for the hours of operation override.
     hours_of_operation_override_id: []const u8,
 
-    /// The identifier of the Amazon Connect instance.
+    /// The identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     /// The name of the hours of operation override.
@@ -39,7 +39,7 @@ pub const UpdateHoursOfOperationOverrideInput = struct {
     ///
     /// For more information about how override types are applied, see [Build your
     /// list of
-    /// overrides](https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html) in the
+    /// overrides](https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html) in the
     /// * Administrator Guide*.
     override_type: ?OverrideType = null,
 

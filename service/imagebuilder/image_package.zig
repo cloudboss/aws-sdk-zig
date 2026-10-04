@@ -1,5 +1,7 @@
-/// A software package that's installed on top of the base image to create a
-/// customized image.
+/// A software package that's installed on an image, as detected by Amazon Web
+/// Services Systems Manager
+/// Inventory at build time. The list includes packages that shipped with the
+/// base image.
 pub const ImagePackage = struct {
     /// The name of the package that's reported to the operating system package
     /// manager.

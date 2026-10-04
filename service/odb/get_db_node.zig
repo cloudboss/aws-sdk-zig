@@ -7,15 +7,21 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DbNode = @import("db_node.zig").DbNode;
 
 pub const GetDbNodeInput = struct {
-    /// The unique identifier of the VM cluster that contains the DB node.
-    cloud_vm_cluster_id: []const u8,
+    /// The unique identifier of the VM cluster that contains the DB node. You must
+    /// specify either this parameter or `exadbVmClusterId`.
+    cloud_vm_cluster_id: ?[]const u8 = null,
 
     /// The unique identifier of the DB node to retrieve information about.
     db_node_id: []const u8,
 
+    /// The unique identifier of the Exascale VM cluster that contains the DB node.
+    /// You must specify either this parameter or `cloudVmClusterId`.
+    exadb_vm_cluster_id: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .cloud_vm_cluster_id = "cloudVmClusterId",
         .db_node_id = "dbNodeId",
+        .exadb_vm_cluster_id = "exadbVmClusterId",
     };
 };
 

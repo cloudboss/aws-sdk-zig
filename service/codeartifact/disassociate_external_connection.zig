@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisassociateExternalCon
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DisassociateExternalConnectionOutput {
-    var result: DisassociateExternalConnectionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DisassociateExternalConnectionOutput, body, allocator);
-    }
+    const result: DisassociateExternalConnectionOutput = try aws.json.parseJsonObject(
+        DisassociateExternalConnectionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

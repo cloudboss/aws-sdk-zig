@@ -92,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDocumentationPart
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDocumentationPartOutput {
-    var result: CreateDocumentationPartOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateDocumentationPartOutput, body, allocator);
-    }
+    const result: CreateDocumentationPartOutput = try aws.json.parseJsonObject(
+        CreateDocumentationPartOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

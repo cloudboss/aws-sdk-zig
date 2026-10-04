@@ -9,7 +9,7 @@ const HoursOfOperationSearchFilter = @import("hours_of_operation_search_filter.z
 const HoursOfOperationOverride = @import("hours_of_operation_override.zig").HoursOfOperationOverride;
 
 pub const SearchHoursOfOperationOverridesInput = struct {
-    /// The identifier of the Amazon Connect instance.
+    /// The identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     /// The maximum number of results to return per page.
@@ -133,10 +133,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchHoursOfOperationO
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchHoursOfOperationOverridesOutput {
-    var result: SearchHoursOfOperationOverridesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchHoursOfOperationOverridesOutput, body, allocator);
-    }
+    const result: SearchHoursOfOperationOverridesOutput = try aws.json.parseJsonObject(
+        SearchHoursOfOperationOverridesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

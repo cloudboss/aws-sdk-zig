@@ -1,3 +1,5 @@
+const PolandTaxRegistrationNumberType = @import("poland_tax_registration_number_type.zig").PolandTaxRegistrationNumberType;
+
 /// Additional tax information associated with your TRN in Poland.
 pub const PolandAdditionalInfo = struct {
     /// The individual tax registration number (NIP). Individual NIP is valid for
@@ -8,8 +10,14 @@ pub const PolandAdditionalInfo = struct {
     /// purposes. Otherwise, this is false.
     is_group_vat_enabled: ?bool = null,
 
+    /// The tax registration number type. Valid values are
+    /// `EUTaxRegistrationNumber`, `LocalTaxRegistrationNumber`, or
+    /// `LocalRegistrationNumber`.
+    tax_registration_number_type: ?PolandTaxRegistrationNumberType = null,
+
     pub const json_field_names = .{
         .individual_registration_number = "individualRegistrationNumber",
         .is_group_vat_enabled = "isGroupVatEnabled",
+        .tax_registration_number_type = "taxRegistrationNumberType",
     };
 };

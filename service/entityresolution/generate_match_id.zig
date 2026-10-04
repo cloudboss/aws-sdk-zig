@@ -29,6 +29,8 @@ pub const GenerateMatchIdInput = struct {
     /// Generates new match IDs without checking existing matches, with updates
     /// processed asynchronously. Provides fastest response time but should only be
     /// used for records known to be unique.
+    ///
+    /// Advanced matching workflows don't support the `processingType` field.
     processing_type: ?ProcessingType = null,
 
     /// The records to match.
@@ -123,10 +125,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GenerateMatchIdInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GenerateMatchIdOutput {
-    var result: GenerateMatchIdOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GenerateMatchIdOutput, body, allocator);
-    }
+    const result: GenerateMatchIdOutput = try aws.json.parseJsonObject(
+        GenerateMatchIdOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

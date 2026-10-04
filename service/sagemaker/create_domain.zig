@@ -10,6 +10,7 @@ const AuthMode = @import("auth_mode.zig").AuthMode;
 const DefaultSpaceSettings = @import("default_space_settings.zig").DefaultSpaceSettings;
 const UserSettings = @import("user_settings.zig").UserSettings;
 const DomainSettings = @import("domain_settings.zig").DomainSettings;
+const HomeEfsFileSystemCreation = @import("home_efs_file_system_creation.zig").HomeEfsFileSystemCreation;
 const TagPropagation = @import("tag_propagation.zig").TagPropagation;
 const Tag = @import("tag.zig").Tag;
 
@@ -49,6 +50,11 @@ pub const CreateDomainInput = struct {
 
     /// A collection of `Domain` settings.
     domain_settings: ?DomainSettings = null,
+
+    /// Indicates whether to create a home EFS file system for the domain. Defaults
+    /// to `Enabled`. Set to `Disabled` to skip EFS creation and reduce domain
+    /// creation time. You can enable EFS later by calling `UpdateDomain`.
+    home_efs_file_system_creation: ?HomeEfsFileSystemCreation = null,
 
     /// Use `KmsKeyId`.
     home_efs_file_system_kms_key_id: ?[]const u8 = null,
@@ -93,6 +99,7 @@ pub const CreateDomainInput = struct {
         .default_user_settings = "DefaultUserSettings",
         .domain_name = "DomainName",
         .domain_settings = "DomainSettings",
+        .home_efs_file_system_creation = "HomeEfsFileSystemCreation",
         .home_efs_file_system_kms_key_id = "HomeEfsFileSystemKmsKeyId",
         .kms_key_id = "KmsKeyId",
         .subnet_ids = "SubnetIds",

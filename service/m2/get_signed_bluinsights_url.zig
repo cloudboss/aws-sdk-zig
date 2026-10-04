@@ -63,10 +63,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSignedBluinsightsUrl
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSignedBluinsightsUrlOutput {
-    var result: GetSignedBluinsightsUrlOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSignedBluinsightsUrlOutput, body, allocator);
-    }
+    const result: GetSignedBluinsightsUrlOutput = try aws.json.parseJsonObject(
+        GetSignedBluinsightsUrlOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

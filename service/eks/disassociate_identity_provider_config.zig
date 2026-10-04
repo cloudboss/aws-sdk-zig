@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisassociateIdentityPro
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DisassociateIdentityProviderConfigOutput {
-    var result: DisassociateIdentityProviderConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DisassociateIdentityProviderConfigOutput, body, allocator);
-    }
+    const result: DisassociateIdentityProviderConfigOutput = try aws.json.parseJsonObject(
+        DisassociateIdentityProviderConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

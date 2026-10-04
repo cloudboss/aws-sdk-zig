@@ -23,9 +23,17 @@ pub const DescribeUserInput = struct {
     /// `d-1234567890`. In this example, `d-` is a fixed prefix, and `1234567890` is
     /// a randomly generated string that contains numbers and lower case letters.
     /// This value is generated at the time that a new identity store is created.
+    ///
+    /// You can specify the identity store by ID or by Amazon Resource Name (ARN).
+    /// For example, identity store ID `d-1234567890` or identity store ARN
+    /// `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
     identity_store_id: []const u8,
 
     /// The identifier for a user in the identity store.
+    ///
+    /// You can specify the user by ID or by Amazon Resource Name (ARN). For
+    /// example, user ID `a1b2c3d4-5678-90ab-cdef-EXAMPLE11111` or user ARN
+    /// `arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
     user_id: []const u8,
 
     pub const json_field_names = .{
@@ -88,6 +96,10 @@ pub const DescribeUserOutput = struct {
     /// A URL link for the user's profile.
     profile_url: ?[]const u8 = null,
 
+    /// The current revision of the user in the identity store. This value changes
+    /// each time the user is modified.
+    revision: []const u8,
+
     /// The roles of the user.
     roles: ?[]const Role = null,
 
@@ -102,6 +114,11 @@ pub const DescribeUserOutput = struct {
 
     /// The identifier of the user or system that last updated the user.
     updated_by: ?[]const u8 = null,
+
+    /// The Amazon Resource Name (ARN) of the user in the identity store. For
+    /// example,
+    /// `arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
+    user_arn: []const u8,
 
     /// The identifier for a user in the identity store.
     user_id: []const u8,
@@ -139,11 +156,13 @@ pub const DescribeUserOutput = struct {
         .photos = "Photos",
         .preferred_language = "PreferredLanguage",
         .profile_url = "ProfileUrl",
+        .revision = "Revision",
         .roles = "Roles",
         .timezone = "Timezone",
         .title = "Title",
         .updated_at = "UpdatedAt",
         .updated_by = "UpdatedBy",
+        .user_arn = "UserArn",
         .user_id = "UserId",
         .user_name = "UserName",
         .user_status = "UserStatus",

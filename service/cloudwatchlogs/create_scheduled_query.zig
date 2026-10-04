@@ -14,10 +14,19 @@ pub const CreateScheduledQueryInput = struct {
     /// functionality.
     description: ?[]const u8 = null,
 
-    /// Configuration for where to deliver query results. Currently supports Amazon
-    /// S3 destinations for
-    /// storing query output.
+    /// Configuration for where to deliver query results. Supports Amazon S3
+    /// destinations for storing
+    /// query output and lookup table destinations for automatically refreshing
+    /// lookup tables with
+    /// query results. You can configure one or both destination types.
     destination_configuration: ?DestinationConfiguration = null,
+
+    /// The time offset in seconds that defines the end of the lookback period for
+    /// the query.
+    /// Together with `startTimeOffset`, this determines the time window relative to
+    /// the
+    /// execution time over which the query runs.
+    end_time_offset: ?i64 = null,
 
     /// The ARN of the IAM role that grants permissions to execute the query and
     /// deliver results
@@ -33,9 +42,7 @@ pub const CreateScheduledQueryInput = struct {
 
     /// The name of the scheduled query. The name must be unique within your account
     /// and region.
-    /// Valid characters are alphanumeric characters, hyphens, underscores, and
-    /// periods. Length must
-    /// be between 1 and 255 characters.
+    /// Length must be between 1 and 300 characters.
     name: []const u8,
 
     /// The query language to use for the scheduled query. Valid values are `CWLI`,
@@ -85,6 +92,7 @@ pub const CreateScheduledQueryInput = struct {
     pub const json_field_names = .{
         .description = "description",
         .destination_configuration = "destinationConfiguration",
+        .end_time_offset = "endTimeOffset",
         .execution_role_arn = "executionRoleArn",
         .log_group_identifiers = "logGroupIdentifiers",
         .name = "name",

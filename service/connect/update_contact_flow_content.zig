@@ -11,13 +11,13 @@ pub const UpdateContactFlowContentInput = struct {
 
     /// The JSON string that represents the content of the flow. For an example, see
     /// [Example
-    /// flow in Amazon Connect Flow
+    /// flow in Connect Customer Flow
     /// language](https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html).
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 256000.
     content: []const u8,
 
-    /// The identifier of the Amazon Connect instance.
+    /// The identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     pub const json_field_names = .{

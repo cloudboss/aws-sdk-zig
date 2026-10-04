@@ -2,14 +2,17 @@ const std = @import("std");
 
 pub const ScheduledQueryDestinationType = enum {
     s3,
+    lookup_table,
 
     pub const json_field_names = .{
         .s3 = "S3",
+        .lookup_table = "LOOKUP_TABLE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .s3 => "S3",
+            .lookup_table => "LOOKUP_TABLE",
         };
     }
 

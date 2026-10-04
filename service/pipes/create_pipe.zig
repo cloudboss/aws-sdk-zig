@@ -233,10 +233,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePipeInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePipeOutput {
-    var result: CreatePipeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePipeOutput, body, allocator);
-    }
+    const result: CreatePipeOutput = try aws.json.parseJsonObject(
+        CreatePipeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDataLakeNamespacesI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListDataLakeNamespacesOutput {
-    var result: ListDataLakeNamespacesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListDataLakeNamespacesOutput, body, allocator);
-    }
+    const result: ListDataLakeNamespacesOutput = try aws.json.parseJsonObject(
+        ListDataLakeNamespacesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -5,9 +5,12 @@ const cancel_capacity_task = @import("cancel_capacity_task.zig");
 const cancel_order = @import("cancel_order.zig");
 const create_order = @import("create_order.zig");
 const create_outpost = @import("create_outpost.zig");
+const create_private_connectivity_config = @import("create_private_connectivity_config.zig");
+const create_quote = @import("create_quote.zig");
 const create_renewal = @import("create_renewal.zig");
 const create_site = @import("create_site.zig");
 const delete_outpost = @import("delete_outpost.zig");
+const delete_quote = @import("delete_quote.zig");
 const delete_site = @import("delete_site.zig");
 const get_capacity_task = @import("get_capacity_task.zig");
 const get_catalog_item = @import("get_catalog_item.zig");
@@ -17,6 +20,8 @@ const get_outpost = @import("get_outpost.zig");
 const get_outpost_billing_information = @import("get_outpost_billing_information.zig");
 const get_outpost_instance_types = @import("get_outpost_instance_types.zig");
 const get_outpost_supported_instance_types = @import("get_outpost_supported_instance_types.zig");
+const get_private_connectivity_config = @import("get_private_connectivity_config.zig");
+const get_quote = @import("get_quote.zig");
 const get_renewal_pricing = @import("get_renewal_pricing.zig");
 const get_site = @import("get_site.zig");
 const get_site_address = @import("get_site_address.zig");
@@ -25,8 +30,10 @@ const list_assets = @import("list_assets.zig");
 const list_blocking_instances_for_capacity_task = @import("list_blocking_instances_for_capacity_task.zig");
 const list_capacity_tasks = @import("list_capacity_tasks.zig");
 const list_catalog_items = @import("list_catalog_items.zig");
+const list_orderable_instance_types = @import("list_orderable_instance_types.zig");
 const list_orders = @import("list_orders.zig");
 const list_outposts = @import("list_outposts.zig");
+const list_quotes = @import("list_quotes.zig");
 const list_sites = @import("list_sites.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const start_capacity_task = @import("start_capacity_task.zig");
@@ -35,6 +42,7 @@ const start_outpost_decommission = @import("start_outpost_decommission.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_outpost = @import("update_outpost.zig");
+const update_quote = @import("update_quote.zig");
 const update_site = @import("update_site.zig");
 const update_site_address = @import("update_site_address.zig");
 const update_site_rack_physical_properties = @import("update_site_rack_physical_properties.zig");
@@ -90,6 +98,27 @@ pub const Client = struct {
         return create_outpost.execute(self, allocator, input, options);
     }
 
+    /// Creates the private connectivity configuration for the specified Outpost.
+    /// Private
+    /// connectivity establishes a service link VPN connection between the Outpost
+    /// and its home
+    /// Amazon Web Services Region using a VPC and subnet that you specify, which
+    /// allows the service link traffic
+    /// to flow through your VPC and minimizes public internet exposure.
+    pub fn createPrivateConnectivityConfig(self: *Self, allocator: std.mem.Allocator, input: create_private_connectivity_config.CreatePrivateConnectivityConfigInput, options: CallOptions) !create_private_connectivity_config.CreatePrivateConnectivityConfigOutput {
+        return create_private_connectivity_config.execute(self, allocator, input, options);
+    }
+
+    /// Creates a quote for an Outpost. A quote provides pricing and configuration
+    /// options based
+    /// on the requested capacity. You can optionally associate the quote with an
+    /// existing Outpost or
+    /// create a standalone quote by specifying only the country code and requested
+    /// capacities.
+    pub fn createQuote(self: *Self, allocator: std.mem.Allocator, input: create_quote.CreateQuoteInput, options: CallOptions) !create_quote.CreateQuoteOutput {
+        return create_quote.execute(self, allocator, input, options);
+    }
+
     /// Creates a renewal contract for the specified Outpost.
     pub fn createRenewal(self: *Self, allocator: std.mem.Allocator, input: create_renewal.CreateRenewalInput, options: CallOptions) !create_renewal.CreateRenewalOutput {
         return create_renewal.execute(self, allocator, input, options);
@@ -103,6 +132,11 @@ pub const Client = struct {
     /// Deletes the specified Outpost.
     pub fn deleteOutpost(self: *Self, allocator: std.mem.Allocator, input: delete_outpost.DeleteOutpostInput, options: CallOptions) !delete_outpost.DeleteOutpostOutput {
         return delete_outpost.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the specified quote.
+    pub fn deleteQuote(self: *Self, allocator: std.mem.Allocator, input: delete_quote.DeleteQuoteInput, options: CallOptions) !delete_quote.DeleteQuoteOutput {
+        return delete_quote.execute(self, allocator, input, options);
     }
 
     /// Deletes the specified site.
@@ -162,6 +196,16 @@ pub const Client = struct {
     /// cannot be launched with the current Outpost capacity configuration.
     pub fn getOutpostSupportedInstanceTypes(self: *Self, allocator: std.mem.Allocator, input: get_outpost_supported_instance_types.GetOutpostSupportedInstanceTypesInput, options: CallOptions) !get_outpost_supported_instance_types.GetOutpostSupportedInstanceTypesOutput {
         return get_outpost_supported_instance_types.execute(self, allocator, input, options);
+    }
+
+    /// Gets the private connectivity configuration for the specified Outpost.
+    pub fn getPrivateConnectivityConfig(self: *Self, allocator: std.mem.Allocator, input: get_private_connectivity_config.GetPrivateConnectivityConfigInput, options: CallOptions) !get_private_connectivity_config.GetPrivateConnectivityConfigOutput {
+        return get_private_connectivity_config.execute(self, allocator, input, options);
+    }
+
+    /// Gets information about the specified quote.
+    pub fn getQuote(self: *Self, allocator: std.mem.Allocator, input: get_quote.GetQuoteInput, options: CallOptions) !get_quote.GetQuoteOutput {
+        return get_quote.execute(self, allocator, input, options);
     }
 
     /// Gets all available renewal pricing options for the specified Outpost.
@@ -228,6 +272,13 @@ pub const Client = struct {
         return list_catalog_items.execute(self, allocator, input, options);
     }
 
+    /// Lists the instance types that can be ordered for an Outpost. You can filter
+    /// the results
+    /// by Outpost generation.
+    pub fn listOrderableInstanceTypes(self: *Self, allocator: std.mem.Allocator, input: list_orderable_instance_types.ListOrderableInstanceTypesInput, options: CallOptions) !list_orderable_instance_types.ListOrderableInstanceTypesOutput {
+        return list_orderable_instance_types.execute(self, allocator, input, options);
+    }
+
     /// Lists the Outpost orders for your Amazon Web Services account.
     pub fn listOrders(self: *Self, allocator: std.mem.Allocator, input: list_orders.ListOrdersInput, options: CallOptions) !list_orders.ListOrdersOutput {
         return list_orders.execute(self, allocator, input, options);
@@ -242,6 +293,11 @@ pub const Client = struct {
     /// items that match any of the values that you specify for the filter.
     pub fn listOutposts(self: *Self, allocator: std.mem.Allocator, input: list_outposts.ListOutpostsInput, options: CallOptions) !list_outposts.ListOutpostsOutput {
         return list_outposts.execute(self, allocator, input, options);
+    }
+
+    /// Lists the quotes for your Amazon Web Services account.
+    pub fn listQuotes(self: *Self, allocator: std.mem.Allocator, input: list_quotes.ListQuotesInput, options: CallOptions) !list_quotes.ListQuotesOutput {
+        return list_quotes.execute(self, allocator, input, options);
     }
 
     /// Lists the Outpost sites for your Amazon Web Services account. Use filters to
@@ -302,6 +358,13 @@ pub const Client = struct {
     /// Updates an Outpost.
     pub fn updateOutpost(self: *Self, allocator: std.mem.Allocator, input: update_outpost.UpdateOutpostInput, options: CallOptions) !update_outpost.UpdateOutpostOutput {
         return update_outpost.execute(self, allocator, input, options);
+    }
+
+    /// Updates the specified quote. You can modify the requested capacities,
+    /// constraints,
+    /// payment options, payment terms, or Outpost association.
+    pub fn updateQuote(self: *Self, allocator: std.mem.Allocator, input: update_quote.UpdateQuoteInput, options: CallOptions) !update_quote.UpdateQuoteOutput {
+        return update_quote.execute(self, allocator, input, options);
     }
 
     /// Updates the specified site.
@@ -390,6 +453,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn listOrderableInstanceTypesPaginator(self: *Self, params: list_orderable_instance_types.ListOrderableInstanceTypesInput) paginator.ListOrderableInstanceTypesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listOrdersPaginator(self: *Self, params: list_orders.ListOrdersInput) paginator.ListOrdersPaginator {
         return .{
             .client = self,
@@ -398,6 +468,13 @@ pub const Client = struct {
     }
 
     pub fn listOutpostsPaginator(self: *Self, params: list_outposts.ListOutpostsInput) paginator.ListOutpostsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listQuotesPaginator(self: *Self, params: list_quotes.ListQuotesInput) paginator.ListQuotesPaginator {
         return .{
             .client = self,
             .params = params,

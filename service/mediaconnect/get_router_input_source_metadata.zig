@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRouterInputSourceMet
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRouterInputSourceMetadataOutput {
-    var result: GetRouterInputSourceMetadataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRouterInputSourceMetadataOutput, body, allocator);
-    }
+    const result: GetRouterInputSourceMetadataOutput = try aws.json.parseJsonObject(
+        GetRouterInputSourceMetadataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

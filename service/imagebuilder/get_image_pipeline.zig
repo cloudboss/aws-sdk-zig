@@ -84,10 +84,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetImagePipelineInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetImagePipelineOutput {
-    var result: GetImagePipelineOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetImagePipelineOutput, body, allocator);
-    }
+    const result: GetImagePipelineOutput = try aws.json.parseJsonObject(
+        GetImagePipelineOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

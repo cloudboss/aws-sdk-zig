@@ -228,10 +228,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchPlaceIndexForSugg
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchPlaceIndexForSuggestionsOutput {
-    var result: SearchPlaceIndexForSuggestionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchPlaceIndexForSuggestionsOutput, body, allocator);
-    }
+    const result: SearchPlaceIndexForSuggestionsOutput = try aws.json.parseJsonObject(
+        SearchPlaceIndexForSuggestionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

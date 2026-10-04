@@ -34,10 +34,10 @@ pub const CreateEngagementInput = struct {
     contexts: ?[]const EngagementContextDetails = null,
 
     /// Provides a description of the `Engagement`.
-    description: []const u8,
+    description: ?[]const u8 = null,
 
     /// Specifies the title of the `Engagement`.
-    title: []const u8,
+    title: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .catalog = "Catalog",

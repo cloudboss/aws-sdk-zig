@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeregisterCapabilityInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeregisterCapabilityOutput {
-    var result: DeregisterCapabilityOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeregisterCapabilityOutput, body, allocator);
-    }
+    const result: DeregisterCapabilityOutput = try aws.json.parseJsonObject(
+        DeregisterCapabilityOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

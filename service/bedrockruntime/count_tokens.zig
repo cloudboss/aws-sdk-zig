@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CountTokensInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CountTokensOutput {
-    var result: CountTokensOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CountTokensOutput, body, allocator);
-    }
+    const result: CountTokensOutput = try aws.json.parseJsonObject(
+        CountTokensOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

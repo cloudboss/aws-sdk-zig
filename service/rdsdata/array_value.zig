@@ -1,14 +1,14 @@
 /// Contains an array.
 pub const ArrayValue = union(enum) {
-    /// An array of arrays.
+    /// An array of arrays. Can contain null values.
     array_values: ?[]const ArrayValue,
-    /// An array of Boolean values.
+    /// An array of Boolean values. Can contain null values.
     boolean_values: ?[]const bool,
-    /// An array of floating-point numbers.
+    /// An array of floating-point numbers. Can contain null values.
     double_values: ?[]const f64,
-    /// An array of integers.
+    /// An array of integers. Can contain null values.
     long_values: ?[]const i64,
-    /// An array of strings.
+    /// An array of strings. Can contain null values.
     string_values: ?[]const []const u8,
 
     pub const json_field_names = .{

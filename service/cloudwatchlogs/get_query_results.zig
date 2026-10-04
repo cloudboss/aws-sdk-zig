@@ -11,7 +11,10 @@ const QueryStatus = @import("query_status.zig").QueryStatus;
 
 pub const GetQueryResultsInput = struct {
     /// The maximum number of log events to return in the response. The maximum is
-    /// 10,000 log events.
+    /// 10,000 log
+    /// events per request. You can retrieve up to 100,000 log event results from a
+    /// query by
+    /// paginating with the `nextToken`.
     max_items: ?i32 = null,
 
     /// The token for the next set of items to return. The token expires after 1
@@ -40,7 +43,10 @@ pub const GetQueryResultsOutput = struct {
     /// If there are more log events remaining in the results, the response includes
     /// a
     /// `nextToken`. You can use this token in a subsequent `GetQueryResults`
-    /// request to get the next set of results.
+    /// request to get the next set of results. You can retrieve up to 100,000 log
+    /// event results
+    /// from a query by paginating with this token. This is only supported for Logs
+    /// Insights QL and is currently not supported for PPL and SQL query languages.
     next_token: ?[]const u8 = null,
 
     /// The query language used for this query. For more information about the query

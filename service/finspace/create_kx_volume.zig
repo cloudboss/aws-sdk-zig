@@ -229,10 +229,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateKxVolumeInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateKxVolumeOutput {
-    var result: CreateKxVolumeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateKxVolumeOutput, body, allocator);
-    }
+    const result: CreateKxVolumeOutput = try aws.json.parseJsonObject(
+        CreateKxVolumeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -144,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAudienceGenerationJo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAudienceGenerationJobOutput {
-    var result: GetAudienceGenerationJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAudienceGenerationJobOutput, body, allocator);
-    }
+    const result: GetAudienceGenerationJobOutput = try aws.json.parseJsonObject(
+        GetAudienceGenerationJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

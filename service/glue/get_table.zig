@@ -4,10 +4,25 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const TableAttributes = @import("table_attributes.zig").TableAttributes;
 const AuditContext = @import("audit_context.zig").AuditContext;
 const Table = @import("table.zig").Table;
 
 pub const GetTableInput = struct {
+    /// Specifies the table fields returned by the `GetTable` call. This parameter
+    /// doesn't accept an empty list.
+    ///
+    /// The following are the valid combinations of values:
+    ///
+    /// * `DEFAULT` - Returns the Hive-style table definition only.
+    ///
+    /// * `LATEST_ICEBERG_METADATA` - Returns only the latest Apache Iceberg table
+    ///   metadata.
+    ///
+    /// * `DEFAULT`, `LATEST_ICEBERG_METADATA` - Returns both the Hive-style table
+    ///   definition and the latest Apache Iceberg table metadata.
+    attributes_to_get: ?[]const TableAttributes = null,
+
     /// A structure containing the Lake Formation [audit
     /// context](https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html).
     audit_context: ?AuditContext = null,
@@ -38,6 +53,7 @@ pub const GetTableInput = struct {
     transaction_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .attributes_to_get = "AttributesToGet",
         .audit_context = "AuditContext",
         .catalog_id = "CatalogId",
         .database_name = "DatabaseName",

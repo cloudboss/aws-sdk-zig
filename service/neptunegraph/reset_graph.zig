@@ -146,10 +146,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ResetGraphInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ResetGraphOutput {
-    var result: ResetGraphOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ResetGraphOutput, body, allocator);
-    }
+    const result: ResetGraphOutput = try aws.json.parseJsonObject(
+        ResetGraphOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

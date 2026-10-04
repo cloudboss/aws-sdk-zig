@@ -17,7 +17,7 @@ pub const QuickConnectSummary = struct {
     /// The name of the quick connect.
     name: ?[]const u8 = null,
 
-    /// The type of quick connect. In the Amazon Connect admin website, when you
+    /// The type of quick connect. In the Connect Customer admin website, when you
     /// create a quick connect, you are
     /// prompted to assign one of the following types: Agent (USER), External
     /// (PHONE_NUMBER), or Queue (QUEUE).

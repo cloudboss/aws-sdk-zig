@@ -1,3 +1,4 @@
+const CertificateKeyPairOrigin = @import("certificate_key_pair_origin.zig").CertificateKeyPairOrigin;
 const CertificateExport = @import("certificate_export.zig").CertificateExport;
 const CertificateManagedBy = @import("certificate_managed_by.zig").CertificateManagedBy;
 const RenewalStatus = @import("renewal_status.zig").RenewalStatus;
@@ -7,6 +8,12 @@ const ValidationMethod = @import("validation_method.zig").ValidationMethod;
 
 /// Filters certificates by ACM metadata.
 pub const AcmCertificateMetadataFilter = union(enum) {
+    /// Filter by ACME account identifier.
+    acme_account_id: ?[]const u8,
+    /// Filter by ACME endpoint ARN.
+    acme_endpoint_arn: ?[]const u8,
+    /// Filter by certificate key pair origin.
+    certificate_key_pair_origin: ?CertificateKeyPairOrigin,
     /// Filter by whether the certificate has been exported.
     exported: ?bool,
     /// Filter by certificate export option.
@@ -25,6 +32,9 @@ pub const AcmCertificateMetadataFilter = union(enum) {
     validation_method: ?ValidationMethod,
 
     pub const json_field_names = .{
+        .acme_account_id = "AcmeAccountId",
+        .acme_endpoint_arn = "AcmeEndpointArn",
+        .certificate_key_pair_origin = "CertificateKeyPairOrigin",
         .exported = "Exported",
         .export_option = "ExportOption",
         .in_use = "InUse",

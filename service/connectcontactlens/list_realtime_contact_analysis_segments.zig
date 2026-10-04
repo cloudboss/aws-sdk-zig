@@ -125,10 +125,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRealtimeContactAnal
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListRealtimeContactAnalysisSegmentsOutput {
-    var result: ListRealtimeContactAnalysisSegmentsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListRealtimeContactAnalysisSegmentsOutput, body, allocator);
-    }
+    const result: ListRealtimeContactAnalysisSegmentsOutput = try aws.json.parseJsonObject(
+        ListRealtimeContactAnalysisSegmentsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

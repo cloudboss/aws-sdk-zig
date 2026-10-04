@@ -12,7 +12,8 @@ pub const CreatePaymentInstrumentInput = struct {
     /// The agent name associated with this request, used for observability.
     agent_name: ?[]const u8 = null,
 
-    /// Idempotency token to ensure request uniqueness.
+    /// A unique, case-sensitive identifier that you provide to ensure the
+    /// idempotency of the request.
     client_token: ?[]const u8 = null,
 
     /// The ID of the payment connector to use for this instrument.
@@ -42,6 +43,7 @@ pub const CreatePaymentInstrumentInput = struct {
 };
 
 pub const CreatePaymentInstrumentOutput = struct {
+    /// The created payment instrument.
     payment_instrument: ?PaymentInstrument = null,
 
     pub const json_field_names = .{
@@ -129,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePaymentInstrument
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePaymentInstrumentOutput {
-    var result: CreatePaymentInstrumentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePaymentInstrumentOutput, body, allocator);
-    }
+    const result: CreatePaymentInstrumentOutput = try aws.json.parseJsonObject(
+        CreatePaymentInstrumentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

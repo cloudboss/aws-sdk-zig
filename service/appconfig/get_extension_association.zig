@@ -94,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetExtensionAssociation
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetExtensionAssociationOutput {
-    var result: GetExtensionAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetExtensionAssociationOutput, body, allocator);
-    }
+    const result: GetExtensionAssociationOutput = try aws.json.parseJsonObject(
+        GetExtensionAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

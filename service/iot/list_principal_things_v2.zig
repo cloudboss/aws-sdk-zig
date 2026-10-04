@@ -131,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPrincipalThingsV2In
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListPrincipalThingsV2Output {
-    var result: ListPrincipalThingsV2Output = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListPrincipalThingsV2Output, body, allocator);
-    }
+    const result: ListPrincipalThingsV2Output = try aws.json.parseJsonObject(
+        ListPrincipalThingsV2Output,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

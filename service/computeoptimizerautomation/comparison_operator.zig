@@ -13,6 +13,18 @@ pub const ComparisonOperator = enum {
     numeric_less_than_equals,
     numeric_greater_than,
     numeric_greater_than_equals,
+    string_equals_if_exists,
+    string_not_equals_if_exists,
+    string_equals_ignore_case_if_exists,
+    string_not_equals_ignore_case_if_exists,
+    string_like_if_exists,
+    string_not_like_if_exists,
+    numeric_equals_if_exists,
+    numeric_not_equals_if_exists,
+    numeric_less_than_if_exists,
+    numeric_less_than_equals_if_exists,
+    numeric_greater_than_if_exists,
+    numeric_greater_than_equals_if_exists,
 
     pub const json_field_names = .{
         .string_equals = "StringEquals",
@@ -27,6 +39,18 @@ pub const ComparisonOperator = enum {
         .numeric_less_than_equals = "NumericLessThanEquals",
         .numeric_greater_than = "NumericGreaterThan",
         .numeric_greater_than_equals = "NumericGreaterThanEquals",
+        .string_equals_if_exists = "StringEqualsIfExists",
+        .string_not_equals_if_exists = "StringNotEqualsIfExists",
+        .string_equals_ignore_case_if_exists = "StringEqualsIgnoreCaseIfExists",
+        .string_not_equals_ignore_case_if_exists = "StringNotEqualsIgnoreCaseIfExists",
+        .string_like_if_exists = "StringLikeIfExists",
+        .string_not_like_if_exists = "StringNotLikeIfExists",
+        .numeric_equals_if_exists = "NumericEqualsIfExists",
+        .numeric_not_equals_if_exists = "NumericNotEqualsIfExists",
+        .numeric_less_than_if_exists = "NumericLessThanIfExists",
+        .numeric_less_than_equals_if_exists = "NumericLessThanEqualsIfExists",
+        .numeric_greater_than_if_exists = "NumericGreaterThanIfExists",
+        .numeric_greater_than_equals_if_exists = "NumericGreaterThanEqualsIfExists",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -43,6 +67,18 @@ pub const ComparisonOperator = enum {
             .numeric_less_than_equals => "NumericLessThanEquals",
             .numeric_greater_than => "NumericGreaterThan",
             .numeric_greater_than_equals => "NumericGreaterThanEquals",
+            .string_equals_if_exists => "StringEqualsIfExists",
+            .string_not_equals_if_exists => "StringNotEqualsIfExists",
+            .string_equals_ignore_case_if_exists => "StringEqualsIgnoreCaseIfExists",
+            .string_not_equals_ignore_case_if_exists => "StringNotEqualsIgnoreCaseIfExists",
+            .string_like_if_exists => "StringLikeIfExists",
+            .string_not_like_if_exists => "StringNotLikeIfExists",
+            .numeric_equals_if_exists => "NumericEqualsIfExists",
+            .numeric_not_equals_if_exists => "NumericNotEqualsIfExists",
+            .numeric_less_than_if_exists => "NumericLessThanIfExists",
+            .numeric_less_than_equals_if_exists => "NumericLessThanEqualsIfExists",
+            .numeric_greater_than_if_exists => "NumericGreaterThanIfExists",
+            .numeric_greater_than_equals_if_exists => "NumericGreaterThanEqualsIfExists",
         };
     }
 

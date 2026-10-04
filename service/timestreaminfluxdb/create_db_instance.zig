@@ -4,12 +4,14 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DbBackupConfiguration = @import("db_backup_configuration.zig").DbBackupConfiguration;
 const DbInstanceType = @import("db_instance_type.zig").DbInstanceType;
 const DbStorageType = @import("db_storage_type.zig").DbStorageType;
 const DeploymentType = @import("deployment_type.zig").DeploymentType;
 const LogDeliveryConfiguration = @import("log_delivery_configuration.zig").LogDeliveryConfiguration;
 const MaintenanceSchedule = @import("maintenance_schedule.zig").MaintenanceSchedule;
 const NetworkType = @import("network_type.zig").NetworkType;
+const DbBackupConfigurationOutput = @import("db_backup_configuration_output.zig").DbBackupConfigurationOutput;
 const InstanceMode = @import("instance_mode.zig").InstanceMode;
 const Status = @import("status.zig").Status;
 
@@ -23,6 +25,10 @@ pub const CreateDbInstanceInput = struct {
     /// (the duration of time that each data point persists). A bucket belongs to an
     /// organization.
     bucket: ?[]const u8 = null,
+
+    /// A list of backup configurations to enable automated backups for the DB
+    /// instance.
+    db_backup_configurations: ?[]const DbBackupConfiguration = null,
 
     /// The Timestream for InfluxDB DB instance type to run InfluxDB on.
     db_instance_type: DbInstanceType,
@@ -47,6 +53,10 @@ pub const CreateDbInstanceInput = struct {
     /// Specifies whether the DB instance will be deployed as a standalone instance
     /// or with a Multi-AZ standby for high availability.
     deployment_type: ?DeploymentType = null,
+
+    /// The Amazon Web Services KMS key identifier to use for encryption of the DB
+    /// instance. Can be a key ID, key ARN, alias name, or alias ARN.
+    kms_key_id: ?[]const u8 = null,
 
     /// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
     log_delivery_configuration: ?LogDeliveryConfiguration = null,
@@ -113,10 +123,12 @@ pub const CreateDbInstanceInput = struct {
     pub const json_field_names = .{
         .allocated_storage = "allocatedStorage",
         .bucket = "bucket",
+        .db_backup_configurations = "dbBackupConfigurations",
         .db_instance_type = "dbInstanceType",
         .db_parameter_group_identifier = "dbParameterGroupIdentifier",
         .db_storage_type = "dbStorageType",
         .deployment_type = "deploymentType",
+        .kms_key_id = "kmsKeyId",
         .log_delivery_configuration = "logDeliveryConfiguration",
         .maintenance_schedule = "maintenanceSchedule",
         .name = "name",
@@ -141,6 +153,9 @@ pub const CreateDbInstanceOutput = struct {
 
     /// The Availability Zone in which the DB instance resides.
     availability_zone: ?[]const u8 = null,
+
+    /// The backup configurations for the DB instance.
+    db_backup_configurations: ?[]const DbBackupConfigurationOutput = null,
 
     /// Specifies the DbCluster to which this DbInstance belongs to.
     db_cluster_id: ?[]const u8 = null,
@@ -175,6 +190,9 @@ pub const CreateDbInstanceOutput = struct {
 
     /// Specifies the DbInstance's roles in the cluster.
     instance_modes: ?[]const InstanceMode = null,
+
+    /// The Amazon Web Services KMS key ARN used for encryption of the DB instance.
+    kms_key_id: ?[]const u8 = null,
 
     /// The timestamp of the last completed maintenance operation on the DB
     /// instance.
@@ -224,6 +242,7 @@ pub const CreateDbInstanceOutput = struct {
         .allocated_storage = "allocatedStorage",
         .arn = "arn",
         .availability_zone = "availabilityZone",
+        .db_backup_configurations = "dbBackupConfigurations",
         .db_cluster_id = "dbClusterId",
         .db_instance_type = "dbInstanceType",
         .db_parameter_group_identifier = "dbParameterGroupIdentifier",
@@ -234,6 +253,7 @@ pub const CreateDbInstanceOutput = struct {
         .influx_auth_parameters_secret_arn = "influxAuthParametersSecretArn",
         .instance_mode = "instanceMode",
         .instance_modes = "instanceModes",
+        .kms_key_id = "kmsKeyId",
         .last_maintenance_time = "lastMaintenanceTime",
         .log_delivery_configuration = "logDeliveryConfiguration",
         .maintenance_schedule = "maintenanceSchedule",

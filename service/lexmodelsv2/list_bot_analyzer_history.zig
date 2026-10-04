@@ -142,10 +142,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListBotAnalyzerHistoryI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListBotAnalyzerHistoryOutput {
-    var result: ListBotAnalyzerHistoryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListBotAnalyzerHistoryOutput, body, allocator);
-    }
+    const result: ListBotAnalyzerHistoryOutput = try aws.json.parseJsonObject(
+        ListBotAnalyzerHistoryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

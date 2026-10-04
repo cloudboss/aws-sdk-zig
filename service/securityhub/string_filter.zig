@@ -11,7 +11,14 @@ pub const StringFilter = struct {
     /// * To search for values that include the filter value, use `CONTAINS`. For
     ///   example, the
     /// filter `Title CONTAINS CloudFront` matches findings that have a `Title` that
-    /// includes the string CloudFront.
+    /// includes the string `CloudFront`.
+    ///
+    /// * To search for values that contain a word matching the filter value,
+    ///   regardless of case, use `CONTAINS_WORD`. For example,
+    /// the filter `Title CONTAINS_WORD lambda` matches a finding whose `Title` is
+    /// `GuardDuty Lambda Protection`, because
+    /// the `Title` contains the word Lambda. Including special characters in the
+    /// filter value might produce unexpected search results.
     ///
     /// * To search for values that exactly match the filter value, use `EQUALS`.
     ///   For example,

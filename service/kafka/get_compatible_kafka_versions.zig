@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCompatibleKafkaVersi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCompatibleKafkaVersionsOutput {
-    var result: GetCompatibleKafkaVersionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCompatibleKafkaVersionsOutput, body, allocator);
-    }
+    const result: GetCompatibleKafkaVersionsOutput = try aws.json.parseJsonObject(
+        GetCompatibleKafkaVersionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateTransitGateway
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateTransitGatewayConnectPeerOutput {
-    var result: AssociateTransitGatewayConnectPeerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateTransitGatewayConnectPeerOutput, body, allocator);
-    }
+    const result: AssociateTransitGatewayConnectPeerOutput = try aws.json.parseJsonObject(
+        AssociateTransitGatewayConnectPeerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -38,7 +38,8 @@ pub const MaterializedViewRefreshTaskRun = struct {
     /// The type of the refresh task run. Either FULL or INCREMENTAL.
     refresh_type: ?MaterializedViewRefreshType = null,
 
-    /// The IAM role that the service assumes to generate statistics.
+    /// The IAM role that the service assumes to run the materialized view refresh
+    /// task.
     role: ?[]const u8 = null,
 
     /// The start time of the task.
@@ -47,7 +48,7 @@ pub const MaterializedViewRefreshTaskRun = struct {
     /// The status of the task run.
     status: ?MaterializedViewRefreshState = null,
 
-    /// The name of the table for which statistics is generated.
+    /// The name of the materialized view.
     table_name: ?[]const u8 = null,
 
     pub const json_field_names = .{

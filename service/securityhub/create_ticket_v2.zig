@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTicketV2Input, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateTicketV2Output {
-    var result: CreateTicketV2Output = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateTicketV2Output, body, allocator);
-    }
+    const result: CreateTicketV2Output = try aws.json.parseJsonObject(
+        CreateTicketV2Output,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

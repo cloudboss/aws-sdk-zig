@@ -89,9 +89,9 @@ pub const InfluxDBv2Parameters = struct {
     /// Default: 0
     query_initial_memory_bytes: ?i64 = null,
 
-    /// Maximum number of queries allowed in execution queue. When queue limit is
-    /// reached, new queries are rejected. Setting to 0 allows an unlimited number
-    /// of queries in the queue.
+    /// Maximum total bytes of memory allowed for all running queries. When this
+    /// limit is reached, new queries are rejected. Setting to 0 allows unlimited
+    /// memory usage.
     ///
     /// Default: 0
     query_max_memory_bytes: ?i64 = null,

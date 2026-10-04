@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCodeSecurityScanCon
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListCodeSecurityScanConfigurationsOutput {
-    var result: ListCodeSecurityScanConfigurationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListCodeSecurityScanConfigurationsOutput, body, allocator);
-    }
+    const result: ListCodeSecurityScanConfigurationsOutput = try aws.json.parseJsonObject(
+        ListCodeSecurityScanConfigurationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

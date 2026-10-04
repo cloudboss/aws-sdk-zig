@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeGlobalSettingsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeGlobalSettingsOutput {
-    var result: DescribeGlobalSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeGlobalSettingsOutput, body, allocator);
-    }
+    const result: DescribeGlobalSettingsOutput = try aws.json.parseJsonObject(
+        DescribeGlobalSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

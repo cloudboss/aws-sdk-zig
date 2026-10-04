@@ -13,7 +13,9 @@ pub const LifecyclePolicyDetailFilter = struct {
     /// is not deleted.
     retain_at_least: ?i32 = null,
 
-    /// Filter resources based on either `age` or `count`.
+    /// Filter resources based on either `AGE` or `COUNT`.
+    /// You can only use the count filter with the `DELETE` action
+    /// type.
     @"type": LifecyclePolicyDetailFilterType,
 
     /// Defines the unit of time that the lifecycle policy uses to determine

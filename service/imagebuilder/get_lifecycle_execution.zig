@@ -7,8 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const LifecycleExecution = @import("lifecycle_execution.zig").LifecycleExecution;
 
 pub const GetLifecycleExecutionInput = struct {
-    /// Use the unique identifier for a runtime instance of the lifecycle policy to
-    /// get runtime details.
+    /// The unique identifier for a runtime instance of the lifecycle policy.
     lifecycle_execution_id: []const u8,
 
     pub const json_field_names = .{
@@ -80,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLifecycleExecutionIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetLifecycleExecutionOutput {
-    var result: GetLifecycleExecutionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetLifecycleExecutionOutput, body, allocator);
-    }
+    const result: GetLifecycleExecutionOutput = try aws.json.parseJsonObject(
+        GetLifecycleExecutionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

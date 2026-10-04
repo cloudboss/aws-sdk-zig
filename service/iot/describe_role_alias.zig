@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeRoleAliasInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeRoleAliasOutput {
-    var result: DescribeRoleAliasOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeRoleAliasOutput, body, allocator);
-    }
+    const result: DescribeRoleAliasOutput = try aws.json.parseJsonObject(
+        DescribeRoleAliasOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

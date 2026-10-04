@@ -1,6 +1,7 @@
 const LogsBackupConfiguration = @import("logs_backup_configuration.zig").LogsBackupConfiguration;
 const LogGroupNameConfiguration = @import("log_group_name_configuration.zig").LogGroupNameConfiguration;
 const LogsEncryptionConfiguration = @import("logs_encryption_configuration.zig").LogsEncryptionConfiguration;
+const TagPropagationConfiguration = @import("tag_propagation_configuration.zig").TagPropagationConfiguration;
 
 /// Configuration for centralization destination log groups, including
 /// encryption and backup settings.
@@ -18,9 +19,16 @@ pub const DestinationLogsConfiguration = struct {
     /// The encryption configuration for centralization destination log groups.
     logs_encryption_configuration: ?LogsEncryptionConfiguration = null,
 
+    /// Specifies the tag propagation configuration for this centralization rule.
+    /// When present, `LogGroupNameConfiguration` must use a `LogGroupNamePattern`
+    /// that contains `${source.logGroup}`, `${source.accountId}`, and
+    /// `${source.region}`.
+    tag_propagation_configuration: ?TagPropagationConfiguration = null,
+
     pub const json_field_names = .{
         .backup_configuration = "BackupConfiguration",
         .log_group_name_configuration = "LogGroupNameConfiguration",
         .logs_encryption_configuration = "LogsEncryptionConfiguration",
+        .tag_propagation_configuration = "TagPropagationConfiguration",
     };
 };

@@ -3,11 +3,9 @@ const Industries = @import("industries.zig").Industries;
 /// Additional tax information associated with your TRN in Turkey.
 pub const TurkeyAdditionalInfo = struct {
     /// The industry information that tells the Tax Settings API if you're subject
-    /// to additional
-    /// withholding taxes. This information required for business-to-business (B2B)
-    /// customers. This
-    /// information is conditionally mandatory for B2B customers who are subject to
-    /// KDV tax.
+    /// to additional withholding taxes. This information required for
+    /// business-to-business (B2B) customers. This information is conditionally
+    /// mandatory for B2B customers who are subject to KDV tax.
     industries: ?Industries = null,
 
     /// The Registered Electronic Mail (REM) that is used to send notarized

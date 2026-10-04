@@ -124,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPricingRulesAssocia
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListPricingRulesAssociatedToPricingPlanOutput {
-    var result: ListPricingRulesAssociatedToPricingPlanOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListPricingRulesAssociatedToPricingPlanOutput, body, allocator);
-    }
+    const result: ListPricingRulesAssociatedToPricingPlanOutput = try aws.json.parseJsonObject(
+        ListPricingRulesAssociatedToPricingPlanOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

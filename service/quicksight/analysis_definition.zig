@@ -9,6 +9,7 @@ const QueryExecutionOptions = @import("query_execution_options.zig").QueryExecut
 const SheetDefinition = @import("sheet_definition.zig").SheetDefinition;
 const StaticFile = @import("static_file.zig").StaticFile;
 const TooltipSheetDefinition = @import("tooltip_sheet_definition.zig").TooltipSheetDefinition;
+const TopicIdentifierDeclaration = @import("topic_identifier_declaration.zig").TopicIdentifierDeclaration;
 
 /// The definition of an analysis.
 pub const AnalysisDefinition = struct {
@@ -60,6 +61,11 @@ pub const AnalysisDefinition = struct {
     /// a tooltip sheet within this analysis.
     tooltip_sheets: ?[]const TooltipSheetDefinition = null,
 
+    /// An array of topic identifier declarations. This mapping allows the usage of
+    /// topic identifiers instead
+    /// of topic ARNs throughout analysis sub-structures.
+    topic_identifier_declarations: ?[]const TopicIdentifierDeclaration = null,
+
     pub const json_field_names = .{
         .analysis_defaults = "AnalysisDefaults",
         .calculated_fields = "CalculatedFields",
@@ -72,5 +78,6 @@ pub const AnalysisDefinition = struct {
         .sheets = "Sheets",
         .static_files = "StaticFiles",
         .tooltip_sheets = "TooltipSheets",
+        .topic_identifier_declarations = "TopicIdentifierDeclarations",
     };
 };

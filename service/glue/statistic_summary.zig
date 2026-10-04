@@ -1,5 +1,6 @@
 const aws = @import("aws");
 
+const DistributionData = @import("distribution_data.zig").DistributionData;
 const StatisticEvaluationLevel = @import("statistic_evaluation_level.zig").StatisticEvaluationLevel;
 const TimestampedInclusionAnnotation = @import("timestamped_inclusion_annotation.zig").TimestampedInclusionAnnotation;
 const RunIdentifier = @import("run_identifier.zig").RunIdentifier;
@@ -8,6 +9,9 @@ const RunIdentifier = @import("run_identifier.zig").RunIdentifier;
 pub const StatisticSummary = struct {
     /// The list of columns referenced by the statistic.
     columns_referenced: ?[]const []const u8 = null,
+
+    /// The distribution value for the statistic.
+    distribution_value: ?DistributionData = null,
 
     /// The value of the statistic.
     double_value: f64 = 0,
@@ -43,6 +47,7 @@ pub const StatisticSummary = struct {
 
     pub const json_field_names = .{
         .columns_referenced = "ColumnsReferenced",
+        .distribution_value = "DistributionValue",
         .double_value = "DoubleValue",
         .evaluation_level = "EvaluationLevel",
         .inclusion_annotation = "InclusionAnnotation",

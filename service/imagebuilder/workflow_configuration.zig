@@ -4,7 +4,10 @@ const WorkflowParameter = @import("workflow_parameter.zig").WorkflowParameter;
 /// Contains control settings and configurable inputs for a workflow
 /// resource.
 pub const WorkflowConfiguration = struct {
-    /// The action to take if the workflow fails.
+    /// The action to take if the workflow fails. With `CONTINUE`, a
+    /// failed workflow is logged and image creation proceeds to the next workflow.
+    /// If you don't set a value, the image build fails when the workflow fails.
+    /// You can only set this property for test workflows.
     on_failure: ?OnWorkflowFailure = null,
 
     /// Test workflows are defined within named runtime groups called parallel

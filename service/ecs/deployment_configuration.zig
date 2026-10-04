@@ -1,6 +1,7 @@
 const DeploymentAlarms = @import("deployment_alarms.zig").DeploymentAlarms;
 const CanaryConfiguration = @import("canary_configuration.zig").CanaryConfiguration;
 const DeploymentCircuitBreaker = @import("deployment_circuit_breaker.zig").DeploymentCircuitBreaker;
+const DeploymentEarlySuccessCriteria = @import("deployment_early_success_criteria.zig").DeploymentEarlySuccessCriteria;
 const DeploymentLifecycleHook = @import("deployment_lifecycle_hook.zig").DeploymentLifecycleHook;
 const LinearConfiguration = @import("linear_configuration.zig").LinearConfiguration;
 const DeploymentStrategy = @import("deployment_strategy.zig").DeploymentStrategy;
@@ -36,8 +37,15 @@ pub const DeploymentConfiguration = struct {
     /// update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html) in the *Amazon Elastic Container Service Developer Guide*
     deployment_circuit_breaker: ?DeploymentCircuitBreaker = null,
 
-    /// An array of deployment lifecycle hook objects to run custom logic at
-    /// specific stages of the deployment lifecycle.
+    /// The early success criteria configuration for a rolling deployment. With
+    /// early success criteria, you can configure an Amazon ECS deployment to
+    /// complete faster. Amazon ECS declares a deployment successful once a target
+    /// percentage of tasks are healthy, instead of waiting for the service to fully
+    /// stabilize.
+    early_success_criteria: ?DeploymentEarlySuccessCriteria = null,
+
+    /// An array of deployment lifecycle hook objects to run custom logic or pause
+    /// the deployment at specific stages of the deployment lifecycle.
     lifecycle_hooks: ?[]const DeploymentLifecycleHook = null,
 
     /// Configuration for linear deployment strategy. Only valid when the deployment
@@ -180,6 +188,7 @@ pub const DeploymentConfiguration = struct {
         .bake_time_in_minutes = "bakeTimeInMinutes",
         .canary_configuration = "canaryConfiguration",
         .deployment_circuit_breaker = "deploymentCircuitBreaker",
+        .early_success_criteria = "earlySuccessCriteria",
         .lifecycle_hooks = "lifecycleHooks",
         .linear_configuration = "linearConfiguration",
         .maximum_percent = "maximumPercent",

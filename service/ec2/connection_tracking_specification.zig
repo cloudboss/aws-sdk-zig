@@ -8,7 +8,9 @@
 pub const ConnectionTrackingSpecification = struct {
     /// Timeout (in seconds) for idle TCP
     /// connections in an established state. Min: 60 seconds. Max: 432000 seconds (5
-    /// days). Default: 432000 seconds. Recommended: Less than 432000 seconds.
+    /// days). Default: 350 seconds for Nitro v6 instance types (excluding
+    /// P6e-GB200); 432000 seconds for all other instance types (including
+    /// P6e-GB200). Recommended: Less than 432000 seconds.
     tcp_established_timeout: ?i32 = null,
 
     /// Timeout (in seconds) for idle UDP

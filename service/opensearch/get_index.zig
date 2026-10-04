@@ -78,10 +78,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetIndexInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetIndexOutput {
-    var result: GetIndexOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetIndexOutput, body, allocator);
-    }
+    const result: GetIndexOutput = try aws.json.parseJsonObject(
+        GetIndexOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

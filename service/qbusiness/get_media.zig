@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMediaInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMediaOutput {
-    var result: GetMediaOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMediaOutput, body, allocator);
-    }
+    const result: GetMediaOutput = try aws.json.parseJsonObject(
+        GetMediaOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

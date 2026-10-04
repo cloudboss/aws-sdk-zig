@@ -19,6 +19,9 @@ pub const CanaryRun = struct {
     /// A unique ID that identifies this canary run.
     id: ?[]const u8 = null,
 
+    /// The Amazon Web Services Region where this canary run was executed.
+    location: ?[]const u8 = null,
+
     /// The name of the canary.
     name: ?[]const u8 = null,
 
@@ -39,6 +42,7 @@ pub const CanaryRun = struct {
         .browser_type = "BrowserType",
         .dry_run_config = "DryRunConfig",
         .id = "Id",
+        .location = "Location",
         .name = "Name",
         .retry_attempt = "RetryAttempt",
         .scheduled_run_id = "ScheduledRunId",

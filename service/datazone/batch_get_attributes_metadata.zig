@@ -117,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetAttributesMetad
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetAttributesMetadataOutput {
-    var result: BatchGetAttributesMetadataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetAttributesMetadataOutput, body, allocator);
-    }
+    const result: BatchGetAttributesMetadataOutput = try aws.json.parseJsonObject(
+        BatchGetAttributesMetadataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

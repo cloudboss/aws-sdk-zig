@@ -282,12 +282,12 @@ pub const ActiveDirectoryError = struct {
     active_directory_id: []const u8,
 
     /// The type of Active Directory error.
-    type: ?ActiveDirectoryErrorType = null,
+    @"type": ?ActiveDirectoryErrorType = null,
 
     pub const json_field_names = .{
         .active_directory_id = "ActiveDirectoryId",
         .message = "Message",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

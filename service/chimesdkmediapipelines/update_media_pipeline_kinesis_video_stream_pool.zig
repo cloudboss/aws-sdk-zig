@@ -91,10 +91,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateMediaPipelineKine
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateMediaPipelineKinesisVideoStreamPoolOutput {
-    var result: UpdateMediaPipelineKinesisVideoStreamPoolOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateMediaPipelineKinesisVideoStreamPoolOutput, body, allocator);
-    }
+    const result: UpdateMediaPipelineKinesisVideoStreamPoolOutput = try aws.json.parseJsonObject(
+        UpdateMediaPipelineKinesisVideoStreamPoolOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

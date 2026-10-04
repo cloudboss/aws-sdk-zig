@@ -45,8 +45,8 @@ pub const UpdateFunctionConfigurationInput = struct {
     /// A description of the function.
     description: ?[]const u8 = null,
 
-    /// Configuration settings for durable functions. Allows updating execution
-    /// timeout and retention period for functions with durability enabled.
+    /// Configuration settings for [durable
+    /// functions](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html), including execution timeout, retention period for execution history, and an optional ARN of the Key Management Service (KMS) customer managed key that is used to encrypt your durable execution's payload data, including input, output, and error payloads.
     durable_config: ?DurableConfig = null,
 
     /// Environment variables that are accessible from function code during
@@ -148,8 +148,11 @@ pub const UpdateFunctionConfigurationInput = struct {
     snap_start: ?SnapStart = null,
 
     /// The amount of time (in seconds) that Lambda allows a function to run before
-    /// stopping it. The default is 3 seconds. The maximum allowed value is 900
-    /// seconds. For more information, see [Lambda execution
+    /// stopping it. The default is 3 seconds, and the maximum allowed value is 900
+    /// seconds. For functions using Lambda Managed Instances, asynchronous
+    /// invocations and event source mapping invocations (except Amazon MQ and
+    /// Amazon DocumentDB) support a maximum allowed value of 5,400 seconds (90
+    /// minutes). For more information, see [Lambda execution
     /// environment](https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html).
     timeout: ?i32 = null,
 
@@ -369,10 +372,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateFunctionConfigura
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateFunctionConfigurationOutput {
-    var result: UpdateFunctionConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateFunctionConfigurationOutput, body, allocator);
-    }
+    const result: UpdateFunctionConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateFunctionConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

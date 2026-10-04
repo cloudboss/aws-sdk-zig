@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AccountAccessType = @import("account_access_type.zig").AccountAccessType;
+const IPAddressType = @import("ip_address_type.zig").IPAddressType;
 const NetworkAccessConfiguration = @import("network_access_configuration.zig").NetworkAccessConfiguration;
 const PermissionType = @import("permission_type.zig").PermissionType;
 const VpcConfiguration = @import("vpc_configuration.zig").VpcConfiguration;
@@ -19,6 +20,12 @@ pub const UpdateWorkspaceInput = struct {
     /// specify `ORGANIZATION`, you must specify which organizational units the
     /// workspace can access in the `workspaceOrganizationalUnits` parameter.
     account_access_type: ?AccountAccessType = null,
+
+    /// Specifies whether the workspace supports IPv4 only, or IPv4 and IPv6. Valid
+    /// values are `IPv4` and `DualStack`. For more information about IP address
+    /// types, see [Network access
+    /// control](https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-nac.html).
+    ip_address_type: ?IPAddressType = null,
 
     /// The configuration settings for network access to your workspace.
     ///
@@ -119,6 +126,7 @@ pub const UpdateWorkspaceInput = struct {
 
     pub const json_field_names = .{
         .account_access_type = "accountAccessType",
+        .ip_address_type = "ipAddressType",
         .network_access_control = "networkAccessControl",
         .organization_role_name = "organizationRoleName",
         .permission_type = "permissionType",
@@ -187,6 +195,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateWorkspaceInput, c
     if (input.account_access_type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"accountAccessType\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.ip_address_type) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ipAddressType\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -284,10 +298,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateWorkspaceInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateWorkspaceOutput {
-    var result: UpdateWorkspaceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateWorkspaceOutput, body, allocator);
-    }
+    const result: UpdateWorkspaceOutput = try aws.json.parseJsonObject(
+        UpdateWorkspaceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

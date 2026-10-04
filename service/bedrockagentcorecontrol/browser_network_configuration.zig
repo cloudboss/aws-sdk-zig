@@ -8,6 +8,8 @@ pub const BrowserNetworkConfiguration = struct {
     /// connects to the network.
     network_mode: BrowserNetworkMode = .public,
 
+    /// The VPC configuration for the browser. This configuration is required when
+    /// the network mode is set to `VPC`.
     vpc_config: ?VpcConfig = null,
 
     pub const json_field_names = .{

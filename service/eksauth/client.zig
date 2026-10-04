@@ -32,14 +32,12 @@ pub const Client = struct {
     }
 
     /// The Amazon EKS Auth API and the `AssumeRoleForPodIdentity` action are only
-    /// used
-    /// by the EKS Pod Identity Agent.
+    /// used by the EKS Pod Identity Agent.
     ///
     /// We recommend that applications use the Amazon Web Services SDKs to connect
-    /// to Amazon Web Services services; if
-    /// credentials from an EKS Pod Identity association are available in the pod,
-    /// the latest versions of the
-    /// SDKs use them automatically.
+    /// to Amazon Web Services services; if credentials from an EKS Pod Identity
+    /// association are available in the pod, the latest versions of the SDKs use
+    /// them automatically.
     pub fn assumeRoleForPodIdentity(self: *Self, allocator: std.mem.Allocator, input: assume_role_for_pod_identity.AssumeRoleForPodIdentityInput, options: CallOptions) !assume_role_for_pod_identity.AssumeRoleForPodIdentityOutput {
         return assume_role_for_pod_identity.execute(self, allocator, input, options);
     }

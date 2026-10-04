@@ -4,16 +4,31 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const OciIamRole = @import("oci_iam_role.zig").OciIamRole;
 const OciIdentityDomain = @import("oci_identity_domain.zig").OciIdentityDomain;
 const OciOnboardingStatus = @import("oci_onboarding_status.zig").OciOnboardingStatus;
+const SubscriptionError = @import("subscription_error.zig").SubscriptionError;
 
 pub const GetOciOnboardingStatusInput = struct {
 };
 
 pub const GetOciOnboardingStatusOutput = struct {
+    /// The list of Amazon Web Services Identity and Access Management (IAM) service
+    /// roles used for Autonomous Database integration with Oracle Cloud
+    /// Infrastructure (OCI).
+    autonomous_database_oci_integration_iam_roles: ?[]const OciIamRole = null,
+
     /// The existing OCI tenancy activation link for your Amazon Web Services
     /// account.
     existing_tenancy_activation_link: ?[]const u8 = null,
+
+    /// The unique identifier of the Oracle Cloud Infrastructure (OCI) compartment
+    /// that is linked to your Amazon Web Services account.
+    linked_oci_compartment_id: ?[]const u8 = null,
+
+    /// The unique identifier of the Oracle Cloud Infrastructure (OCI) tenancy that
+    /// is linked to your Amazon Web Services account.
+    linked_oci_tenancy_id: ?[]const u8 = null,
 
     /// A new OCI tenancy activation link for your Amazon Web Services account.
     new_tenancy_activation_link: ?[]const u8 = null,
@@ -24,11 +39,19 @@ pub const GetOciOnboardingStatusOutput = struct {
 
     status: ?OciOnboardingStatus = null,
 
+    /// The list of errors that occurred during the subscription process for your
+    /// Amazon Web Services account, if any.
+    subscription_errors: ?[]const SubscriptionError = null,
+
     pub const json_field_names = .{
+        .autonomous_database_oci_integration_iam_roles = "autonomousDatabaseOciIntegrationIamRoles",
         .existing_tenancy_activation_link = "existingTenancyActivationLink",
+        .linked_oci_compartment_id = "linkedOciCompartmentId",
+        .linked_oci_tenancy_id = "linkedOciTenancyId",
         .new_tenancy_activation_link = "newTenancyActivationLink",
         .oci_identity_domain = "ociIdentityDomain",
         .status = "status",
+        .subscription_errors = "subscriptionErrors",
     };
 };
 

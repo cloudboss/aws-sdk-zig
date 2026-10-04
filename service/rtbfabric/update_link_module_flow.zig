@@ -8,7 +8,18 @@ const ModuleConfiguration = @import("module_configuration.zig").ModuleConfigurat
 const LinkStatus = @import("link_status.zig").LinkStatus;
 
 pub const UpdateLinkModuleFlowInput = struct {
-    /// The unique client token.
+    /// Specifies a unique, case-sensitive identifier that you provide to ensure the
+    /// idempotency of the request. This lets you safely retry the request without
+    /// accidentally performing the same operation a second time. Passing the same
+    /// value to a later call to an operation requires that you also pass the same
+    /// value for all other parameters. We recommend that you use a [UUID type of
+    /// value](https://wikipedia.org/wiki/Universally_unique_identifier).
+    ///
+    /// If you don't provide this value, then Amazon Web Services generates a random
+    /// one for you.
+    ///
+    /// If you retry the operation with the same `clientToken`, but with different
+    /// parameters, the retry fails with an `IdempotentParameterMismatch` error.
     client_token: []const u8,
 
     /// The unique identifier of the gateway.
@@ -111,10 +122,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateLinkModuleFlowInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateLinkModuleFlowOutput {
-    var result: UpdateLinkModuleFlowOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateLinkModuleFlowOutput, body, allocator);
-    }
+    const result: UpdateLinkModuleFlowOutput = try aws.json.parseJsonObject(
+        UpdateLinkModuleFlowOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

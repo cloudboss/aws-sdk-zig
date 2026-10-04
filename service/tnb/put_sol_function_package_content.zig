@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutSolFunctionPackageCo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutSolFunctionPackageContentOutput {
-    var result: PutSolFunctionPackageContentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutSolFunctionPackageContentOutput, body, allocator);
-    }
+    const result: PutSolFunctionPackageContentOutput = try aws.json.parseJsonObject(
+        PutSolFunctionPackageContentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

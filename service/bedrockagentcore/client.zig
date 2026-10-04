@@ -11,6 +11,7 @@ const create_payment_instrument = @import("create_payment_instrument.zig");
 const create_payment_session = @import("create_payment_session.zig");
 const delete_ab_test = @import("delete_ab_test.zig");
 const delete_batch_evaluation = @import("delete_batch_evaluation.zig");
+const delete_capacity_provider_session = @import("delete_capacity_provider_session.zig");
 const delete_event = @import("delete_event.zig");
 const delete_memory_record = @import("delete_memory_record.zig");
 const delete_payment_instrument = @import("delete_payment_instrument.zig");
@@ -34,6 +35,7 @@ const get_resource_payment_token = @import("get_resource_payment_token.zig");
 const get_workload_access_token = @import("get_workload_access_token.zig");
 const get_workload_access_token_for_jwt = @import("get_workload_access_token_for_jwt.zig");
 const get_workload_access_token_for_user_id = @import("get_workload_access_token_for_user_id.zig");
+const ingest_data = @import("ingest_data.zig");
 const invoke_agent_runtime = @import("invoke_agent_runtime.zig");
 const invoke_agent_runtime_command = @import("invoke_agent_runtime_command.zig");
 const invoke_browser = @import("invoke_browser.zig");
@@ -140,12 +142,12 @@ pub const Client = struct {
         return create_event.execute(self, allocator, input, options);
     }
 
-    /// Create a new payment instrument for a connector
+    /// Create a new payment instrument for a connector.
     pub fn createPaymentInstrument(self: *Self, allocator: std.mem.Allocator, input: create_payment_instrument.CreatePaymentInstrumentInput, options: CallOptions) !create_payment_instrument.CreatePaymentInstrumentOutput {
         return create_payment_instrument.execute(self, allocator, input, options);
     }
 
-    /// Create a new payment manager session
+    /// Create a new payment session.
     pub fn createPaymentSession(self: *Self, allocator: std.mem.Allocator, input: create_payment_session.CreatePaymentSessionInput, options: CallOptions) !create_payment_session.CreatePaymentSessionOutput {
         return create_payment_session.execute(self, allocator, input, options);
     }
@@ -158,6 +160,14 @@ pub const Client = struct {
     /// Deletes a batch evaluation and its associated results.
     pub fn deleteBatchEvaluation(self: *Self, allocator: std.mem.Allocator, input: delete_batch_evaluation.DeleteBatchEvaluationInput, options: CallOptions) !delete_batch_evaluation.DeleteBatchEvaluationOutput {
         return delete_batch_evaluation.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a session associated with a capacity provider in Amazon Bedrock
+    /// AgentCore and makes the session unavailable for further use. To delete a
+    /// capacity provider session, specify both the capacity provider identifier and
+    /// the session ID. After you delete a session, you cannot restart it.
+    pub fn deleteCapacityProviderSession(self: *Self, allocator: std.mem.Allocator, input: delete_capacity_provider_session.DeleteCapacityProviderSessionInput, options: CallOptions) !delete_capacity_provider_session.DeleteCapacityProviderSessionOutput {
+        return delete_capacity_provider_session.execute(self, allocator, input, options);
     }
 
     /// Deletes an event from an AgentCore Memory resource. When you delete an
@@ -178,56 +188,14 @@ pub const Client = struct {
         return delete_memory_record.execute(self, allocator, input, options);
     }
 
-    /// Delete a payment instrument
-    ///
-    /// Marks a payment instrument as deleted by updating its status to DELETED.
-    /// This is a soft delete
-    /// operation that preserves the record in the database for audit and compliance
-    /// purposes. The record
-    /// remains queryable for audit purposes but is excluded from normal list and
-    /// get operations.
-    ///
-    /// Deleting an already-deleted or non-existent instrument returns
-    /// ResourceNotFoundException (404).
-    ///
-    /// Authorization: The caller must own the instrument (accountId, userId, and
-    /// paymentManagerId must match).
-    /// If authorization fails, a 403 Forbidden error is returned.
-    ///
-    /// Timestamp Management: The updatedAt timestamp is set to the current time,
-    /// while createdAt is preserved.
-    /// The version field is incremented for optimistic locking.
-    ///
-    /// Errors:
-    /// - ResourceNotFoundException: The instrument does not exist or is already
-    /// deleted
-    /// - AccessDeniedException: The caller is not authorized to delete this
-    /// instrument
-    /// - ValidationException: Required fields are missing or invalid
-    /// - InternalServerException: An unexpected server error occurred
+    /// Deletes a payment instrument. This is a soft delete operation that preserves
+    /// the record for audit and compliance purposes.
     pub fn deletePaymentInstrument(self: *Self, allocator: std.mem.Allocator, input: delete_payment_instrument.DeletePaymentInstrumentInput, options: CallOptions) !delete_payment_instrument.DeletePaymentInstrumentOutput {
         return delete_payment_instrument.execute(self, allocator, input, options);
     }
 
-    /// Delete a payment manager session
-    ///
-    /// Permanently removes a payment session record from the database. This is a
-    /// hard delete operation
-    /// that removes the session completely.
-    ///
-    /// Deleting a non-existent or already-deleted session returns
-    /// ResourceNotFoundException (404).
-    ///
-    /// Authorization: The caller must own the session (accountId, userId, and
-    /// paymentManagerId must match).
-    /// If authorization fails, a 403 Forbidden error is returned.
-    ///
-    /// Errors:
-    /// - ResourceNotFoundException: The session does not exist or has already been
-    /// deleted
-    /// - AccessDeniedException: The caller is not authorized to delete this session
-    /// - ValidationException: Required fields are missing or invalid
-    /// - InternalServerException: An unexpected server error occurred
+    /// Deletes a payment session. This permanently removes the payment session
+    /// record.
     pub fn deletePaymentSession(self: *Self, allocator: std.mem.Allocator, input: delete_payment_session.DeletePaymentSessionInput, options: CallOptions) !delete_payment_session.DeletePaymentSessionOutput {
         return delete_payment_session.execute(self, allocator, input, options);
     }
@@ -318,17 +286,17 @@ pub const Client = struct {
         return get_memory_record.execute(self, allocator, input, options);
     }
 
-    /// Get a payment instrument by ID
+    /// Get a payment instrument by ID.
     pub fn getPaymentInstrument(self: *Self, allocator: std.mem.Allocator, input: get_payment_instrument.GetPaymentInstrumentInput, options: CallOptions) !get_payment_instrument.GetPaymentInstrumentOutput {
         return get_payment_instrument.execute(self, allocator, input, options);
     }
 
-    /// Get the balance of a payment instrument
+    /// Get the balance of a payment instrument.
     pub fn getPaymentInstrumentBalance(self: *Self, allocator: std.mem.Allocator, input: get_payment_instrument_balance.GetPaymentInstrumentBalanceInput, options: CallOptions) !get_payment_instrument_balance.GetPaymentInstrumentBalanceOutput {
         return get_payment_instrument_balance.execute(self, allocator, input, options);
     }
 
-    /// Get a payment session
+    /// Get a payment session.
     pub fn getPaymentSession(self: *Self, allocator: std.mem.Allocator, input: get_payment_session.GetPaymentSessionInput, options: CallOptions) !get_payment_session.GetPaymentSessionOutput {
         return get_payment_session.execute(self, allocator, input, options);
     }
@@ -371,6 +339,15 @@ pub const Client = struct {
     /// user, using the user's ID.
     pub fn getWorkloadAccessTokenForUserId(self: *Self, allocator: std.mem.Allocator, input: get_workload_access_token_for_user_id.GetWorkloadAccessTokenForUserIdInput, options: CallOptions) !get_workload_access_token_for_user_id.GetWorkloadAccessTokenForUserIdOutput {
         return get_workload_access_token_for_user_id.execute(self, allocator, input, options);
+    }
+
+    /// Submits content directly for ingestion to generate long-term memory records
+    /// in a AgentCore Memory resource.
+    ///
+    /// To use this operation, you must have the `bedrock-agentcore:IngestData`
+    /// permission.
+    pub fn ingestData(self: *Self, allocator: std.mem.Allocator, input: ingest_data.IngestDataInput, options: CallOptions) !ingest_data.IngestDataOutput {
+        return ingest_data.execute(self, allocator, input, options);
     }
 
     /// Sends a request to an agent or tool hosted in an Amazon Bedrock AgentCore
@@ -562,12 +539,12 @@ pub const Client = struct {
         return list_memory_records.execute(self, allocator, input, options);
     }
 
-    /// List payment instruments for a manager
+    /// List payment instruments for a manager.
     pub fn listPaymentInstruments(self: *Self, allocator: std.mem.Allocator, input: list_payment_instruments.ListPaymentInstrumentsInput, options: CallOptions) !list_payment_instruments.ListPaymentInstrumentsOutput {
         return list_payment_instruments.execute(self, allocator, input, options);
     }
 
-    /// List payment manager sessions
+    /// List payment sessions.
     pub fn listPaymentSessions(self: *Self, allocator: std.mem.Allocator, input: list_payment_sessions.ListPaymentSessionsInput, options: CallOptions) !list_payment_sessions.ListPaymentSessionsOutput {
         return list_payment_sessions.execute(self, allocator, input, options);
     }
@@ -589,7 +566,7 @@ pub const Client = struct {
         return list_sessions.execute(self, allocator, input, options);
     }
 
-    /// Process a payment transaction
+    /// Processes a payment using a payment instrument within a payment session.
     pub fn processPayment(self: *Self, allocator: std.mem.Allocator, input: process_payment.ProcessPaymentInput, options: CallOptions) !process_payment.ProcessPaymentOutput {
         return process_payment.execute(self, allocator, input, options);
     }

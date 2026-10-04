@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const EnablementStatus = @import("enablement_status.zig").EnablementStatus;
 const HealthCheck = @import("health_check.zig").HealthCheck;
 const ProviderDetail = @import("provider_detail.zig").ProviderDetail;
 
@@ -29,6 +30,13 @@ pub const GetConnectorV2Output = struct {
     /// The description of the connectorV2.
     description: ?[]const u8 = null,
 
+    /// The enablement status of the connector.
+    enablement_status: ?EnablementStatus = null,
+
+    /// The reason for the current enablement status. Provides additional context
+    /// when the connector is in a failed state.
+    enablement_status_reason: ?[]const u8 = null,
+
     /// The current health status for connectorV2
     health: ?HealthCheck = null,
 
@@ -49,6 +57,8 @@ pub const GetConnectorV2Output = struct {
         .connector_id = "ConnectorId",
         .created_at = "CreatedAt",
         .description = "Description",
+        .enablement_status = "EnablementStatus",
+        .enablement_status_reason = "EnablementStatusReason",
         .health = "Health",
         .kms_key_arn = "KmsKeyArn",
         .last_updated_at = "LastUpdatedAt",
@@ -106,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetConnectorV2Input, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetConnectorV2Output {
-    var result: GetConnectorV2Output = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetConnectorV2Output, body, allocator);
-    }
+    const result: GetConnectorV2Output = try aws.json.parseJsonObject(
+        GetConnectorV2Output,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

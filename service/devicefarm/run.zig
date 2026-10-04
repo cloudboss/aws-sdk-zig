@@ -5,6 +5,8 @@ const DeviceMinutes = @import("device_minutes.zig").DeviceMinutes;
 const DeviceProxy = @import("device_proxy.zig").DeviceProxy;
 const DeviceSelectionResult = @import("device_selection_result.zig").DeviceSelectionResult;
 const EnvironmentVariable = @import("environment_variable.zig").EnvironmentVariable;
+const RunInsights = @import("run_insights.zig").RunInsights;
+const InsightsType = @import("insights_type.zig").InsightsType;
 const Location = @import("location.zig").Location;
 const NetworkProfile = @import("network_profile.zig").NetworkProfile;
 const DevicePlatform = @import("device_platform.zig").DevicePlatform;
@@ -68,6 +70,14 @@ pub const Run = struct {
 
     /// The IAM role associated with the run.
     execution_role_arn: ?[]const u8 = null,
+
+    /// The insights for the run, including the report status and job-level metrics.
+    /// This field contains data only if you specified `insightsTypes` when you
+    /// scheduled the run.
+    insights: ?RunInsights = null,
+
+    /// The types of insights requested for the run.
+    insights_types: ?[]const InsightsType = null,
 
     /// The number of minutes the job executes before it times out.
     job_timeout_minutes: ?i32 = null,
@@ -233,6 +243,8 @@ pub const Run = struct {
         .environment_variables = "environmentVariables",
         .event_count = "eventCount",
         .execution_role_arn = "executionRoleArn",
+        .insights = "insights",
+        .insights_types = "insightsTypes",
         .job_timeout_minutes = "jobTimeoutMinutes",
         .locale = "locale",
         .location = "location",

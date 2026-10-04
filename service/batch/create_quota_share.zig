@@ -155,10 +155,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateQuotaShareInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateQuotaShareOutput {
-    var result: CreateQuotaShareOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateQuotaShareOutput, body, allocator);
-    }
+    const result: CreateQuotaShareOutput = try aws.json.parseJsonObject(
+        CreateQuotaShareOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

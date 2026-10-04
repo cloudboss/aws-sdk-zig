@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetChannelGroupInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetChannelGroupOutput {
-    var result: GetChannelGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetChannelGroupOutput, body, allocator);
-    }
+    const result: GetChannelGroupOutput = try aws.json.parseJsonObject(
+        GetChannelGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

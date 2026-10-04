@@ -4,8 +4,11 @@ const std = @import("std");
 const accept_administrator_invitation = @import("accept_administrator_invitation.zig");
 const accept_invitation = @import("accept_invitation.zig");
 const archive_findings = @import("archive_findings.zig");
+const create_custom_detection_rule_association = @import("create_custom_detection_rule_association.zig");
+const create_custom_detection_rule_org_configuration = @import("create_custom_detection_rule_org_configuration.zig");
 const create_detector = @import("create_detector.zig");
 const create_filter = @import("create_filter.zig");
+const create_investigation = @import("create_investigation.zig");
 const create_ip_set = @import("create_ip_set.zig");
 const create_malware_protection_plan = @import("create_malware_protection_plan.zig");
 const create_members = @import("create_members.zig");
@@ -15,6 +18,8 @@ const create_threat_entity_set = @import("create_threat_entity_set.zig");
 const create_threat_intel_set = @import("create_threat_intel_set.zig");
 const create_trusted_entity_set = @import("create_trusted_entity_set.zig");
 const decline_invitations = @import("decline_invitations.zig");
+const delete_custom_detection_rule_association = @import("delete_custom_detection_rule_association.zig");
+const delete_custom_detection_rule_org_configuration = @import("delete_custom_detection_rule_org_configuration.zig");
 const delete_detector = @import("delete_detector.zig");
 const delete_filter = @import("delete_filter.zig");
 const delete_invitations = @import("delete_invitations.zig");
@@ -35,10 +40,14 @@ const disassociate_members = @import("disassociate_members.zig");
 const enable_organization_admin_account = @import("enable_organization_admin_account.zig");
 const get_administrator_account = @import("get_administrator_account.zig");
 const get_coverage_statistics = @import("get_coverage_statistics.zig");
+const get_custom_detection_rule = @import("get_custom_detection_rule.zig");
+const get_custom_detection_rule_association = @import("get_custom_detection_rule_association.zig");
+const get_custom_detection_rule_org_configuration = @import("get_custom_detection_rule_org_configuration.zig");
 const get_detector = @import("get_detector.zig");
 const get_filter = @import("get_filter.zig");
 const get_findings = @import("get_findings.zig");
 const get_findings_statistics = @import("get_findings_statistics.zig");
+const get_investigation = @import("get_investigation.zig");
 const get_invitations_count = @import("get_invitations_count.zig");
 const get_ip_set = @import("get_ip_set.zig");
 const get_malware_protection_plan = @import("get_malware_protection_plan.zig");
@@ -55,9 +64,13 @@ const get_trusted_entity_set = @import("get_trusted_entity_set.zig");
 const get_usage_statistics = @import("get_usage_statistics.zig");
 const invite_members = @import("invite_members.zig");
 const list_coverage = @import("list_coverage.zig");
+const list_custom_detection_rule_associations = @import("list_custom_detection_rule_associations.zig");
+const list_custom_detection_rule_org_configurations = @import("list_custom_detection_rule_org_configurations.zig");
+const list_custom_detection_rules = @import("list_custom_detection_rules.zig");
 const list_detectors = @import("list_detectors.zig");
 const list_filters = @import("list_filters.zig");
 const list_findings = @import("list_findings.zig");
+const list_investigations = @import("list_investigations.zig");
 const list_invitations = @import("list_invitations.zig");
 const list_ip_sets = @import("list_ip_sets.zig");
 const list_malware_protection_plans = @import("list_malware_protection_plans.zig");
@@ -76,6 +89,8 @@ const stop_monitoring_members = @import("stop_monitoring_members.zig");
 const tag_resource = @import("tag_resource.zig");
 const unarchive_findings = @import("unarchive_findings.zig");
 const untag_resource = @import("untag_resource.zig");
+const update_custom_detection_rule_association = @import("update_custom_detection_rule_association.zig");
+const update_custom_detection_rule_org_configuration = @import("update_custom_detection_rule_org_configuration.zig");
 const update_detector = @import("update_detector.zig");
 const update_filter = @import("update_filter.zig");
 const update_findings_feedback = @import("update_findings_feedback.zig");
@@ -137,6 +152,19 @@ pub const Client = struct {
         return archive_findings.execute(self, allocator, input, options);
     }
 
+    /// Enables a custom detection rule for your account by creating an association.
+    /// You specify the rule and the mode in which it operates.
+    pub fn createCustomDetectionRuleAssociation(self: *Self, allocator: std.mem.Allocator, input: create_custom_detection_rule_association.CreateCustomDetectionRuleAssociationInput, options: CallOptions) !create_custom_detection_rule_association.CreateCustomDetectionRuleAssociationOutput {
+        return create_custom_detection_rule_association.execute(self, allocator, input, options);
+    }
+
+    /// Creates an organization-level configuration that enables a custom detection
+    /// rule across your organization. This operation is available only to the
+    /// delegated administrator account.
+    pub fn createCustomDetectionRuleOrgConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_custom_detection_rule_org_configuration.CreateCustomDetectionRuleOrgConfigurationInput, options: CallOptions) !create_custom_detection_rule_org_configuration.CreateCustomDetectionRuleOrgConfigurationOutput {
+        return create_custom_detection_rule_org_configuration.execute(self, allocator, input, options);
+    }
+
     /// Creates a single GuardDuty detector. A detector is a resource that
     /// represents the GuardDuty service. To start using GuardDuty, you must create
     /// a detector in each Region where you enable the service. You can have only
@@ -170,6 +198,37 @@ pub const Client = struct {
     /// GuardDuty](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_limits.html).
     pub fn createFilter(self: *Self, allocator: std.mem.Allocator, input: create_filter.CreateFilterInput, options: CallOptions) !create_filter.CreateFilterOutput {
         return create_filter.execute(self, allocator, input, options);
+    }
+
+    /// This API is currently available as a preview. During the preview, you can
+    /// initiate up to 10 investigations per account per day, with a total limit of
+    /// 100 investigations per account. This feature is available in the following
+    /// Amazon Web Services Regions: US East (N. Virginia), US East (Ohio), US West
+    /// (Oregon), Canada (Central), Europe (Frankfurt), Europe (Ireland), Europe
+    /// (London), Europe (Paris), Europe (Stockholm), and Asia Pacific (Tokyo).
+    ///
+    /// Initiates a GuardDuty investigation that automatically analyzes security
+    /// findings, correlates related activity, performs account-level analysis, and
+    /// produces a structured investigation summary with recommended next steps.
+    ///
+    /// Only the administrator account can create an investigation. Member accounts
+    /// don't have permission to create investigations from their accounts.
+    ///
+    /// To use this operation, the `AI_ANALYST` feature must be enabled on your
+    /// detector.
+    ///
+    /// This feature uses Amazon Bedrock models that leverage Cross-Region Inference
+    /// (CRIS), which automatically selects the optimal Amazon Web Services Region
+    /// within your geography to process the investigation analysis and generate the
+    /// investigation report. This maximizes available compute resources, model
+    /// availability, and delivers the best customer experience. Your data remains
+    /// stored only in the Region where the investigation request originates,
+    /// however, investigation data and summary results may be processed outside
+    /// that Region. All data is transmitted encrypted across Amazon's secure
+    /// network. For more information, see [GuardDuty
+    /// Investigation](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty-investigation.html).
+    pub fn createInvestigation(self: *Self, allocator: std.mem.Allocator, input: create_investigation.CreateInvestigationInput, options: CallOptions) !create_investigation.CreateInvestigationOutput {
+        return create_investigation.execute(self, allocator, input, options);
     }
 
     /// Creates a new IPSet, which is called a trusted IP list in the console user
@@ -237,10 +296,10 @@ pub const Client = struct {
     }
 
     /// Creates a new threat entity set. In a threat entity set, you can provide
-    /// known malicious IP addresses and domains for your Amazon Web Services
-    /// environment. GuardDuty generates findings based on the entries in the threat
-    /// entity sets. Only users of the administrator account can manage entity sets,
-    /// which automatically apply to member accounts.
+    /// known malicious threat entities for your Amazon Web Services environment.
+    /// GuardDuty generates findings based on the entries in the threat entity sets.
+    /// Only users of the administrator account can manage entity sets, which
+    /// automatically apply to member accounts.
     pub fn createThreatEntitySet(self: *Self, allocator: std.mem.Allocator, input: create_threat_entity_set.CreateThreatEntitySetInput, options: CallOptions) !create_threat_entity_set.CreateThreatEntitySetOutput {
         return create_threat_entity_set.execute(self, allocator, input, options);
     }
@@ -268,6 +327,18 @@ pub const Client = struct {
     /// Services accounts specified by their account IDs.
     pub fn declineInvitations(self: *Self, allocator: std.mem.Allocator, input: decline_invitations.DeclineInvitationsInput, options: CallOptions) !decline_invitations.DeclineInvitationsOutput {
         return decline_invitations.execute(self, allocator, input, options);
+    }
+
+    /// Disables a custom detection rule by deleting its association. This operation
+    /// is idempotent.
+    pub fn deleteCustomDetectionRuleAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_custom_detection_rule_association.DeleteCustomDetectionRuleAssociationInput, options: CallOptions) !delete_custom_detection_rule_association.DeleteCustomDetectionRuleAssociationOutput {
+        return delete_custom_detection_rule_association.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the organization-level configuration for a custom detection rule.
+    /// This operation is available only to the delegated administrator account.
+    pub fn deleteCustomDetectionRuleOrgConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_custom_detection_rule_org_configuration.DeleteCustomDetectionRuleOrgConfigurationInput, options: CallOptions) !delete_custom_detection_rule_org_configuration.DeleteCustomDetectionRuleOrgConfigurationOutput {
+        return delete_custom_detection_rule_org_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon GuardDuty detector that is specified by the detector ID.
@@ -448,6 +519,22 @@ pub const Client = struct {
         return get_coverage_statistics.execute(self, allocator, input, options);
     }
 
+    /// Returns details for a custom detection rule in GuardDuty, including its
+    /// detection logic.
+    pub fn getCustomDetectionRule(self: *Self, allocator: std.mem.Allocator, input: get_custom_detection_rule.GetCustomDetectionRuleInput, options: CallOptions) !get_custom_detection_rule.GetCustomDetectionRuleOutput {
+        return get_custom_detection_rule.execute(self, allocator, input, options);
+    }
+
+    /// Returns details for a custom detection rule association.
+    pub fn getCustomDetectionRuleAssociation(self: *Self, allocator: std.mem.Allocator, input: get_custom_detection_rule_association.GetCustomDetectionRuleAssociationInput, options: CallOptions) !get_custom_detection_rule_association.GetCustomDetectionRuleAssociationOutput {
+        return get_custom_detection_rule_association.execute(self, allocator, input, options);
+    }
+
+    /// Returns the organization-level configuration for a custom detection rule.
+    pub fn getCustomDetectionRuleOrgConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_custom_detection_rule_org_configuration.GetCustomDetectionRuleOrgConfigurationInput, options: CallOptions) !get_custom_detection_rule_org_configuration.GetCustomDetectionRuleOrgConfigurationOutput {
+        return get_custom_detection_rule_org_configuration.execute(self, allocator, input, options);
+    }
+
     /// Retrieves a GuardDuty detector specified by the detectorId.
     ///
     /// There might be regional differences because some data sources might not be
@@ -480,6 +567,21 @@ pub const Client = struct {
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     pub fn getFindingsStatistics(self: *Self, allocator: std.mem.Allocator, input: get_findings_statistics.GetFindingsStatisticsInput, options: CallOptions) !get_findings_statistics.GetFindingsStatisticsOutput {
         return get_findings_statistics.execute(self, allocator, input, options);
+    }
+
+    /// This API is currently available as a preview. This feature is available in
+    /// the following Amazon Web Services Regions: US East (N. Virginia), US East
+    /// (Ohio), US West (Oregon), Canada (Central), Europe (Frankfurt), Europe
+    /// (Ireland), Europe (London), Europe (Paris), Europe (Stockholm), and Asia
+    /// Pacific (Tokyo).
+    ///
+    /// Retrieves the results and status of a specific GuardDuty investigation.
+    ///
+    /// An administrator account can retrieve any investigation within the
+    /// organization. Member accounts can only retrieve investigations that belong
+    /// to them.
+    pub fn getInvestigation(self: *Self, allocator: std.mem.Allocator, input: get_investigation.GetInvestigationInput, options: CallOptions) !get_investigation.GetInvestigationOutput {
+        return get_investigation.execute(self, allocator, input, options);
     }
 
     /// Returns the count of all GuardDuty membership invitations that were sent to
@@ -632,6 +734,24 @@ pub const Client = struct {
         return list_coverage.execute(self, allocator, input, options);
     }
 
+    /// Returns all custom detection rule associations for your account. You can
+    /// filter by rule ID and mode.
+    pub fn listCustomDetectionRuleAssociations(self: *Self, allocator: std.mem.Allocator, input: list_custom_detection_rule_associations.ListCustomDetectionRuleAssociationsInput, options: CallOptions) !list_custom_detection_rule_associations.ListCustomDetectionRuleAssociationsOutput {
+        return list_custom_detection_rule_associations.execute(self, allocator, input, options);
+    }
+
+    /// Returns all organization-level configurations for custom detection rules.
+    /// You can filter the results by status.
+    pub fn listCustomDetectionRuleOrgConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_custom_detection_rule_org_configurations.ListCustomDetectionRuleOrgConfigurationsInput, options: CallOptions) !list_custom_detection_rule_org_configurations.ListCustomDetectionRuleOrgConfigurationsOutput {
+        return list_custom_detection_rule_org_configurations.execute(self, allocator, input, options);
+    }
+
+    /// Returns all available custom detection rules in GuardDuty. You can filter
+    /// the results by data source, severity, tactic, technique, and service.
+    pub fn listCustomDetectionRules(self: *Self, allocator: std.mem.Allocator, input: list_custom_detection_rules.ListCustomDetectionRulesInput, options: CallOptions) !list_custom_detection_rules.ListCustomDetectionRulesOutput {
+        return list_custom_detection_rules.execute(self, allocator, input, options);
+    }
+
     /// Lists detectorIds of all the existing Amazon GuardDuty detector resources.
     pub fn listDetectors(self: *Self, allocator: std.mem.Allocator, input: list_detectors.ListDetectorsInput, options: CallOptions) !list_detectors.ListDetectorsOutput {
         return list_detectors.execute(self, allocator, input, options);
@@ -650,6 +770,21 @@ pub const Client = struct {
     /// endpoints](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html).
     pub fn listFindings(self: *Self, allocator: std.mem.Allocator, input: list_findings.ListFindingsInput, options: CallOptions) !list_findings.ListFindingsOutput {
         return list_findings.execute(self, allocator, input, options);
+    }
+
+    /// This API is currently available as a preview. This feature is available in
+    /// the following Amazon Web Services Regions: US East (N. Virginia), US East
+    /// (Ohio), US West (Oregon), Canada (Central), Europe (Frankfurt), Europe
+    /// (Ireland), Europe (London), Europe (Paris), Europe (Stockholm), and Asia
+    /// Pacific (Tokyo).
+    ///
+    /// Returns a list of investigations associated with the specified GuardDuty
+    /// detector.
+    ///
+    /// An administrator account sees all investigations across the organization.
+    /// Member accounts see only the investigations that belong to them.
+    pub fn listInvestigations(self: *Self, allocator: std.mem.Allocator, input: list_investigations.ListInvestigationsInput, options: CallOptions) !list_investigations.ListInvestigationsOutput {
+        return list_investigations.execute(self, allocator, input, options);
     }
 
     /// Lists all GuardDuty membership invitations that were sent to the current
@@ -788,6 +923,17 @@ pub const Client = struct {
         return untag_resource.execute(self, allocator, input, options);
     }
 
+    /// Updates the mode of an existing custom detection rule association.
+    pub fn updateCustomDetectionRuleAssociation(self: *Self, allocator: std.mem.Allocator, input: update_custom_detection_rule_association.UpdateCustomDetectionRuleAssociationInput, options: CallOptions) !update_custom_detection_rule_association.UpdateCustomDetectionRuleAssociationOutput {
+        return update_custom_detection_rule_association.execute(self, allocator, input, options);
+    }
+
+    /// Updates the organization-level configuration for a custom detection rule,
+    /// including the mode and include/exclude account lists.
+    pub fn updateCustomDetectionRuleOrgConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_custom_detection_rule_org_configuration.UpdateCustomDetectionRuleOrgConfigurationInput, options: CallOptions) !update_custom_detection_rule_org_configuration.UpdateCustomDetectionRuleOrgConfigurationOutput {
+        return update_custom_detection_rule_org_configuration.execute(self, allocator, input, options);
+    }
+
     /// Updates the GuardDuty detector specified by the detector ID.
     ///
     /// Specifying both EKS Runtime Monitoring (`EKS_RUNTIME_MONITORING`) and
@@ -922,6 +1068,27 @@ pub const Client = struct {
         };
     }
 
+    pub fn listCustomDetectionRuleAssociationsPaginator(self: *Self, params: list_custom_detection_rule_associations.ListCustomDetectionRuleAssociationsInput) paginator.ListCustomDetectionRuleAssociationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listCustomDetectionRuleOrgConfigurationsPaginator(self: *Self, params: list_custom_detection_rule_org_configurations.ListCustomDetectionRuleOrgConfigurationsInput) paginator.ListCustomDetectionRuleOrgConfigurationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listCustomDetectionRulesPaginator(self: *Self, params: list_custom_detection_rules.ListCustomDetectionRulesInput) paginator.ListCustomDetectionRulesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listDetectorsPaginator(self: *Self, params: list_detectors.ListDetectorsInput) paginator.ListDetectorsPaginator {
         return .{
             .client = self,
@@ -937,6 +1104,13 @@ pub const Client = struct {
     }
 
     pub fn listFindingsPaginator(self: *Self, params: list_findings.ListFindingsInput) paginator.ListFindingsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listInvestigationsPaginator(self: *Self, params: list_investigations.ListInvestigationsInput) paginator.ListInvestigationsPaginator {
         return .{
             .client = self,
             .params = params,

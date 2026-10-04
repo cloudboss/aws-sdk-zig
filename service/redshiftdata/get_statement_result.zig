@@ -24,9 +24,14 @@ pub const GetStatementResultInput = struct {
     /// request.
     next_token: ?[]const u8 = null,
 
+    /// The number of seconds to wait for the SQL statement to complete execution
+    /// before returning the result. The maximum value is 30 seconds.
+    wait_time_seconds: ?i32 = null,
+
     pub const json_field_names = .{
         .id = "Id",
         .next_token = "NextToken",
+        .wait_time_seconds = "WaitTimeSeconds",
     };
 };
 

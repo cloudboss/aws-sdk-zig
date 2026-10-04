@@ -28,18 +28,20 @@ pub const Evidence = struct {
     /// check
     /// category.
     ///
-    /// * Audit Manager classes evidence as non-compliant if Security Hub reports a
+    /// * Audit Manager classes evidence as non-compliant if Security Hub CSPM
+    ///   reports a
     /// *Fail* result, or if Config reports a
     /// *Non-compliant* result.
     ///
-    /// * Audit Manager classes evidence as compliant if Security Hub reports a
+    /// * Audit Manager classes evidence as compliant if Security Hub CSPM reports a
     /// *Pass* result, or if Config reports a
     /// *Compliant* result.
     ///
     /// * If a compliance check isn't available or applicable, then no compliance
     ///   evaluation can be made
     /// for that evidence. This is the case if the evidence uses Config or
-    /// Security Hub as the underlying data source type, but those services aren't
+    /// Security Hub CSPM as the underlying data source type, but those services
+    /// aren't
     /// enabled. This is also the case if the evidence uses an underlying data
     /// source type
     /// that doesn't support compliance checks (such as manual evidence, Amazon Web

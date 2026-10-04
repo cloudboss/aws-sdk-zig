@@ -9,10 +9,13 @@ const ConfluenceParameters = @import("confluence_parameters.zig").ConfluencePara
 const CustomConnectionParameters = @import("custom_connection_parameters.zig").CustomConnectionParameters;
 const DatabricksParameters = @import("databricks_parameters.zig").DatabricksParameters;
 const ExasolParameters = @import("exasol_parameters.zig").ExasolParameters;
+const FMKBParameters = @import("fmkb_parameters.zig").FMKBParameters;
+const GoogleDriveParameters = @import("google_drive_parameters.zig").GoogleDriveParameters;
 const ImpalaParameters = @import("impala_parameters.zig").ImpalaParameters;
 const JiraParameters = @import("jira_parameters.zig").JiraParameters;
 const MariaDbParameters = @import("maria_db_parameters.zig").MariaDbParameters;
 const MySqlParameters = @import("my_sql_parameters.zig").MySqlParameters;
+const OneDriveParameters = @import("one_drive_parameters.zig").OneDriveParameters;
 const OracleParameters = @import("oracle_parameters.zig").OracleParameters;
 const PostgreSqlParameters = @import("postgre_sql_parameters.zig").PostgreSqlParameters;
 const PrestoParameters = @import("presto_parameters.zig").PrestoParameters;
@@ -23,6 +26,7 @@ const S3KnowledgeBaseParameters = @import("s3_knowledge_base_parameters.zig").S3
 const S3Parameters = @import("s3_parameters.zig").S3Parameters;
 const S3TablesParameters = @import("s3_tables_parameters.zig").S3TablesParameters;
 const ServiceNowParameters = @import("service_now_parameters.zig").ServiceNowParameters;
+const SharePointParameters = @import("share_point_parameters.zig").SharePointParameters;
 const SnowflakeParameters = @import("snowflake_parameters.zig").SnowflakeParameters;
 const SparkParameters = @import("spark_parameters.zig").SparkParameters;
 const SqlServerParameters = @import("sql_server_parameters.zig").SqlServerParameters;
@@ -61,6 +65,10 @@ pub const DataSourceParameters = union(enum) {
     databricks_parameters: ?DatabricksParameters,
     /// The parameters for Exasol.
     exasol_parameters: ?ExasolParameters,
+    /// The parameters for a fully managed knowledge base data source.
+    fmkb_parameters: ?FMKBParameters,
+    /// The parameters for a Google Drive data source.
+    google_drive_parameters: ?GoogleDriveParameters,
     /// The parameters for Impala.
     impala_parameters: ?ImpalaParameters,
     /// The parameters for Jira.
@@ -69,6 +77,8 @@ pub const DataSourceParameters = union(enum) {
     maria_db_parameters: ?MariaDbParameters,
     /// The parameters for MySQL.
     my_sql_parameters: ?MySqlParameters,
+    /// The parameters for an OneDrive data source.
+    one_drive_parameters: ?OneDriveParameters,
     /// The parameters for Oracle.
     oracle_parameters: ?OracleParameters,
     /// The parameters for PostgreSQL.
@@ -89,6 +99,8 @@ pub const DataSourceParameters = union(enum) {
     s3_tables_parameters: ?S3TablesParameters,
     /// The parameters for ServiceNow.
     service_now_parameters: ?ServiceNowParameters,
+    /// The parameters for a SharePoint data source.
+    share_point_parameters: ?SharePointParameters,
     /// The parameters for Snowflake.
     snowflake_parameters: ?SnowflakeParameters,
     /// The parameters for Spark.
@@ -118,10 +130,13 @@ pub const DataSourceParameters = union(enum) {
         .custom_connection_parameters = "CustomConnectionParameters",
         .databricks_parameters = "DatabricksParameters",
         .exasol_parameters = "ExasolParameters",
+        .fmkb_parameters = "FMKBParameters",
+        .google_drive_parameters = "GoogleDriveParameters",
         .impala_parameters = "ImpalaParameters",
         .jira_parameters = "JiraParameters",
         .maria_db_parameters = "MariaDbParameters",
         .my_sql_parameters = "MySqlParameters",
+        .one_drive_parameters = "OneDriveParameters",
         .oracle_parameters = "OracleParameters",
         .postgre_sql_parameters = "PostgreSqlParameters",
         .presto_parameters = "PrestoParameters",
@@ -132,6 +147,7 @@ pub const DataSourceParameters = union(enum) {
         .s3_parameters = "S3Parameters",
         .s3_tables_parameters = "S3TablesParameters",
         .service_now_parameters = "ServiceNowParameters",
+        .share_point_parameters = "SharePointParameters",
         .snowflake_parameters = "SnowflakeParameters",
         .spark_parameters = "SparkParameters",
         .sql_server_parameters = "SqlServerParameters",

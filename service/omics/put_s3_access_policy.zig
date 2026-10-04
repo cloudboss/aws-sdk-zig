@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutS3AccessPolicyInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutS3AccessPolicyOutput {
-    var result: PutS3AccessPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutS3AccessPolicyOutput, body, allocator);
-    }
+    const result: PutS3AccessPolicyOutput = try aws.json.parseJsonObject(
+        PutS3AccessPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

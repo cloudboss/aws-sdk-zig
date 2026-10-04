@@ -10,7 +10,7 @@ const ComponentConfiguration = @import("component_configuration.zig").ComponentC
 const LatestVersionReferences = @import("latest_version_references.zig").LatestVersionReferences;
 
 pub const CreateImageRecipeInput = struct {
-    /// Specify additional settings and launch scripts for your build instances.
+    /// The additional settings and launch scripts for your build instances.
     additional_instance_configuration: ?AdditionalInstanceConfiguration = null,
 
     /// Tags that are applied to the AMI that Image Builder creates during the Build
@@ -18,22 +18,53 @@ pub const CreateImageRecipeInput = struct {
     /// prior to image distribution.
     ami_tags: ?[]const aws.map.StringMapEntry = null,
 
-    /// The block device mappings of the image recipe.
+    /// The AMI watermark names to attach to the output AMI from this recipe.
+    /// AMI watermarks are lineage markers. They automatically propagate to
+    /// derivative AMIs when the source AMI is copied or distributed across
+    /// Regions or accounts.
+    ///
+    /// AMI watermarks are supported only for image recipes. AMIs with
+    /// watermarks cannot be made public.
+    ami_watermarks: ?[]const []const u8 = null,
+
+    /// The block device mappings that Image Builder applies to the build instance
+    /// and the
+    /// output AMI. For example, you can override the size of the base image's
+    /// root volume or attach additional EBS volumes.
     block_device_mappings: ?[]const InstanceBlockDeviceMapping = null,
 
-    /// Unique, case-sensitive identifier you provide to ensure
-    /// idempotency of the request. For more information, see [Ensuring
+    /// A unique, case-sensitive identifier you provide to ensure
+    /// that the operation runs no more than one time. If you retry a request with
+    /// the same client
+    /// token, Image Builder returns the original response without running the
+    /// operation again. For more
+    /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
     /// in the *Amazon EC2 API Reference*.
     client_token: []const u8,
 
-    /// The components included in the image recipe.
+    /// The components included in the image recipe. Components are optional. A
+    /// recipe with no components bakes the base image without additional
+    /// customization. You can
+    /// specify each component only one time in a recipe. Components with a status
+    /// of `DEPRECATED` or `DISABLED` can't be added to
+    /// new recipes.
     components: ?[]const ComponentConfiguration = null,
 
     /// The description of the image recipe.
     description: ?[]const u8 = null,
 
-    /// The name of the image recipe.
+    /// Validates the required permissions and request parameters without performing
+    /// the operation. If validation succeeds, the operation returns a
+    /// `DryRunOperationException` error response.
+    dry_run: ?bool = null,
+
+    /// The name of the image recipe. The recipe name, combined with the semantic
+    /// version, must be unique to your account in each Amazon Web Services Region.
+    /// Image Builder
+    /// generates the image recipe ARN from a normalized form of the name, so
+    /// names that differ only in case, spaces, or underscores count as the same
+    /// name.
     name: []const u8,
 
     /// The base image for customizations specified in the image recipe. You can
@@ -52,7 +83,8 @@ pub const CreateImageRecipeInput = struct {
     ///
     /// If you enter an AMI ID or an SSM parameter that contains the AMI ID, you
     /// must have access
-    /// to the AMI, and the AMI must be in the source Region.
+    /// to the AMI. The AMI must also be in the Region where you're creating
+    /// the recipe.
     parent_image: []const u8,
 
     /// The semantic version of the image recipe. This version follows the semantic
@@ -62,10 +94,10 @@ pub const CreateImageRecipeInput = struct {
     /// The semantic version has four nodes: ../.
     /// You can assign values for the first three, and can filter on all of them.
     ///
-    /// **Assignment:** For the first three nodes you can assign any positive
+    /// **Assignment:** For the first three nodes, you can assign any positive
     /// integer value, including
-    /// zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image
-    /// Builder automatically assigns the
+    /// zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder
+    /// automatically assigns the
     /// build number to the fourth node.
     ///
     /// **Patterns:** You can use any numeric pattern that adheres to the assignment
@@ -78,16 +110,21 @@ pub const CreateImageRecipeInput = struct {
     /// The tags of the image recipe.
     tags: ?[]const aws.map.StringMapEntry = null,
 
-    /// The working directory used during build and test workflows.
+    /// The working directory used during build and test workflows. If you
+    /// don't specify a working directory, Image Builder uses `/tmp` for
+    /// Linux and macOS build instances, and `C:/` for Windows build
+    /// instances.
     working_directory: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .additional_instance_configuration = "additionalInstanceConfiguration",
         .ami_tags = "amiTags",
+        .ami_watermarks = "amiWatermarks",
         .block_device_mappings = "blockDeviceMappings",
         .client_token = "clientToken",
         .components = "components",
         .description = "description",
+        .dry_run = "dryRun",
         .name = "name",
         .parent_image = "parentImage",
         .semantic_version = "semanticVersion",
@@ -104,7 +141,10 @@ pub const CreateImageRecipeOutput = struct {
     /// request.
     image_recipe_arn: ?[]const u8 = null,
 
-    /// The resource ARNs with different wildcard variations of semantic versioning.
+    /// A set of wildcard version ARNs that always reference the latest
+    /// version of the resource. ARNs are included for the latest version overall,
+    /// and for the latest
+    /// versions within the same major, minor, and patch levels.
     latest_version_references: ?LatestVersionReferences = null,
 
     /// The request ID that uniquely identifies this request.
@@ -166,6 +206,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageRecipeInput,
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.ami_watermarks) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"amiWatermarks\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.block_device_mappings) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"blockDeviceMappings\":");
@@ -185,6 +231,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageRecipeInput,
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"description\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.dry_run) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"dryRun\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -228,10 +280,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageRecipeInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateImageRecipeOutput {
-    var result: CreateImageRecipeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateImageRecipeOutput, body, allocator);
-    }
+    const result: CreateImageRecipeOutput = try aws.json.parseJsonObject(
+        CreateImageRecipeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

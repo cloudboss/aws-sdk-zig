@@ -11,7 +11,10 @@ pub const PutImagePolicyInput = struct {
     /// to.
     image_arn: []const u8,
 
-    /// The policy to apply.
+    /// The resource policy to apply to the image, as a JSON policy document.
+    /// Image Builder validates the policy with Amazon Web Services RAM before
+    /// applying it, and rejects
+    /// invalid policies with `InvalidParameterValueException`.
     policy: []const u8,
 
     pub const json_field_names = .{
@@ -93,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutImagePolicyInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutImagePolicyOutput {
-    var result: PutImagePolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutImagePolicyOutput, body, allocator);
-    }
+    const result: PutImagePolicyOutput = try aws.json.parseJsonObject(
+        PutImagePolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

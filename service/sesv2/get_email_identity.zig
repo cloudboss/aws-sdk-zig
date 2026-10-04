@@ -155,10 +155,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEmailIdentityInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetEmailIdentityOutput {
-    var result: GetEmailIdentityOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetEmailIdentityOutput, body, allocator);
-    }
+    const result: GetEmailIdentityOutput = try aws.json.parseJsonObject(
+        GetEmailIdentityOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

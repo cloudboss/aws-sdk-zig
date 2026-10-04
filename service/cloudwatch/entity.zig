@@ -15,7 +15,8 @@ pub const Entity = struct {
     ///
     /// For details about how to use the attributes, see [How
     /// to add related information to
-    /// telemetry](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html) in the *CloudWatch User Guide*.
+    /// telemetry](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html) in the *CloudWatch
+    /// User Guide*.
     attributes: ?[]const aws.map.StringMapEntry = null,
 
     /// The attributes of the entity which identify the specific entity, as a list
@@ -30,10 +31,9 @@ pub const Entity = struct {
     ///
     /// For details about how to use the key attributes to specify an entity, see
     /// [How
-    /// to add related
-    /// information to
-    /// telemetry](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html) in the *CloudWatch User
-    /// Guide*.
+    /// to add related information to
+    /// telemetry](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/adding-your-own-related-telemetry.html) in the *CloudWatch
+    /// User Guide*.
     key_attributes: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{

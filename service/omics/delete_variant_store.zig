@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteVariantStoreInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteVariantStoreOutput {
-    var result: DeleteVariantStoreOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteVariantStoreOutput, body, allocator);
-    }
+    const result: DeleteVariantStoreOutput = try aws.json.parseJsonObject(
+        DeleteVariantStoreOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -5,31 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const TerminateSessionInput = struct {
-    /// The ID of the application that the session belongs to.
-    application_id: []const u8,
+pub const TerminateSessionInput = @import("terminate_session_request.zig").TerminateSessionRequest;
 
-    /// The ID of the session to terminate.
-    session_id: []const u8,
-
-    pub const json_field_names = .{
-        .application_id = "applicationId",
-        .session_id = "sessionId",
-    };
-};
-
-pub const TerminateSessionOutput = struct {
-    /// The output contains the application ID on which the session was terminated.
-    application_id: []const u8,
-
-    /// The output contains the ID of the terminated session.
-    session_id: []const u8,
-
-    pub const json_field_names = .{
-        .application_id = "applicationId",
-        .session_id = "sessionId",
-    };
-};
+pub const TerminateSessionOutput = @import("terminate_session_response.zig").TerminateSessionResponse;
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TerminateSessionInput, options: CallOptions) !TerminateSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -82,10 +60,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TerminateSessionInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !TerminateSessionOutput {
-    var result: TerminateSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(TerminateSessionOutput, body, allocator);
-    }
+    const result: TerminateSessionOutput = try aws.json.parseJsonObject(
+        TerminateSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

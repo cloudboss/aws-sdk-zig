@@ -112,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CancelPracticeRunInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CancelPracticeRunOutput {
-    var result: CancelPracticeRunOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CancelPracticeRunOutput, body, allocator);
-    }
+    const result: CancelPracticeRunOutput = try aws.json.parseJsonObject(
+        CancelPracticeRunOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

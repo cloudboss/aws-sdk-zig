@@ -76,7 +76,8 @@ pub const CrlConfiguration = struct {
     /// Specifies whether to create a complete or partitioned CRL. This setting
     /// determines the maximum number of certificates that the certificate authority
     /// can issue and revoke. For more information, see [Amazon Web Services Private
-    /// CA quotas](privateca/latest/userguide/pca.html#limits_pca).
+    /// CA
+    /// quotas](https://docs.aws.amazon.com/general/latest/gr/pca.html#limits_pca).
     ///
     /// * `COMPLETE` - The default setting. Amazon Web Services Private CA maintains
     ///   a single CRL ﬁle for all unexpired certiﬁcates issued by a CA that have
@@ -120,7 +121,7 @@ pub const CrlConfiguration = struct {
     /// for the **CustomCname** argument, the name of your S3 bucket is placed into
     /// the **CRL Distribution Points** extension of the issued certificate. You can
     /// change the name of your bucket by calling the
-    /// [UpdateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html) operation. You must specify a [bucket policy](https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#s3-policies) that allows Amazon Web Services Private CA to write the CRL to your bucket.
+    /// [UpdateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html) operation. You must specify a [bucket policy](https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies) that allows Amazon Web Services Private CA to write the CRL to your bucket.
     ///
     /// The `S3BucketName` parameter must conform to the [S3 bucket naming
     /// rules](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).
@@ -142,7 +143,7 @@ pub const CrlConfiguration = struct {
     /// `BUCKET_OWNER_FULL_CONTROL` or `PUBLIC_READ` as the value.
     ///
     /// For more information, see [Blocking public access to the S3
-    /// bucket](https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#s3-bpa).
+    /// bucket](https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-bpa).
     s3_object_acl: ?S3ObjectAcl = null,
 
     pub const json_field_names = .{

@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAssetBundleExportJo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAssetBundleExportJobsOutput {
-    var result: ListAssetBundleExportJobsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAssetBundleExportJobsOutput, body, allocator);
-    }
+    var result: ListAssetBundleExportJobsOutput = try aws.json.parseJsonObject(
+        ListAssetBundleExportJobsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

@@ -1,3 +1,5 @@
+const ControlPlaneEgressModeType = @import("control_plane_egress_mode_type.zig").ControlPlaneEgressModeType;
+
 /// An object representing an Amazon EKS cluster VPC configuration response.
 pub const VpcConfigResponse = struct {
     /// The cluster security group that was created by Amazon EKS for the cluster.
@@ -5,6 +7,17 @@ pub const VpcConfigResponse = struct {
     /// groups use this security group for control-plane-to-data-plane
     /// communication.
     cluster_security_group_id: ?[]const u8 = null,
+
+    /// The current control plane egress routing mode for the cluster. If the
+    /// cluster is set
+    /// to `AWS_MANAGED`, Amazon EKS manages the egress path from the control plane.
+    /// If the cluster is set to `CUSTOMER_ROUTED`, you manage the egress path from
+    /// the control plane in your VPC subnets.
+    ///
+    /// [Learn more about control plane
+    /// egress routing in the *Amazon EKS User
+    /// Guide*.](https://docs.aws.amazon.com/eks/latest/userguide/control-plane-egress.html)
+    control_plane_egress_mode: ?ControlPlaneEgressModeType = null,
 
     /// This parameter indicates whether the Amazon EKS private API server endpoint
     /// is enabled. If
@@ -61,6 +74,7 @@ pub const VpcConfigResponse = struct {
 
     pub const json_field_names = .{
         .cluster_security_group_id = "clusterSecurityGroupId",
+        .control_plane_egress_mode = "controlPlaneEgressMode",
         .endpoint_private_access = "endpointPrivateAccess",
         .endpoint_public_access = "endpointPublicAccess",
         .public_access_cidrs = "publicAccessCidrs",

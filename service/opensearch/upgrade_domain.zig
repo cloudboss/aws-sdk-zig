@@ -138,10 +138,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpgradeDomainInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpgradeDomainOutput {
-    var result: UpgradeDomainOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpgradeDomainOutput, body, allocator);
-    }
+    const result: UpgradeDomainOutput = try aws.json.parseJsonObject(
+        UpgradeDomainOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

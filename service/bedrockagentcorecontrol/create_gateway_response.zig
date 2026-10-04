@@ -1,11 +1,13 @@
 const AuthorizerConfiguration = @import("authorizer_configuration.zig").AuthorizerConfiguration;
 const AuthorizerType = @import("authorizer_type.zig").AuthorizerType;
+const CustomTransformConfiguration = @import("custom_transform_configuration.zig").CustomTransformConfiguration;
 const ExceptionLevel = @import("exception_level.zig").ExceptionLevel;
 const GatewayInterceptorConfiguration = @import("gateway_interceptor_configuration.zig").GatewayInterceptorConfiguration;
 const GatewayPolicyEngineConfiguration = @import("gateway_policy_engine_configuration.zig").GatewayPolicyEngineConfiguration;
 const GatewayProtocolConfiguration = @import("gateway_protocol_configuration.zig").GatewayProtocolConfiguration;
 const GatewayProtocolType = @import("gateway_protocol_type.zig").GatewayProtocolType;
 const GatewayStatus = @import("gateway_status.zig").GatewayStatus;
+const WafConfiguration = @import("waf_configuration.zig").WafConfiguration;
 const WorkloadIdentityDetails = @import("workload_identity_details.zig").WorkloadIdentityDetails;
 
 pub const CreateGatewayResponse = struct {
@@ -17,6 +19,10 @@ pub const CreateGatewayResponse = struct {
 
     /// The timestamp when the gateway was created.
     created_at: i64,
+
+    /// The custom transformation configuration for the gateway. This configuration
+    /// defines how the gateway transforms requests and responses.
+    custom_transform_configuration: ?CustomTransformConfiguration = null,
 
     /// The description of the gateway.
     description: ?[]const u8 = null,
@@ -69,6 +75,13 @@ pub const CreateGatewayResponse = struct {
     /// The timestamp when the gateway was last updated.
     updated_at: i64,
 
+    /// The Amazon Web Services WAF configuration for the gateway.
+    waf_configuration: ?WafConfiguration = null,
+
+    /// The Amazon Resource Name (ARN) of the Amazon Web Services WAF web ACL
+    /// associated with the gateway.
+    web_acl_arn: ?[]const u8 = null,
+
     /// The workload identity details for the created gateway.
     workload_identity_details: ?WorkloadIdentityDetails = null,
 
@@ -76,6 +89,7 @@ pub const CreateGatewayResponse = struct {
         .authorizer_configuration = "authorizerConfiguration",
         .authorizer_type = "authorizerType",
         .created_at = "createdAt",
+        .custom_transform_configuration = "customTransformConfiguration",
         .description = "description",
         .exception_level = "exceptionLevel",
         .gateway_arn = "gatewayArn",
@@ -91,6 +105,8 @@ pub const CreateGatewayResponse = struct {
         .status = "status",
         .status_reasons = "statusReasons",
         .updated_at = "updatedAt",
+        .waf_configuration = "wafConfiguration",
+        .web_acl_arn = "webAclArn",
         .workload_identity_details = "workloadIdentityDetails",
     };
 };

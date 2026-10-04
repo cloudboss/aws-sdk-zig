@@ -28,6 +28,10 @@ pub const ModifyTransitGatewayOptions = struct {
     ///
     /// * Connect
     ///
+    /// * VPN Concentrator
+    ///
+    /// * Client VPN
+    ///
     /// You must first delete all transit gateway attachments configured prior to
     /// modifying the ASN on
     /// the transit gateway.

@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchWriteInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchWriteOutput {
-    var result: BatchWriteOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchWriteOutput, body, allocator);
-    }
+    const result: BatchWriteOutput = try aws.json.parseJsonObject(
+        BatchWriteOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

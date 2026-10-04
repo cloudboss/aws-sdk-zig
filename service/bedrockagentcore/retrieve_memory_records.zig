@@ -17,11 +17,13 @@ pub const RetrieveMemoryRecordsInput = struct {
     memory_id: []const u8,
 
     /// The namespace prefix to filter memory records by. Searches for memory
-    /// records in namespaces that start with the provided prefix.
+    /// records in namespaces that start with the provided prefix. Either
+    /// `namespace` or `namespacePath` is required.
     namespace: ?[]const u8 = null,
 
     /// Use namespacePath for hierarchical retrievals. Return all memory records
-    /// where namespace falls under the same parent hierarchy.
+    /// where namespace falls under the same parent hierarchy. Either `namespace` or
+    /// `namespacePath` is required.
     namespace_path: ?[]const u8 = null,
 
     /// The token for the next set of results. Use the value returned in the
@@ -141,10 +143,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RetrieveMemoryRecordsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RetrieveMemoryRecordsOutput {
-    var result: RetrieveMemoryRecordsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RetrieveMemoryRecordsOutput, body, allocator);
-    }
+    const result: RetrieveMemoryRecordsOutput = try aws.json.parseJsonObject(
+        RetrieveMemoryRecordsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -108,11 +108,15 @@ pub const UpdateAssetModelInput = struct {
 };
 
 pub const UpdateAssetModelOutput = struct {
+    /// The ID of the asset model.
+    asset_model_id: ?[]const u8 = null,
+
     /// The status of the asset model, which contains a state (`UPDATING` after
     /// successfully calling this operation) and any error message.
     asset_model_status: ?AssetModelStatus = null,
 
     pub const json_field_names = .{
+        .asset_model_id = "assetModelId",
         .asset_model_status = "assetModelStatus",
     };
 };
@@ -221,10 +225,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAssetModelInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateAssetModelOutput {
-    var result: UpdateAssetModelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateAssetModelOutput, body, allocator);
-    }
+    const result: UpdateAssetModelOutput = try aws.json.parseJsonObject(
+        UpdateAssetModelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

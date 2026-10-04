@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSipMediaApplicati
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateSipMediaApplicationCallOutput {
-    var result: CreateSipMediaApplicationCallOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateSipMediaApplicationCallOutput, body, allocator);
-    }
+    const result: CreateSipMediaApplicationCallOutput = try aws.json.parseJsonObject(
+        CreateSipMediaApplicationCallOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

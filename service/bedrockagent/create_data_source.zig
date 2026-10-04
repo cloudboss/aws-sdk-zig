@@ -30,6 +30,9 @@ pub const CreateDataSourceInput = struct {
     ///   vector embeddings upon deletion of a knowledge base or data source
     ///   resource. Note that the **vector store itself is not deleted** if you
     ///   delete a knowledge base or data source resource.
+    ///
+    /// For managed knowledge bases, the only supported option is `DELETE`, which is
+    /// also the default.
     data_deletion_policy: ?DataDeletionPolicy = null,
 
     /// The connection configuration for the data source.
@@ -165,10 +168,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDataSourceInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDataSourceOutput {
-    var result: CreateDataSourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateDataSourceOutput, body, allocator);
-    }
+    const result: CreateDataSourceOutput = try aws.json.parseJsonObject(
+        CreateDataSourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

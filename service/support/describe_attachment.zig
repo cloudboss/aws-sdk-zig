@@ -9,10 +9,23 @@ const Attachment = @import("attachment.zig").Attachment;
 pub const DescribeAttachmentInput = struct {
     /// The ID of the attachment to return. Attachment IDs are returned by the
     /// DescribeCommunications operation.
+    ///
+    /// If the specified attachment is larger than 5 MB, this operation returns
+    /// `InvalidParameterValueException`. To download attachments larger than 5
+    /// MB, use GetAttachmentDownloadLink.
     attachment_id: []const u8,
+
+    /// Specifies whether to validate the request without actually retrieving the
+    /// attachment. When
+    /// set to `true`, the request is validated but no attachment content is
+    /// returned, and
+    /// the operation returns a `DryRunOperationException`. When omitted or set to
+    /// `false`, the request runs normally.
+    dry_run: ?bool = null,
 
     pub const json_field_names = .{
         .attachment_id = "attachmentId",
+        .dry_run = "dryRun",
     };
 };
 

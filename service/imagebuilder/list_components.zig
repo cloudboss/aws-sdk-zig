@@ -9,7 +9,10 @@ const Ownership = @import("ownership.zig").Ownership;
 const ComponentVersion = @import("component_version.zig").ComponentVersion;
 
 pub const ListComponentsInput = struct {
-    /// Returns the list of components for the specified name.
+    /// Specifies whether to return one entry per component name, with all versions
+    /// of each component aggregated. Defaults to `false`, which returns
+    /// one entry per component version. You can't combine this option with the
+    /// `version` filter.
     by_name: ?bool = null,
 
     /// Use the following filters to streamline results:
@@ -20,6 +23,10 @@ pub const ListComponentsInput = struct {
     ///
     /// * `platform`
     ///
+    /// * `productCodes`
+    ///
+    /// * `status`
+    ///
     /// * `supportedOsVersion`
     ///
     /// * `type`
@@ -27,10 +34,10 @@ pub const ListComponentsInput = struct {
     /// * `version`
     filters: ?[]const Filter = null,
 
-    /// Specify the maximum number of items to return in a request.
+    /// The maximum number of items to return in a single request.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
@@ -38,9 +45,10 @@ pub const ListComponentsInput = struct {
     /// this request
     /// returns a list of components that your account owns. To see results for
     /// other types of
-    /// owners, you can specify components that Amazon manages, third party
-    /// components, or
-    /// components that other accounts have shared with you.
+    /// owners, you can specify components that Amazon manages, components from the
+    /// Amazon Web Services Marketplace, third party components, or components that
+    /// other accounts have shared
+    /// with you.
     owner: ?Ownership = null,
 
     pub const json_field_names = .{
@@ -157,10 +165,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListComponentsInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListComponentsOutput {
-    var result: ListComponentsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListComponentsOutput, body, allocator);
-    }
+    const result: ListComponentsOutput = try aws.json.parseJsonObject(
+        ListComponentsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

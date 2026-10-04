@@ -6,6 +6,7 @@ pub const GetPlaceAdditionalFeature = enum {
     access,
     contact,
     secondary_addresses,
+    cross_references,
 
     pub const json_field_names = .{
         .time_zone = "TimeZone",
@@ -13,6 +14,7 @@ pub const GetPlaceAdditionalFeature = enum {
         .access = "Access",
         .contact = "Contact",
         .secondary_addresses = "SecondaryAddresses",
+        .cross_references = "CrossReferences",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +24,7 @@ pub const GetPlaceAdditionalFeature = enum {
             .access => "Access",
             .contact => "Contact",
             .secondary_addresses => "SecondaryAddresses",
+            .cross_references => "CrossReferences",
         };
     }
 

@@ -122,10 +122,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartConfigurationSessi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartConfigurationSessionOutput {
-    var result: StartConfigurationSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartConfigurationSessionOutput, body, allocator);
-    }
+    const result: StartConfigurationSessionOutput = try aws.json.parseJsonObject(
+        StartConfigurationSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

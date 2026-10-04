@@ -6,11 +6,16 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const DeleteInvoiceUnitInput = struct {
+    /// A unique, case-sensitive identifier that you provide to ensure idempotency
+    /// of the request.
+    client_token: ?[]const u8 = null,
+
     /// The ARN to identify an invoice unit. This information can't be modified or
     /// deleted.
     invoice_unit_arn: []const u8,
 
     pub const json_field_names = .{
+        .client_token = "ClientToken",
         .invoice_unit_arn = "InvoiceUnitArn",
     };
 };

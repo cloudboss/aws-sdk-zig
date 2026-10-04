@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBackupPlanFromJSONIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBackupPlanFromJSONOutput {
-    var result: GetBackupPlanFromJSONOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBackupPlanFromJSONOutput, body, allocator);
-    }
+    const result: GetBackupPlanFromJSONOutput = try aws.json.parseJsonObject(
+        GetBackupPlanFromJSONOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

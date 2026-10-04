@@ -94,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchCreateDelegationBy
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchCreateDelegationByAssessmentOutput {
-    var result: BatchCreateDelegationByAssessmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchCreateDelegationByAssessmentOutput, body, allocator);
-    }
+    const result: BatchCreateDelegationByAssessmentOutput = try aws.json.parseJsonObject(
+        BatchCreateDelegationByAssessmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

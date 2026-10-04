@@ -6,8 +6,12 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const CancelImageCreationInput = struct {
-    /// Unique, case-sensitive identifier you provide to ensure
-    /// idempotency of the request. For more information, see [Ensuring
+    /// A unique, case-sensitive identifier you provide to ensure
+    /// that the operation runs no more than one time. If you retry a request with
+    /// the same client
+    /// token, Image Builder returns the original response without running the
+    /// operation again. For more
+    /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
     /// in the *Amazon EC2 API Reference*.
     client_token: []const u8,
@@ -100,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CancelImageCreationInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CancelImageCreationOutput {
-    var result: CancelImageCreationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CancelImageCreationOutput, body, allocator);
-    }
+    const result: CancelImageCreationOutput = try aws.json.parseJsonObject(
+        CancelImageCreationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

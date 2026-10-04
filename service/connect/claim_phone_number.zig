@@ -16,8 +16,8 @@ pub const ClaimPhoneNumberInput = struct {
     /// Pattern: `^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$`
     client_token: ?[]const u8 = null,
 
-    /// The identifier of the Amazon Connect instance that phone numbers are claimed
-    /// to. You
+    /// The identifier of the Connect Customer instance that phone numbers are
+    /// claimed to. You
     /// can [find the
     /// instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance. You must enter `InstanceId` or `TargetArn`.
@@ -35,7 +35,7 @@ pub const ClaimPhoneNumberInput = struct {
     /// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
     tags: ?[]const aws.map.StringMapEntry = null,
 
-    /// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+    /// The Amazon Resource Name (ARN) for Connect Customer instances or traffic
     /// distribution groups that phone number inbound traffic is routed through. You
     /// must enter `InstanceId` or `TargetArn`.
     target_arn: ?[]const u8 = null,
@@ -149,10 +149,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ClaimPhoneNumberInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ClaimPhoneNumberOutput {
-    var result: ClaimPhoneNumberOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ClaimPhoneNumberOutput, body, allocator);
-    }
+    const result: ClaimPhoneNumberOutput = try aws.json.parseJsonObject(
+        ClaimPhoneNumberOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

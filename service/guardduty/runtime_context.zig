@@ -9,6 +9,15 @@ pub const RuntimeContext = struct {
     /// Example of the command line involved in the suspicious activity.
     command_line_example: ?[]const u8 = null,
 
+    /// Represents the type of file operation that triggered the finding, such as
+    /// Write, Delete, Rename, Link, or Symlink.
+    file_operation: ?[]const u8 = null,
+
+    /// The path of the sensitive file that was modified. Modification includes
+    /// write, delete, rename, link, or symlink operations. This field is indexed
+    /// for filtering.
+    file_path: ?[]const u8 = null,
+
     /// Represents the type of mounted fileSystem.
     file_system_type: ?[]const u8 = null,
 
@@ -54,6 +63,10 @@ pub const RuntimeContext = struct {
     /// The path in the container that is mapped to the host directory.
     mount_target: ?[]const u8 = null,
 
+    /// All file paths modified by the same process that triggered the finding, up
+    /// to a maximum of 25 paths.
+    related_file_paths: ?[]const []const u8 = null,
+
     /// The path in the container that modified the release agent file.
     release_agent_path: ?[]const u8 = null,
 
@@ -90,6 +103,8 @@ pub const RuntimeContext = struct {
     pub const json_field_names = .{
         .address_family = "AddressFamily",
         .command_line_example = "CommandLineExample",
+        .file_operation = "FileOperation",
+        .file_path = "FilePath",
         .file_system_type = "FileSystemType",
         .flags = "Flags",
         .iana_protocol_number = "IanaProtocolNumber",
@@ -103,6 +118,7 @@ pub const RuntimeContext = struct {
         .module_sha_256 = "ModuleSha256",
         .mount_source = "MountSource",
         .mount_target = "MountTarget",
+        .related_file_paths = "RelatedFilePaths",
         .release_agent_path = "ReleaseAgentPath",
         .runc_binary_path = "RuncBinaryPath",
         .script_path = "ScriptPath",

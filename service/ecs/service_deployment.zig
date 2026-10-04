@@ -1,6 +1,7 @@
 const ServiceDeploymentAlarms = @import("service_deployment_alarms.zig").ServiceDeploymentAlarms;
 const ServiceDeploymentCircuitBreaker = @import("service_deployment_circuit_breaker.zig").ServiceDeploymentCircuitBreaker;
 const DeploymentConfiguration = @import("deployment_configuration.zig").DeploymentConfiguration;
+const DeploymentLifecycleHookDetail = @import("deployment_lifecycle_hook_detail.zig").DeploymentLifecycleHookDetail;
 const ServiceDeploymentLifecycleStage = @import("service_deployment_lifecycle_stage.zig").ServiceDeploymentLifecycleStage;
 const Rollback = @import("rollback.zig").Rollback;
 const ServiceRevisionSummary = @import("service_revision_summary.zig").ServiceRevisionSummary;
@@ -33,6 +34,9 @@ pub const ServiceDeployment = struct {
     /// HH:mm:ss.SSSSSS.
     finished_at: ?i64 = null,
 
+    /// The details of the lifecycle hooks for the current service deployment.
+    lifecycle_hook_details: ?[]const DeploymentLifecycleHookDetail = null,
+
     /// The current lifecycle stage of the deployment. Possible values include:
     ///
     /// * RECONCILE_SERVICE
@@ -60,10 +64,16 @@ pub const ServiceDeployment = struct {
     ///
     /// The test traffic shift is complete. The green service revision handles 100%
     /// of the test traffic.
+    /// * PRE_PRODUCTION_TRAFFIC_SHIFT
+    ///
+    /// Occurs before production traffic shift. For linear and canary deployments,
+    /// this stage is invoked before every traffic shift step.
     /// * PRODUCTION_TRAFFIC_SHIFT
     ///
     /// Production traffic is shifting to the green service revision. The green
-    /// service revision is migrating from 0% to 100% of production traffic.
+    /// service revision is migrating from 0% to 100% of production traffic. For
+    /// linear and canary deployments, this stage is invoked at every traffic shift
+    /// step.
     /// * POST_PRODUCTION_TRAFFIC_SHIFT
     ///
     /// The production traffic shift is complete.
@@ -125,6 +135,7 @@ pub const ServiceDeployment = struct {
         .deployment_circuit_breaker = "deploymentCircuitBreaker",
         .deployment_configuration = "deploymentConfiguration",
         .finished_at = "finishedAt",
+        .lifecycle_hook_details = "lifecycleHookDetails",
         .lifecycle_stage = "lifecycleStage",
         .rollback = "rollback",
         .service_arn = "serviceArn",

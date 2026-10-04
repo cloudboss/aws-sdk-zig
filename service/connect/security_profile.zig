@@ -5,11 +5,11 @@ const GranularAccessControlConfiguration = @import("granular_access_control_conf
 /// Contains information about a security profile.
 pub const SecurityProfile = struct {
     /// The identifier of the hierarchy group that a security profile uses to
-    /// restrict access to resources in Amazon Connect.
+    /// restrict access to resources in Connect Customer.
     allowed_access_control_hierarchy_group_id: ?[]const u8 = null,
 
     /// The list of tags that a security profile uses to restrict access to
-    /// resources in Amazon Connect.
+    /// resources in Connect Customer.
     allowed_access_control_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The Amazon Resource Name (ARN) for the security profile.
@@ -23,7 +23,7 @@ pub const SecurityProfile = struct {
     granular_access_control_configuration: ?GranularAccessControlConfiguration = null,
 
     /// The list of resources that a security profile applies hierarchy restrictions
-    /// to in Amazon Connect. Following
+    /// to in Connect Customer. Following
     /// are acceptable ResourceNames: `User`.
     hierarchy_restricted_resources: ?[]const []const u8 = null,
 
@@ -43,7 +43,7 @@ pub const SecurityProfile = struct {
     security_profile_name: ?[]const u8 = null,
 
     /// The list of resources that a security profile applies tag restrictions to in
-    /// Amazon Connect.
+    /// Connect Customer.
     tag_restricted_resources: ?[]const []const u8 = null,
 
     /// The tags used to organize, track, or control access for this resource. For

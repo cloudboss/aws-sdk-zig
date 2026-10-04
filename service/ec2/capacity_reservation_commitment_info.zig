@@ -1,5 +1,12 @@
 /// Information about your commitment for a future-dated Capacity Reservation.
 pub const CapacityReservationCommitmentInfo = struct {
+    /// The commitment duration, in seconds, for the future-dated Capacity
+    /// Reservation. This is
+    /// the minimum duration for which you commit to having the Capacity Reservation
+    /// in the
+    /// `active` state in your account after it has been delivered.
+    commitment_duration: ?i64 = null,
+
     /// The date and time at which the commitment duration expires, in the ISO8601
     /// format in
     /// the UTC time zone (`YYYY-MM-DDThh:mm:ss.sssZ`). You can't decrease the

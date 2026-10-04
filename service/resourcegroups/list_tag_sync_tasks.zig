@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTagSyncTasksInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTagSyncTasksOutput {
-    var result: ListTagSyncTasksOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListTagSyncTasksOutput, body, allocator);
-    }
+    const result: ListTagSyncTasksOutput = try aws.json.parseJsonObject(
+        ListTagSyncTasksOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

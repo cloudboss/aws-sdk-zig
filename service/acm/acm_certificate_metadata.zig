@@ -1,3 +1,4 @@
+const CertificateKeyPairOrigin = @import("certificate_key_pair_origin.zig").CertificateKeyPairOrigin;
 const CertificateExport = @import("certificate_export.zig").CertificateExport;
 const CertificateManagedBy = @import("certificate_managed_by.zig").CertificateManagedBy;
 const RenewalEligibility = @import("renewal_eligibility.zig").RenewalEligibility;
@@ -8,6 +9,15 @@ const ValidationMethod = @import("validation_method.zig").ValidationMethod;
 
 /// Contains ACM-specific metadata about a certificate.
 pub const AcmCertificateMetadata = struct {
+    /// The ACME account identifier associated with the certificate.
+    acme_account_id: ?[]const u8 = null,
+
+    /// The ARN of the ACME endpoint used to issue the certificate.
+    acme_endpoint_arn: ?[]const u8 = null,
+
+    /// The origin of the certificate's key pair.
+    certificate_key_pair_origin: ?CertificateKeyPairOrigin = null,
+
     /// The time at which the certificate was requested.
     created_at: ?i64 = null,
 
@@ -67,6 +77,9 @@ pub const AcmCertificateMetadata = struct {
     validation_method: ?ValidationMethod = null,
 
     pub const json_field_names = .{
+        .acme_account_id = "AcmeAccountId",
+        .acme_endpoint_arn = "AcmeEndpointArn",
+        .certificate_key_pair_origin = "CertificateKeyPairOrigin",
         .created_at = "CreatedAt",
         .exported = "Exported",
         .export_option = "ExportOption",

@@ -1,5 +1,6 @@
 const std = @import("std");
 
+/// The status of a job.
 pub const JobStatus = enum {
     submitted,
     queued,

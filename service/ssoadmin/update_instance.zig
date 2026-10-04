@@ -22,10 +22,20 @@ pub const UpdateInstanceInput = struct {
     /// Updates the instance name.
     name: ?[]const u8 = null,
 
+    /// Enables permission sets for this Identity Center instance. The only accepted
+    /// value is `true `. After permission sets are enabled, they cannot be
+    /// disabled.
+    ///
+    /// You can't set `EncryptionConfiguration` and `PermissionSetsEnabled` in the
+    /// same request. To configure both, make two separate `UpdateInstance` calls.
+    /// These calls can be made in parallel.
+    permission_sets_enabled: ?bool = null,
+
     pub const json_field_names = .{
         .encryption_configuration = "EncryptionConfiguration",
         .instance_arn = "InstanceArn",
         .name = "Name",
+        .permission_sets_enabled = "PermissionSetsEnabled",
     };
 };
 

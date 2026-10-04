@@ -1,14 +1,18 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const create_db_backup = @import("create_db_backup.zig");
 const create_db_cluster = @import("create_db_cluster.zig");
 const create_db_instance = @import("create_db_instance.zig");
 const create_db_parameter_group = @import("create_db_parameter_group.zig");
+const delete_db_backup = @import("delete_db_backup.zig");
 const delete_db_cluster = @import("delete_db_cluster.zig");
 const delete_db_instance = @import("delete_db_instance.zig");
+const get_db_backup = @import("get_db_backup.zig");
 const get_db_cluster = @import("get_db_cluster.zig");
 const get_db_instance = @import("get_db_instance.zig");
 const get_db_parameter_group = @import("get_db_parameter_group.zig");
+const list_db_backups = @import("list_db_backups.zig");
 const list_db_clusters = @import("list_db_clusters.zig");
 const list_db_instances = @import("list_db_instances.zig");
 const list_db_instances_for_cluster = @import("list_db_instances_for_cluster.zig");
@@ -16,6 +20,7 @@ const list_db_parameter_groups = @import("list_db_parameter_groups.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const reboot_db_cluster = @import("reboot_db_cluster.zig");
 const reboot_db_instance = @import("reboot_db_instance.zig");
+const restore_from_db_backup = @import("restore_from_db_backup.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_db_cluster = @import("update_db_cluster.zig");
@@ -50,6 +55,11 @@ pub const Client = struct {
         _ = self;
     }
 
+    /// Creates a new on-demand backup of a Timestream for InfluxDB resource.
+    pub fn createDbBackup(self: *Self, allocator: std.mem.Allocator, input: create_db_backup.CreateDbBackupInput, options: CallOptions) !create_db_backup.CreateDbBackupOutput {
+        return create_db_backup.execute(self, allocator, input, options);
+    }
+
     /// Creates a new Timestream for InfluxDB cluster.
     pub fn createDbCluster(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster.CreateDbClusterInput, options: CallOptions) !create_db_cluster.CreateDbClusterOutput {
         return create_db_cluster.execute(self, allocator, input, options);
@@ -66,6 +76,11 @@ pub const Client = struct {
         return create_db_parameter_group.execute(self, allocator, input, options);
     }
 
+    /// Deletes a Timestream for InfluxDB backup.
+    pub fn deleteDbBackup(self: *Self, allocator: std.mem.Allocator, input: delete_db_backup.DeleteDbBackupInput, options: CallOptions) !delete_db_backup.DeleteDbBackupOutput {
+        return delete_db_backup.execute(self, allocator, input, options);
+    }
+
     /// Deletes a Timestream for InfluxDB cluster.
     pub fn deleteDbCluster(self: *Self, allocator: std.mem.Allocator, input: delete_db_cluster.DeleteDbClusterInput, options: CallOptions) !delete_db_cluster.DeleteDbClusterOutput {
         return delete_db_cluster.execute(self, allocator, input, options);
@@ -74,6 +89,11 @@ pub const Client = struct {
     /// Deletes a Timestream for InfluxDB DB instance.
     pub fn deleteDbInstance(self: *Self, allocator: std.mem.Allocator, input: delete_db_instance.DeleteDbInstanceInput, options: CallOptions) !delete_db_instance.DeleteDbInstanceOutput {
         return delete_db_instance.execute(self, allocator, input, options);
+    }
+
+    /// Returns information about a specific Timestream for InfluxDB backup.
+    pub fn getDbBackup(self: *Self, allocator: std.mem.Allocator, input: get_db_backup.GetDbBackupInput, options: CallOptions) !get_db_backup.GetDbBackupOutput {
+        return get_db_backup.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a Timestream for InfluxDB cluster.
@@ -89,6 +109,11 @@ pub const Client = struct {
     /// Returns a Timestream for InfluxDB DB parameter group.
     pub fn getDbParameterGroup(self: *Self, allocator: std.mem.Allocator, input: get_db_parameter_group.GetDbParameterGroupInput, options: CallOptions) !get_db_parameter_group.GetDbParameterGroupOutput {
         return get_db_parameter_group.execute(self, allocator, input, options);
+    }
+
+    /// Returns a list of Timestream for InfluxDB backups.
+    pub fn listDbBackups(self: *Self, allocator: std.mem.Allocator, input: list_db_backups.ListDbBackupsInput, options: CallOptions) !list_db_backups.ListDbBackupsOutput {
+        return list_db_backups.execute(self, allocator, input, options);
     }
 
     /// Returns a list of Timestream for InfluxDB DB clusters.
@@ -126,6 +151,13 @@ pub const Client = struct {
         return reboot_db_instance.execute(self, allocator, input, options);
     }
 
+    /// Restores a Timestream for InfluxDB resource from a backup. By default, a new
+    /// resource is created. You can optionally restore to the same resource using
+    /// the REPLACE_EXISTING restore mode.
+    pub fn restoreFromDbBackup(self: *Self, allocator: std.mem.Allocator, input: restore_from_db_backup.RestoreFromDbBackupInput, options: CallOptions) !restore_from_db_backup.RestoreFromDbBackupOutput {
+        return restore_from_db_backup.execute(self, allocator, input, options);
+    }
+
     /// Tags are composed of a Key/Value pairs. You can use tags to categorize and
     /// track your Timestream for InfluxDB resources.
     pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
@@ -145,6 +177,13 @@ pub const Client = struct {
     /// Updates a Timestream for InfluxDB DB instance.
     pub fn updateDbInstance(self: *Self, allocator: std.mem.Allocator, input: update_db_instance.UpdateDbInstanceInput, options: CallOptions) !update_db_instance.UpdateDbInstanceOutput {
         return update_db_instance.execute(self, allocator, input, options);
+    }
+
+    pub fn listDbBackupsPaginator(self: *Self, params: list_db_backups.ListDbBackupsInput) paginator.ListDbBackupsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
     }
 
     pub fn listDbClustersPaginator(self: *Self, params: list_db_clusters.ListDbClustersInput) paginator.ListDbClustersPaginator {

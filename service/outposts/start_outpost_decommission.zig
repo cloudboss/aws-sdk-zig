@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartOutpostDecommissio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartOutpostDecommissionOutput {
-    var result: StartOutpostDecommissionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartOutpostDecommissionOutput, body, allocator);
-    }
+    const result: StartOutpostDecommissionOutput = try aws.json.parseJsonObject(
+        StartOutpostDecommissionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -44,6 +44,15 @@ pub const EventType = enum {
     media_file_inaccessible,
     media_file_type_unsupported,
     media_file_size_exceeded,
+    rcs_all,
+    rcs_queued,
+    rcs_sent,
+    rcs_delivered,
+    rcs_read,
+    rcs_failed,
+    rcs_ttl_expired,
+    rcs_protect_blocked,
+    rcs_fallen_back_to_sms,
 
     pub const json_field_names = .{
         .all = "ALL",
@@ -89,6 +98,15 @@ pub const EventType = enum {
         .media_file_inaccessible = "MEDIA_FILE_INACCESSIBLE",
         .media_file_type_unsupported = "MEDIA_FILE_TYPE_UNSUPPORTED",
         .media_file_size_exceeded = "MEDIA_FILE_SIZE_EXCEEDED",
+        .rcs_all = "RCS_ALL",
+        .rcs_queued = "RCS_QUEUED",
+        .rcs_sent = "RCS_SENT",
+        .rcs_delivered = "RCS_DELIVERED",
+        .rcs_read = "RCS_READ",
+        .rcs_failed = "RCS_FAILED",
+        .rcs_ttl_expired = "RCS_TTL_EXPIRED",
+        .rcs_protect_blocked = "RCS_PROTECT_BLOCKED",
+        .rcs_fallen_back_to_sms = "RCS_FALLEN_BACK_TO_SMS",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -136,6 +154,15 @@ pub const EventType = enum {
             .media_file_inaccessible => "MEDIA_FILE_INACCESSIBLE",
             .media_file_type_unsupported => "MEDIA_FILE_TYPE_UNSUPPORTED",
             .media_file_size_exceeded => "MEDIA_FILE_SIZE_EXCEEDED",
+            .rcs_all => "RCS_ALL",
+            .rcs_queued => "RCS_QUEUED",
+            .rcs_sent => "RCS_SENT",
+            .rcs_delivered => "RCS_DELIVERED",
+            .rcs_read => "RCS_READ",
+            .rcs_failed => "RCS_FAILED",
+            .rcs_ttl_expired => "RCS_TTL_EXPIRED",
+            .rcs_protect_blocked => "RCS_PROTECT_BLOCKED",
+            .rcs_fallen_back_to_sms => "RCS_FALLEN_BACK_TO_SMS",
         };
     }
 

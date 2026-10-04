@@ -7,6 +7,7 @@ const ChallengeConfig = @import("challenge_config.zig").ChallengeConfig;
 const CustomResponseBody = @import("custom_response_body.zig").CustomResponseBody;
 const DataProtectionConfig = @import("data_protection_config.zig").DataProtectionConfig;
 const DefaultAction = @import("default_action.zig").DefaultAction;
+const MonetizationConfig = @import("monetization_config.zig").MonetizationConfig;
 const OnSourceDDoSProtectionConfig = @import("on_source_d_do_s_protection_config.zig").OnSourceDDoSProtectionConfig;
 const FirewallManagerRuleGroup = @import("firewall_manager_rule_group.zig").FirewallManagerRuleGroup;
 const Rule = @import("rule.zig").Rule;
@@ -22,7 +23,8 @@ const VisibilityConfig = @import("visibility_config.zig").VisibilityConfig;
 /// resources to protect. The resource types include Amazon CloudFront
 /// distribution, Amazon API Gateway REST API, Application Load Balancer,
 /// AppSync GraphQL API, Amazon Cognito user pool, App Runner service, Amplify
-/// application, and Amazon Web Services Verified Access instance.
+/// application, Amazon Web Services Verified Access instance, and Amazon
+/// Bedrock AgentCore Gateway.
 pub const WebACL = struct {
     /// Returns a list of `ApplicationAttribute`s.
     application_config: ?ApplicationConfig = null,
@@ -138,6 +140,11 @@ pub const WebACL = struct {
     /// `PostProcessFirewallManagerRuleGroups`.
     managed_by_firewall_manager: bool = false,
 
+    /// The monetization configuration for the web ACL. Required when any rule in
+    /// the web ACL uses the `Monetize` action. Specifies the cryptocurrency payment
+    /// networks and currency mode for AI bot monetization.
+    monetization_config: ?MonetizationConfig = null,
+
     /// The name of the web ACL. You cannot change the name of a web ACL after you
     /// create it.
     name: []const u8,
@@ -221,6 +228,7 @@ pub const WebACL = struct {
         .id = "Id",
         .label_namespace = "LabelNamespace",
         .managed_by_firewall_manager = "ManagedByFirewallManager",
+        .monetization_config = "MonetizationConfig",
         .name = "Name",
         .on_source_d_do_s_protection_config = "OnSourceDDoSProtectionConfig",
         .post_process_firewall_manager_rule_groups = "PostProcessFirewallManagerRuleGroups",

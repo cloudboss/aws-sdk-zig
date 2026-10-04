@@ -8,6 +8,7 @@ pub const ResourceCategory = enum {
     ai_ml,
     identity,
     network,
+    messaging,
     other,
 
     pub const json_field_names = .{
@@ -18,6 +19,7 @@ pub const ResourceCategory = enum {
         .ai_ml = "AI/ML",
         .identity = "Identity",
         .network = "Network",
+        .messaging = "Messaging",
         .other = "Other",
     };
 
@@ -30,6 +32,7 @@ pub const ResourceCategory = enum {
             .ai_ml => "AI/ML",
             .identity => "Identity",
             .network => "Network",
+            .messaging => "Messaging",
             .other => "Other",
         };
     }

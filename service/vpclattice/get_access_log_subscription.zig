@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAccessLogSubscriptio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAccessLogSubscriptionOutput {
-    var result: GetAccessLogSubscriptionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAccessLogSubscriptionOutput, body, allocator);
-    }
+    const result: GetAccessLogSubscriptionOutput = try aws.json.parseJsonObject(
+        GetAccessLogSubscriptionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

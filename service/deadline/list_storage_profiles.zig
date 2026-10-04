@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListStorageProfilesInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListStorageProfilesOutput {
-    var result: ListStorageProfilesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListStorageProfilesOutput, body, allocator);
-    }
+    const result: ListStorageProfilesOutput = try aws.json.parseJsonObject(
+        ListStorageProfilesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

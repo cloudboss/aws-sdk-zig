@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSpaceInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateSpaceOutput {
-    var result: UpdateSpaceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateSpaceOutput, body, allocator);
-    }
+    const result: UpdateSpaceOutput = try aws.json.parseJsonObject(
+        UpdateSpaceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

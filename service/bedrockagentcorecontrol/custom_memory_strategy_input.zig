@@ -15,7 +15,8 @@ pub const CustomMemoryStrategyInput = struct {
     /// The name of the custom memory strategy.
     name: []const u8,
 
-    /// The namespaces associated with the custom memory strategy.
+    /// This is a legacy parameter, use `namespaceTemplates`. The namespaces
+    /// associated with the custom memory strategy.
     namespaces: ?[]const []const u8 = null,
 
     /// The namespaceTemplates associated with the custom memory strategy.

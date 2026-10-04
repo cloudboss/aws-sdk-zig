@@ -116,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRetrievedTracesInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListRetrievedTracesOutput {
-    var result: ListRetrievedTracesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListRetrievedTracesOutput, body, allocator);
-    }
+    const result: ListRetrievedTracesOutput = try aws.json.parseJsonObject(
+        ListRetrievedTracesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

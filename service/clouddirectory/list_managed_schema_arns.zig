@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListManagedSchemaArnsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListManagedSchemaArnsOutput {
-    var result: ListManagedSchemaArnsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListManagedSchemaArnsOutput, body, allocator);
-    }
+    const result: ListManagedSchemaArnsOutput = try aws.json.parseJsonObject(
+        ListManagedSchemaArnsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateTelemetryRuleInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateTelemetryRuleOutput {
-    var result: UpdateTelemetryRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateTelemetryRuleOutput, body, allocator);
-    }
+    const result: UpdateTelemetryRuleOutput = try aws.json.parseJsonObject(
+        UpdateTelemetryRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

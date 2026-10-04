@@ -1,5 +1,6 @@
 const std = @import("std");
 
+/// The lifecycle status of a batch evaluation job.
 pub const BatchEvaluationStatus = enum {
     pending,
     in_progress,

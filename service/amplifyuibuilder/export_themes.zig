@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExportThemesInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ExportThemesOutput {
-    var result: ExportThemesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ExportThemesOutput, body, allocator);
-    }
+    const result: ExportThemesOutput = try aws.json.parseJsonObject(
+        ExportThemesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

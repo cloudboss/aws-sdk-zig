@@ -4,9 +4,11 @@ const Address = @import("address.zig").Address;
 const BusinessChain = @import("business_chain.zig").BusinessChain;
 const Category = @import("category.zig").Category;
 const Contacts = @import("contacts.zig").Contacts;
+const CrossReference = @import("cross_reference.zig").CrossReference;
 const FoodType = @import("food_type.zig").FoodType;
 const OpeningHours = @import("opening_hours.zig").OpeningHours;
 const PhonemeDetails = @import("phoneme_details.zig").PhonemeDetails;
+const PlaceAttribute = @import("place_attribute.zig").PlaceAttribute;
 const PlaceType = @import("place_type.zig").PlaceType;
 const TimeZone = @import("time_zone.zig").TimeZone;
 
@@ -36,6 +38,10 @@ pub const SearchNearbyResultItem = struct {
     /// List of potential contact methods for the result/place.
     contacts: ?Contacts = null,
 
+    /// The list of supplier references available for this place. Requires the
+    /// `CrossReferences` additional feature to be enabled.
+    cross_references: ?[]const CrossReference = null,
+
     /// The distance in meters from the QueryPosition.
     distance: i64 = 0,
 
@@ -55,6 +61,10 @@ pub const SearchNearbyResultItem = struct {
     /// How the various components of the result's address are pronounced in various
     /// languages.
     phonemes: ?PhonemeDetails = null,
+
+    /// A list of place attributes for the result, such as whether the business
+    /// offers drive-through service.
+    place_attributes: ?[]const PlaceAttribute = null,
 
     /// The `PlaceId` of the place you wish to receive the information for.
     place_id: []const u8,
@@ -86,11 +96,13 @@ pub const SearchNearbyResultItem = struct {
         .business_chains = "BusinessChains",
         .categories = "Categories",
         .contacts = "Contacts",
+        .cross_references = "CrossReferences",
         .distance = "Distance",
         .food_types = "FoodTypes",
         .map_view = "MapView",
         .opening_hours = "OpeningHours",
         .phonemes = "Phonemes",
+        .place_attributes = "PlaceAttributes",
         .place_id = "PlaceId",
         .place_type = "PlaceType",
         .political_view = "PoliticalView",

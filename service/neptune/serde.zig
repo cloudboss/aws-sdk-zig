@@ -930,6 +930,7 @@ pub fn deserializeClusterPendingModifiedValues(allocator: std.mem.Allocator, rea
     result.engine_version = null;
     result.iam_database_authentication_enabled = null;
     result.iops = null;
+    result.network_type = null;
     result.pending_cloudwatch_logs_exports = null;
     result.storage_type = null;
     while (try reader.next()) |event| {
@@ -947,6 +948,8 @@ pub fn deserializeClusterPendingModifiedValues(allocator: std.mem.Allocator, rea
                     result.iam_database_authentication_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "Iops")) {
                     result.iops = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "NetworkType")) {
+                    result.network_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PendingCloudwatchLogsExports")) {
                     result.pending_cloudwatch_logs_exports = try deserializePendingCloudwatchLogsExports(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "StorageType")) {
@@ -996,6 +999,7 @@ pub fn deserializeDBCluster(allocator: std.mem.Allocator, reader: *aws.xml.Reade
     result.latest_restorable_time = null;
     result.master_username = null;
     result.multi_az = null;
+    result.network_type = null;
     result.pending_modified_values = null;
     result.percent_progress = null;
     result.port = null;
@@ -1076,6 +1080,8 @@ pub fn deserializeDBCluster(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                     result.master_username = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "MultiAZ")) {
                     result.multi_az = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "NetworkType")) {
+                    result.network_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "PendingModifiedValues")) {
                     result.pending_modified_values = try deserializeClusterPendingModifiedValues(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "PercentProgress")) {
@@ -1477,6 +1483,7 @@ pub fn deserializeDBInstance(allocator: std.mem.Allocator, reader: *aws.xml.Read
     result.monitoring_interval = null;
     result.monitoring_role_arn = null;
     result.multi_az = null;
+    result.network_type = null;
     result.option_group_memberships = null;
     result.pending_modified_values = null;
     result.performance_insights_enabled = null;
@@ -1568,6 +1575,8 @@ pub fn deserializeDBInstance(allocator: std.mem.Allocator, reader: *aws.xml.Read
                     result.monitoring_role_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "MultiAZ")) {
                     result.multi_az = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "NetworkType")) {
+                    result.network_type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OptionGroupMemberships")) {
                     result.option_group_memberships = try deserializeOptionGroupMembershipList(allocator, reader, "OptionGroupMembership");
                 } else if (std.mem.eql(u8, e.local, "PendingModifiedValues")) {
@@ -1722,6 +1731,7 @@ pub fn deserializeDBSubnetGroup(allocator: std.mem.Allocator, reader: *aws.xml.R
     result.db_subnet_group_name = null;
     result.subnet_group_status = null;
     result.subnets = null;
+    result.supported_network_types = null;
     result.vpc_id = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -1736,6 +1746,8 @@ pub fn deserializeDBSubnetGroup(allocator: std.mem.Allocator, reader: *aws.xml.R
                     result.subnet_group_status = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Subnets")) {
                     result.subnets = try deserializeSubnetList(allocator, reader, "Subnet");
+                } else if (std.mem.eql(u8, e.local, "SupportedNetworkTypes")) {
+                    result.supported_network_types = try deserializeStringList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "VpcId")) {
                     result.vpc_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -2095,6 +2107,7 @@ pub fn deserializeOrderableDBInstanceOption(allocator: std.mem.Allocator, reader
     result.multi_az_capable = null;
     result.read_replica_capable = null;
     result.storage_type = null;
+    result.supported_network_types = null;
     result.supports_enhanced_monitoring = null;
     result.supports_global_databases = null;
     result.supports_iam_database_authentication = null;
@@ -2133,6 +2146,8 @@ pub fn deserializeOrderableDBInstanceOption(allocator: std.mem.Allocator, reader
                     result.read_replica_capable = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "StorageType")) {
                     result.storage_type = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "SupportedNetworkTypes")) {
+                    result.supported_network_types = try deserializeStringList(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "SupportsEnhancedMonitoring")) {
                     result.supports_enhanced_monitoring = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "SupportsGlobalDatabases")) {

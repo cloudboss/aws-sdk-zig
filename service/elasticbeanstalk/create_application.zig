@@ -17,8 +17,8 @@ pub const CreateApplicationInput = struct {
     description: ?[]const u8 = null,
 
     /// Specifies an application resource lifecycle configuration to prevent your
-    /// application
-    /// from accumulating too many versions.
+    /// application from
+    /// accumulating too many versions.
     resource_lifecycle_config: ?ApplicationResourceLifecycleConfig = null,
 
     /// Specifies the tags applied to the application.

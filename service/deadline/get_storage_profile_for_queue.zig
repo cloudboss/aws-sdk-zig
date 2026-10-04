@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStorageProfileForQue
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetStorageProfileForQueueOutput {
-    var result: GetStorageProfileForQueueOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetStorageProfileForQueueOutput, body, allocator);
-    }
+    const result: GetStorageProfileForQueueOutput = try aws.json.parseJsonObject(
+        GetStorageProfileForQueueOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

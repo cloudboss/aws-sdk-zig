@@ -7,15 +7,19 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const WorkflowSummary = @import("workflow_summary.zig").WorkflowSummary;
 
 pub const ListWorkflowBuildVersionsInput = struct {
-    /// Specify the maximum number of items to return in a request.
+    /// The maximum number of items to return in a single request.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the workflow resource for which to get a
     /// list of build versions.
+    /// The version segments can contain wildcards (`x`) to match multiple
+    /// versions of the workflow. If you don't specify an ARN, the response lists
+    /// build
+    /// versions for all of the workflows in your account.
     workflow_version_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -32,8 +36,8 @@ pub const ListWorkflowBuildVersionsOutput = struct {
     /// with the next request to retrieve additional objects.
     next_token: ?[]const u8 = null,
 
-    /// A list that contains metadata for the workflow builds that have run for
-    /// the workflow resource specified in the request.
+    /// A list that contains metadata for the build versions of the workflow
+    /// resource specified in the request.
     workflow_summary_list: ?[]const WorkflowSummary = null,
 
     pub const json_field_names = .{
@@ -112,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListWorkflowBuildVersio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListWorkflowBuildVersionsOutput {
-    var result: ListWorkflowBuildVersionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListWorkflowBuildVersionsOutput, body, allocator);
-    }
+    const result: ListWorkflowBuildVersionsOutput = try aws.json.parseJsonObject(
+        ListWorkflowBuildVersionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartRecoveryInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartRecoveryOutput {
-    var result: StartRecoveryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartRecoveryOutput, body, allocator);
-    }
+    const result: StartRecoveryOutput = try aws.json.parseJsonObject(
+        StartRecoveryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

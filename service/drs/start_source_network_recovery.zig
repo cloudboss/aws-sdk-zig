@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartSourceNetworkRecov
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartSourceNetworkRecoveryOutput {
-    var result: StartSourceNetworkRecoveryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartSourceNetworkRecoveryOutput, body, allocator);
-    }
+    const result: StartSourceNetworkRecoveryOutput = try aws.json.parseJsonObject(
+        StartSourceNetworkRecoveryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Endpoint = @import("endpoint.zig").Endpoint;
+const NodeLifecycleActions = @import("node_lifecycle_actions.zig").NodeLifecycleActions;
 
 pub const RegisterComputeNodeGroupInstanceInput = struct {
     /// The client-generated token to allow for retries.
@@ -21,19 +22,37 @@ pub const RegisterComputeNodeGroupInstanceInput = struct {
 };
 
 pub const RegisterComputeNodeGroupInstanceOutput = struct {
+    /// The name of the cluster that the compute node registered into.
+    cluster_name: ?[]const u8 = null,
+
+    /// The ID of the compute node group that the compute node registered into.
+    compute_node_group_id: ?[]const u8 = null,
+
+    /// The name of the compute node group that the compute node registered into.
+    compute_node_group_name: ?[]const u8 = null,
+
     /// The list of endpoints available for interaction with the scheduler.
     endpoints: ?[]const Endpoint = null,
 
     /// The scheduler node ID for this instance.
     node_id: []const u8,
 
+    /// The node lifecycle actions configured for the node group, including scripts
+    /// to run when a compute node finishes bootstrapping or becomes ready to accept
+    /// jobs.
+    node_lifecycle_actions: ?NodeLifecycleActions = null,
+
     /// For the Slurm scheduler, this is the shared Munge key the scheduler uses to
     /// authenticate compute node group instances.
     shared_secret: []const u8,
 
     pub const json_field_names = .{
+        .cluster_name = "clusterName",
+        .compute_node_group_id = "computeNodeGroupId",
+        .compute_node_group_name = "computeNodeGroupName",
         .endpoints = "endpoints",
         .node_id = "nodeID",
+        .node_lifecycle_actions = "nodeLifecycleActions",
         .shared_secret = "sharedSecret",
     };
 };

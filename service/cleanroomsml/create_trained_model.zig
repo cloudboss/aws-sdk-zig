@@ -50,6 +50,10 @@ pub const CreateTrainedModelInput = struct {
     /// The membership ID of the member that is creating the trained model.
     membership_identifier: []const u8,
 
+    /// The account ID of the member that is responsible for paying for model
+    /// training costs.
+    ml_model_training_payer_account_id: ?[]const u8 = null,
+
     /// The name of the trained model.
     name: []const u8,
 
@@ -105,6 +109,7 @@ pub const CreateTrainedModelInput = struct {
         .incremental_training_data_channels = "incrementalTrainingDataChannels",
         .kms_key_arn = "kmsKeyArn",
         .membership_identifier = "membershipIdentifier",
+        .ml_model_training_payer_account_id = "mlModelTrainingPayerAccountId",
         .name = "name",
         .resource_config = "resourceConfig",
         .stopping_condition = "stoppingCondition",
@@ -210,6 +215,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTrainedModelInput
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.ml_model_training_payer_account_id) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"mlModelTrainingPayerAccountId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
@@ -252,10 +263,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTrainedModelInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateTrainedModelOutput {
-    var result: CreateTrainedModelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateTrainedModelOutput, body, allocator);
-    }
+    const result: CreateTrainedModelOutput = try aws.json.parseJsonObject(
+        CreateTrainedModelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

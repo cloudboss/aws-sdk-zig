@@ -113,10 +113,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CloneBackendInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CloneBackendOutput {
-    var result: CloneBackendOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CloneBackendOutput, body, allocator);
-    }
+    const result: CloneBackendOutput = try aws.json.parseJsonObject(
+        CloneBackendOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

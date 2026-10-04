@@ -7,8 +7,11 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AvailabilityZoneMapping = @import("availability_zone_mapping.zig").AvailabilityZoneMapping;
 const EnabledAnalysisType = @import("enabled_analysis_type.zig").EnabledAnalysisType;
 const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
+const NatGatewayMapping = @import("nat_gateway_mapping.zig").NatGatewayMapping;
+const ProxySettings = @import("proxy_settings.zig").ProxySettings;
 const SubnetMapping = @import("subnet_mapping.zig").SubnetMapping;
 const Tag = @import("tag.zig").Tag;
+const VpcEndpoint = @import("vpc_endpoint.zig").VpcEndpoint;
 const Firewall = @import("firewall.zig").Firewall;
 const FirewallStatus = @import("firewall_status.zig").FirewallStatus;
 
@@ -67,6 +70,30 @@ pub const CreateFirewallInput = struct {
     /// `TRUE`.
     firewall_policy_change_protection: ?bool = null,
 
+    /// The NAT gateways that the firewall uses to proxy traffic when
+    /// `NoSourcePreservation` is `TRUE`. Network Firewall attaches the firewall to
+    /// each NAT gateway that you specify, so that egress traffic is proxied through
+    /// the NAT gateway.
+    nat_gateway_mappings: ?[]const NatGatewayMapping = null,
+
+    /// Optional. Indicates whether the firewall operates in proxy mode, in which
+    /// the source IP address of the traffic is not preserved. When set to `TRUE`,
+    /// the firewall proxies traffic through a NAT gateway and the traffic reaching
+    /// the destination uses the NAT gateway's IP address as the source.
+    ///
+    /// When you set this to `TRUE`, you must specify `NatGatewayMappings` and
+    /// `VpcEndpoint` instead of a top-level `VpcId` and `SubnetMappings`.
+    ///
+    /// You can't change this setting after you create the firewall.
+    ///
+    /// Default value: `FALSE`
+    no_source_preservation: ?bool = null,
+
+    /// The listener configuration for a proxy mode firewall, used when
+    /// `NoSourcePreservation` is `TRUE`. This specifies the ports and protocols on
+    /// which the firewall's proxy listens for traffic.
+    proxy_settings: ?ProxySettings = null,
+
     /// A setting indicating whether the firewall is protected against changes to
     /// the subnet associations.
     /// Use this setting to protect against
@@ -100,6 +127,15 @@ pub const CreateFirewallInput = struct {
     /// firewalls](https://docs.aws.amazon.com/network-firewall/latest/developerguide/tgw-firewall-considerations.html) in the *Network Firewall Developer Guide*.
     transit_gateway_id: ?[]const u8 = null,
 
+    /// The VPC and subnets for the firewall endpoint, used when
+    /// `NoSourcePreservation` is `TRUE`. Network Firewall creates the firewall
+    /// endpoint in the subnets that you specify here.
+    ///
+    /// For proxy mode firewalls, provide the firewall's VPC and endpoint subnets
+    /// through this parameter instead of the top-level `VpcId` and
+    /// `SubnetMappings`.
+    vpc_endpoint: ?VpcEndpoint = null,
+
     /// The unique identifier of the VPC where Network Firewall should create the
     /// firewall.
     ///
@@ -116,10 +152,14 @@ pub const CreateFirewallInput = struct {
         .firewall_name = "FirewallName",
         .firewall_policy_arn = "FirewallPolicyArn",
         .firewall_policy_change_protection = "FirewallPolicyChangeProtection",
+        .nat_gateway_mappings = "NatGatewayMappings",
+        .no_source_preservation = "NoSourcePreservation",
+        .proxy_settings = "ProxySettings",
         .subnet_change_protection = "SubnetChangeProtection",
         .subnet_mappings = "SubnetMappings",
         .tags = "Tags",
         .transit_gateway_id = "TransitGatewayId",
+        .vpc_endpoint = "VpcEndpoint",
         .vpc_id = "VpcId",
     };
 };

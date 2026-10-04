@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateWorkspaceApiKeyIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateWorkspaceApiKeyOutput {
-    var result: CreateWorkspaceApiKeyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateWorkspaceApiKeyOutput, body, allocator);
-    }
+    const result: CreateWorkspaceApiKeyOutput = try aws.json.parseJsonObject(
+        CreateWorkspaceApiKeyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

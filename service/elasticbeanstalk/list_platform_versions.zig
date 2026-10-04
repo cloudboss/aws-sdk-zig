@@ -10,19 +10,16 @@ const serde = @import("serde.zig");
 
 pub const ListPlatformVersionsInput = struct {
     /// Criteria for restricting the resulting list of platform versions. The filter
-    /// is
-    /// interpreted as a logical conjunction (AND) of the separate `PlatformFilter`
-    /// terms.
+    /// is interpreted as a logical conjunction (AND) of the separate
+    /// `PlatformFilter` terms.
     filters: ?[]const PlatformFilter = null,
 
     /// The maximum number of platform version values returned in one call.
     max_records: ?i32 = null,
 
     /// For a paginated request. Specify a token from a previous response page to
-    /// retrieve the
-    /// next response page. All other parameter values must be identical to the ones
-    /// specified in the
-    /// initial request.
+    /// retrieve the next response page. All other parameter values must be
+    /// identical to the ones specified in the initial request.
     ///
     /// If no `NextToken` is specified, the first page is retrieved.
     next_token: ?[]const u8 = null,
@@ -30,8 +27,8 @@ pub const ListPlatformVersionsInput = struct {
 
 pub const ListPlatformVersionsOutput = struct {
     /// In a paginated request, if this value isn't `null`, it's the token that you
-    /// can
-    /// pass in a subsequent request to get the next response page.
+    /// can pass in a subsequent request to get the next response
+    /// page.
     next_token: ?[]const u8 = null,
 
     /// Summary information about the platform versions.

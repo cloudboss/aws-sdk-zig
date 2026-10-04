@@ -6,27 +6,9 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ChannelSummary = @import("channel_summary.zig").ChannelSummary;
 
-pub const ListChannelsInput = struct {
-    max_results: ?i32 = null,
+pub const ListChannelsInput = @import("list_channels_request.zig").ListChannelsRequest;
 
-    next_token: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .max_results = "MaxResults",
-        .next_token = "NextToken",
-    };
-};
-
-pub const ListChannelsOutput = struct {
-    channels: ?[]const ChannelSummary = null,
-
-    next_token: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .channels = "Channels",
-        .next_token = "NextToken",
-    };
-};
+pub const ListChannelsOutput = @import("list_channels_response.zig").ListChannelsResponse;
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListChannelsInput, options: CallOptions) !ListChannelsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -94,10 +76,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListChannelsInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListChannelsOutput {
-    var result: ListChannelsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListChannelsOutput, body, allocator);
-    }
+    const result: ListChannelsOutput = try aws.json.parseJsonObject(
+        ListChannelsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

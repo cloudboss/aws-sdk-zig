@@ -3,6 +3,7 @@ const DynamicAppProvidersEnabled = @import("dynamic_app_providers_enabled.zig").
 const ResourceError = @import("resource_error.zig").ResourceError;
 const ImagePermissions = @import("image_permissions.zig").ImagePermissions;
 const ImageSharedWithOthers = @import("image_shared_with_others.zig").ImageSharedWithOthers;
+const ImageSoftwareMetadata = @import("image_software_metadata.zig").ImageSoftwareMetadata;
 const ImageType = @import("image_type.zig").ImageType;
 const LatestAppstreamAgentVersion = @import("latest_appstream_agent_version.zig").LatestAppstreamAgentVersion;
 const PlatformType = @import("platform_type.zig").PlatformType;
@@ -55,6 +56,9 @@ pub const Image = struct {
 
     /// Indicates whether the image is shared with another account ID.
     image_shared_with_others: ?ImageSharedWithOthers = null,
+
+    /// The software metadata associated with the image.
+    image_software_metadata: ?ImageSoftwareMetadata = null,
 
     /// The type of the image. Images created through AMI import have type "custom",
     /// while WorkSpaces Applications provided images have type "native". Custom
@@ -121,6 +125,7 @@ pub const Image = struct {
         .image_errors = "ImageErrors",
         .image_permissions = "ImagePermissions",
         .image_shared_with_others = "ImageSharedWithOthers",
+        .image_software_metadata = "ImageSoftwareMetadata",
         .image_type = "ImageType",
         .latest_appstream_agent_version = "LatestAppstreamAgentVersion",
         .managed_software_included = "ManagedSoftwareIncluded",

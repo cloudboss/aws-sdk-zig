@@ -5,7 +5,8 @@ pub const MembershipJobComputePaymentConfig = struct {
     /// compute costs (`TRUE`) or has not accepted to pay for query and job compute
     /// costs (`FALSE`).
     ///
-    /// There is only one member who pays for queries and jobs.
+    /// There can be one or more members who are designated as payer candidates for
+    /// queries and jobs.
     ///
     /// An error message is returned for the following reasons:
     ///

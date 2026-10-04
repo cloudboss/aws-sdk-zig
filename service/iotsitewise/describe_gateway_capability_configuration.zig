@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeGatewayCapabili
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeGatewayCapabilityConfigurationOutput {
-    var result: DescribeGatewayCapabilityConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeGatewayCapabilityConfigurationOutput, body, allocator);
-    }
+    const result: DescribeGatewayCapabilityConfigurationOutput = try aws.json.parseJsonObject(
+        DescribeGatewayCapabilityConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

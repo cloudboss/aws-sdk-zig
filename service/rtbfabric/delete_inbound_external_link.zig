@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteInboundExternalLi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteInboundExternalLinkOutput {
-    var result: DeleteInboundExternalLinkOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteInboundExternalLinkOutput, body, allocator);
-    }
+    const result: DeleteInboundExternalLinkOutput = try aws.json.parseJsonObject(
+        DeleteInboundExternalLinkOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

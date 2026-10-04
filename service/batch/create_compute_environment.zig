@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ComputeResource = @import("compute_resource.zig").ComputeResource;
+const EcsSettings = @import("ecs_settings.zig").EcsSettings;
 const EksConfiguration = @import("eks_configuration.zig").EksConfiguration;
 const CEState = @import("ce_state.zig").CEState;
 const CEType = @import("ce_type.zig").CEType;
@@ -26,12 +27,21 @@ pub const CreateComputeEnvironmentInput = struct {
     /// Reserved.
     context: ?[]const u8 = null,
 
+    /// The Amazon ECS settings for the compute environment. These settings control
+    /// CloudWatch
+    /// Container Insights collection for the compute environment.
+    ecs_settings: ?EcsSettings = null,
+
     /// The details for the Amazon EKS cluster that supports the compute
     /// environment.
     ///
     /// To create a compute environment that uses EKS resources, the caller must
     /// have
-    /// permissions to call `eks:DescribeCluster`.
+    /// permissions to call `eks:DescribeCluster`. Additional Amazon EKS permissions
+    /// are
+    /// required for Batch to manage an access entry on the cluster; see [Amazon EKS
+    /// access entry
+    /// authentication](https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html) in the *Batch User Guide*.
     eks_configuration: ?EksConfiguration = null,
 
     /// The full Amazon Resource Name (ARN) of the IAM role that allows Batch to
@@ -48,6 +58,12 @@ pub const CreateComputeEnvironmentInput = struct {
     /// specified here,
     /// the service attempts to create the Batch service-linked role in your
     /// account.
+    ///
+    /// This automatic service-linked role creation only applies to `MANAGED`
+    /// compute
+    /// environments. For `UNMANAGED` compute environments, you must explicitly
+    /// specify a
+    /// `serviceRole`.
     ///
     /// If your specified role has a path other than `/`, then you must specify
     /// either
@@ -69,7 +85,11 @@ pub const CreateComputeEnvironmentInput = struct {
     /// compute environments.
     service_role: ?[]const u8 = null,
 
-    /// The state of the compute environment. If the state is `ENABLED`, then the
+    /// The state of the compute environment. A compute environment must be created
+    /// in the
+    /// `ENABLED` state.
+    ///
+    /// If the state is `ENABLED`, then the
     /// compute environment accepts jobs from a queue and can scale out
     /// automatically based on
     /// queues.
@@ -90,10 +110,9 @@ pub const CreateComputeEnvironmentInput = struct {
     /// don't scale out.
     ///
     /// Compute environments in a `DISABLED` state may continue to incur billing
-    /// charges. To prevent additional charges, turn off and then delete the compute
-    /// environment.
-    /// For more information, see
-    /// [State](https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state) in the *Batch User Guide*.
+    /// charges, for example, if they have running instances due to jobs that are
+    /// still executing or a non-zero `minvCpus` setting. To prevent additional
+    /// charges, disable and delete the compute environment.
     ///
     /// When an instance is idle, the instance scales down to the `minvCpus` value.
     /// However, the instance size doesn't change. For example, consider a
@@ -136,6 +155,7 @@ pub const CreateComputeEnvironmentInput = struct {
         .compute_environment_name = "computeEnvironmentName",
         .compute_resources = "computeResources",
         .context = "context",
+        .ecs_settings = "ecsSettings",
         .eks_configuration = "eksConfiguration",
         .service_role = "serviceRole",
         .state = "state",
@@ -212,6 +232,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateComputeEnvironmen
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.ecs_settings) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ecsSettings\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.eks_configuration) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"eksConfiguration\":");
@@ -262,10 +288,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateComputeEnvironmen
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateComputeEnvironmentOutput {
-    var result: CreateComputeEnvironmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateComputeEnvironmentOutput, body, allocator);
-    }
+    const result: CreateComputeEnvironmentOutput = try aws.json.parseJsonObject(
+        CreateComputeEnvironmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,8 +1,7 @@
 const DiskImageFormat = @import("disk_image_format.zig").DiskImageFormat;
 
-/// Properties that configure export from your build instance to a compatible
-/// file format
-/// for your VM.
+/// Properties that configure exporting the output image to a disk image file in
+/// an Amazon S3 bucket, in a format that's compatible with your VMs.
 pub const S3ExportConfiguration = struct {
     /// Export the updated image to one of the following supported disk image
     /// formats:

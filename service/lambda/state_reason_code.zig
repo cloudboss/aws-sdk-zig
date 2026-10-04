@@ -25,7 +25,7 @@ pub const StateReasonCode = enum {
     invalid_runtime,
     invalid_zip_file_exception,
     function_error,
-    draining_durable_executions,
+    service_quota_exceeded_exception,
     vcpu_limit_exceeded,
     capacity_provider_scaling_limit_exceeded,
     insufficient_capacity,
@@ -39,6 +39,8 @@ pub const StateReasonCode = enum {
     function_error_too_many_extensions,
     function_error_init_resource_exhausted,
     disallowed_by_vpc_encryption_control,
+    draining_durable_executions,
+    dependency_error,
 
     pub const json_field_names = .{
         .idle = "Idle",
@@ -65,7 +67,7 @@ pub const StateReasonCode = enum {
         .invalid_runtime = "InvalidRuntime",
         .invalid_zip_file_exception = "InvalidZipFileException",
         .function_error = "FunctionError",
-        .draining_durable_executions = "DrainingDurableExecutions",
+        .service_quota_exceeded_exception = "ServiceQuotaExceededException",
         .vcpu_limit_exceeded = "VcpuLimitExceeded",
         .capacity_provider_scaling_limit_exceeded = "CapacityProviderScalingLimitExceeded",
         .insufficient_capacity = "InsufficientCapacity",
@@ -79,6 +81,8 @@ pub const StateReasonCode = enum {
         .function_error_too_many_extensions = "FunctionError.TooManyExtensions",
         .function_error_init_resource_exhausted = "FunctionError.InitResourceExhausted",
         .disallowed_by_vpc_encryption_control = "DisallowedByVpcEncryptionControl",
+        .draining_durable_executions = "DrainingDurableExecutions",
+        .dependency_error = "DependencyError",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -107,7 +111,7 @@ pub const StateReasonCode = enum {
             .invalid_runtime => "InvalidRuntime",
             .invalid_zip_file_exception => "InvalidZipFileException",
             .function_error => "FunctionError",
-            .draining_durable_executions => "DrainingDurableExecutions",
+            .service_quota_exceeded_exception => "ServiceQuotaExceededException",
             .vcpu_limit_exceeded => "VcpuLimitExceeded",
             .capacity_provider_scaling_limit_exceeded => "CapacityProviderScalingLimitExceeded",
             .insufficient_capacity => "InsufficientCapacity",
@@ -121,6 +125,8 @@ pub const StateReasonCode = enum {
             .function_error_too_many_extensions => "FunctionError.TooManyExtensions",
             .function_error_init_resource_exhausted => "FunctionError.InitResourceExhausted",
             .disallowed_by_vpc_encryption_control => "DisallowedByVpcEncryptionControl",
+            .draining_durable_executions => "DrainingDurableExecutions",
+            .dependency_error => "DependencyError",
         };
     }
 

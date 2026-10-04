@@ -4,6 +4,7 @@ const std = @import("std");
 const decrypt_data = @import("decrypt_data.zig");
 const encrypt_data = @import("encrypt_data.zig");
 const generate_as_2805_kek_validation = @import("generate_as_2805_kek_validation.zig");
+const generate_auth_request_cryptogram = @import("generate_auth_request_cryptogram.zig");
 const generate_card_validation_data = @import("generate_card_validation_data.zig");
 const generate_mac = @import("generate_mac.zig");
 const generate_mac_emv_pin_change = @import("generate_mac_emv_pin_change.zig");
@@ -76,8 +77,10 @@ pub const Client = struct {
     /// For information about valid keys for this operation, see [Understanding key
     /// attributes](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html) and [Key types for specific data operations](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html) in the *Amazon Web Services Payment Cryptography User Guide*.
     ///
-    /// **Cross-account use**: This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use**: This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -133,8 +136,10 @@ pub const Client = struct {
     /// For information about valid keys for this operation, see [Understanding key
     /// attributes](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html) and [Key types for specific data operations](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html) in the *Amazon Web Services Payment Cryptography User Guide*.
     ///
-    /// **Cross-account use**: This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use**: This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -148,9 +153,10 @@ pub const Client = struct {
         return encrypt_data.execute(self, allocator, input, options);
     }
 
-    /// Establishes node-to-node initialization between payment processing nodes
-    /// such as an acquirer, issuer or payment network using Australian Standard
-    /// 2805 (AS2805).
+    /// Generates a `KekValidationRequest` or a `KekValidationResponse` for
+    /// node-to-node initialization between payment processing nodes using
+    /// [Australian Standard 2805
+    /// (AS2805)](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/as2805.html).
     ///
     /// During node-to-node initialization, both communicating nodes must validate
     /// that they possess the correct Key Encrypting Keys (KEKs) before proceeding
@@ -161,20 +167,59 @@ pub const Client = struct {
     /// using either the
     /// [CreateKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html) or [ImportKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html) operations.
     ///
-    /// The node initiating communication can use `GenerateAS2805KekValidation` to
-    /// generate a combined KEK validation request and KEK validation response to
-    /// send to the partnering node for validation. When invoked, the API internally
-    /// generates a random sending key encrypted under KEKs and provides a receiving
-    /// key encrypted under KEKr as response. The initiating node sends the response
-    /// returned by this API to its partner for validation.
+    /// To use `GenerateAs2805KekValidation` to generate a KEK validation request,
+    /// set `KekValidationType` to `KekValidationRequest`. This operation returns
+    /// both `RandomKeySend` (KRs) and `RandomKeyReceive` (KRr) as response values.
+    /// The partnering node receives the KRs, uses its KEKr to decrypt it, and
+    /// generates a KRr which is an inverted value of KRs. The node receiving the
+    /// KRr validates it against its own KRr generated during KEK validation request
+    /// outside of Amazon Web Services Payment Cryptography.
+    ///
+    /// You can also use this operation to generate a KEK validation response, by
+    /// setting `KekValidationType` to `KekValidationResponse` and providing the
+    /// incoming KRs. This operation then calculates a KRr. To learn more about more
+    /// about node-to-node initialization, see [Validation of
+    /// KEK](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/as2805.kekvalidation.html) in the *Amazon Web Services Payment Cryptography User Guide*.
     ///
     /// For information about valid keys for this operation, see [Understanding key
     /// attributes](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html) and [Key types for specific data operations](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html) in the *Amazon Web Services Payment Cryptography User Guide*.
     ///
-    /// **Cross-account use**: This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use**: This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     pub fn generateAs2805KekValidation(self: *Self, allocator: std.mem.Allocator, input: generate_as_2805_kek_validation.GenerateAs2805KekValidationInput, options: CallOptions) !generate_as_2805_kek_validation.GenerateAs2805KekValidationOutput {
         return generate_as_2805_kek_validation.execute(self, allocator, input, options);
+    }
+
+    /// Generates an Authorization Request Cryptogram (ARQC) for an EMV chip payment
+    /// card authorization. For more information, see [Generate auth request
+    /// cryptogram](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/data-operations.generateauthrequestcryptogram.html) in the *Amazon Web Services Payment Cryptography User Guide*.
+    ///
+    /// ARQC generation uses an Issuer Master Key (IMK) for application cryptograms
+    /// (TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS) to derive a session key, which is then
+    /// used to generate the cryptogram from the provided transaction data (when
+    /// applicable). To use this operation, you must first create or import an
+    /// IMK-AC key by calling
+    /// [CreateKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html) or [ImportKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html). The `KeyModesOfUse` should be set to `DeriveKey` for the IMK-AC encryption key.
+    ///
+    /// This operation is intended for development and testing scenarios only. It is
+    /// not recommended to use this operation as a substitute for card-based
+    /// cryptogram generation in production payment flows.
+    ///
+    /// For information about valid keys for this operation, see [Understanding key
+    /// attributes](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html) and [Key types for specific data operations](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html) in the *Amazon Web Services Payment Cryptography User Guide*.
+    ///
+    /// **Cross-account use**: This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
+    ///
+    /// **Related operations:**
+    ///
+    /// * VerifyAuthRequestCryptogram
+    pub fn generateAuthRequestCryptogram(self: *Self, allocator: std.mem.Allocator, input: generate_auth_request_cryptogram.GenerateAuthRequestCryptogramInput, options: CallOptions) !generate_auth_request_cryptogram.GenerateAuthRequestCryptogramOutput {
+        return generate_auth_request_cryptogram.execute(self, allocator, input, options);
     }
 
     /// Generates card-related validation data using algorithms such as Card
@@ -193,8 +238,10 @@ pub const Client = struct {
     /// For information about valid keys for this operation, see [Understanding key
     /// attributes](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html) and [Key types for specific data operations](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html) in the *Amazon Web Services Payment Cryptography User Guide*.
     ///
-    /// **Cross-account use**: This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use**: This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -224,8 +271,10 @@ pub const Client = struct {
     /// For information about valid keys for this operation, see [Understanding key
     /// attributes](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html) and [Key types for specific data operations](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html) in the *Amazon Web Services Payment Cryptography User Guide*.
     ///
-    /// **Cross-account use**: This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use**: This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -264,8 +313,10 @@ pub const Client = struct {
     /// to understand that EncryptData using EMV keys and GenerateMac perform
     /// similar functions to this command.
     ///
-    /// **Cross-account use**: This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use**: This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -298,8 +349,10 @@ pub const Client = struct {
     /// For information about valid keys for this operation, see [Understanding key
     /// attributes](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html) and [Key types for specific data operations](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html) in the *Amazon Web Services Payment Cryptography User Guide*.
     ///
-    /// **Cross-account use**: This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use**: This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -310,7 +363,8 @@ pub const Client = struct {
         return generate_pin_data.execute(self, allocator, input, options);
     }
 
-    /// Re-encrypt ciphertext using DUKPT or Symmetric data encryption keys.
+    /// Re-encrypts ciphertext using DUKPT, symmetric, or asymmetric data encryption
+    /// keys.
     ///
     /// You can either generate an encryption key within Amazon Web Services Payment
     /// Cryptography by calling
@@ -326,17 +380,24 @@ pub const Client = struct {
     /// or D. For more information, see [Using Dynamic
     /// Keys](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/use-cases-acquirers-dynamickeys.html) in the *Amazon Web Services Payment Cryptography User Guide*.
     ///
-    /// For symmetric and DUKPT encryption, Amazon Web Services Payment Cryptography
-    /// supports `TDES` and `AES` algorithms. To encrypt using DUKPT, a DUKPT key
-    /// must already exist within your account with `KeyModesOfUse` set to
-    /// `DeriveKey` or a new DUKPT can be generated by calling
-    /// [CreateKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html).
+    /// Amazon Web Services Payment Cryptography supports the following encryption
+    /// key schemes:
+    ///
+    /// * **DUKPT**: `TDES` and `AES` algorithms. To encrypt using DUKPT, a DUKPT
+    ///   key must already exist within your account with `KeyModesOfUse` set to
+    ///   `DeriveKey` or a new DUKPT can be generated by calling
+    ///   [CreateKey](https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html).
+    /// * **Symmetric**: `TDES` and `AES` algorithms.
+    /// * **Asymmetric**: `RSA`. You can use an `RSA` key on either the incoming or
+    ///   the outgoing side, paired with a symmetric key on the other side.
     ///
     /// For information about valid keys for this operation, see [Understanding key
     /// attributes](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html) and [Key types for specific data operations](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html) in the *Amazon Web Services Payment Cryptography User Guide*.
     ///
-    /// **Cross-account use**: This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use**: This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -371,8 +432,10 @@ pub const Client = struct {
     /// For information about valid keys for this operation, see [Understanding key
     /// attributes](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html) and [Key types for specific data operations](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html) in the *Amazon Web Services Payment Cryptography User Guide*.
     ///
-    /// **Cross-account use**: This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use**: This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -431,8 +494,10 @@ pub const Client = struct {
     /// translation for PIN block built using legacy PAN length. That is, PAN is the
     /// right most 12 digits excluding the check digits.
     ///
-    /// **Cross-account use**: This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use**: This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -456,8 +521,10 @@ pub const Client = struct {
     /// For information about valid keys for this operation, see [Understanding key
     /// attributes](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html) and [Key types for specific data operations](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html) in the *Amazon Web Services Payment Cryptography User Guide*.
     ///
-    /// **Cross-account use**: This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use**: This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -485,8 +552,10 @@ pub const Client = struct {
     /// For information about valid keys for this operation, see [Understanding key
     /// attributes](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html) and [Key types for specific data operations](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html) in the *Amazon Web Services Payment Cryptography User Guide*.
     ///
-    /// **Cross-account use**: This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use**: This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -508,8 +577,10 @@ pub const Client = struct {
     /// For information about valid keys for this operation, see [Understanding key
     /// attributes](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html) and [Key types for specific data operations](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html) in the *Amazon Web Services Payment Cryptography User Guide*.
     ///
-    /// **Cross-account use**: This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use**: This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///
@@ -532,8 +603,10 @@ pub const Client = struct {
     /// For information about valid keys for this operation, see [Understanding key
     /// attributes](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html) and [Key types for specific data operations](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html) in the *Amazon Web Services Payment Cryptography User Guide*.
     ///
-    /// **Cross-account use**: This operation can't be used across different Amazon
-    /// Web Services accounts.
+    /// **Cross-account use**: This operation supports cross-account use when the
+    /// key has a resource-based policy that grants access. For more information,
+    /// see [Resource-based
+    /// policies](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html).
     ///
     /// **Related operations:**
     ///

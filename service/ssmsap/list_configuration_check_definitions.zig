@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListConfigurationCheckD
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListConfigurationCheckDefinitionsOutput {
-    var result: ListConfigurationCheckDefinitionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListConfigurationCheckDefinitionsOutput, body, allocator);
-    }
+    const result: ListConfigurationCheckDefinitionsOutput = try aws.json.parseJsonObject(
+        ListConfigurationCheckDefinitionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

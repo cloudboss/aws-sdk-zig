@@ -8,6 +8,7 @@ pub const ServiceError = struct {
     pub const Kind = union(enum) {
         conflict_exception: ConflictException,
         forbidden_exception: ForbiddenException,
+        gateway_timeout_exception: GatewayTimeoutException,
         internal_failure_exception: InternalFailureException,
         invalid_request_exception: InvalidRequestException,
         method_not_allowed_exception: MethodNotAllowedException,
@@ -23,6 +24,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .conflict_exception => "ConflictException",
                 .forbidden_exception => "ForbiddenException",
+                .gateway_timeout_exception => "GatewayTimeoutException",
                 .internal_failure_exception => "InternalFailureException",
                 .invalid_request_exception => "InvalidRequestException",
                 .method_not_allowed_exception => "MethodNotAllowedException",
@@ -40,6 +42,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .conflict_exception => |e| e.message,
                 .forbidden_exception => |e| e.message,
+                .gateway_timeout_exception => |e| e.message,
                 .internal_failure_exception => |e| e.message,
                 .invalid_request_exception => |e| e.message,
                 .method_not_allowed_exception => |e| e.message,
@@ -57,6 +60,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .conflict_exception => 409,
                 .forbidden_exception => 403,
+                .gateway_timeout_exception => 504,
                 .internal_failure_exception => 500,
                 .invalid_request_exception => 400,
                 .method_not_allowed_exception => 405,
@@ -74,6 +78,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .conflict_exception => |e| e.request_id,
                 .forbidden_exception => |e| e.request_id,
+                .gateway_timeout_exception => |e| e.request_id,
                 .internal_failure_exception => |e| e.request_id,
                 .invalid_request_exception => |e| e.request_id,
                 .method_not_allowed_exception => |e| e.request_id,
@@ -115,6 +120,11 @@ pub const ConflictException = struct {
 };
 
 pub const ForbiddenException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const GatewayTimeoutException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -195,6 +205,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     }
     if (std.mem.eql(u8, error_code, "ForbiddenException")) {
         return .{ .arena = arena, .kind = .{ .forbidden_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "GatewayTimeoutException")) {
+        return .{ .arena = arena, .kind = .{ .gateway_timeout_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

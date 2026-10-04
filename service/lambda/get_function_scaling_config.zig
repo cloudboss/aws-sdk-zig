@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFunctionScalingConfi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetFunctionScalingConfigOutput {
-    var result: GetFunctionScalingConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetFunctionScalingConfigOutput, body, allocator);
-    }
+    const result: GetFunctionScalingConfigOutput = try aws.json.parseJsonObject(
+        GetFunctionScalingConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

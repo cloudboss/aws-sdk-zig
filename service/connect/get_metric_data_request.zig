@@ -43,7 +43,7 @@ pub const GetMetricDataRequest = struct {
     /// The metrics to retrieve. Specify the name, unit, and statistic for each
     /// metric. The following historical metrics
     /// are available. For a description of each metric, see [Metrics
-    /// definition](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) in the *Amazon Connect Administrator Guide*.
+    /// definition](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) in the *Connect Customer Administrator Guide*.
     ///
     /// This API does not support a contacts incoming metric (there's
     /// no CONTACTS_INCOMING metric missing from the documented list).
@@ -282,7 +282,7 @@ pub const GetMetricDataRequest = struct {
     /// time](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-abandon-time)
     historical_metrics: []const HistoricalMetric,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 

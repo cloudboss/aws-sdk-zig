@@ -6,6 +6,9 @@ pub const PropertyDataType = enum {
     double,
     boolean,
     @"struct",
+    video,
+    annotation,
+    json,
 
     pub const json_field_names = .{
         .string = "STRING",
@@ -13,6 +16,9 @@ pub const PropertyDataType = enum {
         .double = "DOUBLE",
         .boolean = "BOOLEAN",
         .@"struct" = "STRUCT",
+        .video = "VIDEO",
+        .annotation = "ANNOTATION",
+        .json = "JSON",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +28,9 @@ pub const PropertyDataType = enum {
             .double => "DOUBLE",
             .boolean => "BOOLEAN",
             .@"struct" => "STRUCT",
+            .video => "VIDEO",
+            .annotation => "ANNOTATION",
+            .json => "JSON",
         };
     }
 

@@ -21,8 +21,8 @@ pub const PostContactSummary = struct {
     ///
     /// * `INVALID_ANALYSIS_CONFIGURATION`: This code occurs when, for
     /// example, you're using a
-    /// [language](https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#supported-languages-contact-lens)
-    /// that isn't supported by generative AI-powered post-contact summaries.
+    /// [language](https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#supported-languages-contact-lens) that isn't supported by generative AI-powered post-contact
+    /// summaries.
     ///
     /// * `INTERNAL_ERROR`: Internal system error.
     failure_code: ?PostContactSummaryFailureCode = null,

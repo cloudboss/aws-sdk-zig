@@ -25,10 +25,20 @@ pub const DescribeMetadataModelChildrenInput = struct {
     /// values: SOURCE | TARGET
     origin: OriginTypeValue,
 
-    /// The JSON string that specifies which metadata model's children to retrieve.
-    /// Only one selection rule with "rule-action": "explicit" can be provided. For
-    /// more information, see [Selection
-    /// Rules](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.Selections.html) in the DMS User Guide.
+    /// A JSON string that identifies the metadata model whose children to retrieve.
+    /// For the selection rule format and examples, see [Selection rules in DMS
+    /// Schema
+    /// Conversion](https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html).
+    ///
+    /// Usage:
+    ///
+    /// * Accepts source or target selection rules depending on the `Origin`
+    ///   parameter. The `server-name` in the object locator must match the
+    ///   corresponding data provider.
+    ///
+    /// * Supports only `explicit` rule actions.
+    ///
+    /// * Exactly one rule is allowed.
     selection_rules: []const u8,
 
     pub const json_field_names = .{

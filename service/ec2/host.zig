@@ -1,6 +1,7 @@
 const AllowsMultipleInstanceTypes = @import("allows_multiple_instance_types.zig").AllowsMultipleInstanceTypes;
 const AutoPlacement = @import("auto_placement.zig").AutoPlacement;
 const AvailableCapacity = @import("available_capacity.zig").AvailableCapacity;
+const HostCpuOptions = @import("host_cpu_options.zig").HostCpuOptions;
 const HostMaintenance = @import("host_maintenance.zig").HostMaintenance;
 const HostProperties = @import("host_properties.zig").HostProperties;
 const HostRecovery = @import("host_recovery.zig").HostRecovery;
@@ -40,6 +41,10 @@ pub const Host = struct {
     /// of the request. For more information, see [Ensuring
     /// Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
     client_token: ?[]const u8 = null,
+
+    /// The CPU options for the Dedicated Host, including AMD Secure Encrypted
+    /// Virtualization-Secure Nested Paging (AMD SEV-SNP) settings.
+    cpu_options: ?HostCpuOptions = null,
 
     /// The ID of the Dedicated Host.
     host_id: ?[]const u8 = null,

@@ -3,6 +3,7 @@ pub const DistanceMetric = @import("distance_metric.zig").DistanceMetric;
 pub const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
 pub const GetOutputVector = @import("get_output_vector.zig").GetOutputVector;
 pub const Index = @import("index.zig").Index;
+pub const IndexMode = @import("index_mode.zig").IndexMode;
 pub const IndexSummary = @import("index_summary.zig").IndexSummary;
 pub const ListOutputVector = @import("list_output_vector.zig").ListOutputVector;
 pub const MetadataConfiguration = @import("metadata_configuration.zig").MetadataConfiguration;

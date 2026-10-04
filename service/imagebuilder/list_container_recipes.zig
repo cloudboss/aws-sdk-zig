@@ -20,17 +20,17 @@ pub const ListContainerRecipesInput = struct {
     /// * `platform`
     filters: ?[]const Filter = null,
 
-    /// Specify the maximum number of items to return in a request.
+    /// The maximum number of items to return in a single request.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
     /// Returns container recipes belonging to the specified owner, that have been
-    /// shared with
-    /// you. You can omit this field to return container recipes belonging to your
-    /// account.
+    /// shared with you. You can omit this field to return container recipes
+    /// belonging to your account. For container recipes, the valid owner values are
+    /// `Self`, `Shared`, and `Amazon`.
     owner: ?Ownership = null,
 
     pub const json_field_names = .{
@@ -137,10 +137,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListContainerRecipesInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListContainerRecipesOutput {
-    var result: ListContainerRecipesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListContainerRecipesOutput, body, allocator);
-    }
+    const result: ListContainerRecipesOutput = try aws.json.parseJsonObject(
+        ListContainerRecipesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

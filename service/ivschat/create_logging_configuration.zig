@@ -150,10 +150,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLoggingConfigurat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateLoggingConfigurationOutput {
-    var result: CreateLoggingConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateLoggingConfigurationOutput, body, allocator);
-    }
+    const result: CreateLoggingConfigurationOutput = try aws.json.parseJsonObject(
+        CreateLoggingConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

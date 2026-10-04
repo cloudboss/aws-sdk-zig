@@ -84,10 +84,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteRecipeVersionInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteRecipeVersionOutput {
-    var result: DeleteRecipeVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteRecipeVersionOutput, body, allocator);
-    }
+    const result: DeleteRecipeVersionOutput = try aws.json.parseJsonObject(
+        DeleteRecipeVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

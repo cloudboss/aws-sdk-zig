@@ -105,10 +105,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListBatchEvaluationsInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListBatchEvaluationsOutput {
-    var result: ListBatchEvaluationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListBatchEvaluationsOutput, body, allocator);
-    }
+    const result: ListBatchEvaluationsOutput = try aws.json.parseJsonObject(
+        ListBatchEvaluationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

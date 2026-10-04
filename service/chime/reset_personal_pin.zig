@@ -86,10 +86,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ResetPersonalPINInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ResetPersonalPINOutput {
-    var result: ResetPersonalPINOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ResetPersonalPINOutput, body, allocator);
-    }
+    const result: ResetPersonalPINOutput = try aws.json.parseJsonObject(
+        ResetPersonalPINOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

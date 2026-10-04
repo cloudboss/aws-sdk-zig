@@ -86,10 +86,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateProvisioningClaim
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateProvisioningClaimOutput {
-    var result: CreateProvisioningClaimOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateProvisioningClaimOutput, body, allocator);
-    }
+    const result: CreateProvisioningClaimOutput = try aws.json.parseJsonObject(
+        CreateProvisioningClaimOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -8,7 +8,7 @@ const DescribeSourceServersRequestFilters = @import("describe_source_servers_req
 const SourceServer = @import("source_server.zig").SourceServer;
 
 pub const DescribeSourceServersInput = struct {
-    /// Request to filter Source Servers list by Accoun ID.
+    /// Request to filter Source Servers list by Account ID.
     account_id: ?[]const u8 = null,
 
     /// Request to filter Source Servers list.
@@ -29,10 +29,10 @@ pub const DescribeSourceServersInput = struct {
 };
 
 pub const DescribeSourceServersOutput = struct {
-    /// Request to filter Source Servers list by item.
+    /// The list of returned Source Servers.
     items: ?[]const SourceServer = null,
 
-    /// Request to filter Source Servers next token.
+    /// The token of the next Source Server to retrieve.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -117,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeSourceServersIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeSourceServersOutput {
-    var result: DescribeSourceServersOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeSourceServersOutput, body, allocator);
-    }
+    const result: DescribeSourceServersOutput = try aws.json.parseJsonObject(
+        DescribeSourceServersOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

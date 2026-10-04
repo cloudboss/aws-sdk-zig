@@ -11,7 +11,7 @@ pub const ContactFlow = struct {
 
     /// The JSON string that represents the content of the flow. For an example, see
     /// [Example
-    /// flow in Amazon Connect Flow
+    /// flow in Connect Customer Flow
     /// language](https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html).
     ///
     /// Length Constraints: Minimum length of 1. Maximum length of 256000.
@@ -48,7 +48,7 @@ pub const ContactFlow = struct {
     /// The type of the flow. For descriptions of the available types, see [Choose a
     /// flow
     /// type](https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     @"type": ?ContactFlowType = null,
 
     /// The identifier of the flow version.

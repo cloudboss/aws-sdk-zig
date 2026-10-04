@@ -1,3 +1,4 @@
+const Headquarters = @import("headquarters.zig").Headquarters;
 const IndustrySegment = @import("industry_segment.zig").IndustrySegment;
 const LocalizedContent = @import("localized_content.zig").LocalizedContent;
 const PrimarySolutionType = @import("primary_solution_type.zig").PrimarySolutionType;
@@ -10,6 +11,11 @@ pub const TaskDetails = struct {
 
     /// The updated display name for the partner profile.
     display_name: []const u8,
+
+    /// The ISO 3166 country and subdivision codes for the partner's headquarters
+    /// location. If you omit this field, the service retains the existing
+    /// headquarters value.
+    headquarters: ?Headquarters = null,
 
     /// The updated industry segments for the partner profile.
     industry_segments: []const IndustrySegment,
@@ -32,6 +38,7 @@ pub const TaskDetails = struct {
     pub const json_field_names = .{
         .description = "Description",
         .display_name = "DisplayName",
+        .headquarters = "Headquarters",
         .industry_segments = "IndustrySegments",
         .localized_contents = "LocalizedContents",
         .logo_url = "LogoUrl",

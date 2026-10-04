@@ -10,8 +10,14 @@ pub const DeleteDbClusterInput = struct {
     /// Service-generated unique identifier of the DB cluster.
     db_cluster_id: []const u8,
 
+    /// Specifies whether to retain automated backups after the DB cluster is
+    /// deleted. If set to true, automated backups are not deleted and can be
+    /// restored later.
+    retain_automated_backups: ?bool = null,
+
     pub const json_field_names = .{
         .db_cluster_id = "dbClusterId",
+        .retain_automated_backups = "retainAutomatedBackups",
     };
 };
 

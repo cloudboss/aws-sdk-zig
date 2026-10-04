@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutReportDefinitionInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutReportDefinitionOutput {
-    var result: PutReportDefinitionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutReportDefinitionOutput, body, allocator);
-    }
+    const result: PutReportDefinitionOutput = try aws.json.parseJsonObject(
+        PutReportDefinitionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -37,9 +37,8 @@ pub const UpdateWorkloadInput = struct {
     /// Flag indicating whether the workload owner has acknowledged that the *Review
     /// owner* field is required.
     ///
-    /// If a **Review owner** is not added to the workload within
-    /// 60 days of acknowledgement, access to the workload is restricted until an
-    /// owner is
+    /// If a **Review owner** is not added to the workload within 60 days of
+    /// acknowledgement, access to the workload is restricted until an owner is
     /// added.
     is_review_owner_update_acknowledged: ?bool = null,
 
@@ -245,10 +244,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateWorkloadInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateWorkloadOutput {
-    var result: UpdateWorkloadOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateWorkloadOutput, body, allocator);
-    }
+    const result: UpdateWorkloadOutput = try aws.json.parseJsonObject(
+        UpdateWorkloadOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

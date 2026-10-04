@@ -7,7 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Vocabulary = @import("vocabulary.zig").Vocabulary;
 
 pub const DescribeVocabularyInput = struct {
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -21,7 +21,7 @@ pub const DescribeVocabularyInput = struct {
 };
 
 pub const DescribeVocabularyOutput = struct {
-    /// A list of specific words that you want Contact Lens for Amazon Connect to
+    /// A list of specific words that you want Contact Lens for Connect Customer to
     /// recognize in your audio input. They are generally
     /// domain-specific words and phrases, words that Contact Lens is not
     /// recognizing, or proper nouns.
@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeVocabularyInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeVocabularyOutput {
-    var result: DescribeVocabularyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeVocabularyOutput, body, allocator);
-    }
+    const result: DescribeVocabularyOutput = try aws.json.parseJsonObject(
+        DescribeVocabularyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

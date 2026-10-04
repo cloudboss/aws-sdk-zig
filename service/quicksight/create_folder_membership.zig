@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFolderMembershipI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateFolderMembershipOutput {
-    var result: CreateFolderMembershipOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateFolderMembershipOutput, body, allocator);
-    }
+    const result: CreateFolderMembershipOutput = try aws.json.parseJsonObject(
+        CreateFolderMembershipOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

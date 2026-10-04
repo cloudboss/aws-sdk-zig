@@ -25,6 +25,8 @@ pub const CreateHostedConfigurationVersionInput = struct {
     content_type: []const u8,
 
     /// A description of the configuration.
+    ///
+    /// Due to HTTP limitations, this field only supports ASCII characters.
     description: ?[]const u8 = null,
 
     /// An optional locking token used to prevent race conditions from overwriting
@@ -163,6 +165,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateHostedConfigurati
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateHostedConfigurationVersionOutput {
     var result: CreateHostedConfigurationVersionOutput = .{};
+    errdefer {
+        if (result.application_id) |value| allocator.free(value);
+        if (result.configuration_profile_id) |value| allocator.free(value);
+        if (result.content_type) |value| allocator.free(value);
+        if (result.description) |value| allocator.free(value);
+        if (result.kms_key_arn) |value| allocator.free(value);
+        if (result.version_label) |value| allocator.free(value);
+        if (result.content) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.content = try allocator.dupe(u8, body);
     }

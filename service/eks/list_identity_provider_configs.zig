@@ -129,10 +129,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListIdentityProviderCon
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListIdentityProviderConfigsOutput {
-    var result: ListIdentityProviderConfigsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListIdentityProviderConfigsOutput, body, allocator);
-    }
+    const result: ListIdentityProviderConfigsOutput = try aws.json.parseJsonObject(
+        ListIdentityProviderConfigsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

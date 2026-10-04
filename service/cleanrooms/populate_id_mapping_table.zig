@@ -113,10 +113,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PopulateIdMappingTableI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PopulateIdMappingTableOutput {
-    var result: PopulateIdMappingTableOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PopulateIdMappingTableOutput, body, allocator);
-    }
+    const result: PopulateIdMappingTableOutput = try aws.json.parseJsonObject(
+        PopulateIdMappingTableOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

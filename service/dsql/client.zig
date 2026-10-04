@@ -2,12 +2,16 @@ const aws = @import("aws");
 const std = @import("std");
 
 const create_cluster = @import("create_cluster.zig");
+const create_stream = @import("create_stream.zig");
 const delete_cluster = @import("delete_cluster.zig");
 const delete_cluster_policy = @import("delete_cluster_policy.zig");
+const delete_stream = @import("delete_stream.zig");
 const get_cluster = @import("get_cluster.zig");
 const get_cluster_policy = @import("get_cluster_policy.zig");
+const get_stream = @import("get_stream.zig");
 const get_vpc_endpoint_service_name = @import("get_vpc_endpoint_service_name.zig");
 const list_clusters = @import("list_clusters.zig");
+const list_streams = @import("list_streams.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const put_cluster_policy = @import("put_cluster_policy.zig");
 const tag_resource = @import("tag_resource.zig");
@@ -99,6 +103,36 @@ pub const Client = struct {
         return create_cluster.execute(self, allocator, input, options);
     }
 
+    /// Creates a new change data capture (CDC) stream for a cluster. The stream
+    /// captures database changes and delivers them to the specified target
+    /// destination.
+    ///
+    /// **Required permissions**
+    ///
+    /// **dsql:CreateStream**
+    ///
+    /// Permission to create a new stream.
+    ///
+    /// Resources: `arn:aws:dsql:region:account-id:cluster/cluster-id`
+    ///
+    /// **iam:PassRole**
+    ///
+    /// Permission to pass the IAM role specified in the target definition to the
+    /// service.
+    ///
+    /// Resources: ARN of the IAM role specified in
+    /// `targetDefinition.kinesis.roleArn`
+    ///
+    /// **kms:Decrypt**
+    ///
+    /// Required when the cluster uses a customer managed KMS key (CMK). Permission
+    /// to decrypt data using the cluster's CMK.
+    ///
+    /// Resources: ARN of the KMS key used by the cluster
+    pub fn createStream(self: *Self, allocator: std.mem.Allocator, input: create_stream.CreateStreamInput, options: CallOptions) !create_stream.CreateStreamOutput {
+        return create_stream.execute(self, allocator, input, options);
+    }
+
     /// Deletes a cluster in Amazon Aurora DSQL.
     pub fn deleteCluster(self: *Self, allocator: std.mem.Allocator, input: delete_cluster.DeleteClusterInput, options: CallOptions) !delete_cluster.DeleteClusterOutput {
         return delete_cluster.execute(self, allocator, input, options);
@@ -109,6 +143,11 @@ pub const Client = struct {
     /// controls.
     pub fn deleteClusterPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_cluster_policy.DeleteClusterPolicyInput, options: CallOptions) !delete_cluster_policy.DeleteClusterPolicyOutput {
         return delete_cluster_policy.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a stream from a cluster.
+    pub fn deleteStream(self: *Self, allocator: std.mem.Allocator, input: delete_stream.DeleteStreamInput, options: CallOptions) !delete_stream.DeleteStreamOutput {
+        return delete_stream.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about a cluster.
@@ -122,6 +161,11 @@ pub const Client = struct {
         return get_cluster_policy.execute(self, allocator, input, options);
     }
 
+    /// Retrieves information about a stream.
+    pub fn getStream(self: *Self, allocator: std.mem.Allocator, input: get_stream.GetStreamInput, options: CallOptions) !get_stream.GetStreamOutput {
+        return get_stream.execute(self, allocator, input, options);
+    }
+
     /// Retrieves the VPC endpoint service name.
     pub fn getVpcEndpointServiceName(self: *Self, allocator: std.mem.Allocator, input: get_vpc_endpoint_service_name.GetVpcEndpointServiceNameInput, options: CallOptions) !get_vpc_endpoint_service_name.GetVpcEndpointServiceNameOutput {
         return get_vpc_endpoint_service_name.execute(self, allocator, input, options);
@@ -130,6 +174,11 @@ pub const Client = struct {
     /// Retrieves information about a list of clusters.
     pub fn listClusters(self: *Self, allocator: std.mem.Allocator, input: list_clusters.ListClustersInput, options: CallOptions) !list_clusters.ListClustersOutput {
         return list_clusters.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves information about a list of streams for a cluster.
+    pub fn listStreams(self: *Self, allocator: std.mem.Allocator, input: list_streams.ListStreamsInput, options: CallOptions) !list_streams.ListStreamsOutput {
+        return list_streams.execute(self, allocator, input, options);
     }
 
     /// Lists all of the tags for a resource.
@@ -194,11 +243,14 @@ pub const Client = struct {
     ///
     /// **dsql:RemovePeerCluster**
     ///
-    /// Permission to remove peer clusters. The *dsql:RemovePeerCluster* permission
-    /// uses a wildcard ARN pattern to simplify permission management during
-    /// updates.
+    /// Permission to remove peer clusters. When you list peer clusters in
+    /// `multiRegionProperties.clusters`, you need this permission for each current
+    /// peer cluster that your list omits.
     ///
-    /// Resources: `arn:aws:dsql:*:*account-id*:cluster/*`
+    /// Resources:
+    ///
+    /// * Each removed peer cluster: exact ARN of each removed peer cluster, in its
+    ///   own Region
     ///
     /// **dsql:PutWitnessRegion**
     ///
@@ -211,17 +263,24 @@ pub const Client = struct {
     /// **This permission is checked both in the cluster Region and in the witness
     /// Region.**
     ///
-    /// * The witness region specified in `multiRegionProperties.witnessRegion`
+    /// * The witness Region specified in `multiRegionProperties.witnessRegion`
     ///   cannot be the same as the cluster's Region.
-    /// * When updating clusters with peer relationships, permissions are checked
-    ///   for both adding and removing peers.
-    /// * The `dsql:RemovePeerCluster` permission uses a wildcard ARN pattern to
-    ///   simplify permission management during updates.
+    /// * When you list peer clusters in `multiRegionProperties.clusters`, you need
+    ///   `dsql:AddPeerCluster` for every peer cluster in your request. You need
+    ///   `dsql:RemovePeerCluster` only for the peer clusters that the update
+    ///   removes.
     pub fn updateCluster(self: *Self, allocator: std.mem.Allocator, input: update_cluster.UpdateClusterInput, options: CallOptions) !update_cluster.UpdateClusterOutput {
         return update_cluster.execute(self, allocator, input, options);
     }
 
     pub fn listClustersPaginator(self: *Self, params: list_clusters.ListClustersInput) paginator.ListClustersPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listStreamsPaginator(self: *Self, params: list_streams.ListStreamsInput) paginator.ListStreamsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -235,6 +294,16 @@ pub const Client = struct {
 
     pub fn waitUntilClusterNotExists(self: *Self, params: get_cluster.GetClusterInput) aws.waiter.WaiterError!void {
         var w = waiters.ClusterNotExistsWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilStreamActive(self: *Self, params: get_stream.GetStreamInput) aws.waiter.WaiterError!void {
+        var w = waiters.StreamActiveWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilStreamNotExists(self: *Self, params: get_stream.GetStreamInput) aws.waiter.WaiterError!void {
+        var w = waiters.StreamNotExistsWaiter{ .client = self, .params = params };
         return w.wait();
     }
 };

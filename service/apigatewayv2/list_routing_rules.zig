@@ -116,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRoutingRulesInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListRoutingRulesOutput {
-    var result: ListRoutingRulesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListRoutingRulesOutput, body, allocator);
-    }
+    const result: ListRoutingRulesOutput = try aws.json.parseJsonObject(
+        ListRoutingRulesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

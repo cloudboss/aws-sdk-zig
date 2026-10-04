@@ -5,12 +5,14 @@ pub const CRType = enum {
     spot,
     fargate,
     fargate_spot,
+    ecs_managed_instances,
 
     pub const json_field_names = .{
         .ec2 = "EC2",
         .spot = "SPOT",
         .fargate = "FARGATE",
         .fargate_spot = "FARGATE_SPOT",
+        .ecs_managed_instances = "ECS_MANAGED_INSTANCES",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const CRType = enum {
             .spot => "SPOT",
             .fargate => "FARGATE",
             .fargate_spot => "FARGATE_SPOT",
+            .ecs_managed_instances => "ECS_MANAGED_INSTANCES",
         };
     }
 

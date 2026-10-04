@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisassociatePricingRule
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DisassociatePricingRulesOutput {
-    var result: DisassociatePricingRulesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DisassociatePricingRulesOutput, body, allocator);
-    }
+    const result: DisassociatePricingRulesOutput = try aws.json.parseJsonObject(
+        DisassociatePricingRulesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRelatedResourcesFor
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListRelatedResourcesForAuditFindingOutput {
-    var result: ListRelatedResourcesForAuditFindingOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListRelatedResourcesForAuditFindingOutput, body, allocator);
-    }
+    const result: ListRelatedResourcesForAuditFindingOutput = try aws.json.parseJsonObject(
+        ListRelatedResourcesForAuditFindingOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

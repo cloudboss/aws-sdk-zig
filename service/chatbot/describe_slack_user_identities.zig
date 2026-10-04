@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeSlackUserIdenti
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeSlackUserIdentitiesOutput {
-    var result: DescribeSlackUserIdentitiesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeSlackUserIdentitiesOutput, body, allocator);
-    }
+    const result: DescribeSlackUserIdentitiesOutput = try aws.json.parseJsonObject(
+        DescribeSlackUserIdentitiesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

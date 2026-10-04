@@ -1,11 +1,11 @@
 const PhoneNumberCountryCode = @import("phone_number_country_code.zig").PhoneNumberCountryCode;
 const PhoneNumberType = @import("phone_number_type.zig").PhoneNumberType;
 
-/// Information about phone numbers that have been claimed to your Amazon
-/// Connect instance or traffic distribution group.
+/// Information about phone numbers that have been claimed to your Connect
+/// Customer instance or traffic distribution group.
 pub const ListPhoneNumbersSummary = struct {
-    /// The identifier of the Amazon Connect instance that phone numbers are claimed
-    /// to. You
+    /// The identifier of the Connect Customer instance that phone numbers are
+    /// claimed to. You
     /// can [find the
     /// instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
@@ -37,7 +37,7 @@ pub const ListPhoneNumbersSummary = struct {
     /// that was imported from Amazon Web Services End User Messaging.
     source_phone_number_arn: ?[]const u8 = null,
 
-    /// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+    /// The Amazon Resource Name (ARN) for Connect Customer instances or traffic
     /// distribution groups that phone number inbound traffic is routed through.
     target_arn: ?[]const u8 = null,
 

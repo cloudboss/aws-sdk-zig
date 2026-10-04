@@ -11,7 +11,7 @@ pub const ContactFlowModule = struct {
 
     /// The JSON string that represents the content of the flow. For an example, see
     /// [Example
-    /// flow in Amazon Connect Flow
+    /// flow in Connect Customer Flow
     /// language](https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html).
     content: ?[]const u8 = null,
 

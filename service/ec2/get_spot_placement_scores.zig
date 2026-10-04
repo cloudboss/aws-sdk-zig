@@ -17,6 +17,13 @@ pub const GetSpotPlacementScoresInput = struct {
     /// Otherwise, it is `UnauthorizedOperation`.
     dry_run: ?bool = null,
 
+    /// Specify `true` so that the response returns scores that include Local Zones.
+    /// Otherwise, the response ignores Local Zones.
+    ///
+    /// When you request regional scores, Local Zone capacity counts toward its
+    /// parent Region.
+    include_local_zones: ?bool = null,
+
     /// The attributes for the instance types. When you specify instance attributes,
     /// Amazon EC2 will
     /// identify instance types with those attributes.
@@ -136,6 +143,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpotPlacementScoresI
     try body_buf.appendSlice(allocator, "Action=GetSpotPlacementScores&Version=2016-11-15");
     if (input.dry_run) |v| {
         try body_buf.appendSlice(allocator, "&DryRun=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
+    if (input.include_local_zones) |v| {
+        try body_buf.appendSlice(allocator, "&IncludeLocalZones=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.instance_requirements_with_metadata) |v| {

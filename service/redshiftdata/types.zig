@@ -1,7 +1,10 @@
 pub const ColumnMetadata = @import("column_metadata.zig").ColumnMetadata;
+pub const ExecutionMode = @import("execution_mode.zig").ExecutionMode;
 pub const Field = @import("field.zig").Field;
 pub const QueryRecords = @import("query_records.zig").QueryRecords;
 pub const ResultFormatString = @import("result_format_string.zig").ResultFormatString;
+pub const SessionData = @import("session_data.zig").SessionData;
+pub const SessionStatusString = @import("session_status_string.zig").SessionStatusString;
 pub const SqlParameter = @import("sql_parameter.zig").SqlParameter;
 pub const StatementData = @import("statement_data.zig").StatementData;
 pub const StatementStatusString = @import("statement_status_string.zig").StatementStatusString;

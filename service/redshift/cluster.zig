@@ -9,6 +9,7 @@ const ElasticIpStatus = @import("elastic_ip_status.zig").ElasticIpStatus;
 const Endpoint = @import("endpoint.zig").Endpoint;
 const HsmStatus = @import("hsm_status.zig").HsmStatus;
 const ClusterIamRole = @import("cluster_iam_role.zig").ClusterIamRole;
+const LoggingPublishStatus = @import("logging_publish_status.zig").LoggingPublishStatus;
 const SecondaryClusterInfo = @import("secondary_cluster_info.zig").SecondaryClusterInfo;
 const PendingModifiedValues = @import("pending_modified_values.zig").PendingModifiedValues;
 const ReservedNodeExchangeStatus = @import("reserved_node_exchange_status.zig").ReservedNodeExchangeStatus;
@@ -243,6 +244,10 @@ pub const Cluster = struct {
     /// the cluster is successfully registered with Amazon Redshift federated
     /// permissions.
     lakehouse_registration_status: ?[]const u8 = null,
+
+    /// The status of system table publishing for the cluster. This field is present
+    /// only when system table publishing is configured.
+    logging_publish_status: ?LoggingPublishStatus = null,
 
     /// The name of the maintenance track for the cluster.
     maintenance_track_name: ?[]const u8 = null,

@@ -24,6 +24,8 @@ pub const MetricName = enum {
     free_storage_space,
     network_receive_throughput,
     network_transmit_throughput,
+    freeable_memory,
+    swap_usage,
     burst_capacity_time,
     burst_capacity_percentage,
 
@@ -51,6 +53,8 @@ pub const MetricName = enum {
         .free_storage_space = "FreeStorageSpace",
         .network_receive_throughput = "NetworkReceiveThroughput",
         .network_transmit_throughput = "NetworkTransmitThroughput",
+        .freeable_memory = "FreeableMemory",
+        .swap_usage = "SwapUsage",
         .burst_capacity_time = "BurstCapacityTime",
         .burst_capacity_percentage = "BurstCapacityPercentage",
     };
@@ -80,6 +84,8 @@ pub const MetricName = enum {
             .free_storage_space => "FreeStorageSpace",
             .network_receive_throughput => "NetworkReceiveThroughput",
             .network_transmit_throughput => "NetworkTransmitThroughput",
+            .freeable_memory => "FreeableMemory",
+            .swap_usage => "SwapUsage",
             .burst_capacity_time => "BurstCapacityTime",
             .burst_capacity_percentage => "BurstCapacityPercentage",
         };

@@ -2,6 +2,7 @@ const AccessPoliciesStatus = @import("access_policies_status.zig").AccessPolicie
 const AdvancedOptionsStatus = @import("advanced_options_status.zig").AdvancedOptionsStatus;
 const AdvancedSecurityOptionsStatus = @import("advanced_security_options_status.zig").AdvancedSecurityOptionsStatus;
 const AIMLOptionsStatus = @import("aiml_options_status.zig").AIMLOptionsStatus;
+const AutomatedSnapshotPauseOptionsStatus = @import("automated_snapshot_pause_options_status.zig").AutomatedSnapshotPauseOptionsStatus;
 const AutoTuneOptionsStatus = @import("auto_tune_options_status.zig").AutoTuneOptionsStatus;
 const ChangeProgressDetails = @import("change_progress_details.zig").ChangeProgressDetails;
 const ClusterConfigStatus = @import("cluster_config_status.zig").ClusterConfigStatus;
@@ -10,6 +11,7 @@ const DeploymentStrategyOptionsStatus = @import("deployment_strategy_options_sta
 const DomainEndpointOptionsStatus = @import("domain_endpoint_options_status.zig").DomainEndpointOptionsStatus;
 const EBSOptionsStatus = @import("ebs_options_status.zig").EBSOptionsStatus;
 const EncryptionAtRestOptionsStatus = @import("encryption_at_rest_options_status.zig").EncryptionAtRestOptionsStatus;
+const EngineModeStatus = @import("engine_mode_status.zig").EngineModeStatus;
 const VersionStatus = @import("version_status.zig").VersionStatus;
 const IdentityCenterOptionsStatus = @import("identity_center_options_status.zig").IdentityCenterOptionsStatus;
 const IPAddressTypeStatus = @import("ip_address_type_status.zig").IPAddressTypeStatus;
@@ -19,6 +21,7 @@ const NodeToNodeEncryptionOptionsStatus = @import("node_to_node_encryption_optio
 const OffPeakWindowOptionsStatus = @import("off_peak_window_options_status.zig").OffPeakWindowOptionsStatus;
 const SnapshotOptionsStatus = @import("snapshot_options_status.zig").SnapshotOptionsStatus;
 const SoftwareUpdateOptionsStatus = @import("software_update_options_status.zig").SoftwareUpdateOptionsStatus;
+const UseCaseStatus = @import("use_case_status.zig").UseCaseStatus;
 const VPCDerivedInfoStatus = @import("vpc_derived_info_status.zig").VPCDerivedInfoStatus;
 
 /// Container for the configuration of an OpenSearch Service domain.
@@ -37,6 +40,9 @@ pub const DomainConfig = struct {
 
     /// Container for parameters required to enable all machine learning features.
     aiml_options: ?AIMLOptionsStatus = null,
+
+    /// Specifies `AutomatedSnapshotPauseOptions` for the domain.
+    automated_snapshot_pause_options: ?AutomatedSnapshotPauseOptionsStatus = null,
 
     /// Container for Auto-Tune settings for the domain.
     auto_tune_options: ?AutoTuneOptionsStatus = null,
@@ -64,6 +70,9 @@ pub const DomainConfig = struct {
 
     /// Key-value pairs to enable encryption at rest.
     encryption_at_rest_options: ?EncryptionAtRestOptionsStatus = null,
+
+    /// The engine mode configured for the domain.
+    engine_mode: ?EngineModeStatus = null,
 
     /// The OpenSearch or Elasticsearch version that the domain is running.
     engine_version: ?VersionStatus = null,
@@ -102,6 +111,9 @@ pub const DomainConfig = struct {
     /// Software update options for the domain.
     software_update_options: ?SoftwareUpdateOptionsStatus = null,
 
+    /// The use case configured for the domain.
+    use_case: ?UseCaseStatus = null,
+
     /// The current VPC options for the domain and the status of any updates to
     /// their
     /// configuration.
@@ -112,6 +124,7 @@ pub const DomainConfig = struct {
         .advanced_options = "AdvancedOptions",
         .advanced_security_options = "AdvancedSecurityOptions",
         .aiml_options = "AIMLOptions",
+        .automated_snapshot_pause_options = "AutomatedSnapshotPauseOptions",
         .auto_tune_options = "AutoTuneOptions",
         .change_progress_details = "ChangeProgressDetails",
         .cluster_config = "ClusterConfig",
@@ -120,6 +133,7 @@ pub const DomainConfig = struct {
         .domain_endpoint_options = "DomainEndpointOptions",
         .ebs_options = "EBSOptions",
         .encryption_at_rest_options = "EncryptionAtRestOptions",
+        .engine_mode = "EngineMode",
         .engine_version = "EngineVersion",
         .identity_center_options = "IdentityCenterOptions",
         .ip_address_type = "IPAddressType",
@@ -129,6 +143,7 @@ pub const DomainConfig = struct {
         .off_peak_window_options = "OffPeakWindowOptions",
         .snapshot_options = "SnapshotOptions",
         .software_update_options = "SoftwareUpdateOptions",
+        .use_case = "UseCase",
         .vpc_options = "VPCOptions",
     };
 };

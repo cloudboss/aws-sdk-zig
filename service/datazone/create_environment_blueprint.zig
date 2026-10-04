@@ -4,11 +4,17 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const BlueprintCategory = @import("blueprint_category.zig").BlueprintCategory;
 const ProvisioningProperties = @import("provisioning_properties.zig").ProvisioningProperties;
 const CustomParameter = @import("custom_parameter.zig").CustomParameter;
 const DeploymentProperties = @import("deployment_properties.zig").DeploymentProperties;
 
 pub const CreateEnvironmentBlueprintInput = struct {
+    /// The category of the Amazon DataZone blueprint. The only valid value is
+    /// `TOOLING`, which creates a blueprint that provisions the tooling resources
+    /// of a project.
+    blueprint_category: ?BlueprintCategory = null,
+
     /// The description of the Amazon DataZone blueprint.
     description: ?[]const u8 = null,
 
@@ -25,6 +31,7 @@ pub const CreateEnvironmentBlueprintInput = struct {
     user_parameters: ?[]const CustomParameter = null,
 
     pub const json_field_names = .{
+        .blueprint_category = "blueprintCategory",
         .description = "description",
         .domain_identifier = "domainIdentifier",
         .name = "name",
@@ -34,6 +41,11 @@ pub const CreateEnvironmentBlueprintInput = struct {
 };
 
 pub const CreateEnvironmentBlueprintOutput = struct {
+    /// The category of the Amazon DataZone blueprint. The only valid value is
+    /// `TOOLING`, which indicates a blueprint that provisions the tooling resources
+    /// of a project.
+    blueprint_category: ?BlueprintCategory = null,
+
     /// The timestamp at which the environment blueprint was created.
     created_at: ?i64 = null,
 
@@ -65,6 +77,7 @@ pub const CreateEnvironmentBlueprintOutput = struct {
     user_parameters: ?[]const CustomParameter = null,
 
     pub const json_field_names = .{
+        .blueprint_category = "blueprintCategory",
         .created_at = "createdAt",
         .deployment_properties = "deploymentProperties",
         .description = "description",
@@ -118,6 +131,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEnvironmentBluepr
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.blueprint_category) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"blueprintCategory\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"description\":");
@@ -154,10 +173,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEnvironmentBluepr
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateEnvironmentBlueprintOutput {
-    var result: CreateEnvironmentBlueprintOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateEnvironmentBlueprintOutput, body, allocator);
-    }
+    const result: CreateEnvironmentBlueprintOutput = try aws.json.parseJsonObject(
+        CreateEnvironmentBlueprintOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

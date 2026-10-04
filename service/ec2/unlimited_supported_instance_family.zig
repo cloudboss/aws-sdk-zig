@@ -5,12 +5,14 @@ pub const UnlimitedSupportedInstanceFamily = enum {
     t_3,
     t_3_a,
     t_4_g,
+    t_8_i,
 
     pub const json_field_names = .{
         .t_2 = "t2",
         .t_3 = "t3",
         .t_3_a = "t3a",
         .t_4_g = "t4g",
+        .t_8_i = "t8i",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const UnlimitedSupportedInstanceFamily = enum {
             .t_3 => "t3",
             .t_3_a => "t3a",
             .t_4_g => "t4g",
+            .t_8_i => "t8i",
         };
     }
 

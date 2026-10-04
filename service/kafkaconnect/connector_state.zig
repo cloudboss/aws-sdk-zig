@@ -6,6 +6,7 @@ pub const ConnectorState = enum {
     updating,
     deleting,
     failed,
+    restarting,
 
     pub const json_field_names = .{
         .running = "RUNNING",
@@ -13,6 +14,7 @@ pub const ConnectorState = enum {
         .updating = "UPDATING",
         .deleting = "DELETING",
         .failed = "FAILED",
+        .restarting = "RESTARTING",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +24,7 @@ pub const ConnectorState = enum {
             .updating => "UPDATING",
             .deleting => "DELETING",
             .failed => "FAILED",
+            .restarting => "RESTARTING",
         };
     }
 

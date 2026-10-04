@@ -4,11 +4,13 @@ pub const ServiceType = enum {
     redshift,
     qbusiness,
     athena,
+    glue_data_catalog,
 
     pub const json_field_names = .{
         .redshift = "REDSHIFT",
         .qbusiness = "QBUSINESS",
         .athena = "ATHENA",
+        .glue_data_catalog = "GLUE_DATA_CATALOG",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const ServiceType = enum {
             .redshift => "REDSHIFT",
             .qbusiness => "QBUSINESS",
             .athena => "ATHENA",
+            .glue_data_catalog => "GLUE_DATA_CATALOG",
         };
     }
 

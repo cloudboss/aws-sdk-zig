@@ -1,5 +1,6 @@
 const EC2Capacity = @import("ec2_capacity.zig").EC2Capacity;
 const CatalogItemStatus = @import("catalog_item_status.zig").CatalogItemStatus;
+const RackScalingType = @import("rack_scaling_type.zig").RackScalingType;
 const SupportedStorageEnum = @import("supported_storage_enum.zig").SupportedStorageEnum;
 
 /// Information about a catalog item.
@@ -16,6 +17,10 @@ pub const CatalogItem = struct {
     /// Information about the power draw of an item.
     power_kva: ?f32 = null,
 
+    /// The rack scaling type supported by the catalog item. Valid values are
+    /// `SINGLE_RACK` and `MULTI_RACK`.
+    rack_scaling_type: ?RackScalingType = null,
+
     /// The supported storage options for the catalog item.
     supported_storage: ?[]const SupportedStorageEnum = null,
 
@@ -31,6 +36,7 @@ pub const CatalogItem = struct {
         .ec2_capacities = "EC2Capacities",
         .item_status = "ItemStatus",
         .power_kva = "PowerKva",
+        .rack_scaling_type = "RackScalingType",
         .supported_storage = "SupportedStorage",
         .supported_uplink_gbps = "SupportedUplinkGbps",
         .weight_lbs = "WeightLbs",

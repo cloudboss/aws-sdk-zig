@@ -13,6 +13,7 @@ const describe_event_types = @import("describe_event_types.zig");
 const describe_events = @import("describe_events.zig");
 const describe_events_for_organization = @import("describe_events_for_organization.zig");
 const describe_health_service_status_for_organization = @import("describe_health_service_status_for_organization.zig");
+const describe_service_lifecycle = @import("describe_service_lifecycle.zig");
 const disable_health_service_access_for_organization = @import("disable_health_service_access_for_organization.zig");
 const enable_health_service_access_for_organization = @import("enable_health_service_access_for_organization.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
@@ -300,6 +301,12 @@ pub const Client = struct {
         return describe_health_service_status_for_organization.execute(self, allocator, input, options);
     }
 
+    /// Returns lifecycle information for Amazon Web Services services, including
+    /// end-of-life dates, version recommendations, and lifecycle events.
+    pub fn describeServiceLifecycle(self: *Self, allocator: std.mem.Allocator, input: describe_service_lifecycle.DescribeServiceLifecycleInput, options: CallOptions) !describe_service_lifecycle.DescribeServiceLifecycleOutput {
+        return describe_service_lifecycle.execute(self, allocator, input, options);
+    }
+
     /// Disables Health from working with Organizations. To call this operation, you
     /// must sign
     /// in to the organization's management account. For more information, see
@@ -406,6 +413,13 @@ pub const Client = struct {
     }
 
     pub fn describeEventsForOrganizationPaginator(self: *Self, params: describe_events_for_organization.DescribeEventsForOrganizationInput) paginator.DescribeEventsForOrganizationPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn describeServiceLifecyclePaginator(self: *Self, params: describe_service_lifecycle.DescribeServiceLifecycleInput) paginator.DescribeServiceLifecyclePaginator {
         return .{
             .client = self,
             .params = params,

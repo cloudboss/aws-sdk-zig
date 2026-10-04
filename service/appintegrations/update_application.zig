@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ApplicationConfig = @import("application_config.zig").ApplicationConfig;
 const ApplicationSourceConfig = @import("application_source_config.zig").ApplicationSourceConfig;
 const ApplicationType = @import("application_type.zig").ApplicationType;
+const AuthConfig = @import("auth_config.zig").AuthConfig;
 const IframeConfig = @import("iframe_config.zig").IframeConfig;
 const Publication = @import("publication.zig").Publication;
 const Subscription = @import("subscription.zig").Subscription;
@@ -23,6 +24,10 @@ pub const UpdateApplicationInput = struct {
 
     /// The Amazon Resource Name (ARN) of the Application.
     arn: []const u8,
+
+    /// The authentication settings that Connect Customer uses when calling the
+    /// external application.
+    auth_config: ?AuthConfig = null,
 
     /// The description of the application.
     description: ?[]const u8 = null,
@@ -54,6 +59,7 @@ pub const UpdateApplicationInput = struct {
         .application_source_config = "ApplicationSourceConfig",
         .application_type = "ApplicationType",
         .arn = "Arn",
+        .auth_config = "AuthConfig",
         .description = "Description",
         .iframe_config = "IframeConfig",
         .initialization_timeout = "InitializationTimeout",
@@ -122,6 +128,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateApplicationInput,
     if (input.application_type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"ApplicationType\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.auth_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AuthConfig\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

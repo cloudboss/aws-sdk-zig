@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartRecommendationRepo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartRecommendationReportGenerationOutput {
-    var result: StartRecommendationReportGenerationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartRecommendationReportGenerationOutput, body, allocator);
-    }
+    const result: StartRecommendationReportGenerationOutput = try aws.json.parseJsonObject(
+        StartRecommendationReportGenerationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

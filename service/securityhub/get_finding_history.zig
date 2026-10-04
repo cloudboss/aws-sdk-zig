@@ -171,10 +171,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFindingHistoryInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetFindingHistoryOutput {
-    var result: GetFindingHistoryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetFindingHistoryOutput, body, allocator);
-    }
+    const result: GetFindingHistoryOutput = try aws.json.parseJsonObject(
+        GetFindingHistoryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

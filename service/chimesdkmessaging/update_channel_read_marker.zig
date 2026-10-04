@@ -79,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateChannelReadMarker
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateChannelReadMarkerOutput {
-    var result: UpdateChannelReadMarkerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateChannelReadMarkerOutput, body, allocator);
-    }
+    const result: UpdateChannelReadMarkerOutput = try aws.json.parseJsonObject(
+        UpdateChannelReadMarkerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCACertificatesInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListCACertificatesOutput {
-    var result: ListCACertificatesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListCACertificatesOutput, body, allocator);
-    }
+    const result: ListCACertificatesOutput = try aws.json.parseJsonObject(
+        ListCACertificatesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

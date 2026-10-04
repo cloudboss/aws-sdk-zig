@@ -4,10 +4,17 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DeploymentConfig = @import("deployment_config.zig").DeploymentConfig;
+const serde = @import("serde.zig");
 
 pub const RollbackStackInput = struct {
     /// A unique identifier for this `RollbackStack` request.
     client_request_token: ?[]const u8 = null,
+
+    /// The deployment configuration for this stack operation, including the
+    /// deployment
+    /// mode.
+    deployment_config: ?DeploymentConfig = null,
 
     /// When set to `true`, newly created resources are deleted when the operation
     /// rolls back. This includes newly created resources marked with a deletion
@@ -72,6 +79,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RollbackStackInput, con
     if (input.client_request_token) |v| {
         try body_buf.appendSlice(allocator, "&ClientRequestToken=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.deployment_config) |v| {
+        if (v.disable_rollback) |sv| {
+            try body_buf.appendSlice(allocator, "&DeploymentConfig.DisableRollback=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
+        }
+        if (v.mode) |sv| {
+            try body_buf.appendSlice(allocator, "&DeploymentConfig.Mode=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
+        }
     }
     if (input.retain_except_on_create) |v| {
         try body_buf.appendSlice(allocator, "&RetainExceptOnCreate=");

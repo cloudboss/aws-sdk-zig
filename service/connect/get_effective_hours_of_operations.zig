@@ -14,7 +14,7 @@ pub const GetEffectiveHoursOfOperationsInput = struct {
     /// The identifier for the hours of operation.
     hours_of_operation_id: []const u8,
 
-    /// The identifier of the Amazon Connect instance.
+    /// The identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     /// The date until when the hours of operation are listed.
@@ -37,7 +37,7 @@ pub const GetEffectiveHoursOfOperationsOutput = struct {
     ///
     /// For more information about how override types are applied, see [Build your
     /// list of
-    /// overrides](https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html) in the
+    /// overrides](https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html) in the
     /// * Administrator Guide*.
     effective_override_hours_list: ?[]const EffectiveOverrideHours = null,
 
@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEffectiveHoursOfOper
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetEffectiveHoursOfOperationsOutput {
-    var result: GetEffectiveHoursOfOperationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetEffectiveHoursOfOperationsOutput, body, allocator);
-    }
+    const result: GetEffectiveHoursOfOperationsOutput = try aws.json.parseJsonObject(
+        GetEffectiveHoursOfOperationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -8,14 +8,14 @@ const RoutingProfileManualAssignmentQueueConfig = @import("routing_profile_manua
 const RoutingProfileQueueConfig = @import("routing_profile_queue_config.zig").RoutingProfileQueueConfig;
 
 pub const AssociateRoutingProfileQueuesInput = struct {
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
     /// The manual assignment queues to associate with this routing profile.
     ///
-    /// Note: Use this config for chat, email, and task contacts. It does not
-    /// support voice contacts.
+    /// For voice contacts, manual assignment supports only agent-first callback
+    /// contacts. Chat, email, and task contacts are fully supported.
     manual_assignment_queue_configs: ?[]const RoutingProfileManualAssignmentQueueConfig = null,
 
     /// The queues to associate with this routing profile.

@@ -62,6 +62,7 @@ pub const InvokeCodeInterpreterOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeCodeInterpreterInput, options: CallOptions) !InvokeCodeInterpreterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -70,8 +71,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeCodeI
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "bedrock-agentcore", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -83,11 +82,9 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeCodeI
         return error.ServiceError;
     }
 
-    stream_resp.deinitHeaders();
-    errdefer stream_resp.body.deinit();
-
-    const stream = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
-    return .{ .stream = stream };
+    errdefer stream_resp.deinit();
+    const result = try deserializeStreamingResponse(allocator, &stream_resp);
+    return result;
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: InvokeCodeInterpreterInput, config: *aws.Config) !aws.http.Request {
@@ -137,4 +134,21 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeCodeInterpreterIn
     }
 
     return request;
+}
+
+fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !InvokeCodeInterpreterOutput {
+    var result: InvokeCodeInterpreterOutput = .{};
+    errdefer {
+        if (result.session_id) |value| allocator.free(value);
+    }
+    if (stream_resp.headers.get("x-amzn-code-interpreter-session-id")) |value| {
+        result.session_id = try allocator.dupe(u8, value);
+    }
+    result.stream = try aws.event_stream_reader.EventStreamReader.init(
+        allocator,
+        stream_resp.body,
+    );
+    stream_resp.deinitHeaders();
+
+    return result;
 }

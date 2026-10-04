@@ -6,7 +6,7 @@ pub const RoutePassThroughWaypoint = struct {
     /// Offset in the leg geometry corresponding to the start of this step.
     geometry_offset: ?i32 = null,
 
-    /// The place details.
+    /// Place details corresponding to the pass-through waypoint.
     place: RoutePassThroughPlace,
 
     pub const json_field_names = .{

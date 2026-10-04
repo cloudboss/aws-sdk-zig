@@ -9,9 +9,21 @@ pub const GetTargetSelectionRulesInput = struct {
     /// The migration project name or Amazon Resource Name (ARN).
     migration_project_identifier: []const u8,
 
-    /// The JSON string representing the source selection rules for conversion.
-    /// Selection rules must contain only supported metadata model types. For more
-    /// information, see Selection Rules in the DMS User Guide.
+    /// A JSON string that contains the source selection rules to convert into their
+    /// target counterparts. For the selection rule format and examples, see
+    /// [Selection rules in DMS Schema
+    /// Conversion](https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html).
+    ///
+    /// Usage:
+    ///
+    /// * Accepts only source selection rules, where `server-name` in the object
+    ///   locator matches the source data provider.
+    ///
+    /// * Supports only `explicit` rule actions.
+    ///
+    /// * Does not support `category-name` in the object locator.
+    ///
+    /// * Up to 10 rules are allowed.
     selection_rules: []const u8,
 
     pub const json_field_names = .{

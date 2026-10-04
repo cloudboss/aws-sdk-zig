@@ -20,6 +20,12 @@ pub const DBSubnetGroup = struct {
     /// Contains a list of Subnet elements.
     subnets: ?[]const Subnet = null,
 
+    /// The network types supported by the DB subnet group.
+    ///
+    /// Valid network types include `IPV4` and `DUAL`. A DB subnet group
+    /// supports `DUAL` if all subnets in the group have both IPv4 and IPv6 CIDRs.
+    supported_network_types: ?[]const []const u8 = null,
+
     /// Provides the VpcId of the DB subnet group.
     vpc_id: ?[]const u8 = null,
 };

@@ -52,6 +52,7 @@ pub const FleetSortByType = @import("fleet_sort_by_type.zig").FleetSortByType;
 pub const FleetStatus = @import("fleet_status.zig").FleetStatus;
 pub const FleetStatusCode = @import("fleet_status_code.zig").FleetStatusCode;
 pub const GitSubmodulesConfig = @import("git_submodules_config.zig").GitSubmodulesConfig;
+pub const HostKernel = @import("host_kernel.zig").HostKernel;
 pub const ImagePullCredentialsType = @import("image_pull_credentials_type.zig").ImagePullCredentialsType;
 pub const LanguageType = @import("language_type.zig").LanguageType;
 pub const LogsConfig = @import("logs_config.zig").LogsConfig;

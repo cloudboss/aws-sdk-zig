@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSipRuleInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSipRuleOutput {
-    var result: GetSipRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSipRuleOutput, body, allocator);
-    }
+    const result: GetSipRuleOutput = try aws.json.parseJsonObject(
+        GetSipRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

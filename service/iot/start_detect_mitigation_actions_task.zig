@@ -138,10 +138,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartDetectMitigationAc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartDetectMitigationActionsTaskOutput {
-    var result: StartDetectMitigationActionsTaskOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartDetectMitigationActionsTaskOutput, body, allocator);
-    }
+    const result: StartDetectMitigationActionsTaskOutput = try aws.json.parseJsonObject(
+        StartDetectMitigationActionsTaskOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

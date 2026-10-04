@@ -10,6 +10,7 @@ const list_organization_recommendation_resources = @import("list_organization_re
 const list_organization_recommendations = @import("list_organization_recommendations.zig");
 const list_recommendation_resources = @import("list_recommendation_resources.zig");
 const list_recommendations = @import("list_recommendations.zig");
+const list_recommendations_for_resource = @import("list_recommendations_for_resource.zig");
 const update_organization_recommendation_lifecycle = @import("update_organization_recommendation_lifecycle.zig");
 const update_recommendation_lifecycle = @import("update_recommendation_lifecycle.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
@@ -106,6 +107,11 @@ pub const Client = struct {
         return list_recommendations.execute(self, allocator, input, options);
     }
 
+    /// List all Trusted Advisor recommendations for a given AWS resource ARN.
+    pub fn listRecommendationsForResource(self: *Self, allocator: std.mem.Allocator, input: list_recommendations_for_resource.ListRecommendationsForResourceInput, options: CallOptions) !list_recommendations_for_resource.ListRecommendationsForResourceOutput {
+        return list_recommendations_for_resource.execute(self, allocator, input, options);
+    }
+
     /// Update the lifecycle of a Recommendation within an Organization. This API
     /// only supports prioritized recommendations and updates global priority
     /// recommendations, eliminating the need to call the API in each AWS Region.
@@ -156,6 +162,13 @@ pub const Client = struct {
     }
 
     pub fn listRecommendationsPaginator(self: *Self, params: list_recommendations.ListRecommendationsInput) paginator.ListRecommendationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listRecommendationsForResourcePaginator(self: *Self, params: list_recommendations_for_resource.ListRecommendationsForResourceInput) paginator.ListRecommendationsForResourcePaginator {
         return .{
             .client = self,
             .params = params,

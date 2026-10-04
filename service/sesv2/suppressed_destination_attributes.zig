@@ -1,15 +1,15 @@
 /// An object that contains additional attributes that are related an email
 /// address that
-/// is on the suppression list for your account.
+/// is on the suppression list for your account or for a specific tenant.
 pub const SuppressedDestinationAttributes = struct {
     /// A unique identifier that's generated when an email address is added to the
     /// suppression
-    /// list for your account.
+    /// list for your account or for a specific tenant.
     feedback_id: ?[]const u8 = null,
 
     /// The unique identifier of the email message that caused the email address to
     /// be added
-    /// to the suppression list for your account.
+    /// to the suppression list for your account or for a specific tenant.
     message_id: ?[]const u8 = null,
 
     pub const json_field_names = .{

@@ -1,3 +1,4 @@
+const DefaultSessionParametersMulticast = @import("default_session_parameters_multicast.zig").DefaultSessionParametersMulticast;
 const DlClass = @import("dl_class.zig").DlClass;
 const ParticipatingGatewaysMulticast = @import("participating_gateways_multicast.zig").ParticipatingGatewaysMulticast;
 const SupportedRfRegion = @import("supported_rf_region.zig").SupportedRfRegion;
@@ -5,6 +6,9 @@ const SupportedRfRegion = @import("supported_rf_region.zig").SupportedRfRegion;
 /// The LoRaWAN information that is to be returned from getting multicast group
 /// information.
 pub const LoRaWANMulticastGet = struct {
+    /// The default session parameters for the multicast group.
+    default_session_parameters: ?DefaultSessionParametersMulticast = null,
+
     dl_class: ?DlClass = null,
 
     number_of_devices_in_group: ?i32 = null,
@@ -16,6 +20,7 @@ pub const LoRaWANMulticastGet = struct {
     rf_region: ?SupportedRfRegion = null,
 
     pub const json_field_names = .{
+        .default_session_parameters = "DefaultSessionParameters",
         .dl_class = "DlClass",
         .number_of_devices_in_group = "NumberOfDevicesInGroup",
         .number_of_devices_requested = "NumberOfDevicesRequested",

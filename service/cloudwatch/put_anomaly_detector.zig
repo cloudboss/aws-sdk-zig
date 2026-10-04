@@ -94,6 +94,12 @@ pub const PutAnomalyDetectorInput = struct {
 };
 
 pub const PutAnomalyDetectorOutput = struct {
+    /// The unique identifier of the anomaly detector that you created or updated.
+    anomaly_detector_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .anomaly_detector_id = "AnomalyDetectorId",
+    };
 };
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAnomalyDetectorInput, options: CallOptions) !PutAnomalyDetectorOutput {
@@ -347,9 +353,31 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutAnomalyDetectorInput
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutAnomalyDetectorOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    _ = allocator;
-    const result: PutAnomalyDetectorOutput = .{};
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "PutAnomalyDetectorResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: PutAnomalyDetectorOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AnomalyDetectorId")) {
+                    result.anomaly_detector_id = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

@@ -1,3 +1,4 @@
+const DeletionProtection = @import("deletion_protection.zig").DeletionProtection;
 const CollectionStatus = @import("collection_status.zig").CollectionStatus;
 const CollectionType = @import("collection_type.zig").CollectionType;
 const VectorOptions = @import("vector_options.zig").VectorOptions;
@@ -9,6 +10,10 @@ pub const UpdateCollectionDetail = struct {
 
     /// The date and time when the collection was created.
     created_date: ?i64 = null,
+
+    /// Indicates whether deletion protection is `ENABLED` or `DISABLED` for the
+    /// collection.
+    deletion_protection: ?DeletionProtection = null,
 
     /// The description of the collection.
     description: ?[]const u8 = null,
@@ -34,6 +39,7 @@ pub const UpdateCollectionDetail = struct {
     pub const json_field_names = .{
         .arn = "arn",
         .created_date = "createdDate",
+        .deletion_protection = "deletionProtection",
         .description = "description",
         .id = "id",
         .last_modified_date = "lastModifiedDate",

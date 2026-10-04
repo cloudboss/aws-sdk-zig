@@ -3,8 +3,7 @@ const ProductCodeListItem = @import("product_code_list_item.zig").ProductCodeLis
 const ComponentStatus = @import("component_status.zig").ComponentStatus;
 const ComponentType = @import("component_type.zig").ComponentType;
 
-/// The defining characteristics of a specific version of an Amazon Web Services
-/// TOE component.
+/// The defining characteristics of a specific version of a component.
 pub const ComponentVersion = struct {
     /// The Amazon Resource Name (ARN) of the component.
     ///
@@ -31,7 +30,9 @@ pub const ComponentVersion = struct {
     /// The name of the component.
     name: ?[]const u8 = null,
 
-    /// The owner of the component.
+    /// The owner of the component. The value is your account ID for components
+    /// that you own, the sharing account's ID for shared components, or
+    /// `Amazon`, `ThirdParty`, or `AWSMarketplace`.
     owner: ?[]const u8 = null,
 
     /// The platform of the component.
@@ -44,10 +45,10 @@ pub const ComponentVersion = struct {
     /// Describes the current status of the component version.
     status: ?ComponentStatus = null,
 
-    /// he operating system (OS) version supported by the component. If the OS
+    /// The operating system (OS) version supported by the component. If OS
     /// information is
-    /// available, a prefix match is performed against the base image OS version
-    /// during image
+    /// available, Image Builder performs a prefix match against the base image OS
+    /// version during image
     /// recipe creation.
     supported_os_versions: ?[]const []const u8 = null,
 
@@ -61,10 +62,10 @@ pub const ComponentVersion = struct {
     /// The semantic version has four nodes: ../.
     /// You can assign values for the first three, and can filter on all of them.
     ///
-    /// **Assignment:** For the first three nodes you can assign any positive
+    /// **Assignment:** For the first three nodes, you can assign any positive
     /// integer value, including
-    /// zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image
-    /// Builder automatically assigns the
+    /// zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder
+    /// automatically assigns the
     /// build number to the fourth node.
     ///
     /// **Patterns:** You can use any numeric pattern that adheres to the assignment
@@ -73,13 +74,11 @@ pub const ComponentVersion = struct {
     /// version pattern, such as 1.0.0, or
     /// a date, such as 2021.01.01.
     ///
-    /// **Filtering:** With semantic versioning, you have the flexibility to use
-    /// wildcards (x)
-    /// to specify the most recent versions or nodes when selecting the base image
-    /// or components for your
-    /// recipe. When you use a wildcard in any node, all nodes to the right of the
-    /// first wildcard must also be
-    /// wildcards.
+    /// **Filtering:** You can use wildcards (x) to specify the most recent versions
+    /// or nodes when
+    /// selecting the base image or components for your recipe. When you use a
+    /// wildcard in any node, all nodes
+    /// to the right of the first wildcard must also be wildcards.
     version: ?[]const u8 = null,
 
     pub const json_field_names = .{

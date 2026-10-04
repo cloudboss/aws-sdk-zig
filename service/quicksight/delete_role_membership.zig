@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteRoleMembershipInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteRoleMembershipOutput {
-    var result: DeleteRoleMembershipOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteRoleMembershipOutput, body, allocator);
-    }
+    var result: DeleteRoleMembershipOutput = try aws.json.parseJsonObject(
+        DeleteRoleMembershipOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

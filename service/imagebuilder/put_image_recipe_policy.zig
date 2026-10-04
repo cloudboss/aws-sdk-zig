@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutImageRecipePolicyInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutImageRecipePolicyOutput {
-    var result: PutImageRecipePolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutImageRecipePolicyOutput, body, allocator);
-    }
+    const result: PutImageRecipePolicyOutput = try aws.json.parseJsonObject(
+        PutImageRecipePolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

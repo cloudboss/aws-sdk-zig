@@ -13,7 +13,9 @@ const std = @import("std");
 /// codec. (AAC | MP2 | MP3 | WAV | AIFF | AC3| EAC3 | EAC3_ATMOS | VORBIS |
 /// OPUS | PASSTHROUGH | FLAC) * videoCodec - Your output's video codec. (AV1 |
 /// AVC_INTRA | FRAME_CAPTURE | H_264 | H_265 | MPEG2 | PASSTHROUGH | PRORES |
-/// UNCOMPRESSED | VC3 | VP8 | VP9 | XAVC)
+/// UNCOMPRESSED | VC3 | VP8 | VP9 | XAVC) * errorCode - The error code that
+/// your job failed with. For example, 1010. For more information, see
+/// https://docs.aws.amazon.com/mediaconvert/latest/ug/mediaconvert_error_codes.html
 pub const JobsQueryFilterKey = enum {
     queue,
     status,
@@ -22,6 +24,7 @@ pub const JobsQueryFilterKey = enum {
     job_engine_version_used,
     audio_codec,
     video_codec,
+    error_code,
 
     pub const json_field_names = .{
         .queue = "queue",
@@ -31,6 +34,7 @@ pub const JobsQueryFilterKey = enum {
         .job_engine_version_used = "jobEngineVersionUsed",
         .audio_codec = "audioCodec",
         .video_codec = "videoCodec",
+        .error_code = "errorCode",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -42,6 +46,7 @@ pub const JobsQueryFilterKey = enum {
             .job_engine_version_used => "jobEngineVersionUsed",
             .audio_codec => "audioCodec",
             .video_codec => "videoCodec",
+            .error_code => "errorCode",
         };
     }
 

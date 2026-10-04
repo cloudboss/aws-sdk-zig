@@ -2,14 +2,17 @@ const std = @import("std");
 
 pub const DatasetSourceType = enum {
     kendra,
+    sitewise,
 
     pub const json_field_names = .{
         .kendra = "KENDRA",
+        .sitewise = "SITEWISE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .kendra => "KENDRA",
+            .sitewise => "SITEWISE",
         };
     }
 

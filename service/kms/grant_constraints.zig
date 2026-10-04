@@ -2,17 +2,20 @@ const aws = @import("aws");
 
 /// Use this structure to allow [cryptographic
 /// operations](https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations) in the grant only when the operation request
-/// includes the specified [encryption
-/// context](https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html).
+/// meets the specified constraints.
 ///
-/// KMS applies the grant constraints only to cryptographic operations that
-/// support an
-/// encryption context, that is, all cryptographic operations with a symmetric
-/// KMS key. Grant
-/// constraints are not applied to operations that do not support an encryption
-/// context, such as
-/// cryptographic operations with asymmetric KMS keys and management operations,
-/// such as DescribeKey or RetireGrant.
+/// KMS supports the following grant constraints:
+///
+/// * `EncryptionContextEquals` and `EncryptionContextSubset` —
+/// These encryption context constraints apply only to cryptographic operations
+/// that support
+/// an encryption context, that is, all cryptographic operations with a
+/// symmetric KMS key.
+/// Encryption context grant constraints are not applied to operations that do
+/// not support an
+/// encryption context, such as cryptographic operations with asymmetric KMS
+/// keys and
+/// management operations, such as DescribeKey or RetireGrant.
 ///
 /// In a cryptographic operation, the encryption context in the decryption
 /// operation must be
@@ -33,6 +36,18 @@ const aws = @import("aws");
 /// *
 /// Key Management Service Developer Guide*
 /// .
+///
+/// * `SourceArn` — This grant constraint allows the permissions in the grant
+///   only when the
+/// request is made on behalf of a specific Amazon Web Services resource,
+/// identified by its [Amazon Resource Name
+/// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html). This is effectively
+/// the same as having the
+/// [aws:SourceArn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn) global condition key in the grant. The SourceArn constraint is supported on grants
+/// for all types of KMS keys and can also be applied to the DescribeKey
+/// operation when
+/// specified in the request. However, it does not apply to RetireGrant
+/// operation.
 pub const GrantConstraints = struct {
     /// A list of key-value pairs that must match the encryption context in the
     /// [cryptographic
@@ -51,8 +66,18 @@ pub const GrantConstraints = struct {
     /// can include additional key-value pairs.
     encryption_context_subset: ?[]const aws.map.StringMapEntry = null,
 
+    /// The [
+    /// Amazon Resource Name
+    /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of an Amazon Web Services resource on behalf of which the request is made.
+    /// This is effectively the same as having the
+    /// [aws:SourceArn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn) global condition key in the grant. The SourceArn constraint ensures
+    /// that the principal can use the KMS key only when the request is made on
+    /// behalf of the specified resource.
+    source_arn: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .encryption_context_equals = "EncryptionContextEquals",
         .encryption_context_subset = "EncryptionContextSubset",
+        .source_arn = "SourceArn",
     };
 };

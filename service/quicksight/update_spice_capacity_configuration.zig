@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSPICECapacityConf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateSPICECapacityConfigurationOutput {
-    var result: UpdateSPICECapacityConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateSPICECapacityConfigurationOutput, body, allocator);
-    }
+    var result: UpdateSPICECapacityConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateSPICECapacityConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

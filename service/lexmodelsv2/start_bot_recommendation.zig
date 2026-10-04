@@ -159,10 +159,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartBotRecommendationI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartBotRecommendationOutput {
-    var result: StartBotRecommendationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartBotRecommendationOutput, body, allocator);
-    }
+    const result: StartBotRecommendationOutput = try aws.json.parseJsonObject(
+        StartBotRecommendationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

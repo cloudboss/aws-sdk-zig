@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateWaveInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateWaveOutput {
-    var result: UpdateWaveOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateWaveOutput, body, allocator);
-    }
+    const result: UpdateWaveOutput = try aws.json.parseJsonObject(
+        UpdateWaveOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

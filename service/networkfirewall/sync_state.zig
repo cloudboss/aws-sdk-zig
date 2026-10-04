@@ -2,6 +2,7 @@ const aws = @import("aws");
 
 const Attachment = @import("attachment.zig").Attachment;
 const PerObjectStatus = @import("per_object_status.zig").PerObjectStatus;
+const NatGatewayAttachment = @import("nat_gateway_attachment.zig").NatGatewayAttachment;
 
 /// The status of the firewall endpoint and firewall policy configuration for a
 /// single VPC subnet.
@@ -38,8 +39,14 @@ pub const SyncState = struct {
     /// rules in the endpoint, so it can properly filter network traffic.
     config: ?[]const aws.map.MapEntry(PerObjectStatus) = null,
 
+    /// The status of the NAT gateway attachments for a proxy mode firewall in the
+    /// Availability Zone. This reflects the attachment of the firewall to each NAT
+    /// gateway that proxies its traffic.
+    nat_gateway_attachments: ?[]const NatGatewayAttachment = null,
+
     pub const json_field_names = .{
         .attachment = "Attachment",
         .config = "Config",
+        .nat_gateway_attachments = "NatGatewayAttachments",
     };
 };

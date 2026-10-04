@@ -74,10 +74,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeCodeReviewInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeCodeReviewOutput {
-    var result: DescribeCodeReviewOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeCodeReviewOutput, body, allocator);
-    }
+    const result: DescribeCodeReviewOutput = try aws.json.parseJsonObject(
+        DescribeCodeReviewOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,5 +1,6 @@
 const aws = @import("aws");
 
+const FederatedTable = @import("federated_table.zig").FederatedTable;
 const Column = @import("column.zig").Column;
 const StorageDescriptor = @import("storage_descriptor.zig").StorageDescriptor;
 const TableIdentifier = @import("table_identifier.zig").TableIdentifier;
@@ -9,6 +10,12 @@ const ViewDefinitionInput = @import("view_definition_input.zig").ViewDefinitionI
 pub const TableInput = struct {
     /// A description of the table.
     description: ?[]const u8 = null,
+
+    /// A `FederatedTable` structure that references an entity outside the Glue Data
+    /// Catalog. Specify this field to create a federated table, which points to a
+    /// table in an external metastore instead of describing data managed in the
+    /// Glue Data Catalog.
+    federated_table: ?FederatedTable = null,
 
     /// The last time that the table was accessed.
     last_access_time: ?i64 = null,
@@ -81,6 +88,7 @@ pub const TableInput = struct {
 
     pub const json_field_names = .{
         .description = "Description",
+        .federated_table = "FederatedTable",
         .last_access_time = "LastAccessTime",
         .last_analyzed_time = "LastAnalyzedTime",
         .name = "Name",

@@ -169,8 +169,7 @@ pub const DataSourceConfiguration = struct {
 
     web_crawler_configuration: ?WebCrawlerConfiguration = null,
 
-    /// Provides the configuration information to connect to Amazon WorkDocs as your
-    /// data
+    /// Provides the configuration information to connect to WorkDocs as your data
     /// source.
     work_docs_configuration: ?WorkDocsConfiguration = null,
 

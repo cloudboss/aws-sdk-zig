@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBasePathMappingsInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBasePathMappingsOutput {
-    var result: GetBasePathMappingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBasePathMappingsOutput, body, allocator);
-    }
+    const result: GetBasePathMappingsOutput = try aws.json.parseJsonObject(
+        GetBasePathMappingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

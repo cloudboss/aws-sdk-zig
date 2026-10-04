@@ -7,7 +7,7 @@ const RuleOption = @import("rule_option.zig").RuleOption;
 /// destination, ports, direction, and rule options.
 /// For information about the Suricata `Rules` format, see
 /// [Rules
-/// Format](https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html).
+/// Format](https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html).
 pub const StatefulRule = struct {
     /// Defines what Network Firewall should do with the packets in a traffic flow
     /// when the flow

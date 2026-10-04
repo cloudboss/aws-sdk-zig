@@ -1,4 +1,5 @@
 const MessageType = @import("message_type.zig").MessageType;
+const MessagingLimits = @import("messaging_limits.zig").MessagingLimits;
 
 /// The information for all SenderIds in an Amazon Web Services account.
 pub const SenderIdInformation = struct {
@@ -14,6 +15,10 @@ pub const SenderIdInformation = struct {
     /// critical or time-sensitive and PROMOTIONAL for messages that aren't critical
     /// or time-sensitive.
     message_types: []const MessageType,
+
+    /// The messaging limits that apply to the sender ID, including the
+    /// per-capability send rates.
+    messaging_limits: ?MessagingLimits = null,
 
     /// The monthly leasing price, in US dollars.
     monthly_leasing_price: []const u8,
@@ -35,6 +40,7 @@ pub const SenderIdInformation = struct {
         .deletion_protection_enabled = "DeletionProtectionEnabled",
         .iso_country_code = "IsoCountryCode",
         .message_types = "MessageTypes",
+        .messaging_limits = "MessagingLimits",
         .monthly_leasing_price = "MonthlyLeasingPrice",
         .registered = "Registered",
         .registration_id = "RegistrationId",

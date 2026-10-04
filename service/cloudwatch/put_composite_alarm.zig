@@ -66,7 +66,8 @@ pub const PutCompositeAlarmInput = struct {
     /// `arn:aws:ssm:*region*:*account-id*:opsitem:*severity*
     /// `
     ///
-    /// **Start a Amazon Q Developer operational investigation**
+    /// **Start a Amazon Q Developer operational
+    /// investigation**
     ///
     /// `arn:aws:aiops:*region*:*account-id*:investigation-group:*investigation-group-id*
     /// `

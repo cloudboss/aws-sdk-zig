@@ -1,3 +1,4 @@
+const EventHoldDuration = @import("event_hold_duration.zig").EventHoldDuration;
 const ObjectLockRetentionMode = @import("object_lock_retention_mode.zig").ObjectLockRetentionMode;
 
 /// The container element for optionally specifying the default Object Lock
@@ -14,6 +15,12 @@ pub const DefaultRetention = struct {
     /// period. Must be used with
     /// `Mode`.
     days: ?i32 = null,
+
+    /// The default event hold duration to be applied to new objects placed in the
+    /// specified bucket. When
+    /// configured, new objects will automatically have an event hold enabled with
+    /// this duration.
+    default_event_hold: ?EventHoldDuration = null,
 
     /// The default Object Lock retention mode you want to apply to new objects
     /// placed in the specified

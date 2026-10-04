@@ -241,7 +241,7 @@ pub const CreateAssociationInput = struct {
     /// and multiple
     /// accounts.
     ///
-    /// The `IncludeChildOrganizationUnits` parameter is not supported by State
+    /// The `TargetLocationAlarmConfiguration` parameter is not supported by State
     /// Manager.
     target_locations: ?[]const TargetLocation = null,
 

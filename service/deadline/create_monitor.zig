@@ -22,8 +22,8 @@ pub const CreateMonitorInput = struct {
     /// authenticates monitor users.
     identity_center_instance_arn: []const u8,
 
-    /// The AWS Region where IAM Identity Center is enabled. Required when IAM
-    /// Identity Center is in a different Region than the monitor.
+    /// The Region where IAM Identity Center is enabled. Required when IAM Identity
+    /// Center is in a different Region than the monitor.
     identity_center_region: ?[]const u8 = null,
 
     /// The Amazon Resource Name of the IAM role that the monitor uses to connect to
@@ -147,10 +147,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMonitorInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateMonitorOutput {
-    var result: CreateMonitorOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateMonitorOutput, body, allocator);
-    }
+    const result: CreateMonitorOutput = try aws.json.parseJsonObject(
+        CreateMonitorOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

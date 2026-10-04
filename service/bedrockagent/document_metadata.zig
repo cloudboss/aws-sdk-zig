@@ -1,3 +1,4 @@
+const DocumentAccessControlEntry = @import("document_access_control_entry.zig").DocumentAccessControlEntry;
 const MetadataAttribute = @import("metadata_attribute.zig").MetadataAttribute;
 const CustomS3Location = @import("custom_s3_location.zig").CustomS3Location;
 const MetadataSourceType = @import("metadata_source_type.zig").MetadataSourceType;
@@ -6,6 +7,10 @@ const MetadataSourceType = @import("metadata_source_type.zig").MetadataSourceTyp
 /// into a knowledge base. Choose a `type` and include the field that
 /// corresponds to it.
 pub const DocumentMetadata = struct {
+    /// Access control list for the document. Used when metadata type is
+    /// IN_LINE_ATTRIBUTE.
+    access_control_list: ?[]const DocumentAccessControlEntry = null,
+
     /// An array of objects, each of which defines a metadata attribute to associate
     /// with the content to ingest. You define the attributes inline.
     inline_attributes: ?[]const MetadataAttribute = null,
@@ -18,6 +23,7 @@ pub const DocumentMetadata = struct {
     @"type": MetadataSourceType,
 
     pub const json_field_names = .{
+        .access_control_list = "accessControlList",
         .inline_attributes = "inlineAttributes",
         .s_3_location = "s3Location",
         .@"type" = "type",

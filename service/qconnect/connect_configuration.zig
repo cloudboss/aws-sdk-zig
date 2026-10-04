@@ -1,6 +1,6 @@
-/// The configuration information of the Amazon Connect data source.
+/// The configuration information of the Connect Customer data source.
 pub const ConnectConfiguration = struct {
-    /// The identifier of the Amazon Connect instance. You can find the instanceId
+    /// The identifier of the Connect Customer instance. You can find the instanceId
     /// in the ARN of the instance.
     instance_id: ?[]const u8 = null,
 

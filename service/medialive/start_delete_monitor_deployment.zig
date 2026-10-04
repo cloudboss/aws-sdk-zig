@@ -137,10 +137,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartDeleteMonitorDeplo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartDeleteMonitorDeploymentOutput {
-    var result: StartDeleteMonitorDeploymentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartDeleteMonitorDeploymentOutput, body, allocator);
-    }
+    const result: StartDeleteMonitorDeploymentOutput = try aws.json.parseJsonObject(
+        StartDeleteMonitorDeploymentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

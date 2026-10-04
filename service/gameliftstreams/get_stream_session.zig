@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DisplayConfiguration = @import("display_configuration.zig").DisplayConfiguration;
 const ExportFilesMetadata = @import("export_files_metadata.zig").ExportFilesMetadata;
 const PerformanceStatsConfiguration = @import("performance_stats_configuration.zig").PerformanceStatsConfiguration;
 const Protocol = @import("protocol.zig").Protocol;
@@ -94,6 +95,9 @@ pub const GetStreamSessionOutput = struct {
     /// any time.
     description: ?[]const u8 = null,
 
+    /// The configuration for the stream session's virtual monitor.
+    display_configuration: ?DisplayConfiguration = null,
+
     /// Provides details about the stream session's exported files.
     export_files_metadata: ?ExportFilesMetadata = null,
 
@@ -119,6 +123,11 @@ pub const GetStreamSessionOutput = struct {
 
     /// The data transfer protocol in use with the stream session.
     protocol: ?Protocol = null,
+
+    /// The ARN of the AWS Identity and Access Management (IAM) role that Amazon
+    /// GameLift Streams assumes on behalf of your application during the stream
+    /// session.
+    role_arn: ?[]const u8 = null,
 
     /// The maximum duration of a session. Amazon GameLift Streams will
     /// automatically terminate a session after this amount of time has elapsed,
@@ -215,12 +224,14 @@ pub const GetStreamSessionOutput = struct {
         .connection_timeout_seconds = "ConnectionTimeoutSeconds",
         .created_at = "CreatedAt",
         .description = "Description",
+        .display_configuration = "DisplayConfiguration",
         .export_files_metadata = "ExportFilesMetadata",
         .last_updated_at = "LastUpdatedAt",
         .location = "Location",
         .log_file_location_uri = "LogFileLocationUri",
         .performance_stats_configuration = "PerformanceStatsConfiguration",
         .protocol = "Protocol",
+        .role_arn = "RoleArn",
         .session_length_seconds = "SessionLengthSeconds",
         .signal_request = "SignalRequest",
         .signal_response = "SignalResponse",
@@ -283,10 +294,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStreamSessionInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetStreamSessionOutput {
-    var result: GetStreamSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetStreamSessionOutput, body, allocator);
-    }
+    const result: GetStreamSessionOutput = try aws.json.parseJsonObject(
+        GetStreamSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

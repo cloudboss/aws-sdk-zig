@@ -123,10 +123,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListQueuedMessagesInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListQueuedMessagesOutput {
-    var result: ListQueuedMessagesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListQueuedMessagesOutput, body, allocator);
-    }
+    const result: ListQueuedMessagesOutput = try aws.json.parseJsonObject(
+        ListQueuedMessagesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

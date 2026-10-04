@@ -4,9 +4,14 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DataQualityRuleRecommendationRunAdditionalRunOptions = @import("data_quality_rule_recommendation_run_additional_run_options.zig").DataQualityRuleRecommendationRunAdditionalRunOptions;
 const DataSource = @import("data_source.zig").DataSource;
+const RecommendationMode = @import("recommendation_mode.zig").RecommendationMode;
 
 pub const StartDataQualityRuleRecommendationRunInput = struct {
+    /// Additional run options you can specify for a recommendation run.
+    additional_run_options: ?DataQualityRuleRecommendationRunAdditionalRunOptions = null,
+
     /// Used for idempotency and is recommended to be set to a random ID (such as a
     /// UUID) to avoid creating or starting multiple instances of the same resource.
     client_token: ?[]const u8 = null,
@@ -24,7 +29,15 @@ pub const StartDataQualityRuleRecommendationRunInput = struct {
     /// The number of `G.1X` workers to be used in the run. The default is 5.
     number_of_workers: ?i32 = null,
 
-    /// An IAM role supplied to encrypt the results of the run.
+    /// The mode that Glue Data Quality uses to recommend rules.
+    ///
+    /// The default is `BASIC`.
+    recommendation_mode: ?RecommendationMode = null,
+
+    /// The IAM role that Glue assumes to access resources for the run.
+    ///
+    /// For more information, see [Configure IAM permissions for Glue Data
+    /// Quality](https://docs.aws.amazon.com/glue/latest/dg/data-quality-authorization.html).
     role: []const u8,
 
     /// The timeout for a run in minutes. This is the maximum time that a run can
@@ -33,11 +46,13 @@ pub const StartDataQualityRuleRecommendationRunInput = struct {
     timeout: ?i32 = null,
 
     pub const json_field_names = .{
+        .additional_run_options = "AdditionalRunOptions",
         .client_token = "ClientToken",
         .created_ruleset_name = "CreatedRulesetName",
         .data_quality_security_configuration = "DataQualitySecurityConfiguration",
         .data_source = "DataSource",
         .number_of_workers = "NumberOfWorkers",
+        .recommendation_mode = "RecommendationMode",
         .role = "Role",
         .timeout = "Timeout",
     };

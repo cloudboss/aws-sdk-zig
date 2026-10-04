@@ -99,7 +99,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExecuteOpenCypherExplai
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ExecuteOpenCypherExplainQueryOutput {
-    var result: ExecuteOpenCypherExplainQueryOutput = .{};
+    var result: ExecuteOpenCypherExplainQueryOutput = .{
+        .results = "",
+    };
+    errdefer {
+        allocator.free(result.results);
+    }
     result.results = try allocator.dupe(u8, body);
     _ = status;
     _ = headers;

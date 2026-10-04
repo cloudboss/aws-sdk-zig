@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPackagingConfigurat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListPackagingConfigurationsOutput {
-    var result: ListPackagingConfigurationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListPackagingConfigurationsOutput, body, allocator);
-    }
+    const result: ListPackagingConfigurationsOutput = try aws.json.parseJsonObject(
+        ListPackagingConfigurationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

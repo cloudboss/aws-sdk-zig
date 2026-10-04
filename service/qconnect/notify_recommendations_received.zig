@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: NotifyRecommendationsRe
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !NotifyRecommendationsReceivedOutput {
-    var result: NotifyRecommendationsReceivedOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(NotifyRecommendationsReceivedOutput, body, allocator);
-    }
+    const result: NotifyRecommendationsReceivedOutput = try aws.json.parseJsonObject(
+        NotifyRecommendationsReceivedOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

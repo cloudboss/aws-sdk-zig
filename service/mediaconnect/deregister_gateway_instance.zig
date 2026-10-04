@@ -94,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeregisterGatewayInstan
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeregisterGatewayInstanceOutput {
-    var result: DeregisterGatewayInstanceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeregisterGatewayInstanceOutput, body, allocator);
-    }
+    const result: DeregisterGatewayInstanceOutput = try aws.json.parseJsonObject(
+        DeregisterGatewayInstanceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

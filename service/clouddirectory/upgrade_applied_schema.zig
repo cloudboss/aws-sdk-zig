@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpgradeAppliedSchemaInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpgradeAppliedSchemaOutput {
-    var result: UpgradeAppliedSchemaOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpgradeAppliedSchemaOutput, body, allocator);
-    }
+    const result: UpgradeAppliedSchemaOutput = try aws.json.parseJsonObject(
+        UpgradeAppliedSchemaOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

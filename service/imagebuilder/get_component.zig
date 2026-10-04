@@ -8,9 +8,12 @@ const Component = @import("component.zig").Component;
 const LatestVersionReferences = @import("latest_version_references.zig").LatestVersionReferences;
 
 pub const GetComponentInput = struct {
-    /// The Amazon Resource Name (ARN) of the component that you want to get. Regex
-    /// requires
-    /// the suffix `/\d+$`.
+    /// The Amazon Resource Name (ARN) of the component that you want to get. You
+    /// can specify a build
+    /// version ARN, or a component version ARN. The version can use the
+    /// `x` wildcard in trailing positions, for example
+    /// `1.0.x` or `1.x.x`. Version ARNs resolve to the
+    /// latest available matching component build version.
     component_build_version_arn: []const u8,
 
     pub const json_field_names = .{
@@ -22,7 +25,10 @@ pub const GetComponentOutput = struct {
     /// The component object specified in the request.
     component: ?Component = null,
 
-    /// The resource ARNs with different wildcard variations of semantic versioning.
+    /// A set of wildcard version ARNs that always reference the latest
+    /// version of the resource. ARNs are included for the latest version overall,
+    /// and for the latest
+    /// versions within the same major, minor, and patch levels.
     latest_version_references: ?LatestVersionReferences = null,
 
     /// The request ID that uniquely identifies this request.
@@ -90,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetComponentInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetComponentOutput {
-    var result: GetComponentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetComponentOutput, body, allocator);
-    }
+    const result: GetComponentOutput = try aws.json.parseJsonObject(
+        GetComponentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

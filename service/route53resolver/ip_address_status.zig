@@ -3,6 +3,7 @@ const std = @import("std");
 pub const IpAddressStatus = enum {
     creating,
     failed_creation,
+    failed_creation_insufficient_ec2_capacity_in_outpost,
     attaching,
     attached,
     remap_detaching,
@@ -18,6 +19,7 @@ pub const IpAddressStatus = enum {
     pub const json_field_names = .{
         .creating = "CREATING",
         .failed_creation = "FAILED_CREATION",
+        .failed_creation_insufficient_ec2_capacity_in_outpost = "FAILED_CREATION_INSUFFICIENT_EC2_CAPACITY_IN_OUTPOST",
         .attaching = "ATTACHING",
         .attached = "ATTACHED",
         .remap_detaching = "REMAP_DETACHING",
@@ -35,6 +37,7 @@ pub const IpAddressStatus = enum {
         return switch (self) {
             .creating => "CREATING",
             .failed_creation => "FAILED_CREATION",
+            .failed_creation_insufficient_ec2_capacity_in_outpost => "FAILED_CREATION_INSUFFICIENT_EC2_CAPACITY_IN_OUTPOST",
             .attaching => "ATTACHING",
             .attached => "ATTACHED",
             .remap_detaching => "REMAP_DETACHING",

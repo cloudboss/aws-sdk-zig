@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ArchivingOptions = @import("archiving_options.zig").ArchivingOptions;
 const DeliveryOptions = @import("delivery_options.zig").DeliveryOptions;
+const MessageSecurityOptions = @import("message_security_options.zig").MessageSecurityOptions;
 const ReputationOptions = @import("reputation_options.zig").ReputationOptions;
 const SendingOptions = @import("sending_options.zig").SendingOptions;
 const SuppressionOptions = @import("suppression_options.zig").SuppressionOptions;
@@ -30,6 +31,11 @@ pub const CreateConfigurationSetInput = struct {
     /// using the configuration set.
     delivery_options: ?DeliveryOptions = null,
 
+    /// The message security options to apply to the configuration set, such as the
+    /// signing
+    /// scheme used for messages that you send with the configuration set.
+    message_security_options: ?MessageSecurityOptions = null,
+
     /// An object that defines whether or not Amazon SES collects reputation metrics
     /// for the emails
     /// that you send that use the configuration set.
@@ -40,6 +46,12 @@ pub const CreateConfigurationSetInput = struct {
     /// configuration set.
     sending_options: ?SendingOptions = null,
 
+    /// An object that contains information about the suppression list preferences
+    /// for the
+    /// configuration set. You can optionally include a `SuppressionScope` to
+    /// override the
+    /// tenant or account suppression scope for emails sent using this configuration
+    /// set.
     suppression_options: ?SuppressionOptions = null,
 
     /// An array of objects that define the tags (keys and values) to associate with
@@ -60,6 +72,7 @@ pub const CreateConfigurationSetInput = struct {
         .archiving_options = "ArchivingOptions",
         .configuration_set_name = "ConfigurationSetName",
         .delivery_options = "DeliveryOptions",
+        .message_security_options = "MessageSecurityOptions",
         .reputation_options = "ReputationOptions",
         .sending_options = "SendingOptions",
         .suppression_options = "SuppressionOptions",
@@ -121,6 +134,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateConfigurationSetI
     if (input.delivery_options) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"DeliveryOptions\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.message_security_options) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"MessageSecurityOptions\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

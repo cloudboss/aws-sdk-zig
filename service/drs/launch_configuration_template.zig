@@ -2,6 +2,7 @@ const aws = @import("aws");
 
 const LaunchDisposition = @import("launch_disposition.zig").LaunchDisposition;
 const Licensing = @import("licensing.zig").Licensing;
+const RecoveryMode = @import("recovery_mode.zig").RecoveryMode;
 const TargetInstanceTypeRightSizingMethod = @import("target_instance_type_right_sizing_method.zig").TargetInstanceTypeRightSizingMethod;
 
 /// Account level Launch Configuration Template.
@@ -35,6 +36,9 @@ pub const LaunchConfigurationTemplate = struct {
     /// Post-launch actions activated.
     post_launch_enabled: ?bool = null,
 
+    /// Recovery mode.
+    recovery_mode: ?RecoveryMode = null,
+
     /// Tags of the Launch Configuration Template.
     tags: ?[]const aws.map.StringMapEntry = null,
 
@@ -51,6 +55,7 @@ pub const LaunchConfigurationTemplate = struct {
         .launch_into_source_instance = "launchIntoSourceInstance",
         .licensing = "licensing",
         .post_launch_enabled = "postLaunchEnabled",
+        .recovery_mode = "recoveryMode",
         .tags = "tags",
         .target_instance_type_right_sizing_method = "targetInstanceTypeRightSizingMethod",
     };

@@ -162,10 +162,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAudienceModelInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAudienceModelOutput {
-    var result: CreateAudienceModelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAudienceModelOutput, body, allocator);
-    }
+    const result: CreateAudienceModelOutput = try aws.json.parseJsonObject(
+        CreateAudienceModelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

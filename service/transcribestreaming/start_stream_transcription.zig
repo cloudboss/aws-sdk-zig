@@ -10,6 +10,7 @@ const ContentRedactionType = @import("content_redaction_type.zig").ContentRedact
 const LanguageCode = @import("language_code.zig").LanguageCode;
 const MediaEncoding = @import("media_encoding.zig").MediaEncoding;
 const PartialResultsStability = @import("partial_results_stability.zig").PartialResultsStability;
+const TranscriptFormat = @import("transcript_format.zig").TranscriptFormat;
 const VocabularyFilterMethod = @import("vocabulary_filter_method.zig").VocabularyFilterMethod;
 const TranscriptResultStream = @import("transcript_result_stream.zig").TranscriptResultStream;
 
@@ -263,6 +264,20 @@ pub const StartStreamTranscriptionInput = struct {
     /// (diarization)](https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html).
     show_speaker_label: ?bool = null,
 
+    /// Specify how numbers, dates, and other alphanumeric entities are rendered in
+    /// your
+    /// transcription results.
+    ///
+    /// * `WRITTEN` renders these entities in their standard written form
+    /// (for example, `$50`, `10:30 AM`, and `101`).
+    ///
+    /// * `SPOKEN` renders these entities as words, exactly as they were
+    /// spoken (for example, `fifty dollars`, `ten thirty a m`, and
+    /// `one oh one`).
+    ///
+    /// If you don't specify a value, Amazon Transcribe uses `WRITTEN` by default.
+    transcript_format: ?TranscriptFormat = null,
+
     /// Specify how you want your vocabulary filter applied to your transcript.
     ///
     /// To replace words with `***`, choose `mask`.
@@ -364,6 +379,7 @@ pub const StartStreamTranscriptionInput = struct {
         .session_id = "SessionId",
         .session_resume_window = "SessionResumeWindow",
         .show_speaker_label = "ShowSpeakerLabel",
+        .transcript_format = "TranscriptFormat",
         .vocabulary_filter_method = "VocabularyFilterMethod",
         .vocabulary_filter_name = "VocabularyFilterName",
         .vocabulary_filter_names = "VocabularyFilterNames",
@@ -435,6 +451,9 @@ pub const StartStreamTranscriptionOutput = struct {
     /// Shows whether speaker partitioning was enabled for your transcription.
     show_speaker_label: ?bool = null,
 
+    /// Provides the transcript format that you specified in your request.
+    transcript_format: ?TranscriptFormat = null,
+
     /// Provides detailed information about your streaming session.
     transcript_result_stream: ?TranscriptResultStream = null,
 
@@ -478,6 +497,7 @@ pub const StartStreamTranscriptionOutput = struct {
         .session_id = "SessionId",
         .session_resume_window = "SessionResumeWindow",
         .show_speaker_label = "ShowSpeakerLabel",
+        .transcript_format = "TranscriptFormat",
         .transcript_result_stream = "TranscriptResultStream",
         .vocabulary_filter_method = "VocabularyFilterMethod",
         .vocabulary_filter_name = "VocabularyFilterName",

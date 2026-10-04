@@ -140,10 +140,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetServiceGraphInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetServiceGraphOutput {
-    var result: GetServiceGraphOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetServiceGraphOutput, body, allocator);
-    }
+    const result: GetServiceGraphOutput = try aws.json.parseJsonObject(
+        GetServiceGraphOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

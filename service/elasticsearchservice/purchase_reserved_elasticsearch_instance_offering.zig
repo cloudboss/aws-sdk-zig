@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PurchaseReservedElastic
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PurchaseReservedElasticsearchInstanceOfferingOutput {
-    var result: PurchaseReservedElasticsearchInstanceOfferingOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PurchaseReservedElasticsearchInstanceOfferingOutput, body, allocator);
-    }
+    const result: PurchaseReservedElasticsearchInstanceOfferingOutput = try aws.json.parseJsonObject(
+        PurchaseReservedElasticsearchInstanceOfferingOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

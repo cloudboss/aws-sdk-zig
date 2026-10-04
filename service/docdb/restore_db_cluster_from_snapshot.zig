@@ -15,6 +15,10 @@ pub const RestoreDBClusterFromSnapshotInput = struct {
     /// cluster can be created in.
     availability_zones: ?[]const []const u8 = null,
 
+    /// Specifies whether to copy all tags from the restored DB cluster to snapshots
+    /// of the restored DB cluster. The default is not to copy them.
+    copy_tags_to_snapshot: ?bool = null,
+
     /// The name of the cluster to create from the snapshot or cluster snapshot.
     /// This
     /// parameter isn't case sensitive.
@@ -102,7 +106,7 @@ pub const RestoreDBClusterFromSnapshotInput = struct {
     /// IPv6 protocols (`DUAL`).
     ///
     /// For more information, see [DocumentDB clusters in a
-    /// VPC](https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html) in the Amazon DocumentDB Developer Guide.
+    /// VPC](https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html) in the Amazon DocumentDB Developer Guide.
     ///
     /// Valid Values: `IPV4` | `DUAL`
     network_type: ?[]const u8 = null,
@@ -193,6 +197,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBClusterFromSna
             try body_buf.appendSlice(allocator, field_prefix);
             try aws.url.appendUrlEncoded(allocator, &body_buf, item);
         }
+    }
+    if (input.copy_tags_to_snapshot) |v| {
+        try body_buf.appendSlice(allocator, "&CopyTagsToSnapshot=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     try body_buf.appendSlice(allocator, "&DBClusterIdentifier=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.db_cluster_identifier);

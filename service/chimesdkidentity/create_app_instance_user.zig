@@ -137,10 +137,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAppInstanceUserIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAppInstanceUserOutput {
-    var result: CreateAppInstanceUserOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAppInstanceUserOutput, body, allocator);
-    }
+    const result: CreateAppInstanceUserOutput = try aws.json.parseJsonObject(
+        CreateAppInstanceUserOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

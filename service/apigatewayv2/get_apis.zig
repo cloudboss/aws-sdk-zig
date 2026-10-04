@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetApisInput, config: *
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetApisOutput {
-    var result: GetApisOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetApisOutput, body, allocator);
-    }
+    const result: GetApisOutput = try aws.json.parseJsonObject(
+        GetApisOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

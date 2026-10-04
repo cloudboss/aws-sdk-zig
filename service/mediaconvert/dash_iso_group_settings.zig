@@ -6,6 +6,7 @@ const DashIsoEncryptionSettings = @import("dash_iso_encryption_settings.zig").Da
 const DashIsoHbbtvCompliance = @import("dash_iso_hbbtv_compliance.zig").DashIsoHbbtvCompliance;
 const DashIsoImageBasedTrickPlay = @import("dash_iso_image_based_trick_play.zig").DashIsoImageBasedTrickPlay;
 const DashIsoImageBasedTrickPlaySettings = @import("dash_iso_image_based_trick_play_settings.zig").DashIsoImageBasedTrickPlaySettings;
+const DashIsoImageBasedTrickPlayVariant = @import("dash_iso_image_based_trick_play_variant.zig").DashIsoImageBasedTrickPlayVariant;
 const DashIsoMpdManifestBandwidthType = @import("dash_iso_mpd_manifest_bandwidth_type.zig").DashIsoMpdManifestBandwidthType;
 const DashIsoMpdProfile = @import("dash_iso_mpd_profile.zig").DashIsoMpdProfile;
 const DashIsoPtsOffsetHandlingForBFrames = @import("dash_iso_pts_offset_handling_for_b_frames.zig").DashIsoPtsOffsetHandlingForBFrames;
@@ -90,16 +91,25 @@ pub const DashIsoGroupSettings = struct {
     /// Specify whether MediaConvert generates images for trick play. Keep the
     /// default value, None, to not generate any images. Choose Thumbnail to
     /// generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled
-    /// thumbnails and full-resolution images of single frames. MediaConvert adds an
-    /// entry in the .mpd manifest for each set of images that you generate. A
-    /// common application for these images is Roku trick mode. The thumbnails and
-    /// full-frame images that MediaConvert creates with this feature are compatible
-    /// with this Roku specification:
+    /// thumbnails and full-resolution images of single frames. Choose Advanced to
+    /// customize thumbnail and tile settings for a single trick play variant.
+    /// Choose Variants to specify multiple trick play variants, each with its own
+    /// thumbnail and tile settings. MediaConvert adds an entry in the .mpd manifest
+    /// for each set of images that you generate. A common application for these
+    /// images is Roku trick mode. The thumbnails and full-frame images that
+    /// MediaConvert creates with this feature are compatible with this Roku
+    /// specification:
     /// https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
     image_based_trick_play: ?DashIsoImageBasedTrickPlay = null,
 
     /// Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
     image_based_trick_play_settings: ?DashIsoImageBasedTrickPlaySettings = null,
+
+    /// Specify multiple image-based trick play variants. Each entry creates a
+    /// separate set of JPEG tile images with its own resolution, tile layout, and
+    /// cadence settings. Set imageBasedTrickPlay to VARIANTS when using this
+    /// setting.
+    image_based_trick_play_variants: ?[]const DashIsoImageBasedTrickPlayVariant = null,
 
     /// Minimum time of initially buffered media that is needed to ensure smooth
     /// playout.
@@ -207,6 +217,7 @@ pub const DashIsoGroupSettings = struct {
         .hbbtv_compliance = "HbbtvCompliance",
         .image_based_trick_play = "ImageBasedTrickPlay",
         .image_based_trick_play_settings = "ImageBasedTrickPlaySettings",
+        .image_based_trick_play_variants = "ImageBasedTrickPlayVariants",
         .min_buffer_time = "MinBufferTime",
         .min_final_segment_length = "MinFinalSegmentLength",
         .mpd_manifest_bandwidth_type = "MpdManifestBandwidthType",

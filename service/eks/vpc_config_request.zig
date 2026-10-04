@@ -1,6 +1,27 @@
+const ControlPlaneEgressModeType = @import("control_plane_egress_mode_type.zig").ControlPlaneEgressModeType;
+
 /// An object representing the VPC configuration to use for an Amazon EKS
 /// cluster.
 pub const VpcConfigRequest = struct {
+    /// Specifies the control plane egress routing mode for the cluster. If the
+    /// cluster is set
+    /// to `AWS_MANAGED`, Amazon EKS manages the egress path from the control plane
+    /// and you don't need to configure NAT gateways or other routing infrastructure
+    /// for control
+    /// plane traffic. If the cluster is set to `CUSTOMER_ROUTED`, you manage the
+    /// egress path from the control plane in your VPC subnets. You are responsible
+    /// for ensuring
+    /// that the control plane can reach required endpoints such as webhook servers
+    /// and OIDC
+    /// providers. The default value is `AWS_MANAGED`. Once set to
+    /// `CUSTOMER_ROUTED`, this setting cannot be changed back to
+    /// `AWS_MANAGED` on the same cluster.
+    ///
+    /// [Learn more about control plane
+    /// egress routing in the *Amazon EKS User
+    /// Guide*.](https://docs.aws.amazon.com/eks/latest/userguide/control-plane-egress.html)
+    control_plane_egress_mode: ?ControlPlaneEgressModeType = null,
+
     /// Set this value to `true` to enable private access for your cluster's
     /// Kubernetes
     /// API server endpoint. If you enable private access, Kubernetes API requests
@@ -77,6 +98,7 @@ pub const VpcConfigRequest = struct {
     subnet_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
+        .control_plane_egress_mode = "controlPlaneEgressMode",
         .endpoint_private_access = "endpointPrivateAccess",
         .endpoint_public_access = "endpointPublicAccess",
         .public_access_cidrs = "publicAccessCidrs",

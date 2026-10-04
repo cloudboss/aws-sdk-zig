@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const MembershipProtectedJobResultConfiguration = @import("membership_protected_job_result_configuration.zig").MembershipProtectedJobResultConfiguration;
 const MembershipProtectedQueryResultConfiguration = @import("membership_protected_query_result_configuration.zig").MembershipProtectedQueryResultConfiguration;
 const MembershipJobLogStatus = @import("membership_job_log_status.zig").MembershipJobLogStatus;
+const UpdateMembershipPaymentConfiguration = @import("update_membership_payment_configuration.zig").UpdateMembershipPaymentConfiguration;
 const MembershipQueryLogStatus = @import("membership_query_log_status.zig").MembershipQueryLogStatus;
 const Membership = @import("membership.zig").Membership;
 
@@ -29,6 +30,9 @@ pub const UpdateMembershipInput = struct {
     /// The unique identifier of the membership.
     membership_identifier: []const u8,
 
+    /// The payment configuration to update for the membership.
+    membership_payment_configuration: ?UpdateMembershipPaymentConfiguration = null,
+
     /// An indicator as to whether query logging has been enabled or disabled for
     /// the membership.
     ///
@@ -42,6 +46,7 @@ pub const UpdateMembershipInput = struct {
         .default_result_configuration = "defaultResultConfiguration",
         .job_log_status = "jobLogStatus",
         .membership_identifier = "membershipIdentifier",
+        .membership_payment_configuration = "membershipPaymentConfiguration",
         .query_log_status = "queryLogStatus",
     };
 };
@@ -111,6 +116,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateMembershipInput, 
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.membership_payment_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"membershipPaymentConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.query_log_status) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"queryLogStatus\":");
@@ -133,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateMembershipInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateMembershipOutput {
-    var result: UpdateMembershipOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateMembershipOutput, body, allocator);
-    }
+    const result: UpdateMembershipOutput = try aws.json.parseJsonObject(
+        UpdateMembershipOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

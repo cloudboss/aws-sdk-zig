@@ -102,6 +102,8 @@ pub const ServiceError = struct {
         number_of_nodes_per_cluster_limit_exceeded_fault: NumberOfNodesPerClusterLimitExceededFault,
         number_of_nodes_quota_exceeded_fault: NumberOfNodesQuotaExceededFault,
         partner_not_found_fault: PartnerNotFoundFault,
+        qev_2_idc_application_already_exists_fault: Qev2IdcApplicationAlreadyExistsFault,
+        qev_2_idc_application_not_exists_fault: Qev2IdcApplicationNotExistsFault,
         redshift_idc_application_already_exists_fault: RedshiftIdcApplicationAlreadyExistsFault,
         redshift_idc_application_not_exists_fault: RedshiftIdcApplicationNotExistsFault,
         redshift_idc_application_quota_exceeded_fault: RedshiftIdcApplicationQuotaExceededFault,
@@ -249,6 +251,8 @@ pub const ServiceError = struct {
                 .number_of_nodes_per_cluster_limit_exceeded_fault => "NumberOfNodesPerClusterLimitExceededFault",
                 .number_of_nodes_quota_exceeded_fault => "NumberOfNodesQuotaExceededFault",
                 .partner_not_found_fault => "PartnerNotFoundFault",
+                .qev_2_idc_application_already_exists_fault => "Qev2IdcApplicationAlreadyExistsFault",
+                .qev_2_idc_application_not_exists_fault => "Qev2IdcApplicationNotExistsFault",
                 .redshift_idc_application_already_exists_fault => "RedshiftIdcApplicationAlreadyExistsFault",
                 .redshift_idc_application_not_exists_fault => "RedshiftIdcApplicationNotExistsFault",
                 .redshift_idc_application_quota_exceeded_fault => "RedshiftIdcApplicationQuotaExceededFault",
@@ -398,6 +402,8 @@ pub const ServiceError = struct {
                 .number_of_nodes_per_cluster_limit_exceeded_fault => |e| e.message,
                 .number_of_nodes_quota_exceeded_fault => |e| e.message,
                 .partner_not_found_fault => |e| e.message,
+                .qev_2_idc_application_already_exists_fault => |e| e.message,
+                .qev_2_idc_application_not_exists_fault => |e| e.message,
                 .redshift_idc_application_already_exists_fault => |e| e.message,
                 .redshift_idc_application_not_exists_fault => |e| e.message,
                 .redshift_idc_application_quota_exceeded_fault => |e| e.message,
@@ -547,6 +553,8 @@ pub const ServiceError = struct {
                 .number_of_nodes_per_cluster_limit_exceeded_fault => 400,
                 .number_of_nodes_quota_exceeded_fault => 400,
                 .partner_not_found_fault => 404,
+                .qev_2_idc_application_already_exists_fault => 400,
+                .qev_2_idc_application_not_exists_fault => 404,
                 .redshift_idc_application_already_exists_fault => 400,
                 .redshift_idc_application_not_exists_fault => 404,
                 .redshift_idc_application_quota_exceeded_fault => 400,
@@ -696,6 +704,8 @@ pub const ServiceError = struct {
                 .number_of_nodes_per_cluster_limit_exceeded_fault => |e| e.request_id,
                 .number_of_nodes_quota_exceeded_fault => |e| e.request_id,
                 .partner_not_found_fault => |e| e.request_id,
+                .qev_2_idc_application_already_exists_fault => |e| e.request_id,
+                .qev_2_idc_application_not_exists_fault => |e| e.request_id,
                 .redshift_idc_application_already_exists_fault => |e| e.request_id,
                 .redshift_idc_application_not_exists_fault => |e| e.request_id,
                 .redshift_idc_application_quota_exceeded_fault => |e| e.request_id,
@@ -1245,6 +1255,16 @@ pub const NumberOfNodesQuotaExceededFault = struct {
 };
 
 pub const PartnerNotFoundFault = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const Qev2IdcApplicationAlreadyExistsFault = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const Qev2IdcApplicationNotExistsFault = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -2074,6 +2094,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     }
     if (std.mem.eql(u8, error_code, "PartnerNotFoundFault")) {
         return .{ .arena = arena, .kind = .{ .partner_not_found_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "Qev2IdcApplicationAlreadyExistsFault")) {
+        return .{ .arena = arena, .kind = .{ .qev_2_idc_application_already_exists_fault = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "Qev2IdcApplicationNotExistsFault")) {
+        return .{ .arena = arena, .kind = .{ .qev_2_idc_application_not_exists_fault = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

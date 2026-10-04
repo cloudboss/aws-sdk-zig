@@ -147,10 +147,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicatorInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateReplicatorOutput {
-    var result: CreateReplicatorOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateReplicatorOutput, body, allocator);
-    }
+    const result: CreateReplicatorOutput = try aws.json.parseJsonObject(
+        CreateReplicatorOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

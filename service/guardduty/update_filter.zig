@@ -41,7 +41,6 @@ pub const UpdateFilterInput = struct {
     /// * createdAt
     ///
     /// Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000
-    /// * description
     /// * id
     /// * partition
     /// * region
@@ -230,8 +229,6 @@ pub const UpdateFilterInput = struct {
     /// * resource.rdsDbInstanceDetails.engineVersion
     /// * resource.rdsDbInstanceDetails.iamDatabaseAuthenticationEnabled
     /// * resource.rdsDbInstanceDetails.publiclyAccessible
-    /// * resource.rdsDbInstanceDetails.tags.key
-    /// * resource.rdsDbInstanceDetails.tags.value
     /// * resource.rdsDbInstanceDetails.vpcId
     /// * resource.rdsDbInstanceDetails.vpcSecurityGroups.status
     /// * resource.rdsDbInstanceDetails.vpcSecurityGroups.vpcSecurityGroupId
@@ -294,7 +291,6 @@ pub const UpdateFilterInput = struct {
     /// * resource.s3BucketDetails.type
     /// * schemaVersion
     /// * service.action.actionType
-    /// * service.action.awsApiCallAction.affectedResources
     /// * service.action.awsApiCallAction.api
     /// * service.action.awsApiCallAction.callerType
     /// * service.action.awsApiCallAction.domainDetails.domain
@@ -451,8 +447,6 @@ pub const UpdateFilterInput = struct {
     /// * service.additionalInfo.vpcOwnerAccountId
     /// * service.archived
     /// * service.count
-    /// * service.detection.anomaly.profiles
-    /// * service.detection.anomaly.unusual.behavior
     /// * service.detection.sequence.actors.id
     /// * service.detection.sequence.actors.process.name
     /// * service.detection.sequence.actors.process.path
@@ -797,7 +791,6 @@ pub const UpdateFilterInput = struct {
     ///
     /// For more information, see [Findings severity
     /// levels](https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_findings-severity.html) in the *Amazon GuardDuty User Guide*.
-    /// * title
     /// * type
     /// * updatedAt
     ///
@@ -908,10 +901,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateFilterInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateFilterOutput {
-    var result: UpdateFilterOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateFilterOutput, body, allocator);
-    }
+    const result: UpdateFilterOutput = try aws.json.parseJsonObject(
+        UpdateFilterOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

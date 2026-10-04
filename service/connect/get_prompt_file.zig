@@ -6,7 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const GetPromptFileInput = struct {
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPromptFileInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPromptFileOutput {
-    var result: GetPromptFileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPromptFileOutput, body, allocator);
-    }
+    const result: GetPromptFileOutput = try aws.json.parseJsonObject(
+        GetPromptFileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeAccessPolicyInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeAccessPolicyOutput {
-    var result: DescribeAccessPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeAccessPolicyOutput, body, allocator);
-    }
+    const result: DescribeAccessPolicyOutput = try aws.json.parseJsonObject(
+        DescribeAccessPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

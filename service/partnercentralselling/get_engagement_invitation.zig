@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const EnrichmentContext = @import("enrichment_context.zig").EnrichmentContext;
 const EngagementMemberSummary = @import("engagement_member_summary.zig").EngagementMemberSummary;
 const Payload = @import("payload.zig").Payload;
 const EngagementInvitationPayloadType = @import("engagement_invitation_payload_type.zig").EngagementInvitationPayloadType;
@@ -44,6 +45,11 @@ pub const GetEngagementInvitationOutput = struct {
     /// The title of the engagement invitation, summarizing the purpose or
     /// objectives of the opportunity shared by AWS.
     engagement_title: ?[]const u8 = null,
+
+    /// The enrichment data for the engagement associated with this invitation. You
+    /// can view propensity scores, program eligibility, and lead readiness
+    /// assessments before taking action on the invitation.
+    enrichment_context: ?EnrichmentContext = null,
 
     /// A list of active members currently part of the Engagement. This array
     /// contains a maximum of 10 members, each represented by an object with the
@@ -100,6 +106,7 @@ pub const GetEngagementInvitationOutput = struct {
         .engagement_description = "EngagementDescription",
         .engagement_id = "EngagementId",
         .engagement_title = "EngagementTitle",
+        .enrichment_context = "EnrichmentContext",
         .existing_members = "ExistingMembers",
         .expiration_date = "ExpirationDate",
         .id = "Id",

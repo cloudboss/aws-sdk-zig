@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetQueryResultsWorkload
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetQueryResultsWorkloadInsightsTopContributorsOutput {
-    var result: GetQueryResultsWorkloadInsightsTopContributorsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetQueryResultsWorkloadInsightsTopContributorsOutput, body, allocator);
-    }
+    const result: GetQueryResultsWorkloadInsightsTopContributorsOutput = try aws.json.parseJsonObject(
+        GetQueryResultsWorkloadInsightsTopContributorsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

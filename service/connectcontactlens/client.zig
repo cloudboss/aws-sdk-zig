@@ -32,7 +32,11 @@ pub const Client = struct {
         _ = self;
     }
 
-    /// Provides a list of analysis segments for a real-time analysis session.
+    /// Provides a list of analysis segments for a real-time analysis session for
+    /// voice.
+    ///
+    /// Voice data is retained for 24 hours. You must invoke this API during that
+    /// time.
     pub fn listRealtimeContactAnalysisSegments(self: *Self, allocator: std.mem.Allocator, input: list_realtime_contact_analysis_segments.ListRealtimeContactAnalysisSegmentsInput, options: CallOptions) !list_realtime_contact_analysis_segments.ListRealtimeContactAnalysisSegmentsOutput {
         return list_realtime_contact_analysis_segments.execute(self, allocator, input, options);
     }

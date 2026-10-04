@@ -77,10 +77,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAgentConfigurationIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAgentConfigurationOutput {
-    var result: GetAgentConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAgentConfigurationOutput, body, allocator);
-    }
+    const result: GetAgentConfigurationOutput = try aws.json.parseJsonObject(
+        GetAgentConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

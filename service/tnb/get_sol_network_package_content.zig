@@ -84,6 +84,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSolNetworkPackageCon
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSolNetworkPackageContentOutput {
     var result: GetSolNetworkPackageContentOutput = .{};
+    errdefer {
+        if (result.nsd_content) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.nsd_content = try allocator.dupe(u8, body);
     }

@@ -117,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: LookupPolicyInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !LookupPolicyOutput {
-    var result: LookupPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(LookupPolicyOutput, body, allocator);
-    }
+    const result: LookupPolicyOutput = try aws.json.parseJsonObject(
+        LookupPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

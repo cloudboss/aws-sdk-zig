@@ -136,10 +136,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAgentMemoryInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAgentMemoryOutput {
-    var result: GetAgentMemoryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAgentMemoryOutput, body, allocator);
-    }
+    const result: GetAgentMemoryOutput = try aws.json.parseJsonObject(
+        GetAgentMemoryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

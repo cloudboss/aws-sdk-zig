@@ -1,6 +1,7 @@
 const ConfigRuleState = @import("config_rule_state.zig").ConfigRuleState;
 const EvaluationModeConfiguration = @import("evaluation_mode_configuration.zig").EvaluationModeConfiguration;
 const MaximumExecutionFrequency = @import("maximum_execution_frequency.zig").MaximumExecutionFrequency;
+const RuleEvaluationVisibility = @import("rule_evaluation_visibility.zig").RuleEvaluationVisibility;
 const Scope = @import("scope.zig").Scope;
 const Source = @import("source.zig").Source;
 
@@ -108,6 +109,12 @@ pub const ConfigRule = struct {
     /// parameter.
     maximum_execution_frequency: ?MaximumExecutionFrequency = null,
 
+    /// Indicates whether you can get Evaluations for the Config rule. You can get
+    /// Evaluations for the Amazon Web Services Config rule if this value is
+    /// `EXTERNAL`. You cannot get Evaluations for the Amazon Web Services Config
+    /// rule if this value is `INTERNAL`.
+    rule_evaluation_visibility: ?RuleEvaluationVisibility = null,
+
     /// Defines which resources can trigger an evaluation for the rule.
     /// The scope can include one or more resource types, a combination of
     /// one resource type and one resource ID, or a combination of a tag key
@@ -135,6 +142,7 @@ pub const ConfigRule = struct {
         .evaluation_modes = "EvaluationModes",
         .input_parameters = "InputParameters",
         .maximum_execution_frequency = "MaximumExecutionFrequency",
+        .rule_evaluation_visibility = "RuleEvaluationVisibility",
         .scope = "Scope",
         .source = "Source",
     };

@@ -15,6 +15,7 @@ const list_plans = @import("list_plans.zig");
 const list_plans_in_region = @import("list_plans_in_region.zig");
 const list_route_53_health_checks = @import("list_route_53_health_checks.zig");
 const list_route_53_health_checks_in_region = @import("list_route_53_health_checks_in_region.zig");
+const list_service_quota_warnings = @import("list_service_quota_warnings.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const start_plan_execution = @import("start_plan_execution.zig");
 const tag_resource = @import("tag_resource.zig");
@@ -152,6 +153,21 @@ pub const Client = struct {
         return list_route_53_health_checks_in_region.execute(self, allocator, input, options);
     }
 
+    /// Lists the service quota warnings for the plans that you can access. Region
+    /// switch creates a warning when the applied quota value in one Region of a
+    /// plan is lower than the value required for the matching resource in another
+    /// Region or account in the plan.
+    ///
+    /// Returns the warnings for the plans that you own and for plans that are
+    /// shared with your account through AWS Resource Access Manager (AWS RAM). To
+    /// return warnings for specific plans, provide a list of plan Amazon Resource
+    /// Names (ARNs). Region switch ignores any plan ARN that you can't access. If
+    /// you don't provide any plan ARNs, Region switch returns the warnings for all
+    /// of your accessible plans.
+    pub fn listServiceQuotaWarnings(self: *Self, allocator: std.mem.Allocator, input: list_service_quota_warnings.ListServiceQuotaWarningsInput, options: CallOptions) !list_service_quota_warnings.ListServiceQuotaWarningsOutput {
+        return list_service_quota_warnings.execute(self, allocator, input, options);
+    }
+
     /// Lists the tags attached to a Region switch resource.
     pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
@@ -247,6 +263,13 @@ pub const Client = struct {
     }
 
     pub fn listRoute53HealthChecksInRegionPaginator(self: *Self, params: list_route_53_health_checks_in_region.ListRoute53HealthChecksInRegionInput) paginator.ListRoute53HealthChecksInRegionPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listServiceQuotaWarningsPaginator(self: *Self, params: list_service_quota_warnings.ListServiceQuotaWarningsInput) paginator.ListServiceQuotaWarningsPaginator {
         return .{
             .client = self,
             .params = params,

@@ -6,8 +6,18 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Ec2Configuration = @import("ec_2_configuration.zig").Ec2Configuration;
 const EcrConfiguration = @import("ecr_configuration.zig").EcrConfiguration;
+const UpdateConfigurationInheritance = @import("update_configuration_inheritance.zig").UpdateConfigurationInheritance;
 
 pub const UpdateConfigurationInput = struct {
+    /// The 12-digit Amazon Web Services account ID of the member account whose scan
+    /// configuration you want
+    /// to update. When specified, you must be the delegated administrator for this
+    /// member
+    /// account. If not specified, the operation updates your own configuration and
+    /// propagates changes to any member accounts that have not been individually
+    /// configured.
+    account_id: ?[]const u8 = null,
+
     /// Specifies how the Amazon EC2 automated scan will be updated for your
     /// environment.
     ec_2_configuration: ?Ec2Configuration = null,
@@ -16,9 +26,23 @@ pub const UpdateConfigurationInput = struct {
     /// environment.
     ecr_configuration: ?EcrConfiguration = null,
 
+    /// Specifies which scan-type configurations to reset to the delegated
+    /// administrator's
+    /// inherited values for the targeted member account. Each member of this
+    /// structure is
+    /// independently optional. When specified, `ec2Configuration` and
+    /// `ecrConfiguration` must be absent, and `accountId` must also be
+    /// present. Only `INHERIT_FROM_ADMIN` is valid for each member. If not
+    /// specified,
+    /// the operation uses the `ec2Configuration` and `ecrConfiguration`
+    /// parameters instead.
+    update_configuration_inheritance: ?UpdateConfigurationInheritance = null,
+
     pub const json_field_names = .{
+        .account_id = "accountId",
         .ec_2_configuration = "ec2Configuration",
         .ecr_configuration = "ecrConfiguration",
+        .update_configuration_inheritance = "updateConfigurationInheritance",
     };
 };
 
@@ -61,6 +85,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateConfigurationInpu
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.account_id) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"accountId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.ec_2_configuration) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"ec2Configuration\":");
@@ -70,6 +100,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateConfigurationInpu
     if (input.ecr_configuration) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"ecrConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.update_configuration_inheritance) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"updateConfigurationInheritance\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

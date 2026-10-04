@@ -1,4 +1,5 @@
-/// This API is in preview release for Amazon Connect and is subject to change.
+/// This API is in preview release for Connect Customer and is subject to
+/// change.
 ///
 /// Information about associations that are successfully created: `DataSetId`,
 /// `TargetAccountId`, `ResourceShareId`,

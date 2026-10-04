@@ -6,13 +6,19 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const RetryImageInput = struct {
-    /// Unique, case-sensitive identifier you provide to ensure
-    /// idempotency of the request. For more information, see [Ensuring
+    /// A unique, case-sensitive identifier you provide to ensure
+    /// that the operation runs no more than one time. If you retry a request with
+    /// the same client
+    /// token, Image Builder returns the original response without running the
+    /// operation again. For more
+    /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
     /// in the *Amazon EC2 API Reference*.
     client_token: []const u8,
 
-    /// The source image Amazon Resource Name (ARN) to retry.
+    /// The Amazon Resource Name (ARN) of the image build version that you want to
+    /// retry. The image
+    /// must be in the `FAILED` or `CANCELLED` state.
     image_build_version_arn: []const u8,
 
     pub const json_field_names = .{
@@ -94,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RetryImageInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RetryImageOutput {
-    var result: RetryImageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RetryImageOutput, body, allocator);
-    }
+    const result: RetryImageOutput = try aws.json.parseJsonObject(
+        RetryImageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

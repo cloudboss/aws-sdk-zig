@@ -8,20 +8,34 @@ const Filter = @import("filter.zig").Filter;
 const SchemaConversionRequest = @import("schema_conversion_request.zig").SchemaConversionRequest;
 
 pub const DescribeMetadataModelCreationsInput = struct {
-    /// Filters applied to the metadata model creation requests described in the
-    /// form of key-value pairs. The supported filters are request-id and status.
+    /// The filters to apply to the metadata model creation requests.
+    ///
+    /// The following filter names are supported:
+    ///
+    /// * `request-id` – The request identifier.
+    ///
+    /// * `status` – The request status. Valid values: `RECEIVED`, `IN_PROGRESS`,
+    ///   `SUCCESS`, `FAILED`, `CANCELING`, `CANCELED`.
     filters: ?[]const Filter = null,
 
     /// Specifies the unique pagination token that makes it possible to display the
-    /// next page of metadata model creation requests. If Marker is returned by a
-    /// previous response, there are more metadata model creation requests
+    /// next page of results.
+    /// If this parameter is specified, the response includes only records beyond
+    /// the marker, up to the
+    /// value specified by `MaxRecords`.
+    ///
+    /// If `Marker` is returned by a previous response, there are more results
     /// available.
+    /// The value of `Marker` is a unique pagination token for each page. To
+    /// retrieve the next page,
+    /// make the call again using the returned token and keeping all other arguments
+    /// unchanged.
     marker: ?[]const u8 = null,
 
-    /// The maximum number of metadata model creation requests to include in the
-    /// response. If more requests exist than the specified MaxRecords value, a
-    /// pagination token is provided in the response so that you can retrieve the
-    /// remaining results.
+    /// The maximum number of records to include in the response. If more records
+    /// exist than
+    /// the specified `MaxRecords` value, DMS includes a pagination token
+    /// in the response so that you can retrieve the remaining results.
     max_records: ?i32 = null,
 
     /// The migration project name or Amazon Resource Name (ARN).
@@ -37,12 +51,22 @@ pub const DescribeMetadataModelCreationsInput = struct {
 
 pub const DescribeMetadataModelCreationsOutput = struct {
     /// Specifies the unique pagination token that makes it possible to display the
-    /// next page of metadata model creation requests. If Marker is returned, there
-    /// are more metadata model creation requests available.
+    /// next page of results.
+    /// If this parameter is specified, the response includes only records beyond
+    /// the marker, up to the
+    /// value specified by `MaxRecords`.
+    ///
+    /// If `Marker` is returned by a previous response, there are more results
+    /// available.
+    /// The value of `Marker` is a unique pagination token for each page. To
+    /// retrieve the next page,
+    /// make the call again using the returned token and keeping all other arguments
+    /// unchanged.
     marker: ?[]const u8 = null,
 
-    /// A list of metadata model creation requests. The ExportSqlDetails field will
-    /// never be populated for the DescribeMetadataModelCreations operation.
+    /// A paginated list of metadata model creation requests.
+    ///
+    /// DMS never populates the `ExportSqlDetails` field for this operation.
     requests: ?[]const SchemaConversionRequest = null,
 
     pub const json_field_names = .{

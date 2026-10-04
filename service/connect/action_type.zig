@@ -10,6 +10,8 @@ pub const ActionType = enum {
     assign_sla,
     end_associated_tasks,
     submit_auto_evaluation,
+    extract_information,
+    send_in_app_notification,
 
     pub const json_field_names = .{
         .create_task = "CREATE_TASK",
@@ -21,6 +23,8 @@ pub const ActionType = enum {
         .assign_sla = "ASSIGN_SLA",
         .end_associated_tasks = "END_ASSOCIATED_TASKS",
         .submit_auto_evaluation = "SUBMIT_AUTO_EVALUATION",
+        .extract_information = "EXTRACT_INFORMATION",
+        .send_in_app_notification = "SEND_IN_APP_NOTIFICATION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -34,6 +38,8 @@ pub const ActionType = enum {
             .assign_sla => "ASSIGN_SLA",
             .end_associated_tasks => "END_ASSOCIATED_TASKS",
             .submit_auto_evaluation => "SUBMIT_AUTO_EVALUATION",
+            .extract_information => "EXTRACT_INFORMATION",
+            .send_in_app_notification => "SEND_IN_APP_NOTIFICATION",
         };
     }
 

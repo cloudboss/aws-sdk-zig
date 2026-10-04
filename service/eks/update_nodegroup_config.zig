@@ -170,10 +170,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateNodegroupConfigIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateNodegroupConfigOutput {
-    var result: UpdateNodegroupConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateNodegroupConfigOutput, body, allocator);
-    }
+    const result: UpdateNodegroupConfigOutput = try aws.json.parseJsonObject(
+        UpdateNodegroupConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

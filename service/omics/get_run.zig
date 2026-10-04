@@ -12,6 +12,7 @@ const RunLogLevel = @import("run_log_level.zig").RunLogLevel;
 const RunLogLocation = @import("run_log_location.zig").RunLogLocation;
 const NetworkingMode = @import("networking_mode.zig").NetworkingMode;
 const RunRetentionMode = @import("run_retention_mode.zig").RunRetentionMode;
+const ScratchStorageMode = @import("scratch_storage_mode.zig").ScratchStorageMode;
 const RunStatus = @import("run_status.zig").RunStatus;
 const StorageType = @import("storage_type.zig").StorageType;
 const VpcConfigResponse = @import("vpc_config_response.zig").VpcConfigResponse;
@@ -57,6 +58,9 @@ pub const GetRunOutput = struct {
 
     /// The run's digest.
     digest: ?[]const u8 = null,
+
+    /// The engine-specific settings for the workflow run.
+    engine_settings: ?[]const u8 = null,
 
     /// The actual Nextflow engine version that Amazon Web Services HealthOmics used
     /// for the run. The other workflow definition languages don't provide a value
@@ -108,6 +112,16 @@ pub const GetRunOutput = struct {
 
     /// The destination for workflow outputs.
     run_output_uri: ?[]const u8 = null,
+
+    /// Optional configuration for enabling scratch ephemeral storage mounted at
+    /// /tmp. If absent, this will default to SHARED. This configuration is
+    /// applicable only for CPU tasks. For tasks using GPUs, scratch storage is
+    /// always LOCAL.
+    scratch_storage_mode: ?ScratchStorageMode = null,
+
+    /// Inline policy json for scoping down permissions via a session policy on the
+    /// IAM role.
+    session_policy: ?[]const u8 = null,
 
     /// Who started the run.
     started_by: ?[]const u8 = null,
@@ -166,6 +180,7 @@ pub const GetRunOutput = struct {
         .creation_time = "creationTime",
         .definition = "definition",
         .digest = "digest",
+        .engine_settings = "engineSettings",
         .engine_version = "engineVersion",
         .failure_reason = "failureReason",
         .id = "id",
@@ -182,6 +197,8 @@ pub const GetRunOutput = struct {
         .run_group_id = "runGroupId",
         .run_id = "runId",
         .run_output_uri = "runOutputUri",
+        .scratch_storage_mode = "scratchStorageMode",
+        .session_policy = "sessionPolicy",
         .started_by = "startedBy",
         .start_time = "startTime",
         .status = "status",
@@ -262,10 +279,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRunInput, config: *a
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRunOutput {
-    var result: GetRunOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRunOutput, body, allocator);
-    }
+    const result: GetRunOutput = try aws.json.parseJsonObject(
+        GetRunOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

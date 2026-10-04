@@ -129,10 +129,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteSubscriptionGrant
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteSubscriptionGrantOutput {
-    var result: DeleteSubscriptionGrantOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteSubscriptionGrantOutput, body, allocator);
-    }
+    const result: DeleteSubscriptionGrantOutput = try aws.json.parseJsonObject(
+        DeleteSubscriptionGrantOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

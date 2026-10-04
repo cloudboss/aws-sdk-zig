@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const CertificateKeyPairOrigin = @import("certificate_key_pair_origin.zig").CertificateKeyPairOrigin;
 const CertificateStatus = @import("certificate_status.zig").CertificateStatus;
 const Filters = @import("filters.zig").Filters;
 const SortBy = @import("sort_by.zig").SortBy;
@@ -11,6 +12,11 @@ const SortOrder = @import("sort_order.zig").SortOrder;
 const CertificateSummary = @import("certificate_summary.zig").CertificateSummary;
 
 pub const ListCertificatesInput = struct {
+    /// Filter the certificate list by certificate key pair origin. Specify one or
+    /// more `CertificateKeyPairOrigin` values. Default filtering returns only
+    /// certificates with key pair origin of `AWS_MANAGED` and `CUSTOMER_PROVIDED`.
+    certificate_key_pair_origins: ?[]const CertificateKeyPairOrigin = null,
+
     /// Filter the certificate list by status value.
     certificate_statuses: ?[]const CertificateStatus = null,
 
@@ -38,6 +44,7 @@ pub const ListCertificatesInput = struct {
     sort_order: ?SortOrder = null,
 
     pub const json_field_names = .{
+        .certificate_key_pair_origins = "CertificateKeyPairOrigins",
         .certificate_statuses = "CertificateStatuses",
         .includes = "Includes",
         .max_items = "MaxItems",

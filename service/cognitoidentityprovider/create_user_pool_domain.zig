@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const CustomDomainConfigType = @import("custom_domain_config_type.zig").CustomDomainConfigType;
+const RoutingType = @import("routing_type.zig").RoutingType;
 
 pub const CreateUserPoolDomainInput = struct {
     /// The configuration for a custom domain. Configures your domain with an
@@ -40,7 +41,23 @@ pub const CreateUserPoolDomainInput = struct {
     ///
     /// Managed login requires that your user pool be configured for any [feature
     /// plan](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html) other than `Lite`.
+    ///
+    /// A `ManagedLoginVersion` value of `2` does not activate managed
+    /// login pages for your app client. When you create an app client
+    /// programmatically,
+    /// your app client has no branding style. To use managed login, create a
+    /// branding style
+    /// using the
+    /// [CreateManagedLoginBranding](https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_CreateManagedLoginBranding.html) operation. When you use the console, Amazon Cognito assigns
+    /// a default branding style automatically. When you use the API or an SDK, you
+    /// must create a
+    /// branding style yourself.
     managed_login_version: ?i32 = null,
+
+    /// The configuration of routing for requests to the domain for replicas of a
+    /// replicated user pool.
+    /// The routing configuration is currently only supported for custom domains.
+    routing: ?RoutingType = null,
 
     /// The ID of the user pool where you want to add a domain.
     user_pool_id: []const u8,
@@ -49,6 +66,7 @@ pub const CreateUserPoolDomainInput = struct {
         .custom_domain_config = "CustomDomainConfig",
         .domain = "Domain",
         .managed_login_version = "ManagedLoginVersion",
+        .routing = "Routing",
         .user_pool_id = "UserPoolId",
     };
 };
@@ -69,9 +87,13 @@ pub const CreateUserPoolDomainOutput = struct {
     /// login.
     managed_login_version: ?i32 = null,
 
+    /// The routing configuration that was applied to the user pool domain.
+    routing: ?RoutingType = null,
+
     pub const json_field_names = .{
         .cloud_front_domain = "CloudFrontDomain",
         .managed_login_version = "ManagedLoginVersion",
+        .routing = "Routing",
     };
 };
 

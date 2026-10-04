@@ -14,9 +14,11 @@ pub const PutAlarmMuteRuleInput = struct {
     description: ?[]const u8 = null,
 
     /// The date and time when the mute rule expires and is no longer evaluated,
-    /// specified as a timestamp in ISO 8601 format (for example,
-    /// `2026-12-31T23:59:59Z`). After this time, the rule status becomes EXPIRED
-    /// and will no longer mute the targeted alarms.
+    /// specified
+    /// as a timestamp in ISO 8601 format (for example, `2026-12-31T23:59:59Z`).
+    /// After this time, the rule status becomes EXPIRED and will no longer mute the
+    /// targeted
+    /// alarms.
     expire_date: ?i64 = null,
 
     /// Specifies which alarms this rule applies to.
@@ -30,13 +32,16 @@ pub const PutAlarmMuteRuleInput = struct {
     rule: Rule,
 
     /// The date and time after which the mute rule takes effect, specified as a
-    /// timestamp in ISO 8601 format (for example, `2026-04-15T08:00:00Z`). If not
-    /// specified, the mute rule takes effect immediately upon creation and the
-    /// mutes are applied as per the schedule expression.
+    /// timestamp
+    /// in ISO 8601 format (for example, `2026-04-15T08:00:00Z`). If not specified,
+    /// the mute rule takes effect immediately upon creation and the mutes are
+    /// applied as per
+    /// the schedule expression.
     start_date: ?i64 = null,
 
     /// A list of key-value pairs to associate with the alarm mute rule. You can use
-    /// tags to categorize and manage your mute rules.
+    /// tags
+    /// to categorize and manage your mute rules.
     tags: ?[]const Tag = null,
 
     pub const json_field_names = .{

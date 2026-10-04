@@ -43,7 +43,9 @@ pub const Client = struct {
     /// by completing partial queries with valid address completion. Also, the API
     /// supports the filtering of results based on geographic location, country, or
     /// specific place types, and can be tailored using optional parameters like
-    /// language and political views.
+    /// language and political views. Not supported in `ap-southeast-1` and
+    /// `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// For more information, see
     /// [Autocomplete](https://docs.aws.amazon.com/location/latest/developerguide/autocomplete.html) in the *Amazon Location Service Developer Guide*.
@@ -56,7 +58,9 @@ pub const Client = struct {
     /// information. It supports flexible queries, including free-form text or
     /// structured queries with components like street names, postal codes, and
     /// regions. The Geocode API can also provide additional features such as time
-    /// zone information and the inclusion of political views.
+    /// zone information and the inclusion of political views. Not supported in
+    /// `ap-southeast-1` and `ap-southeast-5` regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// For more information, see
     /// [Geocode](https://docs.aws.amazon.com/location/latest/developerguide/geocode.html) in the *Amazon Location Service Developer Guide*.
@@ -92,7 +96,9 @@ pub const Client = struct {
     /// categories, business chains, food types and more. The API returns details
     /// such as a place name, address, phone, category, food type, contact, opening
     /// hours. Also, the API can return phonemes, time zones and more based on
-    /// requested parameters.
+    /// requested parameters. Not supported in `ap-southeast-1` and `ap-southeast-5`
+    /// regions for
+    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
     ///
     /// For more information, see [Search
     /// Nearby](https://docs.aws.amazon.com/location/latest/developerguide/search-nearby.html) in the *Amazon Location Service Developer Guide*.

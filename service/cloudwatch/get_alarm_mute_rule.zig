@@ -45,7 +45,8 @@ pub const GetAlarmMuteRuleOutput = struct {
     rule: ?Rule = null,
 
     /// The date and time when the mute rule becomes active. If not set, the rule is
-    /// active immediately.
+    /// active
+    /// immediately.
     start_date: ?i64 = null,
 
     /// The current status of the alarm mute rule. Valid values are `SCHEDULED`,

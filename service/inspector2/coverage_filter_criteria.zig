@@ -10,6 +10,39 @@ pub const CoverageFilterCriteria = struct {
     /// for.
     account_id: ?[]const CoverageStringFilter = null,
 
+    /// The cloud container image tags to filter coverage results by.
+    cloud_container_image_tags: ?[]const CoverageStringFilter = null,
+
+    /// The cloud container registry name to filter coverage results by.
+    cloud_container_registry_name: ?[]const CoverageStringFilter = null,
+
+    /// The cloud container repository name to filter coverage results by.
+    cloud_container_repository_name: ?[]const CoverageStringFilter = null,
+
+    /// The cloud provider to filter coverage results by.
+    cloud_provider: ?[]const CoverageStringFilter = null,
+
+    /// The cloud provider account ID to filter coverage results by.
+    cloud_provider_account_id: ?[]const CoverageStringFilter = null,
+
+    /// The cloud provider organization ID to filter coverage results by.
+    cloud_provider_org_id: ?[]const CoverageStringFilter = null,
+
+    /// The cloud provider region to filter coverage results by.
+    cloud_provider_region: ?[]const CoverageStringFilter = null,
+
+    /// The cloud serverless function name to filter coverage results by.
+    cloud_serverless_function_name: ?[]const CoverageStringFilter = null,
+
+    /// The cloud serverless function runtime to filter coverage results by.
+    cloud_serverless_function_runtime: ?[]const CoverageStringFilter = null,
+
+    /// The cloud serverless function tags to filter coverage results by.
+    cloud_serverless_function_tags: ?[]const CoverageMapFilter = null,
+
+    /// The cloud VM instance tags to filter coverage results by.
+    cloud_vm_instance_tags: ?[]const CoverageMapFilter = null,
+
     /// Filter criteria for code repositories based on project name.
     code_repository_project_name: ?[]const CoverageStringFilter = null,
 
@@ -77,7 +110,7 @@ pub const CoverageFilterCriteria = struct {
 
     /// The filter to search for Amazon EC2 instance coverage by scan mode. Valid
     /// values are
-    /// `EC2_SSM_AGENT_BASED` and `EC2_AGENTLESS`.
+    /// `EC2_SSM_AGENT_BASED`, `EC2_AGENTLESS`, and `EC2_INSPECTOR_AGENT_BASED`.
     scan_mode: ?[]const CoverageStringFilter = null,
 
     /// The scan status code to filter on. Valid values are: `ValidationException`,
@@ -93,6 +126,17 @@ pub const CoverageFilterCriteria = struct {
 
     pub const json_field_names = .{
         .account_id = "accountId",
+        .cloud_container_image_tags = "cloudContainerImageTags",
+        .cloud_container_registry_name = "cloudContainerRegistryName",
+        .cloud_container_repository_name = "cloudContainerRepositoryName",
+        .cloud_provider = "cloudProvider",
+        .cloud_provider_account_id = "cloudProviderAccountId",
+        .cloud_provider_org_id = "cloudProviderOrgId",
+        .cloud_provider_region = "cloudProviderRegion",
+        .cloud_serverless_function_name = "cloudServerlessFunctionName",
+        .cloud_serverless_function_runtime = "cloudServerlessFunctionRuntime",
+        .cloud_serverless_function_tags = "cloudServerlessFunctionTags",
+        .cloud_vm_instance_tags = "cloudVmInstanceTags",
         .code_repository_project_name = "codeRepositoryProjectName",
         .code_repository_provider_type = "codeRepositoryProviderType",
         .code_repository_provider_type_visibility = "codeRepositoryProviderTypeVisibility",

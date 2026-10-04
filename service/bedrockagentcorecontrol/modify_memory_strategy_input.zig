@@ -15,7 +15,8 @@ pub const ModifyMemoryStrategyInput = struct {
     /// The unique identifier of the memory strategy to modify.
     memory_strategy_id: []const u8,
 
-    /// The updated namespaces for the memory strategy.
+    /// This is a legacy parameter, use `namespaceTemplates`. The updated namespaces
+    /// for the memory strategy.
     namespaces: ?[]const []const u8 = null,
 
     /// The updated namespaceTemplates for the memory strategy.

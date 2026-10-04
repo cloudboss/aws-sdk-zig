@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Capability = @import("capability.zig").Capability;
 const Change = @import("change.zig").Change;
+const DeploymentConfig = @import("deployment_config.zig").DeploymentConfig;
 const DeploymentMode = @import("deployment_mode.zig").DeploymentMode;
 const ExecutionStatus = @import("execution_status.zig").ExecutionStatus;
 const OnStackFailure = @import("on_stack_failure.zig").OnStackFailure;
@@ -55,6 +56,9 @@ pub const DescribeChangeSetOutput = struct {
 
     /// The start time when the change set was created, in UTC.
     creation_time: ?i64 = null,
+
+    /// The deployment configuration specified when the change set was created.
+    deployment_config: ?DeploymentConfig = null,
 
     /// The deployment mode specified when the change set was created. Valid value
     /// is
@@ -260,6 +264,8 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                     result.change_set_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "CreationTime")) {
                     result.creation_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "DeploymentConfig")) {
+                    result.deployment_config = try serde.deserializeDeploymentConfig(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "DeploymentMode")) {
                     result.deployment_mode = DeploymentMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Description")) {

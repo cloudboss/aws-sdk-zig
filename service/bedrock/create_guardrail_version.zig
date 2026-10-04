@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateGuardrailVersionI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateGuardrailVersionOutput {
-    var result: CreateGuardrailVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateGuardrailVersionOutput, body, allocator);
-    }
+    const result: CreateGuardrailVersionOutput = try aws.json.parseJsonObject(
+        CreateGuardrailVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

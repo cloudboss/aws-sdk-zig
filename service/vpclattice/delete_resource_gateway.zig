@@ -85,10 +85,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteResourceGatewayIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteResourceGatewayOutput {
-    var result: DeleteResourceGatewayOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteResourceGatewayOutput, body, allocator);
-    }
+    const result: DeleteResourceGatewayOutput = try aws.json.parseJsonObject(
+        DeleteResourceGatewayOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

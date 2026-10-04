@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteServiceNetworkRes
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteServiceNetworkResourceAssociationOutput {
-    var result: DeleteServiceNetworkResourceAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteServiceNetworkResourceAssociationOutput, body, allocator);
-    }
+    const result: DeleteServiceNetworkResourceAssociationOutput = try aws.json.parseJsonObject(
+        DeleteServiceNetworkResourceAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

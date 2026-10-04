@@ -8,6 +8,10 @@ const ResourceTag = @import("resource_tag.zig").ResourceTag;
 const InvoiceUnitRule = @import("invoice_unit_rule.zig").InvoiceUnitRule;
 
 pub const CreateInvoiceUnitInput = struct {
+    /// A unique, case-sensitive identifier that you provide to ensure idempotency
+    /// of the request.
+    client_token: ?[]const u8 = null,
+
     /// The invoice unit's description. This can be changed at a later time.
     description: ?[]const u8 = null,
 
@@ -32,6 +36,7 @@ pub const CreateInvoiceUnitInput = struct {
     tax_inheritance_disabled: ?bool = null,
 
     pub const json_field_names = .{
+        .client_token = "ClientToken",
         .description = "Description",
         .invoice_receiver = "InvoiceReceiver",
         .name = "Name",

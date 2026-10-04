@@ -1,7 +1,7 @@
 const RestoreJobState = @import("restore_job_state.zig").RestoreJobState;
 
 /// This is a summary of restore jobs created
-/// or running within the most recent 30 days.
+/// or running within the most recent 14 days.
 ///
 /// The returned summary may contain the following:
 /// Region, Account, State, ResourceType, MessageCategory,

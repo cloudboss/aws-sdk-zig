@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateScraperLoggingCon
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateScraperLoggingConfigurationOutput {
-    var result: UpdateScraperLoggingConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateScraperLoggingConfigurationOutput, body, allocator);
-    }
+    const result: UpdateScraperLoggingConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateScraperLoggingConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

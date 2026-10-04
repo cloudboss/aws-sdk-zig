@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const associate_email_identity_certificate = @import("associate_email_identity_certificate.zig");
 const batch_get_metric_data = @import("batch_get_metric_data.zig");
 const cancel_export_job = @import("cancel_export_job.zig");
 const create_configuration_set = @import("create_configuration_set.zig");
@@ -31,6 +32,7 @@ const delete_multi_region_endpoint = @import("delete_multi_region_endpoint.zig")
 const delete_suppressed_destination = @import("delete_suppressed_destination.zig");
 const delete_tenant = @import("delete_tenant.zig");
 const delete_tenant_resource_association = @import("delete_tenant_resource_association.zig");
+const disassociate_email_identity_certificate = @import("disassociate_email_identity_certificate.zig");
 const get_account = @import("get_account.zig");
 const get_blacklist_reports = @import("get_blacklist_reports.zig");
 const get_configuration_set = @import("get_configuration_set.zig");
@@ -64,6 +66,7 @@ const list_dedicated_ip_pools = @import("list_dedicated_ip_pools.zig");
 const list_deliverability_test_reports = @import("list_deliverability_test_reports.zig");
 const list_domain_deliverability_campaigns = @import("list_domain_deliverability_campaigns.zig");
 const list_email_identities = @import("list_email_identities.zig");
+const list_email_identity_certificates = @import("list_email_identity_certificates.zig");
 const list_email_templates = @import("list_email_templates.zig");
 const list_export_jobs = @import("list_export_jobs.zig");
 const list_import_jobs = @import("list_import_jobs.zig");
@@ -77,6 +80,7 @@ const list_tenant_resources = @import("list_tenant_resources.zig");
 const list_tenants = @import("list_tenants.zig");
 const put_account_dedicated_ip_warmup_attributes = @import("put_account_dedicated_ip_warmup_attributes.zig");
 const put_account_details = @import("put_account_details.zig");
+const put_account_pricing_attributes = @import("put_account_pricing_attributes.zig");
 const put_account_sending_attributes = @import("put_account_sending_attributes.zig");
 const put_account_suppression_attributes = @import("put_account_suppression_attributes.zig");
 const put_account_vdm_attributes = @import("put_account_vdm_attributes.zig");
@@ -97,12 +101,14 @@ const put_email_identity_dkim_signing_attributes = @import("put_email_identity_d
 const put_email_identity_feedback_attributes = @import("put_email_identity_feedback_attributes.zig");
 const put_email_identity_mail_from_attributes = @import("put_email_identity_mail_from_attributes.zig");
 const put_suppressed_destination = @import("put_suppressed_destination.zig");
+const put_tenant_suppression_attributes = @import("put_tenant_suppression_attributes.zig");
 const send_bulk_email = @import("send_bulk_email.zig");
 const send_custom_verification_email = @import("send_custom_verification_email.zig");
 const send_email = @import("send_email.zig");
 const tag_resource = @import("tag_resource.zig");
 const test_render_email_template = @import("test_render_email_template.zig");
 const untag_resource = @import("untag_resource.zig");
+const update_configuration_set = @import("update_configuration_set.zig");
 const update_configuration_set_event_destination = @import("update_configuration_set_event_destination.zig");
 const update_contact = @import("update_contact.zig");
 const update_contact_list = @import("update_contact_list.zig");
@@ -139,6 +145,37 @@ pub const Client = struct {
 
     pub fn deinit(self: *Self) void {
         _ = self;
+    }
+
+    /// Associates an S/MIME certificate with an email identity. After the
+    /// certificate is
+    /// active, Amazon SES API v2 can add an S/MIME signature to messages that you
+    /// send from the associated
+    /// address when signing is enabled on the configuration set used to send the
+    /// message.
+    ///
+    /// The certificate is an X.509 certificate that you manage in Certificate
+    /// Manager
+    /// (ACM). You identify it by its Amazon Resource Name (ARN).
+    ///
+    /// * If the email identity is a domain, you must specify a `FromAddress`
+    /// that belongs to that domain or one of its subdomains. The certificate
+    /// applies to
+    /// messages sent from that address.
+    ///
+    /// * If the email identity is an email address, `FromAddress` is
+    /// optional. If you specify it, it must exactly match the email identity.
+    ///
+    /// When the association is created, the certificate begins provisioning and its
+    /// status is
+    /// `PROVISIONING`. The status changes to `ACTIVE` when the certificate
+    /// is ready to use for signing. Each email address can have only one
+    /// certificate
+    /// association. If an association already exists for the address, this
+    /// operation returns an
+    /// error, unless the existing association is in the `DEPROVISIONING` state.
+    pub fn associateEmailIdentityCertificate(self: *Self, allocator: std.mem.Allocator, input: associate_email_identity_certificate.AssociateEmailIdentityCertificateInput, options: CallOptions) !associate_email_identity_certificate.AssociateEmailIdentityCertificateOutput {
+        return associate_email_identity_certificate.execute(self, allocator, input, options);
     }
 
     /// Retrieves batches of metric data collected based on your sending activity.
@@ -327,8 +364,7 @@ pub const Client = struct {
     /// executed.
     /// The secondary region has to be provided in request's parameters.
     /// From the data flow standpoint there is no difference between primary
-    /// and secondary regions - sending traffic will be split equally between the
-    /// two.
+    /// and secondary regions - sending traffic is divided between the two.
     /// The primary region is the region where the resource has been created and
     /// where it can be managed.
     pub fn createMultiRegionEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_multi_region_endpoint.CreateMultiRegionEndpointInput, options: CallOptions) !create_multi_region_endpoint.CreateMultiRegionEndpointOutput {
@@ -344,6 +380,12 @@ pub const Client = struct {
     /// isolate and manage
     /// email sending for different customers or business units within your Amazon
     /// SES API v2 account.
+    ///
+    /// You can optionally specify `SuppressionAttributes` to configure tenant-level
+    /// suppression at creation time. When tenant-level suppression is enabled,
+    /// Amazon SES maintains a
+    /// separate suppression list for the tenant instead of using the account-level
+    /// suppression list.
     pub fn createTenant(self: *Self, allocator: std.mem.Allocator, input: create_tenant.CreateTenantInput, options: CallOptions) !create_tenant.CreateTenantOutput {
         return create_tenant.execute(self, allocator, input, options);
     }
@@ -459,7 +501,11 @@ pub const Client = struct {
         return delete_multi_region_endpoint.execute(self, allocator, input, options);
     }
 
-    /// Removes an email address from the suppression list for your account.
+    /// Removes an email address from the suppression list for your account or for a
+    /// specific
+    /// tenant. To target a tenant's suppression list, specify the `TenantName`
+    /// parameter. If you omit `TenantName`, the address is removed from the
+    /// account-level suppression list.
     pub fn deleteSuppressedDestination(self: *Self, allocator: std.mem.Allocator, input: delete_suppressed_destination.DeleteSuppressedDestinationInput, options: CallOptions) !delete_suppressed_destination.DeleteSuppressedDestinationOutput {
         return delete_suppressed_destination.execute(self, allocator, input, options);
     }
@@ -482,6 +528,26 @@ pub const Client = struct {
     /// operations.
     pub fn deleteTenantResourceAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_tenant_resource_association.DeleteTenantResourceAssociationInput, options: CallOptions) !delete_tenant_resource_association.DeleteTenantResourceAssociationOutput {
         return delete_tenant_resource_association.execute(self, allocator, input, options);
+    }
+
+    /// Removes the association between an S/MIME certificate and an email identity.
+    /// After the
+    /// association is removed, Amazon SES API v2 stops adding an S/MIME signature
+    /// to messages sent from
+    /// that address.
+    ///
+    /// If the email identity is a domain, specify the `FromAddress` whose
+    /// certificate association you want to remove.
+    ///
+    /// This operation is idempotent. If the specified email identity exists but
+    /// there's no
+    /// matching certificate association, the operation succeeds without making any
+    /// changes.
+    /// Amazon SES API v2 returns a `NotFoundException` only when the specified
+    /// email identity
+    /// doesn't exist.
+    pub fn disassociateEmailIdentityCertificate(self: *Self, allocator: std.mem.Allocator, input: disassociate_email_identity_certificate.DisassociateEmailIdentityCertificateInput, options: CallOptions) !disassociate_email_identity_certificate.DisassociateEmailIdentityCertificateOutput {
+        return disassociate_email_identity_certificate.execute(self, allocator, input, options);
     }
 
     /// Obtain information about the email-sending status and capabilities of your
@@ -653,7 +719,7 @@ pub const Client = struct {
     /// text
     /// part) for the template you specify.
     ///
-    /// You can execute this operation no more than once per second.
+    /// You can execute this operation no more than 50 times per second.
     pub fn getEmailTemplate(self: *Self, allocator: std.mem.Allocator, input: get_email_template.GetEmailTemplateInput, options: CallOptions) !get_email_template.GetEmailTemplateOutput {
         return get_email_template.execute(self, allocator, input, options);
     }
@@ -706,14 +772,17 @@ pub const Client = struct {
 
     /// Retrieves information about a specific email address that's on the
     /// suppression list
-    /// for your account.
+    /// for your account or for a specific tenant. To target a tenant's suppression
+    /// list,
+    /// specify the `TenantName` parameter. If you omit `TenantName`,
+    /// the operation targets the account-level suppression list.
     pub fn getSuppressedDestination(self: *Self, allocator: std.mem.Allocator, input: get_suppressed_destination.GetSuppressedDestinationInput, options: CallOptions) !get_suppressed_destination.GetSuppressedDestinationOutput {
         return get_suppressed_destination.execute(self, allocator, input, options);
     }
 
     /// Get information about a specific tenant, including the tenant's name, ID,
     /// ARN,
-    /// creation timestamp, tags, and sending status.
+    /// creation timestamp, tags, sending status, and suppression attributes.
     pub fn getTenant(self: *Self, allocator: std.mem.Allocator, input: get_tenant.GetTenantInput, options: CallOptions) !get_tenant.GetTenantOutput {
         return get_tenant.execute(self, allocator, input, options);
     }
@@ -798,6 +867,26 @@ pub const Client = struct {
         return list_email_identities.execute(self, allocator, input, options);
     }
 
+    /// Lists the S/MIME certificates that are associated with the specified email
+    /// identity.
+    /// The results include certificates in all states, such as `PROVISIONING`,
+    /// `ACTIVE`, `INACTIVE`, `DEPROVISIONING`, and
+    /// `FAILED`.
+    ///
+    /// If a certificate has passed its expiration time, it's returned with a status
+    /// of
+    /// `FAILED`.
+    ///
+    /// We recommend using pagination to ensure that the operation returns quickly
+    /// and
+    /// successfully. When there are more results than fit in a single response, the
+    /// response
+    /// includes a `NextToken` value that you use in a subsequent call to retrieve
+    /// the next set of results.
+    pub fn listEmailIdentityCertificates(self: *Self, allocator: std.mem.Allocator, input: list_email_identity_certificates.ListEmailIdentityCertificatesInput, options: CallOptions) !list_email_identity_certificates.ListEmailIdentityCertificatesOutput {
+        return list_email_identity_certificates.execute(self, allocator, input, options);
+    }
+
     /// Lists the email templates present in your Amazon SES account in the current
     /// Amazon Web Services
     /// Region.
@@ -862,7 +951,10 @@ pub const Client = struct {
 
     /// Retrieves a list of email addresses that are on the suppression list for
     /// your
-    /// account.
+    /// account or for a specific tenant. To target a tenant's suppression list,
+    /// specify the
+    /// `TenantName` parameter. If you omit `TenantName`, the operation
+    /// targets the account-level suppression list.
     pub fn listSuppressedDestinations(self: *Self, allocator: std.mem.Allocator, input: list_suppressed_destinations.ListSuppressedDestinationsInput, options: CallOptions) !list_suppressed_destinations.ListSuppressedDestinationsOutput {
         return list_suppressed_destinations.execute(self, allocator, input, options);
     }
@@ -907,6 +999,11 @@ pub const Client = struct {
     /// Update your Amazon SES account details.
     pub fn putAccountDetails(self: *Self, allocator: std.mem.Allocator, input: put_account_details.PutAccountDetailsInput, options: CallOptions) !put_account_details.PutAccountDetailsOutput {
         return put_account_details.execute(self, allocator, input, options);
+    }
+
+    /// Set the pricing plan for your Amazon SES account.
+    pub fn putAccountPricingAttributes(self: *Self, allocator: std.mem.Allocator, input: put_account_pricing_attributes.PutAccountPricingAttributesInput, options: CallOptions) !put_account_pricing_attributes.PutAccountPricingAttributesOutput {
+        return put_account_pricing_attributes.execute(self, allocator, input, options);
     }
 
     /// Enable or disable the ability of your account to send email.
@@ -957,7 +1054,11 @@ pub const Client = struct {
         return put_configuration_set_sending_options.execute(self, allocator, input, options);
     }
 
-    /// Specify the account suppression list preferences for a configuration set.
+    /// Specify the suppression list preferences for a configuration set. You can
+    /// also use this operation to specify a `SuppressionScope` to override the
+    /// suppression scope of the tenant or account for emails sent using this
+    /// configuration
+    /// set.
     pub fn putConfigurationSetSuppressionOptions(self: *Self, allocator: std.mem.Allocator, input: put_configuration_set_suppression_options.PutConfigurationSetSuppressionOptionsInput, options: CallOptions) !put_configuration_set_suppression_options.PutConfigurationSetSuppressionOptionsOutput {
         return put_configuration_set_suppression_options.execute(self, allocator, input, options);
     }
@@ -1076,9 +1177,27 @@ pub const Client = struct {
         return put_email_identity_mail_from_attributes.execute(self, allocator, input, options);
     }
 
-    /// Adds an email address to the suppression list for your account.
+    /// Adds an email address to the suppression list for your account or for a
+    /// specific
+    /// tenant. To target a tenant's suppression list, specify the `TenantName`
+    /// parameter. If you omit `TenantName`, the address is added to the
+    /// account-level suppression list.
     pub fn putSuppressedDestination(self: *Self, allocator: std.mem.Allocator, input: put_suppressed_destination.PutSuppressedDestinationInput, options: CallOptions) !put_suppressed_destination.PutSuppressedDestinationOutput {
         return put_suppressed_destination.execute(self, allocator, input, options);
+    }
+
+    /// Configure the suppression list preferences for a tenant. Use this operation
+    /// to enable
+    /// or disable tenant-level suppression, or to change the suppressed reasons for
+    /// a tenant.
+    ///
+    /// When you set the suppression scope to `TENANT`, Amazon SES maintains a
+    /// separate
+    /// suppression list for the tenant. When you set the scope to `ACCOUNT`, the
+    /// tenant
+    /// uses the account-level suppression list.
+    pub fn putTenantSuppressionAttributes(self: *Self, allocator: std.mem.Allocator, input: put_tenant_suppression_attributes.PutTenantSuppressionAttributesInput, options: CallOptions) !put_tenant_suppression_attributes.PutTenantSuppressionAttributesOutput {
+        return put_tenant_suppression_attributes.execute(self, allocator, input, options);
     }
 
     /// Composes an email message to multiple destinations.
@@ -1160,6 +1279,15 @@ pub const Client = struct {
     /// Remove one or more tags (keys and values) from a specified resource.
     pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
+    }
+
+    /// Updates an existing configuration set.
+    ///
+    /// This operation performs a partial update. Only the attributes that you
+    /// include in the
+    /// request are updated; any omitted attribute is left unchanged.
+    pub fn updateConfigurationSet(self: *Self, allocator: std.mem.Allocator, input: update_configuration_set.UpdateConfigurationSetInput, options: CallOptions) !update_configuration_set.UpdateConfigurationSetOutput {
+        return update_configuration_set.execute(self, allocator, input, options);
     }
 
     /// Update the configuration of an event destination for a configuration set.
@@ -1322,6 +1450,13 @@ pub const Client = struct {
     }
 
     pub fn listEmailIdentitiesPaginator(self: *Self, params: list_email_identities.ListEmailIdentitiesInput) paginator.ListEmailIdentitiesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listEmailIdentityCertificatesPaginator(self: *Self, params: list_email_identity_certificates.ListEmailIdentityCertificatesInput) paginator.ListEmailIdentityCertificatesPaginator {
         return .{
             .client = self,
             .params = params,

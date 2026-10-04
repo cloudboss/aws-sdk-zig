@@ -84,10 +84,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartOnDemandAuditTaskI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartOnDemandAuditTaskOutput {
-    var result: StartOnDemandAuditTaskOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartOnDemandAuditTaskOutput, body, allocator);
-    }
+    const result: StartOnDemandAuditTaskOutput = try aws.json.parseJsonObject(
+        StartOnDemandAuditTaskOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

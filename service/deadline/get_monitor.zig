@@ -37,7 +37,7 @@ pub const GetMonitorOutput = struct {
     /// authenticating monitor users.
     identity_center_instance_arn: []const u8,
 
-    /// The AWS Region where IAM Identity Center is enabled.
+    /// The Region where IAM Identity Center is enabled.
     identity_center_region: ?[]const u8 = null,
 
     /// The unique identifier for the monitor.
@@ -126,10 +126,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMonitorInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMonitorOutput {
-    var result: GetMonitorOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMonitorOutput, body, allocator);
-    }
+    const result: GetMonitorOutput = try aws.json.parseJsonObject(
+        GetMonitorOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

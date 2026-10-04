@@ -4,10 +4,12 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const CidrMapping = @import("cidr_mapping.zig").CidrMapping;
 const SourceConfiguration = @import("source_configuration.zig").SourceConfiguration;
 const TargetDeployment = @import("target_deployment.zig").TargetDeployment;
 const TargetNetwork = @import("target_network.zig").TargetNetwork;
 const TargetS3Configuration = @import("target_s3_configuration.zig").TargetS3Configuration;
+const VpcProvisioningStrategy = @import("vpc_provisioning_strategy.zig").VpcProvisioningStrategy;
 
 pub const GetNetworkMigrationDefinitionInput = struct {
     /// The unique identifier of the network migration definition to retrieve.
@@ -21,6 +23,11 @@ pub const GetNetworkMigrationDefinitionInput = struct {
 pub const GetNetworkMigrationDefinitionOutput = struct {
     /// The Amazon Resource Name (ARN) of the network migration definition.
     arn: ?[]const u8 = null,
+
+    /// A list of CIDR mappings that map original source CIDR ranges to updated
+    /// target CIDR ranges. CIDR mappings apply only when `vpcProvisioningStrategy`
+    /// is set to `USE_EXISTING`.
+    cidr_mappings: ?[]const CidrMapping = null,
 
     /// The timestamp when the network migration definition was created.
     created_at: ?i64 = null,
@@ -55,8 +62,14 @@ pub const GetNetworkMigrationDefinitionOutput = struct {
     /// The timestamp when the network migration definition was last updated.
     updated_at: ?i64 = null,
 
+    /// Indicates whether the migration creates new target VPCs or uses existing
+    /// ones. `CREATE_NEW` provisions new target VPCs; `USE_EXISTING` migrates into
+    /// existing VPCs in the target account.
+    vpc_provisioning_strategy: ?VpcProvisioningStrategy = null,
+
     pub const json_field_names = .{
         .arn = "arn",
+        .cidr_mappings = "cidrMappings",
         .created_at = "createdAt",
         .description = "description",
         .name = "name",
@@ -68,6 +81,7 @@ pub const GetNetworkMigrationDefinitionOutput = struct {
         .target_network = "targetNetwork",
         .target_s3_configuration = "targetS3Configuration",
         .updated_at = "updatedAt",
+        .vpc_provisioning_strategy = "vpcProvisioningStrategy",
     };
 };
 
@@ -127,10 +141,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetNetworkMigrationDefi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetNetworkMigrationDefinitionOutput {
-    var result: GetNetworkMigrationDefinitionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetNetworkMigrationDefinitionOutput, body, allocator);
-    }
+    const result: GetNetworkMigrationDefinitionOutput = try aws.json.parseJsonObject(
+        GetNetworkMigrationDefinitionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

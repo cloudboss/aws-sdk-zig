@@ -201,10 +201,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestartChannelPipelines
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RestartChannelPipelinesOutput {
-    var result: RestartChannelPipelinesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RestartChannelPipelinesOutput, body, allocator);
-    }
+    const result: RestartChannelPipelinesOutput = try aws.json.parseJsonObject(
+        RestartChannelPipelinesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

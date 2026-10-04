@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetMetricDataInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetMetricDataOutput {
-    var result: BatchGetMetricDataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetMetricDataOutput, body, allocator);
-    }
+    const result: BatchGetMetricDataOutput = try aws.json.parseJsonObject(
+        BatchGetMetricDataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

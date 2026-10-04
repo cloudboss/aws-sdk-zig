@@ -14,8 +14,12 @@ pub const CreateComponentInput = struct {
     /// component.
     change_description: ?[]const u8 = null,
 
-    /// Unique, case-sensitive identifier you provide to ensure
-    /// idempotency of the request. For more information, see [Ensuring
+    /// A unique, case-sensitive identifier you provide to ensure
+    /// that the operation runs no more than one time. If you retry a request with
+    /// the same client
+    /// token, Image Builder returns the original response without running the
+    /// operation again. For more
+    /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
     /// in the *Amazon EC2 API Reference*.
     client_token: []const u8,
@@ -28,20 +32,29 @@ pub const CreateComponentInput = struct {
     /// Describes the contents of the component.
     description: ?[]const u8 = null,
 
-    /// Validates the required permissions for the operation and the request
-    /// parameters, without actually making the request, and provides an error
-    /// response. Upon a successful request, the error response is
-    /// `DryRunOperationException`.
+    /// Validates the required permissions and request parameters without performing
+    /// the operation. If validation succeeds, the operation returns a
+    /// `DryRunOperationException` error response.
     dry_run: ?bool = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
-    /// encrypt this component. This can be either the Key ARN or the Alias ARN. For
-    /// more information, see [Key identifiers
+    /// encrypt this component.
+    /// This can be either the Key ARN or the Alias ARN. For more information, see
+    /// [Key identifiers
     /// (KeyId)](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN)
-    /// in the *Key Management Service Developer Guide*.
+    /// in the *Key Management Service Developer Guide*. If you don't specify a key,
+    /// Image Builder encrypts the
+    /// component data with a KMS key that Image Builder owns.
     kms_key_id: ?[]const u8 = null,
 
-    /// The name of the component.
+    /// The name of the component. Image Builder generates the component ARN from a
+    /// normalized form of the name, so names that differ only in case, spaces, or
+    /// underscores count as the same name. If a component with the same name and
+    /// semantic version already exists in your account in the same Amazon Web
+    /// Services Region,
+    /// the request creates a new build version for it. If the content is also
+    /// identical to the latest build version, the request fails because the
+    /// component already exists.
     name: []const u8,
 
     /// The operating system platform of the component.
@@ -54,10 +67,10 @@ pub const CreateComponentInput = struct {
     /// The semantic version has four nodes: ../.
     /// You can assign values for the first three, and can filter on all of them.
     ///
-    /// **Assignment:** For the first three nodes you can assign any positive
+    /// **Assignment:** For the first three nodes, you can assign any positive
     /// integer value, including
-    /// zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image
-    /// Builder automatically assigns the
+    /// zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder
+    /// automatically assigns the
     /// build number to the fourth node.
     ///
     /// **Patterns:** You can use any numeric pattern that adheres to the assignment
@@ -78,10 +91,10 @@ pub const CreateComponentInput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The `uri` of a YAML component document file. This must be an S3 URL
-    /// (`s3://bucket/key`), and the requester must have permission to access the
+    /// (`s3://bucket/key`), and you must have permission to access the
     /// S3 bucket it points to. If you use Amazon S3, you can specify component
     /// content up to your
-    /// service quota.
+    /// service quota for component size, which is 64 KB by default.
     ///
     /// Alternatively, you can specify the YAML document inline, using the component
     /// `data` property. You cannot specify both properties.
@@ -110,7 +123,10 @@ pub const CreateComponentOutput = struct {
     /// The Amazon Resource Name (ARN) of the component that the request created.
     component_build_version_arn: ?[]const u8 = null,
 
-    /// The resource ARNs with different wildcard variations of semantic versioning.
+    /// A set of wildcard version ARNs that always reference the latest
+    /// version of the resource. ARNs are included for the latest version overall,
+    /// and for the latest
+    /// versions within the same major, minor, and patch levels.
     latest_version_references: ?LatestVersionReferences = null,
 
     /// The request ID that uniquely identifies this request.
@@ -240,10 +256,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateComponentInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateComponentOutput {
-    var result: CreateComponentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateComponentOutput, body, allocator);
-    }
+    const result: CreateComponentOutput = try aws.json.parseJsonObject(
+        CreateComponentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

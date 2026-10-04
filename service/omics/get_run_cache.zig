@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRunCacheInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRunCacheOutput {
-    var result: GetRunCacheOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRunCacheOutput, body, allocator);
-    }
+    const result: GetRunCacheOutput = try aws.json.parseJsonObject(
+        GetRunCacheOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

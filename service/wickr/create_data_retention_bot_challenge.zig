@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDataRetentionBotC
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDataRetentionBotChallengeOutput {
-    var result: CreateDataRetentionBotChallengeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateDataRetentionBotChallengeOutput, body, allocator);
-    }
+    const result: CreateDataRetentionBotChallengeOutput = try aws.json.parseJsonObject(
+        CreateDataRetentionBotChallengeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

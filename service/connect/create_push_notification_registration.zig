@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePushNotificationR
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePushNotificationRegistrationOutput {
-    var result: CreatePushNotificationRegistrationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePushNotificationRegistrationOutput, body, allocator);
-    }
+    const result: CreatePushNotificationRegistrationOutput = try aws.json.parseJsonObject(
+        CreatePushNotificationRegistrationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

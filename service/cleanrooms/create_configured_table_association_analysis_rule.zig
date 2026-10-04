@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateConfiguredTableAs
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateConfiguredTableAssociationAnalysisRuleOutput {
-    var result: CreateConfiguredTableAssociationAnalysisRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateConfiguredTableAssociationAnalysisRuleOutput, body, allocator);
-    }
+    const result: CreateConfiguredTableAssociationAnalysisRuleOutput = try aws.json.parseJsonObject(
+        CreateConfiguredTableAssociationAnalysisRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

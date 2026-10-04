@@ -79,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAdConfigurationInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAdConfigurationOutput {
-    var result: GetAdConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAdConfigurationOutput, body, allocator);
-    }
+    const result: GetAdConfigurationOutput = try aws.json.parseJsonObject(
+        GetAdConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

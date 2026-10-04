@@ -165,10 +165,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSimilarProfilesInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSimilarProfilesOutput {
-    var result: GetSimilarProfilesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSimilarProfilesOutput, body, allocator);
-    }
+    const result: GetSimilarProfilesOutput = try aws.json.parseJsonObject(
+        GetSimilarProfilesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

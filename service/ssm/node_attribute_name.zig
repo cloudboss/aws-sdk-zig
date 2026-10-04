@@ -7,6 +7,8 @@ pub const NodeAttributeName = enum {
     platform_version,
     region,
     resource_type,
+    source_type,
+    availability_zone,
 
     pub const json_field_names = .{
         .agent_version = "AgentVersion",
@@ -15,6 +17,8 @@ pub const NodeAttributeName = enum {
         .platform_version = "PlatformVersion",
         .region = "Region",
         .resource_type = "ResourceType",
+        .source_type = "SourceType",
+        .availability_zone = "AvailabilityZone",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +29,8 @@ pub const NodeAttributeName = enum {
             .platform_version => "PlatformVersion",
             .region => "Region",
             .resource_type => "ResourceType",
+            .source_type => "SourceType",
+            .availability_zone => "AvailabilityZone",
         };
     }
 

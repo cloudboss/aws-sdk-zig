@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const CacheBehaviorPerPath = @import("cache_behavior_per_path.zig").CacheBehaviorPerPath;
 const CacheSettings = @import("cache_settings.zig").CacheSettings;
+const DistributionCustomErrorResponse = @import("distribution_custom_error_response.zig").DistributionCustomErrorResponse;
 const CacheBehavior = @import("cache_behavior.zig").CacheBehavior;
 const IpAddressType = @import("ip_address_type.zig").IpAddressType;
 const InputOrigin = @import("input_origin.zig").InputOrigin;
@@ -40,11 +41,41 @@ pub const CreateDistributionInput = struct {
     /// action to get a list of certificate names that you can specify.
     certificate_name: ?[]const u8 = null,
 
+    /// An array of objects that describe the custom error responses for the
+    /// distribution. With a
+    /// custom error response, you can specify the page to return when the origin
+    /// responds with a
+    /// given HTTP error code. You can also specify the HTTP status code to send to
+    /// the viewer.
+    custom_error_responses: ?[]const DistributionCustomErrorResponse = null,
+
     /// An object that describes the default cache behavior for the distribution.
     default_cache_behavior: CacheBehavior,
 
+    /// The object (for example, `index.html`) that the distribution returns when a
+    /// viewer requests the root URL of the distribution (`/`) instead of a specific
+    /// object. The object that you specify must be available from the origin.
+    default_root_object: ?[]const u8 = null,
+
     /// The name for the distribution.
     distribution_name: []const u8,
+
+    /// Specifies whether to enable private origin access for the distribution. With
+    /// private
+    /// origin access, the distribution can serve objects that aren't publicly
+    /// accessible from a
+    /// Lightsail bucket.
+    ///
+    /// Lightsail grants the distribution permission to read the bucket's objects.
+    /// Enabling
+    /// private origin access doesn't change the bucket's access settings, and you
+    /// can still
+    /// retrieve publicly accessible objects directly from the bucket's endpoint.
+    ///
+    /// You can enable private origin access only when the distribution's origin is
+    /// a
+    /// Lightsail bucket. If the origin is another resource type, the request fails.
+    enable_private_origin_access: ?bool = null,
 
     /// The IP address type for the distribution.
     ///
@@ -74,8 +105,11 @@ pub const CreateDistributionInput = struct {
         .cache_behaviors = "cacheBehaviors",
         .cache_behavior_settings = "cacheBehaviorSettings",
         .certificate_name = "certificateName",
+        .custom_error_responses = "customErrorResponses",
         .default_cache_behavior = "defaultCacheBehavior",
+        .default_root_object = "defaultRootObject",
         .distribution_name = "distributionName",
+        .enable_private_origin_access = "enablePrivateOriginAccess",
         .ip_address_type = "ipAddressType",
         .origin = "origin",
         .tags = "tags",

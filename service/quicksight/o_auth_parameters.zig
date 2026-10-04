@@ -2,7 +2,8 @@ const VpcConnectionProperties = @import("vpc_connection_properties.zig").VpcConn
 
 /// An object that contains information needed to create a data source
 /// connection that uses OAuth client credentials. This option is available for
-/// data source connections that are made with Snowflake and Starburst.
+/// data source connections that are made with Snowflake, Starburst, and
+/// Databricks.
 pub const OAuthParameters = struct {
     /// The S3 URI of the identity provider's CA certificates bundle in PEM format.
     /// Use this parameter to provide a custom CA certificate bundle for the

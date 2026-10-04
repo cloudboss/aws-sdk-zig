@@ -11,7 +11,7 @@ pub const PhoneNumberOrder = struct {
     /// The Firm Order Commitment (FOC) date for phone number porting orders. This
     /// field is null
     /// if a phone number order is not a porting order.
-    foc_date: ?i64 = null,
+    foc_date: ?[]const u8 = null,
 
     /// The ordered phone number details, such as the phone number in E.164 format
     /// and the phone number status.

@@ -1,4 +1,5 @@
 const AccessKeyDetails = @import("access_key_details.zig").AccessKeyDetails;
+const BedrockGuardrailDetails = @import("bedrock_guardrail_details.zig").BedrockGuardrailDetails;
 const Container = @import("container.zig").Container;
 const EbsSnapshotDetails = @import("ebs_snapshot_details.zig").EbsSnapshotDetails;
 const EbsVolumeDetails = @import("ebs_volume_details.zig").EbsVolumeDetails;
@@ -8,6 +9,7 @@ const EksClusterDetails = @import("eks_cluster_details.zig").EksClusterDetails;
 const InstanceDetails = @import("instance_details.zig").InstanceDetails;
 const KubernetesDetails = @import("kubernetes_details.zig").KubernetesDetails;
 const LambdaDetails = @import("lambda_details.zig").LambdaDetails;
+const ModelDetail = @import("model_detail.zig").ModelDetail;
 const RdsDbInstanceDetails = @import("rds_db_instance_details.zig").RdsDbInstanceDetails;
 const RdsDbUserDetails = @import("rds_db_user_details.zig").RdsDbUserDetails;
 const RdsLimitlessDbDetails = @import("rds_limitless_db_details.zig").RdsLimitlessDbDetails;
@@ -20,6 +22,10 @@ pub const Resource = struct {
     /// The IAM access key details (user information) of a user that engaged in the
     /// activity that prompted GuardDuty to generate a finding.
     access_key_details: ?AccessKeyDetails = null,
+
+    /// Contains information about the Bedrock guardrail that was involved in a
+    /// finding.
+    bedrock_guardrail_details: ?BedrockGuardrailDetails = null,
 
     container_details: ?Container = null,
 
@@ -50,6 +56,9 @@ pub const Resource = struct {
     /// finding.
     lambda_details: ?LambdaDetails = null,
 
+    /// Contains information about the AI models involved in a finding.
+    model_details: ?[]const ModelDetail = null,
+
     /// Contains information about the database instance to which an anomalous login
     /// attempt was made.
     rds_db_instance_details: ?RdsDbInstanceDetails = null,
@@ -73,6 +82,7 @@ pub const Resource = struct {
 
     pub const json_field_names = .{
         .access_key_details = "AccessKeyDetails",
+        .bedrock_guardrail_details = "BedrockGuardrailDetails",
         .container_details = "ContainerDetails",
         .ebs_snapshot_details = "EbsSnapshotDetails",
         .ebs_volume_details = "EbsVolumeDetails",
@@ -82,6 +92,7 @@ pub const Resource = struct {
         .instance_details = "InstanceDetails",
         .kubernetes_details = "KubernetesDetails",
         .lambda_details = "LambdaDetails",
+        .model_details = "ModelDetails",
         .rds_db_instance_details = "RdsDbInstanceDetails",
         .rds_db_user_details = "RdsDbUserDetails",
         .rds_limitless_db_details = "RdsLimitlessDbDetails",

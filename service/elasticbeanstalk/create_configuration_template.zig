@@ -33,15 +33,14 @@ pub const CreateConfigurationTemplateInput = struct {
     /// template. For a complete list of Elastic Beanstalk configuration options,
     /// see [Option
     /// Values](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html) in the
-    /// *AWS Elastic Beanstalk Developer Guide*.
+    /// *Elastic Beanstalk Developer Guide*.
     option_settings: ?[]const ConfigurationOptionSetting = null,
 
     /// The Amazon Resource Name (ARN) of the custom platform. For more information,
     /// see [ Custom
-    /// Platforms](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html) in the *AWS Elastic Beanstalk Developer Guide*.
+    /// Platforms](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html) in the *Elastic Beanstalk Developer Guide*.
     ///
-    /// If you specify `PlatformArn`, then don't specify
-    /// `SolutionStackName`.
+    /// If you specify `PlatformArn`, then don't specify `SolutionStackName`.
     platform_arn: ?[]const u8 = null,
 
     /// The name of an Elastic Beanstalk solution stack (platform version) that this
@@ -54,7 +53,7 @@ pub const CreateConfigurationTemplateInput = struct {
     /// and default
     /// values. For more information, see [Supported
     /// Platforms](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html) in the
-    /// *AWS Elastic Beanstalk Developer Guide*.
+    /// *Elastic Beanstalk Developer Guide*.
     ///
     /// You must specify `SolutionStackName` if you don't specify
     /// `PlatformArn`, `EnvironmentId`, or

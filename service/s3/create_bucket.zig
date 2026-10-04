@@ -113,7 +113,12 @@ pub const CreateBucketOutput = struct {
     /// buckets](https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-tagging.html).
     bucket_arn: ?[]const u8 = null,
 
-    /// A forward slash followed by the name of the bucket.
+    /// A forward slash followed by the name of the bucket for all account regional
+    /// namespace buckets and all global general purpose buckets created in
+    /// us-east-1. For example, `/amzn-s3-demo-bucket`. For global general purpose
+    /// buckets created in other Amazon Web Services Regions, the Location field is
+    /// the global endpoint URL. For example,
+    /// `http://amzn-s3-demo-bucket.s3.amazonaws.com/`.
     location: ?[]const u8 = null,
 };
 

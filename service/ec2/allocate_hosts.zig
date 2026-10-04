@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AutoPlacement = @import("auto_placement.zig").AutoPlacement;
+const HostCpuOptionsRequest = @import("host_cpu_options_request.zig").HostCpuOptionsRequest;
 const HostMaintenance = @import("host_maintenance.zig").HostMaintenance;
 const HostRecovery = @import("host_recovery.zig").HostRecovery;
 const TagSpecification = @import("tag_specification.zig").TagSpecification;
@@ -51,6 +52,9 @@ pub const AllocateHostsInput = struct {
     /// of the request. For more information, see [Ensuring
     /// Idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
     client_token: ?[]const u8 = null,
+
+    /// The CPU configuration options to apply to the Dedicated Host.
+    cpu_options: ?HostCpuOptionsRequest = null,
 
     /// Indicates whether to enable or disable host maintenance for the Dedicated
     /// Host. For
@@ -178,6 +182,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AllocateHostsInput, con
     if (input.client_token) |v| {
         try body_buf.appendSlice(allocator, "&ClientToken=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.cpu_options) |v| {
+        if (v.amd_sev_snp) |sv| {
+            try body_buf.appendSlice(allocator, "&CpuOptions.AmdSevSnp=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
+        }
     }
     if (input.host_maintenance) |v| {
         try body_buf.appendSlice(allocator, "&HostMaintenance=");

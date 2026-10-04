@@ -7,7 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const NotificationHubStatusSummary = @import("notification_hub_status_summary.zig").NotificationHubStatusSummary;
 
 pub const DeregisterNotificationHubInput = struct {
-    /// The `NotificationConfiguration` Region.
+    /// The `NotificationHub` Region.
     notification_hub_region: []const u8,
 
     pub const json_field_names = .{
@@ -16,10 +16,10 @@ pub const DeregisterNotificationHubInput = struct {
 };
 
 pub const DeregisterNotificationHubOutput = struct {
-    /// The `NotificationConfiguration` Region.
+    /// The `NotificationHub` Region.
     notification_hub_region: []const u8,
 
-    /// `NotificationConfiguration` status information.
+    /// `NotificationHub` status information.
     status_summary: ?NotificationHubStatusSummary = null,
 
     pub const json_field_names = .{
@@ -77,10 +77,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeregisterNotificationH
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeregisterNotificationHubOutput {
-    var result: DeregisterNotificationHubOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeregisterNotificationHubOutput, body, allocator);
-    }
+    const result: DeregisterNotificationHubOutput = try aws.json.parseJsonObject(
+        DeregisterNotificationHubOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

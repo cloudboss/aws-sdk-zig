@@ -3,6 +3,14 @@ const ReconnectEnum = @import("reconnect_enum.zig").ReconnectEnum;
 
 /// Describes an Amazon WorkSpaces client.
 pub const ClientProperties = struct {
+    /// The client experience policy that determines which client experience the
+    /// user sees.
+    /// Administrators can set this policy to control the client experience for
+    /// users in a directory.
+    /// Valid values include `FORCE_CLASSIC`, `FORCE_UI_2026`,
+    /// and `USER_CHOICE`.
+    client_experience_policy: ?[]const u8 = null,
+
     /// Specifies whether users can upload diagnostic log files of Amazon WorkSpaces
     /// client directly to
     /// WorkSpaces to troubleshoot issues when using the WorkSpaces client.
@@ -19,6 +27,7 @@ pub const ClientProperties = struct {
     reconnect_enabled: ?ReconnectEnum = null,
 
     pub const json_field_names = .{
+        .client_experience_policy = "ClientExperiencePolicy",
         .log_upload_enabled = "LogUploadEnabled",
         .reconnect_enabled = "ReconnectEnabled",
     };

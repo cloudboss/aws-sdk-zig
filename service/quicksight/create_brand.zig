@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBrandInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateBrandOutput {
-    var result: CreateBrandOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateBrandOutput, body, allocator);
-    }
+    const result: CreateBrandOutput = try aws.json.parseJsonObject(
+        CreateBrandOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

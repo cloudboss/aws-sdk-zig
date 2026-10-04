@@ -136,10 +136,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRestoreAccessBack
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateRestoreAccessBackupVaultOutput {
-    var result: CreateRestoreAccessBackupVaultOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateRestoreAccessBackupVaultOutput, body, allocator);
-    }
+    const result: CreateRestoreAccessBackupVaultOutput = try aws.json.parseJsonObject(
+        CreateRestoreAccessBackupVaultOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

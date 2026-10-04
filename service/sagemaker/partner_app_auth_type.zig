@@ -2,14 +2,17 @@ const std = @import("std");
 
 pub const PartnerAppAuthType = enum {
     iam,
+    idc,
 
     pub const json_field_names = .{
         .iam = "IAM",
+        .idc = "IDC",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .iam => "IAM",
+            .idc => "IDC",
         };
     }
 

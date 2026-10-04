@@ -13,7 +13,7 @@ pub const CreateInstanceInput = struct {
     /// The identifier for the directory.
     directory_id: ?[]const u8 = null,
 
-    /// The type of identity management for your Amazon Connect users.
+    /// The type of identity management for your Connect Customer users.
     identity_management_type: DirectoryType,
 
     /// Your contact center handles incoming contacts.
@@ -142,10 +142,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInstanceInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateInstanceOutput {
-    var result: CreateInstanceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateInstanceOutput, body, allocator);
-    }
+    const result: CreateInstanceOutput = try aws.json.parseJsonObject(
+        CreateInstanceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

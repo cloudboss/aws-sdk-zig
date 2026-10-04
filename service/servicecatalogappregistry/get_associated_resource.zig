@@ -142,10 +142,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAssociatedResourceIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAssociatedResourceOutput {
-    var result: GetAssociatedResourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAssociatedResourceOutput, body, allocator);
-    }
+    const result: GetAssociatedResourceOutput = try aws.json.parseJsonObject(
+        GetAssociatedResourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

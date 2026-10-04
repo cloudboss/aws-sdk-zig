@@ -79,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteCoreNetworkPolicy
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteCoreNetworkPolicyVersionOutput {
-    var result: DeleteCoreNetworkPolicyVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteCoreNetworkPolicyVersionOutput, body, allocator);
-    }
+    const result: DeleteCoreNetworkPolicyVersionOutput = try aws.json.parseJsonObject(
+        DeleteCoreNetworkPolicyVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

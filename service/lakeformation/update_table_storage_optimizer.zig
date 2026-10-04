@@ -105,10 +105,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateTableStorageOptim
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateTableStorageOptimizerOutput {
-    var result: UpdateTableStorageOptimizerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateTableStorageOptimizerOutput, body, allocator);
-    }
+    const result: UpdateTableStorageOptimizerOutput = try aws.json.parseJsonObject(
+        UpdateTableStorageOptimizerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

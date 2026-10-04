@@ -1,5 +1,6 @@
 const std = @import("std");
 
+/// The lifecycle status of a recommendation.
 pub const RecommendationStatus = enum {
     pending,
     in_progress,

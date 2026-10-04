@@ -113,10 +113,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateTemplateAliasInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateTemplateAliasOutput {
-    var result: UpdateTemplateAliasOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateTemplateAliasOutput, body, allocator);
-    }
+    var result: UpdateTemplateAliasOutput = try aws.json.parseJsonObject(
+        UpdateTemplateAliasOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

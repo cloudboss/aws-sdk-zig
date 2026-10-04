@@ -84,10 +84,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTableReplicationStat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTableReplicationStatusOutput {
-    var result: GetTableReplicationStatusOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTableReplicationStatusOutput, body, allocator);
-    }
+    const result: GetTableReplicationStatusOutput = try aws.json.parseJsonObject(
+        GetTableReplicationStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -10,6 +10,63 @@ pub const FilterCriteria = struct {
     /// Details of the Amazon Web Services account IDs used to filter findings.
     aws_account_id: ?[]const StringFilter = null,
 
+    /// Filter criteria for the architecture of a container image.
+    cloud_image_architecture: ?[]const StringFilter = null,
+
+    /// Filter criteria for the digest of a container image.
+    cloud_image_digest: ?[]const StringFilter = null,
+
+    /// Filter criteria for the in-use count of a container image.
+    cloud_image_in_use_count: ?[]const NumberFilter = null,
+
+    /// Filter criteria for the last time a container image was in use.
+    cloud_image_last_in_use_at: ?[]const DateFilter = null,
+
+    /// Filter criteria for when a container image was pushed.
+    cloud_image_pushed_at: ?[]const DateFilter = null,
+
+    /// Filter criteria for the registry of a container image.
+    cloud_image_registry: ?[]const StringFilter = null,
+
+    /// Filter criteria for the repository name of a container image.
+    cloud_image_repository_name: ?[]const StringFilter = null,
+
+    /// Filter criteria for the tags of a container image.
+    cloud_image_tags: ?[]const StringFilter = null,
+
+    /// Filter criteria for the cloud provider.
+    cloud_provider: ?[]const StringFilter = null,
+
+    /// Filter criteria for the cloud provider account ID.
+    cloud_provider_account_id: ?[]const StringFilter = null,
+
+    /// Filter criteria for the cloud provider organization ID.
+    cloud_provider_org_id: ?[]const StringFilter = null,
+
+    /// Filter criteria for the cloud provider region.
+    cloud_provider_region: ?[]const StringFilter = null,
+
+    /// Filter criteria for the execution role of a serverless function.
+    cloud_serverless_function_execution_role: ?[]const StringFilter = null,
+
+    /// Filter criteria for when a serverless function was last modified.
+    cloud_serverless_function_last_modified_at: ?[]const DateFilter = null,
+
+    /// Filter criteria for the name of a serverless function.
+    cloud_serverless_function_name: ?[]const StringFilter = null,
+
+    /// Filter criteria for the runtime of a serverless function.
+    cloud_serverless_function_runtime: ?[]const StringFilter = null,
+
+    /// Filter criteria for the image reference of a VM instance.
+    cloud_vm_image_reference: ?[]const StringFilter = null,
+
+    /// Filter criteria for the network ID of a VM instance.
+    cloud_vm_network_id: ?[]const StringFilter = null,
+
+    /// Filter criteria for the subnet IDs of a VM instance.
+    cloud_vm_subnet_ids: ?[]const StringFilter = null,
+
     /// Filter criteria for findings based on the project name in a code repository.
     code_repository_project_name: ?[]const StringFilter = null,
 
@@ -181,6 +238,25 @@ pub const FilterCriteria = struct {
 
     pub const json_field_names = .{
         .aws_account_id = "awsAccountId",
+        .cloud_image_architecture = "cloudImageArchitecture",
+        .cloud_image_digest = "cloudImageDigest",
+        .cloud_image_in_use_count = "cloudImageInUseCount",
+        .cloud_image_last_in_use_at = "cloudImageLastInUseAt",
+        .cloud_image_pushed_at = "cloudImagePushedAt",
+        .cloud_image_registry = "cloudImageRegistry",
+        .cloud_image_repository_name = "cloudImageRepositoryName",
+        .cloud_image_tags = "cloudImageTags",
+        .cloud_provider = "cloudProvider",
+        .cloud_provider_account_id = "cloudProviderAccountId",
+        .cloud_provider_org_id = "cloudProviderOrgId",
+        .cloud_provider_region = "cloudProviderRegion",
+        .cloud_serverless_function_execution_role = "cloudServerlessFunctionExecutionRole",
+        .cloud_serverless_function_last_modified_at = "cloudServerlessFunctionLastModifiedAt",
+        .cloud_serverless_function_name = "cloudServerlessFunctionName",
+        .cloud_serverless_function_runtime = "cloudServerlessFunctionRuntime",
+        .cloud_vm_image_reference = "cloudVmImageReference",
+        .cloud_vm_network_id = "cloudVmNetworkId",
+        .cloud_vm_subnet_ids = "cloudVmSubnetIds",
         .code_repository_project_name = "codeRepositoryProjectName",
         .code_repository_provider_type = "codeRepositoryProviderType",
         .code_vulnerability_detector_name = "codeVulnerabilityDetectorName",

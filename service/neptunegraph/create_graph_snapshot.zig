@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateGraphSnapshotInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateGraphSnapshotOutput {
-    var result: CreateGraphSnapshotOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateGraphSnapshotOutput, body, allocator);
-    }
+    const result: CreateGraphSnapshotOutput = try aws.json.parseJsonObject(
+        CreateGraphSnapshotOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

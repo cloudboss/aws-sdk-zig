@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCrossAccountAuthori
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListCrossAccountAuthorizationsOutput {
-    var result: ListCrossAccountAuthorizationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListCrossAccountAuthorizationsOutput, body, allocator);
-    }
+    const result: ListCrossAccountAuthorizationsOutput = try aws.json.parseJsonObject(
+        ListCrossAccountAuthorizationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -6,6 +6,8 @@ pub const ValidationExceptionErrorCode = enum {
     invalid_token,
     field_validation_failed,
     missing_input,
+    non_india_customer_can_not_set_pan,
+    gst_existence_block_set_pan,
 
     pub const json_field_names = .{
         .malformed_token = "MalformedToken",
@@ -13,6 +15,8 @@ pub const ValidationExceptionErrorCode = enum {
         .invalid_token = "InvalidToken",
         .field_validation_failed = "FieldValidationFailed",
         .missing_input = "MissingInput",
+        .non_india_customer_can_not_set_pan = "NonIndiaCustomerCanNotSetPAN",
+        .gst_existence_block_set_pan = "GSTExistenceBlockSetPAN",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +26,8 @@ pub const ValidationExceptionErrorCode = enum {
             .invalid_token => "InvalidToken",
             .field_validation_failed => "FieldValidationFailed",
             .missing_input => "MissingInput",
+            .non_india_customer_can_not_set_pan => "NonIndiaCustomerCanNotSetPAN",
+            .gst_existence_block_set_pan => "GSTExistenceBlockSetPAN",
         };
     }
 

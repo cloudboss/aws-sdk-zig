@@ -92,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterAccountInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RegisterAccountOutput {
-    var result: RegisterAccountOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RegisterAccountOutput, body, allocator);
-    }
+    const result: RegisterAccountOutput = try aws.json.parseJsonObject(
+        RegisterAccountOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

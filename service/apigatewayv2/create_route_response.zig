@@ -142,10 +142,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRouteResponseInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateRouteResponseOutput {
-    var result: CreateRouteResponseOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateRouteResponseOutput, body, allocator);
-    }
+    const result: CreateRouteResponseOutput = try aws.json.parseJsonObject(
+        CreateRouteResponseOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

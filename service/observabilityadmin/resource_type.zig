@@ -15,11 +15,14 @@ pub const ResourceType = enum {
     aws_bedrock_agentcore_gateway,
     aws_bedrock_agentcore_memory,
     aws_bedrock_agentcore_workload_identity,
+    aws_bedrock_agentcore_payment_manager,
     aws_security_hub,
     aws_cloudfront_distribution,
     aws_security_hub_hubv2,
     aws_otel_enrichment,
     aws_msk_cluster,
+    aws_s3_bucket,
+    aws_bedrock_knowledgebase,
 
     pub const json_field_names = .{
         .aws_ec2_instance = "AWS::EC2::Instance",
@@ -36,11 +39,14 @@ pub const ResourceType = enum {
         .aws_bedrock_agentcore_gateway = "AWS::BedrockAgentCore::Gateway",
         .aws_bedrock_agentcore_memory = "AWS::BedrockAgentCore::Memory",
         .aws_bedrock_agentcore_workload_identity = "AWS::BedrockAgentCore::WorkloadIdentity",
+        .aws_bedrock_agentcore_payment_manager = "AWS::BedrockAgentCore::PaymentManager",
         .aws_security_hub = "AWS::SecurityHub::Hub",
         .aws_cloudfront_distribution = "AWS::CloudFront::Distribution",
         .aws_security_hub_hubv2 = "AWS::SecurityHub::HubV2",
         .aws_otel_enrichment = "AWS::CloudWatch::OTelEnrichment",
         .aws_msk_cluster = "AWS::MSK::Cluster",
+        .aws_s3_bucket = "AWS::S3::Bucket",
+        .aws_bedrock_knowledgebase = "AWS::Bedrock::KnowledgeBase",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -59,11 +65,14 @@ pub const ResourceType = enum {
             .aws_bedrock_agentcore_gateway => "AWS::BedrockAgentCore::Gateway",
             .aws_bedrock_agentcore_memory => "AWS::BedrockAgentCore::Memory",
             .aws_bedrock_agentcore_workload_identity => "AWS::BedrockAgentCore::WorkloadIdentity",
+            .aws_bedrock_agentcore_payment_manager => "AWS::BedrockAgentCore::PaymentManager",
             .aws_security_hub => "AWS::SecurityHub::Hub",
             .aws_cloudfront_distribution => "AWS::CloudFront::Distribution",
             .aws_security_hub_hubv2 => "AWS::SecurityHub::HubV2",
             .aws_otel_enrichment => "AWS::CloudWatch::OTelEnrichment",
             .aws_msk_cluster => "AWS::MSK::Cluster",
+            .aws_s3_bucket => "AWS::S3::Bucket",
+            .aws_bedrock_knowledgebase => "AWS::Bedrock::KnowledgeBase",
         };
     }
 

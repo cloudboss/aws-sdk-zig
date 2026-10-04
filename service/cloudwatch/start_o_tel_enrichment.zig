@@ -4,11 +4,57 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const OTelEnrichmentMetricSelector = @import("o_tel_enrichment_metric_selector.zig").OTelEnrichmentMetricSelector;
+const serde = @import("serde.zig");
 
 pub const StartOTelEnrichmentInput = struct {
+    /// The metric namespaces, and the metric names, to leave unenriched. If this
+    /// parameter
+    /// is omitted, nothing is excluded.
+    ///
+    /// Amazon CloudWatch applies `ExcludeFilters` after
+    /// `IncludeFilters`, so a metric that both parameters match is not
+    /// enriched.
+    ///
+    /// A maximum of 100 filters is allowed across `IncludeFilters` and
+    /// `ExcludeFilters` combined.
+    exclude_filters: ?[]const OTelEnrichmentMetricSelector = null,
+
+    /// The metric namespaces, and the metric names, to enrich. If this parameter is
+    /// omitted, every namespace that Amazon CloudWatch supports for enrichment is
+    /// in
+    /// scope.
+    ///
+    /// A maximum of 100 filters is allowed across `IncludeFilters` and
+    /// `ExcludeFilters` combined.
+    include_filters: ?[]const OTelEnrichmentMetricSelector = null,
+
+    pub const json_field_names = .{
+        .exclude_filters = "ExcludeFilters",
+        .include_filters = "IncludeFilters",
+    };
 };
 
 pub const StartOTelEnrichmentOutput = struct {
+    /// The date and time that enrichment started for the account.
+    created_at: ?i64 = null,
+
+    /// The exclude filters that are stored for the account.
+    exclude_filters: ?[]const OTelEnrichmentMetricSelector = null,
+
+    /// The include filters that are stored for the account.
+    include_filters: ?[]const OTelEnrichmentMetricSelector = null,
+
+    /// The date and time that the enrichment configuration for the account was last
+    /// stored.
+    updated_at: ?i64 = null,
+
+    pub const json_field_names = .{
+        .created_at = "CreatedAt",
+        .exclude_filters = "ExcludeFilters",
+        .include_filters = "IncludeFilters",
+        .updated_at = "UpdatedAt",
+    };
 };
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartOTelEnrichmentInput, options: CallOptions) !StartOTelEnrichmentOutput {
@@ -37,7 +83,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartOTelEn
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: StartOTelEnrichmentInput, config: *aws.Config) !aws.http.Request {
-    _ = input;
     const endpoint = try config.getEndpointForService("monitoring", "CloudWatch", allocator);
 
     const ep = try aws.url.parseEndpoint(endpoint);
@@ -45,6 +90,50 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartOTelEnrichmentInpu
     var body_buf: std.ArrayList(u8) = .empty;
 
     try body_buf.appendSlice(allocator, "Action=StartOTelEnrichment&Version=2010-08-01");
+    if (input.exclude_filters) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            if (item.metric_names) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludeFilters.member.{d}.MetricNames.member.{d}=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
+                    }
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ExcludeFilters.member.{d}.Namespace=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.namespace);
+            }
+        }
+    }
+    if (input.include_filters) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            if (item.metric_names) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IncludeFilters.member.{d}.MetricNames.member.{d}=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
+                    }
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IncludeFilters.member.{d}.Namespace=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.namespace);
+            }
+        }
+    }
 
     const body = try body_buf.toOwnedSlice(allocator);
 
@@ -62,9 +151,37 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartOTelEnrichmentInpu
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartOTelEnrichmentOutput {
     _ = status;
     _ = headers;
-    _ = body;
-    _ = allocator;
-    const result: StartOTelEnrichmentOutput = .{};
+    var reader = aws.xml.Reader.init(body);
+
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "StartOTelEnrichmentResult")) break;
+            },
+            else => {},
+        }
+    }
+
+    var result: StartOTelEnrichmentOutput = .{};
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "CreatedAt")) {
+                    result.created_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "ExcludeFilters")) {
+                    result.exclude_filters = try serde.deserializeOTelEnrichmentMetricSelectorList(allocator, &reader, "member");
+                } else if (std.mem.eql(u8, e.local, "IncludeFilters")) {
+                    result.include_filters = try serde.deserializeOTelEnrichmentMetricSelectorList(allocator, &reader, "member");
+                } else if (std.mem.eql(u8, e.local, "UpdatedAt")) {
+                    result.updated_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
 
     return result;
 }

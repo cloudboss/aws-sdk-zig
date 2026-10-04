@@ -116,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CheckNoNewAccessInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CheckNoNewAccessOutput {
-    var result: CheckNoNewAccessOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CheckNoNewAccessOutput, body, allocator);
-    }
+    const result: CheckNoNewAccessOutput = try aws.json.parseJsonObject(
+        CheckNoNewAccessOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

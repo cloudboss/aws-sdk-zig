@@ -5,12 +5,14 @@ pub const MemoryStatus = enum {
     active,
     failed,
     deleting,
+    updating,
 
     pub const json_field_names = .{
         .creating = "CREATING",
         .active = "ACTIVE",
         .failed = "FAILED",
         .deleting = "DELETING",
+        .updating = "UPDATING",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const MemoryStatus = enum {
             .active => "ACTIVE",
             .failed => "FAILED",
             .deleting => "DELETING",
+            .updating => "UPDATING",
         };
     }
 

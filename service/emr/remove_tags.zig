@@ -6,6 +6,10 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const RemoveTagsInput = struct {
+    /// The ID of the cluster that scopes the tag operation. Required when the
+    /// resource being untagged is a session-scoped resource.
+    cluster_id: ?[]const u8 = null,
+
     /// The Amazon EMR resource identifier from which tags will be removed. For
     /// example,
     /// a cluster identifier or an Amazon EMR Studio ID.
@@ -15,6 +19,7 @@ pub const RemoveTagsInput = struct {
     tag_keys: []const []const u8,
 
     pub const json_field_names = .{
+        .cluster_id = "ClusterId",
         .resource_id = "ResourceId",
         .tag_keys = "TagKeys",
     };

@@ -4,14 +4,21 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const CidrMapping = @import("cidr_mapping.zig").CidrMapping;
 const SourceConfiguration = @import("source_configuration.zig").SourceConfiguration;
 const TargetDeployment = @import("target_deployment.zig").TargetDeployment;
 const TargetNetworkUpdate = @import("target_network_update.zig").TargetNetworkUpdate;
 const TargetS3ConfigurationUpdate = @import("target_s3_configuration_update.zig").TargetS3ConfigurationUpdate;
+const VpcProvisioningStrategy = @import("vpc_provisioning_strategy.zig").VpcProvisioningStrategy;
 const TargetNetwork = @import("target_network.zig").TargetNetwork;
 const TargetS3Configuration = @import("target_s3_configuration.zig").TargetS3Configuration;
 
 pub const UpdateNetworkMigrationDefinitionInput = struct {
+    /// The updated list of CIDR mappings that map original source CIDR ranges to
+    /// updated target CIDR ranges. CIDR mappings can be provided only when
+    /// `vpcProvisioningStrategy` is set to `USE_EXISTING`.
+    cidr_mappings: ?[]const CidrMapping = null,
+
     /// The updated description of the network migration definition.
     description: ?[]const u8 = null,
 
@@ -36,7 +43,13 @@ pub const UpdateNetworkMigrationDefinitionInput = struct {
     /// The updated S3 configuration for storing the target network artifacts.
     target_s3_configuration: ?TargetS3ConfigurationUpdate = null,
 
+    /// Updates whether the migration creates new target VPCs or uses existing ones.
+    /// Set to `USE_EXISTING` to migrate into existing VPCs in the target account,
+    /// or to `CREATE_NEW` to provision new target VPCs.
+    vpc_provisioning_strategy: ?VpcProvisioningStrategy = null,
+
     pub const json_field_names = .{
+        .cidr_mappings = "cidrMappings",
         .description = "description",
         .name = "name",
         .network_migration_definition_id = "networkMigrationDefinitionID",
@@ -45,12 +58,18 @@ pub const UpdateNetworkMigrationDefinitionInput = struct {
         .target_deployment = "targetDeployment",
         .target_network = "targetNetwork",
         .target_s3_configuration = "targetS3Configuration",
+        .vpc_provisioning_strategy = "vpcProvisioningStrategy",
     };
 };
 
 pub const UpdateNetworkMigrationDefinitionOutput = struct {
     /// The Amazon Resource Name (ARN) of the network migration definition.
     arn: ?[]const u8 = null,
+
+    /// A list of CIDR mappings that map original source CIDR ranges to updated
+    /// target CIDR ranges. CIDR mappings apply only when `vpcProvisioningStrategy`
+    /// is set to `USE_EXISTING`.
+    cidr_mappings: ?[]const CidrMapping = null,
 
     /// The timestamp when the network migration definition was created.
     created_at: ?i64 = null,
@@ -85,8 +104,14 @@ pub const UpdateNetworkMigrationDefinitionOutput = struct {
     /// The timestamp when the network migration definition was last updated.
     updated_at: ?i64 = null,
 
+    /// Indicates whether the migration creates new target VPCs or uses existing
+    /// ones. `CREATE_NEW` provisions new target VPCs; `USE_EXISTING` migrates into
+    /// existing VPCs in the target account.
+    vpc_provisioning_strategy: ?VpcProvisioningStrategy = null,
+
     pub const json_field_names = .{
         .arn = "arn",
+        .cidr_mappings = "cidrMappings",
         .created_at = "createdAt",
         .description = "description",
         .name = "name",
@@ -98,6 +123,7 @@ pub const UpdateNetworkMigrationDefinitionOutput = struct {
         .target_network = "targetNetwork",
         .target_s3_configuration = "targetS3Configuration",
         .updated_at = "updatedAt",
+        .vpc_provisioning_strategy = "vpcProvisioningStrategy",
     };
 };
 
@@ -137,6 +163,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateNetworkMigrationD
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.cidr_mappings) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"cidrMappings\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"description\":");
@@ -183,6 +215,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateNetworkMigrationD
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.vpc_provisioning_strategy) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"vpcProvisioningStrategy\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -199,10 +237,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateNetworkMigrationD
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateNetworkMigrationDefinitionOutput {
-    var result: UpdateNetworkMigrationDefinitionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateNetworkMigrationDefinitionOutput, body, allocator);
-    }
+    const result: UpdateNetworkMigrationDefinitionOutput = try aws.json.parseJsonObject(
+        UpdateNetworkMigrationDefinitionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

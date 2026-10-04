@@ -113,7 +113,10 @@ pub const CreateDashboardInput = struct {
     /// Use the `DataSetReferences` entity within `SourceTemplate` to
     /// list the replacement datasets for the placeholders listed in the original.
     /// The schema in
-    /// each dataset must match its placeholder.
+    /// each dataset must match its placeholder. Use the `TopicReferences`
+    /// entity to list the replacement topics for the topic placeholders listed in
+    /// the original.
+    /// The schema in each topic must match its placeholder.
     ///
     /// Either a `SourceEntity` or a `Definition` must be provided in
     /// order for the request to be valid.
@@ -324,10 +327,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDashboardInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDashboardOutput {
-    var result: CreateDashboardOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateDashboardOutput, body, allocator);
-    }
+    var result: CreateDashboardOutput = try aws.json.parseJsonObject(
+        CreateDashboardOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

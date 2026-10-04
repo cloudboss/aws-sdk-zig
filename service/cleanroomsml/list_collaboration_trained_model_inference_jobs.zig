@@ -131,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCollaborationTraine
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListCollaborationTrainedModelInferenceJobsOutput {
-    var result: ListCollaborationTrainedModelInferenceJobsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListCollaborationTrainedModelInferenceJobsOutput, body, allocator);
-    }
+    const result: ListCollaborationTrainedModelInferenceJobsOutput = try aws.json.parseJsonObject(
+        ListCollaborationTrainedModelInferenceJobsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

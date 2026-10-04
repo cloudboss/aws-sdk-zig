@@ -3,7 +3,9 @@ const BlockDeviceMapping = @import("block_device_mapping.zig").BlockDeviceMappin
 const BootModeValues = @import("boot_mode_values.zig").BootModeValues;
 const HypervisorType = @import("hypervisor_type.zig").HypervisorType;
 const ImageTypeValues = @import("image_type_values.zig").ImageTypeValues;
+const ImageWatermark = @import("image_watermark.zig").ImageWatermark;
 const ImdsSupportValues = @import("imds_support_values.zig").ImdsSupportValues;
+const InstanceTypeSpecification = @import("instance_type_specification.zig").InstanceTypeSpecification;
 const PlatformValues = @import("platform_values.zig").PlatformValues;
 const ProductCode = @import("product_code.zig").ProductCode;
 const DeviceType = @import("device_type.zig").DeviceType;
@@ -83,6 +85,9 @@ pub const Image = struct {
     /// The type of image.
     image_type: ?ImageTypeValues = null,
 
+    /// The watermarks attached to the AMI.
+    image_watermarks: ?[]const ImageWatermark = null,
+
     /// If `v2.0`, it indicates that IMDSv2 is specified in the AMI. Instances
     /// launched
     /// from this AMI will have `HttpTokens` automatically set to `required` so
@@ -92,6 +97,11 @@ pub const Image = struct {
     /// information, see [Configure the
     /// AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration) in the *Amazon EC2 User Guide*.
     imds_support: ?ImdsSupportValues = null,
+
+    /// The instance type specification for the AMI, which defines which instance
+    /// types are
+    /// compatible with this image.
+    instance_type_specification: ?InstanceTypeSpecification = null,
 
     /// The kernel associated with the image, if any. Only applicable for machine
     /// images.
@@ -131,6 +141,11 @@ pub const Image = struct {
     /// implicit and
     /// explicit launch permissions.
     public: ?bool = null,
+
+    /// The name of the public Systems Manager parameter that resolves to this AMI,
+    /// under the
+    /// `aws/service/` namespace.
+    public_ssm_parameter_name: ?[]const u8 = null,
 
     /// The RAM disk associated with the image, if any. Only applicable for machine
     /// images.

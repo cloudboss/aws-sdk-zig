@@ -2,7 +2,9 @@ const aws = @import("aws");
 
 const DataClassificationDetails = @import("data_classification_details.zig").DataClassificationDetails;
 const ResourceDetails = @import("resource_details.zig").ResourceDetails;
+const ResourceOwner = @import("resource_owner.zig").ResourceOwner;
 const Partition = @import("partition.zig").Partition;
+const CloudProviderName = @import("cloud_provider_name.zig").CloudProviderName;
 
 /// A resource related to a finding.
 pub const Resource = struct {
@@ -22,9 +24,16 @@ pub const Resource = struct {
     /// The canonical identifier for the given resource type.
     id: []const u8,
 
+    /// Information about the account and organization that own the resource.
+    owner: ?ResourceOwner = null,
+
     /// The canonical Amazon Web Services partition name that the Region is assigned
     /// to.
     partition: ?Partition = null,
+
+    /// The cloud provider that the resource belongs to. Valid values are `AWS` and
+    /// `Azure`.
+    provider: ?CloudProviderName = null,
 
     /// The canonical Amazon Web Services external Region name where this resource
     /// is located.
@@ -58,7 +67,9 @@ pub const Resource = struct {
         .data_classification = "DataClassification",
         .details = "Details",
         .id = "Id",
+        .owner = "Owner",
         .partition = "Partition",
+        .provider = "Provider",
         .region = "Region",
         .resource_role = "ResourceRole",
         .tags = "Tags",

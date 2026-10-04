@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const PartnerAppConfig = @import("partner_app_config.zig").PartnerAppConfig;
 const PartnerAppAuthType = @import("partner_app_auth_type.zig").PartnerAppAuthType;
+const IdcConfigInput = @import("idc_config_input.zig").IdcConfigInput;
 const PartnerAppMaintenanceConfig = @import("partner_app_maintenance_config.zig").PartnerAppMaintenanceConfig;
 const Tag = @import("tag.zig").Tag;
 const PartnerAppType = @import("partner_app_type.zig").PartnerAppType;
@@ -15,7 +16,13 @@ pub const CreatePartnerAppInput = struct {
     application_config: ?PartnerAppConfig = null,
 
     /// The authorization type that users use to access the SageMaker Partner AI
-    /// App.
+    /// App. Valid values:
+    ///
+    /// * `IAM`: Users access the SageMaker Partner AI App with their Amazon Web
+    ///   Services IAM identity.
+    /// * `IDC`: Users access the SageMaker Partner AI App with their Amazon Web
+    ///   Services IAM Identity Center identity. Specify the Identity Center
+    ///   instance to use in `IdcConfig`.
     auth_type: PartnerAppAuthType,
 
     /// A unique token that guarantees that the call to this API is idempotent.
@@ -33,6 +40,11 @@ pub const CreatePartnerAppInput = struct {
 
     /// The ARN of the IAM role that the partner application uses.
     execution_role_arn: []const u8,
+
+    /// Specifies the Amazon Web Services IAM Identity Center configuration for the
+    /// SageMaker Partner AI App. Specify this parameter when `AuthType` is `IDC`.
+    /// Apps that use `IAM` authorization don't use this parameter.
+    idc_config: ?IdcConfigInput = null,
 
     /// SageMaker Partner AI Apps uses Amazon Web Services KMS to encrypt data at
     /// rest using an Amazon Web Services managed key by default. For more control,
@@ -65,6 +77,7 @@ pub const CreatePartnerAppInput = struct {
         .enable_auto_minor_version_upgrade = "EnableAutoMinorVersionUpgrade",
         .enable_iam_session_based_identity = "EnableIamSessionBasedIdentity",
         .execution_role_arn = "ExecutionRoleArn",
+        .idc_config = "IdcConfig",
         .kms_key_id = "KmsKeyId",
         .maintenance_config = "MaintenanceConfig",
         .name = "Name",

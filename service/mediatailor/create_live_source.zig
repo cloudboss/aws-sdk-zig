@@ -135,10 +135,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLiveSourceInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateLiveSourceOutput {
-    var result: CreateLiveSourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateLiveSourceOutput, body, allocator);
-    }
+    const result: CreateLiveSourceOutput = try aws.json.parseJsonObject(
+        CreateLiveSourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

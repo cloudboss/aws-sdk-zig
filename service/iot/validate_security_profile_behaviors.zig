@@ -86,10 +86,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ValidateSecurityProfile
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ValidateSecurityProfileBehaviorsOutput {
-    var result: ValidateSecurityProfileBehaviorsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ValidateSecurityProfileBehaviorsOutput, body, allocator);
-    }
+    const result: ValidateSecurityProfileBehaviorsOutput = try aws.json.parseJsonObject(
+        ValidateSecurityProfileBehaviorsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

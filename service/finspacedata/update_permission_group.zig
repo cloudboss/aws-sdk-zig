@@ -144,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePermissionGroupIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdatePermissionGroupOutput {
-    var result: UpdatePermissionGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdatePermissionGroupOutput, body, allocator);
-    }
+    const result: UpdatePermissionGroupOutput = try aws.json.parseJsonObject(
+        UpdatePermissionGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

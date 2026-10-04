@@ -11,43 +11,61 @@ const WorkflowConfiguration = @import("workflow_configuration.zig").WorkflowConf
 const LatestVersionReferences = @import("latest_version_references.zig").LatestVersionReferences;
 
 pub const CreateImageInput = struct {
-    /// Unique, case-sensitive identifier you provide to ensure
-    /// idempotency of the request. For more information, see [Ensuring
+    /// A unique, case-sensitive identifier you provide to ensure
+    /// that the operation runs no more than one time. If you retry a request with
+    /// the same client
+    /// token, Image Builder returns the original response without running the
+    /// operation again. For more
+    /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
     /// in the *Amazon EC2 API Reference*.
     client_token: []const u8,
 
     /// The Amazon Resource Name (ARN) of the container recipe that defines how
     /// images are
-    /// configured and tested.
+    /// configured and tested. You must specify either this property or
+    /// `imageRecipeArn`, but not both.
     container_recipe_arn: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the distribution configuration that
     /// defines and
-    /// configures the outputs of your pipeline.
+    /// configures the outputs of the image build. If you don't specify a
+    /// distribution configuration, Image Builder creates the output image only in
+    /// the
+    /// account and Amazon Web Services Region where the build runs.
     distribution_configuration_arn: ?[]const u8 = null,
 
-    /// Collects additional information about the image being created, including the
-    /// operating
-    /// system (OS) version and package list. This information is used to enhance
-    /// the overall
-    /// experience of using EC2 Image Builder. Enabled by default.
+    /// Specifies whether to collect additional information about the image being
+    /// created, including the operating
+    /// system (OS) version and package list. Defaults to `true`.
     enhanced_image_metadata_enabled: ?bool = null,
 
     /// The name or Amazon Resource Name (ARN) for the IAM role you create that
     /// grants
-    /// Image Builder access to perform workflow actions.
+    /// Image Builder access to perform workflow actions. This property is required
+    /// if you
+    /// specify `workflows`. If you don't provide a role, Image Builder uses the
+    /// Image Builder service-linked role in your account, and creates it if it
+    /// doesn't
+    /// exist.
     execution_role: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the image recipe that defines how images
     /// are
-    /// configured, tested, and assessed.
+    /// configured, tested, and assessed. You must specify either this property or
+    /// `containerRecipeArn`, but not both.
     image_recipe_arn: ?[]const u8 = null,
 
-    /// Contains settings for vulnerability scans.
+    /// Settings for vulnerability scans that Amazon Inspector runs during image
+    /// creation. For AMI output, Amazon Inspector scans the test instance. For
+    /// container
+    /// output, Amazon Inspector scans the container image that Image Builder pushes
+    /// to the Amazon ECR
+    /// repository specified in `ecrConfiguration`.
     image_scanning_configuration: ?ImageScanningConfiguration = null,
 
-    /// The image tests configuration of the image.
+    /// Settings that determine whether Image Builder runs tests on the image after
+    /// building it. Image tests are enabled by default.
     image_tests_configuration: ?ImageTestsConfiguration = null,
 
     /// The Amazon Resource Name (ARN) of the infrastructure configuration that
@@ -55,13 +73,20 @@ pub const CreateImageInput = struct {
     /// environment in which your image will be built and tested.
     infrastructure_configuration_arn: []const u8,
 
-    /// Define logging configuration for the image build process.
+    /// The CloudWatch Logs log group where Image Builder sends the image build
+    /// logs. If
+    /// you specify a log group name outside of the `/aws/imagebuilder/`
+    /// namespace, you must also provide an `executionRole` that has
+    /// permission to write to that log group.
     logging_configuration: ?ImageLoggingConfiguration = null,
 
     /// The tags of the image.
     tags: ?[]const aws.map.StringMapEntry = null,
 
-    /// Contains an array of workflow configuration objects.
+    /// The array of workflow configuration objects for the build. If you specify
+    /// workflows, they replace the default workflows that Image Builder otherwise
+    /// runs for
+    /// the build, and you must also provide an `executionRole`.
     workflows: ?[]const WorkflowConfiguration = null,
 
     pub const json_field_names = .{
@@ -87,7 +112,10 @@ pub const CreateImageOutput = struct {
     /// The Amazon Resource Name (ARN) of the image that the request created.
     image_build_version_arn: ?[]const u8 = null,
 
-    /// The resource ARNs with different wildcard variations of semantic versioning.
+    /// A set of wildcard version ARNs that always reference the latest
+    /// version of the resource. ARNs are included for the latest version overall,
+    /// and for the latest
+    /// versions within the same major, minor, and patch levels.
     latest_version_references: ?LatestVersionReferences = null,
 
     /// The request ID that uniquely identifies this request.
@@ -221,10 +249,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateImageInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateImageOutput {
-    var result: CreateImageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateImageOutput, body, allocator);
-    }
+    const result: CreateImageOutput = try aws.json.parseJsonObject(
+        CreateImageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

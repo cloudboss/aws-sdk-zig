@@ -1,6 +1,7 @@
 const DataType = @import("data_type.zig").DataType;
 const DistanceMetric = @import("distance_metric.zig").DistanceMetric;
 const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
+const IndexMode = @import("index_mode.zig").IndexMode;
 const MetadataConfiguration = @import("metadata_configuration.zig").MetadataConfiguration;
 
 /// The attributes of a vector index.
@@ -25,6 +26,14 @@ pub const Index = struct {
     /// The Amazon Resource Name (ARN) of the vector index.
     index_arn: []const u8,
 
+    /// The mode that determines how the vector index processes queries.
+    ///
+    /// Valid values:
+    ///
+    /// * `CLASSIC` - Applies metadata filters during the vector search.
+    /// * `ENHANCED` - Applies metadata filters before the vector search.
+    index_mode: ?IndexMode = null,
+
     /// The name of the vector index.
     index_name: []const u8,
 
@@ -41,6 +50,7 @@ pub const Index = struct {
         .distance_metric = "distanceMetric",
         .encryption_configuration = "encryptionConfiguration",
         .index_arn = "indexArn",
+        .index_mode = "indexMode",
         .index_name = "indexName",
         .metadata_configuration = "metadataConfiguration",
         .vector_bucket_name = "vectorBucketName",

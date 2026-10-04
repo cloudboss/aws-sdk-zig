@@ -10,8 +10,9 @@ pub const WorkflowParameterDetail = struct {
     /// The name of this input parameter.
     name: []const u8,
 
-    /// The type of input this parameter provides. The currently supported value is
-    /// "string".
+    /// The type of input this parameter provides. Supported values are
+    /// `string`, `integer`, `boolean`, and
+    /// `stringList`.
     @"type": []const u8,
 
     pub const json_field_names = .{

@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const BrowserSigningConfigOutput = @import("browser_signing_config_output.zig").BrowserSigningConfigOutput;
 const Certificate = @import("certificate.zig").Certificate;
 const BrowserEnterprisePolicy = @import("browser_enterprise_policy.zig").BrowserEnterprisePolicy;
+const ToolsFileSystemConfiguration = @import("tools_file_system_configuration.zig").ToolsFileSystemConfiguration;
 const BrowserNetworkConfiguration = @import("browser_network_configuration.zig").BrowserNetworkConfiguration;
 const RecordingConfig = @import("recording_config.zig").RecordingConfig;
 const BrowserStatus = @import("browser_status.zig").BrowserStatus;
@@ -49,6 +50,10 @@ pub const GetBrowserOutput = struct {
     /// The reason for failure if the browser is in a failed state.
     failure_reason: ?[]const u8 = null,
 
+    /// The file system configurations mounted into the browser. Each entry
+    /// describes an access point and its mount path.
+    filesystem_configurations: ?[]const ToolsFileSystemConfiguration = null,
+
     /// The timestamp when the browser was last updated.
     last_updated_at: i64,
 
@@ -72,6 +77,7 @@ pub const GetBrowserOutput = struct {
         .enterprise_policies = "enterprisePolicies",
         .execution_role_arn = "executionRoleArn",
         .failure_reason = "failureReason",
+        .filesystem_configurations = "filesystemConfigurations",
         .last_updated_at = "lastUpdatedAt",
         .name = "name",
         .network_configuration = "networkConfiguration",
@@ -129,10 +135,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBrowserInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBrowserOutput {
-    var result: GetBrowserOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBrowserOutput, body, allocator);
-    }
+    const result: GetBrowserOutput = try aws.json.parseJsonObject(
+        GetBrowserOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

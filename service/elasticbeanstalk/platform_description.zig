@@ -58,7 +58,8 @@ pub const PlatformDescription = struct {
     /// The name of the platform version.
     platform_name: ?[]const u8 = null,
 
-    /// The AWS account ID of the person who created the platform version.
+    /// The Amazon Web Services account ID of the person who created the platform
+    /// version.
     platform_owner: ?[]const u8 = null,
 
     /// The status of the platform version.

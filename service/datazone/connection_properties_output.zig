@@ -1,5 +1,6 @@
 const AmazonQPropertiesOutput = @import("amazon_q_properties_output.zig").AmazonQPropertiesOutput;
 const AthenaPropertiesOutput = @import("athena_properties_output.zig").AthenaPropertiesOutput;
+const GitPropertiesOutput = @import("git_properties_output.zig").GitPropertiesOutput;
 const GluePropertiesOutput = @import("glue_properties_output.zig").GluePropertiesOutput;
 const HyperPodPropertiesOutput = @import("hyper_pod_properties_output.zig").HyperPodPropertiesOutput;
 const IamPropertiesOutput = @import("iam_properties_output.zig").IamPropertiesOutput;
@@ -7,8 +8,10 @@ const LakehousePropertiesOutput = @import("lakehouse_properties_output.zig").Lak
 const MlflowPropertiesOutput = @import("mlflow_properties_output.zig").MlflowPropertiesOutput;
 const RedshiftPropertiesOutput = @import("redshift_properties_output.zig").RedshiftPropertiesOutput;
 const S3PropertiesOutput = @import("s3_properties_output.zig").S3PropertiesOutput;
+const SnowflakePropertiesOutput = @import("snowflake_properties_output.zig").SnowflakePropertiesOutput;
 const SparkEmrPropertiesOutput = @import("spark_emr_properties_output.zig").SparkEmrPropertiesOutput;
 const SparkGluePropertiesOutput = @import("spark_glue_properties_output.zig").SparkGluePropertiesOutput;
+const VpcPropertiesOutput = @import("vpc_properties_output.zig").VpcPropertiesOutput;
 const WorkflowsMwaaPropertiesOutput = @import("workflows_mwaa_properties_output.zig").WorkflowsMwaaPropertiesOutput;
 const WorkflowsServerlessPropertiesOutput = @import("workflows_serverless_properties_output.zig").WorkflowsServerlessPropertiesOutput;
 
@@ -18,6 +21,8 @@ pub const ConnectionPropertiesOutput = union(enum) {
     amazon_q_properties: ?AmazonQPropertiesOutput,
     /// The Amazon Athena properties of a connection.
     athena_properties: ?AthenaPropertiesOutput,
+    /// The Git properties of a connection.
+    git_properties: ?GitPropertiesOutput,
     /// The Amazon Web Services Glue properties of a connection.
     glue_properties: ?GluePropertiesOutput,
     /// The hyper pod properties of a connection.
@@ -32,10 +37,14 @@ pub const ConnectionPropertiesOutput = union(enum) {
     redshift_properties: ?RedshiftPropertiesOutput,
     /// The Amazon S3 properties of a connection.
     s_3_properties: ?S3PropertiesOutput,
+    /// The Snowflake-specific connection properties for an existing connection.
+    snowflake_properties: ?SnowflakePropertiesOutput,
     /// The Spark EMR properties of a connection.
     spark_emr_properties: ?SparkEmrPropertiesOutput,
     /// The Spark Amazon Web Services Glue properties of a connection.
     spark_glue_properties: ?SparkGluePropertiesOutput,
+    /// The VPC properties of a connection.
+    vpc_properties: ?VpcPropertiesOutput,
     /// The Amazon MWAA properties of a connection.
     workflows_mwaa_properties: ?WorkflowsMwaaPropertiesOutput,
     /// The MWAA serverless properties of a connection.
@@ -44,6 +53,7 @@ pub const ConnectionPropertiesOutput = union(enum) {
     pub const json_field_names = .{
         .amazon_q_properties = "amazonQProperties",
         .athena_properties = "athenaProperties",
+        .git_properties = "gitProperties",
         .glue_properties = "glueProperties",
         .hyper_pod_properties = "hyperPodProperties",
         .iam_properties = "iamProperties",
@@ -51,8 +61,10 @@ pub const ConnectionPropertiesOutput = union(enum) {
         .mlflow_properties = "mlflowProperties",
         .redshift_properties = "redshiftProperties",
         .s_3_properties = "s3Properties",
+        .snowflake_properties = "snowflakeProperties",
         .spark_emr_properties = "sparkEmrProperties",
         .spark_glue_properties = "sparkGlueProperties",
+        .vpc_properties = "vpcProperties",
         .workflows_mwaa_properties = "workflowsMwaaProperties",
         .workflows_serverless_properties = "workflowsServerlessProperties",
     };

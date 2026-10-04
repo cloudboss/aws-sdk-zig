@@ -7,20 +7,34 @@ pub const ServiceError = struct {
 
     pub const Kind = union(enum) {
         access_denied_exception: AccessDeniedException,
+        agent_message_out_of_context_exception: AgentMessageOutOfContextException,
         conflict_exception: ConflictException,
+        conversation_not_found_exception: ConversationNotFoundException,
+        failed_dependency_exception: FailedDependencyException,
         internal_server_exception: InternalServerException,
+        not_implemented_operation_exception: NotImplementedOperationException,
         resource_not_found_exception: ResourceNotFoundException,
+        service_quota_exceeded_exception: ServiceQuotaExceededException,
         throttling_exception: ThrottlingException,
+        unauthorized_exception: UnauthorizedException,
+        unsupported_mime_type_exception: UnsupportedMIMETypeException,
         validation_exception: ValidationException,
         unknown: UnknownServiceError,
 
         pub fn code(self: Kind) []const u8 {
             return switch (self) {
                 .access_denied_exception => "AccessDeniedException",
+                .agent_message_out_of_context_exception => "AgentMessageOutOfContextException",
                 .conflict_exception => "ConflictException",
+                .conversation_not_found_exception => "ConversationNotFoundException",
+                .failed_dependency_exception => "FailedDependencyException",
                 .internal_server_exception => "InternalServerException",
+                .not_implemented_operation_exception => "NotImplementedOperationException",
                 .resource_not_found_exception => "ResourceNotFoundException",
+                .service_quota_exceeded_exception => "ServiceQuotaExceededException",
                 .throttling_exception => "ThrottlingException",
+                .unauthorized_exception => "UnauthorizedException",
+                .unsupported_mime_type_exception => "UnsupportedMIMETypeException",
                 .validation_exception => "ValidationException",
                 .unknown => |e| e.code,
             };
@@ -29,10 +43,17 @@ pub const ServiceError = struct {
         pub fn message(self: Kind) []const u8 {
             return switch (self) {
                 .access_denied_exception => |e| e.message,
+                .agent_message_out_of_context_exception => |e| e.message,
                 .conflict_exception => |e| e.message,
+                .conversation_not_found_exception => |e| e.message,
+                .failed_dependency_exception => |e| e.message,
                 .internal_server_exception => |e| e.message,
+                .not_implemented_operation_exception => |e| e.message,
                 .resource_not_found_exception => |e| e.message,
+                .service_quota_exceeded_exception => |e| e.message,
                 .throttling_exception => |e| e.message,
+                .unauthorized_exception => |e| e.message,
+                .unsupported_mime_type_exception => |e| e.message,
                 .validation_exception => |e| e.message,
                 .unknown => |e| e.message,
             };
@@ -41,10 +62,17 @@ pub const ServiceError = struct {
         pub fn httpStatus(self: Kind) u16 {
             return switch (self) {
                 .access_denied_exception => 403,
+                .agent_message_out_of_context_exception => 400,
                 .conflict_exception => 409,
+                .conversation_not_found_exception => 404,
+                .failed_dependency_exception => 424,
                 .internal_server_exception => 500,
+                .not_implemented_operation_exception => 501,
                 .resource_not_found_exception => 404,
+                .service_quota_exceeded_exception => 400,
                 .throttling_exception => 429,
+                .unauthorized_exception => 401,
+                .unsupported_mime_type_exception => 415,
                 .validation_exception => 400,
                 .unknown => |e| e.http_status,
             };
@@ -53,10 +81,17 @@ pub const ServiceError = struct {
         pub fn requestId(self: Kind) []const u8 {
             return switch (self) {
                 .access_denied_exception => |e| e.request_id,
+                .agent_message_out_of_context_exception => |e| e.request_id,
                 .conflict_exception => |e| e.request_id,
+                .conversation_not_found_exception => |e| e.request_id,
+                .failed_dependency_exception => |e| e.request_id,
                 .internal_server_exception => |e| e.request_id,
+                .not_implemented_operation_exception => |e| e.request_id,
                 .resource_not_found_exception => |e| e.request_id,
+                .service_quota_exceeded_exception => |e| e.request_id,
                 .throttling_exception => |e| e.request_id,
+                .unauthorized_exception => |e| e.request_id,
+                .unsupported_mime_type_exception => |e| e.request_id,
                 .validation_exception => |e| e.request_id,
                 .unknown => |e| e.request_id,
             };
@@ -94,10 +129,42 @@ pub const AccessDeniedException = struct {
     };
 };
 
+/// The agent message does not fit within the current conversation context.
+/// Start a new conversation or provide a message that relates to the current
+/// profile customization session.
+pub const AgentMessageOutOfContextException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
+};
+
 /// The data store is in a transition state and the user requested action cannot
-/// be
-/// performed.
+/// be performed.
 pub const ConflictException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
+};
+
+/// The specified conversation identifier does not exist. Verify the
+/// conversation ID or omit it to start a new conversation.
+pub const ConversationNotFoundException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
+};
+
+/// A dependent service failed to fulfill the request.
+pub const FailedDependencyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 
@@ -116,8 +183,29 @@ pub const InternalServerException = struct {
     };
 };
 
+/// The requested operation is not yet available. Check the service
+/// documentation for a list of supported operations.
+pub const NotImplementedOperationException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
+};
+
 /// The requested data store was not found.
 pub const ResourceNotFoundException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
+};
+
+/// The request exceeds the service quota.
+pub const ServiceQuotaExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 
@@ -129,6 +217,28 @@ pub const ResourceNotFoundException = struct {
 /// The user has exceeded their maximum number of allowed calls to the given
 /// API.
 pub const ThrottlingException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
+};
+
+/// You are not authorized to make this request. Verify that your Amazon Web
+/// Services credentials are valid and that you have the required permissions.
+pub const UnauthorizedException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
+};
+
+/// The content type in your request is not supported. Use a supported content
+/// type for this operation.
+pub const UnsupportedMIMETypeException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 
@@ -182,6 +292,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             return .{ .arena = arena, .kind = .{ .access_denied_exception = typed_error } };
         }
     }
+    if (std.mem.eql(u8, error_code, "AgentMessageOutOfContextException")) {
+        const parsed_error: ?AgentMessageOutOfContextException = aws.json.parseJsonObject(AgentMessageOutOfContextException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .agent_message_out_of_context_exception = typed_error } };
+        }
+    }
     if (std.mem.eql(u8, error_code, "ConflictException")) {
         const parsed_error: ?ConflictException = aws.json.parseJsonObject(ConflictException, body, arena_alloc) catch |err| switch (err) {
             error.OutOfMemory => return error.OutOfMemory,
@@ -192,6 +314,30 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             typed_error.message = owned_message;
             typed_error.request_id = owned_request_id;
             return .{ .arena = arena, .kind = .{ .conflict_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ConversationNotFoundException")) {
+        const parsed_error: ?ConversationNotFoundException = aws.json.parseJsonObject(ConversationNotFoundException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .conversation_not_found_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "FailedDependencyException")) {
+        const parsed_error: ?FailedDependencyException = aws.json.parseJsonObject(FailedDependencyException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .failed_dependency_exception = typed_error } };
         }
     }
     if (std.mem.eql(u8, error_code, "InternalServerException")) {
@@ -206,6 +352,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             return .{ .arena = arena, .kind = .{ .internal_server_exception = typed_error } };
         }
     }
+    if (std.mem.eql(u8, error_code, "NotImplementedOperationException")) {
+        const parsed_error: ?NotImplementedOperationException = aws.json.parseJsonObject(NotImplementedOperationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .not_implemented_operation_exception = typed_error } };
+        }
+    }
     if (std.mem.eql(u8, error_code, "ResourceNotFoundException")) {
         const parsed_error: ?ResourceNotFoundException = aws.json.parseJsonObject(ResourceNotFoundException, body, arena_alloc) catch |err| switch (err) {
             error.OutOfMemory => return error.OutOfMemory,
@@ -218,6 +376,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             return .{ .arena = arena, .kind = .{ .resource_not_found_exception = typed_error } };
         }
     }
+    if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
+        const parsed_error: ?ServiceQuotaExceededException = aws.json.parseJsonObject(ServiceQuotaExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = typed_error } };
+        }
+    }
     if (std.mem.eql(u8, error_code, "ThrottlingException")) {
         const parsed_error: ?ThrottlingException = aws.json.parseJsonObject(ThrottlingException, body, arena_alloc) catch |err| switch (err) {
             error.OutOfMemory => return error.OutOfMemory,
@@ -228,6 +398,30 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             typed_error.message = owned_message;
             typed_error.request_id = owned_request_id;
             return .{ .arena = arena, .kind = .{ .throttling_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "UnauthorizedException")) {
+        const parsed_error: ?UnauthorizedException = aws.json.parseJsonObject(UnauthorizedException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .unauthorized_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "UnsupportedMIMETypeException")) {
+        const parsed_error: ?UnsupportedMIMETypeException = aws.json.parseJsonObject(UnsupportedMIMETypeException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .unsupported_mime_type_exception = typed_error } };
         }
     }
     if (std.mem.eql(u8, error_code, "ValidationException")) {

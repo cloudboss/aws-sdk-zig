@@ -33,6 +33,7 @@ pub const MessageComponentsSummary = @import("message_components_summary.zig").M
 pub const NotificationConfigurationStatus = @import("notification_configuration_status.zig").NotificationConfigurationStatus;
 pub const NotificationConfigurationStructure = @import("notification_configuration_structure.zig").NotificationConfigurationStructure;
 pub const NotificationConfigurationSubtype = @import("notification_configuration_subtype.zig").NotificationConfigurationSubtype;
+pub const NotificationEventAttachment = @import("notification_event_attachment.zig").NotificationEventAttachment;
 pub const NotificationEventOverview = @import("notification_event_overview.zig").NotificationEventOverview;
 pub const NotificationEventSchema = @import("notification_event_schema.zig").NotificationEventSchema;
 pub const NotificationEventSummary = @import("notification_event_summary.zig").NotificationEventSummary;

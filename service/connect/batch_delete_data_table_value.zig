@@ -105,10 +105,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchDeleteDataTableVal
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchDeleteDataTableValueOutput {
-    var result: BatchDeleteDataTableValueOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchDeleteDataTableValueOutput, body, allocator);
-    }
+    const result: BatchDeleteDataTableValueOutput = try aws.json.parseJsonObject(
+        BatchDeleteDataTableValueOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

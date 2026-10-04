@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeletePermissionGroupIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeletePermissionGroupOutput {
-    var result: DeletePermissionGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeletePermissionGroupOutput, body, allocator);
-    }
+    const result: DeletePermissionGroupOutput = try aws.json.parseJsonObject(
+        DeletePermissionGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

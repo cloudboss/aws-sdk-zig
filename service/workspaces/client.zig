@@ -189,12 +189,12 @@ pub const Client = struct {
         return create_account_link_invitation.execute(self, allocator, input, options);
     }
 
-    /// Creates a client-add-in for Amazon Connect within a directory. You can
+    /// Creates a client-add-in for Connect Customer within a directory. You can
     /// create only
-    /// one Amazon Connect client add-in within a directory.
+    /// one Connect Customer client add-in within a directory.
     ///
-    /// This client add-in allows WorkSpaces users to seamlessly connect to Amazon
-    /// Connect.
+    /// This client add-in allows WorkSpaces users to seamlessly connect to Connect
+    /// Customer.
     pub fn createConnectClientAddIn(self: *Self, allocator: std.mem.Allocator, input: create_connect_client_add_in.CreateConnectClientAddInInput, options: CallOptions) !create_connect_client_add_in.CreateConnectClientAddInOutput {
         return create_connect_client_add_in.execute(self, allocator, input, options);
     }
@@ -307,6 +307,13 @@ pub const Client = struct {
         return create_workspaces.execute(self, allocator, input, options);
     }
 
+    /// End of support notice: On December 31, 2027, Amazon Web Services will end
+    /// support for Amazon WorkSpaces Pools. After December 31, 2027,
+    /// you will no longer be able to access the Amazon WorkSpaces Pools console or
+    /// Amazon WorkSpaces Pools resources. For more information, see
+    /// [Amazon WorkSpaces Pools end of
+    /// support](https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html).
+    ///
     /// Creates a pool of WorkSpaces.
     pub fn createWorkspacesPool(self: *Self, allocator: std.mem.Allocator, input: create_workspaces_pool.CreateWorkspacesPoolInput, options: CallOptions) !create_workspaces_pool.CreateWorkspacesPoolOutput {
         return create_workspaces_pool.execute(self, allocator, input, options);
@@ -332,7 +339,7 @@ pub const Client = struct {
         return delete_client_branding.execute(self, allocator, input, options);
     }
 
-    /// Deletes a client-add-in for Amazon Connect that is configured within a
+    /// Deletes a client-add-in for Connect Customer that is configured within a
     /// directory.
     pub fn deleteConnectClientAddIn(self: *Self, allocator: std.mem.Allocator, input: delete_connect_client_add_in.DeleteConnectClientAddInInput, options: CallOptions) !delete_connect_client_add_in.DeleteConnectClientAddInOutput {
         return delete_connect_client_add_in.execute(self, allocator, input, options);
@@ -477,7 +484,7 @@ pub const Client = struct {
         return describe_client_properties.execute(self, allocator, input, options);
     }
 
-    /// Retrieves a list of Amazon Connect client add-ins that have been created.
+    /// Retrieves a list of Connect Customer client add-ins that have been created.
     pub fn describeConnectClientAddIns(self: *Self, allocator: std.mem.Allocator, input: describe_connect_client_add_ins.DescribeConnectClientAddInsInput, options: CallOptions) !describe_connect_client_add_ins.DescribeConnectClientAddInsOutput {
         return describe_connect_client_add_ins.execute(self, allocator, input, options);
     }
@@ -573,11 +580,25 @@ pub const Client = struct {
         return describe_workspaces_connection_status.execute(self, allocator, input, options);
     }
 
+    /// End of support notice: On December 31, 2027, Amazon Web Services will end
+    /// support for Amazon WorkSpaces Pools. After December 31, 2027,
+    /// you will no longer be able to access the Amazon WorkSpaces Pools console or
+    /// Amazon WorkSpaces Pools resources. For more information, see
+    /// [Amazon WorkSpaces Pools end of
+    /// support](https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html).
+    ///
     /// Retrieves a list that describes the streaming sessions for a specified pool.
     pub fn describeWorkspacesPoolSessions(self: *Self, allocator: std.mem.Allocator, input: describe_workspaces_pool_sessions.DescribeWorkspacesPoolSessionsInput, options: CallOptions) !describe_workspaces_pool_sessions.DescribeWorkspacesPoolSessionsOutput {
         return describe_workspaces_pool_sessions.execute(self, allocator, input, options);
     }
 
+    /// End of support notice: On December 31, 2027, Amazon Web Services will end
+    /// support for Amazon WorkSpaces Pools. After December 31, 2027,
+    /// you will no longer be able to access the Amazon WorkSpaces Pools console or
+    /// Amazon WorkSpaces Pools resources. For more information, see
+    /// [Amazon WorkSpaces Pools end of
+    /// support](https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html).
+    ///
     /// Describes the specified WorkSpaces Pools.
     pub fn describeWorkspacesPools(self: *Self, allocator: std.mem.Allocator, input: describe_workspaces_pools.DescribeWorkspacesPoolsInput, options: CallOptions) !describe_workspaces_pools.DescribeWorkspacesPoolsOutput {
         return describe_workspaces_pools.execute(self, allocator, input, options);
@@ -710,6 +731,10 @@ pub const Client = struct {
     /// migration, and best
     /// practices, see [Migrate a
     /// WorkSpace](https://docs.aws.amazon.com/workspaces/latest/adminguide/migrate-workspaces.html).
+    ///
+    /// If the source WorkSpace has nested virtualization enabled and the target
+    /// bundle does
+    /// not support nested virtualization, the migration fails.
     pub fn migrateWorkspace(self: *Self, allocator: std.mem.Allocator, input: migrate_workspace.MigrateWorkspaceInput, options: CallOptions) !migrate_workspace.MigrateWorkspaceOutput {
         return migrate_workspace.execute(self, allocator, input, options);
     }
@@ -882,6 +907,13 @@ pub const Client = struct {
         return start_workspaces.execute(self, allocator, input, options);
     }
 
+    /// End of support notice: On December 31, 2027, Amazon Web Services will end
+    /// support for Amazon WorkSpaces Pools. After December 31, 2027,
+    /// you will no longer be able to access the Amazon WorkSpaces Pools console or
+    /// Amazon WorkSpaces Pools resources. For more information, see
+    /// [Amazon WorkSpaces Pools end of
+    /// support](https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html).
+    ///
     /// Starts the specified pool.
     ///
     /// You cannot start a pool unless it has a running mode of
@@ -899,6 +931,13 @@ pub const Client = struct {
         return stop_workspaces.execute(self, allocator, input, options);
     }
 
+    /// End of support notice: On December 31, 2027, Amazon Web Services will end
+    /// support for Amazon WorkSpaces Pools. After December 31, 2027,
+    /// you will no longer be able to access the Amazon WorkSpaces Pools console or
+    /// Amazon WorkSpaces Pools resources. For more information, see
+    /// [Amazon WorkSpaces Pools end of
+    /// support](https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html).
+    ///
     /// Stops the specified pool.
     ///
     /// You cannot stop a WorkSpace pool unless it has a running mode of `AutoStop`
@@ -949,19 +988,33 @@ pub const Client = struct {
         return terminate_workspaces.execute(self, allocator, input, options);
     }
 
+    /// End of support notice: On December 31, 2027, Amazon Web Services will end
+    /// support for Amazon WorkSpaces Pools. After December 31, 2027,
+    /// you will no longer be able to access the Amazon WorkSpaces Pools console or
+    /// Amazon WorkSpaces Pools resources. For more information, see
+    /// [Amazon WorkSpaces Pools end of
+    /// support](https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html).
+    ///
     /// Terminates the specified pool.
     pub fn terminateWorkspacesPool(self: *Self, allocator: std.mem.Allocator, input: terminate_workspaces_pool.TerminateWorkspacesPoolInput, options: CallOptions) !terminate_workspaces_pool.TerminateWorkspacesPoolOutput {
         return terminate_workspaces_pool.execute(self, allocator, input, options);
     }
 
+    /// End of support notice: On December 31, 2027, Amazon Web Services will end
+    /// support for Amazon WorkSpaces Pools. After December 31, 2027,
+    /// you will no longer be able to access the Amazon WorkSpaces Pools console or
+    /// Amazon WorkSpaces Pools resources. For more information, see
+    /// [Amazon WorkSpaces Pools end of
+    /// support](https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html).
+    ///
     /// Terminates the pool session.
     pub fn terminateWorkspacesPoolSession(self: *Self, allocator: std.mem.Allocator, input: terminate_workspaces_pool_session.TerminateWorkspacesPoolSessionInput, options: CallOptions) !terminate_workspaces_pool_session.TerminateWorkspacesPoolSessionOutput {
         return terminate_workspaces_pool_session.execute(self, allocator, input, options);
     }
 
-    /// Updates a Amazon Connect client add-in. Use this action to update the name
+    /// Updates a Connect Customer client add-in. Use this action to update the name
     /// and
-    /// endpoint URL of a Amazon Connect client add-in.
+    /// endpoint URL of a Connect Customer client add-in.
     pub fn updateConnectClientAddIn(self: *Self, allocator: std.mem.Allocator, input: update_connect_client_add_in.UpdateConnectClientAddInInput, options: CallOptions) !update_connect_client_add_in.UpdateConnectClientAddInOutput {
         return update_connect_client_add_in.execute(self, allocator, input, options);
     }
@@ -1051,6 +1104,13 @@ pub const Client = struct {
         return update_workspace_image_permission.execute(self, allocator, input, options);
     }
 
+    /// End of support notice: On December 31, 2027, Amazon Web Services will end
+    /// support for Amazon WorkSpaces Pools. After December 31, 2027,
+    /// you will no longer be able to access the Amazon WorkSpaces Pools console or
+    /// Amazon WorkSpaces Pools resources. For more information, see
+    /// [Amazon WorkSpaces Pools end of
+    /// support](https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html).
+    ///
     /// Updates the specified pool.
     pub fn updateWorkspacesPool(self: *Self, allocator: std.mem.Allocator, input: update_workspaces_pool.UpdateWorkspacesPoolInput, options: CallOptions) !update_workspaces_pool.UpdateWorkspacesPoolOutput {
         return update_workspaces_pool.execute(self, allocator, input, options);

@@ -4,7 +4,7 @@ const DirectoryType = @import("directory_type.zig").DirectoryType;
 const InstanceStatus = @import("instance_status.zig").InstanceStatus;
 const InstanceStatusReason = @import("instance_status_reason.zig").InstanceStatusReason;
 
-/// The Amazon Connect instance.
+/// The Connect Customer instance.
 pub const Instance = struct {
     /// The Amazon Resource Name (ARN) of the instance.
     arn: ?[]const u8 = null,
@@ -12,7 +12,7 @@ pub const Instance = struct {
     /// When the instance was created.
     created_time: ?i64 = null,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     id: ?[]const u8 = null,
 
@@ -22,7 +22,7 @@ pub const Instance = struct {
     /// Whether inbound calls are enabled.
     inbound_calls_enabled: ?bool = null,
 
-    /// This URL allows contact center users to access the Amazon Connect admin
+    /// This URL allows contact center users to access the Connect Customer admin
     /// website.
     instance_access_url: ?[]const u8 = null,
 

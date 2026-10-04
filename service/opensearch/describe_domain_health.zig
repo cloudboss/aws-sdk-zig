@@ -163,10 +163,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeDomainHealthInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeDomainHealthOutput {
-    var result: DescribeDomainHealthOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeDomainHealthOutput, body, allocator);
-    }
+    const result: DescribeDomainHealthOutput = try aws.json.parseJsonObject(
+        DescribeDomainHealthOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

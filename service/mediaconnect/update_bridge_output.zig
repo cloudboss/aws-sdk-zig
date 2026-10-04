@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateBridgeOutputInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateBridgeOutputOutput {
-    var result: UpdateBridgeOutputOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateBridgeOutputOutput, body, allocator);
-    }
+    const result: UpdateBridgeOutputOutput = try aws.json.parseJsonObject(
+        UpdateBridgeOutputOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

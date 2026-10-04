@@ -109,8 +109,12 @@ pub const InstanceInformation = struct {
     /// the Thing name.
     source_id: ?[]const u8 = null,
 
+    /// The location of the source resource in the third-party cloud environment.
+    source_location: ?[]const u8 = null,
+
     /// The type of the source resource. For IoT Greengrass devices, `SourceType`
-    /// is `AWS::IoT::Thing`.
+    /// is `AWS::IoT::Thing`. For Azure Virtual Machines, `SourceType` is
+    /// `Microsoft.Compute/virtualMachines`.
     source_type: ?SourceType = null,
 
     pub const json_field_names = .{
@@ -134,6 +138,7 @@ pub const InstanceInformation = struct {
         .registration_date = "RegistrationDate",
         .resource_type = "ResourceType",
         .source_id = "SourceId",
+        .source_location = "SourceLocation",
         .source_type = "SourceType",
     };
 };

@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRDFGraphSummaryInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRDFGraphSummaryOutput {
-    var result: GetRDFGraphSummaryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRDFGraphSummaryOutput, body, allocator);
-    }
+    var result: GetRDFGraphSummaryOutput = try aws.json.parseJsonObject(
+        GetRDFGraphSummaryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status_code = @intCast(status);
     _ = headers;
 

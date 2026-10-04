@@ -2,6 +2,7 @@ const aws = @import("aws");
 
 const SessionCommand = @import("session_command.zig").SessionCommand;
 const ConnectionsList = @import("connections_list.zig").ConnectionsList;
+const SessionType = @import("session_type.zig").SessionType;
 const SessionStatus = @import("session_status.zig").SessionStatus;
 const WorkerType = @import("worker_type.zig").WorkerType;
 
@@ -67,6 +68,9 @@ pub const Session = struct {
     /// The name of the SecurityConfiguration structure to be used with the session.
     security_configuration: ?[]const u8 = null,
 
+    /// The type of the session.
+    session_type: ?SessionType = null,
+
     /// The session status.
     status: ?SessionStatus = null,
 
@@ -94,6 +98,7 @@ pub const Session = struct {
         .progress = "Progress",
         .role = "Role",
         .security_configuration = "SecurityConfiguration",
+        .session_type = "SessionType",
         .status = "Status",
         .worker_type = "WorkerType",
     };

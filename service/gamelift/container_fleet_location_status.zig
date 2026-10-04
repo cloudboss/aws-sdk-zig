@@ -8,6 +8,7 @@ pub const ContainerFleetLocationStatus = enum {
     active,
     updating,
     deleting,
+    expired,
 
     pub const json_field_names = .{
         .pending = "PENDING",
@@ -17,6 +18,7 @@ pub const ContainerFleetLocationStatus = enum {
         .active = "ACTIVE",
         .updating = "UPDATING",
         .deleting = "DELETING",
+        .expired = "EXPIRED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -28,6 +30,7 @@ pub const ContainerFleetLocationStatus = enum {
             .active => "ACTIVE",
             .updating => "UPDATING",
             .deleting => "DELETING",
+            .expired => "EXPIRED",
         };
     }
 

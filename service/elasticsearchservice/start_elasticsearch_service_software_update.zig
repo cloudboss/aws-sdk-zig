@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartElasticsearchServi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartElasticsearchServiceSoftwareUpdateOutput {
-    var result: StartElasticsearchServiceSoftwareUpdateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartElasticsearchServiceSoftwareUpdateOutput, body, allocator);
-    }
+    const result: StartElasticsearchServiceSoftwareUpdateOutput = try aws.json.parseJsonObject(
+        StartElasticsearchServiceSoftwareUpdateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -71,10 +71,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRequestValidatorInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRequestValidatorOutput {
-    var result: GetRequestValidatorOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRequestValidatorOutput, body, allocator);
-    }
+    const result: GetRequestValidatorOutput = try aws.json.parseJsonObject(
+        GetRequestValidatorOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

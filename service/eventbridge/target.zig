@@ -134,9 +134,10 @@ pub const Target = struct {
     /// events.
     sage_maker_pipeline_parameters: ?SageMakerPipelineParameters = null,
 
-    /// Contains the message group ID to use when the target is a FIFO queue.
+    /// Contains the message group ID to use when the target is an Amazon SQS fair
+    /// or FIFO queue.
     ///
-    /// If you specify an SQS FIFO queue as a target, the queue must have
+    /// If you specify a fair or FIFO queue as a target, the queue must have
     /// content-based
     /// deduplication enabled.
     sqs_parameters: ?SqsParameters = null,

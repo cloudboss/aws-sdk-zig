@@ -14,14 +14,14 @@ pub const ReplicateInstanceInput = struct {
     /// APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
     client_token: ?[]const u8 = null,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance. You can provide the `InstanceId`, or the entire ARN.
     instance_id: []const u8,
 
     /// The alias for the replicated instance. The `ReplicaAlias` must be unique.
-    replica_alias: []const u8,
+    replica_alias: ?[]const u8 = null,
 
-    /// The Amazon Web Services Region where to replicate the Amazon Connect
+    /// The Amazon Web Services Region where to replicate the Connect Customer
     /// instance.
     replica_region: []const u8,
 
@@ -95,10 +95,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ReplicateInstanceInput,
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"ReplicaAlias\":");
-    try aws.json.writeValue(@TypeOf(input.replica_alias), input.replica_alias, allocator, &body_buf);
-    has_prev = true;
+    if (input.replica_alias) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ReplicaAlias\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"ReplicaRegion\":");
     try aws.json.writeValue(@TypeOf(input.replica_region), input.replica_region, allocator, &body_buf);
@@ -119,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ReplicateInstanceInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ReplicateInstanceOutput {
-    var result: ReplicateInstanceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ReplicateInstanceOutput, body, allocator);
-    }
+    const result: ReplicateInstanceOutput = try aws.json.parseJsonObject(
+        ReplicateInstanceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

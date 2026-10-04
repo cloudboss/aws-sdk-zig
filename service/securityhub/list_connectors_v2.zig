@@ -5,12 +5,16 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ConnectorStatus = @import("connector_status.zig").ConnectorStatus;
+const EnablementStatus = @import("enablement_status.zig").EnablementStatus;
 const ConnectorProviderName = @import("connector_provider_name.zig").ConnectorProviderName;
 const ConnectorSummary = @import("connector_summary.zig").ConnectorSummary;
 
 pub const ListConnectorsV2Input = struct {
     /// The status for the connectorV2.
     connector_status: ?ConnectorStatus = null,
+
+    /// The enablement status to filter connectors by.
+    enablement_status: ?EnablementStatus = null,
 
     /// The maximum number of results to be returned.
     max_results: ?i32 = null,
@@ -23,6 +27,7 @@ pub const ListConnectorsV2Input = struct {
 
     pub const json_field_names = .{
         .connector_status = "ConnectorStatus",
+        .enablement_status = "EnablementStatus",
         .max_results = "MaxResults",
         .next_token = "NextToken",
         .provider_name = "ProviderName",
@@ -83,6 +88,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListConnectorsV2Input, 
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
+    if (input.enablement_status) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "EnablementStatus=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
+        query_has_prev = true;
+    }
     if (input.max_results) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "MaxResults=");
@@ -121,10 +132,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListConnectorsV2Input, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListConnectorsV2Output {
-    var result: ListConnectorsV2Output = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListConnectorsV2Output, body, allocator);
-    }
+    const result: ListConnectorsV2Output = try aws.json.parseJsonObject(
+        ListConnectorsV2Output,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

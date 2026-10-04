@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStageSessionInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetStageSessionOutput {
-    var result: GetStageSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetStageSessionOutput, body, allocator);
-    }
+    const result: GetStageSessionOutput = try aws.json.parseJsonObject(
+        GetStageSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

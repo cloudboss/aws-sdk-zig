@@ -167,10 +167,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteAppVersionResourc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteAppVersionResourceOutput {
-    var result: DeleteAppVersionResourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteAppVersionResourceOutput, body, allocator);
-    }
+    const result: DeleteAppVersionResourceOutput = try aws.json.parseJsonObject(
+        DeleteAppVersionResourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

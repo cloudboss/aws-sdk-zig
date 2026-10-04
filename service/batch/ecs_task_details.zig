@@ -40,6 +40,13 @@ pub const EcsTaskDetails = struct {
     /// running on Amazon EC2 resources must not specify this parameter.
     network_configuration: ?NetworkConfiguration = null,
 
+    /// The network mode configured for the task. This field is populated for jobs
+    /// running on Amazon ECS
+    /// Managed Instances (`MANAGED_INSTANCES` platform capability) and always
+    /// returns
+    /// `host`.
+    network_mode: ?[]const u8 = null,
+
     /// The process namespace to use for the containers in the task. The valid
     /// values are
     /// `host`, or `task`. For more information see `pidMode` in
@@ -51,7 +58,9 @@ pub const EcsTaskDetails = struct {
 
     /// An object that represents the compute environment architecture for Batch
     /// jobs on
-    /// Fargate.
+    /// Fargate or Amazon ECS Managed Instances. Contains the operating system
+    /// family and CPU architecture
+    /// of the task.
     runtime_platform: ?RuntimePlatform = null,
 
     /// The ARN of the Amazon ECS task.
@@ -78,6 +87,7 @@ pub const EcsTaskDetails = struct {
         .execution_role_arn = "executionRoleArn",
         .ipc_mode = "ipcMode",
         .network_configuration = "networkConfiguration",
+        .network_mode = "networkMode",
         .pid_mode = "pidMode",
         .platform_version = "platformVersion",
         .runtime_platform = "runtimePlatform",

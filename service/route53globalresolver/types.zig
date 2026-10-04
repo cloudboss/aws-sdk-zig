@@ -31,6 +31,7 @@ pub const ListTagsForResourceRequest = @import("list_tags_for_resource_request.z
 pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
 pub const ManagedFirewallDomainListsItem = @import("managed_firewall_domain_lists_item.zig").ManagedFirewallDomainListsItem;
 pub const ProfileResourceStatus = @import("profile_resource_status.zig").ProfileResourceStatus;
+pub const SharedDNSViewSummary = @import("shared_dns_view_summary.zig").SharedDNSViewSummary;
 pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
 pub const TagResourceResponse = @import("tag_resource_response.zig").TagResourceResponse;
 pub const TokenStatus = @import("token_status.zig").TokenStatus;

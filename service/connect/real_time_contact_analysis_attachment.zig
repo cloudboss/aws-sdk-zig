@@ -11,7 +11,7 @@ pub const RealTimeContactAnalysisAttachment = struct {
     /// Describes the MIME file type of the attachment. For a list of supported file
     /// types, see [Feature
     /// specifications](https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     content_type: ?[]const u8 = null,
 
     /// Status of the attachment.

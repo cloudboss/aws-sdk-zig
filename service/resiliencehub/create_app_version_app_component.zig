@@ -153,10 +153,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAppVersionAppComp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAppVersionAppComponentOutput {
-    var result: CreateAppVersionAppComponentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAppVersionAppComponentOutput, body, allocator);
-    }
+    const result: CreateAppVersionAppComponentOutput = try aws.json.parseJsonObject(
+        CreateAppVersionAppComponentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

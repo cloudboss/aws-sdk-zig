@@ -15,20 +15,20 @@ pub const ChatEvent = struct {
     ///
     /// * For allowed message content, see the `Content` parameter in the
     ///   [SendMessage](https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendMessage.html) topic in the
-    /// *Amazon Connect Participant Service API Reference*.
+    /// *Connect Customer Participant Service API Reference*.
     ///
     /// * For allowed event content, see the `Content` parameter in the
-    ///   [SendEvent](https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendEvent.html) topic in the *Amazon Connect Participant Service API Reference*.
+    ///   [SendEvent](https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendEvent.html) topic in the *Connect Customer Participant Service API Reference*.
     content: ?[]const u8 = null,
 
     /// Type of content. This is required when `Type` is `MESSAGE` or `EVENT`.
     ///
     /// * For allowed message content types, see the `ContentType` parameter in the
     ///   [SendMessage](https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendMessage.html) topic
-    /// in the *Amazon Connect Participant Service API Reference*.
+    /// in the *Connect Customer Participant Service API Reference*.
     ///
     /// * For allowed event content types, see the `ContentType` parameter in the
-    ///   [SendEvent](https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendEvent.html) topic in the *Amazon Connect Participant Service API Reference*.
+    ///   [SendEvent](https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendEvent.html) topic in the *Connect Customer Participant Service API Reference*.
     content_type: ?[]const u8 = null,
 
     /// Type of chat integration event.

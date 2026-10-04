@@ -13,6 +13,15 @@ pub const SftpConnectorConfig = struct {
     /// batches by enabling parallel operations.
     max_concurrent_connections: i32 = 1,
 
+    /// An ordered list of Amazon Web Services Secrets Manager version stages
+    /// (staging labels, such as `AWSCURRENT` and `AWSPREVIOUS`) for the secret
+    /// identified by `UserSecretId`. When establishing a connection, the connector
+    /// attempts to retrieve the SFTP user's credentials from each version stage in
+    /// the order listed, and uses the first version it can successfully retrieve.
+    /// This lets you rotate the user secret without interrupting connector
+    /// operations.
+    ordered_user_secret_version_stages: ?[]const []const u8 = null,
+
     /// The public portion of the host key, or keys, that are used to identify the
     /// external server to which you are connecting. You can use the `ssh-keyscan`
     /// command against the SFTP server to retrieve the necessary key.
@@ -67,6 +76,7 @@ pub const SftpConnectorConfig = struct {
 
     pub const json_field_names = .{
         .max_concurrent_connections = "MaxConcurrentConnections",
+        .ordered_user_secret_version_stages = "OrderedUserSecretVersionStages",
         .trusted_host_keys = "TrustedHostKeys",
         .user_secret_id = "UserSecretId",
     };

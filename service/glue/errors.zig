@@ -52,6 +52,7 @@ pub const ServiceError = struct {
         scheduler_not_running_exception: SchedulerNotRunningException,
         scheduler_running_exception: SchedulerRunningException,
         scheduler_transitioning_exception: SchedulerTransitioningException,
+        session_busy_exception: SessionBusyException,
         target_resource_not_found: TargetResourceNotFound,
         throttling_exception: ThrottlingException,
         validation_exception: ValidationException,
@@ -104,6 +105,7 @@ pub const ServiceError = struct {
                 .scheduler_not_running_exception => "SchedulerNotRunningException",
                 .scheduler_running_exception => "SchedulerRunningException",
                 .scheduler_transitioning_exception => "SchedulerTransitioningException",
+                .session_busy_exception => "SessionBusyException",
                 .target_resource_not_found => "TargetResourceNotFound",
                 .throttling_exception => "ThrottlingException",
                 .validation_exception => "ValidationException",
@@ -158,6 +160,7 @@ pub const ServiceError = struct {
                 .scheduler_not_running_exception => |e| e.message,
                 .scheduler_running_exception => |e| e.message,
                 .scheduler_transitioning_exception => |e| e.message,
+                .session_busy_exception => |e| e.message,
                 .target_resource_not_found => |e| e.message,
                 .throttling_exception => |e| e.message,
                 .validation_exception => |e| e.message,
@@ -212,6 +215,7 @@ pub const ServiceError = struct {
                 .scheduler_not_running_exception => 400,
                 .scheduler_running_exception => 400,
                 .scheduler_transitioning_exception => 400,
+                .session_busy_exception => 400,
                 .target_resource_not_found => 404,
                 .throttling_exception => 400,
                 .validation_exception => 400,
@@ -266,6 +270,7 @@ pub const ServiceError = struct {
                 .scheduler_not_running_exception => |e| e.request_id,
                 .scheduler_running_exception => |e| e.request_id,
                 .scheduler_transitioning_exception => |e| e.request_id,
+                .session_busy_exception => |e| e.request_id,
                 .target_resource_not_found => |e| e.request_id,
                 .throttling_exception => |e| e.request_id,
                 .validation_exception => |e| e.request_id,
@@ -746,6 +751,17 @@ pub const SchedulerRunningException = struct {
 
 /// The specified scheduler is transitioning.
 pub const SchedulerTransitioningException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
+};
+
+/// The session is currently busy processing another request and cannot accept
+/// new operations.
+pub const SessionBusyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 
@@ -1343,6 +1359,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             typed_error.message = owned_message;
             typed_error.request_id = owned_request_id;
             return .{ .arena = arena, .kind = .{ .scheduler_transitioning_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "SessionBusyException")) {
+        const parsed_error: ?SessionBusyException = aws.json.parseJsonObject(SessionBusyException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .session_busy_exception = typed_error } };
         }
     }
     if (std.mem.eql(u8, error_code, "TargetResourceNotFound")) {

@@ -9,9 +9,17 @@ const GroupMembershipExistenceResult = @import("group_membership_existence_resul
 
 pub const IsMemberInGroupsInput = struct {
     /// A list of identifiers for groups in the identity store.
+    ///
+    /// You can specify each group by ID or by Amazon Resource Name (ARN). For
+    /// example, group ID `a1b2c3d4-5678-90ab-cdef-EXAMPLE22222` or group ARN
+    /// `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
     group_ids: []const []const u8,
 
     /// The globally unique identifier for the identity store.
+    ///
+    /// You can specify the identity store by ID or by Amazon Resource Name (ARN).
+    /// For example, identity store ID `d-1234567890` or identity store ARN
+    /// `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
     identity_store_id: []const u8,
 
     /// An object containing the identifier of a group member.

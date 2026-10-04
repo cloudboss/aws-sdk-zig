@@ -23,10 +23,14 @@ pub const DescribeTimeSeriesInput = struct {
     /// IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references) in the *IoT SiteWise User Guide*.
     property_id: ?[]const u8 = null,
 
+    /// The name of the workspace.
+    workspace_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .alias = "alias",
         .asset_id = "assetId",
         .property_id = "propertyId",
+        .workspace_name = "workspaceName",
     };
 };
 
@@ -71,6 +75,9 @@ pub const DescribeTimeSeriesOutput = struct {
     /// The date that the time series was last updated, in Unix epoch time.
     time_series_last_update_date: i64,
 
+    /// The name of the workspace.
+    workspace_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .alias = "alias",
         .asset_id = "assetId",
@@ -81,6 +88,7 @@ pub const DescribeTimeSeriesOutput = struct {
         .time_series_creation_date = "timeSeriesCreationDate",
         .time_series_id = "timeSeriesId",
         .time_series_last_update_date = "timeSeriesLastUpdateDate",
+        .workspace_name = "workspaceName",
     };
 };
 
@@ -136,6 +144,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeTimeSeriesInput
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
+    if (input.workspace_name) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "workspaceName=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
     const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
@@ -153,10 +167,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeTimeSeriesInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeTimeSeriesOutput {
-    var result: DescribeTimeSeriesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeTimeSeriesOutput, body, allocator);
-    }
+    const result: DescribeTimeSeriesOutput = try aws.json.parseJsonObject(
+        DescribeTimeSeriesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

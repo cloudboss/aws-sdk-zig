@@ -30,6 +30,8 @@ pub const DkimSigningAttributesOrigin = enum {
     aws_ses_eu_central_2,
     aws_ses_ap_southeast_5,
     aws_ses_ca_west_1,
+    aws_ses_us_gov_east_1,
+    aws_ses_us_gov_west_1,
 
     pub const json_field_names = .{
         .aws_ses = "AWS_SES",
@@ -61,6 +63,8 @@ pub const DkimSigningAttributesOrigin = enum {
         .aws_ses_eu_central_2 = "AWS_SES_EU_CENTRAL_2",
         .aws_ses_ap_southeast_5 = "AWS_SES_AP_SOUTHEAST_5",
         .aws_ses_ca_west_1 = "AWS_SES_CA_WEST_1",
+        .aws_ses_us_gov_east_1 = "AWS_SES_US_GOV_EAST_1",
+        .aws_ses_us_gov_west_1 = "AWS_SES_US_GOV_WEST_1",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -94,6 +98,8 @@ pub const DkimSigningAttributesOrigin = enum {
             .aws_ses_eu_central_2 => "AWS_SES_EU_CENTRAL_2",
             .aws_ses_ap_southeast_5 => "AWS_SES_AP_SOUTHEAST_5",
             .aws_ses_ca_west_1 => "AWS_SES_CA_WEST_1",
+            .aws_ses_us_gov_east_1 => "AWS_SES_US_GOV_EAST_1",
+            .aws_ses_us_gov_west_1 => "AWS_SES_US_GOV_WEST_1",
         };
     }
 

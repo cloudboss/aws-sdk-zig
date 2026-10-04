@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetUpgradeHistoryInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetUpgradeHistoryOutput {
-    var result: GetUpgradeHistoryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetUpgradeHistoryOutput, body, allocator);
-    }
+    const result: GetUpgradeHistoryOutput = try aws.json.parseJsonObject(
+        GetUpgradeHistoryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

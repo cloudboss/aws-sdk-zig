@@ -7,6 +7,7 @@ pub const EventType = enum {
     campaign_telephony,
     campaign_orchestration,
     campaign_whats_app,
+    campaign_web_notification,
 
     pub const json_field_names = .{
         .campaign_email = "Campaign-Email",
@@ -14,6 +15,7 @@ pub const EventType = enum {
         .campaign_telephony = "Campaign-Telephony",
         .campaign_orchestration = "Campaign-Orchestration",
         .campaign_whats_app = "Campaign-WhatsApp",
+        .campaign_web_notification = "Campaign-WebNotification",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -23,6 +25,7 @@ pub const EventType = enum {
             .campaign_telephony => "Campaign-Telephony",
             .campaign_orchestration => "Campaign-Orchestration",
             .campaign_whats_app => "Campaign-WhatsApp",
+            .campaign_web_notification => "Campaign-WebNotification",
         };
     }
 

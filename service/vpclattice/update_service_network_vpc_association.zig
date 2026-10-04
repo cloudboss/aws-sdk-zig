@@ -4,16 +4,25 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DnsOptions = @import("dns_options.zig").DnsOptions;
 const ServiceNetworkVpcAssociationStatus = @import("service_network_vpc_association_status.zig").ServiceNetworkVpcAssociationStatus;
 
 pub const UpdateServiceNetworkVpcAssociationInput = struct {
+    /// DNS options for the service network VPC association.
+    dns_options: ?DnsOptions = null,
+
+    /// Indicates if private DNS is enabled for the VPC association.
+    private_dns_enabled: ?bool = null,
+
     /// The IDs of the security groups.
-    security_group_ids: []const []const u8,
+    security_group_ids: ?[]const []const u8 = null,
 
     /// The ID or ARN of the association.
     service_network_vpc_association_identifier: []const u8,
 
     pub const json_field_names = .{
+        .dns_options = "dnsOptions",
+        .private_dns_enabled = "privateDnsEnabled",
         .security_group_ids = "securityGroupIds",
         .service_network_vpc_association_identifier = "serviceNetworkVpcAssociationIdentifier",
     };
@@ -26,8 +35,14 @@ pub const UpdateServiceNetworkVpcAssociationOutput = struct {
     /// The account that created the association.
     created_by: ?[]const u8 = null,
 
+    /// DNS options for the service network VPC association.
+    dns_options: ?DnsOptions = null,
+
     /// The ID of the association.
     id: ?[]const u8 = null,
+
+    /// Indicates if private DNS is enabled for the VPC association.
+    private_dns_enabled: ?bool = null,
 
     /// The IDs of the security groups.
     security_group_ids: ?[]const []const u8 = null,
@@ -40,7 +55,9 @@ pub const UpdateServiceNetworkVpcAssociationOutput = struct {
     pub const json_field_names = .{
         .arn = "arn",
         .created_by = "createdBy",
+        .dns_options = "dnsOptions",
         .id = "id",
+        .private_dns_enabled = "privateDnsEnabled",
         .security_group_ids = "securityGroupIds",
         .status = "status",
     };
@@ -85,10 +102,24 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateServiceNetworkVpc
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"securityGroupIds\":");
-    try aws.json.writeValue(@TypeOf(input.security_group_ids), input.security_group_ids, allocator, &body_buf);
-    has_prev = true;
+    if (input.dns_options) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"dnsOptions\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.private_dns_enabled) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"privateDnsEnabled\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.security_group_ids) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"securityGroupIds\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -105,10 +136,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateServiceNetworkVpc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateServiceNetworkVpcAssociationOutput {
-    var result: UpdateServiceNetworkVpcAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateServiceNetworkVpcAssociationOutput, body, allocator);
-    }
+    const result: UpdateServiceNetworkVpcAssociationOutput = try aws.json.parseJsonObject(
+        UpdateServiceNetworkVpcAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

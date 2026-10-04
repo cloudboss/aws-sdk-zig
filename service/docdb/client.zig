@@ -146,17 +146,17 @@ pub const Client = struct {
     /// you
     /// want to modify a value in it, you must first [
     /// create a new parameter
-    /// group](https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-create.html)
+    /// group](https://docs.aws.amazon.com/documentdb/latest/devguide/cluster_parameter_group-create.html)
     /// or [
     /// copy an existing parameter
-    /// group](https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-copy.html),
+    /// group](https://docs.aws.amazon.com/documentdb/latest/devguide/cluster_parameter_group-copy.html),
     /// modify it, and then apply the modified parameter group to your
     /// cluster. For the new cluster parameter group and associated settings
     /// to take effect, you must then reboot the instances in the cluster
     /// without failover. For more information,
     /// see [
     /// Modifying Amazon DocumentDB Cluster Parameter
-    /// Groups](https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-modify.html).
+    /// Groups](https://docs.aws.amazon.com/documentdb/latest/devguide/cluster_parameter_group-modify.html).
     pub fn createDbClusterParameterGroup(self: *Self, allocator: std.mem.Allocator, input: create_db_cluster_parameter_group.CreateDBClusterParameterGroupInput, options: CallOptions) !create_db_cluster_parameter_group.CreateDBClusterParameterGroupOutput {
         return create_db_cluster_parameter_group.execute(self, allocator, input, options);
     }
@@ -580,7 +580,7 @@ pub const Client = struct {
     /// Restarts the stopped cluster that is specified by `DBClusterIdentifier`.
     /// For more information, see [Stopping and
     /// Starting an Amazon DocumentDB
-    /// Cluster](https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html).
+    /// Cluster](https://docs.aws.amazon.com/documentdb/latest/devguide/db-cluster-stop-start.html).
     pub fn startDbCluster(self: *Self, allocator: std.mem.Allocator, input: start_db_cluster.StartDBClusterInput, options: CallOptions) !start_db_cluster.StartDBClusterOutput {
         return start_db_cluster.execute(self, allocator, input, options);
     }
@@ -589,7 +589,7 @@ pub const Client = struct {
     /// cluster must be in the *available* state. For more information, see
     /// [Stopping and
     /// Starting an Amazon DocumentDB
-    /// Cluster](https://docs.aws.amazon.com/documentdb/latest/developerguide/db-cluster-stop-start.html).
+    /// Cluster](https://docs.aws.amazon.com/documentdb/latest/devguide/db-cluster-stop-start.html).
     pub fn stopDbCluster(self: *Self, allocator: std.mem.Allocator, input: stop_db_cluster.StopDBClusterInput, options: CallOptions) !stop_db_cluster.StopDBClusterOutput {
         return stop_db_cluster.execute(self, allocator, input, options);
     }

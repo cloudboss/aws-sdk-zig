@@ -6,8 +6,8 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const UntagResourceInput = struct {
-    /// A list of tag keys. Existing tags of the resource
-    /// whose keys are members of this list are removed from the resource.
+    /// A list of tag keys. Existing tags of the resource whose keys are members of
+    /// this list are removed from the resource.
     tag_keys: []const []const u8,
 
     workload_arn: []const u8,

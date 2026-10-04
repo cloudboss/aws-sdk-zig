@@ -8,9 +8,20 @@ const Filter = @import("filter.zig").Filter;
 const ImageScanFindingAggregation = @import("image_scan_finding_aggregation.zig").ImageScanFindingAggregation;
 
 pub const ListImageScanFindingAggregationsInput = struct {
+    /// A filter name and value pair that determines the type of aggregation
+    /// that Image Builder returns. Use one of the following filter names:
+    ///
+    /// * `imageBuildVersionArn`
+    ///
+    /// * `imagePipelineArn`
+    ///
+    /// * `vulnerabilityId`
+    ///
+    /// If you don't specify a filter, Image Builder returns an aggregation for your
+    /// account.
     filter: ?Filter = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
@@ -126,10 +137,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListImageScanFindingAgg
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListImageScanFindingAggregationsOutput {
-    var result: ListImageScanFindingAggregationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListImageScanFindingAggregationsOutput, body, allocator);
-    }
+    const result: ListImageScanFindingAggregationsOutput = try aws.json.parseJsonObject(
+        ListImageScanFindingAggregationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

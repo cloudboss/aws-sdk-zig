@@ -13,7 +13,7 @@ pub const DescribeCapacityReservationTopologyInput = struct {
     ///
     /// Default: Describes all your Capacity Reservations.
     ///
-    /// Constraints: Maximum 100 explicitly specified Capacity Reservation IDs.
+    /// Constraints: Maximum 10 explicitly specified Capacity Reservation IDs.
     capacity_reservation_ids: ?[]const []const u8 = null,
 
     /// Checks whether you have the required permissions for the operation, without

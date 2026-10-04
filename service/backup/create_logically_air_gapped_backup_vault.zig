@@ -159,10 +159,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLogicallyAirGappe
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateLogicallyAirGappedBackupVaultOutput {
-    var result: CreateLogicallyAirGappedBackupVaultOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateLogicallyAirGappedBackupVaultOutput, body, allocator);
-    }
+    const result: CreateLogicallyAirGappedBackupVaultOutput = try aws.json.parseJsonObject(
+        CreateLogicallyAirGappedBackupVaultOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

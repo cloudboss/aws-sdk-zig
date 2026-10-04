@@ -9,7 +9,7 @@ pub const UpdateViewMetadataInput = struct {
     /// The description of the view.
     description: ?[]const u8 = null,
 
-    /// The identifier of the Amazon Connect instance. You can find the instanceId
+    /// The identifier of the Connect Customer instance. You can find the instanceId
     /// in the ARN of the
     /// instance.
     instance_id: []const u8,

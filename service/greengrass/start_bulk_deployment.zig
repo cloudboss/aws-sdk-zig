@@ -116,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartBulkDeploymentInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartBulkDeploymentOutput {
-    var result: StartBulkDeploymentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartBulkDeploymentOutput, body, allocator);
-    }
+    const result: StartBulkDeploymentOutput = try aws.json.parseJsonObject(
+        StartBulkDeploymentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

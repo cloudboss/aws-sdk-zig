@@ -335,10 +335,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateReplicationConfig
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateReplicationConfigurationOutput {
-    var result: UpdateReplicationConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateReplicationConfigurationOutput, body, allocator);
-    }
+    const result: UpdateReplicationConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateReplicationConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

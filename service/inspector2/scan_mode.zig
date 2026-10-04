@@ -3,16 +3,22 @@ const std = @import("std");
 pub const ScanMode = enum {
     ec2_ssm_agent_based,
     ec2_agentless,
+    ec2_inspector_agent_based,
+    vm_inspector_agent_based,
 
     pub const json_field_names = .{
         .ec2_ssm_agent_based = "EC2_SSM_AGENT_BASED",
         .ec2_agentless = "EC2_AGENTLESS",
+        .ec2_inspector_agent_based = "EC2_INSPECTOR_AGENT_BASED",
+        .vm_inspector_agent_based = "VM_INSPECTOR_AGENT_BASED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .ec2_ssm_agent_based => "EC2_SSM_AGENT_BASED",
             .ec2_agentless => "EC2_AGENTLESS",
+            .ec2_inspector_agent_based => "EC2_INSPECTOR_AGENT_BASED",
+            .vm_inspector_agent_based => "VM_INSPECTOR_AGENT_BASED",
         };
     }
 

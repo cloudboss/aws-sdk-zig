@@ -26,6 +26,8 @@ pub const ListTagsForResourceRequest = struct {
     /// * `AggregationAuthorization`
     ///
     /// * `StoredQuery`
+    ///
+    /// * `Connector`
     resource_arn: []const u8,
 
     pub const json_field_names = .{

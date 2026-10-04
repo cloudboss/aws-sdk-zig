@@ -1,4 +1,6 @@
 /// The choice level improvement plan.
+///
+/// This value is only applicable to custom lenses.
 pub const ChoiceImprovementPlan = struct {
     choice_id: ?[]const u8 = null,
 

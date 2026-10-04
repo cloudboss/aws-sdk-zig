@@ -6,7 +6,7 @@ pub const VoiceConnectorItem = struct {
     /// in priority order, with 1 as the highest priority. When hosts have equal
     /// priority,
     /// the system distributes calls among them based on their relative weight.
-    priority: i32,
+    priority: i32 = 1,
 
     /// The Voice Connector ID.
     voice_connector_id: []const u8,

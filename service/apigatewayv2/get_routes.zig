@@ -105,10 +105,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRoutesInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRoutesOutput {
-    var result: GetRoutesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRoutesOutput, body, allocator);
-    }
+    const result: GetRoutesOutput = try aws.json.parseJsonObject(
+        GetRoutesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -235,10 +235,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateScheduleInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateScheduleOutput {
-    var result: CreateScheduleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateScheduleOutput, body, allocator);
-    }
+    const result: CreateScheduleOutput = try aws.json.parseJsonObject(
+        CreateScheduleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

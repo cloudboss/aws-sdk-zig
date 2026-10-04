@@ -1,3 +1,5 @@
+const ControlPlaneConfigInfo = @import("control_plane_config_info.zig").ControlPlaneConfigInfo;
+const ControlPlaneScalingTierInfo = @import("control_plane_scaling_tier_info.zig").ControlPlaneScalingTierInfo;
 const ClusterVersionStatus = @import("cluster_version_status.zig").ClusterVersionStatus;
 const VersionStatus = @import("version_status.zig").VersionStatus;
 
@@ -8,6 +10,14 @@ pub const ClusterVersionInformation = struct {
 
     /// The Kubernetes version for the cluster.
     cluster_version: ?[]const u8 = null,
+
+    /// The default control plane component configuration and constraints for this
+    /// Kubernetes version.
+    control_plane_component_config: ?ControlPlaneConfigInfo = null,
+
+    /// The available provisioned control plane scaling tiers and their capabilities
+    /// for this Kubernetes version.
+    control_plane_scaling_tiers: ?[]const ControlPlaneScalingTierInfo = null,
 
     /// Default platform version for this Kubernetes version.
     default_platform_version: ?[]const u8 = null,
@@ -39,6 +49,8 @@ pub const ClusterVersionInformation = struct {
     pub const json_field_names = .{
         .cluster_type = "clusterType",
         .cluster_version = "clusterVersion",
+        .control_plane_component_config = "controlPlaneComponentConfig",
+        .control_plane_scaling_tiers = "controlPlaneScalingTiers",
         .default_platform_version = "defaultPlatformVersion",
         .default_version = "defaultVersion",
         .end_of_extended_support_date = "endOfExtendedSupportDate",

@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateOtaTaskConfigurat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateOtaTaskConfigurationOutput {
-    var result: CreateOtaTaskConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateOtaTaskConfigurationOutput, body, allocator);
-    }
+    const result: CreateOtaTaskConfigurationOutput = try aws.json.parseJsonObject(
+        CreateOtaTaskConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

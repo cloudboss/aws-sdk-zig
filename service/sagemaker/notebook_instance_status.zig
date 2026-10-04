@@ -8,6 +8,8 @@ pub const NotebookInstanceStatus = enum {
     failed,
     deleting,
     updating,
+    pending_maintenance,
+    in_maintenance,
 
     pub const json_field_names = .{
         .pending = "Pending",
@@ -17,6 +19,8 @@ pub const NotebookInstanceStatus = enum {
         .failed = "Failed",
         .deleting = "Deleting",
         .updating = "Updating",
+        .pending_maintenance = "PendingMaintenance",
+        .in_maintenance = "InMaintenance",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -28,6 +32,8 @@ pub const NotebookInstanceStatus = enum {
             .failed => "Failed",
             .deleting => "Deleting",
             .updating => "Updating",
+            .pending_maintenance => "PendingMaintenance",
+            .in_maintenance => "InMaintenance",
         };
     }
 

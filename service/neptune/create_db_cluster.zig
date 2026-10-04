@@ -33,10 +33,7 @@ pub const CreateDBClusterInput = struct {
     /// the DB cluster that is created.*
     copy_tags_to_snapshot: ?bool = null,
 
-    /// The name for your database of up to 64 alpha-numeric characters. If you do
-    /// not provide a
-    /// name, Amazon Neptune will not create a database in the DB cluster you are
-    /// creating.
+    /// Not supported by Neptune.
     database_name: ?[]const u8 = null,
 
     /// The DB cluster identifier. This parameter is stored as a lowercase string.
@@ -142,6 +139,23 @@ pub const CreateDBClusterInput = struct {
 
     /// Not supported by Neptune.
     master_user_password: ?[]const u8 = null,
+
+    /// The network type of the DB cluster.
+    ///
+    /// Valid Values:
+    ///
+    /// * **
+    /// `IPV4`
+    /// **   –
+    /// ( *the default* ) The DB cluster uses only IPv4 addresses for communication.
+    ///
+    /// * **
+    /// `DUAL`
+    /// **   –
+    /// The DB cluster uses both IPv4 and IPv6 addresses for communication. The DB
+    /// subnet group
+    /// associated with the cluster must support IPv6.
+    network_type: ?[]const u8 = null,
 
     /// *(Not supported by Neptune)*
     option_group_name: ?[]const u8 = null,
@@ -349,6 +363,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBClusterInput, c
     }
     if (input.master_user_password) |v| {
         try body_buf.appendSlice(allocator, "&MasterUserPassword=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.network_type) |v| {
+        try body_buf.appendSlice(allocator, "&NetworkType=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.option_group_name) |v| {

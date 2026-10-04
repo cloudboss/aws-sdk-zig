@@ -7,10 +7,19 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Service = @import("service.zig").Service;
 
 pub const DescribeServicesInput = struct {
+    /// Specifies whether to validate the request without actually returning the
+    /// list of services.
+    /// When set to `true`, the request is validated but no services are returned,
+    /// and the
+    /// operation returns a `DryRunOperationException`. When omitted or set to
+    /// `false`, the request runs normally.
+    dry_run: ?bool = null,
+
     /// The language in which Amazon Web Services Support handles the case. Amazon
     /// Web Services Support
-    /// currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and
-    /// Korean (“ko”). You must specify the ISO 639-1
+    /// currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese
+    /// ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and
+    /// Turkish ("tr"). You must specify the ISO 639-1
     /// code for the `language` parameter if you want support in that language.
     language: ?[]const u8 = null,
 
@@ -19,6 +28,7 @@ pub const DescribeServicesInput = struct {
     service_code_list: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
+        .dry_run = "dryRun",
         .language = "language",
         .service_code_list = "serviceCodeList",
     };

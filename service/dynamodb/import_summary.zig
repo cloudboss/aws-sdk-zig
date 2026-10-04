@@ -9,9 +9,7 @@ pub const ImportSummary = struct {
     /// import task.
     cloud_watch_log_group_arn: ?[]const u8 = null,
 
-    /// The time at which this import task ended. (Does this include the successful
-    /// complete
-    /// creation of the table it was imported to?)
+    /// The time at which this import task ended.
     end_time: ?i64 = null,
 
     /// The Amazon Resource Number (ARN) corresponding to the import request.

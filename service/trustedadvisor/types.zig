@@ -6,6 +6,7 @@ pub const OrganizationRecommendationResourceSummary = @import("organization_reco
 pub const OrganizationRecommendationSummary = @import("organization_recommendation_summary.zig").OrganizationRecommendationSummary;
 pub const Recommendation = @import("recommendation.zig").Recommendation;
 pub const RecommendationCostOptimizingAggregates = @import("recommendation_cost_optimizing_aggregates.zig").RecommendationCostOptimizingAggregates;
+pub const RecommendationForResourceSummary = @import("recommendation_for_resource_summary.zig").RecommendationForResourceSummary;
 pub const RecommendationLanguage = @import("recommendation_language.zig").RecommendationLanguage;
 pub const RecommendationLifecycleStage = @import("recommendation_lifecycle_stage.zig").RecommendationLifecycleStage;
 pub const RecommendationPillar = @import("recommendation_pillar.zig").RecommendationPillar;

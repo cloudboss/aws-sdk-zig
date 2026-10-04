@@ -75,7 +75,7 @@ pub const Channel = struct {
     /// Channel type, which determines the allowable resolution and bitrate. *If you
     /// exceed the allowable input resolution or bitrate, the stream probably will
     /// disconnect immediately.* Default: `STANDARD`. For details, see [Channel
-    /// Types](https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html).
+    /// Types](https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html).
     @"type": ?ChannelType = null,
 
     pub const json_field_names = .{

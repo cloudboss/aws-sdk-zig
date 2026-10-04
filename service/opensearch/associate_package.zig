@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociatePackageInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociatePackageOutput {
-    var result: AssociatePackageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociatePackageOutput, body, allocator);
-    }
+    const result: AssociatePackageOutput = try aws.json.parseJsonObject(
+        AssociatePackageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

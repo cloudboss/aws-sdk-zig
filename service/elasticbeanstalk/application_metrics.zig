@@ -1,7 +1,7 @@
 const Latency = @import("latency.zig").Latency;
 const StatusCodes = @import("status_codes.zig").StatusCodes;
 
-/// Application request metrics for an AWS Elastic Beanstalk environment.
+/// Application request metrics for an Elastic Beanstalk environment.
 pub const ApplicationMetrics = struct {
     /// The amount of time that the metrics cover (usually 10 seconds). For example,
     /// you might

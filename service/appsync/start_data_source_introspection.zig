@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartDataSourceIntrospe
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartDataSourceIntrospectionOutput {
-    var result: StartDataSourceIntrospectionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartDataSourceIntrospectionOutput, body, allocator);
-    }
+    const result: StartDataSourceIntrospectionOutput = try aws.json.parseJsonObject(
+        StartDataSourceIntrospectionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

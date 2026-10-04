@@ -12,6 +12,10 @@ const EvaluationFormScoringStrategy = @import("evaluation_form_scoring_strategy.
 const EvaluationFormTargetConfiguration = @import("evaluation_form_target_configuration.zig").EvaluationFormTargetConfiguration;
 
 pub const CreateEvaluationFormInput = struct {
+    /// The AI version to use for the evaluation form. This specifies which AI model
+    /// version is used for automated evaluations.
+    ai_version: ?[]const u8 = null,
+
     /// A boolean flag indicating whether to create evaluation form in draft state.
     as_draft: ?bool = null,
 
@@ -29,7 +33,7 @@ pub const CreateEvaluationFormInput = struct {
     /// The description of the evaluation form.
     description: ?[]const u8 = null,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -58,6 +62,7 @@ pub const CreateEvaluationFormInput = struct {
     title: []const u8,
 
     pub const json_field_names = .{
+        .ai_version = "AIVersion",
         .as_draft = "AsDraft",
         .auto_evaluation_configuration = "AutoEvaluationConfiguration",
         .client_token = "ClientToken",
@@ -125,6 +130,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEvaluationFormInp
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.ai_version) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AIVersion\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.as_draft) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"AsDraft\":");
@@ -203,10 +214,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEvaluationFormInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateEvaluationFormOutput {
-    var result: CreateEvaluationFormOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateEvaluationFormOutput, body, allocator);
-    }
+    const result: CreateEvaluationFormOutput = try aws.json.parseJsonObject(
+        CreateEvaluationFormOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

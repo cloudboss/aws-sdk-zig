@@ -4,16 +4,19 @@ const std = @import("std");
 pub const M2tsScte35Control = enum {
     none,
     passthrough,
+    scte_35_without_idr,
 
     pub const json_field_names = .{
         .none = "NONE",
         .passthrough = "PASSTHROUGH",
+        .scte_35_without_idr = "SCTE_35_WITHOUT_IDR",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .none => "NONE",
             .passthrough => "PASSTHROUGH",
+            .scte_35_without_idr => "SCTE_35_WITHOUT_IDR",
         };
     }
 

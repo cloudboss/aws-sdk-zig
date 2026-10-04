@@ -54,7 +54,7 @@ pub const CreateCollaborationInput = struct {
     data_encryption_metadata: ?DataEncryptionMetadata = null,
 
     /// A description of the collaboration provided by the collaboration owner.
-    description: []const u8,
+    description: ?[]const u8 = null,
 
     /// An indicator as to whether metrics have been enabled or disabled for the
     /// collaboration.
@@ -199,10 +199,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCollaborationInpu
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"description\":");
-    try aws.json.writeValue(@TypeOf(input.description), input.description, allocator, &body_buf);
-    has_prev = true;
+    if (input.description) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"description\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.is_metrics_enabled) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"isMetricsEnabled\":");
@@ -249,10 +251,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCollaborationInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCollaborationOutput {
-    var result: CreateCollaborationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCollaborationOutput, body, allocator);
-    }
+    const result: CreateCollaborationOutput = try aws.json.parseJsonObject(
+        CreateCollaborationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

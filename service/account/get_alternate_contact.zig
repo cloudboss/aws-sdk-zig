@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAlternateContactInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAlternateContactOutput {
-    var result: GetAlternateContactOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAlternateContactOutput, body, allocator);
-    }
+    const result: GetAlternateContactOutput = try aws.json.parseJsonObject(
+        GetAlternateContactOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

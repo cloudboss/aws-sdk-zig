@@ -361,10 +361,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateWorkflowVersionIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateWorkflowVersionOutput {
-    var result: CreateWorkflowVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateWorkflowVersionOutput, body, allocator);
-    }
+    const result: CreateWorkflowVersionOutput = try aws.json.parseJsonObject(
+        CreateWorkflowVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

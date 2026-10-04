@@ -120,10 +120,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutRuleGroupsNamespaceI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutRuleGroupsNamespaceOutput {
-    var result: PutRuleGroupsNamespaceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutRuleGroupsNamespaceOutput, body, allocator);
-    }
+    const result: PutRuleGroupsNamespaceOutput = try aws.json.parseJsonObject(
+        PutRuleGroupsNamespaceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

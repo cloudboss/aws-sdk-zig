@@ -1,8 +1,10 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const batch_delete_advanced_prompt_optimization_job = @import("batch_delete_advanced_prompt_optimization_job.zig");
 const batch_delete_evaluation_job = @import("batch_delete_evaluation_job.zig");
 const cancel_automated_reasoning_policy_build_workflow = @import("cancel_automated_reasoning_policy_build_workflow.zig");
+const create_advanced_prompt_optimization_job = @import("create_advanced_prompt_optimization_job.zig");
 const create_automated_reasoning_policy = @import("create_automated_reasoning_policy.zig");
 const create_automated_reasoning_policy_test_case = @import("create_automated_reasoning_policy_test_case.zig");
 const create_automated_reasoning_policy_version = @import("create_automated_reasoning_policy_version.zig");
@@ -37,6 +39,8 @@ const delete_provisioned_model_throughput = @import("delete_provisioned_model_th
 const delete_resource_policy = @import("delete_resource_policy.zig");
 const deregister_marketplace_model_endpoint = @import("deregister_marketplace_model_endpoint.zig");
 const export_automated_reasoning_policy_version = @import("export_automated_reasoning_policy_version.zig");
+const get_account_data_retention = @import("get_account_data_retention.zig");
+const get_advanced_prompt_optimization_job = @import("get_advanced_prompt_optimization_job.zig");
 const get_automated_reasoning_policy = @import("get_automated_reasoning_policy.zig");
 const get_automated_reasoning_policy_annotations = @import("get_automated_reasoning_policy_annotations.zig");
 const get_automated_reasoning_policy_build_workflow = @import("get_automated_reasoning_policy_build_workflow.zig");
@@ -62,6 +66,7 @@ const get_prompt_router = @import("get_prompt_router.zig");
 const get_provisioned_model_throughput = @import("get_provisioned_model_throughput.zig");
 const get_resource_policy = @import("get_resource_policy.zig");
 const get_use_case_for_model_access = @import("get_use_case_for_model_access.zig");
+const list_advanced_prompt_optimization_jobs = @import("list_advanced_prompt_optimization_jobs.zig");
 const list_automated_reasoning_policies = @import("list_automated_reasoning_policies.zig");
 const list_automated_reasoning_policy_build_workflows = @import("list_automated_reasoning_policy_build_workflows.zig");
 const list_automated_reasoning_policy_test_cases = @import("list_automated_reasoning_policy_test_cases.zig");
@@ -83,6 +88,7 @@ const list_model_invocation_jobs = @import("list_model_invocation_jobs.zig");
 const list_prompt_routers = @import("list_prompt_routers.zig");
 const list_provisioned_model_throughputs = @import("list_provisioned_model_throughputs.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
+const put_account_data_retention = @import("put_account_data_retention.zig");
 const put_enforced_guardrail_configuration = @import("put_enforced_guardrail_configuration.zig");
 const put_model_invocation_logging_configuration = @import("put_model_invocation_logging_configuration.zig");
 const put_resource_policy = @import("put_resource_policy.zig");
@@ -90,6 +96,7 @@ const put_use_case_for_model_access = @import("put_use_case_for_model_access.zig
 const register_marketplace_model_endpoint = @import("register_marketplace_model_endpoint.zig");
 const start_automated_reasoning_policy_build_workflow = @import("start_automated_reasoning_policy_build_workflow.zig");
 const start_automated_reasoning_policy_test_workflow = @import("start_automated_reasoning_policy_test_workflow.zig");
+const stop_advanced_prompt_optimization_job = @import("stop_advanced_prompt_optimization_job.zig");
 const stop_evaluation_job = @import("stop_evaluation_job.zig");
 const stop_model_customization_job = @import("stop_model_customization_job.zig");
 const stop_model_invocation_job = @import("stop_model_invocation_job.zig");
@@ -132,6 +139,11 @@ pub const Client = struct {
         _ = self;
     }
 
+    /// Deletes one or more advanced prompt optimization jobs.
+    pub fn batchDeleteAdvancedPromptOptimizationJob(self: *Self, allocator: std.mem.Allocator, input: batch_delete_advanced_prompt_optimization_job.BatchDeleteAdvancedPromptOptimizationJobInput, options: CallOptions) !batch_delete_advanced_prompt_optimization_job.BatchDeleteAdvancedPromptOptimizationJobOutput {
+        return batch_delete_advanced_prompt_optimization_job.execute(self, allocator, input, options);
+    }
+
     /// Deletes a batch of evaluation jobs. An evaluation job can only be deleted if
     /// it has following status `FAILED`, `COMPLETED`, and `STOPPED`. You can
     /// request up to 25 model evaluation jobs be deleted in a single request.
@@ -144,6 +156,12 @@ pub const Client = struct {
     /// documents.
     pub fn cancelAutomatedReasoningPolicyBuildWorkflow(self: *Self, allocator: std.mem.Allocator, input: cancel_automated_reasoning_policy_build_workflow.CancelAutomatedReasoningPolicyBuildWorkflowInput, options: CallOptions) !cancel_automated_reasoning_policy_build_workflow.CancelAutomatedReasoningPolicyBuildWorkflowOutput {
         return cancel_automated_reasoning_policy_build_workflow.execute(self, allocator, input, options);
+    }
+
+    /// Creates an advanced prompt optimization job. The job optimizes your prompt
+    /// templates for specific models using your evaluation dataset and criteria.
+    pub fn createAdvancedPromptOptimizationJob(self: *Self, allocator: std.mem.Allocator, input: create_advanced_prompt_optimization_job.CreateAdvancedPromptOptimizationJobInput, options: CallOptions) !create_advanced_prompt_optimization_job.CreateAdvancedPromptOptimizationJobOutput {
+        return create_advanced_prompt_optimization_job.execute(self, allocator, input, options);
     }
 
     /// Creates an Automated Reasoning policy for Amazon Bedrock Guardrails.
@@ -175,6 +193,14 @@ pub const Client = struct {
 
     /// Creates a new custom model in Amazon Bedrock. After the model is active, you
     /// can use it for inference.
+    ///
+    /// You can provide the model data source in one of the following ways:
+    ///
+    /// * `customModelDataSource` — Specify a SageMaker AI model package ARN. Amazon
+    ///   Bedrock resolves the model package to retrieve the model artifacts. This
+    ///   is the preferred method for new SageMaker AI training outputs.
+    /// * `modelSourceConfig` — Specify an Amazon S3 URI pointing to the
+    ///   Amazon-managed Amazon S3 bucket containing your model artifacts.
     ///
     /// To use the model for inference, you must purchase Provisioned Throughput for
     /// it. You can't use On-demand inference with these custom models. For more
@@ -470,6 +496,16 @@ pub const Client = struct {
         return export_automated_reasoning_policy_version.execute(self, allocator, input, options);
     }
 
+    /// Returns the account-wide data retention mode for Amazon Bedrock.
+    pub fn getAccountDataRetention(self: *Self, allocator: std.mem.Allocator, input: get_account_data_retention.GetAccountDataRetentionInput, options: CallOptions) !get_account_data_retention.GetAccountDataRetentionOutput {
+        return get_account_data_retention.execute(self, allocator, input, options);
+    }
+
+    /// Gets information about an advanced prompt optimization job.
+    pub fn getAdvancedPromptOptimizationJob(self: *Self, allocator: std.mem.Allocator, input: get_advanced_prompt_optimization_job.GetAdvancedPromptOptimizationJobInput, options: CallOptions) !get_advanced_prompt_optimization_job.GetAdvancedPromptOptimizationJobOutput {
+        return get_advanced_prompt_optimization_job.execute(self, allocator, input, options);
+    }
+
     /// Retrieves details about an Automated Reasoning policy or policy version.
     /// Returns information including the policy definition, metadata, and
     /// timestamps.
@@ -631,6 +667,11 @@ pub const Client = struct {
     /// Get usecase for model access.
     pub fn getUseCaseForModelAccess(self: *Self, allocator: std.mem.Allocator, input: get_use_case_for_model_access.GetUseCaseForModelAccessInput, options: CallOptions) !get_use_case_for_model_access.GetUseCaseForModelAccessOutput {
         return get_use_case_for_model_access.execute(self, allocator, input, options);
+    }
+
+    /// Lists the advanced prompt optimization jobs in your account.
+    pub fn listAdvancedPromptOptimizationJobs(self: *Self, allocator: std.mem.Allocator, input: list_advanced_prompt_optimization_jobs.ListAdvancedPromptOptimizationJobsInput, options: CallOptions) !list_advanced_prompt_optimization_jobs.ListAdvancedPromptOptimizationJobsOutput {
+        return list_advanced_prompt_optimization_jobs.execute(self, allocator, input, options);
     }
 
     /// Lists all Automated Reasoning policies in your account, with optional
@@ -796,6 +837,11 @@ pub const Client = struct {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
+    /// Sets the account-wide data retention mode for Amazon Bedrock.
+    pub fn putAccountDataRetention(self: *Self, allocator: std.mem.Allocator, input: put_account_data_retention.PutAccountDataRetentionInput, options: CallOptions) !put_account_data_retention.PutAccountDataRetentionOutput {
+        return put_account_data_retention.execute(self, allocator, input, options);
+    }
+
     /// Sets the account-level enforced guardrail configuration.
     pub fn putEnforcedGuardrailConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_enforced_guardrail_configuration.PutEnforcedGuardrailConfigurationInput, options: CallOptions) !put_enforced_guardrail_configuration.PutEnforcedGuardrailConfigurationOutput {
         return put_enforced_guardrail_configuration.execute(self, allocator, input, options);
@@ -834,6 +880,11 @@ pub const Client = struct {
     /// validation results.
     pub fn startAutomatedReasoningPolicyTestWorkflow(self: *Self, allocator: std.mem.Allocator, input: start_automated_reasoning_policy_test_workflow.StartAutomatedReasoningPolicyTestWorkflowInput, options: CallOptions) !start_automated_reasoning_policy_test_workflow.StartAutomatedReasoningPolicyTestWorkflowOutput {
         return start_automated_reasoning_policy_test_workflow.execute(self, allocator, input, options);
+    }
+
+    /// Stops an advanced prompt optimization job that is in progress.
+    pub fn stopAdvancedPromptOptimizationJob(self: *Self, allocator: std.mem.Allocator, input: stop_advanced_prompt_optimization_job.StopAdvancedPromptOptimizationJobInput, options: CallOptions) !stop_advanced_prompt_optimization_job.StopAdvancedPromptOptimizationJobOutput {
+        return stop_advanced_prompt_optimization_job.execute(self, allocator, input, options);
     }
 
     /// Stops an evaluation job that is current being created or running.
@@ -934,6 +985,13 @@ pub const Client = struct {
     /// Throughput](https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html) in the [Amazon Bedrock User Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html).
     pub fn updateProvisionedModelThroughput(self: *Self, allocator: std.mem.Allocator, input: update_provisioned_model_throughput.UpdateProvisionedModelThroughputInput, options: CallOptions) !update_provisioned_model_throughput.UpdateProvisionedModelThroughputOutput {
         return update_provisioned_model_throughput.execute(self, allocator, input, options);
+    }
+
+    pub fn listAdvancedPromptOptimizationJobsPaginator(self: *Self, params: list_advanced_prompt_optimization_jobs.ListAdvancedPromptOptimizationJobsInput) paginator.ListAdvancedPromptOptimizationJobsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
     }
 
     pub fn listAutomatedReasoningPoliciesPaginator(self: *Self, params: list_automated_reasoning_policies.ListAutomatedReasoningPoliciesInput) paginator.ListAutomatedReasoningPoliciesPaginator {

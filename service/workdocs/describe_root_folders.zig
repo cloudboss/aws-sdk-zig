@@ -105,10 +105,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeRootFoldersInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeRootFoldersOutput {
-    var result: DescribeRootFoldersOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeRootFoldersOutput, body, allocator);
-    }
+    const result: DescribeRootFoldersOutput = try aws.json.parseJsonObject(
+        DescribeRootFoldersOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

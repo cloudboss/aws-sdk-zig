@@ -2,6 +2,7 @@ const AacAudioDescriptionBroadcasterMix = @import("aac_audio_description_broadca
 const AacCodecProfile = @import("aac_codec_profile.zig").AacCodecProfile;
 const AacCodingMode = @import("aac_coding_mode.zig").AacCodingMode;
 const AacLoudnessMeasurementMode = @import("aac_loudness_measurement_mode.zig").AacLoudnessMeasurementMode;
+const AacPassthroughControl = @import("aac_passthrough_control.zig").AacPassthroughControl;
 const AacRateControlMode = @import("aac_rate_control_mode.zig").AacRateControlMode;
 const AacRawFormat = @import("aac_raw_format.zig").AacRawFormat;
 const AacSpecification = @import("aac_specification.zig").AacSpecification;
@@ -63,6 +64,13 @@ pub const AacSettings = struct {
     /// speech gates.
     loudness_measurement_mode: ?AacLoudnessMeasurementMode = null,
 
+    /// When set to WHEN_POSSIBLE, input AAC audio will be passed through if it is
+    /// present on the input. This detection is dynamic over the life of the
+    /// transcode. Inputs that alternate between AAC and non-AAC content will have a
+    /// consistent AAC output as the system alternates between passthrough and
+    /// encoding.
+    passthrough_control: ?AacPassthroughControl = null,
+
     /// Specify the RAP (Random Access Point) interval for your xHE-AAC audio
     /// output. A RAP allows a decoder to decode audio data mid-stream, without the
     /// need to reference previous audio frames, and perform adaptive audio bitrate
@@ -109,6 +117,7 @@ pub const AacSettings = struct {
         .codec_profile = "CodecProfile",
         .coding_mode = "CodingMode",
         .loudness_measurement_mode = "LoudnessMeasurementMode",
+        .passthrough_control = "PassthroughControl",
         .rap_interval = "RapInterval",
         .rate_control_mode = "RateControlMode",
         .raw_format = "RawFormat",

@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateLicenseInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateLicenseOutput {
-    var result: AssociateLicenseOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateLicenseOutput, body, allocator);
-    }
+    const result: AssociateLicenseOutput = try aws.json.parseJsonObject(
+        AssociateLicenseOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

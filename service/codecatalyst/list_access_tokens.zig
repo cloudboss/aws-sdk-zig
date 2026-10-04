@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAccessTokensInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAccessTokensOutput {
-    var result: ListAccessTokensOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAccessTokensOutput, body, allocator);
-    }
+    const result: ListAccessTokensOutput = try aws.json.parseJsonObject(
+        ListAccessTokensOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

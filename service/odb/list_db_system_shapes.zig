@@ -25,11 +25,15 @@ pub const ListDbSystemShapesInput = struct {
     /// from the end of the items returned by the previous request.
     next_token: ?[]const u8 = null,
 
+    /// The shape family to filter results by.
+    shape_family: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .availability_zone = "availabilityZone",
         .availability_zone_id = "availabilityZoneId",
         .max_results = "maxResults",
         .next_token = "nextToken",
+        .shape_family = "shapeFamily",
     };
 };
 

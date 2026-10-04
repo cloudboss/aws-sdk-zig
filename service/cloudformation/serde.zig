@@ -27,6 +27,8 @@ const ChangeSource = @import("change_source.zig").ChangeSource;
 const ChangeType = @import("change_type.zig").ChangeType;
 const ConcurrencyMode = @import("concurrency_mode.zig").ConcurrencyMode;
 const DeletionMode = @import("deletion_mode.zig").DeletionMode;
+const DeploymentConfig = @import("deployment_config.zig").DeploymentConfig;
+const DeploymentConfigMode = @import("deployment_config_mode.zig").DeploymentConfigMode;
 const DeploymentTargets = @import("deployment_targets.zig").DeploymentTargets;
 const DetailedStatus = @import("detailed_status.zig").DetailedStatus;
 const DifferenceType = @import("difference_type.zig").DifferenceType;
@@ -1738,6 +1740,29 @@ pub fn deserializeChangeSetSummary(allocator: std.mem.Allocator, reader: *aws.xm
     return result;
 }
 
+pub fn deserializeDeploymentConfig(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !DeploymentConfig {
+    _ = allocator;
+    var result: DeploymentConfig = undefined;
+    result.disable_rollback = null;
+    result.mode = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "DisableRollback")) {
+                    result.disable_rollback = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "Mode")) {
+                    result.mode = DeploymentConfigMode.fromWireName(try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
 pub fn deserializeDeploymentTargets(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !DeploymentTargets {
     var result: DeploymentTargets = undefined;
     result.account_filter_type = null;
@@ -2642,6 +2667,7 @@ pub fn deserializeStack(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !
     result.change_set_id = null;
     result.deletion_mode = null;
     result.deletion_time = null;
+    result.deployment_config = null;
     result.description = null;
     result.detailed_status = null;
     result.disable_rollback = null;
@@ -2674,6 +2700,8 @@ pub fn deserializeStack(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !
                     result.deletion_mode = DeletionMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DeletionTime")) {
                     result.deletion_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "DeploymentConfig")) {
+                    result.deployment_config = try deserializeDeploymentConfig(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Description")) {
                     result.description = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DetailedStatus")) {
@@ -4458,6 +4486,19 @@ pub fn serializeAutoDeployment(allocator: std.mem.Allocator, buf: *std.ArrayList
         try buf.appendSlice(allocator, "<RetainStacksOnAccountRemoval>");
         try buf.appendSlice(allocator, if (v) "true" else "false");
         try buf.appendSlice(allocator, "</RetainStacksOnAccountRemoval>");
+    }
+}
+
+pub fn serializeDeploymentConfig(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: DeploymentConfig) !void {
+    if (value.disable_rollback) |v| {
+        try buf.appendSlice(allocator, "<DisableRollback>");
+        try buf.appendSlice(allocator, if (v) "true" else "false");
+        try buf.appendSlice(allocator, "</DisableRollback>");
+    }
+    if (value.mode) |v| {
+        try buf.appendSlice(allocator, "<Mode>");
+        try buf.appendSlice(allocator, v.wireName());
+        try buf.appendSlice(allocator, "</Mode>");
     }
 }
 

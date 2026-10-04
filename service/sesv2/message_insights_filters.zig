@@ -44,6 +44,9 @@ pub const MessageInsightsFilters = struct {
     /// The subject line of the message.
     subject: ?[]const []const u8 = null,
 
+    /// The name of the tenant used when sending the message.
+    tenant_name: ?[]const []const u8 = null,
+
     pub const json_field_names = .{
         .destination = "Destination",
         .from_email_address = "FromEmailAddress",
@@ -51,5 +54,6 @@ pub const MessageInsightsFilters = struct {
         .last_delivery_event = "LastDeliveryEvent",
         .last_engagement_event = "LastEngagementEvent",
         .subject = "Subject",
+        .tenant_name = "TenantName",
     };
 };

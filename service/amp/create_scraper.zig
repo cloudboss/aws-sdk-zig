@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Destination = @import("destination.zig").Destination;
+const ExporterConfiguration = @import("exporter_configuration.zig").ExporterConfiguration;
 const RoleConfiguration = @import("role_configuration.zig").RoleConfiguration;
 const ScrapeConfiguration = @import("scrape_configuration.zig").ScrapeConfiguration;
 const Source = @import("source.zig").Source;
@@ -19,8 +20,15 @@ pub const CreateScraperInput = struct {
     /// ensure the idempotency of the request.
     client_token: ?[]const u8 = null,
 
-    /// The Amazon Managed Service for Prometheus workspace to send metrics to.
+    /// The destination where the scraper sends the collected metrics. Valid
+    /// destinations are Amazon Managed Service for Prometheus workspaces and
+    /// CloudWatch datasets.
     destination: Destination,
+
+    /// The exporter configurations for the scraper. You can configure at most one
+    /// Amazon OpenSearch Service domain. If you don't specify a value, the scraper
+    /// is created without an exporter configuration.
+    exporters: ?[]const ExporterConfiguration = null,
 
     /// Use this structure to enable cross-account access, so that you can use a
     /// target account to access Prometheus metrics from source accounts.
@@ -42,6 +50,7 @@ pub const CreateScraperInput = struct {
         .alias = "alias",
         .client_token = "clientToken",
         .destination = "destination",
+        .exporters = "exporters",
         .role_configuration = "roleConfiguration",
         .scrape_configuration = "scrapeConfiguration",
         .source = "source",
@@ -122,6 +131,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateScraperInput, con
     try body_buf.appendSlice(allocator, "\"destination\":");
     try aws.json.writeValue(@TypeOf(input.destination), input.destination, allocator, &body_buf);
     has_prev = true;
+    if (input.exporters) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"exporters\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.role_configuration) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"roleConfiguration\":");
@@ -158,10 +173,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateScraperInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateScraperOutput {
-    var result: CreateScraperOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateScraperOutput, body, allocator);
-    }
+    const result: CreateScraperOutput = try aws.json.parseJsonObject(
+        CreateScraperOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

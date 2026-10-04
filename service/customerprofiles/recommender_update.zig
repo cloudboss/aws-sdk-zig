@@ -16,6 +16,9 @@ pub const RecommenderUpdate = struct {
     /// update.
     recommender_config: ?RecommenderConfig = null,
 
+    /// The name of the recommender version associated with this update operation.
+    recommender_version_name: ?[]const u8 = null,
+
     /// The current status of the recommender update operation.
     status: ?RecommenderStatus = null,
 
@@ -24,6 +27,7 @@ pub const RecommenderUpdate = struct {
         .failure_reason = "FailureReason",
         .last_updated_at = "LastUpdatedAt",
         .recommender_config = "RecommenderConfig",
+        .recommender_version_name = "RecommenderVersionName",
         .status = "Status",
     };
 };

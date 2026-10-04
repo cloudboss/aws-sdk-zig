@@ -6,7 +6,7 @@ pub const RoutingProfileQueueConfig = struct {
     /// The delay, in seconds, a contact should be in the queue before they are
     /// routed to an available agent. For more
     /// information, see [Queues: priority and
-    /// delay](https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html) in the *Amazon Connect Administrator Guide*.
+    /// delay](https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html) in the *Connect Customer Administrator Guide*.
     delay: i32,
 
     /// The order in which contacts are to be handled for the queue. For more

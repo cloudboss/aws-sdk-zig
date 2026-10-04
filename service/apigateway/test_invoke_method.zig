@@ -175,10 +175,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TestInvokeMethodInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !TestInvokeMethodOutput {
-    var result: TestInvokeMethodOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(TestInvokeMethodOutput, body, allocator);
-    }
+    const result: TestInvokeMethodOutput = try aws.json.parseJsonObject(
+        TestInvokeMethodOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

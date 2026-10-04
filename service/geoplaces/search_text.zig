@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SearchTextAdditionalFeature = @import("search_text_additional_feature.zig").SearchTextAdditionalFeature;
 const SearchTextFilter = @import("search_text_filter.zig").SearchTextFilter;
 const SearchTextIntendedUse = @import("search_text_intended_use.zig").SearchTextIntendedUse;
+const SearchTextTravelMode = @import("search_text_travel_mode.zig").SearchTextTravelMode;
 const SearchTextResultItem = @import("search_text_result_item.zig").SearchTextResultItem;
 
 pub const SearchTextInput = struct {
@@ -42,11 +43,8 @@ pub const SearchTextInput = struct {
     /// valid SigV4 signature must be provided when making a request.
     key: ?[]const u8 = null,
 
-    /// A list of [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag)
-    /// compliant language codes for the results to be rendered in. If there is no
-    /// data for the result in the requested language, data will be returned in the
-    /// default language for the entry. For
-    /// [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the following codes: `en, id, km, lo, ms, my, pt, th, tl, vi, zh`
+    /// A list of [BCP
+    /// 47](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry) compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers, `ap-southeast-1` and `ap-southeast-5` regions support only the following codes: `en, id, km, lo, ms, my, pt, th, tl, vi, zh`
     language: ?[]const u8 = null,
 
     /// An optional limit for the number of results returned in a single call.
@@ -80,6 +78,11 @@ pub const SearchTextInput = struct {
     /// Exactly one of the following fields must be set: `QueryText` or `QueryId`.
     query_text: ?[]const u8 = null,
 
+    /// Indicates the mode of mobility used by the end user. This is used to improve
+    /// the relevance of search results. Valid values are `Car`, `Scooter`, and
+    /// `Truck`.
+    travel_mode: ?SearchTextTravelMode = null,
+
     pub const json_field_names = .{
         .additional_features = "AdditionalFeatures",
         .bias_position = "BiasPosition",
@@ -92,6 +95,7 @@ pub const SearchTextInput = struct {
         .political_view = "PoliticalView",
         .query_id = "QueryId",
         .query_text = "QueryText",
+        .travel_mode = "TravelMode",
     };
 };
 
@@ -222,6 +226,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchTextInput, config
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.travel_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"TravelMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -239,10 +249,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchTextInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchTextOutput {
-    var result: SearchTextOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchTextOutput, body, allocator);
-    }
+    var result: SearchTextOutput = try aws.json.parseJsonObject(
+        SearchTextOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("x-amz-geo-pricing-bucket")) |value| {
         result.pricing_bucket = try allocator.dupe(u8, value);

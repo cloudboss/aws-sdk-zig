@@ -9,8 +9,10 @@ pub const ExpectedCustomerSpend = struct {
     /// from the opportunity. This helps in forecasting financial returns.
     amount: []const u8 = "",
 
-    /// Currency code for the expected customer spend. Supported currencies: USD,
-    /// EUR
+    /// Indicates the currency in which the revenue estimate is provided. This helps
+    /// in understanding the financial impact across different markets. Accepted
+    /// values are `USD` (US Dollars) and `EUR` (Euros). If the AWS Partition is
+    /// `aws-eusc` (AWS European Sovereign Cloud), the currency code must be `EUR`.
     currency_code: CurrencyCode,
 
     /// A URL providing additional information or context about the spend
@@ -18,14 +20,19 @@ pub const ExpectedCustomerSpend = struct {
     estimation_url: ?[]const u8 = null,
 
     /// Indicates how frequently the customer is expected to spend the projected
-    /// amount. Only the value `Monthly` is allowed for the `Frequency` field,
-    /// representing recurring monthly spend.
+    /// amount. Use `Monthly` for recurring monthly spend (required for
+    /// `TargetCompany: "AWS"` entries). Use `None` for one-time deal value entries
+    /// (required for `TargetCompany: "Self"` entries when providing Total Contract
+    /// Value).
     frequency: PaymentFrequency,
 
-    /// Specifies the name of the partner company that is expected to generate
-    /// revenue from the opportunity. This field helps track the partner’s
-    /// involvement in the opportunity. This field only accepts the value `AWS`. If
-    /// any other value is provided, the system will automatically set it to `AWS`.
+    /// Specifies the entity associated with this spend entry. Use `AWS` for the
+    /// system’s AWS Monthly Recurring Revenue (MRR) estimate. Use `Self` for the
+    /// partner’s own deal value entry when providing Total Contract Value (TCV) for
+    /// automatic MRR conversion. When `ExpectedContractDuration` is present on the
+    /// Project, only `AWS` and `Self` are accepted. When `ExpectedContractDuration`
+    /// is not present, only `AWS` is accepted and any other value will be
+    /// automatically set to `AWS`.
     target_company: []const u8,
 
     pub const json_field_names = .{

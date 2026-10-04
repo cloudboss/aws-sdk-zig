@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ObjectCannedACL = @import("object_canned_acl.zig").ObjectCannedACL;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
+const ObjectLockEventHold = @import("object_lock_event_hold.zig").ObjectLockEventHold;
 const ObjectLockLegalHoldStatus = @import("object_lock_legal_hold_status.zig").ObjectLockLegalHoldStatus;
 const ObjectLockMode = @import("object_lock_mode.zig").ObjectLockMode;
 const RequestPayer = @import("request_payer.zig").RequestPayer;
@@ -397,6 +398,27 @@ pub const PutObjectInput = struct {
 
     /// A map of metadata to store with the object in S3.
     metadata: ?[]const aws.map.StringMapEntry = null,
+
+    /// Specifies the event hold status to apply to this object. Set to `ON` to
+    /// enable or
+    /// `OFF` to disable.
+    ///
+    /// This functionality is not supported for directory buckets.
+    object_lock_event_hold: ?ObjectLockEventHold = null,
+
+    /// Specifies the event hold duration in days to apply to this object. You
+    /// cannot specify a
+    /// duration in both days and years.
+    ///
+    /// This functionality is not supported for directory buckets.
+    object_lock_event_hold_duration_days: ?i32 = null,
+
+    /// Specifies the event hold duration in years to apply to this object. You
+    /// cannot specify a
+    /// duration in both days and years.
+    ///
+    /// This functionality is not supported for directory buckets.
+    object_lock_event_hold_duration_years: ?i32 = null,
 
     /// Specifies whether a legal hold will be applied to this object. For more
     /// information about S3 Object
@@ -1005,6 +1027,21 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutObjectInput, config:
     }
     if (input.if_none_match) |v| {
         try request.headers.put(allocator, "If-None-Match", v);
+    }
+    if (input.object_lock_event_hold) |v| {
+        try request.headers.put(allocator, "x-amz-object-lock-event-hold", v.wireName());
+    }
+    if (input.object_lock_event_hold_duration_days) |v| {
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "x-amz-object-lock-event-hold-duration-days", num_str);
+        }
+    }
+    if (input.object_lock_event_hold_duration_years) |v| {
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "x-amz-object-lock-event-hold-duration-years", num_str);
+        }
     }
     if (input.object_lock_legal_hold_status) |v| {
         try request.headers.put(allocator, "x-amz-object-lock-legal-hold", v.wireName());

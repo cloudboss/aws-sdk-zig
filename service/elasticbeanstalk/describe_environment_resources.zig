@@ -8,20 +8,20 @@ const EnvironmentResourceDescription = @import("environment_resource_description
 const serde = @import("serde.zig");
 
 pub const DescribeEnvironmentResourcesInput = struct {
-    /// The ID of the environment to retrieve AWS resource usage data.
+    /// The ID of the environment to retrieve Amazon Web Services resource usage
+    /// data.
     ///
     /// Condition: You must specify either this or an EnvironmentName, or both. If
-    /// you do not
-    /// specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter`
-    /// error.
+    /// you do not specify either, Elastic Beanstalk returns
+    /// `MissingRequiredParameter` error.
     environment_id: ?[]const u8 = null,
 
-    /// The name of the environment to retrieve AWS resource usage data.
+    /// The name of the environment to retrieve Amazon Web Services resource usage
+    /// data.
     ///
     /// Condition: You must specify either this or an EnvironmentId, or both. If you
-    /// do not
-    /// specify either, AWS Elastic Beanstalk returns `MissingRequiredParameter`
-    /// error.
+    /// do not specify either, Elastic Beanstalk returns
+    /// `MissingRequiredParameter` error.
     environment_name: ?[]const u8 = null,
 };
 

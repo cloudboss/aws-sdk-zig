@@ -21,7 +21,7 @@ pub const EksResourceScalingConfiguration = struct {
     /// The scaling resources for the configuration.
     scaling_resources: ?[]const []const aws.map.MapEntry([]const aws.map.MapEntry(KubernetesScalingResource)) = null,
 
-    /// The target percentage for the configuration.
+    /// The target percentage for the configuration. The default is 100.
     target_percent: i32 = 100,
 
     /// The timeout value specified for the configuration.

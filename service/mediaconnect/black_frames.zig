@@ -2,7 +2,7 @@ const State = @import("state.zig").State;
 
 /// Configures settings for the `BlackFrames` metric.
 pub const BlackFrames = struct {
-    /// Indicates whether the `BlackFrames` metric is enabled or disabled..
+    /// Indicates whether the `BlackFrames` metric is enabled or disabled.
     state: ?State = null,
 
     /// Specifies the number of consecutive seconds of black frames that triggers an

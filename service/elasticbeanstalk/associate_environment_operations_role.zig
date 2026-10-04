@@ -10,8 +10,7 @@ pub const AssociateEnvironmentOperationsRoleInput = struct {
     environment_name: []const u8,
 
     /// The Amazon Resource Name (ARN) of an existing IAM role to be used as the
-    /// environment's
-    /// operations role.
+    /// environment's operations role.
     operations_role: []const u8,
 };
 

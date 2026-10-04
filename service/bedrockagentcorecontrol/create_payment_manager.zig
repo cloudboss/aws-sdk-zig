@@ -30,6 +30,11 @@ pub const CreatePaymentManagerInput = struct {
     /// A description of the payment manager.
     description: ?[]const u8 = null,
 
+    /// The Amazon Resource Name (ARN) of the customer managed KMS key to use for
+    /// encrypting sensitive payment manager data at rest. If you don't specify a
+    /// key, the data is encrypted with an Amazon Web Services owned key.
+    kms_key_arn: ?[]const u8 = null,
+
     /// The name of the payment manager.
     name: []const u8,
 
@@ -45,6 +50,7 @@ pub const CreatePaymentManagerInput = struct {
         .authorizer_type = "authorizerType",
         .client_token = "clientToken",
         .description = "description",
+        .kms_key_arn = "kmsKeyArn",
         .name = "name",
         .role_arn = "roleArn",
         .tags = "tags",
@@ -59,6 +65,10 @@ pub const CreatePaymentManagerOutput = struct {
 
     /// The timestamp when the payment manager was created.
     created_at: i64,
+
+    /// The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive
+    /// payment manager data at rest, if configured.
+    kms_key_arn: ?[]const u8 = null,
 
     /// The name of the created payment manager.
     name: []const u8,
@@ -87,6 +97,7 @@ pub const CreatePaymentManagerOutput = struct {
         .authorizer_configuration = "authorizerConfiguration",
         .authorizer_type = "authorizerType",
         .created_at = "createdAt",
+        .kms_key_arn = "kmsKeyArn",
         .name = "name",
         .payment_manager_arn = "paymentManagerArn",
         .payment_manager_id = "paymentManagerId",
@@ -155,6 +166,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePaymentManagerInp
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.kms_key_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"kmsKeyArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
@@ -185,10 +202,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePaymentManagerInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePaymentManagerOutput {
-    var result: CreatePaymentManagerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePaymentManagerOutput, body, allocator);
-    }
+    const result: CreatePaymentManagerOutput = try aws.json.parseJsonObject(
+        CreatePaymentManagerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

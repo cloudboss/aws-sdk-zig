@@ -7,6 +7,7 @@ const add_direct_query_data_source = @import("add_direct_query_data_source.zig")
 const add_tags = @import("add_tags.zig");
 const associate_package = @import("associate_package.zig");
 const associate_packages = @import("associate_packages.zig");
+const attach_data_source = @import("attach_data_source.zig");
 const authorize_vpc_endpoint_access = @import("authorize_vpc_endpoint_access.zig");
 const cancel_domain_config_change = @import("cancel_domain_config_change.zig");
 const cancel_service_software_update = @import("cancel_service_software_update.zig");
@@ -26,6 +27,7 @@ const delete_outbound_connection = @import("delete_outbound_connection.zig");
 const delete_package = @import("delete_package.zig");
 const delete_vpc_endpoint = @import("delete_vpc_endpoint.zig");
 const deregister_capability = @import("deregister_capability.zig");
+const describe_data_source_attachment = @import("describe_data_source_attachment.zig");
 const describe_domain = @import("describe_domain.zig");
 const describe_domain_auto_tunes = @import("describe_domain_auto_tunes.zig");
 const describe_domain_change_progress = @import("describe_domain_change_progress.zig");
@@ -42,6 +44,7 @@ const describe_packages = @import("describe_packages.zig");
 const describe_reserved_instance_offerings = @import("describe_reserved_instance_offerings.zig");
 const describe_reserved_instances = @import("describe_reserved_instances.zig");
 const describe_vpc_endpoints = @import("describe_vpc_endpoints.zig");
+const detach_data_source = @import("detach_data_source.zig");
 const dissociate_package = @import("dissociate_package.zig");
 const dissociate_packages = @import("dissociate_packages.zig");
 const get_application = @import("get_application.zig");
@@ -52,10 +55,13 @@ const get_default_application_setting = @import("get_default_application_setting
 const get_direct_query_data_source = @import("get_direct_query_data_source.zig");
 const get_domain_maintenance_status = @import("get_domain_maintenance_status.zig");
 const get_index = @import("get_index.zig");
+const get_migration = @import("get_migration.zig");
 const get_package_version_history = @import("get_package_version_history.zig");
 const get_upgrade_history = @import("get_upgrade_history.zig");
 const get_upgrade_status = @import("get_upgrade_status.zig");
+const insight_feedback = @import("insight_feedback.zig");
 const list_applications = @import("list_applications.zig");
+const list_data_source_attachments = @import("list_data_source_attachments.zig");
 const list_data_sources = @import("list_data_sources.zig");
 const list_direct_query_data_sources = @import("list_direct_query_data_sources.zig");
 const list_domain_maintenances = @import("list_domain_maintenances.zig");
@@ -63,6 +69,7 @@ const list_domain_names = @import("list_domain_names.zig");
 const list_domains_for_package = @import("list_domains_for_package.zig");
 const list_insights = @import("list_insights.zig");
 const list_instance_type_details = @import("list_instance_type_details.zig");
+const list_migrations = @import("list_migrations.zig");
 const list_packages_for_domain = @import("list_packages_for_domain.zig");
 const list_scheduled_actions = @import("list_scheduled_actions.zig");
 const list_tags = @import("list_tags.zig");
@@ -78,6 +85,7 @@ const remove_tags = @import("remove_tags.zig");
 const revoke_vpc_endpoint_access = @import("revoke_vpc_endpoint_access.zig");
 const rollback_service_software_update = @import("rollback_service_software_update.zig");
 const start_domain_maintenance = @import("start_domain_maintenance.zig");
+const start_migration = @import("start_migration.zig");
 const start_service_software_update = @import("start_service_software_update.zig");
 const update_application = @import("update_application.zig");
 const update_data_source = @import("update_data_source.zig");
@@ -169,6 +177,18 @@ pub const Client = struct {
     /// a domain simultaneously.
     pub fn associatePackages(self: *Self, allocator: std.mem.Allocator, input: associate_packages.AssociatePackagesInput, options: CallOptions) !associate_packages.AssociatePackagesOutput {
         return associate_packages.execute(self, allocator, input, options);
+    }
+
+    /// Attaches a data source to an OpenSearch application. The data source must be
+    /// an Amazon OpenSearch Service domain. If both the application and the data
+    /// source are active, the attachment completes immediately with a status of
+    /// `ATTACHED`. Otherwise, the operation returns `PENDING` and completes the
+    /// attachment automatically once both become active. If the attachment cannot
+    /// be completed, its status becomes `FAILED`. This operation is idempotent: If
+    /// the data source is already attached or pending, the operation returns the
+    /// existing attachment.
+    pub fn attachDataSource(self: *Self, allocator: std.mem.Allocator, input: attach_data_source.AttachDataSourceInput, options: CallOptions) !attach_data_source.AttachDataSourceOutput {
+        return attach_data_source.execute(self, allocator, input, options);
     }
 
     /// Provides access to an Amazon OpenSearch Service domain through the use of an
@@ -314,6 +334,14 @@ pub const Client = struct {
         return deregister_capability.execute(self, allocator, input, options);
     }
 
+    /// Returns the current status and details of a specific data source attachment
+    /// for an OpenSearch application. Throws a `ResourceNotFoundException` if no
+    /// attachment record exists for the specified application and data source
+    /// combination.
+    pub fn describeDataSourceAttachment(self: *Self, allocator: std.mem.Allocator, input: describe_data_source_attachment.DescribeDataSourceAttachmentInput, options: CallOptions) !describe_data_source_attachment.DescribeDataSourceAttachmentOutput {
+        return describe_data_source_attachment.execute(self, allocator, input, options);
+    }
+
     /// Describes the domain configuration for the specified Amazon OpenSearch
     /// Service domain,
     /// including the domain ID, domain service endpoint, and domain ARN.
@@ -441,6 +469,16 @@ pub const Client = struct {
         return describe_vpc_endpoints.execute(self, allocator, input, options);
     }
 
+    /// Removes a data source from an OpenSearch application. The application must
+    /// be in the `ACTIVE` state. This operation removes the data source saved
+    /// object from the application and deletes the attachment record. Throws a
+    /// `ConflictException` if the specified data source has a `PENDING` attachment,
+    /// and a `ResourceNotFoundException` if the data source is not currently
+    /// attached to the application.
+    pub fn detachDataSource(self: *Self, allocator: std.mem.Allocator, input: detach_data_source.DetachDataSourceInput, options: CallOptions) !detach_data_source.DetachDataSourceOutput {
+        return detach_data_source.execute(self, allocator, input, options);
+    }
+
     /// Removes a package from the specified Amazon OpenSearch Service domain. The
     /// package
     /// can't be in use with any OpenSearch index for the dissociation to succeed.
@@ -511,6 +549,13 @@ pub const Client = struct {
         return get_index.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the current status and progress of a migration job, including the
+    /// number of exported and imported objects and error details if the migration
+    /// failed.
+    pub fn getMigration(self: *Self, allocator: std.mem.Allocator, input: get_migration.GetMigrationInput, options: CallOptions) !get_migration.GetMigrationOutput {
+        return get_migration.execute(self, allocator, input, options);
+    }
+
     /// Returns a list of Amazon OpenSearch Service package versions, along with
     /// their creation
     /// time, commit message, and plugin properties (if the package is a zip plugin
@@ -536,9 +581,25 @@ pub const Client = struct {
         return get_upgrade_status.execute(self, allocator, input, options);
     }
 
+    /// Submits feedback for an existing insight in an Amazon OpenSearch Service
+    /// domain.
+    /// Allows users to provide a thumbs up or thumbs down rating and optional text
+    /// feedback
+    /// for a specific insight.
+    pub fn insightFeedback(self: *Self, allocator: std.mem.Allocator, input: insight_feedback.InsightFeedbackInput, options: CallOptions) !insight_feedback.InsightFeedbackOutput {
+        return insight_feedback.execute(self, allocator, input, options);
+    }
+
     /// Lists all OpenSearch applications under your account.
     pub fn listApplications(self: *Self, allocator: std.mem.Allocator, input: list_applications.ListApplicationsInput, options: CallOptions) !list_applications.ListApplicationsOutput {
         return list_applications.execute(self, allocator, input, options);
+    }
+
+    /// Returns a paginated list of all data source attachments for an OpenSearch
+    /// application, including attachments in all states (`PENDING`, `ATTACHED`, and
+    /// `FAILED`).
+    pub fn listDataSourceAttachments(self: *Self, allocator: std.mem.Allocator, input: list_data_source_attachments.ListDataSourceAttachmentsInput, options: CallOptions) !list_data_source_attachments.ListDataSourceAttachmentsOutput {
+        return list_data_source_attachments.execute(self, allocator, input, options);
     }
 
     /// Lists direct-query data sources for a specific domain. For more information,
@@ -591,6 +652,13 @@ pub const Client = struct {
     /// Elasticsearch version.
     pub fn listInstanceTypeDetails(self: *Self, allocator: std.mem.Allocator, input: list_instance_type_details.ListInstanceTypeDetailsInput, options: CallOptions) !list_instance_type_details.ListInstanceTypeDetailsOutput {
         return list_instance_type_details.execute(self, allocator, input, options);
+    }
+
+    /// Lists migration jobs for an Amazon OpenSearch Service application. You can
+    /// filter results by migration status. Use pagination to ensure that the
+    /// operation returns quickly and successfully.
+    pub fn listMigrations(self: *Self, allocator: std.mem.Allocator, input: list_migrations.ListMigrationsInput, options: CallOptions) !list_migrations.ListMigrationsOutput {
+        return list_migrations.execute(self, allocator, input, options);
     }
 
     /// Lists all packages associated with an Amazon OpenSearch Service domain. For
@@ -712,6 +780,15 @@ pub const Client = struct {
     /// restart.
     pub fn startDomainMaintenance(self: *Self, allocator: std.mem.Allocator, input: start_domain_maintenance.StartDomainMaintenanceInput, options: CallOptions) !start_domain_maintenance.StartDomainMaintenanceOutput {
         return start_domain_maintenance.execute(self, allocator, input, options);
+    }
+
+    /// Initiates a migration job to migrate saved objects from a data source to an
+    /// Amazon OpenSearch Service application workspace. Saved objects include
+    /// dashboards, visualizations, index patterns, and searches. You can specify
+    /// export filters to control the scope of the migration and a conflict
+    /// resolution strategy for handling existing objects in the target workspace.
+    pub fn startMigration(self: *Self, allocator: std.mem.Allocator, input: start_migration.StartMigrationInput, options: CallOptions) !start_migration.StartMigrationOutput {
+        return start_migration.execute(self, allocator, input, options);
     }
 
     /// Schedules a service software update for an Amazon OpenSearch Service domain.

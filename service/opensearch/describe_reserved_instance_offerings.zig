@@ -117,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeReservedInstanc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeReservedInstanceOfferingsOutput {
-    var result: DescribeReservedInstanceOfferingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeReservedInstanceOfferingsOutput, body, allocator);
-    }
+    const result: DescribeReservedInstanceOfferingsOutput = try aws.json.parseJsonObject(
+        DescribeReservedInstanceOfferingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -115,6 +115,7 @@ const ReplicationTimeStatus = @import("replication_time_status.zig").Replication
 const ReplicationTimeValue = @import("replication_time_value.zig").ReplicationTimeValue;
 const S3AccessControlList = @import("s3_access_control_list.zig").S3AccessControlList;
 const S3AccessControlPolicy = @import("s3_access_control_policy.zig").S3AccessControlPolicy;
+const S3AnnotationDirective = @import("s3_annotation_directive.zig").S3AnnotationDirective;
 const S3BucketDestination = @import("s3_bucket_destination.zig").S3BucketDestination;
 const S3CannedAccessControlList = @import("s3_canned_access_control_list.zig").S3CannedAccessControlList;
 const S3ChecksumAlgorithm = @import("s3_checksum_algorithm.zig").S3ChecksumAlgorithm;
@@ -128,9 +129,13 @@ const S3Grantee = @import("s3_grantee.zig").S3Grantee;
 const S3GranteeTypeIdentifier = @import("s3_grantee_type_identifier.zig").S3GranteeTypeIdentifier;
 const S3InitiateRestoreObjectOperation = @import("s3_initiate_restore_object_operation.zig").S3InitiateRestoreObjectOperation;
 const S3MetadataDirective = @import("s3_metadata_directive.zig").S3MetadataDirective;
+const S3ObjectLockEventHold = @import("s3_object_lock_event_hold.zig").S3ObjectLockEventHold;
+const S3ObjectLockEventHoldDuration = @import("s3_object_lock_event_hold_duration.zig").S3ObjectLockEventHoldDuration;
 const S3ObjectLockLegalHold = @import("s3_object_lock_legal_hold.zig").S3ObjectLockLegalHold;
 const S3ObjectLockLegalHoldStatus = @import("s3_object_lock_legal_hold_status.zig").S3ObjectLockLegalHoldStatus;
 const S3ObjectLockMode = @import("s3_object_lock_mode.zig").S3ObjectLockMode;
+const S3ObjectLockRetentionEventHold = @import("s3_object_lock_retention_event_hold.zig").S3ObjectLockRetentionEventHold;
+const S3ObjectLockRetentionEventHoldDuration = @import("s3_object_lock_retention_event_hold_duration.zig").S3ObjectLockRetentionEventHoldDuration;
 const S3ObjectLockRetentionMode = @import("s3_object_lock_retention_mode.zig").S3ObjectLockRetentionMode;
 const S3ObjectMetadata = @import("s3_object_metadata.zig").S3ObjectMetadata;
 const S3ObjectOwner = @import("s3_object_owner.zig").S3ObjectOwner;
@@ -3061,6 +3066,7 @@ pub fn deserializeS3ComputeObjectChecksumOperation(allocator: std.mem.Allocator,
 pub fn deserializeS3CopyObjectOperation(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !S3CopyObjectOperation {
     var result: S3CopyObjectOperation = undefined;
     result.access_control_grants = null;
+    result.annotation_directive = null;
     result.bucket_key_enabled = false;
     result.canned_access_control_list = null;
     result.checksum_algorithm = null;
@@ -3068,6 +3074,8 @@ pub fn deserializeS3CopyObjectOperation(allocator: std.mem.Allocator, reader: *a
     result.modified_since_constraint = null;
     result.new_object_metadata = null;
     result.new_object_tagging = null;
+    result.object_lock_event_hold = null;
+    result.object_lock_event_hold_duration = null;
     result.object_lock_legal_hold_status = null;
     result.object_lock_mode = null;
     result.object_lock_retain_until_date = null;
@@ -3083,6 +3091,8 @@ pub fn deserializeS3CopyObjectOperation(allocator: std.mem.Allocator, reader: *a
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "AccessControlGrants")) {
                     result.access_control_grants = try deserializeS3GrantList(allocator, reader, "member");
+                } else if (std.mem.eql(u8, e.local, "AnnotationDirective")) {
+                    result.annotation_directive = S3AnnotationDirective.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "BucketKeyEnabled")) {
                     result.bucket_key_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "CannedAccessControlList")) {
@@ -3097,6 +3107,10 @@ pub fn deserializeS3CopyObjectOperation(allocator: std.mem.Allocator, reader: *a
                     result.new_object_metadata = try deserializeS3ObjectMetadata(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "NewObjectTagging")) {
                     result.new_object_tagging = try deserializeS3TagSet(allocator, reader, "member");
+                } else if (std.mem.eql(u8, e.local, "ObjectLockEventHold")) {
+                    result.object_lock_event_hold = S3ObjectLockEventHold.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ObjectLockEventHoldDuration")) {
+                    result.object_lock_event_hold_duration = try deserializeS3ObjectLockEventHoldDuration(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "ObjectLockLegalHoldStatus")) {
                     result.object_lock_legal_hold_status = S3ObjectLockLegalHoldStatus.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ObjectLockMode")) {
@@ -3235,6 +3249,29 @@ pub fn deserializeS3InitiateRestoreObjectOperation(allocator: std.mem.Allocator,
     return result;
 }
 
+pub fn deserializeS3ObjectLockEventHoldDuration(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !S3ObjectLockEventHoldDuration {
+    _ = allocator;
+    var result: S3ObjectLockEventHoldDuration = undefined;
+    result.days = null;
+    result.years = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Days")) {
+                    result.days = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "Years")) {
+                    result.years = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
 pub fn deserializeS3ObjectLockLegalHold(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !S3ObjectLockLegalHold {
     _ = allocator;
     var result: S3ObjectLockLegalHold = undefined;
@@ -3243,6 +3280,29 @@ pub fn deserializeS3ObjectLockLegalHold(allocator: std.mem.Allocator, reader: *a
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = S3ObjectLockLegalHoldStatus.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeS3ObjectLockRetentionEventHoldDuration(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !S3ObjectLockRetentionEventHoldDuration {
+    _ = allocator;
+    var result: S3ObjectLockRetentionEventHoldDuration = undefined;
+    result.days = null;
+    result.years = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "Days")) {
+                    result.days = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "Years")) {
+                    result.years = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
                     try reader.skipElement();
                 }
@@ -3341,14 +3401,19 @@ pub fn deserializeS3ReplicateObjectOperation(allocator: std.mem.Allocator, reade
 }
 
 pub fn deserializeS3Retention(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !S3Retention {
-    _ = allocator;
     var result: S3Retention = undefined;
+    result.event_hold = null;
+    result.event_hold_duration = null;
     result.mode = null;
     result.retain_until_date = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
-                if (std.mem.eql(u8, e.local, "Mode")) {
+                if (std.mem.eql(u8, e.local, "EventHold")) {
+                    result.event_hold = S3ObjectLockRetentionEventHold.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "EventHoldDuration")) {
+                    result.event_hold_duration = try deserializeS3ObjectLockRetentionEventHoldDuration(allocator, reader);
+                } else if (std.mem.eql(u8, e.local, "Mode")) {
                     result.mode = S3ObjectLockRetentionMode.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "RetainUntilDate")) {
                     result.retain_until_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
@@ -5235,6 +5300,11 @@ pub fn serializeS3CopyObjectOperation(allocator: std.mem.Allocator, buf: *std.Ar
         try serializeS3GrantList(allocator, buf, v, "member");
         try buf.appendSlice(allocator, "</AccessControlGrants>");
     }
+    if (value.annotation_directive) |v| {
+        try buf.appendSlice(allocator, "<AnnotationDirective>");
+        try buf.appendSlice(allocator, v.wireName());
+        try buf.appendSlice(allocator, "</AnnotationDirective>");
+    }
     try buf.appendSlice(allocator, "<BucketKeyEnabled>");
     try buf.appendSlice(allocator, if (value.bucket_key_enabled) "true" else "false");
     try buf.appendSlice(allocator, "</BucketKeyEnabled>");
@@ -5270,6 +5340,16 @@ pub fn serializeS3CopyObjectOperation(allocator: std.mem.Allocator, buf: *std.Ar
         try buf.appendSlice(allocator, "<NewObjectTagging>");
         try serializeS3TagSet(allocator, buf, v, "member");
         try buf.appendSlice(allocator, "</NewObjectTagging>");
+    }
+    if (value.object_lock_event_hold) |v| {
+        try buf.appendSlice(allocator, "<ObjectLockEventHold>");
+        try buf.appendSlice(allocator, v.wireName());
+        try buf.appendSlice(allocator, "</ObjectLockEventHold>");
+    }
+    if (value.object_lock_event_hold_duration) |v| {
+        try buf.appendSlice(allocator, "<ObjectLockEventHoldDuration>");
+        try serializeS3ObjectLockEventHoldDuration(allocator, buf, v);
+        try buf.appendSlice(allocator, "</ObjectLockEventHoldDuration>");
     }
     if (value.object_lock_legal_hold_status) |v| {
         try buf.appendSlice(allocator, "<ObjectLockLegalHoldStatus>");
@@ -5380,10 +5460,48 @@ pub fn serializeS3InitiateRestoreObjectOperation(allocator: std.mem.Allocator, b
     }
 }
 
+pub fn serializeS3ObjectLockEventHoldDuration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3ObjectLockEventHoldDuration) !void {
+    if (value.days) |v| {
+        try buf.appendSlice(allocator, "<Days>");
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
+        }
+        try buf.appendSlice(allocator, "</Days>");
+    }
+    if (value.years) |v| {
+        try buf.appendSlice(allocator, "<Years>");
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
+        }
+        try buf.appendSlice(allocator, "</Years>");
+    }
+}
+
 pub fn serializeS3ObjectLockLegalHold(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3ObjectLockLegalHold) !void {
     try buf.appendSlice(allocator, "<Status>");
     try buf.appendSlice(allocator, value.status.wireName());
     try buf.appendSlice(allocator, "</Status>");
+}
+
+pub fn serializeS3ObjectLockRetentionEventHoldDuration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3ObjectLockRetentionEventHoldDuration) !void {
+    if (value.days) |v| {
+        try buf.appendSlice(allocator, "<Days>");
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
+        }
+        try buf.appendSlice(allocator, "</Days>");
+    }
+    if (value.years) |v| {
+        try buf.appendSlice(allocator, "<Years>");
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
+        }
+        try buf.appendSlice(allocator, "</Years>");
+    }
 }
 
 pub fn serializeS3ObjectMetadata(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3ObjectMetadata) !void {
@@ -5468,6 +5586,16 @@ pub fn serializeS3ReplicateObjectOperation(allocator: std.mem.Allocator, buf: *s
 }
 
 pub fn serializeS3Retention(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: S3Retention) !void {
+    if (value.event_hold) |v| {
+        try buf.appendSlice(allocator, "<EventHold>");
+        try buf.appendSlice(allocator, v.wireName());
+        try buf.appendSlice(allocator, "</EventHold>");
+    }
+    if (value.event_hold_duration) |v| {
+        try buf.appendSlice(allocator, "<EventHoldDuration>");
+        try serializeS3ObjectLockRetentionEventHoldDuration(allocator, buf, v);
+        try buf.appendSlice(allocator, "</EventHoldDuration>");
+    }
     if (value.mode) |v| {
         try buf.appendSlice(allocator, "<Mode>");
         try buf.appendSlice(allocator, v.wireName());

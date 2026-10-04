@@ -10,12 +10,15 @@ const get_alternate_contact = @import("get_alternate_contact.zig");
 const get_contact_information = @import("get_contact_information.zig");
 const get_gov_cloud_account_information = @import("get_gov_cloud_account_information.zig");
 const get_primary_email = @import("get_primary_email.zig");
+const get_primary_email_update_status = @import("get_primary_email_update_status.zig");
 const get_region_opt_status = @import("get_region_opt_status.zig");
 const list_regions = @import("list_regions.zig");
 const put_account_name = @import("put_account_name.zig");
 const put_alternate_contact = @import("put_alternate_contact.zig");
 const put_contact_information = @import("put_contact_information.zig");
+const send_phone_number_verification = @import("send_phone_number_verification.zig");
 const start_primary_email_update = @import("start_primary_email_update.zig");
+const verify_phone_number = @import("verify_phone_number.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
@@ -129,6 +132,14 @@ pub const Client = struct {
         return get_primary_email.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the status of the most recent primary email update for the
+    /// specified account. For complete details about how to update the primary
+    /// email address, see [Update the primary email address for your AWS
+    /// account](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-root-user-email.html).
+    pub fn getPrimaryEmailUpdateStatus(self: *Self, allocator: std.mem.Allocator, input: get_primary_email_update_status.GetPrimaryEmailUpdateStatusInput, options: CallOptions) !get_primary_email_update_status.GetPrimaryEmailUpdateStatusOutput {
+        return get_primary_email_update_status.execute(self, allocator, input, options);
+    }
+
     /// Retrieves the opt-in status of a particular Region.
     pub fn getRegionOptStatus(self: *Self, allocator: std.mem.Allocator, input: get_region_opt_status.GetRegionOptStatusInput, options: CallOptions) !get_region_opt_status.GetRegionOptStatusOutput {
         return get_region_opt_status.execute(self, allocator, input, options);
@@ -173,10 +184,32 @@ pub const Client = struct {
         return put_contact_information.execute(self, allocator, input, options);
     }
 
+    /// Sends a one-time passcode to the phone number in the primary contact
+    /// information of an Amazon Web Services account. Use VerifyPhoneNumber to
+    /// submit the passcode and complete the verification.
+    ///
+    /// For complete details about how to use the primary contact operations, see
+    /// [Update the primary contact for your Amazon Web Services
+    /// account](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-primary.html).
+    pub fn sendPhoneNumberVerification(self: *Self, allocator: std.mem.Allocator, input: send_phone_number_verification.SendPhoneNumberVerificationInput, options: CallOptions) !send_phone_number_verification.SendPhoneNumberVerificationOutput {
+        return send_phone_number_verification.execute(self, allocator, input, options);
+    }
+
     /// Starts the process to update the primary email address for the specified
     /// account.
     pub fn startPrimaryEmailUpdate(self: *Self, allocator: std.mem.Allocator, input: start_primary_email_update.StartPrimaryEmailUpdateInput, options: CallOptions) !start_primary_email_update.StartPrimaryEmailUpdateOutput {
         return start_primary_email_update.execute(self, allocator, input, options);
+    }
+
+    /// Verifies the phone number in the primary contact information of an Amazon
+    /// Web Services account by submitting the one-time passcode that
+    /// SendPhoneNumberVerification sent to that phone number.
+    ///
+    /// For complete details about how to use the primary contact operations, see
+    /// [Update the primary contact for your Amazon Web Services
+    /// account](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-primary.html).
+    pub fn verifyPhoneNumber(self: *Self, allocator: std.mem.Allocator, input: verify_phone_number.VerifyPhoneNumberInput, options: CallOptions) !verify_phone_number.VerifyPhoneNumberOutput {
+        return verify_phone_number.execute(self, allocator, input, options);
     }
 
     pub fn listRegionsPaginator(self: *Self, params: list_regions.ListRegionsInput) paginator.ListRegionsPaginator {

@@ -76,10 +76,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPortalServiceProvide
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPortalServiceProviderMetadataOutput {
-    var result: GetPortalServiceProviderMetadataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPortalServiceProviderMetadataOutput, body, allocator);
-    }
+    const result: GetPortalServiceProviderMetadataOutput = try aws.json.parseJsonObject(
+        GetPortalServiceProviderMetadataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -352,10 +352,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetHLSStreamingSessionU
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetHLSStreamingSessionURLOutput {
-    var result: GetHLSStreamingSessionURLOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetHLSStreamingSessionURLOutput, body, allocator);
-    }
+    const result: GetHLSStreamingSessionURLOutput = try aws.json.parseJsonObject(
+        GetHLSStreamingSessionURLOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

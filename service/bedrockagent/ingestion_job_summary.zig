@@ -24,6 +24,13 @@ pub const IngestionJobSummary = struct {
     /// The status of the data ingestion job.
     status: IngestionJobStatus,
 
+    /// The time at which all text content in the data ingestion job finished
+    /// extraction and became available to query.
+    ///
+    /// This time isn't returned until text extraction is complete for all the
+    /// documents in the job.
+    text_ready_at: ?i64 = null,
+
     /// The time the data ingestion job was last updated.
     updated_at: i64,
 
@@ -35,6 +42,7 @@ pub const IngestionJobSummary = struct {
         .started_at = "startedAt",
         .statistics = "statistics",
         .status = "status",
+        .text_ready_at = "textReadyAt",
         .updated_at = "updatedAt",
     };
 };

@@ -1,5 +1,12 @@
+const PreRollAdDecisionServerConfiguration = @import("pre_roll_ad_decision_server_configuration.zig").PreRollAdDecisionServerConfiguration;
+
 /// The configuration for pre-roll ad insertion.
 pub const LivePreRollConfiguration = struct {
+    /// The configuration for the ad decision server (ADS) for live pre-roll ads.
+    /// The configuration contains settings that control how MediaTailor processes
+    /// VAST responses for pre-roll ad breaks.
+    ad_decision_server_configuration: ?PreRollAdDecisionServerConfiguration = null,
+
     /// The URL for the ad decision server (ADS) for pre-roll ads. This includes the
     /// specification of static parameters and placeholders for dynamic parameters.
     /// AWS Elemental MediaTailor substitutes player-specific and session-specific
@@ -13,6 +20,7 @@ pub const LivePreRollConfiguration = struct {
     max_duration_seconds: ?i32 = null,
 
     pub const json_field_names = .{
+        .ad_decision_server_configuration = "AdDecisionServerConfiguration",
         .ad_decision_server_url = "AdDecisionServerUrl",
         .max_duration_seconds = "MaxDurationSeconds",
     };

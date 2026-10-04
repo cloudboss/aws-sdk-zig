@@ -3,16 +3,19 @@ const std = @import("std");
 pub const AlarmType = enum {
     composite_alarm,
     metric_alarm,
+    log_alarm,
 
     pub const json_field_names = .{
         .composite_alarm = "CompositeAlarm",
         .metric_alarm = "MetricAlarm",
+        .log_alarm = "LogAlarm",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .composite_alarm => "CompositeAlarm",
             .metric_alarm => "MetricAlarm",
+            .log_alarm => "LogAlarm",
         };
     }
 

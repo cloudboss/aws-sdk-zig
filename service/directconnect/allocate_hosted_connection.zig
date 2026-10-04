@@ -5,9 +5,11 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
+const BillingMode = @import("billing_mode.zig").BillingMode;
 const ConnectionState = @import("connection_state.zig").ConnectionState;
 const HasLogicalRedundancy = @import("has_logical_redundancy.zig").HasLogicalRedundancy;
 const MacSecKey = @import("mac_sec_key.zig").MacSecKey;
+const RateLimiterStatus = @import("rate_limiter_status.zig").RateLimiterStatus;
 
 pub const AllocateHostedConnectionInput = struct {
     /// The bandwidth of the connection. The possible values are 50Mbps, 100Mbps,

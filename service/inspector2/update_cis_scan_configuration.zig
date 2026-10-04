@@ -124,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateCisScanConfigurat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateCisScanConfigurationOutput {
-    var result: UpdateCisScanConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateCisScanConfigurationOutput, body, allocator);
-    }
+    const result: UpdateCisScanConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateCisScanConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

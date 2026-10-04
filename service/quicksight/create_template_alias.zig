@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTemplateAliasInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateTemplateAliasOutput {
-    var result: CreateTemplateAliasOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateTemplateAliasOutput, body, allocator);
-    }
+    var result: CreateTemplateAliasOutput = try aws.json.parseJsonObject(
+        CreateTemplateAliasOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

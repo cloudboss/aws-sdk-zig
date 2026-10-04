@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AudioFillerSettings = @import("audio_filler_settings.zig").AudioFillerSettings;
 const GenerativeAISettings = @import("generative_ai_settings.zig").GenerativeAISettings;
+const SpeakerDiarizationSettings = @import("speaker_diarization_settings.zig").SpeakerDiarizationSettings;
 const SpeechDetectionSensitivity = @import("speech_detection_sensitivity.zig").SpeechDetectionSensitivity;
 const SpeechRecognitionSettings = @import("speech_recognition_settings.zig").SpeechRecognitionSettings;
 const UnifiedSpeechSettings = @import("unified_speech_settings.zig").UnifiedSpeechSettings;
@@ -62,6 +63,11 @@ pub const CreateBotLocaleInput = struct {
     /// * IntentC
     nlu_intent_confidence_threshold: f64,
 
+    /// The speaker diarization settings to configure for the new bot
+    /// locale. When enabled, Amazon Lex restricts speech detection to the primary
+    /// (loudest) speaker during streaming audio conversations.
+    speaker_diarization_settings: ?SpeakerDiarizationSettings = null,
+
     /// The sensitivity level for voice activity detection (VAD) in the bot locale.
     /// This setting helps optimize speech recognition accuracy by adjusting how the
     /// system responds to background noise during voice interactions.
@@ -86,6 +92,7 @@ pub const CreateBotLocaleInput = struct {
         .generative_ai_settings = "generativeAISettings",
         .locale_id = "localeId",
         .nlu_intent_confidence_threshold = "nluIntentConfidenceThreshold",
+        .speaker_diarization_settings = "speakerDiarizationSettings",
         .speech_detection_sensitivity = "speechDetectionSensitivity",
         .speech_recognition_settings = "speechRecognitionSettings",
         .unified_speech_settings = "unifiedSpeechSettings",
@@ -139,6 +146,10 @@ pub const CreateBotLocaleOutput = struct {
     /// `AMAZON.KendraSearchIntent` intents.
     nlu_intent_confidence_threshold: ?f64 = null,
 
+    /// The speaker diarization settings configured for the created bot
+    /// locale.
+    speaker_diarization_settings: ?SpeakerDiarizationSettings = null,
+
     /// The sensitivity level for voice activity detection (VAD) that was specified
     /// for the bot locale.
     speech_detection_sensitivity: ?SpeechDetectionSensitivity = null,
@@ -165,6 +176,7 @@ pub const CreateBotLocaleOutput = struct {
         .locale_id = "localeId",
         .locale_name = "localeName",
         .nlu_intent_confidence_threshold = "nluIntentConfidenceThreshold",
+        .speaker_diarization_settings = "speakerDiarizationSettings",
         .speech_detection_sensitivity = "speechDetectionSensitivity",
         .speech_recognition_settings = "speechRecognitionSettings",
         .unified_speech_settings = "unifiedSpeechSettings",
@@ -240,6 +252,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBotLocaleInput, c
     try body_buf.appendSlice(allocator, "\"nluIntentConfidenceThreshold\":");
     try aws.json.writeValue(@TypeOf(input.nlu_intent_confidence_threshold), input.nlu_intent_confidence_threshold, allocator, &body_buf);
     has_prev = true;
+    if (input.speaker_diarization_settings) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"speakerDiarizationSettings\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.speech_detection_sensitivity) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"speechDetectionSensitivity\":");
@@ -280,10 +298,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBotLocaleInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateBotLocaleOutput {
-    var result: CreateBotLocaleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateBotLocaleOutput, body, allocator);
-    }
+    const result: CreateBotLocaleOutput = try aws.json.parseJsonObject(
+        CreateBotLocaleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -2,23 +2,29 @@ const std = @import("std");
 
 /// For SCTE-35 markers from your input-- Choose Passthrough if you want SCTE-35
 /// markers that appear in your input to also appear in this output. Choose None
-/// if you don't want SCTE-35 markers in this output. For SCTE-35 markers from
+/// if you don't want SCTE-35 markers in this output. When your input is an HLS
+/// manifest, choose Manifest cues to pass through CUE markers in your HLS
+/// manifest as segment boundaries and SCTE-35 markers in this output at each
+/// EXT-X-CUE-OUT splice point in the input manifest. For SCTE-35 markers from
 /// an ESAM XML document-- Choose None. Also provide the ESAM XML as a string in
 /// the setting Signal processing notification XML. Also enable ESAM SCTE-35
 /// (include the property scte35Esam).
 pub const M2tsScte35Source = enum {
     passthrough,
     none,
+    manifest_cues,
 
     pub const json_field_names = .{
         .passthrough = "PASSTHROUGH",
         .none = "NONE",
+        .manifest_cues = "MANIFEST_CUES",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .passthrough => "PASSTHROUGH",
             .none => "NONE",
+            .manifest_cues => "MANIFEST_CUES",
         };
     }
 

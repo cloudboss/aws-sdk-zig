@@ -89,10 +89,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetGroupConfigurationIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetGroupConfigurationOutput {
-    var result: GetGroupConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetGroupConfigurationOutput, body, allocator);
-    }
+    const result: GetGroupConfigurationOutput = try aws.json.parseJsonObject(
+        GetGroupConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,3 +1,4 @@
+const Provider = @import("provider.zig").Provider;
 const ResourceScanMetadata = @import("resource_scan_metadata.zig").ResourceScanMetadata;
 const CoverageResourceType = @import("coverage_resource_type.zig").CoverageResourceType;
 const ScanMode = @import("scan_mode.zig").ScanMode;
@@ -12,6 +13,21 @@ pub const CoveredResource = struct {
 
     /// The date and time the resource was last checked for vulnerabilities.
     last_scanned_at: ?i64 = null,
+
+    /// The cloud provider of the covered resource.
+    provider: ?Provider = null,
+
+    /// The cloud provider account ID of the covered resource.
+    provider_account_id: ?[]const u8 = null,
+
+    /// The cloud provider organization ID of the covered resource.
+    provider_org_id: ?[]const u8 = null,
+
+    /// The cloud provider partition of the covered resource.
+    provider_partition: ?[]const u8 = null,
+
+    /// The cloud provider region of the covered resource.
+    provider_region: ?[]const u8 = null,
 
     /// The ID of the covered resource.
     resource_id: []const u8,
@@ -34,6 +50,11 @@ pub const CoveredResource = struct {
     pub const json_field_names = .{
         .account_id = "accountId",
         .last_scanned_at = "lastScannedAt",
+        .provider = "provider",
+        .provider_account_id = "providerAccountId",
+        .provider_org_id = "providerOrgId",
+        .provider_partition = "providerPartition",
+        .provider_region = "providerRegion",
         .resource_id = "resourceId",
         .resource_metadata = "resourceMetadata",
         .resource_type = "resourceType",

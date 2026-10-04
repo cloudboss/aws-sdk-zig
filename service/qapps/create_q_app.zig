@@ -161,10 +161,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateQAppInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateQAppOutput {
-    var result: CreateQAppOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateQAppOutput, body, allocator);
-    }
+    const result: CreateQAppOutput = try aws.json.parseJsonObject(
+        CreateQAppOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

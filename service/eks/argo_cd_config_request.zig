@@ -11,6 +11,11 @@ pub const ArgoCdConfigRequest = struct {
     /// CenterIAM; Identity Center credentials.
     aws_idc: ArgoCdAwsIdcConfigRequest,
 
+    /// An optional prefix used to construct the hostname of the Argo CD server
+    /// endpoint. If not specified, Amazon EKS automatically generates the endpoint.
+    /// This value can't be changed after the capability is created.
+    endpoint_prefix: ?[]const u8 = null,
+
     /// The Kubernetes namespace where Argo CD resources will be created. If not
     /// specified, the default namespace is used.
     namespace: ?[]const u8 = null,
@@ -31,6 +36,7 @@ pub const ArgoCdConfigRequest = struct {
 
     pub const json_field_names = .{
         .aws_idc = "awsIdc",
+        .endpoint_prefix = "endpointPrefix",
         .namespace = "namespace",
         .network_access = "networkAccess",
         .rbac_role_mappings = "rbacRoleMappings",

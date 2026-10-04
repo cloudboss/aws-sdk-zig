@@ -21,17 +21,17 @@ pub const GetWorkflowExecutionOutput = struct {
     /// The timestamp when the specified runtime instance of the workflow finished.
     end_time: ?[]const u8 = null,
 
-    /// The Amazon Resource Name (ARN) of the image resource build version that the
-    /// specified
-    /// runtime instance of the workflow created.
+    /// The Amazon Resource Name (ARN) of the image build version that owns the
+    /// specified runtime
+    /// instance of the workflow.
     image_build_version_arn: ?[]const u8 = null,
 
     /// The output message from the specified runtime instance of the workflow, if
     /// applicable.
     message: ?[]const u8 = null,
 
-    /// Test workflows are defined within named runtime groups. The parallel group
-    /// is a named group that contains one or more test workflows.
+    /// The name of the parallel group that this runtime instance of the workflow
+    /// ran in, if configured. Parallel groups apply only to test workflows.
     parallel_group: ?[]const u8 = null,
 
     /// The request ID that uniquely identifies this request.
@@ -42,13 +42,16 @@ pub const GetWorkflowExecutionOutput = struct {
 
     /// The current runtime status for the specified runtime instance of the
     /// workflow.
+    /// `COMPLETED`, `FAILED`, `ROLLBACK_COMPLETED`,
+    /// `CANCELLED`, and `SKIPPED` are terminal states.
     status: ?WorkflowExecutionStatus = null,
 
-    /// The total number of steps in the specified runtime instance of the workflow
-    /// that ran.
-    /// This number should equal the sum of the step counts for steps that
-    /// succeeded, were skipped,
-    /// and failed.
+    /// The total number of steps that the workflow document defines for this
+    /// runtime
+    /// instance of the workflow. Image Builder sets this count before any steps
+    /// run. The sum of
+    /// succeeded, skipped, and failed steps only reaches this total if every step
+    /// finishes in one of those states.
     total_step_count: ?i32 = null,
 
     /// A runtime count for the number of steps that failed in the specified runtime
@@ -153,10 +156,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetWorkflowExecutionInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetWorkflowExecutionOutput {
-    var result: GetWorkflowExecutionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetWorkflowExecutionOutput, body, allocator);
-    }
+    const result: GetWorkflowExecutionOutput = try aws.json.parseJsonObject(
+        GetWorkflowExecutionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

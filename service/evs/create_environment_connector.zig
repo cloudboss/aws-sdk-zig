@@ -25,13 +25,22 @@ pub const CreateEnvironmentConnectorInput = struct {
     environment_id: []const u8,
 
     /// The ARN or name of the Amazon Web Services Secrets Manager secret that
-    /// stores the credentials for the VCF appliance.
+    /// stores the credentials for the VCF appliance. `SDDC_MANAGER` requires an
+    /// `apiKey` field; `OPERATIONS_MANAGER` and `VCENTER` require `username` and
+    /// `password` fields.
     ///
     /// Do not use credentials with Administrator privileges. We recommend using a
-    /// service account with the minimum required permissions.
+    /// service account with read-only permissions.
     secret_identifier: []const u8,
 
     /// The type of connector to create.
+    ///
+    /// * `OPERATIONS_MANAGER`: Connector to an Operations Manager appliance.
+    ///   Required for VCF 9x environments.
+    /// * `SDDC_MANAGER`: Connector to an SDDC Manager appliance. Required for VCF
+    ///   5.x environments.
+    /// * `VCENTER`: Connector to a vCenter Server appliance. Required for features
+    ///   that depend on vCenter, such as Windows Server license-included.
     @"type": ConnectorType,
 
     pub const json_field_names = .{

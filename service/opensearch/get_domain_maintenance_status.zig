@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDomainMaintenanceSta
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDomainMaintenanceStatusOutput {
-    var result: GetDomainMaintenanceStatusOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDomainMaintenanceStatusOutput, body, allocator);
-    }
+    const result: GetDomainMaintenanceStatusOutput = try aws.json.parseJsonObject(
+        GetDomainMaintenanceStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

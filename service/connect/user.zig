@@ -8,7 +8,7 @@ const UserPhoneConfig = @import("user_phone_config.zig").UserPhoneConfig;
 const PhoneNumberConfig = @import("phone_number_config.zig").PhoneNumberConfig;
 const VoiceEnhancementConfig = @import("voice_enhancement_config.zig").VoiceEnhancementConfig;
 
-/// Contains information about a user account for an Amazon Connect instance.
+/// Contains information about a user account for an Connect Customer instance.
 pub const User = struct {
     /// The list of after contact work (ACW) timeout configuration settings for each
     /// channel.

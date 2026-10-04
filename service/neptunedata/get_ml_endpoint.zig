@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMLEndpointInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMLEndpointOutput {
-    var result: GetMLEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMLEndpointOutput, body, allocator);
-    }
+    const result: GetMLEndpointOutput = try aws.json.parseJsonObject(
+        GetMLEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

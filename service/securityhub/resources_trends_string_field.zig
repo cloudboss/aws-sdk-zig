@@ -5,12 +5,20 @@ pub const ResourcesTrendsStringField = enum {
     region,
     resource_type,
     resource_category,
+    resource_cloud_provider,
+    resource_region,
+    resource_owner_id,
+    resource_owner_organization_id,
 
     pub const json_field_names = .{
         .account_id = "account_id",
         .region = "region",
         .resource_type = "resource_type",
         .resource_category = "resource_category",
+        .resource_cloud_provider = "resource_cloud_provider",
+        .resource_region = "resource_region",
+        .resource_owner_id = "resource_owner_id",
+        .resource_owner_organization_id = "resource_owner_organization_id",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +27,10 @@ pub const ResourcesTrendsStringField = enum {
             .region => "region",
             .resource_type => "resource_type",
             .resource_category => "resource_category",
+            .resource_cloud_provider => "resource_cloud_provider",
+            .resource_region => "resource_region",
+            .resource_owner_id => "resource_owner_id",
+            .resource_owner_organization_id => "resource_owner_organization_id",
         };
     }
 

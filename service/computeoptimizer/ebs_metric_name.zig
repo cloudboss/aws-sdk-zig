@@ -5,12 +5,16 @@ pub const EBSMetricName = enum {
     volume_write_ops_per_second,
     volume_read_bytes_per_second,
     volume_write_bytes_per_second,
+    volume_iops_exceeded,
+    volume_throughput_exceeded,
 
     pub const json_field_names = .{
         .volume_read_ops_per_second = "VolumeReadOpsPerSecond",
         .volume_write_ops_per_second = "VolumeWriteOpsPerSecond",
         .volume_read_bytes_per_second = "VolumeReadBytesPerSecond",
         .volume_write_bytes_per_second = "VolumeWriteBytesPerSecond",
+        .volume_iops_exceeded = "VolumeIOPSExceeded",
+        .volume_throughput_exceeded = "VolumeThroughputExceeded",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +23,8 @@ pub const EBSMetricName = enum {
             .volume_write_ops_per_second => "VolumeWriteOpsPerSecond",
             .volume_read_bytes_per_second => "VolumeReadBytesPerSecond",
             .volume_write_bytes_per_second => "VolumeWriteBytesPerSecond",
+            .volume_iops_exceeded => "VolumeIOPSExceeded",
+            .volume_throughput_exceeded => "VolumeThroughputExceeded",
         };
     }
 

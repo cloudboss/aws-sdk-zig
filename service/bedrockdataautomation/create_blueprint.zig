@@ -132,10 +132,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBlueprintInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateBlueprintOutput {
-    var result: CreateBlueprintOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateBlueprintOutput, body, allocator);
-    }
+    const result: CreateBlueprintOutput = try aws.json.parseJsonObject(
+        CreateBlueprintOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

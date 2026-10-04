@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchUnsuspendUserInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchUnsuspendUserOutput {
-    var result: BatchUnsuspendUserOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchUnsuspendUserOutput, body, allocator);
-    }
+    const result: BatchUnsuspendUserOutput = try aws.json.parseJsonObject(
+        BatchUnsuspendUserOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

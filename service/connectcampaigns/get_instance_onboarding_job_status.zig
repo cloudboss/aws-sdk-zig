@@ -72,10 +72,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceOnboardingJo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetInstanceOnboardingJobStatusOutput {
-    var result: GetInstanceOnboardingJobStatusOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetInstanceOnboardingJobStatusOutput, body, allocator);
-    }
+    const result: GetInstanceOnboardingJobStatusOutput = try aws.json.parseJsonObject(
+        GetInstanceOnboardingJobStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

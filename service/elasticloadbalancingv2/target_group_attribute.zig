@@ -183,6 +183,27 @@ pub const TargetGroupAttribute = struct {
     /// (`target_failover.on_deregistration` and
     /// `target_failover.on_unhealthy`) can't be set independently. The value you
     /// set for both attributes must be the same.
+    ///
+    /// * `send_tcp_reset.on_unhealthy.enabled` – Specifies whether the Gateway Load
+    /// Balancer sends a TCP Reset to the sender of traffic when a target becomes
+    /// unhealthy. After
+    /// sending the reset, the Gateway Load Balancer removes the flow entry from its
+    /// flow table.
+    /// The value is `true` or `false`. The default is `false`.
+    /// This attribute does not apply when `target_failover.on_unhealthy` is set to
+    /// `rebalance`. This feature requires 5-tuple flow stickiness, which the target
+    /// group uses by default when `stickiness.enabled` is set to
+    /// `false`.
+    ///
+    /// * `send_tcp_reset.on_deregistration.enabled` – Specifies whether the Gateway
+    /// Load Balancer sends a TCP Reset to the sender of traffic when a target is
+    /// deregistered.
+    /// The reset occurs after the connection drain time has elapsed. The value is
+    /// `true` or `false`. The default is `false`. This
+    /// attribute does not apply when `target_failover.on_deregistration` is set to
+    /// `rebalance`. This feature requires 5-tuple flow stickiness, which the target
+    /// group uses by default when `stickiness.enabled` is set to
+    /// `false`.
     key: ?[]const u8 = null,
 
     /// The value of the attribute.

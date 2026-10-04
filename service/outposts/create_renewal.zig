@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const PaymentOption = @import("payment_option.zig").PaymentOption;
 const PaymentTerm = @import("payment_term.zig").PaymentTerm;
+const CurrencyCode = @import("currency_code.zig").CurrencyCode;
 
 pub const CreateRenewalInput = struct {
     /// A unique, case-sensitive identifier that you provide to ensure the
@@ -31,6 +32,9 @@ pub const CreateRenewalInput = struct {
 };
 
 pub const CreateRenewalOutput = struct {
+    /// The currency of the renewal price.
+    currency: ?CurrencyCode = null,
+
     /// The monthly recurring price of the renewal.
     monthly_recurring_price: ?f32 = null,
 
@@ -47,6 +51,7 @@ pub const CreateRenewalOutput = struct {
     upfront_price: ?f32 = null,
 
     pub const json_field_names = .{
+        .currency = "Currency",
         .monthly_recurring_price = "MonthlyRecurringPrice",
         .outpost_id = "OutpostId",
         .payment_option = "PaymentOption",
@@ -125,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRenewalInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateRenewalOutput {
-    var result: CreateRenewalOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateRenewalOutput, body, allocator);
-    }
+    const result: CreateRenewalOutput = try aws.json.parseJsonObject(
+        CreateRenewalOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

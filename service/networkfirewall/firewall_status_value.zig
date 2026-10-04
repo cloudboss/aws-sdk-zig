@@ -4,11 +4,13 @@ pub const FirewallStatusValue = enum {
     provisioning,
     deleting,
     ready,
+    failed,
 
     pub const json_field_names = .{
         .provisioning = "PROVISIONING",
         .deleting = "DELETING",
         .ready = "READY",
+        .failed = "FAILED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const FirewallStatusValue = enum {
             .provisioning => "PROVISIONING",
             .deleting => "DELETING",
             .ready => "READY",
+            .failed => "FAILED",
         };
     }
 

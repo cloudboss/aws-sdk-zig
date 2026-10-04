@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListWebhooksInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListWebhooksOutput {
-    var result: ListWebhooksOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListWebhooksOutput, body, allocator);
-    }
+    const result: ListWebhooksOutput = try aws.json.parseJsonObject(
+        ListWebhooksOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

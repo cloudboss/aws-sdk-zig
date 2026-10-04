@@ -4,10 +4,16 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const RegistryAuthorizerType = @import("registry_authorizer_type.zig").RegistryAuthorizerType;
 const RegistryStatus = @import("registry_status.zig").RegistryStatus;
 const RegistrySummary = @import("registry_summary.zig").RegistrySummary;
 
 pub const ListRegistriesInput = struct {
+    /// Filter registries by their authorizer type. Possible values are `CUSTOM_JWT`
+    /// and `AWS_IAM`. For more information about authorizer types, see the
+    /// `RegistryAuthorizerType` enum.
+    authorizer_type: ?RegistryAuthorizerType = null,
+
     /// The maximum number of results to return in the response. If the total number
     /// of results is greater than this value, use the token returned in the
     /// response in the `nextToken` field when making another request to return the
@@ -25,6 +31,7 @@ pub const ListRegistriesInput = struct {
     status: ?RegistryStatus = null,
 
     pub const json_field_names = .{
+        .authorizer_type = "authorizerType",
         .max_results = "maxResults",
         .next_token = "nextToken",
         .status = "status",
@@ -81,6 +88,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRegistriesInput, co
 
     var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
+    if (input.authorizer_type) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "authorizerType=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
+        query_has_prev = true;
+    }
     if (input.max_results) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "maxResults=");
@@ -119,10 +132,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRegistriesInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListRegistriesOutput {
-    var result: ListRegistriesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListRegistriesOutput, body, allocator);
-    }
+    const result: ListRegistriesOutput = try aws.json.parseJsonObject(
+        ListRegistriesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

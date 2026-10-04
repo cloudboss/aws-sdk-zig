@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTestCaseExecutionSum
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTestCaseExecutionSummaryOutput {
-    var result: GetTestCaseExecutionSummaryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTestCaseExecutionSummaryOutput, body, allocator);
-    }
+    const result: GetTestCaseExecutionSummaryOutput = try aws.json.parseJsonObject(
+        GetTestCaseExecutionSummaryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

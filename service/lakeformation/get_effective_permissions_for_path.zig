@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEffectivePermissions
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetEffectivePermissionsForPathOutput {
-    var result: GetEffectivePermissionsForPathOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetEffectivePermissionsForPathOutput, body, allocator);
-    }
+    const result: GetEffectivePermissionsForPathOutput = try aws.json.parseJsonObject(
+        GetEffectivePermissionsForPathOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

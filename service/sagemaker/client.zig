@@ -4,6 +4,7 @@ const std = @import("std");
 const add_association = @import("add_association.zig");
 const add_tags = @import("add_tags.zig");
 const associate_trial_component = @import("associate_trial_component.zig");
+const attach_cluster_node_network_interface = @import("attach_cluster_node_network_interface.zig");
 const attach_cluster_node_volume = @import("attach_cluster_node_volume.zig");
 const batch_add_cluster_nodes = @import("batch_add_cluster_nodes.zig");
 const batch_delete_cluster_nodes = @import("batch_delete_cluster_nodes.zig");
@@ -47,6 +48,7 @@ const create_image_version = @import("create_image_version.zig");
 const create_inference_component = @import("create_inference_component.zig");
 const create_inference_experiment = @import("create_inference_experiment.zig");
 const create_inference_recommendations_job = @import("create_inference_recommendations_job.zig");
+const create_job = @import("create_job.zig");
 const create_labeling_job = @import("create_labeling_job.zig");
 const create_mlflow_app = @import("create_mlflow_app.zig");
 const create_mlflow_tracking_server = @import("create_mlflow_tracking_server.zig");
@@ -115,6 +117,7 @@ const delete_image = @import("delete_image.zig");
 const delete_image_version = @import("delete_image_version.zig");
 const delete_inference_component = @import("delete_inference_component.zig");
 const delete_inference_experiment = @import("delete_inference_experiment.zig");
+const delete_job = @import("delete_job.zig");
 const delete_mlflow_app = @import("delete_mlflow_app.zig");
 const delete_mlflow_tracking_server = @import("delete_mlflow_tracking_server.zig");
 const delete_model = @import("delete_model.zig");
@@ -182,6 +185,8 @@ const describe_image_version = @import("describe_image_version.zig");
 const describe_inference_component = @import("describe_inference_component.zig");
 const describe_inference_experiment = @import("describe_inference_experiment.zig");
 const describe_inference_recommendations_job = @import("describe_inference_recommendations_job.zig");
+const describe_job = @import("describe_job.zig");
+const describe_job_schema_version = @import("describe_job_schema_version.zig");
 const describe_labeling_job = @import("describe_labeling_job.zig");
 const describe_lineage_group = @import("describe_lineage_group.zig");
 const describe_mlflow_app = @import("describe_mlflow_app.zig");
@@ -271,6 +276,8 @@ const list_inference_components = @import("list_inference_components.zig");
 const list_inference_experiments = @import("list_inference_experiments.zig");
 const list_inference_recommendations_job_steps = @import("list_inference_recommendations_job_steps.zig");
 const list_inference_recommendations_jobs = @import("list_inference_recommendations_jobs.zig");
+const list_job_schema_versions = @import("list_job_schema_versions.zig");
+const list_jobs = @import("list_jobs.zig");
 const list_labeling_jobs = @import("list_labeling_jobs.zig");
 const list_labeling_jobs_for_workteam = @import("list_labeling_jobs_for_workteam.zig");
 const list_lineage_groups = @import("list_lineage_groups.zig");
@@ -343,6 +350,7 @@ const stop_edge_packaging_job = @import("stop_edge_packaging_job.zig");
 const stop_hyper_parameter_tuning_job = @import("stop_hyper_parameter_tuning_job.zig");
 const stop_inference_experiment = @import("stop_inference_experiment.zig");
 const stop_inference_recommendations_job = @import("stop_inference_recommendations_job.zig");
+const stop_job = @import("stop_job.zig");
 const stop_labeling_job = @import("stop_labeling_job.zig");
 const stop_mlflow_tracking_server = @import("stop_mlflow_tracking_server.zig");
 const stop_monitoring_schedule = @import("stop_monitoring_schedule.zig");
@@ -474,6 +482,14 @@ pub const Client = struct {
     /// [DisassociateTrialComponent](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DisassociateTrialComponent.html) API.
     pub fn associateTrialComponent(self: *Self, allocator: std.mem.Allocator, input: associate_trial_component.AssociateTrialComponentInput, options: CallOptions) !associate_trial_component.AssociateTrialComponentOutput {
         return associate_trial_component.execute(self, allocator, input, options);
+    }
+
+    /// Attaches an elastic network interface (ENI) to a node in a HyperPod cluster.
+    ///
+    /// To use this operation, you must have the
+    /// `sagemaker:AttachClusterNodeNetworkInterface` permission.
+    pub fn attachClusterNodeNetworkInterface(self: *Self, allocator: std.mem.Allocator, input: attach_cluster_node_network_interface.AttachClusterNodeNetworkInterfaceInput, options: CallOptions) !attach_cluster_node_network_interface.AttachClusterNodeNetworkInterfaceOutput {
+        return attach_cluster_node_network_interface.execute(self, allocator, input, options);
     }
 
     /// Attaches your Amazon Elastic Block Store (Amazon EBS) volume to a node in
@@ -1115,6 +1131,34 @@ pub const Client = struct {
     /// recommendation or load test job.
     pub fn createInferenceRecommendationsJob(self: *Self, allocator: std.mem.Allocator, input: create_inference_recommendations_job.CreateInferenceRecommendationsJobInput, options: CallOptions) !create_inference_recommendations_job.CreateInferenceRecommendationsJobOutput {
         return create_inference_recommendations_job.execute(self, allocator, input, options);
+    }
+
+    /// Creates a model customization job in Amazon SageMaker. A job runs a workload
+    /// based on the job category and configuration you provide. You specify the job
+    /// category, a schema-versioned configuration document, and an IAM role that
+    /// grants Amazon SageMaker permission to access resources on your behalf.
+    ///
+    /// Use the `AgentRFT` category to fine-tune a model using multi-turn
+    /// reinforcement learning with reward signals. Use the `AgentRFTEvaluation`
+    /// category to evaluate a fine-tuned or base model by running multi-turn
+    /// rollouts against a held-out prompt dataset and computing metrics such as
+    /// pass@k and mean reward.
+    ///
+    /// Before creating a job, call `ListJobSchemaVersions` and
+    /// `DescribeJobSchemaVersion` to retrieve the configuration schema for your job
+    /// category. The `JobConfigDocument` must conform to the schema specified by
+    /// `JobConfigSchemaVersion`.
+    ///
+    /// The following operations are related to `CreateJob`:
+    ///
+    /// * `DescribeJob`
+    /// * `ListJobs`
+    /// * `StopJob`
+    /// * `DeleteJob`
+    /// * `ListJobSchemaVersions`
+    /// * `DescribeJobSchemaVersion`
+    pub fn createJob(self: *Self, allocator: std.mem.Allocator, input: create_job.CreateJobInput, options: CallOptions) !create_job.CreateJobOutput {
+        return create_job.execute(self, allocator, input, options);
     }
 
     /// Creates a job that uses workers to label the data objects in your input
@@ -1893,6 +1937,18 @@ pub const Client = struct {
         return delete_inference_experiment.execute(self, allocator, input, options);
     }
 
+    /// Deletes a job. This operation is idempotent. If the job is currently
+    /// running, you must stop it before deleting it by calling `StopJob`.
+    ///
+    /// The following operations are related to `DeleteJob`:
+    ///
+    /// * `CreateJob`
+    /// * `StopJob`
+    /// * `DescribeJob`
+    pub fn deleteJob(self: *Self, allocator: std.mem.Allocator, input: delete_job.DeleteJobInput, options: CallOptions) !delete_job.DeleteJobOutput {
+        return delete_job.execute(self, allocator, input, options);
+    }
+
     /// Deletes an MLflow App.
     pub fn deleteMlflowApp(self: *Self, allocator: std.mem.Allocator, input: delete_mlflow_app.DeleteMlflowAppInput, options: CallOptions) !delete_mlflow_app.DeleteMlflowAppOutput {
         return delete_mlflow_app.execute(self, allocator, input, options);
@@ -2308,6 +2364,35 @@ pub const Client = struct {
         return describe_inference_recommendations_job.execute(self, allocator, input, options);
     }
 
+    /// Returns detailed information about a job, including its current status,
+    /// secondary status, configuration, and timestamps. Use `SecondaryStatus` for
+    /// granular progress tracking and `SecondaryStatusTransitions` to see the full
+    /// history of status changes with timestamps.
+    ///
+    /// The following operations are related to `DescribeJob`:
+    ///
+    /// * `CreateJob`
+    /// * `ListJobs`
+    /// * `StopJob`
+    /// * `DeleteJob`
+    pub fn describeJob(self: *Self, allocator: std.mem.Allocator, input: describe_job.DescribeJobInput, options: CallOptions) !describe_job.DescribeJobOutput {
+        return describe_job.execute(self, allocator, input, options);
+    }
+
+    /// Returns the JSON schema for a specified job category and schema version. Use
+    /// this schema to validate your `JobConfigDocument` before calling `CreateJob`.
+    /// If you don't specify a schema version, the latest version is returned. The
+    /// schema defines required fields, allowed values, and constraints for the job
+    /// configuration.
+    ///
+    /// The following operations are related to `DescribeJobSchemaVersion`:
+    ///
+    /// * `ListJobSchemaVersions`
+    /// * `CreateJob`
+    pub fn describeJobSchemaVersion(self: *Self, allocator: std.mem.Allocator, input: describe_job_schema_version.DescribeJobSchemaVersionInput, options: CallOptions) !describe_job_schema_version.DescribeJobSchemaVersionOutput {
+        return describe_job_schema_version.execute(self, allocator, input, options);
+    }
+
     /// Gets information about a labeling job.
     pub fn describeLabelingJob(self: *Self, allocator: std.mem.Allocator, input: describe_labeling_job.DescribeLabelingJobInput, options: CallOptions) !describe_labeling_job.DescribeLabelingJobOutput {
         return describe_labeling_job.execute(self, allocator, input, options);
@@ -2342,6 +2427,12 @@ pub const Client = struct {
 
     /// Describes the content, creation time, and security configuration of an
     /// Amazon SageMaker Model Card.
+    ///
+    /// To retrieve only metadata about a model card without requiring `kms:Decrypt`
+    /// permission on the associated customer-managed Amazon Web Services KMS key,
+    /// set `IncludedData` to `MetadataOnly`. The default is `AllData`, which
+    /// returns the full model card `Content` and requires `kms:Decrypt` permission
+    /// when a customer-managed key is configured.
     pub fn describeModelCard(self: *Self, allocator: std.mem.Allocator, input: describe_model_card.DescribeModelCardInput, options: CallOptions) !describe_model_card.DescribeModelCardOutput {
         return describe_model_card.execute(self, allocator, input, options);
     }
@@ -2361,7 +2452,7 @@ pub const Client = struct {
     ///
     /// If you provided a KMS Key ID when you created your model package, you will
     /// see the [KMS
-    /// Decrypt](https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html) API call in your CloudTrail logs when you use this API.
+    /// Decrypt](https://docs.aws.amazon.com/kms/latest/APIReference/API_Decrypt.html) API call in your CloudTrail logs when you use this API. To call this operation without requiring `kms:Decrypt` permission on the customer-managed key, set `IncludedData` to `MetadataOnly`; the response is returned with the embedded `ModelCard.ModelCardContent` field sanitized.
     ///
     /// To create models in SageMaker, buyers can subscribe to model packages listed
     /// on Amazon Web Services Marketplace.
@@ -2838,6 +2929,31 @@ pub const Client = struct {
         return list_inference_recommendations_jobs.execute(self, allocator, input, options);
     }
 
+    /// Lists available configuration schema versions for a specified job category.
+    /// Use the schema versions with `DescribeJobSchemaVersion` to retrieve the full
+    /// schema document.
+    ///
+    /// The following operations are related to `ListJobSchemaVersions`:
+    ///
+    /// * `DescribeJobSchemaVersion`
+    /// * `CreateJob`
+    pub fn listJobSchemaVersions(self: *Self, allocator: std.mem.Allocator, input: list_job_schema_versions.ListJobSchemaVersionsInput, options: CallOptions) !list_job_schema_versions.ListJobSchemaVersionsOutput {
+        return list_job_schema_versions.execute(self, allocator, input, options);
+    }
+
+    /// Lists jobs in a specified category. You can filter results by creation time,
+    /// last modified time, name, and status. Results are sorted by the field you
+    /// specify in `SortBy`. Use pagination to retrieve large result sets
+    /// efficiently.
+    ///
+    /// The following operations are related to `ListJobs`:
+    ///
+    /// * `CreateJob`
+    /// * `DescribeJob`
+    pub fn listJobs(self: *Self, allocator: std.mem.Allocator, input: list_jobs.ListJobsInput, options: CallOptions) !list_jobs.ListJobsOutput {
+        return list_jobs.execute(self, allocator, input, options);
+    }
+
     /// Gets a list of labeling jobs.
     pub fn listLabelingJobs(self: *Self, allocator: std.mem.Allocator, input: list_labeling_jobs.ListLabelingJobsInput, options: CallOptions) !list_labeling_jobs.ListLabelingJobsOutput {
         return list_labeling_jobs.execute(self, allocator, input, options);
@@ -3297,6 +3413,20 @@ pub const Client = struct {
     /// Stops an Inference Recommender job.
     pub fn stopInferenceRecommendationsJob(self: *Self, allocator: std.mem.Allocator, input: stop_inference_recommendations_job.StopInferenceRecommendationsJobInput, options: CallOptions) !stop_inference_recommendations_job.StopInferenceRecommendationsJobOutput {
         return stop_inference_recommendations_job.execute(self, allocator, input, options);
+    }
+
+    /// Stops a running job. When you call `StopJob`, Amazon SageMaker sets the job
+    /// status to `Stopping`. After the job stops, the status changes to `Stopped`.
+    /// Partial results may be available in the output location if the job was in
+    /// progress. To delete a stopped job, call `DeleteJob`.
+    ///
+    /// The following operations are related to `StopJob`:
+    ///
+    /// * `CreateJob`
+    /// * `DescribeJob`
+    /// * `DeleteJob`
+    pub fn stopJob(self: *Self, allocator: std.mem.Allocator, input: stop_job.StopJobInput, options: CallOptions) !stop_job.StopJobOutput {
+        return stop_job.execute(self, allocator, input, options);
     }
 
     /// Stops a running labeling job. A job that is stopped cannot be restarted. Any
@@ -4051,6 +4181,20 @@ pub const Client = struct {
     }
 
     pub fn listInferenceRecommendationsJobsPaginator(self: *Self, params: list_inference_recommendations_jobs.ListInferenceRecommendationsJobsInput) paginator.ListInferenceRecommendationsJobsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listJobSchemaVersionsPaginator(self: *Self, params: list_job_schema_versions.ListJobSchemaVersionsInput) paginator.ListJobSchemaVersionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listJobsPaginator(self: *Self, params: list_jobs.ListJobsInput) paginator.ListJobsPaginator {
         return .{
             .client = self,
             .params = params,

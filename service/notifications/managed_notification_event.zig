@@ -2,6 +2,7 @@ const aws = @import("aws");
 
 const AggregationEventType = @import("aggregation_event_type.zig").AggregationEventType;
 const AggregationSummary = @import("aggregation_summary.zig").AggregationSummary;
+const NotificationEventAttachment = @import("notification_event_attachment.zig").NotificationEventAttachment;
 const EventStatus = @import("event_status.zig").EventStatus;
 const MessageComponents = @import("message_components.zig").MessageComponents;
 const NotificationType = @import("notification_type.zig").NotificationType;
@@ -16,6 +17,9 @@ pub const ManagedNotificationEvent = struct {
     aggregation_event_type: ?AggregationEventType = null,
 
     aggregation_summary: ?AggregationSummary = null,
+
+    /// A list of files attached to the notification event.
+    attachments: ?[]const NotificationEventAttachment = null,
 
     /// The end time of the notification event.
     end_time: ?i64 = null,
@@ -86,6 +90,7 @@ pub const ManagedNotificationEvent = struct {
     pub const json_field_names = .{
         .aggregation_event_type = "aggregationEventType",
         .aggregation_summary = "aggregationSummary",
+        .attachments = "attachments",
         .end_time = "endTime",
         .event_status = "eventStatus",
         .id = "id",

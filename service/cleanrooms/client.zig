@@ -14,6 +14,8 @@ const create_configured_table_association = @import("create_configured_table_ass
 const create_configured_table_association_analysis_rule = @import("create_configured_table_association_analysis_rule.zig");
 const create_id_mapping_table = @import("create_id_mapping_table.zig");
 const create_id_namespace_association = @import("create_id_namespace_association.zig");
+const create_intermediate_table = @import("create_intermediate_table.zig");
+const create_intermediate_table_analysis_rule = @import("create_intermediate_table_analysis_rule.zig");
 const create_membership = @import("create_membership.zig");
 const create_privacy_budget_template = @import("create_privacy_budget_template.zig");
 const delete_analysis_template = @import("delete_analysis_template.zig");
@@ -25,9 +27,13 @@ const delete_configured_table_association = @import("delete_configured_table_ass
 const delete_configured_table_association_analysis_rule = @import("delete_configured_table_association_analysis_rule.zig");
 const delete_id_mapping_table = @import("delete_id_mapping_table.zig");
 const delete_id_namespace_association = @import("delete_id_namespace_association.zig");
+const delete_intermediate_table = @import("delete_intermediate_table.zig");
+const delete_intermediate_table_analysis_rule = @import("delete_intermediate_table_analysis_rule.zig");
 const delete_member = @import("delete_member.zig");
 const delete_membership = @import("delete_membership.zig");
 const delete_privacy_budget_template = @import("delete_privacy_budget_template.zig");
+const disallow_intermediate_table = @import("disallow_intermediate_table.zig");
+const get_analysis_log_export = @import("get_analysis_log_export.zig");
 const get_analysis_template = @import("get_analysis_template.zig");
 const get_collaboration = @import("get_collaboration.zig");
 const get_collaboration_analysis_template = @import("get_collaboration_analysis_template.zig");
@@ -42,12 +48,15 @@ const get_configured_table_association = @import("get_configured_table_associati
 const get_configured_table_association_analysis_rule = @import("get_configured_table_association_analysis_rule.zig");
 const get_id_mapping_table = @import("get_id_mapping_table.zig");
 const get_id_namespace_association = @import("get_id_namespace_association.zig");
+const get_intermediate_table = @import("get_intermediate_table.zig");
+const get_intermediate_table_analysis_rule = @import("get_intermediate_table_analysis_rule.zig");
 const get_membership = @import("get_membership.zig");
 const get_privacy_budget_template = @import("get_privacy_budget_template.zig");
 const get_protected_job = @import("get_protected_job.zig");
 const get_protected_query = @import("get_protected_query.zig");
 const get_schema = @import("get_schema.zig");
 const get_schema_analysis_rule = @import("get_schema_analysis_rule.zig");
+const list_analysis_log_exports = @import("list_analysis_log_exports.zig");
 const list_analysis_templates = @import("list_analysis_templates.zig");
 const list_collaboration_analysis_templates = @import("list_collaboration_analysis_templates.zig");
 const list_collaboration_change_requests = @import("list_collaboration_change_requests.zig");
@@ -61,6 +70,8 @@ const list_configured_table_associations = @import("list_configured_table_associ
 const list_configured_tables = @import("list_configured_tables.zig");
 const list_id_mapping_tables = @import("list_id_mapping_tables.zig");
 const list_id_namespace_associations = @import("list_id_namespace_associations.zig");
+const list_intermediate_table_versions = @import("list_intermediate_table_versions.zig");
+const list_intermediate_tables = @import("list_intermediate_tables.zig");
 const list_members = @import("list_members.zig");
 const list_memberships = @import("list_memberships.zig");
 const list_privacy_budget_templates = @import("list_privacy_budget_templates.zig");
@@ -70,7 +81,9 @@ const list_protected_queries = @import("list_protected_queries.zig");
 const list_schemas = @import("list_schemas.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const populate_id_mapping_table = @import("populate_id_mapping_table.zig");
+const populate_intermediate_table = @import("populate_intermediate_table.zig");
 const preview_privacy_impact = @import("preview_privacy_impact.zig");
+const start_analysis_log_export = @import("start_analysis_log_export.zig");
 const start_protected_job = @import("start_protected_job.zig");
 const start_protected_query = @import("start_protected_query.zig");
 const tag_resource = @import("tag_resource.zig");
@@ -85,6 +98,8 @@ const update_configured_table_association = @import("update_configured_table_ass
 const update_configured_table_association_analysis_rule = @import("update_configured_table_association_analysis_rule.zig");
 const update_id_mapping_table = @import("update_id_mapping_table.zig");
 const update_id_namespace_association = @import("update_id_namespace_association.zig");
+const update_intermediate_table = @import("update_intermediate_table.zig");
+const update_intermediate_table_analysis_rule = @import("update_intermediate_table_analysis_rule.zig");
 const update_membership = @import("update_membership.zig");
 const update_privacy_budget_template = @import("update_privacy_budget_template.zig");
 const update_protected_job = @import("update_protected_job.zig");
@@ -190,6 +205,20 @@ pub const Client = struct {
         return create_id_namespace_association.execute(self, allocator, input, options);
     }
 
+    /// Creates an intermediate table in a membership. The intermediate table is
+    /// owned by the member with the CAN_QUERY ability. To populate the table with
+    /// results, use `PopulateIntermediateTable`.
+    pub fn createIntermediateTable(self: *Self, allocator: std.mem.Allocator, input: create_intermediate_table.CreateIntermediateTableInput, options: CallOptions) !create_intermediate_table.CreateIntermediateTableOutput {
+        return create_intermediate_table.execute(self, allocator, input, options);
+    }
+
+    /// Creates an analysis rule for an intermediate table. Only the CUSTOM analysis
+    /// rule type is supported. Only the intermediate table owner can call this
+    /// operation.
+    pub fn createIntermediateTableAnalysisRule(self: *Self, allocator: std.mem.Allocator, input: create_intermediate_table_analysis_rule.CreateIntermediateTableAnalysisRuleInput, options: CallOptions) !create_intermediate_table_analysis_rule.CreateIntermediateTableAnalysisRuleOutput {
+        return create_intermediate_table_analysis_rule.execute(self, allocator, input, options);
+    }
+
     /// Creates a membership for a specific collaboration identifier and joins the
     /// collaboration.
     pub fn createMembership(self: *Self, allocator: std.mem.Allocator, input: create_membership.CreateMembershipInput, options: CallOptions) !create_membership.CreateMembershipOutput {
@@ -250,6 +279,19 @@ pub const Client = struct {
         return delete_id_namespace_association.execute(self, allocator, input, options);
     }
 
+    /// Deletes an intermediate table. The delete is idempotent. Only the
+    /// intermediate table owner can call this operation.
+    pub fn deleteIntermediateTable(self: *Self, allocator: std.mem.Allocator, input: delete_intermediate_table.DeleteIntermediateTableInput, options: CallOptions) !delete_intermediate_table.DeleteIntermediateTableOutput {
+        return delete_intermediate_table.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an analysis rule from an intermediate table. After the analysis rule
+    /// is deleted, the intermediate table becomes unqueryable until a new analysis
+    /// rule is attached. Only the intermediate table owner can call this operation.
+    pub fn deleteIntermediateTableAnalysisRule(self: *Self, allocator: std.mem.Allocator, input: delete_intermediate_table_analysis_rule.DeleteIntermediateTableAnalysisRuleInput, options: CallOptions) !delete_intermediate_table_analysis_rule.DeleteIntermediateTableAnalysisRuleOutput {
+        return delete_intermediate_table_analysis_rule.execute(self, allocator, input, options);
+    }
+
     /// Removes the specified member from a collaboration. The removed member is
     /// placed in the Removed status and can't interact with the collaboration. The
     /// removed member's data is inaccessible to active members of the
@@ -267,6 +309,23 @@ pub const Client = struct {
     /// Deletes a privacy budget template for a specified collaboration.
     pub fn deletePrivacyBudgetTemplate(self: *Self, allocator: std.mem.Allocator, input: delete_privacy_budget_template.DeletePrivacyBudgetTemplateInput, options: CallOptions) !delete_privacy_budget_template.DeletePrivacyBudgetTemplateOutput {
         return delete_privacy_budget_template.execute(self, allocator, input, options);
+    }
+
+    /// Marks an intermediate table as invalid when it references the caller's base
+    /// table. The data provider (base table owner) calls this operation, not the
+    /// intermediate table owner. By default, the operation also marks all
+    /// descendant intermediate tables as invalid.
+    pub fn disallowIntermediateTable(self: *Self, allocator: std.mem.Allocator, input: disallow_intermediate_table.DisallowIntermediateTableInput, options: CallOptions) !disallow_intermediate_table.DisallowIntermediateTableOutput {
+        return disallow_intermediate_table.execute(self, allocator, input, options);
+    }
+
+    /// Returns information about an analysis log export, including its current
+    /// status and, if the export failed, the reason for the failure.
+    ///
+    /// Poll this operation until the `status` is `SUCCESS` or `FAILED`. An export
+    /// can't be canceled after it starts.
+    pub fn getAnalysisLogExport(self: *Self, allocator: std.mem.Allocator, input: get_analysis_log_export.GetAnalysisLogExportInput, options: CallOptions) !get_analysis_log_export.GetAnalysisLogExportOutput {
+        return get_analysis_log_export.execute(self, allocator, input, options);
     }
 
     /// Retrieves an analysis template.
@@ -340,6 +399,19 @@ pub const Client = struct {
         return get_id_namespace_association.execute(self, allocator, input, options);
     }
 
+    /// Retrieves an intermediate table. Returns the full details of the
+    /// intermediate table, including schema, table dependencies, inherited
+    /// constraints, child resources, and status. Only the intermediate table owner
+    /// can call this operation.
+    pub fn getIntermediateTable(self: *Self, allocator: std.mem.Allocator, input: get_intermediate_table.GetIntermediateTableInput, options: CallOptions) !get_intermediate_table.GetIntermediateTableOutput {
+        return get_intermediate_table.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the analysis rule for an intermediate table.
+    pub fn getIntermediateTableAnalysisRule(self: *Self, allocator: std.mem.Allocator, input: get_intermediate_table_analysis_rule.GetIntermediateTableAnalysisRuleInput, options: CallOptions) !get_intermediate_table_analysis_rule.GetIntermediateTableAnalysisRuleOutput {
+        return get_intermediate_table_analysis_rule.execute(self, allocator, input, options);
+    }
+
     /// Retrieves a specified membership for an identifier.
     pub fn getMembership(self: *Self, allocator: std.mem.Allocator, input: get_membership.GetMembershipInput, options: CallOptions) !get_membership.GetMembershipOutput {
         return get_membership.execute(self, allocator, input, options);
@@ -368,6 +440,12 @@ pub const Client = struct {
     /// Retrieves a schema analysis rule.
     pub fn getSchemaAnalysisRule(self: *Self, allocator: std.mem.Allocator, input: get_schema_analysis_rule.GetSchemaAnalysisRuleInput, options: CallOptions) !get_schema_analysis_rule.GetSchemaAnalysisRuleOutput {
         return get_schema_analysis_rule.execute(self, allocator, input, options);
+    }
+
+    /// Lists analysis log exports, sorted by the most recent export. Results are
+    /// paginated. Use the `nextToken` parameter to retrieve additional results.
+    pub fn listAnalysisLogExports(self: *Self, allocator: std.mem.Allocator, input: list_analysis_log_exports.ListAnalysisLogExportsInput, options: CallOptions) !list_analysis_log_exports.ListAnalysisLogExportsOutput {
+        return list_analysis_log_exports.execute(self, allocator, input, options);
     }
 
     /// Lists analysis templates that the caller owns.
@@ -439,6 +517,20 @@ pub const Client = struct {
         return list_id_namespace_associations.execute(self, allocator, input, options);
     }
 
+    /// Lists the version history of an intermediate table. Each call to
+    /// `PopulateIntermediateTable` creates a new version. We recommend using
+    /// pagination to ensure that the operation returns quickly and successfully.
+    pub fn listIntermediateTableVersions(self: *Self, allocator: std.mem.Allocator, input: list_intermediate_table_versions.ListIntermediateTableVersionsInput, options: CallOptions) !list_intermediate_table_versions.ListIntermediateTableVersionsOutput {
+        return list_intermediate_table_versions.execute(self, allocator, input, options);
+    }
+
+    /// Lists intermediate tables owned by the caller in a membership. We recommend
+    /// using pagination to ensure that the operation returns quickly and
+    /// successfully.
+    pub fn listIntermediateTables(self: *Self, allocator: std.mem.Allocator, input: list_intermediate_tables.ListIntermediateTablesInput, options: CallOptions) !list_intermediate_tables.ListIntermediateTablesOutput {
+        return list_intermediate_tables.execute(self, allocator, input, options);
+    }
+
     /// Lists all members within a collaboration.
     pub fn listMembers(self: *Self, allocator: std.mem.Allocator, input: list_members.ListMembersInput, options: CallOptions) !list_members.ListMembersOutput {
         return list_members.execute(self, allocator, input, options);
@@ -486,10 +578,50 @@ pub const Client = struct {
         return populate_id_mapping_table.execute(self, allocator, input, options);
     }
 
+    /// Runs the stored query of an intermediate table and makes the results
+    /// available for querying. Each call creates a new version. Use
+    /// `GetProtectedQuery` with the returned analysis ID to track progress. Only
+    /// the intermediate table owner can call this operation.
+    pub fn populateIntermediateTable(self: *Self, allocator: std.mem.Allocator, input: populate_intermediate_table.PopulateIntermediateTableInput, options: CallOptions) !populate_intermediate_table.PopulateIntermediateTableOutput {
+        return populate_intermediate_table.execute(self, allocator, input, options);
+    }
+
     /// An estimate of the number of aggregation functions that the member who can
     /// query can run given epsilon and noise parameters.
     pub fn previewPrivacyImpact(self: *Self, allocator: std.mem.Allocator, input: preview_privacy_impact.PreviewPrivacyImpactInput, options: CallOptions) !preview_privacy_impact.PreviewPrivacyImpactOutput {
         return preview_privacy_impact.execute(self, allocator, input, options);
+    }
+
+    /// Starts an export of the Apache Spark logs for a protected query to an Amazon
+    /// S3 bucket that you own. Use the exported logs to diagnose a query that
+    /// failed or that ran more slowly than you expected.
+    ///
+    /// Clean Rooms exports a redacted copy of the Spark logs instead of the raw
+    /// logs. Analyze the exported logs with the tooling of your choice, such as
+    /// Spark History Server. For details about what the exported logs contain, see
+    /// [https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs-contents.html](https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs-contents.html).
+    ///
+    /// The export runs asynchronously and returns with a `status` of `IN_PROGRESS`.
+    /// Call `GetAnalysisLogExport` to poll for the final status.
+    ///
+    /// To use this operation, you must have the `CAN_EXPORT_QUERY_ANALYSIS_LOG`
+    /// ability for your membership. You must also be the query runner or the query
+    /// payer. Having the ability alone is not sufficient.
+    ///
+    /// The query must have reached a terminal state, and it must have reached the
+    /// execution stage. A query that failed validation or that was canceled before
+    /// it started produces no Spark logs.
+    ///
+    /// Log export isn't supported for queries that use differential privacy, and
+    /// isn't supported for PySpark jobs.
+    ///
+    /// The destination bucket must be in the same Amazon Web Services Region as the
+    /// collaboration. Cross-Region export isn't supported.
+    ///
+    /// For more information, see
+    /// [https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs.html](https://docs.aws.amazon.com/clean-rooms/latest/userguide/export-analysis-logs.html).
+    pub fn startAnalysisLogExport(self: *Self, allocator: std.mem.Allocator, input: start_analysis_log_export.StartAnalysisLogExportInput, options: CallOptions) !start_analysis_log_export.StartAnalysisLogExportOutput {
+        return start_analysis_log_export.execute(self, allocator, input, options);
     }
 
     /// Creates a protected job that is started by Clean Rooms.
@@ -571,6 +703,19 @@ pub const Client = struct {
         return update_id_namespace_association.execute(self, allocator, input, options);
     }
 
+    /// Updates an intermediate table. You can update the description, KMS key ARN,
+    /// and column types of existing columns. Only the intermediate table owner can
+    /// call this operation.
+    pub fn updateIntermediateTable(self: *Self, allocator: std.mem.Allocator, input: update_intermediate_table.UpdateIntermediateTableInput, options: CallOptions) !update_intermediate_table.UpdateIntermediateTableOutput {
+        return update_intermediate_table.execute(self, allocator, input, options);
+    }
+
+    /// Updates the analysis rule policy for an intermediate table. Only the
+    /// intermediate table owner can call this operation.
+    pub fn updateIntermediateTableAnalysisRule(self: *Self, allocator: std.mem.Allocator, input: update_intermediate_table_analysis_rule.UpdateIntermediateTableAnalysisRuleInput, options: CallOptions) !update_intermediate_table_analysis_rule.UpdateIntermediateTableAnalysisRuleOutput {
+        return update_intermediate_table_analysis_rule.execute(self, allocator, input, options);
+    }
+
     /// Updates a membership.
     pub fn updateMembership(self: *Self, allocator: std.mem.Allocator, input: update_membership.UpdateMembershipInput, options: CallOptions) !update_membership.UpdateMembershipOutput {
         return update_membership.execute(self, allocator, input, options);
@@ -589,6 +734,13 @@ pub const Client = struct {
     /// Updates the processing of a currently running query.
     pub fn updateProtectedQuery(self: *Self, allocator: std.mem.Allocator, input: update_protected_query.UpdateProtectedQueryInput, options: CallOptions) !update_protected_query.UpdateProtectedQueryOutput {
         return update_protected_query.execute(self, allocator, input, options);
+    }
+
+    pub fn listAnalysisLogExportsPaginator(self: *Self, params: list_analysis_log_exports.ListAnalysisLogExportsInput) paginator.ListAnalysisLogExportsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
     }
 
     pub fn listAnalysisTemplatesPaginator(self: *Self, params: list_analysis_templates.ListAnalysisTemplatesInput) paginator.ListAnalysisTemplatesPaginator {
@@ -676,6 +828,20 @@ pub const Client = struct {
     }
 
     pub fn listIdNamespaceAssociationsPaginator(self: *Self, params: list_id_namespace_associations.ListIdNamespaceAssociationsInput) paginator.ListIdNamespaceAssociationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listIntermediateTableVersionsPaginator(self: *Self, params: list_intermediate_table_versions.ListIntermediateTableVersionsInput) paginator.ListIntermediateTableVersionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listIntermediateTablesPaginator(self: *Self, params: list_intermediate_tables.ListIntermediateTablesInput) paginator.ListIntermediateTablesPaginator {
         return .{
             .client = self,
             .params = params,

@@ -16,6 +16,8 @@ pub const AttributeDimensionType = enum {
     greater_than_or_equal,
     less_than_or_equal,
     equal,
+    list_contains,
+    list_contains_all,
 
     pub const json_field_names = .{
         .inclusive = "INCLUSIVE",
@@ -33,6 +35,8 @@ pub const AttributeDimensionType = enum {
         .greater_than_or_equal = "GREATER_THAN_OR_EQUAL",
         .less_than_or_equal = "LESS_THAN_OR_EQUAL",
         .equal = "EQUAL",
+        .list_contains = "LIST_CONTAINS",
+        .list_contains_all = "LIST_CONTAINS_ALL",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -52,6 +56,8 @@ pub const AttributeDimensionType = enum {
             .greater_than_or_equal => "GREATER_THAN_OR_EQUAL",
             .less_than_or_equal => "LESS_THAN_OR_EQUAL",
             .equal => "EQUAL",
+            .list_contains => "LIST_CONTAINS",
+            .list_contains_all => "LIST_CONTAINS_ALL",
         };
     }
 

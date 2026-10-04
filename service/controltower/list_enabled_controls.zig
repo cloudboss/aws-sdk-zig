@@ -12,8 +12,8 @@ pub const ListEnabledControlsInput = struct {
     /// types of control operations to view.
     filter: ?EnabledControlFilter = null,
 
-    /// A boolean value that determines whether to include enabled controls from
-    /// child organizational units in the response.
+    /// Specifies whether to include enabled controls from child organizational
+    /// units and child accounts in the response.
     include_children: ?bool = null,
 
     /// How many results to return per API call.
@@ -23,8 +23,12 @@ pub const ListEnabledControlsInput = struct {
     /// parameters.
     next_token: ?[]const u8 = null,
 
-    /// The ARN of the organizational unit. For information on how to find the
-    /// `targetIdentifier`, see [the overview
+    /// The ARN of the target. The value depends on the target type:
+    ///
+    /// * Organizational unit (OU) – Specify the ARN of the OU.
+    /// * Account – Specify the ARN of the account.
+    ///
+    /// For information on how to find the `targetIdentifier`, see [the overview
     /// page](https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html).
     target_identifier: ?[]const u8 = null,
 
@@ -134,10 +138,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListEnabledControlsInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListEnabledControlsOutput {
-    var result: ListEnabledControlsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListEnabledControlsOutput, body, allocator);
-    }
+    const result: ListEnabledControlsOutput = try aws.json.parseJsonObject(
+        ListEnabledControlsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

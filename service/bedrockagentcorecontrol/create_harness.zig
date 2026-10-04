@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AuthorizerConfiguration = @import("authorizer_configuration.zig").AuthorizerConfiguration;
 const HarnessEnvironmentProviderRequest = @import("harness_environment_provider_request.zig").HarnessEnvironmentProviderRequest;
 const HarnessEnvironmentArtifact = @import("harness_environment_artifact.zig").HarnessEnvironmentArtifact;
+const HarnessHook = @import("harness_hook.zig").HarnessHook;
 const HarnessMemoryConfiguration = @import("harness_memory_configuration.zig").HarnessMemoryConfiguration;
 const HarnessModelConfiguration = @import("harness_model_configuration.zig").HarnessModelConfiguration;
 const HarnessSkill = @import("harness_skill.zig").HarnessSkill;
@@ -45,6 +46,9 @@ pub const CreateHarnessInput = struct {
     /// The name of the harness. Must start with a letter and contain only
     /// alphanumeric characters and underscores.
     harness_name: []const u8,
+
+    /// The lifecycle hooks to run at defined points in the agent loop.
+    hooks: ?[]const HarnessHook = null,
 
     /// The maximum number of iterations the agent loop can execute per invocation.
     max_iterations: ?i32 = null,
@@ -91,6 +95,7 @@ pub const CreateHarnessInput = struct {
         .environment_variables = "environmentVariables",
         .execution_role_arn = "executionRoleArn",
         .harness_name = "harnessName",
+        .hooks = "hooks",
         .max_iterations = "maxIterations",
         .max_tokens = "maxTokens",
         .memory = "memory",
@@ -193,6 +198,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateHarnessInput, con
     try body_buf.appendSlice(allocator, "\"harnessName\":");
     try aws.json.writeValue(@TypeOf(input.harness_name), input.harness_name, allocator, &body_buf);
     has_prev = true;
+    if (input.hooks) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"hooks\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.max_iterations) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"maxIterations\":");
@@ -269,10 +280,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateHarnessInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateHarnessOutput {
-    var result: CreateHarnessOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateHarnessOutput, body, allocator);
-    }
+    const result: CreateHarnessOutput = try aws.json.parseJsonObject(
+        CreateHarnessOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

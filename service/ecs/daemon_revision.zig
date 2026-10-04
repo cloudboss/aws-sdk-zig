@@ -13,6 +13,14 @@ pub const DaemonRevision = struct {
     /// The Unix timestamp for the time when the daemon revision was created.
     created_at: ?i64 = null,
 
+    /// If the `critical` parameter of this daemon revision is `true`, and the
+    /// daemon task fails, stops, or becomes unhealthy, Amazon ECS drains the
+    /// container instance and stops the other tasks running on it. If the parameter
+    /// is `false`, the daemon task failure doesn't affect the other tasks on the
+    /// instance, and doesn't block instance registration. The default value is
+    /// `true`.
+    critical: ?bool = null,
+
     /// The Amazon Resource Name (ARN) of the daemon for this revision.
     daemon_arn: ?[]const u8 = null,
 
@@ -38,6 +46,7 @@ pub const DaemonRevision = struct {
         .cluster_arn = "clusterArn",
         .container_images = "containerImages",
         .created_at = "createdAt",
+        .critical = "critical",
         .daemon_arn = "daemonArn",
         .daemon_revision_arn = "daemonRevisionArn",
         .daemon_task_definition_arn = "daemonTaskDefinitionArn",

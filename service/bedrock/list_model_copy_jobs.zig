@@ -197,10 +197,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListModelCopyJobsInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListModelCopyJobsOutput {
-    var result: ListModelCopyJobsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListModelCopyJobsOutput, body, allocator);
-    }
+    const result: ListModelCopyJobsOutput = try aws.json.parseJsonObject(
+        ListModelCopyJobsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -7,9 +7,9 @@ const NotificationType = @import("notification_type.zig").NotificationType;
 const SchemaVersion = @import("schema_version.zig").SchemaVersion;
 const TextPartValue = @import("text_part_value.zig").TextPartValue;
 
-/// A ManagedNotificationChildEvent is a notification-focused representation of
-/// an event. They contain semantic information used to create aggregated or
-/// non-aggregated end-user notifications.
+/// A notification-focused representation of an event. They contain semantic
+/// information used to create aggregated or non-aggregated end-user
+/// notifications.
 pub const ManagedNotificationChildEvent = struct {
     /// The Amazon Resource Name (ARN) of the ManagedNotificationEvent that is
     /// associated with this Managed Notification Child Event.

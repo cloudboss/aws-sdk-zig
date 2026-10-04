@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetGroupVersionInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetGroupVersionOutput {
-    var result: GetGroupVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetGroupVersionOutput, body, allocator);
-    }
+    const result: GetGroupVersionOutput = try aws.json.parseJsonObject(
+        GetGroupVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

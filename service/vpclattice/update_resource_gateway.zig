@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateResourceGatewayIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateResourceGatewayOutput {
-    var result: UpdateResourceGatewayOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateResourceGatewayOutput, body, allocator);
-    }
+    const result: UpdateResourceGatewayOutput = try aws.json.parseJsonObject(
+        UpdateResourceGatewayOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

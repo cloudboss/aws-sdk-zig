@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchDatabasesByLFTags
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchDatabasesByLFTagsOutput {
-    var result: SearchDatabasesByLFTagsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchDatabasesByLFTagsOutput, body, allocator);
-    }
+    const result: SearchDatabasesByLFTagsOutput = try aws.json.parseJsonObject(
+        SearchDatabasesByLFTagsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -153,10 +153,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeJobDefinitionsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeJobDefinitionsOutput {
-    var result: DescribeJobDefinitionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeJobDefinitionsOutput, body, allocator);
-    }
+    const result: DescribeJobDefinitionsOutput = try aws.json.parseJsonObject(
+        DescribeJobDefinitionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

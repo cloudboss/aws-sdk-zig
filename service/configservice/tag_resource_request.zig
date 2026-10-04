@@ -19,6 +19,8 @@ pub const TagResourceRequest = struct {
     /// * `AggregationAuthorization`
     ///
     /// * `StoredQuery`
+    ///
+    /// * `Connector`
     resource_arn: []const u8,
 
     /// An array of tag object.

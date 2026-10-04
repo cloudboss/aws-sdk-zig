@@ -11,10 +11,10 @@ pub const ListInfrastructureConfigurationsInput = struct {
     /// You can filter on `name` to streamline results.
     filters: ?[]const Filter = null,
 
-    /// Specify the maximum number of items to return in a request.
+    /// The maximum number of items to return in a single request.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListInfrastructureConfi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListInfrastructureConfigurationsOutput {
-    var result: ListInfrastructureConfigurationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListInfrastructureConfigurationsOutput, body, allocator);
-    }
+    const result: ListInfrastructureConfigurationsOutput = try aws.json.parseJsonObject(
+        ListInfrastructureConfigurationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

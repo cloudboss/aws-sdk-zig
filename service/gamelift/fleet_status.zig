@@ -11,6 +11,7 @@ pub const FleetStatus = enum {
     @"error",
     terminated,
     not_found,
+    expired,
 
     pub const json_field_names = .{
         .new = "NEW",
@@ -23,6 +24,7 @@ pub const FleetStatus = enum {
         .@"error" = "ERROR",
         .terminated = "TERMINATED",
         .not_found = "NOT_FOUND",
+        .expired = "EXPIRED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -37,6 +39,7 @@ pub const FleetStatus = enum {
             .@"error" => "ERROR",
             .terminated => "TERMINATED",
             .not_found => "NOT_FOUND",
+            .expired => "EXPIRED",
         };
     }
 

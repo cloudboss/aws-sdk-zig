@@ -1,3 +1,4 @@
+pub const AddReplicaLocationInput = @import("add_replica_location_input.zig").AddReplicaLocationInput;
 pub const ArtifactConfigInput = @import("artifact_config_input.zig").ArtifactConfigInput;
 pub const ArtifactConfigOutput = @import("artifact_config_output.zig").ArtifactConfigOutput;
 pub const BaseScreenshot = @import("base_screenshot.zig").BaseScreenshot;
@@ -31,7 +32,12 @@ pub const Group = @import("group.zig").Group;
 pub const GroupSummary = @import("group_summary.zig").GroupSummary;
 pub const ListTagsForResourceRequest = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
 pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+pub const LocationType = @import("location_type.zig").LocationType;
+pub const MultiLocationConfig = @import("multi_location_config.zig").MultiLocationConfig;
 pub const ProvisionedResourceCleanupSetting = @import("provisioned_resource_cleanup_setting.zig").ProvisionedResourceCleanupSetting;
+pub const Replica = @import("replica.zig").Replica;
+pub const ReplicationState = @import("replication_state.zig").ReplicationState;
+pub const ReplicationStatus = @import("replication_status.zig").ReplicationStatus;
 pub const ResourceToTag = @import("resource_to_tag.zig").ResourceToTag;
 pub const RetryConfigInput = @import("retry_config_input.zig").RetryConfigInput;
 pub const RetryConfigOutput = @import("retry_config_output.zig").RetryConfigOutput;

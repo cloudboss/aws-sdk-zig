@@ -1,5 +1,6 @@
 const std = @import("std");
 
+/// The type of preloaded data.
 pub const PreloadDataType = enum {
     synthea,
 

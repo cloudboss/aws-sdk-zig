@@ -142,10 +142,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStageInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetStageOutput {
-    var result: GetStageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetStageOutput, body, allocator);
-    }
+    const result: GetStageOutput = try aws.json.parseJsonObject(
+        GetStageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -18,7 +18,7 @@ pub const ContactDataRequest = struct {
     /// Information about the outbound strategy.
     outbound_strategy: ?OutboundStrategy = null,
 
-    /// The identifier of the queue associated with the Amazon Connect instance in
+    /// The identifier of the queue associated with the Connect Customer instance in
     /// which contacts that are created
     /// will be queued.
     queue_id: ?[]const u8 = null,
@@ -26,7 +26,7 @@ pub const ContactDataRequest = struct {
     /// Identifier to uniquely identify individual requests in the batch.
     request_identifier: ?[]const u8 = null,
 
-    /// Endpoint associated with the Amazon Connect instance from which outbound
+    /// Endpoint associated with the Connect Customer instance from which outbound
     /// contact will be initiated for the
     /// campaign.
     system_endpoint: ?Endpoint = null,

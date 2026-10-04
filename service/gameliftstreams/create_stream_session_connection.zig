@@ -123,10 +123,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateStreamSessionConn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateStreamSessionConnectionOutput {
-    var result: CreateStreamSessionConnectionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateStreamSessionConnectionOutput, body, allocator);
-    }
+    const result: CreateStreamSessionConnectionOutput = try aws.json.parseJsonObject(
+        CreateStreamSessionConnectionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

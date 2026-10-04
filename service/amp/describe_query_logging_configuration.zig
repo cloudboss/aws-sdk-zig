@@ -76,10 +76,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeQueryLoggingCon
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeQueryLoggingConfigurationOutput {
-    var result: DescribeQueryLoggingConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeQueryLoggingConfigurationOutput, body, allocator);
-    }
+    const result: DescribeQueryLoggingConfigurationOutput = try aws.json.parseJsonObject(
+        DescribeQueryLoggingConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutFunctionCodeSigningC
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutFunctionCodeSigningConfigOutput {
-    var result: PutFunctionCodeSigningConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutFunctionCodeSigningConfigOutput, body, allocator);
-    }
+    const result: PutFunctionCodeSigningConfigOutput = try aws.json.parseJsonObject(
+        PutFunctionCodeSigningConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -141,10 +141,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutRoutingRuleInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutRoutingRuleOutput {
-    var result: PutRoutingRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutRoutingRuleOutput, body, allocator);
-    }
+    const result: PutRoutingRuleOutput = try aws.json.parseJsonObject(
+        PutRoutingRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

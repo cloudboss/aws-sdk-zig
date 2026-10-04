@@ -120,10 +120,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListReputationEntitiesI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListReputationEntitiesOutput {
-    var result: ListReputationEntitiesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListReputationEntitiesOutput, body, allocator);
-    }
+    const result: ListReputationEntitiesOutput = try aws.json.parseJsonObject(
+        ListReputationEntitiesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

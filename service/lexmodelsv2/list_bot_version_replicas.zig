@@ -134,10 +134,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListBotVersionReplicasI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListBotVersionReplicasOutput {
-    var result: ListBotVersionReplicasOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListBotVersionReplicasOutput, body, allocator);
-    }
+    const result: ListBotVersionReplicasOutput = try aws.json.parseJsonObject(
+        ListBotVersionReplicasOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

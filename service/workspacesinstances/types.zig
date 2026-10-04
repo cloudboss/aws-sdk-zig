@@ -43,6 +43,7 @@ pub const ListTagsForResourceRequest = @import("list_tags_for_resource_request.z
 pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
 pub const ManagedInstanceRequest = @import("managed_instance_request.zig").ManagedInstanceRequest;
 pub const MarketTypeEnum = @import("market_type_enum.zig").MarketTypeEnum;
+pub const NestedVirtualizationEnum = @import("nested_virtualization_enum.zig").NestedVirtualizationEnum;
 pub const Placement = @import("placement.zig").Placement;
 pub const PlatformTypeEnum = @import("platform_type_enum.zig").PlatformTypeEnum;
 pub const PrivateDnsNameOptionsRequest = @import("private_dns_name_options_request.zig").PrivateDnsNameOptionsRequest;

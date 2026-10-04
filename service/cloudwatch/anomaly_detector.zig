@@ -16,6 +16,15 @@ const AnomalyDetectorStateValue = @import("anomaly_detector_state_value.zig").An
 /// monitoring account, the metric can be in the same account or a source
 /// account.
 pub const AnomalyDetector = struct {
+    /// The unique identifier of the anomaly detector.
+    ///
+    /// The identifier does not restrict access to a specific anomaly detector in an
+    /// IAM
+    /// policy. Permissions for anomaly detector operations apply to all anomaly
+    /// detectors
+    /// in the account.
+    anomaly_detector_id: ?[]const u8 = null,
+
     /// The configuration specifies details about how the anomaly detection model is
     /// to be
     /// trained, including time ranges to exclude from use for training the model,
@@ -52,6 +61,7 @@ pub const AnomalyDetector = struct {
     state_value: ?AnomalyDetectorStateValue = null,
 
     pub const json_field_names = .{
+        .anomaly_detector_id = "AnomalyDetectorId",
         .configuration = "Configuration",
         .dimensions = "Dimensions",
         .metric_characteristics = "MetricCharacteristics",

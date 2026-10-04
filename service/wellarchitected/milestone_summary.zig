@@ -6,6 +6,7 @@ pub const MilestoneSummary = struct {
 
     milestone_number: ?i32 = null,
 
+    /// The date and time when the milestone was recorded.
     recorded_at: ?i64 = null,
 
     workload_summary: ?WorkloadSummary = null,

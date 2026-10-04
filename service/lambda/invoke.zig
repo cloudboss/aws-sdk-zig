@@ -13,9 +13,14 @@ pub const InvokeInput = struct {
     /// object to your function for synchronous invocations only.
     client_context: ?[]const u8 = null,
 
-    /// Optional unique name for the durable execution. When you start your special
-    /// function, you can give it a unique name to identify this specific execution.
-    /// It's like giving a nickname to a task.
+    /// A unique name for the durable execution. If you invoke a durable function
+    /// using a name that already exists with the same payload, Lambda returns the
+    /// existing execution instead of creating a duplicate. If the payload differs,
+    /// Lambda returns a `DurableExecutionAlreadyStartedException` error.
+    ///
+    /// If not specified, Lambda generates a unique identifier automatically. For
+    /// more information, see [Execution
+    /// names](https://docs.aws.amazon.com/lambda/latest/dg/durable-execution-idempotency.html#durable-idempotency-execution-names).
     durable_execution_name: ?[]const u8 = null,
 
     /// The name or ARN of the Lambda function, version, or alias. **Name formats**
@@ -187,6 +192,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeInput, config: *a
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !InvokeOutput {
     var result: InvokeOutput = .{};
+    errdefer {
+        if (result.durable_execution_arn) |value| allocator.free(value);
+        if (result.executed_version) |value| allocator.free(value);
+        if (result.function_error) |value| allocator.free(value);
+        if (result.log_result) |value| allocator.free(value);
+        if (result.payload) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.payload = try allocator.dupe(u8, body);
     }

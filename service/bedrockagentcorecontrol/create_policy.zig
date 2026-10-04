@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const PolicyDefinition = @import("policy_definition.zig").PolicyDefinition;
+const EnforcementMode = @import("enforcement_mode.zig").EnforcementMode;
 const PolicyValidationMode = @import("policy_validation_mode.zig").PolicyValidationMode;
 const PolicyStatus = @import("policy_status.zig").PolicyStatus;
 
@@ -16,8 +17,8 @@ pub const CreatePolicyInput = struct {
     /// policy.
     client_token: ?[]const u8 = null,
 
-    /// The Cedar policy statement that defines the access control rules. This
-    /// contains the actual policy logic written in Cedar policy language,
+    /// The Cedar or Dogwood policy statement that defines the access control rules.
+    /// This contains the actual policy logic written in Cedar or Dogwood,
     /// specifying effect (permit or forbid), principals, actions, resources, and
     /// conditions for agent behavior control.
     definition: PolicyDefinition,
@@ -29,6 +30,11 @@ pub const CreatePolicyInput = struct {
     /// any special considerations for maintenance. Clear descriptions are essential
     /// for policy governance, auditing, and troubleshooting.
     description: ?[]const u8 = null,
+
+    /// The enforcement mode for the policy. Run this policy in `LOG_ONLY` mode to
+    /// collect data on how it affects your application. Once you are satisfied with
+    /// the data gathered, switch the policy to `ACTIVE`. Defaults to `ACTIVE`.
+    enforcement_mode: ?EnforcementMode = null,
 
     /// The customer-assigned immutable name for the policy. Must be unique within
     /// the account. This name is used for policy identification and cannot be
@@ -56,6 +62,7 @@ pub const CreatePolicyInput = struct {
         .client_token = "clientToken",
         .definition = "definition",
         .description = "description",
+        .enforcement_mode = "enforcementMode",
         .name = "name",
         .policy_engine_id = "policyEngineId",
         .validation_mode = "validationMode",
@@ -67,14 +74,17 @@ pub const CreatePolicyOutput = struct {
     /// service and used for auditing and lifecycle management.
     created_at: i64,
 
-    /// The Cedar policy statement that was created. This is the validated policy
-    /// definition that will be used for agent behavior control and access
-    /// decisions.
+    /// The Cedar or Dogwood policy statement that was created. This is the
+    /// validated policy definition that will be used for agent behavior control and
+    /// access decisions.
     definition: ?PolicyDefinition = null,
 
     /// The human-readable description of the policy's purpose and functionality.
     /// This helps administrators understand and manage the policy.
     description: ?[]const u8 = null,
+
+    /// The enforcement mode of the created policy.
+    enforcement_mode: ?EnforcementMode = null,
 
     /// The customer-assigned name of the created policy. This matches the name
     /// provided in the request and serves as the human-readable identifier for the
@@ -111,6 +121,7 @@ pub const CreatePolicyOutput = struct {
         .created_at = "createdAt",
         .definition = "definition",
         .description = "description",
+        .enforcement_mode = "enforcementMode",
         .name = "name",
         .policy_arn = "policyArn",
         .policy_engine_id = "policyEngineId",
@@ -177,6 +188,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePolicyInput, conf
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.enforcement_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"enforcementMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
@@ -203,10 +220,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePolicyInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePolicyOutput {
-    var result: CreatePolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePolicyOutput, body, allocator);
-    }
+    const result: CreatePolicyOutput = try aws.json.parseJsonObject(
+        CreatePolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

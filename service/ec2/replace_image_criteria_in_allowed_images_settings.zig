@@ -108,6 +108,43 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ReplaceImageCriteriaInA
                     }
                 }
             }
+            if (item.image_watermarks) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        if (item_1.maximum_days_since_source_image_created) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriterion.{d}.ImageWatermark.{d}.MaximumDaysSinceSourceImageCreated=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        if (item_1.maximum_days_since_watermark_created) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriterion.{d}.ImageWatermark.{d}.MaximumDaysSinceWatermarkCreated=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_2}) catch "");
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        if (item_1.source_image_region) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriterion.{d}.ImageWatermark.{d}.SourceImageRegion=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        if (item_1.watermark_key) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ImageCriterion.{d}.ImageWatermark.{d}.WatermarkKey=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
+                        }
+                    }
+                }
+            }
             if (item.marketplace_product_codes) |lst_1| {
                 for (lst_1, 0..) |item_1, idx_1| {
                     const n_1 = idx_1 + 1;

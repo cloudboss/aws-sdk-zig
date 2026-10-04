@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PostTimeSeriesDataPoint
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PostTimeSeriesDataPointsOutput {
-    var result: PostTimeSeriesDataPointsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PostTimeSeriesDataPointsOutput, body, allocator);
-    }
+    const result: PostTimeSeriesDataPointsOutput = try aws.json.parseJsonObject(
+        PostTimeSeriesDataPointsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

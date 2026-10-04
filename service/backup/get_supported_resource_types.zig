@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSupportedResourceTyp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSupportedResourceTypesOutput {
-    var result: GetSupportedResourceTypesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSupportedResourceTypesOutput, body, allocator);
-    }
+    const result: GetSupportedResourceTypesOutput = try aws.json.parseJsonObject(
+        GetSupportedResourceTypesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

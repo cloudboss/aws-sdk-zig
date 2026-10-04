@@ -5,6 +5,7 @@ const H264CodecProfile = @import("h264_codec_profile.zig").H264CodecProfile;
 const H264DynamicSubGop = @import("h264_dynamic_sub_gop.zig").H264DynamicSubGop;
 const H264EndOfStreamMarkers = @import("h264_end_of_stream_markers.zig").H264EndOfStreamMarkers;
 const H264EntropyEncoding = @import("h264_entropy_encoding.zig").H264EntropyEncoding;
+const H264ExplicitWeightedPrediction = @import("h264_explicit_weighted_prediction.zig").H264ExplicitWeightedPrediction;
 const H264FieldEncoding = @import("h264_field_encoding.zig").H264FieldEncoding;
 const H264FlickerAdaptiveQuantization = @import("h264_flicker_adaptive_quantization.zig").H264FlickerAdaptiveQuantization;
 const H264FramerateControl = @import("h264_framerate_control.zig").H264FramerateControl;
@@ -85,6 +86,11 @@ pub const H264Settings = struct {
 
     /// Entropy encoding mode. Use CABAC (must be in Main or High profile) or CAVLC.
     entropy_encoding: ?H264EntropyEncoding = null,
+
+    /// Enable or disable explicit weighted prediction for the H.264 encoder.
+    /// Weighted prediction improves compression efficiency for content with fading
+    /// or brightness changes between frames.
+    explicit_weighted_prediction: ?H264ExplicitWeightedPrediction = null,
 
     /// The video encoding method for your MPEG-4 AVC output. Keep the default
     /// value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs.
@@ -455,6 +461,7 @@ pub const H264Settings = struct {
         .dynamic_sub_gop = "DynamicSubGop",
         .end_of_stream_markers = "EndOfStreamMarkers",
         .entropy_encoding = "EntropyEncoding",
+        .explicit_weighted_prediction = "ExplicitWeightedPrediction",
         .field_encoding = "FieldEncoding",
         .flicker_adaptive_quantization = "FlickerAdaptiveQuantization",
         .framerate_control = "FramerateControl",

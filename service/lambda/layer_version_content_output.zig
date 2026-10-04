@@ -1,3 +1,5 @@
+const ResolvedS3Object = @import("resolved_s3_object.zig").ResolvedS3Object;
+
 /// Details about a version of an [Lambda
 /// layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 pub const LayerVersionContentOutput = struct {
@@ -10,6 +12,9 @@ pub const LayerVersionContentOutput = struct {
     /// A link to the layer archive in Amazon S3 that is valid for 10 minutes.
     location: ?[]const u8 = null,
 
+    /// The resolved Amazon S3 object that contains the layer archive.
+    resolved_s3_object: ?ResolvedS3Object = null,
+
     /// The Amazon Resource Name (ARN) of a signing job.
     signing_job_arn: ?[]const u8 = null,
 
@@ -20,6 +25,7 @@ pub const LayerVersionContentOutput = struct {
         .code_sha_256 = "CodeSha256",
         .code_size = "CodeSize",
         .location = "Location",
+        .resolved_s3_object = "ResolvedS3Object",
         .signing_job_arn = "SigningJobArn",
         .signing_profile_version_arn = "SigningProfileVersionArn",
     };

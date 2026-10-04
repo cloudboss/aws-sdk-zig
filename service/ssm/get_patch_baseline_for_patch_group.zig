@@ -8,7 +8,7 @@ const OperatingSystem = @import("operating_system.zig").OperatingSystem;
 
 pub const GetPatchBaselineForPatchGroupInput = struct {
     /// Returns the operating system rule specified for patch groups using the patch
-    /// baseline.
+    /// baseline. The default value is `WINDOWS`.
     operating_system: ?OperatingSystem = null,
 
     /// The name of the patch group whose patch baseline should be retrieved.

@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSchemaMappingInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateSchemaMappingOutput {
-    var result: UpdateSchemaMappingOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateSchemaMappingOutput, body, allocator);
-    }
+    const result: UpdateSchemaMappingOutput = try aws.json.parseJsonObject(
+        UpdateSchemaMappingOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

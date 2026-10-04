@@ -14,7 +14,7 @@ pub const StartOutboundVoiceContactInput = struct {
     answer_machine_detection_config: ?AnswerMachineDetectionConfig = null,
 
     /// A custom key-value pair using an attribute map. The attributes are standard
-    /// Amazon Connect attributes, and
+    /// Connect Customer attributes, and
     /// can be accessed in flows just like any other contact attributes.
     ///
     /// There can be up to 32,768 UTF-8 bytes across all key-value pairs per
@@ -36,7 +36,7 @@ pub const StartOutboundVoiceContactInput = struct {
 
     /// The
     /// identifier of the flow for the outbound call. To see the ContactFlowId in
-    /// the Amazon Connect admin website, on the navigation menu go to
+    /// the Connect Customer admin website, on the navigation menu go to
     /// **Routing**, **Contact Flows**. Choose the flow. On the
     /// flow page, under the name of the flow, choose **Show additional flow
     /// information**. The
@@ -49,13 +49,13 @@ pub const StartOutboundVoiceContactInput = struct {
     /// the CCP logs. For more information
     /// about CCP logs, see [Download and
     /// review CCP
-    /// logs](https://docs.aws.amazon.com/connect/latest/adminguide/download-ccp-logs.html) in the *Amazon Connect Administrator Guide*.
+    /// logs](https://docs.aws.amazon.com/connect/latest/adminguide/download-ccp-logs.html) in the *Connect Customer Administrator Guide*.
     description: ?[]const u8 = null,
 
     /// The phone number of the customer, in E.164 format.
     destination_phone_number: []const u8,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -94,13 +94,13 @@ pub const StartOutboundVoiceContactInput = struct {
     /// the call, in seconds
     ring_timeout_in_seconds: ?i32 = null,
 
-    /// The phone number associated with the Amazon Connect instance, in E.164
+    /// The phone number associated with the Connect Customer instance, in E.164
     /// format. If you do not specify a
     /// source phone number, you must specify a queue.
     source_phone_number: ?[]const u8 = null,
 
     /// Denotes the class of traffic. Calls with different traffic types are handled
-    /// differently by Amazon Connect.
+    /// differently by Connect Customer.
     /// The default value is `GENERAL`. Use `CAMPAIGN` if
     /// `EnableAnswerMachineDetection` is
     /// set to `true`. For all other cases, use `GENERAL`.
@@ -127,7 +127,7 @@ pub const StartOutboundVoiceContactInput = struct {
 };
 
 pub const StartOutboundVoiceContactOutput = struct {
-    /// The identifier of this contact within the Amazon Connect instance.
+    /// The identifier of this contact within the Connect Customer instance.
     contact_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -277,10 +277,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartOutboundVoiceConta
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartOutboundVoiceContactOutput {
-    var result: StartOutboundVoiceContactOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartOutboundVoiceContactOutput, body, allocator);
-    }
+    const result: StartOutboundVoiceContactOutput = try aws.json.parseJsonObject(
+        StartOutboundVoiceContactOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

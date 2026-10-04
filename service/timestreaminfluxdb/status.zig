@@ -13,6 +13,8 @@ pub const Status = enum {
     maintenance,
     rebooting,
     reboot_failed,
+    restoring,
+    restore_failed,
 
     pub const json_field_names = .{
         .creating = "CREATING",
@@ -27,6 +29,8 @@ pub const Status = enum {
         .maintenance = "MAINTENANCE",
         .rebooting = "REBOOTING",
         .reboot_failed = "REBOOT_FAILED",
+        .restoring = "RESTORING",
+        .restore_failed = "RESTORE_FAILED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -43,6 +47,8 @@ pub const Status = enum {
             .maintenance => "MAINTENANCE",
             .rebooting => "REBOOTING",
             .reboot_failed => "REBOOT_FAILED",
+            .restoring => "RESTORING",
+            .restore_failed => "RESTORE_FAILED",
         };
     }
 

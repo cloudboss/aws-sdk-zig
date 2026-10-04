@@ -30,32 +30,39 @@ pub const InfrastructureConfiguration = struct {
     /// The Amazon EC2 key pair of the infrastructure configuration.
     key_pair: ?[]const u8 = null,
 
-    /// The logging configuration of the infrastructure configuration.
+    /// The logging configuration of the infrastructure configuration. When you
+    /// configure S3 logs, Image Builder writes logs from the build and test process
+    /// to the
+    /// specified bucket under the key prefix.
     logging: ?Logging = null,
 
     /// The name of the infrastructure configuration.
     name: ?[]const u8 = null,
 
-    /// The instance placement settings that define where the instances that are
-    /// launched
-    /// from your image will run.
+    /// The instance placement settings that define where the build and test
+    /// instances that Image Builder launches during image creation run. These
+    /// settings
+    /// don't affect instances that you launch from the output image.
     placement: ?Placement = null,
 
-    /// The tags attached to the resource created by Image Builder.
+    /// The metadata tags assigned to the Amazon EC2 build and test instances that
+    /// Image Builder
+    /// launches during image creation.
     resource_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The security group IDs of the infrastructure configuration.
     security_group_ids: ?[]const []const u8 = null,
 
-    /// The Amazon Resource Name (ARN) for the SNS topic to which we send image
-    /// build event
-    /// notifications.
+    /// The Amazon Resource Name (ARN) of the SNS topic to which Image Builder
+    /// sends image build event notifications. Specify a standard topic. Image
+    /// Builder doesn't support FIFO
+    /// topics.
     ///
-    /// EC2 Image Builder is unable to send notifications to SNS topics that are
-    /// encrypted using keys
-    /// from other accounts. The key that is used to encrypt the SNS topic must
-    /// reside in the
-    /// account that the Image Builder service runs under.
+    /// EC2 Image Builder can't send notifications to SNS topics that are encrypted
+    /// using keys
+    /// from other accounts. If your SNS topic is encrypted, the key must be owned
+    /// by the
+    /// same account that owns your Image Builder resources.
     sns_topic_arn: ?[]const u8 = null,
 
     /// The subnet ID of the infrastructure configuration.
@@ -64,8 +71,10 @@ pub const InfrastructureConfiguration = struct {
     /// The tags of the infrastructure configuration.
     tags: ?[]const aws.map.StringMapEntry = null,
 
-    /// The terminate instance on failure configuration of the infrastructure
-    /// configuration.
+    /// Indicates whether Image Builder terminates the build and test instances when
+    /// the image
+    /// build fails. When `false`, Image Builder retains the instance so that you
+    /// can debug it.
     terminate_instance_on_failure: ?bool = null,
 
     pub const json_field_names = .{

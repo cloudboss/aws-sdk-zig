@@ -172,6 +172,10 @@ pub const ContainerFleet = struct {
     /// * `UPDATING` -- Updates to the container fleet is being updated. A
     ///   deployment is in
     /// progress.
+    ///
+    /// * `EXPIRED` -- The container fleet has been expired. The fleet is scaled
+    ///   down to zero
+    /// instances and cannot host new game sessions.
     status: ?ContainerFleetStatus = null,
 
     pub const json_field_names = .{

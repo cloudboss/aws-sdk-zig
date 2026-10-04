@@ -41,6 +41,9 @@ pub const CreateABTestInput = struct {
     /// and evaluation resources.
     role_arn: []const u8,
 
+    /// A map of tag keys and values to associate with the A/B test.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
     /// The list of variants for the A/B test. Must contain exactly two variants: a
     /// control (C) and a treatment (T1), each with a configuration bundle or target
     /// reference and a traffic weight.
@@ -55,6 +58,7 @@ pub const CreateABTestInput = struct {
         .gateway_filter = "gatewayFilter",
         .name = "name",
         .role_arn = "roleArn",
+        .tags = "tags",
         .variants = "variants",
     };
 };
@@ -164,6 +168,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateABTestInput, conf
     try body_buf.appendSlice(allocator, "\"roleArn\":");
     try aws.json.writeValue(@TypeOf(input.role_arn), input.role_arn, allocator, &body_buf);
     has_prev = true;
+    if (input.tags) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"variants\":");
     try aws.json.writeValue(@TypeOf(input.variants), input.variants, allocator, &body_buf);
@@ -184,10 +194,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateABTestInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateABTestOutput {
-    var result: CreateABTestOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateABTestOutput, body, allocator);
-    }
+    const result: CreateABTestOutput = try aws.json.parseJsonObject(
+        CreateABTestOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

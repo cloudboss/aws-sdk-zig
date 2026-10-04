@@ -8,7 +8,7 @@ const VoiceConnectorSettings = @import("voice_connector_settings.zig").VoiceConn
 
 pub const UpdateGlobalSettingsInput = struct {
     /// The Voice Connector settings.
-    voice_connector: ?VoiceConnectorSettings = null,
+    voice_connector: VoiceConnectorSettings,
 
     pub const json_field_names = .{
         .voice_connector = "VoiceConnector",
@@ -53,12 +53,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGlobalSettingsInp
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
-    if (input.voice_connector) |v| {
-        if (has_prev) try body_buf.appendSlice(allocator, ",");
-        try body_buf.appendSlice(allocator, "\"VoiceConnector\":");
-        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
-        has_prev = true;
-    }
+    if (has_prev) try body_buf.appendSlice(allocator, ",");
+    try body_buf.appendSlice(allocator, "\"VoiceConnector\":");
+    try aws.json.writeValue(@TypeOf(input.voice_connector), input.voice_connector, allocator, &body_buf);
+    has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);

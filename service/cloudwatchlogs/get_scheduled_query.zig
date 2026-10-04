@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DestinationConfiguration = @import("destination_configuration.zig").DestinationConfiguration;
 const ExecutionStatus = @import("execution_status.zig").ExecutionStatus;
 const QueryLanguage = @import("query_language.zig").QueryLanguage;
+const ScheduleType = @import("schedule_type.zig").ScheduleType;
 const ScheduledQueryState = @import("scheduled_query_state.zig").ScheduledQueryState;
 
 pub const GetScheduledQueryInput = struct {
@@ -27,6 +28,11 @@ pub const GetScheduledQueryOutput = struct {
 
     /// Configuration for where query results are delivered.
     destination_configuration: ?DestinationConfiguration = null,
+
+    /// The time offset in seconds that defines the end of the lookback period for
+    /// the
+    /// query.
+    end_time_offset: ?i64 = null,
 
     /// The ARN of the IAM role used to execute the query and deliver results.
     execution_role_arn: ?[]const u8 = null,
@@ -64,6 +70,10 @@ pub const GetScheduledQueryOutput = struct {
     /// The start time for the scheduled query in Unix epoch format.
     schedule_start_time: ?i64 = null,
 
+    /// The schedule type of the scheduled query. Valid values are
+    /// `CUSTOMER_MANAGED` and `AWS_MANAGED`.
+    schedule_type: ?ScheduleType = null,
+
     /// The time offset in seconds that defines the lookback period for the query.
     start_time_offset: ?i64 = null,
 
@@ -77,6 +87,7 @@ pub const GetScheduledQueryOutput = struct {
         .creation_time = "creationTime",
         .description = "description",
         .destination_configuration = "destinationConfiguration",
+        .end_time_offset = "endTimeOffset",
         .execution_role_arn = "executionRoleArn",
         .last_execution_status = "lastExecutionStatus",
         .last_triggered_time = "lastTriggeredTime",
@@ -89,6 +100,7 @@ pub const GetScheduledQueryOutput = struct {
         .schedule_end_time = "scheduleEndTime",
         .schedule_expression = "scheduleExpression",
         .schedule_start_time = "scheduleStartTime",
+        .schedule_type = "scheduleType",
         .start_time_offset = "startTimeOffset",
         .state = "state",
         .timezone = "timezone",

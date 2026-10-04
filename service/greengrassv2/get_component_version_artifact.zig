@@ -120,10 +120,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetComponentVersionArti
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetComponentVersionArtifactOutput {
-    var result: GetComponentVersionArtifactOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetComponentVersionArtifactOutput, body, allocator);
-    }
+    const result: GetComponentVersionArtifactOutput = try aws.json.parseJsonObject(
+        GetComponentVersionArtifactOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

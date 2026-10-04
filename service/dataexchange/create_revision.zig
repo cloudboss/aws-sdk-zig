@@ -157,10 +157,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRevisionInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateRevisionOutput {
-    var result: CreateRevisionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateRevisionOutput, body, allocator);
-    }
+    const result: CreateRevisionOutput = try aws.json.parseJsonObject(
+        CreateRevisionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

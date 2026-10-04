@@ -145,10 +145,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AddLayerVersionPermissi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AddLayerVersionPermissionOutput {
-    var result: AddLayerVersionPermissionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AddLayerVersionPermissionOutput, body, allocator);
-    }
+    const result: AddLayerVersionPermissionOutput = try aws.json.parseJsonObject(
+        AddLayerVersionPermissionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

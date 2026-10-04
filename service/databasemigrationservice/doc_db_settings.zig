@@ -13,10 +13,16 @@ pub const DocDbSettings = struct {
     /// `1000`.
     docs_to_investigate: ?i32 = null,
 
-    /// Specifies the document ID. Use this setting when `NestingLevel` is set to
-    /// `"none"`.
+    /// Specifies whether the document ID is added to the target table. Use this
+    /// setting when
+    /// `NestingLevel` is set to `"none"`.
     ///
-    /// Default value is `"false"`.
+    /// Set `ExtractDocId` to `true` when using
+    /// [multi-document
+    /// transactions](https://www.mongodb.com/docs/manual/reference/method/Session.startTransaction/#mongodb-method-Session.startTransaction)
+    /// with CDC.
+    ///
+    /// Default value is `false`.
     extract_doc_id: ?bool = null,
 
     /// The KMS key identifier that is used to encrypt the content on the

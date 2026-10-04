@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetContactListInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetContactListOutput {
-    var result: GetContactListOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetContactListOutput, body, allocator);
-    }
+    const result: GetContactListOutput = try aws.json.parseJsonObject(
+        GetContactListOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -9,7 +9,7 @@ const NewSessionDetails = @import("new_session_details.zig").NewSessionDetails;
 
 pub const SendChatIntegrationEventInput = struct {
     /// Chat system identifier, used in part to uniquely identify chat. This is
-    /// associated with the Amazon Connect
+    /// associated with the Connect Customer
     /// instance and flow to be used to start chats. For Server Migration Service,
     /// this is the phone number destination of inbound
     /// Server Migration Service messages represented by an Amazon Web Services End
@@ -135,10 +135,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendChatIntegrationEven
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SendChatIntegrationEventOutput {
-    var result: SendChatIntegrationEventOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SendChatIntegrationEventOutput, body, allocator);
-    }
+    const result: SendChatIntegrationEventOutput = try aws.json.parseJsonObject(
+        SendChatIntegrationEventOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

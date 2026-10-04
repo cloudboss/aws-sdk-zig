@@ -5,23 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetResourcePolicyInput = struct {
-    /// The Amazon Resource Name (ARN) of the service network or service.
-    resource_arn: []const u8,
+pub const GetResourcePolicyInput = @import("get_resource_policy_request.zig").GetResourcePolicyRequest;
 
-    pub const json_field_names = .{
-        .resource_arn = "resourceArn",
-    };
-};
-
-pub const GetResourcePolicyOutput = struct {
-    /// An IAM policy.
-    policy: ?[]const u8 = null,
-
-    pub const json_field_names = .{
-        .policy = "policy",
-    };
-};
+pub const GetResourcePolicyOutput = @import("get_resource_policy_response.zig").GetResourcePolicyResponse;
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResourcePolicyInput, options: CallOptions) !GetResourcePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -72,10 +58,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetResourcePolicyInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetResourcePolicyOutput {
-    var result: GetResourcePolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetResourcePolicyOutput, body, allocator);
-    }
+    const result: GetResourcePolicyOutput = try aws.json.parseJsonObject(
+        GetResourcePolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

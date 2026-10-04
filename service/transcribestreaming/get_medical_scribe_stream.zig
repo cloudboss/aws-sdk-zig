@@ -74,10 +74,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMedicalScribeStreamI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMedicalScribeStreamOutput {
-    var result: GetMedicalScribeStreamOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMedicalScribeStreamOutput, body, allocator);
-    }
+    const result: GetMedicalScribeStreamOutput = try aws.json.parseJsonObject(
+        GetMedicalScribeStreamOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

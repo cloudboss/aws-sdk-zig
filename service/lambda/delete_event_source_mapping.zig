@@ -79,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteEventSourceMappin
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteEventSourceMappingOutput {
-    var result: DeleteEventSourceMappingOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteEventSourceMappingOutput, body, allocator);
-    }
+    const result: DeleteEventSourceMappingOutput = try aws.json.parseJsonObject(
+        DeleteEventSourceMappingOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

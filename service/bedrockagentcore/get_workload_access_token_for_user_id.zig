@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetWorkloadAccessTokenF
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetWorkloadAccessTokenForUserIdOutput {
-    var result: GetWorkloadAccessTokenForUserIdOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetWorkloadAccessTokenForUserIdOutput, body, allocator);
-    }
+    const result: GetWorkloadAccessTokenForUserIdOutput = try aws.json.parseJsonObject(
+        GetWorkloadAccessTokenForUserIdOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -18,6 +18,12 @@ pub const OAuth2ErrorCode = enum {
     /// The request is missing a required parameter, includes an invalid parameter
     /// value, or is otherwise malformed
     invalid_request,
+    /// Requested resource was not found
+    resource_not_found,
+    /// Request conflicts with current state of the resource
+    conflict,
+    /// Request would cause a service quota to be exceeded
+    service_quota_exceeded,
 
     pub const json_field_names = .{
         .token_expired = "TOKEN_EXPIRED",
@@ -26,6 +32,9 @@ pub const OAuth2ErrorCode = enum {
         .authcode_expired = "AUTHCODE_EXPIRED",
         .server_error = "server_error",
         .invalid_request = "INVALID_REQUEST",
+        .resource_not_found = "RESOURCE_NOT_FOUND",
+        .conflict = "CONFLICT",
+        .service_quota_exceeded = "SERVICE_QUOTA_EXCEEDED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -36,6 +45,9 @@ pub const OAuth2ErrorCode = enum {
             .authcode_expired => "AUTHCODE_EXPIRED",
             .server_error => "server_error",
             .invalid_request => "INVALID_REQUEST",
+            .resource_not_found => "RESOURCE_NOT_FOUND",
+            .conflict => "CONFLICT",
+            .service_quota_exceeded => "SERVICE_QUOTA_EXCEEDED",
         };
     }
 

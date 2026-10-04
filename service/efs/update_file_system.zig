@@ -20,8 +20,8 @@ pub const UpdateFileSystemInput = struct {
     /// provision for a file system that you're creating. Required if
     /// `ThroughputMode`
     /// is set to `provisioned`. Valid values are 1-3414 MiBps, with the upper limit
-    /// depending on Region. To increase this limit, contact Amazon Web
-    /// ServicesSupport. For more information,
+    /// depending on Region. To increase this limit, contact Amazon Web Services
+    /// Support. For more information,
     /// see [Amazon EFS
     /// quotas that you can
     /// increase](https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits)
@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateFileSystemInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateFileSystemOutput {
-    var result: UpdateFileSystemOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateFileSystemOutput, body, allocator);
-    }
+    const result: UpdateFileSystemOutput = try aws.json.parseJsonObject(
+        UpdateFileSystemOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

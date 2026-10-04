@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPluginInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPluginOutput {
-    var result: GetPluginOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPluginOutput, body, allocator);
-    }
+    const result: GetPluginOutput = try aws.json.parseJsonObject(
+        GetPluginOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

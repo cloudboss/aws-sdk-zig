@@ -2,8 +2,8 @@
 /// operation.
 pub const BatchPutTaxRegistrationError = struct {
     /// The unique account identifier for the account that the tax registration
-    /// couldn't be
-    /// added, or updated during the `BatchPutTaxRegistration` operation.
+    /// couldn't be added, or updated during the `BatchPutTaxRegistration`
+    /// operation.
     account_id: []const u8,
 
     /// The error code for an individual failure in the `BatchPutTaxRegistration`

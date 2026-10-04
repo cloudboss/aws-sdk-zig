@@ -1,9 +1,11 @@
 const LogType = @import("log_type.zig").LogType;
 
-/// Configuration parameters for Amazon Bedrock AgentCore logging, including
-/// `logType` settings.
+/// The configuration parameters for log delivery, including `logType` settings.
+/// Applies to resource types that support configurable log delivery, such as
+/// Amazon Bedrock Knowledge Bases, Amazon Bedrock AgentCore payment managers,
+/// and Elastic Load Balancing Application Load Balancers.
 pub const LogDeliveryParameters = struct {
-    /// The type of log that the source is sending.
+    /// The types of logs to collect from the resource.
     log_types: ?[]const LogType = null,
 
     pub const json_field_names = .{

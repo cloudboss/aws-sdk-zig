@@ -1,9 +1,7 @@
 /// How to pronounce the various components of the address or place.
 pub const PhonemeTranscription = struct {
-    /// A list of [BCP 47](https://en.wikipedia.org/wiki/IETF_language_tag)
-    /// compliant language codes for the results to be rendered in. If there is no
-    /// data for the result in the requested language, data will be returned in the
-    /// default language for the entry.
+    /// A list of [BCP
+    /// 47](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry) compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.
     language: ?[]const u8 = null,
 
     /// Boolean which indicates if it the preferred pronunciation.

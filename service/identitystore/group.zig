@@ -25,11 +25,23 @@ pub const Group = struct {
     /// resource by an external identity provider.
     external_ids: ?[]const ExternalId = null,
 
+    /// The Amazon Resource Name (ARN) of the group in the identity store. For
+    /// example,
+    /// `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
+    group_arn: []const u8,
+
     /// The identifier for a group in the identity store.
     group_id: []const u8,
 
     /// The globally unique identifier for the identity store.
     identity_store_id: []const u8,
+
+    /// The current revision of the group in the identity store. This value changes
+    /// each time the group is modified. You can provide it as the `Revision`
+    /// parameter of an `UpdateGroup` or `DeleteGroup` request to make the operation
+    /// conditional on the group not having changed. Treat this value as an opaque
+    /// token: don't parse it or rely on its format or ordering.
+    revision: []const u8,
 
     /// The date and time the group was last updated.
     updated_at: ?i64 = null,
@@ -43,8 +55,10 @@ pub const Group = struct {
         .description = "Description",
         .display_name = "DisplayName",
         .external_ids = "ExternalIds",
+        .group_arn = "GroupArn",
         .group_id = "GroupId",
         .identity_store_id = "IdentityStoreId",
+        .revision = "Revision",
         .updated_at = "UpdatedAt",
         .updated_by = "UpdatedBy",
     };

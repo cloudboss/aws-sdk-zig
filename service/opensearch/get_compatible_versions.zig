@@ -85,10 +85,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCompatibleVersionsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCompatibleVersionsOutput {
-    var result: GetCompatibleVersionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCompatibleVersionsOutput, body, allocator);
-    }
+    const result: GetCompatibleVersionsOutput = try aws.json.parseJsonObject(
+        GetCompatibleVersionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

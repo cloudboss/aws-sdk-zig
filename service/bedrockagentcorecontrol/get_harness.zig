@@ -10,8 +10,13 @@ pub const GetHarnessInput = struct {
     /// The ID of the harness to retrieve.
     harness_id: []const u8,
 
+    /// Specific version of the harness to retrieve. If omitted, returns the current
+    /// Harness configuration, including its status.
+    harness_version: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .harness_id = "harnessId",
+        .harness_version = "harnessVersion",
     };
 };
 
@@ -59,6 +64,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetHarnessInput, config
     try path_buf.appendSlice(allocator, input.harness_id);
     const path = try path_buf.toOwnedSlice(allocator);
 
+    var query_buf: std.ArrayList(u8) = .empty;
+    var query_has_prev = false;
+    if (input.harness_version) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "harnessVersion=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
+    const query = try query_buf.toOwnedSlice(allocator);
+
     const body: ?[]const u8 = null;
 
     var request = aws.http.Request.init(ep.host);
@@ -67,16 +82,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetHarnessInput, config
     request.tls = ep.tls;
     request.port = ep.port;
     request.body = body;
+    request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetHarnessOutput {
-    var result: GetHarnessOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetHarnessOutput, body, allocator);
-    }
+    const result: GetHarnessOutput = try aws.json.parseJsonObject(
+        GetHarnessOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -19,9 +19,7 @@ pub const ContainerProperties = struct {
     /// The command that's passed to the container. This parameter maps to `Cmd` in
     /// the
     /// [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/) and the `COMMAND`
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker Remote API](https://docs.docker.com/engine/api/latest/) and the `COMMAND`
     /// parameter to [docker run](https://docs.docker.com/engine/reference/run/).
     /// For more information, see
     /// [https://docs.docker.com/engine/reference/builder/#cmd](https://docs.docker.com/engine/reference/builder/#cmd).
@@ -35,9 +33,7 @@ pub const ContainerProperties = struct {
     /// The environment variables to pass to a container. This parameter maps to
     /// `Env` in
     /// the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/) and the
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker Remote API](https://docs.docker.com/engine/api/latest/) and the
     /// `--env` option to [docker
     /// run](https://docs.docker.com/engine/reference/run/).
     ///
@@ -82,9 +78,7 @@ pub const ContainerProperties = struct {
     /// hyphens (-), underscores (_), colons (:), periods (.), forward slashes (/),
     /// and number signs (#). This parameter maps to `Image` in the
     /// [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/) and the `IMAGE`
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker Remote API](https://docs.docker.com/engine/api/latest/) and the `IMAGE`
     /// parameter of [docker run](https://docs.docker.com/engine/reference/run/).
     ///
     /// Docker image architecture must match the processor architecture of the
@@ -140,9 +134,9 @@ pub const ContainerProperties = struct {
     /// The log configuration specification for the container.
     ///
     /// This parameter maps to `LogConfig` in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate)
     /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/) and the `--log-driver`
+    /// API](https://docs.docker.com/engine/api/latest/) and the `--log-driver`
     /// option to [docker run](https://docs.docker.com/engine/reference/run/). By
     /// default, containers use the same logging
     /// driver that the Docker daemon uses. However the container might use a
@@ -196,9 +190,7 @@ pub const ContainerProperties = struct {
 
     /// The mount points for data volumes in your container. This parameter maps to
     /// `Volumes` in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/)
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker Remote API](https://docs.docker.com/engine/api/latest/)
     /// and the `--volume` option to [docker
     /// run](https://docs.docker.com/engine/reference/run/).
     mount_points: ?[]const MountPoint = null,
@@ -212,9 +204,8 @@ pub const ContainerProperties = struct {
     /// the host
     /// container instance (similar to the `root` user). This parameter maps to
     /// `Privileged` in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the
-    /// [Docker Remote API](https://docs.docker.com/engine/api/v1.23/) and the
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the
+    /// [Docker Remote API](https://docs.docker.com/engine/api/latest/) and the
     /// `--privileged` option to [docker
     /// run](https://docs.docker.com/engine/reference/run/). The default value is
     /// false.
@@ -228,9 +219,7 @@ pub const ContainerProperties = struct {
     /// root file
     /// system. This parameter maps to `ReadonlyRootfs` in the
     /// [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/) and the
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker Remote API](https://docs.docker.com/engine/api/latest/) and the
     /// `--read-only` option to `docker run`.
     readonly_root_filesystem: ?bool = null,
 
@@ -255,9 +244,7 @@ pub const ContainerProperties = struct {
 
     /// A list of `ulimits` to set in the container. This parameter maps to
     /// `Ulimits` in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/)
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker Remote API](https://docs.docker.com/engine/api/latest/)
     /// and the `--ulimit` option to [docker
     /// run](https://docs.docker.com/engine/reference/run/).
     ///
@@ -269,9 +256,7 @@ pub const ContainerProperties = struct {
     /// The user name to use inside the container. This parameter maps to `User` in
     /// the
     /// [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/) and the `--user`
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker Remote API](https://docs.docker.com/engine/api/latest/) and the `--user`
     /// option to [docker run](https://docs.docker.com/engine/reference/run/).
     user: ?[]const u8 = null,
 
@@ -285,9 +270,7 @@ pub const ContainerProperties = struct {
     /// Each vCPU is equivalent to 1,024 CPU shares. This parameter maps to
     /// `CpuShares`
     /// in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/) and the
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker Remote API](https://docs.docker.com/engine/api/latest/) and the
     /// `--cpu-shares` option to [docker
     /// run](https://docs.docker.com/engine/reference/run/). The
     /// number of vCPUs must be specified but can be specified in several places.

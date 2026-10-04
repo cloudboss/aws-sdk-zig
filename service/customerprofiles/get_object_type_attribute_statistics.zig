@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetObjectTypeAttributeS
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetObjectTypeAttributeStatisticsOutput {
-    var result: GetObjectTypeAttributeStatisticsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetObjectTypeAttributeStatisticsOutput, body, allocator);
-    }
+    const result: GetObjectTypeAttributeStatisticsOutput = try aws.json.parseJsonObject(
+        GetObjectTypeAttributeStatisticsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

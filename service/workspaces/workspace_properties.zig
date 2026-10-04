@@ -13,6 +13,13 @@ pub const WorkspaceProperties = struct {
     /// Indicates the Global Accelerator properties.
     global_accelerator: ?GlobalAcceleratorForWorkSpace = null,
 
+    /// Specifies whether nested virtualization is enabled for the WorkSpace.
+    ///
+    /// For more information, see [Nested virtualization
+    /// for Amazon
+    /// WorkSpaces](https://docs.aws.amazon.com/workspaces/latest/adminguide/nested-virtualization.html).
+    nested_virtualization_enabled: ?bool = null,
+
     /// The name of the operating system.
     operating_system_name: ?OperatingSystemName = null,
 
@@ -28,7 +35,8 @@ pub const WorkspaceProperties = struct {
     ///
     /// * Unavailable for Windows 7 WorkSpaces and WorkSpaces using GPU-based
     ///   bundles
-    /// (Graphics, GraphicsPro, Graphics.g4dn, and GraphicsPro.g4dn).
+    /// (Graphics, GraphicsPro, Graphics.g4dn, GraphicsPro.g4dn, Graphics.g6, and
+    /// Graphics.g7).
     protocols: ?[]const Protocol = null,
 
     /// The size of the root volume. For important information about how to modify
@@ -66,6 +74,7 @@ pub const WorkspaceProperties = struct {
     pub const json_field_names = .{
         .compute_type_name = "ComputeTypeName",
         .global_accelerator = "GlobalAccelerator",
+        .nested_virtualization_enabled = "NestedVirtualizationEnabled",
         .operating_system_name = "OperatingSystemName",
         .protocols = "Protocols",
         .root_volume_size_gib = "RootVolumeSizeGib",

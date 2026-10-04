@@ -12,21 +12,25 @@ pub const ListImageScanFindingsInput = struct {
     /// can use the
     /// following filters to streamline results:
     ///
-    /// * `imageBuildVersionArn`
+    /// * `imageBuildVersionArn` – Filters findings by the
+    /// image build version that was scanned.
     ///
-    /// * `imagePipelineArn`
+    /// * `imagePipelineArn` – Filters findings by the
+    /// pipeline that created the scanned image.
     ///
-    /// * `vulnerabilityId`
+    /// * `vulnerabilityId` – Filters findings by
+    /// vulnerability ID, for example a CVE ID.
     ///
-    /// * `severity`
+    /// * `severity` – Filters findings by severity
+    /// level.
     ///
     /// If you don't request a filter, then all findings in your account are listed.
     filters: ?[]const ImageScanFindingsFilter = null,
 
-    /// Specify the maximum number of items to return in a request.
+    /// The maximum number of items to return in a single request.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
@@ -128,10 +132,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListImageScanFindingsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListImageScanFindingsOutput {
-    var result: ListImageScanFindingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListImageScanFindingsOutput, body, allocator);
-    }
+    const result: ListImageScanFindingsOutput = try aws.json.parseJsonObject(
+        ListImageScanFindingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

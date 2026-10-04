@@ -75,6 +75,12 @@ pub const DescribeOptimizationJobOutput = struct {
 
     stopping_condition: ?StoppingCondition = null,
 
+    /// The Amazon Resource Name (ARN) of the training plan associated with this
+    /// optimization job. This field appears only when you specified a training plan
+    /// when you created the job. Optimization jobs that use on-demand capacity
+    /// don't return this field.
+    training_plan_arns: ?[]const []const u8 = null,
+
     /// A VPC in Amazon VPC that your optimized model has access to.
     vpc_config: ?OptimizationVpcConfig = null,
 
@@ -96,6 +102,7 @@ pub const DescribeOptimizationJobOutput = struct {
         .output_config = "OutputConfig",
         .role_arn = "RoleArn",
         .stopping_condition = "StoppingCondition",
+        .training_plan_arns = "TrainingPlanArns",
         .vpc_config = "VpcConfig",
     };
 };

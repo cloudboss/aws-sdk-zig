@@ -12,7 +12,7 @@ pub const CreateSegmentSnapshotInput = struct {
 
     /// The destination to which the segment will be exported. This field must be
     /// provided if
-    /// the request is not submitted from the Amazon Connect Admin Website.
+    /// the request is not submitted from the Connect Customer Admin Website.
     destination_uri: ?[]const u8 = null,
 
     /// The unique name of the domain.
@@ -129,10 +129,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSegmentSnapshotIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateSegmentSnapshotOutput {
-    var result: CreateSegmentSnapshotOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateSegmentSnapshotOutput, body, allocator);
-    }
+    const result: CreateSegmentSnapshotOutput = try aws.json.parseJsonObject(
+        CreateSegmentSnapshotOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

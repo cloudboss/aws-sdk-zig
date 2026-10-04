@@ -9,11 +9,11 @@ const CaseDetails = @import("case_details.zig").CaseDetails;
 pub const DescribeCasesInput = struct {
     /// The start date for a filtered date search on support case communications.
     /// Case
-    /// communications are available for 12 months after creation.
+    /// communications are available for 24 months after creation.
     after_time: ?[]const u8 = null,
 
     /// The end date for a filtered date search on support case communications. Case
-    /// communications are available for 12 months after creation.
+    /// communications are available for 24 months after creation.
     before_time: ?[]const u8 = null,
 
     /// A list of ID numbers of the support cases you want returned. The maximum
@@ -25,6 +25,14 @@ pub const DescribeCasesInput = struct {
     /// interface.
     display_id: ?[]const u8 = null,
 
+    /// Specifies whether to validate the request without actually returning case
+    /// data. When set
+    /// to `true`, the request is validated but no cases are returned, and the
+    /// operation
+    /// returns a `DryRunOperationException`. When omitted or set to `false`, the
+    /// request runs normally.
+    dry_run: ?bool = null,
+
     /// Specifies whether to include communications in the `DescribeCases`
     /// response. By default, communications are included.
     include_communications: ?bool = null,
@@ -35,8 +43,9 @@ pub const DescribeCasesInput = struct {
 
     /// The language in which Amazon Web Services Support handles the case. Amazon
     /// Web Services Support
-    /// currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and
-    /// Korean (“ko”). You must specify the ISO 639-1
+    /// currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese
+    /// ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and
+    /// Turkish ("tr"). You must specify the ISO 639-1
     /// code for the `language` parameter if you want support in that language.
     language: ?[]const u8 = null,
 
@@ -51,6 +60,7 @@ pub const DescribeCasesInput = struct {
         .before_time = "beforeTime",
         .case_id_list = "caseIdList",
         .display_id = "displayId",
+        .dry_run = "dryRun",
         .include_communications = "includeCommunications",
         .include_resolved_cases = "includeResolvedCases",
         .language = "language",

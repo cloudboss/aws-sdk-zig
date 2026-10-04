@@ -121,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListWorkspaceServiceAcc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListWorkspaceServiceAccountTokensOutput {
-    var result: ListWorkspaceServiceAccountTokensOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListWorkspaceServiceAccountTokensOutput, body, allocator);
-    }
+    const result: ListWorkspaceServiceAccountTokensOutput = try aws.json.parseJsonObject(
+        ListWorkspaceServiceAccountTokensOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListVpcEndpointsForDoma
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListVpcEndpointsForDomainOutput {
-    var result: ListVpcEndpointsForDomainOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListVpcEndpointsForDomainOutput, body, allocator);
-    }
+    const result: ListVpcEndpointsForDomainOutput = try aws.json.parseJsonObject(
+        ListVpcEndpointsForDomainOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

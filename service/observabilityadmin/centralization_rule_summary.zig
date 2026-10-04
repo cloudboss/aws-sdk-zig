@@ -1,8 +1,17 @@
+const ContextGraphStatus = @import("context_graph_status.zig").ContextGraphStatus;
 const CentralizationFailureReason = @import("centralization_failure_reason.zig").CentralizationFailureReason;
 const RuleHealth = @import("rule_health.zig").RuleHealth;
+const TagPropagationFailureReason = @import("tag_propagation_failure_reason.zig").TagPropagationFailureReason;
+const TagPropagationStatus = @import("tag_propagation_status.zig").TagPropagationStatus;
 
 /// A summary of a centralization rule's key properties and status.
 pub const CentralizationRuleSummary = struct {
+    /// The status of context graph centralization for this rule. Returns
+    /// `Provisioning` while the context graph is being set up, `Healthy` once it is
+    /// active, or `Unhealthy` if provisioning failed. This status is independent of
+    /// the overall `RuleHealth` for log delivery.
+    context_graph_status: ?ContextGraphStatus = null,
+
     /// The Amazon Web Services region where the organization centralization rule
     /// was created.
     created_region: ?[]const u8 = null,
@@ -35,7 +44,18 @@ pub const CentralizationRuleSummary = struct {
     /// The name of the organization centralization rule.
     rule_name: ?[]const u8 = null,
 
+    /// The reason tag propagation is unhealthy for this rule. Only present when
+    /// `TagPropagationStatus` is `Unhealthy`.
+    tag_propagation_failure_reason: ?TagPropagationFailureReason = null,
+
+    /// The health status of tag propagation for this rule. This status is
+    /// independent of the overall `RuleHealth` for log delivery. Returns `Healthy`
+    /// when the most recent tag-propagation attempt succeeded, or `Unhealthy` when
+    /// the most recent attempt failed.
+    tag_propagation_status: ?TagPropagationStatus = null,
+
     pub const json_field_names = .{
+        .context_graph_status = "ContextGraphStatus",
         .created_region = "CreatedRegion",
         .created_time_stamp = "CreatedTimeStamp",
         .creator_account_id = "CreatorAccountId",
@@ -46,5 +66,7 @@ pub const CentralizationRuleSummary = struct {
         .rule_arn = "RuleArn",
         .rule_health = "RuleHealth",
         .rule_name = "RuleName",
+        .tag_propagation_failure_reason = "TagPropagationFailureReason",
+        .tag_propagation_status = "TagPropagationStatus",
     };
 };

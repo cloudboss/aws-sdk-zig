@@ -4,12 +4,15 @@ const CvssScoreAdjustment = @import("cvss_score_adjustment.zig").CvssScoreAdjust
 /// adjustments
 /// to create the final score.
 pub const CvssScoreDetails = struct {
-    /// An object that contains details about an adjustment that Amazon Inspector
-    /// made to the CVSS score
-    /// for the finding.
+    /// The adjustments that Amazon Inspector applied to the base CVSS score to
+    /// produce its own
+    /// score for the finding. The list is empty when Amazon Inspector made no
+    /// adjustments.
     adjustments: ?[]const CvssScoreAdjustment = null,
 
-    /// The source of the finding.
+    /// The source of the CVSS data that the Amazon Inspector score for the finding
+    /// is based
+    /// on, for example NVD or a vendor security feed.
     cvss_source: ?[]const u8 = null,
 
     /// The CVSS score.

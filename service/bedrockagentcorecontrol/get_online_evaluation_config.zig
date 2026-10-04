@@ -4,9 +4,11 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const ClusteringConfig = @import("clustering_config.zig").ClusteringConfig;
 const DataSourceConfig = @import("data_source_config.zig").DataSourceConfig;
 const EvaluatorReference = @import("evaluator_reference.zig").EvaluatorReference;
 const OnlineEvaluationExecutionStatus = @import("online_evaluation_execution_status.zig").OnlineEvaluationExecutionStatus;
+const Insight = @import("insight.zig").Insight;
 const OutputConfig = @import("output_config.zig").OutputConfig;
 const Rule = @import("rule.zig").Rule;
 const OnlineEvaluationConfigStatus = @import("online_evaluation_config_status.zig").OnlineEvaluationConfigStatus;
@@ -21,6 +23,9 @@ pub const GetOnlineEvaluationConfigInput = struct {
 };
 
 pub const GetOnlineEvaluationConfigOutput = struct {
+    /// The clustering configuration for periodic batch evaluation.
+    clustering_config: ?ClusteringConfig = null,
+
     /// The timestamp when the online evaluation configuration was created.
     created_at: i64,
 
@@ -46,6 +51,9 @@ pub const GetOnlineEvaluationConfigOutput = struct {
     /// failed.
     failure_reason: ?[]const u8 = null,
 
+    /// The list of insight types configured for this evaluation.
+    insights: ?[]const Insight = null,
+
     /// The Amazon Resource Name (ARN) of the online evaluation configuration.
     online_evaluation_config_arn: []const u8,
 
@@ -69,6 +77,7 @@ pub const GetOnlineEvaluationConfigOutput = struct {
     updated_at: i64,
 
     pub const json_field_names = .{
+        .clustering_config = "clusteringConfig",
         .created_at = "createdAt",
         .data_source_config = "dataSourceConfig",
         .description = "description",
@@ -76,6 +85,7 @@ pub const GetOnlineEvaluationConfigOutput = struct {
         .evaluators = "evaluators",
         .execution_status = "executionStatus",
         .failure_reason = "failureReason",
+        .insights = "insights",
         .online_evaluation_config_arn = "onlineEvaluationConfigArn",
         .online_evaluation_config_id = "onlineEvaluationConfigId",
         .online_evaluation_config_name = "onlineEvaluationConfigName",
@@ -135,10 +145,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetOnlineEvaluationConf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetOnlineEvaluationConfigOutput {
-    var result: GetOnlineEvaluationConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetOnlineEvaluationConfigOutput, body, allocator);
-    }
+    const result: GetOnlineEvaluationConfigOutput = try aws.json.parseJsonObject(
+        GetOnlineEvaluationConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

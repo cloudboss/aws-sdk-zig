@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Certificate = @import("certificate.zig").Certificate;
+const ToolsFileSystemConfiguration = @import("tools_file_system_configuration.zig").ToolsFileSystemConfiguration;
 
 pub const StartCodeInterpreterSessionInput = struct {
     /// A list of certificates to install in the code interpreter session.
@@ -21,6 +22,13 @@ pub const StartCodeInterpreterSessionInput = struct {
     /// identifier specifies which code interpreter environment to initialize for
     /// the session.
     code_interpreter_identifier: []const u8,
+
+    /// The file system configurations to mount into the code interpreter session.
+    /// Use these configurations to mount your own Amazon Simple Storage Service
+    /// (Amazon S3) Files or Amazon Elastic File System (Amazon EFS) access points.
+    /// Your session can then read and write your data. If you don't specify this
+    /// field, no additional file systems are mounted.
+    filesystem_configurations: ?[]const ToolsFileSystemConfiguration = null,
 
     /// The name of the code interpreter session. This name helps you identify and
     /// manage the session. The name does not need to be unique.
@@ -42,6 +50,7 @@ pub const StartCodeInterpreterSessionInput = struct {
         .certificates = "certificates",
         .client_token = "clientToken",
         .code_interpreter_identifier = "codeInterpreterIdentifier",
+        .filesystem_configurations = "filesystemConfigurations",
         .name = "name",
         .session_timeout_seconds = "sessionTimeoutSeconds",
         .trace_id = "traceId",
@@ -118,6 +127,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartCodeInterpreterSes
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.filesystem_configurations) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"filesystemConfigurations\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.name) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"name\":");
@@ -152,10 +167,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartCodeInterpreterSes
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartCodeInterpreterSessionOutput {
-    var result: StartCodeInterpreterSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartCodeInterpreterSessionOutput, body, allocator);
-    }
+    const result: StartCodeInterpreterSessionOutput = try aws.json.parseJsonObject(
+        StartCodeInterpreterSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

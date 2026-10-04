@@ -7,14 +7,17 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ComponentSummary = @import("component_summary.zig").ComponentSummary;
 
 pub const ListComponentBuildVersionsInput = struct {
-    /// The component version Amazon Resource Name (ARN) whose versions you want to
-    /// list.
+    /// The component version ARN whose build versions you want to list. The ARN
+    /// must specify an exact version, without a build number suffix. If you
+    /// don't specify an ARN, Image Builder returns build versions for the
+    /// components
+    /// that your account owns.
     component_version_arn: ?[]const u8 = null,
 
-    /// Specify the maximum number of items to return in a request.
+    /// The maximum number of items to return in a single request.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
@@ -26,7 +29,10 @@ pub const ListComponentBuildVersionsInput = struct {
 };
 
 pub const ListComponentBuildVersionsOutput = struct {
-    /// The list of component summaries for the specified semantic version.
+    /// The list of component summaries. Each summary represents one build version
+    /// of the specified component version, or of the components that your account
+    /// owns if you didn't specify an ARN. Deprecated build versions aren't
+    /// included.
     component_summary_list: ?[]const ComponentSummary = null,
 
     /// The next token used for paginated responses. When this field isn't empty,
@@ -115,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListComponentBuildVersi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListComponentBuildVersionsOutput {
-    var result: ListComponentBuildVersionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListComponentBuildVersionsOutput, body, allocator);
-    }
+    const result: ListComponentBuildVersionsOutput = try aws.json.parseJsonObject(
+        ListComponentBuildVersionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

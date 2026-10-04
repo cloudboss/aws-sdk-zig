@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePortalProductInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePortalProductOutput {
-    var result: CreatePortalProductOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePortalProductOutput, body, allocator);
-    }
+    const result: CreatePortalProductOutput = try aws.json.parseJsonObject(
+        CreatePortalProductOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

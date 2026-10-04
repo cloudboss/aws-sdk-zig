@@ -1,4 +1,5 @@
 const FieldToMatch = @import("field_to_match.zig").FieldToMatch;
+const PreParseTextTransformation = @import("pre_parse_text_transformation.zig").PreParseTextTransformation;
 const TextTransformation = @import("text_transformation.zig").TextTransformation;
 
 /// A rule statement used to search web request components for matches with
@@ -20,6 +21,15 @@ pub const RegexPatternSetReferenceStatement = struct {
     /// The part of the web request that you want WAF to inspect.
     field_to_match: FieldToMatch,
 
+    /// Pre-parse text transformations normalize the raw query string before WAF
+    /// parses it into individual
+    /// query arguments. They are applied before the standard text transformations.
+    /// Pre-parse text transformations
+    /// are only supported when `FieldToMatch` is `SingleQueryArgument` or
+    /// `AllQueryArguments`. You can specify up to 10 pre-parse text transformations
+    /// per rule statement.
+    pre_parse_text_transformations: ?[]const PreParseTextTransformation = null,
+
     /// Text transformations eliminate some of the unusual formatting that attackers
     /// use in web requests in an effort to bypass detection. Text transformations
     /// are used in rule match statements, to transform the `FieldToMatch` request
@@ -33,6 +43,7 @@ pub const RegexPatternSetReferenceStatement = struct {
     pub const json_field_names = .{
         .arn = "ARN",
         .field_to_match = "FieldToMatch",
+        .pre_parse_text_transformations = "PreParseTextTransformations",
         .text_transformations = "TextTransformations",
     };
 };

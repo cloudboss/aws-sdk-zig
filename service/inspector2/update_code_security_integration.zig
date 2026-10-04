@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateCodeSecurityInteg
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateCodeSecurityIntegrationOutput {
-    var result: UpdateCodeSecurityIntegrationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateCodeSecurityIntegrationOutput, body, allocator);
-    }
+    const result: UpdateCodeSecurityIntegrationOutput = try aws.json.parseJsonObject(
+        UpdateCodeSecurityIntegrationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

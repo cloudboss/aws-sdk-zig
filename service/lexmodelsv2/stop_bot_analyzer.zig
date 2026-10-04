@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StopBotAnalyzerInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StopBotAnalyzerOutput {
-    var result: StopBotAnalyzerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StopBotAnalyzerOutput, body, allocator);
-    }
+    const result: StopBotAnalyzerOutput = try aws.json.parseJsonObject(
+        StopBotAnalyzerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

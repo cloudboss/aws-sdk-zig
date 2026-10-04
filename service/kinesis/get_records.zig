@@ -8,6 +8,10 @@ const ChildShard = @import("child_shard.zig").ChildShard;
 const Record = @import("record.zig").Record;
 
 pub const GetRecordsInput = struct {
+    /// Checks if your request will succeed. `DryRun` is an optional
+    /// parameter.
+    dry_run: ?bool = null,
+
     /// The maximum number of records to return. Specify a value of up to 10,000. If
     /// you
     /// specify a value that is greater than 10,000, GetRecords throws
@@ -28,6 +32,7 @@ pub const GetRecordsInput = struct {
     stream_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .dry_run = "DryRun",
         .limit = "Limit",
         .shard_iterator = "ShardIterator",
         .stream_arn = "StreamARN",

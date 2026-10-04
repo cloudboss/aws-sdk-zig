@@ -149,10 +149,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCommentInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCommentOutput {
-    var result: CreateCommentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCommentOutput, body, allocator);
-    }
+    const result: CreateCommentOutput = try aws.json.parseJsonObject(
+        CreateCommentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

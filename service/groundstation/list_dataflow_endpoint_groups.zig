@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDataflowEndpointGro
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListDataflowEndpointGroupsOutput {
-    var result: ListDataflowEndpointGroupsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListDataflowEndpointGroupsOutput, body, allocator);
-    }
+    const result: ListDataflowEndpointGroupsOutput = try aws.json.parseJsonObject(
+        ListDataflowEndpointGroupsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterSlackWorkspaceF
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RegisterSlackWorkspaceForOrganizationOutput {
-    var result: RegisterSlackWorkspaceForOrganizationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RegisterSlackWorkspaceForOrganizationOutput, body, allocator);
-    }
+    const result: RegisterSlackWorkspaceForOrganizationOutput = try aws.json.parseJsonObject(
+        RegisterSlackWorkspaceForOrganizationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -16,6 +16,11 @@ pub const NodeFilterKey = enum {
     organizational_unit_path,
     region,
     account_id,
+    source_type,
+    source_id,
+    source_location,
+    availability_zone,
+    availability_zone_id,
 
     pub const json_field_names = .{
         .agent_type = "AgentType",
@@ -33,6 +38,11 @@ pub const NodeFilterKey = enum {
         .organizational_unit_path = "OrganizationalUnitPath",
         .region = "Region",
         .account_id = "AccountId",
+        .source_type = "SourceType",
+        .source_id = "SourceId",
+        .source_location = "SourceLocation",
+        .availability_zone = "AvailabilityZone",
+        .availability_zone_id = "AvailabilityZoneId",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -52,6 +62,11 @@ pub const NodeFilterKey = enum {
             .organizational_unit_path => "OrganizationalUnitPath",
             .region => "Region",
             .account_id => "AccountId",
+            .source_type => "SourceType",
+            .source_id => "SourceId",
+            .source_location => "SourceLocation",
+            .availability_zone => "AvailabilityZone",
+            .availability_zone_id => "AvailabilityZoneId",
         };
     }
 

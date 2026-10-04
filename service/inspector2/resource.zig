@@ -1,6 +1,7 @@
 const aws = @import("aws");
 
 const ResourceDetails = @import("resource_details.zig").ResourceDetails;
+const Provider = @import("provider.zig").Provider;
 const ResourceType = @import("resource_type.zig").ResourceType;
 
 /// Details about the resource involved in a finding.
@@ -13,6 +14,15 @@ pub const Resource = struct {
 
     /// The partition of the resource.
     partition: ?[]const u8 = null,
+
+    /// The cloud provider of the resource.
+    provider: ?Provider = null,
+
+    /// The cloud provider account ID of the resource.
+    provider_account_id: ?[]const u8 = null,
+
+    /// The cloud provider organization ID of the resource.
+    provider_org_id: ?[]const u8 = null,
 
     /// The Amazon Web Services Region the impacted resource is located in.
     region: ?[]const u8 = null,
@@ -27,6 +37,9 @@ pub const Resource = struct {
         .details = "details",
         .id = "id",
         .partition = "partition",
+        .provider = "provider",
+        .provider_account_id = "providerAccountId",
+        .provider_org_id = "providerOrgId",
         .region = "region",
         .tags = "tags",
         .@"type" = "type",

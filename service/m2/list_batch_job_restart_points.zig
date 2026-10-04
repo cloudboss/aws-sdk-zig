@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListBatchJobRestartPoin
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListBatchJobRestartPointsOutput {
-    var result: ListBatchJobRestartPointsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListBatchJobRestartPointsOutput, body, allocator);
-    }
+    const result: ListBatchJobRestartPointsOutput = try aws.json.parseJsonObject(
+        ListBatchJobRestartPointsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

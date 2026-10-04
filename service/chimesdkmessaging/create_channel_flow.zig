@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateChannelFlowInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateChannelFlowOutput {
-    var result: CreateChannelFlowOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateChannelFlowOutput, body, allocator);
-    }
+    const result: CreateChannelFlowOutput = try aws.json.parseJsonObject(
+        CreateChannelFlowOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -7,24 +7,38 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const WorkflowStepActionType = @import("workflow_step_action_type.zig").WorkflowStepActionType;
 
 pub const SendWorkflowStepActionInput = struct {
-    /// The action for the image creation process to take while a workflow
-    /// `WaitForAction` step waits for an asynchronous action to complete.
+    /// The action to perform on the paused workflow step.
+    /// `RESUME` completes the waiting step, and the workflow continues.
+    /// `STOP` fails the step, and the step's `onFailure`
+    /// setting determines whether the workflow continues or aborts. The workflow
+    /// step must be in a waiting state to accept an action. The request fails if
+    /// the step has already timed out or been actioned.
     action: WorkflowStepActionType,
 
-    /// Unique, case-sensitive identifier you provide to ensure
-    /// idempotency of the request. For more information, see [Ensuring
+    /// A unique, case-sensitive identifier you provide to ensure
+    /// that the operation runs no more than one time. If you retry a request with
+    /// the same client
+    /// token, Image Builder returns the original response without running the
+    /// operation again. For more
+    /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
     /// in the *Amazon EC2 API Reference*.
     client_token: []const u8,
 
-    /// The Amazon Resource Name (ARN) of the image build version to send action
-    /// for.
+    /// The Amazon Resource Name (ARN) of the image build version associated with
+    /// the workflow
+    /// step execution. This value must match the image that owns the waiting step.
+    /// If the ARN does not correspond to the image running the workflow,
+    /// then the request fails with a validation error.
     image_build_version_arn: []const u8,
 
-    /// The reason why this action is sent.
+    /// The reason for the action. This value is stored with the step
+    /// execution record and is accessible in subsequent workflow steps
+    /// via step output references.
     reason: ?[]const u8 = null,
 
-    /// Uniquely identifies the workflow step that sent the step action.
+    /// Uniquely identifies the waiting workflow step that you send the action to.
+    /// To get this identifier, call ListWaitingWorkflowSteps.
     step_execution_id: []const u8,
 
     pub const json_field_names = .{
@@ -45,7 +59,8 @@ pub const SendWorkflowStepActionOutput = struct {
     /// request.
     image_build_version_arn: ?[]const u8 = null,
 
-    /// The workflow step that sent the step action.
+    /// The unique identifier for the workflow step that received the action, as
+    /// specified in the request.
     step_execution_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -129,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendWorkflowStepActionI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SendWorkflowStepActionOutput {
-    var result: SendWorkflowStepActionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SendWorkflowStepActionOutput, body, allocator);
-    }
+    const result: SendWorkflowStepActionOutput = try aws.json.parseJsonObject(
+        SendWorkflowStepActionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

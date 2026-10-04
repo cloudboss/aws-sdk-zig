@@ -77,10 +77,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeBackupPolicyInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeBackupPolicyOutput {
-    var result: DescribeBackupPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeBackupPolicyOutput, body, allocator);
-    }
+    const result: DescribeBackupPolicyOutput = try aws.json.parseJsonObject(
+        DescribeBackupPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

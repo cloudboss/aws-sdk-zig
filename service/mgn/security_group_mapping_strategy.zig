@@ -3,16 +3,19 @@ const std = @import("std");
 pub const SecurityGroupMappingStrategy = enum {
     map,
     skip,
+    map_dhcp,
 
     pub const json_field_names = .{
         .map = "MAP",
         .skip = "SKIP",
+        .map_dhcp = "MAP_DHCP",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .map => "MAP",
             .skip => "SKIP",
+            .map_dhcp => "MAP_DHCP",
         };
     }
 

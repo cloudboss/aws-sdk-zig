@@ -120,10 +120,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSceneInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSceneOutput {
-    var result: GetSceneOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSceneOutput, body, allocator);
-    }
+    const result: GetSceneOutput = try aws.json.parseJsonObject(
+        GetSceneOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

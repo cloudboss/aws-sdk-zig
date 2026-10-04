@@ -152,10 +152,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetImageSetInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetImageSetOutput {
-    var result: GetImageSetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetImageSetOutput, body, allocator);
-    }
+    const result: GetImageSetOutput = try aws.json.parseJsonObject(
+        GetImageSetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

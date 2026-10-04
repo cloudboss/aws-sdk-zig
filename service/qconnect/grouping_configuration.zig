@@ -13,7 +13,7 @@ pub const GroupingConfiguration = struct {
     /// users.
     ///
     /// * When setting `criteria` to `RoutingProfileArn`, you need to provide a list
-    ///   of ARNs of [Amazon Connect routing
+    ///   of ARNs of [Connect Customer routing
     ///   profiles](https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html) as values of this parameter.
     values: ?[]const []const u8 = null,
 

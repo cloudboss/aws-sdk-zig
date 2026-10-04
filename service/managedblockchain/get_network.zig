@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetNetworkInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetNetworkOutput {
-    var result: GetNetworkOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetNetworkOutput, body, allocator);
-    }
+    const result: GetNetworkOutput = try aws.json.parseJsonObject(
+        GetNetworkOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

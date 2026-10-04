@@ -85,10 +85,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationConfig
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateReplicationConfigurationOutput {
-    var result: CreateReplicationConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateReplicationConfigurationOutput, body, allocator);
-    }
+    const result: CreateReplicationConfigurationOutput = try aws.json.parseJsonObject(
+        CreateReplicationConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

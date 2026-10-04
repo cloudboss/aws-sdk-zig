@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: MarkAsArchivedInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !MarkAsArchivedOutput {
-    var result: MarkAsArchivedOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(MarkAsArchivedOutput, body, allocator);
-    }
+    const result: MarkAsArchivedOutput = try aws.json.parseJsonObject(
+        MarkAsArchivedOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

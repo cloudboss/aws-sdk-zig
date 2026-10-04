@@ -171,6 +171,7 @@ pub const InvokeInlineAgentOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeInlineAgentInput, options: CallOptions) !InvokeInlineAgentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -179,8 +180,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeInlin
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "bedrock", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -192,11 +191,9 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeInlin
         return error.ServiceError;
     }
 
-    stream_resp.deinitHeaders();
-    errdefer stream_resp.body.deinit();
-
-    const completion = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
-    return .{ .completion = completion };
+    errdefer stream_resp.deinit();
+    const result = try deserializeStreamingResponse(allocator, &stream_resp);
+    return result;
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: InvokeInlineAgentInput, config: *aws.Config) !aws.http.Request {
@@ -348,4 +345,28 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeInlineAgentInput,
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
+}
+
+fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !InvokeInlineAgentOutput {
+    var result: InvokeInlineAgentOutput = .{
+        .content_type = "",
+        .session_id = "",
+    };
+    errdefer {
+        allocator.free(result.content_type);
+        allocator.free(result.session_id);
+    }
+    if (stream_resp.headers.get("x-amzn-bedrock-agent-content-type")) |value| {
+        result.content_type = try allocator.dupe(u8, value);
+    }
+    if (stream_resp.headers.get("x-amz-bedrock-agent-session-id")) |value| {
+        result.session_id = try allocator.dupe(u8, value);
+    }
+    result.completion = try aws.event_stream_reader.EventStreamReader.init(
+        allocator,
+        stream_resp.body,
+    );
+    stream_resp.deinitHeaders();
+
+    return result;
 }

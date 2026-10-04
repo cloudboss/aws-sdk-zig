@@ -2,20 +2,26 @@ const std = @import("std");
 
 pub const EvaluatorType = enum {
     builtin,
+    third_party,
     custom,
     code,
+    custom_derived,
 
     pub const json_field_names = .{
         .builtin = "Builtin",
+        .third_party = "ThirdParty",
         .custom = "Custom",
         .code = "CustomCode",
+        .custom_derived = "CustomDerived",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .builtin => "Builtin",
+            .third_party => "ThirdParty",
             .custom => "Custom",
             .code => "CustomCode",
+            .custom_derived => "CustomDerived",
         };
     }
 

@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RotateIngestEndpointCre
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RotateIngestEndpointCredentialsOutput {
-    var result: RotateIngestEndpointCredentialsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RotateIngestEndpointCredentialsOutput, body, allocator);
-    }
+    const result: RotateIngestEndpointCredentialsOutput = try aws.json.parseJsonObject(
+        RotateIngestEndpointCredentialsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

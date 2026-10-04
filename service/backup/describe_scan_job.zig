@@ -48,6 +48,12 @@ pub const DescribeScanJobOutput = struct {
     /// AM.
     completion_date: ?i64 = null,
 
+    /// The point in time the scan job scanned up to for a continuous backup.
+    continuous_scan_end_time: ?i64 = null,
+
+    /// The point in time the scan job started scan from for a continuous backup.
+    continuous_scan_start_time: ?i64 = null,
+
     created_by: ?ScanJobCreator = null,
 
     /// The date and time that a backup index finished creation, in Unix format and
@@ -118,6 +124,8 @@ pub const DescribeScanJobOutput = struct {
         .backup_vault_arn = "BackupVaultArn",
         .backup_vault_name = "BackupVaultName",
         .completion_date = "CompletionDate",
+        .continuous_scan_end_time = "ContinuousScanEndTime",
+        .continuous_scan_start_time = "ContinuousScanStartTime",
         .created_by = "CreatedBy",
         .creation_date = "CreationDate",
         .iam_role_arn = "IamRoleArn",
@@ -186,10 +194,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeScanJobInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeScanJobOutput {
-    var result: DescribeScanJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeScanJobOutput, body, allocator);
-    }
+    const result: DescribeScanJobOutput = try aws.json.parseJsonObject(
+        DescribeScanJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

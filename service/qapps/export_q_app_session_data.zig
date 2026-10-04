@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExportQAppSessionDataIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ExportQAppSessionDataOutput {
-    var result: ExportQAppSessionDataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ExportQAppSessionDataOutput, body, allocator);
-    }
+    const result: ExportQAppSessionDataOutput = try aws.json.parseJsonObject(
+        ExportQAppSessionDataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

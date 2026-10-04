@@ -79,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteNotificationRuleI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteNotificationRuleOutput {
-    var result: DeleteNotificationRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteNotificationRuleOutput, body, allocator);
-    }
+    const result: DeleteNotificationRuleOutput = try aws.json.parseJsonObject(
+        DeleteNotificationRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

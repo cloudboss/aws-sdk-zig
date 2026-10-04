@@ -16,27 +16,32 @@ pub const CreateVoiceConnectorInput = struct {
     /// `us-east-1` .
     aws_region: ?VoiceConnectorAwsRegion = null,
 
-    /// The connectors for use with Amazon Connect.
+    /// The connectors for use with Connect Customer.
     ///
     /// The following options are available:
     ///
     /// * `CONNECT_CALL_TRANSFER_CONNECTOR` - Enables enterprises to integrate
-    /// Amazon Connect with other voice systems to directly transfer voice calls and
-    /// metadata without using the public telephone network. They can use Amazon
-    /// Connect
+    /// Connect Customer with other voice systems to directly transfer voice calls
+    /// and
+    /// metadata without using the public telephone network. They can use Connect
+    /// Customer
     /// telephony and Interactive Voice Response (IVR) with their existing voice
     /// systems to
     /// modernize the IVR experience of their existing contact center and their
     /// enterprise
     /// and branch voice systems. Additionally, enterprises migrating their contact
     /// center to
-    /// Amazon Connect can start with Connect telephony and IVR for immediate
+    /// Connect Customer can start with Connect telephony and IVR for immediate
     /// modernization ahead of agent migration.
     ///
+    /// This integration is a gated feature. Please reach out to your account team
+    /// to
+    /// discuss this feature with a Connect Specialist.
+    ///
     /// * `CONNECT_ANALYTICS_CONNECTOR` - Enables enterprises to integrate
-    /// Amazon Connect with other voice systems for real-time and post-call
+    /// Connect Customer with other voice systems for real-time and post-call
     /// analytics.
-    /// They can use Amazon Connect Contact Lens with their existing voice systems
+    /// They can use Connect Customer Contact Lens with their existing voice systems
     /// to
     /// provides call recordings, conversational analytics (including contact
     /// transcript,
@@ -48,15 +53,15 @@ pub const CreateVoiceConnectorInput = struct {
     /// interactions, and
     /// programmatic access to data streams and the data lake. Additionally,
     /// enterprises
-    /// migrating their contact center to Amazon Connect can start with Contact Lens
+    /// migrating their contact center to Connect Customer can start with Contact
+    /// Lens
     /// analytics and performance insights ahead of agent migration.
     integration_type: ?VoiceConnectorIntegrationType = null,
 
     /// The name of the Voice Connector.
     name: []const u8,
 
-    /// The type of network for the Voice Connector. Either IPv4 only or dual-stack
-    /// (IPv4 and IPv6).
+    /// The type of network for the Voice Connector.
     network_type: ?NetworkType = null,
 
     /// Enables or disables encryption for the Voice Connector.
@@ -168,10 +173,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVoiceConnectorInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateVoiceConnectorOutput {
-    var result: CreateVoiceConnectorOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateVoiceConnectorOutput, body, allocator);
-    }
+    const result: CreateVoiceConnectorOutput = try aws.json.parseJsonObject(
+        CreateVoiceConnectorOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

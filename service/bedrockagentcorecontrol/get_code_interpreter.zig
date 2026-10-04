@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Certificate = @import("certificate.zig").Certificate;
+const ToolsFileSystemConfiguration = @import("tools_file_system_configuration.zig").ToolsFileSystemConfiguration;
 const CodeInterpreterNetworkConfiguration = @import("code_interpreter_network_configuration.zig").CodeInterpreterNetworkConfiguration;
 const CodeInterpreterStatus = @import("code_interpreter_status.zig").CodeInterpreterStatus;
 
@@ -39,6 +40,10 @@ pub const GetCodeInterpreterOutput = struct {
     /// The reason for failure if the code interpreter is in a failed state.
     failure_reason: ?[]const u8 = null,
 
+    /// The file system configurations mounted into the code interpreter. Each entry
+    /// describes an access point and its mount path.
+    filesystem_configurations: ?[]const ToolsFileSystemConfiguration = null,
+
     /// The timestamp when the code interpreter was last updated.
     last_updated_at: i64,
 
@@ -58,6 +63,7 @@ pub const GetCodeInterpreterOutput = struct {
         .description = "description",
         .execution_role_arn = "executionRoleArn",
         .failure_reason = "failureReason",
+        .filesystem_configurations = "filesystemConfigurations",
         .last_updated_at = "lastUpdatedAt",
         .name = "name",
         .network_configuration = "networkConfiguration",
@@ -114,10 +120,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCodeInterpreterInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCodeInterpreterOutput {
-    var result: GetCodeInterpreterOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCodeInterpreterOutput, body, allocator);
-    }
+    const result: GetCodeInterpreterOutput = try aws.json.parseJsonObject(
+        GetCodeInterpreterOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

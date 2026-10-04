@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetServiceLevelObj
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetServiceLevelObjectiveBudgetReportOutput {
-    var result: BatchGetServiceLevelObjectiveBudgetReportOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetServiceLevelObjectiveBudgetReportOutput, body, allocator);
-    }
+    const result: BatchGetServiceLevelObjectiveBudgetReportOutput = try aws.json.parseJsonObject(
+        BatchGetServiceLevelObjectiveBudgetReportOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

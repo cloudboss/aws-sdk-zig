@@ -32,6 +32,7 @@ const delete_resource_policy = @import("delete_resource_policy.zig");
 const delete_retention_policy = @import("delete_retention_policy.zig");
 const delete_scheduled_query = @import("delete_scheduled_query.zig");
 const delete_subscription_filter = @import("delete_subscription_filter.zig");
+const delete_syslog_configuration = @import("delete_syslog_configuration.zig");
 const delete_transformer = @import("delete_transformer.zig");
 const describe_account_policies = @import("describe_account_policies.zig");
 const describe_configuration_templates = @import("describe_configuration_templates.zig");
@@ -71,6 +72,7 @@ const get_lookup_table = @import("get_lookup_table.zig");
 const get_query_results = @import("get_query_results.zig");
 const get_scheduled_query = @import("get_scheduled_query.zig");
 const get_scheduled_query_history = @import("get_scheduled_query_history.zig");
+const get_storage_tier_policy = @import("get_storage_tier_policy.zig");
 const get_transformer = @import("get_transformer.zig");
 const list_aggregate_log_group_summaries = @import("list_aggregate_log_group_summaries.zig");
 const list_anomalies = @import("list_anomalies.zig");
@@ -80,6 +82,7 @@ const list_log_groups = @import("list_log_groups.zig");
 const list_log_groups_for_query = @import("list_log_groups_for_query.zig");
 const list_scheduled_queries = @import("list_scheduled_queries.zig");
 const list_sources_for_s3_table_integration = @import("list_sources_for_s3_table_integration.zig");
+const list_syslog_configurations = @import("list_syslog_configurations.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_tags_log_group = @import("list_tags_log_group.zig");
 const put_account_policy = @import("put_account_policy.zig");
@@ -98,7 +101,9 @@ const put_metric_filter = @import("put_metric_filter.zig");
 const put_query_definition = @import("put_query_definition.zig");
 const put_resource_policy = @import("put_resource_policy.zig");
 const put_retention_policy = @import("put_retention_policy.zig");
+const put_storage_tier_policy = @import("put_storage_tier_policy.zig");
 const put_subscription_filter = @import("put_subscription_filter.zig");
+const put_syslog_configuration = @import("put_syslog_configuration.zig");
 const put_transformer = @import("put_transformer.zig");
 const start_live_tail = @import("start_live_tail.zig");
 const start_query = @import("start_query.zig");
@@ -472,15 +477,18 @@ pub const Client = struct {
         return create_log_stream.execute(self, allocator, input, options);
     }
 
-    /// Creates a lookup table by uploading CSV data. You can use lookup tables to
-    /// enrich log
-    /// data in CloudWatch Logs Insights queries with reference data such as user
-    /// details, application
-    /// names, or error descriptions.
+    /// Creates a lookup table by uploading CSV data or from CloudWatch Logs query
+    /// results. You can use lookup tables to enrich log data in CloudWatch Logs
+    /// queries with
+    /// reference data such as user details, application names, or error
+    /// descriptions.
     ///
-    /// The table name must be unique within your account and Region. The CSV
-    /// content must include
-    /// a header row with column names, use UTF-8 encoding, and not exceed 10 MB.
+    /// The table name must be unique within your account and Region. You must
+    /// specify either
+    /// `tableBody` or `queryId`, but not both. If you use
+    /// `tableBody`, the CSV content must include a header row with column names,
+    /// use
+    /// UTF-8 encoding, and not exceed 10 MB.
     pub fn createLookupTable(self: *Self, allocator: std.mem.Allocator, input: create_lookup_table.CreateLookupTableInput, options: CallOptions) !create_lookup_table.CreateLookupTableOutput {
         return create_lookup_table.execute(self, allocator, input, options);
     }
@@ -717,6 +725,13 @@ pub const Client = struct {
         return delete_subscription_filter.execute(self, allocator, input, options);
     }
 
+    /// Deletes a syslog configuration for a log group. After deletion, syslog data
+    /// is no
+    /// longer ingested through the specified VPC endpoint.
+    pub fn deleteSyslogConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_syslog_configuration.DeleteSyslogConfigurationInput, options: CallOptions) !delete_syslog_configuration.DeleteSyslogConfigurationOutput {
+        return delete_syslog_configuration.execute(self, allocator, input, options);
+    }
+
     /// Deletes the log transformer for the specified log group. As soon as you do
     /// this, the
     /// transformation of incoming log events according to that transformer stops.
@@ -812,9 +827,12 @@ pub const Client = struct {
         return describe_export_tasks.execute(self, allocator, input, options);
     }
 
-    /// Returns a list of custom and default field indexes which are discovered in
-    /// log data. For
-    /// more information about field index policies, see
+    /// Returns a list of field indexes discovered in log data. By default, the
+    /// response includes
+    /// the `DEFAULT`, `CUSTOM`, and `INACTIVE` index categories. To
+    /// return indexes from other categories, use the `indexCategories` parameter.
+    ///
+    /// For more information about field index policies, see
     /// [PutIndexPolicy](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutIndexPolicy.html).
     pub fn describeFieldIndexes(self: *Self, allocator: std.mem.Allocator, input: describe_field_indexes.DescribeFieldIndexesInput, options: CallOptions) !describe_field_indexes.DescribeFieldIndexesOutput {
         return describe_field_indexes.execute(self, allocator, input, options);
@@ -1051,7 +1069,13 @@ pub const Client = struct {
     ///
     /// The returned log events are sorted by event timestamp, the timestamp when
     /// the event was
-    /// ingested by CloudWatch Logs, and the ID of the `PutLogEvents` request.
+    /// ingested by CloudWatch Logs, and the ID of the `PutLogEvents` request. By
+    /// default,
+    /// the events are returned in ascending timestamp order (oldest first). To
+    /// return events in
+    /// descending timestamp order (newest first), set the `startFromHead` parameter
+    /// to
+    /// `false`.
     ///
     /// If you are using CloudWatch cross-account observability, you can use this
     /// operation
@@ -1305,6 +1329,14 @@ pub const Client = struct {
     /// configured
     /// destinations.
     ///
+    /// You can retrieve up to 100,000 log event results from a query, if available,
+    /// by using
+    /// pagination. Use the `nextToken` returned in the response to request
+    /// additional
+    /// pages of results, with each page returning up to 10,000 log events. This is
+    /// only supported for Logs Insights QL and is currently not supported for PPL
+    /// and SQL query languages.
+    ///
     /// If you are using CloudWatch cross-account observability, you can use this
     /// operation
     /// in a monitoring account to start queries in linked source accounts. For more
@@ -1327,6 +1359,11 @@ pub const Client = struct {
     /// including query results and destination processing status.
     pub fn getScheduledQueryHistory(self: *Self, allocator: std.mem.Allocator, input: get_scheduled_query_history.GetScheduledQueryHistoryInput, options: CallOptions) !get_scheduled_query_history.GetScheduledQueryHistoryOutput {
         return get_scheduled_query_history.execute(self, allocator, input, options);
+    }
+
+    /// Returns the storage tier policy for the account.
+    pub fn getStorageTierPolicy(self: *Self, allocator: std.mem.Allocator, input: get_storage_tier_policy.GetStorageTierPolicyInput, options: CallOptions) !get_storage_tier_policy.GetStorageTierPolicyOutput {
+        return get_storage_tier_policy.execute(self, allocator, input, options);
     }
 
     /// Returns the information about the log transformer associated with this log
@@ -1441,6 +1478,13 @@ pub const Client = struct {
         return list_sources_for_s3_table_integration.execute(self, allocator, input, options);
     }
 
+    /// Returns a list of syslog configurations. You can optionally filter the
+    /// results by log
+    /// group or VPC endpoint.
+    pub fn listSyslogConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_syslog_configurations.ListSyslogConfigurationsInput, options: CallOptions) !list_syslog_configurations.ListSyslogConfigurationsOutput {
+        return list_syslog_configurations.execute(self, allocator, input, options);
+    }
+
     /// Displays the tags associated with a CloudWatch Logs resource. Currently, log
     /// groups and
     /// destinations support tagging.
@@ -1462,7 +1506,56 @@ pub const Client = struct {
     /// policy, transformer policy, or metric extraction policy that applies to all
     /// log groups, a
     /// subset of log groups, or a data source name and type combination in the
-    /// account.
+    /// account. Account-level
+    /// policies are Region-specific: a policy applies only to log groups in the
+    /// Region where you
+    /// create it. To apply a policy across multiple Regions, create the policy
+    /// separately in each
+    /// Region.
+    ///
+    /// `PutAccountPolicy` is an account-wide administrative operation intended for
+    /// CloudWatch Logs administrators. Because it affects all log groups (or a
+    /// broad subset) in
+    /// the account, you should grant `logs:PutAccountPolicy` permissions only to
+    /// administrators who manage logging configuration across the account, not to
+    /// application teams
+    /// or individual log group owners.
+    ///
+    /// **Conflict resolution between account-level and log-group-level
+    /// policies**
+    ///
+    /// When both an account-level policy and a log-group-level policy of the same
+    /// type apply to a
+    /// log group, the resolution depends on the policy type:
+    ///
+    /// * *Data protection* — The two policies are cumulative. Any sensitive
+    /// term specified in either the account-level or the log-group-level policy is
+    /// masked.
+    ///
+    /// * *Subscription filters* — Account-level and log-group-level
+    /// subscription filters are additive. A log group can have up to 1
+    /// account-level and up to 2
+    /// log-group-level subscription filters.
+    ///
+    /// * *Transformers* — A log-group-level transformer overrides the
+    /// account-level transformer. If a log group has its own transformer, it
+    /// ignores the
+    /// account-level transformer policy.
+    ///
+    /// * *Field index policies* — If a log group has its own field index
+    /// policy (created with `PutIndexPolicy`), any account-level policy that uses
+    /// `LogGroupNamePrefix` selection criteria or has no selection criteria is
+    /// ignored
+    /// for that log group. However, account-level policies that use
+    /// `DataSourceName`
+    /// and `DataSourceType` selection criteria still apply alongside the
+    /// log-group-level
+    /// policy.
+    ///
+    /// * *Metric extraction policies* — Metric extraction policies are
+    /// account-level only and have no log-group-level equivalent, so no conflict
+    /// resolution
+    /// applies.
     ///
     /// For field index policies, you can configure indexed fields as *facets*
     /// to enable interactive exploration of your logs. Facets provide value
@@ -2427,6 +2520,14 @@ pub const Client = struct {
         return put_retention_policy.execute(self, allocator, input, options);
     }
 
+    /// Sets the storage tier policy for the account. When you set the storage tier
+    /// to
+    /// `INTELLIGENT_TIERING`, the service automatically moves log data to the most
+    /// cost-effective storage tier based on access frequency.
+    pub fn putStorageTierPolicy(self: *Self, allocator: std.mem.Allocator, input: put_storage_tier_policy.PutStorageTierPolicyInput, options: CallOptions) !put_storage_tier_policy.PutStorageTierPolicyOutput {
+        return put_storage_tier_policy.execute(self, allocator, input, options);
+    }
+
     /// Creates or updates a subscription filter and associates it with the
     /// specified log
     /// group. With subscription filters, you can subscribe to a real-time stream of
@@ -2476,6 +2577,13 @@ pub const Client = struct {
     /// permission.
     pub fn putSubscriptionFilter(self: *Self, allocator: std.mem.Allocator, input: put_subscription_filter.PutSubscriptionFilterInput, options: CallOptions) !put_subscription_filter.PutSubscriptionFilterOutput {
         return put_subscription_filter.execute(self, allocator, input, options);
+    }
+
+    /// Creates or updates a syslog configuration for a log group. This enables
+    /// ingestion of
+    /// syslog data through the specified VPC endpoint into the log group.
+    pub fn putSyslogConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_syslog_configuration.PutSyslogConfigurationInput, options: CallOptions) !put_syslog_configuration.PutSyslogConfigurationOutput {
+        return put_syslog_configuration.execute(self, allocator, input, options);
     }
 
     /// Creates or updates a *log transformer* for a single log group. You use
@@ -2811,13 +2919,15 @@ pub const Client = struct {
         return update_log_anomaly_detector.execute(self, allocator, input, options);
     }
 
-    /// Updates an existing lookup table by replacing all of its CSV content. After
-    /// the update
-    /// completes, queries that use this table will use the new data.
+    /// Updates an existing lookup table by replacing all of its content with new
+    /// CSV data or
+    /// CloudWatch Logs query results. After the update completes, queries that use
+    /// this table
+    /// use the new data.
     ///
-    /// This is a full replacement operation. All existing content is replaced with
-    /// the new CSV
-    /// data.
+    /// This is a full replacement operation. All existing content is replaced. You
+    /// must specify
+    /// either `tableBody` or `queryId`, but not both.
     pub fn updateLookupTable(self: *Self, allocator: std.mem.Allocator, input: update_lookup_table.UpdateLookupTableInput, options: CallOptions) !update_lookup_table.UpdateLookupTableOutput {
         return update_lookup_table.execute(self, allocator, input, options);
     }

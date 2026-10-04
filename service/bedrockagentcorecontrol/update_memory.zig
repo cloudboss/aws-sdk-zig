@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const IndexedKey = @import("indexed_key.zig").IndexedKey;
 const ModifyMemoryStrategies = @import("modify_memory_strategies.zig").ModifyMemoryStrategies;
+const NamespaceKeyEntry = @import("namespace_key_entry.zig").NamespaceKeyEntry;
 const StreamDeliveryResources = @import("stream_delivery_resources.zig").StreamDeliveryResources;
 const Memory = @import("memory.zig").Memory;
 
@@ -36,6 +37,12 @@ pub const UpdateMemoryInput = struct {
     /// The memory strategies to add, modify, or delete.
     memory_strategies: ?ModifyMemoryStrategies = null,
 
+    /// The namespace variable key definitions with validation rules for this
+    /// memory. This value fully replaces the existing set — any key you omit is
+    /// removed. Any referenced `namespaceKey` omission will throw
+    /// ValidationException.
+    namespace_keys: ?[]const NamespaceKeyEntry = null,
+
     /// Configuration for streaming memory record data to external resources.
     stream_delivery_resources: ?StreamDeliveryResources = null,
 
@@ -47,6 +54,7 @@ pub const UpdateMemoryInput = struct {
         .memory_execution_role_arn = "memoryExecutionRoleArn",
         .memory_id = "memoryId",
         .memory_strategies = "memoryStrategies",
+        .namespace_keys = "namespaceKeys",
         .stream_delivery_resources = "streamDeliveryResources",
     };
 };
@@ -136,6 +144,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateMemoryInput, conf
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.namespace_keys) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"namespaceKeys\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.stream_delivery_resources) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"streamDeliveryResources\":");
@@ -158,10 +172,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateMemoryInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateMemoryOutput {
-    var result: UpdateMemoryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateMemoryOutput, body, allocator);
-    }
+    const result: UpdateMemoryOutput = try aws.json.parseJsonObject(
+        UpdateMemoryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -32,7 +32,11 @@ pub const OperationUpdate = struct {
     /// within a child context.
     parent_id: ?[]const u8 = null,
 
-    /// The payload for successful operations.
+    /// The payload for successful operations. The maximum payload size is 6 MB for
+    /// synchronous `EXECUTION` operations (RequestResponse invocationType), 1 MB
+    /// for asynchronous `EXECUTION` (Event invocationType) and `CHAINED_INVOKE`
+    /// operations, and 256 KB for `CONTEXT`, `STEP`, `WAIT`, and `CALLBACK`
+    /// operations.
     payload: ?[]const u8 = null,
 
     /// Options for step operations.

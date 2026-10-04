@@ -80,7 +80,7 @@ pub const PutMetricStreamInput = struct {
     /// `OutputFormat` is `json`, you can stream any additional
     /// statistic that is supported by CloudWatch, listed in [
     /// CloudWatch statistics
-    /// definitions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html). If the `OutputFormat`
+    /// definitions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html). If the `OutputFormat`
     /// is `opentelemetry1.0` or `opentelemetry0.7`, you can stream
     /// percentile statistics such as p95, p99.9, and so on.
     statistics_configurations: ?[]const MetricStreamStatisticsConfiguration = null,

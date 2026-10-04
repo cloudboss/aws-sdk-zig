@@ -179,10 +179,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartVectorEnrichmentJo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartVectorEnrichmentJobOutput {
-    var result: StartVectorEnrichmentJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartVectorEnrichmentJobOutput, body, allocator);
-    }
+    const result: StartVectorEnrichmentJobOutput = try aws.json.parseJsonObject(
+        StartVectorEnrichmentJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

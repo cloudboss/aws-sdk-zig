@@ -1,6 +1,6 @@
 const TriggerSourceType = @import("trigger_source_type.zig").TriggerSourceType;
 
-/// The source that triggered a notebook run in Amazon DataZone.
+/// The source that triggered a notebook run in Amazon SageMaker Unified Studio.
 pub const TriggerSource = struct {
     /// The name of the trigger source.
     name: ?[]const u8 = null,

@@ -57,15 +57,14 @@ pub const Client = struct {
     }
 
     /// Associates a backup gateway with your server. After you complete the
-    /// association process,
-    /// you can back up and restore your VMs through the gateway.
+    /// association process, you can back up and restore your VMs through the
+    /// gateway.
     pub fn associateGatewayToServer(self: *Self, allocator: std.mem.Allocator, input: associate_gateway_to_server.AssociateGatewayToServerInput, options: CallOptions) !associate_gateway_to_server.AssociateGatewayToServerOutput {
         return associate_gateway_to_server.execute(self, allocator, input, options);
     }
 
     /// Creates a backup gateway. After you create a gateway, you can associate it
-    /// with a server
-    /// using the `AssociateGatewayToServer` operation.
+    /// with a server using the `AssociateGatewayToServer` operation.
     pub fn createGateway(self: *Self, allocator: std.mem.Allocator, input: create_gateway.CreateGatewayInput, options: CallOptions) !create_gateway.CreateGatewayOutput {
         return create_gateway.execute(self, allocator, input, options);
     }
@@ -81,38 +80,34 @@ pub const Client = struct {
     }
 
     /// Disassociates a backup gateway from the specified server. After the
-    /// disassociation process
-    /// finishes, the gateway can no longer access the virtual machines on the
-    /// server.
+    /// disassociation process finishes, the gateway can no longer access the
+    /// virtual machines on the server.
     pub fn disassociateGatewayFromServer(self: *Self, allocator: std.mem.Allocator, input: disassociate_gateway_from_server.DisassociateGatewayFromServerInput, options: CallOptions) !disassociate_gateway_from_server.DisassociateGatewayFromServerOutput {
         return disassociate_gateway_from_server.execute(self, allocator, input, options);
     }
 
-    /// Retrieves the bandwidth rate limit schedule for a specified gateway.
-    /// By default, gateways do not have bandwidth rate limit schedules, which means
-    /// no bandwidth rate limiting is in effect. Use this to get a gateway's
-    /// bandwidth rate limit schedule.
+    /// Retrieves the bandwidth rate limit schedule for a specified gateway. By
+    /// default, gateways do not have bandwidth rate limit schedules, which means no
+    /// bandwidth rate limiting is in effect. Use this to get a gateway's bandwidth
+    /// rate limit schedule.
     pub fn getBandwidthRateLimitSchedule(self: *Self, allocator: std.mem.Allocator, input: get_bandwidth_rate_limit_schedule.GetBandwidthRateLimitScheduleInput, options: CallOptions) !get_bandwidth_rate_limit_schedule.GetBandwidthRateLimitScheduleOutput {
         return get_bandwidth_rate_limit_schedule.execute(self, allocator, input, options);
     }
 
-    /// By providing the ARN (Amazon Resource Name), this
-    /// API returns the gateway.
+    /// By providing the ARN (Amazon Resource Name), this API returns the gateway.
     pub fn getGateway(self: *Self, allocator: std.mem.Allocator, input: get_gateway.GetGatewayInput, options: CallOptions) !get_gateway.GetGatewayOutput {
         return get_gateway.execute(self, allocator, input, options);
     }
 
     /// This action requests information about the specified hypervisor to which the
-    /// gateway will connect.
-    /// A hypervisor is hardware, software, or firmware that creates and manages
-    /// virtual machines,
-    /// and allocates resources to them.
+    /// gateway will connect. A hypervisor is hardware, software, or firmware that
+    /// creates and manages virtual machines, and allocates resources to them.
     pub fn getHypervisor(self: *Self, allocator: std.mem.Allocator, input: get_hypervisor.GetHypervisorInput, options: CallOptions) !get_hypervisor.GetHypervisorOutput {
         return get_hypervisor.execute(self, allocator, input, options);
     }
 
-    /// This action retrieves the property mappings for the specified hypervisor.
-    /// A hypervisor property mapping displays the relationship of entity properties
+    /// This action retrieves the property mappings for the specified hypervisor. A
+    /// hypervisor property mapping displays the relationship of entity properties
     /// available from the hypervisor to the properties available in Amazon Web
     /// Services.
     pub fn getHypervisorPropertyMappings(self: *Self, allocator: std.mem.Allocator, input: get_hypervisor_property_mappings.GetHypervisorPropertyMappingsInput, options: CallOptions) !get_hypervisor_property_mappings.GetHypervisorPropertyMappingsOutput {
@@ -143,8 +138,7 @@ pub const Client = struct {
     }
 
     /// Lists the tags applied to the resource identified by its Amazon Resource
-    /// Name
-    /// (ARN).
+    /// Name (ARN).
     pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
         return list_tags_for_resource.execute(self, allocator, input, options);
     }
@@ -156,15 +150,14 @@ pub const Client = struct {
 
     /// This action sets the bandwidth rate limit schedule for a specified gateway.
     /// By default, gateways do not have a bandwidth rate limit schedule, which
-    /// means
-    /// no bandwidth rate limiting is in effect. Use this to initiate a
+    /// means no bandwidth rate limiting is in effect. Use this to initiate a
     /// gateway's bandwidth rate limit schedule.
     pub fn putBandwidthRateLimitSchedule(self: *Self, allocator: std.mem.Allocator, input: put_bandwidth_rate_limit_schedule.PutBandwidthRateLimitScheduleInput, options: CallOptions) !put_bandwidth_rate_limit_schedule.PutBandwidthRateLimitScheduleOutput {
         return put_bandwidth_rate_limit_schedule.execute(self, allocator, input, options);
     }
 
-    /// This action sets the property mappings for the specified hypervisor.
-    /// A hypervisor property mapping displays the relationship of entity properties
+    /// This action sets the property mappings for the specified hypervisor. A
+    /// hypervisor property mapping displays the relationship of entity properties
     /// available from the hypervisor to the properties available in Amazon Web
     /// Services.
     pub fn putHypervisorPropertyMappings(self: *Self, allocator: std.mem.Allocator, input: put_hypervisor_property_mappings.PutHypervisorPropertyMappingsInput, options: CallOptions) !put_hypervisor_property_mappings.PutHypervisorPropertyMappingsOutput {
@@ -188,8 +181,7 @@ pub const Client = struct {
     }
 
     /// Tests your hypervisor configuration to validate that backup gateway can
-    /// connect with the
-    /// hypervisor and its resources.
+    /// connect with the hypervisor and its resources.
     pub fn testHypervisorConfiguration(self: *Self, allocator: std.mem.Allocator, input: test_hypervisor_configuration.TestHypervisorConfigurationInput, options: CallOptions) !test_hypervisor_configuration.TestHypervisorConfigurationOutput {
         return test_hypervisor_configuration.execute(self, allocator, input, options);
     }
@@ -200,27 +192,23 @@ pub const Client = struct {
     }
 
     /// Updates a gateway's name. Specify which gateway to update using the Amazon
-    /// Resource Name
-    /// (ARN) of the gateway in your request.
+    /// Resource Name (ARN) of the gateway in your request.
     pub fn updateGatewayInformation(self: *Self, allocator: std.mem.Allocator, input: update_gateway_information.UpdateGatewayInformationInput, options: CallOptions) !update_gateway_information.UpdateGatewayInformationOutput {
         return update_gateway_information.execute(self, allocator, input, options);
     }
 
-    /// Updates the gateway virtual machine (VM) software.
-    /// The request immediately triggers the software update.
+    /// Updates the gateway virtual machine (VM) software. The request immediately
+    /// triggers the software update.
     ///
-    /// When you make this request, you get a `200 OK`
-    /// success response immediately. However, it might take some
-    /// time for the update to complete.
+    /// When you make this request, you get a `200 OK` success response immediately.
+    /// However, it might take some time for the update to complete.
     pub fn updateGatewaySoftwareNow(self: *Self, allocator: std.mem.Allocator, input: update_gateway_software_now.UpdateGatewaySoftwareNowInput, options: CallOptions) !update_gateway_software_now.UpdateGatewaySoftwareNowOutput {
         return update_gateway_software_now.execute(self, allocator, input, options);
     }
 
     /// Updates a hypervisor metadata, including its host, username, and password.
-    /// Specify which
-    /// hypervisor to update using the Amazon Resource Name (ARN) of the hypervisor
-    /// in your
-    /// request.
+    /// Specify which hypervisor to update using the Amazon Resource Name (ARN) of
+    /// the hypervisor in your request.
     pub fn updateHypervisor(self: *Self, allocator: std.mem.Allocator, input: update_hypervisor.UpdateHypervisorInput, options: CallOptions) !update_hypervisor.UpdateHypervisorOutput {
         return update_hypervisor.execute(self, allocator, input, options);
     }

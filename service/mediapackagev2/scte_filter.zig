@@ -18,6 +18,8 @@ pub const ScteFilter = enum {
     distributor_promo,
     provider_ad_block,
     distributor_ad_block,
+    content_identification,
+    call_ad_server,
 
     pub const json_field_names = .{
         .splice_insert = "SPLICE_INSERT",
@@ -37,6 +39,8 @@ pub const ScteFilter = enum {
         .distributor_promo = "DISTRIBUTOR_PROMO",
         .provider_ad_block = "PROVIDER_AD_BLOCK",
         .distributor_ad_block = "DISTRIBUTOR_AD_BLOCK",
+        .content_identification = "CONTENT_IDENTIFICATION",
+        .call_ad_server = "CALL_AD_SERVER",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -58,6 +62,8 @@ pub const ScteFilter = enum {
             .distributor_promo => "DISTRIBUTOR_PROMO",
             .provider_ad_block => "PROVIDER_AD_BLOCK",
             .distributor_ad_block => "DISTRIBUTOR_AD_BLOCK",
+            .content_identification => "CONTENT_IDENTIFICATION",
+            .call_ad_server => "CALL_AD_SERVER",
         };
     }
 

@@ -19,15 +19,13 @@ pub const CopyDBClusterParameterGroupInput = struct {
     ///
     /// * Must specify a valid DB cluster parameter group.
     ///
-    /// * If the source DB cluster parameter group is in the same Amazon Region as
-    ///   the copy,
-    /// specify a valid DB parameter group identifier, for example
+    /// * Must specify a valid DB cluster parameter group identifier, for example
     /// `my-db-cluster-param-group`, or a valid ARN.
     ///
-    /// * If the source DB parameter group is in a different Amazon Region than the
-    ///   copy, specify a
-    /// valid DB cluster parameter group ARN, for example
-    /// `arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1`.
+    /// * The source DB cluster parameter group must be in the same Amazon Region as
+    ///   the
+    /// copy. Neptune does not support cross-Region copying of parameter
+    /// groups.
     source_db_cluster_parameter_group_identifier: []const u8,
 
     /// The tags to be assigned to the copied DB cluster parameter group.

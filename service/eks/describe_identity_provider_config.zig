@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeIdentityProvide
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeIdentityProviderConfigOutput {
-    var result: DescribeIdentityProviderConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeIdentityProviderConfigOutput, body, allocator);
-    }
+    const result: DescribeIdentityProviderConfigOutput = try aws.json.parseJsonObject(
+        DescribeIdentityProviderConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

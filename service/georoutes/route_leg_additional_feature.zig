@@ -10,6 +10,9 @@ pub const RouteLegAdditionalFeature = enum {
     truck_road_types,
     typical_duration,
     zones,
+    bookings,
+    intermediate_stops,
+    next_departures,
 
     pub const json_field_names = .{
         .elevation = "Elevation",
@@ -21,6 +24,9 @@ pub const RouteLegAdditionalFeature = enum {
         .truck_road_types = "TruckRoadTypes",
         .typical_duration = "TypicalDuration",
         .zones = "Zones",
+        .bookings = "Bookings",
+        .intermediate_stops = "IntermediateStops",
+        .next_departures = "NextDepartures",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -34,6 +40,9 @@ pub const RouteLegAdditionalFeature = enum {
             .truck_road_types => "TruckRoadTypes",
             .typical_duration => "TypicalDuration",
             .zones => "Zones",
+            .bookings => "Bookings",
+            .intermediate_stops => "IntermediateStops",
+            .next_departures => "NextDepartures",
         };
     }
 

@@ -316,6 +316,7 @@ pub const RestoreDBInstanceFromDBSnapshotInput = struct {
     /// Valid Values:
     ///
     /// * `db2-ae`
+    /// * `db2-ce`
     /// * `db2-se`
     /// * `mariadb`
     /// * `mysql`
@@ -330,7 +331,7 @@ pub const RestoreDBInstanceFromDBSnapshotInput = struct {
     /// * `sqlserver-web`
     engine: ?[]const u8 = null,
 
-    /// The life cycle type for this DB instance.
+    /// The lifecycle type for this DB instance.
     ///
     /// By default, this value is set to `open-source-rds-extended-support`, which
     /// enrolls your DB instance into Amazon RDS Extended Support. At the end of
@@ -346,8 +347,8 @@ pub const RestoreDBInstanceFromDBSnapshotInput = struct {
     /// RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html) in the *Amazon RDS User Guide*.
     ///
     /// This setting applies only to RDS for MySQL and RDS for PostgreSQL. For
-    /// Amazon Aurora DB instances, the life cycle type is managed by the DB
-    /// cluster.
+    /// Amazon Aurora DB instances, the engine lifecycle support is managed by the
+    /// DB cluster.
     ///
     /// Valid Values: `open-source-rds-extended-support |
     /// open-source-rds-extended-support-disabled`
@@ -385,7 +386,7 @@ pub const RestoreDBInstanceFromDBSnapshotInput = struct {
     ///
     /// * RDS for Db2 - `bring-your-own-license | marketplace-license`
     /// * RDS for MariaDB - `general-public-license`
-    /// * RDS for Microsoft SQL Server - `license-included`
+    /// * RDS for Microsoft SQL Server - `license-included | bring-your-own-media`
     /// * RDS for MySQL - `general-public-license`
     /// * RDS for Oracle - `bring-your-own-license | license-included`
     /// * RDS for PostgreSQL - `postgresql-license`

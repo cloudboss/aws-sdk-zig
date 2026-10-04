@@ -74,10 +74,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSchemaAsJsonInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSchemaAsJsonOutput {
-    var result: GetSchemaAsJsonOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSchemaAsJsonOutput, body, allocator);
-    }
+    const result: GetSchemaAsJsonOutput = try aws.json.parseJsonObject(
+        GetSchemaAsJsonOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

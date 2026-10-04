@@ -1,9 +1,13 @@
+const CloudProvider = @import("cloud_provider.zig").CloudProvider;
 const FreeTrialStatus = @import("free_trial_status.zig").FreeTrialStatus;
 const FreeTrialType = @import("free_trial_type.zig").FreeTrialType;
 
 /// An object that contains information about the Amazon Inspector free trial
 /// for an account.
 pub const FreeTrialInfo = struct {
+    /// The cloud provider associated with the free trial information.
+    cloud_provider: ?CloudProvider = null,
+
     /// The date and time that the Amazon Inspector free trail ends for a given
     /// account.
     end: i64,
@@ -19,6 +23,7 @@ pub const FreeTrialInfo = struct {
     @"type": FreeTrialType,
 
     pub const json_field_names = .{
+        .cloud_provider = "cloudProvider",
         .end = "end",
         .start = "start",
         .status = "status",

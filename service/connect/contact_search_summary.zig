@@ -1,6 +1,7 @@
 const aws = @import("aws");
 
 const ContactSearchSummaryAgentInfo = @import("contact_search_summary_agent_info.zig").ContactSearchSummaryAgentInfo;
+const ContactSearchSummaryAiAgentInfo = @import("contact_search_summary_ai_agent_info.zig").ContactSearchSummaryAiAgentInfo;
 const Channel = @import("channel.zig").Channel;
 const GlobalResiliencyMetadata = @import("global_resiliency_metadata.zig").GlobalResiliencyMetadata;
 const ContactInitiationMethod = @import("contact_initiation_method.zig").ContactInitiationMethod;
@@ -13,13 +14,16 @@ pub const ContactSearchSummary = struct {
     /// Information about the agent who accepted the contact.
     agent_info: ?ContactSearchSummaryAgentInfo = null,
 
+    /// Information about the AI agents involved in the contact.
+    ai_agent_info: ?[]const ContactSearchSummaryAiAgentInfo = null,
+
     /// The Amazon Resource Name (ARN) of the contact.
     arn: ?[]const u8 = null,
 
     /// How the contact reached your contact center.
     channel: ?Channel = null,
 
-    /// The timestamp when the customer endpoint disconnected from Amazon Connect.
+    /// The timestamp when the customer endpoint disconnected from Connect Customer.
     disconnect_timestamp: ?i64 = null,
 
     /// Additional routing information for contacts created in ACGR instances.
@@ -73,6 +77,7 @@ pub const ContactSearchSummary = struct {
 
     pub const json_field_names = .{
         .agent_info = "AgentInfo",
+        .ai_agent_info = "AiAgentInfo",
         .arn = "Arn",
         .channel = "Channel",
         .disconnect_timestamp = "DisconnectTimestamp",

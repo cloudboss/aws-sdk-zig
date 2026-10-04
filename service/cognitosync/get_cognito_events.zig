@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCognitoEventsInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCognitoEventsOutput {
-    var result: GetCognitoEventsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCognitoEventsOutput, body, allocator);
-    }
+    const result: GetCognitoEventsOutput = try aws.json.parseJsonObject(
+        GetCognitoEventsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

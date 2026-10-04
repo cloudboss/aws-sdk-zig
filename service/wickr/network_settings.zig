@@ -1,8 +1,12 @@
+const ConsentPopupConfig = @import("consent_popup_config.zig").ConsentPopupConfig;
 const ReadReceiptConfig = @import("read_receipt_config.zig").ReadReceiptConfig;
 
 /// Contains network-level configuration settings that apply to all users and
 /// security groups within a Wickr network.
 pub const NetworkSettings = struct {
+    /// Consent popup configuration for the network, displayed to users on login.
+    consent_popup: ?ConsentPopupConfig = null,
+
     /// Indicates whether the data retention feature is enabled for the network.
     /// When true, messages are captured by the data retention bot for compliance
     /// and archiving purposes.
@@ -22,6 +26,7 @@ pub const NetworkSettings = struct {
     read_receipt_config: ?ReadReceiptConfig = null,
 
     pub const json_field_names = .{
+        .consent_popup = "consentPopup",
         .data_retention = "dataRetention",
         .enable_client_metrics = "enableClientMetrics",
         .enable_trusted_data_format = "enableTrustedDataFormat",

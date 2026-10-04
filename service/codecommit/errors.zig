@@ -195,6 +195,7 @@ pub const ServiceError = struct {
         tips_divergence_exceeded_exception: TipsDivergenceExceededException,
         title_required_exception: TitleRequiredException,
         too_many_tags_exception: TooManyTagsException,
+        validation_exception: ValidationException,
         unknown: UnknownServiceError,
 
         pub fn code(self: Kind) []const u8 {
@@ -388,6 +389,7 @@ pub const ServiceError = struct {
                 .tips_divergence_exceeded_exception => "TipsDivergenceExceededException",
                 .title_required_exception => "TitleRequiredException",
                 .too_many_tags_exception => "TooManyTagsException",
+                .validation_exception => "ValidationException",
                 .unknown => |e| e.code,
             };
         }
@@ -583,6 +585,7 @@ pub const ServiceError = struct {
                 .tips_divergence_exceeded_exception => |e| e.message,
                 .title_required_exception => |e| e.message,
                 .too_many_tags_exception => |e| e.message,
+                .validation_exception => |e| e.message,
                 .unknown => |e| e.message,
             };
         }
@@ -778,6 +781,7 @@ pub const ServiceError = struct {
                 .tips_divergence_exceeded_exception => 400,
                 .title_required_exception => 400,
                 .too_many_tags_exception => 400,
+                .validation_exception => 400,
                 .unknown => |e| e.http_status,
             };
         }
@@ -973,6 +977,7 @@ pub const ServiceError = struct {
                 .tips_divergence_exceeded_exception => |e| e.request_id,
                 .title_required_exception => |e| e.request_id,
                 .too_many_tags_exception => |e| e.request_id,
+                .validation_exception => |e| e.request_id,
                 .unknown => |e| e.request_id,
             };
         }
@@ -3089,6 +3094,16 @@ pub const TitleRequiredException = struct {
 
 /// The maximum number of tags for an CodeCommit resource has been exceeded.
 pub const TooManyTagsException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
+};
+
+/// The specified input is either not valid, or it could not be validated.
+pub const ValidationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 
@@ -5386,6 +5401,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             typed_error.message = owned_message;
             typed_error.request_id = owned_request_id;
             return .{ .arena = arena, .kind = .{ .too_many_tags_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ValidationException")) {
+        const parsed_error: ?ValidationException = aws.json.parseJsonObject(ValidationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .validation_exception = typed_error } };
         }
     }
 

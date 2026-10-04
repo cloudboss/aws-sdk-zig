@@ -79,6 +79,15 @@ pub const GetWorkflowVersionOutput = struct {
     /// The parameter template for the workflow version.
     parameter_template: ?[]const aws.map.MapEntry(WorkflowParameter) = null,
 
+    /// A mapping of profile names to their parameter templates. Each profile
+    /// defines its own set of parameters that you can use when starting a run with
+    /// that profile.
+    profile_parameter_templates: ?[]const aws.map.MapEntry([]const aws.map.MapEntry(WorkflowParameter)) = null,
+
+    /// The list of Nextflow profiles that are available for this workflow version.
+    /// Profiles allow you to select predefined configuration settings at runtime.
+    profiles: ?[]const []const u8 = null,
+
     /// The README content for the workflow version, providing documentation and
     /// usage information specific to this version.
     readme: ?[]const u8 = null,
@@ -132,6 +141,8 @@ pub const GetWorkflowVersionOutput = struct {
         .main = "main",
         .metadata = "metadata",
         .parameter_template = "parameterTemplate",
+        .profile_parameter_templates = "profileParameterTemplates",
+        .profiles = "profiles",
         .readme = "readme",
         .readme_path = "readmePath",
         .status = "status",
@@ -223,10 +234,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetWorkflowVersionInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetWorkflowVersionOutput {
-    var result: GetWorkflowVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetWorkflowVersionOutput, body, allocator);
-    }
+    const result: GetWorkflowVersionOutput = try aws.json.parseJsonObject(
+        GetWorkflowVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

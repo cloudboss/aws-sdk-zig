@@ -13,7 +13,7 @@ const UserInfo = @import("user_info.zig").UserInfo;
 
 pub const CreateContactInput = struct {
     /// A custom key-value pair using an attribute map. The attributes are standard
-    /// Amazon Connect attributes, and
+    /// Connect Customer attributes, and
     /// can be accessed in flows just like any other contact attributes.
     ///
     /// There can be up to 32,768 UTF-8 bytes across all key-value pairs per
@@ -61,7 +61,7 @@ pub const CreateContactInput = struct {
     /// information.
     initiation_method: ContactInitiationMethod,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -70,9 +70,9 @@ pub const CreateContactInput = struct {
 
     /// The ID of the previous contact when creating a transfer contact. This value
     /// can be provided only for external
-    /// audio contacts. For more information, see [Integrate Amazon Connect Contact
-    /// Lens with external voice
-    /// systems](https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html) in the *Amazon Connect Administrator Guide*.
+    /// audio contacts. For more information, see [Integrate Connect Customer
+    /// Contact Lens with external voice
+    /// systems](https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html) in the *Connect Customer Administrator Guide*.
     previous_contact_id: ?[]const u8 = null,
 
     /// A formatted URL that is shown to an agent in the Contact Control Panel
@@ -81,12 +81,12 @@ pub const CreateContactInput = struct {
     /// `DATE` | `EMAIL` | `ATTACHMENT`.
     references: ?[]const aws.map.MapEntry(Reference) = null,
 
-    /// The identifier of the contact in this instance of Amazon Connect.
+    /// The identifier of the contact in this instance of Connect Customer.
     related_contact_id: ?[]const u8 = null,
 
     /// A set of system defined key-value pairs stored on individual contact
     /// segments (unique contact ID) using an
-    /// attribute map. The attributes are standard Amazon Connect attributes. They
+    /// attribute map. The attributes are standard Connect Customer attributes. They
     /// can be accessed in flows.
     ///
     /// Attribute keys can include only alphanumeric, -, and _.
@@ -130,7 +130,7 @@ pub const CreateContactOutput = struct {
     /// The Amazon Resource Name (ARN) of the created contact.
     contact_arn: ?[]const u8 = null,
 
-    /// The identifier of the contact in this instance of Amazon Connect.
+    /// The identifier of the contact in this instance of Connect Customer.
     contact_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -269,10 +269,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateContactInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateContactOutput {
-    var result: CreateContactOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateContactOutput, body, allocator);
-    }
+    const result: CreateContactOutput = try aws.json.parseJsonObject(
+        CreateContactOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

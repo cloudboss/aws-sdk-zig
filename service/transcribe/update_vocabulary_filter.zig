@@ -4,15 +4,17 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
 const LanguageCode = @import("language_code.zig").LanguageCode;
 
 pub const UpdateVocabularyFilterInput = struct {
     /// The Amazon Resource Name (ARN) of an IAM role that has permissions to
     /// access the Amazon S3 bucket that contains your input files (in this case,
     /// your custom
-    /// vocabulary filter). If the role that you specify doesn’t have the
-    /// appropriate permissions to access
-    /// the specified Amazon S3 location, your request fails.
+    /// vocabulary filter). If you include `EncryptionConfiguration` in your
+    /// request, this role
+    /// must also have permissions to access the specified KMS key. If the role that
+    /// you specify doesn’t have the appropriate permissions, your request fails.
     ///
     /// IAM role ARNs have the format
     /// `arn:partition:iam::account:role/role-name-with-path`. For example:
@@ -21,6 +23,11 @@ pub const UpdateVocabularyFilterInput = struct {
     /// For more information, see [IAM
     /// ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
     data_access_role_arn: ?[]const u8 = null,
+
+    /// Specifies the new encryption configuration for your custom vocabulary
+    /// filter. The vocabulary filter artifacts are re-encrypted in place using the
+    /// specified KMS key or with an AWS-owned key if a key is not supplied.
+    encryption_configuration: ?EncryptionConfiguration = null,
 
     /// The Amazon S3 location of the text file that contains your custom vocabulary
     /// filter terms. The URI must be located in the same Amazon Web Services Region
@@ -61,6 +68,7 @@ pub const UpdateVocabularyFilterInput = struct {
 
     pub const json_field_names = .{
         .data_access_role_arn = "DataAccessRoleArn",
+        .encryption_configuration = "EncryptionConfiguration",
         .vocabulary_filter_file_uri = "VocabularyFilterFileUri",
         .vocabulary_filter_name = "VocabularyFilterName",
         .words = "Words",

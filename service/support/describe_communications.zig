@@ -9,18 +9,26 @@ const Communication = @import("communication.zig").Communication;
 pub const DescribeCommunicationsInput = struct {
     /// The start date for a filtered date search on support case communications.
     /// Case
-    /// communications are available for 12 months after creation.
+    /// communications are available for 24 months after creation.
     after_time: ?[]const u8 = null,
 
     /// The end date for a filtered date search on support case communications. Case
-    /// communications are available for 12 months after creation.
+    /// communications are available for 24 months after creation.
     before_time: ?[]const u8 = null,
 
     /// The support case ID requested or returned in the call. The case ID is an
     /// alphanumeric
     /// string formatted as shown in this example:
-    /// case-*12345678910-2013-c4c1d2bf33c5cf47*
+    /// case-*12345678910-exen-2025-c4c1d2bf33c5cf47*
     case_id: []const u8,
+
+    /// Specifies whether to validate the request without actually returning
+    /// communications. When
+    /// set to `true`, the request is validated but no communications are returned,
+    /// and the
+    /// operation returns a `DryRunOperationException`. When omitted or set to
+    /// `false`, the request runs normally.
+    dry_run: ?bool = null,
 
     /// The maximum number of results to return before paginating.
     max_results: ?i32 = null,
@@ -32,6 +40,7 @@ pub const DescribeCommunicationsInput = struct {
         .after_time = "afterTime",
         .before_time = "beforeTime",
         .case_id = "caseId",
+        .dry_run = "dryRun",
         .max_results = "maxResults",
         .next_token = "nextToken",
     };

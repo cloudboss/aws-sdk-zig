@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DbBackupConfigurationOutput = @import("db_backup_configuration_output.zig").DbBackupConfigurationOutput;
 const DbInstanceType = @import("db_instance_type.zig").DbInstanceType;
 const DbStorageType = @import("db_storage_type.zig").DbStorageType;
 const DeploymentType = @import("deployment_type.zig").DeploymentType;
@@ -17,8 +18,14 @@ pub const DeleteDbInstanceInput = struct {
     /// The id of the DB instance.
     identifier: []const u8,
 
+    /// Specifies whether to retain automated backups after the DB instance is
+    /// deleted. If set to true, automated backups are not deleted and can be
+    /// restored later.
+    retain_automated_backups: ?bool = null,
+
     pub const json_field_names = .{
         .identifier = "identifier",
+        .retain_automated_backups = "retainAutomatedBackups",
     };
 };
 
@@ -31,6 +38,9 @@ pub const DeleteDbInstanceOutput = struct {
 
     /// The Availability Zone in which the DB instance resides.
     availability_zone: ?[]const u8 = null,
+
+    /// The backup configurations that were associated with the deleted DB instance.
+    db_backup_configurations: ?[]const DbBackupConfigurationOutput = null,
 
     /// Specifies the DbCluster to which this DbInstance belongs to.
     db_cluster_id: ?[]const u8 = null,
@@ -65,6 +75,10 @@ pub const DeleteDbInstanceOutput = struct {
 
     /// Specifies the DbInstance's roles in the cluster.
     instance_modes: ?[]const InstanceMode = null,
+
+    /// The Amazon Web Services KMS key ARN that was used for encryption of the
+    /// deleted DB instance.
+    kms_key_id: ?[]const u8 = null,
 
     /// The timestamp of the last completed maintenance operation on the DB
     /// instance.
@@ -113,6 +127,7 @@ pub const DeleteDbInstanceOutput = struct {
         .allocated_storage = "allocatedStorage",
         .arn = "arn",
         .availability_zone = "availabilityZone",
+        .db_backup_configurations = "dbBackupConfigurations",
         .db_cluster_id = "dbClusterId",
         .db_instance_type = "dbInstanceType",
         .db_parameter_group_identifier = "dbParameterGroupIdentifier",
@@ -123,6 +138,7 @@ pub const DeleteDbInstanceOutput = struct {
         .influx_auth_parameters_secret_arn = "influxAuthParametersSecretArn",
         .instance_mode = "instanceMode",
         .instance_modes = "instanceModes",
+        .kms_key_id = "kmsKeyId",
         .last_maintenance_time = "lastMaintenanceTime",
         .log_delivery_configuration = "logDeliveryConfiguration",
         .maintenance_schedule = "maintenanceSchedule",

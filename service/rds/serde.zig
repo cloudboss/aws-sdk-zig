@@ -27,6 +27,7 @@ const ConnectionPoolConfigurationInfo = @import("connection_pool_configuration_i
 const ContextAttribute = @import("context_attribute.zig").ContextAttribute;
 const CustomDBEngineVersionAMI = @import("custom_db_engine_version_ami.zig").CustomDBEngineVersionAMI;
 const DBCluster = @import("db_cluster.zig").DBCluster;
+const DBClusterAssociatedRole = @import("db_cluster_associated_role.zig").DBClusterAssociatedRole;
 const DBClusterAutomatedBackup = @import("db_cluster_automated_backup.zig").DBClusterAutomatedBackup;
 const DBClusterBacktrack = @import("db_cluster_backtrack.zig").DBClusterBacktrack;
 const DBClusterEndpoint = @import("db_cluster_endpoint.zig").DBClusterEndpoint;
@@ -147,6 +148,7 @@ const TagSpecification = @import("tag_specification.zig").TagSpecification;
 const TargetConnectionNetworkType = @import("target_connection_network_type.zig").TargetConnectionNetworkType;
 const TargetHealth = @import("target_health.zig").TargetHealth;
 const TargetHealthReason = @import("target_health_reason.zig").TargetHealthReason;
+const TargetResourceConfiguration = @import("target_resource_configuration.zig").TargetResourceConfiguration;
 const TargetRole = @import("target_role.zig").TargetRole;
 const TargetState = @import("target_state.zig").TargetState;
 const TargetType = @import("target_type.zig").TargetType;
@@ -2188,6 +2190,8 @@ pub fn deserializeAdditionalStorageVolumeOutput(allocator: std.mem.Allocator, re
     result.allocated_storage = null;
     result.iops = null;
     result.max_allocated_storage = null;
+    result.storage_operation_percent_progress = null;
+    result.storage_operation_status = null;
     result.storage_throughput = null;
     result.storage_type = null;
     result.storage_volume_status = null;
@@ -2201,6 +2205,10 @@ pub fn deserializeAdditionalStorageVolumeOutput(allocator: std.mem.Allocator, re
                     result.iops = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "MaxAllocatedStorage")) {
                     result.max_allocated_storage = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "StorageOperationPercentProgress")) {
+                    result.storage_operation_percent_progress = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "StorageOperationStatus")) {
+                    result.storage_operation_status = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StorageThroughput")) {
                     result.storage_throughput = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "StorageType")) {
@@ -3545,6 +3553,8 @@ pub fn deserializeDBInstance(allocator: std.mem.Allocator, reader: *aws.xml.Read
     result.status_infos = null;
     result.storage_encrypted = null;
     result.storage_encryption_type = null;
+    result.storage_operation_percent_progress = null;
+    result.storage_operation_status = null;
     result.storage_throughput = null;
     result.storage_type = null;
     result.storage_volume_status = null;
@@ -3722,6 +3732,10 @@ pub fn deserializeDBInstance(allocator: std.mem.Allocator, reader: *aws.xml.Read
                     result.storage_encrypted = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "StorageEncryptionType")) {
                     result.storage_encryption_type = StorageEncryptionType.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "StorageOperationPercentProgress")) {
+                    result.storage_operation_percent_progress = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "StorageOperationStatus")) {
+                    result.storage_operation_status = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "StorageThroughput")) {
                     result.storage_throughput = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "StorageType")) {
@@ -4418,6 +4432,7 @@ pub fn deserializeDBSnapshot(allocator: std.mem.Allocator, reader: *aws.xml.Read
     result.encrypted = null;
     result.engine = null;
     result.engine_version = null;
+    result.full_snapshot_size_in_bytes = null;
     result.iam_database_authentication_enabled = null;
     result.instance_create_time = null;
     result.iops = null;
@@ -4475,6 +4490,8 @@ pub fn deserializeDBSnapshot(allocator: std.mem.Allocator, reader: *aws.xml.Read
                     result.engine = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "EngineVersion")) {
                     result.engine_version = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "FullSnapshotSizeInBytes")) {
+                    result.full_snapshot_size_in_bytes = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "IAMDatabaseAuthenticationEnabled")) {
                     result.iam_database_authentication_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "InstanceCreateTime")) {
@@ -7079,6 +7096,18 @@ pub fn serializeAvailabilityZones(allocator: std.mem.Allocator, buf: *std.ArrayL
     }
 }
 
+pub fn serializeDBClusterAssociatedRoles(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const DBClusterAssociatedRole, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializeDBClusterAssociatedRole(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
 pub fn serializeDBSecurityGroupNameList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
         try buf.appendSlice(allocator, "<");
@@ -7307,6 +7336,18 @@ pub fn serializeTagSpecificationList(allocator: std.mem.Allocator, buf: *std.Arr
     }
 }
 
+pub fn serializeTargetResourceConfigurationList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const TargetResourceConfiguration, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializeTargetResourceConfiguration(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
 pub fn serializeUserAuthConfigList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const UserAuthConfig, comptime item_tag: []const u8) !void {
     for (value) |item| {
         try buf.appendSlice(allocator, "<");
@@ -7439,6 +7480,17 @@ pub fn serializeConnectionPoolConfiguration(allocator: std.mem.Allocator, buf: *
         try serializeStringList(allocator, buf, v, "member");
         try buf.appendSlice(allocator, "</SessionPinningFilters>");
     }
+}
+
+pub fn serializeDBClusterAssociatedRole(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: DBClusterAssociatedRole) !void {
+    if (value.feature_name) |v| {
+        try buf.appendSlice(allocator, "<FeatureName>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</FeatureName>");
+    }
+    try buf.appendSlice(allocator, "<RoleArn>");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.role_arn);
+    try buf.appendSlice(allocator, "</RoleArn>");
 }
 
 pub fn serializeFilter(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: Filter) !void {
@@ -7773,6 +7825,17 @@ pub fn serializeTagSpecification(allocator: std.mem.Allocator, buf: *std.ArrayLi
         try buf.appendSlice(allocator, "<Tags>");
         try serializeTagList(allocator, buf, v, "Tag");
         try buf.appendSlice(allocator, "</Tags>");
+    }
+}
+
+pub fn serializeTargetResourceConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: TargetResourceConfiguration) !void {
+    try buf.appendSlice(allocator, "<SourceArn>");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.source_arn);
+    try buf.appendSlice(allocator, "</SourceArn>");
+    if (value.target_kms_key_id) |v| {
+        try buf.appendSlice(allocator, "<TargetKmsKeyId>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</TargetKmsKeyId>");
     }
 }
 

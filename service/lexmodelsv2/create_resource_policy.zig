@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateResourcePolicyInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateResourcePolicyOutput {
-    var result: CreateResourcePolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateResourcePolicyOutput, body, allocator);
-    }
+    const result: CreateResourcePolicyOutput = try aws.json.parseJsonObject(
+        CreateResourcePolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

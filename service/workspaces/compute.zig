@@ -24,6 +24,10 @@ pub const Compute = enum {
     graphics_g6_f_2_xlarge,
     graphics_g6_f_4_xlarge,
     graphics_gr6_f_4_xlarge,
+    graphics_g7_2_xlarge,
+    graphics_g7_4_xlarge,
+    graphics_g7_8_xlarge,
+    graphics_g7_12_xlarge,
 
     pub const json_field_names = .{
         .value = "VALUE",
@@ -49,6 +53,10 @@ pub const Compute = enum {
         .graphics_g6_f_2_xlarge = "GRAPHICS_G6F_2XLARGE",
         .graphics_g6_f_4_xlarge = "GRAPHICS_G6F_4XLARGE",
         .graphics_gr6_f_4_xlarge = "GRAPHICS_GR6F_4XLARGE",
+        .graphics_g7_2_xlarge = "GRAPHICS_G7_2XLARGE",
+        .graphics_g7_4_xlarge = "GRAPHICS_G7_4XLARGE",
+        .graphics_g7_8_xlarge = "GRAPHICS_G7_8XLARGE",
+        .graphics_g7_12_xlarge = "GRAPHICS_G7_12XLARGE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -76,6 +84,10 @@ pub const Compute = enum {
             .graphics_g6_f_2_xlarge => "GRAPHICS_G6F_2XLARGE",
             .graphics_g6_f_4_xlarge => "GRAPHICS_G6F_4XLARGE",
             .graphics_gr6_f_4_xlarge => "GRAPHICS_GR6F_4XLARGE",
+            .graphics_g7_2_xlarge => "GRAPHICS_G7_2XLARGE",
+            .graphics_g7_4_xlarge => "GRAPHICS_G7_4XLARGE",
+            .graphics_g7_8_xlarge => "GRAPHICS_G7_8XLARGE",
+            .graphics_g7_12_xlarge => "GRAPHICS_G7_12XLARGE",
         };
     }
 

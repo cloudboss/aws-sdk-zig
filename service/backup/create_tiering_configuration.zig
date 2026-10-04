@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTieringConfigurat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateTieringConfigurationOutput {
-    var result: CreateTieringConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateTieringConfigurationOutput, body, allocator);
-    }
+    const result: CreateTieringConfigurationOutput = try aws.json.parseJsonObject(
+        CreateTieringConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

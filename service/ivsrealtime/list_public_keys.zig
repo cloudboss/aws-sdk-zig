@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPublicKeysInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListPublicKeysOutput {
-    var result: ListPublicKeysOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListPublicKeysOutput, body, allocator);
-    }
+    const result: ListPublicKeysOutput = try aws.json.parseJsonObject(
+        ListPublicKeysOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

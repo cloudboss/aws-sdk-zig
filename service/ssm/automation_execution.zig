@@ -143,6 +143,10 @@ pub const AutomationExecution = struct {
     /// Variables defined for the automation.
     variables: ?[]const aws.map.MapEntry([]const []const u8) = null,
 
+    /// A message that describes a non-critical issue that occurred during the
+    /// automation execution.
+    warning_message: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .alarm_configuration = "AlarmConfiguration",
         .association_id = "AssociationId",
@@ -179,5 +183,6 @@ pub const AutomationExecution = struct {
         .targets = "Targets",
         .triggered_alarms = "TriggeredAlarms",
         .variables = "Variables",
+        .warning_message = "WarningMessage",
     };
 };

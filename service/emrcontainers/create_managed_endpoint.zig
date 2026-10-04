@@ -28,6 +28,9 @@ pub const CreateManagedEndpointInput = struct {
     /// The Amazon EMR release version.
     release_label: []const u8,
 
+    /// The number of idle minutes before the managed endpoint session times out.
+    session_idle_timeout_in_minutes: ?i32 = null,
+
     /// The tags of the managed endpoint.
     tags: ?[]const aws.map.StringMapEntry = null,
 
@@ -44,6 +47,7 @@ pub const CreateManagedEndpointInput = struct {
         .execution_role_arn = "executionRoleArn",
         .name = "name",
         .release_label = "releaseLabel",
+        .session_idle_timeout_in_minutes = "sessionIdleTimeoutInMinutes",
         .tags = "tags",
         .@"type" = "type",
         .virtual_cluster_id = "virtualClusterId",
@@ -139,6 +143,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateManagedEndpointIn
     try body_buf.appendSlice(allocator, "\"releaseLabel\":");
     try aws.json.writeValue(@TypeOf(input.release_label), input.release_label, allocator, &body_buf);
     has_prev = true;
+    if (input.session_idle_timeout_in_minutes) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"sessionIdleTimeoutInMinutes\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"tags\":");
@@ -165,10 +175,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateManagedEndpointIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateManagedEndpointOutput {
-    var result: CreateManagedEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateManagedEndpointOutput, body, allocator);
-    }
+    const result: CreateManagedEndpointOutput = try aws.json.parseJsonObject(
+        CreateManagedEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

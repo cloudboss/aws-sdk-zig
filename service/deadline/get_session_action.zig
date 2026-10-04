@@ -142,10 +142,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSessionActionInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSessionActionOutput {
-    var result: GetSessionActionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSessionActionOutput, body, allocator);
-    }
+    const result: GetSessionActionOutput = try aws.json.parseJsonObject(
+        GetSessionActionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

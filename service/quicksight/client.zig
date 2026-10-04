@@ -2,38 +2,52 @@ const aws = @import("aws");
 const std = @import("std");
 
 const batch_create_topic_reviewed_answer = @import("batch_create_topic_reviewed_answer.zig");
+const batch_delete_knowledge_base = @import("batch_delete_knowledge_base.zig");
 const batch_delete_topic_reviewed_answer = @import("batch_delete_topic_reviewed_answer.zig");
+const batch_describe_user_limits = @import("batch_describe_user_limits.zig");
 const cancel_ingestion = @import("cancel_ingestion.zig");
 const create_account_customization = @import("create_account_customization.zig");
 const create_account_subscription = @import("create_account_subscription.zig");
 const create_action_connector = @import("create_action_connector.zig");
+const create_agent = @import("create_agent.zig");
 const create_analysis = @import("create_analysis.zig");
+const create_approval_policy = @import("create_approval_policy.zig");
 const create_brand = @import("create_brand.zig");
 const create_custom_permissions = @import("create_custom_permissions.zig");
 const create_dashboard = @import("create_dashboard.zig");
 const create_data_set = @import("create_data_set.zig");
 const create_data_source = @import("create_data_source.zig");
+const create_dlp_setting = @import("create_dlp_setting.zig");
+const create_flow = @import("create_flow.zig");
 const create_folder = @import("create_folder.zig");
 const create_folder_membership = @import("create_folder_membership.zig");
 const create_group = @import("create_group.zig");
 const create_group_membership = @import("create_group_membership.zig");
 const create_iam_policy_assignment = @import("create_iam_policy_assignment.zig");
 const create_ingestion = @import("create_ingestion.zig");
+const create_knowledge_base = @import("create_knowledge_base.zig");
+const create_limits_profile = @import("create_limits_profile.zig");
 const create_namespace = @import("create_namespace.zig");
+const create_o_auth_client_application = @import("create_o_auth_client_application.zig");
 const create_refresh_schedule = @import("create_refresh_schedule.zig");
 const create_role_membership = @import("create_role_membership.zig");
+const create_space = @import("create_space.zig");
 const create_template = @import("create_template.zig");
 const create_template_alias = @import("create_template_alias.zig");
 const create_theme = @import("create_theme.zig");
 const create_theme_alias = @import("create_theme_alias.zig");
 const create_topic = @import("create_topic.zig");
 const create_topic_refresh_schedule = @import("create_topic_refresh_schedule.zig");
+const create_topic_v2 = @import("create_topic_v2.zig");
 const create_vpc_connection = @import("create_vpc_connection.zig");
 const delete_account_custom_permission = @import("delete_account_custom_permission.zig");
 const delete_account_customization = @import("delete_account_customization.zig");
 const delete_account_subscription = @import("delete_account_subscription.zig");
 const delete_action_connector = @import("delete_action_connector.zig");
+const delete_agent = @import("delete_agent.zig");
 const delete_analysis = @import("delete_analysis.zig");
+const delete_app = @import("delete_app.zig");
+const delete_approval_policy = @import("delete_approval_policy.zig");
 const delete_brand = @import("delete_brand.zig");
 const delete_brand_assignment = @import("delete_brand_assignment.zig");
 const delete_custom_permissions = @import("delete_custom_permissions.zig");
@@ -42,22 +56,29 @@ const delete_data_set = @import("delete_data_set.zig");
 const delete_data_set_refresh_properties = @import("delete_data_set_refresh_properties.zig");
 const delete_data_source = @import("delete_data_source.zig");
 const delete_default_q_business_application = @import("delete_default_q_business_application.zig");
+const delete_dlp_setting = @import("delete_dlp_setting.zig");
+const delete_flow = @import("delete_flow.zig");
 const delete_folder = @import("delete_folder.zig");
 const delete_folder_membership = @import("delete_folder_membership.zig");
 const delete_group = @import("delete_group.zig");
 const delete_group_membership = @import("delete_group_membership.zig");
 const delete_iam_policy_assignment = @import("delete_iam_policy_assignment.zig");
 const delete_identity_propagation_config = @import("delete_identity_propagation_config.zig");
+const delete_knowledge_base = @import("delete_knowledge_base.zig");
+const delete_limits_profile = @import("delete_limits_profile.zig");
 const delete_namespace = @import("delete_namespace.zig");
+const delete_o_auth_client_application = @import("delete_o_auth_client_application.zig");
 const delete_refresh_schedule = @import("delete_refresh_schedule.zig");
 const delete_role_custom_permission = @import("delete_role_custom_permission.zig");
 const delete_role_membership = @import("delete_role_membership.zig");
+const delete_space = @import("delete_space.zig");
 const delete_template = @import("delete_template.zig");
 const delete_template_alias = @import("delete_template_alias.zig");
 const delete_theme = @import("delete_theme.zig");
 const delete_theme_alias = @import("delete_theme_alias.zig");
 const delete_topic = @import("delete_topic.zig");
 const delete_topic_refresh_schedule = @import("delete_topic_refresh_schedule.zig");
+const delete_topic_v2 = @import("delete_topic_v2.zig");
 const delete_user = @import("delete_user.zig");
 const delete_user_by_principal_id = @import("delete_user_by_principal_id.zig");
 const delete_user_custom_permission = @import("delete_user_custom_permission.zig");
@@ -68,9 +89,14 @@ const describe_account_settings = @import("describe_account_settings.zig");
 const describe_account_subscription = @import("describe_account_subscription.zig");
 const describe_action_connector = @import("describe_action_connector.zig");
 const describe_action_connector_permissions = @import("describe_action_connector_permissions.zig");
+const describe_agent = @import("describe_agent.zig");
+const describe_agent_permissions = @import("describe_agent_permissions.zig");
 const describe_analysis = @import("describe_analysis.zig");
 const describe_analysis_definition = @import("describe_analysis_definition.zig");
 const describe_analysis_permissions = @import("describe_analysis_permissions.zig");
+const describe_app = @import("describe_app.zig");
+const describe_app_permissions = @import("describe_app_permissions.zig");
+const describe_approval_policy = @import("describe_approval_policy.zig");
 const describe_asset_bundle_export_job = @import("describe_asset_bundle_export_job.zig");
 const describe_asset_bundle_import_job = @import("describe_asset_bundle_import_job.zig");
 const describe_automation_job = @import("describe_automation_job.zig");
@@ -90,6 +116,8 @@ const describe_data_set_refresh_properties = @import("describe_data_set_refresh_
 const describe_data_source = @import("describe_data_source.zig");
 const describe_data_source_permissions = @import("describe_data_source_permissions.zig");
 const describe_default_q_business_application = @import("describe_default_q_business_application.zig");
+const describe_dlp_setting = @import("describe_dlp_setting.zig");
+const describe_flow = @import("describe_flow.zig");
 const describe_folder = @import("describe_folder.zig");
 const describe_folder_permissions = @import("describe_folder_permissions.zig");
 const describe_folder_resolved_permissions = @import("describe_folder_resolved_permissions.zig");
@@ -99,12 +127,18 @@ const describe_iam_policy_assignment = @import("describe_iam_policy_assignment.z
 const describe_ingestion = @import("describe_ingestion.zig");
 const describe_ip_restriction = @import("describe_ip_restriction.zig");
 const describe_key_registration = @import("describe_key_registration.zig");
+const describe_knowledge_base = @import("describe_knowledge_base.zig");
+const describe_knowledge_base_permissions = @import("describe_knowledge_base_permissions.zig");
+const describe_limits_profile = @import("describe_limits_profile.zig");
 const describe_namespace = @import("describe_namespace.zig");
+const describe_o_auth_client_application = @import("describe_o_auth_client_application.zig");
 const describe_q_personalization_configuration = @import("describe_q_personalization_configuration.zig");
 const describe_quick_sight_q_search_configuration = @import("describe_quick_sight_q_search_configuration.zig");
 const describe_refresh_schedule = @import("describe_refresh_schedule.zig");
 const describe_role_custom_permission = @import("describe_role_custom_permission.zig");
 const describe_self_upgrade_configuration = @import("describe_self_upgrade_configuration.zig");
+const describe_space = @import("describe_space.zig");
+const describe_space_permissions = @import("describe_space_permissions.zig");
 const describe_template = @import("describe_template.zig");
 const describe_template_alias = @import("describe_template_alias.zig");
 const describe_template_definition = @import("describe_template_definition.zig");
@@ -114,8 +148,10 @@ const describe_theme_alias = @import("describe_theme_alias.zig");
 const describe_theme_permissions = @import("describe_theme_permissions.zig");
 const describe_topic = @import("describe_topic.zig");
 const describe_topic_permissions = @import("describe_topic_permissions.zig");
+const describe_topic_permissions_v2 = @import("describe_topic_permissions_v2.zig");
 const describe_topic_refresh = @import("describe_topic_refresh.zig");
 const describe_topic_refresh_schedule = @import("describe_topic_refresh_schedule.zig");
+const describe_topic_v2 = @import("describe_topic_v2.zig");
 const describe_user = @import("describe_user.zig");
 const describe_vpc_connection = @import("describe_vpc_connection.zig");
 const generate_embed_url_for_anonymous_user = @import("generate_embed_url_for_anonymous_user.zig");
@@ -127,7 +163,10 @@ const get_flow_permissions = @import("get_flow_permissions.zig");
 const get_identity_context = @import("get_identity_context.zig");
 const get_session_embed_url = @import("get_session_embed_url.zig");
 const list_action_connectors = @import("list_action_connectors.zig");
+const list_agents = @import("list_agents.zig");
 const list_analyses = @import("list_analyses.zig");
+const list_approval_policies = @import("list_approval_policies.zig");
+const list_apps = @import("list_apps.zig");
 const list_asset_bundle_export_jobs = @import("list_asset_bundle_export_jobs.zig");
 const list_asset_bundle_import_jobs = @import("list_asset_bundle_import_jobs.zig");
 const list_brands = @import("list_brands.zig");
@@ -136,6 +175,7 @@ const list_dashboard_versions = @import("list_dashboard_versions.zig");
 const list_dashboards = @import("list_dashboards.zig");
 const list_data_sets = @import("list_data_sets.zig");
 const list_data_sources = @import("list_data_sources.zig");
+const list_dlp_settings = @import("list_dlp_settings.zig");
 const list_flows = @import("list_flows.zig");
 const list_folder_members = @import("list_folder_members.zig");
 const list_folders = @import("list_folders.zig");
@@ -146,10 +186,15 @@ const list_iam_policy_assignments = @import("list_iam_policy_assignments.zig");
 const list_iam_policy_assignments_for_user = @import("list_iam_policy_assignments_for_user.zig");
 const list_identity_propagation_configs = @import("list_identity_propagation_configs.zig");
 const list_ingestions = @import("list_ingestions.zig");
+const list_knowledge_bases = @import("list_knowledge_bases.zig");
+const list_limits_profiles = @import("list_limits_profiles.zig");
 const list_namespaces = @import("list_namespaces.zig");
+const list_o_auth_client_applications = @import("list_o_auth_client_applications.zig");
 const list_refresh_schedules = @import("list_refresh_schedules.zig");
 const list_role_memberships = @import("list_role_memberships.zig");
 const list_self_upgrades = @import("list_self_upgrades.zig");
+const list_space_resources = @import("list_space_resources.zig");
+const list_spaces = @import("list_spaces.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_template_aliases = @import("list_template_aliases.zig");
 const list_template_versions = @import("list_template_versions.zig");
@@ -160,22 +205,29 @@ const list_themes = @import("list_themes.zig");
 const list_topic_refresh_schedules = @import("list_topic_refresh_schedules.zig");
 const list_topic_reviewed_answers = @import("list_topic_reviewed_answers.zig");
 const list_topics = @import("list_topics.zig");
+const list_topics_v2 = @import("list_topics_v2.zig");
 const list_user_groups = @import("list_user_groups.zig");
 const list_users = @import("list_users.zig");
+const list_users_index_capacity = @import("list_users_index_capacity.zig");
 const list_vpc_connections = @import("list_vpc_connections.zig");
 const predict_qa_results = @import("predict_qa_results.zig");
 const put_data_set_refresh_properties = @import("put_data_set_refresh_properties.zig");
 const register_user = @import("register_user.zig");
 const restore_analysis = @import("restore_analysis.zig");
 const search_action_connectors = @import("search_action_connectors.zig");
+const search_agents = @import("search_agents.zig");
 const search_analyses = @import("search_analyses.zig");
+const search_apps = @import("search_apps.zig");
 const search_dashboards = @import("search_dashboards.zig");
 const search_data_sets = @import("search_data_sets.zig");
 const search_data_sources = @import("search_data_sources.zig");
 const search_flows = @import("search_flows.zig");
 const search_folders = @import("search_folders.zig");
 const search_groups = @import("search_groups.zig");
+const search_knowledge_bases = @import("search_knowledge_bases.zig");
+const search_spaces = @import("search_spaces.zig");
 const search_topics = @import("search_topics.zig");
+const search_topics_v2 = @import("search_topics_v2.zig");
 const start_asset_bundle_export_job = @import("start_asset_bundle_export_job.zig");
 const start_asset_bundle_import_job = @import("start_asset_bundle_import_job.zig");
 const start_automation_job = @import("start_automation_job.zig");
@@ -188,9 +240,13 @@ const update_account_customization = @import("update_account_customization.zig")
 const update_account_settings = @import("update_account_settings.zig");
 const update_action_connector = @import("update_action_connector.zig");
 const update_action_connector_permissions = @import("update_action_connector_permissions.zig");
+const update_agent = @import("update_agent.zig");
+const update_agent_permissions = @import("update_agent_permissions.zig");
 const update_analysis = @import("update_analysis.zig");
 const update_analysis_permissions = @import("update_analysis_permissions.zig");
+const update_app_permissions = @import("update_app_permissions.zig");
 const update_application_with_token_exchange_grant = @import("update_application_with_token_exchange_grant.zig");
+const update_approval_policy = @import("update_approval_policy.zig");
 const update_brand = @import("update_brand.zig");
 const update_brand_assignment = @import("update_brand_assignment.zig");
 const update_brand_published_version = @import("update_brand_published_version.zig");
@@ -205,6 +261,8 @@ const update_data_set_permissions = @import("update_data_set_permissions.zig");
 const update_data_source = @import("update_data_source.zig");
 const update_data_source_permissions = @import("update_data_source_permissions.zig");
 const update_default_q_business_application = @import("update_default_q_business_application.zig");
+const update_dlp_setting = @import("update_dlp_setting.zig");
+const update_flow = @import("update_flow.zig");
 const update_flow_permissions = @import("update_flow_permissions.zig");
 const update_folder = @import("update_folder.zig");
 const update_folder_permissions = @import("update_folder_permissions.zig");
@@ -213,6 +271,10 @@ const update_iam_policy_assignment = @import("update_iam_policy_assignment.zig")
 const update_identity_propagation_config = @import("update_identity_propagation_config.zig");
 const update_ip_restriction = @import("update_ip_restriction.zig");
 const update_key_registration = @import("update_key_registration.zig");
+const update_knowledge_base = @import("update_knowledge_base.zig");
+const update_knowledge_base_permissions = @import("update_knowledge_base_permissions.zig");
+const update_limits_profile = @import("update_limits_profile.zig");
+const update_o_auth_client_application = @import("update_o_auth_client_application.zig");
 const update_public_sharing_settings = @import("update_public_sharing_settings.zig");
 const update_q_personalization_configuration = @import("update_q_personalization_configuration.zig");
 const update_quick_sight_q_search_configuration = @import("update_quick_sight_q_search_configuration.zig");
@@ -220,6 +282,9 @@ const update_refresh_schedule = @import("update_refresh_schedule.zig");
 const update_role_custom_permission = @import("update_role_custom_permission.zig");
 const update_self_upgrade = @import("update_self_upgrade.zig");
 const update_self_upgrade_configuration = @import("update_self_upgrade_configuration.zig");
+const update_space = @import("update_space.zig");
+const update_space_permissions = @import("update_space_permissions.zig");
+const update_space_resources = @import("update_space_resources.zig");
 const update_spice_capacity_configuration = @import("update_spice_capacity_configuration.zig");
 const update_template = @import("update_template.zig");
 const update_template_alias = @import("update_template_alias.zig");
@@ -229,7 +294,9 @@ const update_theme_alias = @import("update_theme_alias.zig");
 const update_theme_permissions = @import("update_theme_permissions.zig");
 const update_topic = @import("update_topic.zig");
 const update_topic_permissions = @import("update_topic_permissions.zig");
+const update_topic_permissions_v2 = @import("update_topic_permissions_v2.zig");
 const update_topic_refresh_schedule = @import("update_topic_refresh_schedule.zig");
+const update_topic_v2 = @import("update_topic_v2.zig");
 const update_user = @import("update_user.zig");
 const update_user_custom_permission = @import("update_user_custom_permission.zig");
 const update_vpc_connection = @import("update_vpc_connection.zig");
@@ -268,9 +335,21 @@ pub const Client = struct {
         return batch_create_topic_reviewed_answer.execute(self, allocator, input, options);
     }
 
+    /// Deletes one or more knowledge bases.
+    pub fn batchDeleteKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: batch_delete_knowledge_base.BatchDeleteKnowledgeBaseInput, options: CallOptions) !batch_delete_knowledge_base.BatchDeleteKnowledgeBaseOutput {
+        return batch_delete_knowledge_base.execute(self, allocator, input, options);
+    }
+
     /// Deletes reviewed answers for Q Topic.
     pub fn batchDeleteTopicReviewedAnswer(self: *Self, allocator: std.mem.Allocator, input: batch_delete_topic_reviewed_answer.BatchDeleteTopicReviewedAnswerInput, options: CallOptions) !batch_delete_topic_reviewed_answer.BatchDeleteTopicReviewedAnswerOutput {
         return batch_delete_topic_reviewed_answer.execute(self, allocator, input, options);
+    }
+
+    /// Describes the effective resource limits for one or more Amazon Quick Sight
+    /// users, including the limits that apply to each user based on their profile
+    /// assignments.
+    pub fn batchDescribeUserLimits(self: *Self, allocator: std.mem.Allocator, input: batch_describe_user_limits.BatchDescribeUserLimitsInput, options: CallOptions) !batch_describe_user_limits.BatchDescribeUserLimitsOutput {
+        return batch_describe_user_limits.execute(self, allocator, input, options);
     }
 
     /// Cancels an ongoing ingestion of data into SPICE.
@@ -367,10 +446,20 @@ pub const Client = struct {
         return create_action_connector.execute(self, allocator, input, options);
     }
 
+    /// Creates an agent in Amazon QuickSight.
+    pub fn createAgent(self: *Self, allocator: std.mem.Allocator, input: create_agent.CreateAgentInput, options: CallOptions) !create_agent.CreateAgentOutput {
+        return create_agent.execute(self, allocator, input, options);
+    }
+
     /// Creates an analysis in Amazon Quick Sight. Analyses can be created either
     /// from a template or from an `AnalysisDefinition`.
     pub fn createAnalysis(self: *Self, allocator: std.mem.Allocator, input: create_analysis.CreateAnalysisInput, options: CallOptions) !create_analysis.CreateAnalysisOutput {
         return create_analysis.execute(self, allocator, input, options);
+    }
+
+    /// Creates an approval policy in Quick Sight.
+    pub fn createApprovalPolicy(self: *Self, allocator: std.mem.Allocator, input: create_approval_policy.CreateApprovalPolicyInput, options: CallOptions) !create_approval_policy.CreateApprovalPolicyOutput {
+        return create_approval_policy.execute(self, allocator, input, options);
     }
 
     /// Creates an Quick Sight brand.
@@ -401,9 +490,7 @@ pub const Client = struct {
         return create_dashboard.execute(self, allocator, input, options);
     }
 
-    /// Creates a dataset. This operation doesn't support datasets that include
-    /// uploaded files
-    /// as a source.
+    /// Creates a dataset.
     pub fn createDataSet(self: *Self, allocator: std.mem.Allocator, input: create_data_set.CreateDataSetInput, options: CallOptions) !create_data_set.CreateDataSetOutput {
         return create_data_set.execute(self, allocator, input, options);
     }
@@ -411,6 +498,22 @@ pub const Client = struct {
     /// Creates a data source.
     pub fn createDataSource(self: *Self, allocator: std.mem.Allocator, input: create_data_source.CreateDataSourceInput, options: CallOptions) !create_data_source.CreateDataSourceOutput {
         return create_data_source.execute(self, allocator, input, options);
+    }
+
+    /// Creates a data loss prevention (DLP) setting configuration for an Amazon Web
+    /// Services account. A DLP setting defines the DLP provider, the enforcement
+    /// behavior, and the Quick capabilities that the setting applies to.
+    pub fn createDlpSetting(self: *Self, allocator: std.mem.Allocator, input: create_dlp_setting.CreateDlpSettingInput, options: CallOptions) !create_dlp_setting.CreateDlpSettingOutput {
+        return create_dlp_setting.execute(self, allocator, input, options);
+    }
+
+    /// Creates a new flow in the specified Amazon Web Services account. Creates
+    /// both a DRAFT and PUBLISHED (auto-published) version.
+    ///
+    /// This operation is idempotent. Supply a `ClientToken` to safely retry without
+    /// creating duplicate resources.
+    pub fn createFlow(self: *Self, allocator: std.mem.Allocator, input: create_flow.CreateFlowInput, options: CallOptions) !create_flow.CreateFlowOutput {
+        return create_flow.execute(self, allocator, input, options);
     }
 
     /// Creates an empty shared folder.
@@ -470,6 +573,32 @@ pub const Client = struct {
         return create_ingestion.execute(self, allocator, input, options);
     }
 
+    /// Creates a knowledge base from a specified data source. Supported data source
+    /// connector types include:
+    ///
+    /// * `S3_KNOWLEDGE_BASE` – Uses an Amazon S3 bucket as the data source.
+    ///
+    /// * `WEB_CRAWLER` – Uses web pages indexed by the built-in web crawler as the
+    ///   data source.
+    ///
+    /// * `GOOGLE_DRIVE` – Uses Google Drive as the data source. Supports service
+    ///   account authentication only.
+    ///
+    /// * `SHAREPOINT` – Uses SharePoint as the data source. Supports two-legged
+    ///   OAuth only.
+    ///
+    /// * `ONE_DRIVE` – Uses OneDrive as the data source. Supports two-legged OAuth
+    ///   only.
+    pub fn createKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: create_knowledge_base.CreateKnowledgeBaseInput, options: CallOptions) !create_knowledge_base.CreateKnowledgeBaseOutput {
+        return create_knowledge_base.execute(self, allocator, input, options);
+    }
+
+    /// Creates a limits profile that defines resource usage limits for Amazon Quick
+    /// Sight users.
+    pub fn createLimitsProfile(self: *Self, allocator: std.mem.Allocator, input: create_limits_profile.CreateLimitsProfileInput, options: CallOptions) !create_limits_profile.CreateLimitsProfileOutput {
+        return create_limits_profile.execute(self, allocator, input, options);
+    }
+
     /// (Enterprise edition only) Creates a new namespace for you to use with Amazon
     /// Quick Sight.
     ///
@@ -490,6 +619,11 @@ pub const Client = struct {
         return create_namespace.execute(self, allocator, input, options);
     }
 
+    /// Creates an OAuthClientApplication.
+    pub fn createOAuthClientApplication(self: *Self, allocator: std.mem.Allocator, input: create_o_auth_client_application.CreateOAuthClientApplicationInput, options: CallOptions) !create_o_auth_client_application.CreateOAuthClientApplicationOutput {
+        return create_o_auth_client_application.execute(self, allocator, input, options);
+    }
+
     /// Creates a refresh schedule for a dataset. You can create up to 5 different
     /// schedules for a single dataset.
     pub fn createRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: create_refresh_schedule.CreateRefreshScheduleInput, options: CallOptions) !create_refresh_schedule.CreateRefreshScheduleOutput {
@@ -500,6 +634,12 @@ pub const Client = struct {
     /// existing role.
     pub fn createRoleMembership(self: *Self, allocator: std.mem.Allocator, input: create_role_membership.CreateRoleMembershipInput, options: CallOptions) !create_role_membership.CreateRoleMembershipOutput {
         return create_role_membership.execute(self, allocator, input, options);
+    }
+
+    /// Creates a new Amazon QuickSight space. A space is a collection of resources
+    /// that can be used to organize and manage QuickSight assets.
+    pub fn createSpace(self: *Self, allocator: std.mem.Allocator, input: create_space.CreateSpaceInput, options: CallOptions) !create_space.CreateSpaceOutput {
+        return create_space.execute(self, allocator, input, options);
     }
 
     /// Creates a template either from a `TemplateDefinition` or from an existing
@@ -548,6 +688,11 @@ pub const Client = struct {
     /// Creates a topic refresh schedule.
     pub fn createTopicRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: create_topic_refresh_schedule.CreateTopicRefreshScheduleInput, options: CallOptions) !create_topic_refresh_schedule.CreateTopicRefreshScheduleOutput {
         return create_topic_refresh_schedule.execute(self, allocator, input, options);
+    }
+
+    /// Creates a new Q topic.
+    pub fn createTopicV2(self: *Self, allocator: std.mem.Allocator, input: create_topic_v2.CreateTopicV2Input, options: CallOptions) !create_topic_v2.CreateTopicV2Output {
+        return create_topic_v2.execute(self, allocator, input, options);
     }
 
     /// Creates a new VPC connection.
@@ -625,6 +770,11 @@ pub const Client = struct {
         return delete_action_connector.execute(self, allocator, input, options);
     }
 
+    /// Deletes an agent.
+    pub fn deleteAgent(self: *Self, allocator: std.mem.Allocator, input: delete_agent.DeleteAgentInput, options: CallOptions) !delete_agent.DeleteAgentOutput {
+        return delete_agent.execute(self, allocator, input, options);
+    }
+
     /// Deletes an analysis from Amazon Quick Sight. You can optionally include a
     /// recovery window during
     /// which you can restore the analysis. If you don't specify a recovery window
@@ -648,6 +798,16 @@ pub const Client = struct {
     /// dashboards that you publish from it.
     pub fn deleteAnalysis(self: *Self, allocator: std.mem.Allocator, input: delete_analysis.DeleteAnalysisInput, options: CallOptions) !delete_analysis.DeleteAnalysisOutput {
         return delete_analysis.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an app.
+    pub fn deleteApp(self: *Self, allocator: std.mem.Allocator, input: delete_app.DeleteAppInput, options: CallOptions) !delete_app.DeleteAppOutput {
+        return delete_app.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an approval policy in Quick Sight.
+    pub fn deleteApprovalPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_approval_policy.DeleteApprovalPolicyInput, options: CallOptions) !delete_approval_policy.DeleteApprovalPolicyOutput {
+        return delete_approval_policy.execute(self, allocator, input, options);
     }
 
     /// This API permanently deletes the specified Quick Sight brand. When you
@@ -705,6 +865,17 @@ pub const Client = struct {
         return delete_default_q_business_application.execute(self, allocator, input, options);
     }
 
+    /// Deletes a DLP setting configuration from an Amazon Web Services account.
+    pub fn deleteDlpSetting(self: *Self, allocator: std.mem.Allocator, input: delete_dlp_setting.DeleteDlpSettingInput, options: CallOptions) !delete_dlp_setting.DeleteDlpSettingOutput {
+        return delete_dlp_setting.execute(self, allocator, input, options);
+    }
+
+    /// Permanently deletes a flow from the specified Amazon Web Services account.
+    /// This operation cannot be undone.
+    pub fn deleteFlow(self: *Self, allocator: std.mem.Allocator, input: delete_flow.DeleteFlowInput, options: CallOptions) !delete_flow.DeleteFlowOutput {
+        return delete_flow.execute(self, allocator, input, options);
+    }
+
     /// Deletes an empty folder.
     pub fn deleteFolder(self: *Self, allocator: std.mem.Allocator, input: delete_folder.DeleteFolderInput, options: CallOptions) !delete_folder.DeleteFolderOutput {
         return delete_folder.execute(self, allocator, input, options);
@@ -740,6 +911,16 @@ pub const Client = struct {
         return delete_identity_propagation_config.execute(self, allocator, input, options);
     }
 
+    /// Deletes a knowledge base.
+    pub fn deleteKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: delete_knowledge_base.DeleteKnowledgeBaseInput, options: CallOptions) !delete_knowledge_base.DeleteKnowledgeBaseOutput {
+        return delete_knowledge_base.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a limits profile.
+    pub fn deleteLimitsProfile(self: *Self, allocator: std.mem.Allocator, input: delete_limits_profile.DeleteLimitsProfileInput, options: CallOptions) !delete_limits_profile.DeleteLimitsProfileOutput {
+        return delete_limits_profile.execute(self, allocator, input, options);
+    }
+
     /// Deletes a namespace and the users and groups that are associated with the
     /// namespace.
     /// This is an asynchronous process. Assets including dashboards, analyses,
@@ -748,6 +929,11 @@ pub const Client = struct {
     /// asset.
     pub fn deleteNamespace(self: *Self, allocator: std.mem.Allocator, input: delete_namespace.DeleteNamespaceInput, options: CallOptions) !delete_namespace.DeleteNamespaceOutput {
         return delete_namespace.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an OAuthClientApplication.
+    pub fn deleteOAuthClientApplication(self: *Self, allocator: std.mem.Allocator, input: delete_o_auth_client_application.DeleteOAuthClientApplicationInput, options: CallOptions) !delete_o_auth_client_application.DeleteOAuthClientApplicationOutput {
+        return delete_o_auth_client_application.execute(self, allocator, input, options);
     }
 
     /// Deletes a refresh schedule from a dataset.
@@ -763,6 +949,11 @@ pub const Client = struct {
     /// Removes a group from a role.
     pub fn deleteRoleMembership(self: *Self, allocator: std.mem.Allocator, input: delete_role_membership.DeleteRoleMembershipInput, options: CallOptions) !delete_role_membership.DeleteRoleMembershipOutput {
         return delete_role_membership.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an Amazon QuickSight space.
+    pub fn deleteSpace(self: *Self, allocator: std.mem.Allocator, input: delete_space.DeleteSpaceInput, options: CallOptions) !delete_space.DeleteSpaceOutput {
+        return delete_space.execute(self, allocator, input, options);
     }
 
     /// Deletes a template.
@@ -797,6 +988,11 @@ pub const Client = struct {
     /// Deletes a topic refresh schedule.
     pub fn deleteTopicRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: delete_topic_refresh_schedule.DeleteTopicRefreshScheduleInput, options: CallOptions) !delete_topic_refresh_schedule.DeleteTopicRefreshScheduleOutput {
         return delete_topic_refresh_schedule.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a Q topic.
+    pub fn deleteTopicV2(self: *Self, allocator: std.mem.Allocator, input: delete_topic_v2.DeleteTopicV2Input, options: CallOptions) !delete_topic_v2.DeleteTopicV2Output {
+        return delete_topic_v2.execute(self, allocator, input, options);
     }
 
     /// Deletes the Amazon Quick Sight user that is associated with the identity of
@@ -916,6 +1112,16 @@ pub const Client = struct {
         return describe_action_connector_permissions.execute(self, allocator, input, options);
     }
 
+    /// Describes an agent.
+    pub fn describeAgent(self: *Self, allocator: std.mem.Allocator, input: describe_agent.DescribeAgentInput, options: CallOptions) !describe_agent.DescribeAgentOutput {
+        return describe_agent.execute(self, allocator, input, options);
+    }
+
+    /// Describes the resource permissions for an agent.
+    pub fn describeAgentPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_agent_permissions.DescribeAgentPermissionsInput, options: CallOptions) !describe_agent_permissions.DescribeAgentPermissionsOutput {
+        return describe_agent_permissions.execute(self, allocator, input, options);
+    }
+
     /// Provides a summary of the metadata for an analysis.
     pub fn describeAnalysis(self: *Self, allocator: std.mem.Allocator, input: describe_analysis.DescribeAnalysisInput, options: CallOptions) !describe_analysis.DescribeAnalysisOutput {
         return describe_analysis.execute(self, allocator, input, options);
@@ -937,6 +1143,21 @@ pub const Client = struct {
     /// Provides the read and write permissions for an analysis.
     pub fn describeAnalysisPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_analysis_permissions.DescribeAnalysisPermissionsInput, options: CallOptions) !describe_analysis_permissions.DescribeAnalysisPermissionsOutput {
         return describe_analysis_permissions.execute(self, allocator, input, options);
+    }
+
+    /// Describes an app.
+    pub fn describeApp(self: *Self, allocator: std.mem.Allocator, input: describe_app.DescribeAppInput, options: CallOptions) !describe_app.DescribeAppOutput {
+        return describe_app.execute(self, allocator, input, options);
+    }
+
+    /// Describes the resource permissions for an app.
+    pub fn describeAppPermissions(self: *Self, allocator: std.mem.Allocator, input: describe_app_permissions.DescribeAppPermissionsInput, options: CallOptions) !describe_app_permissions.DescribeAppPermissionsOutput {
+        return describe_app_permissions.execute(self, allocator, input, options);
+    }
+
+    /// Describes an approval policy in Quick Sight.
+    pub fn describeApprovalPolicy(self: *Self, allocator: std.mem.Allocator, input: describe_approval_policy.DescribeApprovalPolicyInput, options: CallOptions) !describe_approval_policy.DescribeApprovalPolicyOutput {
+        return describe_approval_policy.execute(self, allocator, input, options);
     }
 
     /// Describes an existing export job.
@@ -1091,9 +1312,7 @@ pub const Client = struct {
         return describe_dashboards_qa_configuration.execute(self, allocator, input, options);
     }
 
-    /// Describes a dataset. This operation doesn't support datasets that include
-    /// uploaded
-    /// files as a source.
+    /// Describes a dataset.
     pub fn describeDataSet(self: *Self, allocator: std.mem.Allocator, input: describe_data_set.DescribeDataSetInput, options: CallOptions) !describe_data_set.DescribeDataSetOutput {
         return describe_data_set.execute(self, allocator, input, options);
     }
@@ -1125,6 +1344,18 @@ pub const Client = struct {
     /// account.
     pub fn describeDefaultQBusinessApplication(self: *Self, allocator: std.mem.Allocator, input: describe_default_q_business_application.DescribeDefaultQBusinessApplicationInput, options: CallOptions) !describe_default_q_business_application.DescribeDefaultQBusinessApplicationOutput {
         return describe_default_q_business_application.execute(self, allocator, input, options);
+    }
+
+    /// Describes the full configuration of a DLP setting in an Amazon Web Services
+    /// account.
+    pub fn describeDlpSetting(self: *Self, allocator: std.mem.Allocator, input: describe_dlp_setting.DescribeDlpSettingInput, options: CallOptions) !describe_dlp_setting.DescribeDlpSettingOutput {
+        return describe_dlp_setting.execute(self, allocator, input, options);
+    }
+
+    /// Returns the full details of a flow for the latest version of the requested
+    /// publish state.
+    pub fn describeFlow(self: *Self, allocator: std.mem.Allocator, input: describe_flow.DescribeFlowInput, options: CallOptions) !describe_flow.DescribeFlowOutput {
+        return describe_flow.execute(self, allocator, input, options);
     }
 
     /// Describes a folder.
@@ -1179,9 +1410,29 @@ pub const Client = struct {
         return describe_key_registration.execute(self, allocator, input, options);
     }
 
+    /// Describes a knowledge base.
+    pub fn describeKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: describe_knowledge_base.DescribeKnowledgeBaseInput, options: CallOptions) !describe_knowledge_base.DescribeKnowledgeBaseOutput {
+        return describe_knowledge_base.execute(self, allocator, input, options);
+    }
+
+    /// Describes the resource permissions for a knowledge base.
+    pub fn describeKnowledgeBasePermissions(self: *Self, allocator: std.mem.Allocator, input: describe_knowledge_base_permissions.DescribeKnowledgeBasePermissionsInput, options: CallOptions) !describe_knowledge_base_permissions.DescribeKnowledgeBasePermissionsOutput {
+        return describe_knowledge_base_permissions.execute(self, allocator, input, options);
+    }
+
+    /// Describes the properties of an existing limits profile.
+    pub fn describeLimitsProfile(self: *Self, allocator: std.mem.Allocator, input: describe_limits_profile.DescribeLimitsProfileInput, options: CallOptions) !describe_limits_profile.DescribeLimitsProfileOutput {
+        return describe_limits_profile.execute(self, allocator, input, options);
+    }
+
     /// Describes the current namespace.
     pub fn describeNamespace(self: *Self, allocator: std.mem.Allocator, input: describe_namespace.DescribeNamespaceInput, options: CallOptions) !describe_namespace.DescribeNamespaceOutput {
         return describe_namespace.execute(self, allocator, input, options);
+    }
+
+    /// Describes an OAuthClientApplication.
+    pub fn describeOAuthClientApplication(self: *Self, allocator: std.mem.Allocator, input: describe_o_auth_client_application.DescribeOAuthClientApplicationInput, options: CallOptions) !describe_o_auth_client_application.DescribeOAuthClientApplicationOutput {
+        return describe_o_auth_client_application.execute(self, allocator, input, options);
     }
 
     /// Describes a personalization configuration.
@@ -1207,6 +1458,16 @@ pub const Client = struct {
     /// Describes the self-upgrade configuration for a Quick account.
     pub fn describeSelfUpgradeConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_self_upgrade_configuration.DescribeSelfUpgradeConfigurationInput, options: CallOptions) !describe_self_upgrade_configuration.DescribeSelfUpgradeConfigurationOutput {
         return describe_self_upgrade_configuration.execute(self, allocator, input, options);
+    }
+
+    /// Describes an Amazon QuickSight space.
+    pub fn describeSpace(self: *Self, allocator: std.mem.Allocator, input: describe_space.DescribeSpaceInput, options: CallOptions) !describe_space.DescribeSpaceOutput {
+        return describe_space.execute(self, allocator, input, options);
+    }
+
+    /// Describes the permissions for an Amazon QuickSight space.
+    pub fn describeSpacePermissions(self: *Self, allocator: std.mem.Allocator, input: describe_space_permissions.DescribeSpacePermissionsInput, options: CallOptions) !describe_space_permissions.DescribeSpacePermissionsOutput {
+        return describe_space_permissions.execute(self, allocator, input, options);
     }
 
     /// Describes a template's metadata.
@@ -1262,6 +1523,11 @@ pub const Client = struct {
         return describe_topic_permissions.execute(self, allocator, input, options);
     }
 
+    /// Describes the permissions of a topic.
+    pub fn describeTopicPermissionsV2(self: *Self, allocator: std.mem.Allocator, input: describe_topic_permissions_v2.DescribeTopicPermissionsV2Input, options: CallOptions) !describe_topic_permissions_v2.DescribeTopicPermissionsV2Output {
+        return describe_topic_permissions_v2.execute(self, allocator, input, options);
+    }
+
     /// Describes the status of a topic refresh.
     pub fn describeTopicRefresh(self: *Self, allocator: std.mem.Allocator, input: describe_topic_refresh.DescribeTopicRefreshInput, options: CallOptions) !describe_topic_refresh.DescribeTopicRefreshOutput {
         return describe_topic_refresh.execute(self, allocator, input, options);
@@ -1270,6 +1536,11 @@ pub const Client = struct {
     /// Deletes a topic refresh schedule.
     pub fn describeTopicRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: describe_topic_refresh_schedule.DescribeTopicRefreshScheduleInput, options: CallOptions) !describe_topic_refresh_schedule.DescribeTopicRefreshScheduleOutput {
         return describe_topic_refresh_schedule.execute(self, allocator, input, options);
+    }
+
+    /// Describes a Q topic.
+    pub fn describeTopicV2(self: *Self, allocator: std.mem.Allocator, input: describe_topic_v2.DescribeTopicV2Input, options: CallOptions) !describe_topic_v2.DescribeTopicV2Output {
+        return describe_topic_v2.execute(self, allocator, input, options);
     }
 
     /// Returns information about a user, given the user name.
@@ -1528,10 +1799,30 @@ pub const Client = struct {
         return list_action_connectors.execute(self, allocator, input, options);
     }
 
+    /// Lists all agents in an Amazon QuickSight account.
+    pub fn listAgents(self: *Self, allocator: std.mem.Allocator, input: list_agents.ListAgentsInput, options: CallOptions) !list_agents.ListAgentsOutput {
+        return list_agents.execute(self, allocator, input, options);
+    }
+
     /// Lists Amazon Quick Sight analyses that exist in the specified Amazon Web
     /// Services account.
     pub fn listAnalyses(self: *Self, allocator: std.mem.Allocator, input: list_analyses.ListAnalysesInput, options: CallOptions) !list_analyses.ListAnalysesOutput {
         return list_analyses.execute(self, allocator, input, options);
+    }
+
+    /// Lists all approval policies in the specified Quick Sight account. The
+    /// results are paginated. If the
+    /// response includes a `NextToken` value, pass it in a subsequent call to
+    /// retrieve the next
+    /// set of results.
+    pub fn listApprovalPolicies(self: *Self, allocator: std.mem.Allocator, input: list_approval_policies.ListApprovalPoliciesInput, options: CallOptions) !list_approval_policies.ListApprovalPoliciesOutput {
+        return list_approval_policies.execute(self, allocator, input, options);
+    }
+
+    /// Lists the apps in an Amazon Web Services account. Results are paginated; use
+    /// the `NextToken` parameter to retrieve additional results.
+    pub fn listApps(self: *Self, allocator: std.mem.Allocator, input: list_apps.ListAppsInput, options: CallOptions) !list_apps.ListAppsOutput {
+        return list_apps.execute(self, allocator, input, options);
     }
 
     /// Lists all asset bundle export jobs that have been taken place in the last 14
@@ -1591,6 +1882,11 @@ pub const Client = struct {
     /// Amazon Web Services account.
     pub fn listDataSources(self: *Self, allocator: std.mem.Allocator, input: list_data_sources.ListDataSourcesInput, options: CallOptions) !list_data_sources.ListDataSourcesOutput {
         return list_data_sources.execute(self, allocator, input, options);
+    }
+
+    /// Lists all DLP settings in an Amazon Web Services account.
+    pub fn listDlpSettings(self: *Self, allocator: std.mem.Allocator, input: list_dlp_settings.ListDlpSettingsInput, options: CallOptions) !list_dlp_settings.ListDlpSettingsOutput {
+        return list_dlp_settings.execute(self, allocator, input, options);
     }
 
     /// Lists flows in an Amazon Web Services account.
@@ -1656,10 +1952,29 @@ pub const Client = struct {
         return list_ingestions.execute(self, allocator, input, options);
     }
 
+    /// Lists all knowledge bases in an Amazon QuickSight account.
+    pub fn listKnowledgeBases(self: *Self, allocator: std.mem.Allocator, input: list_knowledge_bases.ListKnowledgeBasesInput, options: CallOptions) !list_knowledge_bases.ListKnowledgeBasesOutput {
+        return list_knowledge_bases.execute(self, allocator, input, options);
+    }
+
+    /// Lists all limits profiles in an Amazon Quick Sight account. Results are
+    /// paginated. Use the `maxResults` parameter to limit the number of results
+    /// returned in a single call, and use the `nextToken` parameter to retrieve the
+    /// next page of results.
+    pub fn listLimitsProfiles(self: *Self, allocator: std.mem.Allocator, input: list_limits_profiles.ListLimitsProfilesInput, options: CallOptions) !list_limits_profiles.ListLimitsProfilesOutput {
+        return list_limits_profiles.execute(self, allocator, input, options);
+    }
+
     /// Lists the namespaces for the specified Amazon Web Services account. This
     /// operation doesn't list deleted namespaces.
     pub fn listNamespaces(self: *Self, allocator: std.mem.Allocator, input: list_namespaces.ListNamespacesInput, options: CallOptions) !list_namespaces.ListNamespacesOutput {
         return list_namespaces.execute(self, allocator, input, options);
+    }
+
+    /// Lists all OAuthClientApplications in the current Amazon Web Services Region
+    /// that belong to this Amazon Web Services account.
+    pub fn listOAuthClientApplications(self: *Self, allocator: std.mem.Allocator, input: list_o_auth_client_applications.ListOAuthClientApplicationsInput, options: CallOptions) !list_o_auth_client_applications.ListOAuthClientApplicationsOutput {
+        return list_o_auth_client_applications.execute(self, allocator, input, options);
     }
 
     /// Lists the refresh schedules of a dataset. Each dataset can have up to 5
@@ -1676,6 +1991,16 @@ pub const Client = struct {
     /// Lists all self-upgrade requests for a Quick account.
     pub fn listSelfUpgrades(self: *Self, allocator: std.mem.Allocator, input: list_self_upgrades.ListSelfUpgradesInput, options: CallOptions) !list_self_upgrades.ListSelfUpgradesOutput {
         return list_self_upgrades.execute(self, allocator, input, options);
+    }
+
+    /// Lists the resources in an Amazon QuickSight space.
+    pub fn listSpaceResources(self: *Self, allocator: std.mem.Allocator, input: list_space_resources.ListSpaceResourcesInput, options: CallOptions) !list_space_resources.ListSpaceResourcesOutput {
+        return list_space_resources.execute(self, allocator, input, options);
+    }
+
+    /// Lists all Amazon QuickSight spaces in an Amazon Web Services account.
+    pub fn listSpaces(self: *Self, allocator: std.mem.Allocator, input: list_spaces.ListSpacesInput, options: CallOptions) !list_spaces.ListSpacesOutput {
+        return list_spaces.execute(self, allocator, input, options);
     }
 
     /// Lists the tags assigned to a resource.
@@ -1730,6 +2055,12 @@ pub const Client = struct {
         return list_topics.execute(self, allocator, input, options);
     }
 
+    /// Lists all of the Q topics in the specified Amazon Web Services account in an
+    /// Amazon Web Services Region.
+    pub fn listTopicsV2(self: *Self, allocator: std.mem.Allocator, input: list_topics_v2.ListTopicsV2Input, options: CallOptions) !list_topics_v2.ListTopicsV2Output {
+        return list_topics_v2.execute(self, allocator, input, options);
+    }
+
     /// Lists the Amazon Quick Sight groups that an Amazon Quick Sight user is a
     /// member of.
     pub fn listUserGroups(self: *Self, allocator: std.mem.Allocator, input: list_user_groups.ListUserGroupsInput, options: CallOptions) !list_user_groups.ListUserGroupsOutput {
@@ -1740,6 +2071,11 @@ pub const Client = struct {
     /// account.
     pub fn listUsers(self: *Self, allocator: std.mem.Allocator, input: list_users.ListUsersInput, options: CallOptions) !list_users.ListUsersOutput {
         return list_users.execute(self, allocator, input, options);
+    }
+
+    /// Lists per-user index capacity consumption for an account.
+    pub fn listUsersIndexCapacity(self: *Self, allocator: std.mem.Allocator, input: list_users_index_capacity.ListUsersIndexCapacityInput, options: CallOptions) !list_users_index_capacity.ListUsersIndexCapacityOutput {
+        return list_users_index_capacity.execute(self, allocator, input, options);
     }
 
     /// Lists all of the VPC connections in the current set Amazon Web Services
@@ -1794,12 +2130,25 @@ pub const Client = struct {
         return search_action_connectors.execute(self, allocator, input, options);
     }
 
+    /// Searches for agents based on specified filters.
+    pub fn searchAgents(self: *Self, allocator: std.mem.Allocator, input: search_agents.SearchAgentsInput, options: CallOptions) !search_agents.SearchAgentsOutput {
+        return search_agents.execute(self, allocator, input, options);
+    }
+
     /// Searches for analyses that belong to the user specified in the filter.
     ///
     /// This operation is eventually consistent. The results are best effort and may
     /// not reflect very recent updates and changes.
     pub fn searchAnalyses(self: *Self, allocator: std.mem.Allocator, input: search_analyses.SearchAnalysesInput, options: CallOptions) !search_analyses.SearchAnalysesOutput {
         return search_analyses.execute(self, allocator, input, options);
+    }
+
+    /// Searches for apps in an Amazon Web Services account using the specified
+    /// filters. This operation is eventually consistent; the results might not
+    /// reflect very recent updates. Results are paginated; use the `NextToken`
+    /// parameter to retrieve additional results.
+    pub fn searchApps(self: *Self, allocator: std.mem.Allocator, input: search_apps.SearchAppsInput, options: CallOptions) !search_apps.SearchAppsOutput {
+        return search_apps.execute(self, allocator, input, options);
     }
 
     /// Searches for dashboards that belong to a user.
@@ -1839,9 +2188,24 @@ pub const Client = struct {
         return search_groups.execute(self, allocator, input, options);
     }
 
+    /// Searches for a subset of knowledge bases based on specified filters.
+    pub fn searchKnowledgeBases(self: *Self, allocator: std.mem.Allocator, input: search_knowledge_bases.SearchKnowledgeBasesInput, options: CallOptions) !search_knowledge_bases.SearchKnowledgeBasesOutput {
+        return search_knowledge_bases.execute(self, allocator, input, options);
+    }
+
+    /// Searches for Amazon QuickSight spaces that match the specified filters.
+    pub fn searchSpaces(self: *Self, allocator: std.mem.Allocator, input: search_spaces.SearchSpacesInput, options: CallOptions) !search_spaces.SearchSpacesOutput {
+        return search_spaces.execute(self, allocator, input, options);
+    }
+
     /// Searches for any Q topic that exists in an Quick account.
     pub fn searchTopics(self: *Self, allocator: std.mem.Allocator, input: search_topics.SearchTopicsInput, options: CallOptions) !search_topics.SearchTopicsOutput {
         return search_topics.execute(self, allocator, input, options);
+    }
+
+    /// Searches for any Q topic that exists in an Amazon Web Services account.
+    pub fn searchTopicsV2(self: *Self, allocator: std.mem.Allocator, input: search_topics_v2.SearchTopicsV2Input, options: CallOptions) !search_topics_v2.SearchTopicsV2Output {
+        return search_topics_v2.execute(self, allocator, input, options);
     }
 
     /// Starts an Asset Bundle export job.
@@ -2140,6 +2504,16 @@ pub const Client = struct {
         return update_action_connector_permissions.execute(self, allocator, input, options);
     }
 
+    /// Updates an existing agent.
+    pub fn updateAgent(self: *Self, allocator: std.mem.Allocator, input: update_agent.UpdateAgentInput, options: CallOptions) !update_agent.UpdateAgentOutput {
+        return update_agent.execute(self, allocator, input, options);
+    }
+
+    /// Updates the resource permissions for an agent.
+    pub fn updateAgentPermissions(self: *Self, allocator: std.mem.Allocator, input: update_agent_permissions.UpdateAgentPermissionsInput, options: CallOptions) !update_agent_permissions.UpdateAgentPermissionsOutput {
+        return update_agent_permissions.execute(self, allocator, input, options);
+    }
+
     /// Updates an analysis in Amazon Quick Sight
     pub fn updateAnalysis(self: *Self, allocator: std.mem.Allocator, input: update_analysis.UpdateAnalysisInput, options: CallOptions) !update_analysis.UpdateAnalysisOutput {
         return update_analysis.execute(self, allocator, input, options);
@@ -2150,11 +2524,22 @@ pub const Client = struct {
         return update_analysis_permissions.execute(self, allocator, input, options);
     }
 
+    /// Updates the resource permissions for an app. You can grant or revoke
+    /// permissions and, optionally, change the app's visibility.
+    pub fn updateAppPermissions(self: *Self, allocator: std.mem.Allocator, input: update_app_permissions.UpdateAppPermissionsInput, options: CallOptions) !update_app_permissions.UpdateAppPermissionsOutput {
+        return update_app_permissions.execute(self, allocator, input, options);
+    }
+
     /// Updates an Quick application with a token exchange grant. This operation
     /// only supports Quick applications that are registered with IAM Identity
     /// Center.
     pub fn updateApplicationWithTokenExchangeGrant(self: *Self, allocator: std.mem.Allocator, input: update_application_with_token_exchange_grant.UpdateApplicationWithTokenExchangeGrantInput, options: CallOptions) !update_application_with_token_exchange_grant.UpdateApplicationWithTokenExchangeGrantOutput {
         return update_application_with_token_exchange_grant.execute(self, allocator, input, options);
+    }
+
+    /// Updates an approval policy in Quick Sight.
+    pub fn updateApprovalPolicy(self: *Self, allocator: std.mem.Allocator, input: update_approval_policy.UpdateApprovalPolicyInput, options: CallOptions) !update_approval_policy.UpdateApprovalPolicyOutput {
+        return update_approval_policy.execute(self, allocator, input, options);
     }
 
     /// Updates a brand.
@@ -2210,9 +2595,7 @@ pub const Client = struct {
         return update_dashboards_qa_configuration.execute(self, allocator, input, options);
     }
 
-    /// Updates a dataset. This operation doesn't support datasets that include
-    /// uploaded files
-    /// as a source. Partial updates are not supported by this operation.
+    /// Updates a dataset. Partial updates are not supported by this operation.
     pub fn updateDataSet(self: *Self, allocator: std.mem.Allocator, input: update_data_set.UpdateDataSetInput, options: CallOptions) !update_data_set.UpdateDataSetOutput {
         return update_data_set.execute(self, allocator, input, options);
     }
@@ -2239,6 +2622,20 @@ pub const Client = struct {
     /// account.
     pub fn updateDefaultQBusinessApplication(self: *Self, allocator: std.mem.Allocator, input: update_default_q_business_application.UpdateDefaultQBusinessApplicationInput, options: CallOptions) !update_default_q_business_application.UpdateDefaultQBusinessApplicationOutput {
         return update_default_q_business_application.execute(self, allocator, input, options);
+    }
+
+    /// Updates an existing DLP setting configuration in an Amazon Web Services
+    /// account. Fields that are omitted from the request retain their current
+    /// values.
+    pub fn updateDlpSetting(self: *Self, allocator: std.mem.Allocator, input: update_dlp_setting.UpdateDlpSettingInput, options: CallOptions) !update_dlp_setting.UpdateDlpSettingOutput {
+        return update_dlp_setting.execute(self, allocator, input, options);
+    }
+
+    /// Updates an existing flow. Supply only the fields you want to change. Updates
+    /// both DRAFT and PUBLISHED versions. When `FlowDefinition` is provided, all
+    /// existing steps are replaced with the new definition.
+    pub fn updateFlow(self: *Self, allocator: std.mem.Allocator, input: update_flow.UpdateFlowInput, options: CallOptions) !update_flow.UpdateFlowOutput {
+        return update_flow.execute(self, allocator, input, options);
     }
 
     /// Updates permissions against principals on a flow.
@@ -2290,6 +2687,26 @@ pub const Client = struct {
     /// Updates a customer managed key in a Quick Sight account.
     pub fn updateKeyRegistration(self: *Self, allocator: std.mem.Allocator, input: update_key_registration.UpdateKeyRegistrationInput, options: CallOptions) !update_key_registration.UpdateKeyRegistrationOutput {
         return update_key_registration.execute(self, allocator, input, options);
+    }
+
+    /// Updates the properties of an existing knowledge base.
+    pub fn updateKnowledgeBase(self: *Self, allocator: std.mem.Allocator, input: update_knowledge_base.UpdateKnowledgeBaseInput, options: CallOptions) !update_knowledge_base.UpdateKnowledgeBaseOutput {
+        return update_knowledge_base.execute(self, allocator, input, options);
+    }
+
+    /// Updates the resource permissions for a knowledge base.
+    pub fn updateKnowledgeBasePermissions(self: *Self, allocator: std.mem.Allocator, input: update_knowledge_base_permissions.UpdateKnowledgeBasePermissionsInput, options: CallOptions) !update_knowledge_base_permissions.UpdateKnowledgeBasePermissionsOutput {
+        return update_knowledge_base_permissions.execute(self, allocator, input, options);
+    }
+
+    /// Updates the properties of an existing limits profile.
+    pub fn updateLimitsProfile(self: *Self, allocator: std.mem.Allocator, input: update_limits_profile.UpdateLimitsProfileInput, options: CallOptions) !update_limits_profile.UpdateLimitsProfileOutput {
+        return update_limits_profile.execute(self, allocator, input, options);
+    }
+
+    /// Updates an OAuthClientApplication.
+    pub fn updateOAuthClientApplication(self: *Self, allocator: std.mem.Allocator, input: update_o_auth_client_application.UpdateOAuthClientApplicationInput, options: CallOptions) !update_o_auth_client_application.UpdateOAuthClientApplicationOutput {
+        return update_o_auth_client_application.execute(self, allocator, input, options);
     }
 
     /// This API controls public sharing settings for your entire Quick Sight
@@ -2353,6 +2770,21 @@ pub const Client = struct {
     /// Updates the self-upgrade configuration for a Quick account.
     pub fn updateSelfUpgradeConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_self_upgrade_configuration.UpdateSelfUpgradeConfigurationInput, options: CallOptions) !update_self_upgrade_configuration.UpdateSelfUpgradeConfigurationOutput {
         return update_self_upgrade_configuration.execute(self, allocator, input, options);
+    }
+
+    /// Updates the metadata of an Amazon QuickSight space.
+    pub fn updateSpace(self: *Self, allocator: std.mem.Allocator, input: update_space.UpdateSpaceInput, options: CallOptions) !update_space.UpdateSpaceOutput {
+        return update_space.execute(self, allocator, input, options);
+    }
+
+    /// Updates the permissions for an Amazon QuickSight space.
+    pub fn updateSpacePermissions(self: *Self, allocator: std.mem.Allocator, input: update_space_permissions.UpdateSpacePermissionsInput, options: CallOptions) !update_space_permissions.UpdateSpacePermissionsOutput {
+        return update_space_permissions.execute(self, allocator, input, options);
+    }
+
+    /// Adds or removes resources from an Amazon QuickSight space.
+    pub fn updateSpaceResources(self: *Self, allocator: std.mem.Allocator, input: update_space_resources.UpdateSpaceResourcesInput, options: CallOptions) !update_space_resources.UpdateSpaceResourcesOutput {
+        return update_space_resources.execute(self, allocator, input, options);
     }
 
     /// Updates the SPICE capacity configuration for a Quick Sight account.
@@ -2443,9 +2875,19 @@ pub const Client = struct {
         return update_topic_permissions.execute(self, allocator, input, options);
     }
 
+    /// Updates the permissions of a topic.
+    pub fn updateTopicPermissionsV2(self: *Self, allocator: std.mem.Allocator, input: update_topic_permissions_v2.UpdateTopicPermissionsV2Input, options: CallOptions) !update_topic_permissions_v2.UpdateTopicPermissionsV2Output {
+        return update_topic_permissions_v2.execute(self, allocator, input, options);
+    }
+
     /// Updates a topic refresh schedule.
     pub fn updateTopicRefreshSchedule(self: *Self, allocator: std.mem.Allocator, input: update_topic_refresh_schedule.UpdateTopicRefreshScheduleInput, options: CallOptions) !update_topic_refresh_schedule.UpdateTopicRefreshScheduleOutput {
         return update_topic_refresh_schedule.execute(self, allocator, input, options);
+    }
+
+    /// Updates the definition of a Q topic.
+    pub fn updateTopicV2(self: *Self, allocator: std.mem.Allocator, input: update_topic_v2.UpdateTopicV2Input, options: CallOptions) !update_topic_v2.UpdateTopicV2Output {
+        return update_topic_v2.execute(self, allocator, input, options);
     }
 
     /// Updates an Amazon Quick Sight user.
@@ -2485,6 +2927,20 @@ pub const Client = struct {
     }
 
     pub fn listAnalysesPaginator(self: *Self, params: list_analyses.ListAnalysesInput) paginator.ListAnalysesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listApprovalPoliciesPaginator(self: *Self, params: list_approval_policies.ListApprovalPoliciesInput) paginator.ListApprovalPoliciesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAppsPaginator(self: *Self, params: list_apps.ListAppsInput) paginator.ListAppsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -2541,6 +2997,13 @@ pub const Client = struct {
     }
 
     pub fn listDataSourcesPaginator(self: *Self, params: list_data_sources.ListDataSourcesInput) paginator.ListDataSourcesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listDlpSettingsPaginator(self: *Self, params: list_dlp_settings.ListDlpSettingsInput) paginator.ListDlpSettingsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -2610,7 +3073,28 @@ pub const Client = struct {
         };
     }
 
+    pub fn listKnowledgeBasesPaginator(self: *Self, params: list_knowledge_bases.ListKnowledgeBasesInput) paginator.ListKnowledgeBasesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listLimitsProfilesPaginator(self: *Self, params: list_limits_profiles.ListLimitsProfilesInput) paginator.ListLimitsProfilesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listNamespacesPaginator(self: *Self, params: list_namespaces.ListNamespacesInput) paginator.ListNamespacesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listOAuthClientApplicationsPaginator(self: *Self, params: list_o_auth_client_applications.ListOAuthClientApplicationsInput) paginator.ListOAuthClientApplicationsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -2666,6 +3150,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn listTopicsV2Paginator(self: *Self, params: list_topics_v2.ListTopicsV2Input) paginator.ListTopicsV2Paginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listUserGroupsPaginator(self: *Self, params: list_user_groups.ListUserGroupsInput) paginator.ListUserGroupsPaginator {
         return .{
             .client = self,
@@ -2695,6 +3186,13 @@ pub const Client = struct {
     }
 
     pub fn searchAnalysesPaginator(self: *Self, params: search_analyses.SearchAnalysesInput) paginator.SearchAnalysesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn searchAppsPaginator(self: *Self, params: search_apps.SearchAppsInput) paginator.SearchAppsPaginator {
         return .{
             .client = self,
             .params = params,
@@ -2743,7 +3241,21 @@ pub const Client = struct {
         };
     }
 
+    pub fn searchKnowledgeBasesPaginator(self: *Self, params: search_knowledge_bases.SearchKnowledgeBasesInput) paginator.SearchKnowledgeBasesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn searchTopicsPaginator(self: *Self, params: search_topics.SearchTopicsInput) paginator.SearchTopicsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn searchTopicsV2Paginator(self: *Self, params: search_topics_v2.SearchTopicsV2Input) paginator.SearchTopicsV2Paginator {
         return .{
             .client = self,
             .params = params,

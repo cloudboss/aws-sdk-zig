@@ -3,16 +3,19 @@ const std = @import("std");
 pub const PlatformCapability = enum {
     ec2,
     fargate,
+    managed_instances,
 
     pub const json_field_names = .{
         .ec2 = "EC2",
         .fargate = "FARGATE",
+        .managed_instances = "MANAGED_INSTANCES",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .ec2 => "EC2",
             .fargate => "FARGATE",
+            .managed_instances => "MANAGED_INSTANCES",
         };
     }
 

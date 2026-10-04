@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DataSourceConfig = @import("data_source_config.zig").DataSourceConfig;
 const EvaluationMetadata = @import("evaluation_metadata.zig").EvaluationMetadata;
 const Evaluator = @import("evaluator.zig").Evaluator;
+const Insight = @import("insight.zig").Insight;
 const OutputConfig = @import("output_config.zig").OutputConfig;
 const BatchEvaluationStatus = @import("batch_evaluation_status.zig").BatchEvaluationStatus;
 
@@ -34,6 +35,19 @@ pub const StartBatchEvaluationInput = struct {
     /// both built-in evaluators and custom evaluators. Maximum of 10 evaluators.
     evaluators: ?[]const Evaluator = null,
 
+    /// The list of insight analyses to run against sessions during the batch
+    /// evaluation. Maximum of 10 insights.
+    insights: ?[]const Insight = null,
+
+    /// The ARN of the KMS key used to encrypt evaluation data. If provided,
+    /// customer data is encrypted at rest with the specified key.
+    kms_key_arn: ?[]const u8 = null,
+
+    output_config: ?OutputConfig = null,
+
+    /// A map of tag keys and values to associate with the batch evaluation.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
     pub const json_field_names = .{
         .batch_evaluation_name = "batchEvaluationName",
         .client_token = "clientToken",
@@ -41,6 +55,10 @@ pub const StartBatchEvaluationInput = struct {
         .description = "description",
         .evaluation_metadata = "evaluationMetadata",
         .evaluators = "evaluators",
+        .insights = "insights",
+        .kms_key_arn = "kmsKeyArn",
+        .output_config = "outputConfig",
+        .tags = "tags",
     };
 };
 
@@ -63,11 +81,20 @@ pub const StartBatchEvaluationOutput = struct {
     /// The list of evaluators applied during the batch evaluation.
     evaluators: ?[]const Evaluator = null,
 
+    /// The list of insight analyses applied during the batch evaluation.
+    insights: ?[]const Insight = null,
+
+    /// The ARN of the KMS key used to encrypt evaluation data.
+    kms_key_arn: ?[]const u8 = null,
+
     /// The output configuration specifying where evaluation results are written.
     output_config: ?OutputConfig = null,
 
     /// The status of the batch evaluation.
     status: BatchEvaluationStatus,
+
+    /// The tags associated with the batch evaluation.
+    tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
         .batch_evaluation_arn = "batchEvaluationArn",
@@ -76,8 +103,11 @@ pub const StartBatchEvaluationOutput = struct {
         .created_at = "createdAt",
         .description = "description",
         .evaluators = "evaluators",
+        .insights = "insights",
+        .kms_key_arn = "kmsKeyArn",
         .output_config = "outputConfig",
         .status = "status",
+        .tags = "tags",
     };
 };
 
@@ -149,6 +179,30 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartBatchEvaluationInp
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.insights) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"insights\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.kms_key_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"kmsKeyArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.output_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"outputConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.tags) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -165,10 +219,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartBatchEvaluationInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartBatchEvaluationOutput {
-    var result: StartBatchEvaluationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartBatchEvaluationOutput, body, allocator);
-    }
+    const result: StartBatchEvaluationOutput = try aws.json.parseJsonObject(
+        StartBatchEvaluationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

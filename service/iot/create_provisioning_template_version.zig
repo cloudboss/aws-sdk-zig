@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateProvisioningTempl
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateProvisioningTemplateVersionOutput {
-    var result: CreateProvisioningTemplateVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateProvisioningTemplateVersionOutput, body, allocator);
-    }
+    const result: CreateProvisioningTemplateVersionOutput = try aws.json.parseJsonObject(
+        CreateProvisioningTemplateVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

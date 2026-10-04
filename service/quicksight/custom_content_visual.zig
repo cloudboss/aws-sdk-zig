@@ -15,14 +15,18 @@ pub const CustomContentVisual = struct {
     chart_configuration: ?CustomContentConfiguration = null,
 
     /// The dataset that is used to create the custom content visual. You can't
-    /// create a visual without a dataset.
-    data_set_identifier: []const u8,
+    /// create a visual without a dataset or a topic.
+    data_set_identifier: []const u8 = "",
 
     /// The subtitle that is displayed on the visual.
     subtitle: ?VisualSubtitleLabelOptions = null,
 
     /// The title that is displayed on the visual.
     title: ?VisualTitleLabelOptions = null,
+
+    /// The topic that is used in the custom content visual. You can't create a
+    /// visual without a dataset or a topic.
+    topic_identifier: ?[]const u8 = null,
 
     /// The alt text for the visual.
     visual_content_alt_text: ?[]const u8 = null,
@@ -38,6 +42,7 @@ pub const CustomContentVisual = struct {
         .data_set_identifier = "DataSetIdentifier",
         .subtitle = "Subtitle",
         .title = "Title",
+        .topic_identifier = "TopicIdentifier",
         .visual_content_alt_text = "VisualContentAltText",
         .visual_id = "VisualId",
     };

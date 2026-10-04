@@ -7,14 +7,30 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const DeleteGroupInput = struct {
     /// The identifier for a group in the identity store.
+    ///
+    /// You can specify the group by ID or by Amazon Resource Name (ARN). For
+    /// example, group ID `a1b2c3d4-5678-90ab-cdef-EXAMPLE22222` or group ARN
+    /// `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
     group_id: []const u8,
 
     /// The globally unique identifier for the identity store.
+    ///
+    /// You can specify the identity store by ID or by Amazon Resource Name (ARN).
+    /// For example, identity store ID `d-1234567890` or identity store ARN
+    /// `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
     identity_store_id: []const u8,
+
+    /// The expected current revision of the group. When you provide this value, the
+    /// group is deleted only if it matches the current revision of the group in the
+    /// identity store. If the value doesn't match, the operation fails with a
+    /// `ConflictException`. If you don't provide this value, the group is deleted
+    /// regardless of its current revision.
+    revision: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .group_id = "GroupId",
         .identity_store_id = "IdentityStoreId",
+        .revision = "Revision",
     };
 };
 

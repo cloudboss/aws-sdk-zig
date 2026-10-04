@@ -1,4 +1,7 @@
-/// The configuration information to connect to Amazon S3 as your data source.
+/// The configuration information to connect to Amazon S3 as your data source
+/// for self-managed knowledge bases. To configure this data source for managed
+/// knowledge bases, use
+/// [managedKnowledgeBaseConnectorConfiguration](https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ManagedKnowledgeBaseConnectorConfiguration.html).
 pub const S3DataSourceConfiguration = struct {
     /// The Amazon Resource Name (ARN) of the S3 bucket that contains your data.
     bucket_arn: []const u8,

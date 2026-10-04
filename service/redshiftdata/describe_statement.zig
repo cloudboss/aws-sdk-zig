@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const ExecutionMode = @import("execution_mode.zig").ExecutionMode;
 const SqlParameter = @import("sql_parameter.zig").SqlParameter;
 const ResultFormatString = @import("result_format_string.zig").ResultFormatString;
 const StatusString = @import("status_string.zig").StatusString;
@@ -18,8 +19,13 @@ pub const DescribeStatementInput = struct {
     /// `BatchExecuteStatment`, `ExecuteStatement`, and `ListStatements`.
     id: []const u8,
 
+    /// The number of seconds to wait for the SQL statement to complete execution
+    /// before returning the description. The maximum value is 30 seconds.
+    wait_time_seconds: ?i32 = null,
+
     pub const json_field_names = .{
         .id = "Id",
+        .wait_time_seconds = "WaitTimeSeconds",
     };
 };
 
@@ -42,6 +48,11 @@ pub const DescribeStatementOutput = struct {
     /// The error message from the cluster if the SQL statement encountered an error
     /// while running.
     @"error": ?[]const u8 = null,
+
+    /// The execution mode of the batch request. `TRANSACTION` indicates all SQL
+    /// statements are run as a single transaction. `AUTO_COMMIT` indicates each SQL
+    /// statement is committed individually.
+    execution_mode: ?ExecutionMode = null,
 
     /// A value that indicates whether the statement has a result set. The result
     /// set can be empty. The value is true for an empty result set. The value is
@@ -115,6 +126,7 @@ pub const DescribeStatementOutput = struct {
         .db_user = "DbUser",
         .duration = "Duration",
         .@"error" = "Error",
+        .execution_mode = "ExecutionMode",
         .has_result_set = "HasResultSet",
         .id = "Id",
         .query_parameters = "QueryParameters",

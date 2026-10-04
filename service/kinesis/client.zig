@@ -2,12 +2,15 @@ const aws = @import("aws");
 const std = @import("std");
 
 const add_tags_to_stream = @import("add_tags_to_stream.zig");
+const create_channel = @import("create_channel.zig");
 const create_stream = @import("create_stream.zig");
 const decrease_stream_retention_period = @import("decrease_stream_retention_period.zig");
+const delete_channel = @import("delete_channel.zig");
 const delete_resource_policy = @import("delete_resource_policy.zig");
 const delete_stream = @import("delete_stream.zig");
 const deregister_stream_consumer = @import("deregister_stream_consumer.zig");
 const describe_account_settings = @import("describe_account_settings.zig");
+const describe_channel = @import("describe_channel.zig");
 const describe_limits = @import("describe_limits.zig");
 const describe_stream = @import("describe_stream.zig");
 const describe_stream_consumer = @import("describe_stream_consumer.zig");
@@ -18,6 +21,7 @@ const get_records = @import("get_records.zig");
 const get_resource_policy = @import("get_resource_policy.zig");
 const get_shard_iterator = @import("get_shard_iterator.zig");
 const increase_stream_retention_period = @import("increase_stream_retention_period.zig");
+const list_channels = @import("list_channels.zig");
 const list_shards = @import("list_shards.zig");
 const list_stream_consumers = @import("list_stream_consumers.zig");
 const list_streams = @import("list_streams.zig");
@@ -36,9 +40,11 @@ const subscribe_to_shard = @import("subscribe_to_shard.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_account_settings = @import("update_account_settings.zig");
+const update_channel = @import("update_channel.zig");
 const update_max_record_size = @import("update_max_record_size.zig");
 const update_shard_count = @import("update_shard_count.zig");
 const update_stream_mode = @import("update_stream_mode.zig");
+const update_stream_record_distribution_strategy = @import("update_stream_record_distribution_strategy.zig");
 const update_stream_warm_throughput = @import("update_stream_warm_throughput.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
@@ -86,6 +92,34 @@ pub const Client = struct {
     /// account.
     pub fn addTagsToStream(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_stream.AddTagsToStreamInput, options: CallOptions) !add_tags_to_stream.AddTagsToStreamOutput {
         return add_tags_to_stream.execute(self, allocator, input, options);
+    }
+
+    /// Creates a channel that delivers records from a Kinesis data stream to a
+    /// destination. A channel reads records from the specified stream and writes
+    /// them to streaming tables on Apache Iceberg (Amazon S3 Tables) or to a
+    /// general purpose Amazon S3 bucket.
+    ///
+    /// You must specify either `S3DestinationConfiguration` or
+    /// `S3TablesDestinationConfiguration`, but not both.
+    ///
+    /// To use this operation, you must have permission to pass the specified
+    /// service execution IAM role to Amazon Kinesis Data Streams (the
+    /// `iam:PassRole` permission on that role).
+    ///
+    /// Creating a channel is an asynchronous operation. Upon receiving the request,
+    /// Amazon Kinesis Data Streams returns immediately with the channel in the
+    /// `CREATING` state. After provisioning is complete, Amazon Kinesis Data
+    /// Streams sets the state to `ACTIVE`. You can use DescribeChannel to check the
+    /// current state.
+    ///
+    /// This operation is only supported for data streams with the on-demand
+    /// capacity mode.
+    ///
+    /// This operation has a call limit of 5 transactions per second (TPS) for each
+    /// Amazon Web Services account. Exceeding 5 TPS results in a
+    /// `LimitExceededException`.
+    pub fn createChannel(self: *Self, allocator: std.mem.Allocator, input: create_channel.CreateChannelInput, options: CallOptions) !create_channel.CreateChannelOutput {
+        return create_channel.execute(self, allocator, input, options);
     }
 
     /// Creates a Kinesis data stream. A stream captures and transports data records
@@ -179,6 +213,21 @@ pub const Client = struct {
         return decrease_stream_retention_period.execute(self, allocator, input, options);
     }
 
+    /// Deletes the specified channel. Deleting a channel stops delivery from the
+    /// source stream to the destination. Data already delivered to the destination
+    /// is not deleted.
+    ///
+    /// A stream cannot be deleted while it has active channels. Use ListChannels
+    /// with a stream filter to find the channels attached to a stream before
+    /// deleting it.
+    ///
+    /// This operation has a call limit of 5 transactions per second (TPS) for each
+    /// Amazon Web Services account. Exceeding 5 TPS results in a
+    /// `LimitExceededException`.
+    pub fn deleteChannel(self: *Self, allocator: std.mem.Allocator, input: delete_channel.DeleteChannelInput, options: CallOptions) !delete_channel.DeleteChannelOutput {
+        return delete_channel.execute(self, allocator, input, options);
+    }
+
     /// Delete a policy for the specified data stream or consumer. Request patterns
     /// can be one of the following:
     ///
@@ -251,6 +300,20 @@ pub const Client = struct {
     /// Web Services account. TPS over 5 will initiate the `LimitExceededException`.
     pub fn describeAccountSettings(self: *Self, allocator: std.mem.Allocator, input: describe_account_settings.DescribeAccountSettingsInput, options: CallOptions) !describe_account_settings.DescribeAccountSettingsOutput {
         return describe_account_settings.execute(self, allocator, input, options);
+    }
+
+    /// Describes the specified channel, including its configuration and current
+    /// status.
+    ///
+    /// Use this operation to verify that a channel reached the `ACTIVE` state after
+    /// creation, or to diagnose a channel in the `FAILED` state by reading the
+    /// `ChannelStatusReason`.
+    ///
+    /// This operation has a call limit of 5 transactions per second (TPS) for each
+    /// Amazon Web Services account. Exceeding 5 TPS results in a
+    /// `LimitExceededException`.
+    pub fn describeChannel(self: *Self, allocator: std.mem.Allocator, input: describe_channel.DescribeChannelInput, options: CallOptions) !describe_channel.DescribeChannelOutput {
+        return describe_channel.execute(self, allocator, input, options);
     }
 
     /// Describes the shard limits and usage for the account.
@@ -397,15 +460,21 @@ pub const Client = struct {
     /// last record
     /// to process.
     ///
-    /// Each data record can be up to 1 MiB in size, and each shard can read up to 2
-    /// MiB per
-    /// second. You can ensure that your calls don't exceed the maximum supported
-    /// size or
-    /// throughput by using the `Limit` parameter to specify the maximum number of
-    /// records that GetRecords can return. Consider your average record size
-    /// when determining this limit. The maximum number of records that can be
-    /// returned per call
-    /// is 10,000.
+    /// Each data record can be up to 1 MiB in size by default. Amazon Kinesis Data
+    /// Streams supports
+    /// large records up to 10 MiB in size, but the average throughput for your
+    /// stream cannot exceed
+    /// 1 MiB per second. For more information about how large records are handled,
+    /// see
+    /// [Large
+    /// records](https://docs.aws.amazon.com/streams/latest/dev/large-records.html).
+    /// Each shard can read up to 2 MiB per second. You can ensure that your calls
+    /// don't exceed
+    /// the maximum supported size or throughput by using the `Limit` parameter to
+    /// specify the maximum number of records that GetRecords can return.
+    /// Consider your average record size when determining this limit. The maximum
+    /// number of records
+    /// that can be returned per call is 10,000.
     ///
     /// The size of the data returned by GetRecords varies depending on the
     /// utilization of the shard. It is recommended that consumer applications
@@ -543,6 +612,20 @@ pub const Client = struct {
     /// hours remains inaccessible to consumer applications.
     pub fn increaseStreamRetentionPeriod(self: *Self, allocator: std.mem.Allocator, input: increase_stream_retention_period.IncreaseStreamRetentionPeriodInput, options: CallOptions) !increase_stream_retention_period.IncreaseStreamRetentionPeriodOutput {
         return increase_stream_retention_period.execute(self, allocator, input, options);
+    }
+
+    /// Lists the channels in your account. You can filter the results by source
+    /// stream. The results are paginated. Use the `NextToken` value returned in the
+    /// response to retrieve additional results.
+    ///
+    /// Use this operation to find channels before deleting a stream, or to audit
+    /// the channels configured in an Amazon Web Services Region.
+    ///
+    /// This operation has a call limit of 5 transactions per second (TPS) for each
+    /// Amazon Web Services account. Exceeding 5 TPS results in a
+    /// `LimitExceededException`.
+    pub fn listChannels(self: *Self, allocator: std.mem.Allocator, input: list_channels.ListChannelsInput, options: CallOptions) !list_channels.ListChannelsOutput {
+        return list_channels.execute(self, allocator, input, options);
     }
 
     /// Lists the shards in a stream and provides information about each shard. This
@@ -1126,6 +1209,24 @@ pub const Client = struct {
         return update_account_settings.execute(self, allocator, input, options);
     }
 
+    /// Updates the data freshness interval or the Amazon CloudWatch Logs
+    /// configuration of an existing channel. You cannot change the destination,
+    /// source stream, record format, schema, encryption configuration, or service
+    /// execution role of an existing channel. To change any other setting, delete
+    /// the channel and create a new one.
+    ///
+    /// Updating a channel is an asynchronous operation. Upon receiving the request,
+    /// Amazon Kinesis Data Streams sets the channel to the `UPDATING` state and
+    /// returns immediately. After the change is applied, Amazon Kinesis Data
+    /// Streams sets the channel back to the `ACTIVE` state.
+    ///
+    /// This operation has a call limit of 5 transactions per second (TPS) for each
+    /// Amazon Web Services account. Exceeding 5 TPS results in a
+    /// `LimitExceededException`.
+    pub fn updateChannel(self: *Self, allocator: std.mem.Allocator, input: update_channel.UpdateChannelInput, options: CallOptions) !update_channel.UpdateChannelOutput {
+        return update_channel.execute(self, allocator, input, options);
+    }
+
     /// This allows you to update the `MaxRecordSize` of a single record that you
     /// can write to, and read from a stream. You can ingest and digest single
     /// records up to 10240 KiB.
@@ -1212,10 +1313,53 @@ pub const Client = struct {
         return update_stream_mode.execute(self, allocator, input, options);
     }
 
+    /// Updates the record distribution strategy for the specified Amazon Kinesis
+    /// Data Streams
+    /// on-demand data stream. The record distribution strategy determines how
+    /// Amazon Kinesis
+    /// Data Streams distributes records across the shards in a stream.
+    ///
+    /// You must specify the stream using the `StreamARN` parameter.
+    ///
+    /// The record distribution strategy is a stream-level setting. You can switch
+    /// between the
+    /// following strategies at any time, and the change takes effect immediately
+    /// without
+    /// downtime, data loss, or disruption to producer or consumer applications:
+    ///
+    /// * `AUTO` – Amazon Kinesis Data Streams distributes records evenly
+    /// across shards using service-managed algorithms, and ignores any partition
+    /// key
+    /// and `ExplicitHashKey` that a producer provides. Use this strategy for
+    /// stateless workloads that do not require partition-key ordering.
+    ///
+    /// * `USER_PARTITION_KEY` – Producers must provide a partition key, and
+    /// Amazon Kinesis Data Streams uses the partition key to determine shard
+    /// placement.
+    /// Records that share a partition key are sent to the same shard. This is the
+    /// default strategy.
+    ///
+    /// This operation is only supported for data streams that use the on-demand
+    /// capacity
+    /// mode. Provisioned capacity mode streams do not support the record
+    /// distribution strategy
+    /// setting. Attempting to set `AUTO` on a provisioned stream results in an
+    /// `InvalidArgumentException`.
+    ///
+    /// New records that arrive after the change are distributed according to the
+    /// new
+    /// strategy. Records already in the stream keep their original shard
+    /// assignments and are
+    /// not redistributed.
+    pub fn updateStreamRecordDistributionStrategy(self: *Self, allocator: std.mem.Allocator, input: update_stream_record_distribution_strategy.UpdateStreamRecordDistributionStrategyInput, options: CallOptions) !update_stream_record_distribution_strategy.UpdateStreamRecordDistributionStrategyOutput {
+        return update_stream_record_distribution_strategy.execute(self, allocator, input, options);
+    }
+
     /// Updates the warm throughput configuration for the specified Amazon Kinesis
-    /// Data Streams on-demand data stream. This operation allows you to proactively
-    /// scale your on-demand data stream to a specified throughput level, enabling
-    /// better performance for sudden traffic spikes.
+    /// Data Streams on-demand data stream. Updates the warm throughput
+    /// configuration for the specified on-demand data stream. Use this operation to
+    /// scale your stream to a specified throughput level before anticipated traffic
+    /// spikes, or to release excess capacity after traffic has decreased.
     ///
     /// When invoking this API, you must use either the `StreamARN` or the
     /// `StreamName` parameter, or both. It is recommended that you use the
@@ -1233,6 +1377,9 @@ pub const Client = struct {
     /// capacity mode in accounts that have `MinimumThroughputBillingCommitment`
     /// enabled. Provisioned capacity mode streams do not support warm throughput
     /// configuration.
+    ///
+    /// To release excess capacity, call the API again and set the warm throughput
+    /// to the same or a lower value.
     ///
     /// This operation has the following default limits. By default, you cannot do
     /// the following:
@@ -1252,6 +1399,13 @@ pub const Client = struct {
         return update_stream_warm_throughput.execute(self, allocator, input, options);
     }
 
+    pub fn listChannelsPaginator(self: *Self, params: list_channels.ListChannelsInput) paginator.ListChannelsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listStreamConsumersPaginator(self: *Self, params: list_stream_consumers.ListStreamConsumersInput) paginator.ListStreamConsumersPaginator {
         return .{
             .client = self,
@@ -1264,6 +1418,11 @@ pub const Client = struct {
             .client = self,
             .params = params,
         };
+    }
+
+    pub fn waitUntilChannelActive(self: *Self, params: describe_channel.DescribeChannelInput) aws.waiter.WaiterError!void {
+        var w = waiters.ChannelActiveWaiter{ .client = self, .params = params };
+        return w.wait();
     }
 
     pub fn waitUntilStreamExists(self: *Self, params: describe_stream.DescribeStreamInput) aws.waiter.WaiterError!void {

@@ -169,6 +169,9 @@ pub const Client = struct {
     /// Creates a proxy session for the specified Amazon Chime SDK Voice Connector
     /// for
     /// the specified participant phone numbers.
+    ///
+    /// End of support notice: On April 7, 2026, AWS will end support for Amazon
+    /// Chime SDK proxy sessions.
     pub fn createProxySession(self: *Self, allocator: std.mem.Allocator, input: create_proxy_session.CreateProxySessionInput, options: CallOptions) !create_proxy_session.CreateProxySessionOutput {
         return create_proxy_session.execute(self, allocator, input, options);
     }
@@ -268,6 +271,9 @@ pub const Client = struct {
     /// Deletes the specified proxy session from the specified Amazon Chime SDK
     /// Voice
     /// Connector.
+    ///
+    /// End of support notice: On April 7, 2026, AWS will end support for Amazon
+    /// Chime SDK proxy sessions.
     pub fn deleteProxySession(self: *Self, allocator: std.mem.Allocator, input: delete_proxy_session.DeleteProxySessionInput, options: CallOptions) !delete_proxy_session.DeleteProxySessionOutput {
         return delete_proxy_session.execute(self, allocator, input, options);
     }
@@ -320,6 +326,9 @@ pub const Client = struct {
 
     /// Deletes the proxy configuration from the specified Amazon Chime SDK Voice
     /// Connector.
+    ///
+    /// End of support notice: On April 7, 2026, AWS will end support for Amazon
+    /// Chime SDK proxy sessions.
     pub fn deleteVoiceConnectorProxy(self: *Self, allocator: std.mem.Allocator, input: delete_voice_connector_proxy.DeleteVoiceConnectorProxyInput, options: CallOptions) !delete_voice_connector_proxy.DeleteVoiceConnectorProxyOutput {
         return delete_voice_connector_proxy.execute(self, allocator, input, options);
     }
@@ -396,6 +405,9 @@ pub const Client = struct {
 
     /// Retrieves the specified proxy session details for the specified Amazon Chime
     /// SDK Voice Connector.
+    ///
+    /// End of support notice: On April 7, 2026, AWS will end support for Amazon
+    /// Chime SDK proxy sessions.
     pub fn getProxySession(self: *Self, allocator: std.mem.Allocator, input: get_proxy_session.GetProxySessionInput, options: CallOptions) !get_proxy_session.GetProxySessionOutput {
         return get_proxy_session.execute(self, allocator, input, options);
     }
@@ -475,6 +487,9 @@ pub const Client = struct {
     /// Retrieves the proxy configuration details for the specified Amazon Chime SDK
     /// Voice
     /// Connector.
+    ///
+    /// End of support notice: On April 7, 2026, AWS will end support for Amazon
+    /// Chime SDK proxy sessions.
     pub fn getVoiceConnectorProxy(self: *Self, allocator: std.mem.Allocator, input: get_voice_connector_proxy.GetVoiceConnectorProxyInput, options: CallOptions) !get_voice_connector_proxy.GetVoiceConnectorProxyOutput {
         return get_voice_connector_proxy.execute(self, allocator, input, options);
     }
@@ -537,6 +552,9 @@ pub const Client = struct {
     }
 
     /// Lists the proxy sessions for the specified Amazon Chime SDK Voice Connector.
+    ///
+    /// End of support notice: On April 7, 2026, AWS will end support for Amazon
+    /// Chime SDK proxy sessions.
     pub fn listProxySessions(self: *Self, allocator: std.mem.Allocator, input: list_proxy_sessions.ListProxySessionsInput, options: CallOptions) !list_proxy_sessions.ListProxySessionsOutput {
         return list_proxy_sessions.execute(self, allocator, input, options);
     }
@@ -628,6 +646,9 @@ pub const Client = struct {
 
     /// Puts the specified proxy configuration to the specified Amazon Chime SDK
     /// Voice Connector.
+    ///
+    /// End of support notice: On April 7, 2026, AWS will end support for Amazon
+    /// Chime SDK proxy sessions.
     pub fn putVoiceConnectorProxy(self: *Self, allocator: std.mem.Allocator, input: put_voice_connector_proxy.PutVoiceConnectorProxyInput, options: CallOptions) !put_voice_connector_proxy.PutVoiceConnectorProxyOutput {
         return put_voice_connector_proxy.execute(self, allocator, input, options);
     }
@@ -739,6 +760,9 @@ pub const Client = struct {
 
     /// Updates the specified proxy session details, such as voice or SMS
     /// capabilities.
+    ///
+    /// End of support notice: On April 7, 2026, AWS will end support for Amazon
+    /// Chime SDK proxy sessions.
     pub fn updateProxySession(self: *Self, allocator: std.mem.Allocator, input: update_proxy_session.UpdateProxySessionInput, options: CallOptions) !update_proxy_session.UpdateProxySessionOutput {
         return update_proxy_session.execute(self, allocator, input, options);
     }

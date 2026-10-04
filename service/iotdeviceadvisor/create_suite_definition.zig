@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSuiteDefinitionIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateSuiteDefinitionOutput {
-    var result: CreateSuiteDefinitionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateSuiteDefinitionOutput, body, allocator);
-    }
+    const result: CreateSuiteDefinitionOutput = try aws.json.parseJsonObject(
+        CreateSuiteDefinitionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

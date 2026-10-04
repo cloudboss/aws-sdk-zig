@@ -7,7 +7,7 @@ GRADLE_VERSION = 8.7
 CTR_IMAGE_BASE = ghcr.io/cloudboss/docker.io/library/alpine:3.23.2
 CTR_IMAGE_LOCALSTACK = ghcr.io/cloudboss/docker.io/localstack/localstack:4.14.0
 
-AWS_MODELS_COMMIT = 3c0aa29b303909ce69f0e3bb4a4638a0f21a34a8
+AWS_MODELS_COMMIT = 7eb6ab98cd5f1e5dc6dd90ea1bdc625f9ae308ba
 
 # The Dockerfile and its args are hashed to create a unique tag. The image
 # will be rebuilt if the hash changes, as the dependency file will change.
@@ -61,6 +61,13 @@ test: $(HAS_IMAGE_LOCAL)
 		-w /code \
 		--security-opt label=type:container_runtime_t \
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build test $(ZIG_BUILD_FLAGS)"
+
+test-integration-compile: $(HAS_IMAGE_LOCAL)
+	@docker run --rm \
+		-v $(DIR_ROOT):/code \
+		-w /code \
+		--security-opt label=type:container_runtime_t \
+		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build integration-test-compile $(ZIG_BUILD_FLAGS)"
 
 test-integration-localstack: $(HAS_IMAGE_LOCAL) certs | $(DIR_OUT)
 	@docker run --rm \
@@ -157,4 +164,4 @@ certs:
 clean:
 	@rm -rf $(DIR_OUT)
 
-.PHONY: build test test-integration-localstack test-integration-live fetch-models codegen docgen docgen-test certs clean
+.PHONY: build test test-integration-compile test-integration-localstack test-integration-live fetch-models codegen docgen docgen-test certs clean

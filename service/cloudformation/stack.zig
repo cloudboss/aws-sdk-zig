@@ -1,5 +1,6 @@
 const Capability = @import("capability.zig").Capability;
 const DeletionMode = @import("deletion_mode.zig").DeletionMode;
+const DeploymentConfig = @import("deployment_config.zig").DeploymentConfig;
 const DetailedStatus = @import("detailed_status.zig").DetailedStatus;
 const StackDriftInformation = @import("stack_drift_information.zig").StackDriftInformation;
 const OperationEntry = @import("operation_entry.zig").OperationEntry;
@@ -32,6 +33,11 @@ pub const Stack = struct {
 
     /// The time the stack was deleted.
     deletion_time: ?i64 = null,
+
+    /// The deployment configuration for the stack, including the deployment mode
+    /// used for stack
+    /// operations.
+    deployment_config: ?DeploymentConfig = null,
 
     /// A user-defined description associated with the stack.
     description: ?[]const u8 = null,

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SuppressionListReason = @import("suppression_list_reason.zig").SuppressionListReason;
+const SuppressionListScope = @import("suppression_list_scope.zig").SuppressionListScope;
 const SuppressionValidationOptions = @import("suppression_validation_options.zig").SuppressionValidationOptions;
 
 pub const PutConfigurationSetSuppressionOptionsInput = struct {
@@ -14,17 +15,31 @@ pub const PutConfigurationSetSuppressionOptionsInput = struct {
 
     /// A list that contains the reasons that email addresses are automatically
     /// added to the
-    /// suppression list for your account. This list can contain any or all of the
+    /// suppression list for your account or for a specific tenant. This list can
+    /// contain any or all of the
     /// following:
     ///
     /// * `COMPLAINT` – Amazon SES adds an email address to the suppression
-    /// list for your account when a message sent to that address results in a
+    /// list for your account or for a specific tenant when a message sent to that
+    /// address results in a
     /// complaint.
     ///
     /// * `BOUNCE` – Amazon SES adds an email address to the suppression
-    /// list for your account when a message sent to that address results in a hard
+    /// list for your account or for a specific tenant when a message sent to that
+    /// address results in a hard
     /// bounce.
     suppressed_reasons: ?[]const SuppressionListReason = null,
+
+    /// The suppression scope for the configuration set. This overrides the tenant
+    /// or account
+    /// suppression scope for emails sent using this configuration set. Can be one
+    /// of the
+    /// following:
+    ///
+    /// * `TENANT` – Use the tenant's suppression list.
+    ///
+    /// * `ACCOUNT` – Use the account-level suppression list.
+    suppression_scope: ?SuppressionListScope = null,
 
     /// An object that contains information about the email address suppression
     /// preferences for the configuration set in the current Amazon Web Services
@@ -34,6 +49,7 @@ pub const PutConfigurationSetSuppressionOptionsInput = struct {
     pub const json_field_names = .{
         .configuration_set_name = "ConfigurationSetName",
         .suppressed_reasons = "SuppressedReasons",
+        .suppression_scope = "SuppressionScope",
         .validation_options = "ValidationOptions",
     };
 };
@@ -84,6 +100,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutConfigurationSetSupp
     if (input.suppressed_reasons) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"SuppressedReasons\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.suppression_scope) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"SuppressionScope\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

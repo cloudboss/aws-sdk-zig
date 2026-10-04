@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportCrlInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ImportCrlOutput {
-    var result: ImportCrlOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ImportCrlOutput, body, allocator);
-    }
+    const result: ImportCrlOutput = try aws.json.parseJsonObject(
+        ImportCrlOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

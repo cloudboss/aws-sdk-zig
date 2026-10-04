@@ -75,6 +75,7 @@ pub const GetRecommendationError = @import("get_recommendation_error.zig").GetRe
 pub const Gpu = @import("gpu.zig").Gpu;
 pub const GpuInfo = @import("gpu_info.zig").GpuInfo;
 pub const Idle = @import("idle.zig").Idle;
+pub const IdleDimension = @import("idle_dimension.zig").IdleDimension;
 pub const IdleEstimatedMonthlySavings = @import("idle_estimated_monthly_savings.zig").IdleEstimatedMonthlySavings;
 pub const IdleFinding = @import("idle_finding.zig").IdleFinding;
 pub const IdleMetricName = @import("idle_metric_name.zig").IdleMetricName;

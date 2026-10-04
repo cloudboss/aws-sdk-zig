@@ -1,3 +1,5 @@
+const CustomerType = @import("customer_type.zig").CustomerType;
+
 /// Additional tax information associated with your TRN in Italy.
 pub const ItalyAdditionalInfo = struct {
     /// The tender procedure identification code.
@@ -7,6 +9,10 @@ pub const ItalyAdditionalInfo = struct {
     /// the Interministerial Committee for Economic Planning (CIPE) which
     /// characterizes every public investment project (Individual Project Code).
     cup_number: ?[]const u8 = null,
+
+    /// The customer type for tax registration in Italy. Valid values are `Business`
+    /// or `Individual`.
+    customer_type: ?CustomerType = null,
 
     /// Additional tax information to specify for a TRN in Italy. Use
     /// CodiceDestinatario to receive your invoices via web service (API) or FTP.
@@ -19,6 +25,7 @@ pub const ItalyAdditionalInfo = struct {
     pub const json_field_names = .{
         .cig_number = "cigNumber",
         .cup_number = "cupNumber",
+        .customer_type = "customerType",
         .sdi_account_id = "sdiAccountId",
         .tax_code = "taxCode",
     };

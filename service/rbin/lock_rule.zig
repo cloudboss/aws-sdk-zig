@@ -151,10 +151,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: LockRuleInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !LockRuleOutput {
-    var result: LockRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(LockRuleOutput, body, allocator);
-    }
+    const result: LockRuleOutput = try aws.json.parseJsonObject(
+        LockRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

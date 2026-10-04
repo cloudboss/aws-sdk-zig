@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMediaLiveConnecto
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateMediaLiveConnectorPipelineOutput {
-    var result: CreateMediaLiveConnectorPipelineOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateMediaLiveConnectorPipelineOutput, body, allocator);
-    }
+    const result: CreateMediaLiveConnectorPipelineOutput = try aws.json.parseJsonObject(
+        CreateMediaLiveConnectorPipelineOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

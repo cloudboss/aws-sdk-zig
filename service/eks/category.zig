@@ -3,16 +3,19 @@ const std = @import("std");
 pub const Category = enum {
     upgrade_readiness,
     misconfiguration,
+    rollback_readiness,
 
     pub const json_field_names = .{
         .upgrade_readiness = "UPGRADE_READINESS",
         .misconfiguration = "MISCONFIGURATION",
+        .rollback_readiness = "ROLLBACK_READINESS",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .upgrade_readiness => "UPGRADE_READINESS",
             .misconfiguration => "MISCONFIGURATION",
+            .rollback_readiness => "ROLLBACK_READINESS",
         };
     }
 

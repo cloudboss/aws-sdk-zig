@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchDeleteTaxRegistrat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchDeleteTaxRegistrationOutput {
-    var result: BatchDeleteTaxRegistrationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchDeleteTaxRegistrationOutput, body, allocator);
-    }
+    const result: BatchDeleteTaxRegistrationOutput = try aws.json.parseJsonObject(
+        BatchDeleteTaxRegistrationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

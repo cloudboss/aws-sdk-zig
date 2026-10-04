@@ -86,10 +86,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchCreateFirewallRule
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchCreateFirewallRuleOutput {
-    var result: BatchCreateFirewallRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchCreateFirewallRuleOutput, body, allocator);
-    }
+    const result: BatchCreateFirewallRuleOutput = try aws.json.parseJsonObject(
+        BatchCreateFirewallRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

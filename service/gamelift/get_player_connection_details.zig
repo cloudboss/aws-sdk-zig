@@ -9,8 +9,9 @@ const PlayerConnectionDetail = @import("player_connection_detail.zig").PlayerCon
 pub const GetPlayerConnectionDetailsInput = struct {
     /// An identifier for the game session that is unique across all regions for
     /// which to retrieve player connection details. The value is always a full ARN
-    /// in the following format:
-    /// `arn:aws:gamelift:::gamesession//`.
+    /// in the following format: For Home Region game session -
+    /// `arn:aws:gamelift:::gamesession//`. For Remote Location game session -
+    /// `arn:aws:gamelift:::gamesession///`.
     game_session_id: []const u8,
 
     /// List of unique identifiers for players. Connection details are returned for
@@ -26,8 +27,9 @@ pub const GetPlayerConnectionDetailsInput = struct {
 pub const GetPlayerConnectionDetailsOutput = struct {
     /// An identifier for the game session that is unique across all regions for
     /// which the player connection details were retrieved. The value is always a
-    /// full ARN in the following format:
-    /// `arn:aws:gamelift:::gamesession//`.
+    /// full ARN in the following format: For Home Region game session -
+    /// `arn:aws:gamelift:::gamesession//`. For Remote Location game session -
+    /// `arn:aws:gamelift:::gamesession///`.
     game_session_id: ?[]const u8 = null,
 
     /// A collection of player connection detail objects, one for each requested

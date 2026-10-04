@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const TableAttributes = @import("table_attributes.zig").TableAttributes;
 const AuditContext = @import("audit_context.zig").AuditContext;
+const TableResourceShareType = @import("table_resource_share_type.zig").TableResourceShareType;
 const Table = @import("table.zig").Table;
 
 pub const GetTablesInput = struct {
@@ -51,6 +52,16 @@ pub const GetTablesInput = struct {
     /// `TransactionId`.
     query_as_of_time: ?i64 = null,
 
+    /// Specifies which tables the `GetTables` call returns. The allowable values
+    /// are `FEDERATED` or `ALL`.
+    ///
+    /// * If set to `FEDERATED`, returns only federated tables, which reference an
+    ///   entity outside the Glue Data Catalog.
+    ///
+    /// * If set to `ALL`, returns all tables in the database, both federated and
+    ///   non-federated.
+    resource_share_type: ?TableResourceShareType = null,
+
     /// The transaction ID at which to read the table contents.
     transaction_id: ?[]const u8 = null,
 
@@ -64,6 +75,7 @@ pub const GetTablesInput = struct {
         .max_results = "MaxResults",
         .next_token = "NextToken",
         .query_as_of_time = "QueryAsOfTime",
+        .resource_share_type = "ResourceShareType",
         .transaction_id = "TransactionId",
     };
 };

@@ -170,10 +170,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListChangedBlocksInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListChangedBlocksOutput {
-    var result: ListChangedBlocksOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListChangedBlocksOutput, body, allocator);
-    }
+    const result: ListChangedBlocksOutput = try aws.json.parseJsonObject(
+        ListChangedBlocksOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

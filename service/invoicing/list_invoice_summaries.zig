@@ -15,9 +15,8 @@ pub const ListInvoiceSummariesInput = struct {
     /// The maximum number of invoice summaries a paginated response can contain.
     max_results: ?i32 = null,
 
-    /// The token to retrieve the next set of results. Amazon Web Services provides
-    /// the token when the response from a previous call has more results than the
-    /// maximum page size.
+    /// The token for the next set of results. (You received this token from a
+    /// previous call.)
     next_token: ?[]const u8 = null,
 
     /// The option to retrieve details for a specific invoice by providing its
@@ -37,9 +36,8 @@ pub const ListInvoiceSummariesOutput = struct {
     /// List of key (summary level) invoice details without line item details.
     invoice_summaries: ?[]const InvoiceSummary = null,
 
-    /// The token to retrieve the next set of results. Amazon Web Services provides
-    /// the token when the response from a previous call has more results than the
-    /// maximum page size.
+    /// The token to use to retrieve the next set of results, or null if there are
+    /// no more results.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{

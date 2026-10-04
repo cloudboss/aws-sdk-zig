@@ -10,18 +10,25 @@ const LifecyclePolicyResourceType = @import("lifecycle_policy_resource_type.zig"
 const LifecyclePolicyStatus = @import("lifecycle_policy_status.zig").LifecyclePolicyStatus;
 
 pub const UpdateLifecyclePolicyInput = struct {
-    /// Unique, case-sensitive identifier you provide to ensure
-    /// idempotency of the request. For more information, see [Ensuring
+    /// A unique, case-sensitive identifier you provide to ensure
+    /// that the operation runs no more than one time. If you retry a request with
+    /// the same client
+    /// token, Image Builder returns the original response without running the
+    /// operation again. For more
+    /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
     /// in the *Amazon EC2 API Reference*.
     client_token: []const u8,
 
-    /// Optional description for the lifecycle policy.
+    /// Optional description for the lifecycle policy. Because the update replaces
+    /// the
+    /// entire configuration, omitting this property removes any existing
+    /// description.
     description: ?[]const u8 = null,
 
-    /// The name or Amazon Resource Name (ARN) of the IAM role that Image Builder
-    /// uses to update the
-    /// lifecycle policy.
+    /// The name or Amazon Resource Name (ARN) for the IAM role you create that
+    /// grants Image Builder access
+    /// to run lifecycle actions.
     execution_role: []const u8,
 
     /// The Amazon Resource Name (ARN) of the lifecycle policy resource.
@@ -30,13 +37,19 @@ pub const UpdateLifecyclePolicyInput = struct {
     /// The configuration details for a lifecycle policy resource.
     policy_details: []const LifecyclePolicyDetail,
 
-    /// Selection criteria for resources that the lifecycle policy applies to.
+    /// Selection criteria for resources that the lifecycle policy applies to. You
+    /// must specify exactly one selection criteria: either recipes or a tag map,
+    /// not both.
     resource_selection: LifecyclePolicyResourceSelection,
 
-    /// The type of image resource that the lifecycle policy applies to.
+    /// The type of image resource that the lifecycle policy applies to. The value
+    /// must match the policy's existing resource type. You can't change the
+    /// resource type of an existing lifecycle policy.
     resource_type: LifecyclePolicyResourceType,
 
-    /// Indicates whether the lifecycle policy resource is enabled.
+    /// Indicates whether the lifecycle policy resource is enabled. Defaults to
+    /// `ENABLED` when omitted, so updating a disabled policy without
+    /// setting this property re-enables it.
     status: ?LifecyclePolicyStatus = null,
 
     pub const json_field_names = .{
@@ -149,10 +162,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateLifecyclePolicyIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateLifecyclePolicyOutput {
-    var result: UpdateLifecyclePolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateLifecyclePolicyOutput, body, allocator);
-    }
+    const result: UpdateLifecyclePolicyOutput = try aws.json.parseJsonObject(
+        UpdateLifecyclePolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

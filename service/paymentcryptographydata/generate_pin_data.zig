@@ -189,10 +189,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GeneratePinDataInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GeneratePinDataOutput {
-    var result: GeneratePinDataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GeneratePinDataOutput, body, allocator);
-    }
+    const result: GeneratePinDataOutput = try aws.json.parseJsonObject(
+        GeneratePinDataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

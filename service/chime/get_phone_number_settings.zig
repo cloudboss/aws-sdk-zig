@@ -67,10 +67,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPhoneNumberSettingsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPhoneNumberSettingsOutput {
-    var result: GetPhoneNumberSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPhoneNumberSettingsOutput, body, allocator);
-    }
+    const result: GetPhoneNumberSettingsOutput = try aws.json.parseJsonObject(
+        GetPhoneNumberSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

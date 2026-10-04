@@ -12,8 +12,8 @@ pub const CreateRecommenderSchemaInput = struct {
     domain_name: []const u8,
 
     /// A map of dataset type to column definitions that specifies which data
-    /// columns to include in the schema. Currently only the `_webAnalytics` key is
-    /// supported.
+    /// columns to include in the schema. The `_webAnalytics` and `_catalogItem`
+    /// keys are supported.
     fields: []const aws.map.MapEntry([]const RecommenderSchemaField),
 
     /// The name of the recommender schema. The name must be unique within the
@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRecommenderSchema
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateRecommenderSchemaOutput {
-    var result: CreateRecommenderSchemaOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateRecommenderSchemaOutput, body, allocator);
-    }
+    const result: CreateRecommenderSchemaOutput = try aws.json.parseJsonObject(
+        CreateRecommenderSchemaOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

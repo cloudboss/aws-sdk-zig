@@ -7,8 +7,12 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DataSourceConfig = @import("data_source_config.zig").DataSourceConfig;
 const EvaluationJobResults = @import("evaluation_job_results.zig").EvaluationJobResults;
 const Evaluator = @import("evaluator.zig").Evaluator;
+const ExecutionSummaryClusteringResultContent = @import("execution_summary_clustering_result_content.zig").ExecutionSummaryClusteringResultContent;
+const FailureAnalysisResultContent = @import("failure_analysis_result_content.zig").FailureAnalysisResultContent;
+const Insight = @import("insight.zig").Insight;
 const OutputConfig = @import("output_config.zig").OutputConfig;
 const BatchEvaluationStatus = @import("batch_evaluation_status.zig").BatchEvaluationStatus;
+const UserIntentClusteringResultContent = @import("user_intent_clustering_result_content.zig").UserIntentClusteringResultContent;
 
 pub const GetBatchEvaluationInput = struct {
     /// The unique identifier of the batch evaluation to retrieve.
@@ -48,6 +52,20 @@ pub const GetBatchEvaluationOutput = struct {
     /// The list of evaluators applied during the batch evaluation.
     evaluators: ?[]const Evaluator = null,
 
+    /// The execution summary clustering results from insights, containing grouped
+    /// execution patterns across evaluated sessions.
+    execution_summary_result: ?ExecutionSummaryClusteringResultContent = null,
+
+    /// The failure analysis results from insights, containing categorized failure
+    /// clusters with root causes and recommendations.
+    failure_analysis_result: ?FailureAnalysisResultContent = null,
+
+    /// The list of insight analyses applied during the batch evaluation.
+    insights: ?[]const Insight = null,
+
+    /// The ARN of the KMS key used to encrypt evaluation data.
+    kms_key_arn: ?[]const u8 = null,
+
     /// The output configuration specifying where evaluation results are written.
     output_config: ?OutputConfig = null,
 
@@ -56,6 +74,10 @@ pub const GetBatchEvaluationOutput = struct {
 
     /// The timestamp when the batch evaluation was last updated.
     updated_at: ?i64 = null,
+
+    /// The user intent clustering results from insights, containing grouped user
+    /// intents across evaluated sessions.
+    user_intent_result: ?UserIntentClusteringResultContent = null,
 
     pub const json_field_names = .{
         .batch_evaluation_arn = "batchEvaluationArn",
@@ -67,9 +89,14 @@ pub const GetBatchEvaluationOutput = struct {
         .error_details = "errorDetails",
         .evaluation_results = "evaluationResults",
         .evaluators = "evaluators",
+        .execution_summary_result = "executionSummaryResult",
+        .failure_analysis_result = "failureAnalysisResult",
+        .insights = "insights",
+        .kms_key_arn = "kmsKeyArn",
         .output_config = "outputConfig",
         .status = "status",
         .updated_at = "updatedAt",
+        .user_intent_result = "userIntentResult",
     };
 };
 
@@ -122,10 +149,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBatchEvaluationInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBatchEvaluationOutput {
-    var result: GetBatchEvaluationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBatchEvaluationOutput, body, allocator);
-    }
+    const result: GetBatchEvaluationOutput = try aws.json.parseJsonObject(
+        GetBatchEvaluationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

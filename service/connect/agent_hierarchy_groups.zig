@@ -2,7 +2,7 @@
 /// group levels. For more information
 /// about agent hierarchies, see [Set Up
 /// Agent
-/// Hierarchies](https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html) in the *Amazon Connect Administrator Guide*.
+/// Hierarchies](https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html) in the *Connect Customer Administrator Guide*.
 pub const AgentHierarchyGroups = struct {
     /// The identifiers for level 1 hierarchy groups.
     l1_ids: ?[]const []const u8 = null,

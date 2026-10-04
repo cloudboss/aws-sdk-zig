@@ -9,6 +9,7 @@ pub const ServiceError = struct {
         direct_connect_client_exception: DirectConnectClientException,
         direct_connect_server_exception: DirectConnectServerException,
         duplicate_tag_keys_exception: DuplicateTagKeysException,
+        limit_exceeded_exception: LimitExceededException,
         too_many_tags_exception: TooManyTagsException,
         unknown: UnknownServiceError,
 
@@ -17,6 +18,7 @@ pub const ServiceError = struct {
                 .direct_connect_client_exception => "DirectConnectClientException",
                 .direct_connect_server_exception => "DirectConnectServerException",
                 .duplicate_tag_keys_exception => "DuplicateTagKeysException",
+                .limit_exceeded_exception => "LimitExceededException",
                 .too_many_tags_exception => "TooManyTagsException",
                 .unknown => |e| e.code,
             };
@@ -27,6 +29,7 @@ pub const ServiceError = struct {
                 .direct_connect_client_exception => |e| e.message,
                 .direct_connect_server_exception => |e| e.message,
                 .duplicate_tag_keys_exception => |e| e.message,
+                .limit_exceeded_exception => |e| e.message,
                 .too_many_tags_exception => |e| e.message,
                 .unknown => |e| e.message,
             };
@@ -37,6 +40,7 @@ pub const ServiceError = struct {
                 .direct_connect_client_exception => 400,
                 .direct_connect_server_exception => 500,
                 .duplicate_tag_keys_exception => 400,
+                .limit_exceeded_exception => 400,
                 .too_many_tags_exception => 400,
                 .unknown => |e| e.http_status,
             };
@@ -47,6 +51,7 @@ pub const ServiceError = struct {
                 .direct_connect_client_exception => |e| e.request_id,
                 .direct_connect_server_exception => |e| e.request_id,
                 .duplicate_tag_keys_exception => |e| e.request_id,
+                .limit_exceeded_exception => |e| e.request_id,
                 .too_many_tags_exception => |e| e.request_id,
                 .unknown => |e| e.request_id,
             };
@@ -96,6 +101,17 @@ pub const DirectConnectServerException = struct {
 
 /// A tag key was specified more than once.
 pub const DuplicateTagKeysException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
+};
+
+/// The rate limiter limit has been exceeded for the connection. You cannot add
+/// more rate limiters to virtual interfaces on this connection.
+pub const LimitExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 
@@ -171,6 +187,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             typed_error.message = owned_message;
             typed_error.request_id = owned_request_id;
             return .{ .arena = arena, .kind = .{ .duplicate_tag_keys_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "LimitExceededException")) {
+        const parsed_error: ?LimitExceededException = aws.json.parseJsonObject(LimitExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .limit_exceeded_exception = typed_error } };
         }
     }
     if (std.mem.eql(u8, error_code, "TooManyTagsException")) {

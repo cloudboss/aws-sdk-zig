@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetMemberAccountDe
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetMemberAccountDetailsOutput {
-    var result: BatchGetMemberAccountDetailsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetMemberAccountDetailsOutput, body, allocator);
-    }
+    const result: BatchGetMemberAccountDetailsOutput = try aws.json.parseJsonObject(
+        BatchGetMemberAccountDetailsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

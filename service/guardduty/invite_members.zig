@@ -117,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InviteMembersInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !InviteMembersOutput {
-    var result: InviteMembersOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(InviteMembersOutput, body, allocator);
-    }
+    const result: InviteMembersOutput = try aws.json.parseJsonObject(
+        InviteMembersOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

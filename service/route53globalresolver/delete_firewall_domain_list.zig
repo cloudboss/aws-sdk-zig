@@ -85,10 +85,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteFirewallDomainLis
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteFirewallDomainListOutput {
-    var result: DeleteFirewallDomainListOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteFirewallDomainListOutput, body, allocator);
-    }
+    const result: DeleteFirewallDomainListOutput = try aws.json.parseJsonObject(
+        DeleteFirewallDomainListOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

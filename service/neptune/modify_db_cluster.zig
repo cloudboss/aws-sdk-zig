@@ -122,6 +122,23 @@ pub const ModifyDBClusterInput = struct {
     /// Not supported by Neptune.
     master_user_password: ?[]const u8 = null,
 
+    /// The network type of the DB cluster.
+    ///
+    /// Valid Values:
+    ///
+    /// * **
+    /// `IPV4`
+    /// **   –
+    /// The DB cluster uses only IPv4 addresses for communication.
+    ///
+    /// * **
+    /// `DUAL`
+    /// **   –
+    /// The DB cluster uses both IPv4 and IPv6 addresses for communication. The DB
+    /// subnet group
+    /// associated with the cluster must support IPv6.
+    network_type: ?[]const u8 = null,
+
     /// The new DB cluster identifier for the DB cluster when renaming a DB cluster.
     /// This value is
     /// stored as a lowercase string.
@@ -314,6 +331,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyDBClusterInput, c
     }
     if (input.master_user_password) |v| {
         try body_buf.appendSlice(allocator, "&MasterUserPassword=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.network_type) |v| {
+        try body_buf.appendSlice(allocator, "&NetworkType=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.new_db_cluster_identifier) |v| {

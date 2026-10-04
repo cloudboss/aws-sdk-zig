@@ -153,10 +153,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateImageSetMetadataI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateImageSetMetadataOutput {
-    var result: UpdateImageSetMetadataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateImageSetMetadataOutput, body, allocator);
-    }
+    const result: UpdateImageSetMetadataOutput = try aws.json.parseJsonObject(
+        UpdateImageSetMetadataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -11,6 +11,17 @@ pub const BatchMeterUsageInput = struct {
     /// Product code is used to uniquely identify a product in Amazon Web Services
     /// Marketplace. The product code should
     /// be the same as the one used during the publishing of a new product.
+    ///
+    /// `ProductCode` is required only for legacy integrations that use
+    /// `CustomerIdentifier`. For new integrations using `LicenseArn` (Concurrent
+    /// Agreements), do NOT include `ProductCode` at the request level. The
+    /// `LicenseArn` in each `UsageRecord` identifies both the product and the
+    /// specific agreement.
+    ///
+    /// Sending metering records with both `ProductCode` and `LicenseArn` for the
+    /// same customer within the same hour will result in duplicate billing. If you
+    /// are migrating from product-based metering to license-based metering, stop
+    /// sending `ProductCode` before you start sending `LicenseArn`.
     product_code: ?[]const u8 = null,
 
     /// The set of `UsageRecords` to submit. `BatchMeterUsage` accepts

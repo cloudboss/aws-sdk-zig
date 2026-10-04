@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListIdentityResolutionJ
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListIdentityResolutionJobsOutput {
-    var result: ListIdentityResolutionJobsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListIdentityResolutionJobsOutput, body, allocator);
-    }
+    const result: ListIdentityResolutionJobsOutput = try aws.json.parseJsonObject(
+        ListIdentityResolutionJobsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

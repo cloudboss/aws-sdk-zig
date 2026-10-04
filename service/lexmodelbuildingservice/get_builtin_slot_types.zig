@@ -129,10 +129,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBuiltinSlotTypesInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBuiltinSlotTypesOutput {
-    var result: GetBuiltinSlotTypesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBuiltinSlotTypesOutput, body, allocator);
-    }
+    const result: GetBuiltinSlotTypesOutput = try aws.json.parseJsonObject(
+        GetBuiltinSlotTypesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ArchivingOptions = @import("archiving_options.zig").ArchivingOptions;
 const DeliveryOptions = @import("delivery_options.zig").DeliveryOptions;
+const MessageSecurityOptions = @import("message_security_options.zig").MessageSecurityOptions;
 const ReputationOptions = @import("reputation_options.zig").ReputationOptions;
 const SendingOptions = @import("sending_options.zig").SendingOptions;
 const SuppressionOptions = @import("suppression_options.zig").SuppressionOptions;
@@ -36,6 +37,11 @@ pub const GetConfigurationSetOutput = struct {
     /// using the configuration set.
     delivery_options: ?DeliveryOptions = null,
 
+    /// The message security options that are applied to the configuration set, such
+    /// as the
+    /// signing scheme used for messages that you send with the configuration set.
+    message_security_options: ?MessageSecurityOptions = null,
+
     /// An object that defines whether or not Amazon SES collects reputation metrics
     /// for the emails
     /// that you send that use the configuration set.
@@ -48,7 +54,7 @@ pub const GetConfigurationSetOutput = struct {
 
     /// An object that contains information about the suppression list preferences
     /// for your
-    /// account.
+    /// account or for a specific tenant.
     suppression_options: ?SuppressionOptions = null,
 
     /// An array of objects that define the tags (keys and values) that are
@@ -70,6 +76,7 @@ pub const GetConfigurationSetOutput = struct {
         .archiving_options = "ArchivingOptions",
         .configuration_set_name = "ConfigurationSetName",
         .delivery_options = "DeliveryOptions",
+        .message_security_options = "MessageSecurityOptions",
         .reputation_options = "ReputationOptions",
         .sending_options = "SendingOptions",
         .suppression_options = "SuppressionOptions",
@@ -128,10 +135,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetConfigurationSetInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetConfigurationSetOutput {
-    var result: GetConfigurationSetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetConfigurationSetOutput, body, allocator);
-    }
+    const result: GetConfigurationSetOutput = try aws.json.parseJsonObject(
+        GetConfigurationSetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

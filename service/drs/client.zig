@@ -2,14 +2,20 @@ const aws = @import("aws");
 const std = @import("std");
 
 const associate_source_network_stack = @import("associate_source_network_stack.zig");
+const cancel_recovery_plan_execution = @import("cancel_recovery_plan_execution.zig");
 const create_extended_source_server = @import("create_extended_source_server.zig");
 const create_launch_configuration_template = @import("create_launch_configuration_template.zig");
+const create_recovery_plan = @import("create_recovery_plan.zig");
+const create_recovery_plan_step = @import("create_recovery_plan_step.zig");
 const create_replication_configuration_template = @import("create_replication_configuration_template.zig");
 const create_source_network = @import("create_source_network.zig");
 const delete_job = @import("delete_job.zig");
 const delete_launch_action = @import("delete_launch_action.zig");
 const delete_launch_configuration_template = @import("delete_launch_configuration_template.zig");
 const delete_recovery_instance = @import("delete_recovery_instance.zig");
+const delete_recovery_plan = @import("delete_recovery_plan.zig");
+const delete_recovery_plan_execution = @import("delete_recovery_plan_execution.zig");
+const delete_recovery_plan_step = @import("delete_recovery_plan_step.zig");
 const delete_replication_configuration_template = @import("delete_replication_configuration_template.zig");
 const delete_source_network = @import("delete_source_network.zig");
 const delete_source_server = @import("delete_source_server.zig");
@@ -26,17 +32,28 @@ const disconnect_source_server = @import("disconnect_source_server.zig");
 const export_source_network_cfn_template = @import("export_source_network_cfn_template.zig");
 const get_failback_replication_configuration = @import("get_failback_replication_configuration.zig");
 const get_launch_configuration = @import("get_launch_configuration.zig");
+const get_recovery_plan = @import("get_recovery_plan.zig");
+const get_recovery_plan_execution = @import("get_recovery_plan_execution.zig");
+const get_recovery_plan_execution_step = @import("get_recovery_plan_execution_step.zig");
+const get_recovery_plan_step = @import("get_recovery_plan_step.zig");
 const get_replication_configuration = @import("get_replication_configuration.zig");
 const initialize_service = @import("initialize_service.zig");
 const list_extensible_source_servers = @import("list_extensible_source_servers.zig");
 const list_launch_actions = @import("list_launch_actions.zig");
+const list_recovery_plan_execution_steps = @import("list_recovery_plan_execution_steps.zig");
+const list_recovery_plan_executions = @import("list_recovery_plan_executions.zig");
+const list_recovery_plan_steps = @import("list_recovery_plan_steps.zig");
+const list_recovery_plans = @import("list_recovery_plans.zig");
 const list_staging_accounts = @import("list_staging_accounts.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const put_launch_action = @import("put_launch_action.zig");
+const reorder_recovery_plan_steps = @import("reorder_recovery_plan_steps.zig");
 const retry_data_replication = @import("retry_data_replication.zig");
+const retry_recovery_plan_execution_step = @import("retry_recovery_plan_execution_step.zig");
 const reverse_replication = @import("reverse_replication.zig");
 const start_failback_launch = @import("start_failback_launch.zig");
 const start_recovery = @import("start_recovery.zig");
+const start_recovery_plan_execution = @import("start_recovery_plan_execution.zig");
 const start_replication = @import("start_replication.zig");
 const start_source_network_recovery = @import("start_source_network_recovery.zig");
 const start_source_network_replication = @import("start_source_network_replication.zig");
@@ -49,6 +66,9 @@ const untag_resource = @import("untag_resource.zig");
 const update_failback_replication_configuration = @import("update_failback_replication_configuration.zig");
 const update_launch_configuration = @import("update_launch_configuration.zig");
 const update_launch_configuration_template = @import("update_launch_configuration_template.zig");
+const update_recovery_plan = @import("update_recovery_plan.zig");
+const update_recovery_plan_execution_step = @import("update_recovery_plan_execution_step.zig");
+const update_recovery_plan_step = @import("update_recovery_plan_step.zig");
 const update_replication_configuration = @import("update_replication_configuration.zig");
 const update_replication_configuration_template = @import("update_replication_configuration_template.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
@@ -88,6 +108,11 @@ pub const Client = struct {
         return associate_source_network_stack.execute(self, allocator, input, options);
     }
 
+    /// Cancels an in-progress Recovery Plan execution. Remaining steps are skipped.
+    pub fn cancelRecoveryPlanExecution(self: *Self, allocator: std.mem.Allocator, input: cancel_recovery_plan_execution.CancelRecoveryPlanExecutionInput, options: CallOptions) !cancel_recovery_plan_execution.CancelRecoveryPlanExecutionOutput {
+        return cancel_recovery_plan_execution.execute(self, allocator, input, options);
+    }
+
     /// Create an extended source server in the target Account based on the source
     /// server in staging account.
     pub fn createExtendedSourceServer(self: *Self, allocator: std.mem.Allocator, input: create_extended_source_server.CreateExtendedSourceServerInput, options: CallOptions) !create_extended_source_server.CreateExtendedSourceServerOutput {
@@ -97,6 +122,17 @@ pub const Client = struct {
     /// Creates a new Launch Configuration Template.
     pub fn createLaunchConfigurationTemplate(self: *Self, allocator: std.mem.Allocator, input: create_launch_configuration_template.CreateLaunchConfigurationTemplateInput, options: CallOptions) !create_launch_configuration_template.CreateLaunchConfigurationTemplateOutput {
         return create_launch_configuration_template.execute(self, allocator, input, options);
+    }
+
+    /// Creates a Recovery Plan to orchestrate multi-server disaster recovery.
+    pub fn createRecoveryPlan(self: *Self, allocator: std.mem.Allocator, input: create_recovery_plan.CreateRecoveryPlanInput, options: CallOptions) !create_recovery_plan.CreateRecoveryPlanOutput {
+        return create_recovery_plan.execute(self, allocator, input, options);
+    }
+
+    /// Creates a step in a Recovery Plan. A step is either `SERVER` type (servers
+    /// to recover in parallel) or `WAIT` type (timed pause between steps).
+    pub fn createRecoveryPlanStep(self: *Self, allocator: std.mem.Allocator, input: create_recovery_plan_step.CreateRecoveryPlanStepInput, options: CallOptions) !create_recovery_plan_step.CreateRecoveryPlanStepOutput {
+        return create_recovery_plan_step.execute(self, allocator, input, options);
     }
 
     /// Creates a new ReplicationConfigurationTemplate.
@@ -129,6 +165,22 @@ pub const Client = struct {
     /// disconnected first in order to delete it.
     pub fn deleteRecoveryInstance(self: *Self, allocator: std.mem.Allocator, input: delete_recovery_instance.DeleteRecoveryInstanceInput, options: CallOptions) !delete_recovery_instance.DeleteRecoveryInstanceOutput {
         return delete_recovery_instance.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a Recovery Plan. Cannot delete a plan that has an execution in a
+    /// non-terminal status (`CREATED`, `IN_PROGRESS`).
+    pub fn deleteRecoveryPlan(self: *Self, allocator: std.mem.Allocator, input: delete_recovery_plan.DeleteRecoveryPlanInput, options: CallOptions) !delete_recovery_plan.DeleteRecoveryPlanOutput {
+        return delete_recovery_plan.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a Recovery Plan execution record. Must be in a terminal status.
+    pub fn deleteRecoveryPlanExecution(self: *Self, allocator: std.mem.Allocator, input: delete_recovery_plan_execution.DeleteRecoveryPlanExecutionInput, options: CallOptions) !delete_recovery_plan_execution.DeleteRecoveryPlanExecutionOutput {
+        return delete_recovery_plan_execution.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a step from a Recovery Plan.
+    pub fn deleteRecoveryPlanStep(self: *Self, allocator: std.mem.Allocator, input: delete_recovery_plan_step.DeleteRecoveryPlanStepInput, options: CallOptions) !delete_recovery_plan_step.DeleteRecoveryPlanStepOutput {
+        return delete_recovery_plan_step.execute(self, allocator, input, options);
     }
 
     /// Deletes a single Replication Configuration Template by ID
@@ -243,6 +295,26 @@ pub const Client = struct {
         return get_launch_configuration.execute(self, allocator, input, options);
     }
 
+    /// Gets a Recovery Plan by ARN.
+    pub fn getRecoveryPlan(self: *Self, allocator: std.mem.Allocator, input: get_recovery_plan.GetRecoveryPlanInput, options: CallOptions) !get_recovery_plan.GetRecoveryPlanOutput {
+        return get_recovery_plan.execute(self, allocator, input, options);
+    }
+
+    /// Gets the details of a Recovery Plan execution.
+    pub fn getRecoveryPlanExecution(self: *Self, allocator: std.mem.Allocator, input: get_recovery_plan_execution.GetRecoveryPlanExecutionInput, options: CallOptions) !get_recovery_plan_execution.GetRecoveryPlanExecutionOutput {
+        return get_recovery_plan_execution.execute(self, allocator, input, options);
+    }
+
+    /// Gets the details of a step within a Recovery Plan execution.
+    pub fn getRecoveryPlanExecutionStep(self: *Self, allocator: std.mem.Allocator, input: get_recovery_plan_execution_step.GetRecoveryPlanExecutionStepInput, options: CallOptions) !get_recovery_plan_execution_step.GetRecoveryPlanExecutionStepOutput {
+        return get_recovery_plan_execution_step.execute(self, allocator, input, options);
+    }
+
+    /// Gets a Recovery Plan step by ARN.
+    pub fn getRecoveryPlanStep(self: *Self, allocator: std.mem.Allocator, input: get_recovery_plan_step.GetRecoveryPlanStepInput, options: CallOptions) !get_recovery_plan_step.GetRecoveryPlanStepOutput {
+        return get_recovery_plan_step.execute(self, allocator, input, options);
+    }
+
     /// Gets a ReplicationConfiguration, filtered by Source Server ID.
     pub fn getReplicationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_replication_configuration.GetReplicationConfigurationInput, options: CallOptions) !get_replication_configuration.GetReplicationConfigurationOutput {
         return get_replication_configuration.execute(self, allocator, input, options);
@@ -266,6 +338,26 @@ pub const Client = struct {
         return list_launch_actions.execute(self, allocator, input, options);
     }
 
+    /// Lists all steps within a Recovery Plan execution.
+    pub fn listRecoveryPlanExecutionSteps(self: *Self, allocator: std.mem.Allocator, input: list_recovery_plan_execution_steps.ListRecoveryPlanExecutionStepsInput, options: CallOptions) !list_recovery_plan_execution_steps.ListRecoveryPlanExecutionStepsOutput {
+        return list_recovery_plan_execution_steps.execute(self, allocator, input, options);
+    }
+
+    /// Lists executions of Recovery Plans, optionally filtered by plan or status.
+    pub fn listRecoveryPlanExecutions(self: *Self, allocator: std.mem.Allocator, input: list_recovery_plan_executions.ListRecoveryPlanExecutionsInput, options: CallOptions) !list_recovery_plan_executions.ListRecoveryPlanExecutionsOutput {
+        return list_recovery_plan_executions.execute(self, allocator, input, options);
+    }
+
+    /// Lists all steps in a Recovery Plan.
+    pub fn listRecoveryPlanSteps(self: *Self, allocator: std.mem.Allocator, input: list_recovery_plan_steps.ListRecoveryPlanStepsInput, options: CallOptions) !list_recovery_plan_steps.ListRecoveryPlanStepsOutput {
+        return list_recovery_plan_steps.execute(self, allocator, input, options);
+    }
+
+    /// Lists all Recovery Plans in the account.
+    pub fn listRecoveryPlans(self: *Self, allocator: std.mem.Allocator, input: list_recovery_plans.ListRecoveryPlansInput, options: CallOptions) !list_recovery_plans.ListRecoveryPlansOutput {
+        return list_recovery_plans.execute(self, allocator, input, options);
+    }
+
     /// Returns an array of staging accounts for existing extended source servers.
     pub fn listStagingAccounts(self: *Self, allocator: std.mem.Allocator, input: list_staging_accounts.ListStagingAccountsInput, options: CallOptions) !list_staging_accounts.ListStagingAccountsOutput {
         return list_staging_accounts.execute(self, allocator, input, options);
@@ -281,6 +373,12 @@ pub const Client = struct {
         return put_launch_action.execute(self, allocator, input, options);
     }
 
+    /// Reorders steps in a Recovery Plan. Accepts a complete ordered list of step
+    /// ARNs.
+    pub fn reorderRecoveryPlanSteps(self: *Self, allocator: std.mem.Allocator, input: reorder_recovery_plan_steps.ReorderRecoveryPlanStepsInput, options: CallOptions) !reorder_recovery_plan_steps.ReorderRecoveryPlanStepsOutput {
+        return reorder_recovery_plan_steps.execute(self, allocator, input, options);
+    }
+
     /// WARNING: RetryDataReplication is deprecated. Causes the data replication
     /// initiation sequence to begin immediately upon next Handshake for the
     /// specified Source Server ID, regardless of when the previous initiation
@@ -288,6 +386,11 @@ pub const Client = struct {
     /// in a DISCONNECTED or STOPPED state.
     pub fn retryDataReplication(self: *Self, allocator: std.mem.Allocator, input: retry_data_replication.RetryDataReplicationInput, options: CallOptions) !retry_data_replication.RetryDataReplicationOutput {
         return retry_data_replication.execute(self, allocator, input, options);
+    }
+
+    /// Retries a failed `SERVER` type execution step.
+    pub fn retryRecoveryPlanExecutionStep(self: *Self, allocator: std.mem.Allocator, input: retry_recovery_plan_execution_step.RetryRecoveryPlanExecutionStepInput, options: CallOptions) !retry_recovery_plan_execution_step.RetryRecoveryPlanExecutionStepOutput {
+        return retry_recovery_plan_execution_step.execute(self, allocator, input, options);
     }
 
     /// Start replication to origin / target region - applies only to protected
@@ -310,6 +413,12 @@ pub const Client = struct {
     /// an on demand snapshot.
     pub fn startRecovery(self: *Self, allocator: std.mem.Allocator, input: start_recovery.StartRecoveryInput, options: CallOptions) !start_recovery.StartRecoveryOutput {
         return start_recovery.execute(self, allocator, input, options);
+    }
+
+    /// Starts executing a Recovery Plan in `DRILL` or `RECOVERY` mode. A plan
+    /// cannot have more than one execution in a non-terminal status at a time.
+    pub fn startRecoveryPlanExecution(self: *Self, allocator: std.mem.Allocator, input: start_recovery_plan_execution.StartRecoveryPlanExecutionInput, options: CallOptions) !start_recovery_plan_execution.StartRecoveryPlanExecutionOutput {
+        return start_recovery_plan_execution.execute(self, allocator, input, options);
     }
 
     /// Starts replication for a stopped Source Server. This action would make the
@@ -386,6 +495,24 @@ pub const Client = struct {
         return update_launch_configuration_template.execute(self, allocator, input, options);
     }
 
+    /// Updates a Recovery Plan's name or description.
+    pub fn updateRecoveryPlan(self: *Self, allocator: std.mem.Allocator, input: update_recovery_plan.UpdateRecoveryPlanInput, options: CallOptions) !update_recovery_plan.UpdateRecoveryPlanOutput {
+        return update_recovery_plan.execute(self, allocator, input, options);
+    }
+
+    /// Updates an execution step. Supports two actions: (1) skip a step that is in
+    /// `NOT_STARTED` or `FAILED` status; (2) update the wait duration of a `WAIT`
+    /// type step that is in `NOT_STARTED` status.
+    pub fn updateRecoveryPlanExecutionStep(self: *Self, allocator: std.mem.Allocator, input: update_recovery_plan_execution_step.UpdateRecoveryPlanExecutionStepInput, options: CallOptions) !update_recovery_plan_execution_step.UpdateRecoveryPlanExecutionStepOutput {
+        return update_recovery_plan_execution_step.execute(self, allocator, input, options);
+    }
+
+    /// Updates a Recovery Plan step's name or configuration. Step type is
+    /// immutable.
+    pub fn updateRecoveryPlanStep(self: *Self, allocator: std.mem.Allocator, input: update_recovery_plan_step.UpdateRecoveryPlanStepInput, options: CallOptions) !update_recovery_plan_step.UpdateRecoveryPlanStepOutput {
+        return update_recovery_plan_step.execute(self, allocator, input, options);
+    }
+
     /// Allows you to update a ReplicationConfiguration by Source Server ID.
     pub fn updateReplicationConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_replication_configuration.UpdateReplicationConfigurationInput, options: CallOptions) !update_replication_configuration.UpdateReplicationConfigurationOutput {
         return update_replication_configuration.execute(self, allocator, input, options);
@@ -460,6 +587,34 @@ pub const Client = struct {
     }
 
     pub fn listLaunchActionsPaginator(self: *Self, params: list_launch_actions.ListLaunchActionsInput) paginator.ListLaunchActionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listRecoveryPlanExecutionStepsPaginator(self: *Self, params: list_recovery_plan_execution_steps.ListRecoveryPlanExecutionStepsInput) paginator.ListRecoveryPlanExecutionStepsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listRecoveryPlanExecutionsPaginator(self: *Self, params: list_recovery_plan_executions.ListRecoveryPlanExecutionsInput) paginator.ListRecoveryPlanExecutionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listRecoveryPlanStepsPaginator(self: *Self, params: list_recovery_plan_steps.ListRecoveryPlanStepsInput) paginator.ListRecoveryPlanStepsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listRecoveryPlansPaginator(self: *Self, params: list_recovery_plans.ListRecoveryPlansInput) paginator.ListRecoveryPlansPaginator {
         return .{
             .client = self,
             .params = params,

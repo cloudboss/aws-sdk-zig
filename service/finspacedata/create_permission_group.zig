@@ -133,10 +133,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePermissionGroupIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePermissionGroupOutput {
-    var result: CreatePermissionGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePermissionGroupOutput, body, allocator);
-    }
+    const result: CreatePermissionGroupOutput = try aws.json.parseJsonObject(
+        CreatePermissionGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

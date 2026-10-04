@@ -12,7 +12,7 @@ const SegmentAttributeValue = @import("segment_attribute_value.zig").SegmentAttr
 
 pub const StartOutboundChatContactInput = struct {
     /// A custom key-value pair using an attribute map. The attributes are standard
-    /// Amazon Connect attributes, and
+    /// Connect Customer attributes, and
     /// can be accessed in flows just like any other contact attributes.
     attributes: ?[]const aws.map.StringMapEntry = null,
 
@@ -32,7 +32,7 @@ pub const StartOutboundChatContactInput = struct {
     client_token: ?[]const u8 = null,
 
     /// The identifier of the flow for the call. To see the ContactFlowId in the
-    /// Amazon Connect console user
+    /// Connect Customer console user
     /// interface, on the navigation menu go to **Routing, Contact Flows**. Choose
     /// the flow. On
     /// the flow page, under the name of the flow, choose **Show additional flow
@@ -49,21 +49,21 @@ pub const StartOutboundChatContactInput = struct {
 
     initial_templated_system_message: ?TemplatedMessageConfig = null,
 
-    /// The identifier of the Amazon Connect instance. You can find the instance ID
-    /// in the Amazon Resource Name
+    /// The identifier of the Connect Customer instance. You can find the instance
+    /// ID in the Amazon Resource Name
     /// (ARN) of the instance.
     instance_id: []const u8,
 
     participant_details: ?ParticipantDetails = null,
 
-    /// The unique identifier for an Amazon Connect contact. This identifier is
+    /// The unique identifier for an Connect Customer contact. This identifier is
     /// related to the contact
     /// starting.
     related_contact_id: ?[]const u8 = null,
 
     /// A set of system defined key-value pairs stored on individual contact
     /// segments using an attribute map. The
-    /// attributes are standard Amazon Connect attributes. They can be accessed in
+    /// attributes are standard Connect Customer attributes. They can be accessed in
     /// flows.
     ///
     /// * Attribute keys can include only alphanumeric, `-`, and `_`.
@@ -115,7 +115,7 @@ pub const StartOutboundChatContactInput = struct {
 };
 
 pub const StartOutboundChatContactOutput = struct {
-    /// The identifier of this contact within the Amazon Connect instance.
+    /// The identifier of this contact within the Connect Customer instance.
     contact_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -243,10 +243,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartOutboundChatContac
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartOutboundChatContactOutput {
-    var result: StartOutboundChatContactOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartOutboundChatContactOutput, body, allocator);
-    }
+    const result: StartOutboundChatContactOutput = try aws.json.parseJsonObject(
+        StartOutboundChatContactOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

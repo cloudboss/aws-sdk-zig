@@ -9,14 +9,14 @@ pub const DisassociateAnalyticsDataSetInput = struct {
     /// The identifier of the dataset to remove.
     data_set_id: []const u8,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
     /// The identifier of the target account. Use to associate a dataset to a
     /// different account than the one containing
-    /// the Amazon Connect instance. If not specified, by default this value is the
-    /// Amazon Web Services account that has the Amazon Connect instance.
+    /// the Connect Customer instance. If not specified, by default this value is
+    /// the Amazon Web Services account that has the Connect Customer instance.
     target_account_id: ?[]const u8 = null,
 
     pub const json_field_names = .{

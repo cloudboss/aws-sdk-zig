@@ -218,10 +218,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAgentActionGroupI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateAgentActionGroupOutput {
-    var result: UpdateAgentActionGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateAgentActionGroupOutput, body, allocator);
-    }
+    const result: UpdateAgentActionGroupOutput = try aws.json.parseJsonObject(
+        UpdateAgentActionGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

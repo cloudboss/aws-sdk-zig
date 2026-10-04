@@ -16,6 +16,7 @@ pub const ReviewTemplateSummary = struct {
     /// The name of the review template.
     template_name: ?[]const u8 = null,
 
+    /// The date and time when the review template was last updated.
     updated_at: ?i64 = null,
 
     /// The latest status of a review template.

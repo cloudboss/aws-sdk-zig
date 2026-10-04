@@ -64,7 +64,8 @@ pub const AutomationExecutionMetadata = struct {
     /// The time the execution started.
     execution_start_time: ?i64 = null,
 
-    /// The list of execution outputs as defined in the Automation runbook.
+    /// A message that describes a failure that occurred during the automation
+    /// execution.
     failure_message: ?[]const u8 = null,
 
     /// An S3 bucket where execution information is stored.
@@ -125,6 +126,10 @@ pub const AutomationExecutionMetadata = struct {
     /// The CloudWatch alarm that was invoked by the automation.
     triggered_alarms: ?[]const AlarmStateInformation = null,
 
+    /// A message that describes a non-critical issue that occurred during the
+    /// automation execution.
+    warning_message: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .alarm_configuration = "AlarmConfiguration",
         .association_id = "AssociationId",
@@ -157,5 +162,6 @@ pub const AutomationExecutionMetadata = struct {
         .target_parameter_name = "TargetParameterName",
         .targets = "Targets",
         .triggered_alarms = "TriggeredAlarms",
+        .warning_message = "WarningMessage",
     };
 };

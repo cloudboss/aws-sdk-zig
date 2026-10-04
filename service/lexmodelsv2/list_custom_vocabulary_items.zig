@@ -140,10 +140,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCustomVocabularyIte
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListCustomVocabularyItemsOutput {
-    var result: ListCustomVocabularyItemsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListCustomVocabularyItemsOutput, body, allocator);
-    }
+    const result: ListCustomVocabularyItemsOutput = try aws.json.parseJsonObject(
+        ListCustomVocabularyItemsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,7 +1,7 @@
 /// Details for a Docker volume mount point that's used in a job's container
 /// properties. This
 /// parameter maps to `Volumes` in the [Create a
-/// container](https://docs.docker.com/engine/api/v1.43/#tag/Container/operation/ContainerCreate) section of the *Docker Remote API* and the
+/// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the *Docker Remote API* and the
 /// `--volume` option to docker run.
 pub const MountPoint = struct {
     /// The path on the container where the host volume is mounted.

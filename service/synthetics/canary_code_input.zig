@@ -34,8 +34,8 @@ pub const CanaryCodeInput = struct {
     ///
     /// Multi-checks monitors HTTP/DNS/SSL/TCP endpoints with built-in
     /// authentication schemes (Basic, API Key, OAuth, SigV4) and assertion
-    /// capabilities. When you specify `BlueprintTypes`, the Handler field cannot be
-    /// specified since the blueprint provides a pre-defined entry point.
+    /// capabilities. When you specify `BlueprintTypes`, the `Handler` field cannot
+    /// be specified since the blueprint provides a pre-defined entry point.
     ///
     /// `BlueprintTypes` is supported only on canaries for syn-nodejs-3.0 runtime or
     /// later.

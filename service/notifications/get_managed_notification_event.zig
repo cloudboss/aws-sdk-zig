@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetManagedNotificationE
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetManagedNotificationEventOutput {
-    var result: GetManagedNotificationEventOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetManagedNotificationEventOutput, body, allocator);
-    }
+    const result: GetManagedNotificationEventOutput = try aws.json.parseJsonObject(
+        GetManagedNotificationEventOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

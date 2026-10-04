@@ -81,6 +81,10 @@ pub const DescribeInstanceStatusInput = struct {
     /// * `attached-ebs-status.status` - The status of the attached EBS volume
     /// for the instance (`ok` | `impaired` | `initializing` |
     /// `insufficient-data` | `not-applicable`).
+    ///
+    /// * `application-status.status` - The application status of the instance
+    /// (`ok` | `impaired` | `initializing` |
+    /// `insufficient-data` | `not-applicable`).
     filters: ?[]const Filter = null,
 
     /// When `true`, includes the health status for all instances. When

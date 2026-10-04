@@ -129,10 +129,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRecommendedPolicyV2I
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRecommendedPolicyV2Output {
-    var result: GetRecommendedPolicyV2Output = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRecommendedPolicyV2Output, body, allocator);
-    }
+    const result: GetRecommendedPolicyV2Output = try aws.json.parseJsonObject(
+        GetRecommendedPolicyV2Output,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

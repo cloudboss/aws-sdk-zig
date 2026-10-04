@@ -1,9 +1,12 @@
 const S3Grant = @import("s3_grant.zig").S3Grant;
+const S3AnnotationDirective = @import("s3_annotation_directive.zig").S3AnnotationDirective;
 const S3CannedAccessControlList = @import("s3_canned_access_control_list.zig").S3CannedAccessControlList;
 const S3ChecksumAlgorithm = @import("s3_checksum_algorithm.zig").S3ChecksumAlgorithm;
 const S3MetadataDirective = @import("s3_metadata_directive.zig").S3MetadataDirective;
 const S3ObjectMetadata = @import("s3_object_metadata.zig").S3ObjectMetadata;
 const S3Tag = @import("s3_tag.zig").S3Tag;
+const S3ObjectLockEventHold = @import("s3_object_lock_event_hold.zig").S3ObjectLockEventHold;
+const S3ObjectLockEventHoldDuration = @import("s3_object_lock_event_hold_duration.zig").S3ObjectLockEventHoldDuration;
 const S3ObjectLockLegalHoldStatus = @import("s3_object_lock_legal_hold_status.zig").S3ObjectLockLegalHoldStatus;
 const S3ObjectLockMode = @import("s3_object_lock_mode.zig").S3ObjectLockMode;
 const S3StorageClass = @import("s3_storage_class.zig").S3StorageClass;
@@ -20,6 +23,17 @@ const S3StorageClass = @import("s3_storage_class.zig").S3StorageClass;
 pub const S3CopyObjectOperation = struct {
     /// This functionality is not supported by directory buckets.
     access_control_grants: ?[]const S3Grant = null,
+
+    /// Specifies whether the Batch Operations copy job copies object annotations
+    /// from the source
+    /// object or skips them. If this property isn't specified, `COPY` is the
+    /// default
+    /// behavior.
+    ///
+    /// Valid Values: `COPY | EXCLUDE`
+    ///
+    /// This functionality is not supported by directory buckets.
+    annotation_directive: ?S3AnnotationDirective = null,
 
     /// Specifies whether Amazon S3 should use an S3 Bucket Key for object
     /// encryption with
@@ -69,6 +83,22 @@ pub const S3CopyObjectOperation = struct {
     /// bucket, specify an empty tag set in the `NewObjectTagging` field
     /// to prevent copying the source object tags to the directory bucket.
     new_object_tagging: ?[]const S3Tag = null,
+
+    /// The event hold status to be applied to all objects in the Batch Operations
+    /// copy job. Set to
+    /// `ON` to enable an event hold or `OFF` to disable it.
+    ///
+    /// This functionality is not supported by directory buckets.
+    object_lock_event_hold: ?S3ObjectLockEventHold = null,
+
+    /// The event hold duration to be applied to all objects in the Batch Operations
+    /// copy job. The
+    /// duration specifies how long the object remains protected after the event
+    /// hold is
+    /// released.
+    ///
+    /// This functionality is not supported by directory buckets.
+    object_lock_event_hold_duration: ?S3ObjectLockEventHoldDuration = null,
 
     /// The legal hold status to be applied to all objects in the Batch Operations
     /// job.

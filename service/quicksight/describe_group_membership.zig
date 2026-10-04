@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeGroupMembership
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeGroupMembershipOutput {
-    var result: DescribeGroupMembershipOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeGroupMembershipOutput, body, allocator);
-    }
+    var result: DescribeGroupMembershipOutput = try aws.json.parseJsonObject(
+        DescribeGroupMembershipOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

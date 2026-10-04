@@ -34,6 +34,10 @@ pub const ProcurementPortalPreferenceSummary = struct {
     /// The date and time when the procurement portal preference was last updated.
     last_update_date: i64,
 
+    /// Indicates whether Marketplace PunchOut is enabled for this procurement
+    /// portal preference. Defaults to `false`.
+    marketplace_punch_out_enabled: ?bool = null,
+
     /// The name of the procurement portal.
     procurement_portal_name: ProcurementPortalName,
 
@@ -73,6 +77,7 @@ pub const ProcurementPortalPreferenceSummary = struct {
         .einvoice_delivery_preference_status = "EinvoiceDeliveryPreferenceStatus",
         .einvoice_delivery_preference_status_reason = "EinvoiceDeliveryPreferenceStatusReason",
         .last_update_date = "LastUpdateDate",
+        .marketplace_punch_out_enabled = "MarketplacePunchOutEnabled",
         .procurement_portal_name = "ProcurementPortalName",
         .procurement_portal_preference_arn = "ProcurementPortalPreferenceArn",
         .purchase_order_retrieval_enabled = "PurchaseOrderRetrievalEnabled",

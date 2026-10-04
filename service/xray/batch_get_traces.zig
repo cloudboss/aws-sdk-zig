@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetTracesInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetTracesOutput {
-    var result: BatchGetTracesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetTracesOutput, body, allocator);
-    }
+    const result: BatchGetTracesOutput = try aws.json.parseJsonObject(
+        BatchGetTracesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

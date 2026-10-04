@@ -186,10 +186,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeSavingsPlansOff
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeSavingsPlansOfferingRatesOutput {
-    var result: DescribeSavingsPlansOfferingRatesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeSavingsPlansOfferingRatesOutput, body, allocator);
-    }
+    const result: DescribeSavingsPlansOfferingRatesOutput = try aws.json.parseJsonObject(
+        DescribeSavingsPlansOfferingRatesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

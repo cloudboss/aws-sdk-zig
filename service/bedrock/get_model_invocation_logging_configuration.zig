@@ -65,10 +65,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetModelInvocationLoggi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetModelInvocationLoggingConfigurationOutput {
-    var result: GetModelInvocationLoggingConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetModelInvocationLoggingConfigurationOutput, body, allocator);
-    }
+    const result: GetModelInvocationLoggingConfigurationOutput = try aws.json.parseJsonObject(
+        GetModelInvocationLoggingConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -153,10 +153,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFormTypeInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateFormTypeOutput {
-    var result: CreateFormTypeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateFormTypeOutput, body, allocator);
-    }
+    const result: CreateFormTypeOutput = try aws.json.parseJsonObject(
+        CreateFormTypeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

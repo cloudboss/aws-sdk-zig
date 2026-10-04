@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ContextEntry = @import("context_entry.zig").ContextEntry;
+const OrderedOrganizationPolicyType = @import("ordered_organization_policy_type.zig").OrderedOrganizationPolicyType;
 const EvaluationResult = @import("evaluation_result.zig").EvaluationResult;
 const serde = @import("serde.zig");
 
@@ -18,15 +19,14 @@ pub const SimulateCustomPolicyInput = struct {
     /// in an action name.
     action_names: []const []const u8,
 
-    /// The ARN of the IAM user that you want to use as the simulated caller of the
-    /// API
-    /// operations. `CallerArn` is required if you include a
+    /// The ARN of the IAM user, group, or role that you want to use as the
+    /// simulated
+    /// caller of the API operations. `CallerArn` is required if you include a
     /// `ResourcePolicy` so that the policy's `Principal` element has
     /// a value to use in evaluating the policy.
     ///
-    /// You can specify only the ARN of an IAM user. You cannot specify the ARN of
-    /// an
-    /// assumed role, federated user, or a service principal.
+    /// You cannot specify the ARN of an assumed role, federated user, or a service
+    /// principal.
     caller_arn: ?[]const u8 = null,
 
     /// A list of context keys and corresponding values for the simulation to use.
@@ -58,6 +58,25 @@ pub const SimulateCustomPolicyInput = struct {
     /// where to continue
     /// from.
     max_items: ?i32 = null,
+
+    /// An ordered list of service control policies (SCPs) to include in the
+    /// simulation. Each
+    /// element represents one level of an Organizations hierarchy, from the
+    /// organization root to the
+    /// account.
+    ///
+    /// The simulator evaluates SCPs in the order that you provide, consistent with
+    /// how Organizations
+    /// enforces SCPs. The first element must represent the organization root, and
+    /// the last
+    /// element must represent the account. Any elements between them represent
+    /// organizational
+    /// units (OUs) in descending order.
+    ///
+    /// Use this parameter to simulate the effect of an SCP hierarchy without
+    /// calling
+    /// [SimulatePrincipalPolicy](https://docs.aws.amazon.com/IAM/latest/APIReference/API_SimulatePrincipalPolicy.html).
+    ordered_organization_policy_input_list: ?[]const OrderedOrganizationPolicyType = null,
 
     /// The IAM permissions boundary policy to simulate. The permissions boundary
     /// sets the
@@ -355,6 +374,22 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SimulateCustomPolicyInp
     if (input.max_items) |v| {
         try body_buf.appendSlice(allocator, "&MaxItems=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
+    if (input.ordered_organization_policy_input_list) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            if (item.service_control_policy_input_list) |lst_1| {
+                for (lst_1, 0..) |item_1, idx_1| {
+                    const n_1 = idx_1 + 1;
+                    {
+                        var prefix_buf: [256]u8 = undefined;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&OrderedOrganizationPolicyInputList.member.{d}.ServiceControlPolicyInputList.member.{d}=", .{n, n_1}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
+                    }
+                }
+            }
+        }
     }
     if (input.permissions_boundary_policy_input_list) |list| {
         for (list, 0..) |item, idx| {

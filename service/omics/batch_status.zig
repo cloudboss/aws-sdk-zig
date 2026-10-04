@@ -10,6 +10,7 @@ pub const BatchStatus = enum {
     failed,
     processed,
     runs_deleting,
+    runs_delete_failed,
     runs_deleted,
 
     pub const json_field_names = .{
@@ -22,6 +23,7 @@ pub const BatchStatus = enum {
         .failed = "FAILED",
         .processed = "PROCESSED",
         .runs_deleting = "RUNS_DELETING",
+        .runs_delete_failed = "RUNS_DELETE_FAILED",
         .runs_deleted = "RUNS_DELETED",
     };
 
@@ -36,6 +38,7 @@ pub const BatchStatus = enum {
             .failed => "FAILED",
             .processed => "PROCESSED",
             .runs_deleting => "RUNS_DELETING",
+            .runs_delete_failed => "RUNS_DELETE_FAILED",
             .runs_deleted => "RUNS_DELETED",
         };
     }

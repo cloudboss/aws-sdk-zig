@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AccountDetails = @import("account_details.zig").AccountDetails;
+const PricingAttributes = @import("pricing_attributes.zig").PricingAttributes;
 const SendQuota = @import("send_quota.zig").SendQuota;
 const SuppressionAttributes = @import("suppression_attributes.zig").SuppressionAttributes;
 const VdmAttributes = @import("vdm_attributes.zig").VdmAttributes;
@@ -39,6 +40,11 @@ pub const GetAccountOutput = struct {
     /// you correct the issue, you can contact us and request that your account's
     /// ability to send email is resumed.
     enforcement_status: ?[]const u8 = null,
+
+    /// The pricing attributes that apply to your Amazon SES account, including the
+    /// currently active
+    /// pricing plan and any scheduled change.
+    pricing_attributes: ?PricingAttributes = null,
 
     /// Indicates whether or not your account has production access in the current
     /// Amazon Web Services
@@ -76,6 +82,7 @@ pub const GetAccountOutput = struct {
         .dedicated_ip_auto_warmup_enabled = "DedicatedIpAutoWarmupEnabled",
         .details = "Details",
         .enforcement_status = "EnforcementStatus",
+        .pricing_attributes = "PricingAttributes",
         .production_access_enabled = "ProductionAccessEnabled",
         .sending_enabled = "SendingEnabled",
         .send_quota = "SendQuota",
@@ -131,10 +138,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAccountInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAccountOutput {
-    var result: GetAccountOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAccountOutput, body, allocator);
-    }
+    const result: GetAccountOutput = try aws.json.parseJsonObject(
+        GetAccountOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

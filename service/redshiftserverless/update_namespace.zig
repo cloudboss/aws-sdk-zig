@@ -4,7 +4,10 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const LogDestinationType = @import("log_destination_type.zig").LogDestinationType;
 const LogExport = @import("log_export.zig").LogExport;
+const S3TableAction = @import("s3_table_action.zig").S3TableAction;
+const S3TableGranularity = @import("s3_table_granularity.zig").S3TableGranularity;
 const Namespace = @import("namespace.zig").Namespace;
 
 pub const UpdateNamespaceInput = struct {
@@ -21,6 +24,10 @@ pub const UpdateNamespaceInput = struct {
     /// namespace. This parameter must be updated together with `adminUsername`.
     ///
     /// You can't use `adminUserPassword` if `manageAdminPassword` is true.
+    ///
+    /// If your admin user account is locked, this operation also unlocks your
+    /// account and resets the failed-login counter. This option is available only
+    /// when account lockout security is enabled for the namespace.
     admin_user_password: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the IAM role to set as a default in the
@@ -34,6 +41,13 @@ pub const UpdateNamespaceInput = struct {
     /// The ID of the Amazon Web Services Key Management Service key used to encrypt
     /// your data.
     kms_key_id: ?[]const u8 = null,
+
+    /// The destination for the log data. Valid values are `s3table` and
+    /// `cloudwatch`.
+    ///
+    /// Set this to `s3table` to manage Amazon S3 Tables system-table publishing for
+    /// the namespace.
+    log_destination_type: ?LogDestinationType = null,
 
     /// The types of logs the namespace can export. The export types are `userlog`,
     /// `connectionlog`, and `useractivitylog`.
@@ -50,6 +64,41 @@ pub const UpdateNamespaceInput = struct {
     /// namespace once it is created.
     namespace_name: []const u8,
 
+    /// Whether to enable or disable Amazon S3 Tables publishing. Valid values are
+    /// `Enable` and `Disable`, matched case-insensitively.
+    ///
+    /// When omitted, defaults to `Enable`. Valid only when `logDestinationType` is
+    /// `s3table`.
+    s_3_table_action: ?S3TableAction = null,
+
+    /// The scope of the Amazon S3 Tables destination. Valid values are `namespace`
+    /// and `account`, matched case-insensitively. `namespace` scopes the published
+    /// tables to this namespace; `account` scopes them to the Amazon Web Services
+    /// account.
+    ///
+    /// Required when enabling. Omitting this parameter or passing a blank value
+    /// fails with `ValidationException`. Valid only when `logDestinationType` is
+    /// `s3table`.
+    s_3_table_granularity: ?S3TableGranularity = null,
+
+    /// The identifier of the Key Management Service key used to encrypt the
+    /// published Amazon S3 Tables data. When omitted, the data is encrypted with
+    /// SSE-S3 (Amazon S3 managed keys).
+    ///
+    /// Valid only when `logDestinationType` is `s3table`.
+    s_3_table_kms_key_id: ?[]const u8 = null,
+
+    /// The system tables to publish (on enable) or to stop publishing (on disable).
+    /// Each value is either a system table view name that begins with `sys_` or the
+    /// keyword `all`.
+    ///
+    /// Omitting this parameter, passing an empty list, or including `all` each
+    /// select every current and future system table. Each name must be 1-128
+    /// characters, and the list can contain up to 256 names.
+    ///
+    /// Valid only when `logDestinationType` is `s3table`.
+    s_3_table_names: ?[]const []const u8 = null,
+
     pub const json_field_names = .{
         .admin_password_secret_kms_key_id = "adminPasswordSecretKmsKeyId",
         .admin_username = "adminUsername",
@@ -57,9 +106,14 @@ pub const UpdateNamespaceInput = struct {
         .default_iam_role_arn = "defaultIamRoleArn",
         .iam_roles = "iamRoles",
         .kms_key_id = "kmsKeyId",
+        .log_destination_type = "logDestinationType",
         .log_exports = "logExports",
         .manage_admin_password = "manageAdminPassword",
         .namespace_name = "namespaceName",
+        .s_3_table_action = "s3TableAction",
+        .s_3_table_granularity = "s3TableGranularity",
+        .s_3_table_kms_key_id = "s3TableKmsKeyId",
+        .s_3_table_names = "s3TableNames",
     };
 };
 

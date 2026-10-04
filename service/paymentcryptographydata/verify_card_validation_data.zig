@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: VerifyCardValidationDat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !VerifyCardValidationDataOutput {
-    var result: VerifyCardValidationDataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(VerifyCardValidationDataOutput, body, allocator);
-    }
+    const result: VerifyCardValidationDataOutput = try aws.json.parseJsonObject(
+        VerifyCardValidationDataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

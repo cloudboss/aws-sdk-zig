@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteAttributeMappingI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteAttributeMappingOutput {
-    var result: DeleteAttributeMappingOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteAttributeMappingOutput, body, allocator);
-    }
+    const result: DeleteAttributeMappingOutput = try aws.json.parseJsonObject(
+        DeleteAttributeMappingOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

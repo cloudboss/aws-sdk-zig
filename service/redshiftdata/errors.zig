@@ -8,6 +8,7 @@ pub const ServiceError = struct {
     pub const Kind = union(enum) {
         active_sessions_exceeded_exception: ActiveSessionsExceededException,
         active_statements_exceeded_exception: ActiveStatementsExceededException,
+        active_waiting_requests_exceeded_exception: ActiveWaitingRequestsExceededException,
         batch_execute_statement_exception: BatchExecuteStatementException,
         database_connection_exception: DatabaseConnectionException,
         execute_statement_exception: ExecuteStatementException,
@@ -21,6 +22,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .active_sessions_exceeded_exception => "ActiveSessionsExceededException",
                 .active_statements_exceeded_exception => "ActiveStatementsExceededException",
+                .active_waiting_requests_exceeded_exception => "ActiveWaitingRequestsExceededException",
                 .batch_execute_statement_exception => "BatchExecuteStatementException",
                 .database_connection_exception => "DatabaseConnectionException",
                 .execute_statement_exception => "ExecuteStatementException",
@@ -36,6 +38,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .active_sessions_exceeded_exception => |e| e.message,
                 .active_statements_exceeded_exception => |e| e.message,
+                .active_waiting_requests_exceeded_exception => |e| e.message,
                 .batch_execute_statement_exception => |e| e.message,
                 .database_connection_exception => |e| e.message,
                 .execute_statement_exception => |e| e.message,
@@ -51,6 +54,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .active_sessions_exceeded_exception => 400,
                 .active_statements_exceeded_exception => 400,
+                .active_waiting_requests_exceeded_exception => 400,
                 .batch_execute_statement_exception => 500,
                 .database_connection_exception => 500,
                 .execute_statement_exception => 500,
@@ -66,6 +70,7 @@ pub const ServiceError = struct {
             return switch (self) {
                 .active_sessions_exceeded_exception => |e| e.request_id,
                 .active_statements_exceeded_exception => |e| e.request_id,
+                .active_waiting_requests_exceeded_exception => |e| e.request_id,
                 .batch_execute_statement_exception => |e| e.request_id,
                 .database_connection_exception => |e| e.request_id,
                 .execute_statement_exception => |e| e.request_id,
@@ -112,6 +117,17 @@ pub const ActiveSessionsExceededException = struct {
 
 /// The number of active statements exceeds the limit.
 pub const ActiveStatementsExceededException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "Message",
+    };
+};
+
+/// The number of active requests with `WaitTimeSeconds` for the same SQL
+/// statement exceeds the limit.
+pub const ActiveWaitingRequestsExceededException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 
@@ -247,6 +263,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             typed_error.message = owned_message;
             typed_error.request_id = owned_request_id;
             return .{ .arena = arena, .kind = .{ .active_statements_exceeded_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "ActiveWaitingRequestsExceededException")) {
+        const parsed_error: ?ActiveWaitingRequestsExceededException = aws.json.parseJsonObject(ActiveWaitingRequestsExceededException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .active_waiting_requests_exceeded_exception = typed_error } };
         }
     }
     if (std.mem.eql(u8, error_code, "BatchExecuteStatementException")) {

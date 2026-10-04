@@ -8,8 +8,14 @@ const Filter = @import("filter.zig").Filter;
 const SchemaConversionRequest = @import("schema_conversion_request.zig").SchemaConversionRequest;
 
 pub const DescribeMetadataModelAssessmentsInput = struct {
-    /// Filters applied to the metadata model assessments described in the form of
-    /// key-value pairs.
+    /// The filters to apply to the metadata model assessment requests.
+    ///
+    /// The following filter names are supported:
+    ///
+    /// * `request-id` – The request identifier.
+    ///
+    /// * `status` – The request status. Valid values: `RECEIVED`, `IN_PROGRESS`,
+    ///   `SUCCESS`, `FAILED`.
     filters: ?[]const Filter = null,
 
     /// Specifies the unique pagination token that makes it possible to display the
@@ -32,7 +38,7 @@ pub const DescribeMetadataModelAssessmentsInput = struct {
     /// in the response so that you can retrieve the remaining results.
     max_records: ?i32 = null,
 
-    /// The name or Amazon Resource Name (ARN) of the migration project.
+    /// The migration project name or Amazon Resource Name (ARN).
     migration_project_identifier: []const u8,
 
     pub const json_field_names = .{
@@ -58,8 +64,9 @@ pub const DescribeMetadataModelAssessmentsOutput = struct {
     /// unchanged.
     marker: ?[]const u8 = null,
 
-    /// A paginated list of metadata model assessments for the specified migration
-    /// project.
+    /// A paginated list of metadata model assessment requests.
+    ///
+    /// DMS never populates the `ExportSqlDetails` field for this operation.
     requests: ?[]const SchemaConversionRequest = null,
 
     pub const json_field_names = .{

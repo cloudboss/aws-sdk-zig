@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPlaybackKeyPairsInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListPlaybackKeyPairsOutput {
-    var result: ListPlaybackKeyPairsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListPlaybackKeyPairsOutput, body, allocator);
-    }
+    const result: ListPlaybackKeyPairsOutput = try aws.json.parseJsonObject(
+        ListPlaybackKeyPairsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

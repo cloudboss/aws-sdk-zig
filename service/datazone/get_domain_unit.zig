@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDomainUnitInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDomainUnitOutput {
-    var result: GetDomainUnitOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDomainUnitOutput, body, allocator);
-    }
+    const result: GetDomainUnitOutput = try aws.json.parseJsonObject(
+        GetDomainUnitOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

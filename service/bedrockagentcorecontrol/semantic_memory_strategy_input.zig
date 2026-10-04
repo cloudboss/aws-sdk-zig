@@ -10,7 +10,8 @@ pub const SemanticMemoryStrategyInput = struct {
     /// The name of the semantic memory strategy.
     name: []const u8,
 
-    /// The namespaces associated with the semantic memory strategy.
+    /// This is a legacy parameter, use `namespaceTemplates`. The namespaces
+    /// associated with the semantic memory strategy.
     namespaces: ?[]const []const u8 = null,
 
     /// The namespaceTemplates associated with the semantic memory strategy.

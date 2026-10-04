@@ -15,6 +15,10 @@ pub const PaymentManagerSummary = struct {
     /// The description of the payment manager.
     description: ?[]const u8 = null,
 
+    /// The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive
+    /// payment manager data at rest, if configured.
+    kms_key_arn: ?[]const u8 = null,
+
     /// The timestamp when the payment manager was last updated.
     last_updated_at: i64,
 
@@ -40,6 +44,7 @@ pub const PaymentManagerSummary = struct {
         .authorizer_type = "authorizerType",
         .created_at = "createdAt",
         .description = "description",
+        .kms_key_arn = "kmsKeyArn",
         .last_updated_at = "lastUpdatedAt",
         .name = "name",
         .payment_manager_arn = "paymentManagerArn",

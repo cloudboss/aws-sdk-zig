@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAutomationRulesInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAutomationRulesOutput {
-    var result: ListAutomationRulesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAutomationRulesOutput, body, allocator);
-    }
+    const result: ListAutomationRulesOutput = try aws.json.parseJsonObject(
+        ListAutomationRulesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -166,10 +166,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateConfiguredModelAl
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateConfiguredModelAlgorithmOutput {
-    var result: CreateConfiguredModelAlgorithmOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateConfiguredModelAlgorithmOutput, body, allocator);
-    }
+    const result: CreateConfiguredModelAlgorithmOutput = try aws.json.parseJsonObject(
+        CreateConfiguredModelAlgorithmOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -222,10 +222,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateQuickResponseInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateQuickResponseOutput {
-    var result: UpdateQuickResponseOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateQuickResponseOutput, body, allocator);
-    }
+    const result: UpdateQuickResponseOutput = try aws.json.parseJsonObject(
+        UpdateQuickResponseOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

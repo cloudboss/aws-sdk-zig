@@ -172,10 +172,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateIAMPolicyAssignme
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateIAMPolicyAssignmentOutput {
-    var result: UpdateIAMPolicyAssignmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateIAMPolicyAssignmentOutput, body, allocator);
-    }
+    var result: UpdateIAMPolicyAssignmentOutput = try aws.json.parseJsonObject(
+        UpdateIAMPolicyAssignmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

@@ -6,6 +6,7 @@ const associate_availability_zones = @import("associate_availability_zones.zig")
 const associate_firewall_policy = @import("associate_firewall_policy.zig");
 const associate_subnets = @import("associate_subnets.zig");
 const attach_rule_groups_to_proxy_configuration = @import("attach_rule_groups_to_proxy_configuration.zig");
+const create_container_association = @import("create_container_association.zig");
 const create_firewall = @import("create_firewall.zig");
 const create_firewall_policy = @import("create_firewall_policy.zig");
 const create_proxy = @import("create_proxy.zig");
@@ -15,6 +16,7 @@ const create_proxy_rules = @import("create_proxy_rules.zig");
 const create_rule_group = @import("create_rule_group.zig");
 const create_tls_inspection_configuration = @import("create_tls_inspection_configuration.zig");
 const create_vpc_endpoint_association = @import("create_vpc_endpoint_association.zig");
+const delete_container_association = @import("delete_container_association.zig");
 const delete_firewall = @import("delete_firewall.zig");
 const delete_firewall_policy = @import("delete_firewall_policy.zig");
 const delete_network_firewall_transit_gateway_attachment = @import("delete_network_firewall_transit_gateway_attachment.zig");
@@ -26,6 +28,7 @@ const delete_resource_policy = @import("delete_resource_policy.zig");
 const delete_rule_group = @import("delete_rule_group.zig");
 const delete_tls_inspection_configuration = @import("delete_tls_inspection_configuration.zig");
 const delete_vpc_endpoint_association = @import("delete_vpc_endpoint_association.zig");
+const describe_container_association = @import("describe_container_association.zig");
 const describe_firewall = @import("describe_firewall.zig");
 const describe_firewall_metadata = @import("describe_firewall_metadata.zig");
 const describe_firewall_policy = @import("describe_firewall_policy.zig");
@@ -46,6 +49,7 @@ const disassociate_availability_zones = @import("disassociate_availability_zones
 const disassociate_subnets = @import("disassociate_subnets.zig");
 const get_analysis_report_results = @import("get_analysis_report_results.zig");
 const list_analysis_reports = @import("list_analysis_reports.zig");
+const list_container_associations = @import("list_container_associations.zig");
 const list_firewall_policies = @import("list_firewall_policies.zig");
 const list_firewalls = @import("list_firewalls.zig");
 const list_flow_operation_results = @import("list_flow_operation_results.zig");
@@ -65,6 +69,7 @@ const start_flow_flush = @import("start_flow_flush.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_availability_zone_change_protection = @import("update_availability_zone_change_protection.zig");
+const update_container_association = @import("update_container_association.zig");
 const update_firewall_analysis_settings = @import("update_firewall_analysis_settings.zig");
 const update_firewall_delete_protection = @import("update_firewall_delete_protection.zig");
 const update_firewall_description = @import("update_firewall_description.zig");
@@ -77,6 +82,7 @@ const update_proxy_configuration = @import("update_proxy_configuration.zig");
 const update_proxy_rule = @import("update_proxy_rule.zig");
 const update_proxy_rule_group_priorities = @import("update_proxy_rule_group_priorities.zig");
 const update_proxy_rule_priorities = @import("update_proxy_rule_priorities.zig");
+const update_proxy_settings = @import("update_proxy_settings.zig");
 const update_rule_group = @import("update_rule_group.zig");
 const update_subnet_change_protection = @import("update_subnet_change_protection.zig");
 const update_tls_inspection_configuration = @import("update_tls_inspection_configuration.zig");
@@ -176,6 +182,14 @@ pub const Client = struct {
     /// add to your configuration.
     pub fn attachRuleGroupsToProxyConfiguration(self: *Self, allocator: std.mem.Allocator, input: attach_rule_groups_to_proxy_configuration.AttachRuleGroupsToProxyConfigurationInput, options: CallOptions) !attach_rule_groups_to_proxy_configuration.AttachRuleGroupsToProxyConfigurationOutput {
         return attach_rule_groups_to_proxy_configuration.execute(self, allocator, input, options);
+    }
+
+    /// Creates a Network Firewall container association. The association monitors
+    /// container lifecycle events in your
+    /// Amazon ECS or Amazon EKS clusters and resolves running container addresses
+    /// for use in firewall rules.
+    pub fn createContainerAssociation(self: *Self, allocator: std.mem.Allocator, input: create_container_association.CreateContainerAssociationInput, options: CallOptions) !create_container_association.CreateContainerAssociationOutput {
+        return create_container_association.execute(self, allocator, input, options);
     }
 
     /// Creates an Network Firewall Firewall and accompanying FirewallStatus for a
@@ -323,6 +337,15 @@ pub const Client = struct {
         return create_vpc_endpoint_association.execute(self, allocator, input, options);
     }
 
+    /// Deletes a container association. The resource transitions to a `DELETING`
+    /// state. Deletion is
+    /// asynchronous - Network Firewall returns immediately while cleanup proceeds
+    /// in the background. You can't delete a
+    /// container association while a rule group references it.
+    pub fn deleteContainerAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_container_association.DeleteContainerAssociationInput, options: CallOptions) !delete_container_association.DeleteContainerAssociationOutput {
+        return delete_container_association.execute(self, allocator, input, options);
+    }
+
     /// Deletes the specified Firewall and its FirewallStatus.
     /// This operation requires the firewall's `DeleteProtection` flag to be
     /// `FALSE`. You can't revert this operation.
@@ -413,6 +436,11 @@ pub const Client = struct {
     /// you can remove the endpoint association safely.
     pub fn deleteVpcEndpointAssociation(self: *Self, allocator: std.mem.Allocator, input: delete_vpc_endpoint_association.DeleteVpcEndpointAssociationInput, options: CallOptions) !delete_vpc_endpoint_association.DeleteVpcEndpointAssociationOutput {
         return delete_vpc_endpoint_association.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the configuration and status of a container association.
+    pub fn describeContainerAssociation(self: *Self, allocator: std.mem.Allocator, input: describe_container_association.DescribeContainerAssociationInput, options: CallOptions) !describe_container_association.DescribeContainerAssociationOutput {
+        return describe_container_association.execute(self, allocator, input, options);
     }
 
     /// Returns the data objects for the specified firewall.
@@ -551,6 +579,13 @@ pub const Client = struct {
     /// days.
     pub fn listAnalysisReports(self: *Self, allocator: std.mem.Allocator, input: list_analysis_reports.ListAnalysisReportsInput, options: CallOptions) !list_analysis_reports.ListAnalysisReportsOutput {
         return list_analysis_reports.execute(self, allocator, input, options);
+    }
+
+    /// Lists the container associations in your account and Region. Use the
+    /// `NextToken`
+    /// parameter in subsequent requests to retrieve additional results.
+    pub fn listContainerAssociations(self: *Self, allocator: std.mem.Allocator, input: list_container_associations.ListContainerAssociationsInput, options: CallOptions) !list_container_associations.ListContainerAssociationsOutput {
+        return list_container_associations.execute(self, allocator, input, options);
     }
 
     /// Retrieves the metadata for the firewall policies that you have defined.
@@ -809,6 +844,14 @@ pub const Client = struct {
         return update_availability_zone_change_protection.execute(self, allocator, input, options);
     }
 
+    /// Updates the monitoring configurations and description of a container
+    /// association. You can't change the container
+    /// type after creation. Provide an update token to enable optimistic
+    /// concurrency control.
+    pub fn updateContainerAssociation(self: *Self, allocator: std.mem.Allocator, input: update_container_association.UpdateContainerAssociationInput, options: CallOptions) !update_container_association.UpdateContainerAssociationOutput {
+        return update_container_association.execute(self, allocator, input, options);
+    }
+
     /// Enables specific types of firewall analysis on a specific firewall you
     /// define.
     pub fn updateFirewallAnalysisSettings(self: *Self, allocator: std.mem.Allocator, input: update_firewall_analysis_settings.UpdateFirewallAnalysisSettingsInput, options: CallOptions) !update_firewall_analysis_settings.UpdateFirewallAnalysisSettingsOutput {
@@ -909,6 +952,14 @@ pub const Client = struct {
         return update_proxy_rule_priorities.execute(self, allocator, input, options);
     }
 
+    /// Modifies the proxy listener configuration of a proxy mode firewall. Proxy
+    /// mode firewalls are created with `NoSourcePreservation` set to `TRUE`. Use
+    /// this operation to change the ports and protocols on which the firewall's
+    /// proxy listens for traffic.
+    pub fn updateProxySettings(self: *Self, allocator: std.mem.Allocator, input: update_proxy_settings.UpdateProxySettingsInput, options: CallOptions) !update_proxy_settings.UpdateProxySettingsOutput {
+        return update_proxy_settings.execute(self, allocator, input, options);
+    }
+
     /// Updates the rule settings for the specified rule group. You use a rule group
     /// by
     /// reference in one or more firewall policies. When you modify a rule group,
@@ -949,6 +1000,13 @@ pub const Client = struct {
     }
 
     pub fn listAnalysisReportsPaginator(self: *Self, params: list_analysis_reports.ListAnalysisReportsInput) paginator.ListAnalysisReportsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listContainerAssociationsPaginator(self: *Self, params: list_container_associations.ListContainerAssociationsInput) paginator.ListContainerAssociationsPaginator {
         return .{
             .client = self,
             .params = params,

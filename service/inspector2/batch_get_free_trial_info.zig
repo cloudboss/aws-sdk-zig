@@ -89,10 +89,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetFreeTrialInfoIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetFreeTrialInfoOutput {
-    var result: BatchGetFreeTrialInfoOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetFreeTrialInfoOutput, body, allocator);
-    }
+    const result: BatchGetFreeTrialInfoOutput = try aws.json.parseJsonObject(
+        BatchGetFreeTrialInfoOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

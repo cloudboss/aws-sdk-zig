@@ -117,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateApiMappingInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateApiMappingOutput {
-    var result: CreateApiMappingOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateApiMappingOutput, body, allocator);
-    }
+    const result: CreateApiMappingOutput = try aws.json.parseJsonObject(
+        CreateApiMappingOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

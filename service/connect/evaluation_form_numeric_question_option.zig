@@ -1,4 +1,5 @@
 const AutomaticFailConfiguration = @import("automatic_fail_configuration.zig").AutomaticFailConfiguration;
+const QuestionOptionPointsConfiguration = @import("question_option_points_configuration.zig").QuestionOptionPointsConfiguration;
 
 /// Information about the option range used for scoring in numeric questions.
 pub const EvaluationFormNumericQuestionOption = struct {
@@ -16,6 +17,9 @@ pub const EvaluationFormNumericQuestionOption = struct {
     /// The minimum answer value of the range option.
     min_value: i32 = 0,
 
+    /// The points configuration for point-based scoring.
+    points_configuration: ?QuestionOptionPointsConfiguration = null,
+
     /// The score assigned to answer values within the range option.
     score: i32 = 0,
 
@@ -24,6 +28,7 @@ pub const EvaluationFormNumericQuestionOption = struct {
         .automatic_fail_configuration = "AutomaticFailConfiguration",
         .max_value = "MaxValue",
         .min_value = "MinValue",
+        .points_configuration = "PointsConfiguration",
         .score = "Score",
     };
 };

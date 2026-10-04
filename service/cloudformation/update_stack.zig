@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Capability = @import("capability.zig").Capability;
+const DeploymentConfig = @import("deployment_config.zig").DeploymentConfig;
 const Parameter = @import("parameter.zig").Parameter;
 const RollbackConfiguration = @import("rollback_configuration.zig").RollbackConfiguration;
 const Tag = @import("tag.zig").Tag;
@@ -133,11 +134,22 @@ pub const UpdateStackInput = struct {
     /// `Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002`.
     client_request_token: ?[]const u8 = null,
 
+    /// The deployment configuration for this stack operation, including the
+    /// deployment
+    /// mode.
+    deployment_config: ?DeploymentConfig = null,
+
     /// Preserve the state of previously provisioned resources when an operation
     /// fails.
     ///
     /// Default: `False`
     disable_rollback: ?bool = null,
+
+    /// Set to `true` to disable pre-deployment validations in changeset or stack
+    /// operations.
+    ///
+    /// Default: `false`
+    disable_validation: ?bool = null,
 
     /// Amazon Simple Notification Service topic Amazon Resource Names (ARNs) that
     /// CloudFormation
@@ -365,8 +377,22 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateStackInput, confi
         try body_buf.appendSlice(allocator, "&ClientRequestToken=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
+    if (input.deployment_config) |v| {
+        if (v.disable_rollback) |sv| {
+            try body_buf.appendSlice(allocator, "&DeploymentConfig.DisableRollback=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
+        }
+        if (v.mode) |sv| {
+            try body_buf.appendSlice(allocator, "&DeploymentConfig.Mode=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
+        }
+    }
     if (input.disable_rollback) |v| {
         try body_buf.appendSlice(allocator, "&DisableRollback=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
+    if (input.disable_validation) |v| {
+        try body_buf.appendSlice(allocator, "&DisableValidation=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.notification_ar_ns) |list| {

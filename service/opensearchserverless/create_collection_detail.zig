@@ -1,3 +1,4 @@
+const DeletionProtection = @import("deletion_protection.zig").DeletionProtection;
 const StandbyReplicas = @import("standby_replicas.zig").StandbyReplicas;
 const CollectionStatus = @import("collection_status.zig").CollectionStatus;
 const CollectionType = @import("collection_type.zig").CollectionType;
@@ -13,6 +14,10 @@ pub const CreateCollectionDetail = struct {
 
     /// The Epoch time when the collection was created.
     created_date: ?i64 = null,
+
+    /// Indicates whether deletion protection is `ENABLED` or `DISABLED` for the
+    /// collection.
+    deletion_protection: ?DeletionProtection = null,
 
     /// A description of the collection.
     description: ?[]const u8 = null,
@@ -46,6 +51,7 @@ pub const CreateCollectionDetail = struct {
         .arn = "arn",
         .collection_group_name = "collectionGroupName",
         .created_date = "createdDate",
+        .deletion_protection = "deletionProtection",
         .description = "description",
         .id = "id",
         .kms_key_arn = "kmsKeyArn",

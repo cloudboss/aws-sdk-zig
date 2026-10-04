@@ -14,7 +14,7 @@ pub const QuickResponseSearchResultData = struct {
     /// result is returned.
     attributes_not_interpolated: ?[]const []const u8 = null,
 
-    /// The Amazon Connect contact channels this quick response applies to. The
+    /// The Connect Customer contact channels this quick response applies to. The
     /// supported contact channel types include `Chat`.
     channels: ?[]const []const u8 = null,
 

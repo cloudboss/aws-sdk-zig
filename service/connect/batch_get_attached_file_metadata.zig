@@ -10,9 +10,8 @@ const AttachedFile = @import("attached_file.zig").AttachedFile;
 pub const BatchGetAttachedFileMetadataInput = struct {
     /// The resource to which the attached file is (being) uploaded to. The
     /// supported resources are
-    /// [Cases](https://docs.aws.amazon.com/connect/latest/adminguide/cases.html)
-    /// and
-    /// [Email](https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html).
+    /// [Cases](https://docs.aws.amazon.com/connect/latest/adminguide/cases.html),
+    /// [Email](https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html), and [Task](https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html).
     ///
     /// This value must be a valid ARN.
     associated_resource_arn: []const u8,
@@ -111,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetAttachedFileMet
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetAttachedFileMetadataOutput {
-    var result: BatchGetAttachedFileMetadataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetAttachedFileMetadataOutput, body, allocator);
-    }
+    const result: BatchGetAttachedFileMetadataOutput = try aws.json.parseJsonObject(
+        BatchGetAttachedFileMetadataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -14,7 +14,7 @@ pub const GetCurrentMetricDataInput = struct {
     /// The metrics to retrieve. Specify the name or metricId, and unit for each
     /// metric. The following metrics are available. For a
     /// description of all the metrics, see [Metrics
-    /// definitions](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) in the *Amazon Connect Administrator Guide*.
+    /// definitions](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html) in the *Connect Customer Administrator Guide*.
     ///
     /// MetricId should be used to reference custom metrics or out of the box
     /// metrics as Arn. If using MetricId, the limit is 10 MetricId per request.
@@ -221,7 +221,7 @@ pub const GetCurrentMetricDataInput = struct {
     /// required.
     groupings: ?[]const Grouping = null,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -374,10 +374,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCurrentMetricDataInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCurrentMetricDataOutput {
-    var result: GetCurrentMetricDataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCurrentMetricDataOutput, body, allocator);
-    }
+    const result: GetCurrentMetricDataOutput = try aws.json.parseJsonObject(
+        GetCurrentMetricDataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

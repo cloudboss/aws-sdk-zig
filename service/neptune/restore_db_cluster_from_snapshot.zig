@@ -105,6 +105,23 @@ pub const RestoreDBClusterFromSnapshotInput = struct {
     /// encrypted, then the restored DB cluster is not encrypted.
     kms_key_id: ?[]const u8 = null,
 
+    /// The network type of the DB cluster.
+    ///
+    /// Valid Values:
+    ///
+    /// * **
+    /// `IPV4`
+    /// **   –
+    /// ( *the default* ) The DB cluster uses only IPv4 addresses for communication.
+    ///
+    /// * **
+    /// `DUAL`
+    /// **   –
+    /// The DB cluster uses both IPv4 and IPv6 addresses for communication. The DB
+    /// subnet group
+    /// associated with the cluster must support IPv6.
+    network_type: ?[]const u8 = null,
+
     /// *(Not supported by Neptune)*
     option_group_name: ?[]const u8 = null,
 
@@ -236,6 +253,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBClusterFromSna
     }
     if (input.kms_key_id) |v| {
         try body_buf.appendSlice(allocator, "&KmsKeyId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.network_type) |v| {
+        try body_buf.appendSlice(allocator, "&NetworkType=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.option_group_name) |v| {

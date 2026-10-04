@@ -5,7 +5,8 @@ const LifecyclePolicyResourceSelection = @import("lifecycle_policy_resource_sele
 const LifecyclePolicyResourceType = @import("lifecycle_policy_resource_type.zig").LifecyclePolicyResourceType;
 const LifecyclePolicyStatus = @import("lifecycle_policy_status.zig").LifecyclePolicyStatus;
 
-/// The configuration details for a lifecycle policy resource.
+/// Defines a lifecycle policy resource: its identity, status, execution role,
+/// resource type, rules, resource selection, timestamps, and tags.
 pub const LifecyclePolicy = struct {
     /// The Amazon Resource Name (ARN) of the lifecycle policy resource.
     arn: ?[]const u8 = null,
@@ -30,7 +31,9 @@ pub const LifecyclePolicy = struct {
     /// The name of the lifecycle policy.
     name: ?[]const u8 = null,
 
-    /// The configuration details for a lifecycle policy resource.
+    /// The list of rules for the lifecycle policy. Each rule pairs an action with a
+    /// filter and optional exclusion rules. A policy can contain at most one rule
+    /// per action type.
     policy_details: ?[]const LifecyclePolicyDetail = null,
 
     /// Resource selection criteria used to run the lifecycle policy.
@@ -39,7 +42,9 @@ pub const LifecyclePolicy = struct {
     /// The type of resources the lifecycle policy targets.
     resource_type: ?LifecyclePolicyResourceType = null,
 
-    /// Indicates whether the lifecycle policy resource is enabled.
+    /// Indicates whether the lifecycle policy resource is enabled. Only enabled
+    /// policies run on their schedule. Disabling or deleting a policy removes its
+    /// schedule and cancels any in-flight lifecycle execution.
     status: ?LifecyclePolicyStatus = null,
 
     /// To help manage your lifecycle policy resources, you can assign your own

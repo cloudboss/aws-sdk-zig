@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListResolversByFunction
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListResolversByFunctionOutput {
-    var result: ListResolversByFunctionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListResolversByFunctionOutput, body, allocator);
-    }
+    const result: ListResolversByFunctionOutput = try aws.json.parseJsonObject(
+        ListResolversByFunctionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -12,6 +12,10 @@ pub const ResolveCustomerInput = struct {
     /// to obtain a
     /// `CustomerIdentifier` along with the `CustomerAWSAccountId`,
     /// `ProductCode`, and `LicenseArn`.
+    ///
+    /// For new SaaS product integrations, the `CustomerIdentifier` field is not
+    /// populated. Use `CustomerAWSAccountId` and `LicenseArn` for customer
+    /// identification.
     registration_token: []const u8,
 
     pub const json_field_names = .{
@@ -29,6 +33,9 @@ pub const ResolveCustomerOutput = struct {
 
     /// The `CustomerIdentifier` is used to identify an individual customer in your
     /// application.
+    ///
+    /// For new SaaS product integrations, this field is not populated. Use
+    /// `CustomerAWSAccountId` and `LicenseArn` to identify customers instead.
     customer_identifier: ?[]const u8 = null,
 
     /// The `LicenseArn` is a unique identifier for a specific granted license.

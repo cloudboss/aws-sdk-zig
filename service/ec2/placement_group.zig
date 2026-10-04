@@ -21,6 +21,9 @@ pub const PlacementGroup = struct {
     /// The service provider that manages the Placement Group.
     operator: ?OperatorResponse = null,
 
+    /// The ID of the parent placement group.
+    parent_group_id: ?[]const u8 = null,
+
     /// The number of partitions. Valid only if **strategy** is
     /// set to `partition`.
     partition_count: ?i32 = null,

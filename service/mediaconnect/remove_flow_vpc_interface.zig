@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RemoveFlowVpcInterfaceI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RemoveFlowVpcInterfaceOutput {
-    var result: RemoveFlowVpcInterfaceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RemoveFlowVpcInterfaceOutput, body, allocator);
-    }
+    const result: RemoveFlowVpcInterfaceOutput = try aws.json.parseJsonObject(
+        RemoveFlowVpcInterfaceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

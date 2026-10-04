@@ -148,10 +148,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateFindingAggregator
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateFindingAggregatorOutput {
-    var result: UpdateFindingAggregatorOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateFindingAggregatorOutput, body, allocator);
-    }
+    const result: UpdateFindingAggregatorOutput = try aws.json.parseJsonObject(
+        UpdateFindingAggregatorOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

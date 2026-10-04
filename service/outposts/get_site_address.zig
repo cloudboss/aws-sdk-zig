@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSiteAddressInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSiteAddressOutput {
-    var result: GetSiteAddressOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSiteAddressOutput, body, allocator);
-    }
+    const result: GetSiteAddressOutput = try aws.json.parseJsonObject(
+        GetSiteAddressOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -21,14 +21,7 @@ const PipelineDetail = @import("pipeline_detail.zig").PipelineDetail;
 const ChannelState = @import("channel_state.zig").ChannelState;
 const VpcOutputSettingsDescription = @import("vpc_output_settings_description.zig").VpcOutputSettingsDescription;
 
-pub const DeleteChannelInput = struct {
-    /// Unique ID of the channel.
-    channel_id: []const u8,
-
-    pub const json_field_names = .{
-        .channel_id = "ChannelId",
-    };
-};
+pub const DeleteChannelInput = @import("delete_channel_request.zig").DeleteChannelRequest;
 
 pub const DeleteChannelOutput = struct {
     /// Anywhere settings for this channel.
@@ -178,10 +171,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteChannelInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteChannelOutput {
-    var result: DeleteChannelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteChannelOutput, body, allocator);
-    }
+    const result: DeleteChannelOutput = try aws.json.parseJsonObject(
+        DeleteChannelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

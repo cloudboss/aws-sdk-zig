@@ -20,15 +20,15 @@ pub const UpdateContactInput = struct {
     /// external audio contacts, this is usually
     /// the end customer's phone number. This value can only be updated for external
     /// audio contacts. For more information,
-    /// see [Amazon Connect
+    /// see [Connect Customer
     /// Contact Lens
-    /// integration](https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html) in the *Amazon Connect Administrator Guide*.
+    /// integration](https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html) in the *Connect Customer Administrator Guide*.
     customer_endpoint: ?Endpoint = null,
 
     /// The description of the contact.
     description: ?[]const u8 = null,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -38,10 +38,10 @@ pub const UpdateContactInput = struct {
     /// Information about the queue associated with a contact. This parameter can
     /// only be updated for external audio
     /// contacts. It is used when you integrate third-party systems with Contact
-    /// Lens for analytics. For more information, see [Amazon Connect Contact Lens
+    /// Lens for analytics. For more information, see [Connect Customer Contact Lens
     /// integration](https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html) in
     /// the *
-    /// Amazon Connect Administrator Guide*.
+    /// Connect Customer Administrator Guide*.
     queue_info: ?QueueInfoInput = null,
 
     /// Well-formed data on contact, shown to agents on Contact Control Panel (CCP).
@@ -49,7 +49,7 @@ pub const UpdateContactInput = struct {
 
     /// A set of system defined key-value pairs stored on individual contact
     /// segments (unique contact ID) using an
-    /// attribute map. The attributes are standard Amazon Connect attributes. They
+    /// attribute map. The attributes are standard Connect Customer attributes. They
     /// can be accessed in flows.
     ///
     /// Attribute keys can include only alphanumeric, -, and _.
@@ -65,18 +65,18 @@ pub const UpdateContactInput = struct {
     /// contacts, this is the phone number of
     /// the external system such as the contact center. This value can only be
     /// updated for external audio contacts. For more
-    /// information, see [Amazon Connect Contact Lens
-    /// integration](https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html) in the *Amazon Connect Administrator
+    /// information, see [Connect Customer Contact Lens
+    /// integration](https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html) in the *Connect Customer Administrator
     /// Guide*.
     system_endpoint: ?Endpoint = null,
 
     /// Information about the agent associated with a contact. This parameter can
     /// only be updated for external audio
     /// contacts. It is used when you integrate third-party systems with Contact
-    /// Lens for analytics. For more information, see [Amazon Connect Contact Lens
+    /// Lens for analytics. For more information, see [Connect Customer Contact Lens
     /// integration](https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html) in
     /// the *
-    /// Amazon Connect Administrator Guide*.
+    /// Connect Customer Administrator Guide*.
     user_info: ?UserInfo = null,
 
     pub const json_field_names = .{

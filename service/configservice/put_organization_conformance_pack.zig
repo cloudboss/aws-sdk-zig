@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ConformancePackInputParameter = @import("conformance_pack_input_parameter.zig").ConformancePackInputParameter;
+const Tag = @import("tag.zig").Tag;
 
 pub const PutOrganizationConformancePackInput = struct {
     /// A list of `ConformancePackInputParameter` objects.
@@ -29,6 +30,10 @@ pub const PutOrganizationConformancePackInput = struct {
     /// Name of the organization conformance pack you want to create.
     organization_conformance_pack_name: []const u8,
 
+    /// The tags for the organization conformance pack. Each tag consists of a key
+    /// and an optional value, both of which you define.
+    tags: ?[]const Tag = null,
+
     /// A string that contains the full conformance pack template body. Structure
     /// containing the template body
     /// with a minimum length of 1 byte and a maximum length of 51,200 bytes.
@@ -50,6 +55,7 @@ pub const PutOrganizationConformancePackInput = struct {
         .delivery_s3_key_prefix = "DeliveryS3KeyPrefix",
         .excluded_accounts = "ExcludedAccounts",
         .organization_conformance_pack_name = "OrganizationConformancePackName",
+        .tags = "Tags",
         .template_body = "TemplateBody",
         .template_s3_uri = "TemplateS3Uri",
     };

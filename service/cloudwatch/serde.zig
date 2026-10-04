@@ -27,6 +27,7 @@ const InsightRuleContributor = @import("insight_rule_contributor.zig").InsightRu
 const InsightRuleContributorDatapoint = @import("insight_rule_contributor_datapoint.zig").InsightRuleContributorDatapoint;
 const InsightRuleMetricDatapoint = @import("insight_rule_metric_datapoint.zig").InsightRuleMetricDatapoint;
 const LabelOptions = @import("label_options.zig").LabelOptions;
+const LogAlarm = @import("log_alarm.zig").LogAlarm;
 const ManagedRule = @import("managed_rule.zig").ManagedRule;
 const ManagedRuleDescription = @import("managed_rule_description.zig").ManagedRuleDescription;
 const ManagedRuleState = @import("managed_rule_state.zig").ManagedRuleState;
@@ -45,10 +46,15 @@ const MetricStreamOutputFormat = @import("metric_stream_output_format.zig").Metr
 const MetricStreamStatisticsConfiguration = @import("metric_stream_statistics_configuration.zig").MetricStreamStatisticsConfiguration;
 const MetricStreamStatisticsMetric = @import("metric_stream_statistics_metric.zig").MetricStreamStatisticsMetric;
 const MuteTargets = @import("mute_targets.zig").MuteTargets;
+const OTelEnrichmentMetricSelector = @import("o_tel_enrichment_metric_selector.zig").OTelEnrichmentMetricSelector;
 const PartialFailure = @import("partial_failure.zig").PartialFailure;
 const Range = @import("range.zig").Range;
+const ResourceMetricSelection = @import("resource_metric_selection.zig").ResourceMetricSelection;
+const ResourceMetricsConfiguration = @import("resource_metrics_configuration.zig").ResourceMetricsConfiguration;
 const Rule = @import("rule.zig").Rule;
 const Schedule = @import("schedule.zig").Schedule;
+const ScheduleConfiguration = @import("schedule_configuration.zig").ScheduleConfiguration;
+const ScheduledQueryConfiguration = @import("scheduled_query_configuration.zig").ScheduledQueryConfiguration;
 const SingleMetricAnomalyDetector = @import("single_metric_anomaly_detector.zig").SingleMetricAnomalyDetector;
 const StandardUnit = @import("standard_unit.zig").StandardUnit;
 const StateValue = @import("state_value.zig").StateValue;
@@ -56,6 +62,7 @@ const Statistic = @import("statistic.zig").Statistic;
 const StatisticSet = @import("statistic_set.zig").StatisticSet;
 const StatusCode = @import("status_code.zig").StatusCode;
 const Tag = @import("tag.zig").Tag;
+const WarmUpConfiguration = @import("warm_up_configuration.zig").WarmUpConfiguration;
 
 pub fn deserializeAlarmContributors(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const AlarmContributor {
     var list: std.ArrayList(AlarmContributor) = .empty;
@@ -381,6 +388,42 @@ pub fn deserializeInsightRules(allocator: std.mem.Allocator, reader: *aws.xml.Re
     return list.toOwnedSlice(allocator);
 }
 
+pub fn deserializeLogAlarms(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const LogAlarm {
+    var list: std.ArrayList(LogAlarm) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeLogAlarm(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeLogGroupIdentifiers(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
+    var list: std.ArrayList([]const u8) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
 pub fn deserializeManagedRuleDescriptions(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ManagedRuleDescription {
     var list: std.ArrayList(ManagedRuleDescription) = .empty;
     while (try reader.next()) |event| {
@@ -460,6 +503,24 @@ pub fn deserializeMetricDataResults(allocator: std.mem.Allocator, reader: *aws.x
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
                     try list.append(allocator, try deserializeMetricDataResult(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeMetricNameList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
+    var list: std.ArrayList([]const u8) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
                 } else {
                     try reader.skipElement();
                 }
@@ -615,6 +676,42 @@ pub fn deserializeMuteTargetAlarmNameList(allocator: std.mem.Allocator, reader: 
     return list.toOwnedSlice(allocator);
 }
 
+pub fn deserializeOTelEnrichmentMetricNameList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
+    var list: std.ArrayList([]const u8) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeOTelEnrichmentMetricSelectorList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const OTelEnrichmentMetricSelector {
+    var list: std.ArrayList(OTelEnrichmentMetricSelector) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeOTelEnrichmentMetricSelector(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
 pub fn deserializeOwningAccounts(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const []const u8 {
     var list: std.ArrayList([]const u8) = .empty;
     while (try reader.next()) |event| {
@@ -640,6 +737,24 @@ pub fn deserializeResourceList(allocator: std.mem.Allocator, reader: *aws.xml.Re
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, item_tag)) {
                     try list.append(allocator, try allocator.dupe(u8, try reader.readElementText()));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
+pub fn deserializeResourceMetricSelectionList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const ResourceMetricSelection {
+    var list: std.ArrayList(ResourceMetricSelection) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeResourceMetricSelection(allocator, reader));
                 } else {
                     try reader.skipElement();
                 }
@@ -855,6 +970,7 @@ pub fn deserializeAlarmMuteRuleSummary(allocator: std.mem.Allocator, reader: *aw
 
 pub fn deserializeAnomalyDetector(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !AnomalyDetector {
     var result: AnomalyDetector = undefined;
+    result.anomaly_detector_id = null;
     result.configuration = null;
     result.dimensions = null;
     result.metric_characteristics = null;
@@ -867,7 +983,9 @@ pub fn deserializeAnomalyDetector(allocator: std.mem.Allocator, reader: *aws.xml
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
-                if (std.mem.eql(u8, e.local, "Configuration")) {
+                if (std.mem.eql(u8, e.local, "AnomalyDetectorId")) {
+                    result.anomaly_detector_id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Configuration")) {
                     result.configuration = try deserializeAnomalyDetectorConfiguration(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Dimensions")) {
                     result.dimensions = try deserializeDimensions(allocator, reader, "member");
@@ -1214,6 +1332,91 @@ pub fn deserializeInsightRuleMetricDatapoint(allocator: std.mem.Allocator, reade
     return result;
 }
 
+pub fn deserializeLogAlarm(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !LogAlarm {
+    var result: LogAlarm = undefined;
+    result.action_log_line_count = null;
+    result.action_log_line_role_arn = null;
+    result.actions_enabled = null;
+    result.alarm_actions = null;
+    result.alarm_arn = null;
+    result.alarm_configuration_updated_timestamp = null;
+    result.alarm_description = null;
+    result.alarm_name = null;
+    result.comparison_operator = null;
+    result.evaluation_state = null;
+    result.insufficient_data_actions = null;
+    result.ok_actions = null;
+    result.query_results_to_alarm = null;
+    result.query_results_to_evaluate = null;
+    result.scheduled_query_configuration = null;
+    result.state_reason = null;
+    result.state_reason_data = null;
+    result.state_transitioned_timestamp = null;
+    result.state_updated_timestamp = null;
+    result.state_value = null;
+    result.threshold = null;
+    result.treat_missing_data = null;
+    result.warm_up_configuration = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "ActionLogLineCount")) {
+                    result.action_log_line_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "ActionLogLineRoleArn")) {
+                    result.action_log_line_role_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ActionsEnabled")) {
+                    result.actions_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "AlarmActions")) {
+                    result.alarm_actions = try deserializeResourceList(allocator, reader, "member");
+                } else if (std.mem.eql(u8, e.local, "AlarmArn")) {
+                    result.alarm_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "AlarmConfigurationUpdatedTimestamp")) {
+                    result.alarm_configuration_updated_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "AlarmDescription")) {
+                    result.alarm_description = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "AlarmName")) {
+                    result.alarm_name = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ComparisonOperator")) {
+                    result.comparison_operator = ComparisonOperator.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "EvaluationState")) {
+                    result.evaluation_state = EvaluationState.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "InsufficientDataActions")) {
+                    result.insufficient_data_actions = try deserializeResourceList(allocator, reader, "member");
+                } else if (std.mem.eql(u8, e.local, "OKActions")) {
+                    result.ok_actions = try deserializeResourceList(allocator, reader, "member");
+                } else if (std.mem.eql(u8, e.local, "QueryResultsToAlarm")) {
+                    result.query_results_to_alarm = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "QueryResultsToEvaluate")) {
+                    result.query_results_to_evaluate = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "ScheduledQueryConfiguration")) {
+                    result.scheduled_query_configuration = try deserializeScheduledQueryConfiguration(allocator, reader);
+                } else if (std.mem.eql(u8, e.local, "StateReason")) {
+                    result.state_reason = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "StateReasonData")) {
+                    result.state_reason_data = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "StateTransitionedTimestamp")) {
+                    result.state_transitioned_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "StateUpdatedTimestamp")) {
+                    result.state_updated_timestamp = aws.date.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "StateValue")) {
+                    result.state_value = StateValue.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Threshold")) {
+                    result.threshold = std.fmt.parseFloat(f64, try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "TreatMissingData")) {
+                    result.treat_missing_data = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "WarmUpConfiguration")) {
+                    result.warm_up_configuration = try deserializeWarmUpConfiguration(allocator, reader);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
 pub fn deserializeManagedRuleDescription(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ManagedRuleDescription {
     var result: ManagedRuleDescription = undefined;
     result.resource_arn = null;
@@ -1322,6 +1525,7 @@ pub fn deserializeMetricAlarm(allocator: std.mem.Allocator, reader: *aws.xml.Rea
     result.evaluation_interval = null;
     result.evaluation_periods = null;
     result.evaluation_state = null;
+    result.evaluation_window = null;
     result.extended_statistic = null;
     result.insufficient_data_actions = null;
     result.metric_name = null;
@@ -1339,6 +1543,7 @@ pub fn deserializeMetricAlarm(allocator: std.mem.Allocator, reader: *aws.xml.Rea
     result.threshold_metric_id = null;
     result.treat_missing_data = null;
     result.unit = null;
+    result.warm_up_configuration = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1370,6 +1575,8 @@ pub fn deserializeMetricAlarm(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                     result.evaluation_periods = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "EvaluationState")) {
                     result.evaluation_state = EvaluationState.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "EvaluationWindow")) {
+                    try reader.skipElement();
                 } else if (std.mem.eql(u8, e.local, "ExtendedStatistic")) {
                     result.extended_statistic = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "InsufficientDataActions")) {
@@ -1404,6 +1611,8 @@ pub fn deserializeMetricAlarm(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                     result.treat_missing_data = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Unit")) {
                     result.unit = StandardUnit.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "WarmUpConfiguration")) {
+                    result.warm_up_configuration = try deserializeWarmUpConfiguration(allocator, reader);
                 } else {
                     try reader.skipElement();
                 }
@@ -1666,6 +1875,27 @@ pub fn deserializeMuteTargets(allocator: std.mem.Allocator, reader: *aws.xml.Rea
     return result;
 }
 
+pub fn deserializeOTelEnrichmentMetricSelector(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !OTelEnrichmentMetricSelector {
+    var result: OTelEnrichmentMetricSelector = undefined;
+    result.metric_names = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "MetricNames")) {
+                    result.metric_names = try deserializeOTelEnrichmentMetricNameList(allocator, reader, "member");
+                } else if (std.mem.eql(u8, e.local, "Namespace")) {
+                    result.namespace = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
 pub fn deserializePartialFailure(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !PartialFailure {
     var result: PartialFailure = undefined;
     result.exception_type = null;
@@ -1715,6 +1945,49 @@ pub fn deserializeRange(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !
     return result;
 }
 
+pub fn deserializeResourceMetricSelection(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ResourceMetricSelection {
+    var result: ResourceMetricSelection = undefined;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "IncludeMetrics")) {
+                    result.include_metrics = try deserializeMetricNameList(allocator, reader, "member");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeResourceMetricsConfiguration(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ResourceMetricsConfiguration {
+    var result: ResourceMetricsConfiguration = undefined;
+    result.metric_selections = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "CreatedAt")) {
+                    result.created_at = try aws.date.parseIso8601(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "MetricSelections")) {
+                    result.metric_selections = try deserializeResourceMetricSelectionList(allocator, reader, "member");
+                } else if (std.mem.eql(u8, e.local, "ResourceArn")) {
+                    result.resource_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "UpdatedAt")) {
+                    result.updated_at = try aws.date.parseIso8601(try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
 pub fn deserializeRule(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Rule {
     var result: Rule = undefined;
     while (try reader.next()) |event| {
@@ -1745,6 +2018,62 @@ pub fn deserializeSchedule(allocator: std.mem.Allocator, reader: *aws.xml.Reader
                     result.expression = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Timezone")) {
                     result.timezone = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeScheduleConfiguration(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ScheduleConfiguration {
+    var result: ScheduleConfiguration = undefined;
+    result.end_time_offset = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "EndTimeOffset")) {
+                    result.end_time_offset = std.fmt.parseInt(i64, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "ScheduleExpression")) {
+                    result.schedule_expression = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "StartTimeOffset")) {
+                    result.start_time_offset = try std.fmt.parseInt(i64, try reader.readElementText(), 10);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeScheduledQueryConfiguration(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !ScheduledQueryConfiguration {
+    var result: ScheduledQueryConfiguration = undefined;
+    result.log_group_identifiers = null;
+    result.query_arn = null;
+    result.tags = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "AggregationExpression")) {
+                    result.aggregation_expression = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "LogGroupIdentifiers")) {
+                    result.log_group_identifiers = try deserializeLogGroupIdentifiers(allocator, reader, "member");
+                } else if (std.mem.eql(u8, e.local, "QueryARN")) {
+                    result.query_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "QueryString")) {
+                    result.query_string = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "ScheduleConfiguration")) {
+                    result.schedule_configuration = try deserializeScheduleConfiguration(allocator, reader);
+                } else if (std.mem.eql(u8, e.local, "ScheduledQueryRoleARN")) {
+                    result.scheduled_query_role_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Tags")) {
+                    result.tags = try deserializeTagList(allocator, reader, "member");
                 } else {
                     try reader.skipElement();
                 }
@@ -1807,6 +2136,28 @@ pub fn deserializeTag(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Ta
     return result;
 }
 
+pub fn deserializeWarmUpConfiguration(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !WarmUpConfiguration {
+    _ = allocator;
+    var result: WarmUpConfiguration = undefined;
+    result.only_start_evaluating_after_warm_up_period_ends = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "OnlyStartEvaluatingAfterWarmUpPeriodEnds")) {
+                    result.only_start_evaluating_after_warm_up_period_ends = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "WarmUpPeriodDurationInMinutes")) {
+                    result.warm_up_period_duration_in_minutes = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
 pub fn serializeAlarmMuteRuleStatuses(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const AlarmMuteRuleStatus, comptime item_tag: []const u8) !void {
     for (value) |item| {
         try buf.appendSlice(allocator, "<");
@@ -1849,6 +2200,18 @@ pub fn serializeAnomalyDetectorExcludedTimeRanges(allocator: std.mem.Allocator, 
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
         try serializeRange(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
+pub fn serializeAnomalyDetectorIds(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -1966,6 +2329,18 @@ pub fn serializeInsightRuleNames(allocator: std.mem.Allocator, buf: *std.ArrayLi
     }
 }
 
+pub fn serializeLogGroupIdentifiers(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
 pub fn serializeManagedRules(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ManagedRule, comptime item_tag: []const u8) !void {
     for (value) |item| {
         try buf.appendSlice(allocator, "<");
@@ -1996,6 +2371,18 @@ pub fn serializeMetricDataQueries(allocator: std.mem.Allocator, buf: *std.ArrayL
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
         try serializeMetricDataQuery(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
+pub fn serializeMetricNameList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -2086,12 +2473,48 @@ pub fn serializeMuteTargetAlarmNameList(allocator: std.mem.Allocator, buf: *std.
     }
 }
 
+pub fn serializeOTelEnrichmentMetricNameList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
+pub fn serializeOTelEnrichmentMetricSelectorList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const OTelEnrichmentMetricSelector, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializeOTelEnrichmentMetricSelector(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
 pub fn serializeResourceList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const []const u8, comptime item_tag: []const u8) !void {
     for (value) |item| {
         try buf.appendSlice(allocator, "<");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
         try aws.xml.appendXmlEscaped(allocator, buf, item);
+        try buf.appendSlice(allocator, "</");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+    }
+}
+
+pub fn serializeResourceMetricSelectionList(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: []const ResourceMetricSelection, comptime item_tag: []const u8) !void {
+    for (value) |item| {
+        try buf.appendSlice(allocator, "<");
+        try buf.appendSlice(allocator, item_tag);
+        try buf.appendSlice(allocator, ">");
+        try serializeResourceMetricSelection(allocator, buf, item);
         try buf.appendSlice(allocator, "</");
         try buf.appendSlice(allocator, item_tag);
         try buf.appendSlice(allocator, ">");
@@ -2449,6 +2872,17 @@ pub fn serializeMuteTargets(allocator: std.mem.Allocator, buf: *std.ArrayList(u8
     try buf.appendSlice(allocator, "</AlarmNames>");
 }
 
+pub fn serializeOTelEnrichmentMetricSelector(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: OTelEnrichmentMetricSelector) !void {
+    if (value.metric_names) |v| {
+        try buf.appendSlice(allocator, "<MetricNames>");
+        try serializeOTelEnrichmentMetricNameList(allocator, buf, v, "member");
+        try buf.appendSlice(allocator, "</MetricNames>");
+    }
+    try buf.appendSlice(allocator, "<Namespace>");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.namespace);
+    try buf.appendSlice(allocator, "</Namespace>");
+}
+
 pub fn serializeRange(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: Range) !void {
     try buf.appendSlice(allocator, "<EndTime>");
     {
@@ -2462,6 +2896,12 @@ pub fn serializeRange(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), val
         try buf.appendSlice(allocator, ts_str);
     }
     try buf.appendSlice(allocator, "</StartTime>");
+}
+
+pub fn serializeResourceMetricSelection(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ResourceMetricSelection) !void {
+    try buf.appendSlice(allocator, "<IncludeMetrics>");
+    try serializeMetricNameList(allocator, buf, value.include_metrics, "member");
+    try buf.appendSlice(allocator, "</IncludeMetrics>");
 }
 
 pub fn serializeRule(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: Rule) !void {
@@ -2481,6 +2921,56 @@ pub fn serializeSchedule(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), 
         try buf.appendSlice(allocator, "<Timezone>");
         try aws.xml.appendXmlEscaped(allocator, buf, v);
         try buf.appendSlice(allocator, "</Timezone>");
+    }
+}
+
+pub fn serializeScheduleConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduleConfiguration) !void {
+    if (value.end_time_offset) |v| {
+        try buf.appendSlice(allocator, "<EndTimeOffset>");
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try buf.appendSlice(allocator, num_str);
+        }
+        try buf.appendSlice(allocator, "</EndTimeOffset>");
+    }
+    try buf.appendSlice(allocator, "<ScheduleExpression>");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.schedule_expression);
+    try buf.appendSlice(allocator, "</ScheduleExpression>");
+    try buf.appendSlice(allocator, "<StartTimeOffset>");
+    {
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{value.start_time_offset}) catch "";
+        try buf.appendSlice(allocator, num_str);
+    }
+    try buf.appendSlice(allocator, "</StartTimeOffset>");
+}
+
+pub fn serializeScheduledQueryConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: ScheduledQueryConfiguration) !void {
+    try buf.appendSlice(allocator, "<AggregationExpression>");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.aggregation_expression);
+    try buf.appendSlice(allocator, "</AggregationExpression>");
+    if (value.log_group_identifiers) |v| {
+        try buf.appendSlice(allocator, "<LogGroupIdentifiers>");
+        try serializeLogGroupIdentifiers(allocator, buf, v, "member");
+        try buf.appendSlice(allocator, "</LogGroupIdentifiers>");
+    }
+    if (value.query_arn) |v| {
+        try buf.appendSlice(allocator, "<QueryARN>");
+        try aws.xml.appendXmlEscaped(allocator, buf, v);
+        try buf.appendSlice(allocator, "</QueryARN>");
+    }
+    try buf.appendSlice(allocator, "<QueryString>");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.query_string);
+    try buf.appendSlice(allocator, "</QueryString>");
+    try buf.appendSlice(allocator, "<ScheduleConfiguration>");
+    try serializeScheduleConfiguration(allocator, buf, value.schedule_configuration);
+    try buf.appendSlice(allocator, "</ScheduleConfiguration>");
+    try buf.appendSlice(allocator, "<ScheduledQueryRoleARN>");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.scheduled_query_role_arn);
+    try buf.appendSlice(allocator, "</ScheduledQueryRoleARN>");
+    if (value.tags) |v| {
+        try buf.appendSlice(allocator, "<Tags>");
+        try serializeTagList(allocator, buf, v, "member");
+        try buf.appendSlice(allocator, "</Tags>");
     }
 }
 
@@ -2546,5 +3036,19 @@ pub fn serializeTag(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value
     try buf.appendSlice(allocator, "<Value>");
     try aws.xml.appendXmlEscaped(allocator, buf, value.value);
     try buf.appendSlice(allocator, "</Value>");
+}
+
+pub fn serializeWarmUpConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: WarmUpConfiguration) !void {
+    if (value.only_start_evaluating_after_warm_up_period_ends) |v| {
+        try buf.appendSlice(allocator, "<OnlyStartEvaluatingAfterWarmUpPeriodEnds>");
+        try buf.appendSlice(allocator, if (v) "true" else "false");
+        try buf.appendSlice(allocator, "</OnlyStartEvaluatingAfterWarmUpPeriodEnds>");
+    }
+    try buf.appendSlice(allocator, "<WarmUpPeriodDurationInMinutes>");
+    {
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{value.warm_up_period_duration_in_minutes}) catch "";
+        try buf.appendSlice(allocator, num_str);
+    }
+    try buf.appendSlice(allocator, "</WarmUpPeriodDurationInMinutes>");
 }
 

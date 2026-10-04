@@ -94,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DetachFromIndexInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DetachFromIndexOutput {
-    var result: DetachFromIndexOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DetachFromIndexOutput, body, allocator);
-    }
+    const result: DetachFromIndexOutput = try aws.json.parseJsonObject(
+        DetachFromIndexOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

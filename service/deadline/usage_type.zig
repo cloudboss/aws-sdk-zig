@@ -3,16 +3,19 @@ const std = @import("std");
 pub const UsageType = enum {
     compute,
     license,
+    persistent_volume,
 
     pub const json_field_names = .{
         .compute = "COMPUTE",
         .license = "LICENSE",
+        .persistent_volume = "PERSISTENT_VOLUME",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .compute => "COMPUTE",
             .license => "LICENSE",
+            .persistent_volume => "PERSISTENT_VOLUME",
         };
     }
 

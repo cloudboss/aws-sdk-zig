@@ -4,11 +4,16 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const FeatureDetail = @import("feature_detail.zig").FeatureDetail;
 
 pub const DescribeSecurityHubV2Input = struct {
 };
 
 pub const DescribeSecurityHubV2Output = struct {
+    /// A map of opt-in features and their current status and metadata for the
+    /// account in the current Region.
+    features: ?[]const aws.map.MapEntry(FeatureDetail) = null,
+
     /// The ARN of the service resource.
     hub_v2_arn: ?[]const u8 = null,
 
@@ -16,6 +21,7 @@ pub const DescribeSecurityHubV2Output = struct {
     subscribed_at: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .features = "Features",
         .hub_v2_arn = "HubV2Arn",
         .subscribed_at = "SubscribedAt",
     };
@@ -68,10 +74,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeSecurityHubV2In
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeSecurityHubV2Output {
-    var result: DescribeSecurityHubV2Output = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeSecurityHubV2Output, body, allocator);
-    }
+    const result: DescribeSecurityHubV2Output = try aws.json.parseJsonObject(
+        DescribeSecurityHubV2Output,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,6 +1,8 @@
 const aws = @import("aws");
 
 const ContainerProvider = @import("container_provider.zig").ContainerProvider;
+const SchedulerConfiguration = @import("scheduler_configuration.zig").SchedulerConfiguration;
+const SchedulerStatus = @import("scheduler_status.zig").SchedulerStatus;
 const VirtualClusterState = @import("virtual_cluster_state.zig").VirtualClusterState;
 
 /// This entity describes a virtual cluster. A virtual cluster is a Kubernetes
@@ -29,8 +31,20 @@ pub const VirtualCluster = struct {
     /// The name of the virtual cluster.
     name: ?[]const u8 = null,
 
+    /// The scheduler configuration (concurrency and queue limits) applied to the
+    /// virtual
+    /// cluster. The service does not return this field when no scheduler limits are
+    /// configured.
+    scheduler_configuration: ?SchedulerConfiguration = null,
+
+    /// The current in-queue and concurrent job-run counts for the virtual cluster.
+    scheduler_status: ?SchedulerStatus = null,
+
     /// The ID of the security configuration.
     security_configuration_id: ?[]const u8 = null,
+
+    /// Specifies whether the virtual cluster has session support enabled.
+    session_enabled: ?bool = null,
 
     /// The state of the virtual cluster.
     state: ?VirtualClusterState = null,
@@ -44,7 +58,10 @@ pub const VirtualCluster = struct {
         .created_at = "createdAt",
         .id = "id",
         .name = "name",
+        .scheduler_configuration = "schedulerConfiguration",
+        .scheduler_status = "schedulerStatus",
         .security_configuration_id = "securityConfigurationId",
+        .session_enabled = "sessionEnabled",
         .state = "state",
         .tags = "tags",
     };

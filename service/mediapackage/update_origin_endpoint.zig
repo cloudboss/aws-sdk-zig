@@ -268,10 +268,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateOriginEndpointInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateOriginEndpointOutput {
-    var result: UpdateOriginEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateOriginEndpointOutput, body, allocator);
-    }
+    const result: UpdateOriginEndpointOutput = try aws.json.parseJsonObject(
+        UpdateOriginEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

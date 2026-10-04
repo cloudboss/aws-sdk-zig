@@ -1,3 +1,5 @@
+const CapacityReservationAdjustmentDetails = @import("capacity_reservation_adjustment_details.zig").CapacityReservationAdjustmentDetails;
+const CapacityReservationAdjustmentStatus = @import("capacity_reservation_adjustment_status.zig").CapacityReservationAdjustmentStatus;
 const CapacityAllocation = @import("capacity_allocation.zig").CapacityAllocation;
 const CapacityReservationCommitmentInfo = @import("capacity_reservation_commitment_info.zig").CapacityReservationCommitmentInfo;
 const CapacityReservationDeliveryPreference = @import("capacity_reservation_delivery_preference.zig").CapacityReservationDeliveryPreference;
@@ -6,13 +8,37 @@ const InstanceMatchCriteria = @import("instance_match_criteria.zig").InstanceMat
 const CapacityReservationInstancePlatform = @import("capacity_reservation_instance_platform.zig").CapacityReservationInstancePlatform;
 const InterruptibleCapacityAllocation = @import("interruptible_capacity_allocation.zig").InterruptibleCapacityAllocation;
 const InterruptionInfo = @import("interruption_info.zig").InterruptionInfo;
+const CapacityReservationLaunchStatus = @import("capacity_reservation_launch_status.zig").CapacityReservationLaunchStatus;
 const CapacityReservationType = @import("capacity_reservation_type.zig").CapacityReservationType;
 const CapacityReservationState = @import("capacity_reservation_state.zig").CapacityReservationState;
 const Tag = @import("tag.zig").Tag;
 const CapacityReservationTenancy = @import("capacity_reservation_tenancy.zig").CapacityReservationTenancy;
+const ZeroSizePreference = @import("zero_size_preference.zig").ZeroSizePreference;
 
 /// Describes a Capacity Reservation.
 pub const CapacityReservation = struct {
+    /// The configuration that the Capacity Reservation will have after the
+    /// requested adjustment
+    /// is applied.
+    adjustment_details: ?CapacityReservationAdjustmentDetails = null,
+
+    /// The status of the most recent modification to the Capacity Reservation. A
+    /// Capacity
+    /// Reservation can have one of the following adjustment statuses:
+    ///
+    /// * `requested` - The modification was requested and is being
+    /// processed.
+    ///
+    /// * `applied` - The modification was applied to the Capacity
+    /// Reservation.
+    ///
+    /// * `rejected` - The modification was not applied and the Capacity
+    /// Reservation keeps its existing configuration.
+    ///
+    /// This field is not returned if the Capacity Reservation has never been
+    /// modified.
+    adjustment_status: ?CapacityReservationAdjustmentStatus = null,
+
     /// The Availability Zone in which the capacity is reserved.
     availability_zone: ?[]const u8 = null,
 
@@ -127,6 +153,25 @@ pub const CapacityReservation = struct {
     /// source reservation for interruptible Capacity Reservations.
     interruption_info: ?InterruptionInfo = null,
 
+    /// Only supported for UltraServers.
+    ///
+    /// Indicates whether you can launch instances into the Capacity Reservation. A
+    /// Capacity
+    /// Reservation can have the following launch statuses:
+    ///
+    /// * `launchable` - You can launch instances into the Capacity
+    /// Reservation.
+    ///
+    /// * `unlaunchable` - You can't launch instances into the Capacity
+    /// Reservation. For example, the Capacity Reservation is not active.
+    launch_status: ?CapacityReservationLaunchStatus = null,
+
+    /// The start date that you originally requested for the Capacity Reservation,
+    /// in the ISO8601
+    /// format in the UTC time zone (`YYYY-MM-DDThh:mm:ss.sssZ`). This value doesn't
+    /// change when you push out the start date.
+    original_start_date: ?i64 = null,
+
     /// The Amazon Resource Name (ARN) of the Outpost on which the Capacity
     /// Reservation was
     /// created.
@@ -203,6 +248,13 @@ pub const CapacityReservation = struct {
     /// constraints. You can view
     /// unsupported requests for 30 days. The Capacity Reservation will not be
     /// delivered.
+    ///
+    /// * `cancelling` - (*Future-dated Capacity Reservations*) The
+    /// Capacity Reservation is being cancelled. Capacity has been released but
+    /// charges continue for
+    /// the commitment wind-down period. The reservation transitions to `cancelled`
+    /// when
+    /// the wind-down completes.
     state: ?CapacityReservationState = null,
 
     /// Any tags assigned to the Capacity Reservation.
@@ -227,4 +279,11 @@ pub const CapacityReservation = struct {
     /// capacity of
     /// the Capacity Reservation is assigned.
     unused_reservation_billing_owner_id: ?[]const u8 = null,
+
+    /// The zero-size preference configured for the interruptible Capacity
+    /// Reservation. A value of `retain` keeps the interruptible Capacity
+    /// Reservation active at zero capacity when you reduce its allocation to zero.
+    /// A value of `default` cancels the interruptible Capacity Reservation when you
+    /// reduce its allocation to zero.
+    zero_size_preference: ?ZeroSizePreference = null,
 };

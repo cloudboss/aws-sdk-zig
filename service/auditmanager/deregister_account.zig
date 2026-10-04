@@ -65,10 +65,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeregisterAccountInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeregisterAccountOutput {
-    var result: DeregisterAccountOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeregisterAccountOutput, body, allocator);
-    }
+    const result: DeregisterAccountOutput = try aws.json.parseJsonObject(
+        DeregisterAccountOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -158,6 +158,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMapGlyphsInput, conf
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMapGlyphsOutput {
     var result: GetMapGlyphsOutput = .{};
+    errdefer {
+        if (result.cache_control) |value| allocator.free(value);
+        if (result.content_type) |value| allocator.free(value);
+        if (result.blob) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.blob = try allocator.dupe(u8, body);
     }

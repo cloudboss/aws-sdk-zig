@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetGremlinQueryStatusIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetGremlinQueryStatusOutput {
-    var result: GetGremlinQueryStatusOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetGremlinQueryStatusOutput, body, allocator);
-    }
+    const result: GetGremlinQueryStatusOutput = try aws.json.parseJsonObject(
+        GetGremlinQueryStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

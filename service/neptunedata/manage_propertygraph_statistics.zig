@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ManagePropertygraphStat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ManagePropertygraphStatisticsOutput {
-    var result: ManagePropertygraphStatisticsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ManagePropertygraphStatisticsOutput, body, allocator);
-    }
+    const result: ManagePropertygraphStatisticsOutput = try aws.json.parseJsonObject(
+        ManagePropertygraphStatisticsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFoundationModelAg
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateFoundationModelAgreementOutput {
-    var result: CreateFoundationModelAgreementOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateFoundationModelAgreementOutput, body, allocator);
-    }
+    const result: CreateFoundationModelAgreementOutput = try aws.json.parseJsonObject(
+        CreateFoundationModelAgreementOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

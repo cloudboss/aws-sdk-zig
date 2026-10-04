@@ -2,6 +2,7 @@ const BuyerDomain = @import("buyer_domain.zig").BuyerDomain;
 const Contact = @import("contact.zig").Contact;
 const EinvoiceDeliveryPreference = @import("einvoice_delivery_preference.zig").EinvoiceDeliveryPreference;
 const ProcurementPortalPreferenceStatus = @import("procurement_portal_preference_status.zig").ProcurementPortalPreferenceStatus;
+const MarketplacePunchOutPreference = @import("marketplace_punch_out_preference.zig").MarketplacePunchOutPreference;
 const ProcurementPortalName = @import("procurement_portal_name.zig").ProcurementPortalName;
 const ProcurementPortalPreferenceSelector = @import("procurement_portal_preference_selector.zig").ProcurementPortalPreferenceSelector;
 const SupplierDomain = @import("supplier_domain.zig").SupplierDomain;
@@ -31,8 +32,8 @@ pub const ProcurementPortalPreference = struct {
     /// preference.
     einvoice_delivery_enabled: bool,
 
-    /// The configuration settings that specify how e-invoices are delivered to the
-    /// procurement portal.
+    /// The e-invoice delivery configuration including document types, attachment
+    /// types, and customization settings.
     einvoice_delivery_preference: ?EinvoiceDeliveryPreference = null,
 
     /// The current status of the e-invoice delivery preference.
@@ -43,6 +44,14 @@ pub const ProcurementPortalPreference = struct {
 
     /// The date and time when the procurement portal preference was last updated.
     last_update_date: i64,
+
+    /// Indicates whether Marketplace PunchOut is enabled for this procurement
+    /// portal preference. Defaults to `false`.
+    marketplace_punch_out_enabled: ?bool = null,
+
+    /// The Marketplace PunchOut configuration for this procurement portal
+    /// preference. This is present when `MarketplacePunchOutEnabled` is `true`.
+    marketplace_punch_out_preference: ?MarketplacePunchOutPreference = null,
 
     /// The endpoint URL where e-invoices are delivered to the procurement portal.
     procurement_portal_instance_endpoint: ?[]const u8 = null,
@@ -97,6 +106,8 @@ pub const ProcurementPortalPreference = struct {
         .einvoice_delivery_preference_status = "EinvoiceDeliveryPreferenceStatus",
         .einvoice_delivery_preference_status_reason = "EinvoiceDeliveryPreferenceStatusReason",
         .last_update_date = "LastUpdateDate",
+        .marketplace_punch_out_enabled = "MarketplacePunchOutEnabled",
+        .marketplace_punch_out_preference = "MarketplacePunchOutPreference",
         .procurement_portal_instance_endpoint = "ProcurementPortalInstanceEndpoint",
         .procurement_portal_name = "ProcurementPortalName",
         .procurement_portal_preference_arn = "ProcurementPortalPreferenceArn",

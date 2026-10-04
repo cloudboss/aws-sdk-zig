@@ -1,4 +1,5 @@
 const AudioFillerSettings = @import("audio_filler_settings.zig").AudioFillerSettings;
+const SpeakerDiarizationSettings = @import("speaker_diarization_settings.zig").SpeakerDiarizationSettings;
 const SpeechDetectionSensitivity = @import("speech_detection_sensitivity.zig").SpeechDetectionSensitivity;
 const SpeechRecognitionSettings = @import("speech_recognition_settings.zig").SpeechRecognitionSettings;
 const UnifiedSpeechSettings = @import("unified_speech_settings.zig").UnifiedSpeechSettings;
@@ -49,6 +50,10 @@ pub const BotLocaleImportSpecification = struct {
     /// * `IntentC`
     nlu_intent_confidence_threshold: ?f64 = null,
 
+    /// The speaker diarization settings to apply when importing the bot
+    /// locale configuration.
+    speaker_diarization_settings: ?SpeakerDiarizationSettings = null,
+
     /// The sensitivity level for voice activity detection (VAD) in the bot locale.
     /// This setting helps optimize speech recognition accuracy by adjusting how the
     /// system responds to background noise during voice interactions.
@@ -70,6 +75,7 @@ pub const BotLocaleImportSpecification = struct {
         .bot_version = "botVersion",
         .locale_id = "localeId",
         .nlu_intent_confidence_threshold = "nluIntentConfidenceThreshold",
+        .speaker_diarization_settings = "speakerDiarizationSettings",
         .speech_detection_sensitivity = "speechDetectionSensitivity",
         .speech_recognition_settings = "speechRecognitionSettings",
         .unified_speech_settings = "unifiedSpeechSettings",

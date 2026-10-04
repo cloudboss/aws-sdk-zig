@@ -21,16 +21,16 @@ pub const CreateUserInput = struct {
     auto_accept_configs: ?[]const AutoAcceptConfig = null,
 
     /// The identifier of the user account in the directory used for identity
-    /// management. If Amazon Connect cannot
+    /// management. If Connect Customer cannot
     /// access the directory, you can specify this identifier to authenticate users.
     /// If you include the identifier, we assume
-    /// that Amazon Connect cannot access the directory. Otherwise, the identity
+    /// that Connect Customer cannot access the directory. Otherwise, the identity
     /// information is used to authenticate
     /// users from your directory.
     ///
     /// This parameter is required if you are using an existing directory for
-    /// identity management in Amazon Connect
-    /// when Amazon Connect cannot access your directory to authenticate users. If
+    /// identity management in Connect Customer
+    /// when Connect Customer cannot access your directory to authenticate users. If
     /// you are using SAML for identity
     /// management and include this parameter, an error is returned.
     directory_user_id: ?[]const u8 = null,
@@ -41,12 +41,12 @@ pub const CreateUserInput = struct {
     /// The information about the identity of the user.
     identity_info: ?UserIdentityInfo = null,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
     /// The password for the user account. A password is required if you are using
-    /// Amazon Connect for identity
+    /// Connect Customer for identity
     /// management. Otherwise, it is an error to include a password.
     password: ?[]const u8 = null,
 
@@ -255,10 +255,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateUserInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateUserOutput {
-    var result: CreateUserOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateUserOutput, body, allocator);
-    }
+    const result: CreateUserOutput = try aws.json.parseJsonObject(
+        CreateUserOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -4,11 +4,17 @@ pub const Partition = enum {
     aws,
     aws_cn,
     aws_us_gov,
+    aws_us_iso,
+    aws_us_iso_b,
+    azure_cloud,
 
     pub const json_field_names = .{
         .aws = "aws",
         .aws_cn = "aws-cn",
         .aws_us_gov = "aws-us-gov",
+        .aws_us_iso = "aws-us-iso",
+        .aws_us_iso_b = "aws-us-iso-b",
+        .azure_cloud = "AzureCloud",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +22,9 @@ pub const Partition = enum {
             .aws => "aws",
             .aws_cn => "aws-cn",
             .aws_us_gov => "aws-us-gov",
+            .aws_us_iso => "aws-us-iso",
+            .aws_us_iso_b => "aws-us-iso-b",
+            .azure_cloud => "AzureCloud",
         };
     }
 

@@ -124,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeOutboundCrossCl
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeOutboundCrossClusterSearchConnectionsOutput {
-    var result: DescribeOutboundCrossClusterSearchConnectionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeOutboundCrossClusterSearchConnectionsOutput, body, allocator);
-    }
+    const result: DescribeOutboundCrossClusterSearchConnectionsOutput = try aws.json.parseJsonObject(
+        DescribeOutboundCrossClusterSearchConnectionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

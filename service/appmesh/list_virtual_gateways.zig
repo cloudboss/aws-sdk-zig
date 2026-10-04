@@ -135,10 +135,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListVirtualGatewaysInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListVirtualGatewaysOutput {
-    var result: ListVirtualGatewaysOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListVirtualGatewaysOutput, body, allocator);
-    }
+    const result: ListVirtualGatewaysOutput = try aws.json.parseJsonObject(
+        ListVirtualGatewaysOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

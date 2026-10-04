@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AppConfig = @import("app_config.zig").AppConfig;
 const DataSource = @import("data_source.zig").DataSource;
+const IamIdentityCenterOptionsInput = @import("iam_identity_center_options_input.zig").IamIdentityCenterOptionsInput;
 const IamIdentityCenterOptions = @import("iam_identity_center_options.zig").IamIdentityCenterOptions;
 
 pub const UpdateApplicationInput = struct {
@@ -15,12 +16,18 @@ pub const UpdateApplicationInput = struct {
     /// The data sources to associate with the OpenSearch application.
     data_sources: ?[]const DataSource = null,
 
+    /// Configuration settings for integrating IAM Identity Center with the
+    /// OpenSearch
+    /// application.
+    iam_identity_center_options: ?IamIdentityCenterOptionsInput = null,
+
     /// The unique identifier for the OpenSearch application to be updated.
     id: []const u8,
 
     pub const json_field_names = .{
         .app_configs = "appConfigs",
         .data_sources = "dataSources",
+        .iam_identity_center_options = "iamIdentityCenterOptions",
         .id = "id",
     };
 };
@@ -113,6 +120,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateApplicationInput,
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.iam_identity_center_options) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"iamIdentityCenterOptions\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -129,10 +142,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateApplicationInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateApplicationOutput {
-    var result: UpdateApplicationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateApplicationOutput, body, allocator);
-    }
+    const result: UpdateApplicationOutput = try aws.json.parseJsonObject(
+        UpdateApplicationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

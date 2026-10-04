@@ -124,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCoverageStatisticsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListCoverageStatisticsOutput {
-    var result: ListCoverageStatisticsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListCoverageStatisticsOutput, body, allocator);
-    }
+    const result: ListCoverageStatisticsOutput = try aws.json.parseJsonObject(
+        ListCoverageStatisticsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

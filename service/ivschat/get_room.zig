@@ -132,10 +132,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRoomInput, config: *
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRoomOutput {
-    var result: GetRoomOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRoomOutput, body, allocator);
-    }
+    const result: GetRoomOutput = try aws.json.parseJsonObject(
+        GetRoomOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

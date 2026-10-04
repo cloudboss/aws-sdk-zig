@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartImportFileEnrichme
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartImportFileEnrichmentOutput {
-    var result: StartImportFileEnrichmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartImportFileEnrichmentOutput, body, allocator);
-    }
+    const result: StartImportFileEnrichmentOutput = try aws.json.parseJsonObject(
+        StartImportFileEnrichmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

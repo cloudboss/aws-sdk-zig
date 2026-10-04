@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutAuthPolicyInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutAuthPolicyOutput {
-    var result: PutAuthPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutAuthPolicyOutput, body, allocator);
-    }
+    const result: PutAuthPolicyOutput = try aws.json.parseJsonObject(
+        PutAuthPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

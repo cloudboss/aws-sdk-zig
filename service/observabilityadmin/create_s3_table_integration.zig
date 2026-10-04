@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateS3TableIntegratio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateS3TableIntegrationOutput {
-    var result: CreateS3TableIntegrationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateS3TableIntegrationOutput, body, allocator);
-    }
+    const result: CreateS3TableIntegrationOutput = try aws.json.parseJsonObject(
+        CreateS3TableIntegrationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

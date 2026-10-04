@@ -9,7 +9,7 @@ const PhoneNumberType = @import("phone_number_type.zig").PhoneNumberType;
 const PhoneNumberSummary = @import("phone_number_summary.zig").PhoneNumberSummary;
 
 pub const ListPhoneNumbersInput = struct {
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -141,10 +141,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPhoneNumbersInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListPhoneNumbersOutput {
-    var result: ListPhoneNumbersOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListPhoneNumbersOutput, body, allocator);
-    }
+    const result: ListPhoneNumbersOutput = try aws.json.parseJsonObject(
+        ListPhoneNumbersOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

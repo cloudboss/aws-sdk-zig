@@ -5,6 +5,8 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const PartnerAppConfig = @import("partner_app_config.zig").PartnerAppConfig;
+const PartnerAppAuthType = @import("partner_app_auth_type.zig").PartnerAppAuthType;
+const IdcConfigInput = @import("idc_config_input.zig").IdcConfigInput;
 const PartnerAppMaintenanceConfig = @import("partner_app_maintenance_config.zig").PartnerAppMaintenanceConfig;
 const Tag = @import("tag.zig").Tag;
 
@@ -20,6 +22,17 @@ pub const UpdatePartnerAppInput = struct {
     /// The ARN of the SageMaker Partner AI App to update.
     arn: []const u8,
 
+    /// The authorization type that users use to access the SageMaker Partner AI
+    /// App. Use this parameter to migrate an existing SageMaker Partner AI App from
+    /// `IAM` authorization to `IDC` authorization. Valid values:
+    ///
+    /// * `IAM`: Users access the SageMaker Partner AI App with their Amazon Web
+    ///   Services IAM identity.
+    /// * `IDC`: Users access the SageMaker Partner AI App with their Amazon Web
+    ///   Services IAM Identity Center identity. Specify the Identity Center
+    ///   instance to use in `IdcConfig`.
+    auth_type: ?PartnerAppAuthType = null,
+
     /// A unique token that guarantees that the call to this API is idempotent.
     client_token: ?[]const u8 = null,
 
@@ -32,6 +45,11 @@ pub const UpdatePartnerAppInput = struct {
     /// Services IAM session name or the authenticated IAM user as the identity of
     /// the SageMaker Partner AI App user.
     enable_iam_session_based_identity: ?bool = null,
+
+    /// Specifies the Amazon Web Services IAM Identity Center configuration for the
+    /// SageMaker Partner AI App. Specify this parameter when `AuthType` is `IDC`.
+    /// Apps that use `IAM` authorization don't use this parameter.
+    idc_config: ?IdcConfigInput = null,
 
     /// Maintenance configuration settings for the SageMaker Partner AI App.
     maintenance_config: ?PartnerAppMaintenanceConfig = null,
@@ -48,9 +66,11 @@ pub const UpdatePartnerAppInput = struct {
         .application_config = "ApplicationConfig",
         .app_version = "AppVersion",
         .arn = "Arn",
+        .auth_type = "AuthType",
         .client_token = "ClientToken",
         .enable_auto_minor_version_upgrade = "EnableAutoMinorVersionUpgrade",
         .enable_iam_session_based_identity = "EnableIamSessionBasedIdentity",
+        .idc_config = "IdcConfig",
         .maintenance_config = "MaintenanceConfig",
         .tags = "Tags",
         .tier = "Tier",

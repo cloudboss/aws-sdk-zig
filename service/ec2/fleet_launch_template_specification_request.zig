@@ -19,6 +19,13 @@ pub const FleetLaunchTemplateSpecificationRequest = struct {
     /// both.
     launch_template_name: ?[]const u8 = null,
 
+    /// The base64-encoded user data for instances launched by the fleet. User data
+    /// is limited
+    /// to 16 KB, in raw form, before it is base64-encoded.
+    ///
+    /// Supported only for fleets of type `instant`.
+    launch_template_specification_user_data: ?[]const u8 = null,
+
     /// The launch template version number, `$Latest`, or `$Default`. You must
     /// specify a value, otherwise the request fails.
     ///

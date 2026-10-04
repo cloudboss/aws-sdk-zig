@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListMicrosoftTeamsUserI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListMicrosoftTeamsUserIdentitiesOutput {
-    var result: ListMicrosoftTeamsUserIdentitiesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListMicrosoftTeamsUserIdentitiesOutput, body, allocator);
-    }
+    const result: ListMicrosoftTeamsUserIdentitiesOutput = try aws.json.parseJsonObject(
+        ListMicrosoftTeamsUserIdentitiesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

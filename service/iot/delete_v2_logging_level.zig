@@ -11,7 +11,8 @@ pub const DeleteV2LoggingLevelInput = struct {
     target_name: []const u8,
 
     /// The type of resource for which you are configuring logging. Must be
-    /// `THING_Group`.
+    /// `DEFAULT`, `THING_GROUP`, `CLIENT_ID`,
+    /// `SOURCE_IP`, or `PRINCIPAL_ID`.
     target_type: LogTargetType,
 
     pub const json_field_names = .{

@@ -19,25 +19,37 @@ pub const VirtualInterface = struct {
     /// for Border Gateway Protocol (BGP) configuration. If you provide a number
     /// greater than the maximum, an error is returned. Use `asnLong` instead.
     ///
-    /// You can use `asnLong` or `asn`, but not both. We recommend using `asnLong`
-    /// as it supports a greater pool of numbers.
-    ///
-    /// * The `asnLong` attribute accepts both ASN and long ASN
-    /// ranges.
+    /// * You can use `asnLong` or `asn`, but not both. We recommend using `asnLong`
+    ///   as it supports a greater pool of numbers.
     ///
     /// * If you provide a value in the same API call for both `asn`
     /// and `asnLong`, the API will only accept the value for
     /// `asnLong`.
+    ///
+    /// * If you enter a 4-byte ASN for the `asn` parameter, the API returns an
+    ///   error.
+    ///
+    /// * If you are using a 2-byte ASN, the API response will include the
+    /// 2-byte value for both the `asn` and `asnLong` fields.
     asn: i32 = 0,
 
     /// The long ASN for the virtual interface. The valid range is from 1 to
     /// 4294967294 for BGP configuration.
     ///
-    /// You can use `asnLong` or `asn`, but not both. We recommend using `asnLong`
-    /// as it supports a greater pool of numbers.
+    /// Note the following limitations when using `asnLong`:
     ///
-    /// * The `asnLong` attribute accepts both ASN and long ASN
-    /// ranges.
+    /// * You can use `asnLong` or `asn`, but not both. We recommend using `asnLong`
+    ///   as it supports a greater pool of numbers.
+    ///
+    /// * `asnLong` accepts any valid ASN value, regardless if it's 2-byte or
+    ///   4-byte.
+    ///
+    /// * When using a 4-byte `asnLong`, the API response returns `0` for the legacy
+    ///   `asn` attribute since 4-byte ASN values exceed the maximum supported value
+    ///   of 2,147,483,647.
+    ///
+    /// * If you are using a 2-byte ASN, the API response will include the
+    /// 2-byte value for both the `asn` and `asnLong` fields.
     ///
     /// * If you provide a value in the same API call for both `asn`
     /// and `asnLong`, the API will only accept the value for
@@ -83,6 +95,29 @@ pub const VirtualInterface = struct {
 
     /// The ID of the Amazon Web Services account that owns the virtual interface.
     owner_account: ?[]const u8 = null,
+
+    /// The number of inbound IPv4 route prefixes allocated to the virtual
+    /// interface. Not applicable to public virtual interfaces.
+    prefix_pool_allocated_count_ipv_4: ?i32 = null,
+
+    /// The number of inbound IPv6 route prefixes allocated to the virtual
+    /// interface. Not applicable to public virtual interfaces.
+    prefix_pool_allocated_count_ipv_6: ?i32 = null,
+
+    /// The rate limit (bandwidth allocation) applied to the virtual interface. The
+    /// value must be one of the supported bandwidth values and cannot exceed the
+    /// bandwidth of the parent connection or LAG. Supported values: `50Mbps`,
+    /// `100Mbps`, `200Mbps`, `300Mbps`, `400Mbps`, `500Mbps`, `600Mbps`, `700Mbps`,
+    /// `800Mbps`, `900Mbps`, `1Gbps`, `1.2Gbps`, `1.5Gbps`, `1.8Gbps`, `2Gbps`,
+    /// `2.1Gbps`, `2.4Gbps`, `2.7Gbps`, `3Gbps`, `3.2Gbps`, `3.6Gbps`, `4Gbps`,
+    /// `5Gbps`, `6Gbps`, `7Gbps`, `8Gbps`, `9Gbps`, `10Gbps`, `12Gbps`, `15Gbps`,
+    /// `18Gbps`, `20Gbps`, `21Gbps`, `24Gbps`, `27Gbps`, `30Gbps`, `32Gbps`,
+    /// `36Gbps`, `40Gbps`, `50Gbps`, `60Gbps`, `70Gbps`, `80Gbps`, `100Gbps`,
+    /// `120Gbps`, `150Gbps`, `180Gbps`, `200Gbps`, `210Gbps`, `240Gbps`, `270Gbps`,
+    /// `300Gbps`, `320Gbps`, `360Gbps`, `400Gbps`, `450Gbps`, `480Gbps`, `500Gbps`,
+    /// `540Gbps`, `600Gbps`, `700Gbps`, `800Gbps`, `900Gbps`, `1Tbps`, `1.1Tbps`,
+    /// `1.2Tbps`, `1.3Tbps`, `1.4Tbps`, `1.5Tbps`, `1.6Tbps`.
+    rate_limit: ?[]const u8 = null,
 
     /// The Amazon Web Services Region where the virtual interface is located.
     region: ?[]const u8 = null,
@@ -170,6 +205,9 @@ pub const VirtualInterface = struct {
         .location = "location",
         .mtu = "mtu",
         .owner_account = "ownerAccount",
+        .prefix_pool_allocated_count_ipv_4 = "prefixPoolAllocatedCountIpv4",
+        .prefix_pool_allocated_count_ipv_6 = "prefixPoolAllocatedCountIpv6",
+        .rate_limit = "rateLimit",
         .region = "region",
         .route_filter_prefixes = "routeFilterPrefixes",
         .site_link_enabled = "siteLinkEnabled",

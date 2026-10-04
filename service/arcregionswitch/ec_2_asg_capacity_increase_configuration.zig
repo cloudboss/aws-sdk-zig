@@ -1,6 +1,7 @@
 const Asg = @import("asg.zig").Asg;
 const Ec2AsgCapacityMonitoringApproach = @import("ec_2_asg_capacity_monitoring_approach.zig").Ec2AsgCapacityMonitoringApproach;
 const Ec2Ungraceful = @import("ec_2_ungraceful.zig").Ec2Ungraceful;
+const WaitELBTargetGroupHealthy = @import("wait_elb_target_group_healthy.zig").WaitELBTargetGroupHealthy;
 
 /// Configuration for increasing the capacity of Amazon EC2 Auto Scaling groups
 /// during a Region switch.
@@ -12,7 +13,8 @@ pub const Ec2AsgCapacityIncreaseConfiguration = struct {
     /// configuration.
     capacity_monitoring_approach: Ec2AsgCapacityMonitoringApproach = .sampled_max_in_last_24_hours,
 
-    /// The target percentage that you specify for EC2 Auto Scaling groups.
+    /// The target percentage that you specify for EC2 Auto Scaling groups. The
+    /// default is 100.
     target_percent: i32 = 100,
 
     /// The timeout value specified for the configuration.
@@ -21,11 +23,17 @@ pub const Ec2AsgCapacityIncreaseConfiguration = struct {
     /// The settings for ungraceful execution.
     ungraceful: ?Ec2Ungraceful = null,
 
+    /// If enabled, the step completes only after each attached ELB target group
+    /// reports a healthy target count that matches the group's new desired capacity
+    /// calculated in the step.
+    wait_elb_target_group_healthy: ?WaitELBTargetGroupHealthy = null,
+
     pub const json_field_names = .{
         .asgs = "asgs",
         .capacity_monitoring_approach = "capacityMonitoringApproach",
         .target_percent = "targetPercent",
         .timeout_minutes = "timeoutMinutes",
         .ungraceful = "ungraceful",
+        .wait_elb_target_group_healthy = "waitELBTargetGroupHealthy",
     };
 };

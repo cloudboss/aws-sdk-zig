@@ -1,8 +1,8 @@
 const Currency = @import("currency.zig").Currency;
 
-/// Money amount with currency
+/// Represents a monetary amount with a currency.
 pub const Amount = struct {
-    /// The currency code for this amount.
+    /// The currency code for the amount.
     currency: Currency,
 
     /// The numeric value of the amount.

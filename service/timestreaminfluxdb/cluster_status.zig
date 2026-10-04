@@ -12,6 +12,8 @@ pub const ClusterStatus = enum {
     rebooting,
     reboot_failed,
     partially_available,
+    restoring,
+    restore_failed,
 
     pub const json_field_names = .{
         .creating = "CREATING",
@@ -25,6 +27,8 @@ pub const ClusterStatus = enum {
         .rebooting = "REBOOTING",
         .reboot_failed = "REBOOT_FAILED",
         .partially_available = "PARTIALLY_AVAILABLE",
+        .restoring = "RESTORING",
+        .restore_failed = "RESTORE_FAILED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -40,6 +44,8 @@ pub const ClusterStatus = enum {
             .rebooting => "REBOOTING",
             .reboot_failed => "REBOOT_FAILED",
             .partially_available => "PARTIALLY_AVAILABLE",
+            .restoring => "RESTORING",
+            .restore_failed => "RESTORE_FAILED",
         };
     }
 

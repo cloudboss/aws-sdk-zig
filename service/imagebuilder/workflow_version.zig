@@ -17,9 +17,7 @@ pub const WorkflowVersion = struct {
     /// The owner of the workflow resource.
     owner: ?[]const u8 = null,
 
-    /// The image creation stage that this workflow applies to. Image Builder
-    /// currently
-    /// supports build and test stage workflows.
+    /// The image creation stage that this workflow applies to.
     @"type": ?WorkflowType = null,
 
     /// The semantic version of the workflow resource. The format includes three

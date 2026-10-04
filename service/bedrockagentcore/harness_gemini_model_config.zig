@@ -1,6 +1,10 @@
 /// Configuration for a Google Gemini model provider. Requires an API key stored
 /// in AgentCore Identity.
 pub const HarnessGeminiModelConfig = struct {
+    /// Provider-specific parameters passed through to the Gemini model provider
+    /// unchanged.
+    additional_params: ?[]const u8 = null,
+
     /// The ARN of your Gemini API key on AgentCore Identity.
     api_key_arn: []const u8,
 
@@ -21,6 +25,7 @@ pub const HarnessGeminiModelConfig = struct {
     top_p: ?f32 = null,
 
     pub const json_field_names = .{
+        .additional_params = "additionalParams",
         .api_key_arn = "apiKeyArn",
         .max_tokens = "maxTokens",
         .model_id = "modelId",

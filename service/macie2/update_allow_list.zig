@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAllowListInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateAllowListOutput {
-    var result: UpdateAllowListOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateAllowListOutput, body, allocator);
-    }
+    const result: UpdateAllowListOutput = try aws.json.parseJsonObject(
+        UpdateAllowListOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

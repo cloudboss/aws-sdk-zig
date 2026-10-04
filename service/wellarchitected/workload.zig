@@ -33,9 +33,8 @@ pub const Workload = struct {
     /// Flag indicating whether the workload owner has acknowledged that the *Review
     /// owner* field is required.
     ///
-    /// If a **Review owner** is not added to the workload within
-    /// 60 days of acknowledgement, access to the workload is restricted until an
-    /// owner is
+    /// If a **Review owner** is not added to the workload within 60 days of
+    /// acknowledgement, access to the workload is restricted until an owner is
     /// added.
     is_review_owner_update_acknowledged: ?bool = null,
 
@@ -59,6 +58,7 @@ pub const Workload = struct {
 
     review_owner: ?[]const u8 = null,
 
+    /// The review restriction date for the workload.
     review_restriction_date: ?i64 = null,
 
     risk_counts: ?[]const aws.map.MapEntry(i32) = null,
@@ -69,6 +69,7 @@ pub const Workload = struct {
     /// The tags associated with the workload.
     tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// The date and time when the workload was last updated.
     updated_at: ?i64 = null,
 
     workload_arn: ?[]const u8 = null,

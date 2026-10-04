@@ -1,14 +1,17 @@
 const std = @import("std");
 
+/// The type of a knowledge base.
 pub const KnowledgeBaseType = enum {
     vector,
     kendra,
     sql,
+    managed,
 
     pub const json_field_names = .{
         .vector = "VECTOR",
         .kendra = "KENDRA",
         .sql = "SQL",
+        .managed = "MANAGED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +19,7 @@ pub const KnowledgeBaseType = enum {
             .vector => "VECTOR",
             .kendra => "KENDRA",
             .sql => "SQL",
+            .managed => "MANAGED",
         };
     }
 

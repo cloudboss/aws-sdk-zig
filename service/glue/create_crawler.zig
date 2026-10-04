@@ -11,6 +11,10 @@ const SchemaChangePolicy = @import("schema_change_policy.zig").SchemaChangePolic
 const CrawlerTargets = @import("crawler_targets.zig").CrawlerTargets;
 
 pub const CreateCrawlerInput = struct {
+    /// The ID of the Data Catalog in which to store the crawler's output. If none
+    /// is supplied, the Amazon Web Services account ID is used by default.
+    catalog_id: ?[]const u8 = null,
+
     /// A list of custom classifiers that the user has registered. By default, all
     /// built-in
     /// classifiers are included in a crawl, but these custom classifiers always
@@ -78,6 +82,7 @@ pub const CreateCrawlerInput = struct {
     targets: CrawlerTargets,
 
     pub const json_field_names = .{
+        .catalog_id = "CatalogId",
         .classifiers = "Classifiers",
         .configuration = "Configuration",
         .crawler_security_configuration = "CrawlerSecurityConfiguration",

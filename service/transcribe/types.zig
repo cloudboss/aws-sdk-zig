@@ -13,6 +13,7 @@ pub const ChannelDefinition = @import("channel_definition.zig").ChannelDefinitio
 pub const ClinicalNoteGenerationSettings = @import("clinical_note_generation_settings.zig").ClinicalNoteGenerationSettings;
 pub const CLMLanguageCode = @import("clm_language_code.zig").CLMLanguageCode;
 pub const ContentRedaction = @import("content_redaction.zig").ContentRedaction;
+pub const EncryptionConfiguration = @import("encryption_configuration.zig").EncryptionConfiguration;
 pub const InputDataConfig = @import("input_data_config.zig").InputDataConfig;
 pub const InputType = @import("input_type.zig").InputType;
 pub const InterruptionFilter = @import("interruption_filter.zig").InterruptionFilter;

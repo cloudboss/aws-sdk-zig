@@ -170,10 +170,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateKeyInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateKeyOutput {
-    var result: CreateKeyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateKeyOutput, body, allocator);
-    }
+    const result: CreateKeyOutput = try aws.json.parseJsonObject(
+        CreateKeyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

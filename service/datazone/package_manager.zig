@@ -1,6 +1,7 @@
 const std = @import("std");
 
-/// The package manager for a notebook run environment in Amazon DataZone.
+/// The package manager for a notebook run environment in Amazon SageMaker
+/// Unified Studio.
 pub const PackageManager = enum {
     /// The UV package manager.
     uv,

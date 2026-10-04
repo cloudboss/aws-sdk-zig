@@ -6,12 +6,14 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AuthorizerConfiguration = @import("authorizer_configuration.zig").AuthorizerConfiguration;
 const AuthorizerType = @import("authorizer_type.zig").AuthorizerType;
+const CustomTransformConfiguration = @import("custom_transform_configuration.zig").CustomTransformConfiguration;
 const ExceptionLevel = @import("exception_level.zig").ExceptionLevel;
 const GatewayInterceptorConfiguration = @import("gateway_interceptor_configuration.zig").GatewayInterceptorConfiguration;
 const GatewayPolicyEngineConfiguration = @import("gateway_policy_engine_configuration.zig").GatewayPolicyEngineConfiguration;
 const GatewayProtocolConfiguration = @import("gateway_protocol_configuration.zig").GatewayProtocolConfiguration;
 const GatewayProtocolType = @import("gateway_protocol_type.zig").GatewayProtocolType;
 const GatewayStatus = @import("gateway_status.zig").GatewayStatus;
+const WafConfiguration = @import("waf_configuration.zig").WafConfiguration;
 const WorkloadIdentityDetails = @import("workload_identity_details.zig").WorkloadIdentityDetails;
 
 pub const GetGatewayInput = @import("get_gateway_request.zig").GetGatewayRequest;
@@ -68,10 +70,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetGatewayInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetGatewayOutput {
-    var result: GetGatewayOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetGatewayOutput, body, allocator);
-    }
+    const result: GetGatewayOutput = try aws.json.parseJsonObject(
+        GetGatewayOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

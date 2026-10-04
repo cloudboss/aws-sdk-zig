@@ -9,7 +9,10 @@ const Ownership = @import("ownership.zig").Ownership;
 const ImageVersion = @import("image_version.zig").ImageVersion;
 
 pub const ListImagesInput = struct {
-    /// Requests a list of images with a specific recipe name.
+    /// Specifies whether to return one entry per image name, with all versions of
+    /// each image aggregated. Defaults to `false`, which returns one
+    /// entry per image version. You can't combine this option with the
+    /// `version` filter.
     by_name: ?bool = null,
 
     /// Use the following filters to streamline results:
@@ -25,23 +28,21 @@ pub const ListImagesInput = struct {
     /// * `version`
     filters: ?[]const Filter = null,
 
-    /// Includes deprecated images in the response list.
+    /// Specifies whether to include deprecated Amazon-managed images in the
+    /// results. Deprecated images that you own are always returned. Defaults to
+    /// `false`.
     include_deprecated: ?bool = null,
 
-    /// Specify the maximum number of items to return in a request.
+    /// The maximum number of items to return in a single request.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
-    /// The owner defines which images you want to list. By default, this request
-    /// will only
-    /// show images owned by your account. You can use this field to specify if you
-    /// want to view
-    /// images owned by yourself, by Amazon, or those images that have been shared
-    /// with you by
-    /// other customers.
+    /// Filters the list to images owned by you, by Amazon, or shared with you by
+    /// other accounts.
+    /// By default, only your account's images are returned.
     owner: ?Ownership = null,
 
     pub const json_field_names = .{
@@ -60,13 +61,11 @@ pub const ListImagesOutput = struct {
     /// The semantic version has four nodes: ../.
     /// You can assign values for the first three, and can filter on all of them.
     ///
-    /// **Filtering:** With semantic versioning, you have the flexibility to use
-    /// wildcards (x)
-    /// to specify the most recent versions or nodes when selecting the base image
-    /// or components for your
-    /// recipe. When you use a wildcard in any node, all nodes to the right of the
-    /// first wildcard must also be
-    /// wildcards.
+    /// **Filtering:** You can use wildcards (x) to specify the most recent versions
+    /// or nodes when
+    /// selecting the base image or components for your recipe. When you use a
+    /// wildcard in any node, all nodes
+    /// to the right of the first wildcard must also be wildcards.
     image_version_list: ?[]const ImageVersion = null,
 
     /// The next token used for paginated responses. When this field isn't empty,
@@ -173,10 +172,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListImagesInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListImagesOutput {
-    var result: ListImagesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListImagesOutput, body, allocator);
-    }
+    const result: ListImagesOutput = try aws.json.parseJsonObject(
+        ListImagesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

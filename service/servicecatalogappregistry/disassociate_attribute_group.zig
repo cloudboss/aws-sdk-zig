@@ -86,10 +86,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisassociateAttributeGr
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DisassociateAttributeGroupOutput {
-    var result: DisassociateAttributeGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DisassociateAttributeGroupOutput, body, allocator);
-    }
+    const result: DisassociateAttributeGroupOutput = try aws.json.parseJsonObject(
+        DisassociateAttributeGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

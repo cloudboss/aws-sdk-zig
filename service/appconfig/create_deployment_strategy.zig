@@ -9,6 +9,15 @@ const ReplicateTo = @import("replicate_to.zig").ReplicateTo;
 
 pub const CreateDeploymentStrategyInput = struct {
     /// Total amount of time for a deployment to last.
+    ///
+    /// AppConfig Agent supports deploying feature flag or free-form configuration
+    /// data to specific segments or individual users during a gradual rollout.
+    /// Entity-based gradual deployments ensure that once a user or segment receives
+    /// a configuration version, they continue to receive that same version
+    /// throughout the deployment period, regardless of which compute resource
+    /// serves their requests. For more information, see [Using AppConfig Agent for
+    /// user-based or entity-based gradual
+    /// deployments](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-agent-how-to-use.html#appconfig-entity-based-gradual-deployments)
     deployment_duration_in_minutes: ?i32 = null,
 
     /// A description of the deployment strategy.
@@ -190,10 +199,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDeploymentStrateg
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDeploymentStrategyOutput {
-    var result: CreateDeploymentStrategyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateDeploymentStrategyOutput, body, allocator);
-    }
+    const result: CreateDeploymentStrategyOutput = try aws.json.parseJsonObject(
+        CreateDeploymentStrategyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

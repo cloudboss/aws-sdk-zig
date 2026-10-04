@@ -1,7 +1,13 @@
+const RouteAccessPointDetails = @import("route_access_point_details.zig").RouteAccessPointDetails;
 const RouteSideOfStreet = @import("route_side_of_street.zig").RouteSideOfStreet;
+const RouteStationDetails = @import("route_station_details.zig").RouteStationDetails;
+const RoutePedestrianPlaceType = @import("route_pedestrian_place_type.zig").RoutePedestrianPlaceType;
 
 /// Place details corresponding to the arrival or departure.
 pub const RoutePedestrianPlace = struct {
+    /// Details of the access point.
+    access_point_details: ?RouteAccessPointDetails = null,
+
     /// The name of the place.
     name: ?[]const u8 = null,
 
@@ -14,14 +20,23 @@ pub const RoutePedestrianPlace = struct {
     /// Options to configure matching the provided position to a side of the street.
     side_of_street: ?RouteSideOfStreet = null,
 
+    /// Details about the station.
+    station_details: ?RouteStationDetails = null,
+
+    /// The type of the place.
+    @"type": ?RoutePedestrianPlaceType = null,
+
     /// Index of the waypoint in the request.
     waypoint_index: ?i32 = null,
 
     pub const json_field_names = .{
+        .access_point_details = "AccessPointDetails",
         .name = "Name",
         .original_position = "OriginalPosition",
         .position = "Position",
         .side_of_street = "SideOfStreet",
+        .station_details = "StationDetails",
+        .@"type" = "Type",
         .waypoint_index = "WaypointIndex",
     };
 };

@@ -1,3 +1,3 @@
-/// The connector metadata specific to Amazon Connect Customer Profiles.
+/// The connector metadata specific to Connect Customer Customer Profiles.
 pub const CustomerProfilesMetadata = struct {
 };

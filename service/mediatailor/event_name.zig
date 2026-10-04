@@ -3,16 +3,22 @@ const std = @import("std");
 pub const EventName = enum {
     pre_session_initialization,
     pre_ads_request,
+    post_ads_response,
+    pre_manifest_insertion,
 
     pub const json_field_names = .{
         .pre_session_initialization = "PRE_SESSION_INITIALIZATION",
         .pre_ads_request = "PRE_ADS_REQUEST",
+        .post_ads_response = "POST_ADS_RESPONSE",
+        .pre_manifest_insertion = "PRE_MANIFEST_INSERTION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .pre_session_initialization => "PRE_SESSION_INITIALIZATION",
             .pre_ads_request => "PRE_ADS_REQUEST",
+            .post_ads_response => "POST_ADS_RESPONSE",
+            .pre_manifest_insertion => "PRE_MANIFEST_INSERTION",
         };
     }
 

@@ -1,4 +1,5 @@
 const EventDetails = @import("event_details.zig").EventDetails;
+const ClusterEventLevel = @import("cluster_event_level.zig").ClusterEventLevel;
 const ClusterEventResourceType = @import("cluster_event_resource_type.zig").ClusterEventResourceType;
 
 /// Detailed information about a specific event in a HyperPod cluster.
@@ -19,6 +20,10 @@ pub const ClusterEventDetail = struct {
     /// The unique identifier (UUID) of the event.
     event_id: []const u8,
 
+    /// The severity level of the event. Valid values are `Info`, `Warn`, and
+    /// `Error`.
+    event_level: ?ClusterEventLevel = null,
+
     /// The timestamp when the event occurred.
     event_time: i64,
 
@@ -38,6 +43,7 @@ pub const ClusterEventDetail = struct {
         .description = "Description",
         .event_details = "EventDetails",
         .event_id = "EventId",
+        .event_level = "EventLevel",
         .event_time = "EventTime",
         .instance_group_name = "InstanceGroupName",
         .instance_id = "InstanceId",

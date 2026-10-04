@@ -75,10 +75,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetGraphqlApiEnvironmen
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetGraphqlApiEnvironmentVariablesOutput {
-    var result: GetGraphqlApiEnvironmentVariablesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetGraphqlApiEnvironmentVariablesOutput, body, allocator);
-    }
+    const result: GetGraphqlApiEnvironmentVariablesOutput = try aws.json.parseJsonObject(
+        GetGraphqlApiEnvironmentVariablesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

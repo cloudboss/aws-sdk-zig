@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DatasetConfig = @import("dataset_config.zig").DatasetConfig;
 const DatasetSource = @import("dataset_source.zig").DatasetSource;
 const DatasetStatus = @import("dataset_status.zig").DatasetStatus;
 
@@ -12,6 +13,9 @@ pub const UpdateDatasetInput = struct {
     /// idempotency of the request. Don't reuse this client token if a new
     /// idempotent request is required.
     client_token: ?[]const u8 = null,
+
+    /// The updated configuration for the dataset.
+    dataset_config: ?DatasetConfig = null,
 
     /// A description about the dataset, and its functionality.
     dataset_description: ?[]const u8 = null,
@@ -25,12 +29,21 @@ pub const UpdateDatasetInput = struct {
     /// The data source for the dataset.
     dataset_source: DatasetSource,
 
+    /// The updated metadata for the dataset.
+    metadata: ?[]const aws.map.StringMapEntry = null,
+
+    /// The name of the workspace that contains the dataset.
+    workspace_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .client_token = "clientToken",
+        .dataset_config = "datasetConfig",
         .dataset_description = "datasetDescription",
         .dataset_id = "datasetId",
         .dataset_name = "datasetName",
         .dataset_source = "datasetSource",
+        .metadata = "metadata",
+        .workspace_name = "workspaceName",
     };
 };
 
@@ -103,6 +116,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDatasetInput, con
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.dataset_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"datasetConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.dataset_description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"datasetDescription\":");
@@ -117,6 +136,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDatasetInput, con
     try body_buf.appendSlice(allocator, "\"datasetSource\":");
     try aws.json.writeValue(@TypeOf(input.dataset_source), input.dataset_source, allocator, &body_buf);
     has_prev = true;
+    if (input.metadata) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"metadata\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.workspace_name) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"workspaceName\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -133,10 +164,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDatasetInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateDatasetOutput {
-    var result: UpdateDatasetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateDatasetOutput, body, allocator);
-    }
+    const result: UpdateDatasetOutput = try aws.json.parseJsonObject(
+        UpdateDatasetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -10,6 +10,11 @@ pub const DeleteAgentRuntimeInput = struct {
     /// The unique identifier of the AgentCore Runtime to delete.
     agent_runtime_id: []const u8,
 
+    /// The version of the AgentCore Runtime to delete. When you provide this value,
+    /// only that version is deleted. When you omit it, the entire AgentCore Runtime
+    /// and all of its versions are deleted.
+    agent_runtime_version: ?[]const u8 = null,
+
     /// A unique, case-sensitive identifier to ensure that the operation completes
     /// no more than one time. If this token matches a previous request, the service
     /// ignores the request but does not return an error.
@@ -17,6 +22,7 @@ pub const DeleteAgentRuntimeInput = struct {
 
     pub const json_field_names = .{
         .agent_runtime_id = "agentRuntimeId",
+        .agent_runtime_version = "agentRuntimeVersion",
         .client_token = "clientToken",
     };
 };
@@ -25,11 +31,16 @@ pub const DeleteAgentRuntimeOutput = struct {
     /// The unique identifier of the AgentCore Runtime.
     agent_runtime_id: ?[]const u8 = null,
 
+    /// The version of the AgentCore Runtime that was deleted. This value is present
+    /// only when you delete a single version.
+    agent_runtime_version: ?[]const u8 = null,
+
     /// The current status of the AgentCore Runtime deletion.
     status: AgentRuntimeStatus,
 
     pub const json_field_names = .{
         .agent_runtime_id = "agentRuntimeId",
+        .agent_runtime_version = "agentRuntimeVersion",
         .status = "status",
     };
 };
@@ -72,6 +83,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteAgentRuntimeInput
 
     var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
+    if (input.agent_runtime_version) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "version=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
     if (input.client_token) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "clientToken=");
@@ -95,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteAgentRuntimeInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteAgentRuntimeOutput {
-    var result: DeleteAgentRuntimeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteAgentRuntimeOutput, body, allocator);
-    }
+    const result: DeleteAgentRuntimeOutput = try aws.json.parseJsonObject(
+        DeleteAgentRuntimeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -11,6 +11,7 @@ const GetHlsManifestConfiguration = @import("get_hls_manifest_configuration.zig"
 const GetLowLatencyHlsManifestConfiguration = @import("get_low_latency_hls_manifest_configuration.zig").GetLowLatencyHlsManifestConfiguration;
 const GetMssManifestConfiguration = @import("get_mss_manifest_configuration.zig").GetMssManifestConfiguration;
 const Segment = @import("segment.zig").Segment;
+const StreamNameOutputMode = @import("stream_name_output_mode.zig").StreamNameOutputMode;
 const UriSeparator = @import("uri_separator.zig").UriSeparator;
 
 pub const GetOriginEndpointInput = struct {
@@ -97,6 +98,10 @@ pub const GetOriginEndpointOutput = struct {
     /// on content that falls within the window.
     startover_window_seconds: ?i32 = null,
 
+    /// The output mode for stream names in egress manifests for this origin
+    /// endpoint.
+    stream_name_output_mode: ?StreamNameOutputMode = null,
+
     /// The comma-separated list of tag key:value pairs assigned to the origin
     /// endpoint.
     tags: ?[]const aws.map.StringMapEntry = null,
@@ -122,6 +127,7 @@ pub const GetOriginEndpointOutput = struct {
         .reset_at = "ResetAt",
         .segment = "Segment",
         .startover_window_seconds = "StartoverWindowSeconds",
+        .stream_name_output_mode = "StreamNameOutputMode",
         .tags = "Tags",
         .uri_separator = "UriSeparator",
     };
@@ -180,10 +186,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetOriginEndpointInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetOriginEndpointOutput {
-    var result: GetOriginEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetOriginEndpointOutput, body, allocator);
-    }
+    const result: GetOriginEndpointOutput = try aws.json.parseJsonObject(
+        GetOriginEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

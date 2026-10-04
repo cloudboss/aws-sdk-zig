@@ -1,6 +1,7 @@
 const aws = @import("aws");
 
 const Destination = @import("destination.zig").Destination;
+const ExporterConfiguration = @import("exporter_configuration.zig").ExporterConfiguration;
 const RoleConfiguration = @import("role_configuration.zig").RoleConfiguration;
 const Source = @import("source.zig").Source;
 const ScraperStatus = @import("scraper_status.zig").ScraperStatus;
@@ -17,9 +18,13 @@ pub const ScraperSummary = struct {
     /// The date and time that the scraper was created.
     created_at: i64,
 
-    /// The Amazon Managed Service for Prometheus workspace the scraper sends
-    /// metrics to.
+    /// The destination where the scraper sends metrics. Valid destinations are
+    /// Amazon Managed Service for Prometheus workspaces and CloudWatch datasets.
     destination: Destination,
+
+    /// The exporter configurations for the scraper, if configured. The list
+    /// contains at most one configuration for an Amazon OpenSearch Service domain.
+    exporters: ?[]const ExporterConfiguration = null,
 
     /// The date and time that the scraper was last modified.
     last_modified_at: i64,
@@ -52,6 +57,7 @@ pub const ScraperSummary = struct {
         .arn = "arn",
         .created_at = "createdAt",
         .destination = "destination",
+        .exporters = "exporters",
         .last_modified_at = "lastModifiedAt",
         .role_arn = "roleArn",
         .role_configuration = "roleConfiguration",

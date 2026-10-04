@@ -133,10 +133,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListResourcesAssociated
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListResourcesAssociatedToCustomLineItemOutput {
-    var result: ListResourcesAssociatedToCustomLineItemOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListResourcesAssociatedToCustomLineItemOutput, body, allocator);
-    }
+    const result: ListResourcesAssociatedToCustomLineItemOutput = try aws.json.parseJsonObject(
+        ListResourcesAssociatedToCustomLineItemOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

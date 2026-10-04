@@ -76,10 +76,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetKnowledgeBaseInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetKnowledgeBaseOutput {
-    var result: GetKnowledgeBaseOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetKnowledgeBaseOutput, body, allocator);
-    }
+    const result: GetKnowledgeBaseOutput = try aws.json.parseJsonObject(
+        GetKnowledgeBaseOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

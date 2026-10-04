@@ -86,10 +86,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTableBucketReplicati
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTableBucketReplicationOutput {
-    var result: GetTableBucketReplicationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTableBucketReplicationOutput, body, allocator);
-    }
+    const result: GetTableBucketReplicationOutput = try aws.json.parseJsonObject(
+        GetTableBucketReplicationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const TelemetryPipelineConfiguration = @import("telemetry_pipeline_configuration.zig").TelemetryPipelineConfiguration;
 const Record = @import("record.zig").Record;
+const SignalType = @import("signal_type.zig").SignalType;
 const PipelineOutput = @import("pipeline_output.zig").PipelineOutput;
 
 pub const TestTelemetryPipelineInput = struct {
@@ -16,9 +17,14 @@ pub const TestTelemetryPipelineInput = struct {
     /// purposes.
     records: []const Record,
 
+    /// The type of telemetry signal to test. If not specified, defaults to log
+    /// processing.
+    signal_type: ?SignalType = null,
+
     pub const json_field_names = .{
         .configuration = "Configuration",
         .records = "Records",
+        .signal_type = "SignalType",
     };
 };
 
@@ -76,6 +82,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TestTelemetryPipelineIn
     try body_buf.appendSlice(allocator, "\"Records\":");
     try aws.json.writeValue(@TypeOf(input.records), input.records, allocator, &body_buf);
     has_prev = true;
+    if (input.signal_type) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"SignalType\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -92,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TestTelemetryPipelineIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !TestTelemetryPipelineOutput {
-    var result: TestTelemetryPipelineOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(TestTelemetryPipelineOutput, body, allocator);
-    }
+    const result: TestTelemetryPipelineOutput = try aws.json.parseJsonObject(
+        TestTelemetryPipelineOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

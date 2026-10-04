@@ -72,6 +72,20 @@ pub const CreateRcsAgentOutput = struct {
     /// text messages from your end recipients.
     two_way_enabled: ?bool = null,
 
+    /// The name of the S3 bucket where inbound RCS media files are stored.
+    two_way_media_s3_bucket_name: ?[]const u8 = null,
+
+    /// The key prefix used for inbound RCS media objects in the S3 bucket.
+    two_way_media_s3_key_prefix: ?[]const u8 = null,
+
+    /// The ARN of the IAM role used to write inbound RCS media files to the S3
+    /// bucket. The role must have `s3:PutObject` permission on the bucket and a
+    /// trust policy allowing `sms-voice.amazonaws.com` to assume it.
+    two_way_media_s3_role: ?[]const u8 = null,
+
+    /// The list of RCS event types enabled for two-way messaging on the agent.
+    two_way_rcs_events_enabled: ?[]const []const u8 = null,
+
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",
         .deletion_protection_enabled = "DeletionProtectionEnabled",
@@ -84,6 +98,10 @@ pub const CreateRcsAgentOutput = struct {
         .two_way_channel_arn = "TwoWayChannelArn",
         .two_way_channel_role = "TwoWayChannelRole",
         .two_way_enabled = "TwoWayEnabled",
+        .two_way_media_s3_bucket_name = "TwoWayMediaS3BucketName",
+        .two_way_media_s3_key_prefix = "TwoWayMediaS3KeyPrefix",
+        .two_way_media_s3_role = "TwoWayMediaS3Role",
+        .two_way_rcs_events_enabled = "TwoWayRcsEventsEnabled",
     };
 };
 

@@ -75,9 +75,9 @@ pub const ContainerDetail = struct {
     /// The log configuration specification for the container.
     ///
     /// This parameter maps to `LogConfig` in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate)
     /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/) and the `--log-driver`
+    /// API](https://docs.docker.com/engine/api/latest/) and the `--log-driver`
     /// option to [docker run](https://docs.docker.com/engine/reference/run/). By
     /// default, containers use the same logging
     /// driver that the Docker daemon uses. However, the container might use a
@@ -156,9 +156,7 @@ pub const ContainerDetail = struct {
     /// root file
     /// system. This parameter maps to `ReadonlyRootfs` in the
     /// [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/) and the
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker Remote API](https://docs.docker.com/engine/api/latest/) and the
     /// `--read-only` option to [
     /// `docker
     /// run`
@@ -196,9 +194,7 @@ pub const ContainerDetail = struct {
 
     /// A list of `ulimit` values to set in the container. This parameter maps to
     /// `Ulimits` in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/)
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker Remote API](https://docs.docker.com/engine/api/latest/)
     /// and the `--ulimit` option to [docker
     /// run](https://docs.docker.com/engine/reference/run/).
     ///
@@ -209,9 +205,7 @@ pub const ContainerDetail = struct {
     /// The user name to use inside the container. This parameter maps to `User` in
     /// the
     /// [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/) and the `--user`
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker Remote API](https://docs.docker.com/engine/api/latest/) and the `--user`
     /// option to [docker run](https://docs.docker.com/engine/reference/run/).
     user: ?[]const u8 = null,
 
@@ -222,9 +216,7 @@ pub const ContainerDetail = struct {
     /// can't specify the vCPU requirements in both the `vcpus` and
     /// `resourceRequirements` object. This parameter maps to `CpuShares` in the
     /// [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/) and the
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker Remote API](https://docs.docker.com/engine/api/latest/) and the
     /// `--cpu-shares` option to [docker
     /// run](https://docs.docker.com/engine/reference/run/). Each
     /// vCPU is equivalent to 1,024 CPU shares. You must specify at least one vCPU.

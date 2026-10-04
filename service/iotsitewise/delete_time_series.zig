@@ -27,11 +27,15 @@ pub const DeleteTimeSeriesInput = struct {
     /// IDs](https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references) in the *IoT SiteWise User Guide*.
     property_id: ?[]const u8 = null,
 
+    /// The name of the workspace.
+    workspace_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .alias = "alias",
         .asset_id = "assetId",
         .client_token = "clientToken",
         .property_id = "propertyId",
+        .workspace_name = "workspaceName",
     };
 };
 
@@ -86,6 +90,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteTimeSeriesInput, 
     if (input.property_id) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "propertyId=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
+    if (input.workspace_name) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "workspaceName=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }

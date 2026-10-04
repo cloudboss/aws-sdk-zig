@@ -1,7 +1,8 @@
 const SharePointCrawlerConfiguration = @import("share_point_crawler_configuration.zig").SharePointCrawlerConfiguration;
 const SharePointSourceConfiguration = @import("share_point_source_configuration.zig").SharePointSourceConfiguration;
 
-/// The configuration information to connect to SharePoint as your data source.
+/// The configuration information to connect to SharePoint as your data source
+/// for self-managed knowledge bases.
 pub const SharePointDataSourceConfiguration = struct {
     /// The configuration of the SharePoint content. For example, configuring
     /// specific types of SharePoint content.

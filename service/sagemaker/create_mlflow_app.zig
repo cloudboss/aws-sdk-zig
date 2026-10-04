@@ -20,6 +20,11 @@ pub const CreateMlflowAppInput = struct {
     /// default.
     default_domain_id_list: ?[]const []const u8 = null,
 
+    /// The ID of the Amazon Web Services KMS key used to encrypt the data at rest
+    /// associated with the MLflow App. If you don't specify a value, the MLflow App
+    /// is not encrypted with a customer-managed key.
+    kms_key_id: ?[]const u8 = null,
+
     /// Whether to enable or disable automatic registration of new MLflow models to
     /// the SageMaker Model Registry. To enable automatic model registration, set
     /// this value to `AutoModelRegistrationEnabled`. To disable automatic model
@@ -50,6 +55,7 @@ pub const CreateMlflowAppInput = struct {
         .account_default_status = "AccountDefaultStatus",
         .artifact_store_uri = "ArtifactStoreUri",
         .default_domain_id_list = "DefaultDomainIdList",
+        .kms_key_id = "KmsKeyId",
         .model_registration_mode = "ModelRegistrationMode",
         .name = "Name",
         .role_arn = "RoleArn",

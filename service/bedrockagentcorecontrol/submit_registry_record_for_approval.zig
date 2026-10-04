@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SubmitRegistryRecordFor
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SubmitRegistryRecordForApprovalOutput {
-    var result: SubmitRegistryRecordForApprovalOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SubmitRegistryRecordForApprovalOutput, body, allocator);
-    }
+    const result: SubmitRegistryRecordForApprovalOutput = try aws.json.parseJsonObject(
+        SubmitRegistryRecordForApprovalOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

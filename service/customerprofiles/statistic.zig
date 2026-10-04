@@ -9,6 +9,7 @@ pub const Statistic = enum {
     maximum,
     average,
     max_occurrence,
+    recent_occurrences,
 
     pub const json_field_names = .{
         .first_occurrence = "FIRST_OCCURRENCE",
@@ -19,6 +20,7 @@ pub const Statistic = enum {
         .maximum = "MAXIMUM",
         .average = "AVERAGE",
         .max_occurrence = "MAX_OCCURRENCE",
+        .recent_occurrences = "RECENT_OCCURRENCES",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -31,6 +33,7 @@ pub const Statistic = enum {
             .maximum => "MAXIMUM",
             .average => "AVERAGE",
             .max_occurrence => "MAX_OCCURRENCE",
+            .recent_occurrences => "RECENT_OCCURRENCES",
         };
     }
 

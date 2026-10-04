@@ -1,5 +1,3 @@
-const aws = @import("aws");
-
 const ContinuousIntegrationScanEvent = @import("continuous_integration_scan_event.zig").ContinuousIntegrationScanEvent;
 const PeriodicScanFrequency = @import("periodic_scan_frequency.zig").PeriodicScanFrequency;
 const RuleSetCategory = @import("rule_set_category.zig").RuleSetCategory;
@@ -33,9 +31,6 @@ pub const CodeSecurityScanConfigurationSummary = struct {
     /// to all existing and future projects imported into Amazon Inspector.
     scope_settings: ?ScopeSettings = null,
 
-    /// The tags associated with the scan configuration.
-    tags: ?[]const aws.map.StringMapEntry = null,
-
     pub const json_field_names = .{
         .continuous_integration_scan_supported_events = "continuousIntegrationScanSupportedEvents",
         .frequency_expression = "frequencyExpression",
@@ -45,6 +40,5 @@ pub const CodeSecurityScanConfigurationSummary = struct {
         .rule_set_categories = "ruleSetCategories",
         .scan_configuration_arn = "scanConfigurationArn",
         .scope_settings = "scopeSettings",
-        .tags = "tags",
     };
 };

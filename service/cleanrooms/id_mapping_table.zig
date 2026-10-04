@@ -1,3 +1,4 @@
+const ChildResource = @import("child_resource.zig").ChildResource;
 const IdMappingTableInputReferenceConfig = @import("id_mapping_table_input_reference_config.zig").IdMappingTableInputReferenceConfig;
 const IdMappingTableInputReferenceProperties = @import("id_mapping_table_input_reference_properties.zig").IdMappingTableInputReferenceProperties;
 
@@ -5,6 +6,9 @@ const IdMappingTableInputReferenceProperties = @import("id_mapping_table_input_r
 pub const IdMappingTable = struct {
     /// The Amazon Resource Name (ARN) of the ID mapping table.
     arn: []const u8,
+
+    /// The child resources that depend on this ID mapping table.
+    child_resources: ?[]const ChildResource = null,
 
     /// The Amazon Resource Name (ARN) of the collaboration that contains this ID
     /// mapping table.
@@ -47,6 +51,7 @@ pub const IdMappingTable = struct {
 
     pub const json_field_names = .{
         .arn = "arn",
+        .child_resources = "childResources",
         .collaboration_arn = "collaborationArn",
         .collaboration_id = "collaborationId",
         .create_time = "createTime",

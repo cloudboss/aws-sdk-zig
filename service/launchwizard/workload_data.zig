@@ -1,7 +1,15 @@
+const AccountConstraint = @import("account_constraint.zig").AccountConstraint;
 const WorkloadStatus = @import("workload_status.zig").WorkloadStatus;
 
 /// Describes a workload.
 pub const WorkloadData = struct {
+    /// Optional list of constraints describing what kind of AWS account is allowed
+    /// to deploy this workload or deployment pattern. Within a single list the
+    /// semantics are OR: an account satisfies the list if it satisfies any entry.
+    /// Workload-level and pattern-level lists combine with AND at deployment time.
+    /// An absent or empty list at this level means no constraint at this level.
+    account_constraints: ?[]const AccountConstraint = null,
+
     /// The description of a workload.
     description: ?[]const u8 = null,
 
@@ -26,6 +34,7 @@ pub const WorkloadData = struct {
     workload_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .account_constraints = "accountConstraints",
         .description = "description",
         .display_name = "displayName",
         .documentation_url = "documentationUrl",

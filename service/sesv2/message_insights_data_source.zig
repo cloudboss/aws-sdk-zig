@@ -14,6 +14,9 @@ pub const MessageInsightsDataSource = struct {
     include: ?MessageInsightsFilters = null,
 
     /// The maximum number of results.
+    ///
+    /// If you don't specify `MaxResults`, the export returns a maximum of
+    /// 1,000 results.
     max_results: ?i32 = null,
 
     /// Represents the start date for the export interval as a timestamp. The start

@@ -13,6 +13,10 @@ pub const ServiceJobSummary = struct {
     /// The Unix timestamp (in milliseconds) for when the service job was created.
     created_at: ?i64 = null,
 
+    /// Indicates whether a termination request has been accepted for the service
+    /// job. This field is only present when the value is `true`.
+    is_terminated: ?bool = null,
+
     /// The Amazon Resource Name (ARN) of the service job.
     job_arn: ?[]const u8 = null,
 
@@ -57,6 +61,7 @@ pub const ServiceJobSummary = struct {
     pub const json_field_names = .{
         .capacity_usage = "capacityUsage",
         .created_at = "createdAt",
+        .is_terminated = "isTerminated",
         .job_arn = "jobArn",
         .job_id = "jobId",
         .job_name = "jobName",

@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const IncludedData = @import("included_data.zig").IncludedData;
 const FlowDefinition = @import("flow_definition.zig").FlowDefinition;
 const FlowStatus = @import("flow_status.zig").FlowStatus;
 
@@ -14,9 +15,15 @@ pub const GetFlowVersionInput = struct {
     /// The version of the flow for which to get information.
     flow_version: []const u8,
 
+    /// Controls the scope of data returned. Set to `METADATA_ONLY` to return only
+    /// resource metadata. Set to `ALL_DATA` or omit this field to return the full
+    /// response.
+    included_data: ?IncludedData = null,
+
     pub const json_field_names = .{
         .flow_identifier = "flowIdentifier",
         .flow_version = "flowVersion",
+        .included_data = "includedData",
     };
 };
 
@@ -107,6 +114,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFlowVersionInput, co
     try path_buf.appendSlice(allocator, "/");
     const path = try path_buf.toOwnedSlice(allocator);
 
+    var query_buf: std.ArrayList(u8) = .empty;
+    var query_has_prev = false;
+    if (input.included_data) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "includedData=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
+        query_has_prev = true;
+    }
+    const query = try query_buf.toOwnedSlice(allocator);
+
     const body: ?[]const u8 = null;
 
     var request = aws.http.Request.init(ep.host);
@@ -115,16 +132,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFlowVersionInput, co
     request.tls = ep.tls;
     request.port = ep.port;
     request.body = body;
+    request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetFlowVersionOutput {
-    var result: GetFlowVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetFlowVersionOutput, body, allocator);
-    }
+    const result: GetFlowVersionOutput = try aws.json.parseJsonObject(
+        GetFlowVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

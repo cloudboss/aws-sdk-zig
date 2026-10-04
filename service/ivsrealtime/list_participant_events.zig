@@ -11,8 +11,7 @@ pub const ListParticipantEventsInput = struct {
     max_results: ?i32 = null,
 
     /// The first participant event to retrieve. This is used for pagination; see
-    /// the
-    /// `nextToken` response field.
+    /// the `nextToken` response field.
     next_token: ?[]const u8 = null,
 
     /// Unique identifier for this participant. This is assigned by IVS and returned
@@ -38,8 +37,8 @@ pub const ListParticipantEventsOutput = struct {
     /// List of the matching events.
     events: ?[]const Event = null,
 
-    /// If there are more events than `maxResults`, use `nextToken` in the
-    /// request to get the next set.
+    /// If there are more events than `maxResults`, use `nextToken` in the request
+    /// to get the next set.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -124,10 +123,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListParticipantEventsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListParticipantEventsOutput {
-    var result: ListParticipantEventsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListParticipantEventsOutput, body, allocator);
-    }
+    const result: ListParticipantEventsOutput = try aws.json.parseJsonObject(
+        ListParticipantEventsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

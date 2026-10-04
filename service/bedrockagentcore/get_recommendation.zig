@@ -25,6 +25,9 @@ pub const GetRecommendationOutput = struct {
     /// The description of the recommendation.
     description: ?[]const u8 = null,
 
+    /// The ARN of the KMS key used to encrypt recommendation data.
+    kms_key_arn: ?[]const u8 = null,
+
     /// The name of the recommendation.
     name: []const u8,
 
@@ -54,6 +57,7 @@ pub const GetRecommendationOutput = struct {
     pub const json_field_names = .{
         .created_at = "createdAt",
         .description = "description",
+        .kms_key_arn = "kmsKeyArn",
         .name = "name",
         .recommendation_arn = "recommendationArn",
         .recommendation_config = "recommendationConfig",
@@ -114,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRecommendationInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRecommendationOutput {
-    var result: GetRecommendationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRecommendationOutput, body, allocator);
-    }
+    const result: GetRecommendationOutput = try aws.json.parseJsonObject(
+        GetRecommendationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

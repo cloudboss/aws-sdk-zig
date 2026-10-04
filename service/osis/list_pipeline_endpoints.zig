@@ -103,10 +103,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPipelineEndpointsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListPipelineEndpointsOutput {
-    var result: ListPipelineEndpointsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListPipelineEndpointsOutput, body, allocator);
-    }
+    const result: ListPipelineEndpointsOutput = try aws.json.parseJsonObject(
+        ListPipelineEndpointsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

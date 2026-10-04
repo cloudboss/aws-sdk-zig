@@ -184,10 +184,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateResourceShareI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateResourceShareOutput {
-    var result: AssociateResourceShareOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateResourceShareOutput, body, allocator);
-    }
+    const result: AssociateResourceShareOutput = try aws.json.parseJsonObject(
+        AssociateResourceShareOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

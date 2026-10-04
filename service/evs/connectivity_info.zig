@@ -2,6 +2,8 @@
 /// you specify two route server peer IDs. During environment creation, the
 /// route server endpoints peer with the NSX uplink VLAN for connectivity to the
 /// NSX overlay network.
+///
+/// Not supported when `vcfVersion` is `SELF_DEPLOYED`.
 pub const ConnectivityInfo = struct {
     /// The unique IDs for private route server peers.
     private_route_server_peerings: []const []const u8,

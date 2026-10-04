@@ -1,6 +1,7 @@
 const aws = @import("aws");
 
 const Capacity = @import("capacity.zig").Capacity;
+const VectorCapacity = @import("vector_capacity.zig").VectorCapacity;
 
 /// The capacity units consumed by an operation. The data returned includes the
 /// total
@@ -35,6 +36,12 @@ pub const ConsumedCapacity = struct {
     /// in the response.
     table_name: ?[]const u8 = null,
 
+    /// The amount of throughput consumed on each vector index affected by the
+    /// operation.
+    /// Each entry contains `VectorWriteRequestBytes` (for write operations) or
+    /// `VectorSearchRequestBytes` (for search operations).
+    vector_indexes: ?[]const aws.map.MapEntry(VectorCapacity) = null,
+
     /// The total number of write capacity units consumed by the operation.
     write_capacity_units: ?f64 = null,
 
@@ -45,6 +52,7 @@ pub const ConsumedCapacity = struct {
         .read_capacity_units = "ReadCapacityUnits",
         .table = "Table",
         .table_name = "TableName",
+        .vector_indexes = "VectorIndexes",
         .write_capacity_units = "WriteCapacityUnits",
     };
 };

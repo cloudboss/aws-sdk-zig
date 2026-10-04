@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetUsagePlanKeysInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetUsagePlanKeysOutput {
-    var result: GetUsagePlanKeysOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetUsagePlanKeysOutput, body, allocator);
-    }
+    const result: GetUsagePlanKeysOutput = try aws.json.parseJsonObject(
+        GetUsagePlanKeysOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

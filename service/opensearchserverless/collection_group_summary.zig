@@ -1,4 +1,5 @@
 const CollectionGroupCapacityLimits = @import("collection_group_capacity_limits.zig").CollectionGroupCapacityLimits;
+const ServerlessGeneration = @import("serverless_generation.zig").ServerlessGeneration;
 
 /// Summary information about a collection group.
 pub const CollectionGroupSummary = struct {
@@ -9,6 +10,9 @@ pub const CollectionGroupSummary = struct {
 
     /// The Epoch time when the collection group was created.
     created_date: ?i64 = null,
+
+    /// The generation of Amazon OpenSearch Serverless for the collection group.
+    generation: ?ServerlessGeneration = null,
 
     /// The unique identifier of the collection group.
     id: ?[]const u8 = null,
@@ -23,6 +27,7 @@ pub const CollectionGroupSummary = struct {
         .arn = "arn",
         .capacity_limits = "capacityLimits",
         .created_date = "createdDate",
+        .generation = "generation",
         .id = "id",
         .name = "name",
         .number_of_collections = "numberOfCollections",

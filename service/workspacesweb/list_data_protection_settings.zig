@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDataProtectionSetti
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListDataProtectionSettingsOutput {
-    var result: ListDataProtectionSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListDataProtectionSettingsOutput, body, allocator);
-    }
+    const result: ListDataProtectionSettingsOutput = try aws.json.parseJsonObject(
+        ListDataProtectionSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

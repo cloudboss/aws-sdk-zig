@@ -56,7 +56,8 @@ pub const PutSubscriptionFilterInput = struct {
 
     /// A list of system fields to include in the log events sent to the
     /// subscription destination.
-    /// Valid values are `@aws.account` and `@aws.region`. These fields provide
+    /// Valid values are `@aws.account`, `@aws.region`, and
+    /// `@source.log`. These fields provide
     /// source information for centralized log data in the forwarded payload.
     emit_system_fields: ?[]const []const u8 = null,
 

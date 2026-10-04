@@ -5,6 +5,8 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const CapacityProviderScalingConfig = @import("capacity_provider_scaling_config.zig").CapacityProviderScalingConfig;
+const PropagateTags = @import("propagate_tags.zig").PropagateTags;
+const CapacityProviderTelemetryConfig = @import("capacity_provider_telemetry_config.zig").CapacityProviderTelemetryConfig;
 const CapacityProvider = @import("capacity_provider.zig").CapacityProvider;
 
 pub const UpdateCapacityProviderInput = struct {
@@ -14,9 +16,16 @@ pub const UpdateCapacityProviderInput = struct {
     /// The updated scaling configuration for the capacity provider.
     capacity_provider_scaling_config: ?CapacityProviderScalingConfig = null,
 
+    propagate_tags: ?PropagateTags = null,
+
+    /// The updated telemetry configuration for the capacity provider.
+    telemetry_config: ?CapacityProviderTelemetryConfig = null,
+
     pub const json_field_names = .{
         .capacity_provider_name = "CapacityProviderName",
         .capacity_provider_scaling_config = "CapacityProviderScalingConfig",
+        .propagate_tags = "PropagateTags",
+        .telemetry_config = "TelemetryConfig",
     };
 };
 
@@ -74,6 +83,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateCapacityProviderI
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.propagate_tags) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"PropagateTags\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.telemetry_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"TelemetryConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -90,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateCapacityProviderI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateCapacityProviderOutput {
-    var result: UpdateCapacityProviderOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateCapacityProviderOutput, body, allocator);
-    }
+    const result: UpdateCapacityProviderOutput = try aws.json.parseJsonObject(
+        UpdateCapacityProviderOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

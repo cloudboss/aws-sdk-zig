@@ -4,7 +4,10 @@ const CreateAccessConfigRequest = @import("create_access_config_request.zig").Cr
 const ComputeConfigRequest = @import("compute_config_request.zig").ComputeConfigRequest;
 const ControlPlaneScalingConfig = @import("control_plane_scaling_config.zig").ControlPlaneScalingConfig;
 const EncryptionConfig = @import("encryption_config.zig").EncryptionConfig;
+const KubeApiServerConfigRequest = @import("kube_api_server_config_request.zig").KubeApiServerConfigRequest;
+const KubeControllerManagerConfigRequest = @import("kube_controller_manager_config_request.zig").KubeControllerManagerConfigRequest;
 const KubernetesNetworkConfigRequest = @import("kubernetes_network_config_request.zig").KubernetesNetworkConfigRequest;
+const KubeSchedulerConfigRequest = @import("kube_scheduler_config_request.zig").KubeSchedulerConfigRequest;
 const Logging = @import("logging.zig").Logging;
 const OutpostConfigRequest = @import("outpost_config_request.zig").OutpostConfigRequest;
 const RemoteNetworkConfigRequest = @import("remote_network_config_request.zig").RemoteNetworkConfigRequest;
@@ -52,8 +55,17 @@ pub const CreateClusterRequest = struct {
     /// The encryption configuration for the cluster.
     encryption_config: ?[]const EncryptionConfig = null,
 
+    /// The Kubernetes API server configuration for the new cluster.
+    kube_api_server_config: ?KubeApiServerConfigRequest = null,
+
+    /// The Kubernetes controller manager configuration for the new cluster.
+    kube_controller_manager_config: ?KubeControllerManagerConfigRequest = null,
+
     /// The Kubernetes network configuration for the cluster.
     kubernetes_network_config: ?KubernetesNetworkConfigRequest = null,
+
+    /// The Kubernetes scheduler configuration for the new cluster.
+    kube_scheduler_config: ?KubeSchedulerConfigRequest = null,
 
     /// Enable or disable exporting the Kubernetes control plane logs for your
     /// cluster to CloudWatch Logs .
@@ -181,7 +193,10 @@ pub const CreateClusterRequest = struct {
         .control_plane_scaling_config = "controlPlaneScalingConfig",
         .deletion_protection = "deletionProtection",
         .encryption_config = "encryptionConfig",
+        .kube_api_server_config = "kubeApiServerConfig",
+        .kube_controller_manager_config = "kubeControllerManagerConfig",
         .kubernetes_network_config = "kubernetesNetworkConfig",
+        .kube_scheduler_config = "kubeSchedulerConfig",
         .logging = "logging",
         .name = "name",
         .outpost_config = "outpostConfig",

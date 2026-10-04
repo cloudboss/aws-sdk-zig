@@ -1,13 +1,20 @@
 /// The logging configuration that's defined for pipeline execution.
 pub const PipelineLoggingConfiguration = struct {
-    /// The log group name that Image Builder uses for image creation. If not
-    /// specified, the log group
-    /// name defaults to `/aws/imagebuilder/image-name`.
+    /// Specifies the CloudWatch Logs log group name for image build logs.
+    /// The log group name can contain alphanumeric characters, hyphens,
+    /// underscores, forward slashes, and periods, up to 512 characters.
+    /// Log group names not starting with `/aws/imagebuilder/`
+    /// require an `executionRole` with CloudWatch Logs write
+    /// permissions. If not specified, defaults to
+    /// `/aws/imagebuilder/image-name`.
     image_log_group_name: ?[]const u8 = null,
 
-    /// The log group name that Image Builder uses for the log output during
-    /// creation of a new pipeline.
-    /// If not specified, the pipeline log group name defaults to
+    /// Specifies the CloudWatch Logs log group name for pipeline execution
+    /// logs. The log group name can contain alphanumeric characters, hyphens,
+    /// underscores, forward slashes, and periods, up to 512 characters.
+    /// Log group names not starting with `/aws/imagebuilder/`
+    /// require an `executionRole` with CloudWatch Logs write
+    /// permissions. If not specified, defaults to
     /// `/aws/imagebuilder/pipeline/pipeline-name`.
     pipeline_log_group_name: ?[]const u8 = null,
 

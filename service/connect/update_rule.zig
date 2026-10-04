@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const RuleAction = @import("rule_action.zig").RuleAction;
+const PreEvaluationFilters = @import("pre_evaluation_filters.zig").PreEvaluationFilters;
 const RulePublishStatus = @import("rule_publish_status.zig").RulePublishStatus;
 
 pub const UpdateRuleInput = struct {
@@ -14,7 +15,7 @@ pub const UpdateRuleInput = struct {
     /// The conditions of the rule.
     function: []const u8,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -23,6 +24,14 @@ pub const UpdateRuleInput = struct {
     /// values: `OnZendeskTicketCreate` | `OnZendeskTicketStatusUpdate` |
     /// `OnSalesforceCaseCreate`
     name: []const u8,
+
+    /// The pre-evaluation filters for the rule, that restrict the rule to be
+    /// applied to only certain resources based
+    /// on the resource's attributes, such as tags assigned to a contact. The
+    /// pre-evaluation filters are applied even before
+    /// rule conditions are evaluated and are used to enforce
+    /// tag-based-access-control while applying rules.
+    pre_evaluation_filters: ?PreEvaluationFilters = null,
 
     /// The publish status of the rule.
     publish_status: RulePublishStatus,
@@ -35,6 +44,7 @@ pub const UpdateRuleInput = struct {
         .function = "Function",
         .instance_id = "InstanceId",
         .name = "Name",
+        .pre_evaluation_filters = "PreEvaluationFilters",
         .publish_status = "PublishStatus",
         .rule_id = "RuleId",
     };
@@ -95,6 +105,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateRuleInput, config
     try body_buf.appendSlice(allocator, "\"Name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
     has_prev = true;
+    if (input.pre_evaluation_filters) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"PreEvaluationFilters\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"PublishStatus\":");
     try aws.json.writeValue(@TypeOf(input.publish_status), input.publish_status, allocator, &body_buf);

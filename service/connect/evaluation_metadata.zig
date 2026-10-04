@@ -18,7 +18,7 @@ pub const EvaluationMetadata = struct {
     /// The identifier of the agent who performed the contact.
     contact_agent_id: ?[]const u8 = null,
 
-    /// The identifier of the contact in this instance of Amazon Connect.
+    /// The identifier of the contact in this instance of Connect Customer.
     contact_id: []const u8,
 
     /// Information about a contact participant in this evaluation.

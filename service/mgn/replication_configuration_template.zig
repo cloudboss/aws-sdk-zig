@@ -4,6 +4,7 @@ const ReplicationConfigurationDataPlaneRouting = @import("replication_configurat
 const ReplicationConfigurationDefaultLargeStagingDiskType = @import("replication_configuration_default_large_staging_disk_type.zig").ReplicationConfigurationDefaultLargeStagingDiskType;
 const ReplicationConfigurationEbsEncryption = @import("replication_configuration_ebs_encryption.zig").ReplicationConfigurationEbsEncryption;
 const InternetProtocol = @import("internet_protocol.zig").InternetProtocol;
+const StorageConfiguration = @import("storage_configuration.zig").StorageConfiguration;
 
 pub const ReplicationConfigurationTemplate = struct {
     /// Replication Configuration template ARN.
@@ -49,6 +50,9 @@ pub const ReplicationConfigurationTemplate = struct {
     /// Replication Configuration template Staging Area Tags.
     staging_area_tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// Replication Configuration template storage configuration.
+    storage_configuration: ?StorageConfiguration = null,
+
     /// Replication Configuration template store snapshot on local zone.
     store_snapshot_on_local_zone: ?bool = null,
 
@@ -76,6 +80,7 @@ pub const ReplicationConfigurationTemplate = struct {
         .replication_servers_security_groups_i_ds = "replicationServersSecurityGroupsIDs",
         .staging_area_subnet_id = "stagingAreaSubnetId",
         .staging_area_tags = "stagingAreaTags",
+        .storage_configuration = "storageConfiguration",
         .store_snapshot_on_local_zone = "storeSnapshotOnLocalZone",
         .tags = "tags",
         .use_dedicated_replication_server = "useDedicatedReplicationServer",

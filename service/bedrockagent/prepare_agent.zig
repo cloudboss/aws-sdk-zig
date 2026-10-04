@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PrepareAgentInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PrepareAgentOutput {
-    var result: PrepareAgentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PrepareAgentOutput, body, allocator);
-    }
+    const result: PrepareAgentOutput = try aws.json.parseJsonObject(
+        PrepareAgentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

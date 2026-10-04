@@ -29,6 +29,10 @@ pub const Event = enum {
     s_3_object_tagging_,
     s_3_object_tagging_put,
     s_3_object_tagging_delete,
+    s_3_object_annotation_,
+    s_3_object_annotation_put,
+    s_3_object_annotation_delete,
+    s_3_object_retention_put,
 
     pub const json_field_names = .{
         .s_3_reduced_redundancy_lost_object = "s3:ReducedRedundancyLostObject",
@@ -58,6 +62,10 @@ pub const Event = enum {
         .s_3_object_tagging_ = "s3:ObjectTagging:*",
         .s_3_object_tagging_put = "s3:ObjectTagging:Put",
         .s_3_object_tagging_delete = "s3:ObjectTagging:Delete",
+        .s_3_object_annotation_ = "s3:ObjectAnnotation:*",
+        .s_3_object_annotation_put = "s3:ObjectAnnotation:Put",
+        .s_3_object_annotation_delete = "s3:ObjectAnnotation:Delete",
+        .s_3_object_retention_put = "s3:ObjectRetention:Put",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -89,6 +97,10 @@ pub const Event = enum {
             .s_3_object_tagging_ => "s3:ObjectTagging:*",
             .s_3_object_tagging_put => "s3:ObjectTagging:Put",
             .s_3_object_tagging_delete => "s3:ObjectTagging:Delete",
+            .s_3_object_annotation_ => "s3:ObjectAnnotation:*",
+            .s_3_object_annotation_put => "s3:ObjectAnnotation:Put",
+            .s_3_object_annotation_delete => "s3:ObjectAnnotation:Delete",
+            .s_3_object_retention_put => "s3:ObjectRetention:Put",
         };
     }
 

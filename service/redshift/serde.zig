@@ -54,6 +54,7 @@ const ImpactRankingType = @import("impact_ranking_type.zig").ImpactRankingType;
 const InboundIntegration = @import("inbound_integration.zig").InboundIntegration;
 const Integration = @import("integration.zig").Integration;
 const IntegrationError = @import("integration_error.zig").IntegrationError;
+const LoggingPublishStatus = @import("logging_publish_status.zig").LoggingPublishStatus;
 const MaintenanceTrack = @import("maintenance_track.zig").MaintenanceTrack;
 const Mode = @import("mode.zig").Mode;
 const NetworkInterface = @import("network_interface.zig").NetworkInterface;
@@ -68,6 +69,7 @@ const PartnerIntegrationInfo = @import("partner_integration_info.zig").PartnerIn
 const PartnerIntegrationStatus = @import("partner_integration_status.zig").PartnerIntegrationStatus;
 const PauseClusterMessage = @import("pause_cluster_message.zig").PauseClusterMessage;
 const PendingModifiedValues = @import("pending_modified_values.zig").PendingModifiedValues;
+const Qev2IdcApplication = @import("qev_2_idc_application.zig").Qev2IdcApplication;
 const Recommendation = @import("recommendation.zig").Recommendation;
 const RecommendedAction = @import("recommended_action.zig").RecommendedAction;
 const RecommendedActionType = @import("recommended_action_type.zig").RecommendedActionType;
@@ -86,6 +88,7 @@ const ResourcePolicy = @import("resource_policy.zig").ResourcePolicy;
 const RestoreStatus = @import("restore_status.zig").RestoreStatus;
 const ResumeClusterMessage = @import("resume_cluster_message.zig").ResumeClusterMessage;
 const RevisionTarget = @import("revision_target.zig").RevisionTarget;
+const S3TablePublishStatus = @import("s3_table_publish_status.zig").S3TablePublishStatus;
 const ScheduleState = @import("schedule_state.zig").ScheduleState;
 const ScheduledAction = @import("scheduled_action.zig").ScheduledAction;
 const ScheduledActionFilter = @import("scheduled_action_filter.zig").ScheduledActionFilter;
@@ -1037,6 +1040,24 @@ pub fn deserializePendingActionsList(allocator: std.mem.Allocator, reader: *aws.
     return list.toOwnedSlice(allocator);
 }
 
+pub fn deserializeQev2IdcApplicationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Qev2IdcApplication {
+    var list: std.ArrayList(Qev2IdcApplication) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, item_tag)) {
+                    try list.append(allocator, try deserializeQev2IdcApplication(allocator, reader));
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
 pub fn deserializeRecommendationList(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime item_tag: []const u8) ![]const Recommendation {
     var list: std.ArrayList(Recommendation) = .empty;
     while (try reader.next()) |event| {
@@ -1684,6 +1705,41 @@ pub fn deserializeEncryptionContextMap(allocator: std.mem.Allocator, reader: *aw
     return list.toOwnedSlice(allocator);
 }
 
+pub fn deserializeS3TableLastIngestionTimeMap(allocator: std.mem.Allocator, reader: *aws.xml.Reader, comptime entry_tag: []const u8) ![]const aws.map.StringMapEntry {
+    var list: std.ArrayList(aws.map.StringMapEntry) = .empty;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, entry_tag)) {
+                    var entry_key: []const u8 = "";
+                    var entry_value: []const u8 = undefined;
+                    while (try reader.next()) |inner| {
+                        switch (inner) {
+                            .element_start => |ie| {
+                                if (std.mem.eql(u8, ie.local, "key")) {
+                                    entry_key = try allocator.dupe(u8, try reader.readElementText());
+                                } else if (std.mem.eql(u8, ie.local, "value")) {
+                                    entry_value = try allocator.dupe(u8, try reader.readElementText());
+                                } else {
+                                    try reader.skipElement();
+                                }
+                            },
+                            .element_end => break,
+                            else => {},
+                        }
+                    }
+                    try list.append(allocator, .{ .key = entry_key, .value = entry_value });
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return list.toOwnedSlice(allocator);
+}
+
 pub fn deserializeAccountAttribute(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !AccountAttribute {
     var result: AccountAttribute = undefined;
     result.attribute_name = null;
@@ -1924,6 +1980,7 @@ pub fn deserializeCluster(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
     result.ip_address_type = null;
     result.kms_key_id = null;
     result.lakehouse_registration_status = null;
+    result.logging_publish_status = null;
     result.maintenance_track_name = null;
     result.manual_snapshot_retention_period = null;
     result.master_password_secret_arn = null;
@@ -2029,6 +2086,8 @@ pub fn deserializeCluster(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
                     result.kms_key_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LakehouseRegistrationStatus")) {
                     result.lakehouse_registration_status = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "LoggingPublishStatus")) {
+                    result.logging_publish_status = try deserializeLoggingPublishStatus(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "MaintenanceTrackName")) {
                     result.maintenance_track_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ManualSnapshotRetentionPeriod")) {
@@ -3071,6 +3130,25 @@ pub fn deserializeIntegrationError(allocator: std.mem.Allocator, reader: *aws.xm
     return result;
 }
 
+pub fn deserializeLoggingPublishStatus(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !LoggingPublishStatus {
+    var result: LoggingPublishStatus = undefined;
+    result.s3_tables = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "S3Tables")) {
+                    result.s3_tables = try deserializeS3TablePublishStatus(allocator, reader);
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
 pub fn deserializeMaintenanceTrack(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !MaintenanceTrack {
     var result: MaintenanceTrack = undefined;
     result.database_version = null;
@@ -3316,6 +3394,43 @@ pub fn deserializePendingModifiedValues(allocator: std.mem.Allocator, reader: *a
                     result.number_of_nodes = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "PubliclyAccessible")) {
                     result.publicly_accessible = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeQev2IdcApplication(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !Qev2IdcApplication {
+    var result: Qev2IdcApplication = undefined;
+    result.idc_display_name = null;
+    result.idc_instance_arn = null;
+    result.idc_managed_application_arn = null;
+    result.idc_onboard_status = null;
+    result.qev_2_idc_application_arn = null;
+    result.qev_2_idc_application_name = null;
+    result.tags = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "IdcDisplayName")) {
+                    result.idc_display_name = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "IdcInstanceArn")) {
+                    result.idc_instance_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "IdcManagedApplicationArn")) {
+                    result.idc_managed_application_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "IdcOnboardStatus")) {
+                    result.idc_onboard_status = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Qev2IdcApplicationArn")) {
+                    result.qev_2_idc_application_arn = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Qev2IdcApplicationName")) {
+                    result.qev_2_idc_application_name = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "Tags")) {
+                    result.tags = try deserializeTagList(allocator, reader, "Tag");
                 } else {
                     try reader.skipElement();
                 }
@@ -3818,6 +3933,37 @@ pub fn deserializeRevisionTarget(allocator: std.mem.Allocator, reader: *aws.xml.
                     result.database_revision_release_date = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Description")) {
                     result.description = try allocator.dupe(u8, try reader.readElementText());
+                } else {
+                    try reader.skipElement();
+                }
+            },
+            .element_end => break,
+            else => {},
+        }
+    }
+    return result;
+}
+
+pub fn deserializeS3TablePublishStatus(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !S3TablePublishStatus {
+    var result: S3TablePublishStatus = undefined;
+    result.enabled_all = null;
+    result.last_ingestion_times = null;
+    result.s3_table_granularity = null;
+    result.s3_table_namespace = null;
+    result.s3_tables = null;
+    while (try reader.next()) |event| {
+        switch (event) {
+            .element_start => |e| {
+                if (std.mem.eql(u8, e.local, "EnabledAll")) {
+                    result.enabled_all = std.mem.eql(u8, try reader.readElementText(), "true");
+                } else if (std.mem.eql(u8, e.local, "LastIngestionTimes")) {
+                    result.last_ingestion_times = try deserializeS3TableLastIngestionTimeMap(allocator, reader, "entry");
+                } else if (std.mem.eql(u8, e.local, "S3TableGranularity")) {
+                    result.s3_table_granularity = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "S3TableNamespace")) {
+                    result.s3_table_namespace = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "S3Tables")) {
+                    result.s3_tables = try deserializeLogTypeList(allocator, reader, "member");
                 } else {
                     try reader.skipElement();
                 }

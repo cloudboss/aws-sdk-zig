@@ -7,7 +7,8 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const UpdateNotificationContentInput = struct {
     /// The updated localized content of the notification. A map of locale codes and
-    /// values. Maximum 500 characters per locale.
+    /// values. Maximum 500 visible
+    /// characters per locale.
     content: []const aws.map.StringMapEntry,
 
     /// The identifier of the Amazon Connect instance. You can [find the instance

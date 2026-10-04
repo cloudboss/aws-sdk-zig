@@ -1,6 +1,7 @@
 const ResaleAuthorizationAvailabilityEndDateFilter = @import("resale_authorization_availability_end_date_filter.zig").ResaleAuthorizationAvailabilityEndDateFilter;
 const ResaleAuthorizationCreatedDateFilter = @import("resale_authorization_created_date_filter.zig").ResaleAuthorizationCreatedDateFilter;
 const ResaleAuthorizationEntityIdFilter = @import("resale_authorization_entity_id_filter.zig").ResaleAuthorizationEntityIdFilter;
+const ResaleAuthorizationIssuerAccountIdFilter = @import("resale_authorization_issuer_account_id_filter.zig").ResaleAuthorizationIssuerAccountIdFilter;
 const ResaleAuthorizationLastModifiedDateFilter = @import("resale_authorization_last_modified_date_filter.zig").ResaleAuthorizationLastModifiedDateFilter;
 const ResaleAuthorizationManufacturerAccountIdFilter = @import("resale_authorization_manufacturer_account_id_filter.zig").ResaleAuthorizationManufacturerAccountIdFilter;
 const ResaleAuthorizationManufacturerLegalNameFilter = @import("resale_authorization_manufacturer_legal_name_filter.zig").ResaleAuthorizationManufacturerLegalNameFilter;
@@ -10,6 +11,8 @@ const ResaleAuthorizationProductIdFilter = @import("resale_authorization_product
 const ResaleAuthorizationProductNameFilter = @import("resale_authorization_product_name_filter.zig").ResaleAuthorizationProductNameFilter;
 const ResaleAuthorizationResellerAccountIDFilter = @import("resale_authorization_reseller_account_id_filter.zig").ResaleAuthorizationResellerAccountIDFilter;
 const ResaleAuthorizationResellerLegalNameFilter = @import("resale_authorization_reseller_legal_name_filter.zig").ResaleAuthorizationResellerLegalNameFilter;
+const ResaleAuthorizationResellerRoleFilter = @import("resale_authorization_reseller_role_filter.zig").ResaleAuthorizationResellerRoleFilter;
+const ResaleAuthorizationSourceAuthorizationFilter = @import("resale_authorization_source_authorization_filter.zig").ResaleAuthorizationSourceAuthorizationFilter;
 const ResaleAuthorizationStatusFilter = @import("resale_authorization_status_filter.zig").ResaleAuthorizationStatusFilter;
 
 /// Object containing all the filter fields for resale authorization entity.
@@ -24,6 +27,9 @@ pub const ResaleAuthorizationFilters = struct {
 
     /// Allows filtering on the `EntityId` of a ResaleAuthorization.
     entity_id: ?ResaleAuthorizationEntityIdFilter = null,
+
+    /// Allows filtering on the `IssuerAccountId` of a ResaleAuthorization.
+    issuer_account_id: ?ResaleAuthorizationIssuerAccountIdFilter = null,
 
     /// Allows filtering on the `LastModifiedDate` of a ResaleAuthorization.
     last_modified_date: ?ResaleAuthorizationLastModifiedDateFilter = null,
@@ -52,6 +58,12 @@ pub const ResaleAuthorizationFilters = struct {
     /// Allows filtering on the `ResellerLegalName` of a ResaleAuthorization.
     reseller_legal_name: ?ResaleAuthorizationResellerLegalNameFilter = null,
 
+    /// Allows filtering on the `ResellerRole` of a ResaleAuthorization.
+    reseller_role: ?ResaleAuthorizationResellerRoleFilter = null,
+
+    /// Allows filtering on the `SourceAuthorization` of a ResaleAuthorization.
+    source_authorization: ?ResaleAuthorizationSourceAuthorizationFilter = null,
+
     /// Allows filtering on the `Status` of a ResaleAuthorization.
     status: ?ResaleAuthorizationStatusFilter = null,
 
@@ -59,6 +71,7 @@ pub const ResaleAuthorizationFilters = struct {
         .availability_end_date = "AvailabilityEndDate",
         .created_date = "CreatedDate",
         .entity_id = "EntityId",
+        .issuer_account_id = "IssuerAccountId",
         .last_modified_date = "LastModifiedDate",
         .manufacturer_account_id = "ManufacturerAccountId",
         .manufacturer_legal_name = "ManufacturerLegalName",
@@ -68,6 +81,8 @@ pub const ResaleAuthorizationFilters = struct {
         .product_name = "ProductName",
         .reseller_account_id = "ResellerAccountID",
         .reseller_legal_name = "ResellerLegalName",
+        .reseller_role = "ResellerRole",
+        .source_authorization = "SourceAuthorization",
         .status = "Status",
     };
 };

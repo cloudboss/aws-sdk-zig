@@ -1,6 +1,7 @@
 const ApplicationType = @import("application_type.zig").ApplicationType;
 
-/// This API is in preview release for Amazon Connect and is subject to change.
+/// This API is in preview release for Connect Customer and is subject to
+/// change.
 ///
 /// A third-party application's metadata.
 pub const Application = struct {

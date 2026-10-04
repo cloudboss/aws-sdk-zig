@@ -12,15 +12,17 @@ const serde = @import("serde.zig");
 
 pub const DescribeAlarmHistoryInput = struct {
     /// The unique identifier of a specific alarm contributor to filter the alarm
-    /// history results.
+    /// history
+    /// results.
     alarm_contributor_id: ?[]const u8 = null,
 
     /// The name of the alarm.
     alarm_name: ?[]const u8 = null,
 
     /// Use this parameter to specify whether you want the operation to return
-    /// metric alarms
-    /// or composite alarms. If you omit this parameter, only metric alarms are
+    /// metric alarms,
+    /// composite alarms, or log alarms. If you omit this parameter, only metric
+    /// alarms are
     /// returned.
     alarm_types: ?[]const AlarmType = null,
 

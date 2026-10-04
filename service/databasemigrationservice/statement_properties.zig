@@ -1,4 +1,4 @@
-/// The properties of the statement for metadata model creation.
+/// The properties of the SQL statement.
 pub const StatementProperties = struct {
     /// The SQL text of the statement.
     definition: []const u8,

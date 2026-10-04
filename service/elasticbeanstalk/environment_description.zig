@@ -49,8 +49,8 @@ pub const EnvironmentDescription = struct {
     /// The name of this environment.
     environment_name: ?[]const u8 = null,
 
-    /// Describes the health status of the environment. AWS Elastic Beanstalk
-    /// indicates the
+    /// Describes the health status of the environment. Elastic Beanstalk indicates
+    /// the
     /// failure levels for a running environment:
     ///
     /// * `Red`: Indicates the environment is not responsive. Occurs when three or
@@ -76,16 +76,17 @@ pub const EnvironmentDescription = struct {
     /// Statuses](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
     health_status: ?EnvironmentHealthStatus = null,
 
-    /// The Amazon Resource Name (ARN) of the environment's operations role. For
-    /// more information,
-    /// see [Operations
-    /// roles](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html) in the *AWS Elastic Beanstalk Developer Guide*.
+    /// The operations role feature of Elastic Beanstalk is in beta release and is
+    /// subject to change.
+    ///
+    /// The Amazon Resource Name (ARN) of the environment's operations role.
     operations_role: ?[]const u8 = null,
 
     /// The ARN of the platform version.
     platform_arn: ?[]const u8 = null,
 
-    /// The description of the AWS resources used by this environment.
+    /// The description of the Amazon Web Services resources used by this
+    /// environment.
     resources: ?EnvironmentResourcesDescription = null,
 
     /// The name of the `SolutionStack` deployed with this environment.
@@ -93,7 +94,20 @@ pub const EnvironmentDescription = struct {
 
     /// The current operational status of the environment:
     ///
+    /// * `Aborting`: Environment is in the process of aborting a deployment.
+    ///
     /// * `Launching`: Environment is in the process of initial deployment.
+    ///
+    /// * `LinkingFrom`: Environment is in the process of being linked to by another
+    /// environment. See [Environment
+    /// links](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html)
+    /// for details.
+    ///
+    /// * `LinkingTo`: Environment is in the process of linking to another
+    ///   environment.
+    /// See [Environment
+    /// links](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html)
+    /// for details.
     ///
     /// * `Updating`: Environment is in the process of updating its configuration
     /// settings or application version.

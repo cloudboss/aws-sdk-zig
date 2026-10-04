@@ -16,8 +16,13 @@ pub const UpdateType = enum {
     auto_mode_update,
     remote_network_config_update,
     deletion_protection_update,
+    capability_update,
     control_plane_scaling_config_update,
     vended_logs_update,
+    control_plane_egress_update,
+    version_rollback,
+    control_plane_component_config_update,
+    certificate_authority_update,
 
     pub const json_field_names = .{
         .version_update = "VersionUpdate",
@@ -35,8 +40,13 @@ pub const UpdateType = enum {
         .auto_mode_update = "AutoModeUpdate",
         .remote_network_config_update = "RemoteNetworkConfigUpdate",
         .deletion_protection_update = "DeletionProtectionUpdate",
+        .capability_update = "CapabilityUpdate",
         .control_plane_scaling_config_update = "ControlPlaneScalingConfigUpdate",
         .vended_logs_update = "VendedLogsUpdate",
+        .control_plane_egress_update = "ControlPlaneEgressUpdate",
+        .version_rollback = "VersionRollback",
+        .control_plane_component_config_update = "ControlPlaneComponentConfigUpdate",
+        .certificate_authority_update = "CertificateAuthorityUpdate",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -56,8 +66,13 @@ pub const UpdateType = enum {
             .auto_mode_update => "AutoModeUpdate",
             .remote_network_config_update => "RemoteNetworkConfigUpdate",
             .deletion_protection_update => "DeletionProtectionUpdate",
+            .capability_update => "CapabilityUpdate",
             .control_plane_scaling_config_update => "ControlPlaneScalingConfigUpdate",
             .vended_logs_update => "VendedLogsUpdate",
+            .control_plane_egress_update => "ControlPlaneEgressUpdate",
+            .version_rollback => "VersionRollback",
+            .control_plane_component_config_update => "ControlPlaneComponentConfigUpdate",
+            .certificate_authority_update => "CertificateAuthorityUpdate",
         };
     }
 

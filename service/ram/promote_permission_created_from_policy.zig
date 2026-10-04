@@ -124,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PromotePermissionCreate
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PromotePermissionCreatedFromPolicyOutput {
-    var result: PromotePermissionCreatedFromPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PromotePermissionCreatedFromPolicyOutput, body, allocator);
-    }
+    const result: PromotePermissionCreatedFromPolicyOutput = try aws.json.parseJsonObject(
+        PromotePermissionCreatedFromPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

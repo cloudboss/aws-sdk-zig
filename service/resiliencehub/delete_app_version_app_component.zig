@@ -122,10 +122,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteAppVersionAppComp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteAppVersionAppComponentOutput {
-    var result: DeleteAppVersionAppComponentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteAppVersionAppComponentOutput, body, allocator);
-    }
+    const result: DeleteAppVersionAppComponentOutput = try aws.json.parseJsonObject(
+        DeleteAppVersionAppComponentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

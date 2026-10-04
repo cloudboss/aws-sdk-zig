@@ -35,12 +35,16 @@ pub const ListTimeSeriesInput = struct {
     /// property.
     time_series_type: ?ListTimeSeriesType = null,
 
+    /// The name of the workspace.
+    workspace_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .alias_prefix = "aliasPrefix",
         .asset_id = "assetId",
         .max_results = "maxResults",
         .next_token = "nextToken",
         .time_series_type = "timeSeriesType",
+        .workspace_name = "workspaceName",
     };
 };
 
@@ -52,9 +56,13 @@ pub const ListTimeSeriesOutput = struct {
     /// One or more time series summaries to list.
     time_series_summaries: ?[]const TimeSeriesSummary = null,
 
+    /// The name of the workspace.
+    workspace_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .next_token = "nextToken",
         .time_series_summaries = "TimeSeriesSummaries",
+        .workspace_name = "workspaceName",
     };
 };
 
@@ -125,6 +133,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTimeSeriesInput, co
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
+    if (input.workspace_name) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "workspaceName=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
     const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
@@ -142,10 +156,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTimeSeriesInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTimeSeriesOutput {
-    var result: ListTimeSeriesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListTimeSeriesOutput, body, allocator);
-    }
+    const result: ListTimeSeriesOutput = try aws.json.parseJsonObject(
+        ListTimeSeriesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

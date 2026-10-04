@@ -26,6 +26,10 @@ pub const UserPoolDescriptionType = struct {
     /// The user pool name.
     name: ?[]const u8 = null,
 
+    /// A list of Amazon Web Services Regions where replicas of this user pool
+    /// exist.
+    replica_regions: ?[]const []const u8 = null,
+
     /// The user pool status.
     status: ?StatusType = null,
 
@@ -35,6 +39,7 @@ pub const UserPoolDescriptionType = struct {
         .lambda_config = "LambdaConfig",
         .last_modified_date = "LastModifiedDate",
         .name = "Name",
+        .replica_regions = "ReplicaRegions",
         .status = "Status",
     };
 };

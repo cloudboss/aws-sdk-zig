@@ -1,0 +1,11 @@
+pub const ComputeResourceType = @import("compute_resource_type.zig").ComputeResourceType;
+pub const NetworkConnectorConfiguration = @import("network_connector_configuration.zig").NetworkConnectorConfiguration;
+pub const NetworkConnectorLastUpdateStatus = @import("network_connector_last_update_status.zig").NetworkConnectorLastUpdateStatus;
+pub const NetworkConnectorLastUpdateStatusReasonCode = @import("network_connector_last_update_status_reason_code.zig").NetworkConnectorLastUpdateStatusReasonCode;
+pub const NetworkConnectorState = @import("network_connector_state.zig").NetworkConnectorState;
+pub const NetworkConnectorStateReasonCode = @import("network_connector_state_reason_code.zig").NetworkConnectorStateReasonCode;
+pub const NetworkConnectorSummary = @import("network_connector_summary.zig").NetworkConnectorSummary;
+pub const NetworkConnectorType = @import("network_connector_type.zig").NetworkConnectorType;
+pub const NetworkConnectorVpcEgressConfiguration = @import("network_connector_vpc_egress_configuration.zig").NetworkConnectorVpcEgressConfiguration;
+pub const NetworkProtocol = @import("network_protocol.zig").NetworkProtocol;
+pub const ThrottleReason = @import("throttle_reason.zig").ThrottleReason;

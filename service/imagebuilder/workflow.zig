@@ -4,8 +4,9 @@ const WorkflowParameterDetail = @import("workflow_parameter_detail.zig").Workflo
 const WorkflowState = @import("workflow_state.zig").WorkflowState;
 const WorkflowType = @import("workflow_type.zig").WorkflowType;
 
-/// Defines a process that Image Builder uses to build and test images during
-/// the image creation process.
+/// Defines a process that Image Builder runs during the build, test, or
+/// distribution
+/// stage of the image creation process.
 pub const Workflow = struct {
     /// The Amazon Resource Name (ARN) of the workflow resource.
     arn: ?[]const u8 = null,
@@ -36,7 +37,7 @@ pub const Workflow = struct {
     /// The owner of the workflow resource.
     owner: ?[]const u8 = null,
 
-    /// An array of input parameters that that the image workflow uses
+    /// An array of input parameters that the image workflow uses
     /// to control actions or configure settings.
     parameters: ?[]const WorkflowParameterDetail = null,
 
@@ -44,12 +45,10 @@ pub const Workflow = struct {
     /// that status.
     state: ?WorkflowState = null,
 
-    /// The tags that apply to the workflow resource
+    /// The tags that apply to the workflow resource.
     tags: ?[]const aws.map.StringMapEntry = null,
 
-    /// Specifies the image creation stage that the workflow applies to. Image
-    /// Builder
-    /// currently supports build and test workflows.
+    /// The image creation stage that the workflow applies to.
     @"type": ?WorkflowType = null,
 
     /// The workflow resource version. Workflow resources are immutable.

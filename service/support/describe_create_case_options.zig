@@ -12,6 +12,14 @@ pub const DescribeCreateCaseOptionsInput = struct {
     /// Amazon Web Services service defines its own set of category codes.
     category_code: []const u8,
 
+    /// Specifies whether to validate the request without actually returning case
+    /// option data.
+    /// When set to `true`, the request is validated but no options are returned,
+    /// and the
+    /// operation returns a `DryRunOperationException`. When omitted or set to
+    /// `false`, the request runs normally.
+    dry_run: ?bool = null,
+
     /// The type of issue for the case. You can specify `customer-service` or
     /// `technical`. If you don't specify a value, the default is
     /// `technical`.
@@ -19,8 +27,9 @@ pub const DescribeCreateCaseOptionsInput = struct {
 
     /// The language in which Amazon Web Services Support handles the case. Amazon
     /// Web Services Support
-    /// currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and
-    /// Korean (“ko”). You must specify the ISO 639-1
+    /// currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese
+    /// ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and
+    /// Turkish ("tr"). You must specify the ISO 639-1
     /// code for the `language` parameter if you want support in that language.
     language: []const u8,
 
@@ -31,6 +40,7 @@ pub const DescribeCreateCaseOptionsInput = struct {
 
     pub const json_field_names = .{
         .category_code = "categoryCode",
+        .dry_run = "dryRun",
         .issue_type = "issueType",
         .language = "language",
         .service_code = "serviceCode",

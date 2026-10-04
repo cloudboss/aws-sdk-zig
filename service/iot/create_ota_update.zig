@@ -236,10 +236,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateOTAUpdateInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateOTAUpdateOutput {
-    var result: CreateOTAUpdateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateOTAUpdateOutput, body, allocator);
-    }
+    const result: CreateOTAUpdateOutput = try aws.json.parseJsonObject(
+        CreateOTAUpdateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

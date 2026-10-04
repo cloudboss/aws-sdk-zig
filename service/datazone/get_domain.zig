@@ -4,7 +4,9 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DeleteProgress = @import("delete_progress.zig").DeleteProgress;
 const DomainVersion = @import("domain_version.zig").DomainVersion;
+const FailureReason = @import("failure_reason.zig").FailureReason;
 const SingleSignOn = @import("single_sign_on.zig").SingleSignOn;
 const DomainStatus = @import("domain_status.zig").DomainStatus;
 
@@ -24,6 +26,10 @@ pub const GetDomainOutput = struct {
     /// The timestamp of when the Amazon DataZone domain was created.
     created_at: ?i64 = null,
 
+    /// The progress of the current domain deletion, including the number of
+    /// projects that Amazon DataZone successfully deleted.
+    delete_progress: ?DeleteProgress = null,
+
     /// The description of the Amazon DataZone domain.
     description: ?[]const u8 = null,
 
@@ -32,6 +38,10 @@ pub const GetDomainOutput = struct {
 
     /// The version of the domain.
     domain_version: ?DomainVersion = null,
+
+    /// The list of failure reasons for resources that Amazon DataZone could not
+    /// delete during a cascade deletion of the domain.
+    failure_reasons: ?[]const FailureReason = null,
 
     /// The identifier of the specified Amazon DataZone domain.
     id: []const u8,
@@ -68,9 +78,11 @@ pub const GetDomainOutput = struct {
     pub const json_field_names = .{
         .arn = "arn",
         .created_at = "createdAt",
+        .delete_progress = "deleteProgress",
         .description = "description",
         .domain_execution_role = "domainExecutionRole",
         .domain_version = "domainVersion",
+        .failure_reasons = "failureReasons",
         .id = "id",
         .kms_key_identifier = "kmsKeyIdentifier",
         .last_updated_at = "lastUpdatedAt",
@@ -133,10 +145,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDomainInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDomainOutput {
-    var result: GetDomainOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDomainOutput, body, allocator);
-    }
+    const result: GetDomainOutput = try aws.json.parseJsonObject(
+        GetDomainOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

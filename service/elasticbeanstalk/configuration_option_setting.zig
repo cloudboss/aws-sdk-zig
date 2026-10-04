@@ -2,9 +2,10 @@
 /// its current
 /// value. For a list of possible namespaces and option values, see [Option
 /// Values](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html) in the
-/// *AWS Elastic Beanstalk Developer Guide*.
+/// *Elastic Beanstalk Developer Guide*.
 pub const ConfigurationOptionSetting = struct {
-    /// A unique namespace that identifies the option's associated AWS resource.
+    /// A unique namespace that identifies the option's associated Amazon Web
+    /// Services resource.
     namespace: ?[]const u8 = null,
 
     /// The name of the configuration option.

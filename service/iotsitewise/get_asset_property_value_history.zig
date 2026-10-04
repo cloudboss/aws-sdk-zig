@@ -196,10 +196,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAssetPropertyValueHi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAssetPropertyValueHistoryOutput {
-    var result: GetAssetPropertyValueHistoryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAssetPropertyValueHistoryOutput, body, allocator);
-    }
+    const result: GetAssetPropertyValueHistoryOutput = try aws.json.parseJsonObject(
+        GetAssetPropertyValueHistoryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

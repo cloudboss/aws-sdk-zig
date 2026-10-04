@@ -147,10 +147,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetIdentityResolutionJo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetIdentityResolutionJobOutput {
-    var result: GetIdentityResolutionJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetIdentityResolutionJobOutput, body, allocator);
-    }
+    const result: GetIdentityResolutionJobOutput = try aws.json.parseJsonObject(
+        GetIdentityResolutionJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

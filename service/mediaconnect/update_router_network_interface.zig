@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateRouterNetworkInte
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateRouterNetworkInterfaceOutput {
-    var result: UpdateRouterNetworkInterfaceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateRouterNetworkInterfaceOutput, body, allocator);
-    }
+    const result: UpdateRouterNetworkInterfaceOutput = try aws.json.parseJsonObject(
+        UpdateRouterNetworkInterfaceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

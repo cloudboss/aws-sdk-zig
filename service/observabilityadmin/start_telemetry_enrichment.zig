@@ -70,10 +70,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartTelemetryEnrichmen
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartTelemetryEnrichmentOutput {
-    var result: StartTelemetryEnrichmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartTelemetryEnrichmentOutput, body, allocator);
-    }
+    const result: StartTelemetryEnrichmentOutput = try aws.json.parseJsonObject(
+        StartTelemetryEnrichmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

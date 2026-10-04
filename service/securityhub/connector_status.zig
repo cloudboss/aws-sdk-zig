@@ -2,23 +2,29 @@ const std = @import("std");
 
 pub const ConnectorStatus = enum {
     connected,
+    degraded,
     failed_to_connect,
-    pending_configuration,
     pending_authorization,
+    pending_configuration,
+    unknown,
 
     pub const json_field_names = .{
         .connected = "CONNECTED",
+        .degraded = "DEGRADED",
         .failed_to_connect = "FAILED_TO_CONNECT",
-        .pending_configuration = "PENDING_CONFIGURATION",
         .pending_authorization = "PENDING_AUTHORIZATION",
+        .pending_configuration = "PENDING_CONFIGURATION",
+        .unknown = "UNKNOWN",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .connected => "CONNECTED",
+            .degraded => "DEGRADED",
             .failed_to_connect => "FAILED_TO_CONNECT",
-            .pending_configuration => "PENDING_CONFIGURATION",
             .pending_authorization => "PENDING_AUTHORIZATION",
+            .pending_configuration => "PENDING_CONFIGURATION",
+            .unknown => "UNKNOWN",
         };
     }
 

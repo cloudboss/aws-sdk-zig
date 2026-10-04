@@ -11,6 +11,11 @@ pub const ConnectorProperty = struct {
     /// The default value for the property.
     default_value: ?[]const u8 = null,
 
+    /// A format template for the property value that defines how the value should
+    /// be formatted before sending it in API requests. Use `{value}` as a
+    /// placeholder for the actual property value (for example, `SSWS {value}`).
+    format: ?[]const u8 = null,
+
     /// A key name to use when sending this property in API requests, if different
     /// from the display name.
     key_override: ?[]const u8 = null,
@@ -31,6 +36,7 @@ pub const ConnectorProperty = struct {
     pub const json_field_names = .{
         .allowed_values = "AllowedValues",
         .default_value = "DefaultValue",
+        .format = "Format",
         .key_override = "KeyOverride",
         .name = "Name",
         .property_location = "PropertyLocation",

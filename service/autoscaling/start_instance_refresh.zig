@@ -113,6 +113,22 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartInstanceRefreshInp
         }
         if (v.mixed_instances_policy) |sv| {
             if (sv.instances_distribution) |sv2| {
+                if (sv2.distribution_segments) |list_d2| {
+                    for (list_d2, 0..) |item, idx| {
+                        const n = idx + 1;
+                        if (item.target_capacity_types) |lst_3| {
+                            for (lst_3, 0..) |item_3, idx_3| {
+                                const n_3 = idx_3 + 1;
+                                {
+                                    var prefix_buf: [256]u8 = undefined;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&DesiredConfiguration.MixedInstancesPolicy.InstancesDistribution.DistributionSegments.member.{d}.TargetCapacityTypes.member.{d}=", .{n, n_3}) catch continue;
+                                    try body_buf.appendSlice(allocator, field_prefix);
+                                    try aws.url.appendUrlEncoded(allocator, &body_buf, item_3.wireName());
+                                }
+                            }
+                        }
+                    }
+                }
                 if (sv2.on_demand_allocation_strategy) |sv3| {
                     try body_buf.appendSlice(allocator, "&DesiredConfiguration.MixedInstancesPolicy.InstancesDistribution.OnDemandAllocationStrategy=");
                     try aws.url.appendUrlEncoded(allocator, &body_buf, sv3);

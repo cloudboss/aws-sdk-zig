@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListClusterOperationsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListClusterOperationsOutput {
-    var result: ListClusterOperationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListClusterOperationsOutput, body, allocator);
-    }
+    const result: ListClusterOperationsOutput = try aws.json.parseJsonObject(
+        ListClusterOperationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

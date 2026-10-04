@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const RouterOutputConfiguration = @import("router_output_configuration.zig").RouterOutputConfiguration;
+const FabricConfiguration = @import("fabric_configuration.zig").FabricConfiguration;
 const MaintenanceConfiguration = @import("maintenance_configuration.zig").MaintenanceConfiguration;
 const RoutingScope = @import("routing_scope.zig").RoutingScope;
 const RouterOutputTier = @import("router_output_tier.zig").RouterOutputTier;
@@ -21,6 +22,9 @@ pub const CreateRouterOutputInput = struct {
 
     /// The configuration settings for the router output.
     configuration: RouterOutputConfiguration,
+
+    /// The fabric configuration settings for the router output.
+    fabric_configuration: ?FabricConfiguration = null,
 
     /// The maintenance configuration settings for the router output, including
     /// preferred maintenance windows and schedules.
@@ -51,6 +55,7 @@ pub const CreateRouterOutputInput = struct {
         .availability_zone = "AvailabilityZone",
         .client_token = "ClientToken",
         .configuration = "Configuration",
+        .fabric_configuration = "FabricConfiguration",
         .maintenance_configuration = "MaintenanceConfiguration",
         .maximum_bitrate = "MaximumBitrate",
         .name = "Name",
@@ -122,6 +127,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRouterOutputInput
     try body_buf.appendSlice(allocator, "\"Configuration\":");
     try aws.json.writeValue(@TypeOf(input.configuration), input.configuration, allocator, &body_buf);
     has_prev = true;
+    if (input.fabric_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"FabricConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.maintenance_configuration) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"MaintenanceConfiguration\":");
@@ -172,10 +183,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRouterOutputInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateRouterOutputOutput {
-    var result: CreateRouterOutputOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateRouterOutputOutput, body, allocator);
-    }
+    const result: CreateRouterOutputOutput = try aws.json.parseJsonObject(
+        CreateRouterOutputOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

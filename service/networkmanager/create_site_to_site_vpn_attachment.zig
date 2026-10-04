@@ -121,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSiteToSiteVpnAtta
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateSiteToSiteVpnAttachmentOutput {
-    var result: CreateSiteToSiteVpnAttachmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateSiteToSiteVpnAttachmentOutput, body, allocator);
-    }
+    const result: CreateSiteToSiteVpnAttachmentOutput = try aws.json.parseJsonObject(
+        CreateSiteToSiteVpnAttachmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

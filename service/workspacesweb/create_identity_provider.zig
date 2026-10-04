@@ -179,10 +179,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateIdentityProviderI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateIdentityProviderOutput {
-    var result: CreateIdentityProviderOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateIdentityProviderOutput, body, allocator);
-    }
+    const result: CreateIdentityProviderOutput = try aws.json.parseJsonObject(
+        CreateIdentityProviderOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

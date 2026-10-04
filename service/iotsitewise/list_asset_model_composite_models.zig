@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAssetModelComposite
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAssetModelCompositeModelsOutput {
-    var result: ListAssetModelCompositeModelsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAssetModelCompositeModelsOutput, body, allocator);
-    }
+    const result: ListAssetModelCompositeModelsOutput = try aws.json.parseJsonObject(
+        ListAssetModelCompositeModelsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

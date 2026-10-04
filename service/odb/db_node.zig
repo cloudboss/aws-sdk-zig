@@ -28,8 +28,8 @@ pub const DbNode = struct {
     /// The unique identifier of the DB node.
     db_node_id: ?[]const u8 = null,
 
-    /// The amount of local node storage, in gigabytes (GBs), that's allocated on
-    /// the DB node.
+    /// The amount of local node storage, in gigabytes (GB), that's allocated on the
+    /// DB node.
     db_node_storage_size_in_g_bs: ?i32 = null,
 
     /// The unique identifier of the Db server that is associated with the DB node.

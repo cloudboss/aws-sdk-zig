@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisconnectFromServiceIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DisconnectFromServiceOutput {
-    var result: DisconnectFromServiceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DisconnectFromServiceOutput, body, allocator);
-    }
+    const result: DisconnectFromServiceOutput = try aws.json.parseJsonObject(
+        DisconnectFromServiceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTransitGatewayPeerin
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTransitGatewayPeeringOutput {
-    var result: GetTransitGatewayPeeringOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTransitGatewayPeeringOutput, body, allocator);
-    }
+    const result: GetTransitGatewayPeeringOutput = try aws.json.parseJsonObject(
+        GetTransitGatewayPeeringOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

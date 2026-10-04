@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePartnerInputInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePartnerInputOutput {
-    var result: CreatePartnerInputOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePartnerInputOutput, body, allocator);
-    }
+    const result: CreatePartnerInputOutput = try aws.json.parseJsonObject(
+        CreatePartnerInputOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

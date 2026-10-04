@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SynchronizeGatewayTarge
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SynchronizeGatewayTargetsOutput {
-    var result: SynchronizeGatewayTargetsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SynchronizeGatewayTargetsOutput, body, allocator);
-    }
+    const result: SynchronizeGatewayTargetsOutput = try aws.json.parseJsonObject(
+        SynchronizeGatewayTargetsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

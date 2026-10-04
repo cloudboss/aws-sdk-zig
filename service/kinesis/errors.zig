@@ -7,6 +7,7 @@ pub const ServiceError = struct {
 
     pub const Kind = union(enum) {
         access_denied_exception: AccessDeniedException,
+        dry_run_operation_exception: DryRunOperationException,
         expired_iterator_exception: ExpiredIteratorException,
         expired_next_token_exception: ExpiredNextTokenException,
         internal_failure_exception: InternalFailureException,
@@ -27,6 +28,7 @@ pub const ServiceError = struct {
         pub fn code(self: Kind) []const u8 {
             return switch (self) {
                 .access_denied_exception => "AccessDeniedException",
+                .dry_run_operation_exception => "DryRunOperationException",
                 .expired_iterator_exception => "ExpiredIteratorException",
                 .expired_next_token_exception => "ExpiredNextTokenException",
                 .internal_failure_exception => "InternalFailureException",
@@ -49,6 +51,7 @@ pub const ServiceError = struct {
         pub fn message(self: Kind) []const u8 {
             return switch (self) {
                 .access_denied_exception => |e| e.message,
+                .dry_run_operation_exception => |e| e.message,
                 .expired_iterator_exception => |e| e.message,
                 .expired_next_token_exception => |e| e.message,
                 .internal_failure_exception => |e| e.message,
@@ -71,6 +74,7 @@ pub const ServiceError = struct {
         pub fn httpStatus(self: Kind) u16 {
             return switch (self) {
                 .access_denied_exception => 400,
+                .dry_run_operation_exception => 400,
                 .expired_iterator_exception => 400,
                 .expired_next_token_exception => 400,
                 .internal_failure_exception => 500,
@@ -93,6 +97,7 @@ pub const ServiceError = struct {
         pub fn requestId(self: Kind) []const u8 {
             return switch (self) {
                 .access_denied_exception => |e| e.request_id,
+                .dry_run_operation_exception => |e| e.request_id,
                 .expired_iterator_exception => |e| e.request_id,
                 .expired_next_token_exception => |e| e.request_id,
                 .internal_failure_exception => |e| e.request_id,
@@ -137,6 +142,16 @@ pub const ServiceError = struct {
 /// Specifies that you do not have the permissions required to perform this
 /// operation.
 pub const AccessDeniedException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
+};
+
+/// The request was rejected because the DryRun parameter was specified.
+pub const DryRunOperationException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 
@@ -365,6 +380,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             typed_error.message = owned_message;
             typed_error.request_id = owned_request_id;
             return .{ .arena = arena, .kind = .{ .access_denied_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "DryRunOperationException")) {
+        const parsed_error: ?DryRunOperationException = aws.json.parseJsonObject(DryRunOperationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .dry_run_operation_exception = typed_error } };
         }
     }
     if (std.mem.eql(u8, error_code, "ExpiredIteratorException")) {

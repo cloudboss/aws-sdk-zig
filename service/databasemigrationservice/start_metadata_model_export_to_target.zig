@@ -9,14 +9,22 @@ pub const StartMetadataModelExportToTargetInput = struct {
     /// The migration project name or Amazon Resource Name (ARN).
     migration_project_identifier: []const u8,
 
-    /// Whether to overwrite the migration project extension pack. An extension pack
-    /// is an add-on module
-    /// that emulates functions present in a source database that are required when
-    /// converting objects
-    /// to the target database.
+    /// Specifies whether to overwrite the extension pack if one already exists on
+    /// the
+    /// target database. The default value is `true`.
     overwrite_extension_pack: ?bool = null,
 
-    /// A value that specifies the database objects to export.
+    /// A JSON string that identifies the metadata models to export to the target
+    /// database. For the selection rule format and examples, see [Selection rules
+    /// in DMS Schema
+    /// Conversion](https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html).
+    ///
+    /// Usage:
+    ///
+    /// * Accepts only target selection rules, where `server-name` in the object
+    ///   locator matches the target data provider.
+    ///
+    /// * Supports `explicit`, `include`, and `exclude` rule actions.
     selection_rules: []const u8,
 
     pub const json_field_names = .{
@@ -27,7 +35,7 @@ pub const StartMetadataModelExportToTargetInput = struct {
 };
 
 pub const StartMetadataModelExportToTargetOutput = struct {
-    /// The identifier for the export operation.
+    /// The identifier for the export request.
     request_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{

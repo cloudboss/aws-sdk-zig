@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetDevicePositionI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetDevicePositionOutput {
-    var result: BatchGetDevicePositionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetDevicePositionOutput, body, allocator);
-    }
+    const result: BatchGetDevicePositionOutput = try aws.json.parseJsonObject(
+        BatchGetDevicePositionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

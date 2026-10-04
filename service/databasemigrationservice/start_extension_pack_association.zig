@@ -15,7 +15,7 @@ pub const StartExtensionPackAssociationInput = struct {
 };
 
 pub const StartExtensionPackAssociationOutput = struct {
-    /// The identifier for the request operation.
+    /// The identifier for the installation request.
     request_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{

@@ -41,6 +41,7 @@ const start_transcription_job = @import("start_transcription_job.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_call_analytics_category = @import("update_call_analytics_category.zig");
+const update_language_model = @import("update_language_model.zig");
 const update_medical_vocabulary = @import("update_medical_vocabulary.zig");
 const update_vocabulary = @import("update_vocabulary.zig");
 const update_vocabulary_filter = @import("update_vocabulary_filter.zig");
@@ -708,6 +709,25 @@ pub const Client = struct {
         return update_call_analytics_category.execute(self, allocator, input, options);
     }
 
+    /// Updates the encryption configuration for an existing custom language model.
+    /// You can
+    /// use this operation to change the KMS key used to encrypt your model
+    /// artifacts. The model
+    /// artifacts are re-encrypted in place. No model training is required.
+    ///
+    /// Your custom language model must not be in the `IN_PROGRESS` state when you
+    /// call this operation. You cannot submit another update while a previous
+    /// update is in
+    /// progress. Use to check the current state of
+    /// your model.
+    ///
+    /// Your custom language model remains available for transcription jobs while
+    /// the update
+    /// is being processed.
+    pub fn updateLanguageModel(self: *Self, allocator: std.mem.Allocator, input: update_language_model.UpdateLanguageModelInput, options: CallOptions) !update_language_model.UpdateLanguageModelOutput {
+        return update_language_model.execute(self, allocator, input, options);
+    }
+
     /// Updates an existing custom medical vocabulary with new values. This
     /// operation
     /// overwrites all existing information with your new values; you cannot append
@@ -722,6 +742,10 @@ pub const Client = struct {
     /// existing information with your new values; you cannot append new terms onto
     /// an existing
     /// custom vocabulary.
+    ///
+    /// Your custom vocabulary must be in a terminal state (`READY` or
+    /// `FAILED`) before you can update it. You must include either
+    /// `Phrases` or `VocabularyFileUri` in your request.
     pub fn updateVocabulary(self: *Self, allocator: std.mem.Allocator, input: update_vocabulary.UpdateVocabularyInput, options: CallOptions) !update_vocabulary.UpdateVocabularyOutput {
         return update_vocabulary.execute(self, allocator, input, options);
     }
@@ -731,6 +755,9 @@ pub const Client = struct {
     /// you provide overwrites all previous entries; you cannot append new terms
     /// onto an
     /// existing custom vocabulary filter.
+    ///
+    /// You must include either `Words` or `VocabularyFilterFileUri`
+    /// in your request.
     pub fn updateVocabularyFilter(self: *Self, allocator: std.mem.Allocator, input: update_vocabulary_filter.UpdateVocabularyFilterInput, options: CallOptions) !update_vocabulary_filter.UpdateVocabularyFilterOutput {
         return update_vocabulary_filter.execute(self, allocator, input, options);
     }

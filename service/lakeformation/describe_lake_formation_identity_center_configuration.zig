@@ -125,10 +125,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeLakeFormationId
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeLakeFormationIdentityCenterConfigurationOutput {
-    var result: DescribeLakeFormationIdentityCenterConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeLakeFormationIdentityCenterConfigurationOutput, body, allocator);
-    }
+    const result: DescribeLakeFormationIdentityCenterConfigurationOutput = try aws.json.parseJsonObject(
+        DescribeLakeFormationIdentityCenterConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

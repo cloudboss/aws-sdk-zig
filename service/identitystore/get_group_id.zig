@@ -14,6 +14,10 @@ pub const GetGroupIdInput = struct {
     alternate_identifier: AlternateIdentifier,
 
     /// The globally unique identifier for the identity store.
+    ///
+    /// You can specify the identity store by ID or by Amazon Resource Name (ARN).
+    /// For example, identity store ID `d-1234567890` or identity store ARN
+    /// `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
     identity_store_id: []const u8,
 
     pub const json_field_names = .{
@@ -23,6 +27,11 @@ pub const GetGroupIdInput = struct {
 };
 
 pub const GetGroupIdOutput = struct {
+    /// The Amazon Resource Name (ARN) of the group in the identity store. For
+    /// example,
+    /// `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
+    group_arn: []const u8,
+
     /// The identifier for a group in the identity store.
     group_id: []const u8,
 
@@ -30,6 +39,7 @@ pub const GetGroupIdOutput = struct {
     identity_store_id: []const u8,
 
     pub const json_field_names = .{
+        .group_arn = "GroupArn",
         .group_id = "GroupId",
         .identity_store_id = "IdentityStoreId",
     };

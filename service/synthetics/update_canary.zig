@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const AddReplicaLocationInput = @import("add_replica_location_input.zig").AddReplicaLocationInput;
 const ArtifactConfigInput = @import("artifact_config_input.zig").ArtifactConfigInput;
 const BrowserConfig = @import("browser_config.zig").BrowserConfig;
 const CanaryCodeInput = @import("canary_code_input.zig").CanaryCodeInput;
@@ -14,6 +15,12 @@ const VisualReferenceInput = @import("visual_reference_input.zig").VisualReferen
 const VpcConfigInput = @import("vpc_config_input.zig").VpcConfigInput;
 
 pub const UpdateCanaryInput = struct {
+    /// A list of locations (Amazon Web Services Regions) to add as replicas for the
+    /// canary. Each location specifies a Region and optional VPC configuration for
+    /// the replica.
+    /// You can add up to 50 replica locations.
+    add_replica_locations: ?[]const AddReplicaLocationInput = null,
+
     /// A structure that contains the configuration for canary artifacts,
     /// including the encryption-at-rest settings for artifacts that
     /// the canary uploads to Amazon S3.
@@ -72,6 +79,16 @@ pub const UpdateCanaryInput = struct {
     /// the range of information displayed in the Synthetics console.
     failure_retention_period_in_days: ?i32 = null,
 
+    /// The Amazon Resource Name (ARN) of the customer-managed AWS Key Management
+    /// Service (AWS KMS) key used to encrypt the canary's
+    /// AWS Lambda function environment variables at rest. If you don't specify a
+    /// value,
+    /// the service uses an AWS-managed key. If you omit this parameter, the service
+    /// retains
+    /// the existing value. To revert to the AWS-managed key, set this parameter to
+    /// an empty string.
+    kms_key_arn: ?[]const u8 = null,
+
     /// The name of the canary that you want to update. To find the names of your
     /// canaries, use
     /// [DescribeCanaries](https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html).
@@ -89,6 +106,12 @@ pub const UpdateCanaryInput = struct {
     /// [DeleteCanary](https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html) operation
     /// determines whether the Lambda functions and layers will be deleted.
     provisioned_resource_cleanup: ?ProvisionedResourceCleanupSetting = null,
+
+    /// A list of locations (Amazon Web Services Regions) to remove as replicas for
+    /// the canary. You must specify at least one location to remove. All replicas
+    /// can be removed in a single API
+    /// call and you cannot remove the primary location.
+    remove_replica_locations: ?[]const []const u8 = null,
 
     /// A structure that contains the timeout value that is used for each individual
     /// run of the
@@ -168,6 +191,7 @@ pub const UpdateCanaryInput = struct {
     vpc_config: ?VpcConfigInput = null,
 
     pub const json_field_names = .{
+        .add_replica_locations = "AddReplicaLocations",
         .artifact_config = "ArtifactConfig",
         .artifact_s3_location = "ArtifactS3Location",
         .browser_configs = "BrowserConfigs",
@@ -175,8 +199,10 @@ pub const UpdateCanaryInput = struct {
         .dry_run_id = "DryRunId",
         .execution_role_arn = "ExecutionRoleArn",
         .failure_retention_period_in_days = "FailureRetentionPeriodInDays",
+        .kms_key_arn = "KmsKeyArn",
         .name = "Name",
         .provisioned_resource_cleanup = "ProvisionedResourceCleanup",
+        .remove_replica_locations = "RemoveReplicaLocations",
         .run_config = "RunConfig",
         .runtime_version = "RuntimeVersion",
         .schedule = "Schedule",
@@ -229,6 +255,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateCanaryInput, conf
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.add_replica_locations) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AddReplicaLocations\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.artifact_config) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"ArtifactConfig\":");
@@ -271,9 +303,21 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateCanaryInput, conf
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.kms_key_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"KmsKeyArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.provisioned_resource_cleanup) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"ProvisionedResourceCleanup\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.remove_replica_locations) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"RemoveReplicaLocations\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

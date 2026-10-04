@@ -10,7 +10,7 @@ pub const ListHoursOfOperationOverridesInput = struct {
     /// The identifier for the hours of operation.
     hours_of_operation_id: []const u8,
 
-    /// The identifier of the Amazon Connect instance.
+    /// The identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     /// The maximum number of results to return per page.
@@ -124,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListHoursOfOperationOve
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListHoursOfOperationOverridesOutput {
-    var result: ListHoursOfOperationOverridesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListHoursOfOperationOverridesOutput, body, allocator);
-    }
+    const result: ListHoursOfOperationOverridesOutput = try aws.json.parseJsonObject(
+        ListHoursOfOperationOverridesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -25,8 +25,8 @@ pub const RegisterNotificationHubOutput = struct {
     /// The Region of the `NotificationHub`.
     notification_hub_region: []const u8,
 
-    /// Provides additional information about the current
-    /// `NotificationConfiguration` status information.
+    /// Provides additional information about the current `NotificationHub` status
+    /// information.
     status_summary: ?NotificationHubStatusSummary = null,
 
     pub const json_field_names = .{
@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterNotificationHub
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RegisterNotificationHubOutput {
-    var result: RegisterNotificationHubOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RegisterNotificationHubOutput, body, allocator);
-    }
+    const result: RegisterNotificationHubOutput = try aws.json.parseJsonObject(
+        RegisterNotificationHubOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

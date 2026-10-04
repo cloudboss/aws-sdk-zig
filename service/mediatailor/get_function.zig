@@ -4,10 +4,13 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const AwsServiceRequestConfiguration = @import("aws_service_request_configuration.zig").AwsServiceRequestConfiguration;
+const ConcurrentExecutorConfiguration = @import("concurrent_executor_configuration.zig").ConcurrentExecutorConfiguration;
 const CustomOutputConfiguration = @import("custom_output_configuration.zig").CustomOutputConfiguration;
 const FunctionType = @import("function_type.zig").FunctionType;
 const HttpRequestConfiguration = @import("http_request_configuration.zig").HttpRequestConfiguration;
 const SequentialExecutorConfiguration = @import("sequential_executor_configuration.zig").SequentialExecutorConfiguration;
+const VastRequestConfiguration = @import("vast_request_configuration.zig").VastRequestConfiguration;
 
 pub const GetFunctionInput = struct {
     /// The identifier of the function.
@@ -21,6 +24,13 @@ pub const GetFunctionInput = struct {
 pub const GetFunctionOutput = struct {
     /// The Amazon Resource Name (ARN) of the function.
     arn: ?[]const u8 = null,
+
+    /// The configuration for an `AWS_SERVICE_REQUEST` function. Specifies the
+    /// target service, target Region, and request parameters.
+    aws_service_request_configuration: ?AwsServiceRequestConfiguration = null,
+
+    /// The configuration for a `CONCURRENT_EXECUTOR` function.
+    concurrent_executor_configuration: ?ConcurrentExecutorConfiguration = null,
 
     /// The configuration for a `CUSTOM_OUTPUT` function.
     custom_output_configuration: ?CustomOutputConfiguration = null,
@@ -47,8 +57,13 @@ pub const GetFunctionOutput = struct {
     /// Resources](https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
     tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// The configuration for a `VAST_REQUEST` function.
+    vast_request_configuration: ?VastRequestConfiguration = null,
+
     pub const json_field_names = .{
         .arn = "Arn",
+        .aws_service_request_configuration = "AwsServiceRequestConfiguration",
+        .concurrent_executor_configuration = "ConcurrentExecutorConfiguration",
         .custom_output_configuration = "CustomOutputConfiguration",
         .description = "Description",
         .function_id = "FunctionId",
@@ -56,6 +71,7 @@ pub const GetFunctionOutput = struct {
         .http_request_configuration = "HttpRequestConfiguration",
         .sequential_executor_configuration = "SequentialExecutorConfiguration",
         .tags = "Tags",
+        .vast_request_configuration = "VastRequestConfiguration",
     };
 };
 
@@ -108,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFunctionInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetFunctionOutput {
-    var result: GetFunctionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetFunctionOutput, body, allocator);
-    }
+    const result: GetFunctionOutput = try aws.json.parseJsonObject(
+        GetFunctionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

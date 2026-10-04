@@ -24,6 +24,15 @@ pub const CopyVolumesInput = struct {
     /// Otherwise, it is `UnauthorizedOperation`.
     dry_run: ?bool = null,
 
+    /// Indicates whether to encrypt the volume copy. If the source volume is
+    /// encrypted, the
+    /// service always encrypts the copy regardless of this value. Set to `true` to
+    /// encrypt a copy of an unencrypted source volume during the copy operation. If
+    /// you set
+    /// `Encrypted` to `true` but do not specify `KmsKeyId`, the
+    /// service uses the default KMS key for EBS encryption in your account.
+    encrypted: ?bool = null,
+
     /// The number of I/O operations per second (IOPS) to provision for the volume
     /// copy.
     /// Required for `io1` and `io2` volumes. Optional for `gp3`
@@ -44,6 +53,18 @@ pub const CopyVolumesInput = struct {
     /// System](https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html) can support up to 256,000 IOPS. Other instances can support up to 32,000
     /// IOPS.
     iops: ?i32 = null,
+
+    /// The identifier of the KMS key to use for encryption of the volume copy.
+    /// Specify a
+    /// symmetric encryption KMS key. You can specify a KMS key using the key ID,
+    /// key ARN, alias
+    /// name, or alias ARN. If you set `Encrypted` to `true` but do not
+    /// specify this parameter, the service uses the default KMS key for EBS
+    /// encryption in your
+    /// account. For cross-account volume copies, this must be a KMS key in the
+    /// calling
+    /// account.
+    kms_key_id: ?[]const u8 = null,
 
     /// Indicates whether to enable Amazon EBS Multi-Attach for the volume copy. If
     /// you enable
@@ -144,9 +165,17 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CopyVolumesInput, confi
         try body_buf.appendSlice(allocator, "&DryRun=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
+    if (input.encrypted) |v| {
+        try body_buf.appendSlice(allocator, "&Encrypted=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
     if (input.iops) |v| {
         try body_buf.appendSlice(allocator, "&Iops=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
+    if (input.kms_key_id) |v| {
+        try body_buf.appendSlice(allocator, "&KmsKeyId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.multi_attach_enabled) |v| {
         try body_buf.appendSlice(allocator, "&MultiAttachEnabled=");

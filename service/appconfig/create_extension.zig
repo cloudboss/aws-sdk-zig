@@ -171,10 +171,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateExtensionInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateExtensionOutput {
-    var result: CreateExtensionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateExtensionOutput, body, allocator);
-    }
+    const result: CreateExtensionOutput = try aws.json.parseJsonObject(
+        CreateExtensionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

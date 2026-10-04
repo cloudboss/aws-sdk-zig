@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchCreateUserInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchCreateUserOutput {
-    var result: BatchCreateUserOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchCreateUserOutput, body, allocator);
-    }
+    const result: BatchCreateUserOutput = try aws.json.parseJsonObject(
+        BatchCreateUserOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

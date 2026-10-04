@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCoreNetworkPrefixLi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListCoreNetworkPrefixListAssociationsOutput {
-    var result: ListCoreNetworkPrefixListAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListCoreNetworkPrefixListAssociationsOutput, body, allocator);
-    }
+    const result: ListCoreNetworkPrefixListAssociationsOutput = try aws.json.parseJsonObject(
+        ListCoreNetworkPrefixListAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

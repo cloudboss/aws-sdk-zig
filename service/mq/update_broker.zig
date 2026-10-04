@@ -57,9 +57,15 @@ pub const UpdateBrokerInput = struct {
     /// The parameters that determine the WeeklyStartTime.
     maintenance_window_start_time: ?WeeklyStartTime = null,
 
+    /// The list of resource shares to update on the broker
+    resource_share_arns: ?[]const []const u8 = null,
+
     /// The list of security groups (1 minimum, 5 maximum) that authorizes
     /// connections to brokers.
     security_groups: ?[]const []const u8 = null,
+
+    /// The broker's storage size in GB.
+    storage_size: ?i32 = null,
 
     pub const json_field_names = .{
         .authentication_strategy = "AuthenticationStrategy",
@@ -72,7 +78,9 @@ pub const UpdateBrokerInput = struct {
         .ldap_server_metadata = "LdapServerMetadata",
         .logs = "Logs",
         .maintenance_window_start_time = "MaintenanceWindowStartTime",
+        .resource_share_arns = "ResourceShareArns",
         .security_groups = "SecurityGroups",
+        .storage_size = "StorageSize",
     };
 };
 
@@ -127,9 +135,15 @@ pub const UpdateBrokerOutput = struct {
     /// after reboot.
     pending_data_replication_mode: ?DataReplicationMode = null,
 
+    /// The pending broker's target list of resource shares
+    resource_share_arns: ?[]const []const u8 = null,
+
     /// The list of security groups (1 minimum, 5 maximum) that authorizes
     /// connections to brokers.
     security_groups: ?[]const []const u8 = null,
+
+    /// The broker's storage size in GB.
+    storage_size: ?i32 = null,
 
     pub const json_field_names = .{
         .authentication_strategy = "AuthenticationStrategy",
@@ -145,7 +159,9 @@ pub const UpdateBrokerOutput = struct {
         .maintenance_window_start_time = "MaintenanceWindowStartTime",
         .pending_data_replication_metadata = "PendingDataReplicationMetadata",
         .pending_data_replication_mode = "PendingDataReplicationMode",
+        .resource_share_arns = "ResourceShareArns",
         .security_groups = "SecurityGroups",
+        .storage_size = "StorageSize",
     };
 };
 
@@ -242,9 +258,21 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateBrokerInput, conf
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.resource_share_arns) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"ResourceShareArns\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.security_groups) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"SecurityGroups\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.storage_size) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"StorageSize\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -264,10 +292,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateBrokerInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateBrokerOutput {
-    var result: UpdateBrokerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateBrokerOutput, body, allocator);
-    }
+    const result: UpdateBrokerOutput = try aws.json.parseJsonObject(
+        UpdateBrokerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

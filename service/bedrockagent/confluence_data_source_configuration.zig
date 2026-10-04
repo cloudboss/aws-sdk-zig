@@ -1,7 +1,8 @@
 const ConfluenceCrawlerConfiguration = @import("confluence_crawler_configuration.zig").ConfluenceCrawlerConfiguration;
 const ConfluenceSourceConfiguration = @import("confluence_source_configuration.zig").ConfluenceSourceConfiguration;
 
-/// The configuration information to connect to Confluence as your data source.
+/// The configuration information to connect to Confluence as your data source
+/// for self-managed knowledge bases.
 pub const ConfluenceDataSourceConfiguration = struct {
     /// The configuration of the Confluence content. For example, configuring
     /// specific types of Confluence content.

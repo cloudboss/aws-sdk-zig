@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeCustomPluginInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeCustomPluginOutput {
-    var result: DescribeCustomPluginOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeCustomPluginOutput, body, allocator);
-    }
+    const result: DescribeCustomPluginOutput = try aws.json.parseJsonObject(
+        DescribeCustomPluginOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

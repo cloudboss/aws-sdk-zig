@@ -1,12 +1,15 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const associate_dataset_kms_key = @import("associate_dataset_kms_key.zig");
+const create_resource_metrics_configuration = @import("create_resource_metrics_configuration.zig");
 const delete_alarm_mute_rule = @import("delete_alarm_mute_rule.zig");
 const delete_alarms = @import("delete_alarms.zig");
 const delete_anomaly_detector = @import("delete_anomaly_detector.zig");
 const delete_dashboards = @import("delete_dashboards.zig");
 const delete_insight_rules = @import("delete_insight_rules.zig");
 const delete_metric_stream = @import("delete_metric_stream.zig");
+const delete_resource_metrics_configuration = @import("delete_resource_metrics_configuration.zig");
 const describe_alarm_contributors = @import("describe_alarm_contributors.zig");
 const describe_alarm_history = @import("describe_alarm_history.zig");
 const describe_alarms = @import("describe_alarms.zig");
@@ -15,16 +18,19 @@ const describe_anomaly_detectors = @import("describe_anomaly_detectors.zig");
 const describe_insight_rules = @import("describe_insight_rules.zig");
 const disable_alarm_actions = @import("disable_alarm_actions.zig");
 const disable_insight_rules = @import("disable_insight_rules.zig");
+const disassociate_dataset_kms_key = @import("disassociate_dataset_kms_key.zig");
 const enable_alarm_actions = @import("enable_alarm_actions.zig");
 const enable_insight_rules = @import("enable_insight_rules.zig");
 const get_alarm_mute_rule = @import("get_alarm_mute_rule.zig");
 const get_dashboard = @import("get_dashboard.zig");
+const get_dataset = @import("get_dataset.zig");
 const get_insight_rule_report = @import("get_insight_rule_report.zig");
 const get_metric_data = @import("get_metric_data.zig");
 const get_metric_statistics = @import("get_metric_statistics.zig");
 const get_metric_stream = @import("get_metric_stream.zig");
 const get_metric_widget_image = @import("get_metric_widget_image.zig");
 const get_o_tel_enrichment = @import("get_o_tel_enrichment.zig");
+const get_resource_metrics_configuration = @import("get_resource_metrics_configuration.zig");
 const list_alarm_mute_rules = @import("list_alarm_mute_rules.zig");
 const list_dashboards = @import("list_dashboards.zig");
 const list_managed_insight_rules = @import("list_managed_insight_rules.zig");
@@ -36,6 +42,7 @@ const put_anomaly_detector = @import("put_anomaly_detector.zig");
 const put_composite_alarm = @import("put_composite_alarm.zig");
 const put_dashboard = @import("put_dashboard.zig");
 const put_insight_rule = @import("put_insight_rule.zig");
+const put_log_alarm = @import("put_log_alarm.zig");
 const put_managed_insight_rules = @import("put_managed_insight_rules.zig");
 const put_metric_alarm = @import("put_metric_alarm.zig");
 const put_metric_data = @import("put_metric_data.zig");
@@ -47,6 +54,8 @@ const stop_metric_streams = @import("stop_metric_streams.zig");
 const stop_o_tel_enrichment = @import("stop_o_tel_enrichment.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const update_o_tel_enrichment = @import("update_o_tel_enrichment.zig");
+const update_resource_metrics_configuration = @import("update_resource_metrics_configuration.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
@@ -78,14 +87,128 @@ pub const Client = struct {
         _ = self;
     }
 
+    /// Associates an Amazon Web Services Key Management Service (Amazon Web
+    /// Services KMS)
+    /// customer managed key with the specified dataset. After this operation
+    /// completes, all
+    /// data published to the dataset is encrypted at rest using the specified KMS
+    /// key.
+    /// Callers must have `kms:Decrypt` permission on the key to read the
+    /// encrypted data.
+    ///
+    /// Only the `default` dataset is supported. The `default` dataset
+    /// is implicit for every account in every Region — you do not need to create it
+    /// before
+    /// calling this operation.
+    ///
+    /// You can call `AssociateDatasetKmsKey` on a dataset that is already
+    /// associated with a KMS key to replace the existing key with a different one.
+    /// The
+    /// caller must have `kms:Decrypt` permission on both the current key and
+    /// the new key.
+    ///
+    /// If the currently associated key has been deleted, is scheduled for deletion,
+    /// is pending import, is unavailable, or has been disabled, Amazon CloudWatch
+    /// does not require `kms:Decrypt` permission on the current key and
+    /// the rotation proceeds. If the key was only disabled, consider re-enabling it
+    /// instead of rotating, because re-enabling allows Amazon CloudWatch to
+    /// resume decrypting your existing metric data encrypted with that key.
+    ///
+    /// The KMS key that you specify must meet all of the following requirements:
+    ///
+    /// * It must be a symmetric encryption KMS key (key spec
+    /// `SYMMETRIC_DEFAULT`, key usage `ENCRYPT_DECRYPT`).
+    /// Asymmetric keys, HMAC keys, and key material types other than
+    /// `SYMMETRIC_DEFAULT` are not supported.
+    ///
+    /// * It must be enabled and not pending deletion.
+    ///
+    /// * Its key policy must grant the CloudWatch service principal
+    /// (`cloudwatch.amazonaws.com`) these permissions:
+    /// `kms:DescribeKey`, `kms:GenerateDataKey`,
+    /// `kms:Encrypt`, `kms:Decrypt`, and
+    /// `kms:ReEncrypt*`. Amazon CloudWatch requires these permissions
+    /// to manage the data on your behalf.
+    ///
+    /// * The calling principal must have `kms:Decrypt` permission on the
+    /// key.
+    ///
+    /// * It must be specified as a fully qualified key ARN. Key IDs, aliases, and
+    /// alias ARNs are not accepted.
+    ///
+    /// * It must be in the same Amazon Web Services Region as the dataset.
+    ///
+    /// Before completing the association, Amazon CloudWatch validates the key by
+    /// performing a series of dry-run KMS operations. Service-principal checks run
+    /// first to
+    /// verify that the key policy grants the required access to Amazon CloudWatch.
+    /// These
+    /// checks include `kms:DescribeKey`, `kms:GenerateDataKey`,
+    /// `kms:Encrypt`, `kms:Decrypt`, and `kms:ReEncrypt*`.
+    /// After those succeed, a `kms:Decrypt` dry-run is run with the caller's
+    /// credentials to verify that the calling principal can use the new key. When
+    /// you are
+    /// replacing an existing key, the caller's `kms:Decrypt` dry-run is also run
+    /// on the current key.
+    ///
+    /// If any of these checks on the new key fails, the operation fails and the
+    /// existing
+    /// key association (if any) remains unchanged. Common failure causes include
+    /// the new key
+    /// being disabled, the key policy not granting the required permissions to
+    /// Amazon CloudWatch, or the caller lacking `kms:Decrypt` permission on
+    /// the new key.
+    ///
+    /// For more information about using customer managed keys with Amazon
+    /// CloudWatch,
+    /// see [Encryption at rest
+    /// with customer managed
+    /// keys](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cmk-encryption.html) in the *Amazon CloudWatch User
+    /// Guide*.
+    pub fn associateDatasetKmsKey(self: *Self, allocator: std.mem.Allocator, input: associate_dataset_kms_key.AssociateDatasetKmsKeyInput, options: CallOptions) !associate_dataset_kms_key.AssociateDatasetKmsKeyOutput {
+        return associate_dataset_kms_key.execute(self, allocator, input, options);
+    }
+
+    /// Creates a resource metrics configuration for an Amazon Web Services
+    /// resource. After you
+    /// create a configuration, Amazon CloudWatch collects detailed metrics for that
+    /// resource.
+    ///
+    /// Each Amazon Web Services resource can have only one resource metrics
+    /// configuration. If a
+    /// configuration already exists for the specified resource ARN, this operation
+    /// returns a
+    /// `ConflictException`. To modify an existing configuration, use
+    /// [UpdateResourceMetricsConfiguration](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html).
+    ///
+    /// If the Amazon Web Services resource that you specify in `ResourceArn` does
+    /// not exist, this operation returns a `ResourceNotFoundException`. Verify that
+    /// the resource ARN is correct and that the resource exists before you retry
+    /// the
+    /// request.
+    ///
+    /// To create a resource metrics configuration, you must have the
+    /// `cloudwatch:CreateResourceMetricsConfiguration` permission. For information
+    /// about scoping
+    /// this permission to specific resources, see [Condition keys for resource
+    /// metrics configuration
+    /// access](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html) in the
+    /// *Amazon CloudWatch User Guide*.
+    pub fn createResourceMetricsConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_resource_metrics_configuration.CreateResourceMetricsConfigurationInput, options: CallOptions) !create_resource_metrics_configuration.CreateResourceMetricsConfigurationOutput {
+        return create_resource_metrics_configuration.execute(self, allocator, input, options);
+    }
+
     /// Deletes a specific alarm mute rule.
     ///
     /// When you delete a mute rule, any alarms that are currently being muted by
-    /// that rule are immediately unmuted. If those alarms are in an ALARM state,
-    /// their configured actions will trigger.
+    /// that rule
+    /// are immediately unmuted. If those alarms are in an ALARM state, their
+    /// configured actions
+    /// will trigger.
     ///
     /// This operation is idempotent. If you delete a mute rule that does not exist,
-    /// the operation succeeds without returning an error.
+    /// the
+    /// operation succeeds without returning an error.
     ///
     /// **Permissions**
     ///
@@ -101,12 +224,14 @@ pub const Client = struct {
     /// example, you could
     /// delete 99 metric alarms and one composite alarms with one operation, but you
     /// can't
-    /// delete two composite alarms with one operation.
+    /// delete two composite alarms with one operation. Log alarms cannot be batch
+    /// deleted.
     ///
     /// If you specify any incorrect alarm names, the alarms you specify with
-    /// correct names are still deleted. Other syntax errors might result
-    /// in no alarms being deleted. To confirm that alarms were deleted
-    /// successfully, you can use the
+    /// correct
+    /// names are still deleted. Other syntax errors might result in no alarms being
+    /// deleted. To
+    /// confirm that alarms were deleted successfully, you can use the
     /// [DescribeAlarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DescribeAlarms.html) operation after using `DeleteAlarms`.
     ///
     /// It is possible to create a loop or cycle of composite alarms, where
@@ -162,6 +287,30 @@ pub const Client = struct {
     /// Permanently deletes the metric stream that you specify.
     pub fn deleteMetricStream(self: *Self, allocator: std.mem.Allocator, input: delete_metric_stream.DeleteMetricStreamInput, options: CallOptions) !delete_metric_stream.DeleteMetricStreamOutput {
         return delete_metric_stream.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the resource metrics configuration for an Amazon Web Services
+    /// resource. After
+    /// you delete the configuration, Amazon CloudWatch stops collecting detailed
+    /// metrics
+    /// for the resource. Metric data that Amazon CloudWatch already collected for
+    /// the
+    /// resource is not deleted.
+    ///
+    /// This operation returns a `ResourceNotFoundException` if no resource metrics
+    /// configuration exists for the specified resource ARN. Verify that the
+    /// resource ARN is
+    /// correct.
+    ///
+    /// To delete a resource metrics configuration, you must have the
+    /// `cloudwatch:DeleteResourceMetricsConfiguration` permission. For information
+    /// about scoping
+    /// this permission to specific resources, see [Condition keys for resource
+    /// metrics configuration
+    /// access](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html) in the
+    /// *Amazon CloudWatch User Guide*.
+    pub fn deleteResourceMetricsConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_resource_metrics_configuration.DeleteResourceMetricsConfigurationInput, options: CallOptions) !delete_resource_metrics_configuration.DeleteResourceMetricsConfigurationOutput {
+        return delete_resource_metrics_configuration.execute(self, allocator, input, options);
     }
 
     /// Returns the information of the current alarm contributors that are in
@@ -250,6 +399,51 @@ pub const Client = struct {
         return disable_insight_rules.execute(self, allocator, input, options);
     }
 
+    /// Removes the customer managed Amazon Web Services Key Management Service
+    /// (Amazon Web Services KMS) key association from the specified dataset. After
+    /// this
+    /// operation completes, data that you publish to the dataset is encrypted at
+    /// rest using
+    /// an Amazon Web Services owned key managed by Amazon CloudWatch.
+    ///
+    /// Only the `default` dataset is supported. To call this operation, the
+    /// dataset must currently have a customer managed KMS key associated with it.
+    /// If the
+    /// dataset has no associated KMS key, the operation fails with
+    /// `ResourceNotFoundException`.
+    ///
+    /// Amazon CloudWatch performs a dry-run `kms:Decrypt` call on the
+    /// currently associated key as part of this operation. The caller must have
+    /// `kms:Decrypt` permission on the currently associated key. If the key is
+    /// accessible but the caller lacks `kms:Decrypt` permission, the operation
+    /// fails with `AccessDeniedException`.
+    ///
+    /// If the currently associated key has been deleted, is scheduled for deletion,
+    /// is pending import, is unavailable, or has been disabled, Amazon CloudWatch
+    /// does not require `kms:Decrypt` permission on that key and the
+    /// disassociation proceeds. If the key was only disabled, consider re-enabling
+    /// it
+    /// instead of disassociating, because re-enabling allows Amazon CloudWatch to
+    /// resume decrypting your existing metric data.
+    ///
+    /// Disassociating a KMS key from a dataset does not immediately remove the
+    /// `kms:Decrypt` requirement on data plane operations. For up to three
+    /// hours after disassociation, callers must continue to have
+    /// `kms:Decrypt` permission on the previously associated key. Some data
+    /// might still be encrypted with that key during this window. After this
+    /// enforcement
+    /// window elapses, the `kms:Decrypt` requirement is lifted.
+    ///
+    /// For more information about using customer managed keys with Amazon
+    /// CloudWatch,
+    /// see [Encryption at rest
+    /// with customer managed
+    /// keys](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cmk-encryption.html) in the *Amazon CloudWatch User
+    /// Guide*.
+    pub fn disassociateDatasetKmsKey(self: *Self, allocator: std.mem.Allocator, input: disassociate_dataset_kms_key.DisassociateDatasetKmsKeyInput, options: CallOptions) !disassociate_dataset_kms_key.DisassociateDatasetKmsKeyOutput {
+        return disassociate_dataset_kms_key.execute(self, allocator, input, options);
+    }
+
     /// Enables the actions for the specified alarms.
     pub fn enableAlarmActions(self: *Self, allocator: std.mem.Allocator, input: enable_alarm_actions.EnableAlarmActionsInput, options: CallOptions) !enable_alarm_actions.EnableAlarmActionsOutput {
         return enable_alarm_actions.execute(self, allocator, input, options);
@@ -265,22 +459,25 @@ pub const Client = struct {
     /// Retrieves details for a specific alarm mute rule.
     ///
     /// This operation returns complete information about the mute rule, including
-    /// its configuration, status, targeted alarms, and metadata.
+    /// its
+    /// configuration, status, targeted alarms, and metadata.
     ///
     /// The returned status indicates the current state of the mute rule:
     ///
-    /// * **SCHEDULED**: The mute rule is configured and will become active in the
-    ///   future
+    /// * **SCHEDULED**: The mute rule is configured and
+    /// will become active in the future
     ///
-    /// * **ACTIVE**: The mute rule is currently muting alarm actions
+    /// * **ACTIVE**: The mute rule is currently muting
+    /// alarm actions
     ///
-    /// * **EXPIRED**: The mute rule has passed its expiration date and will no
-    ///   longer become active
+    /// * **EXPIRED**: The mute rule has passed its
+    /// expiration date and will no longer become active
     ///
     /// **Permissions**
     ///
     /// To retrieve details for a mute rule, you need the
-    /// `cloudwatch:GetAlarmMuteRule` permission on the alarm mute rule resource.
+    /// `cloudwatch:GetAlarmMuteRule` permission on the alarm mute rule
+    /// resource.
     pub fn getAlarmMuteRule(self: *Self, allocator: std.mem.Allocator, input: get_alarm_mute_rule.GetAlarmMuteRuleInput, options: CallOptions) !get_alarm_mute_rule.GetAlarmMuteRuleOutput {
         return get_alarm_mute_rule.execute(self, allocator, input, options);
     }
@@ -290,8 +487,41 @@ pub const Client = struct {
     /// To copy an existing dashboard, use `GetDashboard`, and then use the data
     /// returned within `DashboardBody` as the template for the new dashboard when
     /// you call `PutDashboard` to create the copy.
+    ///
+    /// You might have recently enabled an [opt-in Region (Region that is disabled
+    /// by
+    /// default)](https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#optinregion) for your account. In
+    /// that Region, `GetDashboard` can return an access denied error for up to 24
+    /// hours after you enable the Region. This delay occurs while dashboard data
+    /// propagates.
+    /// The error does not
+    /// indicate a problem with your permissions. Because dashboards are global, you
+    /// can call
+    /// `GetDashboard` in any other enabled Region, or retry after propagation
+    /// completes.
     pub fn getDashboard(self: *Self, allocator: std.mem.Allocator, input: get_dashboard.GetDashboardInput, options: CallOptions) !get_dashboard.GetDashboardOutput {
         return get_dashboard.execute(self, allocator, input, options);
+    }
+
+    /// Returns information about the specified dataset. This includes its
+    /// identifier,
+    /// Amazon Resource Name (ARN), and any customer managed Amazon Web Services Key
+    /// Management Service (Amazon Web Services KMS) key that is currently
+    /// associated with
+    /// it.
+    ///
+    /// Only the `default` dataset is supported. The `default` dataset
+    /// is implicit for every account in every Region — you can call `GetDataset`
+    /// for it without first creating it. If no customer managed KMS key has been
+    /// associated
+    /// with the dataset, the response omits the `KmsKeyArn` field, indicating that
+    /// data is encrypted at rest using an Amazon Web Services owned key managed by
+    /// Amazon CloudWatch.
+    ///
+    /// To associate a customer managed KMS key with a dataset, use
+    /// [AssociateDatasetKmsKey](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_AssociateDatasetKmsKey.html). To remove the association, use [DisassociateDatasetKmsKey](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_DisassociateDatasetKmsKey.html).
+    pub fn getDataset(self: *Self, allocator: std.mem.Allocator, input: get_dataset.GetDatasetInput, options: CallOptions) !get_dataset.GetDatasetOutput {
+        return get_dataset.execute(self, allocator, input, options);
     }
 
     /// This operation returns the time series data collected by a Contributor
@@ -357,10 +587,13 @@ pub const Client = struct {
     ///
     /// If you include a Metrics Insights query, each `GetMetricData` operation can
     /// include only one query. But the same `GetMetricData` operation can also
-    /// retrieve other metrics. Metrics Insights queries can query only the most
-    /// recent three
-    /// hours of metric data. For more information about Metrics Insights, see
-    /// [Query your metrics with CloudWatch Metrics
+    /// retrieve other metrics. Metrics Insights queries can query the most recent
+    /// two weeks of
+    /// metric data. For alarm condition evaluations, Metrics Insights queries can
+    /// query only
+    /// the most recent three hours of metric data. For more information about
+    /// Metrics Insights,
+    /// see [Query your metrics with CloudWatch Metrics
     /// Insights](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/query_with_cloudwatch-metrics-insights.html).
     ///
     /// Calls to the `GetMetricData` API have a different pricing structure than
@@ -535,27 +768,50 @@ pub const Client = struct {
     /// Returns the current status of vended metric enrichment for the account,
     /// including
     /// whether CloudWatch vended metrics are enriched with resource ARN and
-    /// resource tag
-    /// labels and queryable using PromQL. For the list of supported resources, see
+    /// resource tag labels
+    /// and queryable using PromQL. For the list of supported resources, see
     /// [Supported Amazon Web Services infrastructure
     /// metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html).
     pub fn getOTelEnrichment(self: *Self, allocator: std.mem.Allocator, input: get_o_tel_enrichment.GetOTelEnrichmentInput, options: CallOptions) !get_o_tel_enrichment.GetOTelEnrichmentOutput {
         return get_o_tel_enrichment.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the current resource metrics configuration for an Amazon Web
+    /// Services
+    /// resource. The response includes the resource ARN, any metric selections, and
+    /// the times
+    /// at which the configuration was created and last updated.
+    ///
+    /// This operation returns a `ResourceNotFoundException` if no resource metrics
+    /// configuration exists for the specified resource ARN. To create a
+    /// configuration, use
+    /// [CreateResourceMetricsConfiguration](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html).
+    ///
+    /// To retrieve a resource metrics configuration, you must have the
+    /// `cloudwatch:GetResourceMetricsConfiguration` permission. For information
+    /// about scoping this permission to specific resources, see [Condition keys for
+    /// resource metrics configuration
+    /// access](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html) in the
+    /// *Amazon CloudWatch User Guide*.
+    pub fn getResourceMetricsConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_resource_metrics_configuration.GetResourceMetricsConfigurationInput, options: CallOptions) !get_resource_metrics_configuration.GetResourceMetricsConfigurationOutput {
+        return get_resource_metrics_configuration.execute(self, allocator, input, options);
+    }
+
     /// Lists alarm mute rules in your Amazon Web Services account and region.
     ///
     /// You can filter the results by alarm name to find all mute rules targeting a
-    /// specific alarm, or by status to find rules that are scheduled, active, or
-    /// expired.
+    /// specific
+    /// alarm, or by status to find rules that are scheduled, active, or expired.
     ///
     /// This operation supports pagination for accounts with many mute rules. Use
-    /// the `MaxRecords` and `NextToken` parameters to retrieve results in multiple
-    /// calls.
+    /// the
+    /// `MaxRecords` and `NextToken` parameters to retrieve results in
+    /// multiple calls.
     ///
     /// **Permissions**
     ///
-    /// To list mute rules, you need the `cloudwatch:ListAlarmMuteRules` permission.
+    /// To list mute rules, you need the `cloudwatch:ListAlarmMuteRules`
+    /// permission.
     pub fn listAlarmMuteRules(self: *Self, allocator: std.mem.Allocator, input: list_alarm_mute_rules.ListAlarmMuteRulesInput, options: CallOptions) !list_alarm_mute_rules.ListAlarmMuteRulesOutput {
         return list_alarm_mute_rules.execute(self, allocator, input, options);
     }
@@ -569,6 +825,18 @@ pub const Client = struct {
     /// the value you received for `NextToken` in the first call, to receive the
     /// next
     /// 1000 results.
+    ///
+    /// You might have recently enabled an [opt-in Region (Region that is disabled
+    /// by
+    /// default)](https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#optinregion) for your account. In
+    /// that Region, `ListDashboards` can return an access denied error for up to 24
+    /// hours after you enable the Region. This delay occurs while dashboard data
+    /// propagates.
+    /// The error does not
+    /// indicate a problem with your permissions. Because dashboards are global, you
+    /// can call
+    /// `ListDashboards` in any other enabled Region, or retry after propagation
+    /// completes.
     pub fn listDashboards(self: *Self, allocator: std.mem.Allocator, input: list_dashboards.ListDashboardsInput, options: CallOptions) !list_dashboards.ListDashboardsOutput {
         return list_dashboards.execute(self, allocator, input, options);
     }
@@ -619,16 +887,21 @@ pub const Client = struct {
     /// Creates or updates an alarm mute rule.
     ///
     /// Alarm mute rules automatically mute alarm actions during predefined time
-    /// windows. When a mute rule is active, targeted alarms continue to evaluate
-    /// metrics and transition between states, but their configured actions (such as
-    /// Amazon SNS notifications or Auto Scaling actions) are muted.
+    /// windows. When
+    /// a mute rule is active, targeted alarms continue to evaluate metrics and
+    /// transition
+    /// between states, but their configured actions (such as Amazon SNS
+    /// notifications
+    /// or Auto Scaling actions) are muted.
     ///
     /// You can create mute rules with recurring schedules using `cron` expressions
     /// or one-time mute windows using `at` expressions. Each mute rule can target
-    /// up to 100 specific alarms by name.
+    /// up
+    /// to 100 specific alarms by name.
     ///
     /// If you specify a rule name that already exists, this operation updates the
-    /// existing rule with the new configuration.
+    /// existing
+    /// rule with the new configuration.
     ///
     /// **Permissions**
     ///
@@ -637,19 +910,22 @@ pub const Client = struct {
     /// alarm mute rule resource itself, and each alarm that the rule targets.
     ///
     /// For example, If you want to allow a user to create mute rules that target
-    /// only specific alarms named "WebServerCPUAlarm" and
-    /// "DatabaseConnectionAlarm", you would create an IAM policy with one statement
-    /// granting `cloudwatch:PutAlarmMuteRule` on the alarm mute rule resource
-    /// (`arn:aws:cloudwatch:[REGION]:123456789012:alarm-mute-rule:*`), and another
-    /// statement granting `cloudwatch:PutAlarmMuteRule` on the targeted alarm
-    /// resources
+    /// only
+    /// specific alarms named "WebServerCPUAlarm" and "DatabaseConnectionAlarm", you
+    /// would
+    /// create an IAM policy with one statement granting
+    /// `cloudwatch:PutAlarmMuteRule` on the alarm mute rule resource
+    /// (`arn:aws:cloudwatch:[REGION]:123456789012:alarm-mute-rule:*`), and
+    /// another statement granting `cloudwatch:PutAlarmMuteRule` on the targeted
+    /// alarm resources
     /// (`arn:aws:cloudwatch:[REGION]:123456789012:alarm:WebServerCPUAlarm` and
     /// `arn:aws:cloudwatch:[REGION]:123456789012:alarm:DatabaseConnectionAlarm`).
     ///
     /// You can also use IAM policy conditions to allow targeting alarms based on
-    /// resource tags. For example, you can restrict users to create/update mute
-    /// rules to only target alarms that have a specific tag key-value pair, such as
-    /// `Team=TeamA`.
+    /// resource
+    /// tags. For example, you can restrict users to create/update mute rules to
+    /// only target
+    /// alarms that have a specific tag key-value pair, such as `Team=TeamA`.
     pub fn putAlarmMuteRule(self: *Self, allocator: std.mem.Allocator, input: put_alarm_mute_rule.PutAlarmMuteRuleInput, options: CallOptions) !put_alarm_mute_rule.PutAlarmMuteRuleOutput {
         return put_alarm_mute_rule.execute(self, allocator, input, options);
     }
@@ -792,6 +1068,38 @@ pub const Client = struct {
         return put_insight_rule.execute(self, allocator, input, options);
     }
 
+    /// Creates or updates a log alarm. A log alarm evaluates the results of a
+    /// CloudWatch Logs scheduled query against the configured threshold and
+    /// comparison operator to determine its state.
+    ///
+    /// When you create a log alarm, the operation creates a service-managed
+    /// CloudWatch Logs scheduled query that runs the query string you provide on
+    /// the schedule you configure. Each scheduled query execution returns one or
+    /// more aggregated values determined by the `AggregationExpression`, and each
+    /// aggregated value is compared against the alarm `Threshold` to determine the
+    /// alarm state. The alarm uses M-out-of-N evaluation: if `QueryResultsToAlarm`
+    /// out of the most recent `QueryResultsToEvaluate` query results breach the
+    /// threshold, the alarm transitions to `ALARM`.
+    ///
+    /// Log alarms support the alarm states (`OK`, `ALARM`, `INSUFFICIENT_DATA`).
+    /// Configure transition actions using `OKActions`, `AlarmActions`, and
+    /// `InsufficientDataActions`.
+    ///
+    /// If you call this operation with the name of an existing log alarm, the
+    /// operation replaces the previous configuration of that alarm.
+    ///
+    /// **Permissions**
+    ///
+    /// To create or update a log alarm, you must have the `cloudwatch:PutLogAlarm`
+    /// permission. The IAM role specified in `ScheduledQueryRoleARN` must grant the
+    /// CloudWatch Alarms service permission to execute scheduled queries on the
+    /// specified log groups. If you set `ActionLogLineCount`, the role specified in
+    /// `ActionLogLineRoleArn` must grant permission to retrieve log events for
+    /// inclusion in alarm notifications.
+    pub fn putLogAlarm(self: *Self, allocator: std.mem.Allocator, input: put_log_alarm.PutLogAlarmInput, options: CallOptions) !put_log_alarm.PutLogAlarmOutput {
+        return put_log_alarm.execute(self, allocator, input, options);
+    }
+
     /// Creates a managed Contributor Insights rule for a specified Amazon Web
     /// Services
     /// resource. When you enable a managed rule, you create a Contributor Insights
@@ -810,8 +1118,9 @@ pub const Client = struct {
     /// Creates or updates an alarm and associates it with the specified metric,
     /// metric
     /// math expression, anomaly detection model, Metrics Insights query, or PromQL
-    /// query. For more
-    /// information about using a Metrics Insights query for an alarm, see [Create
+    /// query. For
+    /// more information about using a Metrics Insights query for an alarm, see
+    /// [Create
     /// alarms on Metrics Insights
     /// queries](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html).
     ///
@@ -1037,16 +1346,25 @@ pub const Client = struct {
 
     /// Enables enrichment and PromQL access for CloudWatch vended metrics for
     /// [supported Amazon Web Services
-    /// resources](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html) in the account. Once enabled, metrics that
-    /// contain a resource identifier dimension (for example, EC2
+    /// resources](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html) in the account. Once enabled,
+    /// metrics that contain a resource identifier dimension (for example, EC2
     /// `CPUUtilization` with an `InstanceId` dimension) are enriched
-    /// with resource ARN and resource tag labels and become queryable using
-    /// PromQL.
+    /// with resource ARN and resource tag labels and become queryable using PromQL.
     ///
     /// Before calling this operation, you must enable resource tags on telemetry
-    /// for
-    /// your account. For more information, see [Enable resource tags on
+    /// for your
+    /// account. For more information, see [Enable
+    /// resource tags on
     /// telemetry](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/EnableResourceTagsOnTelemetry.html).
+    ///
+    /// Optionally, `IncludeFilters` and `ExcludeFilters` limit
+    /// enrichment to a subset of the account's metrics. These filters are stored
+    /// only when this
+    /// operation starts enrichment. Calling `StartOTelEnrichment` for an account
+    /// where enrichment is already running has no effect and does not modify the
+    /// filters that
+    /// are applied. To change them, use
+    /// [UpdateOTelEnrichment](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateOTelEnrichment.html).
     pub fn startOTelEnrichment(self: *Self, allocator: std.mem.Allocator, input: start_o_tel_enrichment.StartOTelEnrichmentInput, options: CallOptions) !start_o_tel_enrichment.StartOTelEnrichmentOutput {
         return start_o_tel_enrichment.execute(self, allocator, input, options);
     }
@@ -1058,10 +1376,10 @@ pub const Client = struct {
 
     /// Disables enrichment and PromQL access for CloudWatch vended metrics for
     /// [supported Amazon Web Services
-    /// resources](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html) in the account. After disabling, these metrics
-    /// are no longer enriched with resource ARN and resource tag labels, and cannot
-    /// be
-    /// queried using PromQL.
+    /// resources](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/UsingResourceTagsForTelemetry.html) in the account. After disabling,
+    /// these metrics are no longer enriched with resource ARN and resource tag
+    /// labels, and
+    /// cannot be queried using PromQL.
     pub fn stopOTelEnrichment(self: *Self, allocator: std.mem.Allocator, input: stop_o_tel_enrichment.StopOTelEnrichmentInput, options: CallOptions) !stop_o_tel_enrichment.StopOTelEnrichmentOutput {
         return stop_o_tel_enrichment.execute(self, allocator, input, options);
     }
@@ -1101,6 +1419,49 @@ pub const Client = struct {
     /// metric streams and Contributor Insights rules support tagging.
     pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
+    }
+
+    /// Replaces the filters that determine which CloudWatch vended metrics are
+    /// enriched
+    /// with resource ARN and resource tag labels for the account. Enrichment must
+    /// already be
+    /// running for the account. If it is not, this operation returns a
+    /// `ResourceNotFoundException`. To start enrichment, use
+    /// [StartOTelEnrichment](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_StartOTelEnrichment.html).
+    ///
+    /// The filters in the request completely replace the stored filters; they are
+    /// not
+    /// merged with them. `IncludeFilters` and `ExcludeFilters` are
+    /// replaced as a pair, so a request that specifies only `IncludeFilters` also
+    /// clears the stored `ExcludeFilters`, and a request that specifies neither
+    /// clears both.
+    pub fn updateOTelEnrichment(self: *Self, allocator: std.mem.Allocator, input: update_o_tel_enrichment.UpdateOTelEnrichmentInput, options: CallOptions) !update_o_tel_enrichment.UpdateOTelEnrichmentOutput {
+        return update_o_tel_enrichment.execute(self, allocator, input, options);
+    }
+
+    /// Updates the resource metrics configuration for an Amazon Web Services
+    /// resource. The
+    /// `MetricSelections` value that you provide replaces any existing metric
+    /// selections for the resource; it is not merged with them.
+    ///
+    /// If you omit `MetricSelections`, Amazon CloudWatch removes any existing
+    /// metric selection filter and collects all available detailed metrics for the
+    /// resource.
+    ///
+    /// This operation returns a `ResourceNotFoundException` if no resource metrics
+    /// configuration exists for the specified resource ARN. To create a
+    /// configuration, use
+    /// [CreateResourceMetricsConfiguration](https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html).
+    ///
+    /// To update a resource metrics configuration, you must have the
+    /// `cloudwatch:UpdateResourceMetricsConfiguration` permission. For information
+    /// about scoping
+    /// this permission to specific resources, see [Condition keys for resource
+    /// metrics configuration
+    /// access](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/iam-cw-condition-keys-resource-arn.html) in the
+    /// *Amazon CloudWatch User Guide*.
+    pub fn updateResourceMetricsConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_resource_metrics_configuration.UpdateResourceMetricsConfigurationInput, options: CallOptions) !update_resource_metrics_configuration.UpdateResourceMetricsConfigurationOutput {
+        return update_resource_metrics_configuration.execute(self, allocator, input, options);
     }
 
     pub fn describeAlarmHistoryPaginator(self: *Self, params: describe_alarm_history.DescribeAlarmHistoryInput) paginator.DescribeAlarmHistoryPaginator {

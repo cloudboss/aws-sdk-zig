@@ -2,12 +2,13 @@
 /// image, to
 /// verify that the AMI or container image is valid before distributing it.
 pub const ImageTestsConfiguration = struct {
-    /// Determines if tests should run after building the image. Image Builder
-    /// defaults to enable tests
-    /// to run following the image build, before image distribution.
+    /// Specifies whether tests run after building the image.
+    /// When enabled, tests run after the image build and before image distribution.
+    /// Defaults to `true`.
     image_tests_enabled: ?bool = null,
 
-    /// The maximum time in minutes that tests are permitted to run.
+    /// The maximum time in minutes that tests are permitted to run. If you don't
+    /// specify a value, Image Builder stores and returns 720.
     ///
     /// The timeout property is not currently active. This value is
     /// ignored.

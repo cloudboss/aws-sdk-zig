@@ -172,10 +172,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetNetworkTelemetryInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetNetworkTelemetryOutput {
-    var result: GetNetworkTelemetryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetNetworkTelemetryOutput, body, allocator);
-    }
+    const result: GetNetworkTelemetryOutput = try aws.json.parseJsonObject(
+        GetNetworkTelemetryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

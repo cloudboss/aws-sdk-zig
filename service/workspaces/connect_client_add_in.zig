@@ -1,4 +1,4 @@
-/// Describes an Amazon Connect client add-in.
+/// Describes an Connect Customer client add-in.
 pub const ConnectClientAddIn = struct {
     /// The client add-in identifier.
     add_in_id: ?[]const u8 = null,

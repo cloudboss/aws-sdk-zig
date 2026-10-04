@@ -89,10 +89,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePermissionsInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdatePermissionsOutput {
-    var result: UpdatePermissionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdatePermissionsOutput, body, allocator);
-    }
+    const result: UpdatePermissionsOutput = try aws.json.parseJsonObject(
+        UpdatePermissionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

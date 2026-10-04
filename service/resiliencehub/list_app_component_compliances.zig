@@ -117,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAppComponentComplia
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAppComponentCompliancesOutput {
-    var result: ListAppComponentCompliancesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAppComponentCompliancesOutput, body, allocator);
-    }
+    const result: ListAppComponentCompliancesOutput = try aws.json.parseJsonObject(
+        ListAppComponentCompliancesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

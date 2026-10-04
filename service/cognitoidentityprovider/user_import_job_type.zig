@@ -1,3 +1,4 @@
+const PasswordHashingAlgorithmType = @import("password_hashing_algorithm_type.zig").PasswordHashingAlgorithmType;
 const UserImportJobStatusType = @import("user_import_job_status_type.zig").UserImportJobStatusType;
 
 /// A user import job in a user pool. Describes the status of user import with a
@@ -34,6 +35,14 @@ pub const UserImportJobType = struct {
 
     /// The friendly name of the user import job.
     job_name: ?[]const u8 = null,
+
+    /// The password hashing algorithm used to generate the hashes in the CSV file
+    /// for this
+    /// import job.
+    ///
+    /// Valid values: `BCRYPT` | `SCRYPT` | `ARGON2ID` |
+    /// `PBKDF2_SHA256`
+    password_hashing_algorithm: ?PasswordHashingAlgorithmType = null,
 
     /// The pre-signed URL target for uploading the CSV file.
     pre_signed_url: ?[]const u8 = null,
@@ -82,6 +91,7 @@ pub const UserImportJobType = struct {
         .imported_users = "ImportedUsers",
         .job_id = "JobId",
         .job_name = "JobName",
+        .password_hashing_algorithm = "PasswordHashingAlgorithm",
         .pre_signed_url = "PreSignedUrl",
         .skipped_users = "SkippedUsers",
         .start_date = "StartDate",

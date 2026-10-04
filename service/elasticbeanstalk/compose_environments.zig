@@ -12,20 +12,18 @@ pub const ComposeEnvironmentsInput = struct {
     application_name: ?[]const u8 = null,
 
     /// The name of the group to which the target environments belong. Specify a
-    /// group name
-    /// only if the environment name defined in each target environment's manifest
-    /// ends with a +
-    /// (plus) character. See [Environment Manifest
+    /// group name only if the environment name defined in each target environment's
+    /// manifest ends with a + (plus) character. See [Environment
+    /// Manifest
     /// (env.yaml)](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html) for details.
     group_name: ?[]const u8 = null,
 
     /// A list of version labels, specifying one or more application source bundles
-    /// that belong
-    /// to the target application. Each source bundle must include an environment
-    /// manifest that
-    /// specifies the name of the environment and the name of the solution stack to
-    /// use, and
-    /// optionally can specify environment links to create.
+    /// that belong to the target application. Each source bundle must include an
+    /// environment manifest that specifies the name of the environment and the name
+    /// of the solution stack to use, and optionally can specify environment links
+    /// to
+    /// create.
     version_labels: ?[]const []const u8 = null,
 };
 
@@ -34,8 +32,7 @@ pub const ComposeEnvironmentsOutput = struct {
     environments: ?[]const EnvironmentDescription = null,
 
     /// In a paginated request, the token that you can pass in a subsequent request
-    /// to get the
-    /// next response page.
+    /// to get the next response page.
     next_token: ?[]const u8 = null,
 };
 

@@ -4,6 +4,7 @@ const ClientConnectResponseOptions = @import("client_connect_response_options.zi
 const ClientLoginBannerResponseOptions = @import("client_login_banner_response_options.zig").ClientLoginBannerResponseOptions;
 const ClientRouteEnforcementResponseOptions = @import("client_route_enforcement_response_options.zig").ClientRouteEnforcementResponseOptions;
 const ConnectionLogResponseOptions = @import("connection_log_response_options.zig").ConnectionLogResponseOptions;
+const DevicePostureResponseOptions = @import("device_posture_response_options.zig").DevicePostureResponseOptions;
 const EndpointIpAddressType = @import("endpoint_ip_address_type.zig").EndpointIpAddressType;
 const ClientVpnEndpointStatus = @import("client_vpn_endpoint_status.zig").ClientVpnEndpointStatus;
 const Tag = @import("tag.zig").Tag;
@@ -62,6 +63,10 @@ pub const ClientVpnEndpoint = struct {
 
     /// A brief description of the endpoint.
     description: ?[]const u8 = null,
+
+    /// The device trust providers configured for the Client VPN endpoint, if
+    /// applicable.
+    device_posture_options: ?DevicePostureResponseOptions = null,
 
     /// Indicates whether the client VPN session is disconnected after the maximum
     /// `sessionTimeoutHours` is reached. If `true`, users are prompted to reconnect

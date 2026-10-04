@@ -11,6 +11,9 @@ pub const ReservedCapacitySummary = struct {
     /// The availability zone for the reserved capacity.
     availability_zone: ?[]const u8 = null,
 
+    /// The Availability Zone ID of the reserved capacity.
+    availability_zone_id: ?[]const u8 = null,
+
     /// The number of whole hours in the total duration for this reserved capacity.
     duration_hours: ?i64 = null,
 
@@ -48,6 +51,7 @@ pub const ReservedCapacitySummary = struct {
 
     pub const json_field_names = .{
         .availability_zone = "AvailabilityZone",
+        .availability_zone_id = "AvailabilityZoneId",
         .duration_hours = "DurationHours",
         .duration_minutes = "DurationMinutes",
         .end_time = "EndTime",

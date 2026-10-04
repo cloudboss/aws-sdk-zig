@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAssistantAIAgentI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateAssistantAIAgentOutput {
-    var result: UpdateAssistantAIAgentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateAssistantAIAgentOutput, body, allocator);
-    }
+    const result: UpdateAssistantAIAgentOutput = try aws.json.parseJsonObject(
+        UpdateAssistantAIAgentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

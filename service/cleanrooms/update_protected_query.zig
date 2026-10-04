@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateProtectedQueryInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateProtectedQueryOutput {
-    var result: UpdateProtectedQueryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateProtectedQueryOutput, body, allocator);
-    }
+    const result: UpdateProtectedQueryOutput = try aws.json.parseJsonObject(
+        UpdateProtectedQueryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

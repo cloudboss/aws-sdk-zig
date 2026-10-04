@@ -20,7 +20,7 @@ pub const ListMaterializedViewRefreshTaskRunsInput = struct {
     /// A continuation token, if this is a continuation call.
     next_token: ?[]const u8 = null,
 
-    /// The name of the table for which statistics is generated.
+    /// The name of the materialized view.
     table_name: ?[]const u8 = null,
 
     pub const json_field_names = .{

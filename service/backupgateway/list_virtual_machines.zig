@@ -15,11 +15,9 @@ pub const ListVirtualMachinesInput = struct {
     max_results: ?i32 = null,
 
     /// The next item following a partial list of returned resources. For example,
-    /// if a request is
-    /// made to return `maxResults` number of resources, `NextToken` allows you
-    /// to return more items in your list starting at the location pointed to by the
-    /// next
-    /// token.
+    /// if a request is made to return `maxResults` number of resources, `NextToken`
+    /// allows you to return more items in your list starting at the location
+    /// pointed to by the next token.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -31,16 +29,13 @@ pub const ListVirtualMachinesInput = struct {
 
 pub const ListVirtualMachinesOutput = struct {
     /// The next item following a partial list of returned resources. For example,
-    /// if a request is
-    /// made to return `maxResults` number of resources, `NextToken` allows you
-    /// to return more items in your list starting at the location pointed to by the
-    /// next
-    /// token.
+    /// if a request is made to return `maxResults` number of resources, `NextToken`
+    /// allows you to return more items in your list starting at the location
+    /// pointed to by the next token.
     next_token: ?[]const u8 = null,
 
     /// A list of your `VirtualMachine` objects, ordered by their Amazon Resource
-    /// Names
-    /// (ARNs).
+    /// Names (ARNs).
     virtual_machines: ?[]const VirtualMachine = null,
 
     pub const json_field_names = .{

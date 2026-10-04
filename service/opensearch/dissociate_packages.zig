@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DissociatePackagesInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DissociatePackagesOutput {
-    var result: DissociatePackagesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DissociatePackagesOutput, body, allocator);
-    }
+    const result: DissociatePackagesOutput = try aws.json.parseJsonObject(
+        DissociatePackagesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

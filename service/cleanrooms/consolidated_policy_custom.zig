@@ -1,4 +1,6 @@
 const AdditionalAnalyses = @import("additional_analyses.zig").AdditionalAnalyses;
+const AggregationThreshold = @import("aggregation_threshold.zig").AggregationThreshold;
+const ComparisonControls = @import("comparison_controls.zig").ComparisonControls;
 const DifferentialPrivacyConfiguration = @import("differential_privacy_configuration.zig").DifferentialPrivacyConfiguration;
 
 /// Controls on the analysis specifications that can be run on a configured
@@ -6,6 +8,9 @@ const DifferentialPrivacyConfiguration = @import("differential_privacy_configura
 pub const ConsolidatedPolicyCustom = struct {
     /// Additional analyses for the consolidated policy.
     additional_analyses: ?AdditionalAnalyses = null,
+
+    /// The aggregation thresholds for the consolidated policy.
+    aggregation_thresholds: ?[]const AggregationThreshold = null,
 
     /// The additional analyses allowed by the consolidated policy.
     allowed_additional_analyses: ?[]const []const u8 = null,
@@ -19,6 +24,9 @@ pub const ConsolidatedPolicyCustom = struct {
     /// The allowed result receivers.
     allowed_result_receivers: ?[]const []const u8 = null,
 
+    /// The comparison controls for the consolidated policy.
+    comparison_controls: ?ComparisonControls = null,
+
     differential_privacy: ?DifferentialPrivacyConfiguration = null,
 
     /// Disallowed output columns
@@ -26,10 +34,12 @@ pub const ConsolidatedPolicyCustom = struct {
 
     pub const json_field_names = .{
         .additional_analyses = "additionalAnalyses",
+        .aggregation_thresholds = "aggregationThresholds",
         .allowed_additional_analyses = "allowedAdditionalAnalyses",
         .allowed_analyses = "allowedAnalyses",
         .allowed_analysis_providers = "allowedAnalysisProviders",
         .allowed_result_receivers = "allowedResultReceivers",
+        .comparison_controls = "comparisonControls",
         .differential_privacy = "differentialPrivacy",
         .disallowed_output_columns = "disallowedOutputColumns",
     };

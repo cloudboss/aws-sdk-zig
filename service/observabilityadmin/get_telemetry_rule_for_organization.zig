@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTelemetryRuleForOrga
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTelemetryRuleForOrganizationOutput {
-    var result: GetTelemetryRuleForOrganizationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTelemetryRuleForOrganizationOutput, body, allocator);
-    }
+    const result: GetTelemetryRuleForOrganizationOutput = try aws.json.parseJsonObject(
+        GetTelemetryRuleForOrganizationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

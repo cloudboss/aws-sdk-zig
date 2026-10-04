@@ -12,19 +12,12 @@ pub const CreateEncoderConfigurationInput = struct {
     name: ?[]const u8 = null,
 
     /// Tags attached to the resource. Array of maps, each of the form
-    /// `string:string
-    /// (key:value)`. See [Best practices and
-    /// strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html)
-    /// in *Tagging AWS Resources and Tag Editor* for details, including
-    /// restrictions that apply to tags and "Tag naming
-    /// limits and requirements"; Amazon IVS has no constraints on tags beyond what
-    /// is documented
-    /// there.
+    /// `string:string (key:value)`. See [Best practices and
+    /// strategies](https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html) in *Tagging AWS Resources and Tag Editor* for details, including restrictions that apply to tags and "Tag naming limits and requirements"; Amazon IVS has no constraints on tags beyond what is documented there.
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Video configuration. Default: video resolution 1280x720, bitrate 2500 kbps,
-    /// 30
-    /// fps.
+    /// 30 fps.
     video: ?Video = null,
 
     pub const json_field_names = .{
@@ -113,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEncoderConfigurat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateEncoderConfigurationOutput {
-    var result: CreateEncoderConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateEncoderConfigurationOutput, body, allocator);
-    }
+    const result: CreateEncoderConfigurationOutput = try aws.json.parseJsonObject(
+        CreateEncoderConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

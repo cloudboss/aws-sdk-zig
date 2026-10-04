@@ -1,7 +1,9 @@
+const BillingMode = @import("billing_mode.zig").BillingMode;
 const Connection = @import("connection.zig").Connection;
 const HasLogicalRedundancy = @import("has_logical_redundancy.zig").HasLogicalRedundancy;
 const LagState = @import("lag_state.zig").LagState;
 const MacSecKey = @import("mac_sec_key.zig").MacSecKey;
+const RateLimiterStatus = @import("rate_limiter_status.zig").RateLimiterStatus;
 const Tag = @import("tag.zig").Tag;
 
 /// Information about a link aggregation group (LAG).
@@ -19,6 +21,9 @@ pub const Lag = struct {
     /// device might be
     /// different than the device that terminates the physical connection.
     aws_logical_device_id: ?[]const u8 = null,
+
+    /// The billing mode of the LAG.
+    billing_mode: ?BillingMode = null,
 
     /// The connections bundled by the LAG.
     connections: ?[]const Connection = null,
@@ -87,8 +92,32 @@ pub const Lag = struct {
     /// The ID of the Amazon Web Services account that owns the LAG.
     owner_account: ?[]const u8 = null,
 
+    /// The total number of inbound IPv4 route prefixes you can allocate across the
+    /// virtual interfaces on the LAG. Not applicable to LAGs that are interconnects
+    /// and support hosted connections.
+    prefix_pool_size_ipv_4: ?i32 = null,
+
+    /// The total number of inbound IPv6 route prefixes you can allocate across the
+    /// virtual interfaces on the LAG. Not applicable to LAGs that are interconnects
+    /// and support hosted connections.
+    prefix_pool_size_ipv_6: ?i32 = null,
+
+    /// The number of inbound IPv4 route prefixes in the LAG prefix pool not yet
+    /// allocated to a virtual interface. Not applicable to LAGs that are
+    /// interconnects and support hosted connections.
+    prefix_pool_unallocated_count_ipv_4: ?i32 = null,
+
+    /// The number of inbound IPv6 route prefixes in the LAG prefix pool not yet
+    /// allocated to a virtual interface. Not applicable to LAGs that are
+    /// interconnects and support hosted connections.
+    prefix_pool_unallocated_count_ipv_6: ?i32 = null,
+
     /// The name of the service provider associated with the LAG.
     provider_name: ?[]const u8 = null,
+
+    /// The rate limiter status for the LAG, including how many rate limiters are in
+    /// use and the maximum allowed.
+    rate_limiter_status: ?RateLimiterStatus = null,
 
     /// The Amazon Web Services Region where the connection is located.
     region: ?[]const u8 = null,
@@ -101,6 +130,7 @@ pub const Lag = struct {
         .aws_device = "awsDevice",
         .aws_device_v2 = "awsDeviceV2",
         .aws_logical_device_id = "awsLogicalDeviceId",
+        .billing_mode = "billingMode",
         .connections = "connections",
         .connections_bandwidth = "connectionsBandwidth",
         .encryption_mode = "encryptionMode",
@@ -115,7 +145,12 @@ pub const Lag = struct {
         .minimum_links = "minimumLinks",
         .number_of_connections = "numberOfConnections",
         .owner_account = "ownerAccount",
+        .prefix_pool_size_ipv_4 = "prefixPoolSizeIpv4",
+        .prefix_pool_size_ipv_6 = "prefixPoolSizeIpv6",
+        .prefix_pool_unallocated_count_ipv_4 = "prefixPoolUnallocatedCountIpv4",
+        .prefix_pool_unallocated_count_ipv_6 = "prefixPoolUnallocatedCountIpv6",
         .provider_name = "providerName",
+        .rate_limiter_status = "rateLimiterStatus",
         .region = "region",
         .tags = "tags",
     };

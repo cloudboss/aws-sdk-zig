@@ -178,10 +178,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateKxEnvironmentNetw
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateKxEnvironmentNetworkOutput {
-    var result: UpdateKxEnvironmentNetworkOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateKxEnvironmentNetworkOutput, body, allocator);
-    }
+    const result: UpdateKxEnvironmentNetworkOutput = try aws.json.parseJsonObject(
+        UpdateKxEnvironmentNetworkOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

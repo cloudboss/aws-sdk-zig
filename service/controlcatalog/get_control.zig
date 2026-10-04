@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ControlBehavior = @import("control_behavior.zig").ControlBehavior;
 const ImplementationDetails = @import("implementation_details.zig").ImplementationDetails;
+const ParameterRequirementSummary = @import("parameter_requirement_summary.zig").ParameterRequirementSummary;
 const ControlParameter = @import("control_parameter.zig").ControlParameter;
 const RegionConfiguration = @import("region_configuration.zig").RegionConfiguration;
 const ControlSeverity = @import("control_severity.zig").ControlSeverity;
@@ -54,13 +55,19 @@ pub const GetControlOutput = struct {
     /// A description of what the control does.
     description: []const u8,
 
-    /// A list of Amazon Web Services resource types that are governed by this
-    /// control. This information helps you understand which controls can govern
-    /// certain types of resources, and conversely, which resources are affected
-    /// when the control is implemented. The resources are represented as Amazon Web
-    /// Services CloudFormation resource types. If `GovernedResources` cannot be
-    /// represented by available CloudFormation resource types, it’s returned as an
-    /// empty list.
+    /// A list of providers whose resources are governed by this control. For
+    /// example, a value of `AWS` indicates that the control governs Amazon Web
+    /// Services resources.
+    governed_providers: ?[]const []const u8 = null,
+
+    /// A list of resource types that are governed by this control. This information
+    /// helps you understand which controls can govern certain types of resources,
+    /// and conversely, which resources are affected when the control is
+    /// implemented. For Amazon Web Services controls, the resources are represented
+    /// as CloudFormation resource types. For non-Amazon Web Services controls, the
+    /// resources are represented in a provider-specific format. If
+    /// `GovernedResources` cannot be represented by available resource types, it’s
+    /// returned as an empty list.
     governed_resources: ?[]const []const u8 = null,
 
     /// Returns information about the control, as an `ImplementationDetails` object
@@ -69,6 +76,12 @@ pub const GetControlOutput = struct {
 
     /// The display name of the control.
     name: []const u8,
+
+    /// A summary that indicates whether the control requires parameters, accepts
+    /// optional parameters, or does not support parameters. Use this field to
+    /// determine whether you need to supply parameter values when you enable the
+    /// control.
+    parameter_requirement_summary: ?ParameterRequirementSummary = null,
 
     /// Returns an array of `ControlParameter` objects that specify the parameters a
     /// control supports. An empty list is returned for controls that don’t support
@@ -86,9 +99,11 @@ pub const GetControlOutput = struct {
         .behavior = "Behavior",
         .create_time = "CreateTime",
         .description = "Description",
+        .governed_providers = "GovernedProviders",
         .governed_resources = "GovernedResources",
         .implementation = "Implementation",
         .name = "Name",
+        .parameter_requirement_summary = "ParameterRequirementSummary",
         .parameters = "Parameters",
         .region_configuration = "RegionConfiguration",
         .severity = "Severity",
@@ -151,10 +166,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetControlInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetControlOutput {
-    var result: GetControlOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetControlOutput, body, allocator);
-    }
+    const result: GetControlOutput = try aws.json.parseJsonObject(
+        GetControlOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

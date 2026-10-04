@@ -5,12 +5,14 @@ pub const SearchNearbyAdditionalFeature = enum {
     phonemes,
     access,
     contact,
+    cross_references,
 
     pub const json_field_names = .{
         .time_zone = "TimeZone",
         .phonemes = "Phonemes",
         .access = "Access",
         .contact = "Contact",
+        .cross_references = "CrossReferences",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const SearchNearbyAdditionalFeature = enum {
             .phonemes => "Phonemes",
             .access => "Access",
             .contact => "Contact",
+            .cross_references => "CrossReferences",
         };
     }
 

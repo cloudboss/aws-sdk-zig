@@ -139,10 +139,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartDevEnvironmentInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartDevEnvironmentOutput {
-    var result: StartDevEnvironmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartDevEnvironmentOutput, body, allocator);
-    }
+    const result: StartDevEnvironmentOutput = try aws.json.parseJsonObject(
+        StartDevEnvironmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

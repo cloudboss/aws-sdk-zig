@@ -9,32 +9,32 @@ pub const SwapEnvironmentCNAMEsInput = struct {
     /// The ID of the destination environment.
     ///
     /// Condition: You must specify at least the `DestinationEnvironmentID` or the
-    /// `DestinationEnvironmentName`. You may also specify both. You must specify
-    /// the
-    /// `SourceEnvironmentId` with the `DestinationEnvironmentId`.
+    /// `DestinationEnvironmentName`. You may also specify
+    /// both. You must specify the `SourceEnvironmentId` with the
+    /// `DestinationEnvironmentId`.
     destination_environment_id: ?[]const u8 = null,
 
     /// The name of the destination environment.
     ///
     /// Condition: You must specify at least the `DestinationEnvironmentID` or the
-    /// `DestinationEnvironmentName`. You may also specify both. You must specify
-    /// the
-    /// `SourceEnvironmentName` with the `DestinationEnvironmentName`.
+    /// `DestinationEnvironmentName`. You may also specify
+    /// both. You must specify the `SourceEnvironmentName` with the
+    /// `DestinationEnvironmentName`.
     destination_environment_name: ?[]const u8 = null,
 
     /// The ID of the source environment.
     ///
     /// Condition: You must specify at least the `SourceEnvironmentID` or the
-    /// `SourceEnvironmentName`. You may also specify both. If you specify the
-    /// `SourceEnvironmentId`, you must specify the
+    /// `SourceEnvironmentName`. You may also specify both. If
+    /// you specify the `SourceEnvironmentId`, you must specify the
     /// `DestinationEnvironmentId`.
     source_environment_id: ?[]const u8 = null,
 
     /// The name of the source environment.
     ///
     /// Condition: You must specify at least the `SourceEnvironmentID` or the
-    /// `SourceEnvironmentName`. You may also specify both. If you specify the
-    /// `SourceEnvironmentName`, you must specify the
+    /// `SourceEnvironmentName`. You may also specify both. If
+    /// you specify the `SourceEnvironmentName`, you must specify the
     /// `DestinationEnvironmentName`.
     source_environment_name: ?[]const u8 = null,
 };

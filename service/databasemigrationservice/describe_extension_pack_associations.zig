@@ -8,8 +8,14 @@ const Filter = @import("filter.zig").Filter;
 const SchemaConversionRequest = @import("schema_conversion_request.zig").SchemaConversionRequest;
 
 pub const DescribeExtensionPackAssociationsInput = struct {
-    /// Filters applied to the extension pack associations described in the form of
-    /// key-value pairs.
+    /// The filters to apply to the extension pack installation requests.
+    ///
+    /// The following filter names are supported:
+    ///
+    /// * `request-id` – The request identifier.
+    ///
+    /// * `status` – The request status. Valid values: `RECEIVED`, `IN_PROGRESS`,
+    ///   `SUCCESS`, `FAILED`.
     filters: ?[]const Filter = null,
 
     /// Specifies the unique pagination token that makes it possible to display the
@@ -32,7 +38,7 @@ pub const DescribeExtensionPackAssociationsInput = struct {
     /// in the response so that you can retrieve the remaining results.
     max_records: ?i32 = null,
 
-    /// The name or Amazon Resource Name (ARN) for the migration project.
+    /// The migration project name or Amazon Resource Name (ARN).
     migration_project_identifier: []const u8,
 
     pub const json_field_names = .{
@@ -58,8 +64,9 @@ pub const DescribeExtensionPackAssociationsOutput = struct {
     /// unchanged.
     marker: ?[]const u8 = null,
 
-    /// A paginated list of extension pack associations for the specified migration
-    /// project.
+    /// A paginated list of extension pack installation requests.
+    ///
+    /// DMS never populates the `ExportSqlDetails` field for this operation.
     requests: ?[]const SchemaConversionRequest = null,
 
     pub const json_field_names = .{

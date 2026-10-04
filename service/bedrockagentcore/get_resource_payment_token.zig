@@ -8,15 +8,14 @@ const PaymentTokenRequestInput = @import("payment_token_request_input.zig").Paym
 const PaymentTokenResponseOutput = @import("payment_token_response_output.zig").PaymentTokenResponseOutput;
 
 pub const GetResourcePaymentTokenInput = struct {
-    /// Vendor-specific token request input
-    /// Contains all request parameters in a type-safe, vendor-specific structure
+    /// Vendor-specific token request input. Contains all request parameters in a
+    /// type-safe, vendor-specific structure.
     payment_token_request: PaymentTokenRequestInput,
 
-    /// Name of the payment credential provider to use
+    /// Name of the payment credential provider to use.
     resource_credential_provider_name: []const u8,
 
-    /// Workload access token for authorization. Named workloadIdentityToken for
-    /// consistency with APIKey and OAuth2CredentialProvider.
+    /// Workload access token for authorization.
     workload_identity_token: []const u8,
 
     pub const json_field_names = .{
@@ -27,8 +26,8 @@ pub const GetResourcePaymentTokenInput = struct {
 };
 
 pub const GetResourcePaymentTokenOutput = struct {
-    /// Vendor-specific token response output
-    /// Contains all response data in a type-safe, vendor-specific structure
+    /// Vendor-specific token response output. Contains all response data in a
+    /// type-safe, vendor-specific structure.
     payment_token_response: ?PaymentTokenResponseOutput = null,
 
     pub const json_field_names = .{
@@ -100,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetResourcePaymentToken
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetResourcePaymentTokenOutput {
-    var result: GetResourcePaymentTokenOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetResourcePaymentTokenOutput, body, allocator);
-    }
+    const result: GetResourcePaymentTokenOutput = try aws.json.parseJsonObject(
+        GetResourcePaymentTokenOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

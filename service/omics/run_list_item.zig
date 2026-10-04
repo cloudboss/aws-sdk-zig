@@ -41,6 +41,9 @@ pub const RunListItem = struct {
     /// The run's workflow ID.
     workflow_id: ?[]const u8 = null,
 
+    /// The name of the workflow.
+    workflow_name: ?[]const u8 = null,
+
     /// The name of the workflow version.
     workflow_version_name: ?[]const u8 = null,
 
@@ -57,6 +60,7 @@ pub const RunListItem = struct {
         .storage_capacity = "storageCapacity",
         .storage_type = "storageType",
         .workflow_id = "workflowId",
+        .workflow_name = "workflowName",
         .workflow_version_name = "workflowVersionName",
     };
 };

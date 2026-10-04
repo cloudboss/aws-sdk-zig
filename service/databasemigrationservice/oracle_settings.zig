@@ -281,13 +281,13 @@ pub const OracleSettings = struct {
 
     /// For an Oracle source endpoint, the transparent data encryption (TDE)
     /// password required
-    /// by AWM DMS to access Oracle redo logs encrypted by TDE using Binary Reader.
-    /// It is also the
+    /// by DMS to access Oracle redo logs encrypted by TDE using Binary Reader. It
+    /// is also the
     /// `
     /// *TDE_Password*
     /// ` part of the comma-separated value you
     /// set to the `Password` request parameter when you create the endpoint. The
-    /// `SecurityDbEncryptian` setting is related to this
+    /// `SecurityDbEncryption` setting is related to this
     /// `SecurityDbEncryptionName` setting. For more information, see [ Supported
     /// encryption methods for using Oracle as a source for
     /// DMS

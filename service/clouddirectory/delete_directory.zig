@@ -70,10 +70,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteDirectoryInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteDirectoryOutput {
-    var result: DeleteDirectoryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteDirectoryOutput, body, allocator);
-    }
+    const result: DeleteDirectoryOutput = try aws.json.parseJsonObject(
+        DeleteDirectoryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

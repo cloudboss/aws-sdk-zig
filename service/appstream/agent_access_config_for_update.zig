@@ -1,6 +1,7 @@
 const ScreenImageFormat = @import("screen_image_format.zig").ScreenImageFormat;
 const ScreenResolution = @import("screen_resolution.zig").ScreenResolution;
 const AgentAccessSetting = @import("agent_access_setting.zig").AgentAccessSetting;
+const UserControlMode = @import("user_control_mode.zig").UserControlMode;
 
 /// The configuration for updating agent access on a stack. This type supports
 /// partial updates, so you only need to specify the fields you want to change.
@@ -23,11 +24,16 @@ pub const AgentAccessConfigForUpdate = struct {
     /// action.
     settings: ?[]const AgentAccessSetting = null,
 
+    /// The user control mode for agent sessions. This setting determines how users
+    /// can interact with agent sessions.
+    user_control_mode: ?UserControlMode = null,
+
     pub const json_field_names = .{
         .s3_bucket_arn = "S3BucketArn",
         .screen_image_format = "ScreenImageFormat",
         .screen_resolution = "ScreenResolution",
         .screenshots_upload_enabled = "ScreenshotsUploadEnabled",
         .settings = "Settings",
+        .user_control_mode = "UserControlMode",
     };
 };

@@ -112,6 +112,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFleetInput, confi
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
+                    if (sv_1.launch_template_specification_user_data) |fv_2| {
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.{d}.LaunchTemplateSpecification.LaunchTemplateSpecificationUserData=", .{n}) catch continue;
+                        try body_buf.appendSlice(allocator, field_prefix);
+                        try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
+                    }
+                }
+                {
+                    var prefix_buf: [256]u8 = undefined;
                     if (sv_1.version) |fv_2| {
                         const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.{d}.LaunchTemplateSpecification.Version=", .{n}) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
@@ -230,6 +238,24 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFleetInput, confi
                                     try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                                 }
+                            }
+                        }
+                    }
+                    if (item_1.iam_instance_profile) |sv_2| {
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            if (sv_2.arn) |fv_3| {
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.{d}.Overrides.{d}.IamInstanceProfile.Arn=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(allocator, field_prefix);
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            if (sv_2.name) |fv_3| {
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.{d}.Overrides.{d}.IamInstanceProfile.Name=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(allocator, field_prefix);
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3);
                             }
                         }
                     }
@@ -576,10 +602,44 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyFleetInput, confi
                     }
                     {
                         var prefix_buf: [256]u8 = undefined;
+                        if (item_1.key_name) |fv_2| {
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.{d}.Overrides.{d}.KeyName=", .{n, n_1}) catch continue;
+                            try body_buf.appendSlice(allocator, field_prefix);
+                            try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
+                        }
+                    }
+                    {
+                        var prefix_buf: [256]u8 = undefined;
                         if (item_1.max_price) |fv_2| {
                             const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.{d}.Overrides.{d}.MaxPrice=", .{n, n_1}) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
+                        }
+                    }
+                    if (item_1.metadata_options) |sv_2| {
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            if (sv_2.http_endpoint) |fv_3| {
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.{d}.Overrides.{d}.MetadataOptions.HttpEndpoint=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(allocator, field_prefix);
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            if (sv_2.http_put_response_hop_limit) |fv_3| {
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.{d}.Overrides.{d}.MetadataOptions.HttpPutResponseHopLimit=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(allocator, field_prefix);
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{fv_3}) catch "");
+                            }
+                        }
+                        {
+                            var prefix_buf: [256]u8 = undefined;
+                            if (sv_2.http_tokens) |fv_3| {
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchTemplateConfig.{d}.Overrides.{d}.MetadataOptions.HttpTokens=", .{n, n_1}) catch continue;
+                                try body_buf.appendSlice(allocator, field_prefix);
+                                try aws.url.appendUrlEncoded(allocator, &body_buf, fv_3.wireName());
+                            }
                         }
                     }
                     if (item_1.placement) |sv_2| {

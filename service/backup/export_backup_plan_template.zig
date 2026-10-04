@@ -77,10 +77,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExportBackupPlanTemplat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ExportBackupPlanTemplateOutput {
-    var result: ExportBackupPlanTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ExportBackupPlanTemplateOutput, body, allocator);
-    }
+    const result: ExportBackupPlanTemplateOutput = try aws.json.parseJsonObject(
+        ExportBackupPlanTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

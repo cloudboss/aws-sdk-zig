@@ -1,6 +1,7 @@
 const ScreenImageFormat = @import("screen_image_format.zig").ScreenImageFormat;
 const ScreenResolution = @import("screen_resolution.zig").ScreenResolution;
 const AgentAccessSetting = @import("agent_access_setting.zig").AgentAccessSetting;
+const UserControlMode = @import("user_control_mode.zig").UserControlMode;
 
 /// The configuration for agent access on a stack. Agent access enables AI
 /// agents to interact with desktop applications during streaming sessions.
@@ -23,11 +24,16 @@ pub const AgentAccessConfig = struct {
     /// action. You must specify at least one setting.
     settings: []const AgentAccessSetting,
 
+    /// The user control mode for agent sessions. This setting determines how users
+    /// can interact with agent sessions.
+    user_control_mode: ?UserControlMode = null,
+
     pub const json_field_names = .{
         .s3_bucket_arn = "S3BucketArn",
         .screen_image_format = "ScreenImageFormat",
         .screen_resolution = "ScreenResolution",
         .screenshots_upload_enabled = "ScreenshotsUploadEnabled",
         .settings = "Settings",
+        .user_control_mode = "UserControlMode",
     };
 };

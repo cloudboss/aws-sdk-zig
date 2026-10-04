@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetControlOperationInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetControlOperationOutput {
-    var result: GetControlOperationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetControlOperationOutput, body, allocator);
-    }
+    const result: GetControlOperationOutput = try aws.json.parseJsonObject(
+        GetControlOperationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

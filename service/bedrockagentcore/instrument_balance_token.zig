@@ -1,7 +1,7 @@
 const std = @import("std");
 
-/// Supported tokens for instrument balance queries.
-/// Only tokens supported for X402 payments are returned.
+/// Supported tokens for instrument balance queries. Only tokens supported for
+/// X402 payments are returned.
 pub const InstrumentBalanceToken = enum {
     usdc,
 

@@ -11,6 +11,7 @@ pub const BlockedGuestUser = @import("blocked_guest_user.zig").BlockedGuestUser;
 pub const Bot = @import("bot.zig").Bot;
 pub const BotStatus = @import("bot_status.zig").BotStatus;
 pub const CallingSettings = @import("calling_settings.zig").CallingSettings;
+pub const ConsentPopupConfig = @import("consent_popup_config.zig").ConsentPopupConfig;
 pub const DataRetentionActionType = @import("data_retention_action_type.zig").DataRetentionActionType;
 pub const ErrorDetail = @import("error_detail.zig").ErrorDetail;
 pub const GuestUser = @import("guest_user.zig").GuestUser;

@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBulkDeploymentStatus
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBulkDeploymentStatusOutput {
-    var result: GetBulkDeploymentStatusOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBulkDeploymentStatusOutput, body, allocator);
-    }
+    const result: GetBulkDeploymentStatusOutput = try aws.json.parseJsonObject(
+        GetBulkDeploymentStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

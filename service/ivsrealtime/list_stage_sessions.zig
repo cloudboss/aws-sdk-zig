@@ -25,8 +25,8 @@ pub const ListStageSessionsInput = struct {
 };
 
 pub const ListStageSessionsOutput = struct {
-    /// If there are more stage sessions than `maxResults`, use
-    /// `nextToken` in the request to get the next set.
+    /// If there are more stage sessions than `maxResults`, use `nextToken` in the
+    /// request to get the next set.
     next_token: ?[]const u8 = null,
 
     /// List of matching stage sessions.
@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListStageSessionsInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListStageSessionsOutput {
-    var result: ListStageSessionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListStageSessionsOutput, body, allocator);
-    }
+    const result: ListStageSessionsOutput = try aws.json.parseJsonObject(
+        ListStageSessionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

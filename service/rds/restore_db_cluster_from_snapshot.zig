@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DBClusterAssociatedRole = @import("db_cluster_associated_role.zig").DBClusterAssociatedRole;
 const RdsCustomClusterConfiguration = @import("rds_custom_cluster_configuration.zig").RdsCustomClusterConfiguration;
 const ScalingConfiguration = @import("scaling_configuration.zig").ScalingConfiguration;
 const ServerlessV2ScalingConfiguration = @import("serverless_v2_scaling_configuration.zig").ServerlessV2ScalingConfiguration;
@@ -13,6 +14,15 @@ const DBCluster = @import("db_cluster.zig").DBCluster;
 const serde = @import("serde.zig");
 
 pub const RestoreDBClusterFromSnapshotInput = struct {
+    /// A list of Amazon Web Services Identity and Access Management (IAM) roles to
+    /// associate with the DB cluster when it's restored from a snapshot. Each role
+    /// grants the DB cluster permission to access other Amazon Web Services on your
+    /// behalf. For each role, specify a role ARN and, optionally, the feature name
+    /// (such as `s3Import`, `s3Export`, or `Lambda`).
+    ///
+    /// Valid for Cluster Type: Aurora DB clusters only
+    associated_roles: ?[]const DBClusterAssociatedRole = null,
+
     /// Provides the list of Availability Zones (AZs) where instances in the
     /// restored DB cluster can be created.
     ///
@@ -207,7 +217,7 @@ pub const RestoreDBClusterFromSnapshotInput = struct {
     /// Valid for: Aurora DB clusters and Multi-AZ DB clusters
     engine: []const u8,
 
-    /// The life cycle type for this DB cluster.
+    /// The lifecycle type for this DB cluster.
     ///
     /// By default, this value is set to `open-source-rds-extended-support`, which
     /// enrolls your DB cluster into Amazon RDS Extended Support. At the end of
@@ -548,6 +558,25 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBClusterFromSna
     var body_buf: std.ArrayList(u8) = .empty;
 
     try body_buf.appendSlice(allocator, "Action=RestoreDBClusterFromSnapshot&Version=2014-10-31");
+    if (input.associated_roles) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.feature_name) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociatedRoles.DBClusterAssociatedRole.{d}.FeatureName=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                }
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AssociatedRoles.DBClusterAssociatedRole.{d}.RoleArn=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.role_arn);
+            }
+        }
+    }
     if (input.availability_zones) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;

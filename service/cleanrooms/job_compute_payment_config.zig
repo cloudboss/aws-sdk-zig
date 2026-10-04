@@ -5,9 +5,8 @@ pub const JobComputePaymentConfig = struct {
     /// member to pay for query and job compute costs (`TRUE`) or has not configured
     /// the collaboration member to pay for query and job compute costs (`FALSE`).
     ///
-    /// Exactly one member can be configured to pay for query and job compute costs.
-    /// An error is returned if the collaboration creator sets a `TRUE` value for
-    /// more than one member in the collaboration.
+    /// One or more members can be configured as payer candidates for query and job
+    /// compute costs.
     ///
     /// An error is returned if the collaboration creator sets a `FALSE` value for
     /// the member who can run queries and jobs.

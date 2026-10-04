@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePhoneNumberOrderI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePhoneNumberOrderOutput {
-    var result: CreatePhoneNumberOrderOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePhoneNumberOrderOutput, body, allocator);
-    }
+    const result: CreatePhoneNumberOrderOutput = try aws.json.parseJsonObject(
+        CreatePhoneNumberOrderOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

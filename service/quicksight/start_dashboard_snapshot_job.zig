@@ -136,10 +136,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartDashboardSnapshotJ
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartDashboardSnapshotJobOutput {
-    var result: StartDashboardSnapshotJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartDashboardSnapshotJobOutput, body, allocator);
-    }
+    var result: StartDashboardSnapshotJobOutput = try aws.json.parseJsonObject(
+        StartDashboardSnapshotJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

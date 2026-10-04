@@ -241,10 +241,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateRegistryRecordInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateRegistryRecordOutput {
-    var result: UpdateRegistryRecordOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateRegistryRecordOutput, body, allocator);
-    }
+    const result: UpdateRegistryRecordOutput = try aws.json.parseJsonObject(
+        UpdateRegistryRecordOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

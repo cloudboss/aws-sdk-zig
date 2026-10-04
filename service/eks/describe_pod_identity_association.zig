@@ -79,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribePodIdentityAsso
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribePodIdentityAssociationOutput {
-    var result: DescribePodIdentityAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribePodIdentityAssociationOutput, body, allocator);
-    }
+    const result: DescribePodIdentityAssociationOutput = try aws.json.parseJsonObject(
+        DescribePodIdentityAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -3,6 +3,7 @@ const ComputeType = @import("compute_type.zig").ComputeType;
 const DockerServer = @import("docker_server.zig").DockerServer;
 const EnvironmentVariable = @import("environment_variable.zig").EnvironmentVariable;
 const ProjectFleet = @import("project_fleet.zig").ProjectFleet;
+const HostKernel = @import("host_kernel.zig").HostKernel;
 const ImagePullCredentialsType = @import("image_pull_credentials_type.zig").ImagePullCredentialsType;
 const RegistryCredential = @import("registry_credential.zig").RegistryCredential;
 const EnvironmentType = @import("environment_type.zig").EnvironmentType;
@@ -107,6 +108,25 @@ pub const ProjectEnvironment = struct {
     /// A ProjectFleet object to use for this build project.
     fleet: ?ProjectFleet = null,
 
+    /// The host operating system kernel used for on-demand builds in the build
+    /// project.
+    /// The host kernel does not affect the build environment operating system,
+    /// which is determined by the image you specify.
+    /// Valid values are:
+    ///
+    /// * `LINUX_KERNEL_4`: Runs on an Amazon Linux 2 host (kernel 4.x).
+    ///
+    /// * `LINUX_KERNEL_6`: Runs on an Amazon Linux 2023 host (kernel 6.x).
+    ///
+    /// * `LINUX_KERNEL_LATEST`: Runs on the latest supported host kernel.
+    ///
+    /// This setting applies to the `LINUX_CONTAINER`, `ARM_CONTAINER`,
+    /// `LINUX_EC2`, and `ARM_EC2`
+    /// environment types. It is not applicable to Windows, Lambda, or Mac
+    /// environment
+    /// types.
+    host_kernel: ?HostKernel = null,
+
     /// The image tag or image digest that identifies the Docker image to use for
     /// this build
     /// project. Use the following formats:
@@ -191,6 +211,7 @@ pub const ProjectEnvironment = struct {
         .docker_server = "dockerServer",
         .environment_variables = "environmentVariables",
         .fleet = "fleet",
+        .host_kernel = "hostKernel",
         .image = "image",
         .image_pull_credentials_type = "imagePullCredentialsType",
         .privileged_mode = "privilegedMode",

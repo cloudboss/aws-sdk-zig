@@ -6,9 +6,40 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const NodeInfo = @import("node_info.zig").NodeInfo;
 
-pub const ListNodesInput = @import("list_nodes_request.zig").ListNodesRequest;
+pub const ListNodesInput = struct {
+    /// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+    cluster_arn: []const u8,
 
-pub const ListNodesOutput = @import("list_nodes_response.zig").ListNodesResponse;
+    /// The maximum number of results to return in the response. If there are more
+    /// results, the response includes a NextToken parameter.
+    max_results: ?i32 = null,
+
+    /// The paginated results marker. When the result of the operation is truncated,
+    /// the call returns NextToken in the response.
+    /// To get the next batch, provide this token in your next request.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .cluster_arn = "ClusterArn",
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListNodesOutput = struct {
+    /// The paginated results marker. When the result of a ListNodes operation is
+    /// truncated, the call returns NextToken in the response.
+    /// To get another batch of nodes, provide this token in your next request.
+    next_token: ?[]const u8 = null,
+
+    /// List containing a NodeInfo object.
+    node_info_list: ?[]const NodeInfo = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .node_info_list = "NodeInfoList",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListNodesInput, options: CallOptions) !ListNodesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -80,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListNodesInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListNodesOutput {
-    var result: ListNodesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListNodesOutput, body, allocator);
-    }
+    const result: ListNodesOutput = try aws.json.parseJsonObject(
+        ListNodesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

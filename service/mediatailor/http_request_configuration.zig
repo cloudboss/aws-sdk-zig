@@ -3,7 +3,10 @@ const aws = @import("aws");
 const MethodType = @import("method_type.zig").MethodType;
 const RuntimeType = @import("runtime_type.zig").RuntimeType;
 
-/// -- Function Configuration DataStructure
+/// The configuration for an `HTTP_REQUEST` function. Specifies the HTTP method,
+/// URL, headers, body, timeout, and output expressions for the request. For
+/// more information, see
+/// [HTTP_REQUEST](https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types-http-request.html) in the *MediaTailor User Guide*.
 pub const HttpRequestConfiguration = struct {
     /// An expression that evaluates to the request body. Used with `POST` requests.
     /// The maximum size after evaluation is 64 KB.

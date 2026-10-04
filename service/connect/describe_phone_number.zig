@@ -16,8 +16,8 @@ pub const DescribePhoneNumberInput = struct {
 };
 
 pub const DescribePhoneNumberOutput = struct {
-    /// Information about a phone number that's been claimed to your Amazon Connect
-    /// instance or traffic distribution group.
+    /// Information about a phone number that's been claimed to your Connect
+    /// Customer instance or traffic distribution group.
     claimed_phone_number_summary: ?ClaimedPhoneNumberSummary = null,
 
     pub const json_field_names = .{
@@ -74,10 +74,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribePhoneNumberInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribePhoneNumberOutput {
-    var result: DescribePhoneNumberOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribePhoneNumberOutput, body, allocator);
-    }
+    const result: DescribePhoneNumberOutput = try aws.json.parseJsonObject(
+        DescribePhoneNumberOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

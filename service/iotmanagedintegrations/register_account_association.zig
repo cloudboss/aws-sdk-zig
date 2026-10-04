@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterAccountAssociat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RegisterAccountAssociationOutput {
-    var result: RegisterAccountAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RegisterAccountAssociationOutput, body, allocator);
-    }
+    const result: RegisterAccountAssociationOutput = try aws.json.parseJsonObject(
+        RegisterAccountAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

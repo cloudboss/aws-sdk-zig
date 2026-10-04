@@ -14,7 +14,9 @@ pub const CreateClusterSchedulerConfigInput = struct {
     /// Description of the cluster policy.
     description: ?[]const u8 = null,
 
-    /// Name for the cluster policy.
+    /// The name for the cluster policy. The name must be unique within the
+    /// SageMaker AI HyperPod cluster specified by `ClusterArn`. You can use the
+    /// same name in other clusters within a Region or across Regions.
     name: []const u8,
 
     /// Configuration about the monitoring schedule.

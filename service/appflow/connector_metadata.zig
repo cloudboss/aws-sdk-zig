@@ -27,7 +27,7 @@ pub const ConnectorMetadata = struct {
     /// The connector metadata specific to Amplitude.
     amplitude: ?AmplitudeMetadata = null,
 
-    /// The connector metadata specific to Amazon Connect Customer Profiles.
+    /// The connector metadata specific to Connect Customer Customer Profiles.
     customer_profiles: ?CustomerProfilesMetadata = null,
 
     /// The connector metadata specific to Datadog.

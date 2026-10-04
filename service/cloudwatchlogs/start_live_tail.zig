@@ -65,6 +65,7 @@ pub const StartLiveTailInput = struct {
 };
 
 pub const StartLiveTailOutput = struct {
+
     response_stream: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *StartLiveTailOutput) void {
@@ -78,6 +79,7 @@ pub const StartLiveTailOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartLiveTailInput, options: CallOptions) !StartLiveTailOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -86,8 +88,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartLiveTa
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "logs", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -99,11 +99,9 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartLiveTa
         return error.ServiceError;
     }
 
-    stream_resp.deinitHeaders();
-    errdefer stream_resp.body.deinit();
-
-    const response_stream = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
-    return .{ .response_stream = response_stream };
+    errdefer stream_resp.deinit();
+    const result = try deserializeStreamingResponse(allocator, &stream_resp);
+    return result;
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: StartLiveTailInput, config: *aws.Config) !aws.http.Request {
@@ -123,4 +121,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartLiveTailInput, con
     try request.headers.put(allocator, "X-Amz-Target", "Logs_20140328.StartLiveTail");
 
     return request;
+}
+
+fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !StartLiveTailOutput {
+    const result: StartLiveTailOutput = .{
+        .response_stream = try aws.event_stream_reader.EventStreamReader.init(
+            allocator,
+            stream_resp.body,
+        ),
+    };
+    stream_resp.deinitHeaders();
+    return result;
 }

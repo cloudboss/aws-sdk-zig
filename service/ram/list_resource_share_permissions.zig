@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListResourceSharePermis
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListResourceSharePermissionsOutput {
-    var result: ListResourceSharePermissionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListResourceSharePermissionsOutput, body, allocator);
-    }
+    const result: ListResourceSharePermissionsOutput = try aws.json.parseJsonObject(
+        ListResourceSharePermissionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

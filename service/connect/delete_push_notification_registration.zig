@@ -6,7 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const DeletePushNotificationRegistrationInput = struct {
-    /// The identifier of the contact within the Amazon Connect instance.
+    /// The identifier of the contact within the Connect Customer instance.
     contact_id: []const u8,
 
     /// The identifier of the Amazon Connect instance. You can [find the instance

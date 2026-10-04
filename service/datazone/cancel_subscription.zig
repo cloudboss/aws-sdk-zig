@@ -128,10 +128,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CancelSubscriptionInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CancelSubscriptionOutput {
-    var result: CancelSubscriptionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CancelSubscriptionOutput, body, allocator);
-    }
+    const result: CancelSubscriptionOutput = try aws.json.parseJsonObject(
+        CancelSubscriptionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

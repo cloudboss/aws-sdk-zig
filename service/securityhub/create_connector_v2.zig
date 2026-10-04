@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ProviderConfiguration = @import("provider_configuration.zig").ProviderConfiguration;
 const ConnectorStatus = @import("connector_status.zig").ConnectorStatus;
+const EnablementStatus = @import("enablement_status.zig").EnablementStatus;
 
 pub const CreateConnectorV2Input = struct {
     /// A unique identifier used to ensure idempotency.
@@ -50,11 +51,15 @@ pub const CreateConnectorV2Output = struct {
     /// The current status of the connectorV2.
     connector_status: ?ConnectorStatus = null,
 
+    /// The enablement status of the connector after creation.
+    enablement_status: ?EnablementStatus = null,
+
     pub const json_field_names = .{
         .auth_url = "AuthUrl",
         .connector_arn = "ConnectorArn",
         .connector_id = "ConnectorId",
         .connector_status = "ConnectorStatus",
+        .enablement_status = "EnablementStatus",
     };
 };
 
@@ -142,10 +147,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateConnectorV2Input,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateConnectorV2Output {
-    var result: CreateConnectorV2Output = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateConnectorV2Output, body, allocator);
-    }
+    const result: CreateConnectorV2Output = try aws.json.parseJsonObject(
+        CreateConnectorV2Output,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

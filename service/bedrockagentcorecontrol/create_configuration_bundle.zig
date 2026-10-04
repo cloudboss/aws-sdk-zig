@@ -38,6 +38,9 @@ pub const CreateConfigurationBundleInput = struct {
     /// The description for the configuration bundle.
     description: ?[]const u8 = null,
 
+    /// Optional KMS key ARN for encrypting component configurations.
+    kms_key_arn: ?[]const u8 = null,
+
     /// A map of tag keys and values to assign to the configuration bundle. Tags
     /// enable you to categorize your resources in different ways, for example, by
     /// purpose, owner, or environment.
@@ -51,6 +54,7 @@ pub const CreateConfigurationBundleInput = struct {
         .components = "components",
         .created_by = "createdBy",
         .description = "description",
+        .kms_key_arn = "kmsKeyArn",
         .tags = "tags",
     };
 };
@@ -150,6 +154,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateConfigurationBund
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.kms_key_arn) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"kmsKeyArn\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"tags\":");
@@ -172,10 +182,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateConfigurationBund
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateConfigurationBundleOutput {
-    var result: CreateConfigurationBundleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateConfigurationBundleOutput, body, allocator);
-    }
+    const result: CreateConfigurationBundleOutput = try aws.json.parseJsonObject(
+        CreateConfigurationBundleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

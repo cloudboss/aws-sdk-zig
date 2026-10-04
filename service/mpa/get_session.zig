@@ -179,10 +179,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSessionInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSessionOutput {
-    var result: GetSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSessionOutput, body, allocator);
-    }
+    const result: GetSessionOutput = try aws.json.parseJsonObject(
+        GetSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

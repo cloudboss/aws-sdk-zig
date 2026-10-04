@@ -24,7 +24,9 @@ pub const ListSuppressedDestinationsInput = struct {
     /// results.
     page_size: ?i32 = null,
 
-    /// The factors that caused the email address to be added to .
+    /// The factors that caused the email address to be added to the suppression
+    /// list for
+    /// your account or for a specific tenant.
     reasons: ?[]const SuppressionListReason = null,
 
     /// Used to filter the list of suppressed email destinations so that it only
@@ -32,22 +34,28 @@ pub const ListSuppressedDestinationsInput = struct {
     /// addresses that were added to the list after a specific date.
     start_date: ?i64 = null,
 
+    /// The name of the tenant whose suppression list you want to retrieve. If you
+    /// omit this
+    /// parameter, the operation targets the account-level suppression list.
+    tenant_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .end_date = "EndDate",
         .next_token = "NextToken",
         .page_size = "PageSize",
         .reasons = "Reasons",
         .start_date = "StartDate",
+        .tenant_name = "TenantName",
     };
 };
 
 pub const ListSuppressedDestinationsOutput = struct {
     /// A token that indicates that there are additional email addresses on the
     /// suppression
-    /// list for your account. To view additional suppressed addresses, issue
-    /// another request to
-    /// `ListSuppressedDestinations`, and pass this token in the
-    /// `NextToken` parameter.
+    /// list for your account or for the specified tenant. To view additional
+    /// suppressed
+    /// addresses, issue another request to `ListSuppressedDestinations`, and pass
+    /// this token in the `NextToken` parameter.
     next_token: ?[]const u8 = null,
 
     /// A list of summaries, each containing a summary for a suppressed email
@@ -135,6 +143,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSuppressedDestinati
         }
         query_has_prev = true;
     }
+    if (input.tenant_name) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "TenantName=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
     const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
@@ -152,10 +166,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSuppressedDestinati
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListSuppressedDestinationsOutput {
-    var result: ListSuppressedDestinationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListSuppressedDestinationsOutput, body, allocator);
-    }
+    const result: ListSuppressedDestinationsOutput = try aws.json.parseJsonObject(
+        ListSuppressedDestinationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -3,16 +3,19 @@ const std = @import("std");
 pub const ConversationRole = enum {
     user,
     assistant,
+    system,
 
     pub const json_field_names = .{
         .user = "user",
         .assistant = "assistant",
+        .system = "system",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .user => "user",
             .assistant => "assistant",
+            .system => "system",
         };
     }
 

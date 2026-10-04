@@ -144,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSearchJobInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSearchJobOutput {
-    var result: GetSearchJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSearchJobOutput, body, allocator);
-    }
+    const result: GetSearchJobOutput = try aws.json.parseJsonObject(
+        GetSearchJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

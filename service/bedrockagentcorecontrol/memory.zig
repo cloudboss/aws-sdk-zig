@@ -1,4 +1,5 @@
 const IndexedKey = @import("indexed_key.zig").IndexedKey;
+const NamespaceKeyEntry = @import("namespace_key_entry.zig").NamespaceKeyEntry;
 const MemoryStatus = @import("memory_status.zig").MemoryStatus;
 const MemoryStrategy = @import("memory_strategy.zig").MemoryStrategy;
 const StreamDeliveryResources = @import("stream_delivery_resources.zig").StreamDeliveryResources;
@@ -30,11 +31,21 @@ pub const Memory = struct {
     /// metadata filters.
     indexed_keys: ?[]const IndexedKey = null,
 
+    /// ARN of the resource managing this memory (e.g. a harness). When set,
+    /// strategy modifications and deletion are only allowed through the managing
+    /// resource.
+    managed_by_resource_arn: ?[]const u8 = null,
+
     /// The ARN of the IAM role that provides permissions for the memory.
     memory_execution_role_arn: ?[]const u8 = null,
 
     /// The name of the memory.
     name: []const u8,
+
+    /// The namespace variable key definitions for this memory. Namespace keys
+    /// define custom variables used in `namespaceTemplates` with optional
+    /// validation rules.
+    namespace_keys: ?[]const NamespaceKeyEntry = null,
 
     /// The current status of the memory.
     status: MemoryStatus,
@@ -57,8 +68,10 @@ pub const Memory = struct {
         .failure_reason = "failureReason",
         .id = "id",
         .indexed_keys = "indexedKeys",
+        .managed_by_resource_arn = "managedByResourceArn",
         .memory_execution_role_arn = "memoryExecutionRoleArn",
         .name = "name",
+        .namespace_keys = "namespaceKeys",
         .status = "status",
         .strategies = "strategies",
         .stream_delivery_resources = "streamDeliveryResources",

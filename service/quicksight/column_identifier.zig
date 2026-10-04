@@ -4,10 +4,14 @@ pub const ColumnIdentifier = struct {
     column_name: []const u8,
 
     /// The data set that the column belongs to.
-    data_set_identifier: []const u8,
+    data_set_identifier: []const u8 = "",
+
+    /// The topic that the column belongs to.
+    topic_identifier: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .column_name = "ColumnName",
         .data_set_identifier = "DataSetIdentifier",
+        .topic_identifier = "TopicIdentifier",
     };
 };

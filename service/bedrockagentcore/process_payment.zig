@@ -13,22 +13,23 @@ pub const ProcessPaymentInput = struct {
     /// The agent name associated with this request, used for observability.
     agent_name: ?[]const u8 = null,
 
-    /// Idempotency token to ensure request uniqueness.
+    /// A unique, case-sensitive identifier that you provide to ensure the
+    /// idempotency of the request.
     client_token: ?[]const u8 = null,
 
     /// The payment input details specific to the payment type.
     payment_input: PaymentInput,
 
-    /// The ID of the payment instrument to use for this transaction.
+    /// The ID of the payment instrument to use.
     payment_instrument_id: []const u8,
 
-    /// The ARN of the payment manager handling this payment.
+    /// The ARN of the payment manager.
     payment_manager_arn: []const u8,
 
-    /// The ID of the payment session for this transaction.
+    /// The ID of the payment session.
     payment_session_id: []const u8,
 
-    /// The type of payment being processed.
+    /// The type of payment to process.
     payment_type: PaymentType,
 
     /// The user ID associated with this payment.
@@ -50,25 +51,25 @@ pub const ProcessPaymentOutput = struct {
     /// The timestamp when the payment was created.
     created_at: i64,
 
-    /// The ID of the payment instrument used for this transaction.
+    /// The ID of the payment instrument used.
     payment_instrument_id: []const u8,
 
-    /// The ARN of the payment manager that processed this payment.
+    /// The ARN of the payment manager.
     payment_manager_arn: []const u8,
 
     /// The payment output details specific to the payment type.
     payment_output: ?PaymentOutput = null,
 
-    /// The ID of the payment session for this transaction.
+    /// The ID of the payment session used.
     payment_session_id: []const u8,
 
-    /// The type of payment that was processed.
+    /// The type of payment processed.
     payment_type: PaymentType,
 
-    /// The unique ID of the processed payment transaction.
+    /// The unique identifier of the processed payment.
     process_payment_id: []const u8,
 
-    /// The status of the payment transaction.
+    /// The status of the payment.
     status: PaymentStatus,
 
     /// The timestamp when the payment was last updated.
@@ -171,10 +172,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ProcessPaymentInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ProcessPaymentOutput {
-    var result: ProcessPaymentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ProcessPaymentOutput, body, allocator);
-    }
+    const result: ProcessPaymentOutput = try aws.json.parseJsonObject(
+        ProcessPaymentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

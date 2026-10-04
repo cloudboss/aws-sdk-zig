@@ -105,10 +105,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RemoveAllBackendsInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RemoveAllBackendsOutput {
-    var result: RemoveAllBackendsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RemoveAllBackendsOutput, body, allocator);
-    }
+    const result: RemoveAllBackendsOutput = try aws.json.parseJsonObject(
+        RemoveAllBackendsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

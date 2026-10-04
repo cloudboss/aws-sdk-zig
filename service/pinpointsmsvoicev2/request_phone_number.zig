@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const MessageType = @import("message_type.zig").MessageType;
 const NumberCapability = @import("number_capability.zig").NumberCapability;
+const NumberPreferenceItem = @import("number_preference_item.zig").NumberPreferenceItem;
 const RequestableNumberType = @import("requestable_number_type.zig").RequestableNumberType;
 const Tag = @import("tag.zig").Tag;
 const NumberStatus = @import("number_status.zig").NumberStatus;
@@ -36,6 +37,12 @@ pub const RequestPhoneNumberInput = struct {
     /// Indicates if the phone number will be used for text messages, voice
     /// messages, or both.
     number_capabilities: []const NumberCapability,
+
+    /// An optional selection preference used to request a specific phone number,
+    /// such as a number that starts with, ends with, or contains a particular digit
+    /// pattern. You can specify at most one preference. Number preferences apply
+    /// only to `TEN_DLC` requests in the `US`.
+    number_preference: ?[]const NumberPreferenceItem = null,
 
     /// The type of phone number to request.
     ///
@@ -72,6 +79,7 @@ pub const RequestPhoneNumberInput = struct {
         .iso_country_code = "IsoCountryCode",
         .message_type = "MessageType",
         .number_capabilities = "NumberCapabilities",
+        .number_preference = "NumberPreference",
         .number_type = "NumberType",
         .opt_out_list_name = "OptOutListName",
         .pool_id = "PoolId",

@@ -238,10 +238,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSubscriptionTarge
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateSubscriptionTargetOutput {
-    var result: UpdateSubscriptionTargetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateSubscriptionTargetOutput, body, allocator);
-    }
+    const result: UpdateSubscriptionTargetOutput = try aws.json.parseJsonObject(
+        UpdateSubscriptionTargetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

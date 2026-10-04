@@ -150,6 +150,7 @@ pub const SynthesizeSpeechOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SynthesizeSpeechInput, options: CallOptions) !SynthesizeSpeechOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -158,8 +159,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SynthesizeS
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "polly", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -171,6 +170,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SynthesizeS
         return error.ServiceError;
     }
 
+    errdefer stream_resp.deinit();
     const result = try deserializeStreamingResponse(allocator, &stream_resp);
     return result;
 }
@@ -251,13 +251,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SynthesizeSpeechInput, 
 
 fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !SynthesizeSpeechOutput {
     var result: SynthesizeSpeechOutput = .{};
-    result.audio_stream = stream_resp.body;
+    errdefer {
+        if (result.content_type) |value| allocator.free(value);
+    }
     if (stream_resp.headers.get("content-type")) |value| {
         result.content_type = try allocator.dupe(u8, value);
     }
     if (stream_resp.headers.get("x-amzn-requestcharacters")) |value| {
         result.request_characters = std.fmt.parseInt(i32, value, 10) catch null;
     }
+    result.audio_stream = stream_resp.body;
     stream_resp.deinitHeaders();
 
     return result;

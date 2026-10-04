@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMultiplexProgramI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateMultiplexProgramOutput {
-    var result: CreateMultiplexProgramOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateMultiplexProgramOutput, body, allocator);
-    }
+    const result: CreateMultiplexProgramOutput = try aws.json.parseJsonObject(
+        CreateMultiplexProgramOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

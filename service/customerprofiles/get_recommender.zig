@@ -28,6 +28,10 @@ pub const GetRecommenderInput = struct {
 };
 
 pub const GetRecommenderOutput = struct {
+    /// The name of the recommender version currently serving recommendations.
+    /// Omitted when no active recommender version is set.
+    active_recommender_version_name: ?[]const u8 = null,
+
     /// The timestamp of when the recommender was created.
     created_at: ?i64 = null,
 
@@ -70,6 +74,7 @@ pub const GetRecommenderOutput = struct {
     training_metrics: ?[]const TrainingMetrics = null,
 
     pub const json_field_names = .{
+        .active_recommender_version_name = "ActiveRecommenderVersionName",
         .created_at = "CreatedAt",
         .description = "Description",
         .failure_reason = "FailureReason",
@@ -150,10 +155,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRecommenderInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRecommenderOutput {
-    var result: GetRecommenderOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRecommenderOutput, body, allocator);
-    }
+    const result: GetRecommenderOutput = try aws.json.parseJsonObject(
+        GetRecommenderOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

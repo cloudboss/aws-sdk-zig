@@ -11,6 +11,9 @@ pub const ComputeScalingPolicy = struct {
     /// Valid Range: Minimum value of 20. Maximum value of 10080. Use 0 to unset and
     /// disable the scale down delay.
     ///
+    /// Idle instances retained during the scale-down delay period are billable at
+    /// standard EC2 pricing.
+    ///
     /// The scale down delay does not apply to:
     ///
     /// * Instances being replaced during infrastructure updates

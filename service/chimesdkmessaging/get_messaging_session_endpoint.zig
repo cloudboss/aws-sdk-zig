@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMessagingSessionEndp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMessagingSessionEndpointOutput {
-    var result: GetMessagingSessionEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMessagingSessionEndpointOutput, body, allocator);
-    }
+    const result: GetMessagingSessionEndpointOutput = try aws.json.parseJsonObject(
+        GetMessagingSessionEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

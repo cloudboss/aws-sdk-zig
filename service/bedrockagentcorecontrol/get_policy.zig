@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const PolicyDefinition = @import("policy_definition.zig").PolicyDefinition;
+const EnforcementMode = @import("enforcement_mode.zig").EnforcementMode;
 const PolicyStatus = @import("policy_status.zig").PolicyStatus;
 
 pub const GetPolicyInput = struct {
@@ -25,14 +26,17 @@ pub const GetPolicyOutput = struct {
     /// The timestamp when the policy was originally created.
     created_at: i64,
 
-    /// The Cedar policy statement that defines the access control rules. This
-    /// contains the actual policy logic used for agent behavior control and access
-    /// decisions.
+    /// The Cedar or Dogwood policy statement that defines the access control rules.
+    /// This contains the actual policy logic used for agent behavior control and
+    /// access decisions.
     definition: ?PolicyDefinition = null,
 
     /// The human-readable description of the policy's purpose and functionality.
     /// This helps administrators understand and manage the policy.
     description: ?[]const u8 = null,
+
+    /// The current enforcement mode of the policy.
+    enforcement_mode: ?EnforcementMode = null,
 
     /// The customer-assigned name of the policy. This is the human-readable
     /// identifier that was specified when the policy was created.
@@ -66,6 +70,7 @@ pub const GetPolicyOutput = struct {
         .created_at = "createdAt",
         .definition = "definition",
         .description = "description",
+        .enforcement_mode = "enforcementMode",
         .name = "name",
         .policy_arn = "policyArn",
         .policy_engine_id = "policyEngineId",
@@ -127,10 +132,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPolicyInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPolicyOutput {
-    var result: GetPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPolicyOutput, body, allocator);
-    }
+    const result: GetPolicyOutput = try aws.json.parseJsonObject(
+        GetPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

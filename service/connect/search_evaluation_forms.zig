@@ -9,7 +9,7 @@ const EvaluationFormSearchFilter = @import("evaluation_form_search_filter.zig").
 const EvaluationFormSearchSummary = @import("evaluation_form_search_summary.zig").EvaluationFormSearchSummary;
 
 pub const SearchEvaluationFormsInput = struct {
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -134,10 +134,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchEvaluationFormsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchEvaluationFormsOutput {
-    var result: SearchEvaluationFormsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchEvaluationFormsOutput, body, allocator);
-    }
+    const result: SearchEvaluationFormsOutput = try aws.json.parseJsonObject(
+        SearchEvaluationFormsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

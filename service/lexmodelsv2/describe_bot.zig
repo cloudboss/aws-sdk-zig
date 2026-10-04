@@ -133,10 +133,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeBotInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeBotOutput {
-    var result: DescribeBotOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeBotOutput, body, allocator);
-    }
+    const result: DescribeBotOutput = try aws.json.parseJsonObject(
+        DescribeBotOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

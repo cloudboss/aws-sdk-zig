@@ -4,12 +4,17 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const Code = @import("code.zig").Code;
 const DefinitionS3Location = @import("definition_s3_location.zig").DefinitionS3Location;
 const EngineVersion = @import("engine_version.zig").EngineVersion;
 const LoggingConfiguration = @import("logging_configuration.zig").LoggingConfiguration;
 const NetworkConfiguration = @import("network_configuration.zig").NetworkConfiguration;
 
 pub const UpdateWorkflowInput = struct {
+    /// The location of code artifacts in Amazon S3 for the updated workflow. The
+    /// service copies the code from this location at the time of the request.
+    code: ?Code = null,
+
     /// The Amazon S3 location where the updated workflow definition file is stored.
     definition_s3_location: DefinitionS3Location,
 
@@ -37,6 +42,7 @@ pub const UpdateWorkflowInput = struct {
     workflow_arn: []const u8,
 
     pub const json_field_names = .{
+        .code = "Code",
         .definition_s3_location = "DefinitionS3Location",
         .description = "Description",
         .engine_version = "EngineVersion",

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const LogDestinationType = @import("log_destination_type.zig").LogDestinationType;
+const S3TablePublishStatus = @import("s3_table_publish_status.zig").S3TablePublishStatus;
 const serde = @import("serde.zig");
 
 pub const DescribeLoggingStatusInput = struct {
@@ -27,13 +28,14 @@ pub const DescribeLoggingStatusOutput = struct {
     /// The last time that logs were delivered.
     last_successful_delivery_time: ?i64 = null,
 
-    /// The log destination type. An enum with possible values of `s3` and
-    /// `cloudwatch`.
+    /// The log destination type. An enum with possible values of `s3`,
+    /// `cloudwatch`, and `s3table`.
     log_destination_type: ?LogDestinationType = null,
 
-    /// The collection of exported log types. Possible values are `connectionlog`,
-    /// `useractivitylog`, and
-    /// `userlog`.
+    /// The collection of exported log types. When `LogDestinationType` is `s3` or
+    /// `cloudwatch`, possible values are `connectionlog`, `useractivitylog`, and
+    /// `userlog`. When `LogDestinationType` is `s3table`, the values are the names
+    /// of the system tables being published.
     log_exports: ?[]const []const u8 = null,
 
     /// `true` if logging is on, `false` if logging is off.
@@ -41,6 +43,10 @@ pub const DescribeLoggingStatusOutput = struct {
 
     /// The prefix applied to the log file names.
     s3_key_prefix: ?[]const u8 = null,
+
+    /// The status of system table publishing to S3 Tables. This field is populated
+    /// only when system table publishing is active.
+    s3_tables: ?S3TablePublishStatus = null,
 };
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeLoggingStatusInput, options: CallOptions) !DescribeLoggingStatusOutput {
@@ -126,6 +132,8 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                     result.logging_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "S3KeyPrefix")) {
                     result.s3_key_prefix = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "S3Tables")) {
+                    result.s3_tables = try serde.deserializeS3TablePublishStatus(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }

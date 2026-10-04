@@ -14,6 +14,8 @@ pub const StorageClass = enum {
     express_onezone,
     fsx_openzfs,
     fsx_ontap,
+    aws_backup_warm,
+    aws_backup_low_cost_warm,
 
     pub const json_field_names = .{
         .standard = "STANDARD",
@@ -29,6 +31,8 @@ pub const StorageClass = enum {
         .express_onezone = "EXPRESS_ONEZONE",
         .fsx_openzfs = "FSX_OPENZFS",
         .fsx_ontap = "FSX_ONTAP",
+        .aws_backup_warm = "AWS_BACKUP_WARM",
+        .aws_backup_low_cost_warm = "AWS_BACKUP_LOW_COST_WARM",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -46,6 +50,8 @@ pub const StorageClass = enum {
             .express_onezone => "EXPRESS_ONEZONE",
             .fsx_openzfs => "FSX_OPENZFS",
             .fsx_ontap => "FSX_ONTAP",
+            .aws_backup_warm => "AWS_BACKUP_WARM",
+            .aws_backup_low_cost_warm => "AWS_BACKUP_LOW_COST_WARM",
         };
     }
 

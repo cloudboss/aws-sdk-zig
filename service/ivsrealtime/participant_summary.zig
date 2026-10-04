@@ -43,11 +43,10 @@ pub const ParticipantSummary = struct {
     state: ?ParticipantState = null,
 
     /// Customer-assigned name to help identify the token; this can be used to link
-    /// a
-    /// participant to a user in the customer’s own systems. This can be any UTF-8
-    /// encoded text.
-    /// *This field is exposed to all stage participants and should not be used for
-    /// personally identifying, confidential, or sensitive information*.
+    /// a participant to a user in the customer’s own systems. This can be any UTF-8
+    /// encoded text. *This field is exposed to all stage participants and should
+    /// not be used for personally identifying, confidential, or sensitive
+    /// information*.
     user_id: ?[]const u8 = null,
 
     pub const json_field_names = .{

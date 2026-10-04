@@ -113,10 +113,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SetIdentityPoolConfigur
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SetIdentityPoolConfigurationOutput {
-    var result: SetIdentityPoolConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SetIdentityPoolConfigurationOutput, body, allocator);
-    }
+    const result: SetIdentityPoolConfigurationOutput = try aws.json.parseJsonObject(
+        SetIdentityPoolConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

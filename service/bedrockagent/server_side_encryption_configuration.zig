@@ -1,4 +1,5 @@
-/// Contains the configuration for server-side encryption.
+/// Contains the configuration for server-side encryption for your managed
+/// knowledge base.
 pub const ServerSideEncryptionConfiguration = struct {
     /// The Amazon Resource Name (ARN) of the KMS key used to encrypt the resource.
     kms_key_arn: ?[]const u8 = null,

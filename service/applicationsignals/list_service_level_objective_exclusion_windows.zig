@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListServiceLevelObjecti
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListServiceLevelObjectiveExclusionWindowsOutput {
-    var result: ListServiceLevelObjectiveExclusionWindowsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListServiceLevelObjectiveExclusionWindowsOutput, body, allocator);
-    }
+    const result: ListServiceLevelObjectiveExclusionWindowsOutput = try aws.json.parseJsonObject(
+        ListServiceLevelObjectiveExclusionWindowsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

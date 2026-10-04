@@ -204,10 +204,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPackageVersionDepen
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListPackageVersionDependenciesOutput {
-    var result: ListPackageVersionDependenciesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListPackageVersionDependenciesOutput, body, allocator);
-    }
+    const result: ListPackageVersionDependenciesOutput = try aws.json.parseJsonObject(
+        ListPackageVersionDependenciesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

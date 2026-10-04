@@ -3,12 +3,16 @@ const std = @import("std");
 pub const PhoneNumberType = enum {
     mobile,
     landline,
+    voip,
+    prepaid,
     other,
     invalid,
 
     pub const json_field_names = .{
         .mobile = "MOBILE",
         .landline = "LANDLINE",
+        .voip = "VOIP",
+        .prepaid = "PREPAID",
         .other = "OTHER",
         .invalid = "INVALID",
     };
@@ -17,6 +21,8 @@ pub const PhoneNumberType = enum {
         return switch (self) {
             .mobile => "MOBILE",
             .landline => "LANDLINE",
+            .voip => "VOIP",
+            .prepaid => "PREPAID",
             .other => "OTHER",
             .invalid => "INVALID",
         };

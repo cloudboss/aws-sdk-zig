@@ -1,8 +1,13 @@
+const Activity = @import("activity.zig").Activity;
 const Indicator = @import("indicator.zig").Indicator;
 const SignalType = @import("signal_type.zig").SignalType;
 
 /// Contains information about the signals involved in the attack sequence.
 pub const Signal = struct {
+    /// Contains information about the activities, such as API calls, that were
+    /// observed for this signal.
+    activities: ?[]const Activity = null,
+
     /// Information about the IDs of the threat actors involved in the signal.
     actor_ids: ?[]const []const u8 = null,
 
@@ -68,6 +73,7 @@ pub const Signal = struct {
     updated_at: i64,
 
     pub const json_field_names = .{
+        .activities = "Activities",
         .actor_ids = "ActorIds",
         .count = "Count",
         .created_at = "CreatedAt",

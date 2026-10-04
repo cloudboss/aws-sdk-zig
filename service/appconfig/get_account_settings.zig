@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DeletionProtectionSettings = @import("deletion_protection_settings.zig").DeletionProtectionSettings;
+const VendedMetricsSettings = @import("vended_metrics_settings.zig").VendedMetricsSettings;
 
 pub const GetAccountSettingsInput = struct {};
 
@@ -19,8 +20,12 @@ pub const GetAccountSettingsOutput = struct {
     /// interval for `ProtectionPeriodInMinutes` is 60.
     deletion_protection: ?DeletionProtectionSettings = null,
 
+    /// The configuration for vended metrics in the account.
+    vended_metrics: ?VendedMetricsSettings = null,
+
     pub const json_field_names = .{
         .deletion_protection = "DeletionProtection",
+        .vended_metrics = "VendedMetrics",
     };
 };
 
@@ -71,10 +76,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAccountSettingsInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAccountSettingsOutput {
-    var result: GetAccountSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAccountSettingsOutput, body, allocator);
-    }
+    const result: GetAccountSettingsOutput = try aws.json.parseJsonObject(
+        GetAccountSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

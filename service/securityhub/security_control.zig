@@ -1,6 +1,7 @@
 const aws = @import("aws");
 
 const ParameterConfiguration = @import("parameter_configuration.zig").ParameterConfiguration;
+const SecurityControlsProvider = @import("security_controls_provider.zig").SecurityControlsProvider;
 const ControlStatus = @import("control_status.zig").ControlStatus;
 const SeverityRating = @import("severity_rating.zig").SeverityRating;
 const UpdateStatus = @import("update_status.zig").UpdateStatus;
@@ -28,6 +29,10 @@ pub const SecurityControl = struct {
     /// An object that identifies the name of a control parameter, its current
     /// value, and whether it has been customized.
     parameters: ?[]const aws.map.MapEntry(ParameterConfiguration) = null,
+
+    /// The cloud provider whose resources the security control evaluates. For
+    /// example, `AWS` or `Azure`.
+    provider: ?SecurityControlsProvider = null,
 
     /// A link to Security Hub CSPM documentation that explains how to remediate a
     /// failed finding for a security control.
@@ -69,6 +74,7 @@ pub const SecurityControl = struct {
         .description = "Description",
         .last_update_reason = "LastUpdateReason",
         .parameters = "Parameters",
+        .provider = "Provider",
         .remediation_url = "RemediationUrl",
         .security_control_arn = "SecurityControlArn",
         .security_control_id = "SecurityControlId",

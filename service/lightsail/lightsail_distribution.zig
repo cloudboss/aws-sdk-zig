@@ -1,5 +1,6 @@
 const CacheBehaviorPerPath = @import("cache_behavior_per_path.zig").CacheBehaviorPerPath;
 const CacheSettings = @import("cache_settings.zig").CacheSettings;
+const DistributionCustomErrorResponse = @import("distribution_custom_error_response.zig").DistributionCustomErrorResponse;
 const CacheBehavior = @import("cache_behavior.zig").CacheBehavior;
 const IpAddressType = @import("ip_address_type.zig").IpAddressType;
 const ResourceLocation = @import("resource_location.zig").ResourceLocation;
@@ -39,8 +40,18 @@ pub const LightsailDistribution = struct {
     /// The timestamp when the distribution was created.
     created_at: ?i64 = null,
 
+    /// An array of objects that describe the custom error responses configured for
+    /// the
+    /// distribution.
+    custom_error_responses: ?[]const DistributionCustomErrorResponse = null,
+
     /// An object that describes the default cache behavior of the distribution.
     default_cache_behavior: ?CacheBehavior = null,
+
+    /// The object (for example, `index.html`) that the distribution returns when a
+    /// viewer requests the root URL of the distribution (`/`) instead of a specific
+    /// object.
+    default_root_object: ?[]const u8 = null,
 
     /// The domain name of the distribution.
     domain_name: ?[]const u8 = null,
@@ -111,7 +122,9 @@ pub const LightsailDistribution = struct {
         .cache_behavior_settings = "cacheBehaviorSettings",
         .certificate_name = "certificateName",
         .created_at = "createdAt",
+        .custom_error_responses = "customErrorResponses",
         .default_cache_behavior = "defaultCacheBehavior",
+        .default_root_object = "defaultRootObject",
         .domain_name = "domainName",
         .ip_address_type = "ipAddressType",
         .is_enabled = "isEnabled",

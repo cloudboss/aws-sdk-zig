@@ -92,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListProfileAttributeVal
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListProfileAttributeValuesOutput {
-    var result: ListProfileAttributeValuesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListProfileAttributeValuesOutput, body, allocator);
-    }
+    var result: ListProfileAttributeValuesOutput = try aws.json.parseJsonObject(
+        ListProfileAttributeValuesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status_code = @intCast(status);
     _ = headers;
 

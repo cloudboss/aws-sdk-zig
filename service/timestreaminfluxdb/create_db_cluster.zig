@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DbBackupConfiguration = @import("db_backup_configuration.zig").DbBackupConfiguration;
 const DbInstanceType = @import("db_instance_type.zig").DbInstanceType;
 const DbStorageType = @import("db_storage_type.zig").DbStorageType;
 const ClusterDeploymentType = @import("cluster_deployment_type.zig").ClusterDeploymentType;
@@ -23,6 +24,10 @@ pub const CreateDbClusterInput = struct {
     /// (the duration of time that each data point persists). A bucket belongs to an
     /// organization.
     bucket: ?[]const u8 = null,
+
+    /// A list of backup configurations to enable automated backups for the DB
+    /// cluster.
+    db_backup_configurations: ?[]const DbBackupConfiguration = null,
 
     /// The Timestream for InfluxDB DB instance type to run InfluxDB on.
     db_instance_type: DbInstanceType,
@@ -50,6 +55,10 @@ pub const CreateDbClusterInput = struct {
     /// Specifies the behavior of failure recovery when the primary node of the
     /// cluster fails.
     failover_mode: ?FailoverMode = null,
+
+    /// The Amazon Web Services KMS key identifier to use for encryption of the DB
+    /// cluster. Can be a key ID, key ARN, alias name, or alias ARN.
+    kms_key_id: ?[]const u8 = null,
 
     /// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
     log_delivery_configuration: ?LogDeliveryConfiguration = null,
@@ -117,11 +126,13 @@ pub const CreateDbClusterInput = struct {
     pub const json_field_names = .{
         .allocated_storage = "allocatedStorage",
         .bucket = "bucket",
+        .db_backup_configurations = "dbBackupConfigurations",
         .db_instance_type = "dbInstanceType",
         .db_parameter_group_identifier = "dbParameterGroupIdentifier",
         .db_storage_type = "dbStorageType",
         .deployment_type = "deploymentType",
         .failover_mode = "failoverMode",
+        .kms_key_id = "kmsKeyId",
         .log_delivery_configuration = "logDeliveryConfiguration",
         .maintenance_schedule = "maintenanceSchedule",
         .name = "name",

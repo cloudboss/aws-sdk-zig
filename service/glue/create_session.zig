@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SessionCommand = @import("session_command.zig").SessionCommand;
 const ConnectionsList = @import("connections_list.zig").ConnectionsList;
+const SessionType = @import("session_type.zig").SessionType;
 const WorkerType = @import("worker_type.zig").WorkerType;
 const Session = @import("session.zig").Session;
 
@@ -52,6 +53,9 @@ pub const CreateSessionInput = struct {
 
     /// The name of the SecurityConfiguration structure to be used with the session
     security_configuration: ?[]const u8 = null,
+
+    /// The type of session to create.
+    session_type: ?SessionType = null,
 
     /// The map of key value pairs (tags) belonging to the session.
     tags: ?[]const aws.map.StringMapEntry = null,
@@ -111,6 +115,7 @@ pub const CreateSessionInput = struct {
         .request_origin = "RequestOrigin",
         .role = "Role",
         .security_configuration = "SecurityConfiguration",
+        .session_type = "SessionType",
         .tags = "Tags",
         .timeout = "Timeout",
         .worker_type = "WorkerType",

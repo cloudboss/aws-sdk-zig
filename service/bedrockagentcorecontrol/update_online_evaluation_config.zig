@@ -4,9 +4,12 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const ClusteringConfig = @import("clustering_config.zig").ClusteringConfig;
 const DataSourceConfig = @import("data_source_config.zig").DataSourceConfig;
 const EvaluatorReference = @import("evaluator_reference.zig").EvaluatorReference;
 const OnlineEvaluationExecutionStatus = @import("online_evaluation_execution_status.zig").OnlineEvaluationExecutionStatus;
+const Insight = @import("insight.zig").Insight;
+const OutputConfig = @import("output_config.zig").OutputConfig;
 const Rule = @import("rule.zig").Rule;
 const OnlineEvaluationConfigStatus = @import("online_evaluation_config_status.zig").OnlineEvaluationConfigStatus;
 
@@ -18,6 +21,9 @@ pub const UpdateOnlineEvaluationConfigInput = struct {
     /// [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
     client_token: ?[]const u8 = null,
+
+    /// The updated clustering configuration for periodic batch evaluation.
+    clustering_config: ?ClusteringConfig = null,
 
     /// The updated data source configuration specifying CloudWatch log groups and
     /// service names to monitor.
@@ -36,8 +42,13 @@ pub const UpdateOnlineEvaluationConfigInput = struct {
     /// The updated execution status to enable or disable the online evaluation.
     execution_status: ?OnlineEvaluationExecutionStatus = null,
 
+    /// The updated list of insight types to run against agent sessions.
+    insights: ?[]const Insight = null,
+
     /// The unique identifier of the online evaluation configuration to update.
     online_evaluation_config_id: []const u8,
+
+    output_config: ?OutputConfig = null,
 
     /// The updated evaluation rule containing sampling configuration, filters, and
     /// session settings.
@@ -45,12 +56,15 @@ pub const UpdateOnlineEvaluationConfigInput = struct {
 
     pub const json_field_names = .{
         .client_token = "clientToken",
+        .clustering_config = "clusteringConfig",
         .data_source_config = "dataSourceConfig",
         .description = "description",
         .evaluation_execution_role_arn = "evaluationExecutionRoleArn",
         .evaluators = "evaluators",
         .execution_status = "executionStatus",
+        .insights = "insights",
         .online_evaluation_config_id = "onlineEvaluationConfigId",
+        .output_config = "outputConfig",
         .rule = "rule",
     };
 };
@@ -132,6 +146,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateOnlineEvaluationC
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.clustering_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"clusteringConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.data_source_config) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"dataSourceConfig\":");
@@ -162,6 +182,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateOnlineEvaluationC
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.insights) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"insights\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.output_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"outputConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.rule) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"rule\":");
@@ -184,10 +216,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateOnlineEvaluationC
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateOnlineEvaluationConfigOutput {
-    var result: UpdateOnlineEvaluationConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateOnlineEvaluationConfigOutput, body, allocator);
-    }
+    const result: UpdateOnlineEvaluationConfigOutput = try aws.json.parseJsonObject(
+        UpdateOnlineEvaluationConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

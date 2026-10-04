@@ -8,9 +8,8 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 pub const CompleteAttachedFileUploadInput = struct {
     /// The resource to which the attached file is (being) uploaded to. The
     /// supported resources are
-    /// [Cases](https://docs.aws.amazon.com/connect/latest/adminguide/cases.html)
-    /// and
-    /// [Email](https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html).
+    /// [Cases](https://docs.aws.amazon.com/connect/latest/adminguide/cases.html),
+    /// [Email](https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html), and [Task](https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html).
     ///
     /// This value must be a valid ARN.
     associated_resource_arn: []const u8,
@@ -18,7 +17,7 @@ pub const CompleteAttachedFileUploadInput = struct {
     /// The unique identifier of the attached file resource.
     file_id: []const u8,
 
-    /// The unique identifier of the Amazon Connect instance.
+    /// The unique identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     pub const json_field_names = .{

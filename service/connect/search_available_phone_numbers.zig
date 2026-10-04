@@ -9,8 +9,8 @@ const PhoneNumberType = @import("phone_number_type.zig").PhoneNumberType;
 const AvailableNumberSummary = @import("available_number_summary.zig").AvailableNumberSummary;
 
 pub const SearchAvailablePhoneNumbersInput = struct {
-    /// The identifier of the Amazon Connect instance that phone numbers are claimed
-    /// to. You
+    /// The identifier of the Connect Customer instance that phone numbers are
+    /// claimed to. You
     /// can [find the
     /// instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance. You must enter `InstanceId` or `TargetArn`.
@@ -34,7 +34,7 @@ pub const SearchAvailablePhoneNumbersInput = struct {
     /// The type of phone number.
     phone_number_type: PhoneNumberType,
 
-    /// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+    /// The Amazon Resource Name (ARN) for Connect Customer instances or traffic
     /// distribution groups that phone number inbound traffic is routed through. You
     /// must enter `InstanceId` or `TargetArn`.
     target_arn: ?[]const u8 = null,
@@ -51,8 +51,8 @@ pub const SearchAvailablePhoneNumbersInput = struct {
 };
 
 pub const SearchAvailablePhoneNumbersOutput = struct {
-    /// A list of available phone numbers that you can claim to your Amazon Connect
-    /// instance or traffic distribution group.
+    /// A list of available phone numbers that you can claim to your Connect
+    /// Customer instance or traffic distribution group.
     available_numbers_list: ?[]const AvailableNumberSummary = null,
 
     /// If there are additional results, this is the token for the next set of
@@ -155,10 +155,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchAvailablePhoneNum
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchAvailablePhoneNumbersOutput {
-    var result: SearchAvailablePhoneNumbersOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchAvailablePhoneNumbersOutput, body, allocator);
-    }
+    const result: SearchAvailablePhoneNumbersOutput = try aws.json.parseJsonObject(
+        SearchAvailablePhoneNumbersOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

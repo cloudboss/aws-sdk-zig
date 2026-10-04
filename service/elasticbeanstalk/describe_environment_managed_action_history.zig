@@ -26,8 +26,7 @@ pub const DescribeEnvironmentManagedActionHistoryOutput = struct {
     managed_action_history_items: ?[]const ManagedActionHistoryItem = null,
 
     /// A pagination token that you pass to DescribeEnvironmentManagedActionHistory
-    /// to get the next page of
-    /// results.
+    /// to get the next page of results.
     next_token: ?[]const u8 = null,
 };
 

@@ -6,6 +6,7 @@ const converse_ = @import("converse.zig");
 const converse_stream = @import("converse_stream.zig");
 const count_tokens = @import("count_tokens.zig");
 const get_async_invoke = @import("get_async_invoke.zig");
+const invoke_guardrail_checks = @import("invoke_guardrail_checks.zig");
 const invoke_model = @import("invoke_model.zig");
 const invoke_model_with_bidirectional_stream = @import("invoke_model_with_bidirectional_stream.zig");
 const invoke_model_with_response_stream = @import("invoke_model_with_response_stream.zig");
@@ -183,6 +184,13 @@ pub const Client = struct {
     /// Retrieve information about an asynchronous invocation.
     pub fn getAsyncInvoke(self: *Self, allocator: std.mem.Allocator, input: get_async_invoke.GetAsyncInvokeInput, options: CallOptions) !get_async_invoke.GetAsyncInvokeOutput {
         return get_async_invoke.execute(self, allocator, input, options);
+    }
+
+    /// Evaluates messages against inline guardrail checks. You specify the check
+    /// configurations directly in the request, and Amazon Bedrock returns per-check
+    /// results with severity or confidence scores.
+    pub fn invokeGuardrailChecks(self: *Self, allocator: std.mem.Allocator, input: invoke_guardrail_checks.InvokeGuardrailChecksInput, options: CallOptions) !invoke_guardrail_checks.InvokeGuardrailChecksOutput {
+        return invoke_guardrail_checks.execute(self, allocator, input, options);
     }
 
     /// Invokes the specified Amazon Bedrock model to run inference using the prompt

@@ -17,10 +17,16 @@ pub const DaemonDeploymentRevisionDetail = struct {
     /// The total number of instances running daemon tasks for this revision.
     total_running_instance_count: ?i32 = null,
 
+    /// The total number of instances running without the daemon task for this
+    /// revision, across all capacity providers. These instances aren't included in
+    /// `totalRunningInstanceCount`.
+    total_without_daemon_instance_count: ?i32 = null,
+
     pub const json_field_names = .{
         .arn = "arn",
         .capacity_providers = "capacityProviders",
         .total_draining_instance_count = "totalDrainingInstanceCount",
         .total_running_instance_count = "totalRunningInstanceCount",
+        .total_without_daemon_instance_count = "totalWithoutDaemonInstanceCount",
     };
 };

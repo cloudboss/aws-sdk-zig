@@ -3,6 +3,7 @@ const aws = @import("aws");
 const AccountAccessType = @import("account_access_type.zig").AccountAccessType;
 const AuthenticationSummary = @import("authentication_summary.zig").AuthenticationSummary;
 const DataSourceType = @import("data_source_type.zig").DataSourceType;
+const IPAddressType = @import("ip_address_type.zig").IPAddressType;
 const LicenseType = @import("license_type.zig").LicenseType;
 const NetworkAccessConfiguration = @import("network_access_configuration.zig").NetworkAccessConfiguration;
 const NotificationDestinationType = @import("notification_destination_type.zig").NotificationDestinationType;
@@ -35,6 +36,10 @@ pub const WorkspaceDescription = struct {
     /// Services console, and the `permissionType` is `SERVICE_MANAGED`.
     data_sources: []const DataSourceType,
 
+    /// If the workspace is in the `DEGRADED` status, this field describes the
+    /// reason the workspace is degraded.
+    degraded_workspace_reason: ?[]const u8 = null,
+
     /// The user-defined description of the workspace.
     description: ?[]const u8 = null,
 
@@ -65,6 +70,10 @@ pub const WorkspaceDescription = struct {
 
     /// The unique ID of this workspace.
     id: []const u8,
+
+    /// The type of IP addresses supported for connection to the workspace. Valid
+    /// values are `IPv4` and `DualStack`.
+    ip_address_type: ?IPAddressType = null,
 
     /// The ID or ARN of the Key Management Service key used for encrypting
     /// workspace data.
@@ -147,6 +156,7 @@ pub const WorkspaceDescription = struct {
         .authentication = "authentication",
         .created = "created",
         .data_sources = "dataSources",
+        .degraded_workspace_reason = "degradedWorkspaceReason",
         .description = "description",
         .endpoint = "endpoint",
         .free_trial_consumed = "freeTrialConsumed",
@@ -154,6 +164,7 @@ pub const WorkspaceDescription = struct {
         .grafana_token = "grafanaToken",
         .grafana_version = "grafanaVersion",
         .id = "id",
+        .ip_address_type = "ipAddressType",
         .kms_key_id = "kmsKeyId",
         .license_expiration = "licenseExpiration",
         .license_type = "licenseType",

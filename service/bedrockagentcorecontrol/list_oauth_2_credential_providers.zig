@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListOauth2CredentialPro
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListOauth2CredentialProvidersOutput {
-    var result: ListOauth2CredentialProvidersOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListOauth2CredentialProvidersOutput, body, allocator);
-    }
+    const result: ListOauth2CredentialProvidersOutput = try aws.json.parseJsonObject(
+        ListOauth2CredentialProvidersOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -171,10 +171,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEventBridgeRuleTe
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateEventBridgeRuleTemplateOutput {
-    var result: CreateEventBridgeRuleTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateEventBridgeRuleTemplateOutput, body, allocator);
-    }
+    const result: CreateEventBridgeRuleTemplateOutput = try aws.json.parseJsonObject(
+        CreateEventBridgeRuleTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

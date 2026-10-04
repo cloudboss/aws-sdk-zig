@@ -91,10 +91,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeletePrivateGraphEndpo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeletePrivateGraphEndpointOutput {
-    var result: DeletePrivateGraphEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeletePrivateGraphEndpointOutput, body, allocator);
-    }
+    const result: DeletePrivateGraphEndpointOutput = try aws.json.parseJsonObject(
+        DeletePrivateGraphEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

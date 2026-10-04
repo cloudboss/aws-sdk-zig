@@ -72,10 +72,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInstanceCommunicatio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetInstanceCommunicationLimitsOutput {
-    var result: GetInstanceCommunicationLimitsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetInstanceCommunicationLimitsOutput, body, allocator);
-    }
+    const result: GetInstanceCommunicationLimitsOutput = try aws.json.parseJsonObject(
+        GetInstanceCommunicationLimitsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

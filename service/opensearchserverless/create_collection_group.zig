@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const CollectionGroupCapacityLimits = @import("collection_group_capacity_limits.zig").CollectionGroupCapacityLimits;
+const ServerlessGeneration = @import("serverless_generation.zig").ServerlessGeneration;
 const StandbyReplicas = @import("standby_replicas.zig").StandbyReplicas;
 const Tag = @import("tag.zig").Tag;
 const CreateCollectionGroupDetail = @import("create_collection_group_detail.zig").CreateCollectionGroupDetail;
@@ -21,6 +22,10 @@ pub const CreateCollectionGroupInput = struct {
     /// A description of the collection group.
     description: ?[]const u8 = null,
 
+    /// The generation of Amazon OpenSearch Serverless for the collection group.
+    /// Valid values are `CLASSIC` and `NEXTGEN`.
+    generation: ?ServerlessGeneration = null,
+
     /// The name of the collection group.
     name: []const u8,
 
@@ -35,6 +40,7 @@ pub const CreateCollectionGroupInput = struct {
         .capacity_limits = "capacityLimits",
         .client_token = "clientToken",
         .description = "description",
+        .generation = "generation",
         .name = "name",
         .standby_replicas = "standbyReplicas",
         .tags = "tags",

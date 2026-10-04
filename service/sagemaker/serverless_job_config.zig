@@ -34,6 +34,24 @@ pub const ServerlessJobConfig = struct {
     /// The parameter-efficient fine-tuning configuration.
     peft: ?Peft = null,
 
+    /// The maximum sequence length, in tokens, that the customization job supports.
+    /// SageMaker uses this value to select a training configuration for the base
+    /// model that you specify. The parameter supports the following values:
+    ///
+    /// * `1K`
+    /// * `2K`
+    /// * `4K`
+    /// * `8K`
+    /// * `16K`
+    /// * `32K`
+    /// * `64K`
+    /// * `128K`
+    ///
+    /// If you don't specify a value, SageMaker selects a training configuration
+    /// based on the other values that you specify. The selection is not restricted
+    /// to a particular sequence length.
+    sequence_length: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .accept_eula = "AcceptEula",
         .base_model_arn = "BaseModelArn",
@@ -42,5 +60,6 @@ pub const ServerlessJobConfig = struct {
         .evaluator_arn = "EvaluatorArn",
         .job_type = "JobType",
         .peft = "Peft",
+        .sequence_length = "SequenceLength",
     };
 };

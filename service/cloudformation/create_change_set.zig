@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Capability = @import("capability.zig").Capability;
 const ChangeSetType = @import("change_set_type.zig").ChangeSetType;
+const DeploymentConfig = @import("deployment_config.zig").DeploymentConfig;
 const DeploymentMode = @import("deployment_mode.zig").DeploymentMode;
 const OnStackFailure = @import("on_stack_failure.zig").OnStackFailure;
 const Parameter = @import("parameter.zig").Parameter;
@@ -144,6 +145,11 @@ pub const CreateChangeSetInput = struct {
     /// to ensure that CloudFormation successfully received them.
     client_token: ?[]const u8 = null,
 
+    /// The deployment configuration for this stack operation, including the
+    /// deployment
+    /// mode.
+    deployment_config: ?DeploymentConfig = null,
+
     /// Determines how CloudFormation handles configuration drift during deployment.
     ///
     /// * `REVERT_DRIFT` – Creates a drift-aware change set that brings actual
@@ -158,6 +164,12 @@ pub const CreateChangeSetInput = struct {
 
     /// A description to help you identify this change set.
     description: ?[]const u8 = null,
+
+    /// Set to `true` to disable pre-deployment validations in changeset or stack
+    /// operations.
+    ///
+    /// Default: `false`
+    disable_validation: ?bool = null,
 
     /// Indicates if the change set auto-imports resources that already exist. For
     /// more
@@ -377,6 +389,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateChangeSetInput, c
         try body_buf.appendSlice(allocator, "&ClientToken=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
+    if (input.deployment_config) |v| {
+        if (v.disable_rollback) |sv| {
+            try body_buf.appendSlice(allocator, "&DeploymentConfig.DisableRollback=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, if (sv) "true" else "false");
+        }
+        if (v.mode) |sv| {
+            try body_buf.appendSlice(allocator, "&DeploymentConfig.Mode=");
+            try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
+        }
+    }
     if (input.deployment_mode) |v| {
         try body_buf.appendSlice(allocator, "&DeploymentMode=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
@@ -384,6 +406,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateChangeSetInput, c
     if (input.description) |v| {
         try body_buf.appendSlice(allocator, "&Description=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.disable_validation) |v| {
+        try body_buf.appendSlice(allocator, "&DisableValidation=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.import_existing_resources) |v| {
         try body_buf.appendSlice(allocator, "&ImportExistingResources=");

@@ -170,10 +170,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetWebExperienceInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetWebExperienceOutput {
-    var result: GetWebExperienceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetWebExperienceOutput, body, allocator);
-    }
+    const result: GetWebExperienceOutput = try aws.json.parseJsonObject(
+        GetWebExperienceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

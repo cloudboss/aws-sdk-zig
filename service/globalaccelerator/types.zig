@@ -27,6 +27,7 @@ pub const EndpointGroup = @import("endpoint_group.zig").EndpointGroup;
 pub const EndpointIdentifier = @import("endpoint_identifier.zig").EndpointIdentifier;
 pub const HealthCheckProtocol = @import("health_check_protocol.zig").HealthCheckProtocol;
 pub const HealthState = @import("health_state.zig").HealthState;
+pub const IpAddressDetail = @import("ip_address_detail.zig").IpAddressDetail;
 pub const IpAddressFamily = @import("ip_address_family.zig").IpAddressFamily;
 pub const IpAddressType = @import("ip_address_type.zig").IpAddressType;
 pub const IpSet = @import("ip_set.zig").IpSet;

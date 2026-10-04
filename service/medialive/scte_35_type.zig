@@ -4,16 +4,19 @@ const std = @import("std");
 pub const Scte35Type = enum {
     none,
     scte_35_without_segmentation,
+    scte_35_without_idr,
 
     pub const json_field_names = .{
         .none = "NONE",
         .scte_35_without_segmentation = "SCTE_35_WITHOUT_SEGMENTATION",
+        .scte_35_without_idr = "SCTE_35_WITHOUT_IDR",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .none => "NONE",
             .scte_35_without_segmentation => "SCTE_35_WITHOUT_SEGMENTATION",
+            .scte_35_without_idr => "SCTE_35_WITHOUT_IDR",
         };
     }
 

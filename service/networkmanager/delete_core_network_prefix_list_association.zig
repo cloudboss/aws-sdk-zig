@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteCoreNetworkPrefix
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteCoreNetworkPrefixListAssociationOutput {
-    var result: DeleteCoreNetworkPrefixListAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteCoreNetworkPrefixListAssociationOutput, body, allocator);
-    }
+    const result: DeleteCoreNetworkPrefixListAssociationOutput = try aws.json.parseJsonObject(
+        DeleteCoreNetworkPrefixListAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

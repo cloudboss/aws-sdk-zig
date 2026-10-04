@@ -9,6 +9,7 @@ const delete_config_rule = @import("delete_config_rule.zig");
 const delete_configuration_aggregator = @import("delete_configuration_aggregator.zig");
 const delete_configuration_recorder = @import("delete_configuration_recorder.zig");
 const delete_conformance_pack = @import("delete_conformance_pack.zig");
+const delete_connector = @import("delete_connector.zig");
 const delete_delivery_channel = @import("delete_delivery_channel.zig");
 const delete_evaluation_results = @import("delete_evaluation_results.zig");
 const delete_organization_config_rule = @import("delete_organization_config_rule.zig");
@@ -58,6 +59,7 @@ const get_compliance_summary_by_config_rule = @import("get_compliance_summary_by
 const get_compliance_summary_by_resource_type = @import("get_compliance_summary_by_resource_type.zig");
 const get_conformance_pack_compliance_details = @import("get_conformance_pack_compliance_details.zig");
 const get_conformance_pack_compliance_summary = @import("get_conformance_pack_compliance_summary.zig");
+const get_connector = @import("get_connector.zig");
 const get_custom_rule_policy = @import("get_custom_rule_policy.zig");
 const get_discovered_resource_counts = @import("get_discovered_resource_counts.zig");
 const get_organization_config_rule_detailed_status = @import("get_organization_config_rule_detailed_status.zig");
@@ -69,6 +71,7 @@ const get_stored_query = @import("get_stored_query.zig");
 const list_aggregate_discovered_resources = @import("list_aggregate_discovered_resources.zig");
 const list_configuration_recorders = @import("list_configuration_recorders.zig");
 const list_conformance_pack_compliance_scores = @import("list_conformance_pack_compliance_scores.zig");
+const list_connectors = @import("list_connectors.zig");
 const list_discovered_resources = @import("list_discovered_resources.zig");
 const list_resource_evaluations = @import("list_resource_evaluations.zig");
 const list_stored_queries = @import("list_stored_queries.zig");
@@ -78,6 +81,7 @@ const put_config_rule = @import("put_config_rule.zig");
 const put_configuration_aggregator = @import("put_configuration_aggregator.zig");
 const put_configuration_recorder = @import("put_configuration_recorder.zig");
 const put_conformance_pack = @import("put_conformance_pack.zig");
+const put_connector = @import("put_connector.zig");
 const put_delivery_channel = @import("put_delivery_channel.zig");
 const put_evaluations = @import("put_evaluations.zig");
 const put_external_evaluation = @import("put_external_evaluation.zig");
@@ -89,6 +93,7 @@ const put_resource_config = @import("put_resource_config.zig");
 const put_retention_configuration = @import("put_retention_configuration.zig");
 const put_service_linked_configuration_recorder = @import("put_service_linked_configuration_recorder.zig");
 const put_stored_query = @import("put_stored_query.zig");
+const put_third_party_service_linked_configuration_recorder = @import("put_third_party_service_linked_configuration_recorder.zig");
 const select_aggregate_resource_config = @import("select_aggregate_resource_config.zig");
 const select_resource_config = @import("select_resource_config.zig");
 const start_config_rules_evaluation = @import("start_config_rules_evaluation.zig");
@@ -251,6 +256,11 @@ pub const Client = struct {
     /// evaluations will not be recorded in the associated resource’s history.
     pub fn deleteConformancePack(self: *Self, allocator: std.mem.Allocator, input: delete_conformance_pack.DeleteConformancePackInput, options: CallOptions) !delete_conformance_pack.DeleteConformancePackOutput {
         return delete_conformance_pack.execute(self, allocator, input, options);
+    }
+
+    /// Deletes the specified connector.
+    pub fn deleteConnector(self: *Self, allocator: std.mem.Allocator, input: delete_connector.DeleteConnectorInput, options: CallOptions) !delete_connector.DeleteConnectorOutput {
+        return delete_connector.execute(self, allocator, input, options);
     }
 
     /// Deletes the delivery channel.
@@ -867,6 +877,11 @@ pub const Client = struct {
         return get_conformance_pack_compliance_summary.execute(self, allocator, input, options);
     }
 
+    /// Returns the details of the specified connector.
+    pub fn getConnector(self: *Self, allocator: std.mem.Allocator, input: get_connector.GetConnectorInput, options: CallOptions) !get_connector.GetConnectorOutput {
+        return get_connector.execute(self, allocator, input, options);
+    }
+
     /// Returns the policy definition containing the logic for your Config Custom
     /// Policy rule.
     pub fn getCustomRulePolicy(self: *Self, allocator: std.mem.Allocator, input: get_custom_rule_policy.GetCustomRulePolicyInput, options: CallOptions) !get_custom_rule_policy.GetCustomRulePolicyOutput {
@@ -1027,6 +1042,11 @@ pub const Client = struct {
     /// `INSUFFICIENT_DATA`.
     pub fn listConformancePackComplianceScores(self: *Self, allocator: std.mem.Allocator, input: list_conformance_pack_compliance_scores.ListConformancePackComplianceScoresInput, options: CallOptions) !list_conformance_pack_compliance_scores.ListConformancePackComplianceScoresOutput {
         return list_conformance_pack_compliance_scores.execute(self, allocator, input, options);
+    }
+
+    /// Returns a list of connectors depending on the filters you specify.
+    pub fn listConnectors(self: *Self, allocator: std.mem.Allocator, input: list_connectors.ListConnectorsInput, options: CallOptions) !list_connectors.ListConnectorsOutput {
+        return list_connectors.execute(self, allocator, input, options);
     }
 
     /// Returns a list of resource
@@ -1303,6 +1323,31 @@ pub const Client = struct {
     /// [TagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html) and [UntagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html) to update tags after creation.
     pub fn putConformancePack(self: *Self, allocator: std.mem.Allocator, input: put_conformance_pack.PutConformancePackInput, options: CallOptions) !put_conformance_pack.PutConformancePackOutput {
         return put_conformance_pack.execute(self, allocator, input, options);
+    }
+
+    /// Creates a connector that specifies the connection between a third-party
+    /// cloud service provider and Config.
+    ///
+    /// A connector is required to create a service-linked configuration recorder
+    /// for a third-party cloud service provider using the
+    /// [PutThirdPartyServiceLinkedConfigurationRecorder](https://docs.aws.amazon.com/config/latest/APIReference/API_PutThirdPartyServiceLinkedConfigurationRecorder.html) operation.
+    ///
+    /// This API creates a service-linked role `AWSServiceRoleForConfigThirdParty`
+    /// in your account. The service-linked role is created only when the role does
+    /// not exist in your account.
+    ///
+    /// **Connectors cannot be updated**
+    ///
+    /// To update the connector configuration, you must delete all associated
+    /// configuration recorders, delete the connector, and recreate it with the
+    /// updated configuration.
+    ///
+    /// **Tags are added at creation and cannot be updated with this operation**
+    ///
+    /// Use
+    /// [TagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html) and [UntagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html) to update tags after creation.
+    pub fn putConnector(self: *Self, allocator: std.mem.Allocator, input: put_connector.PutConnectorInput, options: CallOptions) !put_connector.PutConnectorOutput {
+        return put_connector.execute(self, allocator, input, options);
     }
 
     /// Creates or updates a delivery channel to deliver configuration
@@ -1652,6 +1697,33 @@ pub const Client = struct {
     /// different.
     pub fn putStoredQuery(self: *Self, allocator: std.mem.Allocator, input: put_stored_query.PutStoredQueryInput, options: CallOptions) !put_stored_query.PutStoredQueryOutput {
         return put_stored_query.execute(self, allocator, input, options);
+    }
+
+    /// Creates or updates a service-linked configuration recorder that is linked to
+    /// a third-party cloud service provider based on the `ConnectorArn` you
+    /// specify.
+    ///
+    /// The configuration recorder's `name`, `recordingGroup`, `recordingMode`, and
+    /// `recordingScope` is set by the service that is linked to the configuration
+    /// recorder.
+    ///
+    /// If a service-linked configuration recorder already exists for the specified
+    /// service principal and connector, calling this operation again updates the
+    /// `ScopeConfiguration`.
+    ///
+    /// **This operation can only be called by the Amazon Web Services service
+    /// linked to the configuration recorder**
+    ///
+    /// Customers cannot call this operation directly. Only the linked Amazon Web
+    /// Services service can create or update the service-linked configuration
+    /// recorder.
+    ///
+    /// **Tags are added at creation and cannot be updated with this operation**
+    ///
+    /// Use
+    /// [TagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_TagResource.html) and [UntagResource](https://docs.aws.amazon.com/config/latest/APIReference/API_UntagResource.html) to update tags after creation.
+    pub fn putThirdPartyServiceLinkedConfigurationRecorder(self: *Self, allocator: std.mem.Allocator, input: put_third_party_service_linked_configuration_recorder.PutThirdPartyServiceLinkedConfigurationRecorderInput, options: CallOptions) !put_third_party_service_linked_configuration_recorder.PutThirdPartyServiceLinkedConfigurationRecorderOutput {
+        return put_third_party_service_linked_configuration_recorder.execute(self, allocator, input, options);
     }
 
     /// Accepts a structured query language (SQL) SELECT command and an aggregator
@@ -2044,6 +2116,13 @@ pub const Client = struct {
     }
 
     pub fn listConformancePackComplianceScoresPaginator(self: *Self, params: list_conformance_pack_compliance_scores.ListConformancePackComplianceScoresInput) paginator.ListConformancePackComplianceScoresPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listConnectorsPaginator(self: *Self, params: list_connectors.ListConnectorsInput) paginator.ListConnectorsPaginator {
         return .{
             .client = self,
             .params = params,

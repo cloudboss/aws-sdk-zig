@@ -1,3 +1,4 @@
+const CertificateKeyPairOrigin = @import("certificate_key_pair_origin.zig").CertificateKeyPairOrigin;
 const DomainValidation = @import("domain_validation.zig").DomainValidation;
 const ExtendedKeyUsage = @import("extended_key_usage.zig").ExtendedKeyUsage;
 const FailureReason = @import("failure_reason.zig").FailureReason;
@@ -10,10 +11,17 @@ const RenewalSummary = @import("renewal_summary.zig").RenewalSummary;
 const RevocationReason = @import("revocation_reason.zig").RevocationReason;
 const CertificateStatus = @import("certificate_status.zig").CertificateStatus;
 const CertificateType = @import("certificate_type.zig").CertificateType;
+const UpdateSummary = @import("update_summary.zig").UpdateSummary;
 
 /// Contains metadata about an ACM certificate. This structure is returned in
 /// the response to a DescribeCertificate request.
 pub const CertificateDetail = struct {
+    /// The ACME account identifier associated with the certificate.
+    acme_account_id: ?[]const u8 = null,
+
+    /// The ARN of the ACME endpoint used to issue the certificate.
+    acme_endpoint_arn: ?[]const u8 = null,
+
     /// The Amazon Resource Name (ARN) of the certificate. For more information
     /// about ARNs, see [Amazon Resource Names
     /// (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in the *Amazon Web Services General Reference*.
@@ -24,6 +32,9 @@ pub const CertificateDetail = struct {
     ///
     /// `arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012`
     certificate_authority_arn: ?[]const u8 = null,
+
+    /// The origin of the certificate's key pair.
+    certificate_key_pair_origin: ?CertificateKeyPairOrigin = null,
 
     /// The time at which the certificate was requested.
     created_at: ?i64 = null,
@@ -84,11 +95,9 @@ pub const CertificateDetail = struct {
     /// The time before which the certificate is not valid.
     not_before: ?i64 = null,
 
-    /// Value that specifies whether to add the certificate to a transparency log.
-    /// Certificate transparency makes it possible to detect SSL certificates that
-    /// have been mistakenly or maliciously issued. A browser might respond to
-    /// certificate that has not been logged by showing an error message. The logs
-    /// are cryptographically secure.
+    /// Contains the certificate options. Certificate transparency logging opt-out
+    /// is no longer available. All public certificates are recorded in a
+    /// certificate transparency log.
     options: ?CertificateOptions = null,
 
     /// Specifies whether the certificate is eligible for renewal. At this time,
@@ -145,9 +154,17 @@ pub const CertificateDetail = struct {
     /// Certificates](https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html) in the *Certificate Manager User Guide*.
     @"type": ?CertificateType = null,
 
+    /// Contains information about the most recent update to the certificate. This
+    /// field exists only when the certificate type is `AMAZON_ISSUED` and a
+    /// certificate update has been requested.
+    update_summary: ?UpdateSummary = null,
+
     pub const json_field_names = .{
+        .acme_account_id = "AcmeAccountId",
+        .acme_endpoint_arn = "AcmeEndpointArn",
         .certificate_arn = "CertificateArn",
         .certificate_authority_arn = "CertificateAuthorityArn",
+        .certificate_key_pair_origin = "CertificateKeyPairOrigin",
         .created_at = "CreatedAt",
         .domain_name = "DomainName",
         .domain_validation_options = "DomainValidationOptions",
@@ -173,5 +190,6 @@ pub const CertificateDetail = struct {
         .subject = "Subject",
         .subject_alternative_names = "SubjectAlternativeNames",
         .@"type" = "Type",
+        .update_summary = "UpdateSummary",
     };
 };

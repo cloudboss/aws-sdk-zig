@@ -128,10 +128,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartBotResourceGenerat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartBotResourceGenerationOutput {
-    var result: StartBotResourceGenerationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartBotResourceGenerationOutput, body, allocator);
-    }
+    const result: StartBotResourceGenerationOutput = try aws.json.parseJsonObject(
+        StartBotResourceGenerationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

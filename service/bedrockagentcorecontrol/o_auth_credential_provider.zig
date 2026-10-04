@@ -19,6 +19,9 @@ pub const OAuthCredentialProvider = struct {
     /// * `CLIENT_CREDENTIALS` - Authorization with a client ID and secret.
     /// * `AUTHORIZATION_CODE` - Authorization with a token that is specific to an
     ///   individual end user.
+    /// * `TOKEN_EXCHANGE` - Authorization using on-behalf-of token exchange. An
+    ///   inbound user token is exchanged for a downstream access token scoped to
+    ///   the target audience.
     grant_type: OAuthGrantType = .client_credentials,
 
     /// The Amazon Resource Name (ARN) of the OAuth credential provider. This ARN

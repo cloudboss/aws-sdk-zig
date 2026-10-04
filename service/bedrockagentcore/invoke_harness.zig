@@ -20,6 +20,10 @@ pub const InvokeHarnessInput = struct {
     /// specified, overrides the harness default.
     allowed_tools: ?[]const []const u8 = null,
 
+    /// W3C Baggage header for user-defined context propagation. Format:
+    /// key1=value1,key2=value2
+    baggage: ?[]const u8 = null,
+
     /// The ARN of the harness to invoke.
     harness_arn: []const u8,
 
@@ -38,9 +42,16 @@ pub const InvokeHarnessInput = struct {
     /// the harness default.
     model: ?HarnessModelConfiguration = null,
 
+    /// The endpoint name to invoke. If omitted, the DEFAULT endpoint is used.
+    qualifier: ?[]const u8 = null,
+
     /// The session ID for the invocation. Use the same session ID across requests
     /// to continue a conversation.
     runtime_session_id: []const u8,
+
+    /// An identifier for the end user making the request. This value is passed
+    /// through to the runtime container.
+    runtime_user_id: ?[]const u8 = null,
 
     /// The skills available to the agent for this invocation. If specified,
     /// overrides the harness default.
@@ -58,23 +69,40 @@ pub const InvokeHarnessInput = struct {
     /// overrides the harness default.
     tools: ?[]const HarnessTool = null,
 
+    /// Trace ID for maintaining observability through the operation.
+    trace_id: ?[]const u8 = null,
+
+    /// W3C trace context parent header containing version, trace ID, parent span
+    /// ID, and trace flags.
+    trace_parent: ?[]const u8 = null,
+
+    /// W3C trace context state header for vendor-specific trace information.
+    trace_state: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .actor_id = "actorId",
         .allowed_tools = "allowedTools",
+        .baggage = "baggage",
         .harness_arn = "harnessArn",
         .max_iterations = "maxIterations",
         .max_tokens = "maxTokens",
         .messages = "messages",
         .model = "model",
+        .qualifier = "qualifier",
         .runtime_session_id = "runtimeSessionId",
+        .runtime_user_id = "runtimeUserId",
         .skills = "skills",
         .system_prompt = "systemPrompt",
         .timeout_seconds = "timeoutSeconds",
         .tools = "tools",
+        .trace_id = "traceId",
+        .trace_parent = "traceParent",
+        .trace_state = "traceState",
     };
 };
 
 pub const InvokeHarnessOutput = struct {
+
     stream: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *InvokeHarnessOutput) void {
@@ -88,6 +116,7 @@ pub const InvokeHarnessOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeHarnessInput, options: CallOptions) !InvokeHarnessOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -96,8 +125,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeHarne
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "bedrock-agentcore", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -109,11 +136,9 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeHarne
         return error.ServiceError;
     }
 
-    stream_resp.deinitHeaders();
-    errdefer stream_resp.body.deinit();
-
-    const stream = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
-    return .{ .stream = stream };
+    errdefer stream_resp.deinit();
+    const result = try deserializeStreamingResponse(allocator, &stream_resp);
+    return result;
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: InvokeHarnessInput, config: *aws.Config) !aws.http.Request {
@@ -129,6 +154,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeHarnessInput, con
     try query_buf.appendSlice(allocator, "harnessArn=");
     try aws.url.appendUrlEncoded(allocator, &query_buf, input.harness_arn);
     query_has_prev = true;
+    if (input.qualifier) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "qualifier=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
     const query = try query_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .empty;
@@ -205,7 +236,33 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeHarnessInput, con
     request.body = body;
     request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");
+    if (input.baggage) |v| {
+        try request.headers.put(allocator, "baggage", v);
+    }
     try request.headers.put(allocator, "X-Amzn-Bedrock-AgentCore-Runtime-Session-Id", input.runtime_session_id);
+    if (input.runtime_user_id) |v| {
+        try request.headers.put(allocator, "X-Amzn-Bedrock-AgentCore-Runtime-User-Id", v);
+    }
+    if (input.trace_id) |v| {
+        try request.headers.put(allocator, "X-Amzn-Trace-Id", v);
+    }
+    if (input.trace_parent) |v| {
+        try request.headers.put(allocator, "traceparent", v);
+    }
+    if (input.trace_state) |v| {
+        try request.headers.put(allocator, "tracestate", v);
+    }
 
     return request;
+}
+
+fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !InvokeHarnessOutput {
+    var result: InvokeHarnessOutput = .{};
+    result.stream = try aws.event_stream_reader.EventStreamReader.init(
+        allocator,
+        stream_resp.body,
+    );
+    stream_resp.deinitHeaders();
+
+    return result;
 }

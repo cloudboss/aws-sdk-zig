@@ -1,6 +1,7 @@
 const HarnessContentBlockDeltaEvent = @import("harness_content_block_delta_event.zig").HarnessContentBlockDeltaEvent;
 const HarnessContentBlockStartEvent = @import("harness_content_block_start_event.zig").HarnessContentBlockStartEvent;
 const HarnessContentBlockStopEvent = @import("harness_content_block_stop_event.zig").HarnessContentBlockStopEvent;
+const HarnessHookEvent = @import("harness_hook_event.zig").HarnessHookEvent;
 const InternalServerException = @import("errors.zig").InternalServerException;
 const HarnessMessageStartEvent = @import("harness_message_start_event.zig").HarnessMessageStartEvent;
 const HarnessMessageStopEvent = @import("harness_message_stop_event.zig").HarnessMessageStopEvent;
@@ -16,6 +17,8 @@ pub const InvokeHarnessStreamOutput = union(enum) {
     content_block_start: ?HarnessContentBlockStartEvent,
     /// Indicates the end of the current content block.
     content_block_stop: ?HarnessContentBlockStopEvent,
+    /// A lifecycle hook event emitted when a configured hook runs.
+    hook_event: ?HarnessHookEvent,
     internal_server_exception: ?InternalServerException,
     /// Indicates the start of a new message from the agent.
     message_start: ?HarnessMessageStartEvent,
@@ -23,6 +26,7 @@ pub const InvokeHarnessStreamOutput = union(enum) {
     message_stop: ?HarnessMessageStopEvent,
     /// Token usage and latency metrics for the invocation.
     metadata: ?HarnessMetadataEvent,
+    /// An error returned by the runtime container during agent execution.
     runtime_client_error: ?RuntimeClientError,
     validation_exception: ?ValidationException,
 
@@ -30,6 +34,7 @@ pub const InvokeHarnessStreamOutput = union(enum) {
         .content_block_delta = "contentBlockDelta",
         .content_block_start = "contentBlockStart",
         .content_block_stop = "contentBlockStop",
+        .hook_event = "hookEvent",
         .internal_server_exception = "internalServerException",
         .message_start = "messageStart",
         .message_stop = "messageStop",

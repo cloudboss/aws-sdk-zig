@@ -3,6 +3,10 @@ const aws = @import("aws");
 /// A structure used as a protocol between query engines and Lake Formation or
 /// Glue. Contains both a Lake Formation generated authorization identifier and
 /// information from the request's authorization context.
+///
+/// For more information about how to utilize QuerySessionContext, see
+/// [Lake Formation workflow for application integration API
+/// operations](https://docs.aws.amazon.com/lake-formation/latest/dg/api-overview.html) in the developer guide.
 pub const QuerySessionContext = struct {
     /// An opaque string-string map passed by the query engine.
     additional_context: ?[]const aws.map.StringMapEntry = null,

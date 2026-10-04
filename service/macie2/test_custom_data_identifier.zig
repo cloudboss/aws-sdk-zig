@@ -132,10 +132,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TestCustomDataIdentifie
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !TestCustomDataIdentifierOutput {
-    var result: TestCustomDataIdentifierOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(TestCustomDataIdentifierOutput, body, allocator);
-    }
+    const result: TestCustomDataIdentifierOutput = try aws.json.parseJsonObject(
+        TestCustomDataIdentifierOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

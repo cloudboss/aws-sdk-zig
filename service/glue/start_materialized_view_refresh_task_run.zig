@@ -16,7 +16,7 @@ pub const StartMaterializedViewRefreshTaskRunInput = struct {
     /// Specifies whether this is a full refresh of the task run.
     full_refresh: ?bool = null,
 
-    /// The name of the table to generate run the materialized view refresh task.
+    /// The name of the materialized view to run the refresh task for.
     table_name: []const u8,
 
     pub const json_field_names = .{

@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const ScheduleType = @import("schedule_type.zig").ScheduleType;
 const ScheduledQueryState = @import("scheduled_query_state.zig").ScheduledQueryState;
 const ScheduledQuerySummary = @import("scheduled_query_summary.zig").ScheduledQuerySummary;
 
@@ -13,6 +14,11 @@ pub const ListScheduledQueriesInput = struct {
 
     next_token: ?[]const u8 = null,
 
+    /// Filter scheduled queries by schedule type. Valid values are
+    /// `CUSTOMER_MANAGED` and `AWS_MANAGED`. If not specified, scheduled
+    /// queries of all schedule types are returned.
+    schedule_type: ?ScheduleType = null,
+
     /// Filter scheduled queries by state. Valid values are `ENABLED` and
     /// `DISABLED`. If not specified, all scheduled queries are returned.
     state: ?ScheduledQueryState = null,
@@ -20,6 +26,7 @@ pub const ListScheduledQueriesInput = struct {
     pub const json_field_names = .{
         .max_results = "maxResults",
         .next_token = "nextToken",
+        .schedule_type = "scheduleType",
         .state = "state",
     };
 };

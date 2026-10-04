@@ -1,5 +1,6 @@
 const HlsAutoSelect = @import("hls_auto_select.zig").HlsAutoSelect;
 const HlsDefault = @import("hls_default.zig").HlsDefault;
+const OutputUsage = @import("output_usage.zig").OutputUsage;
 
 /// Media Package V2 Destination Settings
 pub const MediaPackageV2DestinationSettings = struct {
@@ -41,10 +42,22 @@ pub const MediaPackageV2DestinationSettings = struct {
     /// OMIT.
     hls_default: ?HlsDefault = null,
 
+    /// List of usage tags declaring how this MediaPackage V2 output is used.
+    /// Currently these are all multiview-related (multiviewPrimaryView,
+    /// multiviewSecondaryView, multiviewEqualSizeView) and enable multiview
+    /// validations and augmentations to help ensure proper multiview configuration
+    /// and compatibility with MediaPackage. Leave empty (the default) if this
+    /// output has no multiview role. If any video-carrying MediaPackage V2 output
+    /// in an output group specifies a multiview value, every video-carrying
+    /// MediaPackage V2 output in the group must also specify a multiview value;
+    /// place standalone video outputs in a separate output group.
+    output_usage: ?[]const OutputUsage = null,
+
     pub const json_field_names = .{
         .audio_group_id = "AudioGroupId",
         .audio_rendition_sets = "AudioRenditionSets",
         .hls_auto_select = "HlsAutoSelect",
         .hls_default = "HlsDefault",
+        .output_usage = "OutputUsage",
     };
 };

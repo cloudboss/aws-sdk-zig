@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeLaunchConfigura
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeLaunchConfigurationTemplatesOutput {
-    var result: DescribeLaunchConfigurationTemplatesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeLaunchConfigurationTemplatesOutput, body, allocator);
-    }
+    const result: DescribeLaunchConfigurationTemplatesOutput = try aws.json.parseJsonObject(
+        DescribeLaunchConfigurationTemplatesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

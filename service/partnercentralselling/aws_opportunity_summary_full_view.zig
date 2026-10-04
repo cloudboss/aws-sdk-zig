@@ -7,10 +7,15 @@ const AwsTeamMember = @import("aws_team_member.zig").AwsTeamMember;
 const OpportunityOrigin = @import("opportunity_origin.zig").OpportunityOrigin;
 const AwsOpportunityProject = @import("aws_opportunity_project.zig").AwsOpportunityProject;
 const AwsOpportunityRelatedEntities = @import("aws_opportunity_related_entities.zig").AwsOpportunityRelatedEntities;
+const AwsSoftwareRevenue = @import("aws_software_revenue.zig").AwsSoftwareRevenue;
 const Visibility = @import("visibility.zig").Visibility;
 
 /// Provides a comprehensive view of AwsOpportunitySummaryFullView template.
 pub const AwsOpportunitySummaryFullView = struct {
+    /// Engagement classification for this opportunity. Read-only. Null before
+    /// scoring. Known values: `AWS Field-engaged`, `Agent-engaged`, `Partner-led`.
+    cosell_motion: ?[]const u8 = null,
+
     customer: ?AwsOpportunityCustomer = null,
 
     insights: ?AwsOpportunityInsights = null,
@@ -36,10 +41,15 @@ pub const AwsOpportunitySummaryFullView = struct {
     /// Identifier of the related partner opportunity.
     related_opportunity_id: ?[]const u8 = null,
 
+    /// Seller-provided PARC deal terms: commitment value, discount, and contract
+    /// dates.
+    software_revenue: ?AwsSoftwareRevenue = null,
+
     /// Visibility level for the AWS opportunity.
     visibility: ?Visibility = null,
 
     pub const json_field_names = .{
+        .cosell_motion = "CosellMotion",
         .customer = "Customer",
         .insights = "Insights",
         .involvement_type = "InvolvementType",
@@ -50,6 +60,7 @@ pub const AwsOpportunitySummaryFullView = struct {
         .project = "Project",
         .related_entity_ids = "RelatedEntityIds",
         .related_opportunity_id = "RelatedOpportunityId",
+        .software_revenue = "SoftwareRevenue",
         .visibility = "Visibility",
     };
 };

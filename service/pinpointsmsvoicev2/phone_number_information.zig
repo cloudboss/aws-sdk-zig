@@ -1,4 +1,5 @@
 const MessageType = @import("message_type.zig").MessageType;
+const MessagingLimits = @import("messaging_limits.zig").MessagingLimits;
 const NumberCapability = @import("number_capability.zig").NumberCapability;
 const NumberType = @import("number_type.zig").NumberType;
 const NumberStatus = @import("number_status.zig").NumberStatus;
@@ -24,6 +25,10 @@ pub const PhoneNumberInformation = struct {
     /// critical or time-sensitive and PROMOTIONAL for messages that aren't critical
     /// or time-sensitive.
     message_type: MessageType,
+
+    /// The messaging limits that apply to the phone number, including the
+    /// per-capability send rates and any advisory per-provider daily message caps.
+    messaging_limits: ?MessagingLimits = null,
 
     /// The price, in US dollars, to lease the phone number.
     monthly_leasing_price: []const u8,
@@ -82,6 +87,7 @@ pub const PhoneNumberInformation = struct {
         .international_sending_enabled = "InternationalSendingEnabled",
         .iso_country_code = "IsoCountryCode",
         .message_type = "MessageType",
+        .messaging_limits = "MessagingLimits",
         .monthly_leasing_price = "MonthlyLeasingPrice",
         .number_capabilities = "NumberCapabilities",
         .number_type = "NumberType",

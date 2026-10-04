@@ -112,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListIdentityPoolUsageIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListIdentityPoolUsageOutput {
-    var result: ListIdentityPoolUsageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListIdentityPoolUsageOutput, body, allocator);
-    }
+    const result: ListIdentityPoolUsageOutput = try aws.json.parseJsonObject(
+        ListIdentityPoolUsageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

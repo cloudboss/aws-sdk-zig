@@ -123,10 +123,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListBatchJobDefinitions
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListBatchJobDefinitionsOutput {
-    var result: ListBatchJobDefinitionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListBatchJobDefinitionsOutput, body, allocator);
-    }
+    const result: ListBatchJobDefinitionsOutput = try aws.json.parseJsonObject(
+        ListBatchJobDefinitionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

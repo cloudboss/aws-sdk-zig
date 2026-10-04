@@ -69,6 +69,10 @@ pub const TransactWriteItemsOutput = struct {
     /// The capacity units consumed by the entire `TransactWriteItems` operation.
     /// The values of the list are ordered according to the ordering of the
     /// `TransactItems` request parameter.
+    ///
+    /// If the table has vector indexes, each element also includes a
+    /// `VectorIndexes` field with `VectorWriteRequestBytes` consumed
+    /// for each affected vector index.
     consumed_capacity: ?[]const ConsumedCapacity = null,
 
     /// A list of tables that were processed by `TransactWriteItems` and, for each

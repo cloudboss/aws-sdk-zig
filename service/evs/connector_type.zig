@@ -1,14 +1,20 @@
 const std = @import("std");
 
 pub const ConnectorType = enum {
+    operations_manager,
+    sddc_manager,
     vcenter,
 
     pub const json_field_names = .{
+        .operations_manager = "OPERATIONS_MANAGER",
+        .sddc_manager = "SDDC_MANAGER",
         .vcenter = "VCENTER",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
+            .operations_manager => "OPERATIONS_MANAGER",
+            .sddc_manager => "SDDC_MANAGER",
             .vcenter => "VCENTER",
         };
     }

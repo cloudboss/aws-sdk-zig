@@ -184,10 +184,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PublishLayerVersionInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PublishLayerVersionOutput {
-    var result: PublishLayerVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PublishLayerVersionOutput, body, allocator);
-    }
+    const result: PublishLayerVersionOutput = try aws.json.parseJsonObject(
+        PublishLayerVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

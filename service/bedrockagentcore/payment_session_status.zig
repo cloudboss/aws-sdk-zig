@@ -1,6 +1,6 @@
 const std = @import("std");
 
-/// The status of a payment session
+/// The status of a payment session.
 pub const PaymentSessionStatus = enum {
     active,
     expired,

@@ -219,10 +219,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetFrameMetricData
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetFrameMetricDataOutput {
-    var result: BatchGetFrameMetricDataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetFrameMetricDataOutput, body, allocator);
-    }
+    const result: BatchGetFrameMetricDataOutput = try aws.json.parseJsonObject(
+        BatchGetFrameMetricDataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -116,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListIdentityPropagation
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListIdentityPropagationConfigsOutput {
-    var result: ListIdentityPropagationConfigsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListIdentityPropagationConfigsOutput, body, allocator);
-    }
+    var result: ListIdentityPropagationConfigsOutput = try aws.json.parseJsonObject(
+        ListIdentityPropagationConfigsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

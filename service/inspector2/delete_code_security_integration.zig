@@ -79,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteCodeSecurityInteg
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteCodeSecurityIntegrationOutput {
-    var result: DeleteCodeSecurityIntegrationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteCodeSecurityIntegrationOutput, body, allocator);
-    }
+    const result: DeleteCodeSecurityIntegrationOutput = try aws.json.parseJsonObject(
+        DeleteCodeSecurityIntegrationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

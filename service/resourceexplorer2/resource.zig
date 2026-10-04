@@ -8,6 +8,10 @@ pub const Resource = struct {
     /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource.
     arn: ?[]const u8 = null,
 
+    /// The CloudFormation resource type identifier for the resource, such as
+    /// `AWS::EC2::Instance` or `AWS::S3::Bucket`.
+    cfn_resource_type: ?[]const u8 = null,
+
     /// The date and time that Resource Explorer last queried this resource and
     /// updated the index with the latest information about the resource.
     last_reported_at: ?i64 = null,
@@ -32,6 +36,7 @@ pub const Resource = struct {
 
     pub const json_field_names = .{
         .arn = "Arn",
+        .cfn_resource_type = "CfnResourceType",
         .last_reported_at = "LastReportedAt",
         .owning_account_id = "OwningAccountId",
         .properties = "Properties",

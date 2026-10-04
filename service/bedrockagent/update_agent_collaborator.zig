@@ -128,10 +128,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAgentCollaborator
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateAgentCollaboratorOutput {
-    var result: UpdateAgentCollaboratorOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateAgentCollaboratorOutput, body, allocator);
-    }
+    const result: UpdateAgentCollaboratorOutput = try aws.json.parseJsonObject(
+        UpdateAgentCollaboratorOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

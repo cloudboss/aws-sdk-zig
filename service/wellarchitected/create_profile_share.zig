@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateProfileShareInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateProfileShareOutput {
-    var result: CreateProfileShareOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateProfileShareOutput, body, allocator);
-    }
+    const result: CreateProfileShareOutput = try aws.json.parseJsonObject(
+        CreateProfileShareOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

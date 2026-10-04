@@ -122,10 +122,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMetadataTransferJ
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateMetadataTransferJobOutput {
-    var result: CreateMetadataTransferJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateMetadataTransferJobOutput, body, allocator);
-    }
+    const result: CreateMetadataTransferJobOutput = try aws.json.parseJsonObject(
+        CreateMetadataTransferJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

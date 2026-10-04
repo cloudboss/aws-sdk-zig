@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const PayerConfiguration = @import("payer_configuration.zig").PayerConfiguration;
 const PrivacyBudgets = @import("privacy_budgets.zig").PrivacyBudgets;
 const MLInputChannelStatus = @import("ml_input_channel_status.zig").MLInputChannelStatus;
 const StatusDetails = @import("status_details.zig").StatusDetails;
@@ -53,6 +54,9 @@ pub const GetCollaborationMLInputChannelOutput = struct {
     /// The number of records in the ML input channel.
     number_of_records: ?i64 = null,
 
+    /// The payer configuration for the ML input channel.
+    payer_configuration: ?PayerConfiguration = null,
+
     /// Returns the privacy budgets that control access to this Clean Rooms ML input
     /// channel. Use these budgets to monitor and limit resource consumption over
     /// specified time periods.
@@ -84,6 +88,7 @@ pub const GetCollaborationMLInputChannelOutput = struct {
         .ml_input_channel_arn = "mlInputChannelArn",
         .name = "name",
         .number_of_records = "numberOfRecords",
+        .payer_configuration = "payerConfiguration",
         .privacy_budgets = "privacyBudgets",
         .retention_in_days = "retentionInDays",
         .status = "status",
@@ -144,10 +149,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCollaborationMLInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCollaborationMLInputChannelOutput {
-    var result: GetCollaborationMLInputChannelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCollaborationMLInputChannelOutput, body, allocator);
-    }
+    const result: GetCollaborationMLInputChannelOutput = try aws.json.parseJsonObject(
+        GetCollaborationMLInputChannelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

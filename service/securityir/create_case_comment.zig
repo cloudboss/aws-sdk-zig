@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCaseCommentInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCaseCommentOutput {
-    var result: CreateCaseCommentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCaseCommentOutput, body, allocator);
-    }
+    const result: CreateCaseCommentOutput = try aws.json.parseJsonObject(
+        CreateCaseCommentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

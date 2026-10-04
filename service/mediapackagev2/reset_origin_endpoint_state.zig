@@ -104,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ResetOriginEndpointStat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ResetOriginEndpointStateOutput {
-    var result: ResetOriginEndpointStateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ResetOriginEndpointStateOutput, body, allocator);
-    }
+    const result: ResetOriginEndpointStateOutput = try aws.json.parseJsonObject(
+        ResetOriginEndpointStateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

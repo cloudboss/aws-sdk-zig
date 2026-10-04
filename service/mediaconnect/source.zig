@@ -65,12 +65,12 @@ pub const Source = struct {
     /// enabled.
     router_integration_transit_decryption: ?FlowTransitEncryption = null,
 
-    /// The IP address that the flow communicates with to initiate connection with
-    /// the sender.
-    sender_control_port: ?i32 = null,
-
     /// The port that the flow uses to send outbound requests to initiate connection
     /// with the sender.
+    sender_control_port: ?i32 = null,
+
+    /// The IP address that the flow communicates with to initiate connection with
+    /// the sender.
     sender_ip_address: ?[]const u8 = null,
 
     /// The ARN of the source.

@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendCustomVerificationE
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SendCustomVerificationEmailOutput {
-    var result: SendCustomVerificationEmailOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SendCustomVerificationEmailOutput, body, allocator);
-    }
+    const result: SendCustomVerificationEmailOutput = try aws.json.parseJsonObject(
+        SendCustomVerificationEmailOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

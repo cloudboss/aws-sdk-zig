@@ -10,7 +10,11 @@ pub const CalculatedAttributeDimension = struct {
     /// The action to segment with.
     dimension_type: AttributeDimensionType,
 
-    /// The values to apply the DimensionType with.
+    /// The values to apply the DimensionType with. To reference a calculated
+    /// attribute or
+    /// profile attribute as a dynamic value, use handlebar notation:
+    /// `{{_profile.ProfileAttributeName}}` or
+    /// `{{_calculated_attribute.CalculatedAttributeName}}`.
     values: []const []const u8,
 
     pub const json_field_names = .{

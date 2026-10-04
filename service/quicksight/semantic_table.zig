@@ -1,4 +1,5 @@
 const RowLevelPermissionConfiguration = @import("row_level_permission_configuration.zig").RowLevelPermissionConfiguration;
+const TableSemanticMetadata = @import("table_semantic_metadata.zig").TableSemanticMetadata;
 
 /// A semantic table that represents the final analytical structure of the data.
 pub const SemanticTable = struct {
@@ -13,9 +14,13 @@ pub const SemanticTable = struct {
     /// semantic table.
     row_level_permission_configuration: ?RowLevelPermissionConfiguration = null,
 
+    /// The column-level semantic metadata for this semantic table.
+    semantic_metadata: ?TableSemanticMetadata = null,
+
     pub const json_field_names = .{
         .alias = "Alias",
         .destination_table_id = "DestinationTableId",
         .row_level_permission_configuration = "RowLevelPermissionConfiguration",
+        .semantic_metadata = "SemanticMetadata",
     };
 };

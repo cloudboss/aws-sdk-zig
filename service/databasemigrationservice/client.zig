@@ -198,12 +198,22 @@ pub const Client = struct {
 
     /// Cancels a single metadata model conversion operation that was started with
     /// `StartMetadataModelConversion`.
+    ///
+    /// **Required permissions:**
+    /// `dms:CancelMetadataModelConversion`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn cancelMetadataModelConversion(self: *Self, allocator: std.mem.Allocator, input: cancel_metadata_model_conversion.CancelMetadataModelConversionInput, options: CallOptions) !cancel_metadata_model_conversion.CancelMetadataModelConversionOutput {
         return cancel_metadata_model_conversion.execute(self, allocator, input, options);
     }
 
     /// Cancels a single metadata model creation operation that was started with
     /// `StartMetadataModelCreation`.
+    ///
+    /// **Required permissions:**
+    /// `dms:CancelMetadataModelCreation`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn cancelMetadataModelCreation(self: *Self, allocator: std.mem.Allocator, input: cancel_metadata_model_creation.CancelMetadataModelCreationInput, options: CallOptions) !cancel_metadata_model_creation.CancelMetadataModelCreationOutput {
         return cancel_metadata_model_creation.execute(self, allocator, input, options);
     }
@@ -227,6 +237,11 @@ pub const Client = struct {
     /// Creates a data provider using the provided settings. A data provider stores
     /// a data store
     /// type and location information about your database.
+    ///
+    /// **Required permissions:**
+    /// `dms:CreateDataProvider`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn createDataProvider(self: *Self, allocator: std.mem.Allocator, input: create_data_provider.CreateDataProviderInput, options: CallOptions) !create_data_provider.CreateDataProviderOutput {
         return create_data_provider.execute(self, allocator, input, options);
     }
@@ -283,6 +298,11 @@ pub const Client = struct {
     }
 
     /// Creates the instance profile using the specified parameters.
+    ///
+    /// **Required permissions:**
+    /// `dms:CreateInstanceProfile`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn createInstanceProfile(self: *Self, allocator: std.mem.Allocator, input: create_instance_profile.CreateInstanceProfileInput, options: CallOptions) !create_instance_profile.CreateInstanceProfileOutput {
         return create_instance_profile.execute(self, allocator, input, options);
     }
@@ -293,6 +313,11 @@ pub const Client = struct {
     /// providers
     /// using
     /// [CreateInstanceProfile](https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateInstanceProfile.html) and [CreateDataProvider](https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateDataProvider.html).
+    ///
+    /// **Required permissions:**
+    /// `dms:CreateMigrationProject`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn createMigrationProject(self: *Self, allocator: std.mem.Allocator, input: create_migration_project.CreateMigrationProjectInput, options: CallOptions) !create_migration_project.CreateMigrationProjectOutput {
         return create_migration_project.execute(self, allocator, input, options);
     }
@@ -370,6 +395,11 @@ pub const Client = struct {
 
     /// Deletes the specified data provider.
     ///
+    /// **Required permissions:**
+    /// `dms:DeleteDataProvider`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
+    ///
     /// All migration projects associated with the data provider must be deleted or
     /// modified
     /// before you can delete the data provider.
@@ -417,6 +447,11 @@ pub const Client = struct {
 
     /// Deletes the specified instance profile.
     ///
+    /// **Required permissions:**
+    /// `dms:DeleteInstanceProfile`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
+    ///
     /// All migration projects associated with the instance profile must be deleted
     /// or
     /// modified before you can delete the instance profile.
@@ -425,6 +460,11 @@ pub const Client = struct {
     }
 
     /// Deletes the specified migration project.
+    ///
+    /// **Required permissions:**
+    /// `dms:DeleteMigrationProject`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     ///
     /// The migration project must be closed before you can delete it.
     pub fn deleteMigrationProject(self: *Self, allocator: std.mem.Allocator, input: delete_migration_project.DeleteMigrationProjectInput, options: CallOptions) !delete_migration_project.DeleteMigrationProjectOutput {
@@ -538,6 +578,11 @@ pub const Client = struct {
     }
 
     /// Returns configuration parameters for a schema conversion project.
+    ///
+    /// **Required permissions:**
+    /// `dms:DescribeConversionConfiguration`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn describeConversionConfiguration(self: *Self, allocator: std.mem.Allocator, input: describe_conversion_configuration.DescribeConversionConfigurationInput, options: CallOptions) !describe_conversion_configuration.DescribeConversionConfigurationOutput {
         return describe_conversion_configuration.execute(self, allocator, input, options);
     }
@@ -549,6 +594,11 @@ pub const Client = struct {
 
     /// Returns a paginated list of data providers for your account in the current
     /// region.
+    ///
+    /// **Required permissions:**
+    /// `dms:ListDataProviders`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn describeDataProviders(self: *Self, allocator: std.mem.Allocator, input: describe_data_providers.DescribeDataProvidersInput, options: CallOptions) !describe_data_providers.DescribeDataProvidersOutput {
         return describe_data_providers.execute(self, allocator, input, options);
     }
@@ -609,11 +659,15 @@ pub const Client = struct {
         return describe_events.execute(self, allocator, input, options);
     }
 
-    /// Returns a paginated list of extension pack associations for the specified
+    /// Returns a paginated list of extension pack installation requests for a
     /// migration
-    /// project. An extension pack is an add-on module that emulates functions
-    /// present in a source
-    /// database that are required when converting objects to the target database.
+    /// project, initiated by
+    /// [StartExtensionPackAssociation](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartExtensionPackAssociation.html).
+    ///
+    /// **Required permissions:**
+    /// `dms:ListExtensionPacks`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn describeExtensionPackAssociations(self: *Self, allocator: std.mem.Allocator, input: describe_extension_pack_associations.DescribeExtensionPackAssociationsInput, options: CallOptions) !describe_extension_pack_associations.DescribeExtensionPackAssociationsOutput {
         return describe_extension_pack_associations.execute(self, allocator, input, options);
     }
@@ -685,6 +739,11 @@ pub const Client = struct {
     /// Returns a paginated list of instance profiles for your account in the
     /// current
     /// region.
+    ///
+    /// **Required permissions:**
+    /// `dms:ListInstanceProfiles`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn describeInstanceProfiles(self: *Self, allocator: std.mem.Allocator, input: describe_instance_profiles.DescribeInstanceProfilesInput, options: CallOptions) !describe_instance_profiles.DescribeInstanceProfilesOutput {
         return describe_instance_profiles.execute(self, allocator, input, options);
     }
@@ -692,46 +751,102 @@ pub const Client = struct {
     /// Gets detailed information about the specified metadata model, including its
     /// definition and corresponding converted objects in the target database if
     /// applicable.
+    ///
+    /// **Required permissions:**
+    /// `dms:DescribeMetadataModel`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn describeMetadataModel(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model.DescribeMetadataModelInput, options: CallOptions) !describe_metadata_model.DescribeMetadataModelOutput {
         return describe_metadata_model.execute(self, allocator, input, options);
     }
 
-    /// Returns a paginated list of metadata model assessments for your account in
-    /// the current
-    /// region.
+    /// Returns a paginated list of metadata model assessment requests for a
+    /// migration
+    /// project, initiated by
+    /// [StartMetadataModelAssessment](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelAssessment.html).
+    ///
+    /// **Required permissions:**
+    /// `dms:ListMetadataModelAssessments`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn describeMetadataModelAssessments(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_assessments.DescribeMetadataModelAssessmentsInput, options: CallOptions) !describe_metadata_model_assessments.DescribeMetadataModelAssessmentsOutput {
         return describe_metadata_model_assessments.execute(self, allocator, input, options);
     }
 
     /// Gets a list of child metadata models for the specified metadata model in the
     /// database hierarchy.
+    ///
+    /// **Required permissions:**
+    /// `dms:DescribeMetadataModelChildren`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn describeMetadataModelChildren(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_children.DescribeMetadataModelChildrenInput, options: CallOptions) !describe_metadata_model_children.DescribeMetadataModelChildrenOutput {
         return describe_metadata_model_children.execute(self, allocator, input, options);
     }
 
-    /// Returns a paginated list of metadata model conversions for a migration
-    /// project.
+    /// Returns a paginated list of metadata model conversion requests for a
+    /// migration
+    /// project, initiated by
+    /// [StartMetadataModelConversion](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelConversion.html).
+    ///
+    /// To cancel a queued or in-progress request, call
+    /// [CancelMetadataModelConversion](https://docs.aws.amazon.com/dms/latest/APIReference/API_CancelMetadataModelConversion.html).
+    ///
+    /// **Required permissions:**
+    /// `dms:ListMetadataModelConversions`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn describeMetadataModelConversions(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_conversions.DescribeMetadataModelConversionsInput, options: CallOptions) !describe_metadata_model_conversions.DescribeMetadataModelConversionsOutput {
         return describe_metadata_model_conversions.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of metadata model creation requests for a migration
-    /// project.
+    /// project, initiated by
+    /// [StartMetadataModelCreation](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelCreation.html).
+    ///
+    /// To cancel a queued or in-progress request, call
+    /// [CancelMetadataModelCreation](https://docs.aws.amazon.com/dms/latest/APIReference/API_CancelMetadataModelCreation.html).
+    ///
+    /// **Required permissions:**
+    /// `dms:DescribeMetadataModelCreations`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn describeMetadataModelCreations(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_creations.DescribeMetadataModelCreationsInput, options: CallOptions) !describe_metadata_model_creations.DescribeMetadataModelCreationsOutput {
         return describe_metadata_model_creations.execute(self, allocator, input, options);
     }
 
-    /// Returns a paginated list of metadata model exports.
+    /// Returns a paginated list of metadata model export requests for a migration
+    /// project, initiated by
+    /// [StartMetadataModelExportAsScript](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelExportAsScript.html).
+    ///
+    /// **Required permissions:**
+    /// `dms:ListMetadataModelExports`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn describeMetadataModelExportsAsScript(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_exports_as_script.DescribeMetadataModelExportsAsScriptInput, options: CallOptions) !describe_metadata_model_exports_as_script.DescribeMetadataModelExportsAsScriptOutput {
         return describe_metadata_model_exports_as_script.execute(self, allocator, input, options);
     }
 
-    /// Returns a paginated list of metadata model exports.
+    /// Returns a paginated list of metadata model export requests for a migration
+    /// project, initiated by
+    /// [StartMetadataModelExportToTarget](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelExportToTarget.html).
+    ///
+    /// **Required permissions:**
+    /// `dms:ListMetadataModelExports`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn describeMetadataModelExportsToTarget(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_exports_to_target.DescribeMetadataModelExportsToTargetInput, options: CallOptions) !describe_metadata_model_exports_to_target.DescribeMetadataModelExportsToTargetOutput {
         return describe_metadata_model_exports_to_target.execute(self, allocator, input, options);
     }
 
-    /// Returns a paginated list of metadata model imports.
+    /// Returns a paginated list of metadata model import requests for a migration
+    /// project, initiated by
+    /// [StartMetadataModelImport](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html).
+    ///
+    /// **Required permissions:**
+    /// `dms:DescribeMetadataModelImports`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn describeMetadataModelImports(self: *Self, allocator: std.mem.Allocator, input: describe_metadata_model_imports.DescribeMetadataModelImportsInput, options: CallOptions) !describe_metadata_model_imports.DescribeMetadataModelImportsOutput {
         return describe_metadata_model_imports.execute(self, allocator, input, options);
     }
@@ -739,6 +854,11 @@ pub const Client = struct {
     /// Returns a paginated list of migration projects for your account in the
     /// current
     /// region.
+    ///
+    /// **Required permissions:**
+    /// `dms:ListMigrationProjects`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn describeMigrationProjects(self: *Self, allocator: std.mem.Allocator, input: describe_migration_projects.DescribeMigrationProjectsInput, options: CallOptions) !describe_migration_projects.DescribeMigrationProjectsOutput {
         return describe_migration_projects.execute(self, allocator, input, options);
     }
@@ -889,12 +1009,22 @@ pub const Client = struct {
     /// Saves a copy of a database migration assessment report to your Amazon S3
     /// bucket. DMS can
     /// save your assessment report as a comma-separated value (CSV) or a PDF file.
+    ///
+    /// **Required permissions:**
+    /// `dms:ExportMetadataModelAssessment`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn exportMetadataModelAssessment(self: *Self, allocator: std.mem.Allocator, input: export_metadata_model_assessment.ExportMetadataModelAssessmentInput, options: CallOptions) !export_metadata_model_assessment.ExportMetadataModelAssessmentOutput {
         return export_metadata_model_assessment.execute(self, allocator, input, options);
     }
 
     /// Converts source selection rules into their target counterparts for schema
     /// conversion operations.
+    ///
+    /// **Required permissions:**
+    /// `dms:GetTargetSelectionRules`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn getTargetSelectionRules(self: *Self, allocator: std.mem.Allocator, input: get_target_selection_rules.GetTargetSelectionRulesInput, options: CallOptions) !get_target_selection_rules.GetTargetSelectionRulesOutput {
         return get_target_selection_rules.execute(self, allocator, input, options);
     }
@@ -916,6 +1046,11 @@ pub const Client = struct {
 
     /// Modifies the specified schema conversion configuration using the provided
     /// parameters.
+    ///
+    /// **Required permissions:**
+    /// `dms:UpdateConversionConfiguration`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn modifyConversionConfiguration(self: *Self, allocator: std.mem.Allocator, input: modify_conversion_configuration.ModifyConversionConfigurationInput, options: CallOptions) !modify_conversion_configuration.ModifyConversionConfigurationOutput {
         return modify_conversion_configuration.execute(self, allocator, input, options);
     }
@@ -926,6 +1061,11 @@ pub const Client = struct {
     }
 
     /// Modifies the specified data provider using the provided settings.
+    ///
+    /// **Required permissions:**
+    /// `dms:UpdateDataProvider`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     ///
     /// You must remove the data provider from all migration projects before you can
     /// modify
@@ -956,6 +1096,11 @@ pub const Client = struct {
 
     /// Modifies the specified instance profile using the provided parameters.
     ///
+    /// **Required permissions:**
+    /// `dms:UpdateInstanceProfile`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
+    ///
     /// All migration projects associated with the instance profile must be deleted
     /// or
     /// modified before you can modify the instance profile.
@@ -964,6 +1109,11 @@ pub const Client = struct {
     }
 
     /// Modifies the specified migration project using the provided parameters.
+    ///
+    /// **Required permissions:**
+    /// `dms:UpdateMigrationProject`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     ///
     /// The migration project must be closed before you can modify it.
     pub fn modifyMigrationProject(self: *Self, allocator: std.mem.Allocator, input: modify_migration_project.ModifyMigrationProjectInput, options: CallOptions) !modify_migration_project.ModifyMigrationProjectOutput {
@@ -1091,59 +1241,231 @@ pub const Client = struct {
         return start_data_migration.execute(self, allocator, input, options);
     }
 
-    /// Applies the extension pack to your target database. An extension pack is an
-    /// add-on
-    /// module that emulates functions present in a source database that are
-    /// required when
-    /// converting objects to the target database.
+    /// Queues the installation of the extension pack on your target database. If
+    /// other
+    /// requests created by `Start*` operations are already in the migration
+    /// project's
+    /// queue, the installation begins after they complete.
+    ///
+    /// This operation requires a non-virtual target data provider.
+    ///
+    /// If the extension pack already exists, the operation reinstalls it. To ensure
+    /// compatibility, reconvert your database objects if the version has changed
+    /// since your last
+    /// conversion. For more information, see [Using extension packs in DMS Schema
+    /// Conversion](https://docs.aws.amazon.com/dms/latest/userguide/extension-pack.html).
+    ///
+    /// To check the status of the request, call
+    /// [DescribeExtensionPackAssociations](https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeExtensionPackAssociations.html) using the returned
+    /// `RequestIdentifier` as a filter.
+    ///
+    /// **Required permissions:**
+    /// `dms:AssociateExtensionPack`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn startExtensionPackAssociation(self: *Self, allocator: std.mem.Allocator, input: start_extension_pack_association.StartExtensionPackAssociationInput, options: CallOptions) !start_extension_pack_association.StartExtensionPackAssociationOutput {
         return start_extension_pack_association.execute(self, allocator, input, options);
     }
 
-    /// Creates a database migration assessment report by assessing the migration
-    /// complexity for
-    /// your source database. A database migration assessment report summarizes all
-    /// of the schema
-    /// conversion tasks. It also details the action items for database objects that
-    /// can't be
-    /// converted to the database engine of your target database instance.
+    /// Queues an assessment of the selected source metadata models (database
+    /// objects such as
+    /// tables, views, and procedures) to evaluate conversion complexity to the
+    /// target database
+    /// format. If other requests created by `Start*` operations are already in the
+    /// migration project's queue, the assessment begins after they complete.
+    ///
+    /// The assessment request loads metadata models that are not yet in the
+    /// metadata tree, but
+    /// does not reload metadata models that are already present. If your source
+    /// database has
+    /// changed since the metadata was loaded, refresh the affected metadata models
+    /// with
+    /// [StartMetadataModelImport](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html) before calling this operation.
+    ///
+    /// To check the status of the assessment request, call
+    /// [DescribeMetadataModelAssessments](https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelAssessments.html) using the returned
+    /// `RequestIdentifier` as a filter.
+    ///
+    /// To export the conversion assessment report after the request completes
+    /// successfully,
+    /// call
+    /// [ExportMetadataModelAssessment](https://docs.aws.amazon.com/dms/latest/APIReference/API_ExportMetadataModelAssessment.html).
+    ///
+    /// **Required permissions:**
+    /// `dms:StartMetadataModelAssessment`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn startMetadataModelAssessment(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_assessment.StartMetadataModelAssessmentInput, options: CallOptions) !start_metadata_model_assessment.StartMetadataModelAssessmentOutput {
         return start_metadata_model_assessment.execute(self, allocator, input, options);
     }
 
-    /// Converts your source database objects to a format compatible with the target
-    /// database.
+    /// Queues a conversion of the selected source metadata models (database objects
+    /// such as
+    /// tables, views, and procedures) to the target database format. If other
+    /// requests created
+    /// by `Start*` operations are already in the migration project's queue, the
+    /// conversion begins after they complete.
+    ///
+    /// The conversion request loads metadata models that are not yet in the
+    /// metadata tree, but
+    /// does not reload metadata models that are already present. If your source
+    /// database has
+    /// changed since the metadata was loaded, refresh the affected metadata models
+    /// with
+    /// [StartMetadataModelImport](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html) before calling this operation.
+    ///
+    /// If converted objects already exist in the target metadata tree, the
+    /// conversion
+    /// overwrites them, including any manual edits.
+    ///
+    /// To check the status of the conversion request, call
+    /// [DescribeMetadataModelConversions](https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelConversions.html) using the returned
+    /// `RequestIdentifier` as a filter.
+    ///
+    /// To cancel a queued or in-progress request, call
+    /// [CancelMetadataModelConversion](https://docs.aws.amazon.com/dms/latest/APIReference/API_CancelMetadataModelConversion.html) with the returned
+    /// `RequestIdentifier`.
+    ///
+    /// After the conversion completes successfully:
+    ///
+    /// * To export a post-conversion assessment report, call
+    /// [ExportMetadataModelAssessment](https://docs.aws.amazon.com/dms/latest/APIReference/API_ExportMetadataModelAssessment.html).
+    ///
+    /// * To retrieve converted code, use any of the following
+    /// options:
+    ///
+    /// *
+    ///   [DescribeMetadataModel](https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModel.html) and
+    /// [DescribeMetadataModelChildren](https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelChildren.html) – navigate the target metadata
+    /// tree and retrieve converted definitions.
+    ///
+    /// *
+    ///   [StartMetadataModelExportAsScript](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelExportAsScript.html) – export as data definition
+    /// language (DDL) scripts to your Amazon S3 bucket.
+    ///
+    /// *
+    ///   [StartMetadataModelExportToTarget](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelExportToTarget.html) – apply directly to your
+    /// target database.
+    ///
+    /// **Required permissions:**
+    /// `dms:StartMetadataModelConversion`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn startMetadataModelConversion(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_conversion.StartMetadataModelConversionInput, options: CallOptions) !start_metadata_model_conversion.StartMetadataModelConversionOutput {
         return start_metadata_model_conversion.execute(self, allocator, input, options);
     }
 
-    /// Creates source metadata model of the given type with the specified
-    /// properties for schema conversion operations.
+    /// Queues the creation of a metadata model in the source metadata tree. If
+    /// other requests
+    /// created by `Start*` operations are already in the migration project's queue,
+    /// the
+    /// creation begins after they complete.
     ///
-    /// This action supports only these directions: from SQL Server to Aurora
-    /// PostgreSQL, or from SQL Server to RDS for PostgreSQL.
+    /// This operation supports only Microsoft SQL Server to Aurora PostgreSQL and
+    /// Microsoft SQL Server to Amazon RDS for PostgreSQL conversion paths.
+    ///
+    /// To check the status of the creation request, call
+    /// [DescribeMetadataModelCreations](https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelCreations.html) using the returned
+    /// `RequestIdentifier` as a filter.
+    ///
+    /// To cancel a queued or in-progress request, call
+    /// [CancelMetadataModelCreation](https://docs.aws.amazon.com/dms/latest/APIReference/API_CancelMetadataModelCreation.html) with the returned
+    /// `RequestIdentifier`.
+    ///
+    /// Calling
+    /// [StartMetadataModelImport](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html) with `Refresh` deletes metadata models
+    /// created by this operation.
+    ///
+    /// After the creation completes successfully:
+    ///
+    /// * To evaluate conversion complexity, call
+    /// [StartMetadataModelAssessment](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelAssessment.html).
+    ///
+    /// * To convert to the target database format, call
+    /// [StartMetadataModelConversion](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelConversion.html).
+    ///
+    /// **Required permissions:**
+    /// `dms:StartMetadataModelCreation`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn startMetadataModelCreation(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_creation.StartMetadataModelCreationInput, options: CallOptions) !start_metadata_model_creation.StartMetadataModelCreationOutput {
         return start_metadata_model_creation.execute(self, allocator, input, options);
     }
 
-    /// Saves your converted code to a file as a SQL script, and stores this file on
-    /// your Amazon S3
-    /// bucket.
+    /// Queues an export of metadata models (database objects such as tables, views,
+    /// and
+    /// procedures) as a data definition language (DDL) script. The script is stored
+    /// as a ZIP
+    /// archive in the Amazon S3 bucket associated with the migration project. If
+    /// other requests
+    /// created by `Start*` operations are already in the migration project's queue,
+    /// the export begins after they complete.
+    ///
+    /// When exporting from the target metadata tree, the export applies only to
+    /// metadata
+    /// models created by conversion. Metadata models imported from the database are
+    /// skipped.
+    ///
+    /// To check the status of the export request, call
+    /// [DescribeMetadataModelExportsAsScript](https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelExportsAsScript.html) using the returned
+    /// `RequestIdentifier` as a filter.
+    ///
+    /// **Required permissions:**
+    /// `dms:StartMetadataModelExportAsScripts`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn startMetadataModelExportAsScript(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_export_as_script.StartMetadataModelExportAsScriptInput, options: CallOptions) !start_metadata_model_export_as_script.StartMetadataModelExportAsScriptOutput {
         return start_metadata_model_export_as_script.execute(self, allocator, input, options);
     }
 
-    /// Applies converted database objects to your target database.
+    /// Queues an export of the selected converted metadata models (database objects
+    /// such as
+    /// tables, views, and procedures) to your target database. If other requests
+    /// created by
+    /// `Start*` operations are already in the migration project's queue, the export
+    /// begins after they complete.
+    ///
+    /// This operation requires a non-virtual target data provider.
+    ///
+    /// The export applies only metadata models created by conversion. Metadata
+    /// models
+    /// imported from the database are skipped.
+    ///
+    /// If objects with the same name already exist on the target database, the
+    /// export
+    /// overwrites them.
+    ///
+    /// The operation installs the extension pack on the target database. For more
+    /// information, see [Using extension packs in DMS Schema
+    /// Conversion](https://docs.aws.amazon.com/dms/latest/userguide/extension-pack.html).
+    ///
+    /// To check the status of the export request, call
+    /// [DescribeMetadataModelExportsToTarget](https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelExportsToTarget.html) using the returned
+    /// `RequestIdentifier` as a filter.
+    ///
+    /// **Required permissions:**
+    /// `dms:StartMetadataModelExportToTarget`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn startMetadataModelExportToTarget(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_export_to_target.StartMetadataModelExportToTargetInput, options: CallOptions) !start_metadata_model_export_to_target.StartMetadataModelExportToTargetOutput {
         return start_metadata_model_export_to_target.execute(self, allocator, input, options);
     }
 
-    /// Loads the metadata for all the dependent database objects of the parent
-    /// object.
+    /// Queues an import of metadata models (database objects such as tables, views,
+    /// and
+    /// procedures) from your data provider into the metadata tree. If other
+    /// requests created
+    /// by `Start*` operations are already in the migration project's queue, the
+    /// import begins after they complete.
     ///
-    /// This operation uses your project's Amazon S3 bucket as a metadata cache to
-    /// improve
-    /// performance.
+    /// To check the status of the import request, call
+    /// [DescribeMetadataModelImports](https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelImports.html) using the returned
+    /// `RequestIdentifier` as a filter.
+    ///
+    /// **Required permissions:**
+    /// `dms:StartMetadataModelImport`. For more information, see
+    /// [Actions, resources, and condition keys for Database Migration
+    /// Service](https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html).
     pub fn startMetadataModelImport(self: *Self, allocator: std.mem.Allocator, input: start_metadata_model_import.StartMetadataModelImportInput, options: CallOptions) !start_metadata_model_import.StartMetadataModelImportOutput {
         return start_metadata_model_import.execute(self, allocator, input, options);
     }

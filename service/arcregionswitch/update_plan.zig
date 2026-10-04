@@ -30,6 +30,10 @@ pub const UpdatePlanInput = struct {
     /// The updated report configuration for the plan.
     report_configuration: ?ReportConfiguration = null,
 
+    /// Specifies whether service quota checks are enabled for the Region switch
+    /// plan.
+    service_quota_checks_enabled: ?bool = null,
+
     /// The updated conditions that can automatically trigger the execution of the
     /// plan.
     triggers: ?[]const Trigger = null,
@@ -44,6 +48,7 @@ pub const UpdatePlanInput = struct {
         .execution_role = "executionRole",
         .recovery_time_objective_minutes = "recoveryTimeObjectiveMinutes",
         .report_configuration = "reportConfiguration",
+        .service_quota_checks_enabled = "serviceQuotaChecksEnabled",
         .triggers = "triggers",
         .workflows = "workflows",
     };

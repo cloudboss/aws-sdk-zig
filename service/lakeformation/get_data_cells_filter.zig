@@ -104,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDataCellsFilterInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDataCellsFilterOutput {
-    var result: GetDataCellsFilterOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDataCellsFilterOutput, body, allocator);
-    }
+    const result: GetDataCellsFilterOutput = try aws.json.parseJsonObject(
+        GetDataCellsFilterOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

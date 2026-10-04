@@ -13,7 +13,7 @@ pub const ListRoute53HealthChecksInRegionInput = struct {
     /// The hosted zone ID for the health checks.
     hosted_zone_id: ?[]const u8 = null,
 
-    /// The number of objects that you want to return with this call.
+    /// The maximum number of results to return in the response.
     max_results: ?i32 = null,
 
     /// Specifies that you want to receive the next page of results. Valid only if
@@ -39,11 +39,9 @@ pub const ListRoute53HealthChecksInRegionOutput = struct {
     /// List of the health checks requested.
     health_checks: ?[]const Route53HealthCheck = null,
 
-    /// Specifies that you want to receive the next page of results. Valid only if
-    /// you received a `nextToken` response in the previous request. If you did, it
-    /// indicates that more output is available. Set this parameter to the value
-    /// provided by the previous call's `nextToken` response to request the next
-    /// page of results.
+    /// A pagination token. A response may contain no results while still including
+    /// a `nextToken`. Continue paginating until `nextToken` is null to retrieve all
+    /// results.
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{

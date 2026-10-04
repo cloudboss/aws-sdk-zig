@@ -77,10 +77,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTableBucketMetricsCo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTableBucketMetricsConfigurationOutput {
-    var result: GetTableBucketMetricsConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTableBucketMetricsConfigurationOutput, body, allocator);
-    }
+    const result: GetTableBucketMetricsConfigurationOutput = try aws.json.parseJsonObject(
+        GetTableBucketMetricsConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

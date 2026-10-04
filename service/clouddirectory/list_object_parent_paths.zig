@@ -113,10 +113,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListObjectParentPathsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListObjectParentPathsOutput {
-    var result: ListObjectParentPathsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListObjectParentPathsOutput, body, allocator);
-    }
+    const result: ListObjectParentPathsOutput = try aws.json.parseJsonObject(
+        ListObjectParentPathsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

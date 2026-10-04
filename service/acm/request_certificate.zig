@@ -80,14 +80,12 @@ pub const RequestCertificateInput = struct {
     /// issued by ACM.
     managed_by: ?CertificateManagedBy = null,
 
-    /// You can use this parameter to specify whether to add the certificate to a
-    /// certificate transparency log and export your certificate.
+    /// You can use this parameter to specify whether to export your certificate.
     ///
-    /// Certificate transparency makes it possible to detect SSL/TLS certificates
-    /// that have been mistakenly or maliciously issued. Certificates that have not
-    /// been logged typically produce an error message in a browser. For more
-    /// information, see [Opting Out of Certificate Transparency
-    /// Logging](https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency).
+    /// Certificate transparency logging opt-out is no longer available. All public
+    /// certificates are recorded in a certificate transparency log. For more
+    /// information, see [Certificate Transparency
+    /// Logging](https://docs.aws.amazon.com/acm/latest/userguide/acm-concepts.html#concept-transparency).
     ///
     /// You can export public ACM certificates to use with Amazon Web Services
     /// services as well as outside the Amazon Web Services Cloud. For more

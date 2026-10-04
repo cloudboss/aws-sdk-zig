@@ -134,10 +134,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListQueueFleetAssociati
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListQueueFleetAssociationsOutput {
-    var result: ListQueueFleetAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListQueueFleetAssociationsOutput, body, allocator);
-    }
+    const result: ListQueueFleetAssociationsOutput = try aws.json.parseJsonObject(
+        ListQueueFleetAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

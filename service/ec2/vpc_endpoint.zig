@@ -4,6 +4,7 @@ const SecurityGroupIdentifier = @import("security_group_identifier.zig").Securit
 const IpAddressType = @import("ip_address_type.zig").IpAddressType;
 const SubnetIpPrefixes = @import("subnet_ip_prefixes.zig").SubnetIpPrefixes;
 const LastError = @import("last_error.zig").LastError;
+const PayerResponsibilityEntry = @import("payer_responsibility_entry.zig").PayerResponsibilityEntry;
 const State = @import("state.zig").State;
 const Tag = @import("tag.zig").Tag;
 const VpcEndpointType = @import("vpc_endpoint_type.zig").VpcEndpointType;
@@ -22,8 +23,8 @@ pub const VpcEndpoint = struct {
     /// Reason for the failure.
     failure_reason: ?[]const u8 = null,
 
-    /// (Interface endpoint) Information about the security groups that are
-    /// associated with
+    /// (Interface, Resource, ServiceNetwork, and Tunnel endpoints only) Information
+    /// about the security groups that are associated with
     /// the network interface.
     groups: ?[]const SecurityGroupIdentifier = null,
 
@@ -39,11 +40,15 @@ pub const VpcEndpoint = struct {
     /// The last error that occurred for endpoint.
     last_error: ?LastError = null,
 
-    /// (Interface endpoint) The network interfaces for the endpoint.
+    /// (Interface, Gateway Load Balancer endpoints, Resource, ServiceNetwork, and
+    /// Tunnel endpoints only) The network interfaces for the endpoint.
     network_interface_ids: ?[]const []const u8 = null,
 
     /// The ID of the Amazon Web Services account that owns the endpoint.
     owner_id: ?[]const u8 = null,
+
+    /// The payer responsibility settings for the endpoint.
+    payer_responsibilities: ?[]const PayerResponsibilityEntry = null,
 
     /// The policy document associated with the endpoint, if applicable.
     policy_document: ?[]const u8 = null,
@@ -73,7 +78,8 @@ pub const VpcEndpoint = struct {
     /// The state of the endpoint.
     state: ?State = null,
 
-    /// (Interface endpoint) The subnets for the endpoint.
+    /// (Interface, Gateway Load Balancer endpoints, Resource, ServiceNetwork, and
+    /// Tunnel endpoints only) The subnets for the endpoint.
     subnet_ids: ?[]const []const u8 = null,
 
     /// The tags assigned to the endpoint.
@@ -83,6 +89,9 @@ pub const VpcEndpoint = struct {
     vpc_endpoint_id: ?[]const u8 = null,
 
     /// The type of endpoint.
+    ///
+    /// For more information about the types of VPC endpoints, see [VPC
+    /// endpoints](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html#concepts-vpc-endpoints) in the *Amazon Web Services PrivateLink User Guide*.
     vpc_endpoint_type: ?VpcEndpointType = null,
 
     /// The ID of the VPC to which the endpoint is associated.

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const EncryptionConfigurationDetails = @import("encryption_configuration_details.zig").EncryptionConfigurationDetails;
+const RegionMetadata = @import("region_metadata.zig").RegionMetadata;
 const InstanceStatus = @import("instance_status.zig").InstanceStatus;
 
 pub const DescribeInstanceInput = struct {
@@ -25,6 +26,10 @@ pub const DescribeInstanceOutput = struct {
     /// including the encryption status, KMS key type, and KMS key ARN.
     encryption_configuration_details: ?EncryptionConfigurationDetails = null,
 
+    /// The ARN of the identity store that is connected to the instance of IAM
+    /// Identity Center.
+    identity_store_arn: ?[]const u8 = null,
+
     /// The identifier of the identity store that is connected to the instance of
     /// IAM Identity Center.
     identity_store_id: ?[]const u8 = null,
@@ -43,6 +48,18 @@ pub const DescribeInstanceOutput = struct {
     /// created.
     owner_account_id: ?[]const u8 = null,
 
+    /// Indicates whether permission sets are enabled for this Identity Center
+    /// instance.
+    permission_sets_enabled: ?bool = null,
+
+    /// The primary Region where the IAM Identity Center instance was originally
+    /// enabled. The primary Region cannot be removed.
+    primary_region: ?[]const u8 = null,
+
+    /// The list of Regions enabled in the IAM Identity Center instance, including
+    /// Regions with ACTIVE, ADDING, or REMOVING status.
+    regions: ?[]const RegionMetadata = null,
+
     /// The status of the instance.
     status: ?InstanceStatus = null,
 
@@ -57,10 +74,14 @@ pub const DescribeInstanceOutput = struct {
     pub const json_field_names = .{
         .created_date = "CreatedDate",
         .encryption_configuration_details = "EncryptionConfigurationDetails",
+        .identity_store_arn = "IdentityStoreArn",
         .identity_store_id = "IdentityStoreId",
         .instance_arn = "InstanceArn",
         .name = "Name",
         .owner_account_id = "OwnerAccountId",
+        .permission_sets_enabled = "PermissionSetsEnabled",
+        .primary_region = "PrimaryRegion",
+        .regions = "Regions",
         .status = "Status",
         .status_reason = "StatusReason",
     };

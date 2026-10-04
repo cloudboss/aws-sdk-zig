@@ -70,6 +70,13 @@ pub const User = struct {
     /// A string containing a URL that might be associated with the user.
     profile_url: ?[]const u8 = null,
 
+    /// The current revision of the user in the identity store. This value changes
+    /// each time the user is modified. You can provide it as the `Revision`
+    /// parameter of an `UpdateUser` or `DeleteUser` request to make the operation
+    /// conditional on the user not having changed. Treat this value as an opaque
+    /// token: don't parse it or rely on its format or ordering.
+    revision: []const u8,
+
     /// A list of `Role` objects containing roles associated with the user.
     roles: ?[]const Role = null,
 
@@ -85,6 +92,11 @@ pub const User = struct {
 
     /// The identifier of the user or system that last updated the user.
     updated_by: ?[]const u8 = null,
+
+    /// The Amazon Resource Name (ARN) of the user in the identity store. For
+    /// example,
+    /// `arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
+    user_arn: []const u8,
 
     /// The identifier for a user in the identity store.
     user_id: []const u8,
@@ -123,11 +135,13 @@ pub const User = struct {
         .photos = "Photos",
         .preferred_language = "PreferredLanguage",
         .profile_url = "ProfileUrl",
+        .revision = "Revision",
         .roles = "Roles",
         .timezone = "Timezone",
         .title = "Title",
         .updated_at = "UpdatedAt",
         .updated_by = "UpdatedBy",
+        .user_arn = "UserArn",
         .user_id = "UserId",
         .user_name = "UserName",
         .user_status = "UserStatus",

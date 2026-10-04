@@ -159,10 +159,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLineageNodeInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetLineageNodeOutput {
-    var result: GetLineageNodeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetLineageNodeOutput, body, allocator);
-    }
+    const result: GetLineageNodeOutput = try aws.json.parseJsonObject(
+        GetLineageNodeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

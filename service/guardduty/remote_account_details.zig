@@ -10,8 +10,13 @@ pub const RemoteAccountDetails = struct {
     /// caller is from outside your environment.
     affiliated: ?bool = null,
 
+    /// If the remote account belongs to an Amazon Web Services service, this field
+    /// indicates which service the remote account belongs to.
+    aws_service_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .account_id = "AccountId",
         .affiliated = "Affiliated",
+        .aws_service_name = "AwsServiceName",
     };
 };

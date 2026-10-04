@@ -82,10 +82,8 @@ pub const Client = struct {
     }
 
     /// Creates an additional token for a specified stage. This can be done after
-    /// stage creation
-    /// or when tokens expire. Tokens always are scoped to the stage for which they
-    /// are
-    /// created.
+    /// stage creation or when tokens expire. Tokens always are scoped to the stage
+    /// for which they are created.
     ///
     /// Encryption keys are owned by Amazon IVS and never used directly by your
     /// application.
@@ -100,16 +98,14 @@ pub const Client = struct {
 
     /// Creates a new storage configuration, used to enable recording to Amazon S3.
     /// When a StorageConfiguration is created, IVS will modify the S3 bucketPolicy
-    /// of the provided bucket.
-    /// This will ensure that IVS has sufficient permissions to write content to the
-    /// provided bucket.
+    /// of the provided bucket. This will ensure that IVS has sufficient permissions
+    /// to write content to the provided bucket.
     pub fn createStorageConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_storage_configuration.CreateStorageConfigurationInput, options: CallOptions) !create_storage_configuration.CreateStorageConfigurationOutput {
         return create_storage_configuration.execute(self, allocator, input, options);
     }
 
     /// Deletes an EncoderConfiguration resource. Ensures that no Compositions are
-    /// using this
-    /// template; otherwise, returns an error.
+    /// using this template; otherwise, returns an error.
     pub fn deleteEncoderConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_encoder_configuration.DeleteEncoderConfigurationInput, options: CallOptions) !delete_encoder_configuration.DeleteEncoderConfigurationOutput {
         return delete_encoder_configuration.execute(self, allocator, input, options);
     }
@@ -121,18 +117,17 @@ pub const Client = struct {
         return delete_ingest_configuration.execute(self, allocator, input, options);
     }
 
-    /// Deletes the specified public key used to sign stage participant tokens.
-    /// This invalidates future participant tokens generated using the key pair’s
-    /// private key.
+    /// Deletes the specified public key used to sign stage participant tokens. This
+    /// invalidates future participant tokens generated using the key pair’s private
+    /// key.
     pub fn deletePublicKey(self: *Self, allocator: std.mem.Allocator, input: delete_public_key.DeletePublicKeyInput, options: CallOptions) !delete_public_key.DeletePublicKeyOutput {
         return delete_public_key.execute(self, allocator, input, options);
     }
 
     /// Shuts down and deletes the specified stage (disconnecting all participants).
-    /// This operation also
-    /// removes the `stageArn` from the associated IngestConfiguration, if there are
-    /// participants
-    /// using the IngestConfiguration to publish to the stage.
+    /// This operation also removes the `stageArn` from the associated
+    /// IngestConfiguration, if there are participants using the IngestConfiguration
+    /// to publish to the stage.
     pub fn deleteStage(self: *Self, allocator: std.mem.Allocator, input: delete_stage.DeleteStageInput, options: CallOptions) !delete_stage.DeleteStageOutput {
         return delete_stage.execute(self, allocator, input, options);
     }
@@ -140,18 +135,18 @@ pub const Client = struct {
     /// Deletes the storage configuration for the specified ARN.
     ///
     /// If you try to delete a storage configuration that is used by a Composition,
-    /// you will get an error (409 ConflictException).
-    /// To avoid this, for all Compositions that reference the storage
-    /// configuration, first use StopComposition and wait for it to complete,
-    /// then use DeleteStorageConfiguration.
+    /// you will get an error (409 ConflictException). To avoid this, for all
+    /// Compositions that reference the storage configuration, first use
+    /// StopComposition and wait for it to complete, then use
+    /// DeleteStorageConfiguration.
     pub fn deleteStorageConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_storage_configuration.DeleteStorageConfigurationInput, options: CallOptions) !delete_storage_configuration.DeleteStorageConfigurationOutput {
         return delete_storage_configuration.execute(self, allocator, input, options);
     }
 
     /// Disconnects a specified participant from a specified stage. If the
-    /// participant is publishing using
-    /// an IngestConfiguration, DisconnectParticipant also updates the `stageArn`
-    /// in the IngestConfiguration to be an empty string.
+    /// participant is publishing using an IngestConfiguration,
+    /// DisconnectParticipant also updates the `stageArn` in the IngestConfiguration
+    /// to be an empty string.
     pub fn disconnectParticipant(self: *Self, allocator: std.mem.Allocator, input: disconnect_participant.DisconnectParticipantInput, options: CallOptions) !disconnect_participant.DisconnectParticipantOutput {
         return disconnect_participant.execute(self, allocator, input, options);
     }
@@ -202,15 +197,13 @@ pub const Client = struct {
     }
 
     /// Gets summary information about all Compositions in your account, in the AWS
-    /// region
-    /// where the API request is processed.
+    /// region where the API request is processed.
     pub fn listCompositions(self: *Self, allocator: std.mem.Allocator, input: list_compositions.ListCompositionsInput, options: CallOptions) !list_compositions.ListCompositionsOutput {
         return list_compositions.execute(self, allocator, input, options);
     }
 
     /// Gets summary information about all EncoderConfigurations in your account, in
-    /// the AWS
-    /// region where the API request is processed.
+    /// the AWS region where the API request is processed.
     pub fn listEncoderConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_encoder_configurations.ListEncoderConfigurationsInput, options: CallOptions) !list_encoder_configurations.ListEncoderConfigurationsOutput {
         return list_encoder_configurations.execute(self, allocator, input, options);
     }
@@ -222,8 +215,7 @@ pub const Client = struct {
     }
 
     /// Lists events for a specified participant that occurred during a specified
-    /// stage
-    /// session.
+    /// stage session.
     pub fn listParticipantEvents(self: *Self, allocator: std.mem.Allocator, input: list_participant_events.ListParticipantEventsInput, options: CallOptions) !list_participant_events.ListParticipantEventsOutput {
         return list_participant_events.execute(self, allocator, input, options);
     }
@@ -250,8 +242,7 @@ pub const Client = struct {
     }
 
     /// Gets summary information about all stages in your account, in the AWS region
-    /// where the
-    /// API request is processed.
+    /// where the API request is processed.
     pub fn listStages(self: *Self, allocator: std.mem.Allocator, input: list_stages.ListStagesInput, options: CallOptions) !list_stages.ListStagesOutput {
         return list_stages.execute(self, allocator, input, options);
     }
@@ -271,21 +262,16 @@ pub const Client = struct {
     /// request.
     ///
     /// A Composition is an ephemeral resource that exists after this operation
-    /// returns
-    /// successfully. Composition stops and the resource is deleted:
+    /// returns successfully. Composition stops and the resource is deleted:
     ///
     /// * When StopComposition is called.
-    ///
     /// * After a 1-minute timeout, when all participants are disconnected from the
-    /// stage.
-    ///
+    ///   stage.
     /// * After a 1-minute timeout, if there are no participants in the stage when
-    /// StartComposition is called.
-    ///
+    ///   StartComposition is called.
     /// * When broadcasting to the IVS channel fails and all retries are exhausted.
-    ///
     /// * When broadcasting is disconnected and all attempts to reconnect are
-    /// exhausted.
+    ///   exhausted.
     pub fn startComposition(self: *Self, allocator: std.mem.Allocator, input: start_composition.StartCompositionInput, options: CallOptions) !start_composition.StartCompositionOutput {
         return start_composition.execute(self, allocator, input, options);
     }
@@ -297,8 +283,7 @@ pub const Client = struct {
     }
 
     /// Stops and deletes a Composition resource. Any broadcast from the Composition
-    /// resource
-    /// is stopped.
+    /// resource is stopped.
     pub fn stopComposition(self: *Self, allocator: std.mem.Allocator, input: stop_composition.StopCompositionInput, options: CallOptions) !stop_composition.StopCompositionOutput {
         return stop_composition.execute(self, allocator, input, options);
     }

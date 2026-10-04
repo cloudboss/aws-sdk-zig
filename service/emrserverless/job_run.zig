@@ -3,12 +3,14 @@ const aws = @import("aws");
 const ResourceUtilization = @import("resource_utilization.zig").ResourceUtilization;
 const ConfigurationOverrides = @import("configuration_overrides.zig").ConfigurationOverrides;
 const JobRunExecutionIamPolicy = @import("job_run_execution_iam_policy.zig").JobRunExecutionIamPolicy;
+const ImageConfiguration = @import("image_configuration.zig").ImageConfiguration;
 const JobDriver = @import("job_driver.zig").JobDriver;
 const JobRunMode = @import("job_run_mode.zig").JobRunMode;
 const NetworkConfiguration = @import("network_configuration.zig").NetworkConfiguration;
 const RetryPolicy = @import("retry_policy.zig").RetryPolicy;
 const JobRunState = @import("job_run_state.zig").JobRunState;
 const TotalResourceUtilization = @import("total_resource_utilization.zig").TotalResourceUtilization;
+const WorkerTypeSpecification = @import("worker_type_specification.zig").WorkerTypeSpecification;
 
 /// Information about a job run. A job run is a unit of work, such as a Spark
 /// JAR, Hive query, or SparkSQL query, that you submit to an Amazon EMR
@@ -55,6 +57,8 @@ pub const JobRun = struct {
     /// Returns the job run timeout value from the `StartJobRun` call. If no timeout
     /// was specified, then it returns the default timeout of 720 minutes.
     execution_timeout_minutes: ?i64 = null,
+
+    image_configuration: ?ImageConfiguration = null,
 
     /// The job driver for the job run.
     job_driver: JobDriver,
@@ -104,6 +108,11 @@ pub const JobRun = struct {
     /// The date and time when the job run was updated.
     updated_at: i64,
 
+    /// The specification applied to each worker type. Includes the JobRun-level
+    /// ImageConfiguration when the applicationLevelDigestResolution is false for
+    /// the application.
+    worker_type_specifications: ?[]const aws.map.MapEntry(WorkerTypeSpecification) = null,
+
     pub const json_field_names = .{
         .application_id = "applicationId",
         .arn = "arn",
@@ -118,6 +127,7 @@ pub const JobRun = struct {
         .execution_iam_policy = "executionIamPolicy",
         .execution_role = "executionRole",
         .execution_timeout_minutes = "executionTimeoutMinutes",
+        .image_configuration = "imageConfiguration",
         .job_driver = "jobDriver",
         .job_run_id = "jobRunId",
         .mode = "mode",
@@ -133,5 +143,6 @@ pub const JobRun = struct {
         .total_execution_duration_seconds = "totalExecutionDurationSeconds",
         .total_resource_utilization = "totalResourceUtilization",
         .updated_at = "updatedAt",
+        .worker_type_specifications = "workerTypeSpecifications",
     };
 };

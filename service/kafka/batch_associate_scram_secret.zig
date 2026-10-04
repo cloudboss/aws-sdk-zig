@@ -92,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchAssociateScramSecr
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchAssociateScramSecretOutput {
-    var result: BatchAssociateScramSecretOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchAssociateScramSecretOutput, body, allocator);
-    }
+    const result: BatchAssociateScramSecretOutput = try aws.json.parseJsonObject(
+        BatchAssociateScramSecretOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

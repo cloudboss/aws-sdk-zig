@@ -8,6 +8,7 @@ const PartnerAppConfig = @import("partner_app_config.zig").PartnerAppConfig;
 const PartnerAppAuthType = @import("partner_app_auth_type.zig").PartnerAppAuthType;
 const AvailableUpgrade = @import("available_upgrade.zig").AvailableUpgrade;
 const ErrorInfo = @import("error_info.zig").ErrorInfo;
+const IdcConfigOutput = @import("idc_config_output.zig").IdcConfigOutput;
 const PartnerAppMaintenanceConfig = @import("partner_app_maintenance_config.zig").PartnerAppMaintenanceConfig;
 const PartnerAppStatus = @import("partner_app_status.zig").PartnerAppStatus;
 const PartnerAppType = @import("partner_app_type.zig").PartnerAppType;
@@ -34,7 +35,12 @@ pub const DescribePartnerAppOutput = struct {
     arn: ?[]const u8 = null,
 
     /// The authorization type that users use to access the SageMaker Partner AI
-    /// App.
+    /// App. Valid values:
+    ///
+    /// * `IAM`: Users access the SageMaker Partner AI App with their Amazon Web
+    ///   Services IAM identity.
+    /// * `IDC`: Users access the SageMaker Partner AI App with their Amazon Web
+    ///   Services IAM Identity Center identity.
     auth_type: ?PartnerAppAuthType = null,
 
     /// A map of available minor version upgrades for the SageMaker Partner AI App.
@@ -68,6 +74,12 @@ pub const DescribePartnerAppOutput = struct {
 
     /// The ARN of the IAM role associated with the SageMaker Partner AI App.
     execution_role_arn: ?[]const u8 = null,
+
+    /// Contains the Amazon Web Services IAM Identity Center configuration for the
+    /// SageMaker Partner AI App, including the Identity Center instance and the
+    /// Identity Center application that SageMaker creates for the app. The service
+    /// returns this field for apps that use `IDC` authorization.
+    idc_config: ?IdcConfigOutput = null,
 
     /// The Amazon Web Services KMS customer managed key used to encrypt the data at
     /// rest associated with SageMaker Partner AI Apps.
@@ -121,6 +133,7 @@ pub const DescribePartnerAppOutput = struct {
         .enable_iam_session_based_identity = "EnableIamSessionBasedIdentity",
         .@"error" = "Error",
         .execution_role_arn = "ExecutionRoleArn",
+        .idc_config = "IdcConfig",
         .kms_key_id = "KmsKeyId",
         .last_modified_time = "LastModifiedTime",
         .maintenance_config = "MaintenanceConfig",

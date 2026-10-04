@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBlacklistReportsInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBlacklistReportsOutput {
-    var result: GetBlacklistReportsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBlacklistReportsOutput, body, allocator);
-    }
+    const result: GetBlacklistReportsOutput = try aws.json.parseJsonObject(
+        GetBlacklistReportsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

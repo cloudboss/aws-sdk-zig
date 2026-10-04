@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: MergeProfilesInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !MergeProfilesOutput {
-    var result: MergeProfilesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(MergeProfilesOutput, body, allocator);
-    }
+    const result: MergeProfilesOutput = try aws.json.parseJsonObject(
+        MergeProfilesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

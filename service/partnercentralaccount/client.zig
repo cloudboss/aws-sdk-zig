@@ -16,6 +16,9 @@ const get_connection_preferences = @import("get_connection_preferences.zig");
 const get_partner = @import("get_partner.zig");
 const get_profile_update_task = @import("get_profile_update_task.zig");
 const get_profile_visibility = @import("get_profile_visibility.zig");
+const get_qualifications_association_details = @import("get_qualifications_association_details.zig");
+const get_qualifications_association_task = @import("get_qualifications_association_task.zig");
+const get_qualifications_disassociation_task = @import("get_qualifications_disassociation_task.zig");
 const get_verification = @import("get_verification.zig");
 const list_connection_invitations = @import("list_connection_invitations.zig");
 const list_connections = @import("list_connections.zig");
@@ -26,6 +29,8 @@ const put_profile_visibility = @import("put_profile_visibility.zig");
 const reject_connection_invitation = @import("reject_connection_invitation.zig");
 const send_email_verification_code = @import("send_email_verification_code.zig");
 const start_profile_update_task = @import("start_profile_update_task.zig");
+const start_qualifications_association_task = @import("start_qualifications_association_task.zig");
+const start_qualifications_disassociation_task = @import("start_qualifications_disassociation_task.zig");
 const start_verification = @import("start_verification.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
@@ -145,6 +150,28 @@ pub const Client = struct {
         return get_profile_visibility.execute(self, allocator, input, options);
     }
 
+    /// Returns your current qualifications association status, the primary partner,
+    /// and the full list of partners associated under the primary partner.
+    pub fn getQualificationsAssociationDetails(self: *Self, allocator: std.mem.Allocator, input: get_qualifications_association_details.GetQualificationsAssociationDetailsInput, options: CallOptions) !get_qualifications_association_details.GetQualificationsAssociationDetailsOutput {
+        return get_qualifications_association_details.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the status and details of the most recent qualifications
+    /// association task for your partner account. Use this operation to poll the
+    /// progress of an association task initiated by
+    /// `StartQualificationsAssociationTask`.
+    pub fn getQualificationsAssociationTask(self: *Self, allocator: std.mem.Allocator, input: get_qualifications_association_task.GetQualificationsAssociationTaskInput, options: CallOptions) !get_qualifications_association_task.GetQualificationsAssociationTaskOutput {
+        return get_qualifications_association_task.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the status and details of the most recent qualifications
+    /// disassociation task for your partner account. Use this operation to poll the
+    /// progress of a disassociation task initiated by
+    /// `StartQualificationsDisassociationTask`.
+    pub fn getQualificationsDisassociationTask(self: *Self, allocator: std.mem.Allocator, input: get_qualifications_disassociation_task.GetQualificationsDisassociationTaskInput, options: CallOptions) !get_qualifications_disassociation_task.GetQualificationsDisassociationTaskOutput {
+        return get_qualifications_disassociation_task.execute(self, allocator, input, options);
+    }
+
     /// Retrieves the current status and details of a verification process for a
     /// partner account. This operation allows partners to check the progress and
     /// results of business or registrant verification processes.
@@ -204,6 +231,22 @@ pub const Client = struct {
     /// asynchronously.
     pub fn startProfileUpdateTask(self: *Self, allocator: std.mem.Allocator, input: start_profile_update_task.StartProfileUpdateTaskInput, options: CallOptions) !start_profile_update_task.StartProfileUpdateTaskOutput {
         return start_profile_update_task.execute(self, allocator, input, options);
+    }
+
+    /// Initiates an asynchronous task to associate your partner qualifications with
+    /// a primary account. You must be a subsidiary of the primary account with an
+    /// active subsidiary connection. Use `GetQualificationsAssociationTask` to
+    /// monitor task progress.
+    pub fn startQualificationsAssociationTask(self: *Self, allocator: std.mem.Allocator, input: start_qualifications_association_task.StartQualificationsAssociationTaskInput, options: CallOptions) !start_qualifications_association_task.StartQualificationsAssociationTaskOutput {
+        return start_qualifications_association_task.execute(self, allocator, input, options);
+    }
+
+    /// Initiates an asynchronous task to disassociate your partner qualifications
+    /// from a primary account. You must currently be associated and cannot
+    /// disassociate if you are the primary partner. Use
+    /// `GetQualificationsDisassociationTask` to monitor task progress.
+    pub fn startQualificationsDisassociationTask(self: *Self, allocator: std.mem.Allocator, input: start_qualifications_disassociation_task.StartQualificationsDisassociationTaskInput, options: CallOptions) !start_qualifications_disassociation_task.StartQualificationsDisassociationTaskOutput {
+        return start_qualifications_disassociation_task.execute(self, allocator, input, options);
     }
 
     /// Initiates a new verification process for a partner account. This operation

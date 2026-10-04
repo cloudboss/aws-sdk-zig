@@ -153,10 +153,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateProvisionedModelT
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateProvisionedModelThroughputOutput {
-    var result: CreateProvisionedModelThroughputOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateProvisionedModelThroughputOutput, body, allocator);
-    }
+    const result: CreateProvisionedModelThroughputOutput = try aws.json.parseJsonObject(
+        CreateProvisionedModelThroughputOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

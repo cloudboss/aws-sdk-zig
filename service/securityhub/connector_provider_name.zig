@@ -3,16 +3,19 @@ const std = @import("std");
 pub const ConnectorProviderName = enum {
     jira_cloud,
     servicenow,
+    azure,
 
     pub const json_field_names = .{
         .jira_cloud = "JIRA_CLOUD",
         .servicenow = "SERVICENOW",
+        .azure = "AZURE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .jira_cloud => "JIRA_CLOUD",
             .servicenow => "SERVICENOW",
+            .azure => "AZURE",
         };
     }
 

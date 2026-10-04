@@ -25,8 +25,15 @@ pub const TelemetryDestinationConfiguration = struct {
     /// the resource type.
     elb_load_balancer_logging_parameters: ?ELBLoadBalancerLoggingParameters = null,
 
-    /// Configuration parameters specific to Amazon Bedrock AgentCore logging when
-    /// Amazon Bedrock AgentCore is the resource type.
+    /// The Amazon Resource Name (ARN) of the customer-managed Amazon Web Services
+    /// KMS key used to encrypt the log groups created during telemetry rule
+    /// remediation.
+    kms_key_arn: ?[]const u8 = null,
+
+    /// The configuration parameters for log delivery when the resource type
+    /// supports configurable log types, such as Amazon Bedrock Knowledge Bases,
+    /// Amazon Bedrock AgentCore payment managers, or Elastic Load Balancing
+    /// Application Load Balancers.
     log_delivery_parameters: ?LogDeliveryParameters = null,
 
     /// Configuration parameters specific to MSK monitoring when MSK is the resource
@@ -49,6 +56,7 @@ pub const TelemetryDestinationConfiguration = struct {
         .destination_pattern = "DestinationPattern",
         .destination_type = "DestinationType",
         .elb_load_balancer_logging_parameters = "ELBLoadBalancerLoggingParameters",
+        .kms_key_arn = "KmsKeyArn",
         .log_delivery_parameters = "LogDeliveryParameters",
         .msk_monitoring_parameters = "MskMonitoringParameters",
         .retention_in_days = "RetentionInDays",

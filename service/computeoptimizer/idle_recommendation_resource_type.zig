@@ -7,6 +7,12 @@ pub const IdleRecommendationResourceType = enum {
     ecs_service,
     rds_db_instance,
     nat_gateway,
+    dynamo_db_table,
+    elasti_cache_cluster,
+    memory_db_cluster,
+    document_db_cluster,
+    workspaces,
+    sage_maker_endpoint,
 
     pub const json_field_names = .{
         .ec2_instance = "EC2Instance",
@@ -15,6 +21,12 @@ pub const IdleRecommendationResourceType = enum {
         .ecs_service = "ECSService",
         .rds_db_instance = "RDSDBInstance",
         .nat_gateway = "NatGateway",
+        .dynamo_db_table = "DynamoDBTable",
+        .elasti_cache_cluster = "ElastiCacheCluster",
+        .memory_db_cluster = "MemoryDBCluster",
+        .document_db_cluster = "DocumentDBCluster",
+        .workspaces = "WorkSpaces",
+        .sage_maker_endpoint = "SageMakerEndpoint",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +37,12 @@ pub const IdleRecommendationResourceType = enum {
             .ecs_service => "ECSService",
             .rds_db_instance => "RDSDBInstance",
             .nat_gateway => "NatGateway",
+            .dynamo_db_table => "DynamoDBTable",
+            .elasti_cache_cluster => "ElastiCacheCluster",
+            .memory_db_cluster => "MemoryDBCluster",
+            .document_db_cluster => "DocumentDBCluster",
+            .workspaces => "WorkSpaces",
+            .sage_maker_endpoint => "SageMakerEndpoint",
         };
     }
 

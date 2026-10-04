@@ -39,9 +39,11 @@ pub const CreateReplaceRootVolumeTaskInput = struct {
     /// virtualization type as
     /// that of the instance.
     ///
-    /// If you want to restore the replacement volume from a specific snapshot, or
-    /// if you want
-    /// to restore it to its launch state, omit this parameter.
+    /// If you want to restore the replacement volume from a specific snapshot, if
+    /// you want
+    /// to restore it to its launch state, or if you want to replace the root volume
+    /// with a
+    /// specified volume, omit this parameter.
     image_id: ?[]const u8 = null,
 
     /// The ID of the instance for which to replace the root volume.
@@ -55,12 +57,25 @@ pub const CreateReplaceRootVolumeTaskInput = struct {
     ///
     /// If you want to restore the replacement root volume to the initial launch
     /// state,
-    /// or if you want to restore the replacement root volume from an AMI, omit this
-    /// parameter.
+    /// if you want to restore the replacement root volume from an AMI, or if you
+    /// want to
+    /// replace the root volume with a specified volume, omit this parameter.
     snapshot_id: ?[]const u8 = null,
 
     /// The tags to apply to the root volume replacement task.
     tag_specifications: ?[]const TagSpecification = null,
+
+    /// The ID of the volume to use as the replacement root volume. The specified
+    /// volume must
+    /// be in the same Availability Zone as the instance, must be in the `available`
+    /// state, and must not be attached to an instance. If the original root volume
+    /// is encrypted,
+    /// the specified volume must also be encrypted.
+    ///
+    /// If you want to restore the replacement root volume from a specific snapshot,
+    /// an AMI,
+    /// or to its launch state, omit this parameter.
+    volume_id: ?[]const u8 = null,
 
     /// Specifies the Amazon EBS Provisioned Rate for Volume Initialization (volume
     /// initialization rate), in MiB/s, at which to download
@@ -187,6 +202,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplaceRootVolume
                 }
             }
         }
+    }
+    if (input.volume_id) |v| {
+        try body_buf.appendSlice(allocator, "&VolumeId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     if (input.volume_initialization_rate) |v| {
         try body_buf.appendSlice(allocator, "&VolumeInitializationRate=");

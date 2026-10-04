@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetProfileInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetProfileOutput {
-    var result: GetProfileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetProfileOutput, body, allocator);
-    }
+    const result: GetProfileOutput = try aws.json.parseJsonObject(
+        GetProfileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

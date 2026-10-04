@@ -76,6 +76,7 @@ pub const GetImageFrameOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetImageFrameInput, options: CallOptions) !GetImageFrameOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -84,8 +85,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetImageFra
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "medical-imaging", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -97,6 +96,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetImageFra
         return error.ServiceError;
     }
 
+    errdefer stream_resp.deinit();
     const result = try deserializeStreamingResponse(allocator, &stream_resp);
     return result;
 }
@@ -129,10 +129,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetImageFrameInput, con
 
 fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !GetImageFrameOutput {
     var result: GetImageFrameOutput = .{};
-    result.image_frame_blob = stream_resp.body;
+    errdefer {
+        if (result.content_type) |value| allocator.free(value);
+    }
     if (stream_resp.headers.get("content-type")) |value| {
         result.content_type = try allocator.dupe(u8, value);
     }
+    result.image_frame_blob = stream_resp.body;
     stream_resp.deinitHeaders();
 
     return result;

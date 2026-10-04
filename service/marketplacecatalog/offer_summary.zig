@@ -1,4 +1,6 @@
+const OfferCreatedBySourceString = @import("offer_created_by_source_string.zig").OfferCreatedBySourceString;
 const OfferStateString = @import("offer_state_string.zig").OfferStateString;
+const OfferTargetAgreementIntentString = @import("offer_target_agreement_intent_string.zig").OfferTargetAgreementIntentString;
 const OfferTargetingString = @import("offer_targeting_string.zig").OfferTargetingString;
 
 /// Summarized information about an offer.
@@ -8,6 +10,9 @@ pub const OfferSummary = struct {
 
     /// The buyer accounts in the offer.
     buyer_accounts: ?[]const []const u8 = null,
+
+    /// The creation source of the offer.
+    created_by_source: ?OfferCreatedBySourceString = null,
 
     /// The name of the offer.
     name: ?[]const u8 = null,
@@ -27,18 +32,27 @@ pub const OfferSummary = struct {
     /// The status of the offer.
     state: ?OfferStateString = null,
 
+    /// The target agreement ID of the offer.
+    target_agreement_id: ?[]const u8 = null,
+
+    /// The target agreement intent of the offer.
+    target_agreement_intent: ?OfferTargetAgreementIntentString = null,
+
     /// The targeting in the offer.
     targeting: ?[]const OfferTargetingString = null,
 
     pub const json_field_names = .{
         .availability_end_date = "AvailabilityEndDate",
         .buyer_accounts = "BuyerAccounts",
+        .created_by_source = "CreatedBySource",
         .name = "Name",
         .offer_set_id = "OfferSetId",
         .product_id = "ProductId",
         .release_date = "ReleaseDate",
         .resale_authorization_id = "ResaleAuthorizationId",
         .state = "State",
+        .target_agreement_id = "TargetAgreementId",
+        .target_agreement_intent = "TargetAgreementIntent",
         .targeting = "Targeting",
     };
 };

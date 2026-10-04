@@ -12,4 +12,8 @@ pub const ConnectionLogResponseOptions = struct {
     /// Indicates whether client connection logging is enabled for the Client VPN
     /// endpoint.
     enabled: ?bool = null,
+
+    /// Specifies whether the authorization policy evaluation context is included in
+    /// the connection logs for the Client VPN endpoint.
+    include_authorization_policy_context: ?bool = null,
 };

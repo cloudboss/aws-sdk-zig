@@ -8,6 +8,8 @@ pub const TaxRegistrationType = enum {
     sst,
     tin,
     nric,
+    pan,
+    nip,
 
     pub const json_field_names = .{
         .vat = "VAT",
@@ -17,6 +19,8 @@ pub const TaxRegistrationType = enum {
         .sst = "SST",
         .tin = "TIN",
         .nric = "NRIC",
+        .pan = "PAN",
+        .nip = "NIP",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -28,6 +32,8 @@ pub const TaxRegistrationType = enum {
             .sst => "SST",
             .tin => "TIN",
             .nric => "NRIC",
+            .pan => "PAN",
+            .nip => "NIP",
         };
     }
 

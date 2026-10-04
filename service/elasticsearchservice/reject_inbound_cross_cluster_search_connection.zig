@@ -75,10 +75,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RejectInboundCrossClust
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RejectInboundCrossClusterSearchConnectionOutput {
-    var result: RejectInboundCrossClusterSearchConnectionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RejectInboundCrossClusterSearchConnectionOutput, body, allocator);
-    }
+    const result: RejectInboundCrossClusterSearchConnectionOutput = try aws.json.parseJsonObject(
+        RejectInboundCrossClusterSearchConnectionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

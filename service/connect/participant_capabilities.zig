@@ -5,7 +5,7 @@ const VideoCapability = @import("video_capability.zig").VideoCapability;
 /// participants present over the call.
 /// For more information, see [Set up
 /// in-app, web, video calling, and screen sharing
-/// capabilities](https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html) in the *Amazon Connect Administrator
+/// capabilities](https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html) in the *Connect Customer Administrator
 /// Guide*.
 pub const ParticipantCapabilities = struct {
     /// The screen sharing capability that is enabled for the participant. `SEND`

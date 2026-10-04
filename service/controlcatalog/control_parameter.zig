@@ -1,3 +1,5 @@
+const ControlParameterRequirement = @import("control_parameter_requirement.zig").ControlParameterRequirement;
+
 /// Five types of control parameters are supported.
 ///
 /// * **AllowedRegions**: List of Amazon Web Services Regions exempted from the
@@ -42,7 +44,12 @@ pub const ControlParameter = struct {
     /// ](https://docs.aws.amazon.com/controltower/latest/APIReference/API_EnableControl.html) or [ `UpdateEnabledControl` ](https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateEnabledControl.html).
     name: []const u8,
 
+    /// Indicates whether the parameter is required or optional when you enable the
+    /// control.
+    requirement: ?ControlParameterRequirement = null,
+
     pub const json_field_names = .{
         .name = "Name",
+        .requirement = "Requirement",
     };
 };

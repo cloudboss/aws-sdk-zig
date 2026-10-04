@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetConfiguredAudienceMo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetConfiguredAudienceModelAssociationOutput {
-    var result: GetConfiguredAudienceModelAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetConfiguredAudienceModelAssociationOutput, body, allocator);
-    }
+    const result: GetConfiguredAudienceModelAssociationOutput = try aws.json.parseJsonObject(
+        GetConfiguredAudienceModelAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -10,7 +10,7 @@ pub const DescribeContactFlowInput = struct {
     /// The identifier of the flow.
     contact_flow_id: []const u8,
 
-    /// The identifier of the Amazon Connect instance.
+    /// The identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     pub const json_field_names = .{
@@ -79,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeContactFlowInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeContactFlowOutput {
-    var result: DescribeContactFlowOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeContactFlowOutput, body, allocator);
-    }
+    const result: DescribeContactFlowOutput = try aws.json.parseJsonObject(
+        DescribeContactFlowOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

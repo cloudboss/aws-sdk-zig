@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Secret = @import("secret.zig").Secret;
+const SecretSourceType = @import("secret_source_type.zig").SecretSourceType;
 const CredentialProviderVendorType = @import("credential_provider_vendor_type.zig").CredentialProviderVendorType;
 const Oauth2ProviderConfigOutput = @import("oauth_2_provider_config_output.zig").Oauth2ProviderConfigOutput;
 const Status = @import("status.zig").Status;
@@ -24,8 +25,18 @@ pub const GetOauth2CredentialProviderOutput = struct {
     /// users after they complete the authorization flow.
     callback_url: ?[]const u8 = null,
 
-    /// The Amazon Resource Name (ARN) of the client secret in AWS Secrets Manager.
+    /// The Amazon Resource Name (ARN) of the client secret in Amazon Web Services
+    /// Secrets Manager.
     client_secret_arn: ?Secret = null,
+
+    /// The JSON key used to extract the client secret value from the Amazon Web
+    /// Services Secrets Manager secret.
+    client_secret_json_key: ?[]const u8 = null,
+
+    /// The source type of the client secret. Either `MANAGED` if the secret is
+    /// managed by the service, or `EXTERNAL` if managed by the user in Amazon Web
+    /// Services Secrets Manager.
+    client_secret_source: ?SecretSourceType = null,
 
     /// The timestamp when the OAuth2 credential provider was created.
     created_time: i64,
@@ -55,6 +66,8 @@ pub const GetOauth2CredentialProviderOutput = struct {
     pub const json_field_names = .{
         .callback_url = "callbackUrl",
         .client_secret_arn = "clientSecretArn",
+        .client_secret_json_key = "clientSecretJsonKey",
+        .client_secret_source = "clientSecretSource",
         .created_time = "createdTime",
         .credential_provider_arn = "credentialProviderArn",
         .credential_provider_vendor = "credentialProviderVendor",
@@ -122,10 +135,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetOauth2CredentialProv
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetOauth2CredentialProviderOutput {
-    var result: GetOauth2CredentialProviderOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetOauth2CredentialProviderOutput, body, allocator);
-    }
+    const result: GetOauth2CredentialProviderOutput = try aws.json.parseJsonObject(
+        GetOauth2CredentialProviderOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

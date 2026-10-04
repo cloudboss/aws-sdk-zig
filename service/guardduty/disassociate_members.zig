@@ -91,10 +91,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisassociateMembersInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DisassociateMembersOutput {
-    var result: DisassociateMembersOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DisassociateMembersOutput, body, allocator);
-    }
+    const result: DisassociateMembersOutput = try aws.json.parseJsonObject(
+        DisassociateMembersOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

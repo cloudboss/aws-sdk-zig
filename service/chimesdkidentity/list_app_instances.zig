@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAppInstancesInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAppInstancesOutput {
-    var result: ListAppInstancesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAppInstancesOutput, body, allocator);
-    }
+    const result: ListAppInstancesOutput = try aws.json.parseJsonObject(
+        ListAppInstancesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetViewInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetViewOutput {
-    var result: BatchGetViewOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetViewOutput, body, allocator);
-    }
+    const result: BatchGetViewOutput = try aws.json.parseJsonObject(
+        BatchGetViewOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

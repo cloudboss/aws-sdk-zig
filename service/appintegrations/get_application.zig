@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ApplicationConfig = @import("application_config.zig").ApplicationConfig;
 const ApplicationSourceConfig = @import("application_source_config.zig").ApplicationSourceConfig;
 const ApplicationType = @import("application_type.zig").ApplicationType;
+const AuthConfig = @import("auth_config.zig").AuthConfig;
 const IframeConfig = @import("iframe_config.zig").IframeConfig;
 const Publication = @import("publication.zig").Publication;
 const Subscription = @import("subscription.zig").Subscription;
@@ -32,6 +33,10 @@ pub const GetApplicationOutput = struct {
 
     /// The Amazon Resource Name (ARN) of the Application.
     arn: ?[]const u8 = null,
+
+    /// The authentication settings that Connect Customer uses when calling the
+    /// external application.
+    auth_config: ?AuthConfig = null,
 
     /// The created time of the Application.
     created_time: ?i64 = null,
@@ -79,6 +84,7 @@ pub const GetApplicationOutput = struct {
         .application_source_config = "ApplicationSourceConfig",
         .application_type = "ApplicationType",
         .arn = "Arn",
+        .auth_config = "AuthConfig",
         .created_time = "CreatedTime",
         .description = "Description",
         .id = "Id",
@@ -144,10 +150,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetApplicationInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetApplicationOutput {
-    var result: GetApplicationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetApplicationOutput, body, allocator);
-    }
+    const result: GetApplicationOutput = try aws.json.parseJsonObject(
+        GetApplicationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -18,7 +18,7 @@ pub const DestinationConnectorProperties = struct {
     /// The properties that are required to query the custom Connector.
     custom_connector: ?CustomConnectorDestinationProperties = null,
 
-    /// The properties required to query Amazon Connect Customer Profiles.
+    /// The properties required to query Connect Customer Customer Profiles.
     customer_profiles: ?CustomerProfilesDestinationProperties = null,
 
     /// The properties required to query Amazon EventBridge.

@@ -81,5 +81,7 @@ pub const UntagResourceInput = @import("untag_resource.zig").UntagResourceInput;
 pub const UntagResourceOutput = @import("untag_resource.zig").UntagResourceOutput;
 pub const UpdateEventRuleInput = @import("update_event_rule.zig").UpdateEventRuleInput;
 pub const UpdateEventRuleOutput = @import("update_event_rule.zig").UpdateEventRuleOutput;
+pub const UpdateManagedNotificationChannelAssociationInput = @import("update_managed_notification_channel_association.zig").UpdateManagedNotificationChannelAssociationInput;
+pub const UpdateManagedNotificationChannelAssociationOutput = @import("update_managed_notification_channel_association.zig").UpdateManagedNotificationChannelAssociationOutput;
 pub const UpdateNotificationConfigurationInput = @import("update_notification_configuration.zig").UpdateNotificationConfigurationInput;
 pub const UpdateNotificationConfigurationOutput = @import("update_notification_configuration.zig").UpdateNotificationConfigurationOutput;

@@ -14,7 +14,7 @@ pub const StartTaskContactInput = struct {
     attachments: ?[]const TaskAttachment = null,
 
     /// A custom key-value pair using an attribute map. The attributes are standard
-    /// Amazon Connect attributes, and
+    /// Connect Customer attributes, and
     /// can be accessed in flows just like any other contact attributes.
     ///
     /// There can be up to 32,768 UTF-8 bytes across all key-value pairs per
@@ -31,7 +31,7 @@ pub const StartTaskContactInput = struct {
     client_token: ?[]const u8 = null,
 
     /// The identifier of the flow for initiating the tasks. To see the
-    /// ContactFlowId in the Amazon Connect admin website, on the navigation
+    /// ContactFlowId in the Connect Customer admin website, on the navigation
     /// menu go to **Routing**, **Flows**. Choose the flow. On the
     /// flow page, under the name of the flow, choose **Show additional flow
     /// information**. The
@@ -44,7 +44,7 @@ pub const StartTaskContactInput = struct {
     /// Panel (CCP).
     description: ?[]const u8 = null,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -91,7 +91,7 @@ pub const StartTaskContactInput = struct {
 
     /// A set of system defined key-value pairs stored on individual contact
     /// segments (unique contact ID) using an
-    /// attribute map. The attributes are standard Amazon Connect attributes. They
+    /// attribute map. The attributes are standard Connect Customer attributes. They
     /// can be accessed in flows.
     ///
     /// Attribute keys can include only alphanumeric, -, and _.
@@ -114,7 +114,7 @@ pub const StartTaskContactInput = struct {
 
     /// A unique identifier for the task template. For more information about task
     /// templates, see [Create task
-    /// templates](https://docs.aws.amazon.com/connect/latest/adminguide/task-templates.html) in the *Amazon Connect Administrator Guide*.
+    /// templates](https://docs.aws.amazon.com/connect/latest/adminguide/task-templates.html) in the *Connect Customer Administrator Guide*.
     task_template_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -136,7 +136,7 @@ pub const StartTaskContactInput = struct {
 };
 
 pub const StartTaskContactOutput = struct {
-    /// The identifier of this contact within the Amazon Connect instance.
+    /// The identifier of this contact within the Connect Customer instance.
     contact_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -276,10 +276,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartTaskContactInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartTaskContactOutput {
-    var result: StartTaskContactOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartTaskContactOutput, body, allocator);
-    }
+    const result: StartTaskContactOutput = try aws.json.parseJsonObject(
+        StartTaskContactOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

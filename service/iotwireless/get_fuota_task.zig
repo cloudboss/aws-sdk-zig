@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFuotaTaskInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetFuotaTaskOutput {
-    var result: GetFuotaTaskOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetFuotaTaskOutput, body, allocator);
-    }
+    const result: GetFuotaTaskOutput = try aws.json.parseJsonObject(
+        GetFuotaTaskOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

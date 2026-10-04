@@ -3,6 +3,7 @@ const LensType = @import("lens_type.zig").LensType;
 
 /// A lens summary of a lens.
 pub const LensSummary = struct {
+    /// The date and time when the lens was created.
     created_at: ?i64 = null,
 
     description: ?[]const u8 = null,
@@ -25,6 +26,7 @@ pub const LensSummary = struct {
 
     owner: ?[]const u8 = null,
 
+    /// The date and time when the lens was last updated.
     updated_at: ?i64 = null,
 
     pub const json_field_names = .{

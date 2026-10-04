@@ -104,6 +104,7 @@ pub const PutSessionOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutSessionInput, options: CallOptions) !PutSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -112,8 +113,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutSessionI
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "lex", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -125,6 +124,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutSessionI
         return error.ServiceError;
     }
 
+    errdefer stream_resp.deinit();
     const result = try deserializeStreamingResponse(allocator, &stream_resp);
     return result;
 }
@@ -185,7 +185,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutSessionInput, config
 
 fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !PutSessionOutput {
     var result: PutSessionOutput = .{};
-    result.audio_stream = stream_resp.body;
+    errdefer {
+        if (result.content_type) |value| allocator.free(value);
+        if (result.messages) |value| allocator.free(value);
+        if (result.request_attributes) |value| allocator.free(value);
+        if (result.session_id) |value| allocator.free(value);
+        if (result.session_state) |value| allocator.free(value);
+    }
     if (stream_resp.headers.get("content-type")) |value| {
         result.content_type = try allocator.dupe(u8, value);
     }
@@ -201,6 +207,7 @@ fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.
     if (stream_resp.headers.get("x-amz-lex-session-state")) |value| {
         result.session_state = try allocator.dupe(u8, value);
     }
+    result.audio_stream = stream_resp.body;
     stream_resp.deinitHeaders();
 
     return result;

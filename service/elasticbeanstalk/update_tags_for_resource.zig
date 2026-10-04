@@ -14,18 +14,15 @@ pub const UpdateTagsForResourceInput = struct {
     resource_arn: []const u8,
 
     /// A list of tags to add or update. If a key of an existing tag is added, the
-    /// tag's value is
-    /// updated.
+    /// tag's value is updated.
     ///
-    /// Specify at least one of these parameters: `TagsToAdd`,
-    /// `TagsToRemove`.
+    /// Specify at least one of these parameters: `TagsToAdd`, `TagsToRemove`.
     tags_to_add: ?[]const Tag = null,
 
     /// A list of tag keys to remove. If a tag key doesn't exist, it is silently
     /// ignored.
     ///
-    /// Specify at least one of these parameters: `TagsToAdd`,
-    /// `TagsToRemove`.
+    /// Specify at least one of these parameters: `TagsToAdd`, `TagsToRemove`.
     tags_to_remove: ?[]const []const u8 = null,
 };
 

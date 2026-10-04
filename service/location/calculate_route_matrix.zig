@@ -272,10 +272,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CalculateRouteMatrixInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CalculateRouteMatrixOutput {
-    var result: CalculateRouteMatrixOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CalculateRouteMatrixOutput, body, allocator);
-    }
+    const result: CalculateRouteMatrixOutput = try aws.json.parseJsonObject(
+        CalculateRouteMatrixOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

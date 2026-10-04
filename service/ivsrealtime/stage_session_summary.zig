@@ -1,8 +1,7 @@
 /// Summary information about a stage session.
 pub const StageSessionSummary = struct {
     /// ISO 8601 timestamp (returned as a string) when the stage session ended. This
-    /// is null if
-    /// the stage is active.
+    /// is null if the stage is active.
     end_time: ?i64 = null,
 
     /// ID of the session within the stage.

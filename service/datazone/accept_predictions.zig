@@ -143,10 +143,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AcceptPredictionsInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AcceptPredictionsOutput {
-    var result: AcceptPredictionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AcceptPredictionsOutput, body, allocator);
-    }
+    const result: AcceptPredictionsOutput = try aws.json.parseJsonObject(
+        AcceptPredictionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

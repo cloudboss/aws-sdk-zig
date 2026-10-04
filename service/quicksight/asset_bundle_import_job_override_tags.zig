@@ -4,6 +4,7 @@ const AssetBundleImportJobDataSetOverrideTags = @import("asset_bundle_import_job
 const AssetBundleImportJobDataSourceOverrideTags = @import("asset_bundle_import_job_data_source_override_tags.zig").AssetBundleImportJobDataSourceOverrideTags;
 const AssetBundleImportJobFolderOverrideTags = @import("asset_bundle_import_job_folder_override_tags.zig").AssetBundleImportJobFolderOverrideTags;
 const AssetBundleImportJobThemeOverrideTags = @import("asset_bundle_import_job_theme_override_tags.zig").AssetBundleImportJobThemeOverrideTags;
+const AssetBundleImportJobTopicV2OverrideTags = @import("asset_bundle_import_job_topic_v2_override_tags.zig").AssetBundleImportJobTopicV2OverrideTags;
 const AssetBundleImportJobVPCConnectionOverrideTags = @import("asset_bundle_import_job_vpc_connection_override_tags.zig").AssetBundleImportJobVPCConnectionOverrideTags;
 
 /// A structure that contains the override tag configuration that modify the
@@ -35,6 +36,10 @@ pub const AssetBundleImportJobOverrideTags = struct {
     /// asset bundle that is imported.
     themes: ?[]const AssetBundleImportJobThemeOverrideTags = null,
 
+    /// A list of tag overrides for any `Topic` resources that are present in the
+    /// asset bundle that is imported.
+    topics_v2: ?[]const AssetBundleImportJobTopicV2OverrideTags = null,
+
     /// A list of tag overrides for any `VPCConnection` resources that are present
     /// in
     /// the asset bundle that is imported.
@@ -47,6 +52,7 @@ pub const AssetBundleImportJobOverrideTags = struct {
         .data_sources = "DataSources",
         .folders = "Folders",
         .themes = "Themes",
+        .topics_v2 = "TopicsV2",
         .vpc_connections = "VPCConnections",
     };
 };

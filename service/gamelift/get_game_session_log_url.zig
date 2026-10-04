@@ -7,8 +7,9 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const GetGameSessionLogUrlInput = struct {
     /// An identifier for the game session that is unique across all regions to get
-    /// logs for. The value is always a full ARN in the following format:
-    /// `arn:aws:gamelift:::gamesession//`.
+    /// logs for. The value is always a full ARN in the following format: For Home
+    /// Region game session - `arn:aws:gamelift:::gamesession//`. For Remote
+    /// Location game session - `arn:aws:gamelift:::gamesession///`.
     game_session_id: []const u8,
 
     pub const json_field_names = .{

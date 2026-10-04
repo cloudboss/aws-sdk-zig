@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteLicenseServerEndp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteLicenseServerEndpointOutput {
-    var result: DeleteLicenseServerEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteLicenseServerEndpointOutput, body, allocator);
-    }
+    const result: DeleteLicenseServerEndpointOutput = try aws.json.parseJsonObject(
+        DeleteLicenseServerEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

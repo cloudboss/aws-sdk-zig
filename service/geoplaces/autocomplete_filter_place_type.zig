@@ -3,16 +3,34 @@ const std = @import("std");
 pub const AutocompleteFilterPlaceType = enum {
     locality,
     postal_code,
+    street,
+    intersection,
+    point_address,
+    interpolated_address,
+    country,
+    region,
 
     pub const json_field_names = .{
         .locality = "Locality",
         .postal_code = "PostalCode",
+        .street = "Street",
+        .intersection = "Intersection",
+        .point_address = "PointAddress",
+        .interpolated_address = "InterpolatedAddress",
+        .country = "Country",
+        .region = "Region",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .locality => "Locality",
             .postal_code => "PostalCode",
+            .street => "Street",
+            .intersection => "Intersection",
+            .point_address => "PointAddress",
+            .interpolated_address => "InterpolatedAddress",
+            .country => "Country",
+            .region => "Region",
         };
     }
 

@@ -100,6 +100,7 @@ pub const GetObjectOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetObjectInput, options: CallOptions) !GetObjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -108,8 +109,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetObjectIn
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "mediastore", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -121,6 +120,7 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetObjectIn
         return error.ServiceError;
     }
 
+    errdefer stream_resp.deinit();
     const result = try deserializeStreamingResponse(allocator, &stream_resp);
     return result;
 }
@@ -153,7 +153,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetObjectInput, config:
 
 fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !GetObjectOutput {
     var result: GetObjectOutput = .{};
-    result.body = stream_resp.body;
+    errdefer {
+        if (result.cache_control) |value| allocator.free(value);
+        if (result.content_range) |value| allocator.free(value);
+        if (result.content_type) |value| allocator.free(value);
+        if (result.e_tag) |value| allocator.free(value);
+    }
     result.status_code = @intCast(stream_resp.status);
     if (stream_resp.headers.get("cache-control")) |value| {
         result.cache_control = try allocator.dupe(u8, value);
@@ -173,6 +178,7 @@ fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.
     if (stream_resp.headers.get("last-modified")) |value| {
         result.last_modified = std.fmt.parseInt(i64, value, 10) catch null;
     }
+    result.body = stream_resp.body;
     stream_resp.deinitHeaders();
 
     return result;

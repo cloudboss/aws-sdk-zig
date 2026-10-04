@@ -23,8 +23,7 @@ pub const PutTaxRegistrationInput = struct {
 
 pub const PutTaxRegistrationOutput = struct {
     /// The status of your TRN stored in the system after processing. Based on the
-    /// validation
-    /// occurring on the TRN, the status can be `Verified`, `Pending` or
+    /// validation occurring on the TRN, the status can be `Verified`, `Pending` or
     /// `Rejected`.
     status: ?TaxRegistrationStatus = null,
 
@@ -95,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutTaxRegistrationInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutTaxRegistrationOutput {
-    var result: PutTaxRegistrationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutTaxRegistrationOutput, body, allocator);
-    }
+    const result: PutTaxRegistrationOutput = try aws.json.parseJsonObject(
+        PutTaxRegistrationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

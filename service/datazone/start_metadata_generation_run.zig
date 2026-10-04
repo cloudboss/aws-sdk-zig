@@ -161,10 +161,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartMetadataGeneration
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartMetadataGenerationRunOutput {
-    var result: StartMetadataGenerationRunOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartMetadataGenerationRunOutput, body, allocator);
-    }
+    const result: StartMetadataGenerationRunOutput = try aws.json.parseJsonObject(
+        StartMetadataGenerationRunOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

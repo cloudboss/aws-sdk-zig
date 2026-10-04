@@ -144,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetUsageStatisticsInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetUsageStatisticsOutput {
-    var result: GetUsageStatisticsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetUsageStatisticsOutput, body, allocator);
-    }
+    const result: GetUsageStatisticsOutput = try aws.json.parseJsonObject(
+        GetUsageStatisticsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

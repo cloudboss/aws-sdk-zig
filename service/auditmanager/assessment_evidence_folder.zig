@@ -31,10 +31,11 @@ pub const AssessmentEvidenceFolder = struct {
 
     /// The number of evidence that falls under the compliance check category. This
     /// evidence is
-    /// collected from Config or Security Hub.
+    /// collected from Config or Security Hub CSPM.
     evidence_by_type_compliance_check_count: i32 = 0,
 
-    /// The total number of issues that were reported directly from Security Hub,
+    /// The total number of issues that were reported directly from Security Hub
+    /// CSPM,
     /// Config, or both.
     evidence_by_type_compliance_check_issues_count: i32 = 0,
 

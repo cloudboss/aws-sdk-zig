@@ -220,7 +220,12 @@ pub const Client = struct {
     /// returns a JSON that includes container, codec, frame rate, resolution, track
     /// count, audio layout, captions, and more. You can use this information to
     /// learn more about your media files, or to help make decisions while
-    /// automating your transcoding workflow.
+    /// automating your transcoding workflow. Probe supports the following input
+    /// container formats: MP4, QuickTime (MOV), 3GP, 3G2, Matroska (MKV), WebM,
+    /// MXF, MPEG-TS, MPEG-PS, AVI, WAV, MP3, FLAC, Ogg, and ASF (Windows Media /
+    /// WMA). The fields that Probe returns vary by container and codec. A field
+    /// isn't returned when the source doesn't contain it, or when it isn't
+    /// available for that container and codec.
     pub fn probe(self: *Self, allocator: std.mem.Allocator, input: probe_.ProbeInput, options: CallOptions) !probe_.ProbeOutput {
         return probe_.execute(self, allocator, input, options);
     }
@@ -246,16 +251,16 @@ pub const Client = struct {
         return start_jobs_query.execute(self, allocator, input, options);
     }
 
-    /// Add tags to a MediaConvert queue, preset, or job template. For information
-    /// about tagging, see the User Guide at
-    /// https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
+    /// Add tags to a MediaConvert queue, preset, job, or job template. For
+    /// information about tagging, see the User Guide at
+    /// https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-mediaconvert-resources.html.
     pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
         return tag_resource.execute(self, allocator, input, options);
     }
 
-    /// Remove tags from a MediaConvert queue, preset, or job template. For
+    /// Remove tags from a MediaConvert queue, preset, job, or job template. For
     /// information about tagging, see the User Guide at
-    /// https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
+    /// https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-mediaconvert-resources.html.
     pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
     }

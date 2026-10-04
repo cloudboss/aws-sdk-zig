@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const WhatsAppCallSettings = @import("whats_app_call_settings.zig").WhatsAppCallSettings;
 const WhatsAppPhoneNumberDetail = @import("whats_app_phone_number_detail.zig").WhatsAppPhoneNumberDetail;
 
 pub const GetLinkedWhatsAppBusinessAccountPhoneNumberInput = struct {
@@ -21,6 +22,10 @@ pub const GetLinkedWhatsAppBusinessAccountPhoneNumberInput = struct {
 };
 
 pub const GetLinkedWhatsAppBusinessAccountPhoneNumberOutput = struct {
+    /// The calling settings configured for the phone number. This value is absent
+    /// when calling is not configured.
+    call_settings: ?WhatsAppCallSettings = null,
+
     /// The WABA identifier linked to the phone number, formatted as
     /// `waba-01234567890123456789012345678901`.
     linked_whats_app_business_account_id: ?[]const u8 = null,
@@ -28,6 +33,7 @@ pub const GetLinkedWhatsAppBusinessAccountPhoneNumberOutput = struct {
     phone_number: ?WhatsAppPhoneNumberDetail = null,
 
     pub const json_field_names = .{
+        .call_settings = "callSettings",
         .linked_whats_app_business_account_id = "linkedWhatsAppBusinessAccountId",
         .phone_number = "phoneNumber",
     };
@@ -88,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLinkedWhatsAppBusine
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetLinkedWhatsAppBusinessAccountPhoneNumberOutput {
-    var result: GetLinkedWhatsAppBusinessAccountPhoneNumberOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetLinkedWhatsAppBusinessAccountPhoneNumberOutput, body, allocator);
-    }
+    const result: GetLinkedWhatsAppBusinessAccountPhoneNumberOutput = try aws.json.parseJsonObject(
+        GetLinkedWhatsAppBusinessAccountPhoneNumberOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

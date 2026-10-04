@@ -1,3 +1,4 @@
+const ImageWatermark = @import("image_watermark.zig").ImageWatermark;
 const ImageState = @import("image_state.zig").ImageState;
 
 /// Information about the AMI.
@@ -28,6 +29,9 @@ pub const ImageMetadata = struct {
     /// Valid values: `amazon` | `aws-backup-vault` |
     /// `aws-marketplace`
     image_owner_alias: ?[]const u8 = null,
+
+    /// The watermarks attached to the AMI.
+    image_watermarks: ?[]const ImageWatermark = null,
 
     /// Indicates whether the AMI has public launch permissions. A value of `true`
     /// means this AMI has public launch permissions, while `false` means it has

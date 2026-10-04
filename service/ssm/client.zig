@@ -8,6 +8,7 @@ const cancel_maintenance_window_execution = @import("cancel_maintenance_window_e
 const create_activation = @import("create_activation.zig");
 const create_association = @import("create_association.zig");
 const create_association_batch = @import("create_association_batch.zig");
+const create_cloud_connector = @import("create_cloud_connector.zig");
 const create_document = @import("create_document.zig");
 const create_maintenance_window = @import("create_maintenance_window.zig");
 const create_ops_item = @import("create_ops_item.zig");
@@ -16,6 +17,7 @@ const create_patch_baseline = @import("create_patch_baseline.zig");
 const create_resource_data_sync = @import("create_resource_data_sync.zig");
 const delete_activation = @import("delete_activation.zig");
 const delete_association = @import("delete_association.zig");
+const delete_cloud_connector = @import("delete_cloud_connector.zig");
 const delete_document = @import("delete_document.zig");
 const delete_inventory = @import("delete_inventory.zig");
 const delete_maintenance_window = @import("delete_maintenance_window.zig");
@@ -67,6 +69,7 @@ const disassociate_ops_item_related_item = @import("disassociate_ops_item_relate
 const get_access_token = @import("get_access_token.zig");
 const get_automation_execution = @import("get_automation_execution.zig");
 const get_calendar_state = @import("get_calendar_state.zig");
+const get_cloud_connector = @import("get_cloud_connector.zig");
 const get_command_invocation = @import("get_command_invocation.zig");
 const get_connection_status = @import("get_connection_status.zig");
 const get_default_patch_baseline = @import("get_default_patch_baseline.zig");
@@ -94,6 +97,7 @@ const get_service_setting = @import("get_service_setting.zig");
 const label_parameter_version = @import("label_parameter_version.zig");
 const list_association_versions = @import("list_association_versions.zig");
 const list_associations = @import("list_associations.zig");
+const list_cloud_connectors = @import("list_cloud_connectors.zig");
 const list_command_invocations = @import("list_command_invocations.zig");
 const list_commands = @import("list_commands.zig");
 const list_compliance_items = @import("list_compliance_items.zig");
@@ -135,6 +139,7 @@ const terminate_session = @import("terminate_session.zig");
 const unlabel_parameter_version = @import("unlabel_parameter_version.zig");
 const update_association = @import("update_association.zig");
 const update_association_status = @import("update_association_status.zig");
+const update_cloud_connector = @import("update_cloud_connector.zig");
 const update_document = @import("update_document.zig");
 const update_document_default_version = @import("update_document_default_version.zig");
 const update_document_metadata = @import("update_document_metadata.zig");
@@ -147,6 +152,7 @@ const update_ops_metadata = @import("update_ops_metadata.zig");
 const update_patch_baseline = @import("update_patch_baseline.zig");
 const update_resource_data_sync = @import("update_resource_data_sync.zig");
 const update_service_setting = @import("update_service_setting.zig");
+const validate_cloud_connector = @import("validate_cloud_connector.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 const waiters = @import("waiters.zig");
@@ -308,6 +314,13 @@ pub const Client = struct {
         return create_association_batch.execute(self, allocator, input, options);
     }
 
+    /// Creates a cloud connector that establishes a connection between Systems
+    /// Manager and a third-party
+    /// cloud environment.
+    pub fn createCloudConnector(self: *Self, allocator: std.mem.Allocator, input: create_cloud_connector.CreateCloudConnectorInput, options: CallOptions) !create_cloud_connector.CreateCloudConnectorOutput {
+        return create_cloud_connector.execute(self, allocator, input, options);
+    }
+
     /// Creates a Amazon Web Services Systems Manager (SSM document). An SSM
     /// document defines the actions that Systems Manager performs
     /// on your managed nodes. For more information about SSM documents, including
@@ -439,6 +452,11 @@ pub const Client = struct {
         return delete_association.execute(self, allocator, input, options);
     }
 
+    /// Deletes a cloud connector.
+    pub fn deleteCloudConnector(self: *Self, allocator: std.mem.Allocator, input: delete_cloud_connector.DeleteCloudConnectorInput, options: CallOptions) !delete_cloud_connector.DeleteCloudConnectorOutput {
+        return delete_cloud_connector.execute(self, allocator, input, options);
+    }
+
     /// Deletes the Amazon Web Services Systems Manager document (SSM document) and
     /// all managed node associations to the
     /// document.
@@ -542,6 +560,11 @@ pub const Client = struct {
     /// cross-account sharing of parameters, see [Working with
     /// shared
     /// parameters](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html) in the *Amazon Web Services Systems Manager User Guide*.
+    ///
+    /// * `Document` – Shares the document using Resource Access Manager (RAM). For
+    ///   more information about sharing documents, see [Sharing
+    /// Systems Manager
+    /// documents](https://docs.aws.amazon.com/systems-manager/latest/userguide/documents-ssm-sharing.html) in the *Amazon Web Services Systems Manager User Guide*.
     pub fn deleteResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: delete_resource_policy.DeleteResourcePolicyInput, options: CallOptions) !delete_resource_policy.DeleteResourcePolicyOutput {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
@@ -948,6 +971,11 @@ pub const Client = struct {
         return get_calendar_state.execute(self, allocator, input, options);
     }
 
+    /// Returns detailed information about a cloud connector.
+    pub fn getCloudConnector(self: *Self, allocator: std.mem.Allocator, input: get_cloud_connector.GetCloudConnectorInput, options: CallOptions) !get_cloud_connector.GetCloudConnectorOutput {
+        return get_cloud_connector.execute(self, allocator, input, options);
+    }
+
     /// Returns detailed information about command execution for an invocation or
     /// plugin. The Run
     /// Command API follows an eventual consistency model, due to the distributed
@@ -1115,6 +1143,29 @@ pub const Client = struct {
     ///
     /// To get information about more than one parameter at a time, use the
     /// GetParameters operation.
+    ///
+    /// Parameter Store throughput defines the number of API transactions per second
+    /// (TPS) that
+    /// Systems Manager can process. This applies to `GetParameter`,
+    /// `GetParameters`, and `PutParameter` API calls for your Amazon Web Services
+    /// account and
+    /// Amazon Web Services Region. By default, Parameter Store is configured with a
+    /// standard throughput quota suitable
+    /// for low- to moderate-volume workloads. Applications that retrieve
+    /// configuration data infrequently
+    /// or operate at smaller scale can use this default setting without additional
+    /// cost.
+    ///
+    /// For higher-volume workloads, you can enable higher throughput. This
+    /// increases the maximum
+    /// number of supported transactions per second for your account and Region.
+    /// Increased throughput
+    /// supports applications and workloads that need concurrent access to multiple
+    /// parameters. If you
+    /// experience `ThrottlingException: Rate exceeded` errors, enable higher
+    /// throughput. For
+    /// more information, see [Changing Parameter Store
+    /// throughput](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html).
     pub fn getParameter(self: *Self, allocator: std.mem.Allocator, input: get_parameter.GetParameterInput, options: CallOptions) !get_parameter.GetParameterOutput {
         return get_parameter.execute(self, allocator, input, options);
     }
@@ -1147,6 +1198,29 @@ pub const Client = struct {
     /// beginning or end of a parameter name. If the specified name for a parameter
     /// contains spaces
     /// between characters, the request fails with a `ValidationException` error.
+    ///
+    /// Parameter Store throughput defines the number of API transactions per second
+    /// (TPS) that
+    /// Systems Manager can process. This applies to `GetParameter`,
+    /// `GetParameters`, and `PutParameter` API calls for your Amazon Web Services
+    /// account and
+    /// Amazon Web Services Region. By default, Parameter Store is configured with a
+    /// standard throughput quota suitable
+    /// for low- to moderate-volume workloads. Applications that retrieve
+    /// configuration data infrequently
+    /// or operate at smaller scale can use this default setting without additional
+    /// cost.
+    ///
+    /// For higher-volume workloads, you can enable higher throughput. This
+    /// increases the maximum
+    /// number of supported transactions per second for your account and Region.
+    /// Increased throughput
+    /// supports applications and workloads that need concurrent access to multiple
+    /// parameters. If you
+    /// experience `ThrottlingException: Rate exceeded` errors, enable higher
+    /// throughput. For
+    /// more information, see [Changing Parameter Store
+    /// throughput](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html).
     pub fn getParameters(self: *Self, allocator: std.mem.Allocator, input: get_parameters.GetParametersInput, options: CallOptions) !get_parameters.GetParametersOutput {
         return get_parameters.execute(self, allocator, input, options);
     }
@@ -1277,6 +1351,12 @@ pub const Client = struct {
     /// Manager.
     pub fn listAssociations(self: *Self, allocator: std.mem.Allocator, input: list_associations.ListAssociationsInput, options: CallOptions) !list_associations.ListAssociationsOutput {
         return list_associations.execute(self, allocator, input, options);
+    }
+
+    /// Returns a list of cloud connectors in the current Amazon Web Services
+    /// account and Amazon Web Services Region.
+    pub fn listCloudConnectors(self: *Self, allocator: std.mem.Allocator, input: list_cloud_connectors.ListCloudConnectorsInput, options: CallOptions) !list_cloud_connectors.ListCloudConnectorsOutput {
+        return list_cloud_connectors.execute(self, allocator, input, options);
     }
 
     /// An invocation is copy of a command sent to a specific managed node. A
@@ -1498,6 +1578,29 @@ pub const Client = struct {
     }
 
     /// Create or update a parameter in Parameter Store.
+    ///
+    /// Parameter Store throughput defines the number of API transactions per second
+    /// (TPS) that
+    /// Systems Manager can process. This applies to `GetParameter`,
+    /// `GetParameters`, and `PutParameter` API calls for your Amazon Web Services
+    /// account and
+    /// Amazon Web Services Region. By default, Parameter Store is configured with a
+    /// standard throughput quota suitable
+    /// for low- to moderate-volume workloads. Applications that retrieve
+    /// configuration data infrequently
+    /// or operate at smaller scale can use this default setting without additional
+    /// cost.
+    ///
+    /// For higher-volume workloads, you can enable higher throughput. This
+    /// increases the maximum
+    /// number of supported transactions per second for your account and Region.
+    /// Increased throughput
+    /// supports applications and workloads that need concurrent access to multiple
+    /// parameters. If you
+    /// experience `ThrottlingException: Rate exceeded` errors, enable higher
+    /// throughput. For
+    /// more information, see [Changing Parameter Store
+    /// throughput](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-throughput.html).
     pub fn putParameter(self: *Self, allocator: std.mem.Allocator, input: put_parameter.PutParameterInput, options: CallOptions) !put_parameter.PutParameterOutput {
         return put_parameter.execute(self, allocator, input, options);
     }
@@ -1543,6 +1646,21 @@ pub const Client = struct {
     ///
     /// For more information, see [Sharing a
     /// parameter](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-shared-parameters.html#share) in the *Amazon Web Services Systems Manager User Guide*
+    ///
+    /// * `Document` – Shares the document using Resource Access Manager (RAM). For
+    ///   more information about sharing documents, see [Sharing
+    /// Systems Manager
+    /// documents](https://docs.aws.amazon.com/systems-manager/latest/userguide/documents-ssm-sharing.html) in the *Amazon Web Services Systems Manager User Guide*.
+    ///
+    /// While you can share a document using the Systems Manager `PutResourcePolicy`
+    /// operation, we
+    /// recommend using Resource Access Manager (RAM) instead. Using
+    /// `PutResourcePolicy` requires an extra step. You must promote the document to
+    /// a
+    /// standard RAM Resource Share using the RAM
+    /// [PromoteResourceShareCreatedFromPolicy](https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) API operation. Otherwise, the Systems Manager [ListDocuments](https://docs.aws.amazon.com/systems-manager/latest/APIReference/API_ListDocuments.html) API operation won't return the document when filtering for shared
+    /// documents. The Amazon Web Services Config
+    /// [PutRemediationConfigurations](https://docs.aws.amazon.com/config/latest/APIReference/API_PutRemediationConfigurations.html) API operation also can't use the document.
     pub fn putResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: put_resource_policy.PutResourcePolicyInput, options: CallOptions) !put_resource_policy.PutResourcePolicyOutput {
         return put_resource_policy.execute(self, allocator, input, options);
     }
@@ -1761,6 +1879,11 @@ pub const Client = struct {
         return update_association_status.execute(self, allocator, input, options);
     }
 
+    /// Updates an existing cloud connector with new configuration details.
+    pub fn updateCloudConnector(self: *Self, allocator: std.mem.Allocator, input: update_cloud_connector.UpdateCloudConnectorInput, options: CallOptions) !update_cloud_connector.UpdateCloudConnectorOutput {
+        return update_cloud_connector.execute(self, allocator, input, options);
+    }
+
     /// Updates one or more values for an SSM document.
     pub fn updateDocument(self: *Self, allocator: std.mem.Allocator, input: update_document.UpdateDocumentInput, options: CallOptions) !update_document.UpdateDocumentOutput {
         return update_document.execute(self, allocator, input, options);
@@ -1967,6 +2090,11 @@ pub const Client = struct {
     /// Update the service setting for the account.
     pub fn updateServiceSetting(self: *Self, allocator: std.mem.Allocator, input: update_service_setting.UpdateServiceSettingInput, options: CallOptions) !update_service_setting.UpdateServiceSettingOutput {
         return update_service_setting.execute(self, allocator, input, options);
+    }
+
+    /// Validates the configuration and connectivity of a cloud connector.
+    pub fn validateCloudConnector(self: *Self, allocator: std.mem.Allocator, input: validate_cloud_connector.ValidateCloudConnectorInput, options: CallOptions) !validate_cloud_connector.ValidateCloudConnectorOutput {
+        return validate_cloud_connector.execute(self, allocator, input, options);
     }
 
     pub fn describeActivationsPaginator(self: *Self, params: describe_activations.DescribeActivationsInput) paginator.DescribeActivationsPaginator {
@@ -2228,6 +2356,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn listCloudConnectorsPaginator(self: *Self, params: list_cloud_connectors.ListCloudConnectorsInput) paginator.ListCloudConnectorsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listCommandInvocationsPaginator(self: *Self, params: list_command_invocations.ListCommandInvocationsInput) paginator.ListCommandInvocationsPaginator {
         return .{
             .client = self,
@@ -2313,6 +2448,13 @@ pub const Client = struct {
     }
 
     pub fn listResourceDataSyncPaginator(self: *Self, params: list_resource_data_sync.ListResourceDataSyncInput) paginator.ListResourceDataSyncPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn validateCloudConnectorPaginator(self: *Self, params: validate_cloud_connector.ValidateCloudConnectorInput) paginator.ValidateCloudConnectorPaginator {
         return .{
             .client = self,
             .params = params,

@@ -137,10 +137,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListResourceEndpointAss
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListResourceEndpointAssociationsOutput {
-    var result: ListResourceEndpointAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListResourceEndpointAssociationsOutput, body, allocator);
-    }
+    const result: ListResourceEndpointAssociationsOutput = try aws.json.parseJsonObject(
+        ListResourceEndpointAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

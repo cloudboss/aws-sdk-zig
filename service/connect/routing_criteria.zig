@@ -12,8 +12,8 @@ pub const RoutingCriteria = struct {
     /// Information about the index of the routing criteria.
     index: ?i32 = null,
 
-    /// List of routing steps. When Amazon Connect does not find an available agent
-    /// meeting the requirements in a
+    /// List of routing steps. When Connect Customer does not find an available
+    /// agent meeting the requirements in a
     /// step for a given step duration, the routing criteria will move on to the
     /// next step sequentially until a join is
     /// completed with an agent. When all steps are exhausted, the contact will be

@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInferenceProfileInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetInferenceProfileOutput {
-    var result: GetInferenceProfileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetInferenceProfileOutput, body, allocator);
-    }
+    const result: GetInferenceProfileOutput = try aws.json.parseJsonObject(
+        GetInferenceProfileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

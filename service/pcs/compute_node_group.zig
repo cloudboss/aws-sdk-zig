@@ -1,6 +1,7 @@
 const CustomLaunchTemplate = @import("custom_launch_template.zig").CustomLaunchTemplate;
 const ErrorInfo = @import("error_info.zig").ErrorInfo;
 const InstanceConfig = @import("instance_config.zig").InstanceConfig;
+const NodeLifecycleActions = @import("node_lifecycle_actions.zig").NodeLifecycleActions;
 const PurchaseOption = @import("purchase_option.zig").PurchaseOption;
 const ScalingConfiguration = @import("scaling_configuration.zig").ScalingConfiguration;
 const ComputeNodeGroupSlurmConfiguration = @import("compute_node_group_slurm_configuration.zig").ComputeNodeGroupSlurmConfiguration;
@@ -49,10 +50,17 @@ pub const ComputeNodeGroup = struct {
     /// The name that identifies the compute node group.
     name: []const u8,
 
+    /// The lifecycle actions to run on compute nodes in the compute node group. Use
+    /// lifecycle actions to run custom scripts at defined stages of a compute
+    /// node's lifecycle, such as when a compute node finishes bootstrapping or
+    /// becomes ready to accept jobs.
+    node_lifecycle_actions: ?NodeLifecycleActions = null,
+
     /// Specifies how EC2 instances are purchased on your behalf. PCS supports
-    /// On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks for ML.
-    /// For more information, see [Amazon EC2 billing and purchasing
-    /// options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html) in the *Amazon Elastic Compute Cloud User Guide*. For more information about PCS support for Capacity Blocks, see [Using Amazon EC2 Capacity Blocks for ML with PCS](https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html) in the *PCS User Guide*. If you don't provide this option, it defaults to On-Demand.
+    /// On-Demand Instances, Spot Instances, Interruptible Capacity Reservations,
+    /// On-Demand Capacity Reservations, and Amazon EC2 Capacity Blocks for ML. For
+    /// more information, see [Amazon EC2 billing and purchasing
+    /// options](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html) in the *Amazon Elastic Compute Cloud User Guide*. For more information about PCS support for Capacity Blocks, see [Using Amazon EC2 Capacity Blocks for ML with PCS](https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html) in the *PCS User Guide*. For more information about PCS support for interruptible capacity reservations, see [Using I-ODCRs with PCS](https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-iodcr.html) in the *PCS User Guide*. Choose On-Demand if you plan to use an On-Demand Capacity Reservation (ODCR). For more information, see [Using ODCRs with PCS](https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html). If you don't provide this option, it defaults to On-Demand.
     purchase_option: ?PurchaseOption = null,
 
     scaling_configuration: ScalingConfiguration,
@@ -91,6 +99,7 @@ pub const ComputeNodeGroup = struct {
         .instance_configs = "instanceConfigs",
         .modified_at = "modifiedAt",
         .name = "name",
+        .node_lifecycle_actions = "nodeLifecycleActions",
         .purchase_option = "purchaseOption",
         .scaling_configuration = "scalingConfiguration",
         .slurm_configuration = "slurmConfiguration",

@@ -10,7 +10,19 @@ pub const ListGrantsInput = struct {
     /// Returns only grants where the specified principal is the grantee principal
     /// for the
     /// grant.
+    ///
+    /// You can specify either `GranteePrincipal` or
+    /// `GranteeServicePrincipal`, but not both.
     grantee_principal: ?[]const u8 = null,
+
+    /// Returns only grants where the specified Amazon Web Services service
+    /// principal is the grantee service
+    /// principal for the grant. This filter is only usable by callers in a service
+    /// principal.
+    ///
+    /// You can specify either `GranteePrincipal` or
+    /// `GranteeServicePrincipal`, but not both.
+    grantee_service_principal: ?[]const u8 = null,
 
     /// Returns only the grant with the specified grant ID. The grant ID uniquely
     /// identifies the
@@ -50,6 +62,7 @@ pub const ListGrantsInput = struct {
 
     pub const json_field_names = .{
         .grantee_principal = "GranteePrincipal",
+        .grantee_service_principal = "GranteeServicePrincipal",
         .grant_id = "GrantId",
         .key_id = "KeyId",
         .limit = "Limit",

@@ -29,6 +29,9 @@ const get_mobile_sdk_release = @import("get_mobile_sdk_release.zig");
 const get_permission_policy = @import("get_permission_policy.zig");
 const get_rate_based_statement_managed_keys = @import("get_rate_based_statement_managed_keys.zig");
 const get_regex_pattern_set = @import("get_regex_pattern_set.zig");
+const get_revenue_statistics = @import("get_revenue_statistics.zig");
+const get_revenue_statistics_summary = @import("get_revenue_statistics_summary.zig");
+const get_revenue_statistics_time_series = @import("get_revenue_statistics_time_series.zig");
 const get_rule_group = @import("get_rule_group.zig");
 const get_sampled_requests = @import("get_sampled_requests.zig");
 const get_top_path_statistics_by_traffic = @import("get_top_path_statistics_by_traffic.zig");
@@ -44,6 +47,7 @@ const list_mobile_sdk_releases = @import("list_mobile_sdk_releases.zig");
 const list_regex_pattern_sets = @import("list_regex_pattern_sets.zig");
 const list_resources_for_web_acl = @import("list_resources_for_web_acl.zig");
 const list_rule_groups = @import("list_rule_groups.zig");
+const list_settlement_records = @import("list_settlement_records.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_web_ac_ls = @import("list_web_ac_ls.zig");
 const put_logging_configuration = @import("put_logging_configuration.zig");
@@ -204,7 +208,8 @@ pub const Client = struct {
     /// resources to protect. The resource types include Amazon CloudFront
     /// distribution, Amazon API Gateway REST API, Application Load Balancer,
     /// AppSync GraphQL API, Amazon Cognito user pool, App Runner service, Amplify
-    /// application, and Amazon Web Services Verified Access instance.
+    /// application, Amazon Web Services Verified Access instance, and Amazon
+    /// Bedrock AgentCore Gateway.
     pub fn createWebAcl(self: *Self, allocator: std.mem.Allocator, input: create_web_acl.CreateWebACLInput, options: CallOptions) !create_web_acl.CreateWebACLOutput {
         return create_web_acl.execute(self, allocator, input, options);
     }
@@ -429,6 +434,37 @@ pub const Client = struct {
         return get_regex_pattern_set.execute(self, allocator, input, options);
     }
 
+    /// Retrieves ranked monetization statistics. Use the `StatisticType` parameter
+    /// to specify the ranking: `TOP_SOURCES_BY_REVENUE` for top sources by revenue,
+    /// or `TOP_PATHS_BY_REVENUE` for top content paths by revenue. This operation
+    /// is only available for `CLOUDFRONT` scope. The maximum supported time window
+    /// is 90 days. When no `CurrencyMode` filter is provided, results default to
+    /// `REAL`. To retrieve test data, include a `CurrencyMode` filter with the
+    /// value `TEST`.
+    pub fn getRevenueStatistics(self: *Self, allocator: std.mem.Allocator, input: get_revenue_statistics.GetRevenueStatisticsInput, options: CallOptions) !get_revenue_statistics.GetRevenueStatisticsOutput {
+        return get_revenue_statistics.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a summary of monetization revenue for the specified time window.
+    /// Returns total revenue, revenue by verification tier, total settlements, and
+    /// total HTTP 402 responses served. This operation is only available for
+    /// `CLOUDFRONT` scope. The maximum supported time window is 90 days. When no
+    /// `CurrencyMode` filter is provided, results default to `REAL`. To retrieve
+    /// test data, include a `CurrencyMode` filter with the value `TEST`.
+    pub fn getRevenueStatisticsSummary(self: *Self, allocator: std.mem.Allocator, input: get_revenue_statistics_summary.GetRevenueStatisticsSummaryInput, options: CallOptions) !get_revenue_statistics_summary.GetRevenueStatisticsSummaryOutput {
+        return get_revenue_statistics_summary.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves time series data for monetization revenue. Returns data points
+    /// aggregated at the specified interval for the given time window. This
+    /// operation is only available for `CLOUDFRONT` scope. The maximum supported
+    /// time window is 90 days. When no `CurrencyMode` filter is provided, results
+    /// default to `REAL`. To retrieve test data, include a `CurrencyMode` filter
+    /// with the value `TEST`.
+    pub fn getRevenueStatisticsTimeSeries(self: *Self, allocator: std.mem.Allocator, input: get_revenue_statistics_time_series.GetRevenueStatisticsTimeSeriesInput, options: CallOptions) !get_revenue_statistics_time_series.GetRevenueStatisticsTimeSeriesOutput {
+        return get_revenue_statistics_time_series.execute(self, allocator, input, options);
+    }
+
     /// Retrieves the specified RuleGroup.
     pub fn getRuleGroup(self: *Self, allocator: std.mem.Allocator, input: get_rule_group.GetRuleGroupInput, options: CallOptions) !get_rule_group.GetRuleGroupOutput {
         return get_rule_group.execute(self, allocator, input, options);
@@ -590,6 +626,16 @@ pub const Client = struct {
     /// that you manage.
     pub fn listRuleGroups(self: *Self, allocator: std.mem.Allocator, input: list_rule_groups.ListRuleGroupsInput, options: CallOptions) !list_rule_groups.ListRuleGroupsOutput {
         return list_rule_groups.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves individual settlement transaction records for monetization. Each
+    /// record represents a single payment transaction between a client and your
+    /// protected resource. This operation is only available for `CLOUDFRONT` scope.
+    /// The maximum supported time window is 90 days. When no `CurrencyMode` filter
+    /// is provided, results default to `REAL`. To retrieve test data, include a
+    /// `CurrencyMode` filter with the value `TEST`.
+    pub fn listSettlementRecords(self: *Self, allocator: std.mem.Allocator, input: list_settlement_records.ListSettlementRecordsInput, options: CallOptions) !list_settlement_records.ListSettlementRecordsOutput {
+        return list_settlement_records.execute(self, allocator, input, options);
     }
 
     /// Retrieves the TagInfoForResource for the specified resource. Tags are
@@ -921,7 +967,8 @@ pub const Client = struct {
     /// resources to protect. The resource types include Amazon CloudFront
     /// distribution, Amazon API Gateway REST API, Application Load Balancer,
     /// AppSync GraphQL API, Amazon Cognito user pool, App Runner service, Amplify
-    /// application, and Amazon Web Services Verified Access instance.
+    /// application, Amazon Web Services Verified Access instance, and Amazon
+    /// Bedrock AgentCore Gateway.
     ///
     /// **Temporary inconsistencies during updates**
     ///

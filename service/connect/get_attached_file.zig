@@ -12,9 +12,8 @@ const FileUseCaseType = @import("file_use_case_type.zig").FileUseCaseType;
 pub const GetAttachedFileInput = struct {
     /// The resource to which the attached file is (being) uploaded to. The
     /// supported resources are
-    /// [Cases](https://docs.aws.amazon.com/connect/latest/adminguide/cases.html)
-    /// and
-    /// [Email](https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html).
+    /// [Cases](https://docs.aws.amazon.com/connect/latest/adminguide/cases.html),
+    /// [Email](https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html), and [Task](https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html).
     ///
     /// This value must be a valid ARN.
     associated_resource_arn: []const u8,
@@ -22,7 +21,7 @@ pub const GetAttachedFileInput = struct {
     /// The unique identifier of the attached file resource.
     file_id: []const u8,
 
-    /// The unique identifier of the Amazon Connect instance.
+    /// The unique identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     /// Optional override for the expiry of the pre-signed S3 URL in seconds. The
@@ -38,9 +37,10 @@ pub const GetAttachedFileInput = struct {
 };
 
 pub const GetAttachedFileOutput = struct {
-    /// The resource to which the attached file is (being) uploaded to.
-    /// [Cases](https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html) are the only current supported
-    /// resource.
+    /// The resource to which the attached file is (being) uploaded to. The
+    /// supported resources are
+    /// [Cases](https://docs.aws.amazon.com/connect/latest/adminguide/cases.html),
+    /// [Email](https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html), and [Task](https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html).
     associated_resource_arn: ?[]const u8 = null,
 
     /// Represents the identity that created the file.
@@ -161,10 +161,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAttachedFileInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAttachedFileOutput {
-    var result: GetAttachedFileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAttachedFileOutput, body, allocator);
-    }
+    const result: GetAttachedFileOutput = try aws.json.parseJsonObject(
+        GetAttachedFileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -6,6 +6,8 @@ pub const paginator = @import("paginator.zig");
 pub const waiters = @import("waiters.zig");
 pub const types = @import("types.zig");
 
+pub const ContinueServiceDeploymentInput = @import("continue_service_deployment.zig").ContinueServiceDeploymentInput;
+pub const ContinueServiceDeploymentOutput = @import("continue_service_deployment.zig").ContinueServiceDeploymentOutput;
 pub const CreateCapacityProviderInput = @import("create_capacity_provider.zig").CreateCapacityProviderInput;
 pub const CreateCapacityProviderOutput = @import("create_capacity_provider.zig").CreateCapacityProviderOutput;
 pub const CreateClusterInput = @import("create_cluster.zig").CreateClusterInput;

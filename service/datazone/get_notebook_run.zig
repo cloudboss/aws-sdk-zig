@@ -9,14 +9,15 @@ const ComputeConfig = @import("compute_config.zig").ComputeConfig;
 const EnvironmentConfig = @import("environment_config.zig").EnvironmentConfig;
 const NotebookRunError = @import("notebook_run_error.zig").NotebookRunError;
 const NetworkConfig = @import("network_config.zig").NetworkConfig;
+const NotificationConfig = @import("notification_config.zig").NotificationConfig;
 const NotebookRunStatus = @import("notebook_run_status.zig").NotebookRunStatus;
 const StorageConfig = @import("storage_config.zig").StorageConfig;
 const TimeoutConfig = @import("timeout_config.zig").TimeoutConfig;
 const TriggerSource = @import("trigger_source.zig").TriggerSource;
 
 pub const GetNotebookRunInput = struct {
-    /// The identifier of the Amazon DataZone domain in which the notebook run
-    /// exists.
+    /// The identifier of the Amazon SageMaker Unified Studio domain in which the
+    /// notebook run exists.
     domain_identifier: []const u8,
 
     /// The identifier of the notebook run.
@@ -44,7 +45,7 @@ pub const GetNotebookRunOutput = struct {
     /// The identifier of the user who created the notebook run.
     created_by: ?[]const u8 = null,
 
-    /// The identifier of the Amazon DataZone domain.
+    /// The identifier of the Amazon SageMaker Unified Studio domain.
     domain_id: []const u8,
 
     /// The environment configuration of the notebook run, including image version
@@ -65,6 +66,10 @@ pub const GetNotebookRunOutput = struct {
 
     /// The identifier of the notebook.
     notebook_id: []const u8,
+
+    /// The notification configuration of the notebook run, including the notebook
+    /// run states that trigger notifications.
+    notification_configuration: ?NotificationConfig = null,
 
     /// The identifier of the project that owns the notebook run.
     owning_project_id: []const u8,
@@ -110,6 +115,7 @@ pub const GetNotebookRunOutput = struct {
         .metadata = "metadata",
         .network_configuration = "networkConfiguration",
         .notebook_id = "notebookId",
+        .notification_configuration = "notificationConfiguration",
         .owning_project_id = "owningProjectId",
         .parameters = "parameters",
         .schedule_id = "scheduleId",
@@ -174,10 +180,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetNotebookRunInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetNotebookRunOutput {
-    var result: GetNotebookRunOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetNotebookRunOutput, body, allocator);
-    }
+    const result: GetNotebookRunOutput = try aws.json.parseJsonObject(
+        GetNotebookRunOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

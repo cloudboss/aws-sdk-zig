@@ -117,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAutoshiftsInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAutoshiftsOutput {
-    var result: ListAutoshiftsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAutoshiftsOutput, body, allocator);
-    }
+    const result: ListAutoshiftsOutput = try aws.json.parseJsonObject(
+        ListAutoshiftsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

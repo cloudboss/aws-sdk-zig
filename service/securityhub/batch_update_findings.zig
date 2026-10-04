@@ -229,10 +229,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchUpdateFindingsInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchUpdateFindingsOutput {
-    var result: BatchUpdateFindingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchUpdateFindingsOutput, body, allocator);
-    }
+    const result: BatchUpdateFindingsOutput = try aws.json.parseJsonObject(
+        BatchUpdateFindingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

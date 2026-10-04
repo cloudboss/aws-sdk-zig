@@ -1,16 +1,19 @@
 const std = @import("std");
 
-/// Payment type enum
+/// Payment type enum.
 pub const PaymentType = enum {
     crypto_x402,
+    mpp,
 
     pub const json_field_names = .{
         .crypto_x402 = "CRYPTO_X402",
+        .mpp = "MPP",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .crypto_x402 => "CRYPTO_X402",
+            .mpp => "MPP",
         };
     }
 

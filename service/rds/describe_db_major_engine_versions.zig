@@ -18,6 +18,7 @@ pub const DescribeDBMajorEngineVersionsInput = struct {
     /// * `custom-sqlserver-se`
     /// * `custom-sqlserver-web`
     /// * `db2-ae`
+    /// * `db2-ce`
     /// * `db2-se`
     /// * `mariadb`
     /// * `mysql`

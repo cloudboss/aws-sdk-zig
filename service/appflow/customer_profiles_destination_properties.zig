@@ -1,11 +1,11 @@
-/// The properties that are applied when Amazon Connect Customer Profiles is
+/// The properties that are applied when Connect Customer Customer Profiles is
 /// used as a
 /// destination.
 pub const CustomerProfilesDestinationProperties = struct {
-    /// The unique name of the Amazon Connect Customer Profiles domain.
+    /// The unique name of the Connect Customer Customer Profiles domain.
     domain_name: []const u8,
 
-    /// The object specified in the Amazon Connect Customer Profiles flow
+    /// The object specified in the Connect Customer Customer Profiles flow
     /// destination.
     object_type_name: ?[]const u8 = null,
 

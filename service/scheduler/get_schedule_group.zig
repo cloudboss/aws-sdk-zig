@@ -89,10 +89,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetScheduleGroupInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetScheduleGroupOutput {
-    var result: GetScheduleGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetScheduleGroupOutput, body, allocator);
-    }
+    const result: GetScheduleGroupOutput = try aws.json.parseJsonObject(
+        GetScheduleGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

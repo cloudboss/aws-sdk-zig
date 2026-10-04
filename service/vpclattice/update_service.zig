@@ -17,12 +17,20 @@ pub const UpdateServiceInput = struct {
     /// The Amazon Resource Name (ARN) of the certificate.
     certificate_arn: ?[]const u8 = null,
 
+    /// The amount of time, in seconds, that a connection can remain idle (no data
+    /// sent) before VPC Lattice closes it. The valid range is 60 to 600 seconds. If
+    /// you don't specify a value, the default is 60 seconds. This setting does not
+    /// change the maximum connection duration of 10 minutes; connections are still
+    /// closed when they reach that limit.
+    idle_timeout_seconds: ?i32 = null,
+
     /// The ID or ARN of the service.
     service_identifier: []const u8,
 
     pub const json_field_names = .{
         .auth_type = "authType",
         .certificate_arn = "certificateArn",
+        .idle_timeout_seconds = "idleTimeoutSeconds",
         .service_identifier = "serviceIdentifier",
     };
 };
@@ -43,6 +51,10 @@ pub const UpdateServiceOutput = struct {
     /// The ID of the service.
     id: ?[]const u8 = null,
 
+    /// The amount of time, in seconds, that a connection can remain idle before VPC
+    /// Lattice closes it.
+    idle_timeout_seconds: ?i32 = null,
+
     /// The name of the service.
     name: ?[]const u8 = null,
 
@@ -52,6 +64,7 @@ pub const UpdateServiceOutput = struct {
         .certificate_arn = "certificateArn",
         .custom_domain_name = "customDomainName",
         .id = "id",
+        .idle_timeout_seconds = "idleTimeoutSeconds",
         .name = "name",
     };
 };
@@ -107,6 +120,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateServiceInput, con
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.idle_timeout_seconds) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"idleTimeoutSeconds\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -123,10 +142,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateServiceInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateServiceOutput {
-    var result: UpdateServiceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateServiceOutput, body, allocator);
-    }
+    const result: UpdateServiceOutput = try aws.json.parseJsonObject(
+        UpdateServiceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

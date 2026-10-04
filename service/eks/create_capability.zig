@@ -178,10 +178,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapabilityInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCapabilityOutput {
-    var result: CreateCapabilityOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCapabilityOutput, body, allocator);
-    }
+    const result: CreateCapabilityOutput = try aws.json.parseJsonObject(
+        CreateCapabilityOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

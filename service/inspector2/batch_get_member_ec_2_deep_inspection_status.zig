@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetMemberEc2DeepIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetMemberEc2DeepInspectionStatusOutput {
-    var result: BatchGetMemberEc2DeepInspectionStatusOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetMemberEc2DeepInspectionStatusOutput, body, allocator);
-    }
+    const result: BatchGetMemberEc2DeepInspectionStatusOutput = try aws.json.parseJsonObject(
+        BatchGetMemberEc2DeepInspectionStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

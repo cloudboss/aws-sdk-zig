@@ -1,6 +1,7 @@
 const RecordingGroup = @import("recording_group.zig").RecordingGroup;
 const RecordingMode = @import("recording_mode.zig").RecordingMode;
 const RecordingScope = @import("recording_scope.zig").RecordingScope;
+const ScopeConfiguration = @import("scope_configuration.zig").ScopeConfiguration;
 
 /// Records configuration changes to the resource types in scope.
 ///
@@ -11,6 +12,10 @@ const RecordingScope = @import("recording_scope.zig").RecordingScope;
 pub const ConfigurationRecorder = struct {
     /// The Amazon Resource Name (ARN) of the specified configuration recorder.
     arn: ?[]const u8 = null,
+
+    /// The Amazon Resource Name (ARN) of the connector that specifies the
+    /// connection between a third-party cloud service provider and Config.
+    connector_arn: ?[]const u8 = null,
 
     /// The name of the configuration recorder.
     ///
@@ -127,17 +132,23 @@ pub const ConfigurationRecorder = struct {
     /// [AWSServiceRoleForConfig](https://docs.aws.amazon.com/config/latest/developerguide/using-service-linked-roles.html).
     role_arn: ?[]const u8 = null,
 
+    /// Specifies the scope of resources to record from the third-party cloud
+    /// service provider connected through the connector.
+    scope_configuration: ?ScopeConfiguration = null,
+
     /// For service-linked configuration recorders, specifies the linked Amazon Web
     /// Services service for the configuration recorder.
     service_principal: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",
+        .connector_arn = "connectorArn",
         .name = "name",
         .recording_group = "recordingGroup",
         .recording_mode = "recordingMode",
         .recording_scope = "recordingScope",
         .role_arn = "roleARN",
+        .scope_configuration = "scopeConfiguration",
         .service_principal = "servicePrincipal",
     };
 };

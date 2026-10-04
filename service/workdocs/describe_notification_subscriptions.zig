@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeNotificationSub
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeNotificationSubscriptionsOutput {
-    var result: DescribeNotificationSubscriptionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeNotificationSubscriptionsOutput, body, allocator);
-    }
+    const result: DescribeNotificationSubscriptionsOutput = try aws.json.parseJsonObject(
+        DescribeNotificationSubscriptionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

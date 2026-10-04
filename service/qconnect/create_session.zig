@@ -25,9 +25,9 @@ pub const CreateSessionInput = struct {
     /// APIs](http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
     client_token: ?[]const u8 = null,
 
-    /// The Amazon Resource Name (ARN) of the email contact in Amazon Connect. Used
-    /// to retrieve email content and establish session context for AI-powered email
-    /// assistance.
+    /// The Amazon Resource Name (ARN) of the email contact in Connect Customer.
+    /// Used to retrieve email content and establish session context for AI-powered
+    /// email assistance.
     contact_arn: ?[]const u8 = null,
 
     /// The description.
@@ -172,10 +172,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSessionInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateSessionOutput {
-    var result: CreateSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateSessionOutput, body, allocator);
-    }
+    const result: CreateSessionOutput = try aws.json.parseJsonObject(
+        CreateSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

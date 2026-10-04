@@ -154,10 +154,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFirewallDomainLis
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateFirewallDomainListOutput {
-    var result: CreateFirewallDomainListOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateFirewallDomainListOutput, body, allocator);
-    }
+    const result: CreateFirewallDomainListOutput = try aws.json.parseJsonObject(
+        CreateFirewallDomainListOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

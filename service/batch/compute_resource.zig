@@ -3,6 +3,7 @@ const aws = @import("aws");
 const CRAllocationStrategy = @import("cr_allocation_strategy.zig").CRAllocationStrategy;
 const Ec2Configuration = @import("ec_2_configuration.zig").Ec2Configuration;
 const LaunchTemplateSpecification = @import("launch_template_specification.zig").LaunchTemplateSpecification;
+const ManagedInstancesProvider = @import("managed_instances_provider.zig").ManagedInstancesProvider;
 const ComputeScalingPolicy = @import("compute_scaling_policy.zig").ComputeScalingPolicy;
 const CRType = @import("cr_type.zig").CRType;
 
@@ -22,6 +23,12 @@ pub const ComputeResource = struct {
     ///
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't specify it.
+    ///
+    /// This parameter is required for Amazon EKS compute environments. For Amazon
+    /// ECS compute environments,
+    /// if this parameter isn't specified, the `BEST_FIT` allocation strategy is
+    /// used by
+    /// default.
     ///
     /// **BEST_FIT (default)**
     ///
@@ -55,6 +62,36 @@ pub const ComputeResource = struct {
     /// available, Batch
     /// selects new instance types.
     ///
+    /// **BEST_FIT_PROGRESSIVE_ORDERED**
+    ///
+    /// This is an advanced allocation strategy only for customers who want to
+    /// control which
+    /// instance types are preferred during scaling.
+    ///
+    /// Placing large instance types at the top of the list may result in
+    /// **over-provisioning** for
+    /// small jobs. Placing small instance types at the top may cause the compute
+    /// environment to
+    /// reach Amazon EC2 instance count limits before reaching `maxvCpus`.
+    ///
+    /// Batch selects instance types in the order they appear in the
+    /// `instanceTypes` list. When an instance family is specified, sizes within
+    /// that
+    /// family are expanded using `BEST_FIT_PROGRESSIVE` logic—preferring sizes that
+    /// best fit the jobs, with larger sizes as fallback. Instance types that cannot
+    /// meet the resource
+    /// requirements of the jobs are skipped. This strategy is only available for
+    /// On-Demand Instance
+    /// (`EC2`) compute resources.
+    ///
+    /// If an instance family and an explicit instance type from that family both
+    /// appear in
+    /// `instanceTypes`, the explicit type takes its listed position and is excluded
+    /// from
+    /// the family expansion. For example, in `["m7a.4xlarge", "m7a", "m6a"]`,
+    /// `m7a.4xlarge` is always placed first and is excluded from the `m7a`
+    /// family expansion.
+    ///
     /// **SPOT_CAPACITY_OPTIMIZED**
     ///
     /// Batch selects one or more instance types that are large enough to meet the
@@ -75,14 +112,39 @@ pub const ComputeResource = struct {
     /// compute
     /// resources.
     ///
-    /// With `BEST_FIT_PROGRESSIVE`,`SPOT_CAPACITY_OPTIMIZED` and
-    /// `SPOT_PRICE_CAPACITY_OPTIMIZED` (recommended) strategies using On-Demand or
-    /// Spot
-    /// Instances, and the `BEST_FIT` strategy using Spot Instances, Batch might
-    /// need to
-    /// exceed `maxvCpus` to meet your capacity requirements. In this event, Batch
-    /// never
-    /// exceeds `maxvCpus` by more than a single instance.
+    /// **SPOT_CAPACITY_OPTIMIZED_PRIORITIZED**
+    ///
+    /// This is an advanced allocation strategy for customers who want to influence
+    /// instance
+    /// type selection during scaling. This strategy optimizes for **capacity
+    /// first**, and honors instance type priorities on a best-effort basis
+    /// (priorities are
+    /// honored when they do not significantly reduce available Spot capacity).
+    ///
+    /// Placing large instance types at the top of the list may result in
+    /// **over-provisioning** for
+    /// small jobs. Placing small instance types at the top may cause the compute
+    /// environment to
+    /// reach Amazon EC2 instance count limits before reaching `maxvCpus`.
+    ///
+    /// Batch selects instance types in the order they appear in the
+    /// `instanceTypes` list, but **optimizes for capacity
+    /// first**. The customer-defined priority is honored on a best-effort basis.
+    /// When Spot
+    /// Instance capacity pools are similarly available, priority order is
+    /// respected. When capacity is
+    /// constrained, Batch selects from the most available pools regardless of
+    /// priority to minimize
+    /// the likelihood of Spot Instance interruptions. This strategy is only
+    /// available for Spot
+    /// Instance compute resources.
+    ///
+    /// With any allocation strategy except `BEST_FIT` using On-Demand
+    /// (`EC2`) compute resources, Batch might need to exceed `maxvCpus` to meet
+    /// your
+    /// capacity requirements. In this event, Batch never exceeds `maxvCpus` by more
+    /// than
+    /// a single instance.
     allocation_strategy: ?CRAllocationStrategy = null,
 
     /// The maximum percentage that a Spot Instance price can be when compared with
@@ -100,6 +162,19 @@ pub const ComputeResource = struct {
     /// This parameter isn't applicable to jobs that are running on Fargate
     /// resources. Don't specify it.
     bid_percentage: ?i32 = null,
+
+    /// The tags to apply to the Amazon ECS capacity provider and Amazon EC2
+    /// instances launched by the
+    /// compute environment. These tags are separate from the compute environment
+    /// resource tags (the
+    /// top-level `tags` parameter). Use `capacityTags` for cost allocation and
+    /// organization of the underlying infrastructure resources.
+    ///
+    /// This parameter is only valid for `ECS_MANAGED_INSTANCES` compute
+    /// environments.
+    /// You must have the `batch:SetCapacityTags` permission on the
+    /// compute environment resource to use this parameter.
+    capacity_tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The desired number of vCPUS in the compute environment. Batch modifies this
     /// value between
@@ -175,10 +250,6 @@ pub const ComputeResource = struct {
     /// Batch can select the instance type for you if you choose one of the
     /// following:
     ///
-    /// * `optimal` to select instance types (from the `c4`, `m4`,
-    /// `r4`, `c5`, `m5`, and `r5`
-    /// instance families) that match the demand of your job queues.
-    ///
     /// * `default_x86_64` to choose x86 based instance types (from the `m6i`,
     /// `c6i`, `r6i`, and `c7i` instance families) that matches the resource demands
     /// of the job queue.
@@ -187,15 +258,9 @@ pub const ComputeResource = struct {
     /// `c6g`, `r6g`, and `c7g` instance families) that matches the resource demands
     /// of the job queue.
     ///
-    /// Starting on 11/01/2025 the behavior of `optimal` is going to be changed to
-    /// match
-    /// `default_x86_64`. During the change your instance families could be updated
-    /// to a
-    /// newer generation. You do not need to perform any actions for the upgrade to
-    /// happen. For more
-    /// information about change, see [Optimal instance type configuration to
-    /// receive automatic instance family
-    /// updates](https://docs.aws.amazon.com/batch/latest/userguide/optimal-default-instance-troubleshooting.html).
+    /// * `optimal` Semantically equivalent to `default_x86_64`, see [Optimal
+    ///   instance type configuration to receive automatic instance family
+    /// updates](https://docs.aws.amazon.com/batch/latest/userguide/optimal-default-instance-troubleshooting.html) for details.
     ///
     /// Instance family availability varies by Amazon Web Services Region. For
     /// example, some Amazon Web Services Regions may not have any fourth generation
@@ -249,15 +314,25 @@ pub const ComputeResource = struct {
     /// resources. Don't specify it.
     launch_template: ?LaunchTemplateSpecification = null,
 
+    /// The configuration for the Amazon ECS Managed Instances capacity provider.
+    /// This parameter is
+    /// required when `computeResources.type` is `ECS_MANAGED_INSTANCES` and must
+    /// not be specified for other compute environment types.
+    ///
+    /// For more information, see [Amazon ECS
+    /// Managed Instances compute
+    /// environments](https://docs.aws.amazon.com/batch/latest/userguide/ecs_managed_instances.html) in the
+    /// *Batch User Guide*.
+    managed_instances_provider: ?ManagedInstancesProvider = null,
+
     /// The maximum number of vCPUs that a compute environment can support.
     ///
-    /// With `BEST_FIT_PROGRESSIVE`,`SPOT_CAPACITY_OPTIMIZED` and
-    /// `SPOT_PRICE_CAPACITY_OPTIMIZED` (recommended) strategies using On-Demand or
-    /// Spot Instances,
-    /// and the `BEST_FIT` strategy using Spot Instances, Batch might need to exceed
-    /// `maxvCpus` to meet your capacity requirements. In this event, Batch never
-    /// exceeds
-    /// `maxvCpus` by more than a single instance.
+    /// With any allocation strategy except `BEST_FIT` using On-Demand
+    /// (`EC2`) compute resources, Batch might need to exceed `maxvCpus` to meet
+    /// your
+    /// capacity requirements. In this event, Batch never exceeds `maxvCpus` by more
+    /// than
+    /// a single instance.
     maxv_cpus: i32,
 
     /// The minimum number of vCPUs that a compute environment should maintain (even
@@ -331,7 +406,9 @@ pub const ComputeResource = struct {
     /// information, see
     /// [VPCs and
     /// subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
-    /// in the *Amazon VPC User Guide*.
+    /// in the *Amazon VPC User Guide*. This parameter is required for compute
+    /// environments using `EC2`, `SPOT`, `FARGATE`, or
+    /// `FARGATE_SPOT` compute resources.
     ///
     /// Batch on Amazon EC2 and Batch on Amazon EKS support Local Zones. For more
     /// information, see [ Local
@@ -343,7 +420,7 @@ pub const ComputeResource = struct {
     /// Developer Guide*.
     ///
     /// Batch on Fargate doesn't currently support Local Zones.
-    subnets: []const []const u8,
+    subnets: ?[]const []const u8 = null,
 
     /// Key-value pair tags to be applied to Amazon EC2 resources that are launched
     /// in the compute
@@ -363,9 +440,9 @@ pub const ComputeResource = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of compute environment: `EC2`, `SPOT`, `FARGATE`,
-    /// or `FARGATE_SPOT`. For more information, see [Compute
-    /// environments](https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html) in the
-    /// *Batch User Guide*.
+    /// `FARGATE_SPOT`, or `ECS_MANAGED_INSTANCES`. For more information, see
+    /// [Compute
+    /// environments](https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html) in the *Batch User Guide*.
     ///
     /// If you choose `SPOT`, you must also specify an Amazon EC2 Spot Fleet role
     /// with the
@@ -374,12 +451,22 @@ pub const ComputeResource = struct {
     /// role](https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html) in the
     /// *Batch User Guide*.
     ///
-    /// Multi-node parallel jobs aren't supported on Spot Instances.
+    /// If you choose `ECS_MANAGED_INSTANCES`, you must also specify a
+    /// `managedInstancesProvider` configuration. To use Spot capacity, set
+    /// `capacityOptionType` to `SPOT` in the
+    /// `managedInstancesProvider.instanceLaunchTemplate` configuration. For more
+    /// information, see [Amazon ECS Managed Instances compute
+    /// environments](https://docs.aws.amazon.com/batch/latest/userguide/ecs_managed_instances.html) in the *Batch User Guide*.
+    ///
+    /// Multi-node parallel jobs aren't supported on Spot Instances or Amazon ECS
+    /// Managed
+    /// Instances.
     @"type": CRType,
 
     pub const json_field_names = .{
         .allocation_strategy = "allocationStrategy",
         .bid_percentage = "bidPercentage",
+        .capacity_tags = "capacityTags",
         .desiredv_cpus = "desiredvCpus",
         .ec_2_configuration = "ec2Configuration",
         .ec_2_key_pair = "ec2KeyPair",
@@ -387,6 +474,7 @@ pub const ComputeResource = struct {
         .instance_role = "instanceRole",
         .instance_types = "instanceTypes",
         .launch_template = "launchTemplate",
+        .managed_instances_provider = "managedInstancesProvider",
         .maxv_cpus = "maxvCpus",
         .minv_cpus = "minvCpus",
         .placement_group = "placementGroup",

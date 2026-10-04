@@ -24,8 +24,9 @@ pub const StartRunBatchInput = struct {
     /// batches from being created.
     request_id: []const u8,
 
-    /// AWS tags to associate with the batch resource. These tags are not inherited
-    /// by individual runs. To tag individual runs, use `defaultRunSetting.runTags`.
+    /// Amazon Web Services tags to associate with the batch resource. These tags
+    /// are not inherited by individual runs. To tag individual runs, use
+    /// `defaultRunSetting.runTags`.
     tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
@@ -48,7 +49,7 @@ pub const StartRunBatchOutput = struct {
     /// being initialized.
     status: ?BatchStatus = null,
 
-    /// AWS tags associated with the run batch.
+    /// Amazon Web Services tags associated with the run batch.
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The universally unique identifier (UUID) for the run batch.
@@ -139,10 +140,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartRunBatchInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartRunBatchOutput {
-    var result: StartRunBatchOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartRunBatchOutput, body, allocator);
-    }
+    const result: StartRunBatchOutput = try aws.json.parseJsonObject(
+        StartRunBatchOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

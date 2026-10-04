@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AdvancedSecurityOptionsInput = @import("advanced_security_options_input.zig").AdvancedSecurityOptionsInput;
+const AutomatedSnapshotPauseRequestOptions = @import("automated_snapshot_pause_request_options.zig").AutomatedSnapshotPauseRequestOptions;
 const AutoTuneOptions = @import("auto_tune_options.zig").AutoTuneOptions;
 const CognitoOptions = @import("cognito_options.zig").CognitoOptions;
 const DeploymentStrategyOptions = @import("deployment_strategy_options.zig").DeploymentStrategyOptions;
@@ -12,9 +13,11 @@ const DomainEndpointOptions = @import("domain_endpoint_options.zig").DomainEndpo
 const EBSOptions = @import("ebs_options.zig").EBSOptions;
 const ElasticsearchClusterConfig = @import("elasticsearch_cluster_config.zig").ElasticsearchClusterConfig;
 const EncryptionAtRestOptions = @import("encryption_at_rest_options.zig").EncryptionAtRestOptions;
+const DomainEngineMode = @import("domain_engine_mode.zig").DomainEngineMode;
 const LogPublishingOption = @import("log_publishing_option.zig").LogPublishingOption;
 const NodeToNodeEncryptionOptions = @import("node_to_node_encryption_options.zig").NodeToNodeEncryptionOptions;
 const SnapshotOptions = @import("snapshot_options.zig").SnapshotOptions;
+const DomainUseCase = @import("domain_use_case.zig").DomainUseCase;
 const VPCOptions = @import("vpc_options.zig").VPCOptions;
 const ElasticsearchDomainConfig = @import("elasticsearch_domain_config.zig").ElasticsearchDomainConfig;
 const DryRunResults = @import("dry_run_results.zig").DryRunResults;
@@ -32,6 +35,17 @@ pub const UpdateElasticsearchDomainConfigInput = struct {
 
     /// Specifies advanced security options.
     advanced_security_options: ?AdvancedSecurityOptionsInput = null,
+
+    /// Specifies the automated snapshot pause options for the domain.
+    ///
+    /// Suspending snapshots reduces data protection. You cannot restore your domain
+    /// to
+    /// points in time when snapshots are suspended. Use this feature only for
+    /// short-term
+    /// operational needs such as migrations or maintenance windows.
+    ///
+    /// Maximum suspension duration: 3 days.
+    automated_snapshot_pause_options: ?AutomatedSnapshotPauseRequestOptions = null,
 
     /// Specifies Auto-Tune options.
     auto_tune_options: ?AutoTuneOptions = null,
@@ -68,6 +82,10 @@ pub const UpdateElasticsearchDomainConfigInput = struct {
     /// Specifies the Encryption At Rest Options.
     encryption_at_rest_options: ?EncryptionAtRestOptions = null,
 
+    /// The engine mode for the domain. For valid values and requirements, see
+    /// `DomainEngineMode`.
+    engine_mode: ?DomainEngineMode = null,
+
     /// Map of `LogType` and `LogPublishingOption`, each containing options to
     /// publish a given type of Elasticsearch log.
     log_publishing_options: ?[]const aws.map.MapEntry(LogPublishingOption) = null,
@@ -79,6 +97,9 @@ pub const UpdateElasticsearchDomainConfigInput = struct {
     /// Default value is `0` hours.
     snapshot_options: ?SnapshotOptions = null,
 
+    /// The primary use case for the domain. For valid values, see `DomainUseCase`.
+    use_case: ?DomainUseCase = null,
+
     /// Options to specify the subnets and security groups for VPC endpoint. For
     /// more information, see [Creating a
     /// VPC](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc) in *VPC Endpoints for Amazon Elasticsearch Service Domains*
@@ -88,6 +109,7 @@ pub const UpdateElasticsearchDomainConfigInput = struct {
         .access_policies = "AccessPolicies",
         .advanced_options = "AdvancedOptions",
         .advanced_security_options = "AdvancedSecurityOptions",
+        .automated_snapshot_pause_options = "AutomatedSnapshotPauseOptions",
         .auto_tune_options = "AutoTuneOptions",
         .cognito_options = "CognitoOptions",
         .deployment_strategy_options = "DeploymentStrategyOptions",
@@ -97,9 +119,11 @@ pub const UpdateElasticsearchDomainConfigInput = struct {
         .ebs_options = "EBSOptions",
         .elasticsearch_cluster_config = "ElasticsearchClusterConfig",
         .encryption_at_rest_options = "EncryptionAtRestOptions",
+        .engine_mode = "EngineMode",
         .log_publishing_options = "LogPublishingOptions",
         .node_to_node_encryption_options = "NodeToNodeEncryptionOptions",
         .snapshot_options = "SnapshotOptions",
+        .use_case = "UseCase",
         .vpc_options = "VPCOptions",
     };
 };
@@ -175,6 +199,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateElasticsearchDoma
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.automated_snapshot_pause_options) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AutomatedSnapshotPauseOptions\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.auto_tune_options) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"AutoTuneOptions\":");
@@ -223,6 +253,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateElasticsearchDoma
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.engine_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"EngineMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.log_publishing_options) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"LogPublishingOptions\":");
@@ -238,6 +274,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateElasticsearchDoma
     if (input.snapshot_options) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"SnapshotOptions\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.use_case) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"UseCase\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -263,10 +305,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateElasticsearchDoma
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateElasticsearchDomainConfigOutput {
-    var result: UpdateElasticsearchDomainConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateElasticsearchDomainConfigOutput, body, allocator);
-    }
+    const result: UpdateElasticsearchDomainConfigOutput = try aws.json.parseJsonObject(
+        UpdateElasticsearchDomainConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -150,10 +150,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterAppInstanceUser
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RegisterAppInstanceUserEndpointOutput {
-    var result: RegisterAppInstanceUserEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RegisterAppInstanceUserEndpointOutput, body, allocator);
-    }
+    const result: RegisterAppInstanceUserEndpointOutput = try aws.json.parseJsonObject(
+        RegisterAppInstanceUserEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -47,8 +47,8 @@ pub const ContainerOverride = struct {
     name: ?[]const u8 = null,
 
     /// The type and amount of a resource to assign to a container, instead of the
-    /// default value from the task definition. The only supported resource is a
-    /// GPU.
+    /// default value from the task definition. The supported resources are GPUs and
+    /// Neuron devices.
     resource_requirements: ?[]const ResourceRequirement = null,
 
     pub const json_field_names = .{

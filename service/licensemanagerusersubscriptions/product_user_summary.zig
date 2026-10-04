@@ -9,6 +9,14 @@ pub const ProductUserSummary = struct {
     /// An object that specifies details for the identity provider.
     identity_provider: IdentityProvider,
 
+    /// The expiration date of the license associated with this subscription, in ISO
+    /// 8601 UTC format (for example, `2025-03-15T00:00:00Z`).
+    ///
+    /// This field applies only to subscriptions that use license server endpoints,
+    /// such as Remote Desktop Services (RDS) Subscriber Access License (SAL). It
+    /// returns `null` for products that don't use license-based subscriptions.
+    license_expiration_date: ?[]const u8 = null,
+
     /// The name of the user-based subscription product.
     product: []const u8,
 
@@ -33,6 +41,7 @@ pub const ProductUserSummary = struct {
     pub const json_field_names = .{
         .domain = "Domain",
         .identity_provider = "IdentityProvider",
+        .license_expiration_date = "LicenseExpirationDate",
         .product = "Product",
         .product_user_arn = "ProductUserArn",
         .status = "Status",

@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLinkedWhatsAppBusine
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetLinkedWhatsAppBusinessAccountOutput {
-    var result: GetLinkedWhatsAppBusinessAccountOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetLinkedWhatsAppBusinessAccountOutput, body, allocator);
-    }
+    const result: GetLinkedWhatsAppBusinessAccountOutput = try aws.json.parseJsonObject(
+        GetLinkedWhatsAppBusinessAccountOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

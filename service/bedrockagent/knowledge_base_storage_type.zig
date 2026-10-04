@@ -1,5 +1,6 @@
 const std = @import("std");
 
+/// The storage type of a knowledge base.
 pub const KnowledgeBaseStorageType = enum {
     opensearch_serverless,
     pinecone,

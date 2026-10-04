@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateQAppSessionInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateQAppSessionOutput {
-    var result: UpdateQAppSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateQAppSessionOutput, body, allocator);
-    }
+    const result: UpdateQAppSessionOutput = try aws.json.parseJsonObject(
+        UpdateQAppSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

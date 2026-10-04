@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ComputeConfig = @import("compute_config.zig").ComputeConfig;
 const NetworkConfig = @import("network_config.zig").NetworkConfig;
+const NotificationConfig = @import("notification_config.zig").NotificationConfig;
 const TimeoutConfig = @import("timeout_config.zig").TimeoutConfig;
 const TriggerSource = @import("trigger_source.zig").TriggerSource;
 const CellInformation = @import("cell_information.zig").CellInformation;
@@ -23,8 +24,8 @@ pub const StartNotebookRunInput = struct {
     /// environment version.
     compute_configuration: ?ComputeConfig = null,
 
-    /// The identifier of the Amazon DataZone domain in which the notebook run is
-    /// started.
+    /// The identifier of the Amazon SageMaker Unified Studio domain in which the
+    /// notebook run is started.
     domain_identifier: []const u8,
 
     /// The metadata for the notebook run, specified as key-value pairs. You can
@@ -38,6 +39,10 @@ pub const StartNotebookRunInput = struct {
 
     /// The identifier of the notebook to run.
     notebook_identifier: []const u8,
+
+    /// The notification configuration for the notebook run. Use this to specify the
+    /// notebook run states that trigger notifications.
+    notification_configuration: ?NotificationConfig = null,
 
     /// The identifier of the project that owns the notebook run.
     owning_project_identifier: []const u8,
@@ -64,6 +69,7 @@ pub const StartNotebookRunInput = struct {
         .metadata = "metadata",
         .network_configuration = "networkConfiguration",
         .notebook_identifier = "notebookIdentifier",
+        .notification_configuration = "notificationConfiguration",
         .owning_project_identifier = "owningProjectIdentifier",
         .parameters = "parameters",
         .schedule_identifier = "scheduleIdentifier",
@@ -88,7 +94,7 @@ pub const StartNotebookRunOutput = struct {
     /// The identifier of the user who created the notebook run.
     created_by: ?[]const u8 = null,
 
-    /// The identifier of the Amazon DataZone domain.
+    /// The identifier of the Amazon SageMaker Unified Studio domain.
     domain_id: []const u8,
 
     /// The environment configuration of the notebook run, including image version
@@ -109,6 +115,10 @@ pub const StartNotebookRunOutput = struct {
 
     /// The identifier of the notebook.
     notebook_id: []const u8,
+
+    /// The notification configuration of the notebook run, including the notebook
+    /// run states that trigger notifications.
+    notification_configuration: ?NotificationConfig = null,
 
     /// The identifier of the project that owns the notebook run.
     owning_project_id: []const u8,
@@ -154,6 +164,7 @@ pub const StartNotebookRunOutput = struct {
         .metadata = "metadata",
         .network_configuration = "networkConfiguration",
         .notebook_id = "notebookId",
+        .notification_configuration = "notificationConfiguration",
         .owning_project_id = "owningProjectId",
         .parameters = "parameters",
         .schedule_id = "scheduleId",
@@ -235,6 +246,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartNotebookRunInput, 
     try body_buf.appendSlice(allocator, "\"notebookIdentifier\":");
     try aws.json.writeValue(@TypeOf(input.notebook_identifier), input.notebook_identifier, allocator, &body_buf);
     has_prev = true;
+    if (input.notification_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"notificationConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"owningProjectIdentifier\":");
     try aws.json.writeValue(@TypeOf(input.owning_project_identifier), input.owning_project_identifier, allocator, &body_buf);
@@ -279,10 +296,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartNotebookRunInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartNotebookRunOutput {
-    var result: StartNotebookRunOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartNotebookRunOutput, body, allocator);
-    }
+    const result: StartNotebookRunOutput = try aws.json.parseJsonObject(
+        StartNotebookRunOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

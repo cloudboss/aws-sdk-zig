@@ -67,6 +67,7 @@ pub const MLSyntheticDataParameters = @import("ml_synthetic_data_parameters.zig"
 pub const ModelInferenceDataSource = @import("model_inference_data_source.zig").ModelInferenceDataSource;
 pub const ModelTrainingDataChannel = @import("model_training_data_channel.zig").ModelTrainingDataChannel;
 pub const NoiseLevelType = @import("noise_level_type.zig").NoiseLevelType;
+pub const PayerConfiguration = @import("payer_configuration.zig").PayerConfiguration;
 pub const PolicyExistenceCondition = @import("policy_existence_condition.zig").PolicyExistenceCondition;
 pub const PrivacyBudgets = @import("privacy_budgets.zig").PrivacyBudgets;
 pub const PrivacyConfiguration = @import("privacy_configuration.zig").PrivacyConfiguration;

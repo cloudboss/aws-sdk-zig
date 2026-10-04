@@ -6,7 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const UpdateContactAttributesInput = struct {
-    /// The Amazon Connect attributes. These attributes can be accessed in flows
+    /// The Connect Customer attributes. These attributes can be accessed in flows
     /// just like any other contact
     /// attributes.
     ///
@@ -27,7 +27,7 @@ pub const UpdateContactAttributesInput = struct {
     /// of information from one flow to another. For more information, see [Flow
     /// block: Set contact
     /// attributes](https://docs.aws.amazon.com/connect/latest/adminguide/set-contact-attributes.html) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     attributes: []const aws.map.StringMapEntry,
 
     /// The identifier of the contact. This is the identifier of the contact
@@ -35,7 +35,7 @@ pub const UpdateContactAttributesInput = struct {
     /// the contact center.
     initial_contact_id: []const u8,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 

@@ -249,10 +249,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSiteRackPhysicalP
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateSiteRackPhysicalPropertiesOutput {
-    var result: UpdateSiteRackPhysicalPropertiesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateSiteRackPhysicalPropertiesOutput, body, allocator);
-    }
+    const result: UpdateSiteRackPhysicalPropertiesOutput = try aws.json.parseJsonObject(
+        UpdateSiteRackPhysicalPropertiesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

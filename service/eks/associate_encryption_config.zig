@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateEncryptionConf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateEncryptionConfigOutput {
-    var result: AssociateEncryptionConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateEncryptionConfigOutput, body, allocator);
-    }
+    const result: AssociateEncryptionConfigOutput = try aws.json.parseJsonObject(
+        AssociateEncryptionConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

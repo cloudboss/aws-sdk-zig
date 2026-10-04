@@ -1,4 +1,5 @@
 const AutoScalingGroup = @import("auto_scaling_group.zig").AutoScalingGroup;
+const Cluster = @import("cluster.zig").Cluster;
 const Instance = @import("instance.zig").Instance;
 const LaunchConfiguration = @import("launch_configuration.zig").LaunchConfiguration;
 const LaunchTemplate = @import("launch_template.zig").LaunchTemplate;
@@ -6,10 +7,16 @@ const LoadBalancer = @import("load_balancer.zig").LoadBalancer;
 const Queue = @import("queue.zig").Queue;
 const Trigger = @import("trigger.zig").Trigger;
 
-/// Describes the AWS resources in use by this environment. This data is live.
+/// Describes the Amazon Web Services resources in use by this environment. This
+/// data is live.
 pub const EnvironmentResourceDescription = struct {
     /// The `AutoScalingGroups` used by this environment.
     auto_scaling_groups: ?[]const AutoScalingGroup = null,
+
+    /// The Amazon EKS cluster that this environment runs on. This member is present
+    /// only for
+    /// environments in the *Cluster* tier.
+    cluster: ?Cluster = null,
 
     /// The name of the environment.
     environment_name: ?[]const u8 = null,

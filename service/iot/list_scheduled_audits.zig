@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListScheduledAuditsInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListScheduledAuditsOutput {
-    var result: ListScheduledAuditsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListScheduledAuditsOutput, body, allocator);
-    }
+    const result: ListScheduledAuditsOutput = try aws.json.parseJsonObject(
+        ListScheduledAuditsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

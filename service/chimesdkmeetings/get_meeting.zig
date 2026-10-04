@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMeetingInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMeetingOutput {
-    var result: GetMeetingOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMeetingOutput, body, allocator);
-    }
+    const result: GetMeetingOutput = try aws.json.parseJsonObject(
+        GetMeetingOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

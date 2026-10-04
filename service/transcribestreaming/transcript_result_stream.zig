@@ -17,10 +17,15 @@ pub const TranscriptResultStream = union(enum) {
     /// A problem occurred while processing the audio. Amazon Transcribe terminated
     /// processing.
     internal_failure_exception: ?InternalFailureException,
-    /// Your client has exceeded one of the Amazon Transcribe limits. This is
-    /// typically the audio length
-    /// limit. Break your audio stream into smaller chunks and try your request
-    /// again.
+    /// Your client has exceeded one of the Amazon Transcribe limits, typically the
+    /// concurrent stream
+    /// service quota. This error can also occur if a stream exceeds the maximum
+    /// session duration. In rare
+    /// cases, this error can also occur if you increase your number of concurrent
+    /// streams too quickly.
+    /// Reduce your number of concurrent streams and try your request again using an
+    /// exponential backoff
+    /// strategy.
     limit_exceeded_exception: ?LimitExceededException,
     /// The service is currently unavailable. Try your request later.
     service_unavailable_exception: ?ServiceUnavailableException,

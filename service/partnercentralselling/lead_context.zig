@@ -1,4 +1,5 @@
 const LeadCustomer = @import("lead_customer.zig").LeadCustomer;
+const LeadInsights = @import("lead_insights.zig").LeadInsights;
 const LeadInteraction = @import("lead_interaction.zig").LeadInteraction;
 
 /// Provides comprehensive details about a lead associated with an engagement.
@@ -10,6 +11,11 @@ pub const LeadContext = struct {
     /// including company information, contact details, and other relevant customer
     /// data.
     customer: LeadCustomer,
+
+    /// Insights that AI generates and associates with the lead. These insights
+    /// provide automated analysis such as lead readiness scoring to help partners
+    /// assess the lead quality.
+    insights: ?LeadInsights = null,
 
     /// An array of interactions that have occurred with the lead, providing a
     /// history of communications, meetings, and other engagement activities related
@@ -23,6 +29,7 @@ pub const LeadContext = struct {
 
     pub const json_field_names = .{
         .customer = "Customer",
+        .insights = "Insights",
         .interactions = "Interactions",
         .qualification_status = "QualificationStatus",
     };

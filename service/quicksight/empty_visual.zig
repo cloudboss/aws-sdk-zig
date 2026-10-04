@@ -10,8 +10,12 @@ pub const EmptyVisual = struct {
     actions: ?[]const VisualCustomAction = null,
 
     /// The data set that is used in the empty visual. Every visual requires a
-    /// dataset to render.
-    data_set_identifier: []const u8,
+    /// dataset or a topic to render.
+    data_set_identifier: []const u8 = "",
+
+    /// The topic that is used in the empty visual. Every visual requires a dataset
+    /// or a topic to render.
+    topic_identifier: ?[]const u8 = null,
 
     /// The unique identifier of a visual. This identifier must be unique within the
     /// context of a dashboard, template, or analysis. Two dashboards, analyses, or
@@ -21,6 +25,7 @@ pub const EmptyVisual = struct {
     pub const json_field_names = .{
         .actions = "Actions",
         .data_set_identifier = "DataSetIdentifier",
+        .topic_identifier = "TopicIdentifier",
         .visual_id = "VisualId",
     };
 };

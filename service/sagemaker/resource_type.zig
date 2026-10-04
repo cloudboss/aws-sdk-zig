@@ -19,6 +19,8 @@ pub const ResourceType = enum {
     hyper_parameter_tuning_job,
     model_card,
     pipeline_version,
+    job,
+    hub_content,
 
     pub const json_field_names = .{
         .training_job = "TrainingJob",
@@ -39,6 +41,8 @@ pub const ResourceType = enum {
         .hyper_parameter_tuning_job = "HyperParameterTuningJob",
         .model_card = "ModelCard",
         .pipeline_version = "PipelineVersion",
+        .job = "Job",
+        .hub_content = "HubContent",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -61,6 +65,8 @@ pub const ResourceType = enum {
             .hyper_parameter_tuning_job => "HyperParameterTuningJob",
             .model_card => "ModelCard",
             .pipeline_version => "PipelineVersion",
+            .job => "Job",
+            .hub_content => "HubContent",
         };
     }
 

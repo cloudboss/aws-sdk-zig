@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteWebhookInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteWebhookOutput {
-    var result: DeleteWebhookOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteWebhookOutput, body, allocator);
-    }
+    const result: DeleteWebhookOutput = try aws.json.parseJsonObject(
+        DeleteWebhookOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

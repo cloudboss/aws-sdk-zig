@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDashboardsQAConfi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateDashboardsQAConfigurationOutput {
-    var result: UpdateDashboardsQAConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateDashboardsQAConfigurationOutput, body, allocator);
-    }
+    var result: UpdateDashboardsQAConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateDashboardsQAConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

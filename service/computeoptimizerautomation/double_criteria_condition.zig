@@ -3,8 +3,8 @@ const ComparisonOperator = @import("comparison_operator.zig").ComparisonOperator
 /// Defines a condition for filtering based on double/floating-point numeric
 /// values with comparison operators.
 pub const DoubleCriteriaCondition = struct {
-    /// The comparison operator to use, such as equals, greater than, less than,
-    /// etc.
+    /// The comparison operator used to evaluate the attribute against the specified
+    /// values.
     comparison: ?ComparisonOperator = null,
 
     /// The list of double values to compare against using the specified comparison

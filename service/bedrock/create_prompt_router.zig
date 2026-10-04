@@ -142,10 +142,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePromptRouterInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePromptRouterOutput {
-    var result: CreatePromptRouterOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePromptRouterOutput, body, allocator);
-    }
+    const result: CreatePromptRouterOutput = try aws.json.parseJsonObject(
+        CreatePromptRouterOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

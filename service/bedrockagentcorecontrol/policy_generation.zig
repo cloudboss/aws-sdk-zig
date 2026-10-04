@@ -2,8 +2,8 @@ const Resource = @import("resource.zig").Resource;
 const PolicyGenerationStatus = @import("policy_generation_status.zig").PolicyGenerationStatus;
 
 /// Represents a policy generation request within the AgentCore Policy system.
-/// Tracks the AI-powered conversion of natural language descriptions into Cedar
-/// policy statements, enabling users to author policies by describing
+/// Tracks the AI-powered conversion of natural language descriptions into
+/// Dogwood policy statements, enabling users to author policies by describing
 /// authorization requirements in plain English. The generation process analyzes
 /// the natural language input along with the Gateway's tool context and Cedar
 /// schema to produce one or more validated policy options. Each generation

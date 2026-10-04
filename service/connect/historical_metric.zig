@@ -7,7 +7,7 @@ const Unit = @import("unit.zig").Unit;
 pub const HistoricalMetric = struct {
     /// The name of the metric. Following is a list of each supported metric mapped
     /// to the UI name, linked to a detailed
-    /// description in the *Amazon Connect Administrator Guide*.
+    /// description in the *Connect Customer Administrator Guide*.
     ///
     /// **ABANDON_TIME**
     ///

@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RefreshTokenInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RefreshTokenOutput {
-    var result: RefreshTokenOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RefreshTokenOutput, body, allocator);
-    }
+    const result: RefreshTokenOutput = try aws.json.parseJsonObject(
+        RefreshTokenOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

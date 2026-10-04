@@ -105,10 +105,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTemplateStepGroupsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTemplateStepGroupsOutput {
-    var result: ListTemplateStepGroupsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListTemplateStepGroupsOutput, body, allocator);
-    }
+    const result: ListTemplateStepGroupsOutput = try aws.json.parseJsonObject(
+        ListTemplateStepGroupsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

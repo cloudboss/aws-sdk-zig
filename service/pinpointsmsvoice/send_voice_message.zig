@@ -125,10 +125,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendVoiceMessageInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SendVoiceMessageOutput {
-    var result: SendVoiceMessageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SendVoiceMessageOutput, body, allocator);
-    }
+    const result: SendVoiceMessageOutput = try aws.json.parseJsonObject(
+        SendVoiceMessageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

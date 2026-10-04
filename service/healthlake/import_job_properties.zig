@@ -6,8 +6,8 @@ const ValidationLevel = @import("validation_level.zig").ValidationLevel;
 
 /// The import job properties.
 pub const ImportJobProperties = struct {
-    /// The Amazon Resource Name (ARN) that grants AWS HealthLake access to the
-    /// input data.
+    /// The Amazon Resource Name (ARN) that grants HealthLake access to the input
+    /// data.
     data_access_role_arn: ?[]const u8 = null,
 
     /// The data store identifier.
@@ -28,8 +28,7 @@ pub const ImportJobProperties = struct {
     job_output_data_config: ?OutputDataConfig = null,
 
     /// Displays the progress of the import job, including total resources scanned,
-    /// total
-    /// resources imported, and total size of data imported.
+    /// total resources imported, and total size of data imported.
     job_progress_report: ?JobProgressReport = null,
 
     /// The import job status.

@@ -2,6 +2,7 @@ const DataSetConfiguration = @import("data_set_configuration.zig").DataSetConfig
 const TemplateError = @import("template_error.zig").TemplateError;
 const Sheet = @import("sheet.zig").Sheet;
 const ResourceStatus = @import("resource_status.zig").ResourceStatus;
+const TopicConfiguration = @import("topic_configuration.zig").TopicConfiguration;
 
 /// A version of a template.
 pub const TemplateVersion = struct {
@@ -50,6 +51,13 @@ pub const TemplateVersion = struct {
     /// The ARN of the theme associated with this version of the template.
     theme_arn: ?[]const u8 = null,
 
+    /// Schema of the topic identified by the placeholder. Any dashboard created
+    /// from this
+    /// template should be bound to new topics matching the same schema described
+    /// through this
+    /// API operation.
+    topic_configurations: ?[]const TopicConfiguration = null,
+
     /// The version number of the template version.
     version_number: ?i64 = null,
 
@@ -62,6 +70,7 @@ pub const TemplateVersion = struct {
         .source_entity_arn = "SourceEntityArn",
         .status = "Status",
         .theme_arn = "ThemeArn",
+        .topic_configurations = "TopicConfigurations",
         .version_number = "VersionNumber",
     };
 };

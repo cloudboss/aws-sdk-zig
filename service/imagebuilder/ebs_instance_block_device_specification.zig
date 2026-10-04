@@ -2,13 +2,13 @@ const EbsVolumeType = @import("ebs_volume_type.zig").EbsVolumeType;
 
 /// Amazon EBS-specific block device mapping specifications.
 pub const EbsInstanceBlockDeviceSpecification = struct {
-    /// Use to configure delete on termination of the associated device.
+    /// Specifies whether to delete the associated device on termination.
     delete_on_termination: ?bool = null,
 
-    /// Use to configure device encryption.
+    /// Specifies whether to encrypt the device.
     encrypted: ?bool = null,
 
-    /// Use to configure device IOPS.
+    /// The IOPS value for the device. Required only when volumeType is io1 or io2.
     iops: ?i32 = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies the KMS key to use
@@ -26,10 +26,10 @@ pub const EbsInstanceBlockDeviceSpecification = struct {
     /// that the volume supports.
     throughput: ?i32 = null,
 
-    /// Use to override the device's volume size.
+    /// Overrides the volume size for the device.
     volume_size: ?i32 = null,
 
-    /// Use to override the device's volume type.
+    /// Overrides the volume type for the device.
     volume_type: ?EbsVolumeType = null,
 
     pub const json_field_names = .{

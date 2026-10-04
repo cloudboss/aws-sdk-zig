@@ -10,7 +10,9 @@ pub const RegionName = enum {
     eu_west_3,
     eu_central_1,
     eu_north_1,
+    eu_south_2,
     ca_central_1,
+    ap_east_1,
     ap_south_1,
     ap_southeast_1,
     ap_southeast_2,
@@ -18,6 +20,7 @@ pub const RegionName = enum {
     ap_northeast_2,
     ap_southeast_3,
     ap_southeast_5,
+    sa_east_1,
 
     pub const json_field_names = .{
         .us_east_1 = "us-east-1",
@@ -29,7 +32,9 @@ pub const RegionName = enum {
         .eu_west_3 = "eu-west-3",
         .eu_central_1 = "eu-central-1",
         .eu_north_1 = "eu-north-1",
+        .eu_south_2 = "eu-south-2",
         .ca_central_1 = "ca-central-1",
+        .ap_east_1 = "ap-east-1",
         .ap_south_1 = "ap-south-1",
         .ap_southeast_1 = "ap-southeast-1",
         .ap_southeast_2 = "ap-southeast-2",
@@ -37,6 +42,7 @@ pub const RegionName = enum {
         .ap_northeast_2 = "ap-northeast-2",
         .ap_southeast_3 = "ap-southeast-3",
         .ap_southeast_5 = "ap-southeast-5",
+        .sa_east_1 = "sa-east-1",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -50,7 +56,9 @@ pub const RegionName = enum {
             .eu_west_3 => "eu-west-3",
             .eu_central_1 => "eu-central-1",
             .eu_north_1 => "eu-north-1",
+            .eu_south_2 => "eu-south-2",
             .ca_central_1 => "ca-central-1",
+            .ap_east_1 => "ap-east-1",
             .ap_south_1 => "ap-south-1",
             .ap_southeast_1 => "ap-southeast-1",
             .ap_southeast_2 => "ap-southeast-2",
@@ -58,6 +66,7 @@ pub const RegionName = enum {
             .ap_northeast_2 => "ap-northeast-2",
             .ap_southeast_3 => "ap-southeast-3",
             .ap_southeast_5 => "ap-southeast-5",
+            .sa_east_1 => "sa-east-1",
         };
     }
 

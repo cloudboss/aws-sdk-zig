@@ -1,5 +1,6 @@
 const DnsEntry = @import("dns_entry.zig").DnsEntry;
 const IpAddressType = @import("ip_address_type.zig").IpAddressType;
+const PayerResponsibilityEntry = @import("payer_responsibility_entry.zig").PayerResponsibilityEntry;
 const Tag = @import("tag.zig").Tag;
 const State = @import("state.zig").State;
 
@@ -21,6 +22,9 @@ pub const VpcEndpointConnection = struct {
     /// The Amazon Resource Names (ARNs) of the network load balancers for the
     /// service.
     network_load_balancer_arns: ?[]const []const u8 = null,
+
+    /// The payer responsibility settings for the endpoint.
+    payer_responsibilities: ?[]const PayerResponsibilityEntry = null,
 
     /// The ID of the service to which the endpoint is connected.
     service_id: ?[]const u8 = null,

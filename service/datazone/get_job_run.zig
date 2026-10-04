@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetJobRunInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetJobRunOutput {
-    var result: GetJobRunOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetJobRunOutput, body, allocator);
-    }
+    const result: GetJobRunOutput = try aws.json.parseJsonObject(
+        GetJobRunOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

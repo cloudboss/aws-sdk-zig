@@ -116,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeBrokerEngineTyp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeBrokerEngineTypesOutput {
-    var result: DescribeBrokerEngineTypesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeBrokerEngineTypesOutput, body, allocator);
-    }
+    const result: DescribeBrokerEngineTypesOutput = try aws.json.parseJsonObject(
+        DescribeBrokerEngineTypesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

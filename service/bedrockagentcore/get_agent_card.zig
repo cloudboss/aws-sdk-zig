@@ -106,7 +106,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAgentCardInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAgentCardOutput {
-    var result: GetAgentCardOutput = .{};
+    var result: GetAgentCardOutput = .{
+        .agent_card = "",
+    };
+    errdefer {
+        if (result.runtime_session_id) |value| allocator.free(value);
+        allocator.free(result.agent_card);
+    }
     result.agent_card = try allocator.dupe(u8, body);
     result.status_code = @intCast(status);
     if (headers.get("x-amzn-bedrock-agentcore-runtime-session-id")) |value| {

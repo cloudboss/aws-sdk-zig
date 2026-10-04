@@ -223,10 +223,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateWebExperienceInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateWebExperienceOutput {
-    var result: CreateWebExperienceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateWebExperienceOutput, body, allocator);
-    }
+    const result: CreateWebExperienceOutput = try aws.json.parseJsonObject(
+        CreateWebExperienceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

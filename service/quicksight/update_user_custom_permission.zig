@@ -104,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateUserCustomPermiss
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateUserCustomPermissionOutput {
-    var result: UpdateUserCustomPermissionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateUserCustomPermissionOutput, body, allocator);
-    }
+    var result: UpdateUserCustomPermissionOutput = try aws.json.parseJsonObject(
+        UpdateUserCustomPermissionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

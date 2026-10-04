@@ -72,10 +72,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartPipelineInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartPipelineOutput {
-    var result: StartPipelineOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartPipelineOutput, body, allocator);
-    }
+    const result: StartPipelineOutput = try aws.json.parseJsonObject(
+        StartPipelineOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

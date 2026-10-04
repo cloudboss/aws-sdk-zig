@@ -6,6 +6,7 @@ pub const AuthenticationSummary = @import("authentication_summary.zig").Authenti
 pub const AwsSsoAuthentication = @import("aws_sso_authentication.zig").AwsSsoAuthentication;
 pub const DataSourceType = @import("data_source_type.zig").DataSourceType;
 pub const IdpMetadata = @import("idp_metadata.zig").IdpMetadata;
+pub const IPAddressType = @import("ip_address_type.zig").IPAddressType;
 pub const LicenseType = @import("license_type.zig").LicenseType;
 pub const ListTagsForResourceRequest = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
 pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;

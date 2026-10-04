@@ -4,6 +4,7 @@ const DvbSubSourceSettings = @import("dvb_sub_source_settings.zig").DvbSubSource
 const EmbeddedSourceSettings = @import("embedded_source_settings.zig").EmbeddedSourceSettings;
 const Scte20SourceSettings = @import("scte_20_source_settings.zig").Scte20SourceSettings;
 const Scte27SourceSettings = @import("scte_27_source_settings.zig").Scte27SourceSettings;
+const SmartSubtitleSourceSettings = @import("smart_subtitle_source_settings.zig").SmartSubtitleSourceSettings;
 const TeletextSourceSettings = @import("teletext_source_settings.zig").TeletextSourceSettings;
 
 /// Caption Selector Settings
@@ -20,6 +21,8 @@ pub const CaptionSelectorSettings = struct {
 
     scte_27_source_settings: ?Scte27SourceSettings = null,
 
+    smart_subtitle_source_settings: ?SmartSubtitleSourceSettings = null,
+
     teletext_source_settings: ?TeletextSourceSettings = null,
 
     pub const json_field_names = .{
@@ -29,6 +32,7 @@ pub const CaptionSelectorSettings = struct {
         .embedded_source_settings = "EmbeddedSourceSettings",
         .scte_20_source_settings = "Scte20SourceSettings",
         .scte_27_source_settings = "Scte27SourceSettings",
+        .smart_subtitle_source_settings = "SmartSubtitleSourceSettings",
         .teletext_source_settings = "TeletextSourceSettings",
     };
 };

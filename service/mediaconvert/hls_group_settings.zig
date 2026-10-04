@@ -11,6 +11,7 @@ const HlsDirectoryStructure = @import("hls_directory_structure.zig").HlsDirector
 const HlsEncryptionSettings = @import("hls_encryption_settings.zig").HlsEncryptionSettings;
 const HlsImageBasedTrickPlay = @import("hls_image_based_trick_play.zig").HlsImageBasedTrickPlay;
 const HlsImageBasedTrickPlaySettings = @import("hls_image_based_trick_play_settings.zig").HlsImageBasedTrickPlaySettings;
+const HlsImageBasedTrickPlayVariant = @import("hls_image_based_trick_play_variant.zig").HlsImageBasedTrickPlayVariant;
 const HlsManifestCompression = @import("hls_manifest_compression.zig").HlsManifestCompression;
 const HlsManifestDurationFormat = @import("hls_manifest_duration_format.zig").HlsManifestDurationFormat;
 const HlsOutputSelection = @import("hls_output_selection.zig").HlsOutputSelection;
@@ -98,17 +99,25 @@ pub const HlsGroupSettings = struct {
     /// Specify whether MediaConvert generates images for trick play. Keep the
     /// default value, None, to not generate any images. Choose Thumbnail to
     /// generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled
-    /// thumbnails and full-resolution images of single frames. MediaConvert creates
-    /// a child manifest for each set of images that you generate and adds
-    /// corresponding entries to the parent manifest. A common application for these
-    /// images is Roku trick mode. The thumbnails and full-frame images that
-    /// MediaConvert creates with this feature are compatible with this Roku
-    /// specification:
+    /// thumbnails and full-resolution images of single frames. Choose Advanced to
+    /// customize thumbnail and tile settings for a single trick play variant.
+    /// Choose Variants to specify multiple trick play variants, each with its own
+    /// thumbnail and tile settings. MediaConvert creates a child manifest for each
+    /// set of images that you generate and adds corresponding entries to the parent
+    /// manifest. A common application for these images is Roku trick mode. The
+    /// thumbnails and full-frame images that MediaConvert creates with this feature
+    /// are compatible with this Roku specification:
     /// https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md
     image_based_trick_play: ?HlsImageBasedTrickPlay = null,
 
     /// Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
     image_based_trick_play_settings: ?HlsImageBasedTrickPlaySettings = null,
+
+    /// Specify multiple image-based trick play variants. Each entry creates a
+    /// separate set of JPEG tile images with its own resolution, tile layout, and
+    /// cadence settings. Set imageBasedTrickPlay to VARIANTS when using this
+    /// setting.
+    image_based_trick_play_variants: ?[]const HlsImageBasedTrickPlayVariant = null,
 
     /// When set to GZIP, compresses HLS playlist.
     manifest_compression: ?HlsManifestCompression = null,
@@ -244,6 +253,7 @@ pub const HlsGroupSettings = struct {
         .encryption = "Encryption",
         .image_based_trick_play = "ImageBasedTrickPlay",
         .image_based_trick_play_settings = "ImageBasedTrickPlaySettings",
+        .image_based_trick_play_variants = "ImageBasedTrickPlayVariants",
         .manifest_compression = "ManifestCompression",
         .manifest_duration_format = "ManifestDurationFormat",
         .min_final_segment_length = "MinFinalSegmentLength",

@@ -61,7 +61,7 @@ pub const UpdateChannelInput = struct {
     /// Channel type, which determines the allowable resolution and bitrate. *If you
     /// exceed the allowable input resolution or bitrate, the stream probably will
     /// disconnect immediately.* Default: `STANDARD`. For details, see [Channel
-    /// Types](https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html).
+    /// Types](https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html).
     @"type": ?ChannelType = null,
 
     pub const json_field_names = .{
@@ -211,10 +211,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateChannelInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateChannelOutput {
-    var result: UpdateChannelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateChannelOutput, body, allocator);
-    }
+    const result: UpdateChannelOutput = try aws.json.parseJsonObject(
+        UpdateChannelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

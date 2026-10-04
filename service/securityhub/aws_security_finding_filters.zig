@@ -340,9 +340,22 @@ pub const AwsSecurityFindingFilters = struct {
     /// The canonical identifier for the given resource type.
     resource_id: ?[]const StringFilter = null,
 
+    /// The unique identifier of the account that owns the resource that the finding
+    /// applies to, for example, Azure Subscription Id or Amazon Web Services
+    /// Account Id
+    resource_owner_account_id: ?[]const StringFilter = null,
+
+    /// The unique identifier of the organization that owns the resource that the
+    /// finding applies to, for example, Azure Tenant Id
+    resource_owner_org_id: ?[]const StringFilter = null,
+
     /// The canonical Amazon Web Services partition name that the Region is assigned
     /// to.
     resource_partition: ?[]const StringFilter = null,
+
+    /// The cloud provider that the resource belongs to. Valid values are `AWS` and
+    /// `Azure`.
+    resource_provider: ?[]const StringFilter = null,
 
     /// The canonical Amazon Web Services external Region name where this resource
     /// is located.
@@ -573,7 +586,10 @@ pub const AwsSecurityFindingFilters = struct {
         .resource_container_name = "ResourceContainerName",
         .resource_details_other = "ResourceDetailsOther",
         .resource_id = "ResourceId",
+        .resource_owner_account_id = "ResourceOwnerAccountId",
+        .resource_owner_org_id = "ResourceOwnerOrgId",
         .resource_partition = "ResourcePartition",
+        .resource_provider = "ResourceProvider",
         .resource_region = "ResourceRegion",
         .resource_tags = "ResourceTags",
         .resource_type = "ResourceType",

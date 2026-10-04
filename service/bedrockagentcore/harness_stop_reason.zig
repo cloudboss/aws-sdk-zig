@@ -15,6 +15,7 @@ pub const HarnessStopReason = enum {
     max_iterations_exceeded,
     max_output_tokens_exceeded,
     timeout_exceeded,
+    hook_stopped,
 
     pub const json_field_names = .{
         .end_turn = "end_turn",
@@ -31,6 +32,7 @@ pub const HarnessStopReason = enum {
         .max_iterations_exceeded = "max_iterations_exceeded",
         .max_output_tokens_exceeded = "max_output_tokens_exceeded",
         .timeout_exceeded = "timeout_exceeded",
+        .hook_stopped = "hook_stopped",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -49,6 +51,7 @@ pub const HarnessStopReason = enum {
             .max_iterations_exceeded => "max_iterations_exceeded",
             .max_output_tokens_exceeded => "max_output_tokens_exceeded",
             .timeout_exceeded => "timeout_exceeded",
+            .hook_stopped => "hook_stopped",
         };
     }
 

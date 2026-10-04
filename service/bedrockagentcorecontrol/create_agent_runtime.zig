@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AgentRuntimeArtifact = @import("agent_runtime_artifact.zig").AgentRuntimeArtifact;
 const AuthorizerConfiguration = @import("authorizer_configuration.zig").AuthorizerConfiguration;
+const CapacityProviderConfiguration = @import("capacity_provider_configuration.zig").CapacityProviderConfiguration;
 const FilesystemConfiguration = @import("filesystem_configuration.zig").FilesystemConfiguration;
 const LifecycleConfiguration = @import("lifecycle_configuration.zig").LifecycleConfiguration;
 const NetworkConfiguration = @import("network_configuration.zig").NetworkConfiguration;
@@ -23,6 +24,11 @@ pub const CreateAgentRuntimeInput = struct {
 
     /// The authorizer configuration for the AgentCore Runtime.
     authorizer_configuration: ?AuthorizerConfiguration = null,
+
+    /// The capacity provider configuration for the AgentCore Runtime. Use a
+    /// capacity provider to run the AgentCore Runtime on the Instances compute
+    /// type, which provisions Amazon Web Services managed compute in your account.
+    capacity_provider_configuration: ?CapacityProviderConfiguration = null,
 
     /// A unique, case-sensitive identifier to ensure idempotency of the request.
     client_token: ?[]const u8 = null,
@@ -42,7 +48,10 @@ pub const CreateAgentRuntimeInput = struct {
     lifecycle_configuration: ?LifecycleConfiguration = null,
 
     /// The network configuration for the AgentCore Runtime.
-    network_configuration: NetworkConfiguration,
+    network_configuration: ?NetworkConfiguration = null,
+
+    /// The version of the runtime platform to use for the AgentCore Runtime.
+    platform_version: ?[]const u8 = null,
 
     protocol_configuration: ?ProtocolConfiguration = null,
 
@@ -62,12 +71,14 @@ pub const CreateAgentRuntimeInput = struct {
         .agent_runtime_artifact = "agentRuntimeArtifact",
         .agent_runtime_name = "agentRuntimeName",
         .authorizer_configuration = "authorizerConfiguration",
+        .capacity_provider_configuration = "capacityProviderConfiguration",
         .client_token = "clientToken",
         .description = "description",
         .environment_variables = "environmentVariables",
         .filesystem_configurations = "filesystemConfigurations",
         .lifecycle_configuration = "lifecycleConfiguration",
         .network_configuration = "networkConfiguration",
+        .platform_version = "platformVersion",
         .protocol_configuration = "protocolConfiguration",
         .request_header_configuration = "requestHeaderConfiguration",
         .role_arn = "roleArn",
@@ -154,6 +165,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAgentRuntimeInput
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.capacity_provider_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"capacityProviderConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.client_token) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"clientToken\":");
@@ -184,10 +201,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAgentRuntimeInput
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"networkConfiguration\":");
-    try aws.json.writeValue(@TypeOf(input.network_configuration), input.network_configuration, allocator, &body_buf);
-    has_prev = true;
+    if (input.network_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"networkConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.platform_version) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"platformVersion\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.protocol_configuration) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"protocolConfiguration\":");
@@ -226,10 +251,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAgentRuntimeInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAgentRuntimeOutput {
-    var result: CreateAgentRuntimeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAgentRuntimeOutput, body, allocator);
-    }
+    const result: CreateAgentRuntimeOutput = try aws.json.parseJsonObject(
+        CreateAgentRuntimeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

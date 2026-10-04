@@ -120,10 +120,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListMicrosoftTeamsChann
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListMicrosoftTeamsChannelConfigurationsOutput {
-    var result: ListMicrosoftTeamsChannelConfigurationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListMicrosoftTeamsChannelConfigurationsOutput, body, allocator);
-    }
+    const result: ListMicrosoftTeamsChannelConfigurationsOutput = try aws.json.parseJsonObject(
+        ListMicrosoftTeamsChannelConfigurationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

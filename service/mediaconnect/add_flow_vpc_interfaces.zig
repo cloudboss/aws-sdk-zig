@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AddFlowVpcInterfacesInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AddFlowVpcInterfacesOutput {
-    var result: AddFlowVpcInterfacesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AddFlowVpcInterfacesOutput, body, allocator);
-    }
+    const result: AddFlowVpcInterfacesOutput = try aws.json.parseJsonObject(
+        AddFlowVpcInterfacesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

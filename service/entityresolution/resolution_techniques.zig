@@ -5,6 +5,11 @@ const RuleConditionProperties = @import("rule_condition_properties.zig").RuleCon
 
 /// An object which defines the `resolutionType` and the `ruleBasedProperties`.
 pub const ResolutionTechniques = struct {
+    /// Specifies whether real-time matching is enabled for the rule-based matching
+    /// workflow. When you enable real-time matching, you can use the
+    /// `GenerateMatchId` operation with the workflow.
+    enable_real_time_matching: ?bool = null,
+
     /// The properties of the provider service.
     provider_properties: ?ProviderProperties = null,
 
@@ -23,6 +28,7 @@ pub const ResolutionTechniques = struct {
     rule_condition_properties: ?RuleConditionProperties = null,
 
     pub const json_field_names = .{
+        .enable_real_time_matching = "enableRealTimeMatching",
         .provider_properties = "providerProperties",
         .resolution_type = "resolutionType",
         .rule_based_properties = "ruleBasedProperties",

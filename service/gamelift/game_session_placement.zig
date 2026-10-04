@@ -53,8 +53,9 @@ pub const GameSessionPlacement = struct {
     game_properties: ?[]const GameProperty = null,
 
     /// An identifier for the game session that is unique across all regions. The
-    /// value is always a full ARN in the following format:
-    /// `arn:aws:gamelift:::gamesession//`. This value is the same as
+    /// value is always a full ARN in the following format: For Home Region game
+    /// session - `arn:aws:gamelift:::gamesession//`. For Remote Location game
+    /// session - `arn:aws:gamelift:::gamesession///`. This value is the same as
     /// `GameSessionId`. This value isn't final until placement status is
     /// `FULFILLED`.
     game_session_arn: ?[]const u8 = null,
@@ -66,8 +67,9 @@ pub const GameSessionPlacement = struct {
     game_session_data: ?[]const u8 = null,
 
     /// An identifier for the game session that is unique across all regions. The
-    /// value is always a full ARN in the following format:
-    /// `arn:aws:gamelift:::gamesession//`. This value is the same as
+    /// value is always a full ARN in the following format: For Home Region game
+    /// session - `arn:aws:gamelift:::gamesession//`. For Remote Location game
+    /// session - `arn:aws:gamelift:::gamesession///`. This value is the same as
     /// `GameSessionArn`. This value isn't final until placement status is
     /// `FULFILLED`.
     game_session_id: ?[]const u8 = null,
@@ -134,8 +136,9 @@ pub const GameSessionPlacement = struct {
     player_gateway_status: ?PlayerGatewayStatus = null,
 
     /// A set of values, expressed in milliseconds, that indicates the amount of
-    /// latency that a player experiences when connected to Amazon Web Services
-    /// Regions.
+    /// latency that a player experiences when connected to a fleet location (Amazon
+    /// Web Services Regions or custom locations for Amazon GameLift Servers
+    /// Anywhere fleets).
     player_latencies: ?[]const PlayerLatency = null,
 
     /// The port number for the game session. To connect to a Amazon GameLift

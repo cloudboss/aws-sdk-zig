@@ -23,6 +23,9 @@ pub const ConnectionType = enum {
     workflows_mwaa,
     amazon_q,
     mlflow,
+    vpc,
+    /// A Git connection type.
+    git,
 
     pub const json_field_names = .{
         .athena = "ATHENA",
@@ -47,6 +50,8 @@ pub const ConnectionType = enum {
         .workflows_mwaa = "WORKFLOWS_MWAA",
         .amazon_q = "AMAZON_Q",
         .mlflow = "MLFLOW",
+        .vpc = "VPC",
+        .git = "GIT",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -73,6 +78,8 @@ pub const ConnectionType = enum {
             .workflows_mwaa => "WORKFLOWS_MWAA",
             .amazon_q => "AMAZON_Q",
             .mlflow => "MLFLOW",
+            .vpc => "VPC",
+            .git => "GIT",
         };
     }
 

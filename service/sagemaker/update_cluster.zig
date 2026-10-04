@@ -10,6 +10,7 @@ const ClusterNodeProvisioningMode = @import("cluster_node_provisioning_mode.zig"
 const ClusterNodeRecovery = @import("cluster_node_recovery.zig").ClusterNodeRecovery;
 const ClusterOrchestrator = @import("cluster_orchestrator.zig").ClusterOrchestrator;
 const ClusterRestrictedInstanceGroupSpecification = @import("cluster_restricted_instance_group_specification.zig").ClusterRestrictedInstanceGroupSpecification;
+const ClusterRestrictedInstanceGroupsConfig = @import("cluster_restricted_instance_groups_config.zig").ClusterRestrictedInstanceGroupsConfig;
 const ClusterTieredStorageConfig = @import("cluster_tiered_storage_config.zig").ClusterTieredStorageConfig;
 
 pub const UpdateClusterInput = struct {
@@ -49,6 +50,10 @@ pub const UpdateClusterInput = struct {
     /// created in the SageMaker HyperPod cluster.
     restricted_instance_groups: ?[]const ClusterRestrictedInstanceGroupSpecification = null,
 
+    /// The configuration for the restricted instance groups (RIG) in the SageMaker
+    /// HyperPod cluster.
+    restricted_instance_groups_config: ?ClusterRestrictedInstanceGroupsConfig = null,
+
     /// Updates the configuration for managed tier checkpointing on the HyperPod
     /// cluster. For example, you can enable or disable the feature and modify the
     /// percentage of cluster memory allocated for checkpoint storage.
@@ -64,6 +69,7 @@ pub const UpdateClusterInput = struct {
         .node_recovery = "NodeRecovery",
         .orchestrator = "Orchestrator",
         .restricted_instance_groups = "RestrictedInstanceGroups",
+        .restricted_instance_groups_config = "RestrictedInstanceGroupsConfig",
         .tiered_storage_config = "TieredStorageConfig",
     };
 };

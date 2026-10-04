@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const StandardsProvider = @import("standards_provider.zig").StandardsProvider;
 const Standard = @import("standard.zig").Standard;
 
 pub const DescribeStandardsInput = struct {
@@ -19,9 +20,14 @@ pub const DescribeStandardsInput = struct {
     /// parameter to the value returned from the previous response.
     next_token: ?[]const u8 = null,
 
+    /// A list of cloud providers to filter the standards by. For example, specify
+    /// `Azure` to return only standards that evaluate Azure resources.
+    providers: ?[]const StandardsProvider = null,
+
     pub const json_field_names = .{
         .max_results = "MaxResults",
         .next_token = "NextToken",
+        .providers = "Providers",
     };
 };
 
@@ -87,6 +93,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeStandardsInput,
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
+    if (input.providers) |v| {
+        for (v) |item| {
+            if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+            try query_buf.appendSlice(allocator, "Providers=");
+            try aws.url.appendUrlEncoded(allocator, &query_buf, item.wireName());
+            query_has_prev = true;
+        }
+    }
     const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
@@ -104,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeStandardsInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeStandardsOutput {
-    var result: DescribeStandardsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeStandardsOutput, body, allocator);
-    }
+    const result: DescribeStandardsOutput = try aws.json.parseJsonObject(
+        DescribeStandardsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -79,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSecurityControlDefin
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSecurityControlDefinitionOutput {
-    var result: GetSecurityControlDefinitionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSecurityControlDefinitionOutput, body, allocator);
-    }
+    const result: GetSecurityControlDefinitionOutput = try aws.json.parseJsonObject(
+        GetSecurityControlDefinitionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

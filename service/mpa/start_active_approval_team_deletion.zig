@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartActiveApprovalTeam
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartActiveApprovalTeamDeletionOutput {
-    var result: StartActiveApprovalTeamDeletionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartActiveApprovalTeamDeletionOutput, body, allocator);
-    }
+    const result: StartActiveApprovalTeamDeletionOutput = try aws.json.parseJsonObject(
+        StartActiveApprovalTeamDeletionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

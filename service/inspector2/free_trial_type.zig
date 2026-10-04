@@ -6,6 +6,9 @@ pub const FreeTrialType = enum {
     lambda,
     lambda_code,
     code_repository,
+    vm,
+    container_image,
+    serverless_function,
 
     pub const json_field_names = .{
         .ec2 = "EC2",
@@ -13,6 +16,9 @@ pub const FreeTrialType = enum {
         .lambda = "LAMBDA",
         .lambda_code = "LAMBDA_CODE",
         .code_repository = "CODE_REPOSITORY",
+        .vm = "VM",
+        .container_image = "CONTAINER_IMAGE",
+        .serverless_function = "SERVERLESS_FUNCTION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +28,9 @@ pub const FreeTrialType = enum {
             .lambda => "LAMBDA",
             .lambda_code => "LAMBDA_CODE",
             .code_repository => "CODE_REPOSITORY",
+            .vm => "VM",
+            .container_image => "CONTAINER_IMAGE",
+            .serverless_function => "SERVERLESS_FUNCTION",
         };
     }
 

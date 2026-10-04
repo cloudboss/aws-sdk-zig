@@ -17,6 +17,10 @@ pub const CreateTrustStoreInput = struct {
     name: []const u8,
 
     tags: ?Tags = null,
+
+    /// A Boolean that determines whether to use the CA certificate's OCSP endpoint
+    /// to check certificate revocation status.
+    use_client_certificate_ocsp_endpoint: ?bool = null,
 };
 
 pub const CreateTrustStoreOutput = struct {
@@ -68,6 +72,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTrustStoreInput, 
         try body_buf.appendSlice(allocator, "<Tags>");
         try serde.serializeTags(allocator, &body_buf, v);
         try body_buf.appendSlice(allocator, "</Tags>");
+    }
+    if (input.use_client_certificate_ocsp_endpoint) |v| {
+        try body_buf.appendSlice(allocator, "<UseClientCertificateOCSPEndpoint>");
+        try body_buf.appendSlice(allocator, if (v) "true" else "false");
+        try body_buf.appendSlice(allocator, "</UseClientCertificateOCSPEndpoint>");
     }
     try body_buf.appendSlice(allocator, "</CreateTrustStoreRequest>");
     const body = try body_buf.toOwnedSlice(allocator);

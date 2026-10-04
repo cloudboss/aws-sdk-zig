@@ -166,18 +166,19 @@ pub const Client = struct {
 
     /// Creates a rule for the specified listener. The listener must be associated
     /// with an
-    /// Application Load Balancer.
+    /// Application Load Balancer or a dual-stack Network Load Balancer.
     ///
-    /// Each rule consists of a priority, one or more actions, one or more
-    /// conditions, and
-    /// up to two optional transforms. Rules are evaluated in priority order, from
-    /// the lowest value
-    /// to the highest value. When the conditions for a rule are met, its actions
-    /// are performed.
-    /// If the conditions for no rules are met, the actions for the default rule are
-    /// performed.
-    /// For more information, see [Listener
-    /// rules](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules) in the *Application Load Balancers Guide*.
+    /// Each rule consists of a priority, one or more actions, and one or more
+    /// conditions. Rules
+    /// are evaluated in priority order, from the lowest value to the highest value.
+    /// When the
+    /// conditions for a rule are met, its actions are performed. If the conditions
+    /// for no rules are
+    /// met, the actions for the default rule are performed. For more information,
+    /// see [Listener
+    /// rules](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules) in the *Application Load Balancers Guide* or
+    /// [Listener
+    /// rules](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-listeners.html#listener-rules) in the *Network Load Balancers Guide*.
     pub fn createRule(self: *Self, allocator: std.mem.Allocator, input: create_rule.CreateRuleInput, options: CallOptions) !create_rule.CreateRuleOutput {
         return create_rule.execute(self, allocator, input, options);
     }

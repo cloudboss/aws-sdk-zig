@@ -1,6 +1,6 @@
 const CloudWatchOutputConfig = @import("cloud_watch_output_config.zig").CloudWatchOutputConfig;
 
-/// Output destination configuration
+/// Output destination configuration.
 pub const OutputConfig = union(enum) {
     /// The CloudWatch Logs configuration for writing evaluation results.
     cloud_watch_config: ?CloudWatchOutputConfig,

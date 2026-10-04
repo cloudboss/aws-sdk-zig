@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartCutoverInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartCutoverOutput {
-    var result: StartCutoverOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartCutoverOutput, body, allocator);
-    }
+    const result: StartCutoverOutput = try aws.json.parseJsonObject(
+        StartCutoverOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

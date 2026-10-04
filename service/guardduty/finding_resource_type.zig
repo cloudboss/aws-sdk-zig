@@ -17,6 +17,28 @@ pub const FindingResourceType = enum {
     ec2_launch_template,
     ec2_vpc,
     ec2_image,
+    /// An Amazon Bedrock custom model fine-tuned by the customer.
+    bedrock_custom_model,
+    /// An Amazon Bedrock imported model brought in from an external source.
+    bedrock_imported_model,
+    /// An Amazon Bedrock model with provisioned throughput.
+    bedrock_provisioned_model,
+    /// A deployment of an Amazon Bedrock custom model.
+    bedrock_custom_model_deployment,
+    /// An Amazon Bedrock inference profile that routes model invocations across
+    /// Regions.
+    bedrock_inference_profile,
+    /// An application-scoped Amazon Bedrock inference profile used to track
+    /// invocation usage.
+    bedrock_application_inference_profile,
+    /// A managed prompt stored in Amazon Bedrock Prompt Management.
+    bedrock_prompt,
+    /// An Amazon Bedrock prompt router that selects a model per request.
+    bedrock_prompt_router,
+    /// An Amazon Bedrock guardrail evaluated during a model invocation.
+    bedrock_guardrail,
+    /// An Amazon SageMaker inference endpoint.
+    sagemaker_endpoint,
 
     pub const json_field_names = .{
         .ec2_instance = "EC2_INSTANCE",
@@ -35,6 +57,16 @@ pub const FindingResourceType = enum {
         .ec2_launch_template = "EC2_LAUNCH_TEMPLATE",
         .ec2_vpc = "EC2_VPC",
         .ec2_image = "EC2_IMAGE",
+        .bedrock_custom_model = "BEDROCK_CUSTOM_MODEL",
+        .bedrock_imported_model = "BEDROCK_IMPORTED_MODEL",
+        .bedrock_provisioned_model = "BEDROCK_PROVISIONED_MODEL",
+        .bedrock_custom_model_deployment = "BEDROCK_CUSTOM_MODEL_DEPLOYMENT",
+        .bedrock_inference_profile = "BEDROCK_INFERENCE_PROFILE",
+        .bedrock_application_inference_profile = "BEDROCK_APPLICATION_INFERENCE_PROFILE",
+        .bedrock_prompt = "BEDROCK_PROMPT",
+        .bedrock_prompt_router = "BEDROCK_PROMPT_ROUTER",
+        .bedrock_guardrail = "BEDROCK_GUARDRAIL",
+        .sagemaker_endpoint = "SAGEMAKER_ENDPOINT",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -55,6 +87,16 @@ pub const FindingResourceType = enum {
             .ec2_launch_template => "EC2_LAUNCH_TEMPLATE",
             .ec2_vpc => "EC2_VPC",
             .ec2_image => "EC2_IMAGE",
+            .bedrock_custom_model => "BEDROCK_CUSTOM_MODEL",
+            .bedrock_imported_model => "BEDROCK_IMPORTED_MODEL",
+            .bedrock_provisioned_model => "BEDROCK_PROVISIONED_MODEL",
+            .bedrock_custom_model_deployment => "BEDROCK_CUSTOM_MODEL_DEPLOYMENT",
+            .bedrock_inference_profile => "BEDROCK_INFERENCE_PROFILE",
+            .bedrock_application_inference_profile => "BEDROCK_APPLICATION_INFERENCE_PROFILE",
+            .bedrock_prompt => "BEDROCK_PROMPT",
+            .bedrock_prompt_router => "BEDROCK_PROMPT_ROUTER",
+            .bedrock_guardrail => "BEDROCK_GUARDRAIL",
+            .sagemaker_endpoint => "SAGEMAKER_ENDPOINT",
         };
     }
 

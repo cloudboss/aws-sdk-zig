@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RollbackServiceSoftware
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RollbackServiceSoftwareUpdateOutput {
-    var result: RollbackServiceSoftwareUpdateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RollbackServiceSoftwareUpdateOutput, body, allocator);
-    }
+    const result: RollbackServiceSoftwareUpdateOutput = try aws.json.parseJsonObject(
+        RollbackServiceSoftwareUpdateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDataProtectionSettin
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDataProtectionSettingsOutput {
-    var result: GetDataProtectionSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDataProtectionSettingsOutput, body, allocator);
-    }
+    const result: GetDataProtectionSettingsOutput = try aws.json.parseJsonObject(
+        GetDataProtectionSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

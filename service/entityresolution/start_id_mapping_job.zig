@@ -132,10 +132,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartIdMappingJobInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartIdMappingJobOutput {
-    var result: StartIdMappingJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartIdMappingJobOutput, body, allocator);
-    }
+    const result: StartIdMappingJobOutput = try aws.json.parseJsonObject(
+        StartIdMappingJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

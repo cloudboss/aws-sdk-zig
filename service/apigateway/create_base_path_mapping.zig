@@ -121,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBasePathMappingIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateBasePathMappingOutput {
-    var result: CreateBasePathMappingOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateBasePathMappingOutput, body, allocator);
-    }
+    const result: CreateBasePathMappingOutput = try aws.json.parseJsonObject(
+        CreateBasePathMappingOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

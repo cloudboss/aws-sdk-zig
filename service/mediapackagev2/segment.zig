@@ -1,4 +1,5 @@
 const Encryption = @import("encryption.zig").Encryption;
+const OutputTimestampMode = @import("output_timestamp_mode.zig").OutputTimestampMode;
 const Scte = @import("scte.zig").Scte;
 
 /// The segment configuration, including the segment name, duration, and other
@@ -14,6 +15,19 @@ pub const Segment = struct {
     /// stream. This playlist permits player functionality like fast forward and
     /// rewind.
     include_iframe_only_streams: ?bool = null,
+
+    /// The output timestamp mode for the origin endpoint's segments. This setting
+    /// is only configurable on channels with `OutputLockingMode` set to
+    /// `NON_EPOCH_LOCKED`. This value is immutable after endpoint creation. If you
+    /// don't specify a value, the default is `PASSTHROUGH`.
+    ///
+    /// The allowed values are:
+    ///
+    /// * `PASSTHROUGH` - Output PTS (Presentation Timestamp) values pass through
+    ///   unchanged from the input.
+    /// * `REBASED_TO_CHANNEL_START` - Output PTS is rebased relative to the channel
+    ///   start time.
+    output_timestamp_mode: ?OutputTimestampMode = null,
 
     /// The SCTE configuration options in the segment settings.
     scte: ?Scte = null,
@@ -42,6 +56,7 @@ pub const Segment = struct {
     pub const json_field_names = .{
         .encryption = "Encryption",
         .include_iframe_only_streams = "IncludeIframeOnlyStreams",
+        .output_timestamp_mode = "OutputTimestampMode",
         .scte = "Scte",
         .segment_duration_seconds = "SegmentDurationSeconds",
         .segment_name = "SegmentName",

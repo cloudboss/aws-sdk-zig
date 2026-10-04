@@ -7,8 +7,12 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Distribution = @import("distribution.zig").Distribution;
 
 pub const CreateDistributionConfigurationInput = struct {
-    /// Unique, case-sensitive identifier you provide to ensure
-    /// idempotency of the request. For more information, see [Ensuring
+    /// A unique, case-sensitive identifier you provide to ensure
+    /// that the operation runs no more than one time. If you retry a request with
+    /// the same client
+    /// token, Image Builder returns the original response without running the
+    /// operation again. For more
+    /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
     /// in the *Amazon EC2 API Reference*.
     client_token: []const u8,
@@ -16,10 +20,23 @@ pub const CreateDistributionConfigurationInput = struct {
     /// The description of the distribution configuration.
     description: ?[]const u8 = null,
 
-    /// The distributions of the distribution configuration.
+    /// The distribution settings for the configuration. Each entry defines how
+    /// output images are distributed in one target Amazon Web Services Region. A
+    /// Region can
+    /// appear at most once in the list.
     distributions: []const Distribution,
 
-    /// The name of the distribution configuration.
+    /// Validates the required permissions and request parameters without performing
+    /// the operation. If validation succeeds, the operation returns a
+    /// `DryRunOperationException` error response.
+    dry_run: ?bool = null,
+
+    /// The name of the distribution configuration. Distribution configuration
+    /// names must be unique to your account in each Amazon Web Services Region.
+    /// Image Builder generates
+    /// the distribution configuration ARN from a normalized form of the name, so
+    /// names that differ only in case, spaces, or underscores count as the same
+    /// name.
     name: []const u8,
 
     /// The tags of the distribution configuration.
@@ -29,6 +46,7 @@ pub const CreateDistributionConfigurationInput = struct {
         .client_token = "clientToken",
         .description = "description",
         .distributions = "distributions",
+        .dry_run = "dryRun",
         .name = "name",
         .tags = "tags",
     };
@@ -103,6 +121,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDistributionConfi
     try body_buf.appendSlice(allocator, "\"distributions\":");
     try aws.json.writeValue(@TypeOf(input.distributions), input.distributions, allocator, &body_buf);
     has_prev = true;
+    if (input.dry_run) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"dryRun\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
@@ -129,10 +153,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDistributionConfi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDistributionConfigurationOutput {
-    var result: CreateDistributionConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateDistributionConfigurationOutput, body, allocator);
-    }
+    const result: CreateDistributionConfigurationOutput = try aws.json.parseJsonObject(
+        CreateDistributionConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

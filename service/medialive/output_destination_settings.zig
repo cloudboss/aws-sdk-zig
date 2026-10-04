@@ -12,10 +12,14 @@ pub const OutputDestinationSettings = struct {
     /// username for destination
     username: ?[]const u8 = null,
 
+    /// Specifies the source IP address for outbound multicast packets.
+    virtual_source_address: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .password_param = "PasswordParam",
         .stream_name = "StreamName",
         .url = "Url",
         .username = "Username",
+        .virtual_source_address = "VirtualSourceAddress",
     };
 };

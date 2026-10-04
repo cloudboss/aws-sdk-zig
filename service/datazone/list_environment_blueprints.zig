@@ -140,10 +140,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListEnvironmentBlueprin
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListEnvironmentBlueprintsOutput {
-    var result: ListEnvironmentBlueprintsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListEnvironmentBlueprintsOutput, body, allocator);
-    }
+    const result: ListEnvironmentBlueprintsOutput = try aws.json.parseJsonObject(
+        ListEnvironmentBlueprintsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

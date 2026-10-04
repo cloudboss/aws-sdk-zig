@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const continue_service_deployment = @import("continue_service_deployment.zig");
 const create_capacity_provider = @import("create_capacity_provider.zig");
 const create_cluster = @import("create_cluster.zig");
 const create_daemon = @import("create_daemon.zig");
@@ -106,6 +107,23 @@ pub const Client = struct {
 
     pub fn deinit(self: *Self) void {
         _ = self;
+    }
+
+    /// Continues or rolls back an Amazon ECS service deployment that is paused at a
+    /// lifecycle hook.
+    ///
+    /// When a service deployment reaches a lifecycle stage that has a `PAUSE` hook
+    /// configured, the deployment pauses and waits for an explicit action. Use this
+    /// API to either continue the deployment to the next stage or roll back to the
+    /// previous service revision.
+    ///
+    /// To find the `hookId` of the paused hook, call
+    /// [DescribeServiceDeployments](https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html) and inspect the `lifecycleHookDetails` field.
+    ///
+    /// For more information, see [Continuing Amazon ECS service
+    /// deployments](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/continue-service-deployment.html) in the *Amazon Elastic Container Service Developer Guide*.
+    pub fn continueServiceDeployment(self: *Self, allocator: std.mem.Allocator, input: continue_service_deployment.ContinueServiceDeploymentInput, options: CallOptions) !continue_service_deployment.ContinueServiceDeploymentOutput {
+        return continue_service_deployment.execute(self, allocator, input, options);
     }
 
     /// Creates a capacity provider. Capacity providers are associated with a

@@ -9,6 +9,13 @@ pub const AgentInfo = struct {
     /// The timestamp when the contact was accepted by the agent.
     accepted_by_agent_timestamp: ?i64 = null,
 
+    /// The Region where the agent was active when they handled the contact. For
+    /// Amazon Connect Global Resiliency
+    /// instances enabled for global routing, this indicates the Region in which the
+    /// agent's session was established
+    /// at the time of the contact.
+    active_region: ?[]const u8 = null,
+
     /// The difference in time, in whole seconds, between
     /// `AfterContactWorkStartTimestamp` and
     /// `AfterContactWorkEndTimestamp`.
@@ -60,6 +67,7 @@ pub const AgentInfo = struct {
 
     pub const json_field_names = .{
         .accepted_by_agent_timestamp = "AcceptedByAgentTimestamp",
+        .active_region = "ActiveRegion",
         .after_contact_work_duration = "AfterContactWorkDuration",
         .after_contact_work_end_timestamp = "AfterContactWorkEndTimestamp",
         .after_contact_work_start_timestamp = "AfterContactWorkStartTimestamp",

@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RetryWorkflowStepInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RetryWorkflowStepOutput {
-    var result: RetryWorkflowStepOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RetryWorkflowStepOutput, body, allocator);
-    }
+    const result: RetryWorkflowStepOutput = try aws.json.parseJsonObject(
+        RetryWorkflowStepOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -10,6 +10,7 @@ const LocalSecondaryIndex = @import("local_secondary_index.zig").LocalSecondaryI
 const OnDemandThroughput = @import("on_demand_throughput.zig").OnDemandThroughput;
 const ProvisionedThroughput = @import("provisioned_throughput.zig").ProvisionedThroughput;
 const SSESpecification = @import("sse_specification.zig").SSESpecification;
+const VectorIndex = @import("vector_index.zig").VectorIndex;
 const TableDescription = @import("table_description.zig").TableDescription;
 
 pub const RestoreTableToPointInTimeInput = struct {
@@ -21,6 +22,12 @@ pub const RestoreTableToPointInTimeInput = struct {
     /// match existing secondary indexes. You can choose to exclude some or all of
     /// the indexes
     /// at the time of restore.
+    ///
+    /// The `WarmThroughput` setting is not supported on global secondary indexes
+    /// when you use `RestoreTableToPointInTime`. Although `WarmThroughput`
+    /// appears in the shared index definition, including it in a
+    /// `GlobalSecondaryIndexOverride` entry causes the request to fail with a
+    /// validation error.
     global_secondary_index_override: ?[]const GlobalSecondaryIndex = null,
 
     /// List of local secondary indexes for the restored table. The indexes provided
@@ -56,6 +63,14 @@ pub const RestoreTableToPointInTimeInput = struct {
     /// is typically 5 minutes before the current time.
     use_latest_restorable_time: ?bool = null,
 
+    /// The vector indexes for the restored table. If not specified, all vector
+    /// indexes
+    /// from the source table are restored. The indexes provided must match existing
+    /// vector indexes from the source table. You can choose to exclude some or all
+    /// of
+    /// the vector indexes at the time of restore.
+    vector_index_override: ?[]const VectorIndex = null,
+
     pub const json_field_names = .{
         .billing_mode_override = "BillingModeOverride",
         .global_secondary_index_override = "GlobalSecondaryIndexOverride",
@@ -68,6 +83,7 @@ pub const RestoreTableToPointInTimeInput = struct {
         .sse_specification_override = "SSESpecificationOverride",
         .target_table_name = "TargetTableName",
         .use_latest_restorable_time = "UseLatestRestorableTime",
+        .vector_index_override = "VectorIndexOverride",
     };
 };
 

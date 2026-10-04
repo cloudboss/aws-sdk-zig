@@ -94,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteKeyInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteKeyOutput {
-    var result: DeleteKeyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteKeyOutput, body, allocator);
-    }
+    var result: DeleteKeyOutput = try aws.json.parseJsonObject(
+        DeleteKeyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("etag")) |value| {
         result.e_tag = try allocator.dupe(u8, value);

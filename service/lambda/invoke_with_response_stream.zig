@@ -90,6 +90,7 @@ pub const InvokeWithResponseStreamOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeWithResponseStreamInput, options: CallOptions) !InvokeWithResponseStreamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -98,8 +99,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeWithR
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "lambda", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -111,11 +110,9 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvokeWithR
         return error.ServiceError;
     }
 
-    stream_resp.deinitHeaders();
-    errdefer stream_resp.body.deinit();
-
-    const event_stream = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
-    return .{ .event_stream = event_stream };
+    errdefer stream_resp.deinit();
+    const result = try deserializeStreamingResponse(allocator, &stream_resp);
+    return result;
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: InvokeWithResponseStreamInput, config: *aws.Config) !aws.http.Request {
@@ -163,4 +160,26 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeWithResponseStrea
     }
 
     return request;
+}
+
+fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !InvokeWithResponseStreamOutput {
+    var result: InvokeWithResponseStreamOutput = .{};
+    errdefer {
+        if (result.executed_version) |value| allocator.free(value);
+        if (result.response_stream_content_type) |value| allocator.free(value);
+    }
+    result.status_code = @intCast(stream_resp.status);
+    if (stream_resp.headers.get("x-amz-executed-version")) |value| {
+        result.executed_version = try allocator.dupe(u8, value);
+    }
+    if (stream_resp.headers.get("content-type")) |value| {
+        result.response_stream_content_type = try allocator.dupe(u8, value);
+    }
+    result.event_stream = try aws.event_stream_reader.EventStreamReader.init(
+        allocator,
+        stream_resp.body,
+    );
+    stream_resp.deinitHeaders();
+
+    return result;
 }

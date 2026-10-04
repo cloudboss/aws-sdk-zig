@@ -1,14 +1,23 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const create_compliance_inquiry = @import("create_compliance_inquiry.zig");
+const export_compliance_inquiry = @import("export_compliance_inquiry.zig");
 const get_account_settings = @import("get_account_settings.zig");
+const get_compliance_inquiry_metadata = @import("get_compliance_inquiry_metadata.zig");
 const get_report = @import("get_report.zig");
 const get_report_metadata = @import("get_report_metadata.zig");
 const get_term_for_report = @import("get_term_for_report.zig");
+const list_compliance_inquiries = @import("list_compliance_inquiries.zig");
+const list_compliance_inquiry_queries = @import("list_compliance_inquiry_queries.zig");
 const list_customer_agreements = @import("list_customer_agreements.zig");
 const list_report_versions = @import("list_report_versions.zig");
 const list_reports = @import("list_reports.zig");
+const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const put_account_settings = @import("put_account_settings.zig");
+const put_compliance_inquiry_feedback = @import("put_compliance_inquiry_feedback.zig");
+const tag_resource = @import("tag_resource.zig");
+const untag_resource = @import("untag_resource.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
 
@@ -39,9 +48,24 @@ pub const Client = struct {
         _ = self;
     }
 
+    /// Create a new compliance inquiry.
+    pub fn createComplianceInquiry(self: *Self, allocator: std.mem.Allocator, input: create_compliance_inquiry.CreateComplianceInquiryInput, options: CallOptions) !create_compliance_inquiry.CreateComplianceInquiryOutput {
+        return create_compliance_inquiry.execute(self, allocator, input, options);
+    }
+
+    /// Export a compliance inquiry report.
+    pub fn exportComplianceInquiry(self: *Self, allocator: std.mem.Allocator, input: export_compliance_inquiry.ExportComplianceInquiryInput, options: CallOptions) !export_compliance_inquiry.ExportComplianceInquiryOutput {
+        return export_compliance_inquiry.execute(self, allocator, input, options);
+    }
+
     /// Get the account settings for Artifact.
     pub fn getAccountSettings(self: *Self, allocator: std.mem.Allocator, input: get_account_settings.GetAccountSettingsInput, options: CallOptions) !get_account_settings.GetAccountSettingsOutput {
         return get_account_settings.execute(self, allocator, input, options);
+    }
+
+    /// Get the metadata for a single compliance inquiry.
+    pub fn getComplianceInquiryMetadata(self: *Self, allocator: std.mem.Allocator, input: get_compliance_inquiry_metadata.GetComplianceInquiryMetadataInput, options: CallOptions) !get_compliance_inquiry_metadata.GetComplianceInquiryMetadataOutput {
+        return get_compliance_inquiry_metadata.execute(self, allocator, input, options);
     }
 
     /// Get the content for a single report.
@@ -59,6 +83,16 @@ pub const Client = struct {
         return get_term_for_report.execute(self, allocator, input, options);
     }
 
+    /// List available compliance inquiries.
+    pub fn listComplianceInquiries(self: *Self, allocator: std.mem.Allocator, input: list_compliance_inquiries.ListComplianceInquiriesInput, options: CallOptions) !list_compliance_inquiries.ListComplianceInquiriesOutput {
+        return list_compliance_inquiries.execute(self, allocator, input, options);
+    }
+
+    /// List queries within a compliance inquiry.
+    pub fn listComplianceInquiryQueries(self: *Self, allocator: std.mem.Allocator, input: list_compliance_inquiry_queries.ListComplianceInquiryQueriesInput, options: CallOptions) !list_compliance_inquiry_queries.ListComplianceInquiryQueriesOutput {
+        return list_compliance_inquiry_queries.execute(self, allocator, input, options);
+    }
+
     /// List active customer-agreements applicable to calling identity.
     pub fn listCustomerAgreements(self: *Self, allocator: std.mem.Allocator, input: list_customer_agreements.ListCustomerAgreementsInput, options: CallOptions) !list_customer_agreements.ListCustomerAgreementsOutput {
         return list_customer_agreements.execute(self, allocator, input, options);
@@ -74,9 +108,43 @@ pub const Client = struct {
         return list_reports.execute(self, allocator, input, options);
     }
 
+    /// List tags for a resource.
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
+        return list_tags_for_resource.execute(self, allocator, input, options);
+    }
+
     /// Put the account settings for Artifact.
     pub fn putAccountSettings(self: *Self, allocator: std.mem.Allocator, input: put_account_settings.PutAccountSettingsInput, options: CallOptions) !put_account_settings.PutAccountSettingsOutput {
         return put_account_settings.execute(self, allocator, input, options);
+    }
+
+    /// Submits feedback on a compliance inquiry response.
+    pub fn putComplianceInquiryFeedback(self: *Self, allocator: std.mem.Allocator, input: put_compliance_inquiry_feedback.PutComplianceInquiryFeedbackInput, options: CallOptions) !put_compliance_inquiry_feedback.PutComplianceInquiryFeedbackOutput {
+        return put_compliance_inquiry_feedback.execute(self, allocator, input, options);
+    }
+
+    /// Add tags to a resource.
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
+        return tag_resource.execute(self, allocator, input, options);
+    }
+
+    /// Remove tags from a resource.
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
+        return untag_resource.execute(self, allocator, input, options);
+    }
+
+    pub fn listComplianceInquiriesPaginator(self: *Self, params: list_compliance_inquiries.ListComplianceInquiriesInput) paginator.ListComplianceInquiriesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listComplianceInquiryQueriesPaginator(self: *Self, params: list_compliance_inquiry_queries.ListComplianceInquiryQueriesInput) paginator.ListComplianceInquiryQueriesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
     }
 
     pub fn listCustomerAgreementsPaginator(self: *Self, params: list_customer_agreements.ListCustomerAgreementsInput) paginator.ListCustomerAgreementsPaginator {

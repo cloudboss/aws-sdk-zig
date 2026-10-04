@@ -2,6 +2,8 @@ const AutomaticFailoverStatus = @import("automatic_failover_status.zig").Automat
 const ClusterMode = @import("cluster_mode.zig").ClusterMode;
 const Endpoint = @import("endpoint.zig").Endpoint;
 const DataTieringStatus = @import("data_tiering_status.zig").DataTieringStatus;
+const Durability = @import("durability.zig").Durability;
+const EffectiveDurability = @import("effective_durability.zig").EffectiveDurability;
 const GlobalReplicationGroupInfo = @import("global_replication_group_info.zig").GlobalReplicationGroupInfo;
 const IpDiscovery = @import("ip_discovery.zig").IpDiscovery;
 const LogDeliveryConfiguration = @import("log_delivery_configuration.zig").LogDeliveryConfiguration;
@@ -9,6 +11,7 @@ const MultiAZStatus = @import("multi_az_status.zig").MultiAZStatus;
 const NetworkType = @import("network_type.zig").NetworkType;
 const NodeGroup = @import("node_group.zig").NodeGroup;
 const ReplicationGroupPendingModifiedValues = @import("replication_group_pending_modified_values.zig").ReplicationGroupPendingModifiedValues;
+const StorageEncryptionType = @import("storage_encryption_type.zig").StorageEncryptionType;
 const TransitEncryptionMode = @import("transit_encryption_mode.zig").TransitEncryptionMode;
 
 /// Contains all of the attributes of a specific Valkey or Redis OSS replication
@@ -17,18 +20,16 @@ pub const ReplicationGroup = struct {
     /// The ARN (Amazon Resource Name) of the replication group.
     arn: ?[]const u8 = null,
 
-    /// A flag that enables encryption at-rest when set to `true`.
-    ///
-    /// You cannot modify the value of `AtRestEncryptionEnabled` after the cluster
-    /// is created. To enable encryption at-rest on a cluster you must set
-    /// `AtRestEncryptionEnabled` to `true` when you create a
+    /// A flag that enables encryption at-rest on the cluster when set to `true`.
+    /// In some cases, encryption at-rest may be enabled even when this value is
+    /// false.
+    /// Use `StorageEncryptionType` to view the effective encryption state of a
     /// cluster.
     ///
-    /// **Required:** Only available when creating a replication
-    /// group in an Amazon VPC using Redis OSS version `3.2.6`, `4.x` or
-    /// later.
+    /// You cannot modify the value of `AtRestEncryptionEnabled` after the cluster
+    /// is created.
     ///
-    /// Default: `false`
+    /// Default: `true` when using Valkey, `false` when using Redis OSS
     at_rest_encryption_enabled: ?bool = null,
 
     /// A flag that enables using an `AuthToken` (password) when issuing Valkey or
@@ -91,6 +92,20 @@ pub const ReplicationGroup = struct {
 
     /// The user supplied description of the replication group.
     description: ?[]const u8 = null,
+
+    /// The durability setting of the replication group. For more information, see
+    /// [Durability](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html).
+    durability: ?Durability = null,
+
+    /// The effective durability of the replication group. When `Durability` is set
+    /// to
+    /// `default`, the service resolves the actual durability based on the engine
+    /// version,
+    /// cluster mode, and other parameters. This field reflects the resolved value.
+    /// For more
+    /// information, see [Configuring
+    /// Durability](https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.Configuring.html).
+    effective_durability: ?EffectiveDurability = null,
 
     /// The engine used in a replication group. The options are valkey, memcached or
     /// redis.
@@ -182,6 +197,13 @@ pub const ReplicationGroup = struct {
     /// `available`, `modifying`, `deleting`,
     /// `create-failed`, `snapshotting`.
     status: ?[]const u8 = null,
+
+    /// Indicates the type of encryption for data stored at rest in the replication
+    /// group.
+    /// The value is `none` if at-rest encryption is not enabled,
+    /// `sse-elasticache` if an ElastiCache service-managed key is used, or
+    /// `sse-kms` if a customer-managed KMS key is used.
+    storage_encryption_type: ?StorageEncryptionType = null,
 
     /// A flag that enables in-transit encryption when set to `true`.
     ///

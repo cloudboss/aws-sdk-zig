@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateUserSettingsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateUserSettingsOutput {
-    var result: AssociateUserSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateUserSettingsOutput, body, allocator);
-    }
+    const result: AssociateUserSettingsOutput = try aws.json.parseJsonObject(
+        AssociateUserSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

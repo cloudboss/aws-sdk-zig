@@ -150,6 +150,16 @@ pub const DkimSigningAttributes = struct {
     /// * `AWS_SES_US_WEST_2` – Configure DKIM for the identity by replicating from
     ///   a parent
     /// identity in US West (Oregon) region using Deterministic Easy-DKIM (DEED).
+    ///
+    /// * `AWS_SES_US_GOV_EAST_1` – Configure DKIM for the identity by replicating
+    ///   from a parent
+    /// identity in AWS GovCloud (US-East) region using Deterministic Easy-DKIM
+    /// (DEED).
+    ///
+    /// * `AWS_SES_US_GOV_WEST_1` – Configure DKIM for the identity by replicating
+    ///   from a parent
+    /// identity in AWS GovCloud (US-West) region using Deterministic Easy-DKIM
+    /// (DEED).
     domain_signing_attributes_origin: ?DkimSigningAttributesOrigin = null,
 
     /// [Bring Your Own DKIM] A private key that's used to generate a DKIM

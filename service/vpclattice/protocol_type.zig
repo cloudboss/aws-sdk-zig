@@ -3,14 +3,18 @@ const std = @import("std");
 pub const ProtocolType = enum {
     /// Resource Configuration protocol type TCP
     tcp,
+    /// Resource Configuration protocol type TCP_UDP
+    tcp_udp,
 
     pub const json_field_names = .{
         .tcp = "TCP",
+        .tcp_udp = "TCP_UDP",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .tcp => "TCP",
+            .tcp_udp => "TCP_UDP",
         };
     }
 

@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ClusterConfiguration = @import("cluster_configuration.zig").ClusterConfiguration;
+const DbBackupConfigurationOutput = @import("db_backup_configuration_output.zig").DbBackupConfigurationOutput;
 const DbInstanceType = @import("db_instance_type.zig").DbInstanceType;
 const DbStorageType = @import("db_storage_type.zig").DbStorageType;
 const ClusterDeploymentType = @import("cluster_deployment_type.zig").ClusterDeploymentType;
@@ -34,6 +35,9 @@ pub const GetDbClusterOutput = struct {
     /// Configuration for node modes in the DbCluster.
     cluster_configuration: ?ClusterConfiguration = null,
 
+    /// The backup configurations for the DB cluster.
+    db_backup_configurations: ?[]const DbBackupConfigurationOutput = null,
+
     /// The Timestream for InfluxDB instance type that InfluxDB runs on.
     db_instance_type: ?DbInstanceType = null,
 
@@ -45,6 +49,14 @@ pub const GetDbClusterOutput = struct {
 
     /// Deployment type of the DB cluster.
     deployment_type: ?ClusterDeploymentType = null,
+
+    /// The ID of the DB parameter group actually applied to your DB cluster. When
+    /// the service applies optimized defaults, it creates a service-managed DB
+    /// parameter group and this field reflects that group, while
+    /// dbParameterGroupIdentifier reflects the customer-provided DB parameter
+    /// group. When no service-managed DB parameter group is applied, this value
+    /// matches dbParameterGroupIdentifier.
+    effective_db_parameter_group_identifier: ?[]const u8 = null,
 
     /// The endpoint used to connect to the Timestream for InfluxDB cluster for
     /// write and read operations.
@@ -64,6 +76,9 @@ pub const GetDbClusterOutput = struct {
     /// formatted key-value pair holding InfluxDB authorization values:
     /// organization, bucket, username, and password.
     influx_auth_parameters_secret_arn: ?[]const u8 = null,
+
+    /// The Amazon Web Services KMS key ARN used for encryption of the DB cluster.
+    kms_key_id: ?[]const u8 = null,
 
     /// The timestamp of the last completed maintenance operation on the DB cluster.
     last_maintenance_time: ?i64 = null,
@@ -110,15 +125,18 @@ pub const GetDbClusterOutput = struct {
         .allocated_storage = "allocatedStorage",
         .arn = "arn",
         .cluster_configuration = "clusterConfiguration",
+        .db_backup_configurations = "dbBackupConfigurations",
         .db_instance_type = "dbInstanceType",
         .db_parameter_group_identifier = "dbParameterGroupIdentifier",
         .db_storage_type = "dbStorageType",
         .deployment_type = "deploymentType",
+        .effective_db_parameter_group_identifier = "effectiveDbParameterGroupIdentifier",
         .endpoint = "endpoint",
         .engine_type = "engineType",
         .failover_mode = "failoverMode",
         .id = "id",
         .influx_auth_parameters_secret_arn = "influxAuthParametersSecretArn",
+        .kms_key_id = "kmsKeyId",
         .last_maintenance_time = "lastMaintenanceTime",
         .log_delivery_configuration = "logDeliveryConfiguration",
         .maintenance_schedule = "maintenanceSchedule",

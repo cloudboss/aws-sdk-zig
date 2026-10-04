@@ -65,10 +65,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCustomEndpointInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCustomEndpointOutput {
-    var result: GetCustomEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCustomEndpointOutput, body, allocator);
-    }
+    const result: GetCustomEndpointOutput = try aws.json.parseJsonObject(
+        GetCustomEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

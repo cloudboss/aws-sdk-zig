@@ -29,6 +29,14 @@ pub const JobSummary = struct {
     /// entered the `PENDING` state.
     created_at: ?i64 = null,
 
+    /// Indicates whether a cancellation request has been accepted for the job. This
+    /// field is only present when the value is `true`.
+    is_cancelled: ?bool = null,
+
+    /// Indicates whether a termination request has been accepted for the job. This
+    /// field is only present when the value is `true`.
+    is_terminated: ?bool = null,
+
     /// The Amazon Resource Name (ARN) of the job.
     job_arn: ?[]const u8 = null,
 
@@ -79,6 +87,8 @@ pub const JobSummary = struct {
         .capacity_usage = "capacityUsage",
         .container = "container",
         .created_at = "createdAt",
+        .is_cancelled = "isCancelled",
+        .is_terminated = "isTerminated",
         .job_arn = "jobArn",
         .job_definition = "jobDefinition",
         .job_id = "jobId",

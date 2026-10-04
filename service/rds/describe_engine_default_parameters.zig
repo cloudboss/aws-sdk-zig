@@ -23,6 +23,7 @@ pub const DescribeEngineDefaultParametersInput = struct {
     /// * `custom-oracle-ee-19`
     /// * `custom-oracle-ee-cdb-19`
     /// * `db2-ae`
+    /// * `db2-ce`
     /// * `db2-se`
     /// * `mariadb10.2`
     /// * `mariadb10.3`

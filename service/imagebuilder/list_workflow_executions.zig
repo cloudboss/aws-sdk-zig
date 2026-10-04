@@ -11,10 +11,10 @@ pub const ListWorkflowExecutionsInput = struct {
     /// resource ARN.
     image_build_version_arn: []const u8,
 
-    /// Specify the maximum number of items to return in a request.
+    /// The maximum number of items to return in a single request.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
@@ -31,7 +31,9 @@ pub const ListWorkflowExecutionsOutput = struct {
     /// workflow runtime details.
     image_build_version_arn: ?[]const u8 = null,
 
-    /// The output message from the list action, if applicable.
+    /// The failure reason for the image build version, if it's in a failed state.
+    /// This comes from the image itself, not from an individual workflow, so it's
+    /// available even when no workflow executions remain for the image.
     message: ?[]const u8 = null,
 
     /// The next token used for paginated responses. When this field isn't empty,
@@ -43,9 +45,11 @@ pub const ListWorkflowExecutionsOutput = struct {
     /// The request ID that uniquely identifies this request.
     request_id: ?[]const u8 = null,
 
-    /// Contains an array of runtime details that represents each time a workflow
-    /// ran for
-    /// the requested image build version.
+    /// An array of runtime details that represents each time a workflow ran for
+    /// the requested image build version. Image Builder retains workflow execution
+    /// records
+    /// for a limited time, so this array can be empty for older image build
+    /// versions.
     workflow_executions: ?[]const WorkflowExecutionMetadata = null,
 
     pub const json_field_names = .{
@@ -125,10 +129,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListWorkflowExecutionsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListWorkflowExecutionsOutput {
-    var result: ListWorkflowExecutionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListWorkflowExecutionsOutput, body, allocator);
-    }
+    const result: ListWorkflowExecutionsOutput = try aws.json.parseJsonObject(
+        ListWorkflowExecutionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

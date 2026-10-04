@@ -121,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTemplateGroupAccess
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListTemplateGroupAccessControlEntriesOutput {
-    var result: ListTemplateGroupAccessControlEntriesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListTemplateGroupAccessControlEntriesOutput, body, allocator);
-    }
+    const result: ListTemplateGroupAccessControlEntriesOutput = try aws.json.parseJsonObject(
+        ListTemplateGroupAccessControlEntriesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

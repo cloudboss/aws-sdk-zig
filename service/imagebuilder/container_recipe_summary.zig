@@ -3,7 +3,7 @@ const aws = @import("aws");
 const ContainerType = @import("container_type.zig").ContainerType;
 const Platform = @import("platform.zig").Platform;
 
-/// A summary of a container recipe
+/// A summary of a container recipe.
 pub const ContainerRecipeSummary = struct {
     /// The Amazon Resource Name (ARN) of the container recipe.
     arn: ?[]const u8 = null,
@@ -33,7 +33,8 @@ pub const ContainerRecipeSummary = struct {
     /// The base image for the container recipe.
     parent_image: ?[]const u8 = null,
 
-    /// The system platform for the container, such as Windows or Linux.
+    /// The system platform for the container. Container recipes support only the
+    /// Linux and Windows platforms.
     platform: ?Platform = null,
 
     /// Tags that are attached to the container recipe.

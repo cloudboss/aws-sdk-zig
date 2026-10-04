@@ -9,6 +9,7 @@ pub const ReplicationConfigurationReplicatedDiskStagingDiskType = enum {
     standard,
     gp3,
     io2,
+    fsx_ontap,
 
     pub const json_field_names = .{
         .auto = "AUTO",
@@ -19,6 +20,7 @@ pub const ReplicationConfigurationReplicatedDiskStagingDiskType = enum {
         .standard = "STANDARD",
         .gp3 = "GP3",
         .io2 = "IO2",
+        .fsx_ontap = "FSX_ONTAP",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -31,6 +33,7 @@ pub const ReplicationConfigurationReplicatedDiskStagingDiskType = enum {
             .standard => "STANDARD",
             .gp3 => "GP3",
             .io2 => "IO2",
+            .fsx_ontap => "FSX_ONTAP",
         };
     }
 

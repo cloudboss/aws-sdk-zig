@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const UpdateSchedulerRequest = @import("update_scheduler_request.zig").UpdateSchedulerRequest;
 const UpdateClusterSlurmConfigurationRequest = @import("update_cluster_slurm_configuration_request.zig").UpdateClusterSlurmConfigurationRequest;
 const Cluster = @import("cluster.zig").Cluster;
 
@@ -20,12 +21,19 @@ pub const UpdateClusterInput = struct {
     /// The name or ID of the cluster to update.
     cluster_identifier: []const u8,
 
+    /// The scheduler configuration to update for the cluster. Use this to update
+    /// the scheduler version. For more information, see [Updating the scheduler
+    /// version on a
+    /// cluster](https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html) in the *PCS User Guide*.
+    scheduler: ?UpdateSchedulerRequest = null,
+
     /// Additional options related to the Slurm scheduler.
     slurm_configuration: ?UpdateClusterSlurmConfigurationRequest = null,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
         .cluster_identifier = "clusterIdentifier",
+        .scheduler = "scheduler",
         .slurm_configuration = "slurmConfiguration",
     };
 };

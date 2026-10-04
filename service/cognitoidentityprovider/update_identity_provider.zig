@@ -7,6 +7,18 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const IdentityProviderType = @import("identity_provider_type.zig").IdentityProviderType;
 
 pub const UpdateIdentityProviderInput = struct {
+    /// A mapping between the authentication context class reference (ACR) levels of
+    /// your user
+    /// pool and the ACR values of the external OpenID Connect (OIDC) identity
+    /// provider (IdP).
+    /// This mapping has the same behavior as it does when you create an identity
+    /// provider. Only
+    /// OIDC IdPs support ACR mapping.
+    ///
+    /// Setting `AcrMapping` is available in all feature plans. It isn't restricted
+    /// to the Essentials or Plus feature plan.
+    acr_mapping: ?[]const aws.map.StringMapEntry = null,
+
     /// A mapping of IdP attributes to standard and custom user pool attributes.
     /// Specify a
     /// user pool attribute as the key of the key-value pair, and the IdP attribute
@@ -162,6 +174,7 @@ pub const UpdateIdentityProviderInput = struct {
     user_pool_id: []const u8,
 
     pub const json_field_names = .{
+        .acr_mapping = "AcrMapping",
         .attribute_mapping = "AttributeMapping",
         .idp_identifiers = "IdpIdentifiers",
         .provider_details = "ProviderDetails",

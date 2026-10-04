@@ -4,6 +4,7 @@ const ForceEndpointErrorConfiguration = @import("force_endpoint_error_configurat
 const ListHlsManifestConfiguration = @import("list_hls_manifest_configuration.zig").ListHlsManifestConfiguration;
 const ListLowLatencyHlsManifestConfiguration = @import("list_low_latency_hls_manifest_configuration.zig").ListLowLatencyHlsManifestConfiguration;
 const ListMssManifestConfiguration = @import("list_mss_manifest_configuration.zig").ListMssManifestConfiguration;
+const StreamNameOutputMode = @import("stream_name_output_mode.zig").StreamNameOutputMode;
 const UriSeparator = @import("uri_separator.zig").UriSeparator;
 
 /// The configuration of the origin endpoint.
@@ -58,6 +59,10 @@ pub const OriginEndpointListConfiguration = struct {
     /// in the AWS Region and channel.
     origin_endpoint_name: []const u8,
 
+    /// The output mode for stream names in egress manifests for this origin
+    /// endpoint.
+    stream_name_output_mode: ?StreamNameOutputMode = null,
+
     /// The separator character used in generated URIs for this origin endpoint.
     uri_separator: ?UriSeparator = null,
 
@@ -75,6 +80,7 @@ pub const OriginEndpointListConfiguration = struct {
         .modified_at = "ModifiedAt",
         .mss_manifests = "MssManifests",
         .origin_endpoint_name = "OriginEndpointName",
+        .stream_name_output_mode = "StreamNameOutputMode",
         .uri_separator = "UriSeparator",
     };
 };

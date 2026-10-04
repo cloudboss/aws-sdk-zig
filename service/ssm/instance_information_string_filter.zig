@@ -4,7 +4,7 @@ pub const InstanceInformationStringFilter = struct {
     ///
     /// Valid filter key values: ActivationIds | AgentVersion | AssociationStatus |
     /// IamRole |
-    /// InstanceIds | PingStatus | PlatformType | ResourceType | SourceIds |
+    /// InstanceIds | PingStatus | PlatformTypes | ResourceType | SourceIds |
     /// SourceTypes | "tag-key" |
     /// "tag:`{keyname}`
     ///
@@ -14,13 +14,14 @@ pub const InstanceInformationStringFilter = struct {
     /// * Valid values for the `PingStatus` filter key: Online | ConnectionLost |
     /// Inactive (deprecated)
     ///
-    /// * Valid values for the `PlatformType` filter key: Windows | Linux | MacOS
+    /// * Valid values for the `PlatformTypes` filter key: Windows | Linux | MacOS
     ///
     /// * Valid values for the `ResourceType` filter key: EC2Instance |
     /// ManagedInstance
     ///
     /// * Valid values for the `SourceType` filter key: AWS::EC2::Instance |
-    /// AWS::SSM::ManagedInstance | AWS::IoT::Thing
+    /// AWS::SSM::ManagedInstance | AWS::IoT::Thing |
+    /// Microsoft.Compute/virtualMachines
     ///
     /// * Valid tag examples: `Key=tag-key,Values=Purpose` |
     /// `Key=tag:Purpose,Values=Test`.

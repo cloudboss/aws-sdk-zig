@@ -113,10 +113,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListThemesInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListThemesOutput {
-    var result: ListThemesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListThemesOutput, body, allocator);
-    }
+    const result: ListThemesOutput = try aws.json.parseJsonObject(
+        ListThemesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

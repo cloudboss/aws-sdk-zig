@@ -1,6 +1,7 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const associate_glossary_terms = @import("associate_glossary_terms.zig");
 const batch_create_partition = @import("batch_create_partition.zig");
 const batch_delete_connection = @import("batch_delete_connection.zig");
 const batch_delete_partition = @import("batch_delete_partition.zig");
@@ -10,7 +11,9 @@ const batch_get_blueprints = @import("batch_get_blueprints.zig");
 const batch_get_crawlers = @import("batch_get_crawlers.zig");
 const batch_get_custom_entity_types = @import("batch_get_custom_entity_types.zig");
 const batch_get_data_quality_result = @import("batch_get_data_quality_result.zig");
+const batch_get_data_quality_ruleset_evaluation_run = @import("batch_get_data_quality_ruleset_evaluation_run.zig");
 const batch_get_dev_endpoints = @import("batch_get_dev_endpoints.zig");
+const batch_get_iterable_forms = @import("batch_get_iterable_forms.zig");
 const batch_get_jobs = @import("batch_get_jobs.zig");
 const batch_get_partition = @import("batch_get_partition.zig");
 const batch_get_table_optimizer = @import("batch_get_table_optimizer.zig");
@@ -34,6 +37,8 @@ const create_custom_entity_type = @import("create_custom_entity_type.zig");
 const create_data_quality_ruleset = @import("create_data_quality_ruleset.zig");
 const create_database = @import("create_database.zig");
 const create_dev_endpoint = @import("create_dev_endpoint.zig");
+const create_glossary = @import("create_glossary.zig");
+const create_glossary_term = @import("create_glossary_term.zig");
 const create_glue_identity_center_configuration = @import("create_glue_identity_center_configuration.zig");
 const create_integration = @import("create_integration.zig");
 const create_integration_resource_property = @import("create_integration_resource_property.zig");
@@ -53,6 +58,9 @@ const create_trigger = @import("create_trigger.zig");
 const create_usage_profile = @import("create_usage_profile.zig");
 const create_user_defined_function = @import("create_user_defined_function.zig");
 const create_workflow = @import("create_workflow.zig");
+const delete_asset = @import("delete_asset.zig");
+const delete_asset_type = @import("delete_asset_type.zig");
+const delete_attachment = @import("delete_attachment.zig");
 const delete_blueprint = @import("delete_blueprint.zig");
 const delete_catalog = @import("delete_catalog.zig");
 const delete_classifier = @import("delete_classifier.zig");
@@ -66,6 +74,9 @@ const delete_custom_entity_type = @import("delete_custom_entity_type.zig");
 const delete_data_quality_ruleset = @import("delete_data_quality_ruleset.zig");
 const delete_database = @import("delete_database.zig");
 const delete_dev_endpoint = @import("delete_dev_endpoint.zig");
+const delete_form_type = @import("delete_form_type.zig");
+const delete_glossary = @import("delete_glossary.zig");
+const delete_glossary_term = @import("delete_glossary_term.zig");
 const delete_glue_identity_center_configuration = @import("delete_glue_identity_center_configuration.zig");
 const delete_integration = @import("delete_integration.zig");
 const delete_integration_resource_property = @import("delete_integration_resource_property.zig");
@@ -91,6 +102,9 @@ const describe_connection_type = @import("describe_connection_type.zig");
 const describe_entity = @import("describe_entity.zig");
 const describe_inbound_integrations = @import("describe_inbound_integrations.zig");
 const describe_integrations = @import("describe_integrations.zig");
+const disassociate_glossary_terms = @import("disassociate_glossary_terms.zig");
+const get_asset = @import("get_asset.zig");
+const get_asset_type = @import("get_asset_type.zig");
 const get_blueprint = @import("get_blueprint.zig");
 const get_blueprint_run = @import("get_blueprint_run.zig");
 const get_blueprint_runs = @import("get_blueprint_runs.zig");
@@ -110,7 +124,9 @@ const get_crawler = @import("get_crawler.zig");
 const get_crawler_metrics = @import("get_crawler_metrics.zig");
 const get_crawlers = @import("get_crawlers.zig");
 const get_custom_entity_type = @import("get_custom_entity_type.zig");
+const get_dashboard_url = @import("get_dashboard_url.zig");
 const get_data_catalog_encryption_settings = @import("get_data_catalog_encryption_settings.zig");
+const get_data_catalog_export_configuration = @import("get_data_catalog_export_configuration.zig");
 const get_data_quality_model = @import("get_data_quality_model.zig");
 const get_data_quality_model_result = @import("get_data_quality_model_result.zig");
 const get_data_quality_result = @import("get_data_quality_result.zig");
@@ -123,6 +139,9 @@ const get_dataflow_graph = @import("get_dataflow_graph.zig");
 const get_dev_endpoint = @import("get_dev_endpoint.zig");
 const get_dev_endpoints = @import("get_dev_endpoints.zig");
 const get_entity_records = @import("get_entity_records.zig");
+const get_form_type = @import("get_form_type.zig");
+const get_glossary = @import("get_glossary.zig");
+const get_glossary_term = @import("get_glossary_term.zig");
 const get_glue_identity_center_configuration = @import("get_glue_identity_center_configuration.zig");
 const get_integration_resource_property = @import("get_integration_resource_property.zig");
 const get_integration_table_properties = @import("get_integration_table_properties.zig");
@@ -151,6 +170,7 @@ const get_schema_versions_diff = @import("get_schema_versions_diff.zig");
 const get_security_configuration = @import("get_security_configuration.zig");
 const get_security_configurations = @import("get_security_configurations.zig");
 const get_session = @import("get_session.zig");
+const get_session_endpoint = @import("get_session_endpoint.zig");
 const get_statement = @import("get_statement.zig");
 const get_table = @import("get_table.zig");
 const get_table_optimizer = @import("get_table_optimizer.zig");
@@ -171,6 +191,7 @@ const get_workflow_run = @import("get_workflow_run.zig");
 const get_workflow_run_properties = @import("get_workflow_run_properties.zig");
 const get_workflow_runs = @import("get_workflow_runs.zig");
 const import_catalog_to_glue = @import("import_catalog_to_glue.zig");
+const list_asset_types = @import("list_asset_types.zig");
 const list_blueprints = @import("list_blueprints.zig");
 const list_column_statistics_task_runs = @import("list_column_statistics_task_runs.zig");
 const list_connection_types = @import("list_connection_types.zig");
@@ -185,7 +206,12 @@ const list_data_quality_statistic_annotations = @import("list_data_quality_stati
 const list_data_quality_statistics = @import("list_data_quality_statistics.zig");
 const list_dev_endpoints = @import("list_dev_endpoints.zig");
 const list_entities = @import("list_entities.zig");
+const list_form_types = @import("list_form_types.zig");
+const list_glossaries = @import("list_glossaries.zig");
+const list_glossary_terms = @import("list_glossary_terms.zig");
 const list_integration_resource_properties = @import("list_integration_resource_properties.zig");
+const list_integration_table_properties = @import("list_integration_table_properties.zig");
+const list_iterable_forms = @import("list_iterable_forms.zig");
 const list_jobs = @import("list_jobs.zig");
 const list_materialized_view_refresh_task_runs = @import("list_materialized_view_refresh_task_runs.zig");
 const list_ml_transforms = @import("list_ml_transforms.zig");
@@ -199,8 +225,13 @@ const list_triggers = @import("list_triggers.zig");
 const list_usage_profiles = @import("list_usage_profiles.zig");
 const list_workflows = @import("list_workflows.zig");
 const modify_integration = @import("modify_integration.zig");
+const put_asset = @import("put_asset.zig");
+const put_asset_type = @import("put_asset_type.zig");
+const put_attachment = @import("put_attachment.zig");
 const put_data_catalog_encryption_settings = @import("put_data_catalog_encryption_settings.zig");
+const put_data_catalog_export_configuration = @import("put_data_catalog_export_configuration.zig");
 const put_data_quality_profile_annotation = @import("put_data_quality_profile_annotation.zig");
+const put_form_type = @import("put_form_type.zig");
 const put_resource_policy = @import("put_resource_policy.zig");
 const put_schema_version_metadata = @import("put_schema_version_metadata.zig");
 const put_workflow_run_properties = @import("put_workflow_run_properties.zig");
@@ -211,6 +242,7 @@ const remove_schema_version_metadata = @import("remove_schema_version_metadata.z
 const reset_job_bookmark = @import("reset_job_bookmark.zig");
 const resume_workflow_run = @import("resume_workflow_run.zig");
 const run_statement = @import("run_statement.zig");
+const search_assets = @import("search_assets.zig");
 const search_tables = @import("search_tables.zig");
 const start_blueprint_run = @import("start_blueprint_run.zig");
 const start_column_statistics_task_run = @import("start_column_statistics_task_run.zig");
@@ -238,6 +270,7 @@ const stop_workflow_run = @import("stop_workflow_run.zig");
 const tag_resource = @import("tag_resource.zig");
 const test_connection = @import("test_connection.zig");
 const untag_resource = @import("untag_resource.zig");
+const update_asset = @import("update_asset.zig");
 const update_blueprint = @import("update_blueprint.zig");
 const update_catalog = @import("update_catalog.zig");
 const update_classifier = @import("update_classifier.zig");
@@ -250,6 +283,8 @@ const update_crawler_schedule = @import("update_crawler_schedule.zig");
 const update_data_quality_ruleset = @import("update_data_quality_ruleset.zig");
 const update_database = @import("update_database.zig");
 const update_dev_endpoint = @import("update_dev_endpoint.zig");
+const update_glossary = @import("update_glossary.zig");
+const update_glossary_term = @import("update_glossary_term.zig");
 const update_glue_identity_center_configuration = @import("update_glue_identity_center_configuration.zig");
 const update_integration_resource_property = @import("update_integration_resource_property.zig");
 const update_integration_table_properties = @import("update_integration_table_properties.zig");
@@ -294,6 +329,11 @@ pub const Client = struct {
 
     pub fn deinit(self: *Self) void {
         _ = self;
+    }
+
+    /// Associates one or more glossary terms with an asset in Glue Data Catalog.
+    pub fn associateGlossaryTerms(self: *Self, allocator: std.mem.Allocator, input: associate_glossary_terms.AssociateGlossaryTermsInput, options: CallOptions) !associate_glossary_terms.AssociateGlossaryTermsOutput {
+        return associate_glossary_terms.execute(self, allocator, input, options);
     }
 
     /// Creates one or more partitions in a batch operation.
@@ -356,6 +396,11 @@ pub const Client = struct {
         return batch_get_data_quality_result.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the details of multiple evaluation runs in a single request.
+    pub fn batchGetDataQualityRulesetEvaluationRun(self: *Self, allocator: std.mem.Allocator, input: batch_get_data_quality_ruleset_evaluation_run.BatchGetDataQualityRulesetEvaluationRunInput, options: CallOptions) !batch_get_data_quality_ruleset_evaluation_run.BatchGetDataQualityRulesetEvaluationRunOutput {
+        return batch_get_data_quality_ruleset_evaluation_run.execute(self, allocator, input, options);
+    }
+
     /// Returns a list of resource metadata for a given list of development endpoint
     /// names. After
     /// calling the `ListDevEndpoints` operation, you can call this operation to
@@ -365,6 +410,12 @@ pub const Client = struct {
     /// including permission conditions that uses tags.
     pub fn batchGetDevEndpoints(self: *Self, allocator: std.mem.Allocator, input: batch_get_dev_endpoints.BatchGetDevEndpointsInput, options: CallOptions) !batch_get_dev_endpoints.BatchGetDevEndpointsOutput {
         return batch_get_dev_endpoints.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves multiple items from an iterable form on an asset in Glue Data
+    /// Catalog in a single request.
+    pub fn batchGetIterableForms(self: *Self, allocator: std.mem.Allocator, input: batch_get_iterable_forms.BatchGetIterableFormsInput, options: CallOptions) !batch_get_iterable_forms.BatchGetIterableFormsOutput {
+        return batch_get_iterable_forms.execute(self, allocator, input, options);
     }
 
     /// Returns a list of resource metadata for a given list of job names. After
@@ -521,6 +572,17 @@ pub const Client = struct {
         return create_dev_endpoint.execute(self, allocator, input, options);
     }
 
+    /// Creates a business glossary in Glue Data Catalog. A glossary is a container
+    /// for glossary terms that define business concepts.
+    pub fn createGlossary(self: *Self, allocator: std.mem.Allocator, input: create_glossary.CreateGlossaryInput, options: CallOptions) !create_glossary.CreateGlossaryOutput {
+        return create_glossary.execute(self, allocator, input, options);
+    }
+
+    /// Creates a glossary term within a business glossary in Glue Data Catalog.
+    pub fn createGlossaryTerm(self: *Self, allocator: std.mem.Allocator, input: create_glossary_term.CreateGlossaryTermInput, options: CallOptions) !create_glossary_term.CreateGlossaryTermOutput {
+        return create_glossary_term.execute(self, allocator, input, options);
+    }
+
     /// Creates a new Glue Identity Center configuration to enable integration
     /// between Glue and Amazon Web Services IAM
     /// Identity Center for authentication and authorization.
@@ -672,6 +734,21 @@ pub const Client = struct {
         return create_workflow.execute(self, allocator, input, options);
     }
 
+    /// Deletes an asset from Glue Data Catalog.
+    pub fn deleteAsset(self: *Self, allocator: std.mem.Allocator, input: delete_asset.DeleteAssetInput, options: CallOptions) !delete_asset.DeleteAssetOutput {
+        return delete_asset.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an asset type from Glue Data Catalog.
+    pub fn deleteAssetType(self: *Self, allocator: std.mem.Allocator, input: delete_asset_type.DeleteAssetTypeInput, options: CallOptions) !delete_asset_type.DeleteAssetTypeOutput {
+        return delete_asset_type.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a form attachment from an asset in Glue Data Catalog.
+    pub fn deleteAttachment(self: *Self, allocator: std.mem.Allocator, input: delete_attachment.DeleteAttachmentInput, options: CallOptions) !delete_attachment.DeleteAttachmentOutput {
+        return delete_attachment.execute(self, allocator, input, options);
+    }
+
     /// Deletes an existing blueprint.
     pub fn deleteBlueprint(self: *Self, allocator: std.mem.Allocator, input: delete_blueprint.DeleteBlueprintInput, options: CallOptions) !delete_blueprint.DeleteBlueprintOutput {
         return delete_blueprint.execute(self, allocator, input, options);
@@ -774,6 +851,23 @@ pub const Client = struct {
     /// Deletes a specified development endpoint.
     pub fn deleteDevEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_dev_endpoint.DeleteDevEndpointInput, options: CallOptions) !delete_dev_endpoint.DeleteDevEndpointOutput {
         return delete_dev_endpoint.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a form type from Glue Data Catalog. A form type cannot be deleted if
+    /// it is still referenced by an asset type.
+    pub fn deleteFormType(self: *Self, allocator: std.mem.Allocator, input: delete_form_type.DeleteFormTypeInput, options: CallOptions) !delete_form_type.DeleteFormTypeOutput {
+        return delete_form_type.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a business glossary from Glue Data Catalog. A glossary cannot be
+    /// deleted if it still contains glossary terms.
+    pub fn deleteGlossary(self: *Self, allocator: std.mem.Allocator, input: delete_glossary.DeleteGlossaryInput, options: CallOptions) !delete_glossary.DeleteGlossaryOutput {
+        return delete_glossary.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a glossary term from Glue Data Catalog.
+    pub fn deleteGlossaryTerm(self: *Self, allocator: std.mem.Allocator, input: delete_glossary_term.DeleteGlossaryTermInput, options: CallOptions) !delete_glossary_term.DeleteGlossaryTermOutput {
+        return delete_glossary_term.execute(self, allocator, input, options);
     }
 
     /// Deletes the existing Glue Identity Center configuration, removing the
@@ -965,6 +1059,23 @@ pub const Client = struct {
         return describe_integrations.execute(self, allocator, input, options);
     }
 
+    /// Removes the association of one or more glossary terms from an asset in Glue
+    /// Data Catalog.
+    pub fn disassociateGlossaryTerms(self: *Self, allocator: std.mem.Allocator, input: disassociate_glossary_terms.DisassociateGlossaryTermsInput, options: CallOptions) !disassociate_glossary_terms.DisassociateGlossaryTermsOutput {
+        return disassociate_glossary_terms.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the metadata for an asset in Glue Data Catalog, including its
+    /// forms, additional attachments, and associated glossary terms.
+    pub fn getAsset(self: *Self, allocator: std.mem.Allocator, input: get_asset.GetAssetInput, options: CallOptions) !get_asset.GetAssetOutput {
+        return get_asset.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves an asset type in Glue Data Catalog by its identifier.
+    pub fn getAssetType(self: *Self, allocator: std.mem.Allocator, input: get_asset_type.GetAssetTypeInput, options: CallOptions) !get_asset_type.GetAssetTypeOutput {
+        return get_asset_type.execute(self, allocator, input, options);
+    }
+
     /// Retrieves the details of a blueprint.
     pub fn getBlueprint(self: *Self, allocator: std.mem.Allocator, input: get_blueprint.GetBlueprintInput, options: CallOptions) !get_blueprint.GetBlueprintOutput {
         return get_blueprint.execute(self, allocator, input, options);
@@ -1069,9 +1180,21 @@ pub const Client = struct {
         return get_custom_entity_type.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the URL for the Spark monitoring dashboard for a Glue resource.
+    pub fn getDashboardUrl(self: *Self, allocator: std.mem.Allocator, input: get_dashboard_url.GetDashboardUrlInput, options: CallOptions) !get_dashboard_url.GetDashboardUrlOutput {
+        return get_dashboard_url.execute(self, allocator, input, options);
+    }
+
     /// Retrieves the security configuration for a specified catalog.
     pub fn getDataCatalogEncryptionSettings(self: *Self, allocator: std.mem.Allocator, input: get_data_catalog_encryption_settings.GetDataCatalogEncryptionSettingsInput, options: CallOptions) !get_data_catalog_encryption_settings.GetDataCatalogEncryptionSettingsOutput {
         return get_data_catalog_encryption_settings.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the current export configuration for the Glue Data Catalog. The
+    /// export configuration controls whether catalog metadata is exported to S3
+    /// Tables.
+    pub fn getDataCatalogExportConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_data_catalog_export_configuration.GetDataCatalogExportConfigurationInput, options: CallOptions) !get_data_catalog_export_configuration.GetDataCatalogExportConfigurationOutput {
+        return get_data_catalog_export_configuration.execute(self, allocator, input, options);
     }
 
     /// Retrieve the training status of the model along with more information
@@ -1154,6 +1277,21 @@ pub const Client = struct {
     /// appropriate data types matching the schema when returning rows.
     pub fn getEntityRecords(self: *Self, allocator: std.mem.Allocator, input: get_entity_records.GetEntityRecordsInput, options: CallOptions) !get_entity_records.GetEntityRecordsOutput {
         return get_entity_records.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a form type in Glue Data Catalog by its identifier.
+    pub fn getFormType(self: *Self, allocator: std.mem.Allocator, input: get_form_type.GetFormTypeInput, options: CallOptions) !get_form_type.GetFormTypeOutput {
+        return get_form_type.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a business glossary in Glue Data Catalog by its identifier.
+    pub fn getGlossary(self: *Self, allocator: std.mem.Allocator, input: get_glossary.GetGlossaryInput, options: CallOptions) !get_glossary.GetGlossaryOutput {
+        return get_glossary.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a glossary term in Glue Data Catalog by its identifier.
+    pub fn getGlossaryTerm(self: *Self, allocator: std.mem.Allocator, input: get_glossary_term.GetGlossaryTermInput, options: CallOptions) !get_glossary_term.GetGlossaryTermOutput {
+        return get_glossary_term.execute(self, allocator, input, options);
     }
 
     /// Retrieves the current Glue Identity Center configuration details, including
@@ -1368,6 +1506,12 @@ pub const Client = struct {
         return get_session.execute(self, allocator, input, options);
     }
 
+    /// Returns the Spark Connect endpoint URL and authentication token for an
+    /// interactive session.
+    pub fn getSessionEndpoint(self: *Self, allocator: std.mem.Allocator, input: get_session_endpoint.GetSessionEndpointInput, options: CallOptions) !get_session_endpoint.GetSessionEndpointOutput {
+        return get_session_endpoint.execute(self, allocator, input, options);
+    }
+
     /// Retrieves the statement.
     pub fn getStatement(self: *Self, allocator: std.mem.Allocator, input: get_statement.GetStatementInput, options: CallOptions) !get_statement.GetStatementOutput {
         return get_statement.execute(self, allocator, input, options);
@@ -1485,6 +1629,11 @@ pub const Client = struct {
         return import_catalog_to_glue.execute(self, allocator, input, options);
     }
 
+    /// Lists the asset types defined in Glue Data Catalog.
+    pub fn listAssetTypes(self: *Self, allocator: std.mem.Allocator, input: list_asset_types.ListAssetTypesInput, options: CallOptions) !list_asset_types.ListAssetTypesOutput {
+        return list_asset_types.execute(self, allocator, input, options);
+    }
+
     /// Lists all the blueprint names in an account.
     pub fn listBlueprints(self: *Self, allocator: std.mem.Allocator, input: list_blueprints.ListBlueprintsInput, options: CallOptions) !list_blueprints.ListBlueprintsOutput {
         return list_blueprints.execute(self, allocator, input, options);
@@ -1597,10 +1746,37 @@ pub const Client = struct {
         return list_entities.execute(self, allocator, input, options);
     }
 
+    /// Lists the form types defined in Glue Data Catalog.
+    pub fn listFormTypes(self: *Self, allocator: std.mem.Allocator, input: list_form_types.ListFormTypesInput, options: CallOptions) !list_form_types.ListFormTypesOutput {
+        return list_form_types.execute(self, allocator, input, options);
+    }
+
+    /// Lists business glossaries in Glue Data Catalog.
+    pub fn listGlossaries(self: *Self, allocator: std.mem.Allocator, input: list_glossaries.ListGlossariesInput, options: CallOptions) !list_glossaries.ListGlossariesOutput {
+        return list_glossaries.execute(self, allocator, input, options);
+    }
+
+    /// Lists glossary terms within a business glossary in Glue Data Catalog.
+    pub fn listGlossaryTerms(self: *Self, allocator: std.mem.Allocator, input: list_glossary_terms.ListGlossaryTermsInput, options: CallOptions) !list_glossary_terms.ListGlossaryTermsOutput {
+        return list_glossary_terms.execute(self, allocator, input, options);
+    }
+
     /// List integration resource properties for a single customer. It supports the
     /// filters, maxRecords and markers.
     pub fn listIntegrationResourceProperties(self: *Self, allocator: std.mem.Allocator, input: list_integration_resource_properties.ListIntegrationResourcePropertiesInput, options: CallOptions) !list_integration_resource_properties.ListIntegrationResourcePropertiesOutput {
         return list_integration_resource_properties.execute(self, allocator, input, options);
+    }
+
+    /// Lists the integration table properties in your account. This operation
+    /// supports filtering and pagination.
+    pub fn listIntegrationTableProperties(self: *Self, allocator: std.mem.Allocator, input: list_integration_table_properties.ListIntegrationTablePropertiesInput, options: CallOptions) !list_integration_table_properties.ListIntegrationTablePropertiesOutput {
+        return list_integration_table_properties.execute(self, allocator, input, options);
+    }
+
+    /// Lists the items in an iterable form on an asset in Glue Data Catalog. For
+    /// example, lists the columns of a table asset.
+    pub fn listIterableForms(self: *Self, allocator: std.mem.Allocator, input: list_iterable_forms.ListIterableFormsInput, options: CallOptions) !list_iterable_forms.ListIterableFormsOutput {
+        return list_iterable_forms.execute(self, allocator, input, options);
     }
 
     /// Retrieves the names of all job resources in this Amazon Web Services
@@ -1701,6 +1877,25 @@ pub const Client = struct {
         return modify_integration.execute(self, allocator, input, options);
     }
 
+    /// Creates or updates an asset in Glue Data Catalog. If the asset already
+    /// exists, this operation updates it; otherwise, a new asset is created.
+    pub fn putAsset(self: *Self, allocator: std.mem.Allocator, input: put_asset.PutAssetInput, options: CallOptions) !put_asset.PutAssetOutput {
+        return put_asset.execute(self, allocator, input, options);
+    }
+
+    /// Creates or updates an asset type in Glue Data Catalog. An asset type defines
+    /// the structure of assets by specifying which forms they include. If an asset
+    /// type with the given name already exists, it is updated.
+    pub fn putAssetType(self: *Self, allocator: std.mem.Allocator, input: put_asset_type.PutAssetTypeInput, options: CallOptions) !put_asset_type.PutAssetTypeOutput {
+        return put_asset_type.execute(self, allocator, input, options);
+    }
+
+    /// Attaches a form to an asset or an iterable form item in Glue Data Catalog.
+    /// If an attachment with the same name already exists, it is overwritten.
+    pub fn putAttachment(self: *Self, allocator: std.mem.Allocator, input: put_attachment.PutAttachmentInput, options: CallOptions) !put_attachment.PutAttachmentOutput {
+        return put_attachment.execute(self, allocator, input, options);
+    }
+
     /// Sets the security configuration for a specified catalog. After the
     /// configuration has been
     /// set, the specified encryption is applied to every catalog write thereafter.
@@ -1708,9 +1903,22 @@ pub const Client = struct {
         return put_data_catalog_encryption_settings.execute(self, allocator, input, options);
     }
 
+    /// Creates or updates the export configuration for the Glue Data Catalog. Use
+    /// this operation to enable or disable the export of catalog metadata to S3
+    /// Tables.
+    pub fn putDataCatalogExportConfiguration(self: *Self, allocator: std.mem.Allocator, input: put_data_catalog_export_configuration.PutDataCatalogExportConfigurationInput, options: CallOptions) !put_data_catalog_export_configuration.PutDataCatalogExportConfigurationOutput {
+        return put_data_catalog_export_configuration.execute(self, allocator, input, options);
+    }
+
     /// Annotate all datapoints for a Profile.
     pub fn putDataQualityProfileAnnotation(self: *Self, allocator: std.mem.Allocator, input: put_data_quality_profile_annotation.PutDataQualityProfileAnnotationInput, options: CallOptions) !put_data_quality_profile_annotation.PutDataQualityProfileAnnotationOutput {
         return put_data_quality_profile_annotation.execute(self, allocator, input, options);
+    }
+
+    /// Creates or updates a form type in Glue Data Catalog. A form type defines the
+    /// schema for structured metadata that can be attached to assets.
+    pub fn putFormType(self: *Self, allocator: std.mem.Allocator, input: put_form_type.PutFormTypeInput, options: CallOptions) !put_form_type.PutFormTypeOutput {
+        return put_form_type.execute(self, allocator, input, options);
     }
 
     /// Sets the Data Catalog resource policy for access control.
@@ -1805,6 +2013,13 @@ pub const Client = struct {
     /// Executes the statement.
     pub fn runStatement(self: *Self, allocator: std.mem.Allocator, input: run_statement.RunStatementInput, options: CallOptions) !run_statement.RunStatementOutput {
         return run_statement.execute(self, allocator, input, options);
+    }
+
+    /// Searches for assets in Glue Data Catalog using full-text search, filters,
+    /// sorting, and aggregations. Returns matching assets with relevance-ranked
+    /// results.
+    pub fn searchAssets(self: *Self, allocator: std.mem.Allocator, input: search_assets.SearchAssetsInput, options: CallOptions) !search_assets.SearchAssetsOutput {
+        return search_assets.execute(self, allocator, input, options);
     }
 
     /// Searches a set of tables based on properties in the table metadata as well
@@ -1932,8 +2147,8 @@ pub const Client = struct {
         return start_job_run.execute(self, allocator, input, options);
     }
 
-    /// Starts a materialized view refresh task run, for a specified table and
-    /// columns.
+    /// Starts a materialized view refresh task run for a specified materialized
+    /// view.
     pub fn startMaterializedViewRefreshTaskRun(self: *Self, allocator: std.mem.Allocator, input: start_materialized_view_refresh_task_run.StartMaterializedViewRefreshTaskRunInput, options: CallOptions) !start_materialized_view_refresh_task_run.StartMaterializedViewRefreshTaskRunOutput {
         return start_materialized_view_refresh_task_run.execute(self, allocator, input, options);
     }
@@ -2015,8 +2230,8 @@ pub const Client = struct {
         return stop_crawler_schedule.execute(self, allocator, input, options);
     }
 
-    /// Stops a materialized view refresh task run, for a specified table and
-    /// columns.
+    /// Stops a materialized view refresh task run for a specified materialized
+    /// view.
     pub fn stopMaterializedViewRefreshTaskRun(self: *Self, allocator: std.mem.Allocator, input: stop_materialized_view_refresh_task_run.StopMaterializedViewRefreshTaskRunInput, options: CallOptions) !stop_materialized_view_refresh_task_run.StopMaterializedViewRefreshTaskRunOutput {
         return stop_materialized_view_refresh_task_run.execute(self, allocator, input, options);
     }
@@ -2060,6 +2275,12 @@ pub const Client = struct {
     /// Removes tags from a resource.
     pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
+    }
+
+    /// Updates the name and description of an existing asset in Glue Data Catalog.
+    /// Only the fields that you provide are updated.
+    pub fn updateAsset(self: *Self, allocator: std.mem.Allocator, input: update_asset.UpdateAssetInput, options: CallOptions) !update_asset.UpdateAssetOutput {
+        return update_asset.execute(self, allocator, input, options);
     }
 
     /// Updates a registered blueprint.
@@ -2130,6 +2351,16 @@ pub const Client = struct {
     /// Updates a specified development endpoint.
     pub fn updateDevEndpoint(self: *Self, allocator: std.mem.Allocator, input: update_dev_endpoint.UpdateDevEndpointInput, options: CallOptions) !update_dev_endpoint.UpdateDevEndpointOutput {
         return update_dev_endpoint.execute(self, allocator, input, options);
+    }
+
+    /// Updates a business glossary in Glue Data Catalog.
+    pub fn updateGlossary(self: *Self, allocator: std.mem.Allocator, input: update_glossary.UpdateGlossaryInput, options: CallOptions) !update_glossary.UpdateGlossaryOutput {
+        return update_glossary.execute(self, allocator, input, options);
+    }
+
+    /// Updates a glossary term in Glue Data Catalog.
+    pub fn updateGlossaryTerm(self: *Self, allocator: std.mem.Allocator, input: update_glossary_term.UpdateGlossaryTermInput, options: CallOptions) !update_glossary_term.UpdateGlossaryTermOutput {
+        return update_glossary_term.execute(self, allocator, input, options);
     }
 
     /// Updates the existing Glue Identity Center configuration, allowing
@@ -2424,6 +2655,13 @@ pub const Client = struct {
         };
     }
 
+    pub fn listAssetTypesPaginator(self: *Self, params: list_asset_types.ListAssetTypesInput) paginator.ListAssetTypesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listBlueprintsPaginator(self: *Self, params: list_blueprints.ListBlueprintsInput) paginator.ListBlueprintsPaginator {
         return .{
             .client = self,
@@ -2501,6 +2739,34 @@ pub const Client = struct {
         };
     }
 
+    pub fn listFormTypesPaginator(self: *Self, params: list_form_types.ListFormTypesInput) paginator.ListFormTypesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listGlossariesPaginator(self: *Self, params: list_glossaries.ListGlossariesInput) paginator.ListGlossariesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listGlossaryTermsPaginator(self: *Self, params: list_glossary_terms.ListGlossaryTermsInput) paginator.ListGlossaryTermsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listIterableFormsPaginator(self: *Self, params: list_iterable_forms.ListIterableFormsInput) paginator.ListIterableFormsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listJobsPaginator(self: *Self, params: list_jobs.ListJobsInput) paginator.ListJobsPaginator {
         return .{
             .client = self,
@@ -2572,6 +2838,13 @@ pub const Client = struct {
     }
 
     pub fn listWorkflowsPaginator(self: *Self, params: list_workflows.ListWorkflowsInput) paginator.ListWorkflowsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn searchAssetsPaginator(self: *Self, params: search_assets.SearchAssetsInput) paginator.SearchAssetsPaginator {
         return .{
             .client = self,
             .params = params,

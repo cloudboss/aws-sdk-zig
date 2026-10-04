@@ -168,10 +168,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateGroupVersionInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateGroupVersionOutput {
-    var result: CreateGroupVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateGroupVersionOutput, body, allocator);
-    }
+    const result: CreateGroupVersionOutput = try aws.json.parseJsonObject(
+        CreateGroupVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

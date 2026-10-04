@@ -57,7 +57,8 @@ pub const CreateAnalysisInput = struct {
 
     /// A source entity to use for the analysis that you're creating. This metadata
     /// structure
-    /// contains details that describe a source template and one or more datasets.
+    /// contains details that describe a source template and one or more datasets or
+    /// topics.
     ///
     /// Either a `SourceEntity` or a `Definition` must be provided in
     /// order for the request to be valid.
@@ -226,10 +227,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAnalysisInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAnalysisOutput {
-    var result: CreateAnalysisOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAnalysisOutput, body, allocator);
-    }
+    var result: CreateAnalysisOutput = try aws.json.parseJsonObject(
+        CreateAnalysisOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

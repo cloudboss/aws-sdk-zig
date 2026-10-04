@@ -73,7 +73,7 @@ pub const CreateNotebookInstanceInput = struct {
     notebook_instance_name: []const u8,
 
     /// The platform identifier of the notebook instance runtime environment. The
-    /// default value is `notebook-al2-v2`.
+    /// default value is `notebook-al2023-v1`.
     platform_identifier: ?[]const u8 = null,
 
     /// When you send any requests to Amazon Web Services resources from the

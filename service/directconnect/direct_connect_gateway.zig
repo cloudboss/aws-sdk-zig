@@ -35,6 +35,11 @@ pub const DirectConnectGateway = struct {
     /// Information about a tag.
     tags: ?[]const Tag = null,
 
+    /// The total number of inbound route prefixes allocated to the attachments on
+    /// the Direct Connect gateway. The count combines the IPv4 and IPv6 address
+    /// families.
+    total_prefix_pool_allocations: ?i32 = null,
+
     pub const json_field_names = .{
         .amazon_side_asn = "amazonSideAsn",
         .direct_connect_gateway_id = "directConnectGatewayId",
@@ -43,5 +48,6 @@ pub const DirectConnectGateway = struct {
         .owner_account = "ownerAccount",
         .state_change_error = "stateChangeError",
         .tags = "tags",
+        .total_prefix_pool_allocations = "totalPrefixPoolAllocations",
     };
 };

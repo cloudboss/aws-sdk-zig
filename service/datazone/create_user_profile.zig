@@ -140,10 +140,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateUserProfileInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateUserProfileOutput {
-    var result: CreateUserProfileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateUserProfileOutput, body, allocator);
-    }
+    const result: CreateUserProfileOutput = try aws.json.parseJsonObject(
+        CreateUserProfileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

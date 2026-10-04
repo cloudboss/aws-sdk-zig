@@ -8,7 +8,7 @@ const MetricStreamStatisticsMetric = @import("metric_stream_statistics_metric.zi
 /// CloudWatch,
 /// listed in [
 /// CloudWatch statistics
-/// definitions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html).
+/// definitions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html).
 pub const MetricStreamStatisticsConfiguration = struct {
     /// The list of additional statistics that are to be streamed for the metrics
     /// listed in
@@ -24,7 +24,7 @@ pub const MetricStreamStatisticsConfiguration = struct {
     /// If the `OutputFormat` for the stream is `json`, the valid values
     /// include the abbreviations for all of the statistics listed in [
     /// CloudWatch statistics
-    /// definitions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html). For example, this includes
+    /// definitions](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html). For example, this includes
     /// `tm98, `
     /// `wm90`, `PR(:300)`, and so on.
     additional_statistics: []const []const u8,

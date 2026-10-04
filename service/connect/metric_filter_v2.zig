@@ -32,23 +32,23 @@ pub const MetricFilterV2 = struct {
     /// `DISCONNECT_REASON`, and
     /// `ANSWERING_MACHINE_DETECTION_STATUS`, see
     /// [ContactTraceRecord](https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord) in the
-    /// *Amazon Connect Administrator Guide*.
+    /// *Connect Customer Administrator Guide*.
     ///
     /// For valid values of the metric-level filter `FLOWS_OUTCOME_TYPE`, see the
     /// description for the [Flow
     /// outcome](https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#flows-outcome)
-    /// metric in the *Amazon Connect Administrator Guide*.
+    /// metric in the *Connect Customer Administrator Guide*.
     ///
     /// For valid values of the metric-level filter `BOT_CONVERSATION_OUTCOME_TYPE`,
     /// see the description for
     /// the [Bot conversations
-    /// completed](https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-conversations-completed-metric) in the *Amazon Connect Administrator Guide*.
+    /// completed](https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-conversations-completed-metric) in the *Connect Customer Administrator Guide*.
     ///
     /// For valid values of the metric-level filter `BOT_INTENT_OUTCOME_TYPE`, see
     /// the description for the
     /// [Bot
     /// intents
-    /// completed](https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed-metric) metric in the *Amazon Connect Administrator Guide*.
+    /// completed](https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed-metric) metric in the *Connect Customer Administrator Guide*.
     metric_filter_values: ?[]const []const u8 = null,
 
     /// If set to `true`, the API response contains results that filter out the

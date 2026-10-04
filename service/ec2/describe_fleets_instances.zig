@@ -18,8 +18,8 @@ pub const DescribeFleetsInstances = struct {
     launch_template_and_overrides: ?LaunchTemplateAndOverridesResponse = null,
 
     /// Indicates if the instance that was launched is a Spot, On-Demand, Capacity
-    /// Block,
-    /// or Interruptible Capacity Reservation instance.
+    /// Block for ML,
+    /// or interruptible Capacity Reservation instance.
     lifecycle: ?InstanceLifecycle = null,
 
     /// The value is `windows` for Windows instances in an EC2 Fleet. Otherwise, the

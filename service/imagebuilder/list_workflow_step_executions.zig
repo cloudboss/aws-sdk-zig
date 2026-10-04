@@ -7,10 +7,10 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const WorkflowStepMetadata = @import("workflow_step_metadata.zig").WorkflowStepMetadata;
 
 pub const ListWorkflowStepExecutionsInput = struct {
-    /// Specify the maximum number of items to return in a request.
+    /// The maximum number of items to return in a single request.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
@@ -138,10 +138,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListWorkflowStepExecuti
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListWorkflowStepExecutionsOutput {
-    var result: ListWorkflowStepExecutionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListWorkflowStepExecutionsOutput, body, allocator);
-    }
+    const result: ListWorkflowStepExecutionsOutput = try aws.json.parseJsonObject(
+        ListWorkflowStepExecutionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

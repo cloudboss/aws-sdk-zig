@@ -50,6 +50,9 @@ pub const Volume = struct {
     /// The Amazon Resource Name (ARN) of the Outpost.
     outpost_arn: ?[]const u8 = null,
 
+    /// The ID of the Amazon Web Services account that owns the volume.
+    owner_id: ?[]const u8 = null,
+
     /// The size of the volume, in GiBs.
     size: ?i32 = null,
 
@@ -73,6 +76,9 @@ pub const Volume = struct {
 
     /// The throughput that the volume supports, in MiB/s.
     throughput: ?i32 = null,
+
+    /// The Amazon Resource Name (ARN) of the volume.
+    volume_arn: ?[]const u8 = null,
 
     /// The ID of the volume.
     volume_id: ?[]const u8 = null,

@@ -9,6 +9,9 @@ pub const AssetScope = struct {
     /// The filter IDs of the asset scope.
     filter_ids: []const []const u8,
 
+    /// The name of the materialized asset scope.
+    scope_name: ?[]const u8 = null,
+
     /// The status of the asset scope.
     status: []const u8,
 
@@ -16,6 +19,7 @@ pub const AssetScope = struct {
         .asset_id = "assetId",
         .error_message = "errorMessage",
         .filter_ids = "filterIds",
+        .scope_name = "scopeName",
         .status = "status",
     };
 };

@@ -39,6 +39,7 @@ const start_viewer_session_revocation = @import("start_viewer_session_revocation
 const stop_stream = @import("stop_stream.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
+const update_ad_configuration = @import("update_ad_configuration.zig");
 const update_channel = @import("update_channel.zig");
 const update_playback_restriction_policy = @import("update_playback_restriction_policy.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
@@ -340,6 +341,11 @@ pub const Client = struct {
     /// Removes tags from the resource with the specified ARN.
     pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
+    }
+
+    /// Updates a specified ad configuration.
+    pub fn updateAdConfiguration(self: *Self, allocator: std.mem.Allocator, input: update_ad_configuration.UpdateAdConfigurationInput, options: CallOptions) !update_ad_configuration.UpdateAdConfigurationOutput {
+        return update_ad_configuration.execute(self, allocator, input, options);
     }
 
     /// Updates a channel's configuration. Live channels cannot be updated. You must

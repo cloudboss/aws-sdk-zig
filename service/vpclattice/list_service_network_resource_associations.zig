@@ -133,10 +133,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListServiceNetworkResou
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListServiceNetworkResourceAssociationsOutput {
-    var result: ListServiceNetworkResourceAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListServiceNetworkResourceAssociationsOutput, body, allocator);
-    }
+    const result: ListServiceNetworkResourceAssociationsOutput = try aws.json.parseJsonObject(
+        ListServiceNetworkResourceAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

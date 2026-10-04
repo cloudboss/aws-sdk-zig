@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteResourceShareInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteResourceShareOutput {
-    var result: DeleteResourceShareOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteResourceShareOutput, body, allocator);
-    }
+    const result: DeleteResourceShareOutput = try aws.json.parseJsonObject(
+        DeleteResourceShareOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

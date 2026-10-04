@@ -191,6 +191,11 @@ pub const CreateEnvironmentInput = struct {
     /// Defines the access mode for the Apache Airflow *web server*. For more
     /// information, refer to [Apache Airflow access
     /// modes](https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html).
+    ///
+    /// If set to `PUBLIC_AND_PRIVATE`, creates both a public network load balancer
+    /// (NLB) for browser access and a private VPC endpoint (VPCE) for
+    /// worker-to-webserver communication. This mode is only available for Apache
+    /// Airflow version 3.2 and later.
     webserver_access_mode: ?WebserverAccessMode = null,
 
     /// The day and time of the week in Coordinated Universal Time (UTC) 24-hour
@@ -428,10 +433,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateEnvironmentInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateEnvironmentOutput {
-    var result: CreateEnvironmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateEnvironmentOutput, body, allocator);
-    }
+    const result: CreateEnvironmentOutput = try aws.json.parseJsonObject(
+        CreateEnvironmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

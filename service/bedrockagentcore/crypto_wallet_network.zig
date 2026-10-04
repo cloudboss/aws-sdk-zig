@@ -1,6 +1,6 @@
 const std = @import("std");
 
-/// Supported blockchain networks for crypto wallets
+/// Supported blockchain networks for crypto wallets.
 pub const CryptoWalletNetwork = enum {
     ethereum,
     solana,

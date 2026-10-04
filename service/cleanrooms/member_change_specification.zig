@@ -1,4 +1,6 @@
 const MemberAbility = @import("member_ability.zig").MemberAbility;
+const MLMemberAbilities = @import("ml_member_abilities.zig").MLMemberAbilities;
+const PaymentConfiguration = @import("payment_configuration.zig").PaymentConfiguration;
 
 /// Specifies changes to collaboration membership, including adding new members
 /// with their abilities and display names.
@@ -23,11 +25,22 @@ pub const MemberChangeSpecification = struct {
     ///
     /// Set the value of `memberAbilities` to `[CAN_RECEIVE_RESULTS]` to allow a
     /// member to contribute data and receive results.
+    ///
+    /// Set the value of `memberAbilities` to `[CAN_EXPORT_QUERY_ANALYSIS_LOG]` so
+    /// that the member can export the analysis logs for a protected query. Having
+    /// this ability isn't sufficient on its own: You can export logs only for
+    /// queries that you ran or paid for.
     member_abilities: []const MemberAbility,
+
+    ml_member_abilities: ?MLMemberAbilities = null,
+
+    payment_configuration: ?PaymentConfiguration = null,
 
     pub const json_field_names = .{
         .account_id = "accountId",
         .display_name = "displayName",
         .member_abilities = "memberAbilities",
+        .ml_member_abilities = "mlMemberAbilities",
+        .payment_configuration = "paymentConfiguration",
     };
 };

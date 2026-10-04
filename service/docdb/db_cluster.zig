@@ -28,6 +28,10 @@ pub const DBCluster = struct {
     /// (UTC).
     cluster_create_time: ?i64 = null,
 
+    /// Specifies whether to copy all tags from the DB cluster to snapshots of the
+    /// DB cluster. The default is not to copy them.
+    copy_tags_to_snapshot: ?bool = null,
+
     /// The Amazon Resource Name (ARN) for the cluster.
     db_cluster_arn: ?[]const u8 = null,
 
@@ -110,7 +114,7 @@ pub const DBCluster = struct {
     /// IPv6 protocols (`DUAL`).
     ///
     /// For more information, see [DocumentDB clusters in a
-    /// VPC](https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html) in the Amazon DocumentDB Developer Guide.
+    /// VPC](https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html) in the Amazon DocumentDB Developer Guide.
     ///
     /// Valid Values: `IPV4` | `DUAL`
     network_type: ?[]const u8 = null,

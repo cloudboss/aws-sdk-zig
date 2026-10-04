@@ -71,10 +71,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetServiceIndexInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetServiceIndexOutput {
-    var result: GetServiceIndexOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetServiceIndexOutput, body, allocator);
-    }
+    const result: GetServiceIndexOutput = try aws.json.parseJsonObject(
+        GetServiceIndexOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -8,8 +8,8 @@ const PredefinedAttributeSearchCriteria = @import("predefined_attribute_search_c
 const PredefinedAttribute = @import("predefined_attribute.zig").PredefinedAttribute;
 
 pub const SearchPredefinedAttributesInput = struct {
-    /// The identifier of the Amazon Connect instance. You can find the instance ID
-    /// in the Amazon Resource Name (ARN) of the
+    /// The identifier of the Connect Customer instance. You can find the instance
+    /// ID in the Amazon Resource Name (ARN) of the
     /// instance.
     instance_id: []const u8,
 
@@ -126,10 +126,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchPredefinedAttribu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchPredefinedAttributesOutput {
-    var result: SearchPredefinedAttributesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchPredefinedAttributesOutput, body, allocator);
-    }
+    const result: SearchPredefinedAttributesOutput = try aws.json.parseJsonObject(
+        SearchPredefinedAttributesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

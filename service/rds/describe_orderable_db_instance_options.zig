@@ -33,6 +33,7 @@ pub const DescribeOrderableDBInstanceOptionsInput = struct {
     /// * `custom-oracle-se2`
     /// * `custom-oracle-se2-cdb`
     /// * `db2-ae`
+    /// * `db2-ce`
     /// * `db2-se`
     /// * `mariadb`
     /// * `mysql`

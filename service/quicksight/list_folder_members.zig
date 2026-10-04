@@ -121,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListFolderMembersInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListFolderMembersOutput {
-    var result: ListFolderMembersOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListFolderMembersOutput, body, allocator);
-    }
+    var result: ListFolderMembersOutput = try aws.json.parseJsonObject(
+        ListFolderMembersOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

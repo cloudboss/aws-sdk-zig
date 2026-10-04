@@ -144,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: QueryGraphInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !QueryGraphOutput {
-    var result: QueryGraphOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(QueryGraphOutput, body, allocator);
-    }
+    const result: QueryGraphOutput = try aws.json.parseJsonObject(
+        QueryGraphOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

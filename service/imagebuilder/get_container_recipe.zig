@@ -20,7 +20,10 @@ pub const GetContainerRecipeOutput = struct {
     /// The container recipe object that is returned.
     container_recipe: ?ContainerRecipe = null,
 
-    /// The resource ARNs with different wildcard variations of semantic versioning.
+    /// A set of wildcard version ARNs that always reference the latest
+    /// version of the resource. ARNs are included for the latest version overall,
+    /// and for the latest
+    /// versions within the same major, minor, and patch levels.
     latest_version_references: ?LatestVersionReferences = null,
 
     /// The request ID that uniquely identifies this request.
@@ -88,10 +91,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetContainerRecipeInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetContainerRecipeOutput {
-    var result: GetContainerRecipeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetContainerRecipeOutput, body, allocator);
-    }
+    const result: GetContainerRecipeOutput = try aws.json.parseJsonObject(
+        GetContainerRecipeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -27,10 +27,10 @@ pub const CreateDBInstanceInput = struct {
     /// certificate.
     ///
     /// For more information, see [Updating Your Amazon DocumentDB TLS
-    /// Certificates](https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html) and
+    /// Certificates](https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html) and
     /// [
     /// Encrypting Data in
-    /// Transit](https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html) in the *Amazon DocumentDB Developer
+    /// Transit](https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html) in the *Amazon DocumentDB Developer
     /// Guide*.
     ca_certificate_identifier: ?[]const u8 = null,
 
@@ -62,7 +62,7 @@ pub const CreateDBInstanceInput = struct {
     /// Instance. For
     /// more information, see [Using Amazon
     /// Performance
-    /// Insights](https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html).
+    /// Insights](https://docs.aws.amazon.com/documentdb/latest/devguide/performance-insights.html).
     enable_performance_insights: ?bool = null,
 
     /// The name of the database engine to be used for this instance.

@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTrainingDatasetInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTrainingDatasetOutput {
-    var result: GetTrainingDatasetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTrainingDatasetOutput, body, allocator);
-    }
+    const result: GetTrainingDatasetOutput = try aws.json.parseJsonObject(
+        GetTrainingDatasetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

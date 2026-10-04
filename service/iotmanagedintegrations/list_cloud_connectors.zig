@@ -120,10 +120,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCloudConnectorsInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListCloudConnectorsOutput {
-    var result: ListCloudConnectorsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListCloudConnectorsOutput, body, allocator);
-    }
+    const result: ListCloudConnectorsOutput = try aws.json.parseJsonObject(
+        ListCloudConnectorsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

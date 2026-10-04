@@ -1,9 +1,8 @@
-/// Contains details for an image resource that was identified for a lifecycle
-/// action.
+/// Contains an indicator that shows whether the lifecycle execution identified
+/// any resources to take lifecycle actions on.
 pub const LifecycleExecutionResourcesImpactedSummary = struct {
-    /// Indicates whether an image resource that was identified for a lifecycle
-    /// action has
-    /// associated resources that are also impacted.
+    /// Indicates whether the lifecycle execution identified any resources to take
+    /// lifecycle actions on.
     has_impacted_resources: bool = false,
 
     pub const json_field_names = .{

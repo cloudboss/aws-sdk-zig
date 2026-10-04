@@ -144,6 +144,21 @@ pub const DBCluster = struct {
     /// Zones.
     multi_az: ?bool = null,
 
+    /// The network type of the DB cluster.
+    ///
+    /// Valid Values:
+    ///
+    /// * **
+    /// `IPV4`
+    /// **   –
+    /// The DB cluster uses only IPv4 addresses for communication.
+    ///
+    /// * **
+    /// `DUAL`
+    /// **   –
+    /// The DB cluster uses both IPv4 and IPv6 addresses for communication.
+    network_type: ?[]const u8 = null,
+
     /// This data type is used as a response element in the `ModifyDBCluster`
     /// operation and
     /// contains changes that will be applied during the next maintenance window.

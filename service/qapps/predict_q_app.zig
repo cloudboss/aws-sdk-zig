@@ -94,10 +94,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PredictQAppInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PredictQAppOutput {
-    var result: PredictQAppOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PredictQAppOutput, body, allocator);
-    }
+    const result: PredictQAppOutput = try aws.json.parseJsonObject(
+        PredictQAppOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

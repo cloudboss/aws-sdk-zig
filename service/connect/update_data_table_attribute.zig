@@ -153,10 +153,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDataTableAttribut
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateDataTableAttributeOutput {
-    var result: UpdateDataTableAttributeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateDataTableAttributeOutput, body, allocator);
-    }
+    const result: UpdateDataTableAttributeOutput = try aws.json.parseJsonObject(
+        UpdateDataTableAttributeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

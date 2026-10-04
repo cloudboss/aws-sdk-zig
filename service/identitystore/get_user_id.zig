@@ -14,6 +14,10 @@ pub const GetUserIdInput = struct {
     alternate_identifier: AlternateIdentifier,
 
     /// The globally unique identifier for the identity store.
+    ///
+    /// You can specify the identity store by ID or by Amazon Resource Name (ARN).
+    /// For example, identity store ID `d-1234567890` or identity store ARN
+    /// `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
     identity_store_id: []const u8,
 
     pub const json_field_names = .{
@@ -26,11 +30,17 @@ pub const GetUserIdOutput = struct {
     /// The globally unique identifier for the identity store.
     identity_store_id: []const u8,
 
+    /// The Amazon Resource Name (ARN) of the user in the identity store. For
+    /// example,
+    /// `arn:aws:identitystore:::user/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111`.
+    user_arn: []const u8,
+
     /// The identifier for a user in the identity store.
     user_id: []const u8,
 
     pub const json_field_names = .{
         .identity_store_id = "IdentityStoreId",
+        .user_arn = "UserArn",
         .user_id = "UserId",
     };
 };

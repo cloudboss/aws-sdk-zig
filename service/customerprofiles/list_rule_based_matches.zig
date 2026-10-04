@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRuleBasedMatchesInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListRuleBasedMatchesOutput {
-    var result: ListRuleBasedMatchesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListRuleBasedMatchesOutput, body, allocator);
-    }
+    const result: ListRuleBasedMatchesOutput = try aws.json.parseJsonObject(
+        ListRuleBasedMatchesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

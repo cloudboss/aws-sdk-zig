@@ -170,10 +170,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateNotificationRuleI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateNotificationRuleOutput {
-    var result: CreateNotificationRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateNotificationRuleOutput, body, allocator);
-    }
+    const result: CreateNotificationRuleOutput = try aws.json.parseJsonObject(
+        CreateNotificationRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

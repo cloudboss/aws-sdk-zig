@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCaseRuleInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCaseRuleOutput {
-    var result: CreateCaseRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCaseRuleOutput, body, allocator);
-    }
+    const result: CreateCaseRuleOutput = try aws.json.parseJsonObject(
+        CreateCaseRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

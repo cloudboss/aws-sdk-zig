@@ -1,4 +1,4 @@
-/// Contains details about why a contact was disconnected. Only Amazon Connect
+/// Contains details about why a contact was disconnected. Only Connect Customer
 /// outbound campaigns can provide
 /// this field.
 pub const DisconnectReason = struct {

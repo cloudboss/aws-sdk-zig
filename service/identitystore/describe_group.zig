@@ -8,12 +8,20 @@ const ExternalId = @import("external_id.zig").ExternalId;
 
 pub const DescribeGroupInput = struct {
     /// The identifier for a group in the identity store.
+    ///
+    /// You can specify the group by ID or by Amazon Resource Name (ARN). For
+    /// example, group ID `a1b2c3d4-5678-90ab-cdef-EXAMPLE22222` or group ARN
+    /// `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
     group_id: []const u8,
 
     /// The globally unique identifier for the identity store, such as
     /// `d-1234567890`. In this example, `d-` is a fixed prefix, and `1234567890` is
     /// a randomly generated string that contains numbers and lower case letters.
     /// This value is generated at the time that a new identity store is created.
+    ///
+    /// You can specify the identity store by ID or by Amazon Resource Name (ARN).
+    /// For example, identity store ID `d-1234567890` or identity store ARN
+    /// `arn:aws:identitystore::111122223333:identitystore/d-1234567890`.
     identity_store_id: []const u8,
 
     pub const json_field_names = .{
@@ -44,11 +52,20 @@ pub const DescribeGroupOutput = struct {
     /// resource by an external identity provider.
     external_ids: ?[]const ExternalId = null,
 
+    /// The Amazon Resource Name (ARN) of the group in the identity store. For
+    /// example,
+    /// `arn:aws:identitystore:::group/a1b2c3d4-5678-90ab-cdef-EXAMPLE22222`.
+    group_arn: []const u8,
+
     /// The identifier for a group in the identity store.
     group_id: []const u8,
 
     /// The globally unique identifier for the identity store.
     identity_store_id: []const u8,
+
+    /// The current revision of the group in the identity store. This value changes
+    /// each time the group is modified.
+    revision: []const u8,
 
     /// The date and time the group was last updated.
     updated_at: ?i64 = null,
@@ -62,8 +79,10 @@ pub const DescribeGroupOutput = struct {
         .description = "Description",
         .display_name = "DisplayName",
         .external_ids = "ExternalIds",
+        .group_arn = "GroupArn",
         .group_id = "GroupId",
         .identity_store_id = "IdentityStoreId",
+        .revision = "Revision",
         .updated_at = "UpdatedAt",
         .updated_by = "UpdatedBy",
     };

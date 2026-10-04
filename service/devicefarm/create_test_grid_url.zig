@@ -20,11 +20,11 @@ pub const CreateTestGridUrlInput = struct {
 };
 
 pub const CreateTestGridUrlOutput = struct {
-    /// The number of seconds the URL from CreateTestGridUrlResult$url stays active.
+    /// The number of seconds the URL stays active from creation.
     expires: ?i64 = null,
 
-    /// A signed URL, expiring in CreateTestGridUrlRequest$expiresInSeconds seconds,
-    /// to be passed
+    /// A signed URL, expiring in the time specified by the
+    /// `CreateTestGridUrlRequest`, to be passed
     /// to a `RemoteWebDriver`.
     url: ?[]const u8 = null,
 

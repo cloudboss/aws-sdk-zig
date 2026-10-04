@@ -7,6 +7,8 @@ pub const RelationalDatabaseMetricName = enum {
     free_storage_space,
     network_receive_throughput,
     network_transmit_throughput,
+    freeable_memory,
+    swap_usage,
 
     pub const json_field_names = .{
         .cpu_utilization = "CPUUtilization",
@@ -15,6 +17,8 @@ pub const RelationalDatabaseMetricName = enum {
         .free_storage_space = "FreeStorageSpace",
         .network_receive_throughput = "NetworkReceiveThroughput",
         .network_transmit_throughput = "NetworkTransmitThroughput",
+        .freeable_memory = "FreeableMemory",
+        .swap_usage = "SwapUsage",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +29,8 @@ pub const RelationalDatabaseMetricName = enum {
             .free_storage_space => "FreeStorageSpace",
             .network_receive_throughput => "NetworkReceiveThroughput",
             .network_transmit_throughput => "NetworkTransmitThroughput",
+            .freeable_memory => "FreeableMemory",
+            .swap_usage => "SwapUsage",
         };
     }
 

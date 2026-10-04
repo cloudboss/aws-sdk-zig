@@ -4,11 +4,17 @@ pub const RouteResponseNoticeCode = enum {
     main_language_not_found,
     other,
     travel_time_exceeds_driver_work_hours,
+    transit_data_unavailable,
+    transit_route_unavailable,
+    no_transit_stations_found,
 
     pub const json_field_names = .{
         .main_language_not_found = "MainLanguageNotFound",
         .other = "Other",
         .travel_time_exceeds_driver_work_hours = "TravelTimeExceedsDriverWorkHours",
+        .transit_data_unavailable = "TransitDataUnavailable",
+        .transit_route_unavailable = "TransitRouteUnavailable",
+        .no_transit_stations_found = "NoTransitStationsFound",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +22,9 @@ pub const RouteResponseNoticeCode = enum {
             .main_language_not_found => "MainLanguageNotFound",
             .other => "Other",
             .travel_time_exceeds_driver_work_hours => "TravelTimeExceedsDriverWorkHours",
+            .transit_data_unavailable => "TransitDataUnavailable",
+            .transit_route_unavailable => "TransitRouteUnavailable",
+            .no_transit_stations_found => "NoTransitStationsFound",
         };
     }
 

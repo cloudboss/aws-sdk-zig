@@ -112,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportDocumentationPart
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ImportDocumentationPartsOutput {
-    var result: ImportDocumentationPartsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ImportDocumentationPartsOutput, body, allocator);
-    }
+    const result: ImportDocumentationPartsOutput = try aws.json.parseJsonObject(
+        ImportDocumentationPartsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteMultiRegionEndpoi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteMultiRegionEndpointOutput {
-    var result: DeleteMultiRegionEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteMultiRegionEndpointOutput, body, allocator);
-    }
+    const result: DeleteMultiRegionEndpointOutput = try aws.json.parseJsonObject(
+        DeleteMultiRegionEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

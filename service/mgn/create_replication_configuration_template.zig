@@ -8,6 +8,7 @@ const ReplicationConfigurationDataPlaneRouting = @import("replication_configurat
 const ReplicationConfigurationDefaultLargeStagingDiskType = @import("replication_configuration_default_large_staging_disk_type.zig").ReplicationConfigurationDefaultLargeStagingDiskType;
 const ReplicationConfigurationEbsEncryption = @import("replication_configuration_ebs_encryption.zig").ReplicationConfigurationEbsEncryption;
 const InternetProtocol = @import("internet_protocol.zig").InternetProtocol;
+const StorageConfiguration = @import("storage_configuration.zig").StorageConfiguration;
 
 pub const CreateReplicationConfigurationTemplateInput = struct {
     /// Request to associate the default Application Migration Service Security
@@ -56,6 +57,9 @@ pub const CreateReplicationConfigurationTemplateInput = struct {
     /// creation.
     staging_area_tags: []const aws.map.StringMapEntry,
 
+    /// Request to configure storage during Replication Settings template creation.
+    storage_configuration: ?StorageConfiguration = null,
+
     /// Request to store snapshot on local zone during Replication Settings template
     /// creation.
     store_snapshot_on_local_zone: ?bool = null,
@@ -83,6 +87,7 @@ pub const CreateReplicationConfigurationTemplateInput = struct {
         .replication_servers_security_groups_i_ds = "replicationServersSecurityGroupsIDs",
         .staging_area_subnet_id = "stagingAreaSubnetId",
         .staging_area_tags = "stagingAreaTags",
+        .storage_configuration = "storageConfiguration",
         .store_snapshot_on_local_zone = "storeSnapshotOnLocalZone",
         .tags = "tags",
         .use_dedicated_replication_server = "useDedicatedReplicationServer",
@@ -180,6 +185,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationConfig
     try body_buf.appendSlice(allocator, "\"stagingAreaTags\":");
     try aws.json.writeValue(@TypeOf(input.staging_area_tags), input.staging_area_tags, allocator, &body_buf);
     has_prev = true;
+    if (input.storage_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"storageConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.store_snapshot_on_local_zone) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"storeSnapshotOnLocalZone\":");
@@ -218,10 +229,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateReplicationConfig
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateReplicationConfigurationTemplateOutput {
-    var result: CreateReplicationConfigurationTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateReplicationConfigurationTemplateOutput, body, allocator);
-    }
+    const result: CreateReplicationConfigurationTemplateOutput = try aws.json.parseJsonObject(
+        CreateReplicationConfigurationTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

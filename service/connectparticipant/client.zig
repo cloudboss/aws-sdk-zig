@@ -64,7 +64,7 @@ pub const Client = struct {
     /// an attachment
     /// with that identifier is already being uploaded.
     ///
-    /// For security recommendations, see [Amazon Connect Chat security best
+    /// For security recommendations, see [Connect Customer Chat security best
     /// practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
     ///
     /// `ConnectionToken` is used for invoking this API instead of
@@ -78,10 +78,10 @@ pub const Client = struct {
 
     /// Creates the participant's connection.
     ///
-    /// For security recommendations, see [Amazon Connect Chat security best
+    /// For security recommendations, see [Connect Customer Chat security best
     /// practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
     ///
-    /// For WebRTC security recommendations, see [Amazon Connect WebRTC security
+    /// For WebRTC security recommendations, see [Connect Customer WebRTC security
     /// best
     /// practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-webrtc-security).
     ///
@@ -170,7 +170,7 @@ pub const Client = struct {
 
     /// Retrieves the view for the specified view token.
     ///
-    /// For security recommendations, see [Amazon Connect Chat security best
+    /// For security recommendations, see [Connect Customer Chat security best
     /// practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
     pub fn describeView(self: *Self, allocator: std.mem.Allocator, input: describe_view.DescribeViewInput, options: CallOptions) !describe_view.DescribeViewOutput {
         return describe_view.execute(self, allocator, input, options);
@@ -178,7 +178,7 @@ pub const Client = struct {
 
     /// Disconnects a participant.
     ///
-    /// For security recommendations, see [Amazon Connect Chat security best
+    /// For security recommendations, see [Connect Customer Chat security best
     /// practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
     ///
     /// `ConnectionToken` is used for invoking this API instead of
@@ -193,7 +193,7 @@ pub const Client = struct {
     /// Provides a pre-signed URL for download of a completed attachment. This is an
     /// asynchronous API for use with active contacts.
     ///
-    /// For security recommendations, see [Amazon Connect Chat security best
+    /// For security recommendations, see [Connect Customer Chat security best
     /// practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
     ///
     /// * The participant role `CUSTOM_BOT` is not permitted to access
@@ -214,7 +214,7 @@ pub const Client = struct {
     /// the
     /// AuthenticateCustomer flow block.
     ///
-    /// For security recommendations, see [Amazon Connect Chat security best
+    /// For security recommendations, see [Connect Customer Chat security best
     /// practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
     ///
     /// * This API can only be called within one minute of receiving the
@@ -239,7 +239,7 @@ pub const Client = struct {
     /// [Enable persistent
     /// chat](https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html).
     ///
-    /// For security recommendations, see [Amazon Connect Chat security best
+    /// For security recommendations, see [Connect Customer Chat security best
     /// practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
     ///
     /// If you have a process that consumes events in the transcript of an chat that
@@ -282,7 +282,7 @@ pub const Client = struct {
     /// a supervisor
     /// is barged-in will result in a conflict exception.
     ///
-    /// For security recommendations, see [Amazon Connect Chat security best
+    /// For security recommendations, see [Connect Customer Chat security best
     /// practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
     ///
     /// `ConnectionToken` is used for invoking this API instead of
@@ -296,7 +296,7 @@ pub const Client = struct {
 
     /// Sends a message.
     ///
-    /// For security recommendations, see [Amazon Connect Chat security best
+    /// For security recommendations, see [Connect Customer Chat security best
     /// practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
     ///
     /// `ConnectionToken` is used for invoking this API instead of
@@ -312,7 +312,7 @@ pub const Client = struct {
     /// directly to
     /// S3.
     ///
-    /// For security recommendations, see [Amazon Connect Chat security best
+    /// For security recommendations, see [Connect Customer Chat security best
     /// practices](https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat).
     ///
     /// `ConnectionToken` is used for invoking this API instead of

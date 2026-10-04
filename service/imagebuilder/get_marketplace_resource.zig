@@ -11,8 +11,8 @@ pub const GetMarketplaceResourceInput = struct {
     /// Services Marketplace resource.
     resource_arn: []const u8,
 
-    /// The bucket path that you can specify to download the resource from Amazon
-    /// S3.
+    /// The Amazon S3 location of the component artifact to retrieve, in
+    /// `s3://bucket/key` form.
     resource_location: ?[]const u8 = null,
 
     /// Specifies which type of Amazon Web Services Marketplace resource Image
@@ -34,7 +34,8 @@ pub const GetMarketplaceResourceOutput = struct {
     /// resource that was requested.
     resource_arn: ?[]const u8 = null,
 
-    /// The obfuscated S3 URL to download the component artifact from.
+    /// A time-limited presigned URL for downloading the component artifact from
+    /// Amazon S3.
     url: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -110,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMarketplaceResourceI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMarketplaceResourceOutput {
-    var result: GetMarketplaceResourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMarketplaceResourceOutput, body, allocator);
-    }
+    const result: GetMarketplaceResourceOutput = try aws.json.parseJsonObject(
+        GetMarketplaceResourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

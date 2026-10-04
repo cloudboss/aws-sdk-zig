@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMinuteUsageInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMinuteUsageOutput {
-    var result: GetMinuteUsageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMinuteUsageOutput, body, allocator);
-    }
+    const result: GetMinuteUsageOutput = try aws.json.parseJsonObject(
+        GetMinuteUsageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

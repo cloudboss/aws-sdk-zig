@@ -13,8 +13,8 @@ pub const EpisodicOverrideReflectionConfigurationInput = struct {
     /// The model ID to use for the reflection step of the episodic memory strategy.
     model_id: []const u8,
 
-    /// The namespaces to use for episodic reflection. Can be less nested than the
-    /// episodic namespaces.
+    /// This is a legacy parameter, use `namespaceTemplates`. The namespaces to use
+    /// for episodic reflection. Can be less nested than the episodic namespaces.
     namespaces: ?[]const []const u8 = null,
 
     /// The namespaceTemplates to use for episodic reflection. Can be less nested

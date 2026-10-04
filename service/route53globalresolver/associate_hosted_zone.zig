@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateHostedZoneInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateHostedZoneOutput {
-    var result: AssociateHostedZoneOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateHostedZoneOutput, body, allocator);
-    }
+    const result: AssociateHostedZoneOutput = try aws.json.parseJsonObject(
+        AssociateHostedZoneOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

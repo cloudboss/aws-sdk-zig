@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPrivacyBudgetTempla
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListPrivacyBudgetTemplatesOutput {
-    var result: ListPrivacyBudgetTemplatesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListPrivacyBudgetTemplatesOutput, body, allocator);
-    }
+    const result: ListPrivacyBudgetTemplatesOutput = try aws.json.parseJsonObject(
+        ListPrivacyBudgetTemplatesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

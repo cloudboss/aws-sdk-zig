@@ -23,7 +23,8 @@ pub const DescribeAlarmContributorsInput = struct {
 
 pub const DescribeAlarmContributorsOutput = struct {
     /// A list of alarm contributors that provide details about the individual time
-    /// series contributing to the alarm's state.
+    /// series
+    /// contributing to the alarm's state.
     alarm_contributors: ?[]const AlarmContributor = null,
 
     /// The token that marks the start of the next batch of returned results.

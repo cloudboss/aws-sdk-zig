@@ -9,6 +9,7 @@ const ReplicationConfigurationDefaultLargeStagingDiskType = @import("replication
 const ReplicationConfigurationEbsEncryption = @import("replication_configuration_ebs_encryption.zig").ReplicationConfigurationEbsEncryption;
 const InternetProtocol = @import("internet_protocol.zig").InternetProtocol;
 const ReplicationConfigurationReplicatedDisk = @import("replication_configuration_replicated_disk.zig").ReplicationConfigurationReplicatedDisk;
+const StorageConfiguration = @import("storage_configuration.zig").StorageConfiguration;
 
 pub const UpdateReplicationConfigurationInput = struct {
     /// Update replication configuration Account ID request.
@@ -62,6 +63,9 @@ pub const UpdateReplicationConfigurationInput = struct {
     /// Update replication configuration Staging Area Tags request.
     staging_area_tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// Update replication configuration storage configuration.
+    storage_configuration: ?StorageConfiguration = null,
+
     /// Update replication configuration store snapshot on local zone.
     store_snapshot_on_local_zone: ?bool = null,
 
@@ -88,6 +92,7 @@ pub const UpdateReplicationConfigurationInput = struct {
         .source_server_id = "sourceServerID",
         .staging_area_subnet_id = "stagingAreaSubnetId",
         .staging_area_tags = "stagingAreaTags",
+        .storage_configuration = "storageConfiguration",
         .store_snapshot_on_local_zone = "storeSnapshotOnLocalZone",
         .use_dedicated_replication_server = "useDedicatedReplicationServer",
         .use_fips_endpoint = "useFipsEndpoint",
@@ -141,6 +146,9 @@ pub const UpdateReplicationConfigurationOutput = struct {
     /// Replication Configuration Staging Area tags.
     staging_area_tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// Replication Configuration storage configuration.
+    storage_configuration: ?StorageConfiguration = null,
+
     /// Replication Configuration store snapshot on local zone.
     store_snapshot_on_local_zone: ?bool = null,
 
@@ -166,6 +174,7 @@ pub const UpdateReplicationConfigurationOutput = struct {
         .source_server_id = "sourceServerID",
         .staging_area_subnet_id = "stagingAreaSubnetId",
         .staging_area_tags = "stagingAreaTags",
+        .storage_configuration = "storageConfiguration",
         .store_snapshot_on_local_zone = "storeSnapshotOnLocalZone",
         .use_dedicated_replication_server = "useDedicatedReplicationServer",
         .use_fips_endpoint = "useFipsEndpoint",
@@ -302,6 +311,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateReplicationConfig
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.storage_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"storageConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.store_snapshot_on_local_zone) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"storeSnapshotOnLocalZone\":");
@@ -336,10 +351,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateReplicationConfig
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateReplicationConfigurationOutput {
-    var result: UpdateReplicationConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateReplicationConfigurationOutput, body, allocator);
-    }
+    const result: UpdateReplicationConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateReplicationConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

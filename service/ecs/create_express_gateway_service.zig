@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const ExpressCpuArchitecture = @import("express_cpu_architecture.zig").ExpressCpuArchitecture;
 const ExpressGatewayServiceNetworkConfiguration = @import("express_gateway_service_network_configuration.zig").ExpressGatewayServiceNetworkConfiguration;
 const ExpressGatewayContainer = @import("express_gateway_container.zig").ExpressGatewayContainer;
 const ExpressGatewayScalingTarget = @import("express_gateway_scaling_target.zig").ExpressGatewayScalingTarget;
@@ -21,6 +22,21 @@ pub const CreateExpressGatewayServiceInput = struct {
     /// Express service is 256 (.25 vCPU).
     cpu: ?[]const u8 = null,
 
+    /// The CPU architecture that the task runs on. If you don't specify a value,
+    /// the default is `X86_64`.
+    ///
+    /// Valid values:
+    ///
+    /// * `X86_64` - The x86 64-bit architecture.
+    /// * `ARM64` - The 64-bit ARM architecture.
+    ///
+    /// Ensure that the container image you specify supports the architecture you
+    /// choose. The operating system family for an Express service is always
+    /// `LINUX`.
+    ///
+    /// You can't specify `cpuArchitecture` together with `taskDefinitionArn`.
+    cpu_architecture: ?ExpressCpuArchitecture = null,
+
     /// The Amazon Resource Name (ARN) of the task execution role that grants the
     /// Amazon ECS container agent permission to make Amazon Web Services API calls
     /// on your behalf. This role is required for Amazon ECS to pull container
@@ -31,7 +47,7 @@ pub const CreateExpressGatewayServiceInput = struct {
     /// The execution role must include the `AmazonECSTaskExecutionRolePolicy`
     /// managed policy or equivalent permissions. For Express services, this role is
     /// used during task startup and runtime for container management operations.
-    execution_role_arn: []const u8,
+    execution_role_arn: ?[]const u8 = null,
 
     /// The path on the container that the Application Load Balancer uses for health
     /// checks. This should be a valid HTTP endpoint that returns a successful
@@ -78,7 +94,7 @@ pub const CreateExpressGatewayServiceInput = struct {
     /// environment variables, secrets, and startup commands. The container image
     /// can be from Amazon ECR, Docker Hub, or any other container registry
     /// accessible to your execution role.
-    primary_container: ExpressGatewayContainer,
+    primary_container: ?ExpressGatewayContainer = null,
 
     /// The auto-scaling configuration for the Express service. This defines how the
     /// service automatically adjusts the number of running tasks based on demand.
@@ -104,6 +120,20 @@ pub const CreateExpressGatewayServiceInput = struct {
     /// up to 50 tags to a service.
     tags: ?[]const Tag = null,
 
+    /// The Amazon Resource Name (ARN) of a task definition to use to create the
+    /// Express Gateway service. This allows you to manage your own task definition,
+    /// giving you more control over the service configuration such as adding
+    /// sidecar containers.
+    ///
+    /// The task definition must have a container named `Main` with a single TCP
+    /// port mapping that includes a container port and port name. The task
+    /// definition must also have `FARGATE` compatibility.
+    ///
+    /// If you provide a task definition ARN, you cannot also specify
+    /// `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`, `memory`, or
+    /// `cpuArchitecture`.
+    task_definition_arn: ?[]const u8 = null,
+
     /// The Amazon Resource Name (ARN) of the IAM role that containers in this task
     /// can assume. This role allows your application code to access other Amazon
     /// Web Services services securely.
@@ -118,6 +148,7 @@ pub const CreateExpressGatewayServiceInput = struct {
     pub const json_field_names = .{
         .cluster = "cluster",
         .cpu = "cpu",
+        .cpu_architecture = "cpuArchitecture",
         .execution_role_arn = "executionRoleArn",
         .health_check_path = "healthCheckPath",
         .infrastructure_role_arn = "infrastructureRoleArn",
@@ -127,6 +158,7 @@ pub const CreateExpressGatewayServiceInput = struct {
         .scaling_target = "scalingTarget",
         .service_name = "serviceName",
         .tags = "tags",
+        .task_definition_arn = "taskDefinitionArn",
         .task_role_arn = "taskRoleArn",
     };
 };

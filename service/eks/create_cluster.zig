@@ -8,7 +8,10 @@ const CreateAccessConfigRequest = @import("create_access_config_request.zig").Cr
 const ComputeConfigRequest = @import("compute_config_request.zig").ComputeConfigRequest;
 const ControlPlaneScalingConfig = @import("control_plane_scaling_config.zig").ControlPlaneScalingConfig;
 const EncryptionConfig = @import("encryption_config.zig").EncryptionConfig;
+const KubeApiServerConfigRequest = @import("kube_api_server_config_request.zig").KubeApiServerConfigRequest;
+const KubeControllerManagerConfigRequest = @import("kube_controller_manager_config_request.zig").KubeControllerManagerConfigRequest;
 const KubernetesNetworkConfigRequest = @import("kubernetes_network_config_request.zig").KubernetesNetworkConfigRequest;
+const KubeSchedulerConfigRequest = @import("kube_scheduler_config_request.zig").KubeSchedulerConfigRequest;
 const Logging = @import("logging.zig").Logging;
 const OutpostConfigRequest = @import("outpost_config_request.zig").OutpostConfigRequest;
 const RemoteNetworkConfigRequest = @import("remote_network_config_request.zig").RemoteNetworkConfigRequest;
@@ -100,9 +103,27 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateClusterInput, con
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.kube_api_server_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"kubeApiServerConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.kube_controller_manager_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"kubeControllerManagerConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.kubernetes_network_config) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"kubernetesNetworkConfig\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.kube_scheduler_config) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"kubeSchedulerConfig\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -182,10 +203,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateClusterInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateClusterOutput {
-    var result: CreateClusterOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateClusterOutput, body, allocator);
-    }
+    const result: CreateClusterOutput = try aws.json.parseJsonObject(
+        CreateClusterOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

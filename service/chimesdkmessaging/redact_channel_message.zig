@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RedactChannelMessageInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RedactChannelMessageOutput {
-    var result: RedactChannelMessageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RedactChannelMessageOutput, body, allocator);
-    }
+    const result: RedactChannelMessageOutput = try aws.json.parseJsonObject(
+        RedactChannelMessageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

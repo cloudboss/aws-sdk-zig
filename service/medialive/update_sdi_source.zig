@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSdiSourceInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateSdiSourceOutput {
-    var result: UpdateSdiSourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateSdiSourceOutput, body, allocator);
-    }
+    const result: UpdateSdiSourceOutput = try aws.json.parseJsonObject(
+        UpdateSdiSourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

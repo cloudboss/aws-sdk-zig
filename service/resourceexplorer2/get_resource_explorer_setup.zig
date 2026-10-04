@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetResourceExplorerSetu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetResourceExplorerSetupOutput {
-    var result: GetResourceExplorerSetupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetResourceExplorerSetupOutput, body, allocator);
-    }
+    const result: GetResourceExplorerSetupOutput = try aws.json.parseJsonObject(
+        GetResourceExplorerSetupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

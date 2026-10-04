@@ -32,8 +32,8 @@ pub const TaxRegistration = struct {
     /// refer to country specific information in API document.
     sector: ?Sector = null,
 
-    /// The status of your TRN. This can be either `Verified`, `Pending`,
-    /// `Deleted`, or `Rejected`.
+    /// The status of your TRN. This can be either `Verified`, `Pending`, `Deleted`,
+    /// or `Rejected`.
     status: TaxRegistrationStatus,
 
     /// The metadata for your tax document.

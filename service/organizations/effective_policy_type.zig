@@ -12,6 +12,7 @@ pub const EffectivePolicyType = enum {
     bedrock_policy,
     s3_policy,
     network_security_director_policy,
+    guardduty_policy,
 
     pub const json_field_names = .{
         .tag_policy = "TAG_POLICY",
@@ -25,6 +26,7 @@ pub const EffectivePolicyType = enum {
         .bedrock_policy = "BEDROCK_POLICY",
         .s3_policy = "S3_POLICY",
         .network_security_director_policy = "NETWORK_SECURITY_DIRECTOR_POLICY",
+        .guardduty_policy = "GUARDDUTY_POLICY",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -40,6 +42,7 @@ pub const EffectivePolicyType = enum {
             .bedrock_policy => "BEDROCK_POLICY",
             .s3_policy => "S3_POLICY",
             .network_security_director_policy => "NETWORK_SECURITY_DIRECTOR_POLICY",
+            .guardduty_policy => "GUARDDUTY_POLICY",
         };
     }
 

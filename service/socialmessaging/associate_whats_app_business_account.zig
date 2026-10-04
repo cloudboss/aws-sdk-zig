@@ -23,6 +23,10 @@ pub const AssociateWhatsAppBusinessAccountInput = struct {
 };
 
 pub const AssociateWhatsAppBusinessAccountOutput = struct {
+    /// The ID of the WhatsApp Business Account that was linked to your Amazon Web
+    /// Services account.
+    linked_whats_app_business_account_id: ?[]const u8 = null,
+
     /// Contains your WhatsApp registration status.
     signup_callback_result: ?WhatsAppSignupCallbackResult = null,
 
@@ -30,6 +34,7 @@ pub const AssociateWhatsAppBusinessAccountOutput = struct {
     status_code: ?i32 = null,
 
     pub const json_field_names = .{
+        .linked_whats_app_business_account_id = "linkedWhatsAppBusinessAccountId",
         .signup_callback_result = "signupCallbackResult",
         .status_code = "statusCode",
     };
@@ -99,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateWhatsAppBusine
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssociateWhatsAppBusinessAccountOutput {
-    var result: AssociateWhatsAppBusinessAccountOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssociateWhatsAppBusinessAccountOutput, body, allocator);
-    }
+    const result: AssociateWhatsAppBusinessAccountOutput = try aws.json.parseJsonObject(
+        AssociateWhatsAppBusinessAccountOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InstantiateSolNetworkIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !InstantiateSolNetworkInstanceOutput {
-    var result: InstantiateSolNetworkInstanceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(InstantiateSolNetworkInstanceOutput, body, allocator);
-    }
+    const result: InstantiateSolNetworkInstanceOutput = try aws.json.parseJsonObject(
+        InstantiateSolNetworkInstanceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

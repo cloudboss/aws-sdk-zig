@@ -1,8 +1,8 @@
 const Amount = @import("amount.zig").Amount;
 
-/// Available session limits. Currently only budget is supported.
+/// The available spending limits for a payment session.
 pub const AvailableLimits = struct {
-    /// The available spend amount for this session.
+    /// The remaining available amount that can be spent.
     available_spend_amount: ?Amount = null,
 
     /// The timestamp when the available limits were last updated.

@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchDeleteUserInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchDeleteUserOutput {
-    var result: BatchDeleteUserOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchDeleteUserOutput, body, allocator);
-    }
+    const result: BatchDeleteUserOutput = try aws.json.parseJsonObject(
+        BatchDeleteUserOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

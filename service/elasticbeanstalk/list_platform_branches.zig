@@ -10,33 +10,28 @@ const serde = @import("serde.zig");
 
 pub const ListPlatformBranchesInput = struct {
     /// Criteria for restricting the resulting list of platform branches. The filter
-    /// is evaluated
-    /// as a logical conjunction (AND) of the separate `SearchFilter` terms.
+    /// is evaluated as a logical conjunction (AND) of the separate
+    /// `SearchFilter` terms.
     ///
     /// The following list shows valid attribute values for each of the
-    /// `SearchFilter`
-    /// terms. Most operators take a single value. The `in` and `not_in`
-    /// operators can take multiple values.
+    /// `SearchFilter` terms. Most operators take a single value. The
+    /// `in` and `not_in` operators can take multiple values.
     ///
     /// * `Attribute = BranchName`:
     ///
-    /// * `Operator`: `=` | `!=` | `begins_with`
-    /// | `ends_with` | `contains` | `in` |
-    /// `not_in`
+    /// * `Operator`: `=` | `!=` | `begins_with` | `ends_with` | `contains` |
+    /// `in` | `not_in`
     ///
     /// * `Attribute = LifecycleState`:
     ///
-    /// * `Operator`: `=` | `!=` | `in` |
-    /// `not_in`
+    /// * `Operator`: `=` | `!=` | `in` | `not_in`
     ///
-    /// * `Values`: `beta` | `supported` |
-    /// `deprecated` | `retired`
+    /// * `Values`: `beta` | `supported` | `deprecated` | `retired`
     ///
     /// * `Attribute = PlatformName`:
     ///
-    /// * `Operator`: `=` | `!=` | `begins_with`
-    /// | `ends_with` | `contains` | `in` |
-    /// `not_in`
+    /// * `Operator`: `=` | `!=` | `begins_with` | `ends_with` | `contains` |
+    /// `in` | `not_in`
     ///
     /// * `Attribute = TierType`:
     ///
@@ -46,18 +41,15 @@ pub const ListPlatformBranchesInput = struct {
     ///
     /// Array size: limited to 10 `SearchFilter` objects.
     ///
-    /// Within each `SearchFilter` item, the `Values` array is limited to 10
-    /// items.
+    /// Within each `SearchFilter` item, the `Values` array is limited to 10 items.
     filters: ?[]const SearchFilter = null,
 
     /// The maximum number of platform branch values returned in one call.
     max_records: ?i32 = null,
 
     /// For a paginated request. Specify a token from a previous response page to
-    /// retrieve the
-    /// next response page. All other parameter values must be identical to the ones
-    /// specified in the
-    /// initial request.
+    /// retrieve the next response page. All other parameter values must be
+    /// identical to the ones specified in the initial request.
     ///
     /// If no `NextToken` is specified, the first page is retrieved.
     next_token: ?[]const u8 = null,
@@ -65,8 +57,8 @@ pub const ListPlatformBranchesInput = struct {
 
 pub const ListPlatformBranchesOutput = struct {
     /// In a paginated request, if this value isn't `null`, it's the token that you
-    /// can
-    /// pass in a subsequent request to get the next response page.
+    /// can pass in a subsequent request to get the next response
+    /// page.
     next_token: ?[]const u8 = null,
 
     /// Summary information about the platform branches.

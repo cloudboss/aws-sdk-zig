@@ -8,8 +8,27 @@ const MetricType = @import("metric_type.zig").MetricType;
 /// policies](https://docs.aws.amazon.com/autoscaling/application/userguide/monitoring-cloudwatch.html#predefined-metrics) in the
 /// *Application Auto Scaling User Guide*.
 pub const PredefinedMetricSpecification = struct {
-    /// The metric type. The `ALBRequestCountPerTarget` metric type applies only to
+    /// The metric type. The following are notes about specific metric types:
+    ///
+    /// * `ALBRequestCountPerTarget` - This metric type applies only to
     /// Spot Fleets and ECS services.
+    ///
+    /// * `ECSServiceAverageCPUUtilizationHighResolution` - The high-resolution
+    /// version of `ECSServiceAverageCPUUtilization` that uses 20-second CloudWatch
+    /// metrics. Use this metric for target tracking scaling policies that evaluate
+    /// metrics
+    /// every 20 seconds. You must enable high-resolution metrics in Amazon ECS
+    /// before creating
+    /// a scaling policy with this metric type.
+    ///
+    /// * `ECSServiceAverageMemoryUtilizationHighResolution` - The high-resolution
+    /// version of `ECSServiceAverageMemoryUtilization` that uses 20-second
+    /// CloudWatch
+    /// metrics. Use this metric for target tracking scaling policies that evaluate
+    /// metrics
+    /// every 20 seconds. You must enable high-resolution metrics in Amazon ECS
+    /// before creating
+    /// a scaling policy with this metric type.
     predefined_metric_type: MetricType,
 
     /// Identifies the resource associated with the metric type. You can't specify a

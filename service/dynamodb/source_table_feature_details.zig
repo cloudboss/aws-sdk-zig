@@ -3,6 +3,7 @@ const LocalSecondaryIndexInfo = @import("local_secondary_index_info.zig").LocalS
 const SSEDescription = @import("sse_description.zig").SSEDescription;
 const StreamSpecification = @import("stream_specification.zig").StreamSpecification;
 const TimeToLiveDescription = @import("time_to_live_description.zig").TimeToLiveDescription;
+const VectorIndexInfo = @import("vector_index_info.zig").VectorIndexInfo;
 
 /// Contains the details of the features enabled on the table when the backup
 /// was created.
@@ -32,11 +33,19 @@ pub const SourceTableFeatureDetails = struct {
     /// Time to Live settings on the table when the backup was created.
     time_to_live_description: ?TimeToLiveDescription = null,
 
+    /// The vector index properties for the table at the time the backup was
+    /// created,
+    /// including the index name, vector attribute, dimensions, distance function,
+    /// search
+    /// schema, and projection.
+    vector_indexes: ?[]const VectorIndexInfo = null,
+
     pub const json_field_names = .{
         .global_secondary_indexes = "GlobalSecondaryIndexes",
         .local_secondary_indexes = "LocalSecondaryIndexes",
         .sse_description = "SSEDescription",
         .stream_description = "StreamDescription",
         .time_to_live_description = "TimeToLiveDescription",
+        .vector_indexes = "VectorIndexes",
     };
 };

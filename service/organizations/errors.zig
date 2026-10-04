@@ -495,11 +495,15 @@ pub const ConflictException = struct {
 ///
 /// * ACCOUNT_CREATION_RATE_LIMIT_EXCEEDED: You attempted to exceed the number
 ///   of
-/// accounts that you can create in one day.
+/// accounts that can be in progress at a time.
 ///
 /// * ACCOUNT_CREATION_NOT_COMPLETE: Your account setup isn't complete or your
 /// account isn't fully active. You must complete the account setup before you
 /// create an organization.
+///
+/// * ACCOUNT_NOT_ACTIVE_FOR_TRANSFER_RESPONSIBILITY: Your account setup isn't
+/// complete or your account isn't fully active to invite or accept a Billing
+/// Transfer invitation.
 ///
 /// * ACTIVE_RESPONSIBILITY_TRANSFER_PROCESS: You cannot delete organization due
 ///   to an ongoing responsibility transfer process. For example, a pending
@@ -723,8 +727,20 @@ pub const ConflictException = struct {
 ///   organization cannot accept
 /// this transfer invitation because target organization is marked for deletion.
 ///
-/// * UNSUPPORTED_PRICING: Your organization has a pricing contract that is
+/// * TRANSFER_RESPONSIBILITY_UPDATE_NOT_ALLOWED: You cannot update this
+///   transfer
+/// because it is no longer active. Transfers that have been withdrawn,
+/// declined,
+/// expired, or cancelled cannot be modified.
+///
+/// * UNMET_BILLING_PREREQUISITE: Your current billing configuration is
 ///   unsupported.
+/// Contact Amazon Web Services Support for assistance.
+///
+/// * UNSUPPORTED_PRICING: Ineligible for Billing Transfer. Your organization is
+/// subject to a pricing agreement with Amazon Web Services that Billing
+/// Transfer does not
+/// support.
 ///
 /// * WAIT_PERIOD_ACTIVE: After you create an Amazon Web Services account, you
 ///   must wait until at
@@ -905,10 +921,9 @@ pub const HandshakeAlreadyInStateException = struct {
 /// * ORGANIZATION_ALREADY_HAS_ALL_FEATURES: The handshake request is invalid
 /// because the organization has already enabled all features.
 ///
-/// * ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD: The request failed because
-///   the
-/// account is from a different marketplace than the accounts in the
-/// organization.
+/// * ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD: You can only join an
+/// organization that operates in the same Amazon Web Services partition as your
+/// account.
 ///
 /// * ORGANIZATION_IS_ALREADY_PENDING_ALL_FEATURES_MIGRATION: The handshake
 ///   request
@@ -919,6 +934,8 @@ pub const HandshakeAlreadyInStateException = struct {
 /// * ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED: You attempted to
 ///   change
 /// the membership of an account too quickly after its previous change.
+///
+/// * PAST_DUE_INVOICE: Your organization has an invoice that is past due.
 ///
 /// * PAYMENT_INSTRUMENT_REQUIRED: You can't complete the operation with an
 ///   account
@@ -932,6 +949,12 @@ pub const HandshakeAlreadyInStateException = struct {
 ///
 /// * SOURCE_AND_TARGET_CANNOT_MATCH: An account can't accept a transfer
 ///   invitation if it is both the sender and recipient of the invitation.
+///
+/// * TARGET_ACCOUNT_VALIDATION_FAILURE: Billing transfer is not available for
+///   your
+/// account. Contact your billing administrator or Amazon Web Services Support
+/// for
+/// assistance.
 ///
 /// * UNUSED_PREPAYMENT_BALANCE: Your organization has an outstanding
 ///   pre-payment balance.
@@ -992,9 +1015,11 @@ pub const InvalidHandshakeTransitionException = struct {
 ///   must be the end
 /// of the last day of the month (23.59.59.999).
 ///
-/// * END_DATE_TOO_EARLY: You provided an invalid end date. It is too early for
-///   the transfer to
-/// end.
+/// * END_DATE_TOO_EARLY: You provided an invalid end date. The end date is too
+///   early.
+///
+/// * END_DATE_TOO_LATE: You provided an invalid end date. The end date is too
+///   late.
 ///
 /// * IMMUTABLE_POLICY: You specified a policy that is managed by Amazon Web
 ///   Services and can't be
@@ -1006,11 +1031,11 @@ pub const InvalidHandshakeTransitionException = struct {
 ///   the
 /// invited account owner.
 ///
-/// * INVALID_END_DATE: The selected withdrawal date doesn't meet the terms of
-///   your partner
-/// agreement. Visit Amazon Web Services Partner Central to view your partner
-/// agreements or contact your Amazon Web Services
-/// Partner for help.
+/// * INVALID_END_DATE: The selected withdrawal date doesn't meet the minimum
+///   notice
+/// period required by your partner agreement. Visit Amazon Web Services Partner
+/// Central or contact your Amazon Web Services
+/// Channel Partner for help.
 ///
 /// * INVALID_ENUM: You specified an invalid value.
 ///
@@ -1031,7 +1056,9 @@ pub const InvalidHandshakeTransitionException = struct {
 /// organization, or email) as a party.
 ///
 /// * INVALID_PATTERN: You provided a value that doesn't match the required
-/// pattern.
+/// pattern. The service also validates your free-text field values against
+/// common cross-site scripting (XSS) patterns and rejects requests that
+/// contain matching values.
 ///
 /// * INVALID_PATTERN_TARGET_ID: You specified a policy target ID that doesn't
 ///   match
@@ -1378,11 +1405,11 @@ pub const TooManyRequestsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 
-    type: ?[]const u8 = null,
+    @"type": ?[]const u8 = null,
 
     pub const json_field_names = .{
         .message = "Message",
-        .type = "Type",
+        .@"type" = "Type",
     };
 };
 

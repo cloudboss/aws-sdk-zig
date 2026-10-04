@@ -17,6 +17,16 @@ pub const RelatedEntityIdentifiers = struct {
     /// `arn:aws:aws-marketplace:us-east-1:999999999999:AWSMarketplace/OfferSet/offerset-sampleOfferSet32`.
     aws_marketplace_offer_sets: ?[]const []const u8 = null,
 
+    /// Specifies the AWS Marketplace products to associate with the `Opportunity`.
+    /// Each value is an Amazon Resource Name (ARN) that identifies a product
+    /// listing in AWS Marketplace.
+    aws_marketplace_products: ?[]const []const u8 = null,
+
+    /// Specifies the AWS Marketplace solutions to associate with the `Opportunity`.
+    /// Each value is an Amazon Resource Name (ARN) that identifies a solution
+    /// listing in AWS Marketplace.
+    aws_marketplace_solutions: ?[]const []const u8 = null,
+
     /// Enables the association of specific Amazon Web Services products with the
     /// `Opportunity`. Partners can indicate the relevant Amazon Web Services
     /// products for the `Opportunity`'s solution and align with the customer's
@@ -46,6 +56,8 @@ pub const RelatedEntityIdentifiers = struct {
     pub const json_field_names = .{
         .aws_marketplace_offers = "AwsMarketplaceOffers",
         .aws_marketplace_offer_sets = "AwsMarketplaceOfferSets",
+        .aws_marketplace_products = "AwsMarketplaceProducts",
+        .aws_marketplace_solutions = "AwsMarketplaceSolutions",
         .aws_products = "AwsProducts",
         .solutions = "Solutions",
     };

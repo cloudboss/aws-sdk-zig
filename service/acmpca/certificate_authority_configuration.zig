@@ -23,7 +23,8 @@ pub const CertificateAuthorityConfiguration = struct {
     /// Name of the algorithm your private CA uses to sign certificate requests.
     ///
     /// This parameter should not be confused with the `SigningAlgorithm` parameter
-    /// used to sign certificates when they are issued.
+    /// of the `IssueCertificate` API action, which is used to sign certificates
+    /// when they are issued.
     signing_algorithm: SigningAlgorithm,
 
     /// Structure that contains X.500 distinguished name information for your

@@ -8,7 +8,7 @@ const VocabularyLanguageCode = @import("vocabulary_language_code.zig").Vocabular
 const DefaultVocabulary = @import("default_vocabulary.zig").DefaultVocabulary;
 
 pub const ListDefaultVocabulariesInput = struct {
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -121,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDefaultVocabularies
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListDefaultVocabulariesOutput {
-    var result: ListDefaultVocabulariesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListDefaultVocabulariesOutput, body, allocator);
-    }
+    const result: ListDefaultVocabulariesOutput = try aws.json.parseJsonObject(
+        ListDefaultVocabulariesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

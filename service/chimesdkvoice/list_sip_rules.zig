@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSipRulesInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListSipRulesOutput {
-    var result: ListSipRulesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListSipRulesOutput, body, allocator);
-    }
+    const result: ListSipRulesOutput = try aws.json.parseJsonObject(
+        ListSipRulesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

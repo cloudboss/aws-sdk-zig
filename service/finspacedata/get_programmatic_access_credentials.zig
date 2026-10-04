@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetProgrammaticAccessCr
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetProgrammaticAccessCredentialsOutput {
-    var result: GetProgrammaticAccessCredentialsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetProgrammaticAccessCredentialsOutput, body, allocator);
-    }
+    const result: GetProgrammaticAccessCredentialsOutput = try aws.json.parseJsonObject(
+        GetProgrammaticAccessCredentialsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

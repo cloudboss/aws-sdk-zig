@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDeliverabilityDashbo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDeliverabilityDashboardOptionsOutput {
-    var result: GetDeliverabilityDashboardOptionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDeliverabilityDashboardOptionsOutput, body, allocator);
-    }
+    const result: GetDeliverabilityDashboardOptionsOutput = try aws.json.parseJsonObject(
+        GetDeliverabilityDashboardOptionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

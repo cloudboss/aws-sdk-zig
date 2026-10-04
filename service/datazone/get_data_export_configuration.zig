@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDataExportConfigurat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDataExportConfigurationOutput {
-    var result: GetDataExportConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDataExportConfigurationOutput, body, allocator);
-    }
+    const result: GetDataExportConfigurationOutput = try aws.json.parseJsonObject(
+        GetDataExportConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

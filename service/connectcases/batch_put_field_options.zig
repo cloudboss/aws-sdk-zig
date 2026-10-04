@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchPutFieldOptionsInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchPutFieldOptionsOutput {
-    var result: BatchPutFieldOptionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchPutFieldOptionsOutput, body, allocator);
-    }
+    const result: BatchPutFieldOptionsOutput = try aws.json.parseJsonObject(
+        BatchPutFieldOptionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

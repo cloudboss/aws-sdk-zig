@@ -741,6 +741,19 @@ pub const Client = struct {
 
     /// Update the details for the instance of IAM Identity Center that is owned by
     /// the Amazon Web Services account.
+    ///
+    /// In a single `UpdateInstance` request, you can perform only one of the
+    /// following operations:
+    ///
+    /// * Update the encryption configuration of the instance by specifying
+    ///   `EncryptionConfiguration`.
+    /// * Enable permission sets for the instance by specifying
+    ///   `PermissionSetsEnabled`.
+    ///
+    /// A request that specifies both `EncryptionConfiguration` and
+    /// `PermissionSetsEnabled` returns a `ValidationException`. To perform both
+    /// operations, call `UpdateInstance` separately for each. The two calls can be
+    /// made in parallel.
     pub fn updateInstance(self: *Self, allocator: std.mem.Allocator, input: update_instance.UpdateInstanceInput, options: CallOptions) !update_instance.UpdateInstanceOutput {
         return update_instance.execute(self, allocator, input, options);
     }

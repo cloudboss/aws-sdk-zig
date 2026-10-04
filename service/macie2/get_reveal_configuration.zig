@@ -71,10 +71,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRevealConfigurationI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRevealConfigurationOutput {
-    var result: GetRevealConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRevealConfigurationOutput, body, allocator);
-    }
+    const result: GetRevealConfigurationOutput = try aws.json.parseJsonObject(
+        GetRevealConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

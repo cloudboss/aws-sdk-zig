@@ -70,6 +70,10 @@ pub const BatchWriteItemOutput = struct {
     /// throughput.
     ///
     /// * `CapacityUnits` - The total number of capacity units consumed.
+    ///
+    /// If the table has vector indexes, each element also includes a
+    /// `VectorIndexes` field with `VectorWriteRequestBytes` consumed
+    /// for each affected vector index.
     consumed_capacity: ?[]const ConsumedCapacity = null,
 
     /// A list of tables that were processed by `BatchWriteItem` and, for each

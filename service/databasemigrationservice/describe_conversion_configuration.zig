@@ -16,7 +16,12 @@ pub const DescribeConversionConfigurationInput = struct {
 };
 
 pub const DescribeConversionConfigurationOutput = struct {
-    /// The configuration parameters for the schema conversion project.
+    /// A JSON string that contains the schema conversion settings for the migration
+    /// project.
+    /// For the format and available settings, see
+    /// [Specifying schema conversion
+    /// settings for migration
+    /// projects](https://docs.aws.amazon.com/dms/latest/userguide/schema-conversion-settings.html).
     conversion_configuration: ?[]const u8 = null,
 
     /// The name or Amazon Resource Name (ARN) for the schema conversion project.

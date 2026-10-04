@@ -23,6 +23,24 @@ pub const CreateDaemonInput = struct {
     /// The Amazon Resource Name (ARN) of the cluster to create the daemon in.
     cluster_arn: ?[]const u8 = null,
 
+    /// If the `critical` parameter of a daemon is `true`, and the daemon task
+    /// fails, stops, or becomes unhealthy, Amazon ECS drains the container instance
+    /// and stops the other tasks running on it. If the `critical` parameter is
+    /// `false`, the daemon task failure doesn't affect the other tasks on the
+    /// instance. The default value is `true`.
+    ///
+    /// A non-critical daemon doesn't block instance registration. The container
+    /// instance becomes active and continues to run your other tasks, whether the
+    /// daemon task fails during scale-out or during a deployment.
+    ///
+    /// Amazon ECS emits an EventBridge event when a daemon task fails to start, for
+    /// both critical and non-critical daemons.
+    ///
+    /// Daemon task launch failures during a deployment are still counted by the
+    /// deployment circuit breaker. The circuit breaker can roll back an unstable
+    /// target revision.
+    critical: ?bool = null,
+
     /// The name of the daemon. Up to 255 letters (uppercase and lowercase),
     /// numbers, underscores, and hyphens are allowed.
     daemon_name: []const u8,
@@ -80,6 +98,7 @@ pub const CreateDaemonInput = struct {
         .capacity_provider_arns = "capacityProviderArns",
         .client_token = "clientToken",
         .cluster_arn = "clusterArn",
+        .critical = "critical",
         .daemon_name = "daemonName",
         .daemon_task_definition_arn = "daemonTaskDefinitionArn",
         .deployment_configuration = "deploymentConfiguration",

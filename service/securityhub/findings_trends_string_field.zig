@@ -11,6 +11,10 @@ pub const FindingsTrendsStringField = enum {
     finding_class,
     provider_name,
     finding_activity_name,
+    resource_cloud_providers,
+    resource_regions,
+    resource_owner_ids,
+    resource_owner_organization_ids,
 
     pub const json_field_names = .{
         .account_id = "account_id",
@@ -23,6 +27,10 @@ pub const FindingsTrendsStringField = enum {
         .finding_class = "finding_class_name",
         .provider_name = "finding_provider",
         .finding_activity_name = "finding_activity_name",
+        .resource_cloud_providers = "resource_cloud_providers",
+        .resource_regions = "resource_regions",
+        .resource_owner_ids = "resource_owner_ids",
+        .resource_owner_organization_ids = "resource_owner_organization_ids",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -37,6 +45,10 @@ pub const FindingsTrendsStringField = enum {
             .finding_class => "finding_class_name",
             .provider_name => "finding_provider",
             .finding_activity_name => "finding_activity_name",
+            .resource_cloud_providers => "resource_cloud_providers",
+            .resource_regions => "resource_regions",
+            .resource_owner_ids => "resource_owner_ids",
+            .resource_owner_organization_ids => "resource_owner_organization_ids",
         };
     }
 

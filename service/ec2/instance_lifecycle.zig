@@ -4,11 +4,13 @@ pub const InstanceLifecycle = enum {
     spot,
     on_demand,
     interruptible_capacity_reservation,
+    capacity_block,
 
     pub const json_field_names = .{
         .spot = "spot",
         .on_demand = "on-demand",
         .interruptible_capacity_reservation = "interruptible-capacity-reservation",
+        .capacity_block = "capacity-block",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const InstanceLifecycle = enum {
             .spot => "spot",
             .on_demand => "on-demand",
             .interruptible_capacity_reservation => "interruptible-capacity-reservation",
+            .capacity_block => "capacity-block",
         };
     }
 

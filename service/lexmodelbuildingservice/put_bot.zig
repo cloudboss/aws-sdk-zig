@@ -574,10 +574,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutBotInput, config: *a
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutBotOutput {
-    var result: PutBotOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutBotOutput, body, allocator);
-    }
+    const result: PutBotOutput = try aws.json.parseJsonObject(
+        PutBotOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

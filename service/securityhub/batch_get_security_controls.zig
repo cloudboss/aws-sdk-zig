@@ -92,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetSecurityControl
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetSecurityControlsOutput {
-    var result: BatchGetSecurityControlsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetSecurityControlsOutput, body, allocator);
-    }
+    const result: BatchGetSecurityControlsOutput = try aws.json.parseJsonObject(
+        BatchGetSecurityControlsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

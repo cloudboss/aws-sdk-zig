@@ -12,7 +12,8 @@ pub const EpisodicMemoryStrategyInput = struct {
     /// The name of the episodic memory strategy.
     name: []const u8,
 
-    /// The namespaces for which to create episodes.
+    /// This is a legacy parameter, use `namespaceTemplates`. The namespaces for
+    /// which to create episodes.
     namespaces: ?[]const []const u8 = null,
 
     /// The namespaceTemplates for which to create episodes.

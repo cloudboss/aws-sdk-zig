@@ -191,10 +191,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAppVersionResourc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAppVersionResourceOutput {
-    var result: CreateAppVersionResourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAppVersionResourceOutput, body, allocator);
-    }
+    const result: CreateAppVersionResourceOutput = try aws.json.parseJsonObject(
+        CreateAppVersionResourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

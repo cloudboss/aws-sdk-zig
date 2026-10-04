@@ -1,10 +1,12 @@
 const S3Location = @import("s3_location.zig").S3Location;
 const SupplementalDataStorageLocationType = @import("supplemental_data_storage_location_type.zig").SupplementalDataStorageLocationType;
 
-/// Contains information about a storage location for images extracted from
-/// multimodal documents in your data source.
+/// Contains information about a storage location for multimedia content
+/// (images, audio, and video) extracted from multimodal documents in your data
+/// source.
 pub const SupplementalDataStorageLocation = struct {
-    /// Contains information about the Amazon S3 location for the extracted images.
+    /// Contains information about the Amazon S3 location for the extracted
+    /// multimedia content.
     s_3_location: ?S3Location = null,
 
     /// Specifies the storage service used for this location.

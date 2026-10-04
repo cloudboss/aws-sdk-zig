@@ -16,9 +16,8 @@ pub const TaskContainerProperties = struct {
     /// The command that's passed to the container. This parameter maps to `Cmd` in
     /// the
     /// [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the [Docker
-    /// Remote API](https://docs.docker.com/engine/api/v1.23/) and the `COMMAND`
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker
+    /// Remote API](https://docs.docker.com/engine/api/latest/) and the `COMMAND`
     /// parameter to [docker run](https://docs.docker.com/engine/reference/run/).
     /// For more information,
     /// see [Dockerfile reference:
@@ -30,9 +29,9 @@ pub const TaskContainerProperties = struct {
 
     /// The environment variables to pass to a container. This parameter maps to Env
     /// in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate)
     /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/)
+    /// API](https://docs.docker.com/engine/api/latest/)
     /// and the `--env` parameter to [docker
     /// run](https://docs.docker.com/engine/reference/run/).
     ///
@@ -81,8 +80,8 @@ pub const TaskContainerProperties = struct {
     /// colons, periods, forward
     /// slashes, and number signs are allowed. This parameter maps to `Image` in the
     /// [Create a
-    /// container](https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of the [Docker
-    /// Remote API](https://docs.docker.com/engine/api/v1.35/) and the `IMAGE`
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker
+    /// Remote API](https://docs.docker.com/engine/api/latest/) and the `IMAGE`
     /// parameter of the [
     /// *docker
     /// run*
@@ -98,8 +97,8 @@ pub const TaskContainerProperties = struct {
     /// The log configuration specification for the container.
     ///
     /// This parameter maps to `LogConfig` in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of the [Docker
-    /// Remote API](https://docs.docker.com/engine/api/v1.35/) and the
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker
+    /// Remote API](https://docs.docker.com/engine/api/latest/) and the
     /// `--log-driver` option to [docker
     /// run](https://docs.docker.com/engine/reference/run/#security-configuration).
     ///
@@ -144,8 +143,8 @@ pub const TaskContainerProperties = struct {
     /// The mount points for data volumes in your container.
     ///
     /// This parameter maps to `Volumes` in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of the [Docker
-    /// Remote API](https://docs.docker.com/engine/api/v1.35/) and the --volume
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker
+    /// Remote API](https://docs.docker.com/engine/api/latest/) and the --volume
     /// option to [docker
     /// run](https://docs.docker.com/engine/reference/run/#security-configuration).
     ///
@@ -164,8 +163,8 @@ pub const TaskContainerProperties = struct {
     /// the
     /// host container instance (similar to the `root` user). This parameter maps to
     /// `Privileged` in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of the [Docker
-    /// Remote API](https://docs.docker.com/engine/api/v1.35/) and the
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker
+    /// Remote API](https://docs.docker.com/engine/api/latest/) and the
     /// `--privileged` option to [docker
     /// run](https://docs.docker.com/engine/reference/run/#security-configuration).
     ///
@@ -176,9 +175,9 @@ pub const TaskContainerProperties = struct {
     /// When this parameter is true, the container is given read-only access to its
     /// root file
     /// system. This parameter maps to `ReadonlyRootfs` in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of the [Docker
-    /// Remote API](https://docs.docker.com/engine/api/v1.35/) and the `--read-only`
-    /// option to [docker
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker
+    /// Remote API](https://docs.docker.com/engine/api/latest/) and the
+    /// `--read-only` option to [docker
     /// run](https://docs.docker.com/engine/reference/run/#security-configuration).
     ///
     /// This parameter is not supported for Windows containers.
@@ -187,9 +186,9 @@ pub const TaskContainerProperties = struct {
     /// The private repository authentication credentials to use.
     repository_credentials: ?RepositoryCredentials = null,
 
-    /// The type and amount of a resource to assign to a container. The only
-    /// supported resource is a
-    /// GPU.
+    /// The type and amount of a resource to assign to a container. The supported
+    /// resources include
+    /// `GPU`, `MEMORY`, and `VCPU`.
     resource_requirements: ?[]const ResourceRequirement = null,
 
     /// The secrets to pass to the container. For more information, see [Specifying
@@ -223,8 +222,8 @@ pub const TaskContainerProperties = struct {
     /// specified in a task definition, it overrides the default values set by
     /// Docker. This parameter
     /// maps to `Ulimits` in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of the [Docker
-    /// Remote API](https://docs.docker.com/engine/api/v1.35/) and the `--ulimit`
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker
+    /// Remote API](https://docs.docker.com/engine/api/latest/) and the `--ulimit`
     /// option to [docker
     /// run](https://docs.docker.com/engine/reference/run/#security-configuration).
     ///

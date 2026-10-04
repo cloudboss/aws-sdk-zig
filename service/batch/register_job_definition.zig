@@ -67,7 +67,12 @@ pub const RegisterJobDefinitionInput = struct {
     /// The platform capabilities required by the job definition. If no value is
     /// specified, it
     /// defaults to `EC2`. To run the job on Fargate resources, specify
-    /// `FARGATE`.
+    /// `FARGATE`. To run the job on Amazon ECS Managed Instances, specify
+    /// `MANAGED_INSTANCES`.
+    ///
+    /// Jobs with the `MANAGED_INSTANCES` platform capability must use
+    /// `ecsProperties` (not `containerProperties`) and do not support
+    /// multi-node parallel jobs.
     ///
     /// If the job runs on Amazon EKS resources, then you must not specify
     /// `platformCapabilities`.
@@ -304,10 +309,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterJobDefinitionIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RegisterJobDefinitionOutput {
-    var result: RegisterJobDefinitionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RegisterJobDefinitionOutput, body, allocator);
-    }
+    const result: RegisterJobDefinitionOutput = try aws.json.parseJsonObject(
+        RegisterJobDefinitionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

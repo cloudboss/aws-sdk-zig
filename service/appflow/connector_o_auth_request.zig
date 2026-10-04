@@ -6,6 +6,9 @@ pub const ConnectorOAuthRequest = struct {
     /// connected app.
     auth_code: ?[]const u8 = null,
 
+    /// The code verifier used in the PKCE (Proof Key for Code Exchange) OAuth flow.
+    code_verifier: ?[]const u8 = null,
+
     /// The URL to which the authentication server redirects the browser after
     /// authorization has
     /// been granted.
@@ -13,6 +16,7 @@ pub const ConnectorOAuthRequest = struct {
 
     pub const json_field_names = .{
         .auth_code = "authCode",
+        .code_verifier = "codeVerifier",
         .redirect_uri = "redirectUri",
     };
 };

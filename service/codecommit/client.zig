@@ -26,6 +26,7 @@ const disassociate_approval_rule_template_from_repository = @import("disassociat
 const evaluate_pull_request_approval_rules = @import("evaluate_pull_request_approval_rules.zig");
 const get_approval_rule_template = @import("get_approval_rule_template.zig");
 const get_blob = @import("get_blob.zig");
+const get_blob_differences = @import("get_blob_differences.zig");
 const get_branch = @import("get_branch.zig");
 const get_comment = @import("get_comment.zig");
 const get_comment_reactions = @import("get_comment_reactions.zig");
@@ -313,6 +314,20 @@ pub const Client = struct {
         return get_blob.execute(self, allocator, input, options);
     }
 
+    /// Returns a structured, line-level diff between two blob versions in a
+    /// repository. The
+    /// diff is returned as an ordered list of hunks, where each hunk represents a
+    /// contiguous
+    /// run of changed lines together with any surrounding unchanged context lines.
+    ///
+    /// Results are paginated. Use `MaxResults` and `NextToken` to
+    /// retrieve additional pages.
+    ///
+    /// For the typical usage workflow, see GetDifferences.
+    pub fn getBlobDifferences(self: *Self, allocator: std.mem.Allocator, input: get_blob_differences.GetBlobDifferencesInput, options: CallOptions) !get_blob_differences.GetBlobDifferencesOutput {
+        return get_blob_differences.execute(self, allocator, input, options);
+    }
+
     /// Returns information about a repository branch, including its name and the
     /// last commit ID.
     pub fn getBranch(self: *Self, allocator: std.mem.Allocator, input: get_branch.GetBranchInput, options: CallOptions) !get_branch.GetBranchOutput {
@@ -365,6 +380,9 @@ pub const Client = struct {
     /// branch, tag, HEAD, commit ID, or other fully qualified reference). Results
     /// can be
     /// limited to a specified path.
+    ///
+    /// For line-level diff details, pass the `beforeBlob.blobId` and
+    /// `afterBlob.blobId` values from a `Difference` object to GetBlobDifferences.
     pub fn getDifferences(self: *Self, allocator: std.mem.Allocator, input: get_differences.GetDifferencesInput, options: CallOptions) !get_differences.GetDifferencesOutput {
         return get_differences.execute(self, allocator, input, options);
     }
@@ -698,6 +716,13 @@ pub const Client = struct {
     }
 
     pub fn describePullRequestEventsPaginator(self: *Self, params: describe_pull_request_events.DescribePullRequestEventsInput) paginator.DescribePullRequestEventsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn getBlobDifferencesPaginator(self: *Self, params: get_blob_differences.GetBlobDifferencesInput) paginator.GetBlobDifferencesPaginator {
         return .{
             .client = self,
             .params = params,

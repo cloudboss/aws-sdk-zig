@@ -75,10 +75,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: EnableCrlInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !EnableCrlOutput {
-    var result: EnableCrlOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(EnableCrlOutput, body, allocator);
-    }
+    const result: EnableCrlOutput = try aws.json.parseJsonObject(
+        EnableCrlOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

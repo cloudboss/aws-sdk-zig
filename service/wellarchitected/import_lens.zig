@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportLensInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ImportLensOutput {
-    var result: ImportLensOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ImportLensOutput, body, allocator);
-    }
+    const result: ImportLensOutput = try aws.json.parseJsonObject(
+        ImportLensOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -8,6 +8,7 @@ const GenerativeDataDetails = @import("generative_data_details.zig").GenerativeD
 const IntentDetectedDataDetails = @import("intent_detected_data_details.zig").IntentDetectedDataDetails;
 const NotesChunkDataDetails = @import("notes_chunk_data_details.zig").NotesChunkDataDetails;
 const NotesDataDetails = @import("notes_data_details.zig").NotesDataDetails;
+const ProactiveRecommendationDataDetails = @import("proactive_recommendation_data_details.zig").ProactiveRecommendationDataDetails;
 const SourceContentDataDetails = @import("source_content_data_details.zig").SourceContentDataDetails;
 const SuggestedMessageDataDetails = @import("suggested_message_data_details.zig").SuggestedMessageDataDetails;
 
@@ -35,6 +36,9 @@ pub const DataDetails = union(enum) {
     notes_chunk_data: ?NotesChunkDataDetails,
     /// Details about notes data.
     notes_data: ?NotesDataDetails,
+    /// Details about a proactive recommendation, including the token used to
+    /// retrieve its chunked response with `GetNextMessage`.
+    proactive_recommendation_data: ?ProactiveRecommendationDataDetails,
     /// Details about the content data.
     source_content_data: ?SourceContentDataDetails,
     /// Details about suggested message data.
@@ -51,6 +55,7 @@ pub const DataDetails = union(enum) {
         .intent_detected_data = "intentDetectedData",
         .notes_chunk_data = "notesChunkData",
         .notes_data = "notesData",
+        .proactive_recommendation_data = "proactiveRecommendationData",
         .source_content_data = "sourceContentData",
         .suggested_message_data = "suggestedMessageData",
     };

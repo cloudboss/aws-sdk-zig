@@ -104,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InvokeBrowserInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !InvokeBrowserOutput {
-    var result: InvokeBrowserOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(InvokeBrowserOutput, body, allocator);
-    }
+    var result: InvokeBrowserOutput = try aws.json.parseJsonObject(
+        InvokeBrowserOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     if (headers.get("x-amzn-browser-session-id")) |value| {
         result.session_id = try allocator.dupe(u8, value);

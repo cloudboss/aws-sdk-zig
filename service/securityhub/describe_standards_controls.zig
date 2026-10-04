@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeStandardsContro
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeStandardsControlsOutput {
-    var result: DescribeStandardsControlsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeStandardsControlsOutput, body, allocator);
-    }
+    const result: DescribeStandardsControlsOutput = try aws.json.parseJsonObject(
+        DescribeStandardsControlsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCellReadinessSummary
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCellReadinessSummaryOutput {
-    var result: GetCellReadinessSummaryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCellReadinessSummaryOutput, body, allocator);
-    }
+    const result: GetCellReadinessSummaryOutput = try aws.json.parseJsonObject(
+        GetCellReadinessSummaryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

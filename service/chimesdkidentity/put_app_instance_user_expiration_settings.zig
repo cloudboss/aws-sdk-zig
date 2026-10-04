@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutAppInstanceUserExpir
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutAppInstanceUserExpirationSettingsOutput {
-    var result: PutAppInstanceUserExpirationSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutAppInstanceUserExpirationSettingsOutput, body, allocator);
-    }
+    const result: PutAppInstanceUserExpirationSettingsOutput = try aws.json.parseJsonObject(
+        PutAppInstanceUserExpirationSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

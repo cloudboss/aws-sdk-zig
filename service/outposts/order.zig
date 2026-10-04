@@ -30,6 +30,12 @@ pub const Order = struct {
     /// The payment term.
     payment_term: ?PaymentTerm = null,
 
+    /// The ID of the quote associated with the order.
+    quote_identifier: ?[]const u8 = null,
+
+    /// The ID of the quote option associated with the order.
+    quote_option_identifier: ?[]const u8 = null,
+
     /// The status of the order.
     ///
     /// * `PREPARING` - Order is received and being prepared.
@@ -58,6 +64,8 @@ pub const Order = struct {
         .outpost_id = "OutpostId",
         .payment_option = "PaymentOption",
         .payment_term = "PaymentTerm",
+        .quote_identifier = "QuoteIdentifier",
+        .quote_option_identifier = "QuoteOptionIdentifier",
         .status = "Status",
     };
 };

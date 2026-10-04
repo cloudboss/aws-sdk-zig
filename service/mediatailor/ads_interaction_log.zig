@@ -12,8 +12,11 @@ pub const AdsInteractionLog = struct {
     /// playback sessions that are initialized with this configuration.
     exclude_event_types: ?[]const AdsInteractionExcludeEventType = null,
 
-    /// Indicates that MediaTailor emits `RAW_ADS_RESPONSE` logs for playback
-    /// sessions that are initialized with this configuration.
+    /// Indicates that MediaTailor will emit the selected events in the logs for
+    /// playback sessions that are initialized with this configuration. These events
+    /// are not emitted by default and must be explicitly opted in. For descriptions
+    /// of each event type, see [MediaTailor ADS logs description and event
+    /// types](https://docs.aws.amazon.com/mediatailor/latest/ug/ads-log-format.html) in Elemental MediaTailor User Guide.
     publish_opt_in_event_types: ?[]const AdsInteractionPublishOptInEventType = null,
 
     pub const json_field_names = .{

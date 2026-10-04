@@ -141,10 +141,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RegisterOpentdfConfigIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RegisterOpentdfConfigOutput {
-    var result: RegisterOpentdfConfigOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RegisterOpentdfConfigOutput, body, allocator);
-    }
+    const result: RegisterOpentdfConfigOutput = try aws.json.parseJsonObject(
+        RegisterOpentdfConfigOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

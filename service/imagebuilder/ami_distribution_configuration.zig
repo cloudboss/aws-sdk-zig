@@ -7,9 +7,13 @@ pub const AmiDistributionConfiguration = struct {
     /// The tags to apply to AMIs distributed to this Region.
     ami_tags: ?[]const aws.map.StringMapEntry = null,
 
-    /// The description of the AMI distribution configuration. Minimum and maximum
-    /// length are
-    /// in characters.
+    /// The description to apply to the distributed AMI. Image Builder sets this as
+    /// the
+    /// output AMI's description in each target Region and account. If you
+    /// don't specify a description, the AMI in the build Region uses the
+    /// image recipe's description, if the recipe has one. Copies distributed
+    /// to other Regions and accounts don't receive a default
+    /// description.
     description: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
@@ -25,10 +29,17 @@ pub const AmiDistributionConfiguration = struct {
     /// launch instances.
     launch_permission: ?LaunchPermissionConfiguration = null,
 
-    /// The name of the output AMI.
+    /// The name of the output AMI. The name must include the
+    /// `{{ imagebuilder:buildDate }}` dynamic tag so that each build
+    /// produces a uniquely named AMI. If you don't specify a name, Image Builder
+    /// names the output AMI with the image name followed by the build timestamp,
+    /// for example `my-image 2022-10-26T22-30-05.912619Z`.
     name: ?[]const u8 = null,
 
-    /// The ID of an account to which you want to distribute an image.
+    /// The Amazon Web Services account IDs to distribute the AMI to in this Region.
+    /// Each listed
+    /// account receives its own copy of the output AMI. If you don't specify
+    /// accounts, Image Builder distributes the AMI only to your own account.
     target_account_ids: ?[]const []const u8 = null,
 
     pub const json_field_names = .{

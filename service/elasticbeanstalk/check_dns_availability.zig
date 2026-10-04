@@ -18,8 +18,8 @@ pub const CheckDNSAvailabilityOutput = struct {
     /// * `false` : The CNAME is not available.
     available: ?bool = null,
 
-    /// The fully qualified CNAME to reserve when CreateEnvironment is called
-    /// with the provided prefix.
+    /// The fully qualified CNAME to reserve when CreateEnvironment is called with
+    /// the provided prefix.
     fully_qualified_cname: ?[]const u8 = null,
 };
 

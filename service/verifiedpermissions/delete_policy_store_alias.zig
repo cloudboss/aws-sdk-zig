@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DeletionMode = @import("deletion_mode.zig").DeletionMode;
 
 pub const DeletePolicyStoreAliasInput = struct {
     /// Specifies the name of the policy store alias that you want to delete.
@@ -11,8 +12,18 @@ pub const DeletePolicyStoreAliasInput = struct {
     /// The alias name must always be prefixed with `policy-store-alias/`.
     alias_name: []const u8,
 
+    /// Specifies the deletion mode for the policy store alias. The valid values
+    /// are:
+    ///
+    /// * **SoftDelete** – The policy store alias enters the `PendingDeletion`
+    ///   state. This is the default behavior when no `deletionMode` is specified.
+    /// * **HardDelete** – The policy store alias is immediately deleted, bypassing
+    ///   the `PendingDeletion` state.
+    deletion_mode: ?DeletionMode = null,
+
     pub const json_field_names = .{
         .alias_name = "aliasName",
+        .deletion_mode = "deletionMode",
     };
 };
 

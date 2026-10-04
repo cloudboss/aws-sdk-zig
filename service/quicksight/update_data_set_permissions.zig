@@ -122,10 +122,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDataSetPermission
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateDataSetPermissionsOutput {
-    var result: UpdateDataSetPermissionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateDataSetPermissionsOutput, body, allocator);
-    }
+    var result: UpdateDataSetPermissionsOutput = try aws.json.parseJsonObject(
+        UpdateDataSetPermissionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

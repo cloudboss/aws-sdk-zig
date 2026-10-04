@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
+const TargetResourceConfiguration = @import("target_resource_configuration.zig").TargetResourceConfiguration;
 const BlueGreenDeployment = @import("blue_green_deployment.zig").BlueGreenDeployment;
 const serde = @import("serde.zig");
 
@@ -71,6 +72,23 @@ pub const CreateBlueGreenDeploymentInput = struct {
     ///
     /// This setting doesn't apply to Amazon Aurora blue/green deployments.
     target_iops: ?i32 = null,
+
+    /// Specifies resource-level configuration overrides for the green environment.
+    ///
+    /// Each entry identifies a resource in the blue environment by its Amazon
+    /// Resource Name (ARN). It defines the desired configuration for the
+    /// corresponding resource in the green environment. Any resource that you don't
+    /// include in this parameter retains the same configuration as its counterpart
+    /// in the blue environment.
+    ///
+    /// Use this parameter when one or more resources in the green environment
+    /// require a different configuration than what they have in the blue
+    /// environment.
+    ///
+    /// Constraints:
+    ///
+    /// * You can't specify the same `SourceArn` in more than one entry.
+    target_resource_configurations: ?[]const TargetResourceConfiguration = null,
 
     /// The storage throughput value for the green DB instance.
     ///
@@ -179,6 +197,25 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBlueGreenDeployme
     if (input.target_iops) |v| {
         try body_buf.appendSlice(allocator, "&TargetIops=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
+    if (input.target_resource_configurations) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            {
+                var prefix_buf: [256]u8 = undefined;
+                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TargetResourceConfigurations.TargetResourceConfiguration.{d}.SourceArn=", .{n}) catch continue;
+                try body_buf.appendSlice(allocator, field_prefix);
+                try aws.url.appendUrlEncoded(allocator, &body_buf, item.source_arn);
+            }
+            {
+                var prefix_buf: [256]u8 = undefined;
+                if (item.target_kms_key_id) |fv_1| {
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TargetResourceConfigurations.TargetResourceConfiguration.{d}.TargetKmsKeyId=", .{n}) catch continue;
+                    try body_buf.appendSlice(allocator, field_prefix);
+                    try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);
+                }
+            }
+        }
     }
     if (input.target_storage_throughput) |v| {
         try body_buf.appendSlice(allocator, "&TargetStorageThroughput=");

@@ -3,7 +3,7 @@ const ChecksumType = @import("checksum_type.zig").ChecksumType;
 /// Container for all response elements.
 pub const CopyObjectResult = struct {
     /// The Base64 encoded, 32-bit `CRC32` checksum of the object. This checksum is
-    /// only present if the object was uploaded
+    /// only present if the checksum was uploaded
     /// with the object. For more information, see [
     /// Checking object
     /// integrity](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html) in the *Amazon S3 User Guide*.

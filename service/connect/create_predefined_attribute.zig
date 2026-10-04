@@ -11,12 +11,12 @@ pub const CreatePredefinedAttributeInput = struct {
     /// Custom metadata that is associated to predefined attributes to control
     /// behavior
     /// in upstream services, such as controlling
-    /// how a predefined attribute should be displayed in the Amazon Connect admin
+    /// how a predefined attribute should be displayed in the Connect Customer admin
     /// website.
     attribute_configuration: ?InputPredefinedAttributeConfiguration = null,
 
-    /// The identifier of the Amazon Connect instance. You can find the instance ID
-    /// in the Amazon Resource Name (ARN) of the
+    /// The identifier of the Connect Customer instance. You can find the instance
+    /// ID in the Amazon Resource Name (ARN) of the
     /// instance.
     instance_id: []const u8,
 
@@ -24,7 +24,7 @@ pub const CreatePredefinedAttributeInput = struct {
     name: []const u8,
 
     /// Values that enable you to categorize your predefined attributes. You can use
-    /// them in custom UI elements across the Amazon Connect admin website.
+    /// them in custom UI elements across the Connect Customer admin website.
     purposes: ?[]const []const u8 = null,
 
     /// The values of the predefined attribute.

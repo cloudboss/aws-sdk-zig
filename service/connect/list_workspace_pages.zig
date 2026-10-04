@@ -117,10 +117,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListWorkspacePagesInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListWorkspacePagesOutput {
-    var result: ListWorkspacePagesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListWorkspacePagesOutput, body, allocator);
-    }
+    const result: ListWorkspacePagesOutput = try aws.json.parseJsonObject(
+        ListWorkspacePagesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -89,10 +89,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchAssociateCodeSecur
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchAssociateCodeSecurityScanConfigurationOutput {
-    var result: BatchAssociateCodeSecurityScanConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchAssociateCodeSecurityScanConfigurationOutput, body, allocator);
-    }
+    const result: BatchAssociateCodeSecurityScanConfigurationOutput = try aws.json.parseJsonObject(
+        BatchAssociateCodeSecurityScanConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,6 +1,7 @@
 const ColorCorrector = @import("color_corrector.zig").ColorCorrector;
 const Deinterlacer = @import("deinterlacer.zig").Deinterlacer;
 const DolbyVision = @import("dolby_vision.zig").DolbyVision;
+const DurationControl = @import("duration_control.zig").DurationControl;
 const Hdr10Plus = @import("hdr_10_plus.zig").Hdr10Plus;
 const ImageInserter = @import("image_inserter.zig").ImageInserter;
 const NoiseReducer = @import("noise_reducer.zig").NoiseReducer;
@@ -23,6 +24,12 @@ pub const VideoPreprocessor = struct {
 
     /// Enable Dolby Vision feature to produce Dolby Vision compatible video output.
     dolby_vision: ?DolbyVision = null,
+
+    /// Enable integer-second duration normalization. When enabled, the output
+    /// duration is adjusted to land on an exact integer-second boundary. The
+    /// adjustment method (trim, compress, or pad) is chosen automatically based on
+    /// how far the input duration is from the nearest integer second.
+    duration_control: ?DurationControl = null,
 
     /// Enable HDR10+ analysis and metadata injection. Compatible with HEVC only.
     hdr_10_plus: ?Hdr10Plus = null,
@@ -52,6 +59,7 @@ pub const VideoPreprocessor = struct {
         .color_corrector = "ColorCorrector",
         .deinterlacer = "Deinterlacer",
         .dolby_vision = "DolbyVision",
+        .duration_control = "DurationControl",
         .hdr_10_plus = "Hdr10Plus",
         .image_inserter = "ImageInserter",
         .noise_reducer = "NoiseReducer",

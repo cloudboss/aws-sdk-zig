@@ -153,10 +153,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CopyClusterSnapshotInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CopyClusterSnapshotOutput {
-    var result: CopyClusterSnapshotOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CopyClusterSnapshotOutput, body, allocator);
-    }
+    const result: CopyClusterSnapshotOutput = try aws.json.parseJsonObject(
+        CopyClusterSnapshotOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -112,6 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UploadArchiveInput, con
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UploadArchiveOutput {
     var result: UploadArchiveOutput = .{};
+    errdefer {
+        if (result.archive_id) |value| allocator.free(value);
+        if (result.checksum) |value| allocator.free(value);
+        if (result.location) |value| allocator.free(value);
+    }
     _ = body;
     _ = status;
     if (headers.get("x-amz-archive-id")) |value| {

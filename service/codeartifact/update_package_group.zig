@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePackageGroupInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdatePackageGroupOutput {
-    var result: UpdatePackageGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdatePackageGroupOutput, body, allocator);
-    }
+    const result: UpdatePackageGroupOutput = try aws.json.parseJsonObject(
+        UpdatePackageGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

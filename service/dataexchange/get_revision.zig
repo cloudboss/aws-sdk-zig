@@ -133,10 +133,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetRevisionInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRevisionOutput {
-    var result: GetRevisionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetRevisionOutput, body, allocator);
-    }
+    const result: GetRevisionOutput = try aws.json.parseJsonObject(
+        GetRevisionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

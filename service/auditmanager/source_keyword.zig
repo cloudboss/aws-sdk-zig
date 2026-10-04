@@ -7,7 +7,7 @@ const KeywordInputType = @import("keyword_input_type.zig").KeywordInputType;
 /// text.
 ///
 /// For automated evidence, this keyword identifies a specific CloudTrail event,
-/// Config rule, Security Hub control, or Amazon Web Services API name.
+/// Config rule, Security Hub CSPM control, or Amazon Web Services API name.
 ///
 /// To learn more about the supported keywords that you can use when mapping a
 /// control data
@@ -17,7 +17,7 @@ const KeywordInputType = @import("keyword_input_type.zig").KeywordInputType;
 /// * [Config rules supported by Audit
 ///   Manager](https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html)
 ///
-/// * [Security Hub controls supported by Audit
+/// * [Security Hub CSPM controls supported by Audit
 ///   Manager](https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html)
 ///
 /// * [API calls
@@ -35,7 +35,7 @@ pub const SourceKeyword = struct {
     /// * When `keywordInputType` is `SELECT_FROM_LIST`, a
     /// keyword must be selected to collect automated evidence. For example, this
     /// keyword can be a CloudTrail event name, a rule name for Config, a Security
-    /// Hub control, or the name of an Amazon Web Services API call.
+    /// Hub CSPM control, or the name of an Amazon Web Services API call.
     ///
     /// * `UPLOAD_FILE` and `INPUT_TEXT` are only used when mapping a
     /// data source for manual evidence.
@@ -50,7 +50,7 @@ pub const SourceKeyword = struct {
     /// The value of the keyword that's used when mapping a control data source. For
     /// example,
     /// this can be a CloudTrail event name, a rule name for Config, a
-    /// Security Hub control, or the name of an Amazon Web Services API call.
+    /// Security Hub CSPM control, or the name of an Amazon Web Services API call.
     ///
     /// If you’re mapping a data source to a rule in Config, the
     /// `keywordValue` that you specify depends on the type of rule:
@@ -128,9 +128,10 @@ pub const SourceKeyword = struct {
     /// console](https://console.aws.amazon.com/config/) to
     /// verify your custom rule name.
     ///
-    /// * For Security Hub: The format varies for Security Hub control names.
+    /// * For Security Hub CSPM: The format varies for Security Hub CSPM control
+    ///   names.
     /// For accuracy, we recommend that you reference the list of [supported
-    /// Security Hub
+    /// Security Hub CSPM
     /// controls](https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html).
     ///
     /// * For Amazon Web Services API calls: Make sure that the `keywordValue`

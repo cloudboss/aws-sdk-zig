@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetSchemaAnalysisR
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetSchemaAnalysisRuleOutput {
-    var result: BatchGetSchemaAnalysisRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetSchemaAnalysisRuleOutput, body, allocator);
-    }
+    const result: BatchGetSchemaAnalysisRuleOutput = try aws.json.parseJsonObject(
+        BatchGetSchemaAnalysisRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

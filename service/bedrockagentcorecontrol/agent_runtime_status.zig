@@ -7,6 +7,7 @@ pub const AgentRuntimeStatus = enum {
     update_failed,
     ready,
     deleting,
+    delete_failed,
 
     pub const json_field_names = .{
         .creating = "CREATING",
@@ -15,6 +16,7 @@ pub const AgentRuntimeStatus = enum {
         .update_failed = "UPDATE_FAILED",
         .ready = "READY",
         .deleting = "DELETING",
+        .delete_failed = "DELETE_FAILED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +27,7 @@ pub const AgentRuntimeStatus = enum {
             .update_failed => "UPDATE_FAILED",
             .ready => "READY",
             .deleting => "DELETING",
+            .delete_failed => "DELETE_FAILED",
         };
     }
 

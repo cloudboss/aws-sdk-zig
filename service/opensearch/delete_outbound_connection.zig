@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteOutboundConnectio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteOutboundConnectionOutput {
-    var result: DeleteOutboundConnectionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteOutboundConnectionOutput, body, allocator);
-    }
+    const result: DeleteOutboundConnectionOutput = try aws.json.parseJsonObject(
+        DeleteOutboundConnectionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

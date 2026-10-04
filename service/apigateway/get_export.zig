@@ -128,6 +128,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetExportInput, config:
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetExportOutput {
     var result: GetExportOutput = .{};
+    errdefer {
+        if (result.content_disposition) |value| allocator.free(value);
+        if (result.content_type) |value| allocator.free(value);
+        if (result.body) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.body = try allocator.dupe(u8, body);
     }

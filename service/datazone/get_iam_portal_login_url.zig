@@ -78,10 +78,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetIamPortalLoginUrlInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetIamPortalLoginUrlOutput {
-    var result: GetIamPortalLoginUrlOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetIamPortalLoginUrlOutput, body, allocator);
-    }
+    const result: GetIamPortalLoginUrlOutput = try aws.json.parseJsonObject(
+        GetIamPortalLoginUrlOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

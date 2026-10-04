@@ -7,8 +7,8 @@ pub const S3Destination = struct {
     /// file.
     s3_bucket: []const u8,
 
-    /// The AWS Account ID that owns the S3 bucket used as the destination for the
-    /// data export.
+    /// The Amazon Web Services account ID that owns the S3 bucket used as the
+    /// destination for the data export.
     s3_bucket_owner: ?[]const u8 = null,
 
     /// The output configuration for the data export.

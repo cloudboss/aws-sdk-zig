@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const PolicyDefinition = @import("policy_definition.zig").PolicyDefinition;
+const EnforcementMode = @import("enforcement_mode.zig").EnforcementMode;
 const PolicyStatus = @import("policy_status.zig").PolicyStatus;
 
 pub const DeletePolicyInput = struct {
@@ -30,6 +31,9 @@ pub const DeletePolicyOutput = struct {
 
     /// The human-readable description of the deleted policy.
     description: ?[]const u8 = null,
+
+    /// The enforcement mode of the deleted policy.
+    enforcement_mode: ?EnforcementMode = null,
 
     /// The customer-assigned name of the deleted policy. This confirms which policy
     /// was successfully removed from the system and matches the name that was
@@ -65,6 +69,7 @@ pub const DeletePolicyOutput = struct {
         .created_at = "createdAt",
         .definition = "definition",
         .description = "description",
+        .enforcement_mode = "enforcementMode",
         .name = "name",
         .policy_arn = "policyArn",
         .policy_engine_id = "policyEngineId",
@@ -126,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeletePolicyInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeletePolicyOutput {
-    var result: DeletePolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeletePolicyOutput, body, allocator);
-    }
+    const result: DeletePolicyOutput = try aws.json.parseJsonObject(
+        DeletePolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAIPromptVersionIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAIPromptVersionOutput {
-    var result: CreateAIPromptVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAIPromptVersionOutput, body, allocator);
-    }
+    const result: CreateAIPromptVersionOutput = try aws.json.parseJsonObject(
+        CreateAIPromptVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

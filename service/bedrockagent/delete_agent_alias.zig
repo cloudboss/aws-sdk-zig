@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteAgentAliasInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteAgentAliasOutput {
-    var result: DeleteAgentAliasOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteAgentAliasOutput, body, allocator);
-    }
+    const result: DeleteAgentAliasOutput = try aws.json.parseJsonObject(
+        DeleteAgentAliasOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

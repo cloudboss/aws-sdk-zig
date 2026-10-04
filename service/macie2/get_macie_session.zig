@@ -91,10 +91,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMacieSessionInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMacieSessionOutput {
-    var result: GetMacieSessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMacieSessionOutput, body, allocator);
-    }
+    const result: GetMacieSessionOutput = try aws.json.parseJsonObject(
+        GetMacieSessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

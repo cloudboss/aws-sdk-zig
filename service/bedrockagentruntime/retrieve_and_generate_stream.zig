@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const RetrieveAndGenerateInput = @import("retrieve_and_generate_input.zig").RetrieveAndGenerateInput;
 const RetrieveAndGenerateConfiguration = @import("retrieve_and_generate_configuration.zig").RetrieveAndGenerateConfiguration;
 const RetrieveAndGenerateSessionConfiguration = @import("retrieve_and_generate_session_configuration.zig").RetrieveAndGenerateSessionConfiguration;
+const UserContext = @import("user_context.zig").UserContext;
 const RetrieveAndGenerateStreamResponseOutput = @import("retrieve_and_generate_stream_response_output.zig").RetrieveAndGenerateStreamResponseOutput;
 
 pub const RetrieveAndGenerateStreamInput = struct {
@@ -29,11 +30,17 @@ pub const RetrieveAndGenerateStreamInput = struct {
     /// `sessionId` yourself.
     session_id: ?[]const u8 = null,
 
+    /// Contains information about the user making the request. This is used for
+    /// access control filtering to ensure that retrieval results only include
+    /// documents the user is authorized to access.
+    user_context: ?UserContext = null,
+
     pub const json_field_names = .{
         .input = "input",
         .retrieve_and_generate_configuration = "retrieveAndGenerateConfiguration",
         .session_configuration = "sessionConfiguration",
         .session_id = "sessionId",
+        .user_context = "userContext",
     };
 };
 
@@ -55,6 +62,7 @@ pub const RetrieveAndGenerateStreamOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RetrieveAndGenerateStreamInput, options: CallOptions) !RetrieveAndGenerateStreamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -63,8 +71,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RetrieveAnd
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "bedrock", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -76,11 +82,9 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RetrieveAnd
         return error.ServiceError;
     }
 
-    stream_resp.deinitHeaders();
-    errdefer stream_resp.body.deinit();
-
-    const stream = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
-    return .{ .stream = stream };
+    errdefer stream_resp.deinit();
+    const result = try deserializeStreamingResponse(allocator, &stream_resp);
+    return result;
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: RetrieveAndGenerateStreamInput, config: *aws.Config) !aws.http.Request {
@@ -116,6 +120,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RetrieveAndGenerateStre
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.user_context) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"userContext\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -129,4 +139,23 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RetrieveAndGenerateStre
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
+}
+
+fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !RetrieveAndGenerateStreamOutput {
+    var result: RetrieveAndGenerateStreamOutput = .{
+        .session_id = "",
+    };
+    errdefer {
+        allocator.free(result.session_id);
+    }
+    if (stream_resp.headers.get("x-amzn-bedrock-knowledge-base-session-id")) |value| {
+        result.session_id = try allocator.dupe(u8, value);
+    }
+    result.stream = try aws.event_stream_reader.EventStreamReader.init(
+        allocator,
+        stream_resp.body,
+    );
+    stream_resp.deinitHeaders();
+
+    return result;
 }

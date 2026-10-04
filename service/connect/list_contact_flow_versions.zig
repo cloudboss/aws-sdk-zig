@@ -10,7 +10,7 @@ pub const ListContactFlowVersionsInput = struct {
     /// The identifier of the flow.
     contact_flow_id: []const u8,
 
-    /// The identifier of the Amazon Connect instance.
+    /// The identifier of the Connect Customer instance.
     instance_id: []const u8,
 
     /// The maximum number of results to return per page. The default MaxResult size
@@ -116,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListContactFlowVersions
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListContactFlowVersionsOutput {
-    var result: ListContactFlowVersionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListContactFlowVersionsOutput, body, allocator);
-    }
+    const result: ListContactFlowVersionsOutput = try aws.json.parseJsonObject(
+        ListContactFlowVersionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -9,12 +9,16 @@ pub const S3DeliveryConfiguration = struct {
 
     /// This string allows re-configuring the S3 object prefix to contain either
     /// static or
-    /// variable sections. The valid variables to use in the suffix path will vary
-    /// by each log source.
-    /// To find the values supported for the suffix path for each log source, use
-    /// the
+    /// variable sections. The valid variables to use in the suffix path vary by log
+    /// type. To find the
+    /// values supported for the suffix path for each log type, use the
     /// [DescribeConfigurationTemplates](https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeConfigurationTemplates.html) operation and check the
-    /// `allowedSuffixPathFields` field in the response.
+    /// `allowedSuffixPathFields` field in the response. For more information about
+    /// how
+    /// the destination prefix, suffix path, and Hive-compatible setting determine
+    /// the Amazon S3 object
+    /// key, see [Amazon S3 object key for V2
+    /// deliveries](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-infrastructure-V2-S3.html#AWS-logs-infrastructure-V2-S3-object-key).
     suffix_path: ?[]const u8 = null,
 
     pub const json_field_names = .{

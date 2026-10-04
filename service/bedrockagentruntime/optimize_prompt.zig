@@ -21,6 +21,7 @@ pub const OptimizePromptInput = struct {
 };
 
 pub const OptimizePromptOutput = struct {
+
     optimized_prompt: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *OptimizePromptOutput) void {
@@ -34,6 +35,7 @@ pub const OptimizePromptOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: OptimizePromptInput, options: CallOptions) !OptimizePromptOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -42,8 +44,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: OptimizePro
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "bedrock", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -55,11 +55,9 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: OptimizePro
         return error.ServiceError;
     }
 
-    stream_resp.deinitHeaders();
-    errdefer stream_resp.body.deinit();
-
-    const optimized_prompt = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
-    return .{ .optimized_prompt = optimized_prompt };
+    errdefer stream_resp.deinit();
+    const result = try deserializeStreamingResponse(allocator, &stream_resp);
+    return result;
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: OptimizePromptInput, config: *aws.Config) !aws.http.Request {
@@ -94,4 +92,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: OptimizePromptInput, co
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
+}
+
+fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !OptimizePromptOutput {
+    var result: OptimizePromptOutput = .{};
+    result.optimized_prompt = try aws.event_stream_reader.EventStreamReader.init(
+        allocator,
+        stream_resp.body,
+    );
+    stream_resp.deinitHeaders();
+
+    return result;
 }

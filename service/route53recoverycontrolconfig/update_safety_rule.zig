@@ -99,10 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSafetyRuleInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateSafetyRuleOutput {
-    var result: UpdateSafetyRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateSafetyRuleOutput, body, allocator);
-    }
+    const result: UpdateSafetyRuleOutput = try aws.json.parseJsonObject(
+        UpdateSafetyRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

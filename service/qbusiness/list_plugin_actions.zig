@@ -116,10 +116,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPluginActionsInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListPluginActionsOutput {
-    var result: ListPluginActionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListPluginActionsOutput, body, allocator);
-    }
+    const result: ListPluginActionsOutput = try aws.json.parseJsonObject(
+        ListPluginActionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TagInput, config: *aws.
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !TagOutput {
-    var result: TagOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(TagOutput, body, allocator);
-    }
+    const result: TagOutput = try aws.json.parseJsonObject(
+        TagOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,16 +1,22 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const batch_delete_instrumentation_configurations = @import("batch_delete_instrumentation_configurations.zig");
 const batch_get_service_level_objective_budget_report = @import("batch_get_service_level_objective_budget_report.zig");
 const batch_update_exclusion_windows = @import("batch_update_exclusion_windows.zig");
+const create_instrumentation_configuration = @import("create_instrumentation_configuration.zig");
 const create_service_level_objective = @import("create_service_level_objective.zig");
 const delete_grouping_configuration = @import("delete_grouping_configuration.zig");
+const delete_instrumentation_configuration = @import("delete_instrumentation_configuration.zig");
 const delete_service_level_objective = @import("delete_service_level_objective.zig");
+const get_instrumentation_configuration = @import("get_instrumentation_configuration.zig");
+const get_instrumentation_configuration_status = @import("get_instrumentation_configuration_status.zig");
 const get_service = @import("get_service.zig");
 const get_service_level_objective = @import("get_service_level_objective.zig");
 const list_audit_findings = @import("list_audit_findings.zig");
 const list_entity_events = @import("list_entity_events.zig");
 const list_grouping_attribute_definitions = @import("list_grouping_attribute_definitions.zig");
+const list_instrumentation_configurations = @import("list_instrumentation_configurations.zig");
 const list_service_dependencies = @import("list_service_dependencies.zig");
 const list_service_dependents = @import("list_service_dependents.zig");
 const list_service_level_objective_exclusion_windows = @import("list_service_level_objective_exclusion_windows.zig");
@@ -20,6 +26,7 @@ const list_service_states = @import("list_service_states.zig");
 const list_services = @import("list_services.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const put_grouping_configuration = @import("put_grouping_configuration.zig");
+const report_instrumentation_configuration_status = @import("report_instrumentation_configuration_status.zig");
 const start_discovery = @import("start_discovery.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
@@ -54,6 +61,16 @@ pub const Client = struct {
         _ = self;
     }
 
+    /// Deletes multiple instrumentation configurations in a single request.
+    /// Supports two mutually exclusive selection methods:
+    /// - By scope: Delete all configurations matching a Service + Environment +
+    /// InstrumentationType
+    /// - By ARN list: Delete specific configurations by providing a list of
+    /// resource ARNs
+    pub fn batchDeleteInstrumentationConfigurations(self: *Self, allocator: std.mem.Allocator, input: batch_delete_instrumentation_configurations.BatchDeleteInstrumentationConfigurationsInput, options: CallOptions) !batch_delete_instrumentation_configurations.BatchDeleteInstrumentationConfigurationsOutput {
+        return batch_delete_instrumentation_configurations.execute(self, allocator, input, options);
+    }
+
     /// Use this operation to retrieve one or more *service level objective (SLO)
     /// budget reports*.
     ///
@@ -76,6 +93,23 @@ pub const Client = struct {
     /// Objectives (SLOs).
     pub fn batchUpdateExclusionWindows(self: *Self, allocator: std.mem.Allocator, input: batch_update_exclusion_windows.BatchUpdateExclusionWindowsInput, options: CallOptions) !batch_update_exclusion_windows.BatchUpdateExclusionWindowsOutput {
         return batch_update_exclusion_windows.execute(self, allocator, input, options);
+    }
+
+    /// Creates a dynamic instrumentation configuration for a specific code or
+    /// endpoint location within a service and environment. Configurations are
+    /// immutable after creation.
+    ///
+    /// For `BREAKPOINT` type configurations, they expire after 24 hours unless a
+    /// shorter expiration is provided. For `PROBE` type configurations, they
+    /// persist until explicitly deleted; an expiration cannot be set for `PROBE`
+    /// configurations.
+    ///
+    /// If a configuration already exists for the same service, environment, signal
+    /// type, and location, this operation returns a conflict instead of overwriting
+    /// it. Use attribute filters and capture settings to control where the
+    /// instrumentation runs and which data is collected.
+    pub fn createInstrumentationConfiguration(self: *Self, allocator: std.mem.Allocator, input: create_instrumentation_configuration.CreateInstrumentationConfigurationInput, options: CallOptions) !create_instrumentation_configuration.CreateInstrumentationConfigurationOutput {
+        return create_instrumentation_configuration.execute(self, allocator, input, options);
     }
 
     /// Creates a service level objective (SLO), which can help you ensure that your
@@ -161,9 +195,33 @@ pub const Client = struct {
         return delete_grouping_configuration.execute(self, allocator, input, options);
     }
 
+    /// Deletes the specified instrumentation configuration. SDKs remove the
+    /// instrumentation during their next sync after the configuration is deleted or
+    /// expires.
+    pub fn deleteInstrumentationConfiguration(self: *Self, allocator: std.mem.Allocator, input: delete_instrumentation_configuration.DeleteInstrumentationConfigurationInput, options: CallOptions) !delete_instrumentation_configuration.DeleteInstrumentationConfigurationOutput {
+        return delete_instrumentation_configuration.execute(self, allocator, input, options);
+    }
+
     /// Deletes the specified service level objective.
     pub fn deleteServiceLevelObjective(self: *Self, allocator: std.mem.Allocator, input: delete_service_level_objective.DeleteServiceLevelObjectiveInput, options: CallOptions) !delete_service_level_objective.DeleteServiceLevelObjectiveOutput {
         return delete_service_level_objective.execute(self, allocator, input, options);
+    }
+
+    /// Returns the details of a single instrumentation configuration identified by
+    /// service, environment, signal type, and location. Use this to audit or
+    /// display configuration details.
+    pub fn getInstrumentationConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_instrumentation_configuration.GetInstrumentationConfigurationInput, options: CallOptions) !get_instrumentation_configuration.GetInstrumentationConfigurationOutput {
+        return get_instrumentation_configuration.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the status history for a single instrumentation configuration
+    /// during a specified time range. The response lists when the configuration was
+    /// ACTIVE, READY, ERROR, or DISABLED.
+    ///
+    /// If no status or time window is provided, the operation defaults to ACTIVE
+    /// events from the last hour.
+    pub fn getInstrumentationConfigurationStatus(self: *Self, allocator: std.mem.Allocator, input: get_instrumentation_configuration_status.GetInstrumentationConfigurationStatusInput, options: CallOptions) !get_instrumentation_configuration_status.GetInstrumentationConfigurationStatusOutput {
+        return get_instrumentation_configuration_status.execute(self, allocator, input, options);
     }
 
     /// Returns information about a service discovered by Application Signals.
@@ -199,6 +257,17 @@ pub const Client = struct {
     /// attributes, Amazon Web Services tags, or predefined mappings.
     pub fn listGroupingAttributeDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_grouping_attribute_definitions.ListGroupingAttributeDefinitionsInput, options: CallOptions) !list_grouping_attribute_definitions.ListGroupingAttributeDefinitionsOutput {
         return list_grouping_attribute_definitions.execute(self, allocator, input, options);
+    }
+
+    /// Returns all active instrumentation configurations for a service and
+    /// environment. SDKs use this operation to sync configurations and apply
+    /// client-side filters locally.
+    ///
+    /// Include the previous `SyncedAt` value to perform incremental syncs. When no
+    /// changes are detected, the response sets `Changed` to `false` and omits
+    /// configuration details.
+    pub fn listInstrumentationConfigurations(self: *Self, allocator: std.mem.Allocator, input: list_instrumentation_configurations.ListInstrumentationConfigurationsInput, options: CallOptions) !list_instrumentation_configurations.ListInstrumentationConfigurationsOutput {
+        return list_instrumentation_configurations.execute(self, allocator, input, options);
     }
 
     /// Returns a list of service dependencies of the service that you specify. A
@@ -266,6 +335,17 @@ pub const Client = struct {
         return put_grouping_configuration.execute(self, allocator, input, options);
     }
 
+    /// Reports the status of one or more instrumentation configurations from SDK
+    /// instances. Use this to record when configurations become ready, hit errors,
+    /// become active, or are disabled by limits.
+    ///
+    /// Report `READY`, `ERROR`, and `DISABLED` when the status changes. Report
+    /// `ACTIVE` periodically (for example, every minute) while instrumentation is
+    /// running.
+    pub fn reportInstrumentationConfigurationStatus(self: *Self, allocator: std.mem.Allocator, input: report_instrumentation_configuration_status.ReportInstrumentationConfigurationStatusInput, options: CallOptions) !report_instrumentation_configuration_status.ReportInstrumentationConfigurationStatusOutput {
+        return report_instrumentation_configuration_status.execute(self, allocator, input, options);
+    }
+
     /// Enables this Amazon Web Services account to be able to use CloudWatch
     /// Application Signals by creating the
     /// *AWSServiceRoleForCloudWatchApplicationSignals* service-linked role. This
@@ -326,7 +406,21 @@ pub const Client = struct {
         return update_service_level_objective.execute(self, allocator, input, options);
     }
 
+    pub fn getInstrumentationConfigurationStatusPaginator(self: *Self, params: get_instrumentation_configuration_status.GetInstrumentationConfigurationStatusInput) paginator.GetInstrumentationConfigurationStatusPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
     pub fn listEntityEventsPaginator(self: *Self, params: list_entity_events.ListEntityEventsInput) paginator.ListEntityEventsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listInstrumentationConfigurationsPaginator(self: *Self, params: list_instrumentation_configurations.ListInstrumentationConfigurationsInput) paginator.ListInstrumentationConfigurationsPaginator {
         return .{
             .client = self,
             .params = params,

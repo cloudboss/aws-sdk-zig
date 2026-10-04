@@ -4,11 +4,13 @@ pub const TextPartType = enum {
     localized_text,
     plain_text,
     url,
+    portable_text,
 
     pub const json_field_names = .{
         .localized_text = "LOCALIZED_TEXT",
         .plain_text = "PLAIN_TEXT",
         .url = "URL",
+        .portable_text = "PORTABLE_TEXT",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const TextPartType = enum {
             .localized_text => "LOCALIZED_TEXT",
             .plain_text => "PLAIN_TEXT",
             .url => "URL",
+            .portable_text => "PORTABLE_TEXT",
         };
     }
 

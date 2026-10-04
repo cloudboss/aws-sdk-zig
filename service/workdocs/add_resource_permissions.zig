@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AddResourcePermissionsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AddResourcePermissionsOutput {
-    var result: AddResourcePermissionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AddResourcePermissionsOutput, body, allocator);
-    }
+    const result: AddResourcePermissionsOutput = try aws.json.parseJsonObject(
+        AddResourcePermissionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

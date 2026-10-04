@@ -10,6 +10,10 @@ const DBCluster = @import("db_cluster.zig").DBCluster;
 const serde = @import("serde.zig");
 
 pub const RestoreDBClusterToPointInTimeInput = struct {
+    /// Specifies whether to copy all tags from the restored DB cluster to snapshots
+    /// of the restored DB cluster. The default is not to copy them.
+    copy_tags_to_snapshot: ?bool = null,
+
     /// The name of the new cluster to be created.
     ///
     /// Constraints:
@@ -74,7 +78,7 @@ pub const RestoreDBClusterToPointInTimeInput = struct {
     /// IPv6 protocols (`DUAL`).
     ///
     /// For more information, see [DocumentDB clusters in a
-    /// VPC](https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html) in the Amazon DocumentDB Developer Guide.
+    /// VPC](https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html) in the Amazon DocumentDB Developer Guide.
     ///
     /// Valid Values: `IPV4` | `DUAL`
     network_type: ?[]const u8 = null,
@@ -194,6 +198,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RestoreDBClusterToPoint
     var body_buf: std.ArrayList(u8) = .empty;
 
     try body_buf.appendSlice(allocator, "Action=RestoreDBClusterToPointInTime&Version=2014-10-31");
+    if (input.copy_tags_to_snapshot) |v| {
+        try body_buf.appendSlice(allocator, "&CopyTagsToSnapshot=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
+    }
     try body_buf.appendSlice(allocator, "&DBClusterIdentifier=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.db_cluster_identifier);
     if (input.db_subnet_group_name) |v| {

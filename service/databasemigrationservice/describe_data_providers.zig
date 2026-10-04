@@ -8,11 +8,11 @@ const Filter = @import("filter.zig").Filter;
 const DataProvider = @import("data_provider.zig").DataProvider;
 
 pub const DescribeDataProvidersInput = struct {
-    /// Filters applied to the data providers described in the form of key-value
-    /// pairs.
+    /// The filters to apply to the data providers.
     ///
-    /// Valid filter names and values: data-provider-identifier, data provider arn
-    /// or name
+    /// The following filter names are supported:
+    ///
+    /// * `data-provider-identifier` – The data provider name or ARN.
     filters: ?[]const Filter = null,
 
     /// Specifies the unique pagination token that makes it possible to display the

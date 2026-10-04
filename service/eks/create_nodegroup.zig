@@ -389,10 +389,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateNodegroupInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateNodegroupOutput {
-    var result: CreateNodegroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateNodegroupOutput, body, allocator);
-    }
+    const result: CreateNodegroupOutput = try aws.json.parseJsonObject(
+        CreateNodegroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

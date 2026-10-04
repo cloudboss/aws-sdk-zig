@@ -2,6 +2,7 @@ const std = @import("std");
 
 pub const ProcurementPortalPreferenceStatus = enum {
     pending_verification,
+    validated,
     test_initialized,
     test_initialization_failed,
     test_failed,
@@ -10,6 +11,7 @@ pub const ProcurementPortalPreferenceStatus = enum {
 
     pub const json_field_names = .{
         .pending_verification = "PENDING_VERIFICATION",
+        .validated = "VALIDATED",
         .test_initialized = "TEST_INITIALIZED",
         .test_initialization_failed = "TEST_INITIALIZATION_FAILED",
         .test_failed = "TEST_FAILED",
@@ -20,6 +22,7 @@ pub const ProcurementPortalPreferenceStatus = enum {
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .pending_verification => "PENDING_VERIFICATION",
+            .validated => "VALIDATED",
             .test_initialized => "TEST_INITIALIZED",
             .test_initialization_failed => "TEST_INITIALIZATION_FAILED",
             .test_failed => "TEST_FAILED",

@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeChimeWebhookCon
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeChimeWebhookConfigurationsOutput {
-    var result: DescribeChimeWebhookConfigurationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeChimeWebhookConfigurationsOutput, body, allocator);
-    }
+    const result: DescribeChimeWebhookConfigurationsOutput = try aws.json.parseJsonObject(
+        DescribeChimeWebhookConfigurationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

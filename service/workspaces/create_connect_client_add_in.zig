@@ -12,7 +12,7 @@ pub const CreateConnectClientAddInInput = struct {
     /// The directory identifier for which to configure the client add-in.
     resource_id: []const u8,
 
-    /// The endpoint URL of the Amazon Connect client add-in.
+    /// The endpoint URL of the Connect Customer client add-in.
     url: []const u8,
 
     pub const json_field_names = .{

@@ -13,6 +13,15 @@ pub const StartPlanExecutionInput = struct {
     /// Region).
     action: ExecutionAction,
 
+    /// A unique, case-sensitive identifier to ensure that the operation completes
+    /// no more than one time. If this token matches a previous request, the service
+    /// ignores the request and returns the result of the original successful
+    /// request. If you don't provide a client token, the service automatically
+    /// generates one. For more information about idempotency, see [Making retries
+    /// safe with idempotent
+    /// APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
+    client_token: ?[]const u8 = null,
+
     /// An optional comment explaining why the plan execution is being started.
     comment: ?[]const u8 = null,
 
@@ -39,6 +48,7 @@ pub const StartPlanExecutionInput = struct {
 
     pub const json_field_names = .{
         .action = "action",
+        .client_token = "clientToken",
         .comment = "comment",
         .latest_version = "latestVersion",
         .mode = "mode",

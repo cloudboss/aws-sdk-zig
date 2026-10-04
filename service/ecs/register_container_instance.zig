@@ -34,8 +34,8 @@ pub const RegisterContainerInstanceInput = struct {
     /// http://169.254.169.254/latest/dynamic/instance-identity/signature/`
     instance_identity_document_signature: ?[]const u8 = null,
 
-    /// The devices that are available on the container instance. The only supported
-    /// device type is a GPU.
+    /// The devices that are available on the container instance. The supported
+    /// device types are GPUs and Neuron devices.
     platform_devices: ?[]const PlatformDevice = null,
 
     /// The metadata that you apply to the container instance to help you categorize

@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeRegionSettingsI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeRegionSettingsOutput {
-    var result: DescribeRegionSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeRegionSettingsOutput, body, allocator);
-    }
+    const result: DescribeRegionSettingsOutput = try aws.json.parseJsonObject(
+        DescribeRegionSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

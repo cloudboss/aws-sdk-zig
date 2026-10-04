@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSbomExportInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateSbomExportOutput {
-    var result: CreateSbomExportOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateSbomExportOutput, body, allocator);
-    }
+    const result: CreateSbomExportOutput = try aws.json.parseJsonObject(
+        CreateSbomExportOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

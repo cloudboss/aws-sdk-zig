@@ -4,13 +4,19 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const RequestBillingMode = @import("request_billing_mode.zig").RequestBillingMode;
 const Tag = @import("tag.zig").Tag;
+const BillingMode = @import("billing_mode.zig").BillingMode;
 const Connection = @import("connection.zig").Connection;
 const HasLogicalRedundancy = @import("has_logical_redundancy.zig").HasLogicalRedundancy;
 const LagState = @import("lag_state.zig").LagState;
 const MacSecKey = @import("mac_sec_key.zig").MacSecKey;
+const RateLimiterStatus = @import("rate_limiter_status.zig").RateLimiterStatus;
 
 pub const CreateLagInput = struct {
+    /// The billing mode for the LAG.
+    billing_mode: ?RequestBillingMode = null,
+
     /// The tags to associate with the automtically created LAGs.
     child_connection_tags: ?[]const Tag = null,
 
@@ -50,6 +56,7 @@ pub const CreateLagInput = struct {
     tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
+        .billing_mode = "billingMode",
         .child_connection_tags = "childConnectionTags",
         .connection_id = "connectionId",
         .connections_bandwidth = "connectionsBandwidth",

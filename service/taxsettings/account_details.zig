@@ -14,9 +14,8 @@ pub const AccountDetails = struct {
     tax_inheritance_details: ?TaxInheritanceDetails = null,
 
     /// Your TRN information. Instead of having full legal address, here TRN
-    /// information will have
-    /// jurisdiction details (for example, country code and state/region/province if
-    /// applicable).
+    /// information will have jurisdiction details (for example, country code and
+    /// state/region/province if applicable).
     tax_registration: ?TaxRegistrationWithJurisdiction = null,
 
     pub const json_field_names = .{

@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEvidenceByEvidenceFo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetEvidenceByEvidenceFolderOutput {
-    var result: GetEvidenceByEvidenceFolderOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetEvidenceByEvidenceFolderOutput, body, allocator);
-    }
+    const result: GetEvidenceByEvidenceFolderOutput = try aws.json.parseJsonObject(
+        GetEvidenceByEvidenceFolderOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

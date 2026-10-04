@@ -461,6 +461,24 @@ pub const DBInstance = struct {
     ///   or Amazon Web Services managed KMS key.
     storage_encryption_type: ?StorageEncryptionType = null,
 
+    /// The percentage of the in-progress storage operation on the DB instance that
+    /// has completed, from `0` to `100`. This field appears only while a storage
+    /// operation is in progress. It isn't present when no storage operation is
+    /// active.
+    storage_operation_percent_progress: ?i32 = null,
+
+    /// The status of an in-progress storage operation on the DB instance. This
+    /// field appears only while a storage operation is in progress. It isn't
+    /// present when no storage operation is active. Possible values:
+    ///
+    /// * `Initializing` - The volume is initializing from a snapshot, such as
+    ///   during a snapshot restore, point-in-time restore, read replica creation,
+    ///   or blue/green deployment. Performance can be lower than provisioned until
+    ///   initialization completes.
+    /// * `Optimizing` - The volume is optimizing following a storage scaling or
+    ///   modification operation.
+    storage_operation_status: ?[]const u8 = null,
+
     /// The storage throughput for the DB instance.
     ///
     /// This setting applies only to the `gp3` storage type.

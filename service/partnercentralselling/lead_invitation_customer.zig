@@ -1,7 +1,3 @@
-const CountryCode = @import("country_code.zig").CountryCode;
-const Industry = @import("industry.zig").Industry;
-const MarketSegment = @import("market_segment.zig").MarketSegment;
-
 /// Contains customer information included in a lead invitation payload. This
 /// structure provides essential details about the customer to help partners
 /// evaluate the lead opportunity and determine their interest in engagement.
@@ -19,17 +15,17 @@ pub const LeadInvitationCustomer = struct {
     /// The country code indicating the geographic location of the customer company.
     /// This information helps partners understand regional requirements and assess
     /// their ability to serve the customer effectively.
-    country_code: CountryCode,
+    country_code: []const u8 = "",
 
     /// Specifies the industry sector of the customer company associated with the
     /// lead invitation. This categorization helps partners understand the
     /// customer's business context and assess solution fit.
-    industry: ?Industry = null,
+    industry: ?[]const u8 = null,
 
     /// Specifies the market segment classification of the customer, such as
     /// enterprise, mid-market, or small business. This segmentation helps partners
     /// determine the appropriate solution complexity and engagement strategy.
-    market_segment: ?MarketSegment = null,
+    market_segment: ?[]const u8 = null,
 
     /// The website URL of the customer company. This provides additional context
     /// about the customer organization and helps partners verify company details

@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBulkPublishDetailsIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBulkPublishDetailsOutput {
-    var result: GetBulkPublishDetailsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBulkPublishDetailsOutput, body, allocator);
-    }
+    const result: GetBulkPublishDetailsOutput = try aws.json.parseJsonObject(
+        GetBulkPublishDetailsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

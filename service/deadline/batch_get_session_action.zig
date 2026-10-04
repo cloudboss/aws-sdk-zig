@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetSessionActionIn
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetSessionActionOutput {
-    var result: BatchGetSessionActionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetSessionActionOutput, body, allocator);
-    }
+    const result: BatchGetSessionActionOutput = try aws.json.parseJsonObject(
+        BatchGetSessionActionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

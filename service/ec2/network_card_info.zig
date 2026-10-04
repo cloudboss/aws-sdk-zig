@@ -1,3 +1,5 @@
+const NetworkCardInterfaceType = @import("network_card_interface_type.zig").NetworkCardInterfaceType;
+
 /// Describes the network card support of the instance type.
 pub const NetworkCardInfo = struct {
     /// The number of additional network interfaces that can be attached to an
@@ -12,6 +14,9 @@ pub const NetworkCardInfo = struct {
 
     /// The default number of the ENA queues for each interface.
     default_ena_queue_count_per_interface: ?i32 = null,
+
+    /// The supported interface types for the network card.
+    interface_types: ?[]const NetworkCardInterfaceType = null,
 
     /// The maximum number of the ENA queues.
     maximum_ena_queue_count: ?i32 = null,

@@ -1,8 +1,12 @@
+const IdleDimension = @import("idle_dimension.zig").IdleDimension;
 const IdleMetricName = @import("idle_metric_name.zig").IdleMetricName;
 const MetricStatistic = @import("metric_statistic.zig").MetricStatistic;
 
 /// Describes the utilization metric of an idle resource.
 pub const IdleUtilizationMetric = struct {
+    /// The dimensions of the utilization metric.
+    dimensions: ?[]const IdleDimension = null,
+
     /// The name of the utilization metric.
     name: ?IdleMetricName = null,
 
@@ -28,6 +32,7 @@ pub const IdleUtilizationMetric = struct {
     value: f64 = 0,
 
     pub const json_field_names = .{
+        .dimensions = "dimensions",
         .name = "name",
         .statistic = "statistic",
         .value = "value",

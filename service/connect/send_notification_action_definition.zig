@@ -7,7 +7,7 @@ pub const SendNotificationActionDefinition = struct {
     /// Notification content. Supports variable injection. For more information, see
     /// [JSONPath
     /// reference](https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html)
-    /// in the *Amazon Connect Administrators Guide*.
+    /// in the *Connect Customer Administrators Guide*.
     content: []const u8,
 
     /// Content type format.
@@ -26,7 +26,7 @@ pub const SendNotificationActionDefinition = struct {
     /// variable injection. For more information, see
     /// [JSONPath
     /// reference](https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html)
-    /// in the *Amazon Connect Administrators Guide*.
+    /// in the *Connect Customer Administrators Guide*.
     subject: ?[]const u8 = null,
 
     pub const json_field_names = .{

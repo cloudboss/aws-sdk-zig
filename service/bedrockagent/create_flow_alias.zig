@@ -177,10 +177,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFlowAliasInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateFlowAliasOutput {
-    var result: CreateFlowAliasOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateFlowAliasOutput, body, allocator);
-    }
+    const result: CreateFlowAliasOutput = try aws.json.parseJsonObject(
+        CreateFlowAliasOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

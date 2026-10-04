@@ -5,6 +5,8 @@ const Risk = @import("risk.zig").Risk;
 /// An improvement summary of a lens review in a workload.
 pub const ImprovementSummary = struct {
     /// The improvement plan details.
+    ///
+    /// This value is only applicable to custom lenses.
     improvement_plans: ?[]const ChoiceImprovementPlan = null,
 
     improvement_plan_url: ?[]const u8 = null,

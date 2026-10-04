@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateConfiguredTableAs
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateConfiguredTableAssociationOutput {
-    var result: UpdateConfiguredTableAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateConfiguredTableAssociationOutput, body, allocator);
-    }
+    const result: UpdateConfiguredTableAssociationOutput = try aws.json.parseJsonObject(
+        UpdateConfiguredTableAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

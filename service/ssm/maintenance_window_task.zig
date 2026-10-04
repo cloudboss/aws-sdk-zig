@@ -98,6 +98,9 @@ pub const MaintenanceWindowTask = struct {
     /// Manager (SSM document) name or
     /// ARN. For `LAMBDA` tasks, it's the function name or ARN. For
     /// `STEP_FUNCTIONS` tasks, it's the state machine ARN.
+    ///
+    /// Maintenance Window does not validate the TaskArn when you register a task.
+    /// A successful registration does not guarantee that the TaskArn is valid.
     task_arn: ?[]const u8 = null,
 
     /// The parameters that should be passed to the task when it is run.

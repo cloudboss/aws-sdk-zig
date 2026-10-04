@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCustomPluginInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCustomPluginOutput {
-    var result: CreateCustomPluginOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCustomPluginOutput, body, allocator);
-    }
+    const result: CreateCustomPluginOutput = try aws.json.parseJsonObject(
+        CreateCustomPluginOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

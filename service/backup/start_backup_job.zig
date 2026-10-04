@@ -285,10 +285,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartBackupJobInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartBackupJobOutput {
-    var result: StartBackupJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartBackupJobOutput, body, allocator);
-    }
+    const result: StartBackupJobOutput = try aws.json.parseJsonObject(
+        StartBackupJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -130,10 +130,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListMultipartUploadsInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListMultipartUploadsOutput {
-    var result: ListMultipartUploadsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListMultipartUploadsOutput, body, allocator);
-    }
+    const result: ListMultipartUploadsOutput = try aws.json.parseJsonObject(
+        ListMultipartUploadsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

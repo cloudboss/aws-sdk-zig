@@ -6,8 +6,7 @@ pub const Choice = struct {
     /// The additional resources for a choice in a custom lens.
     ///
     /// A choice can have up to two additional resources: one of type
-    /// `HELPFUL_RESOURCE`,
-    /// one of type `IMPROVEMENT_PLAN`, or both.
+    /// `HELPFUL_RESOURCE`, one of type `IMPROVEMENT_PLAN`, or both.
     additional_resources: ?[]const AdditionalResources = null,
 
     choice_id: ?[]const u8 = null,

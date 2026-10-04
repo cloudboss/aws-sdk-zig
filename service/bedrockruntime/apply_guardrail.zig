@@ -146,10 +146,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ApplyGuardrailInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ApplyGuardrailOutput {
-    var result: ApplyGuardrailOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ApplyGuardrailOutput, body, allocator);
-    }
+    const result: ApplyGuardrailOutput = try aws.json.parseJsonObject(
+        ApplyGuardrailOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

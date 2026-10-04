@@ -83,10 +83,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeDataTableInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeDataTableOutput {
-    var result: DescribeDataTableOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeDataTableOutput, body, allocator);
-    }
+    const result: DescribeDataTableOutput = try aws.json.parseJsonObject(
+        DescribeDataTableOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

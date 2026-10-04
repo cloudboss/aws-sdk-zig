@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListIdMappingTablesInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListIdMappingTablesOutput {
-    var result: ListIdMappingTablesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListIdMappingTablesOutput, body, allocator);
-    }
+    const result: ListIdMappingTablesOutput = try aws.json.parseJsonObject(
+        ListIdMappingTablesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

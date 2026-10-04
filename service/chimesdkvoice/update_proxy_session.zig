@@ -104,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateProxySessionInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateProxySessionOutput {
-    var result: UpdateProxySessionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateProxySessionOutput, body, allocator);
-    }
+    const result: UpdateProxySessionOutput = try aws.json.parseJsonObject(
+        UpdateProxySessionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

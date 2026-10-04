@@ -120,10 +120,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartSuiteRunInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartSuiteRunOutput {
-    var result: StartSuiteRunOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartSuiteRunOutput, body, allocator);
-    }
+    const result: StartSuiteRunOutput = try aws.json.parseJsonObject(
+        StartSuiteRunOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,3 +1,4 @@
+const ProcessingInstancePreference = @import("processing_instance_preference.zig").ProcessingInstancePreference;
 const ProcessingInstanceType = @import("processing_instance_type.zig").ProcessingInstanceType;
 
 /// Configuration for the cluster used to run a processing job.
@@ -5,10 +6,30 @@ pub const ProcessingClusterConfig = struct {
     /// The number of ML compute instances to use in the processing job. For
     /// distributed processing jobs, specify a value greater than 1. The default
     /// value is 1.
-    instance_count: i32,
+    instance_count: ?i32 = null,
+
+    /// An ordered list of ML compute instance types for the processing job, in
+    /// priority order. Amazon SageMaker launches the job on the first instance type
+    /// in the list that has available capacity. If capacity is insufficient, Amazon
+    /// SageMaker evaluates the next instance type in the list. Exactly one instance
+    /// type is selected for the job.
+    ///
+    /// `InstancePreferences` is mutually exclusive with `InstanceType`.
+    instance_preferences: ?[]const ProcessingInstancePreference = null,
 
     /// The ML compute instance type for the processing job.
-    instance_type: ProcessingInstanceType,
+    instance_type: ?ProcessingInstanceType = null,
+
+    /// The number of instances of `SelectedInstanceType` that the job launched
+    /// with. The job is billed for this instance type and count. Returned by
+    /// `DescribeProcessingJob` after an instance type is selected. This field is
+    /// read-only and isn't accepted in `CreateProcessingJob` requests.
+    selected_instance_count: ?i32 = null,
+
+    /// The instance type that Amazon SageMaker selected for the job from
+    /// `InstancePreferences`. Returned by `
+    /// [DescribeProcessingJob](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeProcessingJob.html) ` after an instance type is selected. This field is read-only and isn't accepted in `CreateProcessingJob` requests.
+    selected_instance_type: ?ProcessingInstanceType = null,
 
     /// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
     /// that Amazon SageMaker uses to encrypt data on the storage volume attached to
@@ -44,7 +65,10 @@ pub const ProcessingClusterConfig = struct {
 
     pub const json_field_names = .{
         .instance_count = "InstanceCount",
+        .instance_preferences = "InstancePreferences",
         .instance_type = "InstanceType",
+        .selected_instance_count = "SelectedInstanceCount",
+        .selected_instance_type = "SelectedInstanceType",
         .volume_kms_key_id = "VolumeKmsKeyId",
         .volume_size_in_gb = "VolumeSizeInGB",
     };

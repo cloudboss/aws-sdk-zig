@@ -1,5 +1,6 @@
 const std = @import("std");
 
+/// The FHIR version supported by the data store.
 pub const FHIRVersion = enum {
     r4,
 

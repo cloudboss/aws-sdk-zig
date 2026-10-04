@@ -293,10 +293,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInterpolatedAssetPro
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetInterpolatedAssetPropertyValuesOutput {
-    var result: GetInterpolatedAssetPropertyValuesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetInterpolatedAssetPropertyValuesOutput, body, allocator);
-    }
+    const result: GetInterpolatedAssetPropertyValuesOutput = try aws.json.parseJsonObject(
+        GetInterpolatedAssetPropertyValuesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

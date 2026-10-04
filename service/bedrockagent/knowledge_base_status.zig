@@ -7,6 +7,7 @@ pub const KnowledgeBaseStatus = enum {
     updating,
     failed,
     delete_unsuccessful,
+    update_unsuccessful,
 
     pub const json_field_names = .{
         .creating = "CREATING",
@@ -15,6 +16,7 @@ pub const KnowledgeBaseStatus = enum {
         .updating = "UPDATING",
         .failed = "FAILED",
         .delete_unsuccessful = "DELETE_UNSUCCESSFUL",
+        .update_unsuccessful = "UPDATE_UNSUCCESSFUL",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -25,6 +27,7 @@ pub const KnowledgeBaseStatus = enum {
             .updating => "UPDATING",
             .failed => "FAILED",
             .delete_unsuccessful => "DELETE_UNSUCCESSFUL",
+            .update_unsuccessful => "UPDATE_UNSUCCESSFUL",
         };
     }
 

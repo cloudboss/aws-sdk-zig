@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteWhatsAppMessageMe
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteWhatsAppMessageMediaOutput {
-    var result: DeleteWhatsAppMessageMediaOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteWhatsAppMessageMediaOutput, body, allocator);
-    }
+    const result: DeleteWhatsAppMessageMediaOutput = try aws.json.parseJsonObject(
+        DeleteWhatsAppMessageMediaOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

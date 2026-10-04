@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListConfiguredAudienceM
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListConfiguredAudienceModelAssociationsOutput {
-    var result: ListConfiguredAudienceModelAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListConfiguredAudienceModelAssociationsOutput, body, allocator);
-    }
+    const result: ListConfiguredAudienceModelAssociationsOutput = try aws.json.parseJsonObject(
+        ListConfiguredAudienceModelAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -11,24 +11,28 @@ pub const S3LoggingConfiguration = struct {
     ///
     /// Valid log types:
     ///
-    /// * `system-logs`: System-level logs including daemon logs, bootstrap logs,
-    ///   and other infrastructure logs.
+    /// * `system-logs`: EMR Daemon logs.
     ///
-    /// * `application-logs`: Application-level logs from frameworks like Hadoop,
-    ///   Spark, Hive, etc.
+    /// * `application-logs`: Framework logs from Hadoop, Spark, Hive and other
+    ///   applications running on the cluster.
     ///
-    /// * `persistent-ui-logs`: Logs for persistent application UIs like Spark
-    ///   History Server.
+    /// * `persistent-ui-logs`: Logs required for persistent application UIs such as
+    ///   Spark History Server and Tez UI.
     ///
     /// Valid upload policies:
     ///
-    /// * `emr-managed`: Logs are uploaded to both the EMR-managed S3 bucket and the
-    ///   customer-specified S3 bucket (if LogUri is provided).
+    /// * `emr-managed`: Standard behavior. Logs are uploaded to S3 bucket as
+    ///   configured in your
+    /// LogUri, with certain logs retained by the service for operational
+    /// support and troubleshooting purposes.
     ///
     /// * `on-customer-s3only`: Logs are uploaded only to the customer-specified S3
-    ///   bucket. Requires LogUri to be specified in the cluster configuration.
+    ///   bucket. This requires you to specify a LogUri
+    /// when creating the cluster. Persistent-ui-logs cannot have
+    /// on-customer-s3only policy. Allowed policies for persistent-ui-logs
+    /// are emr-managed and disabled.
     ///
-    /// * `disabled`: Log upload is disabled for this log type.
+    /// * `disabled`: No S3 upload for this log type.
     log_type_upload_policy: ?[]const aws.map.MapEntry(LogUploadPolicyValue) = null,
 
     pub const json_field_names = .{

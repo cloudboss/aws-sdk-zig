@@ -128,10 +128,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListLayersInput, config
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListLayersOutput {
-    var result: ListLayersOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListLayersOutput, body, allocator);
-    }
+    const result: ListLayersOutput = try aws.json.parseJsonObject(
+        ListLayersOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

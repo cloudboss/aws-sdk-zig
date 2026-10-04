@@ -1,11 +1,11 @@
 /// Information about proficiency of a user.
 pub const UserProficiency = struct {
     /// The name of user's proficiency. You must use name of predefined attribute
-    /// present in the Amazon Connect instance.
+    /// present in the Connect Customer instance.
     attribute_name: []const u8,
 
     /// The value of user's proficiency. You must use value of predefined attribute
-    /// present in the Amazon Connect
+    /// present in the Connect Customer
     /// instance.
     attribute_value: []const u8,
 

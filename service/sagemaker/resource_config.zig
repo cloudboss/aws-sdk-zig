@@ -1,5 +1,6 @@
 const InstanceGroup = @import("instance_group.zig").InstanceGroup;
 const InstancePlacementConfig = @import("instance_placement_config.zig").InstancePlacementConfig;
+const InstancePreference = @import("instance_preference.zig").InstancePreference;
 const TrainingInstanceType = @import("training_instance_type.zig").TrainingInstanceType;
 
 /// Describes the resources, including machine learning (ML) compute instances
@@ -16,12 +17,36 @@ pub const ResourceConfig = struct {
     /// UltraServers. Only applicable for UltraServer capacity.
     instance_placement_config: ?InstancePlacementConfig = null,
 
+    /// An ordered list of ML compute instance types for the training job, in
+    /// priority order. SageMaker launches the training job on the first instance
+    /// type in the list that has available capacity. If capacity is insufficient,
+    /// SageMaker evaluates the next instance type in the preferred list. Exactly
+    /// one instance type is selected for the job.
+    ///
+    /// `InstancePreferences` is mutually exclusive with `InstanceType`,
+    /// `InstanceGroups`, `InstancePlacementConfig`, and
+    /// `EnableManagedSpotTraining`, and supports only Flexible Training Plans (FTP)
+    /// and On-Demand capacity.
+    instance_preferences: ?[]const InstancePreference = null,
+
     /// The ML compute instance type.
     instance_type: ?TrainingInstanceType = null,
 
     /// The duration of time in seconds to retain configured resources in a warm
     /// pool for subsequent training jobs.
     keep_alive_period_in_seconds: ?i32 = null,
+
+    /// The number of instances of `SelectedInstanceType` that the training job
+    /// launched with. The job is billed for this instance type and count. Returned
+    /// by `DescribeTrainingJob` after an instance type is selected. This field is
+    /// read-only and isn't accepted in `CreateTrainingJob` requests.
+    selected_instance_count: ?i32 = null,
+
+    /// The instance type that SageMaker selected for the job from the provided
+    /// `InstancePreferences`. The job is billed for this instance type and count.
+    /// Returned by `
+    /// [DescribeTrainingJob](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrainingJob.html) ` after an instance type is selected. This field is read-only and isn't accepted in `CreateTrainingJob` requests.
+    selected_instance_type: ?TrainingInstanceType = null,
 
     /// The Amazon Resource Name (ARN); of the training plan to use for this
     /// resource configuration.
@@ -85,8 +110,11 @@ pub const ResourceConfig = struct {
         .instance_count = "InstanceCount",
         .instance_groups = "InstanceGroups",
         .instance_placement_config = "InstancePlacementConfig",
+        .instance_preferences = "InstancePreferences",
         .instance_type = "InstanceType",
         .keep_alive_period_in_seconds = "KeepAlivePeriodInSeconds",
+        .selected_instance_count = "SelectedInstanceCount",
+        .selected_instance_type = "SelectedInstanceType",
         .training_plan_arn = "TrainingPlanArn",
         .volume_kms_key_id = "VolumeKmsKeyId",
         .volume_size_in_gb = "VolumeSizeInGB",

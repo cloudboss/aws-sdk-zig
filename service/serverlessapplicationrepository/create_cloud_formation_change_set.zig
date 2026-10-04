@@ -288,10 +288,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCloudFormationCha
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateCloudFormationChangeSetOutput {
-    var result: CreateCloudFormationChangeSetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateCloudFormationChangeSetOutput, body, allocator);
-    }
+    const result: CreateCloudFormationChangeSetOutput = try aws.json.parseJsonObject(
+        CreateCloudFormationChangeSetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

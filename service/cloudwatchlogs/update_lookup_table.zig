@@ -18,15 +18,29 @@ pub const UpdateLookupTableInput = struct {
     /// The ARN of the lookup table to update.
     lookup_table_arn: []const u8,
 
+    /// The ID of a completed or cancelled CloudWatch Logs query whose results
+    /// replace
+    /// the lookup table content. A cancelled query replaces the content with the
+    /// partial results
+    /// that were available when the query was stopped.
+    ///
+    /// You must specify either `tableBody` or `queryId`, but not
+    /// both.
+    query_id: ?[]const u8 = null,
+
     /// The new CSV content to replace the existing data. The first row must be a
     /// header row
     /// with column names. The content must use UTF-8 encoding and not exceed 10 MB.
-    table_body: []const u8,
+    ///
+    /// You must specify either `tableBody` or `queryId`, but not
+    /// both.
+    table_body: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "description",
         .kms_key_id = "kmsKeyId",
         .lookup_table_arn = "lookupTableArn",
+        .query_id = "queryId",
         .table_body = "tableBody",
     };
 };

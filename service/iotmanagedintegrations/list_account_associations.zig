@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAccountAssociations
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAccountAssociationsOutput {
-    var result: ListAccountAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAccountAssociationsOutput, body, allocator);
-    }
+    const result: ListAccountAssociationsOutput = try aws.json.parseJsonObject(
+        ListAccountAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -93,10 +93,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TestRenderEmailTemplate
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !TestRenderEmailTemplateOutput {
-    var result: TestRenderEmailTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(TestRenderEmailTemplateOutput, body, allocator);
-    }
+    const result: TestRenderEmailTemplateOutput = try aws.json.parseJsonObject(
+        TestRenderEmailTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

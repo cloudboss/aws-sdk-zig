@@ -54,9 +54,10 @@ pub const StartGameSessionPlacementInput = struct {
     placement_id: []const u8,
 
     /// A set of values, expressed in milliseconds, that indicates the amount of
-    /// latency that a player experiences when connected to Amazon Web Services
-    /// Regions. This information is used to try to place the new game session where
-    /// it
+    /// latency that a player experiences when connected to a fleet location (Amazon
+    /// Web Services Regions or custom locations for Amazon GameLift Servers
+    /// Anywhere fleets). This information is used to try to place the new game
+    /// session where it
     /// can offer the best possible gameplay experience for the players.
     player_latencies: ?[]const PlayerLatency = null,
 

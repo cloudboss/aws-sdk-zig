@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCloudWatchAlarmTempl
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCloudWatchAlarmTemplateGroupOutput {
-    var result: GetCloudWatchAlarmTemplateGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCloudWatchAlarmTemplateGroupOutput, body, allocator);
-    }
+    const result: GetCloudWatchAlarmTemplateGroupOutput = try aws.json.parseJsonObject(
+        GetCloudWatchAlarmTemplateGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

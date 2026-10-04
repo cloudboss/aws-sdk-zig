@@ -8,7 +8,10 @@ const ControlPlaneScalingConfig = @import("control_plane_scaling_config.zig").Co
 const EncryptionConfig = @import("encryption_config.zig").EncryptionConfig;
 const ClusterHealth = @import("cluster_health.zig").ClusterHealth;
 const Identity = @import("identity.zig").Identity;
+const KubeApiServerConfigResponse = @import("kube_api_server_config_response.zig").KubeApiServerConfigResponse;
+const KubeControllerManagerConfigResponse = @import("kube_controller_manager_config_response.zig").KubeControllerManagerConfigResponse;
 const KubernetesNetworkConfigResponse = @import("kubernetes_network_config_response.zig").KubernetesNetworkConfigResponse;
+const KubeSchedulerConfigResponse = @import("kube_scheduler_config_response.zig").KubeSchedulerConfigResponse;
 const Logging = @import("logging.zig").Logging;
 const OutpostConfigResponse = @import("outpost_config_response.zig").OutpostConfigResponse;
 const RemoteNetworkConfigResponse = @import("remote_network_config_response.zig").RemoteNetworkConfigResponse;
@@ -78,8 +81,17 @@ pub const Cluster = struct {
     /// The identity provider information for the cluster.
     identity: ?Identity = null,
 
+    /// The Kubernetes API server configuration for the cluster.
+    kube_api_server_config: ?KubeApiServerConfigResponse = null,
+
+    /// The Kubernetes controller manager configuration for the cluster.
+    kube_controller_manager_config: ?KubeControllerManagerConfigResponse = null,
+
     /// The Kubernetes network configuration for the cluster.
     kubernetes_network_config: ?KubernetesNetworkConfigResponse = null,
+
+    /// The Kubernetes scheduler configuration for the cluster.
+    kube_scheduler_config: ?KubeSchedulerConfigResponse = null,
 
     /// The logging configuration for your cluster.
     logging: ?Logging = null,
@@ -173,7 +185,10 @@ pub const Cluster = struct {
         .health = "health",
         .id = "id",
         .identity = "identity",
+        .kube_api_server_config = "kubeApiServerConfig",
+        .kube_controller_manager_config = "kubeControllerManagerConfig",
         .kubernetes_network_config = "kubernetesNetworkConfig",
+        .kube_scheduler_config = "kubeSchedulerConfig",
         .logging = "logging",
         .name = "name",
         .outpost_config = "outpostConfig",

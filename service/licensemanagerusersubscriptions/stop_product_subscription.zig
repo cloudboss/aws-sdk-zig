@@ -18,7 +18,7 @@ pub const StopProductSubscriptionInput = struct {
     /// The name of the user-based subscription product.
     ///
     /// Valid values: `VISUAL_STUDIO_ENTERPRISE` | `VISUAL_STUDIO_PROFESSIONAL` |
-    /// `OFFICE_PROFESSIONAL_PLUS` | `REMOTE_DESKTOP_SERVICES`
+    /// `OFFICE_PROFESSIONAL_PLUS` | `OFFICE_STANDARD` | `REMOTE_DESKTOP_SERVICES`
     product: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the product user.
@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StopProductSubscription
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StopProductSubscriptionOutput {
-    var result: StopProductSubscriptionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StopProductSubscriptionOutput, body, allocator);
-    }
+    const result: StopProductSubscriptionOutput = try aws.json.parseJsonObject(
+        StopProductSubscriptionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

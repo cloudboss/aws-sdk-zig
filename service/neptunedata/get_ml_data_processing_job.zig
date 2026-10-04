@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMLDataProcessingJobI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMLDataProcessingJobOutput {
-    var result: GetMLDataProcessingJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMLDataProcessingJobOutput, body, allocator);
-    }
+    const result: GetMLDataProcessingJobOutput = try aws.json.parseJsonObject(
+        GetMLDataProcessingJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -5,12 +5,14 @@ pub const AuthFactorType = enum {
     email_otp,
     sms_otp,
     web_authn,
+    software_token,
 
     pub const json_field_names = .{
         .password = "PASSWORD",
         .email_otp = "EMAIL_OTP",
         .sms_otp = "SMS_OTP",
         .web_authn = "WEB_AUTHN",
+        .software_token = "SOFTWARE_TOKEN",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const AuthFactorType = enum {
             .email_otp => "EMAIL_OTP",
             .sms_otp => "SMS_OTP",
             .web_authn => "WEB_AUTHN",
+            .software_token => "SOFTWARE_TOKEN",
         };
     }
 

@@ -104,10 +104,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListEnabledProductsForI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListEnabledProductsForImportOutput {
-    var result: ListEnabledProductsForImportOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListEnabledProductsForImportOutput, body, allocator);
-    }
+    const result: ListEnabledProductsForImportOutput = try aws.json.parseJsonObject(
+        ListEnabledProductsForImportOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetGatewayRuleInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetGatewayRuleOutput {
-    var result: GetGatewayRuleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetGatewayRuleOutput, body, allocator);
-    }
+    const result: GetGatewayRuleOutput = try aws.json.parseJsonObject(
+        GetGatewayRuleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

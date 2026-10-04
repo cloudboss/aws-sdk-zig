@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateRevealConfigurati
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateRevealConfigurationOutput {
-    var result: UpdateRevealConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateRevealConfigurationOutput, body, allocator);
-    }
+    const result: UpdateRevealConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateRevealConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -4,10 +4,16 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const DatasetTypeEnum = @import("dataset_type_enum.zig").DatasetTypeEnum;
 const DatasetSourceType = @import("dataset_source_type.zig").DatasetSourceType;
 const DatasetSummary = @import("dataset_summary.zig").DatasetSummary;
 
 pub const ListDatasetsInput = struct {
+    /// The type of dataset to filter by: a session dataset, a curated dataset, or a
+    /// connection
+    /// to an external datasource.
+    dataset_type: ?DatasetTypeEnum = null,
+
     /// The maximum number of results to return for each paginated request.
     max_results: ?i32 = null,
 
@@ -18,10 +24,15 @@ pub const ListDatasetsInput = struct {
     /// The type of data source for the dataset.
     source_type: DatasetSourceType,
 
+    /// The name of the workspace to filter datasets by.
+    workspace_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
+        .dataset_type = "datasetType",
         .max_results = "maxResults",
         .next_token = "nextToken",
         .source_type = "sourceType",
+        .workspace_name = "workspaceName",
     };
 };
 
@@ -33,9 +44,13 @@ pub const ListDatasetsOutput = struct {
     /// results.
     next_token: ?[]const u8 = null,
 
+    /// The name of the workspace.
+    workspace_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .dataset_summaries = "datasetSummaries",
         .next_token = "nextToken",
+        .workspace_name = "workspaceName",
     };
 };
 
@@ -73,6 +88,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDatasetsInput, conf
 
     var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
+    if (input.dataset_type) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "datasetType=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
+        query_has_prev = true;
+    }
     if (input.max_results) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "maxResults=");
@@ -92,6 +113,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDatasetsInput, conf
     try query_buf.appendSlice(allocator, "sourceType=");
     try aws.url.appendUrlEncoded(allocator, &query_buf, input.source_type.wireName());
     query_has_prev = true;
+    if (input.workspace_name) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "workspaceName=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
     const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
@@ -109,10 +136,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDatasetsInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListDatasetsOutput {
-    var result: ListDatasetsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListDatasetsOutput, body, allocator);
-    }
+    const result: ListDatasetsOutput = try aws.json.parseJsonObject(
+        ListDatasetsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

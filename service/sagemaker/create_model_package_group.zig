@@ -4,9 +4,13 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const ManagedConfiguration = @import("managed_configuration.zig").ManagedConfiguration;
 const Tag = @import("tag.zig").Tag;
 
 pub const CreateModelPackageGroupInput = struct {
+    /// The managed configuration of the model package group.
+    managed_configuration: ?ManagedConfiguration = null,
+
     /// A description for the model group.
     model_package_group_description: ?[]const u8 = null,
 
@@ -20,6 +24,7 @@ pub const CreateModelPackageGroupInput = struct {
     tags: ?[]const Tag = null,
 
     pub const json_field_names = .{
+        .managed_configuration = "ManagedConfiguration",
         .model_package_group_description = "ModelPackageGroupDescription",
         .model_package_group_name = "ModelPackageGroupName",
         .tags = "Tags",

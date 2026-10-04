@@ -6,7 +6,9 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const IncludedData = @import("included_data.zig").IncludedData;
 const EvaluatorConfig = @import("evaluator_config.zig").EvaluatorConfig;
+const EvaluatorType = @import("evaluator_type.zig").EvaluatorType;
 const EvaluatorLevel = @import("evaluator_level.zig").EvaluatorLevel;
+const Provider = @import("provider.zig").Provider;
 const EvaluatorStatus = @import("evaluator_status.zig").EvaluatorStatus;
 
 pub const GetEvaluatorInput = struct {
@@ -48,6 +50,17 @@ pub const GetEvaluatorOutput = struct {
     /// The name of the evaluator.
     evaluator_name: []const u8,
 
+    /// The kind of evaluator resource. Valid values:
+    ///
+    /// * `Builtin` – An Amazon Web Services-managed global evaluator.
+    /// * `ThirdParty` – An Amazon Web Services-managed global evaluator from a
+    ///   third-party provider.
+    /// * `Custom` – A customer-created evaluator.
+    /// * `CustomCode` – A customer-created code-based evaluator.
+    /// * `CustomDerived` – A customer-created evaluator derived from an existing
+    ///   base evaluator.
+    evaluator_type: ?EvaluatorType = null,
+
     /// The Amazon Resource Name (ARN) of the customer managed KMS key used to
     /// encrypt the evaluator's sensitive data. This field is only present for
     /// evaluators encrypted with a customer managed key.
@@ -60,6 +73,10 @@ pub const GetEvaluatorOutput = struct {
     /// Whether the evaluator is locked for modification due to being referenced by
     /// active online evaluation configurations.
     locked_for_modification: ?bool = null,
+
+    /// The source of the evaluator's logic: Amazon Web Services, a third-party
+    /// library, or you.
+    provider: ?Provider = null,
 
     /// The current status of the evaluator.
     status: EvaluatorStatus,
@@ -74,9 +91,11 @@ pub const GetEvaluatorOutput = struct {
         .evaluator_config = "evaluatorConfig",
         .evaluator_id = "evaluatorId",
         .evaluator_name = "evaluatorName",
+        .evaluator_type = "evaluatorType",
         .kms_key_arn = "kmsKeyArn",
         .level = "level",
         .locked_for_modification = "lockedForModification",
+        .provider = "provider",
         .status = "status",
         .updated_at = "updatedAt",
     };
@@ -142,10 +161,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetEvaluatorInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetEvaluatorOutput {
-    var result: GetEvaluatorOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetEvaluatorOutput, body, allocator);
-    }
+    const result: GetEvaluatorOutput = try aws.json.parseJsonObject(
+        GetEvaluatorOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

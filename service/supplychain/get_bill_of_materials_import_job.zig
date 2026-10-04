@@ -79,10 +79,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBillOfMaterialsImpor
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBillOfMaterialsImportJobOutput {
-    var result: GetBillOfMaterialsImportJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBillOfMaterialsImportJobOutput, body, allocator);
-    }
+    const result: GetBillOfMaterialsImportJobOutput = try aws.json.parseJsonObject(
+        GetBillOfMaterialsImportJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

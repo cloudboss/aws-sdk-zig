@@ -143,10 +143,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListGroundStationReserv
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListGroundStationReservationsOutput {
-    var result: ListGroundStationReservationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListGroundStationReservationsOutput, body, allocator);
-    }
+    const result: ListGroundStationReservationsOutput = try aws.json.parseJsonObject(
+        ListGroundStationReservationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

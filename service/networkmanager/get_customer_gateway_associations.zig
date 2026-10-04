@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCustomerGatewayAssoc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCustomerGatewayAssociationsOutput {
-    var result: GetCustomerGatewayAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCustomerGatewayAssociationsOutput, body, allocator);
-    }
+    const result: GetCustomerGatewayAssociationsOutput = try aws.json.parseJsonObject(
+        GetCustomerGatewayAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

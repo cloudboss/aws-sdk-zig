@@ -6,7 +6,7 @@ const OpenIdConnectIdentityTokenConfigurationItem = @import("open_id_connect_ide
 /// given OIDC identity source.
 ///
 /// This data type is part of a
-/// [OpenIdConnectConfigurationItem](https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html) structure, which is a parameter of [ListIdentitySources](http://amazonaws.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html).
+/// [OpenIdConnectConfigurationItem](https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html) structure, which is a parameter of [ListIdentitySources](https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html).
 pub const OpenIdConnectTokenSelectionItem = union(enum) {
     /// The OIDC configuration for processing access tokens. Contains allowed
     /// audience claims, for example `https://auth.example.com`, and the claim that

@@ -13,7 +13,7 @@ pub const ToolSpecification = struct {
     /// The name of the tool.
     name: []const u8,
 
-    /// Whether to enforce strict JSON schema adherence for the tool input
+    /// Whether the tool schema is strictly enforced.
     strict: ?bool = null,
 
     pub const json_field_names = .{

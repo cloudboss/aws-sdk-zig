@@ -1,3 +1,4 @@
+const PayerConfiguration = @import("payer_configuration.zig").PayerConfiguration;
 const MLInputChannelStatus = @import("ml_input_channel_status.zig").MLInputChannelStatus;
 
 /// Provides summary information about an ML input channel in a collaboration.
@@ -28,6 +29,9 @@ pub const CollaborationMLInputChannelSummary = struct {
     /// The name of the ML input channel.
     name: []const u8,
 
+    /// The payer configuration for the ML input channel.
+    payer_configuration: ?PayerConfiguration = null,
+
     /// The status of the ML input channel.
     status: MLInputChannelStatus,
 
@@ -43,6 +47,7 @@ pub const CollaborationMLInputChannelSummary = struct {
         .membership_identifier = "membershipIdentifier",
         .ml_input_channel_arn = "mlInputChannelArn",
         .name = "name",
+        .payer_configuration = "payerConfiguration",
         .status = "status",
         .update_time = "updateTime",
     };

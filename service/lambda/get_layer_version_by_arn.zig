@@ -124,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLayerVersionByArnInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetLayerVersionByArnOutput {
-    var result: GetLayerVersionByArnOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetLayerVersionByArnOutput, body, allocator);
-    }
+    const result: GetLayerVersionByArnOutput = try aws.json.parseJsonObject(
+        GetLayerVersionByArnOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

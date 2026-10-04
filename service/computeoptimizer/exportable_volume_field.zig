@@ -8,6 +8,8 @@ pub const ExportableVolumeField = enum {
     utilization_metrics_volume_write_ops_per_second_maximum,
     utilization_metrics_volume_read_bytes_per_second_maximum,
     utilization_metrics_volume_write_bytes_per_second_maximum,
+    utilization_metrics_volume_iops_exceeded_maximum,
+    utilization_metrics_volume_throughput_exceeded_maximum,
     lookback_period_in_days,
     current_configuration_volume_type,
     current_configuration_volume_baseline_iops,
@@ -36,6 +38,7 @@ pub const ExportableVolumeField = enum {
     recommendation_options_savings_opportunity_after_discounts_percentage,
     recommendation_options_estimated_monthly_savings_currency_after_discounts,
     recommendation_options_estimated_monthly_savings_value_after_discounts,
+    effective_recommendation_preferences_lookback_period,
 
     pub const json_field_names = .{
         .account_id = "AccountId",
@@ -45,6 +48,8 @@ pub const ExportableVolumeField = enum {
         .utilization_metrics_volume_write_ops_per_second_maximum = "UtilizationMetricsVolumeWriteOpsPerSecondMaximum",
         .utilization_metrics_volume_read_bytes_per_second_maximum = "UtilizationMetricsVolumeReadBytesPerSecondMaximum",
         .utilization_metrics_volume_write_bytes_per_second_maximum = "UtilizationMetricsVolumeWriteBytesPerSecondMaximum",
+        .utilization_metrics_volume_iops_exceeded_maximum = "UtilizationMetricsVolumeIOPSExceededMaximum",
+        .utilization_metrics_volume_throughput_exceeded_maximum = "UtilizationMetricsVolumeThroughputExceededMaximum",
         .lookback_period_in_days = "LookbackPeriodInDays",
         .current_configuration_volume_type = "CurrentConfigurationVolumeType",
         .current_configuration_volume_baseline_iops = "CurrentConfigurationVolumeBaselineIOPS",
@@ -73,6 +78,7 @@ pub const ExportableVolumeField = enum {
         .recommendation_options_savings_opportunity_after_discounts_percentage = "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
         .recommendation_options_estimated_monthly_savings_currency_after_discounts = "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
         .recommendation_options_estimated_monthly_savings_value_after_discounts = "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
+        .effective_recommendation_preferences_lookback_period = "EffectiveRecommendationPreferencesLookBackPeriod",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -84,6 +90,8 @@ pub const ExportableVolumeField = enum {
             .utilization_metrics_volume_write_ops_per_second_maximum => "UtilizationMetricsVolumeWriteOpsPerSecondMaximum",
             .utilization_metrics_volume_read_bytes_per_second_maximum => "UtilizationMetricsVolumeReadBytesPerSecondMaximum",
             .utilization_metrics_volume_write_bytes_per_second_maximum => "UtilizationMetricsVolumeWriteBytesPerSecondMaximum",
+            .utilization_metrics_volume_iops_exceeded_maximum => "UtilizationMetricsVolumeIOPSExceededMaximum",
+            .utilization_metrics_volume_throughput_exceeded_maximum => "UtilizationMetricsVolumeThroughputExceededMaximum",
             .lookback_period_in_days => "LookbackPeriodInDays",
             .current_configuration_volume_type => "CurrentConfigurationVolumeType",
             .current_configuration_volume_baseline_iops => "CurrentConfigurationVolumeBaselineIOPS",
@@ -112,6 +120,7 @@ pub const ExportableVolumeField = enum {
             .recommendation_options_savings_opportunity_after_discounts_percentage => "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
             .recommendation_options_estimated_monthly_savings_currency_after_discounts => "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
             .recommendation_options_estimated_monthly_savings_value_after_discounts => "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
+            .effective_recommendation_preferences_lookback_period => "EffectiveRecommendationPreferencesLookBackPeriod",
         };
     }
 

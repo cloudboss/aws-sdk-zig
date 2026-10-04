@@ -1,6 +1,7 @@
 const NetworkAccessType = @import("network_access_type.zig").NetworkAccessType;
 
-/// The network configuration for a notebook run in Amazon DataZone.
+/// The network configuration for a notebook run in Amazon SageMaker Unified
+/// Studio.
 pub const NetworkConfig = struct {
     /// The network access type for the notebook run. Valid values are
     /// `PUBLIC_INTERNET_ONLY` and `VPC_ONLY`.

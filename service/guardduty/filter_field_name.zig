@@ -1,0 +1,42 @@
+const std = @import("std");
+
+pub const FilterFieldName = enum {
+    name,
+    description,
+    data_source,
+    severity,
+    tactic,
+    technique,
+    service,
+
+    pub const json_field_names = .{
+        .name = "name",
+        .description = "description",
+        .data_source = "dataSource",
+        .severity = "severity",
+        .tactic = "tactic",
+        .technique = "technique",
+        .service = "service",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .name => "name",
+            .description => "description",
+            .data_source => "dataSource",
+            .severity => "severity",
+            .tactic => "tactic",
+            .technique => "technique",
+            .service => "service",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        inline for (std.meta.fields(@TypeOf(json_field_names))) |field| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field.name))) {
+                return @field(@This(), field.name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
+};

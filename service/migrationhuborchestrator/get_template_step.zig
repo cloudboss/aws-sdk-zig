@@ -138,10 +138,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetTemplateStepInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetTemplateStepOutput {
-    var result: GetTemplateStepOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetTemplateStepOutput, body, allocator);
-    }
+    const result: GetTemplateStepOutput = try aws.json.parseJsonObject(
+        GetTemplateStepOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

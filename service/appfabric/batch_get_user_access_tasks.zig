@@ -90,10 +90,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchGetUserAccessTasks
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchGetUserAccessTasksOutput {
-    var result: BatchGetUserAccessTasksOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchGetUserAccessTasksOutput, body, allocator);
-    }
+    const result: BatchGetUserAccessTasksOutput = try aws.json.parseJsonObject(
+        BatchGetUserAccessTasksOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -16,6 +16,7 @@ const get_aws_opportunity_summary = @import("get_aws_opportunity_summary.zig");
 const get_engagement = @import("get_engagement.zig");
 const get_engagement_invitation = @import("get_engagement_invitation.zig");
 const get_opportunity = @import("get_opportunity.zig");
+const get_prospecting_from_engagement_task = @import("get_prospecting_from_engagement_task.zig");
 const get_resource_snapshot = @import("get_resource_snapshot.zig");
 const get_resource_snapshot_job = @import("get_resource_snapshot_job.zig");
 const get_selling_system_settings = @import("get_selling_system_settings.zig");
@@ -27,6 +28,7 @@ const list_engagement_resource_associations = @import("list_engagement_resource_
 const list_engagements = @import("list_engagements.zig");
 const list_opportunities = @import("list_opportunities.zig");
 const list_opportunity_from_engagement_tasks = @import("list_opportunity_from_engagement_tasks.zig");
+const list_prospecting_from_engagement_tasks = @import("list_prospecting_from_engagement_tasks.zig");
 const list_resource_snapshot_jobs = @import("list_resource_snapshot_jobs.zig");
 const list_resource_snapshots = @import("list_resource_snapshots.zig");
 const list_solutions = @import("list_solutions.zig");
@@ -36,6 +38,7 @@ const reject_engagement_invitation = @import("reject_engagement_invitation.zig")
 const start_engagement_by_accepting_invitation_task = @import("start_engagement_by_accepting_invitation_task.zig");
 const start_engagement_from_opportunity_task = @import("start_engagement_from_opportunity_task.zig");
 const start_opportunity_from_engagement_task = @import("start_opportunity_from_engagement_task.zig");
+const start_prospecting_from_engagement_task = @import("start_prospecting_from_engagement_task.zig");
 const start_resource_snapshot_job = @import("start_resource_snapshot_job.zig");
 const stop_resource_snapshot_job = @import("stop_resource_snapshot_job.zig");
 const submit_opportunity = @import("submit_opportunity.zig");
@@ -246,6 +249,13 @@ pub const Client = struct {
         return get_opportunity.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the details and current status of a prospecting task previously
+    /// started with `StartProspectingFromEngagementTask` to enable polling for
+    /// completion and access to per-engagement processing results.
+    pub fn getProspectingFromEngagementTask(self: *Self, allocator: std.mem.Allocator, input: get_prospecting_from_engagement_task.GetProspectingFromEngagementTaskInput, options: CallOptions) !get_prospecting_from_engagement_task.GetProspectingFromEngagementTaskOutput {
+        return get_prospecting_from_engagement_task.execute(self, allocator, input, options);
+    }
+
     /// Use this action to retrieve a specific snapshot record.
     pub fn getResourceSnapshot(self: *Self, allocator: std.mem.Allocator, input: get_resource_snapshot.GetResourceSnapshotInput, options: CallOptions) !get_resource_snapshot.GetResourceSnapshotOutput {
         return get_resource_snapshot.execute(self, allocator, input, options);
@@ -335,6 +345,14 @@ pub const Client = struct {
         return list_opportunity_from_engagement_tasks.execute(self, allocator, input, options);
     }
 
+    /// Lists all prospecting tasks initiated by the caller's account. Supports
+    /// optional filters by task identifier, task name, or start time range. Results
+    /// can be sorted using configurable options. The response is paginated. Use the
+    /// `NextToken` value from each response to retrieve subsequent pages.
+    pub fn listProspectingFromEngagementTasks(self: *Self, allocator: std.mem.Allocator, input: list_prospecting_from_engagement_tasks.ListProspectingFromEngagementTasksInput, options: CallOptions) !list_prospecting_from_engagement_tasks.ListProspectingFromEngagementTasksOutput {
+        return list_prospecting_from_engagement_tasks.execute(self, allocator, input, options);
+    }
+
     /// Lists resource snapshot jobs owned by the customer. This operation supports
     /// various filtering scenarios, including listing all jobs owned by the caller,
     /// jobs for a specific engagement, jobs with a specific status, or any
@@ -409,6 +427,14 @@ pub const Client = struct {
     /// partner's account.
     pub fn startOpportunityFromEngagementTask(self: *Self, allocator: std.mem.Allocator, input: start_opportunity_from_engagement_task.StartOpportunityFromEngagementTaskInput, options: CallOptions) !start_opportunity_from_engagement_task.StartOpportunityFromEngagementTaskOutput {
         return start_opportunity_from_engagement_task.execute(self, allocator, input, options);
+    }
+
+    /// Starts a task to convert one or more engagement contexts into new
+    /// prospecting leads. The task runs asynchronously. To poll for status, use
+    /// `GetProspectingFromEngagementTask`, or use
+    /// `ListProspectingFromEngagementTasks` to monitor multiple tasks.
+    pub fn startProspectingFromEngagementTask(self: *Self, allocator: std.mem.Allocator, input: start_prospecting_from_engagement_task.StartProspectingFromEngagementTaskInput, options: CallOptions) !start_prospecting_from_engagement_task.StartProspectingFromEngagementTaskOutput {
+        return start_prospecting_from_engagement_task.execute(self, allocator, input, options);
     }
 
     /// Starts a resource snapshot job that has been previously created.
@@ -510,6 +536,13 @@ pub const Client = struct {
     }
 
     pub fn listOpportunityFromEngagementTasksPaginator(self: *Self, params: list_opportunity_from_engagement_tasks.ListOpportunityFromEngagementTasksInput) paginator.ListOpportunityFromEngagementTasksPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listProspectingFromEngagementTasksPaginator(self: *Self, params: list_prospecting_from_engagement_tasks.ListProspectingFromEngagementTasksInput) paginator.ListProspectingFromEngagementTasksPaginator {
         return .{
             .client = self,
             .params = params,

@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutAccountSettingsInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutAccountSettingsOutput {
-    var result: PutAccountSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutAccountSettingsOutput, body, allocator);
-    }
+    const result: PutAccountSettingsOutput = try aws.json.parseJsonObject(
+        PutAccountSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -22,6 +22,16 @@ pub const TextTransformationType = enum {
     base64_decode_ext,
     url_decode_uni,
     utf8_to_unicode,
+    remove_whitespace,
+    trim,
+    trim_left,
+    trim_right,
+    remove_comments_char,
+    uppercase,
+    cmd_line_win,
+    cmd_line_unix,
+    js_decode_ext,
+    sha256,
 
     pub const json_field_names = .{
         .none = "NONE",
@@ -45,6 +55,16 @@ pub const TextTransformationType = enum {
         .base64_decode_ext = "BASE64_DECODE_EXT",
         .url_decode_uni = "URL_DECODE_UNI",
         .utf8_to_unicode = "UTF8_TO_UNICODE",
+        .remove_whitespace = "REMOVE_WHITESPACE",
+        .trim = "TRIM",
+        .trim_left = "TRIM_LEFT",
+        .trim_right = "TRIM_RIGHT",
+        .remove_comments_char = "REMOVE_COMMENTS_CHAR",
+        .uppercase = "UPPERCASE",
+        .cmd_line_win = "CMD_LINE_WIN",
+        .cmd_line_unix = "CMD_LINE_UNIX",
+        .js_decode_ext = "JS_DECODE_EXT",
+        .sha256 = "SHA256",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -70,6 +90,16 @@ pub const TextTransformationType = enum {
             .base64_decode_ext => "BASE64_DECODE_EXT",
             .url_decode_uni => "URL_DECODE_UNI",
             .utf8_to_unicode => "UTF8_TO_UNICODE",
+            .remove_whitespace => "REMOVE_WHITESPACE",
+            .trim => "TRIM",
+            .trim_left => "TRIM_LEFT",
+            .trim_right => "TRIM_RIGHT",
+            .remove_comments_char => "REMOVE_COMMENTS_CHAR",
+            .uppercase => "UPPERCASE",
+            .cmd_line_win => "CMD_LINE_WIN",
+            .cmd_line_unix => "CMD_LINE_UNIX",
+            .js_decode_ext => "JS_DECODE_EXT",
+            .sha256 => "SHA256",
         };
     }
 

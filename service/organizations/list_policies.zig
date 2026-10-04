@@ -50,6 +50,9 @@ pub const ListPoliciesInput = struct {
     ///
     /// *
     ///   [NETWORK_SECURITY_DIRECTOR_POLICY](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_network_security_director.html)
+    ///
+    /// *
+    ///   [GUARDDUTY_POLICY](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_guardduty.html)
     filter: PolicyType,
 
     /// The maximum number of items to return in the response. If more results exist

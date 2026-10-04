@@ -82,10 +82,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetServicePrincipalName
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetServicePrincipalNameOutput {
-    var result: GetServicePrincipalNameOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetServicePrincipalNameOutput, body, allocator);
-    }
+    const result: GetServicePrincipalNameOutput = try aws.json.parseJsonObject(
+        GetServicePrincipalNameOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

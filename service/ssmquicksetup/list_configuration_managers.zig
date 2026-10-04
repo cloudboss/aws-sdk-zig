@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListConfigurationManage
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListConfigurationManagersOutput {
-    var result: ListConfigurationManagersOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListConfigurationManagersOutput, body, allocator);
-    }
+    const result: ListConfigurationManagersOutput = try aws.json.parseJsonObject(
+        ListConfigurationManagersOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

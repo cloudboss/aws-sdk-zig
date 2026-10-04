@@ -123,10 +123,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateActionConnectorPe
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateActionConnectorPermissionsOutput {
-    var result: UpdateActionConnectorPermissionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateActionConnectorPermissionsOutput, body, allocator);
-    }
+    var result: UpdateActionConnectorPermissionsOutput = try aws.json.parseJsonObject(
+        UpdateActionConnectorPermissionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

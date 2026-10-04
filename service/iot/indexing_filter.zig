@@ -1,3 +1,4 @@
+const ConnectivityFilter = @import("connectivity_filter.zig").ConnectivityFilter;
 const GeoLocationTarget = @import("geo_location_target.zig").GeoLocationTarget;
 
 /// Provides additional selections for named shadows and geolocation data.
@@ -18,6 +19,10 @@ const GeoLocationTarget = @import("geo_location_target.zig").GeoLocationTarget;
 /// `geoLocations` filter. For more information, see [Managing fleet
 /// indexing](https://docs.aws.amazon.com/iot/latest/developerguide/managing-fleet-index.html).
 pub const IndexingFilter = struct {
+    /// Provides additional connectivity filter selections for the fleet indexing
+    /// configuration.
+    connectivity: ?ConnectivityFilter = null,
+
     /// The list of geolocation targets that you select to index. The default
     /// maximum number of
     /// geolocation targets for indexing is `1`. To increase the limit, see [Amazon
@@ -33,6 +38,7 @@ pub const IndexingFilter = struct {
     named_shadow_names: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
+        .connectivity = "connectivity",
         .geo_locations = "geoLocations",
         .named_shadow_names = "namedShadowNames",
     };

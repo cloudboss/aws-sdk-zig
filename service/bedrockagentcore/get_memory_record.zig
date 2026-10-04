@@ -14,9 +14,14 @@ pub const GetMemoryRecordInput = struct {
     /// The identifier of the memory record to retrieve.
     memory_record_id: []const u8,
 
+    /// The namespace of the memory record to retrieve. This value is used for IAM
+    /// condition key authorization.
+    namespace: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .memory_id = "memoryId",
         .memory_record_id = "memoryRecordId",
+        .namespace = "namespace",
     };
 };
 
@@ -66,6 +71,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMemoryRecordInput, c
     try path_buf.appendSlice(allocator, input.memory_record_id);
     const path = try path_buf.toOwnedSlice(allocator);
 
+    var query_buf: std.ArrayList(u8) = .empty;
+    var query_has_prev = false;
+    if (input.namespace) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "namespace=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
+    const query = try query_buf.toOwnedSlice(allocator);
+
     const body: ?[]const u8 = null;
 
     var request = aws.http.Request.init(ep.host);
@@ -74,16 +89,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMemoryRecordInput, c
     request.tls = ep.tls;
     request.port = ep.port;
     request.body = body;
+    request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetMemoryRecordOutput {
-    var result: GetMemoryRecordOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetMemoryRecordOutput, body, allocator);
-    }
+    const result: GetMemoryRecordOutput = try aws.json.parseJsonObject(
+        GetMemoryRecordOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

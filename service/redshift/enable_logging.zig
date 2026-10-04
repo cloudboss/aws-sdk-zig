@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const LogDestinationType = @import("log_destination_type.zig").LogDestinationType;
+const S3TablePublishStatus = @import("s3_table_publish_status.zig").S3TablePublishStatus;
 const serde = @import("serde.zig");
 
 pub const EnableLoggingInput = struct {
@@ -22,12 +23,16 @@ pub const EnableLoggingInput = struct {
     /// Example: `examplecluster`
     cluster_identifier: []const u8,
 
-    /// The log destination type. An enum with possible values of `s3` and
-    /// `cloudwatch`.
+    /// The log destination type. An enum with possible values of `s3`,
+    /// `cloudwatch`, and `s3table`.
     log_destination_type: ?LogDestinationType = null,
 
-    /// The collection of exported log types. Possible values are `connectionlog`,
-    /// `useractivitylog`, and `userlog`.
+    /// The collection of exported log types. When `LogDestinationType` is `s3` or
+    /// `cloudwatch`, possible values are `connectionlog`, `useractivitylog`, and
+    /// `userlog`. When `LogDestinationType` is `s3table`, the values are the names
+    /// of the system tables to publish. Omitting this parameter, passing an empty
+    /// list, or including the value `all` publishes all current and future system
+    /// tables.
     log_exports: ?[]const []const u8 = null,
 
     /// The prefix applied to the log file names.
@@ -38,6 +43,16 @@ pub const EnableLoggingInput = struct {
     /// (`+`), backslash (`\`),
     /// hyphen (`-`), at symbol (`@`).
     s3_key_prefix: ?[]const u8 = null,
+
+    /// The scope of system table publishing. Valid values are `cluster` and
+    /// `account`. A value of `cluster` scopes publishing to the individual cluster.
+    /// A value of `account` scopes publishing to the Amazon Web Services account.
+    /// This parameter is valid only when `LogDestinationType` is `s3table`.
+    s3_table_granularity: ?[]const u8 = null,
+
+    /// The identifier of a customer managed KMS key used to encrypt the S3 tables.
+    /// This parameter is valid only when `LogDestinationType` is `s3table`.
+    s3_table_kms_key_id: ?[]const u8 = null,
 };
 
 pub const EnableLoggingOutput = struct {
@@ -53,13 +68,14 @@ pub const EnableLoggingOutput = struct {
     /// The last time that logs were delivered.
     last_successful_delivery_time: ?i64 = null,
 
-    /// The log destination type. An enum with possible values of `s3` and
-    /// `cloudwatch`.
+    /// The log destination type. An enum with possible values of `s3`,
+    /// `cloudwatch`, and `s3table`.
     log_destination_type: ?LogDestinationType = null,
 
-    /// The collection of exported log types. Possible values are `connectionlog`,
-    /// `useractivitylog`, and
-    /// `userlog`.
+    /// The collection of exported log types. When `LogDestinationType` is `s3` or
+    /// `cloudwatch`, possible values are `connectionlog`, `useractivitylog`, and
+    /// `userlog`. When `LogDestinationType` is `s3table`, the values are the names
+    /// of the system tables being published.
     log_exports: ?[]const []const u8 = null,
 
     /// `true` if logging is on, `false` if logging is off.
@@ -67,6 +83,10 @@ pub const EnableLoggingOutput = struct {
 
     /// The prefix applied to the log file names.
     s3_key_prefix: ?[]const u8 = null,
+
+    /// The status of system table publishing to S3 Tables. This field is populated
+    /// only when system table publishing is active.
+    s3_tables: ?S3TablePublishStatus = null,
 };
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableLoggingInput, options: CallOptions) !EnableLoggingOutput {
@@ -125,6 +145,14 @@ fn serializeRequest(allocator: std.mem.Allocator, input: EnableLoggingInput, con
         try body_buf.appendSlice(allocator, "&S3KeyPrefix=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
+    if (input.s3_table_granularity) |v| {
+        try body_buf.appendSlice(allocator, "&S3TableGranularity=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.s3_table_kms_key_id) |v| {
+        try body_buf.appendSlice(allocator, "&S3TableKmsKeyId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
 
     const body = try body_buf.toOwnedSlice(allocator);
 
@@ -173,6 +201,8 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                     result.logging_enabled = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "S3KeyPrefix")) {
                     result.s3_key_prefix = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "S3Tables")) {
+                    result.s3_tables = try serde.deserializeS3TablePublishStatus(allocator, &reader);
                 } else {
                     try reader.skipElement();
                 }

@@ -28,6 +28,11 @@ pub const ClusterPendingModifiedValues = struct {
     /// for Multi-AZ DB clusters.
     iops: ?i32 = null,
 
+    /// The pending change in network type for the DB cluster.
+    ///
+    /// Valid Values: `IPV4`, `DUAL`
+    network_type: ?[]const u8 = null,
+
     /// This `PendingCloudwatchLogsExports` structure specifies
     /// pending changes to which CloudWatch logs are enabled and which are disabled.
     pending_cloudwatch_logs_exports: ?PendingCloudwatchLogsExports = null,

@@ -34,6 +34,10 @@ pub const StartTrainedModelInferenceJobInput = struct {
     /// inference job.
     membership_identifier: []const u8,
 
+    /// The account ID of the member that is responsible for paying for model
+    /// inference costs.
+    ml_model_inference_payer_account_id: ?[]const u8 = null,
+
     /// The name of the trained model inference job.
     name: []const u8,
 
@@ -86,6 +90,7 @@ pub const StartTrainedModelInferenceJobInput = struct {
         .environment = "environment",
         .kms_key_arn = "kmsKeyArn",
         .membership_identifier = "membershipIdentifier",
+        .ml_model_inference_payer_account_id = "mlModelInferencePayerAccountId",
         .name = "name",
         .output_configuration = "outputConfiguration",
         .resource_config = "resourceConfig",
@@ -178,6 +183,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartTrainedModelInfere
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.ml_model_inference_payer_account_id) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"mlModelInferencePayerAccountId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
@@ -222,10 +233,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartTrainedModelInfere
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartTrainedModelInferenceJobOutput {
-    var result: StartTrainedModelInferenceJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartTrainedModelInferenceJobOutput, body, allocator);
-    }
+    const result: StartTrainedModelInferenceJobOutput = try aws.json.parseJsonObject(
+        StartTrainedModelInferenceJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

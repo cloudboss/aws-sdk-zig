@@ -321,10 +321,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBranchInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateBranchOutput {
-    var result: CreateBranchOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateBranchOutput, body, allocator);
-    }
+    const result: CreateBranchOutput = try aws.json.parseJsonObject(
+        CreateBranchOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

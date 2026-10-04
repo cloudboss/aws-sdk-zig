@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateQuickSightQSearch
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateQuickSightQSearchConfigurationOutput {
-    var result: UpdateQuickSightQSearchConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateQuickSightQSearchConfigurationOutput, body, allocator);
-    }
+    var result: UpdateQuickSightQSearchConfigurationOutput = try aws.json.parseJsonObject(
+        UpdateQuickSightQSearchConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

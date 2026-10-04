@@ -91,10 +91,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SyncResourceInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SyncResourceOutput {
-    var result: SyncResourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SyncResourceOutput, body, allocator);
-    }
+    const result: SyncResourceOutput = try aws.json.parseJsonObject(
+        SyncResourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -159,10 +159,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetReplicationConfigura
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetReplicationConfigurationOutput {
-    var result: GetReplicationConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetReplicationConfigurationOutput, body, allocator);
-    }
+    const result: GetReplicationConfigurationOutput = try aws.json.parseJsonObject(
+        GetReplicationConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -6,9 +6,10 @@ pub const LaunchTemplateConfiguration = struct {
     /// Identifies the Amazon EC2 launch template to use.
     launch_template_id: []const u8,
 
-    /// Set the specified Amazon EC2 launch template as the default launch template
-    /// for the
-    /// specified account.
+    /// Specifies whether to make the new launch template version that Image Builder
+    /// creates
+    /// the default version of the launch template. If you don't set a value,
+    /// Image Builder treats it as `true`.
     set_default_version: bool = false,
 
     pub const json_field_names = .{

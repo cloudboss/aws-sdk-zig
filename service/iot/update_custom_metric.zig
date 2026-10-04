@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateCustomMetricInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateCustomMetricOutput {
-    var result: UpdateCustomMetricOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateCustomMetricOutput, body, allocator);
-    }
+    const result: UpdateCustomMetricOutput = try aws.json.parseJsonObject(
+        UpdateCustomMetricOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -13,7 +13,7 @@ pub const Record = struct {
     /// in any way.
     /// When the data blob (the payload before base64-encoding) is added to the
     /// partition key
-    /// size, the total size must not exceed the maximum record size (1 MiB).
+    /// size, the total size must not exceed the maximum record size (10 MiB).
     data: []const u8,
 
     /// The encryption type used on the record. This parameter can be one of the
@@ -27,7 +27,14 @@ pub const Record = struct {
     encryption_type: ?EncryptionType = null,
 
     /// Identifies which shard in the stream the data record is assigned to.
-    partition_key: []const u8,
+    ///
+    /// For a stream that uses the `AUTO` record distribution strategy, this value
+    /// is not returned if the producer did not provide a partition key when writing
+    /// the record.
+    /// If the producer provided a partition key, the original value is returned
+    /// even though it
+    /// was not used to determine shard placement.
+    partition_key: ?[]const u8 = null,
 
     /// The unique identifier of the record within its shard.
     sequence_number: []const u8,

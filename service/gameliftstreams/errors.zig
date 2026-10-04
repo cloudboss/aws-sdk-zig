@@ -11,6 +11,7 @@ pub const ServiceError = struct {
         internal_server_exception: InternalServerException,
         resource_not_found_exception: ResourceNotFoundException,
         service_quota_exceeded_exception: ServiceQuotaExceededException,
+        stream_session_access_not_ready_exception: StreamSessionAccessNotReadyException,
         throttling_exception: ThrottlingException,
         validation_exception: ValidationException,
         unknown: UnknownServiceError,
@@ -22,6 +23,7 @@ pub const ServiceError = struct {
                 .internal_server_exception => "InternalServerException",
                 .resource_not_found_exception => "ResourceNotFoundException",
                 .service_quota_exceeded_exception => "ServiceQuotaExceededException",
+                .stream_session_access_not_ready_exception => "StreamSessionAccessNotReadyException",
                 .throttling_exception => "ThrottlingException",
                 .validation_exception => "ValidationException",
                 .unknown => |e| e.code,
@@ -35,6 +37,7 @@ pub const ServiceError = struct {
                 .internal_server_exception => |e| e.message,
                 .resource_not_found_exception => |e| e.message,
                 .service_quota_exceeded_exception => |e| e.message,
+                .stream_session_access_not_ready_exception => |e| e.message,
                 .throttling_exception => |e| e.message,
                 .validation_exception => |e| e.message,
                 .unknown => |e| e.message,
@@ -48,6 +51,7 @@ pub const ServiceError = struct {
                 .internal_server_exception => 500,
                 .resource_not_found_exception => 404,
                 .service_quota_exceeded_exception => 402,
+                .stream_session_access_not_ready_exception => 409,
                 .throttling_exception => 429,
                 .validation_exception => 400,
                 .unknown => |e| e.http_status,
@@ -61,6 +65,7 @@ pub const ServiceError = struct {
                 .internal_server_exception => |e| e.request_id,
                 .resource_not_found_exception => |e| e.request_id,
                 .service_quota_exceeded_exception => |e| e.request_id,
+                .stream_session_access_not_ready_exception => |e| e.request_id,
                 .throttling_exception => |e| e.request_id,
                 .validation_exception => |e| e.request_id,
                 .unknown => |e| e.request_id,
@@ -110,6 +115,11 @@ pub const ResourceNotFoundException = struct {
 };
 
 pub const ServiceQuotaExceededException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const StreamSessionAccessNotReadyException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -173,6 +183,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     }
     if (std.mem.eql(u8, error_code, "ServiceQuotaExceededException")) {
         return .{ .arena = arena, .kind = .{ .service_quota_exceeded_exception = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "StreamSessionAccessNotReadyException")) {
+        return .{ .arena = arena, .kind = .{ .stream_session_access_not_ready_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

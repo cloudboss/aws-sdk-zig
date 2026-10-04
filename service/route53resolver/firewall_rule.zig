@@ -4,6 +4,7 @@ const BlockResponse = @import("block_response.zig").BlockResponse;
 const ConfidenceThreshold = @import("confidence_threshold.zig").ConfidenceThreshold;
 const DnsThreatProtection = @import("dns_threat_protection.zig").DnsThreatProtection;
 const FirewallDomainRedirectionAction = @import("firewall_domain_redirection_action.zig").FirewallDomainRedirectionAction;
+const FirewallRuleType = @import("firewall_rule_type.zig").FirewallRuleType;
 
 /// A single firewall rule in a rule group.
 pub const FirewallRule = struct {
@@ -75,12 +76,16 @@ pub const FirewallRule = struct {
     ///
     /// * `DGA`: Domain generation algorithms detection. DGAs are used by attackers
     ///   to generate a large number of domains
-    /// to to launch malware attacks.
+    /// to launch malware attacks.
     ///
     /// * `DNS_TUNNELING`: DNS tunneling detection. DNS tunneling is used by
     ///   attackers to exfiltrate data from the client by using the DNS tunnel
     ///   without
     /// making a network connection to the client.
+    ///
+    /// * `DICTIONARY_DGA`: Dictionary-based domain generation algorithms detection.
+    ///   Dictionary DGAs use wordlists to generate domains that appear more
+    ///   legitimate, making them harder to detect than traditional DGAs.
     dns_threat_protection: ?DnsThreatProtection = null,
 
     /// The ID of the domain list that's used in the rule.
@@ -101,6 +106,25 @@ pub const FirewallRule = struct {
 
     /// The unique identifier of the Firewall rule group of the rule.
     firewall_rule_group_id: ?[]const u8 = null,
+
+    /// The rule type configuration for the firewall rule. This is a tagged union —
+    /// exactly one of its members will be populated. Possible members are:
+    ///
+    /// * `FirewallAdvancedContentCategory` — an Amazon Web Services-managed content
+    ///   category (for example, `VIOLENCE_AND_HATE_SPEECH`).
+    ///
+    /// * `FirewallAdvancedThreatCategory` — an Amazon Web Services-managed advanced
+    ///   threat category (for example, `PHISHING`).
+    ///
+    /// * `DnsThreatProtection` — a built-in DNS Firewall Advanced threat detector
+    ///   (`DGA`, `DNS_TUNNELING`, or `DICTIONARY_DGA`).
+    ///
+    /// * `PartnerThreatProtection` — a third-party threat feed delivered through
+    ///   Amazon Web Services Marketplace.
+    ///
+    /// To enumerate the values supported in your account, call
+    /// ListFirewallRuleTypes.
+    firewall_rule_type: ?FirewallRuleType = null,
 
     /// ID of the DNS Firewall Advanced rule.
     firewall_threat_protection_id: ?[]const u8 = null,
@@ -148,11 +172,33 @@ pub const FirewallRule = struct {
     /// * A query type you define by using the DNS type ID, for example 28 for AAAA.
     ///   The values must be
     /// defined as TYPENUMBER, where the
-    /// NUMBER can be 1-65334, for
+    /// NUMBER can be 1-65534, for
     /// example, TYPE28. For more information, see
     /// [List of DNS record
     /// types](https://en.wikipedia.org/wiki/List_of_DNS_record_types).
     qtype: ?[]const u8 = null,
+
+    /// The lifecycle state of the firewall rule. Possible values:
+    ///
+    /// * `CREATING` — DNS Firewall is provisioning the rule. Rules created with the
+    ///   `PartnerThreatProtection` rule type begin in this state while DNS Firewall
+    ///   verifies the calling account's Amazon Web Services Marketplace
+    ///   entitlement.
+    ///
+    /// * `COMPLETE` — The rule is provisioned and enforcing matches.
+    ///
+    /// * `CREATION_FAILED` — Provisioning failed. `StatusMessage` contains a
+    ///   human-readable reason. A rule in this state is immutable:
+    ///   UpdateFirewallRule rejects the request, and the rule must be removed with
+    ///   DeleteFirewallRule.
+    ///
+    /// For rules that do not require asynchronous provisioning, this field may be
+    /// absent.
+    status: ?[]const u8 = null,
+
+    /// An additional message about the rule's lifecycle state. Populated when
+    /// `Status` is `CREATION_FAILED` to describe why provisioning failed.
+    status_message: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",
@@ -167,10 +213,13 @@ pub const FirewallRule = struct {
         .firewall_domain_list_id = "FirewallDomainListId",
         .firewall_domain_redirection_action = "FirewallDomainRedirectionAction",
         .firewall_rule_group_id = "FirewallRuleGroupId",
+        .firewall_rule_type = "FirewallRuleType",
         .firewall_threat_protection_id = "FirewallThreatProtectionId",
         .modification_time = "ModificationTime",
         .name = "Name",
         .priority = "Priority",
         .qtype = "Qtype",
+        .status = "Status",
+        .status_message = "StatusMessage",
     };
 };

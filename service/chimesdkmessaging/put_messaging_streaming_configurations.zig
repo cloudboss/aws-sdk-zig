@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutMessagingStreamingCo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutMessagingStreamingConfigurationsOutput {
-    var result: PutMessagingStreamingConfigurationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutMessagingStreamingConfigurationsOutput, body, allocator);
-    }
+    const result: PutMessagingStreamingConfigurationsOutput = try aws.json.parseJsonObject(
+        PutMessagingStreamingConfigurationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

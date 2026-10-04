@@ -476,8 +476,8 @@ pub const ContainerDefinition = struct {
     /// The private repository authentication credentials to use.
     repository_credentials: ?RepositoryCredentials = null,
 
-    /// The type and amount of a resource to assign to a container. The only
-    /// supported resource is a GPU.
+    /// The type and amount of a resource to assign to a container. The supported
+    /// resources are GPUs and Neuron devices.
     resource_requirements: ?[]const ResourceRequirement = null,
 
     /// The restart policy for a container. When you set up a restart policy, Amazon

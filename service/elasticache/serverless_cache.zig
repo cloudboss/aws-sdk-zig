@@ -1,6 +1,8 @@
 const CacheUsageLimits = @import("cache_usage_limits.zig").CacheUsageLimits;
+const ConnectionType = @import("connection_type.zig").ConnectionType;
 const Endpoint = @import("endpoint.zig").Endpoint;
 const NetworkType = @import("network_type.zig").NetworkType;
+const StorageEncryptionType = @import("storage_encryption_type.zig").StorageEncryptionType;
 
 /// The resource representing a serverless cache.
 pub const ServerlessCache = struct {
@@ -9,6 +11,11 @@ pub const ServerlessCache = struct {
 
     /// The cache usage limit for the serverless cache.
     cache_usage_limits: ?CacheUsageLimits = null,
+
+    /// The connection type for the serverless cache.
+    /// Must be either `vpc` | `public`.
+    /// If not specified, defaults to `vpc`.
+    connection_type: ?ConnectionType = null,
 
     /// When the serverless cache was created.
     create_time: ?i64 = null,
@@ -62,6 +69,13 @@ pub const ServerlessCache = struct {
     /// The current status of the serverless cache. The allowed values are CREATING,
     /// AVAILABLE, DELETING, CREATE-FAILED and MODIFYING.
     status: ?[]const u8 = null,
+
+    /// Indicates the type of encryption for data stored at rest in the serverless
+    /// cache.
+    /// Serverless caches are always encrypted at rest. The value is
+    /// `sse-elasticache` if an ElastiCache service-managed key is used, or
+    /// `sse-kms` if a customer-managed KMS key is used.
+    storage_encryption_type: ?StorageEncryptionType = null,
 
     /// If no subnet IDs are given and your VPC is in us-west-1, then ElastiCache
     /// will select 2 default subnets across AZs in your VPC.

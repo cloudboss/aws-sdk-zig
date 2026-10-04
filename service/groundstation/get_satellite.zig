@@ -89,10 +89,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSatelliteInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSatelliteOutput {
-    var result: GetSatelliteOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSatelliteOutput, body, allocator);
-    }
+    const result: GetSatelliteOutput = try aws.json.parseJsonObject(
+        GetSatelliteOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

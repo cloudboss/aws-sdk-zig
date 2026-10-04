@@ -1,8 +1,8 @@
 const Amount = @import("amount.zig").Amount;
 
-/// Session spending limits
+/// The spending limits configuration for a payment session.
 pub const SessionLimits = struct {
-    /// The maximum amount that can be spent in this session.
+    /// The maximum amount that can be spent in the session.
     max_spend_amount: Amount,
 
     pub const json_field_names = .{

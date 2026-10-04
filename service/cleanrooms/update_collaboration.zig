@@ -114,10 +114,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateCollaborationInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateCollaborationOutput {
-    var result: UpdateCollaborationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateCollaborationOutput, body, allocator);
-    }
+    const result: UpdateCollaborationOutput = try aws.json.parseJsonObject(
+        UpdateCollaborationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

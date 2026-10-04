@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const InputChannel = @import("input_channel.zig").InputChannel;
+const PayerConfiguration = @import("payer_configuration.zig").PayerConfiguration;
 
 pub const CreateMLInputChannelInput = struct {
     /// The associated configured model algorithms that are necessary to create this
@@ -26,6 +27,10 @@ pub const CreateMLInputChannelInput = struct {
 
     /// The name of the ML input channel.
     name: []const u8,
+
+    /// The payer configuration for the ML input channel. Determines which member
+    /// account pays for compute and synthetic data costs.
+    payer_configuration: ?PayerConfiguration = null,
 
     /// The number of days that the data in the ML input channel is retained.
     retention_in_days: i32,
@@ -62,6 +67,7 @@ pub const CreateMLInputChannelInput = struct {
         .kms_key_arn = "kmsKeyArn",
         .membership_identifier = "membershipIdentifier",
         .name = "name",
+        .payer_configuration = "payerConfiguration",
         .retention_in_days = "retentionInDays",
         .tags = "tags",
     };
@@ -140,6 +146,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMLInputChannelInp
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
     has_prev = true;
+    if (input.payer_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"payerConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"retentionInDays\":");
     try aws.json.writeValue(@TypeOf(input.retention_in_days), input.retention_in_days, allocator, &body_buf);
@@ -166,10 +178,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMLInputChannelInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateMLInputChannelOutput {
-    var result: CreateMLInputChannelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateMLInputChannelOutput, body, allocator);
-    }
+    const result: CreateMLInputChannelOutput = try aws.json.parseJsonObject(
+        CreateMLInputChannelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

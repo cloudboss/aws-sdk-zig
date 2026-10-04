@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: EvaluateMappingTemplate
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !EvaluateMappingTemplateOutput {
-    var result: EvaluateMappingTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(EvaluateMappingTemplateOutput, body, allocator);
-    }
+    const result: EvaluateMappingTemplateOutput = try aws.json.parseJsonObject(
+        EvaluateMappingTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

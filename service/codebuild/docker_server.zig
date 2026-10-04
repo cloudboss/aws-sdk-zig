@@ -31,6 +31,8 @@ pub const DockerServer = struct {
     security_group_ids: ?[]const []const u8 = null,
 
     /// A DockerServerStatus object to use for this docker server.
+    ///
+    /// Note that `status` is only an output and cannot be passed in as an input.
     status: ?DockerServerStatus = null,
 
     pub const json_field_names = .{

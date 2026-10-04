@@ -107,10 +107,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchAddChannelRoleToAc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchAddChannelRoleToAccessorsOutput {
-    var result: BatchAddChannelRoleToAccessorsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchAddChannelRoleToAccessorsOutput, body, allocator);
-    }
+    const result: BatchAddChannelRoleToAccessorsOutput = try aws.json.parseJsonObject(
+        BatchAddChannelRoleToAccessorsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

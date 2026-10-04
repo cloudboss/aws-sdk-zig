@@ -144,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCisScansInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListCisScansOutput {
-    var result: ListCisScansOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListCisScansOutput, body, allocator);
-    }
+    const result: ListCisScansOutput = try aws.json.parseJsonObject(
+        ListCisScansOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -34,7 +34,7 @@ pub const CreateGlobalClusterInput = struct {
     ///   case, Amazon Aurora uses the engine of the source DB cluster.
     engine: ?[]const u8 = null,
 
-    /// The life cycle type for this global database cluster.
+    /// The lifecycle type for this global database cluster.
     ///
     /// By default, this value is set to `open-source-rds-extended-support`, which
     /// enrolls your global cluster into Amazon RDS Extended Support. At the end of

@@ -133,10 +133,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeFileSystemsInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeFileSystemsOutput {
-    var result: DescribeFileSystemsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeFileSystemsOutput, body, allocator);
-    }
+    const result: DescribeFileSystemsOutput = try aws.json.parseJsonObject(
+        DescribeFileSystemsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

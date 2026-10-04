@@ -96,10 +96,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteBrowserInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteBrowserOutput {
-    var result: DeleteBrowserOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteBrowserOutput, body, allocator);
-    }
+    const result: DeleteBrowserOutput = try aws.json.parseJsonObject(
+        DeleteBrowserOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

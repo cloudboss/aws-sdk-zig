@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetIntegrationResponses
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetIntegrationResponsesOutput {
-    var result: GetIntegrationResponsesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetIntegrationResponsesOutput, body, allocator);
-    }
+    const result: GetIntegrationResponsesOutput = try aws.json.parseJsonObject(
+        GetIntegrationResponsesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

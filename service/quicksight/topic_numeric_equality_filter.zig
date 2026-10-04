@@ -1,5 +1,6 @@
 const NamedFilterAggType = @import("named_filter_agg_type.zig").NamedFilterAggType;
 const TopicSingularFilterConstant = @import("topic_singular_filter_constant.zig").TopicSingularFilterConstant;
+const NullFilterType = @import("null_filter_type.zig").NullFilterType;
 
 /// A filter that filters topics based on the value of a numeric field. The
 /// filter includes only topics whose numeric field value matches the specified
@@ -17,8 +18,16 @@ pub const TopicNumericEqualityFilter = struct {
     /// The constant used in a numeric equality filter.
     constant: ?TopicSingularFilterConstant = null,
 
+    /// A Boolean value that indicates if the filter is inverse.
+    inverse: bool = false,
+
+    /// The `null` filter that is applied to the numeric equality filter.
+    null_filter: ?NullFilterType = null,
+
     pub const json_field_names = .{
         .aggregation = "Aggregation",
         .constant = "Constant",
+        .inverse = "Inverse",
+        .null_filter = "NullFilter",
     };
 };

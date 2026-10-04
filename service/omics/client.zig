@@ -322,8 +322,8 @@ pub const Client = struct {
     }
 
     /// Creates a cross-account shared resource. The resource owner makes an offer
-    /// to share the resource with the principal subscriber (an AWS user with a
-    /// different account than the resource owner).
+    /// to share the resource with the principal subscriber (an Amazon Web Services
+    /// user with a different account than the resource owner).
     ///
     /// The following resources support cross-account sharing:
     ///
@@ -419,9 +419,10 @@ pub const Client = struct {
     /// `DeleteRunBatch` before calling `DeleteBatch`.
     ///
     /// `DeleteBatch` requires the batch to be in a terminal state: `PROCESSED`,
-    /// `FAILED`, `CANCELLED`, or `RUNS_DELETED`. After `DeleteBatch` completes, the
-    /// batch metadata is no longer accessible. You cannot call `GetBatch`,
-    /// `ListRunsInBatch`, `DeleteRunBatch`, or `CancelRunBatch` on a deleted batch.
+    /// `FAILED`, `CANCELLED`, `RUNS_DELETE_FAILED`, or `RUNS_DELETED`. After
+    /// `DeleteBatch` completes, the batch metadata is no longer accessible. You
+    /// cannot call `GetBatch`, `ListRunsInBatch`, `DeleteRunBatch`, or
+    /// `CancelRunBatch` on a deleted batch.
     pub fn deleteBatch(self: *Self, allocator: std.mem.Allocator, input: delete_batch.DeleteBatchInput, options: CallOptions) !delete_batch.DeleteBatchOutput {
         return delete_batch.execute(self, allocator, input, options);
     }
@@ -962,9 +963,9 @@ pub const Client = struct {
     }
 
     /// Activates an archived read set and returns its metadata in a JSON formatted
-    /// output. AWS HealthOmics automatically archives unused read sets after 30
-    /// days. To monitor the status of your read set activation job, use the
-    /// `GetReadSetActivationJob` operation.
+    /// output. Amazon Web Services HealthOmics automatically archives unused read
+    /// sets after 30 days. To monitor the status of your read set activation job,
+    /// use the `GetReadSetActivationJob` operation.
     ///
     /// To learn more, see [Activating read
     /// sets](https://docs.aws.amazon.com/omics/latest/dev/activating-read-sets.html) in the *Amazon Web Services HealthOmics User Guide*.

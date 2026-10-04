@@ -21,6 +21,7 @@ const Tag = @import("tag.zig").Tag;
 const TensorBoardOutputConfig = @import("tensor_board_output_config.zig").TensorBoardOutputConfig;
 const TrainingJobStatus = @import("training_job_status.zig").TrainingJobStatus;
 const VpcConfig = @import("vpc_config.zig").VpcConfig;
+const WarmPoolStatus = @import("warm_pool_status.zig").WarmPoolStatus;
 
 /// Contains information about a training job.
 pub const TrainingJob = struct {
@@ -235,6 +236,9 @@ pub const TrainingJob = struct {
     /// [VpcConfig](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html) object that specifies the VPC that this training job has access to. For more information, see [Protect Training Jobs by Using an Amazon Virtual Private Cloud](https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
     vpc_config: ?VpcConfig = null,
 
+    /// The status of the warm pool associated with the training job.
+    warm_pool_status: ?WarmPoolStatus = null,
+
     pub const json_field_names = .{
         .algorithm_specification = "AlgorithmSpecification",
         .auto_ml_job_arn = "AutoMLJobArn",
@@ -276,5 +280,6 @@ pub const TrainingJob = struct {
         .training_time_in_seconds = "TrainingTimeInSeconds",
         .tuning_job_arn = "TuningJobArn",
         .vpc_config = "VpcConfig",
+        .warm_pool_status = "WarmPoolStatus",
     };
 };

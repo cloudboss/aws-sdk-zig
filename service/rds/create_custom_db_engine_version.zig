@@ -15,6 +15,10 @@ const serde = @import("serde.zig");
 pub const CreateCustomDBEngineVersionInput = struct {
     /// The database installation files (ISO and EXE) uploaded to Amazon S3 for your
     /// database engine version to import to Amazon RDS.
+    ///
+    /// For RDS for SQL Server Bring Your Own Media (`sqlserver-ee`,
+    /// `sqlserver-se`), provide the SQL Server RTM ISO file once per major version
+    /// and edition combination. Minor versions reuse the same file.
     database_installation_files: ?[]const []const u8 = null,
 
     /// The name of an Amazon S3 bucket that contains database installation files
@@ -43,10 +47,14 @@ pub const CreateCustomDBEngineVersionInput = struct {
     ///
     /// * `custom-sqlserver-ee`
     /// * `custom-sqlserver-se`
-    /// * `ccustom-sqlserver-web`
+    /// * `custom-sqlserver-web`
     /// * `custom-sqlserver-dev`
     ///
-    /// RDS for SQL Server supports only `sqlserver-dev-ee`.
+    /// RDS for SQL Server supports the following values:
+    ///
+    /// * `sqlserver-ee` (Bring Your Own Media)
+    /// * `sqlserver-se` (Bring Your Own Media)
+    /// * `sqlserver-dev-ee`
     engine: []const u8,
 
     /// The name of your custom engine version (CEV).
@@ -54,9 +62,14 @@ pub const CreateCustomDBEngineVersionInput = struct {
     /// For RDS Custom for Oracle, the name format is `19.*customized_string*`. For
     /// example, a valid CEV name is `19.my_cev1`.
     ///
-    /// For RDS for SQL Server and RDS Custom for SQL Server, the name format is
-    /// `major engine_version*.*minor_engine_version*.*customized_string*`. For
+    /// For RDS Custom for SQL Server and RDS for SQL Server `sqlserver-dev-ee`, the
+    /// name format is
+    /// `*major_engine_version*.*minor_engine_version*.*customized_string*`. For
     /// example, a valid CEV name is `16.00.4215.2.my_cev1`.
+    ///
+    /// For RDS for SQL Server Bring Your Own Media (`sqlserver-ee`,
+    /// `sqlserver-se`), specify the RDS engine version that you want to use. For
+    /// example, `16.00.4175.1.v1`.
     ///
     /// The CEV name is unique per customer per Amazon Web Services Regions.
     engine_version: []const u8,

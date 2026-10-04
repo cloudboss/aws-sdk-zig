@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const OrganizationCustomPolicyRuleMetadata = @import("organization_custom_policy_rule_metadata.zig").OrganizationCustomPolicyRuleMetadata;
 const OrganizationCustomRuleMetadata = @import("organization_custom_rule_metadata.zig").OrganizationCustomRuleMetadata;
 const OrganizationManagedRuleMetadata = @import("organization_managed_rule_metadata.zig").OrganizationManagedRuleMetadata;
+const Tag = @import("tag.zig").Tag;
 
 pub const PutOrganizationConfigRuleInput = struct {
     /// A comma-separated list of accounts that you want to exclude from an
@@ -42,12 +43,17 @@ pub const PutOrganizationConfigRuleInput = struct {
     /// for the rule if the trigger type is periodic.
     organization_managed_rule_metadata: ?OrganizationManagedRuleMetadata = null,
 
+    /// The tags for the organization Config rule. Each tag consists of a key and an
+    /// optional value, both of which you define.
+    tags: ?[]const Tag = null,
+
     pub const json_field_names = .{
         .excluded_accounts = "ExcludedAccounts",
         .organization_config_rule_name = "OrganizationConfigRuleName",
         .organization_custom_policy_rule_metadata = "OrganizationCustomPolicyRuleMetadata",
         .organization_custom_rule_metadata = "OrganizationCustomRuleMetadata",
         .organization_managed_rule_metadata = "OrganizationManagedRuleMetadata",
+        .tags = "Tags",
     };
 };
 

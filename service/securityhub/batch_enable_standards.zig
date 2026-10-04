@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchEnableStandardsInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !BatchEnableStandardsOutput {
-    var result: BatchEnableStandardsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(BatchEnableStandardsOutput, body, allocator);
-    }
+    const result: BatchEnableStandardsOutput = try aws.json.parseJsonObject(
+        BatchEnableStandardsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

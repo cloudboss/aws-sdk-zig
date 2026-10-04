@@ -8,8 +8,8 @@ const As2805KekValidationType = @import("as_2805_kek_validation_type.zig").As280
 const RandomKeySendVariantMask = @import("random_key_send_variant_mask.zig").RandomKeySendVariantMask;
 
 pub const GenerateAs2805KekValidationInput = struct {
-    /// Parameter information for generating a random key for KEK validation to
-    /// perform node-to-node initialization.
+    /// Defines whether to generate a KEK validation request or KEK validation
+    /// response for node-to-node initialization.
     kek_validation_type: As2805KekValidationType,
 
     /// The `keyARN` of sending KEK that Amazon Web Services Payment Cryptography
@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GenerateAs2805KekValida
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GenerateAs2805KekValidationOutput {
-    var result: GenerateAs2805KekValidationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GenerateAs2805KekValidationOutput, body, allocator);
-    }
+    const result: GenerateAs2805KekValidationOutput = try aws.json.parseJsonObject(
+        GenerateAs2805KekValidationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

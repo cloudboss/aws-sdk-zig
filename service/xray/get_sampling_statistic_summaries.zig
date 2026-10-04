@@ -87,10 +87,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSamplingStatisticSum
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSamplingStatisticSummariesOutput {
-    var result: GetSamplingStatisticSummariesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSamplingStatisticSummariesOutput, body, allocator);
-    }
+    const result: GetSamplingStatisticSummariesOutput = try aws.json.parseJsonObject(
+        GetSamplingStatisticSummariesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

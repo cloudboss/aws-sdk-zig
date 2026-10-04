@@ -126,10 +126,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateApplicationSettin
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateApplicationSettingsOutput {
-    var result: UpdateApplicationSettingsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateApplicationSettingsOutput, body, allocator);
-    }
+    const result: UpdateApplicationSettingsOutput = try aws.json.parseJsonObject(
+        UpdateApplicationSettingsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

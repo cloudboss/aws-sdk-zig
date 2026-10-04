@@ -1,6 +1,7 @@
 const AccessPoliciesStatus = @import("access_policies_status.zig").AccessPoliciesStatus;
 const AdvancedOptionsStatus = @import("advanced_options_status.zig").AdvancedOptionsStatus;
 const AdvancedSecurityOptionsStatus = @import("advanced_security_options_status.zig").AdvancedSecurityOptionsStatus;
+const AutomatedSnapshotPauseOptionsStatus = @import("automated_snapshot_pause_options_status.zig").AutomatedSnapshotPauseOptionsStatus;
 const AutoTuneOptionsStatus = @import("auto_tune_options_status.zig").AutoTuneOptionsStatus;
 const ChangeProgressDetails = @import("change_progress_details.zig").ChangeProgressDetails;
 const CognitoOptionsStatus = @import("cognito_options_status.zig").CognitoOptionsStatus;
@@ -10,10 +11,12 @@ const EBSOptionsStatus = @import("ebs_options_status.zig").EBSOptionsStatus;
 const ElasticsearchClusterConfigStatus = @import("elasticsearch_cluster_config_status.zig").ElasticsearchClusterConfigStatus;
 const ElasticsearchVersionStatus = @import("elasticsearch_version_status.zig").ElasticsearchVersionStatus;
 const EncryptionAtRestOptionsStatus = @import("encryption_at_rest_options_status.zig").EncryptionAtRestOptionsStatus;
+const EngineModeStatus = @import("engine_mode_status.zig").EngineModeStatus;
 const LogPublishingOptionsStatus = @import("log_publishing_options_status.zig").LogPublishingOptionsStatus;
 const ModifyingProperties = @import("modifying_properties.zig").ModifyingProperties;
 const NodeToNodeEncryptionOptionsStatus = @import("node_to_node_encryption_options_status.zig").NodeToNodeEncryptionOptionsStatus;
 const SnapshotOptionsStatus = @import("snapshot_options_status.zig").SnapshotOptionsStatus;
+const UseCaseStatus = @import("use_case_status.zig").UseCaseStatus;
 const VPCDerivedInfoStatus = @import("vpc_derived_info_status.zig").VPCDerivedInfoStatus;
 
 /// The configuration of an Elasticsearch domain.
@@ -27,6 +30,9 @@ pub const ElasticsearchDomainConfig = struct {
 
     /// Specifies `AdvancedSecurityOptions` for the domain.
     advanced_security_options: ?AdvancedSecurityOptionsStatus = null,
+
+    /// Specifies `AutomatedSnapshotPauseOptions` for the domain.
+    automated_snapshot_pause_options: ?AutomatedSnapshotPauseOptionsStatus = null,
 
     /// Specifies `AutoTuneOptions` for the domain.
     auto_tune_options: ?AutoTuneOptionsStatus = null,
@@ -57,6 +63,9 @@ pub const ElasticsearchDomainConfig = struct {
     /// Specifies the `EncryptionAtRestOptions` for the Elasticsearch domain.
     encryption_at_rest_options: ?EncryptionAtRestOptionsStatus = null,
 
+    /// The engine mode configured for the domain.
+    engine_mode: ?EngineModeStatus = null,
+
     /// Log publishing options for the given domain.
     log_publishing_options: ?LogPublishingOptionsStatus = null,
 
@@ -69,6 +78,9 @@ pub const ElasticsearchDomainConfig = struct {
     /// Specifies the `SnapshotOptions` for the Elasticsearch domain.
     snapshot_options: ?SnapshotOptionsStatus = null,
 
+    /// The use case configured for the domain.
+    use_case: ?UseCaseStatus = null,
+
     /// The `VPCOptions` for the specified domain. For more information, see [VPC
     /// Endpoints for Amazon Elasticsearch Service
     /// Domains](http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html).
@@ -78,6 +90,7 @@ pub const ElasticsearchDomainConfig = struct {
         .access_policies = "AccessPolicies",
         .advanced_options = "AdvancedOptions",
         .advanced_security_options = "AdvancedSecurityOptions",
+        .automated_snapshot_pause_options = "AutomatedSnapshotPauseOptions",
         .auto_tune_options = "AutoTuneOptions",
         .change_progress_details = "ChangeProgressDetails",
         .cognito_options = "CognitoOptions",
@@ -87,10 +100,12 @@ pub const ElasticsearchDomainConfig = struct {
         .elasticsearch_cluster_config = "ElasticsearchClusterConfig",
         .elasticsearch_version = "ElasticsearchVersion",
         .encryption_at_rest_options = "EncryptionAtRestOptions",
+        .engine_mode = "EngineMode",
         .log_publishing_options = "LogPublishingOptions",
         .modifying_properties = "ModifyingProperties",
         .node_to_node_encryption_options = "NodeToNodeEncryptionOptions",
         .snapshot_options = "SnapshotOptions",
+        .use_case = "UseCase",
         .vpc_options = "VPCOptions",
     };
 };

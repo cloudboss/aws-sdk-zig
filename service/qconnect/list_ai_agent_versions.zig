@@ -129,10 +129,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAIAgentVersionsInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAIAgentVersionsOutput {
-    var result: ListAIAgentVersionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAIAgentVersionsOutput, body, allocator);
-    }
+    const result: ListAIAgentVersionsOutput = try aws.json.parseJsonObject(
+        ListAIAgentVersionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

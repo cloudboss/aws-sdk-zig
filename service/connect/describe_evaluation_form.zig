@@ -13,7 +13,7 @@ pub const DescribeEvaluationFormInput = struct {
     /// A version of the evaluation form.
     evaluation_form_version: ?i32 = null,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -98,10 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeEvaluationFormI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeEvaluationFormOutput {
-    var result: DescribeEvaluationFormOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeEvaluationFormOutput, body, allocator);
-    }
+    const result: DescribeEvaluationFormOutput = try aws.json.parseJsonObject(
+        DescribeEvaluationFormOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

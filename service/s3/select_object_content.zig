@@ -87,6 +87,7 @@ pub const SelectObjectContentInput = struct {
 };
 
 pub const SelectObjectContentOutput = struct {
+
     payload: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *SelectObjectContentOutput) void {
@@ -96,6 +97,7 @@ pub const SelectObjectContentOutput = struct {
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SelectObjectContentInput, options: CallOptions) !SelectObjectContentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -104,8 +106,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SelectObjec
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "s3", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -117,11 +117,9 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SelectObjec
         return error.ServiceError;
     }
 
-    stream_resp.deinitHeaders();
-    errdefer stream_resp.body.deinit();
-
-    const payload = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
-    return .{ .payload = payload };
+    errdefer stream_resp.deinit();
+    const result = try deserializeStreamingResponse(allocator, &stream_resp);
+    return result;
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: SelectObjectContentInput, config: *aws.Config) !aws.http.Request {
@@ -191,4 +189,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SelectObjectContentInpu
     }
 
     return request;
+}
+
+fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !SelectObjectContentOutput {
+    var result: SelectObjectContentOutput = .{};
+    result.payload = try aws.event_stream_reader.EventStreamReader.init(
+        allocator,
+        stream_resp.body,
+    );
+    stream_resp.deinitHeaders();
+
+    return result;
 }

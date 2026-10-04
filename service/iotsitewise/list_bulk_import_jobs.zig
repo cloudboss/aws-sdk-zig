@@ -18,10 +18,14 @@ pub const ListBulkImportJobsInput = struct {
     /// The token to be used for the next set of paginated results.
     next_token: ?[]const u8 = null,
 
+    /// The name of the workspace.
+    workspace_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .filter = "filter",
         .max_results = "maxResults",
         .next_token = "nextToken",
+        .workspace_name = "workspaceName",
     };
 };
 
@@ -94,6 +98,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListBulkImportJobsInput
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
+    if (input.workspace_name) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "workspaceName=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
     const query = try query_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;
@@ -111,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListBulkImportJobsInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListBulkImportJobsOutput {
-    var result: ListBulkImportJobsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListBulkImportJobsOutput, body, allocator);
-    }
+    const result: ListBulkImportJobsOutput = try aws.json.parseJsonObject(
+        ListBulkImportJobsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

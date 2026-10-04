@@ -9,8 +9,20 @@ pub const DeleteApplicationInput = struct {
     /// The Amazon Resource Name (ARN) of the Application.
     arn: []const u8,
 
+    /// Specifies whether to delete the application even if it still has application
+    /// associations.
+    /// If `true`, the operation removes the application and its associations. If
+    /// `false` or absent, the delete fails when associations exist.
+    ///
+    /// Setting this parameter to `true` permanently removes all of the
+    /// application's associations. Doing so might impact other resources that rely
+    /// on and
+    /// reference the application. This action can't be undone.
+    force: ?bool = null,
+
     pub const json_field_names = .{
         .arn = "Arn",
+        .force = "Force",
     };
 };
 
@@ -52,6 +64,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteApplicationInput,
     try path_buf.appendSlice(allocator, input.arn);
     const path = try path_buf.toOwnedSlice(allocator);
 
+    var query_buf: std.ArrayList(u8) = .empty;
+    var query_has_prev = false;
+    if (input.force) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "force=");
+        try query_buf.appendSlice(allocator, if (v) "true" else "false");
+        query_has_prev = true;
+    }
+    const query = try query_buf.toOwnedSlice(allocator);
+
     const body: ?[]const u8 = null;
 
     var request = aws.http.Request.init(ep.host);
@@ -60,6 +82,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteApplicationInput,
     request.tls = ep.tls;
     request.port = ep.port;
     request.body = body;
+    request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;

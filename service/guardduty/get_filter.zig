@@ -29,6 +29,11 @@ pub const GetFilterOutput = struct {
     /// filter.
     action: FilterAction,
 
+    /// The timestamp when the filter was created. This field is not available for
+    /// filters that were created before the lifecycle metadata feature was enabled
+    /// (legacy filters).
+    created_at: ?i64 = null,
+
     /// The description of the filter.
     description: ?[]const u8 = null,
 
@@ -45,13 +50,26 @@ pub const GetFilterOutput = struct {
     /// The tags of the filter resource.
     tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// The timestamp when the filter was last updated. For legacy filters, this
+    /// field is present only after the filter has been updated at least once since
+    /// the lifecycle metadata feature was enabled.
+    updated_at: ?i64 = null,
+
+    /// The version of the filter. Every time the filter is updated, the version
+    /// increments by 1. This field is not available for legacy filters that were
+    /// created before the lifecycle metadata feature was enabled.
+    version: ?i64 = null,
+
     pub const json_field_names = .{
         .action = "Action",
+        .created_at = "CreatedAt",
         .description = "Description",
         .finding_criteria = "FindingCriteria",
         .name = "Name",
         .rank = "Rank",
         .tags = "Tags",
+        .updated_at = "UpdatedAt",
+        .version = "Version",
     };
 };
 
@@ -106,10 +124,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFilterInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetFilterOutput {
-    var result: GetFilterOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetFilterOutput, body, allocator);
-    }
+    const result: GetFilterOutput = try aws.json.parseJsonObject(
+        GetFilterOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

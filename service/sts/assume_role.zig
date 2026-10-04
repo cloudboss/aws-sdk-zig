@@ -78,6 +78,8 @@ pub const AssumeRoleInput = struct {
     /// +=,.@:\/-
     external_id: ?[]const u8 = null,
 
+    minimum_session_token_size: ?i32 = null,
+
     /// An IAM policy in JSON format that you want to use as an inline session
     /// policy.
     ///
@@ -350,6 +352,10 @@ pub const AssumeRoleOutput = struct {
     /// which means the policies and tags exceeded the allowed space.
     packed_policy_size: ?i32 = null,
 
+    session_token_size: ?i32 = null,
+
+    session_token_utilization: ?i32 = null,
+
     /// The source identity specified by the principal that is calling the
     /// `AssumeRole` operation.
     ///
@@ -416,6 +422,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssumeRoleInput, config
     if (input.external_id) |v| {
         try body_buf.appendSlice(allocator, "&ExternalId=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.minimum_session_token_size) |v| {
+        try body_buf.appendSlice(allocator, "&MinimumSessionTokenSize=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     if (input.policy) |v| {
         try body_buf.appendSlice(allocator, "&Policy=");
@@ -535,6 +545,10 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                     result.credentials = try serde.deserializeCredentials(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "PackedPolicySize")) {
                     result.packed_policy_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "SessionTokenSize")) {
+                    result.session_token_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "SessionTokenUtilization")) {
+                    result.session_token_utilization = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "SourceIdentity")) {
                     result.source_identity = try allocator.dupe(u8, try reader.readElementText());
                 } else {

@@ -13,8 +13,12 @@ pub const DescribeBulkImportJobInput = struct {
     /// The ID of the job.
     job_id: []const u8,
 
+    /// The name of the workspace.
+    workspace_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .job_id = "jobId",
+        .workspace_name = "workspaceName",
     };
 };
 
@@ -25,6 +29,9 @@ pub const DescribeBulkImportJobOutput = struct {
     /// is.
     adaptive_ingestion: ?bool = null,
 
+    /// The ID of the dataset.
+    dataset_id: ?[]const u8 = null,
+
     /// If set to true, your data files is deleted from S3, after ingestion into IoT
     /// SiteWise storage.
     delete_files_after_import: ?bool = null,
@@ -33,7 +40,13 @@ pub const DescribeBulkImportJobOutput = struct {
     /// request are saved.
     error_report_location: ?ErrorReportLocation = null,
 
-    /// The files in the specified Amazon S3 bucket that contain your data.
+    /// The files in the specified Amazon S3 bucket that contain your data. You can
+    /// specify up to 100 files for each bulk import job. Each file supports the
+    /// following size limits:
+    ///
+    /// * Parquet files – Up to 256 MiB.
+    ///
+    /// * Other file formats – Up to 5 GiB.
     files: ?[]const File = null,
 
     /// Contains the configuration information of a job, such as the file format
@@ -80,8 +93,12 @@ pub const DescribeBulkImportJobOutput = struct {
     /// to troubleshoot issues.
     job_status: JobStatus,
 
+    /// The name of the workspace.
+    workspace_name: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .adaptive_ingestion = "adaptiveIngestion",
+        .dataset_id = "datasetId",
         .delete_files_after_import = "deleteFilesAfterImport",
         .error_report_location = "errorReportLocation",
         .files = "files",
@@ -92,6 +109,7 @@ pub const DescribeBulkImportJobOutput = struct {
         .job_name = "jobName",
         .job_role_arn = "jobRoleArn",
         .job_status = "jobStatus",
+        .workspace_name = "workspaceName",
     };
 };
 
@@ -130,6 +148,16 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeBulkImportJobIn
     try path_buf.appendSlice(allocator, input.job_id);
     const path = try path_buf.toOwnedSlice(allocator);
 
+    var query_buf: std.ArrayList(u8) = .empty;
+    var query_has_prev = false;
+    if (input.workspace_name) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "workspaceName=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
+    const query = try query_buf.toOwnedSlice(allocator);
+
     const body: ?[]const u8 = null;
 
     var request = aws.http.Request.init(ep.host);
@@ -138,16 +166,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeBulkImportJobIn
     request.tls = ep.tls;
     request.port = ep.port;
     request.body = body;
+    request.query = query;
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeBulkImportJobOutput {
-    var result: DescribeBulkImportJobOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeBulkImportJobOutput, body, allocator);
-    }
+    const result: DescribeBulkImportJobOutput = try aws.json.parseJsonObject(
+        DescribeBulkImportJobOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

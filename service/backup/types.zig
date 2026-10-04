@@ -1,3 +1,4 @@
+pub const AccessPointStatus = @import("access_point_status.zig").AccessPointStatus;
 pub const AdvancedBackupSetting = @import("advanced_backup_setting.zig").AdvancedBackupSetting;
 pub const AggregatedScanResult = @import("aggregated_scan_result.zig").AggregatedScanResult;
 pub const AggregationPeriod = @import("aggregation_period.zig").AggregationPeriod;
@@ -42,6 +43,7 @@ pub const LegalHold = @import("legal_hold.zig").LegalHold;
 pub const LegalHoldStatus = @import("legal_hold_status.zig").LegalHoldStatus;
 pub const Lifecycle = @import("lifecycle.zig").Lifecycle;
 pub const LifecycleDeleteAfterEvent = @import("lifecycle_delete_after_event.zig").LifecycleDeleteAfterEvent;
+pub const ListAccessPointsMember = @import("list_access_points_member.zig").ListAccessPointsMember;
 pub const MalwareScanner = @import("malware_scanner.zig").MalwareScanner;
 pub const MpaRevokeSessionStatus = @import("mpa_revoke_session_status.zig").MpaRevokeSessionStatus;
 pub const MpaSessionStatus = @import("mpa_session_status.zig").MpaSessionStatus;

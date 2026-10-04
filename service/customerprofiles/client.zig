@@ -2,8 +2,10 @@ const aws = @import("aws");
 const std = @import("std");
 
 const add_profile_key = @import("add_profile_key.zig");
+const associate_stream_for_segments = @import("associate_stream_for_segments.zig");
 const batch_get_calculated_attribute_for_profile = @import("batch_get_calculated_attribute_for_profile.zig");
 const batch_get_profile = @import("batch_get_profile.zig");
+const batch_put_profile_object = @import("batch_put_profile_object.zig");
 const create_calculated_attribute_definition = @import("create_calculated_attribute_definition.zig");
 const create_domain = @import("create_domain.zig");
 const create_domain_layout = @import("create_domain_layout.zig");
@@ -33,8 +35,10 @@ const delete_recommender = @import("delete_recommender.zig");
 const delete_recommender_filter = @import("delete_recommender_filter.zig");
 const delete_recommender_schema = @import("delete_recommender_schema.zig");
 const delete_segment_definition = @import("delete_segment_definition.zig");
+const delete_segment_subscription = @import("delete_segment_subscription.zig");
 const delete_workflow = @import("delete_workflow.zig");
 const detect_profile_object_type = @import("detect_profile_object_type.zig");
+const disassociate_stream_for_segments = @import("disassociate_stream_for_segments.zig");
 const get_auto_merging_preview = @import("get_auto_merging_preview.zig");
 const get_calculated_attribute_definition = @import("get_calculated_attribute_definition.zig");
 const get_calculated_attribute_for_profile = @import("get_calculated_attribute_for_profile.zig");
@@ -58,7 +62,9 @@ const get_segment_definition = @import("get_segment_definition.zig");
 const get_segment_estimate = @import("get_segment_estimate.zig");
 const get_segment_membership = @import("get_segment_membership.zig");
 const get_segment_snapshot = @import("get_segment_snapshot.zig");
+const get_segment_subscription = @import("get_segment_subscription.zig");
 const get_similar_profiles = @import("get_similar_profiles.zig");
+const get_stream_for_segments = @import("get_stream_for_segments.zig");
 const get_upload_job = @import("get_upload_job.zig");
 const get_upload_job_path = @import("get_upload_job_path.zig");
 const get_workflow = @import("get_workflow.zig");
@@ -86,6 +92,7 @@ const list_recommender_schemas = @import("list_recommender_schemas.zig");
 const list_recommenders = @import("list_recommenders.zig");
 const list_rule_based_matches = @import("list_rule_based_matches.zig");
 const list_segment_definitions = @import("list_segment_definitions.zig");
+const list_segment_subscription_events = @import("list_segment_subscription_events.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_upload_jobs = @import("list_upload_jobs.zig");
 const list_workflows = @import("list_workflows.zig");
@@ -94,7 +101,9 @@ const put_domain_object_type = @import("put_domain_object_type.zig");
 const put_integration = @import("put_integration.zig");
 const put_profile_object = @import("put_profile_object.zig");
 const put_profile_object_type = @import("put_profile_object_type.zig");
+const put_segment_subscription = @import("put_segment_subscription.zig");
 const search_profiles = @import("search_profiles.zig");
+const search_recommendations = @import("search_recommendations.zig");
 const start_recommender = @import("start_recommender.zig");
 const start_upload_job = @import("start_upload_job.zig");
 const stop_recommender = @import("stop_recommender.zig");
@@ -147,6 +156,15 @@ pub const Client = struct {
         return add_profile_key.execute(self, allocator, input, options);
     }
 
+    /// Associates an Amazon Kinesis data stream to receive segment membership
+    /// events for a given
+    /// domain. This is a domain-level configuration that applies to all segment
+    /// subscriptions within the domain. A domain can have only one associated
+    /// stream at a time.
+    pub fn associateStreamForSegments(self: *Self, allocator: std.mem.Allocator, input: associate_stream_for_segments.AssociateStreamForSegmentsInput, options: CallOptions) !associate_stream_for_segments.AssociateStreamForSegmentsOutput {
+        return associate_stream_for_segments.execute(self, allocator, input, options);
+    }
+
     /// Fetch the possible attribute values given the attribute name.
     pub fn batchGetCalculatedAttributeForProfile(self: *Self, allocator: std.mem.Allocator, input: batch_get_calculated_attribute_for_profile.BatchGetCalculatedAttributeForProfileInput, options: CallOptions) !batch_get_calculated_attribute_for_profile.BatchGetCalculatedAttributeForProfileOutput {
         return batch_get_calculated_attribute_for_profile.execute(self, allocator, input, options);
@@ -155,6 +173,28 @@ pub const Client = struct {
     /// Get a batch of profiles.
     pub fn batchGetProfile(self: *Self, allocator: std.mem.Allocator, input: batch_get_profile.BatchGetProfileInput, options: CallOptions) !batch_get_profile.BatchGetProfileOutput {
         return batch_get_profile.execute(self, allocator, input, options);
+    }
+
+    /// Adds multiple profile objects to a domain of a given ObjectType in a single
+    /// API call.
+    ///
+    /// When adding a specific profile object, like a Contact Record, an inferred
+    /// profile can
+    /// get created if it is not mapped to an existing profile. The resulting
+    /// profile will only
+    /// have a phone number populated in the standard ProfileObject. Any additional
+    /// Contact Records
+    /// with the same phone number will be mapped to the same inferred profile.
+    ///
+    /// When a ProfileObject is created and if a ProfileObjectType already exists
+    /// for the
+    /// ProfileObject, it will provide data to a standard profile depending on the
+    /// ProfileObjectType definition.
+    ///
+    /// BatchPutProfileObject needs an ObjectType, which can be created using
+    /// PutProfileObjectType.
+    pub fn batchPutProfileObject(self: *Self, allocator: std.mem.Allocator, input: batch_put_profile_object.BatchPutProfileObjectInput, options: CallOptions) !batch_put_profile_object.BatchPutProfileObjectOutput {
+        return batch_put_profile_object.execute(self, allocator, input, options);
     }
 
     /// Creates a new calculated attribute definition. After creation, new object
@@ -177,9 +217,9 @@ pub const Client = struct {
     /// multiple
     /// domains, and each domain can have multiple third-party integrations.
     ///
-    /// Each Amazon Connect instance can be associated with only one domain.
+    /// Each Connect Customer instance can be associated with only one domain.
     /// Multiple
-    /// Amazon Connect instances can be associated with one domain.
+    /// Connect Customer instances can be associated with one domain.
     ///
     /// Use this API or
     /// [UpdateDomain](https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html) to
@@ -214,7 +254,7 @@ pub const Client = struct {
 
     /// Creates an event stream, which is a subscription to real-time events, such
     /// as when
-    /// profiles are created and updated through Amazon Connect Customer Profiles.
+    /// profiles are created and updated through Connect Customer Customer Profiles.
     ///
     /// Each event stream can be associated with only one Kinesis Data Stream
     /// destination in the
@@ -383,6 +423,13 @@ pub const Client = struct {
         return delete_segment_definition.execute(self, allocator, input, options);
     }
 
+    /// Deletes a segment subscription for membership events. All active event
+    /// notifications for
+    /// this segment are stopped.
+    pub fn deleteSegmentSubscription(self: *Self, allocator: std.mem.Allocator, input: delete_segment_subscription.DeleteSegmentSubscriptionInput, options: CallOptions) !delete_segment_subscription.DeleteSegmentSubscriptionOutput {
+        return delete_segment_subscription.execute(self, allocator, input, options);
+    }
+
     /// Deletes the specified workflow and all its corresponding resources. This is
     /// an async
     /// process.
@@ -393,6 +440,14 @@ pub const Client = struct {
     /// The process of detecting profile object type mapping by using given objects.
     pub fn detectProfileObjectType(self: *Self, allocator: std.mem.Allocator, input: detect_profile_object_type.DetectProfileObjectTypeInput, options: CallOptions) !detect_profile_object_type.DetectProfileObjectTypeOutput {
         return detect_profile_object_type.execute(self, allocator, input, options);
+    }
+
+    /// Disassociates the Amazon Kinesis data stream configured for segment
+    /// membership events. All
+    /// active segment subscriptions delivering events to this stream are eventually
+    /// stopped.
+    pub fn disassociateStreamForSegments(self: *Self, allocator: std.mem.Allocator, input: disassociate_stream_for_segments.DisassociateStreamForSegmentsInput, options: CallOptions) !disassociate_stream_for_segments.DisassociateStreamForSegmentsOutput {
+        return disassociate_stream_for_segments.execute(self, allocator, input, options);
     }
 
     /// Tests the auto-merging settings of your Identity Resolution Job without
@@ -605,12 +660,26 @@ pub const Client = struct {
         return get_segment_snapshot.execute(self, allocator, input, options);
     }
 
+    /// Returns the current subscription configuration, execution schedule, and
+    /// status for
+    /// segment membership events.
+    pub fn getSegmentSubscription(self: *Self, allocator: std.mem.Allocator, input: get_segment_subscription.GetSegmentSubscriptionInput, options: CallOptions) !get_segment_subscription.GetSegmentSubscriptionOutput {
+        return get_segment_subscription.execute(self, allocator, input, options);
+    }
+
     /// Returns a set of profiles that belong to the same matching group using the
     /// `matchId` or `profileId`. You can also specify the type of
     /// matching that you want for finding similar profiles using either
     /// `RULE_BASED_MATCHING` or `ML_BASED_MATCHING`.
     pub fn getSimilarProfiles(self: *Self, allocator: std.mem.Allocator, input: get_similar_profiles.GetSimilarProfilesInput, options: CallOptions) !get_similar_profiles.GetSimilarProfilesOutput {
         return get_similar_profiles.execute(self, allocator, input, options);
+    }
+
+    /// Returns information about the segment membership event stream configured for
+    /// a specific
+    /// domain, including the stream state and associated segments.
+    pub fn getStreamForSegments(self: *Self, allocator: std.mem.Allocator, input: get_stream_for_segments.GetStreamForSegmentsInput, options: CallOptions) !get_stream_for_segments.GetStreamForSegmentsOutput {
+        return get_stream_for_segments.execute(self, allocator, input, options);
     }
 
     /// This API retrieves the details of a specific upload job.
@@ -764,6 +833,15 @@ pub const Client = struct {
         return list_segment_definitions.execute(self, allocator, input, options);
     }
 
+    /// Returns the most recent membership events for a segment. Each event
+    /// represents a profile
+    /// that entered or exited the segment.
+    ///
+    /// This operation is paginated.
+    pub fn listSegmentSubscriptionEvents(self: *Self, allocator: std.mem.Allocator, input: list_segment_subscription_events.ListSegmentSubscriptionEventsInput, options: CallOptions) !list_segment_subscription_events.ListSegmentSubscriptionEventsOutput {
+        return list_segment_subscription_events.execute(self, allocator, input, options);
+    }
+
     /// Displays the tags associated with an Amazon Connect Customer Profiles
     /// resource. In Connect
     /// Customer Profiles, domains, profile object types, and integrations can be
@@ -867,6 +945,33 @@ pub const Client = struct {
         return put_profile_object_type.execute(self, allocator, input, options);
     }
 
+    /// Creates or updates a segment subscription for membership events. When a
+    /// subscription is
+    /// created, an initial snapshot is taken and the system begins monitoring for
+    /// membership
+    /// changes.
+    ///
+    /// You can optionally set a schedule configuration interval to control how
+    /// often membership
+    /// snapshots are run. The interval can be from 1 to 24 hours. If not set, the
+    /// interval defaults
+    /// to 24 hours. Scheduled snapshots run on
+    /// a best-effort basis. If a scheduled snapshot takes longer than the
+    /// configured interval, the
+    /// next scheduled run does not start until the in-progress snapshot completes,
+    /// so a run might
+    /// be delayed or skipped and is not guaranteed to occur at exactly the
+    /// requested time.
+    ///
+    /// For Classic segments, membership events are generated from these scheduled
+    /// snapshots and
+    /// also in near real-time as profile attribute changes occur. For SQL segments,
+    /// membership
+    /// events are generated only from the scheduled snapshots.
+    pub fn putSegmentSubscription(self: *Self, allocator: std.mem.Allocator, input: put_segment_subscription.PutSegmentSubscriptionInput, options: CallOptions) !put_segment_subscription.PutSegmentSubscriptionOutput {
+        return put_segment_subscription.execute(self, allocator, input, options);
+    }
+
     /// Searches for profiles within a specific domain using one or more predefined
     /// search keys
     /// (e.g., _fullName, _phone, _email, _account, etc.) and/or custom-defined
@@ -879,6 +984,23 @@ pub const Client = struct {
     /// up to 5 key-value(s) pairs using either `AND` or `OR` logic.
     pub fn searchProfiles(self: *Self, allocator: std.mem.Allocator, input: search_profiles.SearchProfilesInput, options: CallOptions) !search_profiles.SearchProfilesOutput {
         return search_profiles.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves recommendations for a profile in a specific domain. The profile is
+    /// identified
+    /// using a search key, which consists of a `KeyName` and a `KeyValues` list.
+    /// The `KeyName` can be a predefined key (for example, `_profileId`,
+    /// `_phone`, `_email`) or a custom-defined key.
+    ///
+    /// The search key must match exactly one profile. If no profile matches the
+    /// search key, the
+    /// operation returns a `ResourceNotFoundException`. If more than one profile
+    /// matches
+    /// the search key, the operation returns a `BadRequestException`. You can use
+    /// the
+    /// SearchProfiles API to review the matching profiles.
+    pub fn searchRecommendations(self: *Self, allocator: std.mem.Allocator, input: search_recommendations.SearchRecommendationsInput, options: CallOptions) !search_recommendations.SearchRecommendationsOutput {
+        return search_recommendations.execute(self, allocator, input, options);
     }
 
     /// Starts a recommender that was previously stopped. Starting a recommender
@@ -1078,6 +1200,13 @@ pub const Client = struct {
     }
 
     pub fn listSegmentDefinitionsPaginator(self: *Self, params: list_segment_definitions.ListSegmentDefinitionsInput) paginator.ListSegmentDefinitionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listSegmentSubscriptionEventsPaginator(self: *Self, params: list_segment_subscription_events.ListSegmentSubscriptionEventsInput) paginator.ListSegmentSubscriptionEventsPaginator {
         return .{
             .client = self,
             .params = params,

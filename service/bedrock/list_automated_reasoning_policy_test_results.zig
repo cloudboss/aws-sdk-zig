@@ -118,10 +118,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAutomatedReasoningP
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAutomatedReasoningPolicyTestResultsOutput {
-    var result: ListAutomatedReasoningPolicyTestResultsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAutomatedReasoningPolicyTestResultsOutput, body, allocator);
-    }
+    const result: ListAutomatedReasoningPolicyTestResultsOutput = try aws.json.parseJsonObject(
+        ListAutomatedReasoningPolicyTestResultsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

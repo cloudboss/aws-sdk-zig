@@ -119,10 +119,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDataLakeDatasetsInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListDataLakeDatasetsOutput {
-    var result: ListDataLakeDatasetsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListDataLakeDatasetsOutput, body, allocator);
-    }
+    const result: ListDataLakeDatasetsOutput = try aws.json.parseJsonObject(
+        ListDataLakeDatasetsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const IndexMode = @import("index_mode.zig").IndexMode;
 const VectorData = @import("vector_data.zig").VectorData;
 const DistanceMetric = @import("distance_metric.zig").DistanceMetric;
 const QueryOutputVector = @import("query_output_vector.zig").QueryOutputVector;
@@ -19,6 +20,20 @@ pub const QueryVectorsInput = struct {
 
     /// The name of the vector index that you want to query.
     index_name: ?[]const u8 = null,
+
+    /// Pagination token from a previous request. The value of this field is empty
+    /// for an initial request.
+    next_token: ?[]const u8 = null,
+
+    /// The mode to use to process the query. If you don't specify a query mode, the
+    /// operation uses the mode that's currently configured for the vector index.
+    ///
+    /// Valid values:
+    ///
+    /// * `CLASSIC` - Applies metadata filters during the vector search. You can't
+    ///   specify `CLASSIC` for an `ENHANCED` index.
+    /// * `ENHANCED` - Applies metadata filters before the vector search.
+    query_mode: ?IndexMode = null,
 
     /// The query vector. Ensure that the query vector has the same dimension as the
     /// dimension of the vector index that's being queried. For example, if your
@@ -44,6 +59,8 @@ pub const QueryVectorsInput = struct {
         .filter = "filter",
         .index_arn = "indexArn",
         .index_name = "indexName",
+        .next_token = "nextToken",
+        .query_mode = "queryMode",
         .query_vector = "queryVector",
         .return_distance = "returnDistance",
         .return_metadata = "returnMetadata",
@@ -58,11 +75,16 @@ pub const QueryVectorsOutput = struct {
     /// when it was created.
     distance_metric: DistanceMetric,
 
+    /// Pagination token to be used in the subsequent page request. The field is
+    /// empty if no further pagination is required.
+    next_token: ?[]const u8 = null,
+
     /// The vectors in the approximate nearest neighbor search.
     vectors: ?[]const QueryOutputVector = null,
 
     pub const json_field_names = .{
         .distance_metric = "distanceMetric",
+        .next_token = "nextToken",
         .vectors = "vectors",
     };
 };
@@ -121,6 +143,18 @@ fn serializeRequest(allocator: std.mem.Allocator, input: QueryVectorsInput, conf
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.next_token) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"nextToken\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.query_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"queryMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"queryVector\":");
     try aws.json.writeValue(@TypeOf(input.query_vector), input.query_vector, allocator, &body_buf);
@@ -163,10 +197,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: QueryVectorsInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !QueryVectorsOutput {
-    var result: QueryVectorsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(QueryVectorsOutput, body, allocator);
-    }
+    const result: QueryVectorsOutput = try aws.json.parseJsonObject(
+        QueryVectorsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

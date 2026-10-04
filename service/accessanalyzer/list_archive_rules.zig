@@ -106,10 +106,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListArchiveRulesInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListArchiveRulesOutput {
-    var result: ListArchiveRulesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListArchiveRulesOutput, body, allocator);
-    }
+    const result: ListArchiveRulesOutput = try aws.json.parseJsonObject(
+        ListArchiveRulesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

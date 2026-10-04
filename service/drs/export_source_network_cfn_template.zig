@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExportSourceNetworkCfnT
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ExportSourceNetworkCfnTemplateOutput {
-    var result: ExportSourceNetworkCfnTemplateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ExportSourceNetworkCfnTemplateOutput, body, allocator);
-    }
+    const result: ExportSourceNetworkCfnTemplateOutput = try aws.json.parseJsonObject(
+        ExportSourceNetworkCfnTemplateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

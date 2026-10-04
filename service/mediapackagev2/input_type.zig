@@ -3,16 +3,19 @@ const std = @import("std");
 pub const InputType = enum {
     hls,
     cmaf,
+    multiview,
 
     pub const json_field_names = .{
         .hls = "HLS",
         .cmaf = "CMAF",
+        .multiview = "MULTIVIEW",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .hls => "HLS",
             .cmaf => "CMAF",
+            .multiview => "MULTIVIEW",
         };
     }
 

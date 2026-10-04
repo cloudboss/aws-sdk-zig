@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AgentRuntimeArtifact = @import("agent_runtime_artifact.zig").AgentRuntimeArtifact;
 const AuthorizerConfiguration = @import("authorizer_configuration.zig").AuthorizerConfiguration;
+const CapacityProviderConfiguration = @import("capacity_provider_configuration.zig").CapacityProviderConfiguration;
 const FilesystemConfiguration = @import("filesystem_configuration.zig").FilesystemConfiguration;
 const LifecycleConfiguration = @import("lifecycle_configuration.zig").LifecycleConfiguration;
 const RuntimeMetadataConfiguration = @import("runtime_metadata_configuration.zig").RuntimeMetadataConfiguration;
@@ -47,6 +48,9 @@ pub const GetAgentRuntimeOutput = struct {
     /// The authorizer configuration for the AgentCore Runtime.
     authorizer_configuration: ?AuthorizerConfiguration = null,
 
+    /// The capacity provider configuration for the AgentCore Runtime.
+    capacity_provider_configuration: ?CapacityProviderConfiguration = null,
+
     /// The timestamp when the AgentCore Runtime was created.
     created_at: i64,
 
@@ -75,6 +79,9 @@ pub const GetAgentRuntimeOutput = struct {
     /// The network configuration for the AgentCore Runtime.
     network_configuration: ?NetworkConfiguration = null,
 
+    /// The version of the runtime platform used by the AgentCore Runtime.
+    platform_version: ?[]const u8 = null,
+
     protocol_configuration: ?ProtocolConfiguration = null,
 
     /// Configuration for HTTP request headers that will be passed through to the
@@ -97,6 +104,7 @@ pub const GetAgentRuntimeOutput = struct {
         .agent_runtime_name = "agentRuntimeName",
         .agent_runtime_version = "agentRuntimeVersion",
         .authorizer_configuration = "authorizerConfiguration",
+        .capacity_provider_configuration = "capacityProviderConfiguration",
         .created_at = "createdAt",
         .description = "description",
         .environment_variables = "environmentVariables",
@@ -106,6 +114,7 @@ pub const GetAgentRuntimeOutput = struct {
         .lifecycle_configuration = "lifecycleConfiguration",
         .metadata_configuration = "metadataConfiguration",
         .network_configuration = "networkConfiguration",
+        .platform_version = "platformVersion",
         .protocol_configuration = "protocolConfiguration",
         .request_header_configuration = "requestHeaderConfiguration",
         .role_arn = "roleArn",
@@ -175,10 +184,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAgentRuntimeInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetAgentRuntimeOutput {
-    var result: GetAgentRuntimeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetAgentRuntimeOutput, body, allocator);
-    }
+    const result: GetAgentRuntimeOutput = try aws.json.parseJsonObject(
+        GetAgentRuntimeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

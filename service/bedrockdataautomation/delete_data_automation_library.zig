@@ -76,10 +76,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteDataAutomationLib
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteDataAutomationLibraryOutput {
-    var result: DeleteDataAutomationLibraryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteDataAutomationLibraryOutput, body, allocator);
-    }
+    const result: DeleteDataAutomationLibraryOutput = try aws.json.parseJsonObject(
+        DeleteDataAutomationLibraryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

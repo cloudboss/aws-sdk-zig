@@ -11,6 +11,7 @@ const ChallengeConfig = @import("challenge_config.zig").ChallengeConfig;
 const CustomResponseBody = @import("custom_response_body.zig").CustomResponseBody;
 const DataProtectionConfig = @import("data_protection_config.zig").DataProtectionConfig;
 const DefaultAction = @import("default_action.zig").DefaultAction;
+const MonetizationConfig = @import("monetization_config.zig").MonetizationConfig;
 const OnSourceDDoSProtectionConfig = @import("on_source_d_do_s_protection_config.zig").OnSourceDDoSProtectionConfig;
 const Rule = @import("rule.zig").Rule;
 const Scope = @import("scope.zig").Scope;
@@ -106,6 +107,10 @@ pub const UpdateWebACLInput = struct {
     /// use the new token returned by that operation.
     lock_token: []const u8,
 
+    /// The monetization configuration for the web ACL. Provide this when any rule
+    /// in the web ACL uses the `Monetize` action.
+    monetization_config: ?MonetizationConfig = null,
+
     /// The name of the web ACL. You cannot change the name of a web ACL after you
     /// create it.
     name: []const u8,
@@ -165,6 +170,7 @@ pub const UpdateWebACLInput = struct {
         .description = "Description",
         .id = "Id",
         .lock_token = "LockToken",
+        .monetization_config = "MonetizationConfig",
         .name = "Name",
         .on_source_d_do_s_protection_config = "OnSourceDDoSProtectionConfig",
         .rules = "Rules",

@@ -75,10 +75,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeFlowSourceThumb
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeFlowSourceThumbnailOutput {
-    var result: DescribeFlowSourceThumbnailOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeFlowSourceThumbnailOutput, body, allocator);
-    }
+    const result: DescribeFlowSourceThumbnailOutput = try aws.json.parseJsonObject(
+        DescribeFlowSourceThumbnailOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

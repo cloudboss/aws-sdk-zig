@@ -44,6 +44,17 @@ pub const QueryStatistics = struct {
     /// The total number of log events scanned during the query.
     records_scanned: f64 = 0,
 
+    /// The number of rows in the final query result set. This value represents the
+    /// total number
+    /// of output rows across all pages. For queries that include post-aggregation
+    /// filters (such as
+    /// `stats count(*) by field | filter count > threshold`), this value might be
+    /// less
+    /// than `recordsMatched`. It reflects only the rows that survived all
+    /// operations in
+    /// the query.
+    result_count: f64 = 0,
+
     pub const json_field_names = .{
         .bytes_scanned = "bytesScanned",
         .estimated_bytes_skipped = "estimatedBytesSkipped",
@@ -51,5 +62,6 @@ pub const QueryStatistics = struct {
         .log_groups_scanned = "logGroupsScanned",
         .records_matched = "recordsMatched",
         .records_scanned = "recordsScanned",
+        .result_count = "resultCount",
     };
 };

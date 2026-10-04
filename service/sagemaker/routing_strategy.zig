@@ -3,16 +3,19 @@ const std = @import("std");
 pub const RoutingStrategy = enum {
     least_outstanding_requests,
     random,
+    prefix_aware,
 
     pub const json_field_names = .{
         .least_outstanding_requests = "LEAST_OUTSTANDING_REQUESTS",
         .random = "RANDOM",
+        .prefix_aware = "PREFIX_AWARE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .least_outstanding_requests => "LEAST_OUTSTANDING_REQUESTS",
             .random => "RANDOM",
+            .prefix_aware => "PREFIX_AWARE",
         };
     }
 

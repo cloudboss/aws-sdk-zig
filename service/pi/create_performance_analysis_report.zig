@@ -9,7 +9,7 @@ const Tag = @import("tag.zig").Tag;
 
 pub const CreatePerformanceAnalysisReportInput = struct {
     /// The end time defined for the analysis report.
-    end_time: i64,
+    end_time: ?i64 = null,
 
     /// An immutable, Amazon Web Services Region-unique identifier for a data
     /// source. Performance Insights gathers metrics from

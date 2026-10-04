@@ -43,6 +43,10 @@ pub const UpdatePaymentConnectorInput = struct {
 };
 
 pub const UpdatePaymentConnectorOutput = struct {
+    /// The URL that the user must open to complete OAuth consent. This field is
+    /// only present when the payment connector status is `PENDING_AUTHENTICATION`.
+    authorization_url: ?[]const u8 = null,
+
     /// The credential provider configurations for the updated payment connector.
     credential_provider_configurations: ?[]const CredentialsProviderConfiguration = null,
 
@@ -67,6 +71,7 @@ pub const UpdatePaymentConnectorOutput = struct {
     @"type": PaymentConnectorType,
 
     pub const json_field_names = .{
+        .authorization_url = "authorizationUrl",
         .credential_provider_configurations = "credentialProviderConfigurations",
         .last_updated_at = "lastUpdatedAt",
         .name = "name",
@@ -158,10 +163,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePaymentConnectorI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdatePaymentConnectorOutput {
-    var result: UpdatePaymentConnectorOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdatePaymentConnectorOutput, body, allocator);
-    }
+    const result: UpdatePaymentConnectorOutput = try aws.json.parseJsonObject(
+        UpdatePaymentConnectorOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -2,7 +2,10 @@ const aws = @import("aws");
 
 const AdConditioningConfiguration = @import("ad_conditioning_configuration.zig").AdConditioningConfiguration;
 const AdDecisionServerConfiguration = @import("ad_decision_server_configuration.zig").AdDecisionServerConfiguration;
+const AdsPersonalizationConcurrency = @import("ads_personalization_concurrency.zig").AdsPersonalizationConcurrency;
+const AdsPersonalizationTimeouts = @import("ads_personalization_timeouts.zig").AdsPersonalizationTimeouts;
 const AvailSuppression = @import("avail_suppression.zig").AvailSuppression;
+const BeaconingConfiguration = @import("beaconing_configuration.zig").BeaconingConfiguration;
 const Bumper = @import("bumper.zig").Bumper;
 const CdnConfiguration = @import("cdn_configuration.zig").CdnConfiguration;
 const DashConfiguration = @import("dash_configuration.zig").DashConfiguration;
@@ -11,6 +14,7 @@ const InsertionMode = @import("insertion_mode.zig").InsertionMode;
 const LivePreRollConfiguration = @import("live_pre_roll_configuration.zig").LivePreRollConfiguration;
 const LogConfiguration = @import("log_configuration.zig").LogConfiguration;
 const ManifestProcessingRules = @import("manifest_processing_rules.zig").ManifestProcessingRules;
+const YieldOptimizationConfiguration = @import("yield_optimization_configuration.zig").YieldOptimizationConfiguration;
 
 /// A playback configuration. For information about MediaTailor configurations,
 /// see [Working with configurations in AWS Elemental
@@ -30,10 +34,24 @@ pub const PlaybackConfiguration = struct {
     /// static VAST URL. The maximum length is 25,000 characters.
     ad_decision_server_url: ?[]const u8 = null,
 
+    /// The concurrency settings for ad decision server interactions. These settings
+    /// control how many simultaneous ADS requests MediaTailor makes per manifest
+    /// request.
+    ads_personalization_concurrency: ?AdsPersonalizationConcurrency = null,
+
+    /// The timeout settings for ad decision server interactions. These settings
+    /// control how long MediaTailor waits for ADS responses and the total time
+    /// budget for ad personalization across live, VOD, and prefetch workflows.
+    ads_personalization_timeouts: ?AdsPersonalizationTimeouts = null,
+
     /// The configuration for avail suppression, also known as ad suppression. For
     /// more information about ad suppression, see [Ad
     /// Suppression](https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
     avail_suppression: ?AvailSuppression = null,
+
+    /// The beaconing configuration for this playback configuration, which controls
+    /// whether MediaTailor includes beacons of its own in the ad tracking response.
+    beaconing_configuration: ?BeaconingConfiguration = null,
 
     /// The configuration for bumpers. Bumpers are short audio or video clips that
     /// play at the start or before the end of an ad break. To learn more about
@@ -53,10 +71,19 @@ pub const PlaybackConfiguration = struct {
     /// The configuration for a DASH source.
     dash_configuration: ?DashConfiguration = null,
 
+    /// The dual-stack (IPv4 and IPv6) URL that your player accesses to get a
+    /// manifest from AWS Elemental MediaTailor.
+    dual_stack_playback_endpoint_prefix: ?[]const u8 = null,
+
+    /// The dual-stack (IPv4 and IPv6) URL that your player uses to initialize a
+    /// session that uses client-side reporting.
+    dual_stack_session_initialization_endpoint_prefix: ?[]const u8 = null,
+
     /// A map of lifecycle hook event names to function identifiers. The function
     /// mapping specifies which function MediaTailor executes at each lifecycle hook
-    /// during ad insertion. Valid keys are `PRE_SESSION_INITIALIZATION` and
-    /// `PRE_ADS_REQUEST`. For more information, see [Functions lifecycle
+    /// during ad insertion. Valid keys are `PRE_SESSION_INITIALIZATION`,
+    /// `PRE_ADS_REQUEST`, `POST_ADS_RESPONSE`, and `PRE_MANIFEST_INSERTION`. For
+    /// more information, see [Functions lifecycle
     /// hooks](https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html) in the *MediaTailor User Guide*.
     function_mapping: ?[]const aws.map.StringMapEntry = null,
 
@@ -99,11 +126,11 @@ pub const PlaybackConfiguration = struct {
     /// The Amazon Resource Name (ARN) for the playback configuration.
     playback_configuration_arn: ?[]const u8 = null,
 
-    /// The URL that the player accesses to get a manifest from AWS Elemental
+    /// The URL that your player accesses to get a manifest from AWS Elemental
     /// MediaTailor.
     playback_endpoint_prefix: ?[]const u8 = null,
 
-    /// The URL that the player uses to initialize a session that uses client-side
+    /// The URL that your player uses to initialize a session that uses client-side
     /// reporting.
     session_initialization_endpoint_prefix: ?[]const u8 = null,
 
@@ -132,15 +159,24 @@ pub const PlaybackConfiguration = struct {
     /// The maximum length is 512 characters.
     video_content_source_url: ?[]const u8 = null,
 
+    /// Configuration for Yield Optimization, which fills unsold ad inventory in ad
+    /// breaks with programmatic ads from Amazon Publisher Services (APS).
+    yield_optimization_configuration: ?YieldOptimizationConfiguration = null,
+
     pub const json_field_names = .{
         .ad_conditioning_configuration = "AdConditioningConfiguration",
         .ad_decision_server_configuration = "AdDecisionServerConfiguration",
         .ad_decision_server_url = "AdDecisionServerUrl",
+        .ads_personalization_concurrency = "AdsPersonalizationConcurrency",
+        .ads_personalization_timeouts = "AdsPersonalizationTimeouts",
         .avail_suppression = "AvailSuppression",
+        .beaconing_configuration = "BeaconingConfiguration",
         .bumper = "Bumper",
         .cdn_configuration = "CdnConfiguration",
         .configuration_aliases = "ConfigurationAliases",
         .dash_configuration = "DashConfiguration",
+        .dual_stack_playback_endpoint_prefix = "DualStackPlaybackEndpointPrefix",
+        .dual_stack_session_initialization_endpoint_prefix = "DualStackSessionInitializationEndpointPrefix",
         .function_mapping = "FunctionMapping",
         .hls_configuration = "HlsConfiguration",
         .insertion_mode = "InsertionMode",
@@ -156,5 +192,6 @@ pub const PlaybackConfiguration = struct {
         .tags = "Tags",
         .transcode_profile_name = "TranscodeProfileName",
         .video_content_source_url = "VideoContentSourceUrl",
+        .yield_optimization_configuration = "YieldOptimizationConfiguration",
     };
 };

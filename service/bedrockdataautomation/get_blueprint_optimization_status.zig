@@ -86,10 +86,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBlueprintOptimizatio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBlueprintOptimizationStatusOutput {
-    var result: GetBlueprintOptimizationStatusOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBlueprintOptimizationStatusOutput, body, allocator);
-    }
+    const result: GetBlueprintOptimizationStatusOutput = try aws.json.parseJsonObject(
+        GetBlueprintOptimizationStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -9,21 +9,32 @@ const Ownership = @import("ownership.zig").Ownership;
 const WorkflowVersion = @import("workflow_version.zig").WorkflowVersion;
 
 pub const ListWorkflowsInput = struct {
-    /// Specify all or part of the workflow name to streamline results.
+    /// Specifies whether to return one entry per workflow name, with all versions
+    /// of
+    /// each workflow aggregated. Defaults to `false`, which returns one
+    /// entry per workflow version. You can't combine this option with the
+    /// `version` filter.
     by_name: ?bool = null,
 
-    /// Used to streamline search results.
+    /// Filters to narrow the list of workflows. You can filter on
+    /// `name`, `version`, `description`, and
+    /// `type`.
     filters: ?[]const Filter = null,
 
-    /// Specify the maximum number of items to return in a request.
+    /// The maximum number of items to return in a single request.
     max_results: ?i32 = null,
 
-    /// A token to specify where to start paginating. This is the nextToken
+    /// A token to specify where to start paginating. Use the `nextToken` value
     /// from a previously truncated response.
     next_token: ?[]const u8 = null,
 
-    /// Used to get a list of workflow build version filtered by the identity of the
-    /// creator.
+    /// Filters results based on the workflow owner. By default, this request
+    /// returns
+    /// the workflows that your account owns (`Self`). Specify
+    /// `Amazon` to list the workflows that Image Builder manages. Image Builder
+    /// rejects
+    /// the `Shared` and `ThirdParty` owner values for
+    /// workflows, and `AWSMarketplace` returns no results.
     owner: ?Ownership = null,
 
     pub const json_field_names = .{
@@ -42,7 +53,7 @@ pub const ListWorkflowsOutput = struct {
     /// with the next request to retrieve additional objects.
     next_token: ?[]const u8 = null,
 
-    /// A list of workflow build versions that match the request criteria.
+    /// A list of workflow versions that match the request criteria.
     workflow_version_list: ?[]const WorkflowVersion = null,
 
     pub const json_field_names = .{
@@ -133,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListWorkflowsInput, con
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListWorkflowsOutput {
-    var result: ListWorkflowsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListWorkflowsOutput, body, allocator);
-    }
+    const result: ListWorkflowsOutput = try aws.json.parseJsonObject(
+        ListWorkflowsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

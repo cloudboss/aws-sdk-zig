@@ -5,8 +5,10 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ObjectCannedACL = @import("object_canned_acl.zig").ObjectCannedACL;
+const AnnotationDirective = @import("annotation_directive.zig").AnnotationDirective;
 const ChecksumAlgorithm = @import("checksum_algorithm.zig").ChecksumAlgorithm;
 const MetadataDirective = @import("metadata_directive.zig").MetadataDirective;
+const ObjectLockEventHold = @import("object_lock_event_hold.zig").ObjectLockEventHold;
 const ObjectLockLegalHoldStatus = @import("object_lock_legal_hold_status.zig").ObjectLockLegalHoldStatus;
 const ObjectLockMode = @import("object_lock_mode.zig").ObjectLockMode;
 const RequestPayer = @import("request_payer.zig").RequestPayer;
@@ -48,6 +50,44 @@ pub const CopyObjectInput = struct {
     ///
     /// * This functionality is not supported for Amazon S3 on Outposts.
     acl: ?ObjectCannedACL = null,
+
+    /// Specifies whether you want to copy annotations from the source object or
+    /// exclude them. If this
+    /// header isn't specified, `COPY` is the default behavior.
+    ///
+    /// Valid Values: `COPY | EXCLUDE`
+    ///
+    /// You can specify this directive as either an HTTP header
+    /// (`x-amz-object-annotation-directive`) or as a query string parameter. Use
+    /// the query
+    /// string form when generating presigned URLs that need to control annotation
+    /// copy behavior.
+    ///
+    /// When set to `COPY`, you must have `s3:GetObjectAnnotation` permission on
+    /// the source object and `s3:PutObjectAnnotation` permission on the
+    /// destination. Each
+    /// annotation copied is billed as a separate PUT request. If annotations on the
+    /// source are modified
+    /// during the copy, Amazon S3 returns a retryable error.
+    ///
+    /// For directory buckets, annotations are not supported. Use `EXCLUDE` to copy
+    /// objects to directory buckets without errors. If you specify `COPY` for a
+    /// directory
+    /// bucket, the request returns HTTP 501 (Not Implemented).
+    ///
+    /// When you copy objects using multipart upload (for example, when the Amazon
+    /// Web Services CLI or Amazon Web Services SDKs
+    /// use Transfer Manager for objects larger than approximately 8 MB),
+    /// annotations are not copied by
+    /// default. To include annotations, specify `--copy-props default` in the
+    /// Amazon Web Services CLI or the
+    /// equivalent SDK configuration. With this opt-in, the SDK reads source
+    /// annotations, completes the
+    /// multipart upload, and then writes each annotation to the destination.
+    /// Between the upload completion
+    /// and the last annotation write, the destination object exists without all its
+    /// annotations.
+    annotation_directive: ?AnnotationDirective = null,
 
     /// The name of the destination bucket.
     ///
@@ -434,6 +474,26 @@ pub const CopyObjectInput = struct {
     /// the `x-amz-metadata-directive` header. To copy the value, you must specify
     /// `x-amz-website-redirect-location` in the request header.
     metadata_directive: ?MetadataDirective = null,
+
+    /// The event hold status to apply to the object copy. Set to `ON` to enable or
+    /// `OFF` to disable.
+    ///
+    /// This functionality is not supported for directory buckets.
+    object_lock_event_hold: ?ObjectLockEventHold = null,
+
+    /// The event hold duration in days to apply to the object copy. You cannot
+    /// specify a duration
+    /// in both days and years.
+    ///
+    /// This functionality is not supported for directory buckets.
+    object_lock_event_hold_duration_days: ?i32 = null,
+
+    /// The event hold duration in years to apply to the object copy. You cannot
+    /// specify a
+    /// duration in both days and years.
+    ///
+    /// This functionality is not supported for directory buckets.
+    object_lock_event_hold_duration_years: ?i32 = null,
 
     /// Specifies whether you want to apply a legal hold to the object copy.
     ///
@@ -899,6 +959,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CopyObjectInput, config
     if (input.acl) |v| {
         try request.headers.put(allocator, "x-amz-acl", v.wireName());
     }
+    if (input.annotation_directive) |v| {
+        try request.headers.put(allocator, "x-amz-object-annotation-directive", v.wireName());
+    }
     if (input.bucket_key_enabled) |v| {
         try request.headers.put(allocator, "x-amz-server-side-encryption-bucket-key-enabled", if (v) "true" else "false");
     }
@@ -977,6 +1040,21 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CopyObjectInput, config
     }
     if (input.metadata_directive) |v| {
         try request.headers.put(allocator, "x-amz-metadata-directive", v.wireName());
+    }
+    if (input.object_lock_event_hold) |v| {
+        try request.headers.put(allocator, "x-amz-object-lock-event-hold", v.wireName());
+    }
+    if (input.object_lock_event_hold_duration_days) |v| {
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "x-amz-object-lock-event-hold-duration-days", num_str);
+        }
+    }
+    if (input.object_lock_event_hold_duration_years) |v| {
+        {
+            const num_str = std.fmt.allocPrint(allocator, "{d}", .{v}) catch "";
+            try request.headers.put(allocator, "x-amz-object-lock-event-hold-duration-years", num_str);
+        }
     }
     if (input.object_lock_legal_hold_status) |v| {
         try request.headers.put(allocator, "x-amz-object-lock-legal-hold", v.wireName());

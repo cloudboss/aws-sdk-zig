@@ -10,6 +10,12 @@ const SingleMetricAnomalyDetector = @import("single_metric_anomaly_detector.zig"
 const serde = @import("serde.zig");
 
 pub const DeleteAnomalyDetectorInput = struct {
+    /// Specifies the unique identifier of the anomaly detector to delete. If you
+    /// specify
+    /// this parameter, you do not need to specify a metric to identify the
+    /// detector.
+    anomaly_detector_id: ?[]const u8 = null,
+
     /// The metric dimensions associated with the anomaly detection model to delete.
     dimensions: ?[]const Dimension = null,
 
@@ -64,6 +70,7 @@ pub const DeleteAnomalyDetectorInput = struct {
     stat: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .anomaly_detector_id = "AnomalyDetectorId",
         .dimensions = "Dimensions",
         .metric_math_anomaly_detector = "MetricMathAnomalyDetector",
         .metric_name = "MetricName",
@@ -109,6 +116,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteAnomalyDetectorIn
     var body_buf: std.ArrayList(u8) = .empty;
 
     try body_buf.appendSlice(allocator, "Action=DeleteAnomalyDetector&Version=2010-08-01");
+    if (input.anomaly_detector_id) |v| {
+        try body_buf.appendSlice(allocator, "&AnomalyDetectorId=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
     if (input.dimensions) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;

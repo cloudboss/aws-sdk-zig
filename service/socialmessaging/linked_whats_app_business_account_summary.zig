@@ -6,6 +6,11 @@ pub const LinkedWhatsAppBusinessAccountSummary = struct {
     /// The ARN of the linked WhatsApp Business Account.
     arn: []const u8,
 
+    /// The Meta Conversions API dataset ID associated with this WhatsApp Business
+    /// Account. This value is a numeric string of 10 to 20 digits. This field is
+    /// not present when no dataset has been created for this account.
+    dataset_id: ?[]const u8 = null,
+
     /// The event destinations for the linked WhatsApp Business Account.
     event_destinations: []const WhatsAppBusinessAccountEventDestination,
 
@@ -15,6 +20,11 @@ pub const LinkedWhatsAppBusinessAccountSummary = struct {
 
     /// The date the WhatsApp Business Account was linked.
     link_date: i64,
+
+    /// The onboarding status for the Marketing Messages API. This value is fetched
+    /// from Meta and indicates whether the WhatsApp Business Account is onboarded
+    /// for Meta's Marketing Messages API.
+    marketing_messages_onboarding_status: ?[]const u8 = null,
 
     /// The registration status of the linked WhatsApp Business Account.
     registration_status: RegistrationStatus,
@@ -27,9 +37,11 @@ pub const LinkedWhatsAppBusinessAccountSummary = struct {
 
     pub const json_field_names = .{
         .arn = "arn",
+        .dataset_id = "datasetId",
         .event_destinations = "eventDestinations",
         .id = "id",
         .link_date = "linkDate",
+        .marketing_messages_onboarding_status = "marketingMessagesOnboardingStatus",
         .registration_status = "registrationStatus",
         .waba_id = "wabaId",
         .waba_name = "wabaName",

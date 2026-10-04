@@ -31,7 +31,7 @@ pub const TrainingPlanOffering = struct {
     reserved_capacity_offerings: ?[]const ReservedCapacityOffering = null,
 
     /// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod,
-    /// SageMaker Endpoints) for this training plan offering.
+    /// SageMaker Endpoints, Studio apps) for this training plan offering.
     ///
     /// Training plans are specific to their target resource.
     ///
@@ -41,6 +41,8 @@ pub const TrainingPlanOffering = struct {
     ///   compute resources to a cluster's instance group.
     /// * A training plan for SageMaker endpoints can be used exclusively to provide
     ///   compute resources to SageMaker endpoints for model deployment.
+    /// * A training plan for Studio apps can be used to launch JupyterLab and Code
+    ///   Editor apps on reserved training plan capacity.
     target_resources: []const SageMakerResourceName,
 
     /// The unique identifier for this training plan offering.

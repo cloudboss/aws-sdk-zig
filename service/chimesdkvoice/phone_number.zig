@@ -38,6 +38,8 @@ pub const PhoneNumber = struct {
     /// The phone number's order ID.
     order_id: ?[]const u8 = null,
 
+    phone_number_arn: ?[]const u8 = null,
+
     /// The phone number's ID.
     phone_number_id: ?[]const u8 = null,
 
@@ -64,6 +66,7 @@ pub const PhoneNumber = struct {
         .e164_phone_number = "E164PhoneNumber",
         .name = "Name",
         .order_id = "OrderId",
+        .phone_number_arn = "PhoneNumberArn",
         .phone_number_id = "PhoneNumberId",
         .product_type = "ProductType",
         .status = "Status",

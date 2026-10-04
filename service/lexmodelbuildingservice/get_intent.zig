@@ -170,10 +170,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetIntentInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetIntentOutput {
-    var result: GetIntentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetIntentOutput, body, allocator);
-    }
+    const result: GetIntentOutput = try aws.json.parseJsonObject(
+        GetIntentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

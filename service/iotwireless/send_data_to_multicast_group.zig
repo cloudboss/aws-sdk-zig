@@ -92,10 +92,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendDataToMulticastGrou
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SendDataToMulticastGroupOutput {
-    var result: SendDataToMulticastGroupOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SendDataToMulticastGroupOutput, body, allocator);
-    }
+    const result: SendDataToMulticastGroupOutput = try aws.json.parseJsonObject(
+        SendDataToMulticastGroupOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

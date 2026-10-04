@@ -144,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBridgeInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateBridgeOutput {
-    var result: CreateBridgeOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateBridgeOutput, body, allocator);
-    }
+    const result: CreateBridgeOutput = try aws.json.parseJsonObject(
+        CreateBridgeOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

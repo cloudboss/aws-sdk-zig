@@ -153,10 +153,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDevicePositionHistor
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetDevicePositionHistoryOutput {
-    var result: GetDevicePositionHistoryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetDevicePositionHistoryOutput, body, allocator);
-    }
+    const result: GetDevicePositionHistoryOutput = try aws.json.parseJsonObject(
+        GetDevicePositionHistoryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

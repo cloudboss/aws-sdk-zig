@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDomainNameAccessA
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDomainNameAccessAssociationOutput {
-    var result: CreateDomainNameAccessAssociationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateDomainNameAccessAssociationOutput, body, allocator);
-    }
+    const result: CreateDomainNameAccessAssociationOutput = try aws.json.parseJsonObject(
+        CreateDomainNameAccessAssociationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

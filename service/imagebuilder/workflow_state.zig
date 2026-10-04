@@ -1,6 +1,6 @@
 const WorkflowStatus = @import("workflow_status.zig").WorkflowStatus;
 
-/// A group of fields that describe the current status of workflow.
+/// A group of fields that describe the current status of the workflow.
 pub const WorkflowState = struct {
     /// Describes how or why the workflow changed state.
     reason: ?[]const u8 = null,

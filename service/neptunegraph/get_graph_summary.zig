@@ -97,10 +97,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetGraphSummaryInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetGraphSummaryOutput {
-    var result: GetGraphSummaryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetGraphSummaryOutput, body, allocator);
-    }
+    const result: GetGraphSummaryOutput = try aws.json.parseJsonObject(
+        GetGraphSummaryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

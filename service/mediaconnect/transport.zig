@@ -1,3 +1,4 @@
+const NdiOutputTimecodeSource = @import("ndi_output_timecode_source.zig").NdiOutputTimecodeSource;
 const NdiSourceSettings = @import("ndi_source_settings.zig").NdiSourceSettings;
 const Protocol = @import("protocol.zig").Protocol;
 
@@ -26,6 +27,17 @@ pub const Transport = struct {
     /// latency of the stream is set to the highest number between the sender’s
     /// minimum latency and the receiver’s minimum latency.
     min_latency: ?i32 = null,
+
+    /// The timecode source for NDI output frames. For NDI outputs, this field is
+    /// always present and defaults to `EMBEDDED_TIMECODE`.
+    ///
+    /// * `EMBEDDED_TIMECODE` - Preserves timecodes from the input transport stream.
+    ///   The timecodes must be embedded in the video stream as SEI timing messages.
+    ///   If no embedded timecode is detected, MediaConnect uses the UTC system time
+    ///   instead.
+    /// * `UTC_SYSTEM_TIME` - Generates timecodes based on the system clock time
+    ///   when each frame is sent.
+    ndi_output_timecode_source: ?NdiOutputTimecodeSource = null,
 
     /// A suffix for the name of the NDI® sender that the flow creates. If a custom
     /// name isn't specified, MediaConnect uses the output name.
@@ -74,6 +86,7 @@ pub const Transport = struct {
         .max_latency = "MaxLatency",
         .max_sync_buffer = "MaxSyncBuffer",
         .min_latency = "MinLatency",
+        .ndi_output_timecode_source = "NdiOutputTimecodeSource",
         .ndi_program_name = "NdiProgramName",
         .ndi_source_settings = "NdiSourceSettings",
         .ndi_speed_hq_quality = "NdiSpeedHqQuality",

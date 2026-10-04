@@ -5,11 +5,10 @@ const GroundTruthTurn = @import("ground_truth_turn.zig").GroundTruthTurn;
 /// Inline ground truth data containing assertions, expected trajectories, and
 /// per-turn expected responses.
 pub const InlineGroundTruth = struct {
-    /// assertions for evaluation, reuses common model EvaluationContentList
+    /// Assertions for evaluation, reuses common model EvaluationContentList.
     assertions: ?[]const EvaluationContent = null,
 
-    /// expectedTrajectory for evaluation, reuses common model
-    /// EvaluationExpectedTrajectory
+    /// The expected tool call sequence for trajectory evaluation.
     expected_trajectory: ?EvaluationExpectedTrajectory = null,
 
     /// A list of per-turn ground truth data, each containing an input prompt and

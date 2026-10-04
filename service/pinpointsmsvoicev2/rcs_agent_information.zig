@@ -1,3 +1,4 @@
+const MessagingLimits = @import("messaging_limits.zig").MessagingLimits;
 const RcsAgentStatus = @import("rcs_agent_status.zig").RcsAgentStatus;
 const TestingAgentInformation = @import("testing_agent_information.zig").TestingAgentInformation;
 
@@ -9,6 +10,10 @@ pub const RcsAgentInformation = struct {
 
     /// When set to true the RCS agent can't be deleted.
     deletion_protection_enabled: bool = false,
+
+    /// The messaging limits that apply to the RCS agent, including the
+    /// per-capability send rates.
+    messaging_limits: ?MessagingLimits = null,
 
     /// The name of the OptOutList associated with the RCS agent.
     opt_out_list_name: ?[]const u8 = null,
@@ -44,9 +49,23 @@ pub const RcsAgentInformation = struct {
     /// recipients using the TwoWayChannelArn.
     two_way_enabled: bool = false,
 
+    /// The name of the S3 bucket where inbound RCS media files are stored.
+    two_way_media_s3_bucket_name: ?[]const u8 = null,
+
+    /// The key prefix used for inbound RCS media objects in the S3 bucket.
+    two_way_media_s3_key_prefix: ?[]const u8 = null,
+
+    /// The ARN of the IAM role used to write inbound RCS media files to the S3
+    /// bucket.
+    two_way_media_s3_role: ?[]const u8 = null,
+
+    /// The list of RCS event types enabled for two-way messaging on the agent.
+    two_way_rcs_events_enabled: ?[]const []const u8 = null,
+
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",
         .deletion_protection_enabled = "DeletionProtectionEnabled",
+        .messaging_limits = "MessagingLimits",
         .opt_out_list_name = "OptOutListName",
         .pool_id = "PoolId",
         .rcs_agent_arn = "RcsAgentArn",
@@ -57,5 +76,9 @@ pub const RcsAgentInformation = struct {
         .two_way_channel_arn = "TwoWayChannelArn",
         .two_way_channel_role = "TwoWayChannelRole",
         .two_way_enabled = "TwoWayEnabled",
+        .two_way_media_s3_bucket_name = "TwoWayMediaS3BucketName",
+        .two_way_media_s3_key_prefix = "TwoWayMediaS3KeyPrefix",
+        .two_way_media_s3_role = "TwoWayMediaS3Role",
+        .two_way_rcs_events_enabled = "TwoWayRcsEventsEnabled",
     };
 };

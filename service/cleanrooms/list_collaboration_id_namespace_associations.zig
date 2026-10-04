@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCollaborationIdName
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListCollaborationIdNamespaceAssociationsOutput {
-    var result: ListCollaborationIdNamespaceAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListCollaborationIdNamespaceAssociationsOutput, body, allocator);
-    }
+    const result: ListCollaborationIdNamespaceAssociationsOutput = try aws.json.parseJsonObject(
+        ListCollaborationIdNamespaceAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

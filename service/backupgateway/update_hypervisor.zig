@@ -7,8 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const UpdateHypervisorInput = struct {
     /// The updated host of the hypervisor. This can be either an IP address or a
-    /// fully-qualified
-    /// domain name (FQDN).
+    /// fully-qualified domain name (FQDN).
     host: ?[]const u8 = null,
 
     /// The Amazon Resource Name (ARN) of the hypervisor to update.

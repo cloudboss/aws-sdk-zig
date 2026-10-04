@@ -144,10 +144,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListReplacePermissionAs
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListReplacePermissionAssociationsWorkOutput {
-    var result: ListReplacePermissionAssociationsWorkOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListReplacePermissionAssociationsWorkOutput, body, allocator);
-    }
+    const result: ListReplacePermissionAssociationsWorkOutput = try aws.json.parseJsonObject(
+        ListReplacePermissionAssociationsWorkOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

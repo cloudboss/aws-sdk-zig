@@ -3,16 +3,19 @@ const std = @import("std");
 pub const VcfVersion = enum {
     vcf_5_2_1,
     vcf_5_2_2,
+    self_deployed,
 
     pub const json_field_names = .{
         .vcf_5_2_1 = "VCF-5.2.1",
         .vcf_5_2_2 = "VCF-5.2.2",
+        .self_deployed = "SELF_DEPLOYED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .vcf_5_2_1 => "VCF-5.2.1",
             .vcf_5_2_2 => "VCF-5.2.2",
+            .self_deployed => "SELF_DEPLOYED",
         };
     }
 

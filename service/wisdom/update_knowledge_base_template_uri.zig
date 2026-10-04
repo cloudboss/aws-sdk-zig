@@ -91,10 +91,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateKnowledgeBaseTemp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateKnowledgeBaseTemplateUriOutput {
-    var result: UpdateKnowledgeBaseTemplateUriOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateKnowledgeBaseTemplateUriOutput, body, allocator);
-    }
+    const result: UpdateKnowledgeBaseTemplateUriOutput = try aws.json.parseJsonObject(
+        UpdateKnowledgeBaseTemplateUriOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

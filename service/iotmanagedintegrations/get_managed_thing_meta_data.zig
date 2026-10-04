@@ -76,10 +76,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetManagedThingMetaData
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetManagedThingMetaDataOutput {
-    var result: GetManagedThingMetaDataOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetManagedThingMetaDataOutput, body, allocator);
-    }
+    const result: GetManagedThingMetaDataOutput = try aws.json.parseJsonObject(
+        GetManagedThingMetaDataOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

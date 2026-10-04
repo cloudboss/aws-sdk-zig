@@ -110,10 +110,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateThemeAliasInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateThemeAliasOutput {
-    var result: CreateThemeAliasOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateThemeAliasOutput, body, allocator);
-    }
+    var result: CreateThemeAliasOutput = try aws.json.parseJsonObject(
+        CreateThemeAliasOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

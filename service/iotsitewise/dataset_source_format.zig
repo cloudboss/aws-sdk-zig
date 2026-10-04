@@ -2,14 +2,17 @@ const std = @import("std");
 
 pub const DatasetSourceFormat = enum {
     knowledge_base,
+    timeseries,
 
     pub const json_field_names = .{
         .knowledge_base = "KNOWLEDGE_BASE",
+        .timeseries = "TIMESERIES",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .knowledge_base => "KNOWLEDGE_BASE",
+            .timeseries => "TIMESERIES",
         };
     }
 

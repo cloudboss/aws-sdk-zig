@@ -1,8 +1,12 @@
+const CurrencyCode = @import("currency_code.zig").CurrencyCode;
 const PaymentOption = @import("payment_option.zig").PaymentOption;
 const PaymentTerm = @import("payment_term.zig").PaymentTerm;
 
 /// The pricing details for a subscription.
 pub const SubscriptionPricingDetails = struct {
+    /// The currency of the price. Currently only `USD` is supported.
+    currency: ?CurrencyCode = null,
+
     /// The monthly recurring price.
     monthly_recurring_price: ?f32 = null,
 
@@ -16,6 +20,7 @@ pub const SubscriptionPricingDetails = struct {
     upfront_price: ?f32 = null,
 
     pub const json_field_names = .{
+        .currency = "Currency",
         .monthly_recurring_price = "MonthlyRecurringPrice",
         .payment_option = "PaymentOption",
         .payment_term = "PaymentTerm",

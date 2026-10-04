@@ -159,10 +159,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAsyncInvokesInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListAsyncInvokesOutput {
-    var result: ListAsyncInvokesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListAsyncInvokesOutput, body, allocator);
-    }
+    const result: ListAsyncInvokesOutput = try aws.json.parseJsonObject(
+        ListAsyncInvokesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

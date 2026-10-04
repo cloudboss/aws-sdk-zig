@@ -1,4 +1,5 @@
 const ConfiguredTableAssociationAnalysisRuleType = @import("configured_table_association_analysis_rule_type.zig").ConfiguredTableAssociationAnalysisRuleType;
+const ChildResource = @import("child_resource.zig").ChildResource;
 
 /// A configured table association links a configured table to a collaboration.
 pub const ConfiguredTableAssociation = struct {
@@ -7,6 +8,9 @@ pub const ConfiguredTableAssociation = struct {
 
     /// The unique ARN for the configured table association.
     arn: []const u8,
+
+    /// The child resources that depend on this configured table association.
+    child_resources: ?[]const ChildResource = null,
 
     /// The unique ARN for the configured table that the association refers to.
     configured_table_arn: []const u8,
@@ -46,6 +50,7 @@ pub const ConfiguredTableAssociation = struct {
     pub const json_field_names = .{
         .analysis_rule_types = "analysisRuleTypes",
         .arn = "arn",
+        .child_resources = "childResources",
         .configured_table_arn = "configuredTableArn",
         .configured_table_id = "configuredTableId",
         .create_time = "createTime",

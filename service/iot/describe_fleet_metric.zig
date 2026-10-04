@@ -126,10 +126,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeFleetMetricInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeFleetMetricOutput {
-    var result: DescribeFleetMetricOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeFleetMetricOutput, body, allocator);
-    }
+    const result: DescribeFleetMetricOutput = try aws.json.parseJsonObject(
+        DescribeFleetMetricOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

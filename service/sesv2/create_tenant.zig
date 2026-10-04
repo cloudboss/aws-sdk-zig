@@ -4,10 +4,16 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const TenantSuppressionAttributes = @import("tenant_suppression_attributes.zig").TenantSuppressionAttributes;
 const Tag = @import("tag.zig").Tag;
 const SendingStatus = @import("sending_status.zig").SendingStatus;
 
 pub const CreateTenantInput = struct {
+    /// An object that contains information about the suppression list preferences
+    /// for the tenant.
+    /// Use this to configure tenant-level suppression at creation time.
+    suppression_attributes: ?TenantSuppressionAttributes = null,
+
     /// An array of objects that define the tags (keys and values) to associate with
     /// the tenant
     tags: ?[]const Tag = null,
@@ -18,6 +24,7 @@ pub const CreateTenantInput = struct {
     tenant_name: []const u8,
 
     pub const json_field_names = .{
+        .suppression_attributes = "SuppressionAttributes",
         .tags = "Tags",
         .tenant_name = "TenantName",
     };
@@ -29,6 +36,8 @@ pub const CreateTenantOutput = struct {
 
     /// The status of email sending capability for the tenant.
     sending_status: ?SendingStatus = null,
+
+    suppression_attributes: ?TenantSuppressionAttributes = null,
 
     /// An array of objects that define the tags (keys and values) associated with
     /// the tenant.
@@ -46,6 +55,7 @@ pub const CreateTenantOutput = struct {
     pub const json_field_names = .{
         .created_timestamp = "CreatedTimestamp",
         .sending_status = "SendingStatus",
+        .suppression_attributes = "SuppressionAttributes",
         .tags = "Tags",
         .tenant_arn = "TenantArn",
         .tenant_id = "TenantId",
@@ -89,6 +99,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTenantInput, conf
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.suppression_attributes) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"SuppressionAttributes\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Tags\":");
@@ -115,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTenantInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateTenantOutput {
-    var result: CreateTenantOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateTenantOutput, body, allocator);
-    }
+    const result: CreateTenantOutput = try aws.json.parseJsonObject(
+        CreateTenantOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

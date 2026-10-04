@@ -4,11 +4,13 @@ pub const InstanceHealthCheckType = enum {
     container_runtime,
     accelerated_compute,
     daemon,
+    agent_connectivity,
 
     pub const json_field_names = .{
         .container_runtime = "CONTAINER_RUNTIME",
         .accelerated_compute = "ACCELERATED_COMPUTE",
         .daemon = "DAEMON",
+        .agent_connectivity = "AGENT_CONNECTIVITY",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const InstanceHealthCheckType = enum {
             .container_runtime => "CONTAINER_RUNTIME",
             .accelerated_compute => "ACCELERATED_COMPUTE",
             .daemon => "DAEMON",
+            .agent_connectivity => "AGENT_CONNECTIVITY",
         };
     }
 

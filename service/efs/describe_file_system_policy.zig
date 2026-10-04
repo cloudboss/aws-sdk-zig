@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeFileSystemPolic
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeFileSystemPolicyOutput {
-    var result: DescribeFileSystemPolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeFileSystemPolicyOutput, body, allocator);
-    }
+    const result: DescribeFileSystemPolicyOutput = try aws.json.parseJsonObject(
+        DescribeFileSystemPolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

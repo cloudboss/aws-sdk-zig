@@ -31,6 +31,10 @@ pub const ManagedNotificationChannelAssociationSummary = struct {
     /// * Delivers notifications to email addresses.
     channel_type: ChannelType,
 
+    /// Specifies whether this channel association is subscribed to sensitive
+    /// events. Defaults to false for associations created without the flag.
+    is_sensitive_events_subscribed: ?bool = null,
+
     /// Controls whether users can modify channel associations for a notification
     /// configuration.
     ///
@@ -50,6 +54,7 @@ pub const ManagedNotificationChannelAssociationSummary = struct {
     pub const json_field_names = .{
         .channel_identifier = "channelIdentifier",
         .channel_type = "channelType",
+        .is_sensitive_events_subscribed = "isSensitiveEventsSubscribed",
         .override_option = "overrideOption",
     };
 };

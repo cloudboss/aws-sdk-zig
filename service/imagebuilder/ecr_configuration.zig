@@ -7,14 +7,13 @@ pub const EcrConfiguration = struct {
     /// help you identify and manage your scanned images.
     container_tags: ?[]const []const u8 = null,
 
-    /// The name of the container repository that Amazon Inspector scans to identify
-    /// findings for your
-    /// container images. The name includes the path for the repository location. If
-    /// you don’t
-    /// provide this information, Image Builder creates a repository in your account
-    /// named
-    /// `image-builder-image-scanning-repository` for vulnerability scans of your
-    /// output container images.
+    /// The name of the container repository where Image Builder pushes the
+    /// container
+    /// image for the vulnerability scan. Provide the repository name only (a
+    /// namespace path is allowed, but not the registry hostname); the repository
+    /// must already exist in your account. If you don't specify a repository
+    /// name, Image Builder creates the default repository
+    /// `image-builder-image-scanning-repository` in your account.
     repository_name: ?[]const u8 = null,
 
     pub const json_field_names = .{

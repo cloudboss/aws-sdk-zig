@@ -157,10 +157,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDetectMitigationAct
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListDetectMitigationActionsExecutionsOutput {
-    var result: ListDetectMitigationActionsExecutionsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListDetectMitigationActionsExecutionsOutput, body, allocator);
-    }
+    const result: ListDetectMitigationActionsExecutionsOutput = try aws.json.parseJsonObject(
+        ListDetectMitigationActionsExecutionsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -12,7 +12,7 @@ pub const ListRulesInput = struct {
     /// The name of the event source.
     event_source_name: ?EventSourceName = null,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -131,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRulesInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListRulesOutput {
-    var result: ListRulesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListRulesOutput, body, allocator);
-    }
+    const result: ListRulesOutput = try aws.json.parseJsonObject(
+        ListRulesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

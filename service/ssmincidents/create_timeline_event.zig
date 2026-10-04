@@ -145,10 +145,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTimelineEventInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateTimelineEventOutput {
-    var result: CreateTimelineEventOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateTimelineEventOutput, body, allocator);
-    }
+    const result: CreateTimelineEventOutput = try aws.json.parseJsonObject(
+        CreateTimelineEventOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

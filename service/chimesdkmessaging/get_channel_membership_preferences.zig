@@ -95,10 +95,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetChannelMembershipPre
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetChannelMembershipPreferencesOutput {
-    var result: GetChannelMembershipPreferencesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetChannelMembershipPreferencesOutput, body, allocator);
-    }
+    const result: GetChannelMembershipPreferencesOutput = try aws.json.parseJsonObject(
+        GetChannelMembershipPreferencesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

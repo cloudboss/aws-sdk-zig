@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutVoiceConnectorStream
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutVoiceConnectorStreamingConfigurationOutput {
-    var result: PutVoiceConnectorStreamingConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutVoiceConnectorStreamingConfigurationOutput, body, allocator);
-    }
+    const result: PutVoiceConnectorStreamingConfigurationOutput = try aws.json.parseJsonObject(
+        PutVoiceConnectorStreamingConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

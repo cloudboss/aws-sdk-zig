@@ -17,10 +17,10 @@ pub const TransferContactInput = struct {
     /// The identifier of the flow.
     contact_flow_id: []const u8,
 
-    /// The identifier of the contact in this instance of Amazon Connect.
+    /// The identifier of the contact in this instance of Connect Customer.
     contact_id: []const u8,
 
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -44,7 +44,7 @@ pub const TransferContactOutput = struct {
     /// The Amazon Resource Name (ARN) of the contact.
     contact_arn: ?[]const u8 = null,
 
-    /// The identifier of the contact in this instance of Amazon Connect.
+    /// The identifier of the contact in this instance of Connect Customer.
     contact_id: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -135,10 +135,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: TransferContactInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !TransferContactOutput {
-    var result: TransferContactOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(TransferContactOutput, body, allocator);
-    }
+    const result: TransferContactOutput = try aws.json.parseJsonObject(
+        TransferContactOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

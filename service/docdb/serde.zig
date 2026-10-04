@@ -763,6 +763,7 @@ pub fn deserializeDBCluster(allocator: std.mem.Allocator, reader: *aws.xml.Reade
     result.backup_retention_period = null;
     result.clone_group_id = null;
     result.cluster_create_time = null;
+    result.copy_tags_to_snapshot = null;
     result.db_cluster_arn = null;
     result.db_cluster_identifier = null;
     result.db_cluster_members = null;
@@ -808,6 +809,8 @@ pub fn deserializeDBCluster(allocator: std.mem.Allocator, reader: *aws.xml.Reade
                     result.clone_group_id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "ClusterCreateTime")) {
                     result.cluster_create_time = aws.date.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "CopyTagsToSnapshot")) {
+                    result.copy_tags_to_snapshot = std.mem.eql(u8, try reader.readElementText(), "true");
                 } else if (std.mem.eql(u8, e.local, "DBClusterArn")) {
                     result.db_cluster_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "DBClusterIdentifier")) {

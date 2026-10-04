@@ -131,10 +131,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDirectQueryDataSo
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateDirectQueryDataSourceOutput {
-    var result: UpdateDirectQueryDataSourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateDirectQueryDataSourceOutput, body, allocator);
-    }
+    const result: UpdateDirectQueryDataSourceOutput = try aws.json.parseJsonObject(
+        UpdateDirectQueryDataSourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -165,10 +165,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAssetFilterInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAssetFilterOutput {
-    var result: CreateAssetFilterOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAssetFilterOutput, body, allocator);
-    }
+    const result: CreateAssetFilterOutput = try aws.json.parseJsonObject(
+        CreateAssetFilterOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

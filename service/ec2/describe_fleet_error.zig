@@ -6,13 +6,13 @@ pub const DescribeFleetError = struct {
     /// The error code that indicates why the instance could not be launched. For
     /// more
     /// information about error codes, see [Error
-    /// codes](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html).
+    /// codes](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html).
     error_code: ?[]const u8 = null,
 
     /// The error message that describes why the instance could not be launched. For
     /// more
     /// information about error messages, see [Error
-    /// codes](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html).
+    /// codes](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html).
     error_message: ?[]const u8 = null,
 
     /// The launch templates and overrides that were used for launching the
@@ -22,7 +22,10 @@ pub const DescribeFleetError = struct {
     launch_template_and_overrides: ?LaunchTemplateAndOverridesResponse = null,
 
     /// Indicates if the instance that could not be launched was a Spot, On-Demand,
-    /// Capacity Block,
-    /// or Interruptible Capacity Reservation instance.
+    /// Capacity Block for ML,
+    /// or interruptible Capacity Reservation instance. If you are using
+    /// `ReservedCapacityOptions` with
+    /// `on-demand-capacity-reservation` in the `ReservationTypes` list, the
+    /// value can also be `on-demand-capacity-reservation`.
     lifecycle: ?InstanceLifecycle = null,
 };

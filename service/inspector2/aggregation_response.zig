@@ -2,6 +2,7 @@ const AccountAggregationResponse = @import("account_aggregation_response.zig").A
 const AmiAggregationResponse = @import("ami_aggregation_response.zig").AmiAggregationResponse;
 const AwsEcrContainerAggregationResponse = @import("aws_ecr_container_aggregation_response.zig").AwsEcrContainerAggregationResponse;
 const CodeRepositoryAggregationResponse = @import("code_repository_aggregation_response.zig").CodeRepositoryAggregationResponse;
+const ContainerImageAggregationResponse = @import("container_image_aggregation_response.zig").ContainerImageAggregationResponse;
 const Ec2InstanceAggregationResponse = @import("ec_2_instance_aggregation_response.zig").Ec2InstanceAggregationResponse;
 const FindingTypeAggregationResponse = @import("finding_type_aggregation_response.zig").FindingTypeAggregationResponse;
 const ImageLayerAggregationResponse = @import("image_layer_aggregation_response.zig").ImageLayerAggregationResponse;
@@ -9,7 +10,9 @@ const LambdaFunctionAggregationResponse = @import("lambda_function_aggregation_r
 const LambdaLayerAggregationResponse = @import("lambda_layer_aggregation_response.zig").LambdaLayerAggregationResponse;
 const PackageAggregationResponse = @import("package_aggregation_response.zig").PackageAggregationResponse;
 const RepositoryAggregationResponse = @import("repository_aggregation_response.zig").RepositoryAggregationResponse;
+const ServerlessFunctionAggregationResponse = @import("serverless_function_aggregation_response.zig").ServerlessFunctionAggregationResponse;
 const TitleAggregationResponse = @import("title_aggregation_response.zig").TitleAggregationResponse;
+const VmInstanceAggregationResponse = @import("vm_instance_aggregation_response.zig").VmInstanceAggregationResponse;
 
 /// A structure that contains details about the results of an aggregation type.
 pub const AggregationResponse = union(enum) {
@@ -28,6 +31,9 @@ pub const AggregationResponse = union(enum) {
     /// An object that contains details about an aggregation response based on code
     /// repositories.
     code_repository_aggregation: ?CodeRepositoryAggregationResponse,
+    /// An object that contains details about an aggregation response based on
+    /// container images.
+    container_image_aggregation: ?ContainerImageAggregationResponse,
     /// An object that contains details about an aggregation response based on
     /// Amazon EC2
     /// instances.
@@ -53,15 +59,22 @@ pub const AggregationResponse = union(enum) {
     /// repositories.
     repository_aggregation: ?RepositoryAggregationResponse,
     /// An object that contains details about an aggregation response based on
+    /// serverless functions.
+    serverless_function_aggregation: ?ServerlessFunctionAggregationResponse,
+    /// An object that contains details about an aggregation response based on
     /// finding
     /// title.
     title_aggregation: ?TitleAggregationResponse,
+    /// An object that contains details about an aggregation response based on VM
+    /// instances.
+    vm_instance_aggregation: ?VmInstanceAggregationResponse,
 
     pub const json_field_names = .{
         .account_aggregation = "accountAggregation",
         .ami_aggregation = "amiAggregation",
         .aws_ecr_container_aggregation = "awsEcrContainerAggregation",
         .code_repository_aggregation = "codeRepositoryAggregation",
+        .container_image_aggregation = "containerImageAggregation",
         .ec_2_instance_aggregation = "ec2InstanceAggregation",
         .finding_type_aggregation = "findingTypeAggregation",
         .image_layer_aggregation = "imageLayerAggregation",
@@ -69,6 +82,8 @@ pub const AggregationResponse = union(enum) {
         .lambda_layer_aggregation = "lambdaLayerAggregation",
         .package_aggregation = "packageAggregation",
         .repository_aggregation = "repositoryAggregation",
+        .serverless_function_aggregation = "serverlessFunctionAggregation",
         .title_aggregation = "titleAggregation",
+        .vm_instance_aggregation = "vmInstanceAggregation",
     };
 };

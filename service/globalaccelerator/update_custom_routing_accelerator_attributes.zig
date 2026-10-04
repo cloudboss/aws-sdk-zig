@@ -31,10 +31,8 @@ pub const UpdateCustomRoutingAcceleratorAttributesInput = struct {
     /// logs. Attribute is required if
     /// `FlowLogsEnabled` is `true`.
     ///
-    /// If you don’t specify a prefix, the flow logs are stored in the
-    /// root of the bucket. If you specify slash (/) for the S3 bucket prefix, the
-    /// log file bucket folder structure will include a double slash (//), like the
-    /// following:
+    /// If you specify slash (/) for the S3 bucket prefix, the log file bucket
+    /// folder structure will include a double slash (//), like the following:
     ///
     /// DOC-EXAMPLE-BUCKET//AWSLogs/aws_account_id
     flow_logs_s3_prefix: ?[]const u8 = null,

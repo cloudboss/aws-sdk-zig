@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetQuickResponseInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetQuickResponseOutput {
-    var result: GetQuickResponseOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetQuickResponseOutput, body, allocator);
-    }
+    const result: GetQuickResponseOutput = try aws.json.parseJsonObject(
+        GetQuickResponseOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

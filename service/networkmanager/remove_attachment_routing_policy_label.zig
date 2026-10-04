@@ -86,10 +86,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RemoveAttachmentRouting
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !RemoveAttachmentRoutingPolicyLabelOutput {
-    var result: RemoveAttachmentRoutingPolicyLabelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(RemoveAttachmentRoutingPolicyLabelOutput, body, allocator);
-    }
+    const result: RemoveAttachmentRoutingPolicyLabelOutput = try aws.json.parseJsonObject(
+        RemoveAttachmentRoutingPolicyLabelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

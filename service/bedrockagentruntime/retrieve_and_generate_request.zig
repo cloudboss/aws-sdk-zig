@@ -1,6 +1,7 @@
 const RetrieveAndGenerateInput = @import("retrieve_and_generate_input.zig").RetrieveAndGenerateInput;
 const RetrieveAndGenerateConfiguration = @import("retrieve_and_generate_configuration.zig").RetrieveAndGenerateConfiguration;
 const RetrieveAndGenerateSessionConfiguration = @import("retrieve_and_generate_session_configuration.zig").RetrieveAndGenerateSessionConfiguration;
+const UserContext = @import("user_context.zig").UserContext;
 
 pub const RetrieveAndGenerateRequest = struct {
     /// Contains the query to be made to the knowledge base.
@@ -22,10 +23,16 @@ pub const RetrieveAndGenerateRequest = struct {
     /// `sessionId` yourself.
     session_id: ?[]const u8 = null,
 
+    /// Contains information about the user making the request. This is used for
+    /// access control filtering to ensure that retrieval results only include
+    /// documents the user is authorized to access.
+    user_context: ?UserContext = null,
+
     pub const json_field_names = .{
         .input = "input",
         .retrieve_and_generate_configuration = "retrieveAndGenerateConfiguration",
         .session_configuration = "sessionConfiguration",
         .session_id = "sessionId",
+        .user_context = "userContext",
     };
 };

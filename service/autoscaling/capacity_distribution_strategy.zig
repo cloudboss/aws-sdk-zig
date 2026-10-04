@@ -3,16 +3,19 @@ const std = @import("std");
 pub const CapacityDistributionStrategy = enum {
     balanced_only,
     balanced_best_effort,
+    reservations_then_balanced,
 
     pub const json_field_names = .{
         .balanced_only = "balanced-only",
         .balanced_best_effort = "balanced-best-effort",
+        .reservations_then_balanced = "reservations-then-balanced",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .balanced_only => "balanced-only",
             .balanced_best_effort => "balanced-best-effort",
+            .reservations_then_balanced => "reservations-then-balanced",
         };
     }
 

@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTestSetDiscrepanc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateTestSetDiscrepancyReportOutput {
-    var result: CreateTestSetDiscrepancyReportOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateTestSetDiscrepancyReportOutput, body, allocator);
-    }
+    const result: CreateTestSetDiscrepancyReportOutput = try aws.json.parseJsonObject(
+        CreateTestSetDiscrepancyReportOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

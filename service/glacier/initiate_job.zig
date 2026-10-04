@@ -99,6 +99,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: InitiateJobInput, confi
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !InitiateJobOutput {
     var result: InitiateJobOutput = .{};
+    errdefer {
+        if (result.job_id) |value| allocator.free(value);
+        if (result.job_output_path) |value| allocator.free(value);
+        if (result.location) |value| allocator.free(value);
+    }
     _ = body;
     _ = status;
     if (headers.get("x-amz-job-id")) |value| {

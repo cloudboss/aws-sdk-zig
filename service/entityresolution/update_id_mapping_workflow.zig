@@ -175,10 +175,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateIdMappingWorkflow
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateIdMappingWorkflowOutput {
-    var result: UpdateIdMappingWorkflowOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateIdMappingWorkflowOutput, body, allocator);
-    }
+    const result: UpdateIdMappingWorkflowOutput = try aws.json.parseJsonObject(
+        UpdateIdMappingWorkflowOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

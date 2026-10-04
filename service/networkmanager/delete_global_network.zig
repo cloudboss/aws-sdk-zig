@@ -73,10 +73,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteGlobalNetworkInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteGlobalNetworkOutput {
-    var result: DeleteGlobalNetworkOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteGlobalNetworkOutput, body, allocator);
-    }
+    const result: DeleteGlobalNetworkOutput = try aws.json.parseJsonObject(
+        DeleteGlobalNetworkOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

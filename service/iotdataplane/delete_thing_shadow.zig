@@ -88,7 +88,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteThingShadowInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteThingShadowOutput {
-    var result: DeleteThingShadowOutput = .{};
+    var result: DeleteThingShadowOutput = .{
+        .payload = "",
+    };
+    errdefer {
+        allocator.free(result.payload);
+    }
     result.payload = try allocator.dupe(u8, body);
     _ = status;
     _ = headers;

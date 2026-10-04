@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetModelInput, config: 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetModelOutput {
-    var result: GetModelOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetModelOutput, body, allocator);
-    }
+    const result: GetModelOutput = try aws.json.parseJsonObject(
+        GetModelOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

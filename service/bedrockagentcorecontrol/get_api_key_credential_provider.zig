@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Secret = @import("secret.zig").Secret;
+const SecretSourceType = @import("secret_source_type.zig").SecretSourceType;
 
 pub const GetApiKeyCredentialProviderInput = struct {
     /// The name of the API key credential provider to retrieve.
@@ -16,8 +17,18 @@ pub const GetApiKeyCredentialProviderInput = struct {
 };
 
 pub const GetApiKeyCredentialProviderOutput = struct {
-    /// The Amazon Resource Name (ARN) of the API key secret in AWS Secrets Manager.
+    /// The Amazon Resource Name (ARN) of the API key secret in Amazon Web Services
+    /// Secrets Manager.
     api_key_secret_arn: ?Secret = null,
+
+    /// The JSON key used to extract the API key value from the Amazon Web Services
+    /// Secrets Manager secret.
+    api_key_secret_json_key: ?[]const u8 = null,
+
+    /// The source type of the API key secret. Either `MANAGED` if the secret is
+    /// managed by the service, or `EXTERNAL` if managed by the user in Amazon Web
+    /// Services Secrets Manager.
+    api_key_secret_source: ?SecretSourceType = null,
 
     /// The timestamp when the API key credential provider was created.
     created_time: i64,
@@ -33,6 +44,8 @@ pub const GetApiKeyCredentialProviderOutput = struct {
 
     pub const json_field_names = .{
         .api_key_secret_arn = "apiKeySecretArn",
+        .api_key_secret_json_key = "apiKeySecretJsonKey",
+        .api_key_secret_source = "apiKeySecretSource",
         .created_time = "createdTime",
         .credential_provider_arn = "credentialProviderArn",
         .last_updated_time = "lastUpdatedTime",
@@ -96,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetApiKeyCredentialProv
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetApiKeyCredentialProviderOutput {
-    var result: GetApiKeyCredentialProviderOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetApiKeyCredentialProviderOutput, body, allocator);
-    }
+    const result: GetApiKeyCredentialProviderOutput = try aws.json.parseJsonObject(
+        GetApiKeyCredentialProviderOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

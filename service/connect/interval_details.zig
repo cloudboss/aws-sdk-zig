@@ -7,9 +7,9 @@ pub const IntervalDetails = struct {
     /// `DAY` | `WEEK` | `TOTAL`.
     ///
     /// For example, if `IntervalPeriod` is selected `THIRTY_MIN`, `StartTime` and
-    /// `EndTime` differs by 1 day, then Amazon Connect returns 48 results in the
+    /// `EndTime` differs by 1 day, then Connect Customer returns 48 results in the
     /// response. Each result is
-    /// aggregated by the THIRTY_MIN period. By default Amazon Connect aggregates
+    /// aggregated by the THIRTY_MIN period. By default Connect Customer aggregates
     /// results based on the `TOTAL`
     /// interval period.
     ///

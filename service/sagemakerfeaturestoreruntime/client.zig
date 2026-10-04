@@ -2,10 +2,14 @@ const aws = @import("aws");
 const std = @import("std");
 
 const batch_get_record = @import("batch_get_record.zig");
+const batch_write_record = @import("batch_write_record.zig");
 const delete_record = @import("delete_record.zig");
 const get_record = @import("get_record.zig");
+const list_records = @import("list_records.zig");
 const put_record = @import("put_record.zig");
+const update_record = @import("update_record.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
+const paginator = @import("paginator.zig");
 
 pub const Client = struct {
     allocator: std.mem.Allocator,
@@ -37,6 +41,19 @@ pub const Client = struct {
     /// Retrieves a batch of `Records` from a `FeatureGroup`.
     pub fn batchGetRecord(self: *Self, allocator: std.mem.Allocator, input: batch_get_record.BatchGetRecordInput, options: CallOptions) !batch_get_record.BatchGetRecordOutput {
         return batch_get_record.execute(self, allocator, input, options);
+    }
+
+    /// Writes a batch of `Records` to one or more `FeatureGroup`s. Use
+    /// this API for bulk ingestion of records into the `OnlineStore` and
+    /// `OfflineStore`.
+    ///
+    /// You can set the ingested records to expire at a given time to live (TTL)
+    /// duration after
+    /// the record's event time by specifying the `TtlDuration` parameter. A request
+    /// level `TtlDuration` applies to all entries that do not specify their own
+    /// `TtlDuration`.
+    pub fn batchWriteRecord(self: *Self, allocator: std.mem.Allocator, input: batch_write_record.BatchWriteRecordInput, options: CallOptions) !batch_write_record.BatchWriteRecordOutput {
+        return batch_write_record.execute(self, allocator, input, options);
     }
 
     /// Deletes a `Record` from a `FeatureGroup` in the
@@ -74,7 +91,7 @@ pub const Client = struct {
     /// to
     /// hard delete a record from the `OfflineStore` with the Iceberg table format
     /// enabled, see [Delete records from the offline
-    /// store](https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-delete-records-offline-store.html#feature-store-delete-records-offline-store).
+    /// store](https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-delete-records.html#feature-store-delete-records-offline-store).
     pub fn deleteRecord(self: *Self, allocator: std.mem.Allocator, input: delete_record.DeleteRecordInput, options: CallOptions) !delete_record.DeleteRecordOutput {
         return delete_record.execute(self, allocator, input, options);
     }
@@ -85,6 +102,13 @@ pub const Client = struct {
     /// `RecordIdentifierValue` is found, then an empty result is returned.
     pub fn getRecord(self: *Self, allocator: std.mem.Allocator, input: get_record.GetRecordInput, options: CallOptions) !get_record.GetRecordOutput {
         return get_record.execute(self, allocator, input, options);
+    }
+
+    /// Lists the `RecordIdentifier` values of all records stored in a
+    /// `FeatureGroup`'s `OnlineStore`. This enables you to discover which
+    /// records exist without retrieving the full record data.
+    pub fn listRecords(self: *Self, allocator: std.mem.Allocator, input: list_records.ListRecordsInput, options: CallOptions) !list_records.ListRecordsOutput {
+        return list_records.execute(self, allocator, input, options);
     }
 
     /// The `PutRecord` API is used to ingest a list of `Records` into
@@ -109,5 +133,38 @@ pub const Client = struct {
     /// the group level `TtlDuration`.
     pub fn putRecord(self: *Self, allocator: std.mem.Allocator, input: put_record.PutRecordInput, options: CallOptions) !put_record.PutRecordOutput {
         return put_record.execute(self, allocator, input, options);
+    }
+
+    /// Updates one or more feature values for an existing record in the specified
+    /// feature group. Features that you do not include in the request remain
+    /// unchanged.
+    /// You can update up to 100 features per call.
+    ///
+    /// This operation is available only for feature groups that use the
+    /// `Standard_V2` or `InMemory` online store type.
+    ///
+    /// The record must already exist. If the record does not exist or has been
+    /// soft-deleted, the operation returns a `ResourceNotFound` error. To create
+    /// a record, use `PutRecord`.
+    ///
+    /// If you provide an `EventTime` that is older than the record's current
+    /// `EventTime`, the service rejects the update with a
+    /// `ConflictException`. If the `EventTime` is equal to or newer
+    /// than the current value, the service applies the update. If you omit
+    /// `EventTime`, the service keeps the record's existing
+    /// `EventTime` and applies the update.
+    ///
+    /// If you specify a `TtlDuration`, you must also provide an
+    /// `EventTime` in the request. Otherwise, the operation returns a
+    /// `ValidationError`.
+    pub fn updateRecord(self: *Self, allocator: std.mem.Allocator, input: update_record.UpdateRecordInput, options: CallOptions) !update_record.UpdateRecordOutput {
+        return update_record.execute(self, allocator, input, options);
+    }
+
+    pub fn listRecordsPaginator(self: *Self, params: list_records.ListRecordsInput) paginator.ListRecordsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
     }
 };

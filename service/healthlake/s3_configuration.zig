@@ -1,12 +1,11 @@
-/// The configuration of the S3 bucket for either an import or export job. This
-/// includes
-/// assigning access permissions.
+/// The configuration of the Amazon S3 bucket for either an import or export
+/// job. This includes assigning access permissions.
 pub const S3Configuration = struct {
-    /// The Key Management Service (KMS) key ID used to access the S3 bucket.
+    /// The Key Management Service (KMS) key ID used to access the Amazon S3 bucket.
     kms_key_id: []const u8,
 
-    /// The `S3Uri` is the user-specified S3 location of the FHIR data to be
-    /// imported into AWS HealthLake.
+    /// The `S3Uri` is the user-specified Amazon S3 location of the FHIR data to be
+    /// imported into HealthLake.
     s3_uri: []const u8,
 
     pub const json_field_names = .{

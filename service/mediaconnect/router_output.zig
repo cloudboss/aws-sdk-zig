@@ -1,6 +1,7 @@
 const aws = @import("aws");
 
 const RouterOutputConfiguration = @import("router_output_configuration.zig").RouterOutputConfiguration;
+const FabricConfiguration = @import("fabric_configuration.zig").FabricConfiguration;
 const MaintenanceConfiguration = @import("maintenance_configuration.zig").MaintenanceConfiguration;
 const MaintenanceSchedule = @import("maintenance_schedule.zig").MaintenanceSchedule;
 const MaintenanceScheduleType = @import("maintenance_schedule_type.zig").MaintenanceScheduleType;
@@ -27,6 +28,9 @@ pub const RouterOutput = struct {
 
     /// The timestamp when the router output was created.
     created_at: i64,
+
+    /// The fabric configuration settings for the router output.
+    fabric_configuration: FabricConfiguration,
 
     /// The unique identifier of the router output.
     id: []const u8,
@@ -92,6 +96,7 @@ pub const RouterOutput = struct {
         .availability_zone = "AvailabilityZone",
         .configuration = "Configuration",
         .created_at = "CreatedAt",
+        .fabric_configuration = "FabricConfiguration",
         .id = "Id",
         .ip_address = "IpAddress",
         .maintenance_configuration = "MaintenanceConfiguration",

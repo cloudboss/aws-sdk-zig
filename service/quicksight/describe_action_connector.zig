@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeActionConnector
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeActionConnectorOutput {
-    var result: DescribeActionConnectorOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeActionConnectorOutput, body, allocator);
-    }
+    var result: DescribeActionConnectorOutput = try aws.json.parseJsonObject(
+        DescribeActionConnectorOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     result.status = @intCast(status);
     _ = headers;
 

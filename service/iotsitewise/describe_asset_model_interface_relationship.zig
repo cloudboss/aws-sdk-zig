@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeAssetModelInter
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeAssetModelInterfaceRelationshipOutput {
-    var result: DescribeAssetModelInterfaceRelationshipOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeAssetModelInterfaceRelationshipOutput, body, allocator);
-    }
+    const result: DescribeAssetModelInterfaceRelationshipOutput = try aws.json.parseJsonObject(
+        DescribeAssetModelInterfaceRelationshipOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

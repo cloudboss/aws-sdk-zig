@@ -12,10 +12,8 @@ pub const GetPaymentInstrumentBalanceInput = struct {
     /// The agent name associated with this request, used for observability.
     agent_name: ?[]const u8 = null,
 
-    /// The specific blockchain chain to query balance on.
-    /// Required because balances are chain-specific — the same wallet address may
-    /// hold
-    /// different token balances on different chains.
+    /// The specific blockchain chain to query balance on. Required because balances
+    /// are chain-specific.
     chain: BlockchainChainId,
 
     /// The ID of the payment connector associated with this instrument.
@@ -27,8 +25,8 @@ pub const GetPaymentInstrumentBalanceInput = struct {
     /// The ARN of the payment manager that owns this payment instrument.
     payment_manager_arn: []const u8,
 
-    /// The token to query balance for.
-    /// Required to specify which supported token's balance to return.
+    /// The token to query balance for. Only tokens supported for X402 payments are
+    /// returned.
     token: InstrumentBalanceToken,
 
     /// The user ID associated with this payment instrument.
@@ -136,10 +134,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPaymentInstrumentBal
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPaymentInstrumentBalanceOutput {
-    var result: GetPaymentInstrumentBalanceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPaymentInstrumentBalanceOutput, body, allocator);
-    }
+    const result: GetPaymentInstrumentBalanceOutput = try aws.json.parseJsonObject(
+        GetPaymentInstrumentBalanceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

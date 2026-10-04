@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDataAutomationLib
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateDataAutomationLibraryOutput {
-    var result: UpdateDataAutomationLibraryOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateDataAutomationLibraryOutput, body, allocator);
-    }
+    const result: UpdateDataAutomationLibraryOutput = try aws.json.parseJsonObject(
+        UpdateDataAutomationLibraryOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

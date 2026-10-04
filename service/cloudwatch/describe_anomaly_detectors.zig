@@ -10,6 +10,14 @@ const AnomalyDetector = @import("anomaly_detector.zig").AnomalyDetector;
 const serde = @import("serde.zig");
 
 pub const DescribeAnomalyDetectorsInput = struct {
+    /// Specifies the unique identifiers of the anomaly detectors to describe. You
+    /// can specify
+    /// up to 50 identifiers. If you specify this parameter, you cannot also specify
+    /// the
+    /// `Namespace`, `MetricName`, `Dimensions`, or
+    /// `AnomalyDetectorTypes` metric filters.
+    anomaly_detector_ids: ?[]const []const u8 = null,
+
     /// The anomaly detector types to request when using
     /// `DescribeAnomalyDetectorsInput`. If empty, defaults to
     /// `SINGLE_METRIC`.
@@ -47,6 +55,7 @@ pub const DescribeAnomalyDetectorsInput = struct {
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .anomaly_detector_ids = "AnomalyDetectorIds",
         .anomaly_detector_types = "AnomalyDetectorTypes",
         .dimensions = "Dimensions",
         .max_results = "MaxResults",
@@ -104,6 +113,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeAnomalyDetector
     var body_buf: std.ArrayList(u8) = .empty;
 
     try body_buf.appendSlice(allocator, "Action=DescribeAnomalyDetectors&Version=2010-08-01");
+    if (input.anomaly_detector_ids) |list| {
+        for (list, 0..) |item, idx| {
+            const n = idx + 1;
+            var prefix_buf: [256]u8 = undefined;
+            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AnomalyDetectorIds.member.{d}=", .{n}) catch continue;
+            try body_buf.appendSlice(allocator, field_prefix);
+            try aws.url.appendUrlEncoded(allocator, &body_buf, item);
+        }
+    }
     if (input.anomaly_detector_types) |list| {
         for (list, 0..) |item, idx| {
             const n = idx + 1;

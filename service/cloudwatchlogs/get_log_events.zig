@@ -59,6 +59,9 @@ pub const GetLogEventsInput = struct {
     /// this time
     /// are included. Events with a timestamp earlier than this time are not
     /// included.
+    ///
+    /// Set `startTime` explicitly to reduce the chances of empty pages in the
+    /// response.
     start_time: ?i64 = null,
 
     /// Specify `true` to display the log event fields with all sensitive data

@@ -22,6 +22,8 @@ pub const GetFederationTokenInput = struct {
     /// credentials defaults to one hour.
     duration_seconds: ?i32 = null,
 
+    minimum_session_token_size: ?i32 = null,
+
     /// The name of the federated user. The name is used as an identifier for the
     /// temporary
     /// security credentials (such as `Bob`). For example, you can reference the
@@ -203,6 +205,10 @@ pub const GetFederationTokenOutput = struct {
     /// greater than 100 percent,
     /// which means the policies and tags exceeded the allowed space.
     packed_policy_size: ?i32 = null,
+
+    session_token_size: ?i32 = null,
+
+    session_token_utilization: ?i32 = null,
 };
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetFederationTokenInput, options: CallOptions) !GetFederationTokenOutput {
@@ -240,6 +246,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetFederationTokenInput
     try body_buf.appendSlice(allocator, "Action=GetFederationToken&Version=2011-06-15");
     if (input.duration_seconds) |v| {
         try body_buf.appendSlice(allocator, "&DurationSeconds=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
+    if (input.minimum_session_token_size) |v| {
+        try body_buf.appendSlice(allocator, "&MinimumSessionTokenSize=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
     }
     try body_buf.appendSlice(allocator, "&Name=");
@@ -316,6 +326,10 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                     result.federated_user = try serde.deserializeFederatedUser(allocator, &reader);
                 } else if (std.mem.eql(u8, e.local, "PackedPolicySize")) {
                     result.packed_policy_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "SessionTokenSize")) {
+                    result.session_token_size = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
+                } else if (std.mem.eql(u8, e.local, "SessionTokenUtilization")) {
+                    result.session_token_utilization = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else {
                     try reader.skipElement();
                 }

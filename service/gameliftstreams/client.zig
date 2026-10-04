@@ -5,7 +5,9 @@ const add_stream_group_locations = @import("add_stream_group_locations.zig");
 const associate_applications = @import("associate_applications.zig");
 const create_application = @import("create_application.zig");
 const create_stream_group = @import("create_stream_group.zig");
+const create_stream_session_admin_shell = @import("create_stream_session_admin_shell.zig");
 const create_stream_session_connection = @import("create_stream_session_connection.zig");
+const create_stream_url = @import("create_stream_url.zig");
 const delete_application = @import("delete_application.zig");
 const delete_stream_group = @import("delete_stream_group.zig");
 const disassociate_applications = @import("disassociate_applications.zig");
@@ -13,12 +15,16 @@ const export_stream_session_files = @import("export_stream_session_files.zig");
 const get_application = @import("get_application.zig");
 const get_stream_group = @import("get_stream_group.zig");
 const get_stream_session = @import("get_stream_session.zig");
+const get_stream_url = @import("get_stream_url.zig");
+const list_application_shader_caches = @import("list_application_shader_caches.zig");
 const list_applications = @import("list_applications.zig");
 const list_stream_groups = @import("list_stream_groups.zig");
 const list_stream_sessions = @import("list_stream_sessions.zig");
 const list_stream_sessions_by_account = @import("list_stream_sessions_by_account.zig");
+const list_stream_urls = @import("list_stream_urls.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const remove_stream_group_locations = @import("remove_stream_group_locations.zig");
+const revoke_stream_url = @import("revoke_stream_url.zig");
 const start_stream_session = @import("start_stream_session.zig");
 const tag_resource = @import("tag_resource.zig");
 const terminate_stream_session = @import("terminate_stream_session.zig");
@@ -97,6 +103,11 @@ pub const Client = struct {
     /// you want to use. If you change the files at a later time, you will need to
     /// create a new Amazon GameLift Streams application.
     ///
+    /// Creating an application is the only time Amazon GameLift Streams accesses
+    /// your Amazon S3 bucket. After the application reaches `READY` status, you can
+    /// delete the original files from your Amazon S3 bucket without affecting the
+    /// application.
+    ///
     /// If the request is successful, Amazon GameLift Streams begins to create an
     /// application and sets the status to `INITIALIZED`. When an application
     /// reaches `READY` status, you can use the application to set up stream groups
@@ -155,6 +166,28 @@ pub const Client = struct {
         return create_stream_group.execute(self, allocator, input, options);
     }
 
+    /// Creates an administrative terminal session with full access to the live
+    /// runtime environment of the Amazon GameLift Streams stream session. Use the
+    /// returned credentials (`SessionId`, `StreamUrl` and `TokenValue`) with the
+    /// Amazon Web Services Systems Manager [Session Manager
+    /// plugin](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html) for the CLI to access the terminal session.
+    ///
+    /// The stream session must be in one of the following statuses: `ACTIVE`,
+    /// `CONNECTED`, `PENDING_CLIENT_RECONNECTION`, or `RECONNECTING`.
+    ///
+    /// The `StreamUrl` is valid for 60 seconds. After it expires, call this
+    /// operation again to get a new URL.
+    ///
+    /// The returned credentials grant full access to the live runtime environment
+    /// of the Amazon GameLift Streams stream session. The operator who connects to
+    /// the terminal session has the same level of access that your Amazon GameLift
+    /// Streams applications have, including potentially user input, screen images,
+    /// and application data files. Grant permissions to call this operation only to
+    /// trusted IAM identities that require live runtime environment access.
+    pub fn createStreamSessionAdminShell(self: *Self, allocator: std.mem.Allocator, input: create_stream_session_admin_shell.CreateStreamSessionAdminShellInput, options: CallOptions) !create_stream_session_admin_shell.CreateStreamSessionAdminShellOutput {
+        return create_stream_session_admin_shell.execute(self, allocator, input, options);
+    }
+
     /// Enables clients to reconnect to a stream session while preserving all
     /// session state and data in the disconnected session. This reconnection
     /// process can be initiated when a stream session is in either
@@ -190,6 +223,19 @@ pub const Client = struct {
     /// request to use with the stream.
     pub fn createStreamSessionConnection(self: *Self, allocator: std.mem.Allocator, input: create_stream_session_connection.CreateStreamSessionConnectionInput, options: CallOptions) !create_stream_session_connection.CreateStreamSessionConnectionOutput {
         return create_stream_session_connection.execute(self, allocator, input, options);
+    }
+
+    /// Creates a stream URL that grants temporary access to a stream session in a
+    /// web browser without requiring an Amazon Web Services account or client
+    /// integration.
+    ///
+    /// You can use the stream URL to start a stream session up to the number of
+    /// times set by `UsageLimit`, until it expires after `UrlExpiresAfterMinutes`.
+    /// Each successful use starts a new stream session.
+    ///
+    /// To make the request idempotent, provide a `ClientToken`.
+    pub fn createStreamUrl(self: *Self, allocator: std.mem.Allocator, input: create_stream_url.CreateStreamUrlInput, options: CallOptions) !create_stream_url.CreateStreamUrlOutput {
+        return create_stream_url.execute(self, allocator, input, options);
     }
 
     /// Permanently deletes an Amazon GameLift Streams application resource. This
@@ -302,6 +348,25 @@ pub const Client = struct {
         return get_stream_session.execute(self, allocator, input, options);
     }
 
+    /// Retrieves properties for a stream URL, including its current status, usage,
+    /// and the stream sessions started through it.
+    ///
+    /// If you delete the stream group or application that backs the stream URL,
+    /// this operation updates the status of the stream URL to `REVOKED`.
+    pub fn getStreamUrl(self: *Self, allocator: std.mem.Allocator, input: get_stream_url.GetStreamUrlInput, options: CallOptions) !get_stream_url.GetStreamUrlOutput {
+        return get_stream_url.execute(self, allocator, input, options);
+    }
+
+    /// Lists the shader caches associated with an Amazon GameLift Streams
+    /// application. Each shader cache entry includes its status, associated stream
+    /// groups, and size in bytes.
+    ///
+    /// Returns shader caches associated with the specified Amazon GameLift Streams
+    /// application in all statuses.
+    pub fn listApplicationShaderCaches(self: *Self, allocator: std.mem.Allocator, input: list_application_shader_caches.ListApplicationShaderCachesInput, options: CallOptions) !list_application_shader_caches.ListApplicationShaderCachesOutput {
+        return list_application_shader_caches.execute(self, allocator, input, options);
+    }
+
     /// Retrieves a list of all Amazon GameLift Streams applications that are
     /// associated with the Amazon Web Services account in use. This operation
     /// returns applications in all statuses, in no particular order. You can
@@ -345,6 +410,16 @@ pub const Client = struct {
         return list_stream_sessions_by_account.execute(self, allocator, input, options);
     }
 
+    /// Retrieves a list of the stream URLs in the current Amazon Web Services
+    /// Region for your Amazon Web Services account. You can filter the results by
+    /// status or by stream group. Use the pagination parameters to retrieve results
+    /// as a set of sequential pages. If you delete the stream group or application
+    /// that backs a stream URL, this operation updates that stream URL's status to
+    /// `REVOKED`.
+    pub fn listStreamUrls(self: *Self, allocator: std.mem.Allocator, input: list_stream_urls.ListStreamUrlsInput, options: CallOptions) !list_stream_urls.ListStreamUrlsOutput {
+        return list_stream_urls.execute(self, allocator, input, options);
+    }
+
     /// Retrieves all tags assigned to a Amazon GameLift Streams resource. To list
     /// tags for a resource, specify the ARN value for the resource.
     ///
@@ -374,6 +449,17 @@ pub const Client = struct {
     /// allocated compute resources in that location.
     pub fn removeStreamGroupLocations(self: *Self, allocator: std.mem.Allocator, input: remove_stream_group_locations.RemoveStreamGroupLocationsInput, options: CallOptions) !remove_stream_group_locations.RemoveStreamGroupLocationsOutput {
         return remove_stream_group_locations.execute(self, allocator, input, options);
+    }
+
+    /// Revokes a stream URL so that it can no longer start new stream sessions. By
+    /// default, stream sessions that are already running continue until they end on
+    /// their own. To also end running sessions, set `RevocationMode` to
+    /// `REVOKE_AND_TERMINATE_SESSIONS`.
+    ///
+    /// Revoking a stream URL is permanent. The status of the stream URL changes to
+    /// `REVOKED`.
+    pub fn revokeStreamUrl(self: *Self, allocator: std.mem.Allocator, input: revoke_stream_url.RevokeStreamUrlInput, options: CallOptions) !revoke_stream_url.RevokeStreamUrlOutput {
+        return revoke_stream_url.execute(self, allocator, input, options);
     }
 
     /// This action initiates a new stream session and outputs connection
@@ -561,6 +647,13 @@ pub const Client = struct {
     }
 
     pub fn listStreamSessionsByAccountPaginator(self: *Self, params: list_stream_sessions_by_account.ListStreamSessionsByAccountInput) paginator.ListStreamSessionsByAccountPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listStreamUrlsPaginator(self: *Self, params: list_stream_urls.ListStreamUrlsInput) paginator.ListStreamUrlsPaginator {
         return .{
             .client = self,
             .params = params,

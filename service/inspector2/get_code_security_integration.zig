@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCodeSecurityIntegrat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCodeSecurityIntegrationOutput {
-    var result: GetCodeSecurityIntegrationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCodeSecurityIntegrationOutput, body, allocator);
-    }
+    const result: GetCodeSecurityIntegrationOutput = try aws.json.parseJsonObject(
+        GetCodeSecurityIntegrationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

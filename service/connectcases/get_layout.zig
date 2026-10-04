@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLayoutInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetLayoutOutput {
-    var result: GetLayoutOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetLayoutOutput, body, allocator);
-    }
+    const result: GetLayoutOutput = try aws.json.parseJsonObject(
+        GetLayoutOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

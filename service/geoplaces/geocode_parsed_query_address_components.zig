@@ -26,6 +26,10 @@ pub const GeocodeParsedQueryAddressComponents = struct {
     /// Example: `Vancouver`.
     locality: ?[]const ParsedQueryComponent = null,
 
+    /// Additional information extracted from the query that does not correspond to
+    /// standard address components.
+    other_components: ?[]const ParsedQueryComponent = null,
+
     /// An alphanumeric string included in a postal address to facilitate mail
     /// sorting, such as post code, postcode, or ZIP code, for which the result
     /// should possess.
@@ -67,6 +71,7 @@ pub const GeocodeParsedQueryAddressComponents = struct {
         .country = "Country",
         .district = "District",
         .locality = "Locality",
+        .other_components = "OtherComponents",
         .postal_code = "PostalCode",
         .region = "Region",
         .secondary_address_components = "SecondaryAddressComponents",

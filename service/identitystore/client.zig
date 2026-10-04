@@ -9,6 +9,7 @@ const delete_group_membership = @import("delete_group_membership.zig");
 const delete_user = @import("delete_user.zig");
 const describe_group = @import("describe_group.zig");
 const describe_group_membership = @import("describe_group_membership.zig");
+const describe_identity_store = @import("describe_identity_store.zig");
 const describe_user = @import("describe_user.zig");
 const get_group_id = @import("get_group_id.zig");
 const get_group_membership_id = @import("get_group_membership_id.zig");
@@ -17,8 +18,10 @@ const is_member_in_groups = @import("is_member_in_groups.zig");
 const list_group_memberships = @import("list_group_memberships.zig");
 const list_group_memberships_for_member = @import("list_group_memberships_for_member.zig");
 const list_groups = @import("list_groups.zig");
+const list_identity_stores = @import("list_identity_stores.zig");
 const list_users = @import("list_users.zig");
 const update_group = @import("update_group.zig");
+const update_identity_store = @import("update_identity_store.zig");
 const update_user = @import("update_user.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
@@ -101,6 +104,12 @@ pub const Client = struct {
     /// accounts](https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-accounts.html#limiting-access-from-member-accounts) in the * IAM Identity Center User Guide*.
     pub fn describeGroupMembership(self: *Self, allocator: std.mem.Allocator, input: describe_group_membership.DescribeGroupMembershipInput, options: CallOptions) !describe_group_membership.DescribeGroupMembershipOutput {
         return describe_group_membership.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves details about the specified identity store, including its Amazon
+    /// Resource Name (ARN) and network configuration.
+    pub fn describeIdentityStore(self: *Self, allocator: std.mem.Allocator, input: describe_identity_store.DescribeIdentityStoreInput, options: CallOptions) !describe_identity_store.DescribeIdentityStoreOutput {
+        return describe_identity_store.execute(self, allocator, input, options);
     }
 
     /// Retrieves the user metadata and attributes from the `UserId` in an identity
@@ -189,6 +198,17 @@ pub const Client = struct {
         return list_groups.execute(self, allocator, input, options);
     }
 
+    /// Lists the identity stores that you have access to. This operation returns
+    /// only the identity store ID and Amazon Resource Name (ARN) of each identity
+    /// store. To obtain additional information about an identity store, call
+    /// `DescribeIdentityStore`.
+    ///
+    /// This operation returns results in paginated form. Use the `NextToken`
+    /// parameter to retrieve additional pages of results.
+    pub fn listIdentityStores(self: *Self, allocator: std.mem.Allocator, input: list_identity_stores.ListIdentityStoresInput, options: CallOptions) !list_identity_stores.ListIdentityStoresOutput {
+        return list_identity_stores.execute(self, allocator, input, options);
+    }
+
     /// Lists all users in the identity store. Returns a paginated list of complete
     /// `User` objects. Filtering for a `User` by the `UserName` attribute is
     /// deprecated. Instead, use the `GetUserId` API action.
@@ -205,6 +225,12 @@ pub const Client = struct {
     /// identity store.
     pub fn updateGroup(self: *Self, allocator: std.mem.Allocator, input: update_group.UpdateGroupInput, options: CallOptions) !update_group.UpdateGroupOutput {
         return update_group.execute(self, allocator, input, options);
+    }
+
+    /// Updates the configuration of the specified identity store, including its
+    /// network configuration.
+    pub fn updateIdentityStore(self: *Self, allocator: std.mem.Allocator, input: update_identity_store.UpdateIdentityStoreInput, options: CallOptions) !update_identity_store.UpdateIdentityStoreOutput {
+        return update_identity_store.execute(self, allocator, input, options);
     }
 
     /// Updates the specified user metadata and attributes in the specified identity
@@ -228,6 +254,13 @@ pub const Client = struct {
     }
 
     pub fn listGroupsPaginator(self: *Self, params: list_groups.ListGroupsInput) paginator.ListGroupsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listIdentityStoresPaginator(self: *Self, params: list_identity_stores.ListIdentityStoresInput) paginator.ListIdentityStoresPaginator {
         return .{
             .client = self,
             .params = params,

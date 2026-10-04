@@ -101,10 +101,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDirectoryRegistra
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDirectoryRegistrationOutput {
-    var result: CreateDirectoryRegistrationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateDirectoryRegistrationOutput, body, allocator);
-    }
+    const result: CreateDirectoryRegistrationOutput = try aws.json.parseJsonObject(
+        CreateDirectoryRegistrationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDeviceDefinitionV
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateDeviceDefinitionVersionOutput {
-    var result: CreateDeviceDefinitionVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateDeviceDefinitionVersionOutput, body, allocator);
-    }
+    const result: CreateDeviceDefinitionVersionOutput = try aws.json.parseJsonObject(
+        CreateDeviceDefinitionVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

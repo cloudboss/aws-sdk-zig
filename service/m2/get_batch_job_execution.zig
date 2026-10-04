@@ -135,10 +135,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBatchJobExecutionInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBatchJobExecutionOutput {
-    var result: GetBatchJobExecutionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBatchJobExecutionOutput, body, allocator);
-    }
+    const result: GetBatchJobExecutionOutput = try aws.json.parseJsonObject(
+        GetBatchJobExecutionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -6,9 +6,10 @@ const GatewayPolicyEngineMode = @import("gateway_policy_engine_mode.zig").Gatewa
 /// agent requests and determines whether to allow or deny each action based on
 /// the defined policies.
 pub const GatewayPolicyEngineConfiguration = struct {
-    /// The ARN of the policy engine. The policy engine contains Cedar policies that
-    /// define fine-grained authorization rules specifying who can perform what
-    /// actions on which resources as agents interact through the gateway.
+    /// The ARN of the policy engine. The policy engine contains Cedar or Dogwood
+    /// policies that define fine-grained authorization rules specifying who can
+    /// perform what actions on which resources as agents interact through the
+    /// gateway.
     arn: []const u8,
 
     /// The enforcement mode for the policy engine. Valid values include:

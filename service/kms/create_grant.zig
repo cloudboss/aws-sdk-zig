@@ -13,41 +13,57 @@ pub const CreateGrantInput = struct {
     /// Do not include confidential or sensitive information in this field. This
     /// field may be displayed in plaintext in CloudTrail logs and other output.
     ///
-    /// KMS supports the `EncryptionContextEquals` and
-    /// `EncryptionContextSubset` grant constraints, which allow the permissions in
-    /// the
-    /// grant only when the encryption context in the request matches
-    /// (`EncryptionContextEquals`) or includes (`EncryptionContextSubset`)
-    /// the encryption context specified in the constraint.
+    /// KMS supports the following grant constraints.
     ///
-    /// The encryption context grant constraints are supported only on [grant
-    /// operations](https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-grant-operations) that include
-    /// an `EncryptionContext` parameter, such as cryptographic operations on
-    /// symmetric
-    /// encryption KMS keys. Grants with grant constraints can include the
-    /// DescribeKey and RetireGrant operations, but the constraint doesn't apply to
-    /// these
-    /// operations. If a grant with a grant constraint includes the `CreateGrant`
-    /// operation, the constraint requires that any grants created with the
-    /// `CreateGrant`
-    /// permission have an equally strict or stricter encryption context constraint.
+    /// * `EncryptionContextEquals` and `EncryptionContextSubset` — These
+    /// encryption context grant constraints allow the permissions in the grant only
+    /// when the
+    /// encryption context in the request matches (`EncryptionContextEquals`) or
+    /// includes (`EncryptionContextSubset`) the encryption context specified in the
+    /// constraint.
     ///
-    /// You cannot use an encryption context grant constraint for cryptographic
-    /// operations with
-    /// asymmetric KMS keys or HMAC KMS keys. Operations with these keys don't
-    /// support an encryption
-    /// context.
+    /// Encryption context grant constraints are supported only on [grant
+    /// operations](https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-grant-operations) that
+    /// include an `EncryptionContext` parameter, such as cryptographic operations
+    /// on
+    /// symmetric encryption KMS keys. You cannot use an encryption context grant
+    /// constraint for
+    /// cryptographic operations with asymmetric KMS keys or HMAC KMS keys.
+    /// Operations with these
+    /// keys don't support an encryption context. Grants with encryption context
+    /// grant constraints
+    /// can include the DescribeKey and RetireGrant operations,
+    /// but the constraint doesn't apply to these operations. If a grant with an
+    /// encryption context
+    /// grant constraint includes the `CreateGrant` operation, the constraint
+    /// requires
+    /// that any grants created with the `CreateGrant` permission have an equally
+    /// strict
+    /// or stricter encryption context constraint.
     ///
     /// Each constraint value can include up to 8 encryption context pairs. The
-    /// encryption context
-    /// value in each constraint cannot exceed 384 characters. For information about
-    /// grant
-    /// constraints, see [Using grant
-    /// constraints](https://docs.aws.amazon.com/kms/latest/developerguide/create-grant-overview.html#grant-constraints) in the *Key Management Service Developer Guide*. For more information about encryption context,
-    /// see [Encryption
+    /// encryption
+    /// context value in each constraint cannot exceed 384 characters. For more
+    /// information about
+    /// encryption context, see [Encryption
     /// context](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context) in the *
     /// Key Management Service Developer Guide*
     /// .
+    ///
+    /// * `SourceArn` — This grant constraint allows the permissions in the grant
+    ///   only when the
+    /// request is made on behalf of a specific Amazon Web Services resource,
+    /// identified by its [Amazon Resource Name
+    /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html). This is effectively
+    /// the same as having the
+    /// [aws:SourceArn](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn) global condition key in the grant. The SourceArn constraint is supported on grants
+    /// for all types of KMS keys and can also be applied to the DescribeKey
+    /// operation when
+    /// specified in the request. However, it does not apply to RetireGrant
+    /// operation.
+    ///
+    /// For information about grant constraints, see [Using grant
+    /// constraints](https://docs.aws.amazon.com/kms/latest/developerguide/create-grant-overview.html#grant-constraints) in the *Key Management Service Developer Guide*.
     constraints: ?GrantConstraints = null,
 
     /// Checks if your request will succeed. `DryRun` is an optional parameter.
@@ -68,7 +84,21 @@ pub const CreateGrantInput = struct {
     /// ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns) in the *
     /// Identity and Access Management User Guide*
     /// .
-    grantee_principal: []const u8,
+    ///
+    /// You must specify either `GranteePrincipal` or
+    /// `GranteeServicePrincipal`, but not both.
+    grantee_principal: ?[]const u8 = null,
+
+    /// The Amazon Web Services [service
+    /// principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services) that gets the permissions specified in the grant.
+    ///
+    /// When you specify a `GranteeServicePrincipal`, you must also specify a
+    /// `SourceArn` grant constraint. In addition, you must specify either a
+    /// `RetiringPrincipal` or a `RetiringServicePrincipal`.
+    ///
+    /// You must specify either `GranteePrincipal` or
+    /// `GranteeServicePrincipal`, but not both.
+    grantee_service_principal: ?[]const u8 = null,
 
     /// A list of grant tokens.
     ///
@@ -147,17 +177,30 @@ pub const CreateGrantInput = struct {
     /// retire the grant or revoke the grant. For details, see RevokeGrant and
     /// [Retiring and revoking
     /// grants](https://docs.aws.amazon.com/kms/latest/developerguide/grant-delete.html) in the *Key Management Service Developer Guide*.
+    ///
+    /// You can specify either `RetiringPrincipal` or
+    /// `RetiringServicePrincipal`, but not both.
     retiring_principal: ?[]const u8 = null,
+
+    /// The Amazon Web Services [service
+    /// principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services) that has permission to use the RetireGrant
+    /// operation to retire the grant.
+    ///
+    /// You can specify either `RetiringPrincipal` or
+    /// `RetiringServicePrincipal`, but not both.
+    retiring_service_principal: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .constraints = "Constraints",
         .dry_run = "DryRun",
         .grantee_principal = "GranteePrincipal",
+        .grantee_service_principal = "GranteeServicePrincipal",
         .grant_tokens = "GrantTokens",
         .key_id = "KeyId",
         .name = "Name",
         .operations = "Operations",
         .retiring_principal = "RetiringPrincipal",
+        .retiring_service_principal = "RetiringServicePrincipal",
     };
 };
 

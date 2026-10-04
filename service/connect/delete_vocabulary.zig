@@ -7,7 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const VocabularyState = @import("vocabulary_state.zig").VocabularyState;
 
 pub const DeleteVocabularyInput = struct {
-    /// The identifier of the Amazon Connect instance. You can [find the instance
+    /// The identifier of the Connect Customer instance. You can [find the instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
     instance_id: []const u8,
 
@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteVocabularyInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteVocabularyOutput {
-    var result: DeleteVocabularyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteVocabularyOutput, body, allocator);
-    }
+    const result: DeleteVocabularyOutput = try aws.json.parseJsonObject(
+        DeleteVocabularyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

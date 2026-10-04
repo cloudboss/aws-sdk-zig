@@ -80,10 +80,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssumeFleetRoleForReadI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AssumeFleetRoleForReadOutput {
-    var result: AssumeFleetRoleForReadOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AssumeFleetRoleForReadOutput, body, allocator);
-    }
+    const result: AssumeFleetRoleForReadOutput = try aws.json.parseJsonObject(
+        AssumeFleetRoleForReadOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

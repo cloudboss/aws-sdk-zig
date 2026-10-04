@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const PasswordHashingAlgorithmType = @import("password_hashing_algorithm_type.zig").PasswordHashingAlgorithmType;
 const UserImportJobType = @import("user_import_job_type.zig").UserImportJobType;
 
 pub const CreateUserImportJobInput = struct {
@@ -15,12 +16,21 @@ pub const CreateUserImportJobInput = struct {
     /// A friendly name for the user import job.
     job_name: []const u8,
 
+    /// The password hashing algorithm used to generate the hashes in the CSV file
+    /// for this
+    /// import job.
+    ///
+    /// Valid values: `BCRYPT` | `SCRYPT` | `ARGON2ID` |
+    /// `PBKDF2_SHA256`
+    password_hashing_algorithm: ?PasswordHashingAlgorithmType = null,
+
     /// The ID of the user pool that you want to import users into.
     user_pool_id: []const u8,
 
     pub const json_field_names = .{
         .cloud_watch_logs_role_arn = "CloudWatchLogsRoleArn",
         .job_name = "JobName",
+        .password_hashing_algorithm = "PasswordHashingAlgorithm",
         .user_pool_id = "UserPoolId",
     };
 };

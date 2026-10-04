@@ -16,6 +16,10 @@ pub const PutRecordInput = struct {
     /// MiB).
     data: []const u8,
 
+    /// Checks if your request will succeed. `DryRun` is an optional
+    /// parameter.
+    dry_run: ?bool = null,
+
     /// The hash value used to explicitly determine the shard the data record is
     /// assigned to
     /// by overriding the partition key hash.
@@ -34,7 +38,17 @@ pub const PutRecordInput = struct {
     /// data records to shards. As a result of this hashing mechanism, all data
     /// records with the
     /// same partition key map to the same shard within the stream.
-    partition_key: []const u8,
+    ///
+    /// If the stream uses the `USER_PARTITION_KEY` record distribution strategy
+    /// (the default), a partition key is required. If the stream uses the `AUTO`
+    /// record distribution strategy, the partition key is optional and any value
+    /// you provide is
+    /// ignored, along with any `ExplicitHashKey` you provide. In that case, Amazon
+    /// Kinesis Data Streams distributes the record across shards using
+    /// service-managed
+    /// algorithms. For more information, see
+    /// `UpdateStreamRecordDistributionStrategy`.
+    partition_key: ?[]const u8 = null,
 
     /// Guarantees strictly increasing sequence numbers, for puts from the same
     /// client and to
@@ -55,6 +69,7 @@ pub const PutRecordInput = struct {
 
     pub const json_field_names = .{
         .data = "Data",
+        .dry_run = "DryRun",
         .explicit_hash_key = "ExplicitHashKey",
         .partition_key = "PartitionKey",
         .sequence_number_for_ordering = "SequenceNumberForOrdering",

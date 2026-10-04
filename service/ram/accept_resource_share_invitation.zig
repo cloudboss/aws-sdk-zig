@@ -115,10 +115,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AcceptResourceShareInvi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !AcceptResourceShareInvitationOutput {
-    var result: AcceptResourceShareInvitationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(AcceptResourceShareInvitationOutput, body, allocator);
-    }
+    const result: AcceptResourceShareInvitationOutput = try aws.json.parseJsonObject(
+        AcceptResourceShareInvitationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

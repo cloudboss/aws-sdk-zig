@@ -100,10 +100,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetBackupVaultNotificat
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetBackupVaultNotificationsOutput {
-    var result: GetBackupVaultNotificationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetBackupVaultNotificationsOutput, body, allocator);
-    }
+    const result: GetBackupVaultNotificationsOutput = try aws.json.parseJsonObject(
+        GetBackupVaultNotificationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

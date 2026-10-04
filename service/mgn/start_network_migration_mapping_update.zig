@@ -109,10 +109,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartNetworkMigrationMa
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartNetworkMigrationMappingUpdateOutput {
-    var result: StartNetworkMigrationMappingUpdateOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartNetworkMigrationMappingUpdateOutput, body, allocator);
-    }
+    const result: StartNetworkMigrationMappingUpdateOutput = try aws.json.parseJsonObject(
+        StartNetworkMigrationMappingUpdateOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

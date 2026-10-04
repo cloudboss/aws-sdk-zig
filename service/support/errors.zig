@@ -1,6 +1,8 @@
 const aws = @import("aws");
 const std = @import("std");
 
+const ThrottlingReason = @import("throttling_reason.zig").ThrottlingReason;
+
 pub const ServiceError = struct {
     arena: ?std.heap.ArenaAllocator = null,
     kind: Kind,
@@ -14,8 +16,10 @@ pub const ServiceError = struct {
         case_creation_limit_exceeded: CaseCreationLimitExceeded,
         case_id_not_found: CaseIdNotFound,
         describe_attachment_limit_exceeded: DescribeAttachmentLimitExceeded,
+        dry_run_operation_exception: DryRunOperationException,
         internal_server_error: InternalServerError,
         throttling_exception: ThrottlingException,
+        upload_id_not_found: UploadIdNotFound,
         unknown: UnknownServiceError,
 
         pub fn code(self: Kind) []const u8 {
@@ -28,8 +32,10 @@ pub const ServiceError = struct {
                 .case_creation_limit_exceeded => "CaseCreationLimitExceeded",
                 .case_id_not_found => "CaseIdNotFound",
                 .describe_attachment_limit_exceeded => "DescribeAttachmentLimitExceeded",
+                .dry_run_operation_exception => "DryRunOperationException",
                 .internal_server_error => "InternalServerError",
                 .throttling_exception => "ThrottlingException",
+                .upload_id_not_found => "UploadIdNotFound",
                 .unknown => |e| e.code,
             };
         }
@@ -44,8 +50,10 @@ pub const ServiceError = struct {
                 .case_creation_limit_exceeded => |e| e.message,
                 .case_id_not_found => |e| e.message,
                 .describe_attachment_limit_exceeded => |e| e.message,
+                .dry_run_operation_exception => |e| e.message,
                 .internal_server_error => |e| e.message,
                 .throttling_exception => |e| e.message,
+                .upload_id_not_found => |e| e.message,
                 .unknown => |e| e.message,
             };
         }
@@ -60,8 +68,10 @@ pub const ServiceError = struct {
                 .case_creation_limit_exceeded => 400,
                 .case_id_not_found => 400,
                 .describe_attachment_limit_exceeded => 400,
+                .dry_run_operation_exception => 400,
                 .internal_server_error => 500,
                 .throttling_exception => 400,
+                .upload_id_not_found => 400,
                 .unknown => |e| e.http_status,
             };
         }
@@ -76,8 +86,10 @@ pub const ServiceError = struct {
                 .case_creation_limit_exceeded => |e| e.request_id,
                 .case_id_not_found => |e| e.request_id,
                 .describe_attachment_limit_exceeded => |e| e.request_id,
+                .dry_run_operation_exception => |e| e.request_id,
                 .internal_server_error => |e| e.request_id,
                 .throttling_exception => |e| e.request_id,
+                .upload_id_not_found => |e| e.request_id,
                 .unknown => |e| e.request_id,
             };
         }
@@ -191,6 +203,18 @@ pub const DescribeAttachmentLimitExceeded = struct {
     };
 };
 
+/// The request was valid, but the operation wasn't performed because `dryRun`
+/// was
+/// set to `true`.
+pub const DryRunOperationException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    pub const json_field_names = .{
+        .message = "message",
+    };
+};
+
 /// An internal server error occurred.
 pub const InternalServerError = struct {
     message: []const u8 = "",
@@ -204,6 +228,20 @@ pub const InternalServerError = struct {
 /// You have exceeded the maximum allowed TPS (Transactions Per Second) for the
 /// operations.
 pub const ThrottlingException = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+
+    /// A list of one or more reasons that the request was throttled.
+    throttling_reasons: ?[]const ThrottlingReason = null,
+
+    pub const json_field_names = .{
+        .message = "message",
+        .throttling_reasons = "throttlingReasons",
+    };
+};
+
+/// The specified `uploadId` couldn't be located.
+pub const UploadIdNotFound = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 
@@ -331,6 +369,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             return .{ .arena = arena, .kind = .{ .describe_attachment_limit_exceeded = typed_error } };
         }
     }
+    if (std.mem.eql(u8, error_code, "DryRunOperationException")) {
+        const parsed_error: ?DryRunOperationException = aws.json.parseJsonObject(DryRunOperationException, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .dry_run_operation_exception = typed_error } };
+        }
+    }
     if (std.mem.eql(u8, error_code, "InternalServerError")) {
         const parsed_error: ?InternalServerError = aws.json.parseJsonObject(InternalServerError, body, arena_alloc) catch |err| switch (err) {
             error.OutOfMemory => return error.OutOfMemory,
@@ -353,6 +403,18 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
             typed_error.message = owned_message;
             typed_error.request_id = owned_request_id;
             return .{ .arena = arena, .kind = .{ .throttling_exception = typed_error } };
+        }
+    }
+    if (std.mem.eql(u8, error_code, "UploadIdNotFound")) {
+        const parsed_error: ?UploadIdNotFound = aws.json.parseJsonObject(UploadIdNotFound, body, arena_alloc) catch |err| switch (err) {
+            error.OutOfMemory => return error.OutOfMemory,
+            else => null,
+        };
+        if (parsed_error) |parsed| {
+            var typed_error = parsed;
+            typed_error.message = owned_message;
+            typed_error.request_id = owned_request_id;
+            return .{ .arena = arena, .kind = .{ .upload_id_not_found = typed_error } };
         }
     }
 

@@ -14,8 +14,10 @@ pub const ListHostedZoneAssociationsInput = struct {
     /// a single response.
     next_token: ?[]const u8 = null,
 
-    /// Amazon Resource Name (ARN) of the DNS view.
-    resource_arn: []const u8,
+    /// The Amazon Resource Name (ARN) of the DNS view to list hosted zone
+    /// associations for. This parameter is optional; if you omit it, all hosted
+    /// zone associations in your Amazon Web Services account are returned.
+    resource_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .max_results = "maxResults",
@@ -69,10 +71,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListHostedZoneAssociati
 
     const ep = try aws.url.parseEndpoint(endpoint);
 
-    var path_buf: std.ArrayList(u8) = .empty;
-    try path_buf.appendSlice(allocator, "/hosted-zone-associations/resource-arn/");
-    try path_buf.appendSlice(allocator, input.resource_arn);
-    const path = try path_buf.toOwnedSlice(allocator);
+    const path = "/hosted-zone-associations";
 
     var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
@@ -88,6 +87,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListHostedZoneAssociati
     if (input.next_token) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "next_token=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v);
+        query_has_prev = true;
+    }
+    if (input.resource_arn) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "resourceArn=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
@@ -108,10 +113,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListHostedZoneAssociati
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListHostedZoneAssociationsOutput {
-    var result: ListHostedZoneAssociationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListHostedZoneAssociationsOutput, body, allocator);
-    }
+    const result: ListHostedZoneAssociationsOutput = try aws.json.parseJsonObject(
+        ListHostedZoneAssociationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

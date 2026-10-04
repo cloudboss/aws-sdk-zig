@@ -12,8 +12,8 @@ pub const ListDaemonsInput = struct {
     /// returned.
     capacity_provider_arns: ?[]const []const u8 = null,
 
-    /// The Amazon Resource Name (ARN) of the cluster to filter daemons by. If not
-    /// specified, daemons from all clusters are returned.
+    /// The Amazon Resource Name (ARN) of the cluster to filter daemons by. If you
+    /// do not specify a cluster, the default cluster is assumed.
     cluster_arn: ?[]const u8 = null,
 
     /// The maximum number of daemon results that `ListDaemons` returned in

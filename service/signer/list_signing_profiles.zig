@@ -142,10 +142,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSigningProfilesInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListSigningProfilesOutput {
-    var result: ListSigningProfilesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListSigningProfilesOutput, body, allocator);
-    }
+    const result: ListSigningProfilesOutput = try aws.json.parseJsonObject(
+        ListSigningProfilesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

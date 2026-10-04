@@ -8,7 +8,8 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 pub const CreateCaseInput = struct {
     /// The ID of a set of one or more attachments for the case. Create the set by
     /// using the
-    /// AddAttachmentsToSet operation.
+    /// AddAttachmentsToSet operation. Each attachment in the set must be 5
+    /// MB or smaller. To attach files larger than 5 MB, use `uploadIds`.
     attachment_set_id: ?[]const u8 = null,
 
     /// The category of problem for the support case. You also use the
@@ -30,6 +31,13 @@ pub const CreateCaseInput = struct {
     /// Case](https://console.aws.amazon.com/support/home#/case/create) page.
     communication_body: []const u8,
 
+    /// Specifies whether to validate the request without actually creating the
+    /// case. When set to
+    /// `true`, the request is validated but no case is created, and the operation
+    /// returns a `DryRunOperationException`. When omitted or set to `false`, the
+    /// request runs normally.
+    dry_run: ?bool = null,
+
     /// The type of issue for the case. You can specify `customer-service` or
     /// `technical`. If you don't specify a value, the default is
     /// `technical`.
@@ -37,8 +45,9 @@ pub const CreateCaseInput = struct {
 
     /// The language in which Amazon Web Services Support handles the case. Amazon
     /// Web Services Support
-    /// currently supports Chinese (“zh”), English ("en"), Japanese ("ja") and
-    /// Korean (“ko”). You must specify the ISO 639-1
+    /// currently supports Chinese (“zh”), English ("en"), Japanese ("ja") , Chinese
+    /// ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"), Korean (“ko”), and
+    /// Turkish ("tr"). You must specify the ISO 639-1
     /// code for the `language` parameter if you want support in that language.
     language: ?[]const u8 = null,
 
@@ -66,16 +75,28 @@ pub const CreateCaseInput = struct {
     /// Case](https://console.aws.amazon.com/support/home#/case/create) page.
     subject: []const u8,
 
+    /// A list of upload IDs that identify attachments to add to the case. Each
+    /// `uploadId` is returned by the GetAttachmentUploadLinks
+    /// operation. The upload must reach the `attachment-ready` state by calling
+    /// CompleteAttachmentUpload before it can be passed here.
+    /// Use
+    /// `uploadIds` to attach files of any supported size, including files larger
+    /// than
+    /// 5 MB.
+    upload_ids: ?[]const []const u8 = null,
+
     pub const json_field_names = .{
         .attachment_set_id = "attachmentSetId",
         .category_code = "categoryCode",
         .cc_email_addresses = "ccEmailAddresses",
         .communication_body = "communicationBody",
+        .dry_run = "dryRun",
         .issue_type = "issueType",
         .language = "language",
         .service_code = "serviceCode",
         .severity_code = "severityCode",
         .subject = "subject",
+        .upload_ids = "uploadIds",
     };
 };
 
@@ -83,7 +104,7 @@ pub const CreateCaseOutput = struct {
     /// The support case ID requested or returned in the call. The case ID is an
     /// alphanumeric
     /// string in the following format:
-    /// case-*12345678910-2013-c4c1d2bf33c5cf47*
+    /// case-*12345678910-exen-2025-c4c1d2bf33c5cf47*
     case_id: ?[]const u8 = null,
 
     pub const json_field_names = .{

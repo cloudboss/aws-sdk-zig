@@ -1,4 +1,5 @@
 const CustomDomainConfigType = @import("custom_domain_config_type.zig").CustomDomainConfigType;
+const RoutingType = @import("routing_type.zig").RoutingType;
 const DomainStatusType = @import("domain_status_type.zig").DomainStatusType;
 
 /// A container for information about the user pool domain associated with the
@@ -32,6 +33,11 @@ pub const DomainDescriptionType = struct {
     /// plan](https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html) other than `Lite`.
     managed_login_version: ?i32 = null,
 
+    /// The routing configuration for the domain, including failover settings for
+    /// multi-region deployments.
+    /// Currently only `Failover` configurations are allowed.
+    routing: ?RoutingType = null,
+
     /// The Amazon S3 bucket where the static files for this domain are stored.
     s3_bucket: ?[]const u8 = null,
 
@@ -50,6 +56,7 @@ pub const DomainDescriptionType = struct {
         .custom_domain_config = "CustomDomainConfig",
         .domain = "Domain",
         .managed_login_version = "ManagedLoginVersion",
+        .routing = "Routing",
         .s3_bucket = "S3Bucket",
         .status = "Status",
         .user_pool_id = "UserPoolId",

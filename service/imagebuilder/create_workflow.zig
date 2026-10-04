@@ -12,24 +12,29 @@ pub const CreateWorkflowInput = struct {
     /// what makes this version different from other versions of the workflow.
     change_description: ?[]const u8 = null,
 
-    /// Unique, case-sensitive identifier you provide to ensure
-    /// idempotency of the request. For more information, see [Ensuring
+    /// A unique, case-sensitive identifier you provide to ensure
+    /// that the operation runs no more than one time. If you retry a request with
+    /// the same client
+    /// token, Image Builder returns the original response without running the
+    /// operation again. For more
+    /// information, see [Ensuring
     /// idempotency](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
     /// in the *Amazon EC2 API Reference*.
     client_token: []const u8,
 
-    /// Contains the UTF-8 encoded YAML document content for the workflow.
-    /// Alternatively, you can specify the `uri` of a YAML document file stored in
-    /// Amazon S3. However, you cannot specify both properties.
+    /// The UTF-8 encoded YAML document content for the workflow, up to
+    /// 16,000 characters. For larger documents, store the document in Amazon S3 and
+    /// specify
+    /// the `uri` property instead. You must specify exactly one of the
+    /// `data` or `uri` properties.
     data: ?[]const u8 = null,
 
     /// Describes the workflow.
     description: ?[]const u8 = null,
 
-    /// Validates the required permissions for the operation and the request
-    /// parameters, without actually making the request, and provides an error
-    /// response. Upon a successful request, the error response is
-    /// `DryRunOperationException`.
+    /// Validates the required permissions and request parameters without performing
+    /// the operation. If validation succeeds, the operation returns a
+    /// `DryRunOperationException` error response.
     dry_run: ?bool = null,
 
     /// The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to
@@ -37,10 +42,20 @@ pub const CreateWorkflowInput = struct {
     /// This can be either the Key ARN or the Alias ARN. For more information, see
     /// [Key identifiers
     /// (KeyId)](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN)
-    /// in the *Key Management Service Developer Guide*.
+    /// in the *Key Management Service Developer Guide*. If you don't specify a key,
+    /// Image Builder encrypts the workflow
+    /// document with a KMS key that Image Builder owns.
     kms_key_id: ?[]const u8 = null,
 
-    /// The name of the workflow to create.
+    /// The name of the workflow to create. Image Builder generates the workflow ARN
+    /// from a
+    /// normalized form of the name, so names that differ only in case, spaces, or
+    /// underscores count as the same name. If a workflow with the same name and
+    /// semantic version already exists in your account in the same Amazon Web
+    /// Services Region,
+    /// the request creates a new build version for it. If the content is also
+    /// identical to the latest build version, the request fails because the
+    /// workflow already exists.
     name: []const u8,
 
     /// The semantic version of this workflow resource. The semantic version syntax
@@ -49,10 +64,10 @@ pub const CreateWorkflowInput = struct {
     /// The semantic version has four nodes: ../.
     /// You can assign values for the first three, and can filter on all of them.
     ///
-    /// **Assignment:** For the first three nodes you can assign any positive
+    /// **Assignment:** For the first three nodes, you can assign any positive
     /// integer value, including
-    /// zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image
-    /// Builder automatically assigns the
+    /// zero. The upper limit is 2^30-1, or 1073741823, for each node. Image Builder
+    /// automatically assigns the
     /// build number to the fourth node.
     ///
     /// **Patterns:** You can use any numeric pattern that adheres to the assignment
@@ -65,18 +80,19 @@ pub const CreateWorkflowInput = struct {
     /// Tags that apply to the workflow resource.
     tags: ?[]const aws.map.StringMapEntry = null,
 
-    /// The phase in the image build process for which the workflow resource
-    /// is responsible.
+    /// The image creation stage that this workflow applies to. Image Builder
+    /// validates the
+    /// workflow document steps against the stage you specify.
     @"type": WorkflowType,
 
-    /// The `uri` of a YAML component document file. This must be an S3 URL
-    /// (`s3://bucket/key`), and the requester must have permission to access the
-    /// S3 bucket it points to. If you use Amazon S3, you can specify component
-    /// content up to your
-    /// service quota.
+    /// The `uri` of a YAML workflow document file stored in Amazon S3. This must
+    /// be an S3 URL (`s3://bucket/key`), and you must have permission to
+    /// access the S3 bucket it points to. A workflow document that you provide from
+    /// Amazon S3 can be up to your service quota for workflow size.
     ///
-    /// Alternatively, you can specify the YAML document inline, using the component
-    /// `data` property. You cannot specify both properties.
+    /// Alternatively, you can specify the YAML document inline, using the workflow
+    /// `data` property. You must specify exactly one of the `data`
+    /// or `uri` properties.
     uri: ?[]const u8 = null,
 
     pub const json_field_names = .{
@@ -98,7 +114,10 @@ pub const CreateWorkflowOutput = struct {
     /// The client token that uniquely identifies the request.
     client_token: ?[]const u8 = null,
 
-    /// The resource ARNs with different wildcard variations of semantic versioning.
+    /// A set of wildcard version ARNs that always reference the latest
+    /// version of the resource. ARNs are included for the latest version overall,
+    /// and for the latest
+    /// versions within the same major, minor, and patch levels.
     latest_version_references: ?LatestVersionReferences = null,
 
     /// The Amazon Resource Name (ARN) of the workflow resource that the request
@@ -222,10 +241,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateWorkflowInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateWorkflowOutput {
-    var result: CreateWorkflowOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateWorkflowOutput, body, allocator);
-    }
+    const result: CreateWorkflowOutput = try aws.json.parseJsonObject(
+        CreateWorkflowOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

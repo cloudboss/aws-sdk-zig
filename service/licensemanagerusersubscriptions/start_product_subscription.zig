@@ -18,7 +18,7 @@ pub const StartProductSubscriptionInput = struct {
     /// The name of the user-based subscription product.
     ///
     /// Valid values: `VISUAL_STUDIO_ENTERPRISE` | `VISUAL_STUDIO_PROFESSIONAL` |
-    /// `OFFICE_PROFESSIONAL_PLUS` | `REMOTE_DESKTOP_SERVICES`
+    /// `OFFICE_PROFESSIONAL_PLUS` | `OFFICE_STANDARD` | `REMOTE_DESKTOP_SERVICES`
     product: []const u8,
 
     /// The tags that apply to the product subscription.
@@ -121,10 +121,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartProductSubscriptio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartProductSubscriptionOutput {
-    var result: StartProductSubscriptionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartProductSubscriptionOutput, body, allocator);
-    }
+    const result: StartProductSubscriptionOutput = try aws.json.parseJsonObject(
+        StartProductSubscriptionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

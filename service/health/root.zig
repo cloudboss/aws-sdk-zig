@@ -28,3 +28,5 @@ pub const DescribeEventsForOrganizationOutput = @import("describe_events_for_org
 pub const DescribeEventsInput = @import("describe_events.zig").DescribeEventsInput;
 pub const DescribeEventsOutput = @import("describe_events.zig").DescribeEventsOutput;
 pub const DescribeHealthServiceStatusForOrganizationOutput = @import("describe_health_service_status_for_organization.zig").DescribeHealthServiceStatusForOrganizationOutput;
+pub const DescribeServiceLifecycleInput = @import("describe_service_lifecycle.zig").DescribeServiceLifecycleInput;
+pub const DescribeServiceLifecycleOutput = @import("describe_service_lifecycle.zig").DescribeServiceLifecycleOutput;

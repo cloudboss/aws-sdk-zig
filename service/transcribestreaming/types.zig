@@ -65,6 +65,7 @@ pub const Specialty = @import("specialty.zig").Specialty;
 pub const TimestampRange = @import("timestamp_range.zig").TimestampRange;
 pub const Transcript = @import("transcript.zig").Transcript;
 pub const TranscriptEvent = @import("transcript_event.zig").TranscriptEvent;
+pub const TranscriptFormat = @import("transcript_format.zig").TranscriptFormat;
 pub const TranscriptResultStream = @import("transcript_result_stream.zig").TranscriptResultStream;
 pub const Type = @import("type.zig").Type;
 pub const UtteranceEvent = @import("utterance_event.zig").UtteranceEvent;

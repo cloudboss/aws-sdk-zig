@@ -2,21 +2,44 @@ const aws = @import("aws");
 const std = @import("std");
 
 const add_tags_to_certificate = @import("add_tags_to_certificate.zig");
+const create_acme_domain_validation = @import("create_acme_domain_validation.zig");
+const create_acme_endpoint = @import("create_acme_endpoint.zig");
+const create_acme_external_account_binding = @import("create_acme_external_account_binding.zig");
+const delete_acme_domain_validation = @import("delete_acme_domain_validation.zig");
+const delete_acme_endpoint = @import("delete_acme_endpoint.zig");
+const delete_acme_external_account_binding = @import("delete_acme_external_account_binding.zig");
 const delete_certificate = @import("delete_certificate.zig");
+const describe_acme_account = @import("describe_acme_account.zig");
+const describe_acme_domain_validation = @import("describe_acme_domain_validation.zig");
+const describe_acme_endpoint = @import("describe_acme_endpoint.zig");
+const describe_acme_external_account_binding = @import("describe_acme_external_account_binding.zig");
 const describe_certificate = @import("describe_certificate.zig");
 const export_certificate = @import("export_certificate.zig");
 const get_account_configuration = @import("get_account_configuration.zig");
+const get_acme_external_account_binding_credentials = @import("get_acme_external_account_binding_credentials.zig");
 const get_certificate = @import("get_certificate.zig");
 const import_certificate = @import("import_certificate.zig");
+const list_acme_accounts = @import("list_acme_accounts.zig");
+const list_acme_domain_validations = @import("list_acme_domain_validations.zig");
+const list_acme_endpoints = @import("list_acme_endpoints.zig");
+const list_acme_external_account_bindings = @import("list_acme_external_account_bindings.zig");
+const list_certificate_domain_validations = @import("list_certificate_domain_validations.zig");
 const list_certificates = @import("list_certificates.zig");
 const list_tags_for_certificate = @import("list_tags_for_certificate.zig");
+const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const put_account_configuration = @import("put_account_configuration.zig");
 const remove_tags_from_certificate = @import("remove_tags_from_certificate.zig");
 const renew_certificate = @import("renew_certificate.zig");
 const request_certificate = @import("request_certificate.zig");
 const resend_validation_email = @import("resend_validation_email.zig");
+const revoke_acme_account = @import("revoke_acme_account.zig");
+const revoke_acme_external_account_binding = @import("revoke_acme_external_account_binding.zig");
 const revoke_certificate = @import("revoke_certificate.zig");
 const search_certificates = @import("search_certificates.zig");
+const tag_resource = @import("tag_resource.zig");
+const untag_resource = @import("untag_resource.zig");
+const update_acme_domain_validation = @import("update_acme_domain_validation.zig");
+const update_acme_endpoint = @import("update_acme_endpoint.zig");
 const update_certificate_options = @import("update_certificate_options.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
 const paginator = @import("paginator.zig");
@@ -55,6 +78,9 @@ pub const Client = struct {
     /// input by its Amazon Resource Name (ARN). You specify the tag by using a
     /// key-value pair.
     ///
+    /// This action applies only to the `certificate` resource type. For all other
+    /// ACM resource types, use TagResource instead.
+    ///
     /// You can apply a tag to just one certificate if you want to identify a
     /// specific characteristic of that certificate, or you can apply the same tag
     /// to multiple certificates if you want to filter for a common relationship
@@ -70,6 +96,49 @@ pub const Client = struct {
     /// ListTagsForCertificate action.
     pub fn addTagsToCertificate(self: *Self, allocator: std.mem.Allocator, input: add_tags_to_certificate.AddTagsToCertificateInput, options: CallOptions) !add_tags_to_certificate.AddTagsToCertificateOutput {
         return add_tags_to_certificate.execute(self, allocator, input, options);
+    }
+
+    /// Creates a domain validation for an ACME endpoint. Domain validations
+    /// authorize the endpoint to issue certificates for specified domain names. You
+    /// configure prevalidation to prove domain ownership.
+    pub fn createAcmeDomainValidation(self: *Self, allocator: std.mem.Allocator, input: create_acme_domain_validation.CreateAcmeDomainValidationInput, options: CallOptions) !create_acme_domain_validation.CreateAcmeDomainValidationOutput {
+        return create_acme_domain_validation.execute(self, allocator, input, options);
+    }
+
+    /// Creates an ACME endpoint, which is a managed ACME server with a unique
+    /// endpoint URL. After creation, ACME clients can use the endpoint URL to
+    /// automate certificate issuance using the ACME protocol.
+    pub fn createAcmeEndpoint(self: *Self, allocator: std.mem.Allocator, input: create_acme_endpoint.CreateAcmeEndpointInput, options: CallOptions) !create_acme_endpoint.CreateAcmeEndpointOutput {
+        return create_acme_endpoint.execute(self, allocator, input, options);
+    }
+
+    /// Creates an external account binding (EAB) for an ACME endpoint. An EAB
+    /// provides credentials that authorize an ACME client to register an account
+    /// with the endpoint. Each EAB is associated with an IAM role that controls
+    /// what certificate operations the ACME client can perform.
+    pub fn createAcmeExternalAccountBinding(self: *Self, allocator: std.mem.Allocator, input: create_acme_external_account_binding.CreateAcmeExternalAccountBindingInput, options: CallOptions) !create_acme_external_account_binding.CreateAcmeExternalAccountBindingOutput {
+        return create_acme_external_account_binding.execute(self, allocator, input, options);
+    }
+
+    /// Deletes a domain validation. After deletion, the ACME endpoint can no longer
+    /// issue certificates for the associated domain.
+    pub fn deleteAcmeDomainValidation(self: *Self, allocator: std.mem.Allocator, input: delete_acme_domain_validation.DeleteAcmeDomainValidationInput, options: CallOptions) !delete_acme_domain_validation.DeleteAcmeDomainValidationOutput {
+        return delete_acme_domain_validation.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an ACME endpoint. After deletion, the endpoint URL is no longer
+    /// accessible and ACME clients cannot issue certificates through it. Any
+    /// existing external account bindings and domain validations associated with
+    /// the endpoint are also deleted.
+    pub fn deleteAcmeEndpoint(self: *Self, allocator: std.mem.Allocator, input: delete_acme_endpoint.DeleteAcmeEndpointInput, options: CallOptions) !delete_acme_endpoint.DeleteAcmeEndpointOutput {
+        return delete_acme_endpoint.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an external account binding. Previously fetched credentials for this
+    /// binding will no longer be usable for account registration. A deleted binding
+    /// cannot be recovered.
+    pub fn deleteAcmeExternalAccountBinding(self: *Self, allocator: std.mem.Allocator, input: delete_acme_external_account_binding.DeleteAcmeExternalAccountBindingInput, options: CallOptions) !delete_acme_external_account_binding.DeleteAcmeExternalAccountBindingOutput {
+        return delete_acme_external_account_binding.execute(self, allocator, input, options);
     }
 
     /// Deletes a certificate and its associated private key. If this action
@@ -90,6 +159,9 @@ pub const Client = struct {
     /// CA](https://docs.aws.amazon.com/privateca/latest/userguide/PCADeleteCA.html)
     /// in the *Private Certificate Authority User Guide*.
     ///
+    /// You cannot delete a certificate with a `CertificateKeyPairOrigin` of `ACME`.
+    /// ACM automatically deletes these certificates 1 year after they expire.
+    ///
     /// Deleting a certificate issued by a private certificate authority (CA) has no
     /// effect on the CA. You will continue to be charged for the CA until it is
     /// deleted. For more information, see [Deleting your private
@@ -97,6 +169,31 @@ pub const Client = struct {
     /// in the *Amazon Web Services Private Certificate Authority User Guide*.
     pub fn deleteCertificate(self: *Self, allocator: std.mem.Allocator, input: delete_certificate.DeleteCertificateInput, options: CallOptions) !delete_certificate.DeleteCertificateOutput {
         return delete_certificate.execute(self, allocator, input, options);
+    }
+
+    /// Returns detailed metadata about the specified ACME account, including its
+    /// status, public key thumbprint, and associated external account binding.
+    pub fn describeAcmeAccount(self: *Self, allocator: std.mem.Allocator, input: describe_acme_account.DescribeAcmeAccountInput, options: CallOptions) !describe_acme_account.DescribeAcmeAccountOutput {
+        return describe_acme_account.execute(self, allocator, input, options);
+    }
+
+    /// Returns detailed metadata about the specified domain validation, including
+    /// its status, domain scope, and DNS resource records required for validation.
+    pub fn describeAcmeDomainValidation(self: *Self, allocator: std.mem.Allocator, input: describe_acme_domain_validation.DescribeAcmeDomainValidationInput, options: CallOptions) !describe_acme_domain_validation.DescribeAcmeDomainValidationOutput {
+        return describe_acme_domain_validation.execute(self, allocator, input, options);
+    }
+
+    /// Returns detailed metadata about the specified ACME endpoint, including its
+    /// status, URL, authorization behavior, and certificate authority
+    /// configuration.
+    pub fn describeAcmeEndpoint(self: *Self, allocator: std.mem.Allocator, input: describe_acme_endpoint.DescribeAcmeEndpointInput, options: CallOptions) !describe_acme_endpoint.DescribeAcmeEndpointOutput {
+        return describe_acme_endpoint.execute(self, allocator, input, options);
+    }
+
+    /// Returns detailed metadata about the specified external account binding,
+    /// including the associated IAM role, expiration time, and usage history.
+    pub fn describeAcmeExternalAccountBinding(self: *Self, allocator: std.mem.Allocator, input: describe_acme_external_account_binding.DescribeAcmeExternalAccountBindingInput, options: CallOptions) !describe_acme_external_account_binding.DescribeAcmeExternalAccountBindingOutput {
+        return describe_acme_external_account_binding.execute(self, allocator, input, options);
     }
 
     /// Returns detailed metadata about the specified ACM certificate.
@@ -127,6 +224,13 @@ pub const Client = struct {
     /// Services account.
     pub fn getAccountConfiguration(self: *Self, allocator: std.mem.Allocator, input: get_account_configuration.GetAccountConfigurationInput, options: CallOptions) !get_account_configuration.GetAccountConfigurationOutput {
         return get_account_configuration.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the key ID and MAC key credentials for an external account
+    /// binding. These credentials are used by ACME clients during account
+    /// registration to bind to the endpoint.
+    pub fn getAcmeExternalAccountBindingCredentials(self: *Self, allocator: std.mem.Allocator, input: get_acme_external_account_binding_credentials.GetAcmeExternalAccountBindingCredentialsInput, options: CallOptions) !get_acme_external_account_binding_credentials.GetAcmeExternalAccountBindingCredentialsOutput {
+        return get_acme_external_account_binding_credentials.execute(self, allocator, input, options);
     }
 
     /// Retrieves a certificate and its certificate chain. The certificate may be
@@ -183,10 +287,48 @@ pub const Client = struct {
         return import_certificate.execute(self, allocator, input, options);
     }
 
+    /// Retrieves a list of ACME accounts registered with the specified ACME
+    /// endpoint. ACME accounts are created when clients use external account
+    /// binding credentials to register.
+    pub fn listAcmeAccounts(self: *Self, allocator: std.mem.Allocator, input: list_acme_accounts.ListAcmeAccountsInput, options: CallOptions) !list_acme_accounts.ListAcmeAccountsOutput {
+        return list_acme_accounts.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a list of domain validations for the specified ACME endpoint.
+    pub fn listAcmeDomainValidations(self: *Self, allocator: std.mem.Allocator, input: list_acme_domain_validations.ListAcmeDomainValidationsInput, options: CallOptions) !list_acme_domain_validations.ListAcmeDomainValidationsOutput {
+        return list_acme_domain_validations.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a list of ACME endpoints in your account. Use this operation to
+    /// view all configured ACME endpoints and their current status.
+    pub fn listAcmeEndpoints(self: *Self, allocator: std.mem.Allocator, input: list_acme_endpoints.ListAcmeEndpointsInput, options: CallOptions) !list_acme_endpoints.ListAcmeEndpointsOutput {
+        return list_acme_endpoints.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a list of external account bindings for the specified ACME
+    /// endpoint.
+    pub fn listAcmeExternalAccountBindings(self: *Self, allocator: std.mem.Allocator, input: list_acme_external_account_bindings.ListAcmeExternalAccountBindingsInput, options: CallOptions) !list_acme_external_account_bindings.ListAcmeExternalAccountBindingsOutput {
+        return list_acme_external_account_bindings.execute(self, allocator, input, options);
+    }
+
+    /// Returns per-domain validation summaries for an ACM certificate. Each summary
+    /// includes the domain name, the active validation configuration, and the
+    /// requested validation configuration when a validation method migration is in
+    /// progress. You can use the results to monitor the progress of an email-to-DNS
+    /// validation migration and to retrieve the CNAME records required for DNS
+    /// validation.
+    pub fn listCertificateDomainValidations(self: *Self, allocator: std.mem.Allocator, input: list_certificate_domain_validations.ListCertificateDomainValidationsInput, options: CallOptions) !list_certificate_domain_validations.ListCertificateDomainValidationsOutput {
+        return list_certificate_domain_validations.execute(self, allocator, input, options);
+    }
+
     /// Retrieves a list of certificate ARNs and domain names. You can request that
     /// only certificates that match a specific status be listed. You can also
     /// filter by specific attributes of the certificate. Default filtering returns
     /// only `RSA_2048` certificates. For more information, see Filters.
+    ///
+    /// By default, this action does not return certificates with a
+    /// `CertificateKeyPairOrigin` of `ACME`. To include ACME certificates, specify
+    /// `ACME` in the `CertificateKeyPairOrigins` filter.
     pub fn listCertificates(self: *Self, allocator: std.mem.Allocator, input: list_certificates.ListCertificatesInput, options: CallOptions) !list_certificates.ListCertificatesOutput {
         return list_certificates.execute(self, allocator, input, options);
     }
@@ -195,8 +337,22 @@ pub const Client = struct {
     /// certificate's Amazon Resource Name (ARN) to specify the certificate. To add
     /// a tag to an ACM certificate, use the AddTagsToCertificate action. To delete
     /// a tag, use the RemoveTagsFromCertificate action.
+    ///
+    /// This action applies only to the `certificate` resource type. For all other
+    /// ACM resource types, use ListTagsForResource instead.
     pub fn listTagsForCertificate(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_certificate.ListTagsForCertificateInput, options: CallOptions) !list_tags_for_certificate.ListTagsForCertificateOutput {
         return list_tags_for_certificate.execute(self, allocator, input, options);
+    }
+
+    /// Lists the tags associated with an ACM resource.
+    ///
+    /// Use this action for all ACM resource types except the `certificate` resource
+    /// type. For certificate resources, use ListTagsForCertificate instead.
+    ///
+    /// To add one or more tags, use the TagResource action. To remove one or more
+    /// tags, use the UntagResource action.
+    pub fn listTagsForResource(self: *Self, allocator: std.mem.Allocator, input: list_tags_for_resource.ListTagsForResourceInput, options: CallOptions) !list_tags_for_resource.ListTagsForResourceOutput {
+        return list_tags_for_resource.execute(self, allocator, input, options);
     }
 
     /// Adds or modifies account-level configurations in ACM.
@@ -215,6 +371,9 @@ pub const Client = struct {
     /// calling this function, the tag will be removed regardless of value. If you
     /// specify a value, the tag is removed only if it is associated with the
     /// specified value.
+    ///
+    /// This action applies only to the `certificate` resource type. For all other
+    /// ACM resource types, use UntagResource instead.
     ///
     /// To add tags to a certificate, use the AddTagsToCertificate action. To view
     /// all of the tags that have been applied to a specific ACM certificate, use
@@ -269,6 +428,20 @@ pub const Client = struct {
         return resend_validation_email.execute(self, allocator, input, options);
     }
 
+    /// Revokes an ACME account, preventing it from requesting or revoking
+    /// certificates. This operation is irreversible.
+    pub fn revokeAcmeAccount(self: *Self, allocator: std.mem.Allocator, input: revoke_acme_account.RevokeAcmeAccountInput, options: CallOptions) !revoke_acme_account.RevokeAcmeAccountOutput {
+        return revoke_acme_account.execute(self, allocator, input, options);
+    }
+
+    /// Revokes an external account binding, preventing new ACME accounts from being
+    /// registered using this binding. Existing ACME accounts that were previously
+    /// registered using the binding are not affected and must be revoked
+    /// separately.
+    pub fn revokeAcmeExternalAccountBinding(self: *Self, allocator: std.mem.Allocator, input: revoke_acme_external_account_binding.RevokeAcmeExternalAccountBindingInput, options: CallOptions) !revoke_acme_external_account_binding.RevokeAcmeExternalAccountBindingOutput {
+        return revoke_acme_external_account_binding.execute(self, allocator, input, options);
+    }
+
     /// Revokes a public ACM certificate. You can only revoke certificates that have
     /// been previously exported.
     ///
@@ -287,13 +460,84 @@ pub const Client = struct {
         return search_certificates.execute(self, allocator, input, options);
     }
 
-    /// Updates a certificate. You can use this function to specify whether to opt
-    /// in to or out of recording your certificate in a certificate transparency log
-    /// and exporting. For more information, see [ Opting Out of Certificate
-    /// Transparency
-    /// Logging](https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency) and [Certificate Manager Exportable Managed Certificates](https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html).
+    /// Adds one or more tags to an ACM resource. Tags are labels that you can use
+    /// to identify and organize your Amazon Web Services resources. Each tag
+    /// consists of a `key` and an optional `value`.
+    ///
+    /// Use this action for all ACM resource types except the `certificate` resource
+    /// type. For certificate resources, use AddTagsToCertificate instead.
+    ///
+    /// To remove one or more tags, use the UntagResource action. To view all of the
+    /// tags that have been applied to a resource, use the ListTagsForResource
+    /// action.
+    pub fn tagResource(self: *Self, allocator: std.mem.Allocator, input: tag_resource.TagResourceInput, options: CallOptions) !tag_resource.TagResourceOutput {
+        return tag_resource.execute(self, allocator, input, options);
+    }
+
+    /// Removes one or more tags from an ACM resource.
+    ///
+    /// Use this action for all ACM resource types except the `certificate` resource
+    /// type. For certificate resources, use RemoveTagsFromCertificate instead.
+    ///
+    /// To add one or more tags, use the TagResource action. To view all of the tags
+    /// that have been applied to a resource, use the ListTagsForResource action.
+    pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
+        return untag_resource.execute(self, allocator, input, options);
+    }
+
+    /// Updates the prevalidation configuration of an existing domain validation.
+    pub fn updateAcmeDomainValidation(self: *Self, allocator: std.mem.Allocator, input: update_acme_domain_validation.UpdateAcmeDomainValidationInput, options: CallOptions) !update_acme_domain_validation.UpdateAcmeDomainValidationOutput {
+        return update_acme_domain_validation.execute(self, allocator, input, options);
+    }
+
+    /// Updates the configuration of an existing ACME endpoint. You can change the
+    /// authorization behavior, contact requirement, or certificate authority
+    /// settings.
+    pub fn updateAcmeEndpoint(self: *Self, allocator: std.mem.Allocator, input: update_acme_endpoint.UpdateAcmeEndpointInput, options: CallOptions) !update_acme_endpoint.UpdateAcmeEndpointOutput {
+        return update_acme_endpoint.execute(self, allocator, input, options);
+    }
+
+    /// Updates certificate options. You can use this operation to change the domain
+    /// validation method or specify whether to export your certificate. For more
+    /// information, see [Migrate from email to DNS
+    /// validation](https://docs.aws.amazon.com/acm/latest/userguide/email-to-dns-migration.html) and [Certificate Manager Exportable Managed Certificates](https://docs.aws.amazon.com/acm/latest/userguide/acm-exportable-certificates.html).
     pub fn updateCertificateOptions(self: *Self, allocator: std.mem.Allocator, input: update_certificate_options.UpdateCertificateOptionsInput, options: CallOptions) !update_certificate_options.UpdateCertificateOptionsOutput {
         return update_certificate_options.execute(self, allocator, input, options);
+    }
+
+    pub fn listAcmeAccountsPaginator(self: *Self, params: list_acme_accounts.ListAcmeAccountsInput) paginator.ListAcmeAccountsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAcmeDomainValidationsPaginator(self: *Self, params: list_acme_domain_validations.ListAcmeDomainValidationsInput) paginator.ListAcmeDomainValidationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAcmeEndpointsPaginator(self: *Self, params: list_acme_endpoints.ListAcmeEndpointsInput) paginator.ListAcmeEndpointsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAcmeExternalAccountBindingsPaginator(self: *Self, params: list_acme_external_account_bindings.ListAcmeExternalAccountBindingsInput) paginator.ListAcmeExternalAccountBindingsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listCertificateDomainValidationsPaginator(self: *Self, params: list_certificate_domain_validations.ListCertificateDomainValidationsInput) paginator.ListCertificateDomainValidationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
     }
 
     pub fn listCertificatesPaginator(self: *Self, params: list_certificates.ListCertificatesInput) paginator.ListCertificatesPaginator {
@@ -308,6 +552,26 @@ pub const Client = struct {
             .client = self,
             .params = params,
         };
+    }
+
+    pub fn waitUntilAcmeDomainValidationDeleted(self: *Self, params: describe_acme_domain_validation.DescribeAcmeDomainValidationInput) aws.waiter.WaiterError!void {
+        var w = waiters.AcmeDomainValidationDeletedWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilAcmeDomainValidationValidated(self: *Self, params: describe_acme_domain_validation.DescribeAcmeDomainValidationInput) aws.waiter.WaiterError!void {
+        var w = waiters.AcmeDomainValidationValidatedWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilAcmeEndpointActive(self: *Self, params: describe_acme_endpoint.DescribeAcmeEndpointInput) aws.waiter.WaiterError!void {
+        var w = waiters.AcmeEndpointActiveWaiter{ .client = self, .params = params };
+        return w.wait();
+    }
+
+    pub fn waitUntilAcmeEndpointDeleted(self: *Self, params: describe_acme_endpoint.DescribeAcmeEndpointInput) aws.waiter.WaiterError!void {
+        var w = waiters.AcmeEndpointDeletedWaiter{ .client = self, .params = params };
+        return w.wait();
     }
 
     pub fn waitUntilCertificateValidated(self: *Self, params: describe_certificate.DescribeCertificateInput) aws.waiter.WaiterError!void {

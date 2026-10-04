@@ -20,7 +20,7 @@ pub const RouteFerrySpan = struct {
     /// Offset in the leg geometry corresponding to the start of this span.
     geometry_offset: ?i32 = null,
 
-    /// Provides an array of names of the ferry span in available languages.
+    /// Names of the ferry span in available languages.
     names: ?[]const LocalizedString = null,
 
     /// 2-3 letter Region code corresponding to the Span. This is either a province

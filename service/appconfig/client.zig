@@ -5,6 +5,7 @@ const create_application = @import("create_application.zig");
 const create_configuration_profile = @import("create_configuration_profile.zig");
 const create_deployment_strategy = @import("create_deployment_strategy.zig");
 const create_environment = @import("create_environment.zig");
+const create_experiment_definition = @import("create_experiment_definition.zig");
 const create_extension = @import("create_extension.zig");
 const create_extension_association = @import("create_extension_association.zig");
 const create_hosted_configuration_version = @import("create_hosted_configuration_version.zig");
@@ -12,6 +13,7 @@ const delete_application = @import("delete_application.zig");
 const delete_configuration_profile = @import("delete_configuration_profile.zig");
 const delete_deployment_strategy = @import("delete_deployment_strategy.zig");
 const delete_environment = @import("delete_environment.zig");
+const delete_experiment_definition = @import("delete_experiment_definition.zig");
 const delete_extension = @import("delete_extension.zig");
 const delete_extension_association = @import("delete_extension_association.zig");
 const delete_hosted_configuration_version = @import("delete_hosted_configuration_version.zig");
@@ -22,6 +24,8 @@ const get_configuration_profile = @import("get_configuration_profile.zig");
 const get_deployment = @import("get_deployment.zig");
 const get_deployment_strategy = @import("get_deployment_strategy.zig");
 const get_environment = @import("get_environment.zig");
+const get_experiment_definition = @import("get_experiment_definition.zig");
+const get_experiment_run = @import("get_experiment_run.zig");
 const get_extension = @import("get_extension.zig");
 const get_extension_association = @import("get_extension_association.zig");
 const get_hosted_configuration_version = @import("get_hosted_configuration_version.zig");
@@ -30,12 +34,17 @@ const list_configuration_profiles = @import("list_configuration_profiles.zig");
 const list_deployment_strategies = @import("list_deployment_strategies.zig");
 const list_deployments = @import("list_deployments.zig");
 const list_environments = @import("list_environments.zig");
+const list_experiment_definitions = @import("list_experiment_definitions.zig");
+const list_experiment_run_events = @import("list_experiment_run_events.zig");
+const list_experiment_runs = @import("list_experiment_runs.zig");
 const list_extension_associations = @import("list_extension_associations.zig");
 const list_extensions = @import("list_extensions.zig");
 const list_hosted_configuration_versions = @import("list_hosted_configuration_versions.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const start_deployment = @import("start_deployment.zig");
+const start_experiment_run = @import("start_experiment_run.zig");
 const stop_deployment = @import("stop_deployment.zig");
+const stop_experiment_run = @import("stop_experiment_run.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_account_settings = @import("update_account_settings.zig");
@@ -43,6 +52,8 @@ const update_application = @import("update_application.zig");
 const update_configuration_profile = @import("update_configuration_profile.zig");
 const update_deployment_strategy = @import("update_deployment_strategy.zig");
 const update_environment = @import("update_environment.zig");
+const update_experiment_definition = @import("update_experiment_definition.zig");
+const update_experiment_run = @import("update_experiment_run.zig");
 const update_extension = @import("update_extension.zig");
 const update_extension_association = @import("update_extension_association.zig");
 const validate_configuration = @import("validate_configuration.zig");
@@ -156,6 +167,14 @@ pub const Client = struct {
         return create_environment.execute(self, allocator, input, options);
     }
 
+    /// Creates an experiment definition in AppConfig. An experiment definition
+    /// describes the purpose, scope, and operational configuration of an
+    /// experiment, including the target audience, feature flag, and treatment
+    /// configurations.
+    pub fn createExperimentDefinition(self: *Self, allocator: std.mem.Allocator, input: create_experiment_definition.CreateExperimentDefinitionInput, options: CallOptions) !create_experiment_definition.CreateExperimentDefinitionOutput {
+        return create_experiment_definition.execute(self, allocator, input, options);
+    }
+
     /// Creates an AppConfig extension. An extension augments your ability to inject
     /// logic or behavior at different points during the AppConfig workflow of
     /// creating
@@ -213,7 +232,7 @@ pub const Client = struct {
     /// you're creating a feature flag, we recommend you familiarize yourself with
     /// the JSON schema
     /// for feature flag data. For more information, see [Type reference for
-    /// AWS.AppConfig.FeatureFlags](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-creating-configuration-and-profile-feature-flags.html#appconfig-type-reference-feature-flags) in the
+    /// AWS.AppConfig.FeatureFlags](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-type-reference-feature-flags.html) in the
     /// *AppConfig User Guide*.
     pub fn createHostedConfigurationVersion(self: *Self, allocator: std.mem.Allocator, input: create_hosted_configuration_version.CreateHostedConfigurationVersionInput, options: CallOptions) !create_hosted_configuration_version.CreateHostedConfigurationVersionOutput {
         return create_hosted_configuration_version.execute(self, allocator, input, options);
@@ -246,6 +265,13 @@ pub const Client = struct {
     /// protection](https://docs.aws.amazon.com/appconfig/latest/userguide/deletion-protection.html).
     pub fn deleteEnvironment(self: *Self, allocator: std.mem.Allocator, input: delete_environment.DeleteEnvironmentInput, options: CallOptions) !delete_environment.DeleteEnvironmentOutput {
         return delete_environment.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an experiment definition. You can archive the definition to hide it
+    /// from the active list while preserving it for future reference, or
+    /// permanently delete it along with all associated run history.
+    pub fn deleteExperimentDefinition(self: *Self, allocator: std.mem.Allocator, input: delete_experiment_definition.DeleteExperimentDefinitionInput, options: CallOptions) !delete_experiment_definition.DeleteExperimentDefinitionOutput {
+        return delete_experiment_definition.execute(self, allocator, input, options);
     }
 
     /// Deletes an AppConfig extension. You must delete all associations to an
@@ -328,6 +354,17 @@ pub const Client = struct {
         return get_environment.execute(self, allocator, input, options);
     }
 
+    /// Retrieves information about an experiment definition.
+    pub fn getExperimentDefinition(self: *Self, allocator: std.mem.Allocator, input: get_experiment_definition.GetExperimentDefinitionInput, options: CallOptions) !get_experiment_definition.GetExperimentDefinitionOutput {
+        return get_experiment_definition.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves information about an experiment run, including its status, start
+    /// time, and exposure settings.
+    pub fn getExperimentRun(self: *Self, allocator: std.mem.Allocator, input: get_experiment_run.GetExperimentRunInput, options: CallOptions) !get_experiment_run.GetExperimentRunOutput {
+        return get_experiment_run.execute(self, allocator, input, options);
+    }
+
     /// Returns information about an AppConfig extension.
     pub fn getExtension(self: *Self, allocator: std.mem.Allocator, input: get_extension.GetExtensionInput, options: CallOptions) !get_extension.GetExtensionOutput {
         return get_extension.execute(self, allocator, input, options);
@@ -371,6 +408,24 @@ pub const Client = struct {
         return list_environments.execute(self, allocator, input, options);
     }
 
+    /// Lists the experiment definitions for an account. You can filter results by
+    /// application, configuration profile, environment, or status.
+    pub fn listExperimentDefinitions(self: *Self, allocator: std.mem.Allocator, input: list_experiment_definitions.ListExperimentDefinitionsInput, options: CallOptions) !list_experiment_definitions.ListExperimentDefinitionsOutput {
+        return list_experiment_definitions.execute(self, allocator, input, options);
+    }
+
+    /// Lists the events for a specified experiment run. Events provide a timeline
+    /// of actions and state changes that occurred during the run.
+    pub fn listExperimentRunEvents(self: *Self, allocator: std.mem.Allocator, input: list_experiment_run_events.ListExperimentRunEventsInput, options: CallOptions) !list_experiment_run_events.ListExperimentRunEventsOutput {
+        return list_experiment_run_events.execute(self, allocator, input, options);
+    }
+
+    /// Lists the experiment runs for a specified experiment definition. You can
+    /// filter by status.
+    pub fn listExperimentRuns(self: *Self, allocator: std.mem.Allocator, input: list_experiment_runs.ListExperimentRunsInput, options: CallOptions) !list_experiment_runs.ListExperimentRunsOutput {
+        return list_experiment_runs.execute(self, allocator, input, options);
+    }
+
     /// Lists all AppConfig extension associations in the account. For more
     /// information about extensions and associations, see [Extending
     /// workflows](https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html) in the *AppConfig User Guide*.
@@ -398,8 +453,29 @@ pub const Client = struct {
     }
 
     /// Starts a deployment.
+    ///
+    /// AppConfig Agent supports deploying feature flag or free-form configuration
+    /// data to specific segments or individual users during a gradual rollout.
+    /// Entity-based gradual deployments ensure that once a user or segment receives
+    /// a configuration version, they continue to receive that same version
+    /// throughout the deployment period, regardless of which compute resource
+    /// serves their requests. For more information, see [Using AppConfig Agent for
+    /// user-based or entity-based gradual
+    /// deployments](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-agent-how-to-use.html#appconfig-entity-based-gradual-deployments)
     pub fn startDeployment(self: *Self, allocator: std.mem.Allocator, input: start_deployment.StartDeploymentInput, options: CallOptions) !start_deployment.StartDeploymentOutput {
         return start_deployment.execute(self, allocator, input, options);
+    }
+
+    /// Starts an experiment run for the specified experiment definition. An
+    /// experiment run delivers treatments to the target audience and collects
+    /// metrics. You can start multiple experiment runs from the same experiment
+    /// definition.
+    ///
+    /// Billing for this experiment begins when you call this operation and
+    /// continues until the experiment is stopped. For pricing details, see
+    /// [AppConfig pricing](https://aws.amazon.com/systems-manager/pricing/).
+    pub fn startExperimentRun(self: *Self, allocator: std.mem.Allocator, input: start_experiment_run.StartExperimentRunInput, options: CallOptions) !start_experiment_run.StartExperimentRunOutput {
+        return start_experiment_run.execute(self, allocator, input, options);
     }
 
     /// Stops a deployment. This API action works only on deployments that have a
@@ -411,6 +487,13 @@ pub const Client = struct {
     /// deployment completion.
     pub fn stopDeployment(self: *Self, allocator: std.mem.Allocator, input: stop_deployment.StopDeploymentInput, options: CallOptions) !stop_deployment.StopDeploymentOutput {
         return stop_deployment.execute(self, allocator, input, options);
+    }
+
+    /// Stops a running experiment. Stopping an experiment run ends audience
+    /// exposure and returns users to the currently deployed feature flag
+    /// configuration.
+    pub fn stopExperimentRun(self: *Self, allocator: std.mem.Allocator, input: stop_experiment_run.StopExperimentRunInput, options: CallOptions) !stop_experiment_run.StopExperimentRunOutput {
+        return stop_experiment_run.execute(self, allocator, input, options);
     }
 
     /// Assigns metadata to an AppConfig resource. Tags help organize and categorize
@@ -449,6 +532,21 @@ pub const Client = struct {
     /// Updates an environment.
     pub fn updateEnvironment(self: *Self, allocator: std.mem.Allocator, input: update_environment.UpdateEnvironmentInput, options: CallOptions) !update_environment.UpdateEnvironmentOutput {
         return update_environment.execute(self, allocator, input, options);
+    }
+
+    /// Updates an experiment definition. You can update treatments, the control,
+    /// audience rules, and other properties. You cannot update an experiment
+    /// definition while an experiment run is active.
+    pub fn updateExperimentDefinition(self: *Self, allocator: std.mem.Allocator, input: update_experiment_definition.UpdateExperimentDefinitionInput, options: CallOptions) !update_experiment_definition.UpdateExperimentDefinitionOutput {
+        return update_experiment_definition.execute(self, allocator, input, options);
+    }
+
+    /// Updates a running experiment. Use this operation to increase audience
+    /// exposure, modify treatment assignment overrides, or update the description
+    /// of an active experiment run. Audience exposure can only be increased, not
+    /// decreased.
+    pub fn updateExperimentRun(self: *Self, allocator: std.mem.Allocator, input: update_experiment_run.UpdateExperimentRunInput, options: CallOptions) !update_experiment_run.UpdateExperimentRunOutput {
+        return update_experiment_run.execute(self, allocator, input, options);
     }
 
     /// Updates an AppConfig extension. For more information about extensions, see
@@ -500,6 +598,27 @@ pub const Client = struct {
     }
 
     pub fn listEnvironmentsPaginator(self: *Self, params: list_environments.ListEnvironmentsInput) paginator.ListEnvironmentsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listExperimentDefinitionsPaginator(self: *Self, params: list_experiment_definitions.ListExperimentDefinitionsInput) paginator.ListExperimentDefinitionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listExperimentRunEventsPaginator(self: *Self, params: list_experiment_run_events.ListExperimentRunEventsInput) paginator.ListExperimentRunEventsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listExperimentRunsPaginator(self: *Self, params: list_experiment_runs.ListExperimentRunsInput) paginator.ListExperimentRunsPaginator {
         return .{
             .client = self,
             .params = params,

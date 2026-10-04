@@ -6,13 +6,17 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AdConditioningConfiguration = @import("ad_conditioning_configuration.zig").AdConditioningConfiguration;
 const AdDecisionServerConfiguration = @import("ad_decision_server_configuration.zig").AdDecisionServerConfiguration;
+const AdsPersonalizationConcurrency = @import("ads_personalization_concurrency.zig").AdsPersonalizationConcurrency;
+const AdsPersonalizationTimeouts = @import("ads_personalization_timeouts.zig").AdsPersonalizationTimeouts;
 const AvailSuppression = @import("avail_suppression.zig").AvailSuppression;
+const BeaconingConfiguration = @import("beaconing_configuration.zig").BeaconingConfiguration;
 const Bumper = @import("bumper.zig").Bumper;
 const CdnConfiguration = @import("cdn_configuration.zig").CdnConfiguration;
 const DashConfigurationForPut = @import("dash_configuration_for_put.zig").DashConfigurationForPut;
 const InsertionMode = @import("insertion_mode.zig").InsertionMode;
 const LivePreRollConfiguration = @import("live_pre_roll_configuration.zig").LivePreRollConfiguration;
 const ManifestProcessingRules = @import("manifest_processing_rules.zig").ManifestProcessingRules;
+const YieldOptimizationConfiguration = @import("yield_optimization_configuration.zig").YieldOptimizationConfiguration;
 const DashConfiguration = @import("dash_configuration.zig").DashConfiguration;
 const HlsConfiguration = @import("hls_configuration.zig").HlsConfiguration;
 const LogConfiguration = @import("log_configuration.zig").LogConfiguration;
@@ -35,10 +39,25 @@ pub const PutPlaybackConfigurationInput = struct {
     /// static VAST URL. The maximum length is 25,000 characters.
     ad_decision_server_url: ?[]const u8 = null,
 
+    /// The concurrency settings for ad decision server interactions. These settings
+    /// control how many simultaneous ADS requests MediaTailor makes per manifest
+    /// request.
+    ads_personalization_concurrency: ?AdsPersonalizationConcurrency = null,
+
+    /// The timeout settings for ad decision server interactions. These settings
+    /// control how long MediaTailor waits for ADS responses and the total time
+    /// budget for ad personalization across live, VOD, and prefetch workflows.
+    ads_personalization_timeouts: ?AdsPersonalizationTimeouts = null,
+
     /// The configuration for avail suppression, also known as ad suppression. For
     /// more information about ad suppression, see [Ad
     /// Suppression](https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
     avail_suppression: ?AvailSuppression = null,
+
+    /// The beaconing configuration for this playback configuration, which controls
+    /// whether MediaTailor includes beacons of its own in the ad tracking response.
+    /// If you omit this setting, MediaTailor uses `INSIGHTS`.
+    beaconing_configuration: ?BeaconingConfiguration = null,
 
     /// The configuration for bumpers. Bumpers are short audio or video clips that
     /// play at the start or before the end of an ad break. To learn more about
@@ -60,8 +79,9 @@ pub const PutPlaybackConfigurationInput = struct {
 
     /// A map of lifecycle hook event names to function identifiers. The function
     /// mapping specifies which function MediaTailor executes at each lifecycle hook
-    /// during ad insertion. Valid keys are `PRE_SESSION_INITIALIZATION` and
-    /// `PRE_ADS_REQUEST`. For more information, see [Functions lifecycle
+    /// during ad insertion. Valid keys are `PRE_SESSION_INITIALIZATION`,
+    /// `PRE_ADS_REQUEST`, `POST_ADS_RESPONSE`, and `PRE_MANIFEST_INSERTION`. For
+    /// more information, see [Functions lifecycle
     /// hooks](https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html) in the *MediaTailor User Guide*.
     function_mapping: ?[]const aws.map.StringMapEntry = null,
 
@@ -119,11 +139,18 @@ pub const PutPlaybackConfigurationInput = struct {
     /// The maximum length is 512 characters.
     video_content_source_url: ?[]const u8 = null,
 
+    /// Configuration for Yield Optimization, which fills unsold ad inventory in ad
+    /// breaks with programmatic ads from Amazon Publisher Services (APS).
+    yield_optimization_configuration: ?YieldOptimizationConfiguration = null,
+
     pub const json_field_names = .{
         .ad_conditioning_configuration = "AdConditioningConfiguration",
         .ad_decision_server_configuration = "AdDecisionServerConfiguration",
         .ad_decision_server_url = "AdDecisionServerUrl",
+        .ads_personalization_concurrency = "AdsPersonalizationConcurrency",
+        .ads_personalization_timeouts = "AdsPersonalizationTimeouts",
         .avail_suppression = "AvailSuppression",
+        .beaconing_configuration = "BeaconingConfiguration",
         .bumper = "Bumper",
         .cdn_configuration = "CdnConfiguration",
         .configuration_aliases = "ConfigurationAliases",
@@ -138,6 +165,7 @@ pub const PutPlaybackConfigurationInput = struct {
         .tags = "Tags",
         .transcode_profile_name = "TranscodeProfileName",
         .video_content_source_url = "VideoContentSourceUrl",
+        .yield_optimization_configuration = "YieldOptimizationConfiguration",
     };
 };
 
@@ -159,10 +187,24 @@ pub const PutPlaybackConfigurationOutput = struct {
     /// static VAST URL. The maximum length is 25,000 characters.
     ad_decision_server_url: ?[]const u8 = null,
 
+    /// The concurrency settings for ad decision server interactions. These settings
+    /// control how many simultaneous ADS requests MediaTailor makes per manifest
+    /// request.
+    ads_personalization_concurrency: ?AdsPersonalizationConcurrency = null,
+
+    /// The timeout settings for ad decision server interactions. These settings
+    /// control how long MediaTailor waits for ADS responses and the total time
+    /// budget for ad personalization across live, VOD, and prefetch workflows.
+    ads_personalization_timeouts: ?AdsPersonalizationTimeouts = null,
+
     /// The configuration for avail suppression, also known as ad suppression. For
     /// more information about ad suppression, see [Ad
     /// Suppression](https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
     avail_suppression: ?AvailSuppression = null,
+
+    /// The beaconing configuration for this playback configuration, which controls
+    /// whether MediaTailor includes beacons of its own in the ad tracking response.
+    beaconing_configuration: ?BeaconingConfiguration = null,
 
     /// The configuration for bumpers. Bumpers are short audio or video clips that
     /// play at the start or before the end of an ad break. To learn more about
@@ -182,10 +224,19 @@ pub const PutPlaybackConfigurationOutput = struct {
     /// The configuration for DASH content.
     dash_configuration: ?DashConfiguration = null,
 
+    /// The dual-stack (IPv4 and IPv6) playback endpoint prefix associated with the
+    /// playback configuration.
+    dual_stack_playback_endpoint_prefix: ?[]const u8 = null,
+
+    /// The dual-stack (IPv4 and IPv6) session initialization endpoint prefix
+    /// associated with the playback configuration.
+    dual_stack_session_initialization_endpoint_prefix: ?[]const u8 = null,
+
     /// A map of lifecycle hook event names to function identifiers. The function
     /// mapping specifies which function MediaTailor executes at each lifecycle hook
-    /// during ad insertion. Valid keys are `PRE_SESSION_INITIALIZATION` and
-    /// `PRE_ADS_REQUEST`. For more information, see [Functions lifecycle
+    /// during ad insertion. Valid keys are `PRE_SESSION_INITIALIZATION`,
+    /// `PRE_ADS_REQUEST`, `POST_ADS_RESPONSE`, and `PRE_MANIFEST_INSERTION`. For
+    /// more information, see [Functions lifecycle
     /// hooks](https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html) in the *MediaTailor User Guide*.
     function_mapping: ?[]const aws.map.StringMapEntry = null,
 
@@ -260,15 +311,24 @@ pub const PutPlaybackConfigurationOutput = struct {
     /// The maximum length is 512 characters.
     video_content_source_url: ?[]const u8 = null,
 
+    /// Configuration for Yield Optimization, which fills unsold ad inventory in ad
+    /// breaks with programmatic ads from Amazon Publisher Services (APS).
+    yield_optimization_configuration: ?YieldOptimizationConfiguration = null,
+
     pub const json_field_names = .{
         .ad_conditioning_configuration = "AdConditioningConfiguration",
         .ad_decision_server_configuration = "AdDecisionServerConfiguration",
         .ad_decision_server_url = "AdDecisionServerUrl",
+        .ads_personalization_concurrency = "AdsPersonalizationConcurrency",
+        .ads_personalization_timeouts = "AdsPersonalizationTimeouts",
         .avail_suppression = "AvailSuppression",
+        .beaconing_configuration = "BeaconingConfiguration",
         .bumper = "Bumper",
         .cdn_configuration = "CdnConfiguration",
         .configuration_aliases = "ConfigurationAliases",
         .dash_configuration = "DashConfiguration",
+        .dual_stack_playback_endpoint_prefix = "DualStackPlaybackEndpointPrefix",
+        .dual_stack_session_initialization_endpoint_prefix = "DualStackSessionInitializationEndpointPrefix",
         .function_mapping = "FunctionMapping",
         .hls_configuration = "HlsConfiguration",
         .insertion_mode = "InsertionMode",
@@ -284,6 +344,7 @@ pub const PutPlaybackConfigurationOutput = struct {
         .tags = "Tags",
         .transcode_profile_name = "TranscodeProfileName",
         .video_content_source_url = "VideoContentSourceUrl",
+        .yield_optimization_configuration = "YieldOptimizationConfiguration",
     };
 };
 
@@ -341,9 +402,27 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutPlaybackConfiguratio
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.ads_personalization_concurrency) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AdsPersonalizationConcurrency\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.ads_personalization_timeouts) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"AdsPersonalizationTimeouts\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.avail_suppression) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"AvailSuppression\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.beaconing_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"BeaconingConfiguration\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
@@ -429,6 +508,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutPlaybackConfiguratio
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.yield_optimization_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"YieldOptimizationConfiguration\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);
@@ -445,10 +530,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutPlaybackConfiguratio
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !PutPlaybackConfigurationOutput {
-    var result: PutPlaybackConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(PutPlaybackConfigurationOutput, body, allocator);
-    }
+    const result: PutPlaybackConfigurationOutput = try aws.json.parseJsonObject(
+        PutPlaybackConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

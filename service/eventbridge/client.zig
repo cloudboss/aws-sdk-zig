@@ -529,7 +529,7 @@ pub const Client = struct {
     /// rules.
     ///
     /// You can batch multiple event entries into one request for efficiency.
-    /// However, the total entry size must be less than 256KB. You can calculate the
+    /// However, the total entry size must be less than 1MB. You can calculate the
     /// entry size before you send the events.
     /// For more information, see [Calculating PutEvents event entry
     /// size](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-putevents.html#eb-putevent-size) in the *

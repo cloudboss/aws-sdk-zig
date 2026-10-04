@@ -81,10 +81,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisableDelegatedAdminAc
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DisableDelegatedAdminAccountOutput {
-    var result: DisableDelegatedAdminAccountOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DisableDelegatedAdminAccountOutput, body, allocator);
-    }
+    const result: DisableDelegatedAdminAccountOutput = try aws.json.parseJsonObject(
+        DisableDelegatedAdminAccountOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

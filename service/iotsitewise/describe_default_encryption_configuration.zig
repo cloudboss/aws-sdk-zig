@@ -77,10 +77,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeDefaultEncrypti
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeDefaultEncryptionConfigurationOutput {
-    var result: DescribeDefaultEncryptionConfigurationOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeDefaultEncryptionConfigurationOutput, body, allocator);
-    }
+    const result: DescribeDefaultEncryptionConfigurationOutput = try aws.json.parseJsonObject(
+        DescribeDefaultEncryptionConfigurationOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

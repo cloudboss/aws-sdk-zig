@@ -123,10 +123,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateTransitGatewayRou
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateTransitGatewayRouteTableAttachmentOutput {
-    var result: CreateTransitGatewayRouteTableAttachmentOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateTransitGatewayRouteTableAttachmentOutput, body, allocator);
-    }
+    const result: CreateTransitGatewayRouteTableAttachmentOutput = try aws.json.parseJsonObject(
+        CreateTransitGatewayRouteTableAttachmentOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

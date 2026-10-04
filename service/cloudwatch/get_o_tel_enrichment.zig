@@ -4,19 +4,46 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const OTelEnrichmentMetricSelector = @import("o_tel_enrichment_metric_selector.zig").OTelEnrichmentMetricSelector;
 const OTelEnrichmentStatus = @import("o_tel_enrichment_status.zig").OTelEnrichmentStatus;
+const serde = @import("serde.zig");
 
 pub const GetOTelEnrichmentInput = struct {
 };
 
 pub const GetOTelEnrichmentOutput = struct {
+    /// The date and time that enrichment started for the account. This parameter is
+    /// omitted when enrichment is stopped.
+    created_at: ?i64 = null,
+
+    /// The metric namespaces, and the metric names, that are left unenriched. This
+    /// parameter is omitted when enrichment is stopped, and when enrichment is
+    /// running with no
+    /// exclude filters, which means that nothing is excluded.
+    exclude_filters: ?[]const OTelEnrichmentMetricSelector = null,
+
+    /// The metric namespaces, and the metric names, that are enriched. This
+    /// parameter is
+    /// omitted when enrichment is stopped, and when enrichment is running with no
+    /// include
+    /// filters, which means that every supported namespace is in scope.
+    include_filters: ?[]const OTelEnrichmentMetricSelector = null,
+
     /// The status of OTel enrichment for the account. Valid values are
-    /// `Running` (enrichment is enabled) and `Stopped`
-    /// (enrichment is disabled).
+    /// `Running` (enrichment is enabled) and `Stopped` (enrichment is
+    /// disabled).
     status: OTelEnrichmentStatus,
 
+    /// The date and time that the enrichment configuration for the account was last
+    /// stored.
+    updated_at: ?i64 = null,
+
     pub const json_field_names = .{
+        .created_at = "CreatedAt",
+        .exclude_filters = "ExcludeFilters",
+        .include_filters = "IncludeFilters",
         .status = "Status",
+        .updated_at = "UpdatedAt",
     };
 };
 
@@ -71,7 +98,6 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetOTelEnrichmentInput,
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetOTelEnrichmentOutput {
     _ = status;
     _ = headers;
-    _ = allocator;
     var reader = aws.xml.Reader.init(body);
 
     while (try reader.next()) |event| {
@@ -87,8 +113,16 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
-                if (std.mem.eql(u8, e.local, "Status")) {
+                if (std.mem.eql(u8, e.local, "CreatedAt")) {
+                    result.created_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
+                } else if (std.mem.eql(u8, e.local, "ExcludeFilters")) {
+                    result.exclude_filters = try serde.deserializeOTelEnrichmentMetricSelectorList(allocator, &reader, "member");
+                } else if (std.mem.eql(u8, e.local, "IncludeFilters")) {
+                    result.include_filters = try serde.deserializeOTelEnrichmentMetricSelectorList(allocator, &reader, "member");
+                } else if (std.mem.eql(u8, e.local, "Status")) {
                     result.status = OTelEnrichmentStatus.fromWireName(try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "UpdatedAt")) {
+                    result.updated_at = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else {
                     try reader.skipElement();
                 }

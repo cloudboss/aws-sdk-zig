@@ -78,10 +78,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteEventTriggerInput
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DeleteEventTriggerOutput {
-    var result: DeleteEventTriggerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DeleteEventTriggerOutput, body, allocator);
-    }
+    const result: DeleteEventTriggerOutput = try aws.json.parseJsonObject(
+        DeleteEventTriggerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

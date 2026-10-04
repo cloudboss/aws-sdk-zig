@@ -187,10 +187,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateMLEndpointInput, 
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateMLEndpointOutput {
-    var result: CreateMLEndpointOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateMLEndpointOutput, body, allocator);
-    }
+    const result: CreateMLEndpointOutput = try aws.json.parseJsonObject(
+        CreateMLEndpointOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

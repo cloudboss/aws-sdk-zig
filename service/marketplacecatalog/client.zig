@@ -4,9 +4,11 @@ const std = @import("std");
 const batch_describe_entities = @import("batch_describe_entities.zig");
 const cancel_change_set = @import("cancel_change_set.zig");
 const delete_resource_policy = @import("delete_resource_policy.zig");
+const describe_assessment = @import("describe_assessment.zig");
 const describe_change_set = @import("describe_change_set.zig");
 const describe_entity = @import("describe_entity.zig");
 const get_resource_policy = @import("get_resource_policy.zig");
+const list_assessments = @import("list_assessments.zig");
 const list_change_sets = @import("list_change_sets.zig");
 const list_entities = @import("list_entities.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
@@ -69,6 +71,18 @@ pub const Client = struct {
         return delete_resource_policy.execute(self, allocator, input, options);
     }
 
+    /// Returns the metadata and detailed results of a single assessment, including
+    /// the
+    /// framework that was evaluated, the overall assessment result, and a paginated
+    /// list of
+    /// individual control evaluation results.
+    ///
+    /// To list available assessments before describing one, use the
+    /// `ListAssessments` action.
+    pub fn describeAssessment(self: *Self, allocator: std.mem.Allocator, input: describe_assessment.DescribeAssessmentInput, options: CallOptions) !describe_assessment.DescribeAssessmentOutput {
+        return describe_assessment.execute(self, allocator, input, options);
+    }
+
     /// Provides information about a given change set.
     pub fn describeChangeSet(self: *Self, allocator: std.mem.Allocator, input: describe_change_set.DescribeChangeSetInput, options: CallOptions) !describe_change_set.DescribeChangeSetOutput {
         return describe_change_set.execute(self, allocator, input, options);
@@ -83,6 +97,23 @@ pub const Client = struct {
     /// ARN.
     pub fn getResourcePolicy(self: *Self, allocator: std.mem.Allocator, input: get_resource_policy.GetResourcePolicyInput, options: CallOptions) !get_resource_policy.GetResourcePolicyOutput {
         return get_resource_policy.execute(self, allocator, input, options);
+    }
+
+    /// Returns a paginated list of assessments associated with an entity or change
+    /// set in
+    /// AWS Marketplace. An *assessment* is the result of evaluating a
+    /// product or change set against a framework, such as AMI Security or Container
+    /// Security.
+    ///
+    /// Use the `AssessmentTargetFilter` to scope results to a specific entity or
+    /// change set, and use `FrameworkFilters` to scope results to a single
+    /// framework. To retrieve detailed control-level results for an individual
+    /// assessment, use
+    /// the `DescribeAssessment` action.
+    ///
+    /// Results are sorted by assessment creation time in descending order.
+    pub fn listAssessments(self: *Self, allocator: std.mem.Allocator, input: list_assessments.ListAssessmentsInput, options: CallOptions) !list_assessments.ListAssessmentsOutput {
+        return list_assessments.execute(self, allocator, input, options);
     }
 
     /// Returns the list of change sets owned by the account being used to make the
@@ -158,6 +189,20 @@ pub const Client = struct {
     /// [entity](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities) or [change set](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets)).
     pub fn untagResource(self: *Self, allocator: std.mem.Allocator, input: untag_resource.UntagResourceInput, options: CallOptions) !untag_resource.UntagResourceOutput {
         return untag_resource.execute(self, allocator, input, options);
+    }
+
+    pub fn describeAssessmentPaginator(self: *Self, params: describe_assessment.DescribeAssessmentInput) paginator.DescribeAssessmentPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listAssessmentsPaginator(self: *Self, params: list_assessments.ListAssessmentsInput) paginator.ListAssessmentsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
     }
 
     pub fn listChangeSetsPaginator(self: *Self, params: list_change_sets.ListChangeSetsInput) paginator.ListChangeSetsPaginator {

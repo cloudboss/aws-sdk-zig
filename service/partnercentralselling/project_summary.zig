@@ -1,4 +1,5 @@
 const DeliveryModel = @import("delivery_model.zig").DeliveryModel;
+const ExpectedContractDuration = @import("expected_contract_duration.zig").ExpectedContractDuration;
 const ExpectedCustomerSpend = @import("expected_customer_spend.zig").ExpectedCustomerSpend;
 
 /// An object that contains a `Project` object's subset of fields.
@@ -23,12 +24,17 @@ pub const ProjectSummary = struct {
     /// * Other: Delivery model not described above.
     delivery_models: ?[]const DeliveryModel = null,
 
+    /// Optional. The expected contract duration for this opportunity, representing
+    /// the anticipated length of the contract in the unit specified by `Term`.
+    expected_contract_duration: ?ExpectedContractDuration = null,
+
     /// Provides a summary of the expected customer spend for the project, offering
     /// a high-level view of the potential financial impact.
     expected_customer_spend: ?[]const ExpectedCustomerSpend = null,
 
     pub const json_field_names = .{
         .delivery_models = "DeliveryModels",
+        .expected_contract_duration = "ExpectedContractDuration",
         .expected_customer_spend = "ExpectedCustomerSpend",
     };
 };

@@ -128,10 +128,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBrowserProfileInp
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateBrowserProfileOutput {
-    var result: CreateBrowserProfileOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateBrowserProfileOutput, body, allocator);
-    }
+    const result: CreateBrowserProfileOutput = try aws.json.parseJsonObject(
+        CreateBrowserProfileOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

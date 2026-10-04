@@ -39,6 +39,9 @@ pub const TaskListItem = struct {
     /// The task's ID.
     task_id: ?[]const u8 = null,
 
+    /// The universally unique identifier (UUID) for the workflow task.
+    uuid: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .cache_hit = "cacheHit",
         .cache_s3_uri = "cacheS3Uri",
@@ -52,5 +55,6 @@ pub const TaskListItem = struct {
         .status = "status",
         .stop_time = "stopTime",
         .task_id = "taskId",
+        .uuid = "uuid",
     };
 };

@@ -32,9 +32,7 @@ pub const ResourceRequirement = struct {
     /// specified, the container is terminated. This parameter maps to `Memory` in
     /// the
     /// [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/) and the
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the [Docker Remote API](https://docs.docker.com/engine/api/latest/) and the
     /// `--memory` option to [docker
     /// run](https://docs.docker.com/engine/reference/run/). You
     /// must specify at least 4 MiB of memory for a job. This is required but can be
@@ -42,10 +40,10 @@ pub const ResourceRequirement = struct {
     /// several places for multi-node parallel (MNP) jobs. It must be specified for
     /// each node at least
     /// once. This parameter maps to `Memory` in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate)
     /// section of the [Docker Remote
-    /// API](https://docs.docker.com/engine/api/v1.23/) and the `--memory` option to
-    /// [docker run](https://docs.docker.com/engine/reference/run/).
+    /// API](https://docs.docker.com/engine/api/latest/) and the `--memory` option
+    /// to [docker run](https://docs.docker.com/engine/reference/run/).
     ///
     /// If you're trying to maximize your resource utilization by providing your
     /// jobs as much
@@ -103,25 +101,36 @@ pub const ResourceRequirement = struct {
     ///
     /// `VCPU` = 4 or 8
     ///
-    /// **value = 36864, 45056, 53248, or 61440**
+    /// **value = 36864, 45056, or 53248**
     ///
     /// `VCPU` = 8
+    ///
+    /// **value = 61440**
+    ///
+    /// `VCPU` = 8 or 32
     ///
     /// **value = 32768, 40960, 49152, or 57344**
     ///
     /// `VCPU` = 8 or 16
     ///
-    /// **value = 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880**
+    /// **value = 65536, 73728, 81920, 90112, 98304, 106496, or 114688**
     ///
     /// `VCPU` = 16
+    ///
+    /// **value = 122880**
+    ///
+    /// `VCPU` = 16 or 32
+    ///
+    /// **value = 249856**
+    ///
+    /// `VCPU` = 32
     ///
     /// **type="VCPU"**
     ///
     /// The number of vCPUs reserved for the container. This parameter maps to
     /// `CpuShares` in the [Create a
-    /// container](https://docs.docker.com/engine/api/v1.23/#create-a-container)
-    /// section of the
-    /// [Docker Remote API](https://docs.docker.com/engine/api/v1.23/) and the
+    /// container](https://docs.docker.com/engine/api/latest/#tag/Container/operation/ContainerCreate) section of the
+    /// [Docker Remote API](https://docs.docker.com/engine/api/latest/) and the
     /// `--cpu-shares` option to [docker
     /// run](https://docs.docker.com/engine/reference/run/). Each vCPU is equivalent
     /// to 1,024 CPU shares.
@@ -138,8 +147,9 @@ pub const ResourceRequirement = struct {
     /// For jobs that are running on Fargate resources, then `value` must match one
     /// of the supported values and the `MEMORY` values must be one of the values
     /// supported
-    /// for that `VCPU` value. The supported values are 0.25, 0.5, 1, 2, 4, 8, and
-    /// 16
+    /// for that `VCPU` value. The supported values are 0.25, 0.5, 1, 2, 4, 8, 16,
+    /// and
+    /// 32.
     ///
     /// **value = 0.25**
     ///
@@ -174,6 +184,10 @@ pub const ResourceRequirement = struct {
     ///
     /// `MEMORY` = 32768, 40960, 49152, 57344, 65536, 73728, 81920, 90112, 98304,
     /// 106496, 114688, or 122880
+    ///
+    /// **value = 32**
+    ///
+    /// `MEMORY` = 61440, 122880, or 249856
     value: []const u8,
 
     pub const json_field_names = .{

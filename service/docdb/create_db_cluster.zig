@@ -24,6 +24,10 @@ pub const CreateDBClusterInput = struct {
     /// * Must be a value from 1 to 35.
     backup_retention_period: ?i32 = null,
 
+    /// Specifies whether to copy all tags from the DB cluster to snapshots of the
+    /// DB cluster. The default is not to copy them.
+    copy_tags_to_snapshot: ?bool = null,
+
     /// The cluster identifier. This parameter is stored as a lowercase
     /// string.
     ///
@@ -61,10 +65,10 @@ pub const CreateDBClusterInput = struct {
     /// CloudWatch Logs. You can enable audit logs or profiler logs. For more
     /// information, see [
     /// Auditing Amazon DocumentDB
-    /// Events](https://docs.aws.amazon.com/documentdb/latest/developerguide/event-auditing.html)
+    /// Events](https://docs.aws.amazon.com/documentdb/latest/devguide/event-auditing.html)
     /// and [
     /// Profiling Amazon DocumentDB
-    /// Operations](https://docs.aws.amazon.com/documentdb/latest/developerguide/profiling.html).
+    /// Operations](https://docs.aws.amazon.com/documentdb/latest/devguide/profiling.html).
     enable_cloudwatch_logs_exports: ?[]const []const u8 = null,
 
     /// The name of the database engine to be used for this cluster.
@@ -153,7 +157,7 @@ pub const CreateDBClusterInput = struct {
     /// IPv6 protocols (`DUAL`).
     ///
     /// For more information, see [DocumentDB clusters in a
-    /// VPC](https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html) in the Amazon DocumentDB Developer Guide.
+    /// VPC](https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html) in the Amazon DocumentDB Developer Guide.
     ///
     /// Valid Values: `IPV4` | `DUAL`
     network_type: ?[]const u8 = null,
@@ -274,6 +278,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDBClusterInput, c
     if (input.backup_retention_period) |v| {
         try body_buf.appendSlice(allocator, "&BackupRetentionPeriod=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{v}) catch "");
+    }
+    if (input.copy_tags_to_snapshot) |v| {
+        try body_buf.appendSlice(allocator, "&CopyTagsToSnapshot=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     try body_buf.appendSlice(allocator, "&DBClusterIdentifier=");
     try aws.url.appendUrlEncoded(allocator, &body_buf, input.db_cluster_identifier);

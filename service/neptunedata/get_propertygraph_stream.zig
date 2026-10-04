@@ -174,10 +174,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPropertygraphStreamI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPropertygraphStreamOutput {
-    var result: GetPropertygraphStreamOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPropertygraphStreamOutput, body, allocator);
-    }
+    const result: GetPropertygraphStreamOutput = try aws.json.parseJsonObject(
+        GetPropertygraphStreamOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

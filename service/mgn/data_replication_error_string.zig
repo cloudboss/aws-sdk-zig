@@ -17,6 +17,8 @@ pub const DataReplicationErrorString = enum {
     failed_to_start_data_transfer,
     unsupported_vm_configuration,
     last_snapshot_job_failed,
+    failed_to_setup_fsx_proxy,
+    failed_to_create_fsx_snapshot,
 
     pub const json_field_names = .{
         .agent_not_seen = "AGENT_NOT_SEEN",
@@ -35,6 +37,8 @@ pub const DataReplicationErrorString = enum {
         .failed_to_start_data_transfer = "FAILED_TO_START_DATA_TRANSFER",
         .unsupported_vm_configuration = "UNSUPPORTED_VM_CONFIGURATION",
         .last_snapshot_job_failed = "LAST_SNAPSHOT_JOB_FAILED",
+        .failed_to_setup_fsx_proxy = "FAILED_TO_SETUP_FSX_PROXY",
+        .failed_to_create_fsx_snapshot = "FAILED_TO_CREATE_FSX_SNAPSHOT",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -55,6 +59,8 @@ pub const DataReplicationErrorString = enum {
             .failed_to_start_data_transfer => "FAILED_TO_START_DATA_TRANSFER",
             .unsupported_vm_configuration => "UNSUPPORTED_VM_CONFIGURATION",
             .last_snapshot_job_failed => "LAST_SNAPSHOT_JOB_FAILED",
+            .failed_to_setup_fsx_proxy => "FAILED_TO_SETUP_FSX_PROXY",
+            .failed_to_create_fsx_snapshot => "FAILED_TO_CREATE_FSX_SNAPSHOT",
         };
     }
 

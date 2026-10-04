@@ -127,10 +127,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: VerifyMacInput, config:
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !VerifyMacOutput {
-    var result: VerifyMacOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(VerifyMacOutput, body, allocator);
-    }
+    const result: VerifyMacOutput = try aws.json.parseJsonObject(
+        VerifyMacOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

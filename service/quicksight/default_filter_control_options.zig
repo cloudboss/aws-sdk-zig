@@ -1,5 +1,7 @@
 const DefaultDateTimePickerControlOptions = @import("default_date_time_picker_control_options.zig").DefaultDateTimePickerControlOptions;
 const DefaultFilterDropDownControlOptions = @import("default_filter_drop_down_control_options.zig").DefaultFilterDropDownControlOptions;
+const DefaultHierarchyFilterDropDownControlOptions = @import("default_hierarchy_filter_drop_down_control_options.zig").DefaultHierarchyFilterDropDownControlOptions;
+const DefaultHierarchyFilterListControlOptions = @import("default_hierarchy_filter_list_control_options.zig").DefaultHierarchyFilterListControlOptions;
 const DefaultFilterListControlOptions = @import("default_filter_list_control_options.zig").DefaultFilterListControlOptions;
 const DefaultRelativeDateTimeControlOptions = @import("default_relative_date_time_control_options.zig").DefaultRelativeDateTimeControlOptions;
 const DefaultSliderControlOptions = @import("default_slider_control_options.zig").DefaultSliderControlOptions;
@@ -14,6 +16,14 @@ pub const DefaultFilterControlOptions = struct {
 
     /// The default options that correspond to the `Dropdown` filter control type.
     default_dropdown_options: ?DefaultFilterDropDownControlOptions = null,
+
+    /// The default options that correspond to the `HierarchyDropdown` filter
+    /// control type.
+    default_hierarchy_dropdown: ?DefaultHierarchyFilterDropDownControlOptions = null,
+
+    /// The default options that correspond to the `HierarchyList` filter control
+    /// type.
+    default_hierarchy_list: ?DefaultHierarchyFilterListControlOptions = null,
 
     /// The default options that correspond to the `List` filter control type.
     default_list_options: ?DefaultFilterListControlOptions = null,
@@ -34,6 +44,8 @@ pub const DefaultFilterControlOptions = struct {
     pub const json_field_names = .{
         .default_date_time_picker_options = "DefaultDateTimePickerOptions",
         .default_dropdown_options = "DefaultDropdownOptions",
+        .default_hierarchy_dropdown = "DefaultHierarchyDropdown",
+        .default_hierarchy_list = "DefaultHierarchyList",
         .default_list_options = "DefaultListOptions",
         .default_relative_date_time_options = "DefaultRelativeDateTimeOptions",
         .default_slider_options = "DefaultSliderOptions",

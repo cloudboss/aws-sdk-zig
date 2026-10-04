@@ -11,7 +11,7 @@ pub const CrlDistributionPointExtensionConfiguration = struct {
     /// specified through CSR or API passthrough.
     ///
     /// Only set this if you have another way to distribute the CRL Distribution
-    /// Points ffor certificates issued by your CA, such as the Matter Distributed
+    /// Points for certificates issued by your CA, such as the Matter Distributed
     /// Compliance Ledger
     ///
     /// This configuration cannot be enabled with a custom CNAME set.

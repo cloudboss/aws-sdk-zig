@@ -16,7 +16,7 @@ pub const StartExportInput = struct {
     /// Start export request s3key.
     s_3_key: []const u8,
 
-    /// Start import request tags.
+    /// Start export request tags.
     tags: ?[]const aws.map.StringMapEntry = null,
 
     pub const json_field_names = .{
@@ -108,10 +108,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartExportInput, confi
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !StartExportOutput {
-    var result: StartExportOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(StartExportOutput, body, allocator);
-    }
+    const result: StartExportOutput = try aws.json.parseJsonObject(
+        StartExportOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -96,6 +96,9 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetResourcePositionInpu
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetResourcePositionOutput {
     var result: GetResourcePositionOutput = .{};
+    errdefer {
+        if (result.geo_json_payload) |value| allocator.free(value);
+    }
     if (body.len > 0) {
         result.geo_json_payload = try allocator.dupe(u8, body);
     }

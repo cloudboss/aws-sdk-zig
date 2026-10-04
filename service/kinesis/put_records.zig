@@ -9,6 +9,10 @@ const EncryptionType = @import("encryption_type.zig").EncryptionType;
 const PutRecordsResultEntry = @import("put_records_result_entry.zig").PutRecordsResultEntry;
 
 pub const PutRecordsInput = struct {
+    /// Checks if your request will succeed. `DryRun` is an optional
+    /// parameter.
+    dry_run: ?bool = null,
+
     /// The records associated with the request.
     records: []const PutRecordsRequestEntry,
 
@@ -22,6 +26,7 @@ pub const PutRecordsInput = struct {
     stream_name: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .dry_run = "DryRun",
         .records = "Records",
         .stream_arn = "StreamARN",
         .stream_id = "StreamId",

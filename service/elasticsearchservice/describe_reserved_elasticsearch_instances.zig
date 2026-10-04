@@ -112,10 +112,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeReservedElastic
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !DescribeReservedElasticsearchInstancesOutput {
-    var result: DescribeReservedElasticsearchInstancesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(DescribeReservedElasticsearchInstancesOutput, body, allocator);
-    }
+    const result: DescribeReservedElasticsearchInstancesOutput = try aws.json.parseJsonObject(
+        DescribeReservedElasticsearchInstancesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

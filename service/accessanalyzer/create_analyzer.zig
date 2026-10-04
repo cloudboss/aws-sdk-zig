@@ -143,10 +143,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAnalyzerInput, co
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateAnalyzerOutput {
-    var result: CreateAnalyzerOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateAnalyzerOutput, body, allocator);
-    }
+    const result: CreateAnalyzerOutput = try aws.json.parseJsonObject(
+        CreateAnalyzerOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

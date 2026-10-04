@@ -2,9 +2,14 @@ const ChangeProgressStage = @import("change_progress_stage.zig").ChangeProgressS
 const ConfigChangeStatus = @import("config_change_status.zig").ConfigChangeStatus;
 const InitiatedBy = @import("initiated_by.zig").InitiatedBy;
 const OverallChangeStatus = @import("overall_change_status.zig").OverallChangeStatus;
+const ValidationFailure = @import("validation_failure.zig").ValidationFailure;
 
 /// The progress details of a specific domain configuration change.
 pub const ChangeProgressStatusDetails = struct {
+    /// The list of advisory warning codes that were accepted for the configuration
+    /// change.
+    accepted_warnings: ?[]const []const u8 = null,
+
     /// The unique change identifier associated with a specific domain configuration
     /// change.
     change_id: ?[]const u8 = null,
@@ -40,7 +45,12 @@ pub const ChangeProgressStatusDetails = struct {
     /// The total number of stages required for the configuration change.
     total_number_of_stages: i32 = 0,
 
+    /// The validation failures that occurred as a result of the configuration
+    /// change.
+    validation_failures: ?[]const ValidationFailure = null,
+
     pub const json_field_names = .{
+        .accepted_warnings = "AcceptedWarnings",
         .change_id = "ChangeId",
         .change_progress_stages = "ChangeProgressStages",
         .completed_properties = "CompletedProperties",
@@ -51,5 +61,6 @@ pub const ChangeProgressStatusDetails = struct {
         .start_time = "StartTime",
         .status = "Status",
         .total_number_of_stages = "TotalNumberOfStages",
+        .validation_failures = "ValidationFailures",
     };
 };

@@ -6,20 +6,25 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const DeleteConnectionInput = struct {
-    /// Specifies whether to remove the client's session state when disconnecting.
-    /// Set to `TRUE` to delete all session information, including subscriptions and
-    /// queued messages. Set to `FALSE` to preserve the session state. By default,
-    /// this is set to `FALSE` (preserves the session state).
+    /// Specifies whether to remove the client's persistent session state when
+    /// disconnecting. Set to `TRUE` to delete all session information, including
+    /// subscriptions and queued messages. Set to `FALSE` to preserve the session
+    /// state for [persistent
+    /// sessions](https://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html#mqtt-persistent-sessions). For clean sessions this parameter will be ignored. By default, this is set to `FALSE` (preserves the session state).
     clean_session: ?bool = null,
 
     /// The unique identifier of the MQTT client to disconnect. The client ID can't
     /// start with a dollar sign ($).
+    ///
+    /// MQTT client IDs must be URL encoded (percent-encoded) when they contain
+    /// characters that are not valid in HTTP requests, such as spaces, forward
+    /// slashes (/), and UTF-8 characters.
     client_id: []const u8,
 
     /// Controls if Amazon Web Services IoT Core publishes the client's Last Will
     /// and Testament (LWT) message upon disconnection. Set to `TRUE` to prevent
-    /// publishing the LWT message. Set to `FALSE` to allow publishing. By default,
-    /// this is set to `FALSE` (allows publishing the LWT message).
+    /// publishing the LWT message. Set to `FALSE` to ensure that LWT is published.
+    /// By default, this is set to `FALSE` (LWT message is published).
     prevent_will_message: ?bool = null,
 
     pub const json_field_names = .{

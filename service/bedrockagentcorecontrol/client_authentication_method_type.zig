@@ -4,11 +4,13 @@ pub const ClientAuthenticationMethodType = enum {
     client_secret_basic,
     client_secret_post,
     aws_iam_id_token_jwt,
+    private_key_jwt,
 
     pub const json_field_names = .{
         .client_secret_basic = "CLIENT_SECRET_BASIC",
         .client_secret_post = "CLIENT_SECRET_POST",
         .aws_iam_id_token_jwt = "AWS_IAM_ID_TOKEN_JWT",
+        .private_key_jwt = "PRIVATE_KEY_JWT",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const ClientAuthenticationMethodType = enum {
             .client_secret_basic => "CLIENT_SECRET_BASIC",
             .client_secret_post => "CLIENT_SECRET_POST",
             .aws_iam_id_token_jwt => "AWS_IAM_ID_TOKEN_JWT",
+            .private_key_jwt => "PRIVATE_KEY_JWT",
         };
     }
 

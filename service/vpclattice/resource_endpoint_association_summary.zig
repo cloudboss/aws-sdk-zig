@@ -1,3 +1,5 @@
+const PayerResponsibilityEntry = @import("payer_responsibility_entry.zig").PayerResponsibilityEntry;
+
 /// Summary information about a VPC endpoint association.
 pub const ResourceEndpointAssociationSummary = struct {
     /// The Amazon Resource Name (ARN) of the VPC endpoint association.
@@ -12,6 +14,9 @@ pub const ResourceEndpointAssociationSummary = struct {
 
     /// The ID of the VPC endpoint association.
     id: ?[]const u8 = null,
+
+    /// Who pays for each category of charges on the VPC endpoint association.
+    payer_responsibility: ?[]const PayerResponsibilityEntry = null,
 
     /// The Amazon Resource Name (ARN) of the resource configuration.
     resource_configuration_arn: ?[]const u8 = null,
@@ -33,6 +38,7 @@ pub const ResourceEndpointAssociationSummary = struct {
         .created_at = "createdAt",
         .created_by = "createdBy",
         .id = "id",
+        .payer_responsibility = "payerResponsibility",
         .resource_configuration_arn = "resourceConfigurationArn",
         .resource_configuration_id = "resourceConfigurationId",
         .resource_configuration_name = "resourceConfigurationName",

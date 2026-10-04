@@ -111,10 +111,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetCoreNetworkChangeEve
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetCoreNetworkChangeEventsOutput {
-    var result: GetCoreNetworkChangeEventsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetCoreNetworkChangeEventsOutput, body, allocator);
-    }
+    const result: GetCoreNetworkChangeEventsOutput = try aws.json.parseJsonObject(
+        GetCoreNetworkChangeEventsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

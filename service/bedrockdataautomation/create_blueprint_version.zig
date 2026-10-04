@@ -88,10 +88,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateBlueprintVersionI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreateBlueprintVersionOutput {
-    var result: CreateBlueprintVersionOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreateBlueprintVersionOutput, body, allocator);
-    }
+    const result: CreateBlueprintVersionOutput = try aws.json.parseJsonObject(
+        CreateBlueprintVersionOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

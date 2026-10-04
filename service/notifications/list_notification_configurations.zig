@@ -169,10 +169,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListNotificationConfigu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListNotificationConfigurationsOutput {
-    var result: ListNotificationConfigurationsOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListNotificationConfigurationsOutput, body, allocator);
-    }
+    const result: ListNotificationConfigurationsOutput = try aws.json.parseJsonObject(
+        ListNotificationConfigurationsOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

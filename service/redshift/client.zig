@@ -24,6 +24,7 @@ const create_event_subscription = @import("create_event_subscription.zig");
 const create_hsm_client_certificate = @import("create_hsm_client_certificate.zig");
 const create_hsm_configuration = @import("create_hsm_configuration.zig");
 const create_integration = @import("create_integration.zig");
+const create_qev_2_idc_application = @import("create_qev_2_idc_application.zig");
 const create_redshift_idc_application = @import("create_redshift_idc_application.zig");
 const create_scheduled_action = @import("create_scheduled_action.zig");
 const create_snapshot_copy_grant = @import("create_snapshot_copy_grant.zig");
@@ -44,6 +45,7 @@ const delete_hsm_client_certificate = @import("delete_hsm_client_certificate.zig
 const delete_hsm_configuration = @import("delete_hsm_configuration.zig");
 const delete_integration = @import("delete_integration.zig");
 const delete_partner = @import("delete_partner.zig");
+const delete_qev_2_idc_application = @import("delete_qev_2_idc_application.zig");
 const delete_redshift_idc_application = @import("delete_redshift_idc_application.zig");
 const delete_resource_policy = @import("delete_resource_policy.zig");
 const delete_scheduled_action = @import("delete_scheduled_action.zig");
@@ -81,6 +83,7 @@ const describe_logging_status = @import("describe_logging_status.zig");
 const describe_node_configuration_options = @import("describe_node_configuration_options.zig");
 const describe_orderable_cluster_options = @import("describe_orderable_cluster_options.zig");
 const describe_partners = @import("describe_partners.zig");
+const describe_qev_2_idc_applications = @import("describe_qev_2_idc_applications.zig");
 const describe_redshift_idc_applications = @import("describe_redshift_idc_applications.zig");
 const describe_reserved_node_exchange_status = @import("describe_reserved_node_exchange_status.zig");
 const describe_reserved_node_offerings = @import("describe_reserved_node_offerings.zig");
@@ -121,6 +124,7 @@ const modify_endpoint_access = @import("modify_endpoint_access.zig");
 const modify_event_subscription = @import("modify_event_subscription.zig");
 const modify_integration = @import("modify_integration.zig");
 const modify_lakehouse_configuration = @import("modify_lakehouse_configuration.zig");
+const modify_qev_2_idc_application = @import("modify_qev_2_idc_application.zig");
 const modify_redshift_idc_application = @import("modify_redshift_idc_application.zig");
 const modify_scheduled_action = @import("modify_scheduled_action.zig");
 const modify_snapshot_copy_retention_period = @import("modify_snapshot_copy_retention_period.zig");
@@ -483,6 +487,12 @@ pub const Client = struct {
         return create_integration.execute(self, allocator, input, options);
     }
 
+    /// Creates an Amazon Redshift Query Editor (QEV2) IAM Identity Center
+    /// application.
+    pub fn createQev2IdcApplication(self: *Self, allocator: std.mem.Allocator, input: create_qev_2_idc_application.CreateQev2IdcApplicationInput, options: CallOptions) !create_qev_2_idc_application.CreateQev2IdcApplicationOutput {
+        return create_qev_2_idc_application.execute(self, allocator, input, options);
+    }
+
     /// Creates an Amazon Redshift application for use with IAM Identity Center.
     pub fn createRedshiftIdcApplication(self: *Self, allocator: std.mem.Allocator, input: create_redshift_idc_application.CreateRedshiftIdcApplicationInput, options: CallOptions) !create_redshift_idc_application.CreateRedshiftIdcApplicationOutput {
         return create_redshift_idc_application.execute(self, allocator, input, options);
@@ -649,6 +659,12 @@ pub const Client = struct {
     /// cluster until the integration is deleted at the partner's website.
     pub fn deletePartner(self: *Self, allocator: std.mem.Allocator, input: delete_partner.DeletePartnerInput, options: CallOptions) !delete_partner.DeletePartnerOutput {
         return delete_partner.execute(self, allocator, input, options);
+    }
+
+    /// Deletes an Amazon Redshift Query Editor (QEV2) IAM Identity Center
+    /// application.
+    pub fn deleteQev2IdcApplication(self: *Self, allocator: std.mem.Allocator, input: delete_qev_2_idc_application.DeleteQev2IdcApplicationInput, options: CallOptions) !delete_qev_2_idc_application.DeleteQev2IdcApplicationOutput {
+        return delete_qev_2_idc_application.execute(self, allocator, input, options);
     }
 
     /// Deletes an Amazon Redshift IAM Identity Center application.
@@ -1056,6 +1072,13 @@ pub const Client = struct {
     /// Returns information about the partner integrations defined for a cluster.
     pub fn describePartners(self: *Self, allocator: std.mem.Allocator, input: describe_partners.DescribePartnersInput, options: CallOptions) !describe_partners.DescribePartnersOutput {
         return describe_partners.execute(self, allocator, input, options);
+    }
+
+    /// Lists the Amazon Redshift Query Editor (QEV2) IAM Identity Center
+    /// applications. To retrieve additional results, use the MaxRecords and Marker
+    /// parameters.
+    pub fn describeQev2IdcApplications(self: *Self, allocator: std.mem.Allocator, input: describe_qev_2_idc_applications.DescribeQev2IdcApplicationsInput, options: CallOptions) !describe_qev_2_idc_applications.DescribeQev2IdcApplicationsOutput {
+        return describe_qev_2_idc_applications.execute(self, allocator, input, options);
     }
 
     /// Lists the Amazon Redshift IAM Identity Center applications.
@@ -1511,6 +1534,12 @@ pub const Client = struct {
         return modify_lakehouse_configuration.execute(self, allocator, input, options);
     }
 
+    /// Modifies an Amazon Redshift Query Editor (QEV2) IAM Identity Center
+    /// application.
+    pub fn modifyQev2IdcApplication(self: *Self, allocator: std.mem.Allocator, input: modify_qev_2_idc_application.ModifyQev2IdcApplicationInput, options: CallOptions) !modify_qev_2_idc_application.ModifyQev2IdcApplicationOutput {
+        return modify_qev_2_idc_application.execute(self, allocator, input, options);
+    }
+
     /// Changes an existing Amazon Redshift IAM Identity Center application.
     pub fn modifyRedshiftIdcApplication(self: *Self, allocator: std.mem.Allocator, input: modify_redshift_idc_application.ModifyRedshiftIdcApplicationInput, options: CallOptions) !modify_redshift_idc_application.ModifyRedshiftIdcApplicationOutput {
         return modify_redshift_idc_application.execute(self, allocator, input, options);
@@ -1628,6 +1657,14 @@ pub const Client = struct {
     /// * dc2.large
     ///
     /// * dc2.8xlarge
+    ///
+    /// * rg.large
+    ///
+    /// * rg.xlarge
+    ///
+    /// * rg.4xlarge
+    ///
+    /// * rg.12xlarge
     ///
     /// * ra3.large
     ///
@@ -1923,6 +1960,13 @@ pub const Client = struct {
     }
 
     pub fn describeOrderableClusterOptionsPaginator(self: *Self, params: describe_orderable_cluster_options.DescribeOrderableClusterOptionsInput) paginator.DescribeOrderableClusterOptionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn describeQev2IdcApplicationsPaginator(self: *Self, params: describe_qev_2_idc_applications.DescribeQev2IdcApplicationsInput) paginator.DescribeQev2IdcApplicationsPaginator {
         return .{
             .client = self,
             .params = params,

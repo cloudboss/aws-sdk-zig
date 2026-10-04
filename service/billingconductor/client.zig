@@ -16,6 +16,7 @@ const delete_pricing_rule = @import("delete_pricing_rule.zig");
 const disassociate_accounts = @import("disassociate_accounts.zig");
 const disassociate_pricing_rules = @import("disassociate_pricing_rules.zig");
 const get_billing_group_cost_report = @import("get_billing_group_cost_report.zig");
+const get_billing_transfer_preference = @import("get_billing_transfer_preference.zig");
 const list_account_associations = @import("list_account_associations.zig");
 const list_billing_group_cost_reports = @import("list_billing_group_cost_reports.zig");
 const list_billing_groups = @import("list_billing_groups.zig");
@@ -30,6 +31,7 @@ const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_billing_group = @import("update_billing_group.zig");
+const update_billing_transfer_preference = @import("update_billing_transfer_preference.zig");
 const update_custom_line_item = @import("update_custom_line_item.zig");
 const update_pricing_plan = @import("update_pricing_plan.zig");
 const update_pricing_rule = @import("update_pricing_rule.zig");
@@ -155,6 +157,11 @@ pub const Client = struct {
         return get_billing_group_cost_report.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the auto billing group creation preference for a billing transfer.
+    pub fn getBillingTransferPreference(self: *Self, allocator: std.mem.Allocator, input: get_billing_transfer_preference.GetBillingTransferPreferenceInput, options: CallOptions) !get_billing_transfer_preference.GetBillingTransferPreferenceOutput {
+        return get_billing_transfer_preference.execute(self, allocator, input, options);
+    }
+
     /// This is a paginated call to list linked accounts that are linked to the
     /// payer account for the specified time period. If no information is provided,
     /// the current billing period is used. The response will optionally include the
@@ -236,6 +243,20 @@ pub const Client = struct {
     /// This updates an existing billing group.
     pub fn updateBillingGroup(self: *Self, allocator: std.mem.Allocator, input: update_billing_group.UpdateBillingGroupInput, options: CallOptions) !update_billing_group.UpdateBillingGroupOutput {
         return update_billing_group.execute(self, allocator, input, options);
+    }
+
+    /// Sets the auto billing group creation preference for a billing transfer. When
+    /// the preference is enabled, Billing Conductor automatically creates an
+    /// indirect billing transfer billing group in your account, with the pricing
+    /// plan that you specify, for each account that transfers its bill to the bill
+    /// source account of this billing transfer. The preference applies only to
+    /// billing groups that are created after you enable it.
+    ///
+    /// Enabling the preference requires the `iam:CreateServiceLinkedRole`
+    /// permission. While a pricing plan is specified in an enabled preference, you
+    /// can't delete that pricing plan.
+    pub fn updateBillingTransferPreference(self: *Self, allocator: std.mem.Allocator, input: update_billing_transfer_preference.UpdateBillingTransferPreferenceInput, options: CallOptions) !update_billing_transfer_preference.UpdateBillingTransferPreferenceOutput {
+        return update_billing_transfer_preference.execute(self, allocator, input, options);
     }
 
     /// Update an existing custom line item in the current or previous billing

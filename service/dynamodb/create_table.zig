@@ -16,6 +16,7 @@ const SSESpecification = @import("sse_specification.zig").SSESpecification;
 const StreamSpecification = @import("stream_specification.zig").StreamSpecification;
 const TableClass = @import("table_class.zig").TableClass;
 const Tag = @import("tag.zig").Tag;
+const VectorIndex = @import("vector_index.zig").VectorIndex;
 const WarmThroughput = @import("warm_throughput.zig").WarmThroughput;
 const TableDescription = @import("table_description.zig").TableDescription;
 
@@ -271,6 +272,36 @@ pub const CreateTableInput = struct {
     /// DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html).
     tags: ?[]const Tag = null,
 
+    /// One or more vector indexes to be created on the table. Each vector index
+    /// enables
+    /// similarity search on a vector attribute. Each element in the list consists
+    /// of:
+    ///
+    /// * `IndexName` - The name of the vector index. Must be unique
+    /// within the table.
+    ///
+    /// * `VectorAttribute` - The attribute that contains vector
+    /// embeddings. If multiple vector indexes reference the same attribute, they
+    /// must all use the same number of dimensions.
+    ///
+    /// * `Dimensions` - The number of dimensions in each vector.
+    ///
+    /// * `DistanceFunction` - The distance function used to calculate
+    /// similarity. Valid values: `COSINE`, `EUCLIDEAN`,
+    /// `DOT_PRODUCT`.
+    ///
+    /// * `Projection` - Specifies attributes that are copied (projected)
+    /// from the table into the vector index. The total number of projected
+    /// non-key attributes is shared across the vector attribute (counts as 1)
+    /// and `INLINE_FILTER` search schema elements (each counts as 1).
+    /// `HASH` search schema elements do not count toward this
+    /// limit.
+    ///
+    /// * `SearchSchema` - (Optional) Defines the partition key
+    /// (`HASH`) and inline filter (`INLINE_FILTER`) attributes
+    /// for the vector index.
+    vector_indexes: ?[]const VectorIndex = null,
+
     /// Represents the warm throughput (in read units per second and write units per
     /// second)
     /// for creating a table.
@@ -293,6 +324,7 @@ pub const CreateTableInput = struct {
         .table_class = "TableClass",
         .table_name = "TableName",
         .tags = "Tags",
+        .vector_indexes = "VectorIndexes",
         .warm_throughput = "WarmThroughput",
     };
 };

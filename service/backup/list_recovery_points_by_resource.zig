@@ -14,7 +14,8 @@ pub const ListRecoveryPointsByResourceInput = struct {
     /// with the selected resources that are managed by Backup.
     ///
     /// If this is set to `FALSE`, the response will contain all
-    /// recovery points associated with the selected resource.
+    /// recovery points associated with the selected resource, except for EBS
+    /// snapshots copied within the same Region and account.
     ///
     /// Type: Boolean
     managed_by_aws_backup_only: ?bool = null,
@@ -144,10 +145,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRecoveryPointsByRes
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !ListRecoveryPointsByResourceOutput {
-    var result: ListRecoveryPointsByResourceOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(ListRecoveryPointsByResourceOutput, body, allocator);
-    }
+    const result: ListRecoveryPointsByResourceOutput = try aws.json.parseJsonObject(
+        ListRecoveryPointsByResourceOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -1,6 +1,7 @@
 const ManagedStatus = @import("managed_status.zig").ManagedStatus;
 const PlatformType = @import("platform_type.zig").PlatformType;
 const ResourceType = @import("resource_type.zig").ResourceType;
+const SourceType = @import("source_type.zig").SourceType;
 
 /// Details about a specific managed node.
 pub const InstanceInfo = struct {
@@ -9,6 +10,12 @@ pub const InstanceInfo = struct {
 
     /// The version number of the agent installed on the node.
     agent_version: ?[]const u8 = null,
+
+    /// The Availability Zone where the managed node is located.
+    availability_zone: ?[]const u8 = null,
+
+    /// The Availability Zone ID where the managed node is located.
+    availability_zone_id: ?[]const u8 = null,
 
     /// The fully qualified host name of the managed node.
     computer_name: ?[]const u8 = null,
@@ -21,6 +28,9 @@ pub const InstanceInfo = struct {
 
     /// Indicates whether the node is managed by Systems Manager.
     managed_status: ?ManagedStatus = null,
+
+    /// The name assigned to the managed node.
+    name: ?[]const u8 = null,
 
     /// The name of the operating system platform running on your managed node.
     platform_name: ?[]const u8 = null,
@@ -36,16 +46,33 @@ pub const InstanceInfo = struct {
     /// fleet.
     resource_type: ?ResourceType = null,
 
+    /// The ID of the source resource. For IoT Greengrass devices, `SourceId` is
+    /// the Thing name.
+    source_id: ?[]const u8 = null,
+
+    /// The location of the source resource in the third-party cloud environment.
+    source_location: ?[]const u8 = null,
+
+    /// The type of the source resource. For IoT Greengrass devices,
+    /// `SourceType` is `AWS::IoT::Thing`.
+    source_type: ?SourceType = null,
+
     pub const json_field_names = .{
         .agent_type = "AgentType",
         .agent_version = "AgentVersion",
+        .availability_zone = "AvailabilityZone",
+        .availability_zone_id = "AvailabilityZoneId",
         .computer_name = "ComputerName",
         .instance_status = "InstanceStatus",
         .ip_address = "IpAddress",
         .managed_status = "ManagedStatus",
+        .name = "Name",
         .platform_name = "PlatformName",
         .platform_type = "PlatformType",
         .platform_version = "PlatformVersion",
         .resource_type = "ResourceType",
+        .source_id = "SourceId",
+        .source_location = "SourceLocation",
+        .source_type = "SourceType",
     };
 };

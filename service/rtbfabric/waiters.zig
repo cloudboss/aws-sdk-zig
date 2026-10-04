@@ -3,11 +3,158 @@ const std = @import("std");
 
 const Client = @import("client.zig").Client;
 
+const get_certificate_association = @import("get_certificate_association.zig");
 const get_inbound_external_link = @import("get_inbound_external_link.zig");
 const get_link = @import("get_link.zig");
+const get_link_routing_rule = @import("get_link_routing_rule.zig");
 const get_outbound_external_link = @import("get_outbound_external_link.zig");
 const get_requester_gateway = @import("get_requester_gateway.zig");
 const get_responder_gateway = @import("get_responder_gateway.zig");
+
+pub const CertificateAssociatedWaiter = struct {
+    client: *Client,
+    params: get_certificate_association.GetCertificateAssociationInput,
+    config: aws.waiter.WaiterConfig = .{
+        .min_delay_s = 15,
+        .max_delay_s = 120,
+        .max_wait_time_s = 300,
+    },
+
+    const Self = @This();
+
+    pub fn wait(self: *Self) aws.waiter.WaiterError!void {
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
+        var delay_s: u32 = self.config.min_delay_s;
+
+        while (true) {
+            const state = self.poll();
+
+            switch (state) {
+                .success => return,
+                .failure => return error.WaiterFailed,
+                .retry => {},
+            }
+
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
+            if (elapsed >= self.config.max_wait_time_s) {
+                return error.WaiterTimedOut;
+            }
+
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
+            delay_s = @min(delay_s * 2, self.config.max_delay_s);
+        }
+    }
+
+    fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
+        var diagnostic: @import("errors.zig").ServiceError = undefined;
+        const output = self.client.getCertificateAssociation(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+            if (err == error.ServiceError) {
+                defer diagnostic.deinit();
+                if (std.mem.eql(u8, diagnostic.code(), "ResourceNotFoundException")) {
+                    return .failure;
+                }
+            }
+            return .retry;
+        };
+
+        if (output.status) |val_0| {
+            if (std.mem.eql(u8, val_0.wireName(), "ASSOCIATED")) {
+                return .success;
+            }
+        }
+        if (output.status) |val_0| {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
+                return .failure;
+            }
+        }
+        if (output.status) |val_0| {
+            if (std.mem.eql(u8, val_0.wireName(), "DISASSOCIATED")) {
+                return .failure;
+            }
+        }
+        if (output.status) |val_0| {
+            if (std.mem.eql(u8, val_0.wireName(), "PENDING_DISASSOCIATION")) {
+                return .failure;
+            }
+        }
+        return .retry;
+    }
+};
+
+pub const CertificateDisassociatedWaiter = struct {
+    client: *Client,
+    params: get_certificate_association.GetCertificateAssociationInput,
+    config: aws.waiter.WaiterConfig = .{
+        .min_delay_s = 15,
+        .max_delay_s = 120,
+        .max_wait_time_s = 300,
+    },
+
+    const Self = @This();
+
+    pub fn wait(self: *Self) aws.waiter.WaiterError!void {
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
+        var delay_s: u32 = self.config.min_delay_s;
+
+        while (true) {
+            const state = self.poll();
+
+            switch (state) {
+                .success => return,
+                .failure => return error.WaiterFailed,
+                .retry => {},
+            }
+
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
+            if (elapsed >= self.config.max_wait_time_s) {
+                return error.WaiterTimedOut;
+            }
+
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
+            delay_s = @min(delay_s * 2, self.config.max_delay_s);
+        }
+    }
+
+    fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
+        var diagnostic: @import("errors.zig").ServiceError = undefined;
+        const output = self.client.getCertificateAssociation(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+            if (err == error.ServiceError) {
+                defer diagnostic.deinit();
+                if (std.mem.eql(u8, diagnostic.code(), "ResourceNotFoundException")) {
+                    return .success;
+                }
+            }
+            return .retry;
+        };
+
+        if (output.status) |val_0| {
+            if (std.mem.eql(u8, val_0.wireName(), "DISASSOCIATED")) {
+                return .success;
+            }
+        }
+        if (output.status) |val_0| {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
+                return .failure;
+            }
+        }
+        if (output.status) |val_0| {
+            if (std.mem.eql(u8, val_0.wireName(), "PENDING_ASSOCIATION")) {
+                return .failure;
+            }
+        }
+        return .retry;
+    }
+};
 
 pub const InboundExternalLinkActiveWaiter = struct {
     client: *Client,
@@ -337,6 +484,134 @@ pub const LinkDeletedWaiter = struct {
         }
         if (output.status) |val_0| {
             if (std.mem.eql(u8, val_0.wireName(), "REJECTED")) {
+                return .failure;
+            }
+        }
+        return .retry;
+    }
+};
+
+pub const LinkRoutingRuleActiveWaiter = struct {
+    client: *Client,
+    params: get_link_routing_rule.GetLinkRoutingRuleInput,
+    config: aws.waiter.WaiterConfig = .{
+        .min_delay_s = 5,
+        .max_delay_s = 120,
+        .max_wait_time_s = 300,
+    },
+
+    const Self = @This();
+
+    pub fn wait(self: *Self) aws.waiter.WaiterError!void {
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
+        var delay_s: u32 = self.config.min_delay_s;
+
+        while (true) {
+            const state = self.poll();
+
+            switch (state) {
+                .success => return,
+                .failure => return error.WaiterFailed,
+                .retry => {},
+            }
+
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
+            if (elapsed >= self.config.max_wait_time_s) {
+                return error.WaiterTimedOut;
+            }
+
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
+            delay_s = @min(delay_s * 2, self.config.max_delay_s);
+        }
+    }
+
+    fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
+        const output = self.client.getLinkRoutingRule(arena.allocator(), self.params, .{}) catch  {
+            return .retry;
+        };
+
+        if (output.status) |val_0| {
+            if (std.mem.eql(u8, val_0.wireName(), "ACTIVE")) {
+                return .success;
+            }
+        }
+        if (output.status) |val_0| {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
+                return .failure;
+            }
+        }
+        if (output.status) |val_0| {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETED")) {
+                return .failure;
+            }
+        }
+        return .retry;
+    }
+};
+
+pub const LinkRoutingRuleDeletedWaiter = struct {
+    client: *Client,
+    params: get_link_routing_rule.GetLinkRoutingRuleInput,
+    config: aws.waiter.WaiterConfig = .{
+        .min_delay_s = 5,
+        .max_delay_s = 120,
+        .max_wait_time_s = 300,
+    },
+
+    const Self = @This();
+
+    pub fn wait(self: *Self) aws.waiter.WaiterError!void {
+        const io = self.client.config.io;
+        const start = std.Io.Clock.real.now(io).toSeconds();
+        var delay_s: u32 = self.config.min_delay_s;
+
+        while (true) {
+            const state = self.poll();
+
+            switch (state) {
+                .success => return,
+                .failure => return error.WaiterFailed,
+                .retry => {},
+            }
+
+            const elapsed: u32 = @intCast(std.Io.Clock.real.now(io).toSeconds() - start);
+            if (elapsed >= self.config.max_wait_time_s) {
+                return error.WaiterTimedOut;
+            }
+
+            const jittered = aws.waiter.jitteredDelay(io, self.config.min_delay_s, delay_s);
+            io.sleep(.fromSeconds(@intCast(jittered)), .awake) catch {};
+            delay_s = @min(delay_s * 2, self.config.max_delay_s);
+        }
+    }
+
+    fn poll(self: *Self) aws.waiter.AcceptorState {
+        var arena = std.heap.ArenaAllocator.init(self.client.allocator);
+        defer arena.deinit();
+
+        var diagnostic: @import("errors.zig").ServiceError = undefined;
+        const output = self.client.getLinkRoutingRule(arena.allocator(), self.params, .{ .diagnostic = &diagnostic }) catch |err| {
+            if (err == error.ServiceError) {
+                defer diagnostic.deinit();
+                if (std.mem.eql(u8, diagnostic.code(), "ResourceNotFoundException")) {
+                    return .success;
+                }
+            }
+            return .retry;
+        };
+
+        if (output.status) |val_0| {
+            if (std.mem.eql(u8, val_0.wireName(), "DELETED")) {
+                return .success;
+            }
+        }
+        if (output.status) |val_0| {
+            if (std.mem.eql(u8, val_0.wireName(), "FAILED")) {
                 return .failure;
             }
         }

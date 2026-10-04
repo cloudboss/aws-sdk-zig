@@ -102,10 +102,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateBrokerStorageInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateBrokerStorageOutput {
-    var result: UpdateBrokerStorageOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateBrokerStorageOutput, body, allocator);
-    }
+    const result: UpdateBrokerStorageOutput = try aws.json.parseJsonObject(
+        UpdateBrokerStorageOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

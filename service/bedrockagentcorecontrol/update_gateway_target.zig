@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const CertificateConfiguration = @import("certificate_configuration.zig").CertificateConfiguration;
 const CredentialProviderConfiguration = @import("credential_provider_configuration.zig").CredentialProviderConfiguration;
 const MetadataConfiguration = @import("metadata_configuration.zig").MetadataConfiguration;
 const PrivateEndpoint = @import("private_endpoint.zig").PrivateEndpoint;
@@ -14,6 +15,15 @@ const TargetProtocolType = @import("target_protocol_type.zig").TargetProtocolTyp
 const TargetStatus = @import("target_status.zig").TargetStatus;
 
 pub const UpdateGatewayTargetInput = struct {
+    /// The private certificate authority (CA) configurations for the gateway
+    /// target. Use this to have the gateway trust a private CA when it establishes
+    /// TLS connections to the target endpoint. Provide each certificate by
+    /// reference to an Amazon S3 object or an Amazon Web Services Secrets Manager
+    /// secret. You can specify only one certificate authority configuration in this
+    /// list. To remove a previously configured certificate authority, omit this
+    /// field on update.
+    certificate_configurations: ?[]const CertificateConfiguration = null,
+
     /// The updated credential provider configurations for the gateway target.
     credential_provider_configurations: ?[]const CredentialProviderConfiguration = null,
 
@@ -28,7 +38,7 @@ pub const UpdateGatewayTargetInput = struct {
     metadata_configuration: ?MetadataConfiguration = null,
 
     /// The updated name for the gateway target.
-    name: []const u8,
+    name: ?[]const u8 = null,
 
     /// The private endpoint configuration for the gateway target. Use this to
     /// connect the gateway to private resources in your VPC.
@@ -40,6 +50,7 @@ pub const UpdateGatewayTargetInput = struct {
     target_id: []const u8,
 
     pub const json_field_names = .{
+        .certificate_configurations = "certificateConfigurations",
         .credential_provider_configurations = "credentialProviderConfigurations",
         .description = "description",
         .gateway_identifier = "gatewayIdentifier",
@@ -56,6 +67,10 @@ pub const UpdateGatewayTargetOutput = struct {
     /// returned when a target is configured with a credential provider with
     /// authorization code grant type and requires user federation.
     authorization_data: ?AuthorizationData = null,
+
+    /// The private certificate authority (CA) configurations for the gateway
+    /// target.
+    certificate_configurations: ?[]const CertificateConfiguration = null,
 
     /// The timestamp when the gateway target was created.
     created_at: i64,
@@ -104,6 +119,7 @@ pub const UpdateGatewayTargetOutput = struct {
 
     pub const json_field_names = .{
         .authorization_data = "authorizationData",
+        .certificate_configurations = "certificateConfigurations",
         .created_at = "createdAt",
         .credential_provider_configurations = "credentialProviderConfigurations",
         .description = "description",
@@ -164,6 +180,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGatewayTargetInpu
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.certificate_configurations) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"certificateConfigurations\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.credential_provider_configurations) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"credentialProviderConfigurations\":");
@@ -182,10 +204,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGatewayTargetInpu
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (has_prev) try body_buf.appendSlice(allocator, ",");
-    try body_buf.appendSlice(allocator, "\"name\":");
-    try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
-    has_prev = true;
+    if (input.name) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"name\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.private_endpoint) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"privateEndpoint\":");
@@ -212,10 +236,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGatewayTargetInpu
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateGatewayTargetOutput {
-    var result: UpdateGatewayTargetOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdateGatewayTargetOutput, body, allocator);
-    }
+    const result: UpdateGatewayTargetOutput = try aws.json.parseJsonObject(
+        UpdateGatewayTargetOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

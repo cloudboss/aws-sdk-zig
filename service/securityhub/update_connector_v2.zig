@@ -5,6 +5,8 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ProviderUpdateConfiguration = @import("provider_update_configuration.zig").ProviderUpdateConfiguration;
+const ConnectorStatus = @import("connector_status.zig").ConnectorStatus;
+const EnablementStatus = @import("enablement_status.zig").EnablementStatus;
 
 pub const UpdateConnectorV2Input = struct {
     /// The UUID of the connectorV2 to identify connectorV2 resource.
@@ -24,6 +26,16 @@ pub const UpdateConnectorV2Input = struct {
 };
 
 pub const UpdateConnectorV2Output = struct {
+    /// The status of the connector after the update.
+    connector_status: ?ConnectorStatus = null,
+
+    /// The enablement status of the connector after the update.
+    enablement_status: ?EnablementStatus = null,
+
+    pub const json_field_names = .{
+        .connector_status = "ConnectorStatus",
+        .enablement_status = "EnablementStatus",
+    };
 };
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateConnectorV2Input, options: CallOptions) !UpdateConnectorV2Output {
@@ -93,11 +105,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateConnectorV2Input,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdateConnectorV2Output {
-    _ = allocator;
-    _ = body;
+    const result: UpdateConnectorV2Output = try aws.json.parseJsonObject(
+        UpdateConnectorV2Output,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
-    const result: UpdateConnectorV2Output = .{};
 
     return result;
 }

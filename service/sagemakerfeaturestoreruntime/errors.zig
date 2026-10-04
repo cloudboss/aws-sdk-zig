@@ -7,6 +7,7 @@ pub const ServiceError = struct {
 
     pub const Kind = union(enum) {
         access_forbidden: AccessForbidden,
+        conflict_exception: ConflictException,
         internal_failure: InternalFailure,
         resource_not_found: ResourceNotFound,
         service_unavailable: ServiceUnavailable,
@@ -16,6 +17,7 @@ pub const ServiceError = struct {
         pub fn code(self: Kind) []const u8 {
             return switch (self) {
                 .access_forbidden => "AccessForbidden",
+                .conflict_exception => "ConflictException",
                 .internal_failure => "InternalFailure",
                 .resource_not_found => "ResourceNotFound",
                 .service_unavailable => "ServiceUnavailable",
@@ -27,6 +29,7 @@ pub const ServiceError = struct {
         pub fn message(self: Kind) []const u8 {
             return switch (self) {
                 .access_forbidden => |e| e.message,
+                .conflict_exception => |e| e.message,
                 .internal_failure => |e| e.message,
                 .resource_not_found => |e| e.message,
                 .service_unavailable => |e| e.message,
@@ -38,6 +41,7 @@ pub const ServiceError = struct {
         pub fn httpStatus(self: Kind) u16 {
             return switch (self) {
                 .access_forbidden => 403,
+                .conflict_exception => 409,
                 .internal_failure => 500,
                 .resource_not_found => 404,
                 .service_unavailable => 503,
@@ -49,6 +53,7 @@ pub const ServiceError = struct {
         pub fn requestId(self: Kind) []const u8 {
             return switch (self) {
                 .access_forbidden => |e| e.request_id,
+                .conflict_exception => |e| e.request_id,
                 .internal_failure => |e| e.request_id,
                 .resource_not_found => |e| e.request_id,
                 .service_unavailable => |e| e.request_id,
@@ -80,6 +85,11 @@ pub const ServiceError = struct {
 };
 
 pub const AccessForbidden = struct {
+    message: []const u8 = "",
+    request_id: []const u8 = "",
+};
+
+pub const ConflictException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 };
@@ -129,6 +139,12 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
 
     if (std.mem.eql(u8, error_code, "AccessForbidden")) {
         return .{ .arena = arena, .kind = .{ .access_forbidden = .{
+            .message = owned_message,
+            .request_id = owned_request_id,
+        } } };
+    }
+    if (std.mem.eql(u8, error_code, "ConflictException")) {
+        return .{ .arena = arena, .kind = .{ .conflict_exception = .{
             .message = owned_message,
             .request_id = owned_request_id,
         } } };

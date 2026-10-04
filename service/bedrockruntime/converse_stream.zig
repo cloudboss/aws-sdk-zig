@@ -126,10 +126,22 @@ pub const ConverseStreamInput = struct {
     };
 };
 
-pub const ConverseStreamOutput = @import("converse_stream_response.zig").ConverseStreamResponse;
+pub const ConverseStreamOutput = struct {
+
+    stream: aws.event_stream_reader.EventStreamReader = undefined,
+
+    pub fn deinit(self: *ConverseStreamOutput) void {
+        self.stream.deinit();
+    }
+
+    pub const json_field_names = .{
+        .stream = "stream",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ConverseStreamInput, options: CallOptions) !ConverseStreamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
     const alloc = arena.allocator();
 
     var request = try serializeRequest(alloc, input, client.config);
@@ -138,8 +150,6 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ConverseStr
     try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "amazonbedrockfrontendservice", client.config.http_client.clock_skew_offset);
 
     var stream_resp = try client.config.http_client.sendStreamingRequestWithOptions(&request, client.options);
-
-    arena.deinit();
 
     if (!stream_resp.isSuccess()) {
         defer stream_resp.deinit();
@@ -151,11 +161,9 @@ pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ConverseStr
         return error.ServiceError;
     }
 
-    stream_resp.deinitHeaders();
-    errdefer stream_resp.body.deinit();
-
-    const stream = try aws.event_stream_reader.EventStreamReader.init(allocator, stream_resp.body);
-    return .{ .stream = stream };
+    errdefer stream_resp.deinit();
+    const result = try deserializeStreamingResponse(allocator, &stream_resp);
+    return result;
 }
 
 fn serializeRequest(allocator: std.mem.Allocator, input: ConverseStreamInput, config: *aws.Config) !aws.http.Request {
@@ -258,4 +266,15 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ConverseStreamInput, co
     try request.headers.put(allocator, "Content-Type", "application/json");
 
     return request;
+}
+
+fn deserializeStreamingResponse(allocator: std.mem.Allocator, stream_resp: *aws.http.StreamingResponse) !ConverseStreamOutput {
+    var result: ConverseStreamOutput = .{};
+    result.stream = try aws.event_stream_reader.EventStreamReader.init(
+        allocator,
+        stream_resp.body,
+    );
+    stream_resp.deinitHeaders();
+
+    return result;
 }

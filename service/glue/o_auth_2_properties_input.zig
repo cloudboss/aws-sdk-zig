@@ -20,7 +20,8 @@ pub const OAuth2PropertiesInput = struct {
     o_auth_2_credentials: ?OAuth2Credentials = null,
 
     /// The OAuth2 grant type in the CreateConnection request. For example,
-    /// `AUTHORIZATION_CODE`, `JWT_BEARER`, or `CLIENT_CREDENTIALS`.
+    /// `AUTHORIZATION_CODE`, `JWT_BEARER`, `REFRESH_TOKEN`, or
+    /// `CLIENT_CREDENTIALS`.
     o_auth_2_grant_type: ?OAuth2GrantType = null,
 
     /// The URL of the provider's authentication server, to exchange an

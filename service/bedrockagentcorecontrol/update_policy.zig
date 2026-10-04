@@ -6,19 +6,26 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const PolicyDefinition = @import("policy_definition.zig").PolicyDefinition;
 const UpdatedDescription = @import("updated_description.zig").UpdatedDescription;
+const EnforcementMode = @import("enforcement_mode.zig").EnforcementMode;
 const PolicyValidationMode = @import("policy_validation_mode.zig").PolicyValidationMode;
 const PolicyStatus = @import("policy_status.zig").PolicyStatus;
 
 pub const UpdatePolicyInput = struct {
-    /// The new Cedar policy statement that defines the access control rules. This
-    /// replaces the existing policy definition with new logic while maintaining the
-    /// policy's identity.
+    /// The new Cedar or Dogwood policy statement that defines the access control
+    /// rules. This replaces the existing policy definition with new logic while
+    /// maintaining the policy's identity.
     definition: ?PolicyDefinition = null,
 
     /// The new human-readable description for the policy. This optional field
     /// allows updating the policy's documentation while keeping the same policy
     /// logic.
     description: ?UpdatedDescription = null,
+
+    /// The enforcement mode for the policy. Run this policy in `LOG_ONLY` mode to
+    /// collect data on how it affects your application. Once you are satisfied with
+    /// the data gathered, switch the policy to `ACTIVE`. If you omit this field,
+    /// the policy's existing enforcement mode is unchanged.
+    enforcement_mode: ?EnforcementMode = null,
 
     /// The identifier of the policy engine that manages the policy to be updated.
     /// This ensures the policy is updated within the correct policy engine context.
@@ -40,6 +47,7 @@ pub const UpdatePolicyInput = struct {
     pub const json_field_names = .{
         .definition = "definition",
         .description = "description",
+        .enforcement_mode = "enforcementMode",
         .policy_engine_id = "policyEngineId",
         .policy_id = "policyId",
         .validation_mode = "validationMode",
@@ -50,11 +58,14 @@ pub const UpdatePolicyOutput = struct {
     /// The original creation timestamp of the policy.
     created_at: i64,
 
-    /// The updated Cedar policy statement.
+    /// The updated Cedar or Dogwood policy statement.
     definition: ?PolicyDefinition = null,
 
     /// The updated description of the policy.
     description: ?[]const u8 = null,
+
+    /// The current enforcement mode of the updated policy.
+    enforcement_mode: ?EnforcementMode = null,
 
     /// The name of the updated policy.
     name: []const u8,
@@ -81,6 +92,7 @@ pub const UpdatePolicyOutput = struct {
         .created_at = "createdAt",
         .definition = "definition",
         .description = "description",
+        .enforcement_mode = "enforcementMode",
         .name = "name",
         .policy_arn = "policyArn",
         .policy_engine_id = "policyEngineId",
@@ -144,6 +156,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePolicyInput, conf
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.enforcement_mode) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"enforcementMode\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.validation_mode) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"validationMode\":");
@@ -166,10 +184,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePolicyInput, conf
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdatePolicyOutput {
-    var result: UpdatePolicyOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdatePolicyOutput, body, allocator);
-    }
+    const result: UpdatePolicyOutput = try aws.json.parseJsonObject(
+        UpdatePolicyOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -45,6 +45,7 @@ const delete_queue_environment = @import("delete_queue_environment.zig");
 const delete_queue_fleet_association = @import("delete_queue_fleet_association.zig");
 const delete_queue_limit_association = @import("delete_queue_limit_association.zig");
 const delete_storage_profile = @import("delete_storage_profile.zig");
+const delete_volume = @import("delete_volume.zig");
 const delete_worker = @import("delete_worker.zig");
 const disassociate_member_from_farm = @import("disassociate_member_from_farm.zig");
 const disassociate_member_from_fleet = @import("disassociate_member_from_fleet.zig");
@@ -69,6 +70,7 @@ const get_step = @import("get_step.zig");
 const get_storage_profile = @import("get_storage_profile.zig");
 const get_storage_profile_for_queue = @import("get_storage_profile_for_queue.zig");
 const get_task = @import("get_task.zig");
+const get_volume = @import("get_volume.zig");
 const get_worker = @import("get_worker.zig");
 const list_available_metered_products = @import("list_available_metered_products.zig");
 const list_budgets = @import("list_budgets.zig");
@@ -98,6 +100,7 @@ const list_storage_profiles = @import("list_storage_profiles.zig");
 const list_storage_profiles_for_queue = @import("list_storage_profiles_for_queue.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_tasks = @import("list_tasks.zig");
+const list_volumes = @import("list_volumes.zig");
 const list_workers = @import("list_workers.zig");
 const put_metered_product = @import("put_metered_product.zig");
 const search_jobs = @import("search_jobs.zig");
@@ -477,6 +480,11 @@ pub const Client = struct {
         return delete_storage_profile.execute(self, allocator, input, options);
     }
 
+    /// Deletes a persistent volume.
+    pub fn deleteVolume(self: *Self, allocator: std.mem.Allocator, input: delete_volume.DeleteVolumeInput, options: CallOptions) !delete_volume.DeleteVolumeOutput {
+        return delete_volume.execute(self, allocator, input, options);
+    }
+
     /// Deletes a worker.
     pub fn deleteWorker(self: *Self, allocator: std.mem.Allocator, input: delete_worker.DeleteWorkerInput, options: CallOptions) !delete_worker.DeleteWorkerOutput {
         return delete_worker.execute(self, allocator, input, options);
@@ -598,6 +606,11 @@ pub const Client = struct {
     /// Gets a task.
     pub fn getTask(self: *Self, allocator: std.mem.Allocator, input: get_task.GetTaskInput, options: CallOptions) !get_task.GetTaskOutput {
         return get_task.execute(self, allocator, input, options);
+    }
+
+    /// Gets a persistent volume.
+    pub fn getVolume(self: *Self, allocator: std.mem.Allocator, input: get_volume.GetVolumeInput, options: CallOptions) !get_volume.GetVolumeOutput {
+        return get_volume.execute(self, allocator, input, options);
     }
 
     /// Gets a worker.
@@ -745,6 +758,11 @@ pub const Client = struct {
         return list_tasks.execute(self, allocator, input, options);
     }
 
+    /// Lists the persistent volumes in a fleet.
+    pub fn listVolumes(self: *Self, allocator: std.mem.Allocator, input: list_volumes.ListVolumesInput, options: CallOptions) !list_volumes.ListVolumesOutput {
+        return list_volumes.execute(self, allocator, input, options);
+    }
+
     /// Lists workers.
     pub fn listWorkers(self: *Self, allocator: std.mem.Allocator, input: list_workers.ListWorkersInput, options: CallOptions) !list_workers.ListWorkersOutput {
         return list_workers.execute(self, allocator, input, options);
@@ -807,6 +825,14 @@ pub const Client = struct {
     }
 
     /// Updates a fleet.
+    ///
+    /// Workers that are running when you call `UpdateFleet` keep the instance type
+    /// and capabilities that they launched with until they scale in. Deadline Cloud
+    /// can schedule jobs that you submit after the update on these existing
+    /// workers, so the new configuration might not take effect immediately. To make
+    /// sure that all workers use the new configuration, set `maxWorkerCount` to 0,
+    /// use the `ListWorkers` operation to confirm that the fleet has no workers,
+    /// and then restore `maxWorkerCount`.
     pub fn updateFleet(self: *Self, allocator: std.mem.Allocator, input: update_fleet.UpdateFleetInput, options: CallOptions) !update_fleet.UpdateFleetOutput {
         return update_fleet.execute(self, allocator, input, options);
     }
@@ -1082,6 +1108,13 @@ pub const Client = struct {
     }
 
     pub fn listTasksPaginator(self: *Self, params: list_tasks.ListTasksInput) paginator.ListTasksPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listVolumesPaginator(self: *Self, params: list_volumes.ListVolumesInput) paginator.ListVolumesPaginator {
         return .{
             .client = self,
             .params = params,

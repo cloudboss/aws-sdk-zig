@@ -47,6 +47,13 @@ pub const PutDeliveryDestinationInput = struct {
     /// The format for the logs that this delivery destination will receive.
     output_format: ?OutputFormat = null,
 
+    /// The ARN of an IAM role in your account that CloudWatch Logs assumes to
+    /// deliver to this delivery destination. The trust policy of the role must
+    /// allow CloudWatch Logs to assume it. This parameter is supported only for
+    /// X-Ray trace delivery
+    /// destinations.
+    role_arn: ?[]const u8 = null,
+
     /// An optional list of key-value pairs to associate with the resource.
     ///
     /// For more information about tagging, see [Tagging Amazon Web Services
@@ -58,6 +65,7 @@ pub const PutDeliveryDestinationInput = struct {
         .delivery_destination_type = "deliveryDestinationType",
         .name = "name",
         .output_format = "outputFormat",
+        .role_arn = "roleArn",
         .tags = "tags",
     };
 };

@@ -2,6 +2,7 @@ const aws = @import("aws");
 
 const Encryption = @import("encryption.zig").Encryption;
 const MediaStreamOutputConfigurationRequest = @import("media_stream_output_configuration_request.zig").MediaStreamOutputConfigurationRequest;
+const NdiOutputTimecodeSource = @import("ndi_output_timecode_source.zig").NdiOutputTimecodeSource;
 const OutputStatus = @import("output_status.zig").OutputStatus;
 const Protocol = @import("protocol.zig").Protocol;
 const State = @import("state.zig").State;
@@ -44,6 +45,17 @@ pub const AddOutputRequest = struct {
 
     /// The name of the output. This value must be unique within the current flow.
     name: ?[]const u8 = null,
+
+    /// Controls how MediaConnect generates timecodes for NDI output frames. If you
+    /// don't specify this field, MediaConnect uses `EMBEDDED_TIMECODE`.
+    ///
+    /// * `EMBEDDED_TIMECODE` (default) - Preserves timecodes from the input
+    ///   transport stream. The timecodes must be embedded in the video stream as
+    ///   SEI timing messages. If no embedded timecode is detected, MediaConnect
+    ///   uses the UTC system time instead.
+    /// * `UTC_SYSTEM_TIME` - Generates timecodes based on the system clock time
+    ///   when each frame is sent.
+    ndi_output_timecode_source: ?NdiOutputTimecodeSource = null,
 
     /// A suffix for the name of the NDI® sender that the flow creates. If a custom
     /// name isn't specified, MediaConnect uses the output name.
@@ -101,6 +113,7 @@ pub const AddOutputRequest = struct {
         .media_stream_output_configurations = "MediaStreamOutputConfigurations",
         .min_latency = "MinLatency",
         .name = "Name",
+        .ndi_output_timecode_source = "NdiOutputTimecodeSource",
         .ndi_program_name = "NdiProgramName",
         .ndi_speed_hq_quality = "NdiSpeedHqQuality",
         .output_status = "OutputStatus",

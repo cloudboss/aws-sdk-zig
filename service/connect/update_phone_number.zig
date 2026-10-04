@@ -14,8 +14,8 @@ pub const UpdatePhoneNumberInput = struct {
     /// APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
     client_token: ?[]const u8 = null,
 
-    /// The identifier of the Amazon Connect instance that phone numbers are claimed
-    /// to. You
+    /// The identifier of the Connect Customer instance that phone numbers are
+    /// claimed to. You
     /// can [find the
     /// instance
     /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance. You must enter `InstanceId` or `TargetArn`.
@@ -24,7 +24,7 @@ pub const UpdatePhoneNumberInput = struct {
     /// A unique identifier for the phone number.
     phone_number_id: []const u8,
 
-    /// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+    /// The Amazon Resource Name (ARN) for Connect Customer instances or traffic
     /// distribution groups that phone number inbound traffic is routed through. You
     /// must enter `InstanceId` or `TargetArn`.
     target_arn: ?[]const u8 = null,
@@ -123,10 +123,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePhoneNumberInput,
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !UpdatePhoneNumberOutput {
-    var result: UpdatePhoneNumberOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(UpdatePhoneNumberOutput, body, allocator);
-    }
+    const result: UpdatePhoneNumberOutput = try aws.json.parseJsonObject(
+        UpdatePhoneNumberOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

@@ -10,6 +10,9 @@ pub const SignInPolicyType = struct {
     /// users to start authentication with a standard username and password, or with
     /// other
     /// one-time password and hardware factors.
+    ///
+    /// `SOFTWARE_TOKEN` is not currently supported as a first auth factor.
+    /// Do not include this value in `AllowedFirstAuthFactors`.
     allowed_first_auth_factors: ?[]const AuthFactorType = null,
 
     pub const json_field_names = .{

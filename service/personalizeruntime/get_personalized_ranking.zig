@@ -180,10 +180,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetPersonalizedRankingI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetPersonalizedRankingOutput {
-    var result: GetPersonalizedRankingOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetPersonalizedRankingOutput, body, allocator);
-    }
+    const result: GetPersonalizedRankingOutput = try aws.json.parseJsonObject(
+        GetPersonalizedRankingOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

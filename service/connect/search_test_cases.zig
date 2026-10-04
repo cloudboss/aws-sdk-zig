@@ -134,10 +134,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchTestCasesInput, c
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !SearchTestCasesOutput {
-    var result: SearchTestCasesOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(SearchTestCasesOutput, body, allocator);
-    }
+    const result: SearchTestCasesOutput = try aws.json.parseJsonObject(
+        SearchTestCasesOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

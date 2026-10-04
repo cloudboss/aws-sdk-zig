@@ -75,10 +75,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpeechSynthesisTaskI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetSpeechSynthesisTaskOutput {
-    var result: GetSpeechSynthesisTaskOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(GetSpeechSynthesisTaskOutput, body, allocator);
-    }
+    const result: GetSpeechSynthesisTaskOutput = try aws.json.parseJsonObject(
+        GetSpeechSynthesisTaskOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

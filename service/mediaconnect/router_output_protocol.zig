@@ -5,12 +5,14 @@ pub const RouterOutputProtocol = enum {
     rist,
     srt_caller,
     srt_listener,
+    rtmp_push,
 
     pub const json_field_names = .{
         .rtp = "RTP",
         .rist = "RIST",
         .srt_caller = "SRT_CALLER",
         .srt_listener = "SRT_LISTENER",
+        .rtmp_push = "RTMP_PUSH",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const RouterOutputProtocol = enum {
             .rist => "RIST",
             .srt_caller => "SRT_CALLER",
             .srt_listener => "SRT_LISTENER",
+            .rtmp_push => "RTMP_PUSH",
         };
     }
 

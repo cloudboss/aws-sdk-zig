@@ -1,14 +1,18 @@
 const aws = @import("aws");
 
-const JobAttachmentSettings = @import("job_attachment_settings.zig").JobAttachmentSettings;
+const JobDetailsJobAttachmentSettings = @import("job_details_job_attachment_settings.zig").JobDetailsJobAttachmentSettings;
 const JobRunAsUser = @import("job_run_as_user.zig").JobRunAsUser;
 const JobParameter = @import("job_parameter.zig").JobParameter;
 const PathMappingRule = @import("path_mapping_rule.zig").PathMappingRule;
 
 /// The job details for a specific job.
 pub const JobDetailsEntity = struct {
+    /// The Open Job Description extensions that the job template uses. This value
+    /// is used by the worker agent.
+    extensions: ?[]const []const u8 = null,
+
     /// The job attachment settings.
-    job_attachment_settings: ?JobAttachmentSettings = null,
+    job_attachment_settings: ?JobDetailsJobAttachmentSettings = null,
 
     /// The job ID.
     job_id: []const u8,
@@ -32,6 +36,7 @@ pub const JobDetailsEntity = struct {
     schema_version: []const u8,
 
     pub const json_field_names = .{
+        .extensions = "extensions",
         .job_attachment_settings = "jobAttachmentSettings",
         .job_id = "jobId",
         .job_run_as_user = "jobRunAsUser",

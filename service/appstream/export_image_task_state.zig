@@ -4,11 +4,13 @@ pub const ExportImageTaskState = enum {
     exporting,
     completed,
     failed,
+    timed_out,
 
     pub const json_field_names = .{
         .exporting = "EXPORTING",
         .completed = "COMPLETED",
         .failed = "FAILED",
+        .timed_out = "TIMED_OUT",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const ExportImageTaskState = enum {
             .exporting => "EXPORTING",
             .completed => "COMPLETED",
             .failed => "FAILED",
+            .timed_out => "TIMED_OUT",
         };
     }
 

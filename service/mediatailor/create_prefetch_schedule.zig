@@ -219,10 +219,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePrefetchScheduleI
 }
 
 fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !CreatePrefetchScheduleOutput {
-    var result: CreatePrefetchScheduleOutput = .{};
-    if (body.len > 0) {
-        result = try aws.json.parseJsonObject(CreatePrefetchScheduleOutput, body, allocator);
-    }
+    const result: CreatePrefetchScheduleOutput = try aws.json.parseJsonObject(
+        CreatePrefetchScheduleOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
     _ = status;
     _ = headers;
 

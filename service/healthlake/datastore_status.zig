@@ -1,11 +1,14 @@
 const std = @import("std");
 
+/// The status of a data store.
 pub const DatastoreStatus = enum {
     creating,
     active,
     deleting,
     deleted,
     create_failed,
+    updating,
+    update_failed,
 
     pub const json_field_names = .{
         .creating = "CREATING",
@@ -13,6 +16,8 @@ pub const DatastoreStatus = enum {
         .deleting = "DELETING",
         .deleted = "DELETED",
         .create_failed = "CREATE_FAILED",
+        .updating = "UPDATING",
+        .update_failed = "UPDATE_FAILED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +27,8 @@ pub const DatastoreStatus = enum {
             .deleting => "DELETING",
             .deleted => "DELETED",
             .create_failed => "CREATE_FAILED",
+            .updating => "UPDATING",
+            .update_failed => "UPDATE_FAILED",
         };
     }
 

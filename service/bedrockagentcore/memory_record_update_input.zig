@@ -22,6 +22,10 @@ pub const MemoryRecordUpdateInput = struct {
     /// record.
     namespaces: ?[]const []const u8 = null,
 
+    /// The namespaces of the source memory record being updated. This value is used
+    /// for IAM condition key authorization.
+    source_namespaces: ?[]const []const u8 = null,
+
     /// Time at which the memory record was updated
     timestamp: i64,
 
@@ -31,6 +35,7 @@ pub const MemoryRecordUpdateInput = struct {
         .memory_strategy_id = "memoryStrategyId",
         .metadata = "metadata",
         .namespaces = "namespaces",
+        .source_namespaces = "sourceNamespaces",
         .timestamp = "timestamp",
     };
 };

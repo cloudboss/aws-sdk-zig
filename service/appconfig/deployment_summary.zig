@@ -1,5 +1,6 @@
 const GrowthType = @import("growth_type.zig").GrowthType;
 const DeploymentState = @import("deployment_state.zig").DeploymentState;
+const DeploymentType = @import("deployment_type.zig").DeploymentType;
 
 /// Information about the deployment.
 pub const DeploymentSummary = struct {
@@ -8,6 +9,9 @@ pub const DeploymentSummary = struct {
 
     /// The name of the configuration.
     configuration_name: ?[]const u8 = null,
+
+    /// The ID of the configuration profile that was deployed.
+    configuration_profile_id: ?[]const u8 = null,
 
     /// The version of the configuration.
     configuration_version: ?[]const u8 = null,
@@ -38,12 +42,16 @@ pub const DeploymentSummary = struct {
     /// The state of the deployment.
     state: ?DeploymentState = null,
 
+    /// The type of deployment.
+    @"type": ?DeploymentType = null,
+
     /// A user-defined label for an AppConfig hosted configuration version.
     version_label: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .completed_at = "CompletedAt",
         .configuration_name = "ConfigurationName",
+        .configuration_profile_id = "ConfigurationProfileId",
         .configuration_version = "ConfigurationVersion",
         .deployment_duration_in_minutes = "DeploymentDurationInMinutes",
         .deployment_number = "DeploymentNumber",
@@ -53,6 +61,7 @@ pub const DeploymentSummary = struct {
         .percentage_complete = "PercentageComplete",
         .started_at = "StartedAt",
         .state = "State",
+        .@"type" = "Type",
         .version_label = "VersionLabel",
     };
 };
