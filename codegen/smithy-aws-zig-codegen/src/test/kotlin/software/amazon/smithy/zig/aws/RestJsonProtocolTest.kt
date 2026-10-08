@@ -269,6 +269,17 @@ class RestJsonProtocolTest {
     }
 
     @Test
+    fun enumHttpLabelsUseTheirSerializedValue() {
+        val original = buildTestModel()
+        val input = original.expectShape(ShapeId.from("test#InvokeInput"), StructureShape::class.java)
+        val label = input.getMember("FunctionName").get().toBuilder()
+            .target("test#RuntimeType").build()
+        val model = original.toBuilder().addShape(input.toBuilder().addMember(label).build()).build()
+        val request = generateFiles(model).getValue("invoke.zig")
+        assertTrue(request.contains("path_buf.appendSlice(allocator, input.function_name.wireName())"))
+    }
+
+    @Test
     fun requiredBodyMembersAreInitializedByParsing() {
         val original = buildTestModel()
         val output = original.expectShape(

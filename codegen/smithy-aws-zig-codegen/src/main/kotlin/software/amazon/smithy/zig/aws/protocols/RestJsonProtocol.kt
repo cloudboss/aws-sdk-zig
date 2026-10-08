@@ -126,7 +126,7 @@ class RestJsonProtocol : ProtocolGenerator {
         val staticQuery = if (questionMark >= 0) uriString.substring(questionMark + 1) else null
 
         // Build URI path
-        writeUriBuilder(writer, pathPattern, bindings)
+        writeUriBuilder(writer, ctx, pathPattern, bindings)
         writer.blankLine()
 
         // Build query string
@@ -235,7 +235,9 @@ class RestJsonProtocol : ProtocolGenerator {
         writer.closeBlock("}")
     }
 
-    private fun writeUriBuilder(writer: ZigWriter, pathPattern: String, bindings: InputBindings) {
+    private fun writeUriBuilder(
+        writer: ZigWriter, ctx: OperationContext, pathPattern: String, bindings: InputBindings,
+    ) {
         if (bindings.labels.isEmpty()) {
             // Static path, no substitution needed
             writer.write("const path = \"\$L\";", pathPattern)
@@ -275,7 +277,11 @@ class RestJsonProtocol : ProtocolGenerator {
                 is Pair<*, *> -> {
                     val memberName = part.first as String
                     val fieldName = NamingUtil.toFieldName(memberName)
-                    writer.write("try path_buf.appendSlice(allocator, input.\$L);", fieldName)
+                    val target = ctx.model.expectShape((part.second as MemberShape).target)
+                    val isEnum = target is EnumShape ||
+                        (target is StringShape && target.hasTrait(EnumTrait::class.java))
+                    val value = if (isEnum) "input.$fieldName.wireName()" else "input.$fieldName"
+                    writer.write("try path_buf.appendSlice(allocator, \$L);", value)
                 }
             }
         }
