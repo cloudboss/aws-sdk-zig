@@ -89,6 +89,11 @@ class UnionGenerator(
             for (member in shape.members()) {
                 val variantName = NamingUtil.toFieldName(member.memberName)
                 val targetSymbol = symbolProvider.toSymbol(member)
+                val payloadType = if (member.target == shape.id) {
+                    if (member.isRequired) "*const ${symbol.name}" else "?*const ${symbol.name}"
+                } else {
+                    targetSymbol.name
+                }
 
                 val memberDocs = member.getTrait(DocumentationTrait::class.java)
                     .map { it.value }
@@ -97,7 +102,7 @@ class UnionGenerator(
                 if (memberDocs != null) {
                     writer.writeDocs(memberDocs)
                 }
-                writer.write("\$L: \$L,", variantName, targetSymbol.name)
+                writer.write("\$L: \$L,", variantName, payloadType)
             }
 
             // Emit json_field_names for JSON protocol services

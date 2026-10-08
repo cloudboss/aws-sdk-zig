@@ -58,6 +58,7 @@ fn parseValue(comptime T: type, scanner: *Scanner, alloc: Allocator) ParseError!
             },
             .one => {
                 const p = try alloc.create(ptr.child);
+                errdefer alloc.destroy(p);
                 p.* = try parseValue(ptr.child, scanner, alloc);
                 return p;
             },
@@ -1369,4 +1370,33 @@ test "parse array of zero-sized enum" {
     defer if (result.values) |values| std.testing.allocator.free(values);
 
     try std.testing.expectEqual(@as(usize, 2), result.values.?.len);
+}
+
+test "recursive union JSON serialization and parsing" {
+    const Expression = union(enum) {
+        not: ?*const @This(),
+        value: i32,
+    };
+    const leaf = Expression{ .value = 42 };
+    const input = Expression{ .not = &leaf };
+    const encoded = try jsonStringify(input, std.testing.allocator);
+    defer std.testing.allocator.free(encoded);
+    try std.testing.expectEqualStrings("{\"not\":{\"value\":42}}", encoded);
+
+    var arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+    defer arena.deinit();
+    const parsed = try parseJsonObject(Expression, encoded, arena.allocator());
+    try std.testing.expectEqual(@as(i32, 42), parsed.not.?.value);
+}
+
+test "recursive union parse failure frees the child allocation" {
+    const Expression = union(enum) {
+        not: ?*const @This(),
+        value: i32,
+    };
+    try std.testing.expectError(error.SyntaxError, parseJsonObject(
+        Expression,
+        "{\"not\":{\"invalid\":42}}",
+        std.testing.allocator,
+    ));
 }
