@@ -14,8 +14,7 @@ pub const DisableImportFindingsForProductInput = struct {
     };
 };
 
-pub const DisableImportFindingsForProductOutput = struct {
-};
+pub const DisableImportFindingsForProductOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableImportFindingsForProductInput, options: CallOptions) !DisableImportFindingsForProductOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

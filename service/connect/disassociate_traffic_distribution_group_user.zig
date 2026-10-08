@@ -24,8 +24,7 @@ pub const DisassociateTrafficDistributionGroupUserInput = struct {
     };
 };
 
-pub const DisassociateTrafficDistributionGroupUserOutput = struct {
-};
+pub const DisassociateTrafficDistributionGroupUserOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateTrafficDistributionGroupUserInput, options: CallOptions) !DisassociateTrafficDistributionGroupUserOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

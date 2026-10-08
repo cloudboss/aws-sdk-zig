@@ -24,8 +24,7 @@ pub const DisconnectUserInput = struct {
     };
 };
 
-pub const DisconnectUserOutput = struct {
-};
+pub const DisconnectUserOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisconnectUserInput, options: CallOptions) !DisconnectUserOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

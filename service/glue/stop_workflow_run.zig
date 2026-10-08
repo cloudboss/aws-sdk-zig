@@ -18,8 +18,7 @@ pub const StopWorkflowRunInput = struct {
     };
 };
 
-pub const StopWorkflowRunOutput = struct {
-};
+pub const StopWorkflowRunOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopWorkflowRunInput, options: CallOptions) !StopWorkflowRunOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

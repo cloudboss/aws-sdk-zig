@@ -28,8 +28,7 @@ pub const DeleteOriginEndpointPolicyInput = struct {
     };
 };
 
-pub const DeleteOriginEndpointPolicyOutput = struct {
-};
+pub const DeleteOriginEndpointPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteOriginEndpointPolicyInput, options: CallOptions) !DeleteOriginEndpointPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

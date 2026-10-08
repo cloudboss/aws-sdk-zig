@@ -24,8 +24,7 @@ pub const PutPermissionsBoundaryToPermissionSetInput = struct {
     };
 };
 
-pub const PutPermissionsBoundaryToPermissionSetOutput = struct {
-};
+pub const PutPermissionsBoundaryToPermissionSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutPermissionsBoundaryToPermissionSetInput, options: CallOptions) !PutPermissionsBoundaryToPermissionSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

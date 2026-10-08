@@ -18,8 +18,7 @@ pub const DeleteAnalysisTemplateInput = struct {
     };
 };
 
-pub const DeleteAnalysisTemplateOutput = struct {
-};
+pub const DeleteAnalysisTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAnalysisTemplateInput, options: CallOptions) !DeleteAnalysisTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

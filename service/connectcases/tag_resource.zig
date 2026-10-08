@@ -5,7 +5,19 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The Amazon Resource Name (ARN)
+    arn: []const u8,
+
+    /// A map of of key-value pairs that represent tags on a resource. Tags are used
+    /// to organize, track, or control access for this resource.
+    tags: []const aws.map.StringMapEntry,
+
+    pub const json_field_names = .{
+        .arn = "arn",
+        .tags = "tags",
+    };
+};
 
 pub const TagResourceOutput = struct {};
 

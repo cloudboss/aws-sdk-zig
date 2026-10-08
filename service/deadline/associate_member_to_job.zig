@@ -45,8 +45,7 @@ pub const AssociateMemberToJobInput = struct {
     };
 };
 
-pub const AssociateMemberToJobOutput = struct {
-};
+pub const AssociateMemberToJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateMemberToJobInput, options: CallOptions) !AssociateMemberToJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

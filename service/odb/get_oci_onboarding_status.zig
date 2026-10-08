@@ -9,8 +9,7 @@ const OciIdentityDomain = @import("oci_identity_domain.zig").OciIdentityDomain;
 const OciOnboardingStatus = @import("oci_onboarding_status.zig").OciOnboardingStatus;
 const SubscriptionError = @import("subscription_error.zig").SubscriptionError;
 
-pub const GetOciOnboardingStatusInput = struct {
-};
+pub const GetOciOnboardingStatusInput = struct {};
 
 pub const GetOciOnboardingStatusOutput = struct {
     /// The list of Amazon Web Services Identity and Access Management (IAM) service

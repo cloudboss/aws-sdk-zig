@@ -15,8 +15,7 @@ pub const GenerateRecommendedPolicyV2Input = struct {
     };
 };
 
-pub const GenerateRecommendedPolicyV2Output = struct {
-};
+pub const GenerateRecommendedPolicyV2Output = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GenerateRecommendedPolicyV2Input, options: CallOptions) !GenerateRecommendedPolicyV2Output {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

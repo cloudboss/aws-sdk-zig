@@ -20,8 +20,7 @@ pub const UpdateGlueIdentityCenterConfigurationInput = struct {
     };
 };
 
-pub const UpdateGlueIdentityCenterConfigurationOutput = struct {
-};
+pub const UpdateGlueIdentityCenterConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateGlueIdentityCenterConfigurationInput, options: CallOptions) !UpdateGlueIdentityCenterConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

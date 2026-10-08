@@ -6,9 +6,24 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the Amazon Security Lake resource to add
+    /// or update the tags for.
+    resource_arn: []const u8,
 
-pub const TagResourceOutput = @import("tag_resource_response.zig").TagResourceResponse;
+    /// An array of objects, one for each tag (key and value) to associate with the
+    /// Amazon Security Lake resource. For each tag, you must
+    /// specify both a tag key and a tag value. A tag value cannot be null, but it
+    /// can be an empty string.
+    tags: []const Tag,
+
+    pub const json_field_names = .{
+        .resource_arn = "resourceArn",
+        .tags = "tags",
+    };
+};
+
+pub const TagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TagResourceInput, options: CallOptions) !TagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

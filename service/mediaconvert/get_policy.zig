@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Policy = @import("policy.zig").Policy;
 
-pub const GetPolicyInput = struct {
-};
+pub const GetPolicyInput = struct {};
 
 pub const GetPolicyOutput = struct {
     /// A policy configures behavior that you allow or disallow for your account.

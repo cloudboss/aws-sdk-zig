@@ -36,7 +36,7 @@ pub const UpdateEngagementContextInput = struct {
     /// Specifies the type of context being updated within the engagement. This
     /// field determines the structure and content of the context payload being
     /// modified.
-    @"type": EngagementContextType,
+    type: EngagementContextType,
 
     pub const json_field_names = .{
         .catalog = "Catalog",
@@ -44,7 +44,7 @@ pub const UpdateEngagementContextInput = struct {
         .engagement_identifier = "EngagementIdentifier",
         .engagement_last_modified_at = "EngagementLastModifiedAt",
         .payload = "Payload",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

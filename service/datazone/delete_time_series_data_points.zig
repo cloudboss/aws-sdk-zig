@@ -33,8 +33,7 @@ pub const DeleteTimeSeriesDataPointsInput = struct {
     };
 };
 
-pub const DeleteTimeSeriesDataPointsOutput = struct {
-};
+pub const DeleteTimeSeriesDataPointsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTimeSeriesDataPointsInput, options: CallOptions) !DeleteTimeSeriesDataPointsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -70,7 +69,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteTimeSeriesDataPoi
     try path_buf.appendSlice(allocator, "/v2/domains/");
     try path_buf.appendSlice(allocator, input.domain_identifier);
     try path_buf.appendSlice(allocator, "/entities/");
-    try path_buf.appendSlice(allocator, input.entity_type);
+    try path_buf.appendSlice(allocator, input.entity_type.wireName());
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.entity_identifier);
     try path_buf.appendSlice(allocator, "/time-series-data-points");

@@ -14,8 +14,7 @@ pub const DeletePromptRouterInput = struct {
     };
 };
 
-pub const DeletePromptRouterOutput = struct {
-};
+pub const DeletePromptRouterOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePromptRouterInput, options: CallOptions) !DeletePromptRouterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

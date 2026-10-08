@@ -22,8 +22,7 @@ pub const DeleteThreatIntelSetInput = struct {
     };
 };
 
-pub const DeleteThreatIntelSetOutput = struct {
-};
+pub const DeleteThreatIntelSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteThreatIntelSetInput, options: CallOptions) !DeleteThreatIntelSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

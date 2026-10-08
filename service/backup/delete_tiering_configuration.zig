@@ -14,8 +14,7 @@ pub const DeleteTieringConfigurationInput = struct {
     };
 };
 
-pub const DeleteTieringConfigurationOutput = struct {
-};
+pub const DeleteTieringConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTieringConfigurationInput, options: CallOptions) !DeleteTieringConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

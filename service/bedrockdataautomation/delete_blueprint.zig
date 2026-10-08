@@ -18,8 +18,7 @@ pub const DeleteBlueprintInput = struct {
     };
 };
 
-pub const DeleteBlueprintOutput = struct {
-};
+pub const DeleteBlueprintOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteBlueprintInput, options: CallOptions) !DeleteBlueprintOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

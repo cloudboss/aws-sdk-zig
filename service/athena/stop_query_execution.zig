@@ -14,8 +14,7 @@ pub const StopQueryExecutionInput = struct {
     };
 };
 
-pub const StopQueryExecutionOutput = struct {
-};
+pub const StopQueryExecutionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopQueryExecutionInput, options: CallOptions) !StopQueryExecutionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

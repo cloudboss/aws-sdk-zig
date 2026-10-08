@@ -37,7 +37,7 @@ pub const UpdateResourceInput = struct {
     resource_id: []const u8,
 
     /// Updates the resource type.
-    @"type": ?ResourceType = null,
+    type: ?ResourceType = null,
 
     pub const json_field_names = .{
         .booking_options = "BookingOptions",
@@ -46,12 +46,11 @@ pub const UpdateResourceInput = struct {
         .name = "Name",
         .organization_id = "OrganizationId",
         .resource_id = "ResourceId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
-pub const UpdateResourceOutput = struct {
-};
+pub const UpdateResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateResourceInput, options: CallOptions) !UpdateResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

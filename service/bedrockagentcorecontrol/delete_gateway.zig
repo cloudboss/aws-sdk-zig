@@ -6,9 +6,31 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const GatewayStatus = @import("gateway_status.zig").GatewayStatus;
 
-pub const DeleteGatewayInput = @import("delete_gateway_request.zig").DeleteGatewayRequest;
+pub const DeleteGatewayInput = struct {
+    /// The identifier of the gateway to delete.
+    gateway_identifier: []const u8,
 
-pub const DeleteGatewayOutput = @import("delete_gateway_response.zig").DeleteGatewayResponse;
+    pub const json_field_names = .{
+        .gateway_identifier = "gatewayIdentifier",
+    };
+};
+
+pub const DeleteGatewayOutput = struct {
+    /// The unique identifier of the deleted gateway.
+    gateway_id: []const u8,
+
+    /// The current status of the gateway deletion.
+    status: GatewayStatus,
+
+    /// The reasons for the current status of the gateway deletion.
+    status_reasons: ?[]const []const u8 = null,
+
+    pub const json_field_names = .{
+        .gateway_id = "gatewayId",
+        .status = "status",
+        .status_reasons = "statusReasons",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteGatewayInput, options: CallOptions) !DeleteGatewayOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -21,18 +21,17 @@ pub const SubmitFeedbackInput = struct {
     profiling_group_name: []const u8,
 
     /// The feedback tpye. Thee are two valid values, `Positive` and `Negative`.
-    @"type": FeedbackType,
+    type: FeedbackType,
 
     pub const json_field_names = .{
         .anomaly_instance_id = "anomalyInstanceId",
         .comment = "comment",
         .profiling_group_name = "profilingGroupName",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
-pub const SubmitFeedbackOutput = struct {
-};
+pub const SubmitFeedbackOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SubmitFeedbackInput, options: CallOptions) !SubmitFeedbackOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -84,7 +83,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SubmitFeedbackInput, co
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

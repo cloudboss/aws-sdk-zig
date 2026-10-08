@@ -21,7 +21,7 @@ pub const CampaignSummary = struct {
 
     schedule: ?Schedule = null,
 
-    @"type": ?ExternalCampaignType = null,
+    type: ?ExternalCampaignType = null,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -32,6 +32,6 @@ pub const CampaignSummary = struct {
         .id = "id",
         .name = "name",
         .schedule = "schedule",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -23,8 +23,7 @@ pub const PutVerificationStateOnViolationInput = struct {
     };
 };
 
-pub const PutVerificationStateOnViolationOutput = struct {
-};
+pub const PutVerificationStateOnViolationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutVerificationStateOnViolationInput, options: CallOptions) !PutVerificationStateOnViolationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const DeleteSinkInput = struct {
     };
 };
 
-pub const DeleteSinkOutput = struct {
-};
+pub const DeleteSinkOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSinkInput, options: CallOptions) !DeleteSinkOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

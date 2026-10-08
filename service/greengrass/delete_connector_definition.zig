@@ -14,8 +14,7 @@ pub const DeleteConnectorDefinitionInput = struct {
     };
 };
 
-pub const DeleteConnectorDefinitionOutput = struct {
-};
+pub const DeleteConnectorDefinitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConnectorDefinitionInput, options: CallOptions) !DeleteConnectorDefinitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

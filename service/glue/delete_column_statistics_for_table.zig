@@ -27,8 +27,7 @@ pub const DeleteColumnStatisticsForTableInput = struct {
     };
 };
 
-pub const DeleteColumnStatisticsForTableOutput = struct {
-};
+pub const DeleteColumnStatisticsForTableOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteColumnStatisticsForTableInput, options: CallOptions) !DeleteColumnStatisticsForTableOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -18,8 +18,7 @@ pub const SetReceiptRulePositionInput = struct {
     rule_set_name: []const u8,
 };
 
-pub const SetReceiptRulePositionOutput = struct {
-};
+pub const SetReceiptRulePositionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetReceiptRulePositionInput, options: CallOptions) !SetReceiptRulePositionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

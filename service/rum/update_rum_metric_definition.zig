@@ -42,8 +42,7 @@ pub const UpdateRumMetricDefinitionInput = struct {
     };
 };
 
-pub const UpdateRumMetricDefinitionOutput = struct {
-};
+pub const UpdateRumMetricDefinitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRumMetricDefinitionInput, options: CallOptions) !UpdateRumMetricDefinitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

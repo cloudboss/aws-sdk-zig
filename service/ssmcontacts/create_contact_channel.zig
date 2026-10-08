@@ -46,7 +46,7 @@ pub const CreateContactChannelInput = struct {
     /// * `VOICE`
     ///
     /// * `EMAIL`
-    @"type": ChannelType,
+    type: ChannelType,
 
     pub const json_field_names = .{
         .contact_id = "ContactId",
@@ -54,7 +54,7 @@ pub const CreateContactChannelInput = struct {
         .delivery_address = "DeliveryAddress",
         .idempotency_token = "IdempotencyToken",
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

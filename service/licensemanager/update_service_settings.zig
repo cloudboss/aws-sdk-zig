@@ -33,8 +33,7 @@ pub const UpdateServiceSettingsInput = struct {
     };
 };
 
-pub const UpdateServiceSettingsOutput = struct {
-};
+pub const UpdateServiceSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateServiceSettingsInput, options: CallOptions) !UpdateServiceSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

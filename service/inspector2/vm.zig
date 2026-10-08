@@ -28,7 +28,7 @@ pub const Vm = struct {
     subnet_ids: ?[]const []const u8 = null,
 
     /// The type of the VM instance.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The image reference of the VM instance.
     vm_image_reference: ?[]const u8 = null,
@@ -46,7 +46,7 @@ pub const Vm = struct {
         .platform = "platform",
         .security_group_ids = "securityGroupIds",
         .subnet_ids = "subnetIds",
-        .@"type" = "type",
+        .type = "type",
         .vm_image_reference = "vmImageReference",
         .vm_name = "vmName",
     };

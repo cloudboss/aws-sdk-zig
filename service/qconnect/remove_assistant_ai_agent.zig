@@ -25,8 +25,7 @@ pub const RemoveAssistantAIAgentInput = struct {
     };
 };
 
-pub const RemoveAssistantAIAgentOutput = struct {
-};
+pub const RemoveAssistantAIAgentOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveAssistantAIAgentInput, options: CallOptions) !RemoveAssistantAIAgentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

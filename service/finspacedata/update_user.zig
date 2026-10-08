@@ -39,7 +39,7 @@ pub const UpdateUserInput = struct {
     ///
     /// * `APP_USER` – A user with specific permissions in FinSpace. The users are
     ///   assigned permissions by adding them to a permission group.
-    @"type": ?UserType = null,
+    type: ?UserType = null,
 
     /// The unique identifier for the user that you want to update.
     user_id: []const u8,
@@ -50,7 +50,7 @@ pub const UpdateUserInput = struct {
         .client_token = "clientToken",
         .first_name = "firstName",
         .last_name = "lastName",
-        .@"type" = "type",
+        .type = "type",
         .user_id = "userId",
     };
 };
@@ -133,7 +133,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateUserInput, config
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"type\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);

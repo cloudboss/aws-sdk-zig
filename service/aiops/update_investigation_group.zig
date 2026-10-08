@@ -73,8 +73,7 @@ pub const UpdateInvestigationGroupInput = struct {
     };
 };
 
-pub const UpdateInvestigationGroupOutput = struct {
-};
+pub const UpdateInvestigationGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateInvestigationGroupInput, options: CallOptions) !UpdateInvestigationGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

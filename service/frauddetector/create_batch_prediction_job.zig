@@ -49,8 +49,7 @@ pub const CreateBatchPredictionJobInput = struct {
     };
 };
 
-pub const CreateBatchPredictionJobOutput = struct {
-};
+pub const CreateBatchPredictionJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateBatchPredictionJobInput, options: CallOptions) !CreateBatchPredictionJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

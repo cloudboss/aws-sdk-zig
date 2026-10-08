@@ -32,8 +32,7 @@ pub const AssociateAwsTrainingCertificationEmailDomainInput = struct {
     };
 };
 
-pub const AssociateAwsTrainingCertificationEmailDomainOutput = struct {
-};
+pub const AssociateAwsTrainingCertificationEmailDomainOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateAwsTrainingCertificationEmailDomainInput, options: CallOptions) !AssociateAwsTrainingCertificationEmailDomainOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

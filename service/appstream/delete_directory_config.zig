@@ -14,8 +14,7 @@ pub const DeleteDirectoryConfigInput = struct {
     };
 };
 
-pub const DeleteDirectoryConfigOutput = struct {
-};
+pub const DeleteDirectoryConfigOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDirectoryConfigInput, options: CallOptions) !DeleteDirectoryConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

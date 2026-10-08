@@ -20,8 +20,7 @@ pub const DeleteMicrosoftTeamsConfiguredTeamInput = struct {
     };
 };
 
-pub const DeleteMicrosoftTeamsConfiguredTeamOutput = struct {
-};
+pub const DeleteMicrosoftTeamsConfiguredTeamOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMicrosoftTeamsConfiguredTeamInput, options: CallOptions) !DeleteMicrosoftTeamsConfiguredTeamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

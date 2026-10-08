@@ -7,7 +7,7 @@ pub const CaseFilter = union(enum) {
     and_all: ?[]const CaseFilter,
     /// A list of fields to filter on.
     field: ?FieldFilter,
-    not: ?CaseFilter,
+    not: ?*const CaseFilter,
     /// Provides "or all" filtering.
     or_all: ?[]const CaseFilter,
     /// A list of tags to filter on.

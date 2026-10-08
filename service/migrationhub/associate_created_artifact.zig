@@ -32,8 +32,7 @@ pub const AssociateCreatedArtifactInput = struct {
     };
 };
 
-pub const AssociateCreatedArtifactOutput = struct {
-};
+pub const AssociateCreatedArtifactOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateCreatedArtifactInput, options: CallOptions) !AssociateCreatedArtifactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

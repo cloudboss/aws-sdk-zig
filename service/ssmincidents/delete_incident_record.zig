@@ -14,8 +14,7 @@ pub const DeleteIncidentRecordInput = struct {
     };
 };
 
-pub const DeleteIncidentRecordOutput = struct {
-};
+pub const DeleteIncidentRecordOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIncidentRecordInput, options: CallOptions) !DeleteIncidentRecordOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -17,8 +17,7 @@ pub const DeleteMatchmakingRuleSetInput = struct {
     };
 };
 
-pub const DeleteMatchmakingRuleSetOutput = struct {
-};
+pub const DeleteMatchmakingRuleSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMatchmakingRuleSetInput, options: CallOptions) !DeleteMatchmakingRuleSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

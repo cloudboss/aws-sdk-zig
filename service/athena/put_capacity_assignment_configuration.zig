@@ -21,8 +21,7 @@ pub const PutCapacityAssignmentConfigurationInput = struct {
     };
 };
 
-pub const PutCapacityAssignmentConfigurationOutput = struct {
-};
+pub const PutCapacityAssignmentConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutCapacityAssignmentConfigurationInput, options: CallOptions) !PutCapacityAssignmentConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

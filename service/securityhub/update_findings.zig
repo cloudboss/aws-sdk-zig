@@ -25,8 +25,7 @@ pub const UpdateFindingsInput = struct {
     };
 };
 
-pub const UpdateFindingsOutput = struct {
-};
+pub const UpdateFindingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateFindingsInput, options: CallOptions) !UpdateFindingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

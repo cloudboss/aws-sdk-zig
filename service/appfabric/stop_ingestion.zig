@@ -22,8 +22,7 @@ pub const StopIngestionInput = struct {
     };
 };
 
-pub const StopIngestionOutput = struct {
-};
+pub const StopIngestionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopIngestionInput, options: CallOptions) !StopIngestionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

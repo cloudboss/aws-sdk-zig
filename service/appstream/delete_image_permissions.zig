@@ -19,8 +19,7 @@ pub const DeleteImagePermissionsInput = struct {
     };
 };
 
-pub const DeleteImagePermissionsOutput = struct {
-};
+pub const DeleteImagePermissionsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteImagePermissionsInput, options: CallOptions) !DeleteImagePermissionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

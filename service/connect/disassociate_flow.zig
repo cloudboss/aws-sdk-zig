@@ -30,8 +30,7 @@ pub const DisassociateFlowInput = struct {
     };
 };
 
-pub const DisassociateFlowOutput = struct {
-};
+pub const DisassociateFlowOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateFlowInput, options: CallOptions) !DisassociateFlowOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -69,7 +68,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisassociateFlowInput, 
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.resource_id);
     try path_buf.appendSlice(allocator, "/");
-    try path_buf.appendSlice(allocator, input.resource_type);
+    try path_buf.appendSlice(allocator, input.resource_type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

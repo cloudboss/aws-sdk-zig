@@ -32,5 +32,5 @@ pub const ParameterDefinition = struct {
     /// The data type of the parameter. Valid values are `String`,
     /// `StringList`, `Number`, `NumberList`,
     /// `Arn`, and `ArnList`.
-    @"type": parameterTypeType,
+    type: parameterTypeType,
 };

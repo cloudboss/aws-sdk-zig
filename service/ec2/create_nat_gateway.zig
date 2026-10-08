@@ -158,7 +158,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateNatGatewayInput, 
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZoneAddress.{d}.AllocationId.{d}=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AvailabilityZoneAddress.{d}.AllocationId.{d}=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
                     }
@@ -241,7 +241,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateNatGatewayInput, 
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.key) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -249,7 +249,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateNatGatewayInput, 
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.value) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }

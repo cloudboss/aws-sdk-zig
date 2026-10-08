@@ -19,8 +19,7 @@ pub const SendDurableExecutionCallbackFailureInput = struct {
     };
 };
 
-pub const SendDurableExecutionCallbackFailureOutput = struct {
-};
+pub const SendDurableExecutionCallbackFailureOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendDurableExecutionCallbackFailureInput, options: CallOptions) !SendDurableExecutionCallbackFailureOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

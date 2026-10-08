@@ -106,8 +106,7 @@ pub const AddIpRoutesInput = struct {
     };
 };
 
-pub const AddIpRoutesOutput = struct {
-};
+pub const AddIpRoutesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddIpRoutesInput, options: CallOptions) !AddIpRoutesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

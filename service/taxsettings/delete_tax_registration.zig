@@ -16,8 +16,7 @@ pub const DeleteTaxRegistrationInput = struct {
     };
 };
 
-pub const DeleteTaxRegistrationOutput = struct {
-};
+pub const DeleteTaxRegistrationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTaxRegistrationInput, options: CallOptions) !DeleteTaxRegistrationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

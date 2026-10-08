@@ -6,9 +6,29 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const StreamSession = @import("stream_session.zig").StreamSession;
 
-pub const GetStreamSessionInput = @import("get_stream_session_request.zig").GetStreamSessionRequest;
+pub const GetStreamSessionInput = struct {
+    /// ARN of the channel resource
+    channel_arn: []const u8,
 
-pub const GetStreamSessionOutput = @import("get_stream_session_response.zig").GetStreamSessionResponse;
+    /// Unique identifier for a live or previously live stream in the specified
+    /// channel. If no `streamId` is provided, this returns the most recent stream
+    /// session for the channel, if it exists.
+    stream_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .channel_arn = "channelArn",
+        .stream_id = "streamId",
+    };
+};
+
+pub const GetStreamSessionOutput = struct {
+    /// List of stream details.
+    stream_session: ?StreamSession = null,
+
+    pub const json_field_names = .{
+        .stream_session = "streamSession",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetStreamSessionInput, options: CallOptions) !GetStreamSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

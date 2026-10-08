@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetTrafficPolicyInstanceCountInput = struct {
-};
+pub const GetTrafficPolicyInstanceCountInput = struct {};
 
 pub const GetTrafficPolicyInstanceCountOutput = struct {
     /// The number of traffic policy instances that are associated with the current

@@ -23,8 +23,7 @@ pub const PutLabelInput = struct {
     };
 };
 
-pub const PutLabelOutput = struct {
-};
+pub const PutLabelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutLabelInput, options: CallOptions) !PutLabelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -51,8 +51,7 @@ pub const CreateVariableInput = struct {
     };
 };
 
-pub const CreateVariableOutput = struct {
-};
+pub const CreateVariableOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVariableInput, options: CallOptions) !CreateVariableOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

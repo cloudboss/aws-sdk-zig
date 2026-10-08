@@ -14,8 +14,7 @@ pub const RemoveNotificationChannelInput = struct {
     };
 };
 
-pub const RemoveNotificationChannelOutput = struct {
-};
+pub const RemoveNotificationChannelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveNotificationChannelInput, options: CallOptions) !RemoveNotificationChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

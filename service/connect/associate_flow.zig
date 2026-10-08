@@ -34,8 +34,7 @@ pub const AssociateFlowInput = struct {
     };
 };
 
-pub const AssociateFlowOutput = struct {
-};
+pub const AssociateFlowOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateFlowInput, options: CallOptions) !AssociateFlowOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

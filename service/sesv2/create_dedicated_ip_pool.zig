@@ -26,8 +26,7 @@ pub const CreateDedicatedIpPoolInput = struct {
     };
 };
 
-pub const CreateDedicatedIpPoolOutput = struct {
-};
+pub const CreateDedicatedIpPoolOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDedicatedIpPoolInput, options: CallOptions) !CreateDedicatedIpPoolOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

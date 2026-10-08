@@ -14,8 +14,7 @@ pub const DeleteNetworkSettingsInput = struct {
     };
 };
 
-pub const DeleteNetworkSettingsOutput = struct {
-};
+pub const DeleteNetworkSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteNetworkSettingsInput, options: CallOptions) !DeleteNetworkSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -1,0 +1,32 @@
+const std = @import("std");
+
+/// Defines the visibility level of provider resources. PRIVATE indicates
+/// restricted access, while PUBLIC indicates open access.
+pub const AccessType = enum {
+    /// Resource is private and has restricted access.
+    private,
+    /// Resource is public and openly accessible.
+    public,
+
+    pub const json_field_names = .{
+        .private = "PRIVATE",
+        .public = "PUBLIC",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .private => "PRIVATE",
+            .public => "PUBLIC",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        const fields = @typeInfo(@TypeOf(json_field_names)).@"struct".field_names;
+        inline for (fields) |field_name| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field_name))) {
+                return @field(@This(), field_name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
+};

@@ -10,11 +10,11 @@ pub const GuardrailManagedWord = struct {
     match: ?[]const u8 = null,
 
     /// The type details for the managed word filter in the Guardrail.
-    @"type": ?GuardrailManagedWordType = null,
+    type: ?GuardrailManagedWordType = null,
 
     pub const json_field_names = .{
         .action = "action",
         .match = "match",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -18,8 +18,7 @@ pub const CreateResourceShareInput = struct {
     };
 };
 
-pub const CreateResourceShareOutput = struct {
-};
+pub const CreateResourceShareOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateResourceShareInput, options: CallOptions) !CreateResourceShareOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

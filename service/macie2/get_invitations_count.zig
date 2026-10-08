@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetInvitationsCountInput = struct {
-};
+pub const GetInvitationsCountInput = struct {};
 
 pub const GetInvitationsCountOutput = struct {
     /// The total number of invitations that were received by the account, not

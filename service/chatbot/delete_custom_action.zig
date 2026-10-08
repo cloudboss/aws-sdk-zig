@@ -14,8 +14,7 @@ pub const DeleteCustomActionInput = struct {
     };
 };
 
-pub const DeleteCustomActionOutput = struct {
-};
+pub const DeleteCustomActionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCustomActionInput, options: CallOptions) !DeleteCustomActionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

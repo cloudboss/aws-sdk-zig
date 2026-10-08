@@ -25,7 +25,10 @@ pub const GetBucketLifecycleConfigurationInput = struct {
     bucket: []const u8,
 };
 
-pub const GetBucketLifecycleConfigurationOutput = @import("get_bucket_lifecycle_configuration_result.zig").GetBucketLifecycleConfigurationResult;
+pub const GetBucketLifecycleConfigurationOutput = struct {
+    /// Container for the lifecycle rule of the Outposts bucket.
+    rules: ?[]const LifecycleRule = null,
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketLifecycleConfigurationInput, options: CallOptions) !GetBucketLifecycleConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

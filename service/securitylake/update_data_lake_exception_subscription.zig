@@ -23,8 +23,7 @@ pub const UpdateDataLakeExceptionSubscriptionInput = struct {
     };
 };
 
-pub const UpdateDataLakeExceptionSubscriptionOutput = struct {
-};
+pub const UpdateDataLakeExceptionSubscriptionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDataLakeExceptionSubscriptionInput, options: CallOptions) !UpdateDataLakeExceptionSubscriptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

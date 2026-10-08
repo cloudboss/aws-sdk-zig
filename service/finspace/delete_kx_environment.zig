@@ -18,8 +18,7 @@ pub const DeleteKxEnvironmentInput = struct {
     };
 };
 
-pub const DeleteKxEnvironmentOutput = struct {
-};
+pub const DeleteKxEnvironmentOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteKxEnvironmentInput, options: CallOptions) !DeleteKxEnvironmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

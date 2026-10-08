@@ -1,3 +1,2 @@
 /// Multiplex Group Settings
-pub const MultiplexGroupSettings = struct {
-};
+pub const MultiplexGroupSettings = struct {};

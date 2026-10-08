@@ -36,8 +36,7 @@ pub const DisassociateEmailAddressAliasInput = struct {
     };
 };
 
-pub const DisassociateEmailAddressAliasOutput = struct {
-};
+pub const DisassociateEmailAddressAliasOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateEmailAddressAliasInput, options: CallOptions) !DisassociateEmailAddressAliasOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

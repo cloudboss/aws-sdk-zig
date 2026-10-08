@@ -14,8 +14,7 @@ pub const RestoreFromSnapshotInput = struct {
     };
 };
 
-pub const RestoreFromSnapshotOutput = struct {
-};
+pub const RestoreFromSnapshotOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RestoreFromSnapshotInput, options: CallOptions) !RestoreFromSnapshotOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

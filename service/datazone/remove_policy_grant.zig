@@ -42,8 +42,7 @@ pub const RemovePolicyGrantInput = struct {
     };
 };
 
-pub const RemovePolicyGrantOutput = struct {
-};
+pub const RemovePolicyGrantOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemovePolicyGrantInput, options: CallOptions) !RemovePolicyGrantOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -79,7 +78,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RemovePolicyGrantInput,
     try path_buf.appendSlice(allocator, "/v2/domains/");
     try path_buf.appendSlice(allocator, input.domain_identifier);
     try path_buf.appendSlice(allocator, "/policies/managed/");
-    try path_buf.appendSlice(allocator, input.entity_type);
+    try path_buf.appendSlice(allocator, input.entity_type.wireName());
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.entity_identifier);
     try path_buf.appendSlice(allocator, "/removeGrant");

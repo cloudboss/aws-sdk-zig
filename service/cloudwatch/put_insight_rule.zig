@@ -70,8 +70,7 @@ pub const PutInsightRuleInput = struct {
     };
 };
 
-pub const PutInsightRuleOutput = struct {
-};
+pub const PutInsightRuleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutInsightRuleInput, options: CallOptions) !PutInsightRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -8,14 +8,14 @@ pub const InsightField = struct {
 
     /// The type of the insight field. Possible values are `text` and
     /// `metric`.
-    @"type": InsightFieldType,
+    type: InsightFieldType,
 
     /// The value of the insight field.
     value: []const u8,
 
     pub const json_field_names = .{
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
         .value = "Value",
     };
 };

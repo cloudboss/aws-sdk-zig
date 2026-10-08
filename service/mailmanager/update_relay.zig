@@ -32,8 +32,7 @@ pub const UpdateRelayInput = struct {
     };
 };
 
-pub const UpdateRelayOutput = struct {
-};
+pub const UpdateRelayOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRelayInput, options: CallOptions) !UpdateRelayOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

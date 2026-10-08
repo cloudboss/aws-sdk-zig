@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AuthorizationData = @import("authorization_data.zig").AuthorizationData;
 
-pub const GetAuthorizationTokenInput = struct {
-};
+pub const GetAuthorizationTokenInput = struct {};
 
 pub const GetAuthorizationTokenOutput = struct {
     /// An authorization token data object that corresponds to a public registry.

@@ -14,8 +14,7 @@ pub const DeleteWirelessDeviceInput = struct {
     };
 };
 
-pub const DeleteWirelessDeviceOutput = struct {
-};
+pub const DeleteWirelessDeviceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteWirelessDeviceInput, options: CallOptions) !DeleteWirelessDeviceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

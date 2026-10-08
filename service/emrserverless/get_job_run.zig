@@ -6,9 +6,32 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const JobRun = @import("job_run.zig").JobRun;
 
-pub const GetJobRunInput = @import("get_job_run_request.zig").GetJobRunRequest;
+pub const GetJobRunInput = struct {
+    /// The ID of the application on which the job run is submitted.
+    application_id: []const u8,
 
-pub const GetJobRunOutput = @import("get_job_run_response.zig").GetJobRunResponse;
+    /// An optimal parameter that indicates the amount of attempts for the job. If
+    /// not specified, this value defaults to the attempt of the latest job.
+    attempt: ?i32 = null,
+
+    /// The ID of the job run.
+    job_run_id: []const u8,
+
+    pub const json_field_names = .{
+        .application_id = "applicationId",
+        .attempt = "attempt",
+        .job_run_id = "jobRunId",
+    };
+};
+
+pub const GetJobRunOutput = struct {
+    /// The output displays information about the job run.
+    job_run: ?JobRun = null,
+
+    pub const json_field_names = .{
+        .job_run = "jobRun",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetJobRunInput, options: CallOptions) !GetJobRunOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

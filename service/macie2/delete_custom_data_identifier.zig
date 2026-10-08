@@ -15,8 +15,7 @@ pub const DeleteCustomDataIdentifierInput = struct {
     };
 };
 
-pub const DeleteCustomDataIdentifierOutput = struct {
-};
+pub const DeleteCustomDataIdentifierOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCustomDataIdentifierInput, options: CallOptions) !DeleteCustomDataIdentifierOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

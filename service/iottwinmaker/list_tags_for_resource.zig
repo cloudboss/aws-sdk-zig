@@ -5,9 +5,37 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// The maximum number of results to return at one time. The default is 25.
+    ///
+    /// Valid Range: Minimum value of 1. Maximum value of 250.
+    max_results: ?i32 = null,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    /// The string that specifies the next page of results.
+    next_token: ?[]const u8 = null,
+
+    /// The ARN of the resource.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+        .resource_arn = "resourceARN",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// The string that specifies the next page of results.
+    next_token: ?[]const u8 = null,
+
+    /// Metadata that you can use to manage a resource.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .next_token = "nextToken",
+        .tags = "tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

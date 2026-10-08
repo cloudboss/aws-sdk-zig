@@ -32,19 +32,18 @@ pub const UpdateNotebookInput = struct {
 
     /// The notebook content type. Currently, the only valid type is
     /// `IPYNB`.
-    @"type": NotebookType,
+    type: NotebookType,
 
     pub const json_field_names = .{
         .client_request_token = "ClientRequestToken",
         .notebook_id = "NotebookId",
         .payload = "Payload",
         .session_id = "SessionId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
-pub const UpdateNotebookOutput = struct {
-};
+pub const UpdateNotebookOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateNotebookInput, options: CallOptions) !UpdateNotebookOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

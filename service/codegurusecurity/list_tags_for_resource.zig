@@ -5,9 +5,31 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// The ARN of the `ScanName` object. You can retrieve this ARN by calling
+    /// `CreateScan`, `ListScans`, or `GetScan`.
+    resource_arn: []const u8,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    pub const json_field_names = .{
+        .resource_arn = "resourceArn",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// An array of key-value pairs used to tag an existing scan. A tag is a custom
+    /// attribute label with two parts:
+    ///
+    /// * A tag key. For example, `CostCenter`, `Environment`, or `Secret`. Tag keys
+    ///   are case sensitive.
+    /// * An optional tag value field. For example, `111122223333`, `Production`, or
+    ///   a team name. Omitting the tag value is the same as using an empty string.
+    ///   Tag values are case sensitive.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .tags = "tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

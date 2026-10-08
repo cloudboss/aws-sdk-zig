@@ -16,8 +16,7 @@ pub const DeleteAccessTokenInput = struct {
     };
 };
 
-pub const DeleteAccessTokenOutput = struct {
-};
+pub const DeleteAccessTokenOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAccessTokenInput, options: CallOptions) !DeleteAccessTokenOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

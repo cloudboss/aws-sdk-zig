@@ -14,8 +14,7 @@ pub const EnableDomainAutoRenewInput = struct {
     };
 };
 
-pub const EnableDomainAutoRenewOutput = struct {
-};
+pub const EnableDomainAutoRenewOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableDomainAutoRenewInput, options: CallOptions) !EnableDomainAutoRenewOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

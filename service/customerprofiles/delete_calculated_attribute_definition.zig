@@ -18,8 +18,7 @@ pub const DeleteCalculatedAttributeDefinitionInput = struct {
     };
 };
 
-pub const DeleteCalculatedAttributeDefinitionOutput = struct {
-};
+pub const DeleteCalculatedAttributeDefinitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCalculatedAttributeDefinitionInput, options: CallOptions) !DeleteCalculatedAttributeDefinitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

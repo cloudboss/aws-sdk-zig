@@ -19,8 +19,7 @@ pub const StopContactMediaProcessingInput = struct {
     };
 };
 
-pub const StopContactMediaProcessingOutput = struct {
-};
+pub const StopContactMediaProcessingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopContactMediaProcessingInput, options: CallOptions) !StopContactMediaProcessingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

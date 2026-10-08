@@ -15,12 +15,12 @@ pub const ListCodeInterpretersInput = struct {
     next_token: ?[]const u8 = null,
 
     /// The type of code interpreters to list.
-    @"type": ?ResourceType = null,
+    type: ?ResourceType = null,
 
     pub const json_field_names = .{
         .max_results = "maxResults",
         .next_token = "nextToken",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -86,7 +86,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCodeInterpretersInp
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());

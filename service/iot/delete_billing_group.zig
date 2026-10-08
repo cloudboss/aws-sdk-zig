@@ -22,8 +22,7 @@ pub const DeleteBillingGroupInput = struct {
     };
 };
 
-pub const DeleteBillingGroupOutput = struct {
-};
+pub const DeleteBillingGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteBillingGroupInput, options: CallOptions) !DeleteBillingGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

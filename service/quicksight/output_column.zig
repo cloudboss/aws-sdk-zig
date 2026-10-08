@@ -16,13 +16,13 @@ pub const OutputColumn = struct {
     sub_type: ?ColumnDataSubType = null,
 
     /// The data type of the column.
-    @"type": ?ColumnDataType = null,
+    type: ?ColumnDataType = null,
 
     pub const json_field_names = .{
         .description = "Description",
         .id = "Id",
         .name = "Name",
         .sub_type = "SubType",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

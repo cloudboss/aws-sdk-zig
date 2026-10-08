@@ -41,8 +41,7 @@ pub const AssociateMemberToQueueInput = struct {
     };
 };
 
-pub const AssociateMemberToQueueOutput = struct {
-};
+pub const AssociateMemberToQueueOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateMemberToQueueInput, options: CallOptions) !AssociateMemberToQueueOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

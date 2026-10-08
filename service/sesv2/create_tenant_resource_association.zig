@@ -18,8 +18,7 @@ pub const CreateTenantResourceAssociationInput = struct {
     };
 };
 
-pub const CreateTenantResourceAssociationOutput = struct {
-};
+pub const CreateTenantResourceAssociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateTenantResourceAssociationInput, options: CallOptions) !CreateTenantResourceAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

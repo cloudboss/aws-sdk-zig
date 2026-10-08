@@ -7,11 +7,11 @@ pub const FileValidationMessage = struct {
     title: ?[]const u8 = null,
 
     /// The message type.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content = "content",
         .title = "title",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -14,8 +14,7 @@ pub const SendDurableExecutionCallbackHeartbeatInput = struct {
     };
 };
 
-pub const SendDurableExecutionCallbackHeartbeatOutput = struct {
-};
+pub const SendDurableExecutionCallbackHeartbeatOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendDurableExecutionCallbackHeartbeatInput, options: CallOptions) !SendDurableExecutionCallbackHeartbeatOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

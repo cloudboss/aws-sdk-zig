@@ -14,8 +14,7 @@ pub const DeleteRouteCalculatorInput = struct {
     };
 };
 
-pub const DeleteRouteCalculatorOutput = struct {
-};
+pub const DeleteRouteCalculatorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRouteCalculatorInput, options: CallOptions) !DeleteRouteCalculatorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

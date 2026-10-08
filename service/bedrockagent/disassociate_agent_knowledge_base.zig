@@ -23,8 +23,7 @@ pub const DisassociateAgentKnowledgeBaseInput = struct {
     };
 };
 
-pub const DisassociateAgentKnowledgeBaseOutput = struct {
-};
+pub const DisassociateAgentKnowledgeBaseOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateAgentKnowledgeBaseInput, options: CallOptions) !DisassociateAgentKnowledgeBaseOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -5,9 +5,17 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteMemberInput = @import("delete_member_request.zig").DeleteMemberRequest;
+pub const DeleteMemberInput = struct {
+    /// The unique identifier for the Amazon Macie resource that the request applies
+    /// to.
+    id: []const u8,
 
-pub const DeleteMemberOutput = @import("delete_member_response.zig").DeleteMemberResponse;
+    pub const json_field_names = .{
+        .id = "id",
+    };
+};
+
+pub const DeleteMemberOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMemberInput, options: CallOptions) !DeleteMemberOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

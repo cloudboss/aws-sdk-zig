@@ -5,9 +5,24 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceInput = struct {
+    /// The value of the resource that will have the tag removed. An Amazon Resource
+    /// Name (ARN) is an identifier for a specific AWS resource, such as a server,
+    /// user, or role.
+    resource_arn: []const u8,
 
-pub const UntagResourceOutput = @import("untag_resource_response.zig").UntagResourceResponse;
+    /// TagKeys are key-value pairs assigned to ARNs that can be used to group and
+    /// search for resources by type. This metadata can be attached to resources for
+    /// any purpose.
+    tag_keys: []const []const u8,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceARN",
+        .tag_keys = "TagKeys",
+    };
+};
+
+pub const UntagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResourceInput, options: CallOptions) !UntagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

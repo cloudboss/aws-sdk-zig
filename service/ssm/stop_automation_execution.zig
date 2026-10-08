@@ -13,16 +13,15 @@ pub const StopAutomationExecutionInput = struct {
     /// The stop request type. Valid types include the following: Cancel and
     /// Complete. The default
     /// type is Cancel.
-    @"type": ?StopType = null,
+    type: ?StopType = null,
 
     pub const json_field_names = .{
         .automation_execution_id = "AutomationExecutionId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
-pub const StopAutomationExecutionOutput = struct {
-};
+pub const StopAutomationExecutionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopAutomationExecutionInput, options: CallOptions) !StopAutomationExecutionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

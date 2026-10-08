@@ -15,8 +15,7 @@ pub const DeleteResourcesByExternalIdInput = struct {
     };
 };
 
-pub const DeleteResourcesByExternalIdOutput = struct {
-};
+pub const DeleteResourcesByExternalIdOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteResourcesByExternalIdInput, options: CallOptions) !DeleteResourcesByExternalIdOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

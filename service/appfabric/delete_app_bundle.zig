@@ -15,8 +15,7 @@ pub const DeleteAppBundleInput = struct {
     };
 };
 
-pub const DeleteAppBundleOutput = struct {
-};
+pub const DeleteAppBundleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAppBundleInput, options: CallOptions) !DeleteAppBundleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

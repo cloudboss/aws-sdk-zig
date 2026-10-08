@@ -50,7 +50,7 @@ pub const PricingRuleListElement = struct {
     tiering: ?Tiering = null,
 
     /// The type of pricing rule.
-    @"type": ?PricingRuleType = null,
+    type: ?PricingRuleType = null,
 
     /// Usage type is the unit that each service uses to measure the usage of a
     /// specific type of resource.
@@ -74,7 +74,7 @@ pub const PricingRuleListElement = struct {
         .scope = "Scope",
         .service = "Service",
         .tiering = "Tiering",
-        .@"type" = "Type",
+        .type = "Type",
         .usage_type = "UsageType",
     };
 };

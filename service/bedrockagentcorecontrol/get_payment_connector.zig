@@ -69,7 +69,7 @@ pub const GetPaymentConnectorOutput = struct {
 
     /// The type of the payment connector, which determines the payment provider
     /// integration.
-    @"type": PaymentConnectorType,
+    type: PaymentConnectorType,
 
     pub const json_field_names = .{
         .authorization_url = "authorizationUrl",
@@ -82,7 +82,7 @@ pub const GetPaymentConnectorOutput = struct {
         .payment_connector_id = "paymentConnectorId",
         .provision_mode = "provisionMode",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 

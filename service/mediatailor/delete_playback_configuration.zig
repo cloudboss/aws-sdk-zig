@@ -14,8 +14,7 @@ pub const DeletePlaybackConfigurationInput = struct {
     };
 };
 
-pub const DeletePlaybackConfigurationOutput = struct {
-};
+pub const DeletePlaybackConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePlaybackConfigurationInput, options: CallOptions) !DeletePlaybackConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

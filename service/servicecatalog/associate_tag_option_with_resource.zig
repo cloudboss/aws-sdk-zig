@@ -18,8 +18,7 @@ pub const AssociateTagOptionWithResourceInput = struct {
     };
 };
 
-pub const AssociateTagOptionWithResourceOutput = struct {
-};
+pub const AssociateTagOptionWithResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateTagOptionWithResourceInput, options: CallOptions) !AssociateTagOptionWithResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

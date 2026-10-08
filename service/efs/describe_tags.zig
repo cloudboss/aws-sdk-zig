@@ -6,9 +6,50 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const DescribeTagsInput = @import("describe_tags_request.zig").DescribeTagsRequest;
+pub const DescribeTagsInput = struct {
+    /// The ID of the file system whose tag set you want to retrieve.
+    file_system_id: []const u8,
 
-pub const DescribeTagsOutput = @import("describe_tags_response.zig").DescribeTagsResponse;
+    /// (Optional) An opaque pagination token returned from a previous
+    /// `DescribeTags` operation (String). If present, it specifies to continue the
+    /// list
+    /// from where the previous call left off.
+    marker: ?[]const u8 = null,
+
+    /// (Optional) The maximum number of file system tags to return in the response.
+    /// Currently,
+    /// this number is automatically set to
+    /// 100, and other values are ignored. The response is paginated at 100 per page
+    /// if you have more than 100 tags.
+    max_items: ?i32 = null,
+
+    pub const json_field_names = .{
+        .file_system_id = "FileSystemId",
+        .marker = "Marker",
+        .max_items = "MaxItems",
+    };
+};
+
+pub const DescribeTagsOutput = struct {
+    /// If the request included a `Marker`, the response returns that value in this
+    /// field.
+    marker: ?[]const u8 = null,
+
+    /// If a value is present, there are more tags to return. In a subsequent
+    /// request, you can
+    /// provide the value of `NextMarker` as the value of the `Marker` parameter
+    /// in your next request to retrieve the next set of tags.
+    next_marker: ?[]const u8 = null,
+
+    /// Returns tags associated with the file system as an array of `Tag` objects.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .marker = "Marker",
+        .next_marker = "NextMarker",
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTagsInput, options: CallOptions) !DescribeTagsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

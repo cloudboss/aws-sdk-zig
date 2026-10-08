@@ -8,8 +8,7 @@ const ReceiptRuleSetMetadata = @import("receipt_rule_set_metadata.zig").ReceiptR
 const ReceiptRule = @import("receipt_rule.zig").ReceiptRule;
 const serde = @import("serde.zig");
 
-pub const DescribeActiveReceiptRuleSetInput = struct {
-};
+pub const DescribeActiveReceiptRuleSetInput = struct {};
 
 pub const DescribeActiveReceiptRuleSetOutput = struct {
     /// The metadata for the currently active receipt rule set. The metadata

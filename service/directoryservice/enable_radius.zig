@@ -20,8 +20,7 @@ pub const EnableRadiusInput = struct {
     };
 };
 
-pub const EnableRadiusOutput = struct {
-};
+pub const EnableRadiusOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableRadiusInput, options: CallOptions) !EnableRadiusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

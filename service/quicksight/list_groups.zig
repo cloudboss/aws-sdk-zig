@@ -6,9 +6,49 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Group = @import("group.zig").Group;
 
-pub const ListGroupsInput = @import("list_groups_request.zig").ListGroupsRequest;
+pub const ListGroupsInput = struct {
+    /// The ID for the Amazon Web Services account that the group is in. Currently,
+    /// you use the ID for the
+    /// Amazon Web Services account that contains your Amazon Quick Sight account.
+    aws_account_id: []const u8,
 
-pub const ListGroupsOutput = @import("list_groups_response.zig").ListGroupsResponse;
+    /// The maximum number of results to return.
+    max_results: ?i32 = null,
+
+    /// The namespace that you want a list of groups from.
+    namespace: []const u8,
+
+    /// A pagination token that can be used in a subsequent request.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .aws_account_id = "AwsAccountId",
+        .max_results = "MaxResults",
+        .namespace = "Namespace",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListGroupsOutput = struct {
+    /// The list of the groups.
+    group_list: ?[]const Group = null,
+
+    /// A pagination token that can be used in a subsequent request.
+    next_token: ?[]const u8 = null,
+
+    /// The Amazon Web Services request ID for this operation.
+    request_id: ?[]const u8 = null,
+
+    /// The HTTP status of the request.
+    status: ?i32 = null,
+
+    pub const json_field_names = .{
+        .group_list = "GroupList",
+        .next_token = "NextToken",
+        .request_id = "RequestId",
+        .status = "Status",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListGroupsInput, options: CallOptions) !ListGroupsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

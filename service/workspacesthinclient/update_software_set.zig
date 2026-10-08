@@ -19,8 +19,7 @@ pub const UpdateSoftwareSetInput = struct {
     };
 };
 
-pub const UpdateSoftwareSetOutput = struct {
-};
+pub const UpdateSoftwareSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSoftwareSetInput, options: CallOptions) !UpdateSoftwareSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

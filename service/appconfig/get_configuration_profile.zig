@@ -67,7 +67,7 @@ pub const GetConfigurationProfileOutput = struct {
     /// `AWS.AppConfig.FeatureFlags`
     ///
     /// `AWS.Freeform`
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// A list of methods for validating the configuration.
     validators: ?[]const Validator = null,
@@ -81,7 +81,7 @@ pub const GetConfigurationProfileOutput = struct {
         .location_uri = "LocationUri",
         .name = "Name",
         .retrieval_role_arn = "RetrievalRoleArn",
-        .@"type" = "Type",
+        .type = "Type",
         .validators = "Validators",
     };
 };

@@ -13,7 +13,7 @@ pub const CertificateValidationRecord = struct {
     status: ?CertificateValidationRecordStatus = null,
 
     /// The record type, always `CNAME`.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The certificate CNAME record value.
     value: ?[]const u8 = null,
@@ -21,7 +21,7 @@ pub const CertificateValidationRecord = struct {
     pub const json_field_names = .{
         .name = "Name",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
         .value = "Value",
     };
 };

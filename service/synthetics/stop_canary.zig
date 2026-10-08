@@ -16,8 +16,7 @@ pub const StopCanaryInput = struct {
     };
 };
 
-pub const StopCanaryOutput = struct {
-};
+pub const StopCanaryOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopCanaryInput, options: CallOptions) !StopCanaryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

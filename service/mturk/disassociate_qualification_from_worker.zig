@@ -23,8 +23,7 @@ pub const DisassociateQualificationFromWorkerInput = struct {
     };
 };
 
-pub const DisassociateQualificationFromWorkerOutput = struct {
-};
+pub const DisassociateQualificationFromWorkerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateQualificationFromWorkerInput, options: CallOptions) !DisassociateQualificationFromWorkerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

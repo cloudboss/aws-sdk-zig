@@ -32,8 +32,7 @@ pub const UpdateFindingsFeedbackInput = struct {
     };
 };
 
-pub const UpdateFindingsFeedbackOutput = struct {
-};
+pub const UpdateFindingsFeedbackOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateFindingsFeedbackInput, options: CallOptions) !UpdateFindingsFeedbackOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

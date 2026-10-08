@@ -7,10 +7,10 @@ pub const ManagedSearchRerankingConfiguration = struct {
     bedrock_reranking_configuration: ?ManagedSearchBedrockRerankingConfiguration = null,
 
     /// The type of reranking configuration.
-    @"type": ManagedSearchRerankingConfigurationType,
+    type: ManagedSearchRerankingConfigurationType,
 
     pub const json_field_names = .{
         .bedrock_reranking_configuration = "bedrockRerankingConfiguration",
-        .@"type" = "type",
+        .type = "type",
     };
 };

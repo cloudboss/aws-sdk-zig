@@ -17,7 +17,7 @@ pub const ConfiguredTableAnalysisRule = struct {
     policy: ConfiguredTableAnalysisRulePolicy,
 
     /// The type of configured table analysis rule.
-    @"type": ConfiguredTableAnalysisRuleType,
+    type: ConfiguredTableAnalysisRuleType,
 
     /// The time the configured table analysis rule was last updated.
     update_time: i64,
@@ -27,7 +27,7 @@ pub const ConfiguredTableAnalysisRule = struct {
         .configured_table_id = "configuredTableId",
         .create_time = "createTime",
         .policy = "policy",
-        .@"type" = "type",
+        .type = "type",
         .update_time = "updateTime",
     };
 };

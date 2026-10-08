@@ -27,8 +27,7 @@ pub const UpdateEventLabelInput = struct {
     };
 };
 
-pub const UpdateEventLabelOutput = struct {
-};
+pub const UpdateEventLabelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateEventLabelInput, options: CallOptions) !UpdateEventLabelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

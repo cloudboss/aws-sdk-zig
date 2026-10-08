@@ -25,8 +25,7 @@ pub const DeleteApplicationSnapshotInput = struct {
     };
 };
 
-pub const DeleteApplicationSnapshotOutput = struct {
-};
+pub const DeleteApplicationSnapshotOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteApplicationSnapshotInput, options: CallOptions) !DeleteApplicationSnapshotOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

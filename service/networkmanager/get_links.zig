@@ -26,7 +26,7 @@ pub const GetLinksInput = struct {
     site_id: ?[]const u8 = null,
 
     /// The link type.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .global_network_id = "GlobalNetworkId",
@@ -35,7 +35,7 @@ pub const GetLinksInput = struct {
         .next_token = "NextToken",
         .provider = "Provider",
         .site_id = "SiteId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -125,7 +125,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetLinksInput, config: 
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);

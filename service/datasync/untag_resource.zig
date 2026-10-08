@@ -5,9 +5,21 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceInput = struct {
+    /// Specifies the keys in the tags that you want to remove.
+    keys: []const []const u8,
 
-pub const UntagResourceOutput = @import("untag_resource_response.zig").UntagResourceResponse;
+    /// Specifies the Amazon Resource Name (ARN) of the resource to remove the tags
+    /// from.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .keys = "Keys",
+        .resource_arn = "ResourceArn",
+    };
+};
+
+pub const UntagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResourceInput, options: CallOptions) !UntagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -7,10 +7,10 @@ pub const BrowserEnterprisePolicy = struct {
     location: ResourceLocation,
 
     /// The enterprise policy type. See BrowserEnterprisePolicyType.
-    @"type": ?BrowserEnterprisePolicyType = null,
+    type: ?BrowserEnterprisePolicyType = null,
 
     pub const json_field_names = .{
         .location = "location",
-        .@"type" = "type",
+        .type = "type",
     };
 };

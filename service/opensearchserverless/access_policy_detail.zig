@@ -21,7 +21,7 @@ pub const AccessPolicyDetail = struct {
     policy_version: ?[]const u8 = null,
 
     /// The type of access policy.
-    @"type": ?AccessPolicyType = null,
+    type: ?AccessPolicyType = null,
 
     pub const json_field_names = .{
         .created_date = "createdDate",
@@ -30,6 +30,6 @@ pub const AccessPolicyDetail = struct {
         .name = "name",
         .policy = "policy",
         .policy_version = "policyVersion",
-        .@"type" = "type",
+        .type = "type",
     };
 };

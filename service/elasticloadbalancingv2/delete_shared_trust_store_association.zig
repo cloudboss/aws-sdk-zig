@@ -13,8 +13,7 @@ pub const DeleteSharedTrustStoreAssociationInput = struct {
     trust_store_arn: []const u8,
 };
 
-pub const DeleteSharedTrustStoreAssociationOutput = struct {
-};
+pub const DeleteSharedTrustStoreAssociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSharedTrustStoreAssociationInput, options: CallOptions) !DeleteSharedTrustStoreAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

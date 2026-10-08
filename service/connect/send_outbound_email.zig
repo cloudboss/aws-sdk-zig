@@ -55,8 +55,7 @@ pub const SendOutboundEmailInput = struct {
     };
 };
 
-pub const SendOutboundEmailOutput = struct {
-};
+pub const SendOutboundEmailOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendOutboundEmailInput, options: CallOptions) !SendOutboundEmailOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

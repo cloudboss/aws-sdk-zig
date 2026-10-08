@@ -77,7 +77,6 @@ pub fn parseErrorResponse(allocator: std.mem.Allocator, body: []const u8, status
     const owned_message = try arena_alloc.dupe(u8, error_message);
     const owned_request_id = try arena_alloc.dupe(u8, "");
 
-
     const owned_code = try arena_alloc.dupe(u8, error_code);
     return .{ .arena = arena, .kind = .{ .unknown = .{
         .code = owned_code,

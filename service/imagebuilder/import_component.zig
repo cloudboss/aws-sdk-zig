@@ -87,7 +87,7 @@ pub const ImportComponentInput = struct {
     /// The type of the component denotes whether the component is used to build the
     /// image, or
     /// only to test it.
-    @"type": ComponentType,
+    type: ComponentType,
 
     /// The uri of the component. Must be an Amazon S3 URL and you must have
     /// permission
@@ -108,7 +108,7 @@ pub const ImportComponentInput = struct {
         .platform = "platform",
         .semantic_version = "semanticVersion",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .uri = "uri",
     };
 };
@@ -218,7 +218,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ImportComponentInput, c
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
     if (input.uri) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");

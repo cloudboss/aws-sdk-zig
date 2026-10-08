@@ -21,8 +21,7 @@ pub const DeleteConnectorProfileInput = struct {
     };
 };
 
-pub const DeleteConnectorProfileOutput = struct {
-};
+pub const DeleteConnectorProfileOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConnectorProfileInput, options: CallOptions) !DeleteConnectorProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

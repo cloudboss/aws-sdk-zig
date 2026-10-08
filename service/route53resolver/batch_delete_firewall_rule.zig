@@ -8,9 +8,27 @@ const DeleteFirewallRuleEntry = @import("delete_firewall_rule_entry.zig").Delete
 const FirewallRule = @import("firewall_rule.zig").FirewallRule;
 const BatchDeleteFirewallRuleError = @import("batch_delete_firewall_rule_error.zig").BatchDeleteFirewallRuleError;
 
-pub const BatchDeleteFirewallRuleInput = @import("batch_delete_firewall_rule_request.zig").BatchDeleteFirewallRuleRequest;
+pub const BatchDeleteFirewallRuleInput = struct {
+    /// The list of firewall rules to delete.
+    delete_firewall_rule_entries: []const DeleteFirewallRuleEntry,
 
-pub const BatchDeleteFirewallRuleOutput = @import("batch_delete_firewall_rule_response.zig").BatchDeleteFirewallRuleResponse;
+    pub const json_field_names = .{
+        .delete_firewall_rule_entries = "DeleteFirewallRuleEntries",
+    };
+};
+
+pub const BatchDeleteFirewallRuleOutput = struct {
+    /// The firewall rules that were successfully deleted by the request.
+    deleted_firewall_rules: ?[]const FirewallRule = null,
+
+    /// A list of errors that occurred while deleting the firewall rules.
+    delete_errors: ?[]const BatchDeleteFirewallRuleError = null,
+
+    pub const json_field_names = .{
+        .deleted_firewall_rules = "DeletedFirewallRules",
+        .delete_errors = "DeleteErrors",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchDeleteFirewallRuleInput, options: CallOptions) !BatchDeleteFirewallRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

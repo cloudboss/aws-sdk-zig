@@ -14,8 +14,7 @@ pub const DeleteClassifierInput = struct {
     };
 };
 
-pub const DeleteClassifierOutput = struct {
-};
+pub const DeleteClassifierOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteClassifierInput, options: CallOptions) !DeleteClassifierOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -24,8 +24,7 @@ pub const UpdateRuleSetInput = struct {
     };
 };
 
-pub const UpdateRuleSetOutput = struct {
-};
+pub const UpdateRuleSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRuleSetInput, options: CallOptions) !UpdateRuleSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

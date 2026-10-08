@@ -15,8 +15,7 @@ pub const ImportCatalogToGlueInput = struct {
     };
 };
 
-pub const ImportCatalogToGlueOutput = struct {
-};
+pub const ImportCatalogToGlueOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ImportCatalogToGlueInput, options: CallOptions) !ImportCatalogToGlueOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -18,8 +18,7 @@ pub const AssociateIpGroupsInput = struct {
     };
 };
 
-pub const AssociateIpGroupsOutput = struct {
-};
+pub const AssociateIpGroupsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateIpGroupsInput, options: CallOptions) !AssociateIpGroupsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

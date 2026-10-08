@@ -36,8 +36,7 @@ pub const CreateListInput = struct {
     };
 };
 
-pub const CreateListOutput = struct {
-};
+pub const CreateListOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateListInput, options: CallOptions) !CreateListOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

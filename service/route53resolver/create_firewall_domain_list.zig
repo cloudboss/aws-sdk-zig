@@ -7,9 +7,35 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 const FirewallDomainList = @import("firewall_domain_list.zig").FirewallDomainList;
 
-pub const CreateFirewallDomainListInput = @import("create_firewall_domain_list_request.zig").CreateFirewallDomainListRequest;
+pub const CreateFirewallDomainListInput = struct {
+    /// A unique string that identifies the request and that allows you to retry
+    /// failed requests
+    /// without the risk of running the operation twice. `CreatorRequestId` can be
+    /// any unique string, for example, a date/time stamp.
+    creator_request_id: []const u8,
 
-pub const CreateFirewallDomainListOutput = @import("create_firewall_domain_list_response.zig").CreateFirewallDomainListResponse;
+    /// A name that lets you identify the domain list to manage and use it.
+    name: []const u8,
+
+    /// A list of the tag keys and values that you want to associate with the domain
+    /// list.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .creator_request_id = "CreatorRequestId",
+        .name = "Name",
+        .tags = "Tags",
+    };
+};
+
+pub const CreateFirewallDomainListOutput = struct {
+    /// The domain list that you just created.
+    firewall_domain_list: ?FirewallDomainList = null,
+
+    pub const json_field_names = .{
+        .firewall_domain_list = "FirewallDomainList",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateFirewallDomainListInput, options: CallOptions) !CreateFirewallDomainListOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

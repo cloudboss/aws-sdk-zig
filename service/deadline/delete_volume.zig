@@ -22,8 +22,7 @@ pub const DeleteVolumeInput = struct {
     };
 };
 
-pub const DeleteVolumeOutput = struct {
-};
+pub const DeleteVolumeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVolumeInput, options: CallOptions) !DeleteVolumeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

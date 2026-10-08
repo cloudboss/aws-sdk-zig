@@ -12,10 +12,10 @@ pub const AgentInputMessage = struct {
     /// * `normal`: A regular message to the agent.
     /// * `confirmation_response`: A response to a confirmation request from the
     ///   agent.
-    @"type": AgentInputMessageType,
+    type: AgentInputMessageType,
 
     pub const json_field_names = .{
         .body = "Body",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

@@ -8,9 +8,50 @@ const Tag = @import("tag.zig").Tag;
 const UpstreamRepository = @import("upstream_repository.zig").UpstreamRepository;
 const RepositoryDescription = @import("repository_description.zig").RepositoryDescription;
 
-pub const CreateRepositoryInput = @import("create_repository_request.zig").CreateRepositoryRequest;
+pub const CreateRepositoryInput = struct {
+    /// A description of the created repository.
+    description: ?[]const u8 = null,
 
-pub const CreateRepositoryOutput = @import("create_repository_result.zig").CreateRepositoryResult;
+    /// The name of the domain that contains the created repository.
+    domain: []const u8,
+
+    /// The 12-digit account number of the Amazon Web Services account that owns the
+    /// domain. It does not include
+    /// dashes or spaces.
+    domain_owner: ?[]const u8 = null,
+
+    /// The name of the repository to create.
+    repository: []const u8,
+
+    /// One or more tag key-value pairs for the repository.
+    tags: ?[]const Tag = null,
+
+    /// A list of upstream repositories to associate with the repository. The order
+    /// of the upstream repositories
+    /// in the list determines their priority order when CodeArtifact looks for a
+    /// requested package version. For more
+    /// information, see [Working with upstream
+    /// repositories](https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html).
+    upstreams: ?[]const UpstreamRepository = null,
+
+    pub const json_field_names = .{
+        .description = "description",
+        .domain = "domain",
+        .domain_owner = "domainOwner",
+        .repository = "repository",
+        .tags = "tags",
+        .upstreams = "upstreams",
+    };
+};
+
+pub const CreateRepositoryOutput = struct {
+    /// Information about the created repository after processing the request.
+    repository: ?RepositoryDescription = null,
+
+    pub const json_field_names = .{
+        .repository = "repository",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateRepositoryInput, options: CallOptions) !CreateRepositoryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

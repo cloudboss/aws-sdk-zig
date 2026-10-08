@@ -23,8 +23,7 @@ pub const DismissUserContactInput = struct {
     };
 };
 
-pub const DismissUserContactOutput = struct {
-};
+pub const DismissUserContactOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DismissUserContactInput, options: CallOptions) !DismissUserContactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

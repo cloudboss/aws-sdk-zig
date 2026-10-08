@@ -6,7 +6,18 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The ARN of the resource being tagged.
+    resource_arn: []const u8,
+
+    /// A list of the tags being added to the resource.
+    tags: []const Tag,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceARN",
+        .tags = "Tags",
+    };
+};
 
 pub const TagResourceOutput = struct {};
 

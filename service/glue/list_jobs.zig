@@ -5,9 +5,36 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const ListJobsInput = @import("list_jobs_request.zig").ListJobsRequest;
+pub const ListJobsInput = struct {
+    /// The maximum size of a list to return.
+    max_results: ?i32 = null,
 
-pub const ListJobsOutput = @import("list_jobs_response.zig").ListJobsResponse;
+    /// A continuation token, if this is a continuation request.
+    next_token: ?[]const u8 = null,
+
+    /// Specifies to return only these tagged resources.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+        .tags = "Tags",
+    };
+};
+
+pub const ListJobsOutput = struct {
+    /// The names of all jobs in the account, or the jobs with the specified tags.
+    job_names: ?[]const []const u8 = null,
+
+    /// A continuation token, if the returned list does not contain the
+    /// last metric available.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .job_names = "JobNames",
+        .next_token = "NextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListJobsInput, options: CallOptions) !ListJobsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

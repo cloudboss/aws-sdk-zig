@@ -19,8 +19,7 @@ pub const AttachSecurityProfileInput = struct {
     };
 };
 
-pub const AttachSecurityProfileOutput = struct {
-};
+pub const AttachSecurityProfileOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AttachSecurityProfileInput, options: CallOptions) !AttachSecurityProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

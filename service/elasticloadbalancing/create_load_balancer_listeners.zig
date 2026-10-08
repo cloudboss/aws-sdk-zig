@@ -15,8 +15,7 @@ pub const CreateLoadBalancerListenersInput = struct {
     load_balancer_name: []const u8,
 };
 
-pub const CreateLoadBalancerListenersOutput = struct {
-};
+pub const CreateLoadBalancerListenersOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLoadBalancerListenersInput, options: CallOptions) !CreateLoadBalancerListenersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

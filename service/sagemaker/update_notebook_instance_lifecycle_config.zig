@@ -26,8 +26,7 @@ pub const UpdateNotebookInstanceLifecycleConfigInput = struct {
     };
 };
 
-pub const UpdateNotebookInstanceLifecycleConfigOutput = struct {
-};
+pub const UpdateNotebookInstanceLifecycleConfigOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateNotebookInstanceLifecycleConfigInput, options: CallOptions) !UpdateNotebookInstanceLifecycleConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

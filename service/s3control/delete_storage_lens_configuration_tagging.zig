@@ -13,8 +13,7 @@ pub const DeleteStorageLensConfigurationTaggingInput = struct {
     config_id: []const u8,
 };
 
-pub const DeleteStorageLensConfigurationTaggingOutput = struct {
-};
+pub const DeleteStorageLensConfigurationTaggingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteStorageLensConfigurationTaggingInput, options: CallOptions) !DeleteStorageLensConfigurationTaggingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

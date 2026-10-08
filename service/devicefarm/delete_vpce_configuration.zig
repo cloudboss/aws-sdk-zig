@@ -15,8 +15,7 @@ pub const DeleteVPCEConfigurationInput = struct {
     };
 };
 
-pub const DeleteVPCEConfigurationOutput = struct {
-};
+pub const DeleteVPCEConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVPCEConfigurationInput, options: CallOptions) !DeleteVPCEConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

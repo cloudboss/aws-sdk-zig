@@ -14,8 +14,7 @@ pub const DeleteIdentityProviderInput = struct {
     };
 };
 
-pub const DeleteIdentityProviderOutput = struct {
-};
+pub const DeleteIdentityProviderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIdentityProviderInput, options: CallOptions) !DeleteIdentityProviderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

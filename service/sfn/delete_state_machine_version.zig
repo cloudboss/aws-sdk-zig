@@ -14,8 +14,7 @@ pub const DeleteStateMachineVersionInput = struct {
     };
 };
 
-pub const DeleteStateMachineVersionOutput = struct {
-};
+pub const DeleteStateMachineVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteStateMachineVersionInput, options: CallOptions) !DeleteStateMachineVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

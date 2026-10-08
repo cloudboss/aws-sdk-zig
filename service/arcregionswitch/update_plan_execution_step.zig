@@ -33,8 +33,7 @@ pub const UpdatePlanExecutionStepInput = struct {
     };
 };
 
-pub const UpdatePlanExecutionStepOutput = struct {
-};
+pub const UpdatePlanExecutionStepOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdatePlanExecutionStepInput, options: CallOptions) !UpdatePlanExecutionStepOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

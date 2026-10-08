@@ -19,8 +19,7 @@ pub const PutLifecyclePolicyInput = struct {
     };
 };
 
-pub const PutLifecyclePolicyOutput = struct {
-};
+pub const PutLifecyclePolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutLifecyclePolicyInput, options: CallOptions) !PutLifecyclePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

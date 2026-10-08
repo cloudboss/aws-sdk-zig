@@ -169,8 +169,7 @@ pub const UpdateCustomKeyStoreInput = struct {
     };
 };
 
-pub const UpdateCustomKeyStoreOutput = struct {
-};
+pub const UpdateCustomKeyStoreOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCustomKeyStoreInput, options: CallOptions) !UpdateCustomKeyStoreOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

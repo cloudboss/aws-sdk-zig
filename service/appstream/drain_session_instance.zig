@@ -14,8 +14,7 @@ pub const DrainSessionInstanceInput = struct {
     };
 };
 
-pub const DrainSessionInstanceOutput = struct {
-};
+pub const DrainSessionInstanceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DrainSessionInstanceInput, options: CallOptions) !DrainSessionInstanceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

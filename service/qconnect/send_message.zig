@@ -46,7 +46,7 @@ pub const SendMessageInput = struct {
     session_id: []const u8,
 
     /// The message type.
-    @"type": MessageType,
+    type: MessageType,
 
     pub const json_field_names = .{
         .ai_agent_id = "aiAgentId",
@@ -59,7 +59,7 @@ pub const SendMessageInput = struct {
         .orchestrator_use_case = "orchestratorUseCase",
         .origin_request_id = "originRequestId",
         .session_id = "sessionId",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -171,7 +171,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendMessageInput, confi
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

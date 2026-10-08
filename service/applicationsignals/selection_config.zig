@@ -9,10 +9,10 @@ pub const SelectionConfig = struct {
     /// operation names.
     pattern: ?[]const u8 = null,
 
-    @"type": SelectionType,
+    type: SelectionType,
 
     pub const json_field_names = .{
         .pattern = "Pattern",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

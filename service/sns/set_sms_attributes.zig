@@ -106,8 +106,7 @@ pub const SetSMSAttributesInput = struct {
     attributes: []const aws.map.StringMapEntry,
 };
 
-pub const SetSMSAttributesOutput = struct {
-};
+pub const SetSMSAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetSMSAttributesInput, options: CallOptions) !SetSMSAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

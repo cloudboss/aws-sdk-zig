@@ -15,11 +15,11 @@ pub const UpdateIndexTypeInput = struct {
     /// The type of the index. To understand the difference between `LOCAL` and
     /// `AGGREGATOR`, see [Turning on cross-Region
     /// search](https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html) in the *Amazon Web Services Resource Explorer User Guide*.
-    @"type": IndexType,
+    type: IndexType,
 
     pub const json_field_names = .{
         .arn = "Arn",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -36,13 +36,13 @@ pub const UpdateIndexTypeOutput = struct {
     state: ?IndexState = null,
 
     /// Specifies the type of the specified index after the operation completes.
-    @"type": ?IndexType = null,
+    type: ?IndexType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",
         .last_updated_at = "LastUpdatedAt",
         .state = "State",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -88,7 +88,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateIndexTypeInput, c
     has_prev = true;
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

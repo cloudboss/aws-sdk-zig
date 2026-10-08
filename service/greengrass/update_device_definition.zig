@@ -18,8 +18,7 @@ pub const UpdateDeviceDefinitionInput = struct {
     };
 };
 
-pub const UpdateDeviceDefinitionOutput = struct {
-};
+pub const UpdateDeviceDefinitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDeviceDefinitionInput, options: CallOptions) !UpdateDeviceDefinitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

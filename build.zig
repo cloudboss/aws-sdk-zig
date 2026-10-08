@@ -94,10 +94,10 @@ pub fn build(b: *std.Build) void {
     });
     modeled_error_module.addImport("aws", aws_module);
     for ([_][]const u8{
-        "backupgateway",  "cognitoidentity", "dynamodb",        "ec2",
-        "lambda",         "s3",              "sts",             "verifiedpermissions",
-        "iotsitewise",    "lambda-core",     "lambda-microvms", "lambda-web",
-        "bedrockruntime", "kinesis",
+        "backupgateway", "cognitoidentity", "dynamodb",       "ec2",
+        "lambda",        "s3",              "sts",            "verifiedpermissions",
+        "iotsitewise",   "lambdacore",      "lambdamicrovms", "bedrockruntime",
+        "kinesis",
     }) |name| {
         modeled_error_module.addImport(name, service_modules.get(name).?);
     }

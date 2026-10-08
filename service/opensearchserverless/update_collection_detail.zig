@@ -31,7 +31,7 @@ pub const UpdateCollectionDetail = struct {
     status: ?CollectionStatus = null,
 
     /// The collection type.
-    @"type": ?CollectionType = null,
+    type: ?CollectionType = null,
 
     /// Configuration options for vector search capabilities in the collection.
     vector_options: ?VectorOptions = null,
@@ -45,7 +45,7 @@ pub const UpdateCollectionDetail = struct {
         .last_modified_date = "lastModifiedDate",
         .name = "name",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
         .vector_options = "vectorOptions",
     };
 };

@@ -12,16 +12,15 @@ pub const EnableLDAPSInput = struct {
 
     /// The type of LDAP security to enable. Currently only the value `Client` is
     /// supported.
-    @"type": LDAPSType,
+    type: LDAPSType,
 
     pub const json_field_names = .{
         .directory_id = "DirectoryId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
-pub const EnableLDAPSOutput = struct {
-};
+pub const EnableLDAPSOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableLDAPSInput, options: CallOptions) !EnableLDAPSOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

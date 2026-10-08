@@ -6,9 +6,23 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ResourceTag = @import("resource_tag.zig").ResourceTag;
 
-pub const DescribeTagsInput = @import("describe_tags_request.zig").DescribeTagsRequest;
+pub const DescribeTagsInput = struct {
+    /// The Amazon Resource Names (ARNs) of the resources.
+    resource_arns: []const []const u8,
 
-pub const DescribeTagsOutput = @import("describe_tags_response.zig").DescribeTagsResponse;
+    pub const json_field_names = .{
+        .resource_arns = "resourceArns",
+    };
+};
+
+pub const DescribeTagsOutput = struct {
+    /// Information about the tags.
+    resource_tags: ?[]const ResourceTag = null,
+
+    pub const json_field_names = .{
+        .resource_tags = "resourceTags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeTagsInput, options: CallOptions) !DescribeTagsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

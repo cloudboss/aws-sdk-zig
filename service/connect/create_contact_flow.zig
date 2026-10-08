@@ -39,7 +39,7 @@ pub const CreateContactFlowInput = struct {
     /// flow
     /// type](https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types) in the
     /// *Connect Customer Administrator Guide*.
-    @"type": ContactFlowType,
+    type: ContactFlowType,
 
     pub const json_field_names = .{
         .content = "Content",
@@ -48,7 +48,7 @@ pub const CreateContactFlowInput = struct {
         .name = "Name",
         .status = "Status",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -136,7 +136,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateContactFlowInput,
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

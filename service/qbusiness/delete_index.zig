@@ -5,9 +5,21 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteIndexInput = @import("delete_index_request.zig").DeleteIndexRequest;
+pub const DeleteIndexInput = struct {
+    /// The identifier of the Amazon Q Business application the Amazon Q Business
+    /// index is linked to.
+    application_id: []const u8,
 
-pub const DeleteIndexOutput = @import("delete_index_response.zig").DeleteIndexResponse;
+    /// The identifier of the Amazon Q Business index.
+    index_id: []const u8,
+
+    pub const json_field_names = .{
+        .application_id = "applicationId",
+        .index_id = "indexId",
+    };
+};
+
+pub const DeleteIndexOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIndexInput, options: CallOptions) !DeleteIndexOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

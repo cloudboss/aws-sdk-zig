@@ -14,8 +14,7 @@ pub const FlushApiCacheInput = struct {
     };
 };
 
-pub const FlushApiCacheOutput = struct {
-};
+pub const FlushApiCacheOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: FlushApiCacheInput, options: CallOptions) !FlushApiCacheOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

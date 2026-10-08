@@ -14,8 +14,7 @@ pub const DeregisterWebhookWithThirdPartyInput = struct {
     };
 };
 
-pub const DeregisterWebhookWithThirdPartyOutput = struct {
-};
+pub const DeregisterWebhookWithThirdPartyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterWebhookWithThirdPartyInput, options: CallOptions) !DeregisterWebhookWithThirdPartyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

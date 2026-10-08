@@ -23,8 +23,7 @@ pub const DisassociateTrackerConsumerInput = struct {
     };
 };
 
-pub const DisassociateTrackerConsumerOutput = struct {
-};
+pub const DisassociateTrackerConsumerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateTrackerConsumerInput, options: CallOptions) !DisassociateTrackerConsumerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

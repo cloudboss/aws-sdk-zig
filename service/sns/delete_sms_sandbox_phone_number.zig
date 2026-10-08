@@ -10,8 +10,7 @@ pub const DeleteSMSSandboxPhoneNumberInput = struct {
     phone_number: []const u8,
 };
 
-pub const DeleteSMSSandboxPhoneNumberOutput = struct {
-};
+pub const DeleteSMSSandboxPhoneNumberOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSMSSandboxPhoneNumberInput, options: CallOptions) !DeleteSMSSandboxPhoneNumberOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

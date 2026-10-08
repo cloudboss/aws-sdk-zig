@@ -18,8 +18,7 @@ pub const CheckInLicenseInput = struct {
     };
 };
 
-pub const CheckInLicenseOutput = struct {
-};
+pub const CheckInLicenseOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CheckInLicenseInput, options: CallOptions) !CheckInLicenseOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -19,8 +19,7 @@ pub const DeleteEnvironmentBlueprintConfigurationInput = struct {
     };
 };
 
-pub const DeleteEnvironmentBlueprintConfigurationOutput = struct {
-};
+pub const DeleteEnvironmentBlueprintConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteEnvironmentBlueprintConfigurationInput, options: CallOptions) !DeleteEnvironmentBlueprintConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

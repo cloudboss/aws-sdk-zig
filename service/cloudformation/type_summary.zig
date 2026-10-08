@@ -100,7 +100,7 @@ pub const TypeSummary = struct {
     publisher_name: ?[]const u8 = null,
 
     /// The kind of extension.
-    @"type": ?RegistryType = null,
+    type: ?RegistryType = null,
 
     /// The ARN of the extension.
     type_arn: ?[]const u8 = null,

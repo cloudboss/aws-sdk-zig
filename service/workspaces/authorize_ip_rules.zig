@@ -19,8 +19,7 @@ pub const AuthorizeIpRulesInput = struct {
     };
 };
 
-pub const AuthorizeIpRulesOutput = struct {
-};
+pub const AuthorizeIpRulesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AuthorizeIpRulesInput, options: CallOptions) !AuthorizeIpRulesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

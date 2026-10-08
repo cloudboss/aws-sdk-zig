@@ -20,8 +20,7 @@ pub const DeleteTimelineEventInput = struct {
     };
 };
 
-pub const DeleteTimelineEventOutput = struct {
-};
+pub const DeleteTimelineEventOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTimelineEventInput, options: CallOptions) !DeleteTimelineEventOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

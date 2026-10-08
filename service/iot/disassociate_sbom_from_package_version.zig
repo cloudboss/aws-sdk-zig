@@ -24,8 +24,7 @@ pub const DisassociateSbomFromPackageVersionInput = struct {
     };
 };
 
-pub const DisassociateSbomFromPackageVersionOutput = struct {
-};
+pub const DisassociateSbomFromPackageVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateSbomFromPackageVersionInput, options: CallOptions) !DisassociateSbomFromPackageVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

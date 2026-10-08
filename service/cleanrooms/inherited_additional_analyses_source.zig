@@ -14,7 +14,7 @@ pub const InheritedAdditionalAnalysesSource = struct {
     source_account_id: []const u8,
 
     /// The type of the parent table.
-    @"type": BaseTableDependencyType,
+    type: BaseTableDependencyType,
 
     /// The additional analyses setting defined on the parent table.
     value: AdditionalAnalyses,
@@ -23,7 +23,7 @@ pub const InheritedAdditionalAnalysesSource = struct {
         .id = "id",
         .name = "name",
         .source_account_id = "sourceAccountId",
-        .@"type" = "type",
+        .type = "type",
         .value = "value",
     };
 };

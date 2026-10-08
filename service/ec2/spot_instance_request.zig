@@ -82,7 +82,7 @@ pub const SpotInstanceRequest = struct {
     tags: ?[]const Tag = null,
 
     /// The Spot Instance request type.
-    @"type": ?SpotInstanceType = null,
+    type: ?SpotInstanceType = null,
 
     /// The start date of the request, in UTC format (for example,
     /// *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).

@@ -18,8 +18,7 @@ pub const DeleteInactiveApprovalTeamVersionInput = struct {
     };
 };
 
-pub const DeleteInactiveApprovalTeamVersionOutput = struct {
-};
+pub const DeleteInactiveApprovalTeamVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteInactiveApprovalTeamVersionInput, options: CallOptions) !DeleteInactiveApprovalTeamVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

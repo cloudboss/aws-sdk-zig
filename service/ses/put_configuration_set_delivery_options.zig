@@ -17,8 +17,7 @@ pub const PutConfigurationSetDeliveryOptionsInput = struct {
     delivery_options: ?DeliveryOptions = null,
 };
 
-pub const PutConfigurationSetDeliveryOptionsOutput = struct {
-};
+pub const PutConfigurationSetDeliveryOptionsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutConfigurationSetDeliveryOptionsInput, options: CallOptions) !PutConfigurationSetDeliveryOptionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

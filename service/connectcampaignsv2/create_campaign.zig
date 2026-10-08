@@ -33,7 +33,7 @@ pub const CreateCampaignInput = struct {
 
     tags: ?[]const aws.map.StringMapEntry = null,
 
-    @"type": ?ExternalCampaignType = null,
+    type: ?ExternalCampaignType = null,
 
     pub const json_field_names = .{
         .channel_subtype_config = "channelSubtypeConfig",
@@ -46,7 +46,7 @@ pub const CreateCampaignInput = struct {
         .schedule = "schedule",
         .source = "source",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -156,7 +156,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCampaignInput, co
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"type\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);

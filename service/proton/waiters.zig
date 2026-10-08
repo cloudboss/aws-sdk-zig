@@ -112,7 +112,7 @@ pub const ComponentDeployedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getComponent(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getComponent(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -174,7 +174,7 @@ pub const EnvironmentDeployedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getEnvironment(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getEnvironment(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -236,7 +236,7 @@ pub const EnvironmentTemplateVersionRegisteredWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getEnvironmentTemplateVersion(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getEnvironmentTemplateVersion(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -305,7 +305,7 @@ pub const ServiceCreatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getService(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getService(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -443,7 +443,7 @@ pub const ServiceInstanceDeployedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getServiceInstance(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getServiceInstance(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -505,7 +505,7 @@ pub const ServicePipelineDeployedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getService(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getService(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -571,7 +571,7 @@ pub const ServiceTemplateVersionRegisteredWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getServiceTemplateVersion(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getServiceTemplateVersion(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -640,7 +640,7 @@ pub const ServiceUpdatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getService(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getService(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetOrganizationAdminAccountInput = struct {
-};
+pub const GetOrganizationAdminAccountInput = struct {};
 
 pub const GetOrganizationAdminAccountOutput = struct {
     /// The identifier for the administrator account.

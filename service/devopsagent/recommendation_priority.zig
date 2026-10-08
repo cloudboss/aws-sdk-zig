@@ -1,0 +1,35 @@
+const std = @import("std");
+
+/// Priority level of a recommendation
+pub const RecommendationPriority = enum {
+    /// High priority recommendation requiring immediate attention
+    high,
+    /// Medium priority recommendation for normal processing
+    medium,
+    /// Low priority recommendation that can be addressed later
+    low,
+
+    pub const json_field_names = .{
+        .high = "HIGH",
+        .medium = "MEDIUM",
+        .low = "LOW",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .high => "HIGH",
+            .medium => "MEDIUM",
+            .low => "LOW",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        const fields = @typeInfo(@TypeOf(json_field_names)).@"struct".field_names;
+        inline for (fields) |field_name| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field_name))) {
+                return @field(@This(), field_name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
+};

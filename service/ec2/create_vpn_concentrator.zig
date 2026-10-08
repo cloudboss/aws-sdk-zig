@@ -24,7 +24,7 @@ pub const CreateVpnConcentratorInput = struct {
     transit_gateway_id: ?[]const u8 = null,
 
     /// The type of VPN concentrator to create.
-    @"type": VpnConcentratorType,
+    type: VpnConcentratorType,
 };
 
 pub const CreateVpnConcentratorOutput = struct {
@@ -86,7 +86,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConcentratorIn
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.key) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -94,7 +94,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConcentratorIn
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.value) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -108,7 +108,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateVpnConcentratorIn
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
     try body_buf.appendSlice(allocator, "&Type=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, input.@"type".wireName());
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.type.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

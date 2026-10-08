@@ -29,8 +29,7 @@ pub const UpdateWorkspaceVisibilityInput = struct {
     };
 };
 
-pub const UpdateWorkspaceVisibilityOutput = struct {
-};
+pub const UpdateWorkspaceVisibilityOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorkspaceVisibilityInput, options: CallOptions) !UpdateWorkspaceVisibilityOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

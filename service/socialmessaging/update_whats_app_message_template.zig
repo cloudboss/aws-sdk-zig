@@ -48,8 +48,7 @@ pub const UpdateWhatsAppMessageTemplateInput = struct {
     };
 };
 
-pub const UpdateWhatsAppMessageTemplateOutput = struct {
-};
+pub const UpdateWhatsAppMessageTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWhatsAppMessageTemplateInput, options: CallOptions) !UpdateWhatsAppMessageTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

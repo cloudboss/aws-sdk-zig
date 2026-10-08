@@ -14,8 +14,7 @@ pub const StartAddressListImportJobInput = struct {
     };
 };
 
-pub const StartAddressListImportJobOutput = struct {
-};
+pub const StartAddressListImportJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartAddressListImportJobInput, options: CallOptions) !StartAddressListImportJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

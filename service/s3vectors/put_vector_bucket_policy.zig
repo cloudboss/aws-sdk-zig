@@ -24,8 +24,7 @@ pub const PutVectorBucketPolicyInput = struct {
     };
 };
 
-pub const PutVectorBucketPolicyOutput = struct {
-};
+pub const PutVectorBucketPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutVectorBucketPolicyInput, options: CallOptions) !PutVectorBucketPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

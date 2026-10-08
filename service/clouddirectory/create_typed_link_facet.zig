@@ -21,8 +21,7 @@ pub const CreateTypedLinkFacetInput = struct {
     };
 };
 
-pub const CreateTypedLinkFacetOutput = struct {
-};
+pub const CreateTypedLinkFacetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateTypedLinkFacetInput, options: CallOptions) !CreateTypedLinkFacetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

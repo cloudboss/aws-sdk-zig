@@ -63,7 +63,7 @@ pub const Capability = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of capability. Valid values are `ACK`, `ARGOCD`, or `KRO`.
-    @"type": ?CapabilityType = null,
+    type: ?CapabilityType = null,
 
     /// The version of the capability software that is currently running.
     version: ?[]const u8 = null,
@@ -80,7 +80,7 @@ pub const Capability = struct {
         .role_arn = "roleArn",
         .status = "status",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .version = "version",
     };
 };

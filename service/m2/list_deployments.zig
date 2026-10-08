@@ -6,9 +6,40 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DeploymentSummary = @import("deployment_summary.zig").DeploymentSummary;
 
-pub const ListDeploymentsInput = @import("list_deployments_request.zig").ListDeploymentsRequest;
+pub const ListDeploymentsInput = struct {
+    /// The application identifier.
+    application_id: []const u8,
 
-pub const ListDeploymentsOutput = @import("list_deployments_response.zig").ListDeploymentsResponse;
+    /// The maximum number of objects to return.
+    max_results: ?i32 = null,
+
+    /// A pagination token returned from a previous call to
+    /// this operation. This specifies the next item to return. To return to the
+    /// beginning of the
+    /// list, exclude this parameter.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .application_id = "applicationId",
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+    };
+};
+
+pub const ListDeploymentsOutput = struct {
+    /// The list of deployments that is returned.
+    deployments: ?[]const DeploymentSummary = null,
+
+    /// If there are more items to return, this contains a token
+    /// that is passed to a subsequent call to this operation to retrieve the next
+    /// set of items.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .deployments = "deployments",
+        .next_token = "nextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDeploymentsInput, options: CallOptions) !ListDeploymentsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

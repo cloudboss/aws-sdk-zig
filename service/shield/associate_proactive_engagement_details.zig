@@ -24,8 +24,7 @@ pub const AssociateProactiveEngagementDetailsInput = struct {
     };
 };
 
-pub const AssociateProactiveEngagementDetailsOutput = struct {
-};
+pub const AssociateProactiveEngagementDetailsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateProactiveEngagementDetailsInput, options: CallOptions) !AssociateProactiveEngagementDetailsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

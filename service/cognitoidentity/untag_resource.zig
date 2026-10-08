@@ -18,7 +18,7 @@ pub const UntagResourceInput = struct {
     };
 };
 
-pub const UntagResourceOutput = @import("untag_resource_response.zig").UntagResourceResponse;
+pub const UntagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResourceInput, options: CallOptions) !UntagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

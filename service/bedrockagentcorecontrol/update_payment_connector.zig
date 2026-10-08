@@ -30,7 +30,7 @@ pub const UpdatePaymentConnectorInput = struct {
     payment_manager_id: []const u8,
 
     /// The updated type of the payment connector.
-    @"type": ?PaymentConnectorType = null,
+    type: ?PaymentConnectorType = null,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
@@ -38,7 +38,7 @@ pub const UpdatePaymentConnectorInput = struct {
         .description = "description",
         .payment_connector_id = "paymentConnectorId",
         .payment_manager_id = "paymentManagerId",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -68,7 +68,7 @@ pub const UpdatePaymentConnectorOutput = struct {
     status: PaymentConnectorStatus,
 
     /// The type of the updated payment connector.
-    @"type": PaymentConnectorType,
+    type: PaymentConnectorType,
 
     pub const json_field_names = .{
         .authorization_url = "authorizationUrl",
@@ -78,7 +78,7 @@ pub const UpdatePaymentConnectorOutput = struct {
         .payment_connector_id = "paymentConnectorId",
         .payment_manager_id = "paymentManagerId",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -141,7 +141,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePaymentConnectorI
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"type\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);

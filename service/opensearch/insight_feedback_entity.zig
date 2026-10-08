@@ -5,13 +5,13 @@ const InsightFeedbackEntityType = @import("insight_feedback_entity_type.zig").In
 /// Amazon OpenSearch Service domain.
 pub const InsightFeedbackEntity = struct {
     /// The type of the entity. Possible values are `DomainName`.
-    @"type": InsightFeedbackEntityType,
+    type: InsightFeedbackEntityType,
 
     /// The value of the entity, such as a domain name.
     value: []const u8,
 
     pub const json_field_names = .{
-        .@"type" = "Type",
+        .type = "Type",
         .value = "Value",
     };
 };

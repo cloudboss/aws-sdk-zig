@@ -41,8 +41,7 @@ pub const UpdateThreatIntelSetInput = struct {
     };
 };
 
-pub const UpdateThreatIntelSetOutput = struct {
-};
+pub const UpdateThreatIntelSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateThreatIntelSetInput, options: CallOptions) !UpdateThreatIntelSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

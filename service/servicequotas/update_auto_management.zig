@@ -31,8 +31,7 @@ pub const UpdateAutoManagementInput = struct {
     };
 };
 
-pub const UpdateAutoManagementOutput = struct {
-};
+pub const UpdateAutoManagementOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAutoManagementInput, options: CallOptions) !UpdateAutoManagementOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

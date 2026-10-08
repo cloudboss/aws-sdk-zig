@@ -14,8 +14,7 @@ pub const StopFleetInput = struct {
     };
 };
 
-pub const StopFleetOutput = struct {
-};
+pub const StopFleetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopFleetInput, options: CallOptions) !StopFleetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

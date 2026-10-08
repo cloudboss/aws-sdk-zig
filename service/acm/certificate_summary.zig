@@ -110,7 +110,7 @@ pub const CertificateSummary = struct {
     /// between certificates that you import and those that ACM provides, see
     /// [Importing
     /// Certificates](https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html) in the *Certificate Manager User Guide*.
-    @"type": ?CertificateType = null,
+    type: ?CertificateType = null,
 
     pub const json_field_names = .{
         .certificate_arn = "CertificateArn",
@@ -133,6 +133,6 @@ pub const CertificateSummary = struct {
         .revoked_at = "RevokedAt",
         .status = "Status",
         .subject_alternative_name_summaries = "SubjectAlternativeNameSummaries",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

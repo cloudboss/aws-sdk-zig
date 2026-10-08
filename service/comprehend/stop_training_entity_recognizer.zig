@@ -16,8 +16,7 @@ pub const StopTrainingEntityRecognizerInput = struct {
     };
 };
 
-pub const StopTrainingEntityRecognizerOutput = struct {
-};
+pub const StopTrainingEntityRecognizerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopTrainingEntityRecognizerInput, options: CallOptions) !StopTrainingEntityRecognizerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

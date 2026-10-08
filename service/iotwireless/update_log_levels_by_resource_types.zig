@@ -26,8 +26,7 @@ pub const UpdateLogLevelsByResourceTypesInput = struct {
     };
 };
 
-pub const UpdateLogLevelsByResourceTypesOutput = struct {
-};
+pub const UpdateLogLevelsByResourceTypesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLogLevelsByResourceTypesInput, options: CallOptions) !UpdateLogLevelsByResourceTypesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

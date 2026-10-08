@@ -16,7 +16,7 @@ pub const RouteTransitIncident = struct {
     start_time: ?[]const u8 = null,
 
     /// Type of the incident.
-    @"type": RouteTransitIncidentType,
+    type: RouteTransitIncidentType,
 
     /// URL to the original incident published at the agency website.
     url: ?[]const u8 = null,
@@ -26,7 +26,7 @@ pub const RouteTransitIncident = struct {
         .effect = "Effect",
         .end_time = "EndTime",
         .start_time = "StartTime",
-        .@"type" = "Type",
+        .type = "Type",
         .url = "Url",
     };
 };

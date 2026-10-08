@@ -25,7 +25,7 @@ pub const CreateImpersonationRoleInput = struct {
 
     /// The impersonation role's type. The available impersonation role types are
     /// `READ_ONLY` or `FULL_ACCESS`.
-    @"type": ImpersonationRoleType,
+    type: ImpersonationRoleType,
 
     pub const json_field_names = .{
         .client_token = "ClientToken",
@@ -33,7 +33,7 @@ pub const CreateImpersonationRoleInput = struct {
         .name = "Name",
         .organization_id = "OrganizationId",
         .rules = "Rules",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

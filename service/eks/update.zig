@@ -27,7 +27,7 @@ pub const Update = struct {
     status: ?UpdateStatus = null,
 
     /// The type of the update.
-    @"type": ?UpdateType = null,
+    type: ?UpdateType = null,
 
     pub const json_field_names = .{
         .cancellation = "cancellation",
@@ -36,6 +36,6 @@ pub const Update = struct {
         .id = "id",
         .params = "params",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };

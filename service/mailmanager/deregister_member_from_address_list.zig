@@ -18,8 +18,7 @@ pub const DeregisterMemberFromAddressListInput = struct {
     };
 };
 
-pub const DeregisterMemberFromAddressListOutput = struct {
-};
+pub const DeregisterMemberFromAddressListOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterMemberFromAddressListInput, options: CallOptions) !DeregisterMemberFromAddressListOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

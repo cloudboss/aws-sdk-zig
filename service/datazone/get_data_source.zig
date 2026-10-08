@@ -96,7 +96,7 @@ pub const GetDataSourceOutput = struct {
     status: ?DataSourceStatus = null,
 
     /// The type of the data source.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The timestamp of when the data source was updated.
     updated_at: ?i64 = null,
@@ -123,7 +123,7 @@ pub const GetDataSourceOutput = struct {
         .schedule = "schedule",
         .self_grant_status = "selfGrantStatus",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
     };
 };

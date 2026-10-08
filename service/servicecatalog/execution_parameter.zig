@@ -8,11 +8,11 @@ pub const ExecutionParameter = struct {
     name: ?[]const u8 = null,
 
     /// The execution parameter type.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .default_values = "DefaultValues",
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

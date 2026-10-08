@@ -26,7 +26,7 @@ pub const ListOriginRequestPoliciesInput = struct {
     ///   Services.
     /// * `custom` – Returns only the custom policies created in your Amazon Web
     ///   Services account.
-    @"type": ?OriginRequestPolicyType = null,
+    type: ?OriginRequestPolicyType = null,
 };
 
 pub const ListOriginRequestPoliciesOutput = struct {
@@ -83,7 +83,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListOriginRequestPolici
         }
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "Type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());

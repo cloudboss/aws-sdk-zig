@@ -39,8 +39,7 @@ pub const AmendBenefitApplicationInput = struct {
     };
 };
 
-pub const AmendBenefitApplicationOutput = struct {
-};
+pub const AmendBenefitApplicationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AmendBenefitApplicationInput, options: CallOptions) !AmendBenefitApplicationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -7,8 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SAMLProviderListEntry = @import("saml_provider_list_entry.zig").SAMLProviderListEntry;
 const serde = @import("serde.zig");
 
-pub const ListSAMLProvidersInput = struct {
-};
+pub const ListSAMLProvidersInput = struct {};
 
 pub const ListSAMLProvidersOutput = struct {
     /// The list of SAML provider resource objects defined in IAM for this Amazon

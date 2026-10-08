@@ -5,11 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DisableMacieInput = struct {
-};
+pub const DisableMacieInput = struct {};
 
-pub const DisableMacieOutput = struct {
-};
+pub const DisableMacieOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableMacieInput, options: CallOptions) !DisableMacieOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

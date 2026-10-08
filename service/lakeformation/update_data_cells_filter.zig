@@ -16,8 +16,7 @@ pub const UpdateDataCellsFilterInput = struct {
     };
 };
 
-pub const UpdateDataCellsFilterOutput = struct {
-};
+pub const UpdateDataCellsFilterOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDataCellsFilterInput, options: CallOptions) !UpdateDataCellsFilterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

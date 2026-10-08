@@ -6,9 +6,23 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the resource. The resource must be active
+    /// (not in the `DELETING` state), and must be owned by the account ID included
+    /// in the request.
+    resource_arn: []const u8,
 
-pub const TagResourceOutput = @import("tag_resource_response.zig").TagResourceResponse;
+    /// A list of tags (key-value pairs) to add to the resource. All tag keys in the
+    /// request must be unique.
+    tags: []const Tag,
+
+    pub const json_field_names = .{
+        .resource_arn = "resourceArn",
+        .tags = "tags",
+    };
+};
+
+pub const TagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TagResourceInput, options: CallOptions) !TagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

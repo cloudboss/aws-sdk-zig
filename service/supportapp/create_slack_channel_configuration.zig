@@ -72,8 +72,7 @@ pub const CreateSlackChannelConfigurationInput = struct {
     };
 };
 
-pub const CreateSlackChannelConfigurationOutput = struct {
-};
+pub const CreateSlackChannelConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSlackChannelConfigurationInput, options: CallOptions) !CreateSlackChannelConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

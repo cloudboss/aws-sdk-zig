@@ -15,13 +15,13 @@ pub const ExportSchemaInput = struct {
     /// Specifying this limits the results to only this schema version.
     schema_version: ?[]const u8 = null,
 
-    @"type": []const u8,
+    type: []const u8,
 
     pub const json_field_names = .{
         .registry_name = "RegistryName",
         .schema_name = "SchemaName",
         .schema_version = "SchemaVersion",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -34,14 +34,14 @@ pub const ExportSchemaOutput = struct {
 
     schema_version: ?[]const u8 = null,
 
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content = "Content",
         .schema_arn = "SchemaArn",
         .schema_name = "SchemaName",
         .schema_version = "SchemaVersion",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -93,7 +93,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ExportSchemaInput, conf
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "type=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, input.@"type");
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.type);
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(allocator);
 

@@ -25,8 +25,7 @@ pub const AcceptInvitationInput = struct {
     };
 };
 
-pub const AcceptInvitationOutput = struct {
-};
+pub const AcceptInvitationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AcceptInvitationInput, options: CallOptions) !AcceptInvitationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

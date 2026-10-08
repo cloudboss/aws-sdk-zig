@@ -15,8 +15,7 @@ pub const UpdateMetricConfigurationInput = struct {
     };
 };
 
-pub const UpdateMetricConfigurationOutput = struct {
-};
+pub const UpdateMetricConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateMetricConfigurationInput, options: CallOptions) !UpdateMetricConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

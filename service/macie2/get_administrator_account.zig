@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Invitation = @import("invitation.zig").Invitation;
 
-pub const GetAdministratorAccountInput = struct {
-};
+pub const GetAdministratorAccountInput = struct {};
 
 pub const GetAdministratorAccountOutput = struct {
     /// The Amazon Web Services account ID for the administrator account. If the

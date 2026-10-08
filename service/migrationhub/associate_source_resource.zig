@@ -42,8 +42,7 @@ pub const AssociateSourceResourceInput = struct {
     };
 };
 
-pub const AssociateSourceResourceOutput = struct {
-};
+pub const AssociateSourceResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateSourceResourceInput, options: CallOptions) !AssociateSourceResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

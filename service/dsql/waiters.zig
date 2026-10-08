@@ -46,7 +46,7 @@ pub const ClusterActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getCluster(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getCluster(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -154,7 +154,7 @@ pub const StreamActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getStream(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getStream(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

@@ -29,8 +29,7 @@ pub const DeleteContainerImageInput = struct {
     };
 };
 
-pub const DeleteContainerImageOutput = struct {
-};
+pub const DeleteContainerImageOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteContainerImageInput, options: CallOptions) !DeleteContainerImageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

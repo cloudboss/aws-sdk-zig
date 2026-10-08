@@ -470,7 +470,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAutoScalingGroupI
                             const n_2 = idx_2 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.InstancesDistribution.DistributionSegments.member.{d}.TargetCapacityTypes.member.{d}=", .{n, n_2}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.InstancesDistribution.DistributionSegments.member.{d}.TargetCapacityTypes.member.{d}=", .{ n, n_2 }) catch continue;
                                 try body_buf.appendSlice(allocator, field_prefix);
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, item_2.wireName());
                             }
@@ -553,7 +553,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAutoScalingGroupI
                                 const n_3 = idx_3 + 1;
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorManufacturers.member.{d}=", .{n, n_3}) catch continue;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorManufacturers.member.{d}=", .{ n, n_3 }) catch continue;
                                     try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, item_3.wireName());
                                 }
@@ -564,7 +564,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAutoScalingGroupI
                                 const n_3 = idx_3 + 1;
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorNames.member.{d}=", .{n, n_3}) catch continue;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorNames.member.{d}=", .{ n, n_3 }) catch continue;
                                     try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, item_3.wireName());
                                 }
@@ -593,7 +593,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAutoScalingGroupI
                                 const n_3 = idx_3 + 1;
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorTypes.member.{d}=", .{n, n_3}) catch continue;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AcceleratorTypes.member.{d}=", .{ n, n_3 }) catch continue;
                                     try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, item_3.wireName());
                                 }
@@ -604,7 +604,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAutoScalingGroupI
                                 const n_3 = idx_3 + 1;
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AllowedInstanceTypes.member.{d}=", .{n, n_3}) catch continue;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.AllowedInstanceTypes.member.{d}=", .{ n, n_3 }) catch continue;
                                     try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, item_3);
                                 }
@@ -644,7 +644,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAutoScalingGroupI
                                         {
                                             var prefix_buf: [256]u8 = undefined;
                                             if (item_5.instance_family) |fv_6| {
-                                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BaselinePerformanceFactors.Cpu.Reference.item.{d}.InstanceFamily=", .{n, n_5}) catch continue;
+                                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.BaselinePerformanceFactors.Cpu.Reference.item.{d}.InstanceFamily=", .{ n, n_5 }) catch continue;
                                                 try body_buf.appendSlice(allocator, field_prefix);
                                                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_6);
                                             }
@@ -666,7 +666,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAutoScalingGroupI
                                 const n_3 = idx_3 + 1;
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.CpuManufacturers.member.{d}=", .{n, n_3}) catch continue;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.CpuManufacturers.member.{d}=", .{ n, n_3 }) catch continue;
                                     try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, item_3.wireName());
                                 }
@@ -677,7 +677,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAutoScalingGroupI
                                 const n_3 = idx_3 + 1;
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.ExcludedInstanceTypes.member.{d}=", .{n, n_3}) catch continue;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.ExcludedInstanceTypes.member.{d}=", .{ n, n_3 }) catch continue;
                                     try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, item_3);
                                 }
@@ -688,7 +688,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAutoScalingGroupI
                                 const n_3 = idx_3 + 1;
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.InstanceGenerations.member.{d}=", .{n, n_3}) catch continue;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.InstanceGenerations.member.{d}=", .{ n, n_3 }) catch continue;
                                     try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, item_3.wireName());
                                 }
@@ -707,7 +707,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAutoScalingGroupI
                                 const n_3 = idx_3 + 1;
                                 {
                                     var prefix_buf: [256]u8 = undefined;
-                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.LocalStorageTypes.member.{d}=", .{n, n_3}) catch continue;
+                                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MixedInstancesPolicy.LaunchTemplate.Overrides.member.{d}.InstanceRequirements.LocalStorageTypes.member.{d}=", .{ n, n_3 }) catch continue;
                                     try body_buf.appendSlice(allocator, field_prefix);
                                     try aws.url.appendUrlEncoded(allocator, &body_buf, item_3.wireName());
                                 }

@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DataRetentionMode = @import("data_retention_mode.zig").DataRetentionMode;
 
-pub const GetAccountDataRetentionInput = struct {
-};
+pub const GetAccountDataRetentionInput = struct {};
 
 pub const GetAccountDataRetentionOutput = struct {
     /// The data retention mode configured for the account.

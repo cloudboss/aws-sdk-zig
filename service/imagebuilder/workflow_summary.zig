@@ -30,7 +30,7 @@ pub const WorkflowSummary = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The image creation stage that this workflow applies to.
-    @"type": ?WorkflowType = null,
+    type: ?WorkflowType = null,
 
     /// The version of the workflow.
     version: ?[]const u8 = null,
@@ -44,7 +44,7 @@ pub const WorkflowSummary = struct {
         .owner = "owner",
         .state = "state",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .version = "version",
     };
 };

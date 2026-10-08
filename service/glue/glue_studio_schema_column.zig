@@ -7,11 +7,11 @@ pub const GlueStudioSchemaColumn = struct {
     name: []const u8,
 
     /// The hive type for this column in the Glue Studio schema.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .glue_studio_type = "GlueStudioType",
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

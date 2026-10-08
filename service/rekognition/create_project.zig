@@ -7,9 +7,41 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ProjectAutoUpdate = @import("project_auto_update.zig").ProjectAutoUpdate;
 const CustomizationFeature = @import("customization_feature.zig").CustomizationFeature;
 
-pub const CreateProjectInput = @import("create_project_request.zig").CreateProjectRequest;
+pub const CreateProjectInput = struct {
+    /// Specifies whether automatic retraining should be attempted for the versions
+    /// of the
+    /// project. Automatic retraining is done as a best effort. Required argument
+    /// for Content
+    /// Moderation. Applicable only to adapters.
+    auto_update: ?ProjectAutoUpdate = null,
 
-pub const CreateProjectOutput = @import("create_project_response.zig").CreateProjectResponse;
+    /// Specifies feature that is being customized. If no value is provided
+    /// CUSTOM_LABELS is used as a default.
+    feature: ?CustomizationFeature = null,
+
+    /// The name of the project to create.
+    project_name: []const u8,
+
+    /// A set of tags (key-value pairs) that you want to attach to the project.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .auto_update = "AutoUpdate",
+        .feature = "Feature",
+        .project_name = "ProjectName",
+        .tags = "Tags",
+    };
+};
+
+pub const CreateProjectOutput = struct {
+    /// The Amazon Resource Name (ARN) of the new project. You can use the ARN to
+    /// configure IAM access to the project.
+    project_arn: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .project_arn = "ProjectArn",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateProjectInput, options: CallOptions) !CreateProjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

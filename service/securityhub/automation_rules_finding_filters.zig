@@ -251,7 +251,7 @@ pub const AutomationRulesFindingFilters = struct {
     /// ASFF](https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html) in the *Security Hub CSPM User Guide*.
     ///
     /// Array Members: Minimum number of 1 item. Maximum number of 20 items.
-    @"type": ?[]const StringFilter = null,
+    type: ?[]const StringFilter = null,
 
     /// A timestamp that indicates when the finding record was most recently
     /// updated.
@@ -315,7 +315,7 @@ pub const AutomationRulesFindingFilters = struct {
         .severity_label = "SeverityLabel",
         .source_url = "SourceUrl",
         .title = "Title",
-        .@"type" = "Type",
+        .type = "Type",
         .updated_at = "UpdatedAt",
         .user_defined_fields = "UserDefinedFields",
         .verification_state = "VerificationState",

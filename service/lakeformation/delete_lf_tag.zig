@@ -21,8 +21,7 @@ pub const DeleteLFTagInput = struct {
     };
 };
 
-pub const DeleteLFTagOutput = struct {
-};
+pub const DeleteLFTagOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLFTagInput, options: CallOptions) !DeleteLFTagOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

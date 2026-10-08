@@ -18,8 +18,7 @@ pub const DeleteResourcePermissionStatementInput = struct {
     };
 };
 
-pub const DeleteResourcePermissionStatementOutput = struct {
-};
+pub const DeleteResourcePermissionStatementOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteResourcePermissionStatementInput, options: CallOptions) !DeleteResourcePermissionStatementOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

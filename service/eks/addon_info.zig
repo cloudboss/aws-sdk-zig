@@ -25,7 +25,7 @@ pub const AddonInfo = struct {
     publisher: ?[]const u8 = null,
 
     /// The type of the add-on.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .addon_name = "addonName",
@@ -34,6 +34,6 @@ pub const AddonInfo = struct {
         .marketplace_information = "marketplaceInformation",
         .owner = "owner",
         .publisher = "publisher",
-        .@"type" = "type",
+        .type = "type",
     };
 };

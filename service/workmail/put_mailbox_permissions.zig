@@ -62,8 +62,7 @@ pub const PutMailboxPermissionsInput = struct {
     };
 };
 
-pub const PutMailboxPermissionsOutput = struct {
-};
+pub const PutMailboxPermissionsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutMailboxPermissionsInput, options: CallOptions) !PutMailboxPermissionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

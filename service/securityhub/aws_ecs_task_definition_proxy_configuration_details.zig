@@ -11,11 +11,11 @@ pub const AwsEcsTaskDefinitionProxyConfigurationDetails = struct {
     proxy_configuration_properties: ?[]const AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails = null,
 
     /// The proxy type.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .container_name = "ContainerName",
         .proxy_configuration_properties = "ProxyConfigurationProperties",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

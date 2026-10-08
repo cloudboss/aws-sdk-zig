@@ -6,10 +6,10 @@ pub const EarthObservationJobErrorDetails = struct {
     message: ?[]const u8 = null,
 
     /// The type of error in an Earth Observation job.
-    @"type": ?EarthObservationJobErrorType = null,
+    type: ?EarthObservationJobErrorType = null,
 
     pub const json_field_names = .{
         .message = "Message",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

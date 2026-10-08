@@ -17,8 +17,7 @@ pub const DeregisterWorkspaceDirectoryInput = struct {
     };
 };
 
-pub const DeregisterWorkspaceDirectoryOutput = struct {
-};
+pub const DeregisterWorkspaceDirectoryOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterWorkspaceDirectoryInput, options: CallOptions) !DeregisterWorkspaceDirectoryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

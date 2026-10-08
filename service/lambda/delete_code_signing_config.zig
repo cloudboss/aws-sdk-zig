@@ -14,8 +14,7 @@ pub const DeleteCodeSigningConfigInput = struct {
     };
 };
 
-pub const DeleteCodeSigningConfigOutput = struct {
-};
+pub const DeleteCodeSigningConfigOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCodeSigningConfigInput, options: CallOptions) !DeleteCodeSigningConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

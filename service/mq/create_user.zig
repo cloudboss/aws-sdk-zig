@@ -40,8 +40,7 @@ pub const CreateUserInput = struct {
     };
 };
 
-pub const CreateUserOutput = struct {
-};
+pub const CreateUserOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateUserInput, options: CallOptions) !CreateUserOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

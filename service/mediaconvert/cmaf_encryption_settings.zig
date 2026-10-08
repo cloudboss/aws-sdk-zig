@@ -47,7 +47,7 @@ pub const CmafEncryptionSettings = struct {
     /// Specify whether your DRM encryption key is static or from a key provider
     /// that follows the SPEKE standard. For more information about SPEKE, see
     /// https://docs.aws.amazon.com/speke/latest/documentation/what-is-speke.html.
-    @"type": ?CmafKeyProviderType = null,
+    type: ?CmafKeyProviderType = null,
 
     pub const json_field_names = .{
         .clear_lead_segments = "ClearLeadSegments",
@@ -56,6 +56,6 @@ pub const CmafEncryptionSettings = struct {
         .initialization_vector_in_manifest = "InitializationVectorInManifest",
         .speke_key_provider = "SpekeKeyProvider",
         .static_key_provider = "StaticKeyProvider",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

@@ -14,8 +14,7 @@ pub const DeleteExternalModelInput = struct {
     };
 };
 
-pub const DeleteExternalModelOutput = struct {
-};
+pub const DeleteExternalModelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteExternalModelInput, options: CallOptions) !DeleteExternalModelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

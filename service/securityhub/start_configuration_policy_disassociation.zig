@@ -23,8 +23,7 @@ pub const StartConfigurationPolicyDisassociationInput = struct {
     };
 };
 
-pub const StartConfigurationPolicyDisassociationOutput = struct {
-};
+pub const StartConfigurationPolicyDisassociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartConfigurationPolicyDisassociationInput, options: CallOptions) !StartConfigurationPolicyDisassociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

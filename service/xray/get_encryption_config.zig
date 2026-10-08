@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const EncryptionConfig = @import("encryption_config.zig").EncryptionConfig;
 
-pub const GetEncryptionConfigInput = struct {
-};
+pub const GetEncryptionConfigInput = struct {};
 
 pub const GetEncryptionConfigOutput = struct {
     /// The encryption configuration document.

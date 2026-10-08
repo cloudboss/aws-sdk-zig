@@ -9,14 +9,14 @@ pub const FunctionParameter = struct {
     name: ?[]const u8 = null,
 
     /// The data type of the parameter.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The value of the parameter.
     value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
         .value = "value",
     };
 };

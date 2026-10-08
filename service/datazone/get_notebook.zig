@@ -81,7 +81,7 @@ pub const GetNotebookOutput = struct {
     status: NotebookStatus,
 
     /// The type of the notebook.
-    @"type": ?NotebookType = null,
+    type: ?NotebookType = null,
 
     /// The timestamp of when the notebook was last updated.
     updated_at: ?i64 = null,
@@ -108,7 +108,7 @@ pub const GetNotebookOutput = struct {
         .owning_project_id = "owningProjectId",
         .parameters = "parameters",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
         .updated_by = "updatedBy",
     };

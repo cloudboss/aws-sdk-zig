@@ -20,7 +20,7 @@ pub const ActorUser = struct {
     name: ?[]const u8 = null,
 
     /// The type of user.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The unique identifier of the threat actor.
     uid: ?[]const u8 = null,
@@ -29,7 +29,7 @@ pub const ActorUser = struct {
         .account = "Account",
         .credential_uid = "CredentialUid",
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
         .uid = "Uid",
     };
 };

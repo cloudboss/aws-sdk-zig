@@ -19,11 +19,11 @@ pub const Metric = struct {
     /// The supported value `AggregatedRelativeTotalTime` is an
     /// aggregation of the metric value for one frame that is calculated across the
     /// occurences of all frames in a profile.
-    @"type": MetricType,
+    type: MetricType,
 
     pub const json_field_names = .{
         .frame_name = "frameName",
         .thread_states = "threadStates",
-        .@"type" = "type",
+        .type = "type",
     };
 };

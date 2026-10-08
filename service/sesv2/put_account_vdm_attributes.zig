@@ -15,8 +15,7 @@ pub const PutAccountVdmAttributesInput = struct {
     };
 };
 
-pub const PutAccountVdmAttributesOutput = struct {
-};
+pub const PutAccountVdmAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAccountVdmAttributesInput, options: CallOptions) !PutAccountVdmAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

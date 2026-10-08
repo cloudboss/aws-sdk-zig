@@ -18,8 +18,7 @@ pub const DeleteCollectionGroupInput = struct {
     };
 };
 
-pub const DeleteCollectionGroupOutput = struct {
-};
+pub const DeleteCollectionGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCollectionGroupInput, options: CallOptions) !DeleteCollectionGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

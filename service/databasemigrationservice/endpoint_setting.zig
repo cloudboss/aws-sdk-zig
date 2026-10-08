@@ -28,7 +28,7 @@ pub const EndpointSetting = struct {
 
     /// The type of endpoint. Valid values are `source` and
     /// `target`.
-    @"type": ?EndpointSettingTypeValue = null,
+    type: ?EndpointSettingTypeValue = null,
 
     /// The unit of measure for this endpoint setting.
     units: ?[]const u8 = null,
@@ -41,7 +41,7 @@ pub const EndpointSetting = struct {
         .int_value_min = "IntValueMin",
         .name = "Name",
         .sensitive = "Sensitive",
-        .@"type" = "Type",
+        .type = "Type",
         .units = "Units",
     };
 };

@@ -26,8 +26,7 @@ pub const UpdateConnectClientAddInInput = struct {
     };
 };
 
-pub const UpdateConnectClientAddInOutput = struct {
-};
+pub const UpdateConnectClientAddInOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateConnectClientAddInInput, options: CallOptions) !UpdateConnectClientAddInOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

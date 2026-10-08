@@ -6,10 +6,10 @@ pub const DocumentAclGroup = struct {
     id: []const u8,
 
     /// The membership type indicating the scope of the group entry.
-    @"type": DocumentAclMembershipType,
+    type: DocumentAclMembershipType,
 
     pub const json_field_names = .{
         .id = "id",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -6,9 +6,31 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ListDomainItem = @import("list_domain_item.zig").ListDomainItem;
 
-pub const ListDomainsInput = @import("list_domains_request.zig").ListDomainsRequest;
+pub const ListDomainsInput = struct {
+    /// The maximum number of objects returned per page.
+    max_results: ?i32 = null,
 
-pub const ListDomainsOutput = @import("list_domains_response.zig").ListDomainsResponse;
+    /// The pagination token from the previous ListDomain API call.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListDomainsOutput = struct {
+    /// The list of ListDomains instances.
+    items: ?[]const ListDomainItem = null,
+
+    /// The pagination token from the previous ListDomains API call.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .items = "Items",
+        .next_token = "NextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDomainsInput, options: CallOptions) !ListDomainsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

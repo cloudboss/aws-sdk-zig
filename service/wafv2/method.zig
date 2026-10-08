@@ -6,5 +6,4 @@
 /// component types.
 ///
 /// JSON specification: `"Method": {}`
-pub const Method = struct {
-};
+pub const Method = struct {};

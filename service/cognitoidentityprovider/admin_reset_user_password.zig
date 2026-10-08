@@ -59,8 +59,7 @@ pub const AdminResetUserPasswordInput = struct {
     };
 };
 
-pub const AdminResetUserPasswordOutput = struct {
-};
+pub const AdminResetUserPasswordOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminResetUserPasswordInput, options: CallOptions) !AdminResetUserPasswordOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

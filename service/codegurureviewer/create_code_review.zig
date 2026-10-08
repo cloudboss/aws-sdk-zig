@@ -29,13 +29,13 @@ pub const CreateCodeReviewInput = struct {
     /// The type of code review to create. This is specified using a
     /// [CodeReviewType](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html)
     /// object. You can create a code review only of type `RepositoryAnalysis`.
-    @"type": CodeReviewType,
+    type: CodeReviewType,
 
     pub const json_field_names = .{
         .client_request_token = "ClientRequestToken",
         .name = "Name",
         .repository_association_arn = "RepositoryAssociationArn",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -99,7 +99,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCodeReviewInput, 
     has_prev = true;
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

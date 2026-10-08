@@ -18,12 +18,12 @@ pub const ListBrowsersInput = struct {
 
     /// The type of browsers to list. If not specified, all browser types are
     /// returned.
-    @"type": ?ResourceType = null,
+    type: ?ResourceType = null,
 
     pub const json_field_names = .{
         .max_results = "maxResults",
         .next_token = "nextToken",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -89,7 +89,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListBrowsersInput, conf
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());

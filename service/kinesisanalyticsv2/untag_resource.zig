@@ -5,9 +5,21 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceInput = struct {
+    /// The ARN of the Managed Service for Apache Flink application from which to
+    /// remove the tags.
+    resource_arn: []const u8,
 
-pub const UntagResourceOutput = @import("untag_resource_response.zig").UntagResourceResponse;
+    /// A list of keys of tags to remove from the specified application.
+    tag_keys: []const []const u8,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceARN",
+        .tag_keys = "TagKeys",
+    };
+};
+
+pub const UntagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResourceInput, options: CallOptions) !UntagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

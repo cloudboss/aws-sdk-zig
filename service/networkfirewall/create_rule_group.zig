@@ -139,7 +139,7 @@ pub const CreateRuleGroupInput = struct {
     /// Indicates whether the rule group is stateless or stateful. If the rule group
     /// is stateless, it contains
     /// stateless rules. If it is stateful, it contains stateful rules.
-    @"type": RuleGroupType,
+    type: RuleGroupType,
 
     pub const json_field_names = .{
         .analyze_rule_group = "AnalyzeRuleGroup",
@@ -153,7 +153,7 @@ pub const CreateRuleGroupInput = struct {
         .source_metadata = "SourceMetadata",
         .summary_configuration = "SummaryConfiguration",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

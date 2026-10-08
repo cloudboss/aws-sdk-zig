@@ -26,8 +26,7 @@ pub const RemoveThingFromBillingGroupInput = struct {
     };
 };
 
-pub const RemoveThingFromBillingGroupOutput = struct {
-};
+pub const RemoveThingFromBillingGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveThingFromBillingGroupInput, options: CallOptions) !RemoveThingFromBillingGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

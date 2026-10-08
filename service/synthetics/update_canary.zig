@@ -213,8 +213,7 @@ pub const UpdateCanaryInput = struct {
     };
 };
 
-pub const UpdateCanaryOutput = struct {
-};
+pub const UpdateCanaryOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCanaryInput, options: CallOptions) !UpdateCanaryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

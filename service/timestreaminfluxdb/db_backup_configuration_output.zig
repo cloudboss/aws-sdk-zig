@@ -15,13 +15,13 @@ pub const DbBackupConfigurationOutput = struct {
     retention_days: i32,
 
     /// The type of automated backup schedule.
-    @"type": AutomatedDbBackupType,
+    type: AutomatedDbBackupType,
 
     pub const json_field_names = .{
         .custom_schedule = "customSchedule",
         .enabled = "enabled",
         .next_automated_backup_time = "nextAutomatedBackupTime",
         .retention_days = "retentionDays",
-        .@"type" = "type",
+        .type = "type",
     };
 };

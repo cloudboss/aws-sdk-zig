@@ -38,7 +38,7 @@ pub const View = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the view - `CUSTOMER_MANAGED`.
-    @"type": ?ViewType = null,
+    type: ?ViewType = null,
 
     /// Current version of the view.
     version: i32 = 0,
@@ -59,7 +59,7 @@ pub const View = struct {
         .name = "Name",
         .status = "Status",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
         .version = "Version",
         .version_description = "VersionDescription",
         .view_content_sha_256 = "ViewContentSha256",

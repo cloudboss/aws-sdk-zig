@@ -20,8 +20,7 @@ pub const UpdateMediaStorageConfigurationInput = struct {
     };
 };
 
-pub const UpdateMediaStorageConfigurationOutput = struct {
-};
+pub const UpdateMediaStorageConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateMediaStorageConfigurationInput, options: CallOptions) !UpdateMediaStorageConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

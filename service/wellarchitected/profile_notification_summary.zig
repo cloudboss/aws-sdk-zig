@@ -15,7 +15,7 @@ pub const ProfileNotificationSummary = struct {
     profile_name: ?[]const u8 = null,
 
     /// Type of notification.
-    @"type": ?ProfileNotificationType = null,
+    type: ?ProfileNotificationType = null,
 
     workload_id: ?[]const u8 = null,
 
@@ -26,7 +26,7 @@ pub const ProfileNotificationSummary = struct {
         .latest_profile_version = "LatestProfileVersion",
         .profile_arn = "ProfileArn",
         .profile_name = "ProfileName",
-        .@"type" = "Type",
+        .type = "Type",
         .workload_id = "WorkloadId",
         .workload_name = "WorkloadName",
     };

@@ -14,11 +14,11 @@ pub const MetadataAttributeSchema = struct {
 
     /// The data type of the metadata attribute. The type determines how the
     /// attribute can be used in filter expressions and reranking.
-    @"type": AttributeType,
+    type: AttributeType,
 
     pub const json_field_names = .{
         .description = "description",
         .key = "key",
-        .@"type" = "type",
+        .type = "type",
     };
 };

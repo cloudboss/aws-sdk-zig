@@ -23,8 +23,7 @@ pub const DeleteProjectPolicyInput = struct {
     };
 };
 
-pub const DeleteProjectPolicyOutput = struct {
-};
+pub const DeleteProjectPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteProjectPolicyInput, options: CallOptions) !DeleteProjectPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

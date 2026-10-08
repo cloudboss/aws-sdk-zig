@@ -13,12 +13,12 @@ pub const OfferingStatus = struct {
     quantity: ?i32 = null,
 
     /// The type specified for the offering status.
-    @"type": ?OfferingTransactionType = null,
+    type: ?OfferingTransactionType = null,
 
     pub const json_field_names = .{
         .effective_on = "effectiveOn",
         .offering = "offering",
         .quantity = "quantity",
-        .@"type" = "type",
+        .type = "type",
     };
 };

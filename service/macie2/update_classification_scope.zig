@@ -21,8 +21,7 @@ pub const UpdateClassificationScopeInput = struct {
     };
 };
 
-pub const UpdateClassificationScopeOutput = struct {
-};
+pub const UpdateClassificationScopeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateClassificationScopeInput, options: CallOptions) !UpdateClassificationScopeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

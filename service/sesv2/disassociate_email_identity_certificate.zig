@@ -22,8 +22,7 @@ pub const DisassociateEmailIdentityCertificateInput = struct {
     };
 };
 
-pub const DisassociateEmailIdentityCertificateOutput = struct {
-};
+pub const DisassociateEmailIdentityCertificateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateEmailIdentityCertificateInput, options: CallOptions) !DisassociateEmailIdentityCertificateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -11,11 +11,11 @@ pub const FoundationModelConfiguration = struct {
     mantle_foundation_model_configuration: ?MantleFoundationModelConfiguration = null,
 
     /// The type of foundation model configuration.
-    @"type": FoundationModelConfigurationType,
+    type: FoundationModelConfigurationType,
 
     pub const json_field_names = .{
         .bedrock_foundation_model_configuration = "bedrockFoundationModelConfiguration",
         .mantle_foundation_model_configuration = "mantleFoundationModelConfiguration",
-        .@"type" = "type",
+        .type = "type",
     };
 };

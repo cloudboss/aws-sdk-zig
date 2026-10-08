@@ -30,8 +30,7 @@ pub const UpdateLocationFsxLustreInput = struct {
     };
 };
 
-pub const UpdateLocationFsxLustreOutput = struct {
-};
+pub const UpdateLocationFsxLustreOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLocationFsxLustreInput, options: CallOptions) !UpdateLocationFsxLustreOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

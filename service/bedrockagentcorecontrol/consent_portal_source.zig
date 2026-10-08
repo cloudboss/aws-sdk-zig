@@ -7,10 +7,10 @@ pub const ConsentPortalSource = struct {
     identifier: []const u8,
 
     /// The type of the source resource.
-    @"type": ConsentPortalSourceType,
+    type: ConsentPortalSourceType,
 
     pub const json_field_names = .{
         .identifier = "identifier",
-        .@"type" = "type",
+        .type = "type",
     };
 };

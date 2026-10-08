@@ -11,14 +11,14 @@ pub const WebNotificationContent = struct {
     attributes: ?ContentAttributes = null,
 
     /// The type of web notification to send.
-    @"type": NotificationType,
+    type: NotificationType,
 
     /// The Amazon Resource Name (ARN) of the view to render for the notification.
     view_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",
-        .@"type" = "Type",
+        .type = "Type",
         .view_arn = "ViewArn",
     };
 };

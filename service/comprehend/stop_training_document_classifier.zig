@@ -16,8 +16,7 @@ pub const StopTrainingDocumentClassifierInput = struct {
     };
 };
 
-pub const StopTrainingDocumentClassifierOutput = struct {
-};
+pub const StopTrainingDocumentClassifierOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopTrainingDocumentClassifierInput, options: CallOptions) !StopTrainingDocumentClassifierOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

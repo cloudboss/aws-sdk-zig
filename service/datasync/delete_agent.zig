@@ -16,8 +16,7 @@ pub const DeleteAgentInput = struct {
     };
 };
 
-pub const DeleteAgentOutput = struct {
-};
+pub const DeleteAgentOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAgentInput, options: CallOptions) !DeleteAgentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

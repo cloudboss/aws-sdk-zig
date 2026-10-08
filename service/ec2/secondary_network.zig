@@ -28,5 +28,5 @@ pub const SecondaryNetwork = struct {
     tags: ?[]const Tag = null,
 
     /// The type of the secondary network.
-    @"type": ?SecondaryNetworkType = null,
+    type: ?SecondaryNetworkType = null,
 };

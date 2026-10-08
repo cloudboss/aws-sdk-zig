@@ -62,7 +62,7 @@ pub const UpdateChannelInput = struct {
     /// exceed the allowable input resolution or bitrate, the stream probably will
     /// disconnect immediately.* Default: `STANDARD`. For details, see [Channel
     /// Types](https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html).
-    @"type": ?ChannelType = null,
+    type: ?ChannelType = null,
 
     pub const json_field_names = .{
         .ad_configuration_arn = "adConfigurationArn",
@@ -76,7 +76,7 @@ pub const UpdateChannelInput = struct {
         .playback_restriction_policy_arn = "playbackRestrictionPolicyArn",
         .preset = "preset",
         .recording_configuration_arn = "recordingConfigurationArn",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -189,7 +189,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateChannelInput, con
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"type\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);

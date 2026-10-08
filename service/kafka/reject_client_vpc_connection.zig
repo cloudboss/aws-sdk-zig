@@ -18,8 +18,7 @@ pub const RejectClientVpcConnectionInput = struct {
     };
 };
 
-pub const RejectClientVpcConnectionOutput = struct {
-};
+pub const RejectClientVpcConnectionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RejectClientVpcConnectionInput, options: CallOptions) !RejectClientVpcConnectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

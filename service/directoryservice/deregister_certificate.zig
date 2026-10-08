@@ -18,8 +18,7 @@ pub const DeregisterCertificateInput = struct {
     };
 };
 
-pub const DeregisterCertificateOutput = struct {
-};
+pub const DeregisterCertificateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterCertificateInput, options: CallOptions) !DeregisterCertificateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

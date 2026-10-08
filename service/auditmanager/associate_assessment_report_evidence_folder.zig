@@ -18,8 +18,7 @@ pub const AssociateAssessmentReportEvidenceFolderInput = struct {
     };
 };
 
-pub const AssociateAssessmentReportEvidenceFolderOutput = struct {
-};
+pub const AssociateAssessmentReportEvidenceFolderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateAssessmentReportEvidenceFolderInput, options: CallOptions) !AssociateAssessmentReportEvidenceFolderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

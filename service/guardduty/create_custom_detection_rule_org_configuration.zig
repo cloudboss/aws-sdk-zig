@@ -35,8 +35,7 @@ pub const CreateCustomDetectionRuleOrgConfigurationInput = struct {
     };
 };
 
-pub const CreateCustomDetectionRuleOrgConfigurationOutput = struct {
-};
+pub const CreateCustomDetectionRuleOrgConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCustomDetectionRuleOrgConfigurationInput, options: CallOptions) !CreateCustomDetectionRuleOrgConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

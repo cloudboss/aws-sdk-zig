@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AccountSettings = @import("account_settings.zig").AccountSettings;
 
-pub const GetAccountSettingsInput = struct {
-};
+pub const GetAccountSettingsInput = struct {};
 
 pub const GetAccountSettingsOutput = struct {
     account_settings: ?AccountSettings = null,

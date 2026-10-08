@@ -14,8 +14,7 @@ pub const DeleteChimeWebhookConfigurationInput = struct {
     };
 };
 
-pub const DeleteChimeWebhookConfigurationOutput = struct {
-};
+pub const DeleteChimeWebhookConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteChimeWebhookConfigurationInput, options: CallOptions) !DeleteChimeWebhookConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

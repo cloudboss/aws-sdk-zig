@@ -19,13 +19,13 @@ pub const ValidationFinding = struct {
     scope: ?ValidationFindingScope = null,
 
     /// The type of the validation finding.
-    @"type": ?ValidationFindingType = null,
+    type: ?ValidationFindingType = null,
 
     pub const json_field_names = .{
         .code = "Code",
         .message = "Message",
         .provider_message = "ProviderMessage",
         .scope = "Scope",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

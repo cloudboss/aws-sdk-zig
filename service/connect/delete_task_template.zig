@@ -19,8 +19,7 @@ pub const DeleteTaskTemplateInput = struct {
     };
 };
 
-pub const DeleteTaskTemplateOutput = struct {
-};
+pub const DeleteTaskTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTaskTemplateInput, options: CallOptions) !DeleteTaskTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

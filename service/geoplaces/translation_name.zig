@@ -16,7 +16,7 @@ pub const TranslationName = struct {
 
     /// The type of translation name. Valid values are `Abbreviation`, `AreaCode`,
     /// `BaseName`, `Exonym`, `Shortened`, and `Synonym`.
-    @"type": TranslationNameType,
+    type: TranslationNameType,
 
     /// The translated or alternative name value.
     value: []const u8,
@@ -25,7 +25,7 @@ pub const TranslationName = struct {
         .language = "Language",
         .primary = "Primary",
         .transliterated = "Transliterated",
-        .@"type" = "Type",
+        .type = "Type",
         .value = "Value",
     };
 };

@@ -14,8 +14,7 @@ pub const DeleteVectorEnrichmentJobInput = struct {
     };
 };
 
-pub const DeleteVectorEnrichmentJobOutput = struct {
-};
+pub const DeleteVectorEnrichmentJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVectorEnrichmentJobInput, options: CallOptions) !DeleteVectorEnrichmentJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

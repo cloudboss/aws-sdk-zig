@@ -81,7 +81,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFolderMembershipI
     try path_buf.appendSlice(allocator, "/folders/");
     try path_buf.appendSlice(allocator, input.folder_id);
     try path_buf.appendSlice(allocator, "/members/");
-    try path_buf.appendSlice(allocator, input.member_type);
+    try path_buf.appendSlice(allocator, input.member_type.wireName());
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.member_id);
     const path = try path_buf.toOwnedSlice(allocator);

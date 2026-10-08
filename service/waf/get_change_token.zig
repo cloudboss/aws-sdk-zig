@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetChangeTokenInput = struct {
-};
+pub const GetChangeTokenInput = struct {};
 
 pub const GetChangeTokenOutput = struct {
     /// The `ChangeToken` that you used in the request. Use this value in a

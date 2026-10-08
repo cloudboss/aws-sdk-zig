@@ -51,8 +51,7 @@ pub const UpdateRotationInput = struct {
     };
 };
 
-pub const UpdateRotationOutput = struct {
-};
+pub const UpdateRotationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRotationInput, options: CallOptions) !UpdateRotationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

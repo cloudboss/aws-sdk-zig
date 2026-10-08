@@ -16,12 +16,12 @@ pub const AccessPoint = struct {
 
     /// The type of access point, indicating its intended use. Only applies to
     /// results of type place.
-    @"type": ?AccessPointType = null,
+    type: ?AccessPointType = null,
 
     pub const json_field_names = .{
         .label = "Label",
         .position = "Position",
         .primary = "Primary",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

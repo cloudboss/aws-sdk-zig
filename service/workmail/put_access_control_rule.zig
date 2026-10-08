@@ -63,8 +63,7 @@ pub const PutAccessControlRuleInput = struct {
     };
 };
 
-pub const PutAccessControlRuleOutput = struct {
-};
+pub const PutAccessControlRuleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAccessControlRuleInput, options: CallOptions) !PutAccessControlRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

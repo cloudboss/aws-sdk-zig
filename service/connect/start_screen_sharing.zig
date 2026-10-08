@@ -28,8 +28,7 @@ pub const StartScreenSharingInput = struct {
     };
 };
 
-pub const StartScreenSharingOutput = struct {
-};
+pub const StartScreenSharingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartScreenSharingInput, options: CallOptions) !StartScreenSharingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

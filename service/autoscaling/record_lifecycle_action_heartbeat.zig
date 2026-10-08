@@ -23,8 +23,7 @@ pub const RecordLifecycleActionHeartbeatInput = struct {
     lifecycle_hook_name: []const u8,
 };
 
-pub const RecordLifecycleActionHeartbeatOutput = struct {
-};
+pub const RecordLifecycleActionHeartbeatOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RecordLifecycleActionHeartbeatInput, options: CallOptions) !RecordLifecycleActionHeartbeatOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

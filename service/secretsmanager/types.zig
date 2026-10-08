@@ -12,6 +12,4 @@ pub const SortByType = @import("sort_by_type.zig").SortByType;
 pub const SortOrderType = @import("sort_order_type.zig").SortOrderType;
 pub const StatusType = @import("status_type.zig").StatusType;
 pub const Tag = @import("tag.zig").Tag;
-pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
-pub const UntagResourceRequest = @import("untag_resource_request.zig").UntagResourceRequest;
 pub const ValidationErrorsEntry = @import("validation_errors_entry.zig").ValidationErrorsEntry;

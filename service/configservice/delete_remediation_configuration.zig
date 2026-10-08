@@ -19,8 +19,7 @@ pub const DeleteRemediationConfigurationInput = struct {
     };
 };
 
-pub const DeleteRemediationConfigurationOutput = struct {
-};
+pub const DeleteRemediationConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRemediationConfigurationInput, options: CallOptions) !DeleteRemediationConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

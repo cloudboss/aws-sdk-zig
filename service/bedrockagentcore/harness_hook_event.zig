@@ -18,13 +18,13 @@ pub const HarnessHookEvent = struct {
     reason: ?[]const u8 = null,
 
     /// The type of lifecycle hook event.
-    @"type": HarnessHookEventType,
+    type: HarnessHookEventType,
 
     pub const json_field_names = .{
         .decision = "decision",
         .hook_event_id = "hookEventId",
         .name = "name",
         .reason = "reason",
-        .@"type" = "type",
+        .type = "type",
     };
 };

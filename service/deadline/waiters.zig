@@ -50,7 +50,7 @@ pub const FleetActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getFleet(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getFleet(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -113,7 +113,7 @@ pub const JobCompleteWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getJob(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getJob(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -191,7 +191,7 @@ pub const JobCreateCompleteWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getJob(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getJob(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -269,7 +269,7 @@ pub const JobSucceededWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getJob(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getJob(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -407,7 +407,7 @@ pub const LicenseEndpointValidWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getLicenseEndpoint(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getLicenseEndpoint(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -465,7 +465,7 @@ pub const QueueFleetAssociationStoppedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getQueueFleetAssociation(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getQueueFleetAssociation(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -518,7 +518,7 @@ pub const QueueLimitAssociationStoppedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getQueueLimitAssociation(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getQueueLimitAssociation(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -571,7 +571,7 @@ pub const QueueSchedulingWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getQueue(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getQueue(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -624,7 +624,7 @@ pub const QueueSchedulingBlockedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getQueue(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getQueue(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

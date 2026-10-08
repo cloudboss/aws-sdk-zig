@@ -11,8 +11,7 @@ pub const DeleteIdentityInput = struct {
     identity: []const u8,
 };
 
-pub const DeleteIdentityOutput = struct {
-};
+pub const DeleteIdentityOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIdentityInput, options: CallOptions) !DeleteIdentityOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -15,8 +15,7 @@ pub const DeleteInferenceProfileInput = struct {
     };
 };
 
-pub const DeleteInferenceProfileOutput = struct {
-};
+pub const DeleteInferenceProfileOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteInferenceProfileInput, options: CallOptions) !DeleteInferenceProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

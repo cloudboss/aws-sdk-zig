@@ -18,8 +18,7 @@ pub const DeleteWarmPoolInput = struct {
     force_delete: ?bool = null,
 };
 
-pub const DeleteWarmPoolOutput = struct {
-};
+pub const DeleteWarmPoolOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteWarmPoolInput, options: CallOptions) !DeleteWarmPoolOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

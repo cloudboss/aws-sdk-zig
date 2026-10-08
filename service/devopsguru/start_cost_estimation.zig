@@ -20,8 +20,7 @@ pub const StartCostEstimationInput = struct {
     };
 };
 
-pub const StartCostEstimationOutput = struct {
-};
+pub const StartCostEstimationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartCostEstimationInput, options: CallOptions) !StartCostEstimationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

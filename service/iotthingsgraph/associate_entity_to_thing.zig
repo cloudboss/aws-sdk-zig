@@ -27,8 +27,7 @@ pub const AssociateEntityToThingInput = struct {
     };
 };
 
-pub const AssociateEntityToThingOutput = struct {
-};
+pub const AssociateEntityToThingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateEntityToThingInput, options: CallOptions) !AssociateEntityToThingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

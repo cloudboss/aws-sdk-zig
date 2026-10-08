@@ -17,7 +17,7 @@ pub const NotebookMetadata = struct {
     notebook_id: ?[]const u8 = null,
 
     /// The type of notebook. Currently, the only valid type is `IPYNB`.
-    @"type": ?NotebookType = null,
+    type: ?NotebookType = null,
 
     /// The name of the Spark enabled workgroup to which the notebook belongs.
     work_group: ?[]const u8 = null,
@@ -27,7 +27,7 @@ pub const NotebookMetadata = struct {
         .last_modified_time = "LastModifiedTime",
         .name = "Name",
         .notebook_id = "NotebookId",
-        .@"type" = "Type",
+        .type = "Type",
         .work_group = "WorkGroup",
     };
 };

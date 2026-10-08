@@ -18,11 +18,11 @@ pub const FrameMetric = struct {
     /// metric
     /// value for one frame that is calculated across the occurrences of all frames
     /// in a profile.
-    @"type": MetricType,
+    type: MetricType,
 
     pub const json_field_names = .{
         .frame_name = "frameName",
         .thread_states = "threadStates",
-        .@"type" = "type",
+        .type = "type",
     };
 };

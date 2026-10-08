@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SigninResourceBasedPolicy = @import("signin_resource_based_policy.zig").SigninResourceBasedPolicy;
 
-pub const GetResourcePolicyInput = struct {
-};
+pub const GetResourcePolicyInput = struct {};
 
 pub const GetResourcePolicyOutput = struct {
     /// The account's SignIn resource-based policy

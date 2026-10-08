@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AccountRoleStatus = @import("account_role_status.zig").AccountRoleStatus;
 
-pub const GetAdminAccountInput = struct {
-};
+pub const GetAdminAccountInput = struct {};
 
 pub const GetAdminAccountOutput = struct {
     /// The account that is set as the Firewall Manager default administrator.

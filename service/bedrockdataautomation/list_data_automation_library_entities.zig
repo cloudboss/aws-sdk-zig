@@ -74,7 +74,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDataAutomationLibra
     try path_buf.appendSlice(allocator, "/data-automation-libraries/");
     try path_buf.appendSlice(allocator, input.library_arn);
     try path_buf.appendSlice(allocator, "/entityType/");
-    try path_buf.appendSlice(allocator, input.entity_type);
+    try path_buf.appendSlice(allocator, input.entity_type.wireName());
     try path_buf.appendSlice(allocator, "/entities/");
     const path = try path_buf.toOwnedSlice(allocator);
 

@@ -8,7 +8,23 @@ const SchemaVersionFormat = @import("schema_version_format.zig").SchemaVersionFo
 const SchemaVersionType = @import("schema_version_type.zig").SchemaVersionType;
 const SchemaVersionVisibility = @import("schema_version_visibility.zig").SchemaVersionVisibility;
 
-pub const GetSchemaVersionInput = @import("get_schema_version_request.zig").GetSchemaVersionRequest;
+pub const GetSchemaVersionInput = struct {
+    /// The format of the schema version.
+    format: ?SchemaVersionFormat = null,
+
+    /// Schema id with a version specified. If the version is missing, it defaults
+    /// to latest version.
+    schema_versioned_id: []const u8,
+
+    /// The type of schema version.
+    type: SchemaVersionType,
+
+    pub const json_field_names = .{
+        .format = "Format",
+        .schema_versioned_id = "SchemaVersionedId",
+        .type = "Type",
+    };
+};
 
 pub const GetSchemaVersionOutput = struct {
     /// The description of the schema version.
@@ -28,7 +44,7 @@ pub const GetSchemaVersionOutput = struct {
     semantic_version: ?[]const u8 = null,
 
     /// The type of schema version.
-    @"type": ?SchemaVersionType = null,
+    type: ?SchemaVersionType = null,
 
     /// The visibility of the schema version.
     visibility: ?SchemaVersionVisibility = null,
@@ -39,7 +55,7 @@ pub const GetSchemaVersionOutput = struct {
         .schema = "Schema",
         .schema_id = "SchemaId",
         .semantic_version = "SemanticVersion",
-        .@"type" = "Type",
+        .type = "Type",
         .visibility = "Visibility",
     };
 };
@@ -76,7 +92,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSchemaVersionInput, 
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/schema-versions/");
-    try path_buf.appendSlice(allocator, input.@"type");
+    try path_buf.appendSlice(allocator, input.type.wireName());
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.schema_versioned_id);
     const path = try path_buf.toOwnedSlice(allocator);

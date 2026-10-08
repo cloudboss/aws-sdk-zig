@@ -14,8 +14,7 @@ pub const DeleteJobTaggingInput = struct {
     job_id: []const u8,
 };
 
-pub const DeleteJobTaggingOutput = struct {
-};
+pub const DeleteJobTaggingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteJobTaggingInput, options: CallOptions) !DeleteJobTaggingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

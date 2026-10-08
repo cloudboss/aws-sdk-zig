@@ -34,8 +34,7 @@ pub const CreateVpcPeeringConnectionInput = struct {
     };
 };
 
-pub const CreateVpcPeeringConnectionOutput = struct {
-};
+pub const CreateVpcPeeringConnectionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateVpcPeeringConnectionInput, options: CallOptions) !CreateVpcPeeringConnectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -21,8 +21,7 @@ pub const SubmitMultiRegionAccessPointRoutesInput = struct {
     route_updates: []const MultiRegionAccessPointRoute,
 };
 
-pub const SubmitMultiRegionAccessPointRoutesOutput = struct {
-};
+pub const SubmitMultiRegionAccessPointRoutesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SubmitMultiRegionAccessPointRoutesInput, options: CallOptions) !SubmitMultiRegionAccessPointRoutesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

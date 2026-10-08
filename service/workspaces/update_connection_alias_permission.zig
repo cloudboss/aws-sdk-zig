@@ -21,8 +21,7 @@ pub const UpdateConnectionAliasPermissionInput = struct {
     };
 };
 
-pub const UpdateConnectionAliasPermissionOutput = struct {
-};
+pub const UpdateConnectionAliasPermissionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateConnectionAliasPermissionInput, options: CallOptions) !UpdateConnectionAliasPermissionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

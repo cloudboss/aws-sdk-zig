@@ -7,10 +7,10 @@ pub const OutputFormat = struct {
     structure: OutputFormatStructure,
 
     /// The type of structured output format.
-    @"type": OutputFormatType,
+    type: OutputFormatType,
 
     pub const json_field_names = .{
         .structure = "structure",
-        .@"type" = "type",
+        .type = "type",
     };
 };

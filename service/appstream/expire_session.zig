@@ -14,8 +14,7 @@ pub const ExpireSessionInput = struct {
     };
 };
 
-pub const ExpireSessionOutput = struct {
-};
+pub const ExpireSessionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExpireSessionInput, options: CallOptions) !ExpireSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

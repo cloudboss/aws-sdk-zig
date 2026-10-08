@@ -42,8 +42,7 @@ pub const NotifyMigrationTaskStateInput = struct {
     };
 };
 
-pub const NotifyMigrationTaskStateOutput = struct {
-};
+pub const NotifyMigrationTaskStateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: NotifyMigrationTaskStateInput, options: CallOptions) !NotifyMigrationTaskStateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

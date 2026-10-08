@@ -5,9 +5,43 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const UpdateProjectInput = @import("update_project_request.zig").UpdateProjectRequest;
+pub const UpdateProjectInput = struct {
+    /// The description of the project.
+    description: ?[]const u8 = null,
 
-pub const UpdateProjectOutput = @import("update_project_response.zig").UpdateProjectResponse;
+    /// The name of the project.
+    name: []const u8,
+
+    /// The name of the space.
+    space_name: []const u8,
+
+    pub const json_field_names = .{
+        .description = "description",
+        .name = "name",
+        .space_name = "spaceName",
+    };
+};
+
+pub const UpdateProjectOutput = struct {
+    /// The description of the project.
+    description: ?[]const u8 = null,
+
+    /// The friendly name of the project displayed to users in Amazon CodeCatalyst.
+    display_name: ?[]const u8 = null,
+
+    /// The name of the project.
+    name: ?[]const u8 = null,
+
+    /// The name of the space.
+    space_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .description = "description",
+        .display_name = "displayName",
+        .name = "name",
+        .space_name = "spaceName",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateProjectInput, options: CallOptions) !UpdateProjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

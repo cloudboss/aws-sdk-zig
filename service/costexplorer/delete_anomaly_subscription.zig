@@ -15,8 +15,7 @@ pub const DeleteAnomalySubscriptionInput = struct {
     };
 };
 
-pub const DeleteAnomalySubscriptionOutput = struct {
-};
+pub const DeleteAnomalySubscriptionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAnomalySubscriptionInput, options: CallOptions) !DeleteAnomalySubscriptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

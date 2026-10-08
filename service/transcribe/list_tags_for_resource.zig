@@ -6,9 +6,40 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// Returns a list of all tags associated with the specified Amazon Resource
+    /// Name (ARN).
+    /// ARNs have the format
+    /// `arn:partition:service:region:account-id:resource-type/resource-id`.
+    ///
+    /// For example,
+    /// `arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name`.
+    ///
+    /// Valid values for `resource-type` are: `transcription-job`,
+    /// `medical-transcription-job`, `vocabulary`,
+    /// `medical-vocabulary`, `vocabulary-filter`, and
+    /// `language-model`.
+    resource_arn: []const u8,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// The Amazon Resource Name (ARN) specified in your request.
+    resource_arn: ?[]const u8 = null,
+
+    /// Lists all tags associated with the given transcription job, vocabulary,
+    /// model, or
+    /// resource.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

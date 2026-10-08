@@ -32,7 +32,7 @@ pub const DescribeTypeInput = struct {
     ///
     /// Conditional: You must specify either `TypeName` and `Type`, or
     /// `Arn`.
-    @"type": ?RegistryType = null,
+    type: ?RegistryType = null,
 
     /// The name of the extension.
     ///
@@ -252,7 +252,7 @@ pub const DescribeTypeOutput = struct {
     time_created: ?i64 = null,
 
     /// The kind of extension.
-    @"type": ?RegistryType = null,
+    type: ?RegistryType = null,
 
     /// The name of the extension.
     ///
@@ -358,7 +358,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeTypeInput, conf
         try body_buf.appendSlice(allocator, "&PublisherId=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         try body_buf.appendSlice(allocator, "&Type=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
@@ -447,7 +447,7 @@ fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u
                 } else if (std.mem.eql(u8, e.local, "TimeCreated")) {
                     result.time_created = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = RegistryType.fromWireName(try reader.readElementText());
+                    result.type = RegistryType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TypeName")) {
                     result.type_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TypeTestsStatus")) {

@@ -28,14 +28,14 @@ pub const CreateDimensionInput = struct {
     tags: ?[]const Tag = null,
 
     /// Specifies the type of dimension. Supported types: `TOPIC_FILTER.`
-    @"type": DimensionType,
+    type: DimensionType,
 
     pub const json_field_names = .{
         .client_request_token = "clientRequestToken",
         .name = "name",
         .string_values = "stringValues",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -110,7 +110,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDimensionInput, c
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

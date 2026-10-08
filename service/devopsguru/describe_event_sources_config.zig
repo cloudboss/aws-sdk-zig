@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const EventSourcesConfig = @import("event_sources_config.zig").EventSourcesConfig;
 
-pub const DescribeEventSourcesConfigInput = struct {
-};
+pub const DescribeEventSourcesConfigInput = struct {};
 
 pub const DescribeEventSourcesConfigOutput = struct {
     /// Lists the event sources in the configuration.

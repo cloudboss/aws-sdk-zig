@@ -27,7 +27,7 @@ pub const VmEntitlement = struct {
     stopped_at: ?i64 = null,
 
     /// The type of entitlement.
-    @"type": ?EntitlementType = null,
+    type: ?EntitlementType = null,
 
     /// The unique ID of the virtual machine.
     vm_id: ?[]const u8 = null,
@@ -43,7 +43,7 @@ pub const VmEntitlement = struct {
         .started_at = "startedAt",
         .status = "status",
         .stopped_at = "stoppedAt",
-        .@"type" = "type",
+        .type = "type",
         .vm_id = "vmId",
         .vm_name = "vmName",
     };

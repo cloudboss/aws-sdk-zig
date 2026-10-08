@@ -18,8 +18,7 @@ pub const DeleteVodSourceInput = struct {
     };
 };
 
-pub const DeleteVodSourceOutput = struct {
-};
+pub const DeleteVodSourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVodSourceInput, options: CallOptions) !DeleteVodSourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -23,8 +23,7 @@ pub const CreateLoadBalancerPolicyInput = struct {
     policy_type_name: []const u8,
 };
 
-pub const CreateLoadBalancerPolicyOutput = struct {
-};
+pub const CreateLoadBalancerPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLoadBalancerPolicyInput, options: CallOptions) !CreateLoadBalancerPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

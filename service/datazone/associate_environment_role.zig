@@ -23,8 +23,7 @@ pub const AssociateEnvironmentRoleInput = struct {
     };
 };
 
-pub const AssociateEnvironmentRoleOutput = struct {
-};
+pub const AssociateEnvironmentRoleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateEnvironmentRoleInput, options: CallOptions) !AssociateEnvironmentRoleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

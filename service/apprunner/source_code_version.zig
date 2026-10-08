@@ -6,7 +6,7 @@ pub const SourceCodeVersion = struct {
     /// The type of version identifier.
     ///
     /// For a git-based repository, branches represent versions.
-    @"type": SourceCodeVersionType,
+    type: SourceCodeVersionType,
 
     /// A source code version.
     ///
@@ -15,7 +15,7 @@ pub const SourceCodeVersion = struct {
     value: []const u8,
 
     pub const json_field_names = .{
-        .@"type" = "Type",
+        .type = "Type",
         .value = "Value",
     };
 };

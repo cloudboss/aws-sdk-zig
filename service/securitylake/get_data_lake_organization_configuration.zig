@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DataLakeAutoEnableNewAccountConfiguration = @import("data_lake_auto_enable_new_account_configuration.zig").DataLakeAutoEnableNewAccountConfiguration;
 
-pub const GetDataLakeOrganizationConfigurationInput = struct {
-};
+pub const GetDataLakeOrganizationConfigurationInput = struct {};
 
 pub const GetDataLakeOrganizationConfigurationOutput = struct {
     /// The configuration used for new accounts in Security Lake.

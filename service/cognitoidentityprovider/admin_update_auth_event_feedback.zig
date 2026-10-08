@@ -43,8 +43,7 @@ pub const AdminUpdateAuthEventFeedbackInput = struct {
     };
 };
 
-pub const AdminUpdateAuthEventFeedbackOutput = struct {
-};
+pub const AdminUpdateAuthEventFeedbackOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminUpdateAuthEventFeedbackInput, options: CallOptions) !AdminUpdateAuthEventFeedbackOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

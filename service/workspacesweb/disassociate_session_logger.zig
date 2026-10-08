@@ -14,8 +14,7 @@ pub const DisassociateSessionLoggerInput = struct {
     };
 };
 
-pub const DisassociateSessionLoggerOutput = struct {
-};
+pub const DisassociateSessionLoggerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateSessionLoggerInput, options: CallOptions) !DisassociateSessionLoggerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -18,8 +18,7 @@ pub const DeleteEventStreamInput = struct {
     };
 };
 
-pub const DeleteEventStreamOutput = struct {
-};
+pub const DeleteEventStreamOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteEventStreamInput, options: CallOptions) !DeleteEventStreamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

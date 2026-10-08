@@ -25,8 +25,7 @@ pub const DeleteServiceQuotaIncreaseRequestFromTemplateInput = struct {
     };
 };
 
-pub const DeleteServiceQuotaIncreaseRequestFromTemplateOutput = struct {
-};
+pub const DeleteServiceQuotaIncreaseRequestFromTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteServiceQuotaIncreaseRequestFromTemplateInput, options: CallOptions) !DeleteServiceQuotaIncreaseRequestFromTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

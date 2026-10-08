@@ -15,11 +15,11 @@ pub const GuardrailAutomatedReasoningLogicWarning = struct {
 
     /// The category of the detected logical issue, such as statements that are
     /// always true or always false.
-    @"type": ?GuardrailAutomatedReasoningLogicWarningType = null,
+    type: ?GuardrailAutomatedReasoningLogicWarningType = null,
 
     pub const json_field_names = .{
         .claims = "claims",
         .premises = "premises",
-        .@"type" = "type",
+        .type = "type",
     };
 };

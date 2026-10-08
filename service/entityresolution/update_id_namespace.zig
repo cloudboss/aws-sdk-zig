@@ -70,7 +70,7 @@ pub const UpdateIdNamespaceOutput = struct {
     ///
     /// The `TARGET` contains a configuration of `targetId` to which all `sourceIds`
     /// will resolve to.
-    @"type": IdNamespaceType,
+    type: IdNamespaceType,
 
     /// The timestamp of when the ID namespace was last updated.
     updated_at: i64,
@@ -83,7 +83,7 @@ pub const UpdateIdNamespaceOutput = struct {
         .id_namespace_name = "idNamespaceName",
         .input_source_config = "inputSourceConfig",
         .role_arn = "roleArn",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
     };
 };

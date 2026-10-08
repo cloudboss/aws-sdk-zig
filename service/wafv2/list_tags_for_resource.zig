@@ -6,9 +6,48 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const TagInfoForResource = @import("tag_info_for_resource.zig").TagInfoForResource;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// The maximum number of objects that you want WAF to return for this request.
+    /// If more
+    /// objects are available, in the response, WAF provides a
+    /// `NextMarker` value that you can use in a subsequent call to get the next
+    /// batch of objects.
+    limit: ?i32 = null,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    /// When you request a list of objects with a `Limit` setting, if the number of
+    /// objects that are still available
+    /// for retrieval exceeds the limit, WAF returns a `NextMarker`
+    /// value in the response. To retrieve the next batch of objects, provide the
+    /// marker from the prior call in your next request.
+    next_marker: ?[]const u8 = null,
+
+    /// The Amazon Resource Name (ARN) of the resource.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .limit = "Limit",
+        .next_marker = "NextMarker",
+        .resource_arn = "ResourceARN",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// When you request a list of objects with a `Limit` setting, if the number of
+    /// objects that are still available
+    /// for retrieval exceeds the limit, WAF returns a `NextMarker`
+    /// value in the response. To retrieve the next batch of objects, provide the
+    /// marker from the prior call in your next request.
+    next_marker: ?[]const u8 = null,
+
+    /// The collection of tagging definitions for the resource. If you specified a
+    /// `Limit` in your request, this might not be the full list.
+    tag_info_for_resource: ?TagInfoForResource = null,
+
+    pub const json_field_names = .{
+        .next_marker = "NextMarker",
+        .tag_info_for_resource = "TagInfoForResource",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

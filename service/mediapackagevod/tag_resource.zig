@@ -5,7 +5,19 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) for the resource. You can get this from the
+    /// response to any request to the resource.
+    resource_arn: []const u8,
+
+    /// A collection of tags associated with a resource
+    tags: []const aws.map.StringMapEntry,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+        .tags = "Tags",
+    };
+};
 
 pub const TagResourceOutput = struct {};
 

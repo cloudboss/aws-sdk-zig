@@ -76,7 +76,7 @@ pub const StartVectorEnrichmentJobOutput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the Vector Enrichment job.
-    @"type": VectorEnrichmentJobType,
+    type: VectorEnrichmentJobType,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -89,7 +89,7 @@ pub const StartVectorEnrichmentJobOutput = struct {
         .name = "Name",
         .status = "Status",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

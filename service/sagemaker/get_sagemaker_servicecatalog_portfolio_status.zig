@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SagemakerServicecatalogStatus = @import("sagemaker_servicecatalog_status.zig").SagemakerServicecatalogStatus;
 
-pub const GetSagemakerServicecatalogPortfolioStatusInput = struct {
-};
+pub const GetSagemakerServicecatalogPortfolioStatusInput = struct {};
 
 pub const GetSagemakerServicecatalogPortfolioStatusOutput = struct {
     /// Whether Service Catalog is enabled or disabled in SageMaker.

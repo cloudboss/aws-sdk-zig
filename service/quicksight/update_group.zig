@@ -6,9 +6,45 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Group = @import("group.zig").Group;
 
-pub const UpdateGroupInput = @import("update_group_request.zig").UpdateGroupRequest;
+pub const UpdateGroupInput = struct {
+    /// The ID for the Amazon Web Services account that the group is in. Currently,
+    /// you use the ID for the
+    /// Amazon Web Services account that contains your Amazon Quick Sight account.
+    aws_account_id: []const u8,
 
-pub const UpdateGroupOutput = @import("update_group_response.zig").UpdateGroupResponse;
+    /// The description for the group that you want to update.
+    description: ?[]const u8 = null,
+
+    /// The name of the group that you want to update.
+    group_name: []const u8,
+
+    /// The namespace of the group that you want to update.
+    namespace: []const u8,
+
+    pub const json_field_names = .{
+        .aws_account_id = "AwsAccountId",
+        .description = "Description",
+        .group_name = "GroupName",
+        .namespace = "Namespace",
+    };
+};
+
+pub const UpdateGroupOutput = struct {
+    /// The name of the group.
+    group: ?Group = null,
+
+    /// The Amazon Web Services request ID for this operation.
+    request_id: ?[]const u8 = null,
+
+    /// The HTTP status of the request.
+    status: ?i32 = null,
+
+    pub const json_field_names = .{
+        .group = "Group",
+        .request_id = "RequestId",
+        .status = "Status",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateGroupInput, options: CallOptions) !UpdateGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

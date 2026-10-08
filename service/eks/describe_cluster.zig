@@ -6,9 +6,23 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Cluster = @import("cluster.zig").Cluster;
 
-pub const DescribeClusterInput = @import("describe_cluster_request.zig").DescribeClusterRequest;
+pub const DescribeClusterInput = struct {
+    /// The name of your cluster.
+    name: []const u8,
 
-pub const DescribeClusterOutput = @import("describe_cluster_response.zig").DescribeClusterResponse;
+    pub const json_field_names = .{
+        .name = "name",
+    };
+};
+
+pub const DescribeClusterOutput = struct {
+    /// The full description of your specified cluster.
+    cluster: ?Cluster = null,
+
+    pub const json_field_names = .{
+        .cluster = "cluster",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeClusterInput, options: CallOptions) !DescribeClusterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

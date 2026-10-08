@@ -5,9 +5,22 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the Amazon Q Business application, or data
+    /// source to remove the tag from.
+    resource_arn: []const u8,
 
-pub const UntagResourceOutput = @import("untag_resource_response.zig").UntagResourceResponse;
+    /// A list of tag keys to remove from the Amazon Q Business application or data
+    /// source. If a tag key does not exist on the resource, it is ignored.
+    tag_keys: []const []const u8,
+
+    pub const json_field_names = .{
+        .resource_arn = "resourceARN",
+        .tag_keys = "tagKeys",
+    };
+};
+
+pub const UntagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResourceInput, options: CallOptions) !UntagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

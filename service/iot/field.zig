@@ -6,10 +6,10 @@ pub const Field = struct {
     name: ?[]const u8 = null,
 
     /// The data type of the field.
-    @"type": ?FieldType = null,
+    type: ?FieldType = null,
 
     pub const json_field_names = .{
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };

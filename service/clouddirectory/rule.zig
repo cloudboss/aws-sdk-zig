@@ -10,10 +10,10 @@ pub const Rule = struct {
     parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of attribute validation rule.
-    @"type": ?RuleType = null,
+    type: ?RuleType = null,
 
     pub const json_field_names = .{
         .parameters = "Parameters",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

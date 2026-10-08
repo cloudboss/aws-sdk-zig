@@ -14,8 +14,7 @@ pub const DeleteNotebookInput = struct {
     };
 };
 
-pub const DeleteNotebookOutput = struct {
-};
+pub const DeleteNotebookOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteNotebookInput, options: CallOptions) !DeleteNotebookOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -16,8 +16,7 @@ pub const SetLoadBalancerListenerSSLCertificateInput = struct {
     ssl_certificate_id: []const u8,
 };
 
-pub const SetLoadBalancerListenerSSLCertificateOutput = struct {
-};
+pub const SetLoadBalancerListenerSSLCertificateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetLoadBalancerListenerSSLCertificateInput, options: CallOptions) !SetLoadBalancerListenerSSLCertificateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -7,9 +7,27 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const LoadBalancerDescription = @import("load_balancer_description.zig").LoadBalancerDescription;
 const serde = @import("serde.zig");
 
-pub const DescribeLoadBalancersInput = @import("describe_access_points_input.zig").DescribeAccessPointsInput;
+pub const DescribeLoadBalancersInput = struct {
+    /// The names of the load balancers.
+    load_balancer_names: ?[]const []const u8 = null,
 
-pub const DescribeLoadBalancersOutput = @import("describe_access_points_output.zig").DescribeAccessPointsOutput;
+    /// The marker for the next set of results. (You received this marker from a
+    /// previous call.)
+    marker: ?[]const u8 = null,
+
+    /// The maximum number of results to return with this call (a number from 1 to
+    /// 400). The default is 400.
+    page_size: ?i32 = null,
+};
+
+pub const DescribeLoadBalancersOutput = struct {
+    /// Information about the load balancers.
+    load_balancer_descriptions: ?[]const LoadBalancerDescription = null,
+
+    /// The marker to use when requesting the next set of results. If there are no
+    /// additional results, the string is empty.
+    next_marker: ?[]const u8 = null,
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeLoadBalancersInput, options: CallOptions) !DescribeLoadBalancersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

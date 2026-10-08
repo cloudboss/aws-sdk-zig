@@ -18,8 +18,7 @@ pub const UpdateEventIntegrationInput = struct {
     };
 };
 
-pub const UpdateEventIntegrationOutput = struct {
-};
+pub const UpdateEventIntegrationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateEventIntegrationInput, options: CallOptions) !UpdateEventIntegrationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -43,8 +43,7 @@ pub const PutExternalModelInput = struct {
     };
 };
 
-pub const PutExternalModelOutput = struct {
-};
+pub const PutExternalModelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutExternalModelInput, options: CallOptions) !PutExternalModelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

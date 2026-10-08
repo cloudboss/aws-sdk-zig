@@ -15,8 +15,7 @@ pub const StopEventDataStoreIngestionInput = struct {
     };
 };
 
-pub const StopEventDataStoreIngestionOutput = struct {
-};
+pub const StopEventDataStoreIngestionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopEventDataStoreIngestionInput, options: CallOptions) !StopEventDataStoreIngestionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -30,7 +30,7 @@ pub const CreateAndAttachS3AccessPointInput = struct {
     s3_access_point: ?CreateAndAttachS3AccessPointS3Configuration = null,
 
     /// The type of S3 access point you want to create. Only `OpenZFS` is supported.
-    @"type": S3AccessPointAttachmentType,
+    type: S3AccessPointAttachmentType,
 
     pub const json_field_names = .{
         .client_request_token = "ClientRequestToken",
@@ -38,7 +38,7 @@ pub const CreateAndAttachS3AccessPointInput = struct {
         .ontap_configuration = "OntapConfiguration",
         .open_zfs_configuration = "OpenZFSConfiguration",
         .s3_access_point = "S3AccessPoint",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

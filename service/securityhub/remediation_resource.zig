@@ -43,7 +43,7 @@ pub const RemediationResource = struct {
     resource_region: []const u8,
 
     /// The type of the resource.
-    @"type": []const u8,
+    type: []const u8,
 
     pub const json_field_names = .{
         .account_id = "AccountId",
@@ -55,6 +55,6 @@ pub const RemediationResource = struct {
         .resource_owner_account_id = "ResourceOwnerAccountId",
         .resource_owner_org_id = "ResourceOwnerOrgId",
         .resource_region = "ResourceRegion",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

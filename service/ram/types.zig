@@ -1,7 +1,5 @@
 pub const AssociatedPermission = @import("associated_permission.zig").AssociatedPermission;
 pub const AssociatedSource = @import("associated_source.zig").AssociatedSource;
-pub const ListResourcesRequest = @import("list_resources_request.zig").ListResourcesRequest;
-pub const ListResourcesResponse = @import("list_resources_response.zig").ListResourcesResponse;
 pub const PermissionFeatureSet = @import("permission_feature_set.zig").PermissionFeatureSet;
 pub const PermissionStatus = @import("permission_status.zig").PermissionStatus;
 pub const PermissionType = @import("permission_type.zig").PermissionType;
@@ -28,7 +26,3 @@ pub const ResourceStatus = @import("resource_status.zig").ResourceStatus;
 pub const ServiceNameAndResourceType = @import("service_name_and_resource_type.zig").ServiceNameAndResourceType;
 pub const Tag = @import("tag.zig").Tag;
 pub const TagFilter = @import("tag_filter.zig").TagFilter;
-pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
-pub const TagResourceResponse = @import("tag_resource_response.zig").TagResourceResponse;
-pub const UntagResourceRequest = @import("untag_resource_request.zig").UntagResourceRequest;
-pub const UntagResourceResponse = @import("untag_resource_response.zig").UntagResourceResponse;

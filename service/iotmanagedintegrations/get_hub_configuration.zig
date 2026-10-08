@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetHubConfigurationInput = struct {
-};
+pub const GetHubConfigurationInput = struct {};
 
 pub const GetHubConfigurationOutput = struct {
     /// A user-defined integer value that represents the hub token timer expiry

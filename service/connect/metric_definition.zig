@@ -97,7 +97,7 @@ pub const MetricDefinition = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the metric. Valid values: `AWS_MANAGED` | `CUSTOMER_MANAGED`.
-    @"type": MetricType,
+    type: MetricType,
 
     /// The display unit for the metric's data.
     unit: MetricUnit,
@@ -128,7 +128,7 @@ pub const MetricDefinition = struct {
         .supports_custom_calculation = "SupportsCustomCalculation",
         .supports_preaggregate_calculation = "SupportsPreaggregateCalculation",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
         .unit = "Unit",
     };
 };

@@ -8,10 +8,10 @@ pub const VectorEnrichmentJobExportErrorDetails = struct {
     message: ?[]const u8 = null,
 
     /// The output error details for an Export operation on a Vector Enrichment job.
-    @"type": ?VectorEnrichmentJobExportErrorType = null,
+    type: ?VectorEnrichmentJobExportErrorType = null,
 
     pub const json_field_names = .{
         .message = "Message",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

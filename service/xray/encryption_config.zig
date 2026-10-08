@@ -13,11 +13,11 @@ pub const EncryptionConfig = struct {
     /// The type of encryption. Set to `KMS` for encryption with KMS keys. Set to
     /// `NONE` for
     /// default encryption.
-    @"type": ?EncryptionType = null,
+    type: ?EncryptionType = null,
 
     pub const json_field_names = .{
         .key_id = "KeyId",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

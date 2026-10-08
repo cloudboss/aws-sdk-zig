@@ -22,8 +22,7 @@ pub const CompleteWebAuthnRegistrationInput = struct {
     };
 };
 
-pub const CompleteWebAuthnRegistrationOutput = struct {
-};
+pub const CompleteWebAuthnRegistrationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CompleteWebAuthnRegistrationInput, options: CallOptions) !CompleteWebAuthnRegistrationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

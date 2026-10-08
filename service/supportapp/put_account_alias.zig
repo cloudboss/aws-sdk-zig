@@ -14,8 +14,7 @@ pub const PutAccountAliasInput = struct {
     };
 };
 
-pub const PutAccountAliasOutput = struct {
-};
+pub const PutAccountAliasOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAccountAliasInput, options: CallOptions) !PutAccountAliasOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

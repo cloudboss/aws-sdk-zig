@@ -26,7 +26,7 @@ pub const DataSourceSummary = struct {
     status: ?DataSourceStatus = null,
 
     /// The type of the data source.
-    @"type": ?DataSourceType = null,
+    type: ?DataSourceType = null,
 
     /// The Unix timestamp when the data source connector was last updated.
     updated_at: ?i64 = null,
@@ -37,7 +37,7 @@ pub const DataSourceSummary = struct {
         .language_code = "LanguageCode",
         .name = "Name",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
         .updated_at = "UpdatedAt",
     };
 };

@@ -1,3 +1,2 @@
 /// The connector metadata specific to SAPOData.
-pub const SAPODataMetadata = struct {
-};
+pub const SAPODataMetadata = struct {};

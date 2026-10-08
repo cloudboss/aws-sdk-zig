@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SubscriptionState = @import("subscription_state.zig").SubscriptionState;
 
-pub const GetSubscriptionStateInput = struct {
-};
+pub const GetSubscriptionStateInput = struct {};
 
 pub const GetSubscriptionStateOutput = struct {
     /// The status of the subscription.

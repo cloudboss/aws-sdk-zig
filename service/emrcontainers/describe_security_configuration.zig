@@ -6,9 +6,23 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SecurityConfiguration = @import("security_configuration.zig").SecurityConfiguration;
 
-pub const DescribeSecurityConfigurationInput = @import("describe_security_configuration_request.zig").DescribeSecurityConfigurationRequest;
+pub const DescribeSecurityConfigurationInput = struct {
+    /// The ID of the security configuration.
+    id: []const u8,
 
-pub const DescribeSecurityConfigurationOutput = @import("describe_security_configuration_response.zig").DescribeSecurityConfigurationResponse;
+    pub const json_field_names = .{
+        .id = "id",
+    };
+};
+
+pub const DescribeSecurityConfigurationOutput = struct {
+    /// Details of the security configuration.
+    security_configuration: ?SecurityConfiguration = null,
+
+    pub const json_field_names = .{
+        .security_configuration = "securityConfiguration",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeSecurityConfigurationInput, options: CallOptions) !DescribeSecurityConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

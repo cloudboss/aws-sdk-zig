@@ -40,8 +40,7 @@ pub const PutMobileDeviceAccessOverrideInput = struct {
     };
 };
 
-pub const PutMobileDeviceAccessOverrideOutput = struct {
-};
+pub const PutMobileDeviceAccessOverrideOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutMobileDeviceAccessOverrideInput, options: CallOptions) !PutMobileDeviceAccessOverrideOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

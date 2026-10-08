@@ -28,8 +28,7 @@ pub const UpdateWorkGroupInput = struct {
     };
 };
 
-pub const UpdateWorkGroupOutput = struct {
-};
+pub const UpdateWorkGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorkGroupInput, options: CallOptions) !UpdateWorkGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

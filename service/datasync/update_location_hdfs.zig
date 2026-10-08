@@ -112,8 +112,7 @@ pub const UpdateLocationHdfsInput = struct {
     };
 };
 
-pub const UpdateLocationHdfsOutput = struct {
-};
+pub const UpdateLocationHdfsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLocationHdfsInput, options: CallOptions) !UpdateLocationHdfsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -23,8 +23,7 @@ pub const DeleteAIPromptVersionInput = struct {
     };
 };
 
-pub const DeleteAIPromptVersionOutput = struct {
-};
+pub const DeleteAIPromptVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAIPromptVersionInput, options: CallOptions) !DeleteAIPromptVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -31,8 +31,7 @@ pub const UpdateCaseRuleInput = struct {
     };
 };
 
-pub const UpdateCaseRuleOutput = struct {
-};
+pub const UpdateCaseRuleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCaseRuleInput, options: CallOptions) !UpdateCaseRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

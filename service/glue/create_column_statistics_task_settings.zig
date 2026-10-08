@@ -46,8 +46,7 @@ pub const CreateColumnStatisticsTaskSettingsInput = struct {
     };
 };
 
-pub const CreateColumnStatisticsTaskSettingsOutput = struct {
-};
+pub const CreateColumnStatisticsTaskSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateColumnStatisticsTaskSettingsInput, options: CallOptions) !CreateColumnStatisticsTaskSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

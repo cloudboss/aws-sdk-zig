@@ -30,8 +30,7 @@ pub const StartContactMediaProcessingInput = struct {
     };
 };
 
-pub const StartContactMediaProcessingOutput = struct {
-};
+pub const StartContactMediaProcessingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartContactMediaProcessingInput, options: CallOptions) !StartContactMediaProcessingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

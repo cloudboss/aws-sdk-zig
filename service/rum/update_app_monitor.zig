@@ -60,8 +60,7 @@ pub const UpdateAppMonitorInput = struct {
     };
 };
 
-pub const UpdateAppMonitorOutput = struct {
-};
+pub const UpdateAppMonitorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAppMonitorInput, options: CallOptions) !UpdateAppMonitorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

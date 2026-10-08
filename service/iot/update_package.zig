@@ -40,8 +40,7 @@ pub const UpdatePackageInput = struct {
     };
 };
 
-pub const UpdatePackageOutput = struct {
-};
+pub const UpdatePackageOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdatePackageInput, options: CallOptions) !UpdatePackageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

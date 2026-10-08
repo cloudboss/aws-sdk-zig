@@ -23,7 +23,7 @@ pub const CreateSchemaInput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of schema.
-    @"type": Type,
+    type: Type,
 
     pub const json_field_names = .{
         .content = "Content",
@@ -31,7 +31,7 @@ pub const CreateSchemaInput = struct {
         .registry_name = "RegistryName",
         .schema_name = "SchemaName",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -54,7 +54,7 @@ pub const CreateSchemaOutput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the schema.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The date the schema version was created.
     version_created_date: ?i64 = null,
@@ -66,7 +66,7 @@ pub const CreateSchemaOutput = struct {
         .schema_name = "SchemaName",
         .schema_version = "SchemaVersion",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
         .version_created_date = "VersionCreatedDate",
     };
 };
@@ -130,7 +130,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSchemaInput, conf
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

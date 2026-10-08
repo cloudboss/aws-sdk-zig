@@ -39,7 +39,7 @@ pub const FilterListControl = struct {
     /// * `MULTI_SELECT`: The user can select multiple entries from the list.
     ///
     /// * `SINGLE_SELECT`: The user can select a single entry from the list.
-    @"type": ?SheetControlListType = null,
+    type: ?SheetControlListType = null,
 
     pub const json_field_names = .{
         .cascading_control_configuration = "CascadingControlConfiguration",
@@ -50,6 +50,6 @@ pub const FilterListControl = struct {
         .selectable_values = "SelectableValues",
         .source_filter_id = "SourceFilterId",
         .title = "Title",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

@@ -18,8 +18,7 @@ pub const DeleteDetectorVersionInput = struct {
     };
 };
 
-pub const DeleteDetectorVersionOutput = struct {
-};
+pub const DeleteDetectorVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDetectorVersionInput, options: CallOptions) !DeleteDetectorVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

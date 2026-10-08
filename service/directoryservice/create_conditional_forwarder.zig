@@ -31,8 +31,7 @@ pub const CreateConditionalForwarderInput = struct {
     };
 };
 
-pub const CreateConditionalForwarderOutput = struct {
-};
+pub const CreateConditionalForwarderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateConditionalForwarderInput, options: CallOptions) !CreateConditionalForwarderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

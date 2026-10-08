@@ -14,8 +14,7 @@ pub const StartChannelInput = struct {
     };
 };
 
-pub const StartChannelOutput = struct {
-};
+pub const StartChannelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartChannelInput, options: CallOptions) !StartChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -7,10 +7,10 @@ pub const BatchReadException = struct {
     message: ?[]const u8 = null,
 
     /// A type of exception, such as `InvalidArnException`.
-    @"type": ?BatchReadExceptionType = null,
+    type: ?BatchReadExceptionType = null,
 
     pub const json_field_names = .{
         .message = "Message",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

@@ -80,7 +80,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeElasticsearchIn
     try path_buf.appendSlice(allocator, "/2015-01-01/es/instanceTypeLimits/");
     try path_buf.appendSlice(allocator, input.elasticsearch_version);
     try path_buf.appendSlice(allocator, "/");
-    try path_buf.appendSlice(allocator, input.instance_type);
+    try path_buf.appendSlice(allocator, input.instance_type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .empty;

@@ -6,9 +6,36 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ResourceTag = @import("resource_tag.zig").ResourceTag;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// The maximum number of objects that are returned for the request.
+    max_results: ?i32 = null,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    /// The token to retrieve the next set of results.
+    next_token: ?[]const u8 = null,
+
+    /// The unique identifier for the resource.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+        .resource_arn = "ResourceArn",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// The token to retrieve the next set of results.
+    next_token: ?[]const u8 = null,
+
+    /// An optional list of tags to associate with the specified export. Each tag
+    /// consists of a key and a value, and each key must be unique for the resource.
+    resource_tags: ?[]const ResourceTag = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .resource_tags = "ResourceTags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

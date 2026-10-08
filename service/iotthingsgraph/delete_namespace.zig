@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteNamespaceInput = struct {
-};
+pub const DeleteNamespaceInput = struct {};
 
 pub const DeleteNamespaceOutput = struct {
     /// The ARN of the namespace to be deleted.

@@ -10,11 +10,11 @@ pub const ProcessedObject = struct {
 
     /// The type of the database object. For example, a table, view, procedure, and
     /// so on.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .endpoint_type = "EndpointType",
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

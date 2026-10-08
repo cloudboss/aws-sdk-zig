@@ -18,8 +18,7 @@ pub const StartUploadJobInput = struct {
     };
 };
 
-pub const StartUploadJobOutput = struct {
-};
+pub const StartUploadJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartUploadJobInput, options: CallOptions) !StartUploadJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

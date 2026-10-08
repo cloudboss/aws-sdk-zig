@@ -14,8 +14,7 @@ pub const DeleteDedicatedIpPoolInput = struct {
     };
 };
 
-pub const DeleteDedicatedIpPoolOutput = struct {
-};
+pub const DeleteDedicatedIpPoolOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDedicatedIpPoolInput, options: CallOptions) !DeleteDedicatedIpPoolOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

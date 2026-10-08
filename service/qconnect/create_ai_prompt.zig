@@ -58,7 +58,7 @@ pub const CreateAIPromptInput = struct {
     template_type: AIPromptTemplateType,
 
     /// The type of this AI Prompt.
-    @"type": AIPromptType,
+    type: AIPromptType,
 
     /// The visibility status of the AI Prompt.
     visibility_status: VisibilityStatus,
@@ -74,7 +74,7 @@ pub const CreateAIPromptInput = struct {
         .tags = "tags",
         .template_configuration = "templateConfiguration",
         .template_type = "templateType",
-        .@"type" = "type",
+        .type = "type",
         .visibility_status = "visibilityStatus",
     };
 };
@@ -174,7 +174,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAIPromptInput, co
     has_prev = true;
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"visibilityStatus\":");

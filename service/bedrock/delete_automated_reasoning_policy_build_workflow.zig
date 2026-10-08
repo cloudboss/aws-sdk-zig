@@ -25,8 +25,7 @@ pub const DeleteAutomatedReasoningPolicyBuildWorkflowInput = struct {
     };
 };
 
-pub const DeleteAutomatedReasoningPolicyBuildWorkflowOutput = struct {
-};
+pub const DeleteAutomatedReasoningPolicyBuildWorkflowOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAutomatedReasoningPolicyBuildWorkflowInput, options: CallOptions) !DeleteAutomatedReasoningPolicyBuildWorkflowOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

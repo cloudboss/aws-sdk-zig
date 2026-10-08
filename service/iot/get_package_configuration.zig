@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const VersionUpdateByJobsConfig = @import("version_update_by_jobs_config.zig").VersionUpdateByJobsConfig;
 
-pub const GetPackageConfigurationInput = struct {
-};
+pub const GetPackageConfigurationInput = struct {};
 
 pub const GetPackageConfigurationOutput = struct {
     /// The version that is associated to a specific job.

@@ -80,8 +80,7 @@ pub const DeleteAnomalyDetectorInput = struct {
     };
 };
 
-pub const DeleteAnomalyDetectorOutput = struct {
-};
+pub const DeleteAnomalyDetectorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAnomalyDetectorInput, options: CallOptions) !DeleteAnomalyDetectorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -177,13 +176,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteAnomalyDetectorIn
                             const n_3 = idx_3 + 1;
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.MetricStat.Metric.Dimensions.member.{d}.Name=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.MetricStat.Metric.Dimensions.member.{d}.Name=", .{ n, n_3 }) catch continue;
                                 try body_buf.appendSlice(allocator, field_prefix);
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, item_3.name);
                             }
                             {
                                 var prefix_buf: [256]u8 = undefined;
-                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.MetricStat.Metric.Dimensions.member.{d}.Value=", .{n, n_3}) catch continue;
+                                const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricMathAnomalyDetector.MetricDataQueries.member.{d}.MetricStat.Metric.Dimensions.member.{d}.Value=", .{ n, n_3 }) catch continue;
                                 try body_buf.appendSlice(allocator, field_prefix);
                                 try aws.url.appendUrlEncoded(allocator, &body_buf, item_3.value);
                             }

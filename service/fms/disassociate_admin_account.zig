@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DisassociateAdminAccountInput = struct {
-};
+pub const DisassociateAdminAccountInput = struct {};
 
 pub const DisassociateAdminAccountOutput = struct {};
 

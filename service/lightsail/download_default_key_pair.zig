@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DownloadDefaultKeyPairInput = struct {
-};
+pub const DownloadDefaultKeyPairInput = struct {};
 
 pub const DownloadDefaultKeyPairOutput = struct {
     /// The timestamp when the default key pair was created.

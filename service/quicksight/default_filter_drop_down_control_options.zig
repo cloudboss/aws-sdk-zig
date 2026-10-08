@@ -26,13 +26,13 @@ pub const DefaultFilterDropDownControlOptions = struct {
     /// * `MULTI_SELECT`: The user can select multiple entries from a dropdown menu.
     ///
     /// * `SINGLE_SELECT`: The user can select a single entry from a dropdown menu.
-    @"type": ?SheetControlListType = null,
+    type: ?SheetControlListType = null,
 
     pub const json_field_names = .{
         .commit_mode = "CommitMode",
         .control_sort_configurations = "ControlSortConfigurations",
         .display_options = "DisplayOptions",
         .selectable_values = "SelectableValues",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

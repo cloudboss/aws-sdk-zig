@@ -15,8 +15,7 @@ pub const CancelAuditTaskInput = struct {
     };
 };
 
-pub const CancelAuditTaskOutput = struct {
-};
+pub const CancelAuditTaskOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelAuditTaskInput, options: CallOptions) !CancelAuditTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

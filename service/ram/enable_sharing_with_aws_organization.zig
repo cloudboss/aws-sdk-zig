@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const EnableSharingWithAwsOrganizationInput = struct {
-};
+pub const EnableSharingWithAwsOrganizationInput = struct {};
 
 pub const EnableSharingWithAwsOrganizationOutput = struct {
     /// A return value of `true` indicates that the request succeeded.

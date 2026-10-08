@@ -27,8 +27,7 @@ pub const DeleteRelationshipInput = struct {
     };
 };
 
-pub const DeleteRelationshipOutput = struct {
-};
+pub const DeleteRelationshipOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRelationshipInput, options: CallOptions) !DeleteRelationshipOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

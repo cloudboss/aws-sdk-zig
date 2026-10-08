@@ -44,8 +44,7 @@ pub const RevokePermissionsInput = struct {
     };
 };
 
-pub const RevokePermissionsOutput = struct {
-};
+pub const RevokePermissionsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RevokePermissionsInput, options: CallOptions) !RevokePermissionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

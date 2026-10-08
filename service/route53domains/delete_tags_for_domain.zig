@@ -18,8 +18,7 @@ pub const DeleteTagsForDomainInput = struct {
     };
 };
 
-pub const DeleteTagsForDomainOutput = struct {
-};
+pub const DeleteTagsForDomainOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTagsForDomainInput, options: CallOptions) !DeleteTagsForDomainOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

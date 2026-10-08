@@ -23,8 +23,7 @@ pub const ResetUserPasswordInput = struct {
     };
 };
 
-pub const ResetUserPasswordOutput = struct {
-};
+pub const ResetUserPasswordOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ResetUserPasswordInput, options: CallOptions) !ResetUserPasswordOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

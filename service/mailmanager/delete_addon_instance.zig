@@ -14,8 +14,7 @@ pub const DeleteAddonInstanceInput = struct {
     };
 };
 
-pub const DeleteAddonInstanceOutput = struct {
-};
+pub const DeleteAddonInstanceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAddonInstanceInput, options: CallOptions) !DeleteAddonInstanceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

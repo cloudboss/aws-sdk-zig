@@ -17,7 +17,7 @@ pub const GetUserProfileInput = struct {
     session_name: ?[]const u8 = null,
 
     /// The type of the user profile.
-    @"type": ?UserProfileType = null,
+    type: ?UserProfileType = null,
 
     /// The identifier of the user for which you want to get the user profile.
     user_identifier: []const u8,
@@ -25,7 +25,7 @@ pub const GetUserProfileInput = struct {
     pub const json_field_names = .{
         .domain_identifier = "domainIdentifier",
         .session_name = "sessionName",
-        .@"type" = "type",
+        .type = "type",
         .user_identifier = "userIdentifier",
     };
 };
@@ -45,14 +45,14 @@ pub const GetUserProfileOutput = struct {
     status: ?UserProfileStatus = null,
 
     /// The type of the user profile.
-    @"type": ?UserProfileType = null,
+    type: ?UserProfileType = null,
 
     pub const json_field_names = .{
         .details = "details",
         .domain_id = "domainId",
         .id = "id",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -101,7 +101,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetUserProfileInput, co
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());

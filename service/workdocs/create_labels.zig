@@ -23,8 +23,7 @@ pub const CreateLabelsInput = struct {
     };
 };
 
-pub const CreateLabelsOutput = struct {
-};
+pub const CreateLabelsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLabelsInput, options: CallOptions) !CreateLabelsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

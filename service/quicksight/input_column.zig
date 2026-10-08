@@ -18,12 +18,12 @@ pub const InputColumn = struct {
     /// **Note:**
     /// `SEMISTRUCT` represents Athena's map, row, and struct data types. It is
     /// supported when using the new data preparation experience.
-    @"type": InputColumnDataType,
+    type: InputColumnDataType,
 
     pub const json_field_names = .{
         .id = "Id",
         .name = "Name",
         .sub_type = "SubType",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

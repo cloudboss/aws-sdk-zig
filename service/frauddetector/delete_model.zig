@@ -19,8 +19,7 @@ pub const DeleteModelInput = struct {
     };
 };
 
-pub const DeleteModelOutput = struct {
-};
+pub const DeleteModelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteModelInput, options: CallOptions) !DeleteModelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

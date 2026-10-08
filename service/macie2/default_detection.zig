@@ -14,11 +14,11 @@ pub const DefaultDetection = struct {
 
     /// The type of sensitive data that was detected. For example, AWS_CREDENTIALS,
     /// PHONE_NUMBER, or ADDRESS.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .count = "count",
         .occurrences = "occurrences",
-        .@"type" = "type",
+        .type = "type",
     };
 };

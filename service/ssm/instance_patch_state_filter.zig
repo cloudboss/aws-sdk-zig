@@ -34,14 +34,14 @@ pub const InstancePatchStateFilter = struct {
     key: []const u8,
 
     /// The type of comparison that should be performed for the value.
-    @"type": InstancePatchStateOperatorType,
+    type: InstancePatchStateOperatorType,
 
     /// The value for the filter. Must be an integer greater than or equal to 0.
     values: []const []const u8,
 
     pub const json_field_names = .{
         .key = "Key",
-        .@"type" = "Type",
+        .type = "Type",
         .values = "Values",
     };
 };

@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AccountStatus = @import("account_status.zig").AccountStatus;
 
-pub const DeregisterAccountInput = struct {
-};
+pub const DeregisterAccountInput = struct {};
 
 pub const DeregisterAccountOutput = struct {
     /// The registration status of the account.

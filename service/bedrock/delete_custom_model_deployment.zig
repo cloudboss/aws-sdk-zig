@@ -15,8 +15,7 @@ pub const DeleteCustomModelDeploymentInput = struct {
     };
 };
 
-pub const DeleteCustomModelDeploymentOutput = struct {
-};
+pub const DeleteCustomModelDeploymentOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCustomModelDeploymentInput, options: CallOptions) !DeleteCustomModelDeploymentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

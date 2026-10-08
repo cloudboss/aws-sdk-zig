@@ -15,8 +15,7 @@ pub const DeleteUploadInput = struct {
     };
 };
 
-pub const DeleteUploadOutput = struct {
-};
+pub const DeleteUploadOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteUploadInput, options: CallOptions) !DeleteUploadOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -29,8 +29,7 @@ pub const SetIdentityHeadersInNotificationsEnabledInput = struct {
     notification_type: NotificationType,
 };
 
-pub const SetIdentityHeadersInNotificationsEnabledOutput = struct {
-};
+pub const SetIdentityHeadersInNotificationsEnabledOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetIdentityHeadersInNotificationsEnabledInput, options: CallOptions) !SetIdentityHeadersInNotificationsEnabledOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

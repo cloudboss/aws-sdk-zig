@@ -30,8 +30,7 @@ pub const UpdateQueueLimitAssociationInput = struct {
     };
 };
 
-pub const UpdateQueueLimitAssociationOutput = struct {
-};
+pub const UpdateQueueLimitAssociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateQueueLimitAssociationInput, options: CallOptions) !UpdateQueueLimitAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

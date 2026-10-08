@@ -61,8 +61,7 @@ pub const SendOutboundWebNotificationInput = struct {
     };
 };
 
-pub const SendOutboundWebNotificationOutput = struct {
-};
+pub const SendOutboundWebNotificationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendOutboundWebNotificationInput, options: CallOptions) !SendOutboundWebNotificationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

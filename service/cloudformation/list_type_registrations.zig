@@ -32,7 +32,7 @@ pub const ListTypeRegistrationsInput = struct {
     ///
     /// Conditional: You must specify either `TypeName` and `Type`, or
     /// `Arn`.
-    @"type": ?RegistryType = null,
+    type: ?RegistryType = null,
 
     /// The Amazon Resource Name (ARN) of the extension.
     ///
@@ -109,7 +109,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTypeRegistrationsIn
         try body_buf.appendSlice(allocator, "&RegistrationStatusFilter=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         try body_buf.appendSlice(allocator, "&Type=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }

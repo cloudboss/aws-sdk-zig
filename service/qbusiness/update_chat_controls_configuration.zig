@@ -57,8 +57,7 @@ pub const UpdateChatControlsConfigurationInput = struct {
     };
 };
 
-pub const UpdateChatControlsConfigurationOutput = struct {
-};
+pub const UpdateChatControlsConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateChatControlsConfigurationInput, options: CallOptions) !UpdateChatControlsConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const DeleteSubscriberNotificationInput = struct {
     };
 };
 
-pub const DeleteSubscriberNotificationOutput = struct {
-};
+pub const DeleteSubscriberNotificationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSubscriberNotificationInput, options: CallOptions) !DeleteSubscriberNotificationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

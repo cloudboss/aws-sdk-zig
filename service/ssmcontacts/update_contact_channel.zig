@@ -24,8 +24,7 @@ pub const UpdateContactChannelInput = struct {
     };
 };
 
-pub const UpdateContactChannelOutput = struct {
-};
+pub const UpdateContactChannelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateContactChannelInput, options: CallOptions) !UpdateContactChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

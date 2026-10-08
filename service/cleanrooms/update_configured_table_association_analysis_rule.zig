@@ -77,7 +77,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateConfiguredTableAs
     try path_buf.appendSlice(allocator, "/configuredTableAssociations/");
     try path_buf.appendSlice(allocator, input.configured_table_association_identifier);
     try path_buf.appendSlice(allocator, "/analysisRule/");
-    try path_buf.appendSlice(allocator, input.analysis_rule_type);
+    try path_buf.appendSlice(allocator, input.analysis_rule_type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .empty;

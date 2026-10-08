@@ -29,8 +29,7 @@ pub const CancelBenefitApplicationInput = struct {
     };
 };
 
-pub const CancelBenefitApplicationOutput = struct {
-};
+pub const CancelBenefitApplicationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelBenefitApplicationInput, options: CallOptions) !CancelBenefitApplicationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -25,8 +25,7 @@ pub const UpdateReplicationSetInput = struct {
     };
 };
 
-pub const UpdateReplicationSetOutput = struct {
-};
+pub const UpdateReplicationSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateReplicationSetInput, options: CallOptions) !UpdateReplicationSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

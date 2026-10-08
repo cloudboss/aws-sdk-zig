@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteNotificationChannelInput = struct {
-};
+pub const DeleteNotificationChannelInput = struct {};
 
 pub const DeleteNotificationChannelOutput = struct {};
 

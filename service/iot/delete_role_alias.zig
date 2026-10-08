@@ -14,8 +14,7 @@ pub const DeleteRoleAliasInput = struct {
     };
 };
 
-pub const DeleteRoleAliasOutput = struct {
-};
+pub const DeleteRoleAliasOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRoleAliasInput, options: CallOptions) !DeleteRoleAliasOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

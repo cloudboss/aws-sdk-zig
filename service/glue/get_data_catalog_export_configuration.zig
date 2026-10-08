@@ -8,8 +8,7 @@ const ExportEncryptionConfiguration = @import("export_encryption_configuration.z
 const ExportSetting = @import("export_setting.zig").ExportSetting;
 const ExportStatus = @import("export_status.zig").ExportStatus;
 
-pub const GetDataCatalogExportConfigurationInput = struct {
-};
+pub const GetDataCatalogExportConfigurationInput = struct {};
 
 pub const GetDataCatalogExportConfigurationOutput = struct {
     /// The timestamp at which the export configuration was created.

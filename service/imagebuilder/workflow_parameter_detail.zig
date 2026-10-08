@@ -13,12 +13,12 @@ pub const WorkflowParameterDetail = struct {
     /// The type of input this parameter provides. Supported values are
     /// `string`, `integer`, `boolean`, and
     /// `stringList`.
-    @"type": []const u8,
+    type: []const u8,
 
     pub const json_field_names = .{
         .default_value = "defaultValue",
         .description = "description",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -5,9 +5,26 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the resource whose tags are to be removed.
+    resource_arn: []const u8,
 
-pub const UntagResourceOutput = @import("untag_resource_response.zig").UntagResourceResponse;
+    /// A list of tag key names to remove from the resource. You don't specify the
+    /// value. Both the key and its associated value are removed.
+    ///
+    /// This parameter to the API requires a JSON text string argument. For
+    /// information on how to format a JSON parameter for the various command line
+    /// tool environments, see [Using JSON for
+    /// Parameters](https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters.html#cli-using-param-json) in the *AWS CLI User Guide*.
+    tag_keys: []const []const u8,
+
+    pub const json_field_names = .{
+        .resource_arn = "resourceArn",
+        .tag_keys = "tagKeys",
+    };
+};
+
+pub const UntagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResourceInput, options: CallOptions) !UntagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

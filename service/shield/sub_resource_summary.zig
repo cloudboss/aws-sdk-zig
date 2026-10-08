@@ -14,12 +14,12 @@ pub const SubResourceSummary = struct {
     id: ?[]const u8 = null,
 
     /// The `SubResource` type.
-    @"type": ?SubResourceType = null,
+    type: ?SubResourceType = null,
 
     pub const json_field_names = .{
         .attack_vectors = "AttackVectors",
         .counters = "Counters",
         .id = "Id",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

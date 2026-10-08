@@ -6,9 +6,33 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const RepositoryDescription = @import("repository_description.zig").RepositoryDescription;
 
-pub const DeleteRepositoryInput = @import("delete_repository_request.zig").DeleteRepositoryRequest;
+pub const DeleteRepositoryInput = struct {
+    /// The name of the domain that contains the repository to delete.
+    domain: []const u8,
 
-pub const DeleteRepositoryOutput = @import("delete_repository_result.zig").DeleteRepositoryResult;
+    /// The 12-digit account number of the Amazon Web Services account that owns the
+    /// domain. It does not include
+    /// dashes or spaces.
+    domain_owner: ?[]const u8 = null,
+
+    /// The name of the repository to delete.
+    repository: []const u8,
+
+    pub const json_field_names = .{
+        .domain = "domain",
+        .domain_owner = "domainOwner",
+        .repository = "repository",
+    };
+};
+
+pub const DeleteRepositoryOutput = struct {
+    /// Information about the deleted repository after processing the request.
+    repository: ?RepositoryDescription = null,
+
+    pub const json_field_names = .{
+        .repository = "repository",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRepositoryInput, options: CallOptions) !DeleteRepositoryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

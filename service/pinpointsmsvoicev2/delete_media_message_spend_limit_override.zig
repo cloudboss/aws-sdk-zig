@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteMediaMessageSpendLimitOverrideInput = struct {
-};
+pub const DeleteMediaMessageSpendLimitOverrideInput = struct {};
 
 pub const DeleteMediaMessageSpendLimitOverrideOutput = struct {
     /// The current monthly limit, in US dollars.

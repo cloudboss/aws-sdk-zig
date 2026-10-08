@@ -55,7 +55,7 @@ pub const ComponentSummary = struct {
     /// The component type specifies whether Image Builder uses the component to
     /// build the image or
     /// only to test it.
-    @"type": ?ComponentType = null,
+    type: ?ComponentType = null,
 
     /// The version of the component.
     version: ?[]const u8 = null,
@@ -73,7 +73,7 @@ pub const ComponentSummary = struct {
         .state = "state",
         .supported_os_versions = "supportedOsVersions",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .version = "version",
     };
 };

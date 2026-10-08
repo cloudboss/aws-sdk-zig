@@ -14,8 +14,7 @@ pub const StartApplicationInput = struct {
     };
 };
 
-pub const StartApplicationOutput = struct {
-};
+pub const StartApplicationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartApplicationInput, options: CallOptions) !StartApplicationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

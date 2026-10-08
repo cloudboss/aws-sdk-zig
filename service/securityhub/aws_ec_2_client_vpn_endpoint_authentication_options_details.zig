@@ -16,12 +16,12 @@ pub const AwsEc2ClientVpnEndpointAuthenticationOptionsDetails = struct {
     mutual_authentication: ?AwsEc2ClientVpnEndpointAuthenticationOptionsMutualAuthenticationDetails = null,
 
     /// The authentication type used.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .active_directory = "ActiveDirectory",
         .federated_authentication = "FederatedAuthentication",
         .mutual_authentication = "MutualAuthentication",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

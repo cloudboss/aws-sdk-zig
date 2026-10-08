@@ -501,7 +501,7 @@ pub const ComputeResourceUpdate = struct {
     /// environments](https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html) in the *Batch User Guide*.
     ///
     /// You cannot change the type to or from `ECS_MANAGED_INSTANCES`.
-    @"type": ?CRType = null,
+    type: ?CRType = null,
 
     /// Specifies whether the AMI ID is updated to the latest one that's supported
     /// by Batch when
@@ -544,7 +544,7 @@ pub const ComputeResourceUpdate = struct {
         .security_group_ids = "securityGroupIds",
         .subnets = "subnets",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .update_to_latest_image_version = "updateToLatestImageVersion",
     };
 };

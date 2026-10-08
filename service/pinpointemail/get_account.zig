@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SendQuota = @import("send_quota.zig").SendQuota;
 
-pub const GetAccountInput = struct {
-};
+pub const GetAccountInput = struct {};
 
 pub const GetAccountOutput = struct {
     /// Indicates whether or not the automatic warm-up feature is enabled for

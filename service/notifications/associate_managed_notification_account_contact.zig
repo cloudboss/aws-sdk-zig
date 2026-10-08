@@ -27,8 +27,7 @@ pub const AssociateManagedNotificationAccountContactInput = struct {
     };
 };
 
-pub const AssociateManagedNotificationAccountContactOutput = struct {
-};
+pub const AssociateManagedNotificationAccountContactOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateManagedNotificationAccountContactInput, options: CallOptions) !AssociateManagedNotificationAccountContactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -62,7 +61,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateManagedNotific
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/contacts/associate-managed-notification/");
-    try path_buf.appendSlice(allocator, input.contact_identifier);
+    try path_buf.appendSlice(allocator, input.contact_identifier.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .empty;

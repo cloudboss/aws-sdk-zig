@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetUseCaseForModelAccessInput = struct {
-};
+pub const GetUseCaseForModelAccessInput = struct {};
 
 pub const GetUseCaseForModelAccessOutput = struct {
     /// Get customer profile Response.

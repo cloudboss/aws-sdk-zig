@@ -27,8 +27,7 @@ pub const DeleteOTAUpdateInput = struct {
     };
 };
 
-pub const DeleteOTAUpdateOutput = struct {
-};
+pub const DeleteOTAUpdateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteOTAUpdateInput, options: CallOptions) !DeleteOTAUpdateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const DeleteCapacityReservationInput = struct {
     };
 };
 
-pub const DeleteCapacityReservationOutput = struct {
-};
+pub const DeleteCapacityReservationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCapacityReservationInput, options: CallOptions) !DeleteCapacityReservationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -43,7 +43,7 @@ pub const DeploymentSummary = struct {
     state: ?DeploymentState = null,
 
     /// The type of deployment.
-    @"type": ?DeploymentType = null,
+    type: ?DeploymentType = null,
 
     /// A user-defined label for an AppConfig hosted configuration version.
     version_label: ?[]const u8 = null,
@@ -61,7 +61,7 @@ pub const DeploymentSummary = struct {
         .percentage_complete = "PercentageComplete",
         .started_at = "StartedAt",
         .state = "State",
-        .@"type" = "Type",
+        .type = "Type",
         .version_label = "VersionLabel",
     };
 };

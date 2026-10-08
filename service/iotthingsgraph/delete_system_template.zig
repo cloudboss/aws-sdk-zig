@@ -18,8 +18,7 @@ pub const DeleteSystemTemplateInput = struct {
     };
 };
 
-pub const DeleteSystemTemplateOutput = struct {
-};
+pub const DeleteSystemTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSystemTemplateInput, options: CallOptions) !DeleteSystemTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

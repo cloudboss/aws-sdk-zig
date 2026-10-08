@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DisassociateServiceRoleFromAccountInput = struct {
-};
+pub const DisassociateServiceRoleFromAccountInput = struct {};
 
 pub const DisassociateServiceRoleFromAccountOutput = struct {
     /// The time when the service role was disassociated from IoT Greengrass for

@@ -6,9 +6,38 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SessionSummary = @import("session_summary.zig").SessionSummary;
 
-pub const ListSessionsInput = @import("list_sessions_request.zig").ListSessionsRequest;
+pub const ListSessionsInput = struct {
+    /// The maximum number of results to return in the response. If the total number
+    /// of results is greater than this value, use the token returned in the
+    /// response in the `nextToken` field when making another request to return the
+    /// next batch of results.
+    max_results: ?i32 = null,
 
-pub const ListSessionsOutput = @import("list_sessions_response.zig").ListSessionsResponse;
+    /// If the total number of results is greater than the `maxResults` value
+    /// provided in the request, enter the token returned in the `nextToken` field
+    /// in the response in this field to return the next batch of results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+    };
+};
+
+pub const ListSessionsOutput = struct {
+    /// If the total number of results is greater than the `maxResults` value
+    /// provided in the request, use this token when making another request in the
+    /// `nextToken` field to return the next batch of results.
+    next_token: ?[]const u8 = null,
+
+    /// A list of summaries for each session in your Amazon Web Services account.
+    session_summaries: ?[]const SessionSummary = null,
+
+    pub const json_field_names = .{
+        .next_token = "nextToken",
+        .session_summaries = "sessionSummaries",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSessionsInput, options: CallOptions) !ListSessionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

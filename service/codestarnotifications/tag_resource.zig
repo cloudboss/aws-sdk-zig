@@ -5,9 +5,28 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the notification rule to tag.
+    arn: []const u8,
 
-pub const TagResourceOutput = @import("tag_resource_result.zig").TagResourceResult;
+    /// The list of tags to associate with the resource. Tag key names cannot start
+    /// with "`aws`".
+    tags: []const aws.map.StringMapEntry,
+
+    pub const json_field_names = .{
+        .arn = "Arn",
+        .tags = "Tags",
+    };
+};
+
+pub const TagResourceOutput = struct {
+    /// The list of tags associated with the resource.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TagResourceInput, options: CallOptions) !TagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

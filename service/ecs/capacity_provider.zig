@@ -59,7 +59,7 @@ pub const CapacityProvider = struct {
     /// The type of capacity provider. For Amazon ECS Managed Instances, this value
     /// is `MANAGED_INSTANCES`, indicating that Amazon ECS manages the underlying
     /// Amazon EC2 instances on your behalf.
-    @"type": ?CapacityProviderType = null,
+    type: ?CapacityProviderType = null,
 
     /// The update status of the capacity provider. The following are the possible
     /// states that is returned.
@@ -90,7 +90,7 @@ pub const CapacityProvider = struct {
         .name = "name",
         .status = "status",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .update_status = "updateStatus",
         .update_status_reason = "updateStatusReason",
     };

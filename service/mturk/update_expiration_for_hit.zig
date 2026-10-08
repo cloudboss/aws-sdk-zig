@@ -18,8 +18,7 @@ pub const UpdateExpirationForHITInput = struct {
     };
 };
 
-pub const UpdateExpirationForHITOutput = struct {
-};
+pub const UpdateExpirationForHITOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateExpirationForHITInput, options: CallOptions) !UpdateExpirationForHITOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

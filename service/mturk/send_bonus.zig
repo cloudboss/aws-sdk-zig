@@ -40,8 +40,7 @@ pub const SendBonusInput = struct {
     };
 };
 
-pub const SendBonusOutput = struct {
-};
+pub const SendBonusOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendBonusInput, options: CallOptions) !SendBonusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

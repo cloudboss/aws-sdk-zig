@@ -14,8 +14,7 @@ pub const DeleteInsightInput = struct {
     };
 };
 
-pub const DeleteInsightOutput = struct {
-};
+pub const DeleteInsightOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteInsightInput, options: CallOptions) !DeleteInsightOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

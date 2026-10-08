@@ -12,10 +12,10 @@ pub const CrawlFilterConfiguration = struct {
     /// The type of filtering that you want to apply to certain objects or content
     /// of the data source. For example, the `PATTERN` type is regular expression
     /// patterns you can apply to filter your content.
-    @"type": CrawlFilterConfigurationType,
+    type: CrawlFilterConfigurationType,
 
     pub const json_field_names = .{
         .pattern_object_filter = "patternObjectFilter",
-        .@"type" = "type",
+        .type = "type",
     };
 };

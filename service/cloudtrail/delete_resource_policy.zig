@@ -5,9 +5,26 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteResourcePolicyInput = @import("delete_resource_policy_request.zig").DeleteResourcePolicyRequest;
+pub const DeleteResourcePolicyInput = struct {
+    /// The Amazon Resource Name (ARN) of the CloudTrail event data store,
+    /// dashboard, or channel you're deleting the resource-based policy from.
+    ///
+    /// Example event data store ARN format:
+    /// `arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
+    ///
+    /// Example dashboard ARN format:
+    /// `arn:aws:cloudtrail:us-east-1:123456789012:dashboard/exampleDash`
+    ///
+    /// Example channel ARN format:
+    /// `arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890`
+    resource_arn: []const u8,
 
-pub const DeleteResourcePolicyOutput = @import("delete_resource_policy_response.zig").DeleteResourcePolicyResponse;
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+    };
+};
+
+pub const DeleteResourcePolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteResourcePolicyInput, options: CallOptions) !DeleteResourcePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

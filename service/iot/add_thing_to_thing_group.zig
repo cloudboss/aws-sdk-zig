@@ -36,8 +36,7 @@ pub const AddThingToThingGroupInput = struct {
     };
 };
 
-pub const AddThingToThingGroupOutput = struct {
-};
+pub const AddThingToThingGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddThingToThingGroupInput, options: CallOptions) !AddThingToThingGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

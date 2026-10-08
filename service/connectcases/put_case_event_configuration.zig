@@ -20,8 +20,7 @@ pub const PutCaseEventConfigurationInput = struct {
     };
 };
 
-pub const PutCaseEventConfigurationOutput = struct {
-};
+pub const PutCaseEventConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutCaseEventConfigurationInput, options: CallOptions) !PutCaseEventConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

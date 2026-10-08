@@ -19,8 +19,7 @@ pub const UpdateConnectorScanConfigurationInput = struct {
     };
 };
 
-pub const UpdateConnectorScanConfigurationOutput = struct {
-};
+pub const UpdateConnectorScanConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateConnectorScanConfigurationInput, options: CallOptions) !UpdateConnectorScanConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

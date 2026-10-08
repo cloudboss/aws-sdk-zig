@@ -183,8 +183,7 @@ pub const PutRecommendationPreferencesInput = struct {
     };
 };
 
-pub const PutRecommendationPreferencesOutput = struct {
-};
+pub const PutRecommendationPreferencesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutRecommendationPreferencesInput, options: CallOptions) !PutRecommendationPreferencesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

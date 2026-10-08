@@ -42,8 +42,7 @@ pub const SetTaskStatusInput = struct {
     };
 };
 
-pub const SetTaskStatusOutput = struct {
-};
+pub const SetTaskStatusOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetTaskStatusInput, options: CallOptions) !SetTaskStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

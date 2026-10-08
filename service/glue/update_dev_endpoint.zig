@@ -57,8 +57,7 @@ pub const UpdateDevEndpointInput = struct {
     };
 };
 
-pub const UpdateDevEndpointOutput = struct {
-};
+pub const UpdateDevEndpointOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDevEndpointInput, options: CallOptions) !UpdateDevEndpointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

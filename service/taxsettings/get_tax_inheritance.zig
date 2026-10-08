@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const HeritageStatus = @import("heritage_status.zig").HeritageStatus;
 
-pub const GetTaxInheritanceInput = struct {
-};
+pub const GetTaxInheritanceInput = struct {};
 
 pub const GetTaxInheritanceOutput = struct {
     /// The tax inheritance status.

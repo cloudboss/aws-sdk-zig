@@ -20,8 +20,7 @@ pub const UpdateEmergencyContactSettingsInput = struct {
     };
 };
 
-pub const UpdateEmergencyContactSettingsOutput = struct {
-};
+pub const UpdateEmergencyContactSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateEmergencyContactSettingsInput, options: CallOptions) !UpdateEmergencyContactSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -19,8 +19,7 @@ pub const DeleteWorkerBlockInput = struct {
     };
 };
 
-pub const DeleteWorkerBlockOutput = struct {
-};
+pub const DeleteWorkerBlockOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteWorkerBlockInput, options: CallOptions) !DeleteWorkerBlockOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -34,7 +34,7 @@ pub const AutoScalingGroupConfiguration = struct {
 
     /// Describes whether the EC2 Auto Scaling group has a single instance type or a
     /// mixed instance type configuration.
-    @"type": ?AsgType = null,
+    type: ?AsgType = null,
 
     pub const json_field_names = .{
         .allocation_strategy = "allocationStrategy",
@@ -44,6 +44,6 @@ pub const AutoScalingGroupConfiguration = struct {
         .max_size = "maxSize",
         .min_size = "minSize",
         .mixed_instance_types = "mixedInstanceTypes",
-        .@"type" = "type",
+        .type = "type",
     };
 };

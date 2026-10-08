@@ -17,13 +17,13 @@ pub const ListDeviceResourcesInput = struct {
     next_token: ?[]const u8 = null,
 
     /// A structure used to filter the results by type of resource.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .managed_device_id = "managedDeviceId",
         .max_results = "maxResults",
         .next_token = "nextToken",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -94,7 +94,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListDeviceResourcesInpu
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);

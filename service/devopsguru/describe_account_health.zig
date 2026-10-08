@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DescribeAccountHealthInput = struct {
-};
+pub const DescribeAccountHealthInput = struct {};
 
 pub const DescribeAccountHealthOutput = struct {
     /// Number of resources that DevOps Guru is monitoring in your Amazon Web

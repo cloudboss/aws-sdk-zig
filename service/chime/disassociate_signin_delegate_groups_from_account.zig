@@ -18,8 +18,7 @@ pub const DisassociateSigninDelegateGroupsFromAccountInput = struct {
     };
 };
 
-pub const DisassociateSigninDelegateGroupsFromAccountOutput = struct {
-};
+pub const DisassociateSigninDelegateGroupsFromAccountOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateSigninDelegateGroupsFromAccountInput, options: CallOptions) !DisassociateSigninDelegateGroupsFromAccountOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

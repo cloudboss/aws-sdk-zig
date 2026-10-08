@@ -14,8 +14,7 @@ pub const StopCrawlerInput = struct {
     };
 };
 
-pub const StopCrawlerOutput = struct {
-};
+pub const StopCrawlerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopCrawlerInput, options: CallOptions) !StopCrawlerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

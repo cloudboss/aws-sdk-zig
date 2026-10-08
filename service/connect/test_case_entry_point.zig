@@ -8,14 +8,14 @@ pub const TestCaseEntryPoint = struct {
     chat_entry_point_parameters: ?ChatEntryPointParameters = null,
 
     /// The type of entry point.
-    @"type": ?TestCaseEntryPointType = null,
+    type: ?TestCaseEntryPointType = null,
 
     /// Parameters for voice call entry point.
     voice_call_entry_point_parameters: ?VoiceCallEntryPointParameters = null,
 
     pub const json_field_names = .{
         .chat_entry_point_parameters = "ChatEntryPointParameters",
-        .@"type" = "Type",
+        .type = "Type",
         .voice_call_entry_point_parameters = "VoiceCallEntryPointParameters",
     };
 };

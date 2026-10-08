@@ -7,10 +7,10 @@ pub const NextContactEntry = struct {
     next_contact_metadata: ?NextContactMetadata = null,
 
     /// The type of the next contact entry.
-    @"type": ?NextContactType = null,
+    type: ?NextContactType = null,
 
     pub const json_field_names = .{
         .next_contact_metadata = "NextContactMetadata",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

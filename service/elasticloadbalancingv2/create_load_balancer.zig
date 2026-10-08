@@ -132,7 +132,7 @@ pub const CreateLoadBalancerInput = struct {
     tags: ?[]const Tag = null,
 
     /// The type of load balancer. The default is `application`.
-    @"type": ?LoadBalancerTypeEnum = null,
+    type: ?LoadBalancerTypeEnum = null,
 };
 
 pub const CreateLoadBalancerOutput = struct {
@@ -279,7 +279,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateLoadBalancerInput
             }
         }
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         try body_buf.appendSlice(allocator, "&Type=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }

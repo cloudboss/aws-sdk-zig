@@ -28,7 +28,7 @@ pub const StartProtectedJobInput = struct {
     result_configuration: ?ProtectedJobResultConfigurationInput = null,
 
     /// The type of protected job to start.
-    @"type": ProtectedJobType,
+    type: ProtectedJobType,
 
     pub const json_field_names = .{
         .compute_configuration = "computeConfiguration",
@@ -36,7 +36,7 @@ pub const StartProtectedJobInput = struct {
         .job_parameters = "jobParameters",
         .membership_identifier = "membershipIdentifier",
         .result_configuration = "resultConfiguration",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -113,7 +113,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartProtectedJobInput,
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

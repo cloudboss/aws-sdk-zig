@@ -8,10 +8,10 @@ pub const SsoIdentity = struct {
     id: []const u8,
 
     /// The type of identity. Valid values are `SSO_USER` or `SSO_GROUP`.
-    @"type": SsoIdentityType,
+    type: SsoIdentityType,
 
     pub const json_field_names = .{
         .id = "id",
-        .@"type" = "type",
+        .type = "type",
     };
 };

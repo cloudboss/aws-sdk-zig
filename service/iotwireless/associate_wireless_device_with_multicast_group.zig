@@ -16,8 +16,7 @@ pub const AssociateWirelessDeviceWithMulticastGroupInput = struct {
     };
 };
 
-pub const AssociateWirelessDeviceWithMulticastGroupOutput = struct {
-};
+pub const AssociateWirelessDeviceWithMulticastGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateWirelessDeviceWithMulticastGroupInput, options: CallOptions) !AssociateWirelessDeviceWithMulticastGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

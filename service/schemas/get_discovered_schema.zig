@@ -13,11 +13,11 @@ pub const GetDiscoveredSchemaInput = struct {
     events: []const []const u8,
 
     /// The type of event.
-    @"type": Type,
+    type: Type,
 
     pub const json_field_names = .{
         .events = "Events",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -72,7 +72,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetDiscoveredSchemaInpu
     has_prev = true;
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

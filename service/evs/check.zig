@@ -40,12 +40,12 @@ pub const Check = struct {
     ///   SDDC Manager is not used by another Amazon EVS environment.
     /// * `CONNECTOR_HEALTH`: Aggregate health across all connectors in the
     ///   environment.
-    @"type": ?CheckType = null,
+    type: ?CheckType = null,
 
     pub const json_field_names = .{
         .id = "id",
         .impaired_since = "impairedSince",
         .result = "result",
-        .@"type" = "type",
+        .type = "type",
     };
 };

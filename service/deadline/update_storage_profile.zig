@@ -45,8 +45,7 @@ pub const UpdateStorageProfileInput = struct {
     };
 };
 
-pub const UpdateStorageProfileOutput = struct {
-};
+pub const UpdateStorageProfileOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateStorageProfileInput, options: CallOptions) !UpdateStorageProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

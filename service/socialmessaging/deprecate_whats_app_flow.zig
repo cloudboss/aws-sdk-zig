@@ -18,8 +18,7 @@ pub const DeprecateWhatsAppFlowInput = struct {
     };
 };
 
-pub const DeprecateWhatsAppFlowOutput = struct {
-};
+pub const DeprecateWhatsAppFlowOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeprecateWhatsAppFlowInput, options: CallOptions) !DeprecateWhatsAppFlowOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

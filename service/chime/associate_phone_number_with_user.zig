@@ -22,8 +22,7 @@ pub const AssociatePhoneNumberWithUserInput = struct {
     };
 };
 
-pub const AssociatePhoneNumberWithUserOutput = struct {
-};
+pub const AssociatePhoneNumberWithUserOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociatePhoneNumberWithUserInput, options: CallOptions) !AssociatePhoneNumberWithUserOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

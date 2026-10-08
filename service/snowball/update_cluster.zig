@@ -61,8 +61,7 @@ pub const UpdateClusterInput = struct {
     };
 };
 
-pub const UpdateClusterOutput = struct {
-};
+pub const UpdateClusterOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateClusterInput, options: CallOptions) !UpdateClusterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

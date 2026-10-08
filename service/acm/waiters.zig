@@ -109,7 +109,7 @@ pub const AcmeDomainValidationValidatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeAcmeDomainValidation(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeAcmeDomainValidation(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -178,7 +178,7 @@ pub const AcmeEndpointActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeAcmeEndpoint(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeAcmeEndpoint(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

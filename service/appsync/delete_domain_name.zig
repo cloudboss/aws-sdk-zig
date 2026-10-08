@@ -14,8 +14,7 @@ pub const DeleteDomainNameInput = struct {
     };
 };
 
-pub const DeleteDomainNameOutput = struct {
-};
+pub const DeleteDomainNameOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDomainNameInput, options: CallOptions) !DeleteDomainNameOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

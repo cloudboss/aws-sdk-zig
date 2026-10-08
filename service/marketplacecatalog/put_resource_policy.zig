@@ -5,10 +5,22 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const PutResourcePolicyInput = @import("put_resource_policy_request.zig").PutResourcePolicyRequest;
+pub const PutResourcePolicyInput = struct {
+    /// The policy document to set; formatted in JSON.
+    policy: []const u8,
 
-pub const PutResourcePolicyOutput = struct {
+    /// The Amazon Resource Name (ARN) of the entity resource you want to associate
+    /// with a
+    /// resource policy.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .policy = "Policy",
+        .resource_arn = "ResourceArn",
+    };
 };
+
+pub const PutResourcePolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutResourcePolicyInput, options: CallOptions) !PutResourcePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

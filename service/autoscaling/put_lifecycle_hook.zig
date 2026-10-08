@@ -72,8 +72,7 @@ pub const PutLifecycleHookInput = struct {
     role_arn: ?[]const u8 = null,
 };
 
-pub const PutLifecycleHookOutput = struct {
-};
+pub const PutLifecycleHookOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutLifecycleHookInput, options: CallOptions) !PutLifecycleHookOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

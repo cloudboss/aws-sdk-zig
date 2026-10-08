@@ -21,7 +21,7 @@ pub const SharedResource = struct {
     status: SharedResourceStatus,
 
     /// The type of shared resource.
-    @"type": SharedResourceType,
+    type: SharedResourceType,
 
     pub const json_field_names = .{
         .dns_names = "DnsNames",
@@ -29,6 +29,6 @@ pub const SharedResource = struct {
         .resource_arn = "ResourceArn",
         .resource_share_arns = "ResourceShareArns",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

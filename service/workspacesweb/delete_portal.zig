@@ -14,8 +14,7 @@ pub const DeletePortalInput = struct {
     };
 };
 
-pub const DeletePortalOutput = struct {
-};
+pub const DeletePortalOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePortalInput, options: CallOptions) !DeletePortalOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

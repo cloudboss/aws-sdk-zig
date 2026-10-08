@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SourceCredentialsInfo = @import("source_credentials_info.zig").SourceCredentialsInfo;
 
-pub const ListSourceCredentialsInput = struct {
-};
+pub const ListSourceCredentialsInput = struct {};
 
 pub const ListSourceCredentialsOutput = struct {
     /// A list of `SourceCredentialsInfo` objects. Each

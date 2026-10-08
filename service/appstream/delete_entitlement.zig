@@ -18,8 +18,7 @@ pub const DeleteEntitlementInput = struct {
     };
 };
 
-pub const DeleteEntitlementOutput = struct {
-};
+pub const DeleteEntitlementOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteEntitlementInput, options: CallOptions) !DeleteEntitlementOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

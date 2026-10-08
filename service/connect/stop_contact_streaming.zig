@@ -25,8 +25,7 @@ pub const StopContactStreamingInput = struct {
     };
 };
 
-pub const StopContactStreamingOutput = struct {
-};
+pub const StopContactStreamingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopContactStreamingInput, options: CallOptions) !StopContactStreamingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -5,7 +5,18 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceInput = struct {
+    /// The resource ARN.
+    resource_arn: []const u8,
+
+    /// The tag keys.
+    tag_keys: []const []const u8,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceARN",
+        .tag_keys = "TagKeys",
+    };
+};
 
 pub const UntagResourceOutput = struct {};
 

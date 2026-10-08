@@ -41,8 +41,7 @@ pub const UpdateAutomationRuleV2Input = struct {
     };
 };
 
-pub const UpdateAutomationRuleV2Output = struct {
-};
+pub const UpdateAutomationRuleV2Output = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAutomationRuleV2Input, options: CallOptions) !UpdateAutomationRuleV2Output {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

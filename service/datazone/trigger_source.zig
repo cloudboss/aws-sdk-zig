@@ -7,10 +7,10 @@ pub const TriggerSource = struct {
 
     /// The type of the trigger source. Valid values are `MANUAL`, `SCHEDULED`, and
     /// `WORKFLOW`.
-    @"type": ?TriggerSourceType = null,
+    type: ?TriggerSourceType = null,
 
     pub const json_field_names = .{
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };

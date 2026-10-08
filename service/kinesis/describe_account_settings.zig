@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const MinimumThroughputBillingCommitmentOutput = @import("minimum_throughput_billing_commitment_output.zig").MinimumThroughputBillingCommitmentOutput;
 
-pub const DescribeAccountSettingsInput = struct {
-};
+pub const DescribeAccountSettingsInput = struct {};
 
 pub const DescribeAccountSettingsOutput = struct {
     /// The current configuration of the minimum throughput billing commitment for

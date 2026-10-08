@@ -14,8 +14,7 @@ pub const StopAccessLoggingInput = struct {
     };
 };
 
-pub const StopAccessLoggingOutput = struct {
-};
+pub const StopAccessLoggingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopAccessLoggingInput, options: CallOptions) !StopAccessLoggingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

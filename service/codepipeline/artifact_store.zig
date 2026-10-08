@@ -27,11 +27,11 @@ pub const ArtifactStore = struct {
     location: []const u8,
 
     /// The type of the artifact store, such as S3.
-    @"type": ArtifactStoreType,
+    type: ArtifactStoreType,
 
     pub const json_field_names = .{
         .encryption_key = "encryptionKey",
         .location = "location",
-        .@"type" = "type",
+        .type = "type",
     };
 };

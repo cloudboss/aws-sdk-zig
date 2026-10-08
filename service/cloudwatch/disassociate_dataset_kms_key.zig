@@ -17,8 +17,7 @@ pub const DisassociateDatasetKmsKeyInput = struct {
     };
 };
 
-pub const DisassociateDatasetKmsKeyOutput = struct {
-};
+pub const DisassociateDatasetKmsKeyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateDatasetKmsKeyInput, options: CallOptions) !DisassociateDatasetKmsKeyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

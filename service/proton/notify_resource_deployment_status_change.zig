@@ -32,8 +32,7 @@ pub const NotifyResourceDeploymentStatusChangeInput = struct {
     };
 };
 
-pub const NotifyResourceDeploymentStatusChangeOutput = struct {
-};
+pub const NotifyResourceDeploymentStatusChangeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: NotifyResourceDeploymentStatusChangeInput, options: CallOptions) !NotifyResourceDeploymentStatusChangeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

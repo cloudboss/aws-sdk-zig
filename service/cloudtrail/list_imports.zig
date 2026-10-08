@@ -7,9 +7,39 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ImportStatus = @import("import_status.zig").ImportStatus;
 const ImportsListItem = @import("imports_list_item.zig").ImportsListItem;
 
-pub const ListImportsInput = @import("list_imports_request.zig").ListImportsRequest;
+pub const ListImportsInput = struct {
+    /// The ARN of the destination event data store.
+    destination: ?[]const u8 = null,
 
-pub const ListImportsOutput = @import("list_imports_response.zig").ListImportsResponse;
+    /// The status of the import.
+    import_status: ?ImportStatus = null,
+
+    /// The maximum number of imports to display on a single page.
+    max_results: ?i32 = null,
+
+    /// A token you can use to get the next page of import results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .destination = "Destination",
+        .import_status = "ImportStatus",
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListImportsOutput = struct {
+    /// The list of returned imports.
+    imports: ?[]const ImportsListItem = null,
+
+    /// A token you can use to get the next page of import results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .imports = "Imports",
+        .next_token = "NextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListImportsInput, options: CallOptions) !ListImportsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

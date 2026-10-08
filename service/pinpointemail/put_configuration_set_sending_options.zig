@@ -21,8 +21,7 @@ pub const PutConfigurationSetSendingOptionsInput = struct {
     };
 };
 
-pub const PutConfigurationSetSendingOptionsOutput = struct {
-};
+pub const PutConfigurationSetSendingOptionsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutConfigurationSetSendingOptionsInput, options: CallOptions) !PutConfigurationSetSendingOptionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

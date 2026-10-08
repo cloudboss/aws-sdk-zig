@@ -91,8 +91,7 @@ pub const UpdateTaskInput = struct {
     };
 };
 
-pub const UpdateTaskOutput = struct {
-};
+pub const UpdateTaskOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTaskInput, options: CallOptions) !UpdateTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

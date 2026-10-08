@@ -14,8 +14,7 @@ pub const DeleteStageInput = struct {
     };
 };
 
-pub const DeleteStageOutput = struct {
-};
+pub const DeleteStageOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteStageInput, options: CallOptions) !DeleteStageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

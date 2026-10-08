@@ -82,8 +82,7 @@ pub const CreateConfigurationSetInput = struct {
     };
 };
 
-pub const CreateConfigurationSetOutput = struct {
-};
+pub const CreateConfigurationSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateConfigurationSetInput, options: CallOptions) !CreateConfigurationSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

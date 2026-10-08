@@ -35,8 +35,7 @@ pub const UpdateDataAccessorInput = struct {
     };
 };
 
-pub const UpdateDataAccessorOutput = struct {
-};
+pub const UpdateDataAccessorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDataAccessorInput, options: CallOptions) !UpdateDataAccessorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

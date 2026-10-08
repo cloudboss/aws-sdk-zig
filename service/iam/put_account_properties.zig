@@ -20,8 +20,7 @@ pub const PutAccountPropertiesInput = struct {
     properties: []const aws.map.StringMapEntry,
 };
 
-pub const PutAccountPropertiesOutput = struct {
-};
+pub const PutAccountPropertiesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAccountPropertiesInput, options: CallOptions) !PutAccountPropertiesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -8,8 +8,7 @@ const LinuxSubscriptionsDiscovery = @import("linux_subscriptions_discovery.zig")
 const LinuxSubscriptionsDiscoverySettings = @import("linux_subscriptions_discovery_settings.zig").LinuxSubscriptionsDiscoverySettings;
 const Status = @import("status.zig").Status;
 
-pub const GetServiceSettingsInput = struct {
-};
+pub const GetServiceSettingsInput = struct {};
 
 pub const GetServiceSettingsOutput = struct {
     /// The Region in which License Manager displays the aggregated data for Linux

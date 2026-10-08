@@ -5,9 +5,16 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteDomainInput = @import("delete_domain_request.zig").DeleteDomainRequest;
+pub const DeleteDomainInput = struct {
+    /// The unique identifier of the Cases domain.
+    domain_id: []const u8,
 
-pub const DeleteDomainOutput = @import("delete_domain_response.zig").DeleteDomainResponse;
+    pub const json_field_names = .{
+        .domain_id = "domainId",
+    };
+};
+
+pub const DeleteDomainOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDomainInput, options: CallOptions) !DeleteDomainOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetDefaultApplicationSettingInput = struct {
-};
+pub const GetDefaultApplicationSettingInput = struct {};
 
 pub const GetDefaultApplicationSettingOutput = struct {
     application_arn: ?[]const u8 = null,

@@ -41,8 +41,7 @@ pub const DisassociateSourceResourceInput = struct {
     };
 };
 
-pub const DisassociateSourceResourceOutput = struct {
-};
+pub const DisassociateSourceResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateSourceResourceInput, options: CallOptions) !DisassociateSourceResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

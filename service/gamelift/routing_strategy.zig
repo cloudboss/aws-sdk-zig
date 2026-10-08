@@ -25,11 +25,11 @@ pub const RoutingStrategy = struct {
     /// fleet but instead can be used to display a message to the user. A terminal
     /// alias
     /// throws a TerminalRoutingStrategyException with the message embedded.
-    @"type": ?RoutingStrategyType = null,
+    type: ?RoutingStrategyType = null,
 
     pub const json_field_names = .{
         .fleet_id = "FleetId",
         .message = "Message",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

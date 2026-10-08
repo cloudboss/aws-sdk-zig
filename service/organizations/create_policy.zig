@@ -86,14 +86,14 @@ pub const CreatePolicyInput = struct {
     ///
     /// *
     ///   [GUARDDUTY_POLICY](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_guardduty.html)
-    @"type": PolicyType,
+    type: PolicyType,
 
     pub const json_field_names = .{
         .content = "Content",
         .description = "Description",
         .name = "Name",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

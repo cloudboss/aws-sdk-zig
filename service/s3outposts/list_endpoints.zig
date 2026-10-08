@@ -6,9 +6,35 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Endpoint = @import("endpoint.zig").Endpoint;
 
-pub const ListEndpointsInput = @import("list_endpoints_request.zig").ListEndpointsRequest;
+pub const ListEndpointsInput = struct {
+    /// The maximum number of endpoints that will be returned in the response.
+    max_results: ?i32 = null,
 
-pub const ListEndpointsOutput = @import("list_endpoints_result.zig").ListEndpointsResult;
+    /// If a previous response from this operation included a `NextToken` value,
+    /// provide that value here to retrieve the next page of results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListEndpointsOutput = struct {
+    /// The list of endpoints associated with the specified Outpost.
+    endpoints: ?[]const Endpoint = null,
+
+    /// If the number of endpoints associated with the specified Outpost exceeds
+    /// `MaxResults`,
+    /// you can include this value in subsequent calls to this operation to retrieve
+    /// more results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .endpoints = "Endpoints",
+        .next_token = "NextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListEndpointsInput, options: CallOptions) !ListEndpointsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

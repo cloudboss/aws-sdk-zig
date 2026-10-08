@@ -40,7 +40,7 @@ pub const Connector = struct {
     status: ?CheckResult = null,
 
     /// The type of the connector.
-    @"type": ?ConnectorType = null,
+    type: ?ConnectorType = null,
 
     pub const json_field_names = .{
         .appliance_fqdn = "applianceFqdn",
@@ -53,6 +53,6 @@ pub const Connector = struct {
         .state = "state",
         .state_details = "stateDetails",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };

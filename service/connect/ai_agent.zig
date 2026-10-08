@@ -7,10 +7,10 @@ pub const AIAgent = struct {
     arn: ?[]const u8 = null,
 
     /// The type of the AI agent. The valid value is `THIRD_PARTY`.
-    @"type": ?AIAgentType = null,
+    type: ?AIAgentType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

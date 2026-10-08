@@ -92,8 +92,7 @@ pub const ContinueUpdateRollbackInput = struct {
     stack_name: []const u8,
 };
 
-pub const ContinueUpdateRollbackOutput = struct {
-};
+pub const ContinueUpdateRollbackOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ContinueUpdateRollbackInput, options: CallOptions) !ContinueUpdateRollbackOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

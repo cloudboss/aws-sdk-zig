@@ -18,8 +18,7 @@ pub const UpdateThingTypeInput = struct {
     };
 };
 
-pub const UpdateThingTypeOutput = struct {
-};
+pub const UpdateThingTypeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateThingTypeInput, options: CallOptions) !UpdateThingTypeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

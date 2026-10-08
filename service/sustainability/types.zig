@@ -1,0 +1,14 @@
+pub const Dimension = @import("dimension.zig").Dimension;
+pub const DimensionEntry = @import("dimension_entry.zig").DimensionEntry;
+pub const Emissions = @import("emissions.zig").Emissions;
+pub const EmissionsType = @import("emissions_type.zig").EmissionsType;
+pub const EmissionsUnit = @import("emissions_unit.zig").EmissionsUnit;
+pub const EstimatedCarbonEmissions = @import("estimated_carbon_emissions.zig").EstimatedCarbonEmissions;
+pub const EstimatedWaterAllocation = @import("estimated_water_allocation.zig").EstimatedWaterAllocation;
+pub const FilterExpression = @import("filter_expression.zig").FilterExpression;
+pub const GranularityConfiguration = @import("granularity_configuration.zig").GranularityConfiguration;
+pub const TimeGranularity = @import("time_granularity.zig").TimeGranularity;
+pub const TimePeriod = @import("time_period.zig").TimePeriod;
+pub const WaterAllocation = @import("water_allocation.zig").WaterAllocation;
+pub const WaterAllocationType = @import("water_allocation_type.zig").WaterAllocationType;
+pub const WaterAllocationUnit = @import("water_allocation_unit.zig").WaterAllocationUnit;

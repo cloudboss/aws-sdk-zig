@@ -14,8 +14,7 @@ pub const DeleteCloudAutonomousVmClusterInput = struct {
     };
 };
 
-pub const DeleteCloudAutonomousVmClusterOutput = struct {
-};
+pub const DeleteCloudAutonomousVmClusterOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCloudAutonomousVmClusterInput, options: CallOptions) !DeleteCloudAutonomousVmClusterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

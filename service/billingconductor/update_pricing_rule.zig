@@ -27,7 +27,7 @@ pub const UpdatePricingRuleInput = struct {
     tiering: ?UpdateTieringInput = null,
 
     /// The new pricing rule type.
-    @"type": ?PricingRuleType = null,
+    type: ?PricingRuleType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -35,7 +35,7 @@ pub const UpdatePricingRuleInput = struct {
         .modifier_percentage = "ModifierPercentage",
         .name = "Name",
         .tiering = "Tiering",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -84,7 +84,7 @@ pub const UpdatePricingRuleOutput = struct {
     tiering: ?UpdateTieringInput = null,
 
     /// The new pricing rule type.
-    @"type": ?PricingRuleType = null,
+    type: ?PricingRuleType = null,
 
     /// Usage type is the unit that each service uses to measure the usage of a
     /// specific type of resource.
@@ -107,7 +107,7 @@ pub const UpdatePricingRuleOutput = struct {
         .scope = "Scope",
         .service = "Service",
         .tiering = "Tiering",
-        .@"type" = "Type",
+        .type = "Type",
         .usage_type = "UsageType",
     };
 };
@@ -176,7 +176,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdatePricingRuleInput,
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Type\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);

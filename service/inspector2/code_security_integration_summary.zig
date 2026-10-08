@@ -22,7 +22,7 @@ pub const CodeSecurityIntegrationSummary = struct {
     status_reason: []const u8,
 
     /// The type of repository provider for the integration.
-    @"type": IntegrationType,
+    type: IntegrationType,
 
     pub const json_field_names = .{
         .created_on = "createdOn",
@@ -31,6 +31,6 @@ pub const CodeSecurityIntegrationSummary = struct {
         .name = "name",
         .status = "status",
         .status_reason = "statusReason",
-        .@"type" = "type",
+        .type = "type",
     };
 };

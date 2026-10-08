@@ -105,8 +105,7 @@ pub const ConfirmForgotPasswordInput = struct {
     };
 };
 
-pub const ConfirmForgotPasswordOutput = struct {
-};
+pub const ConfirmForgotPasswordOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ConfirmForgotPasswordInput, options: CallOptions) !ConfirmForgotPasswordOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -13,8 +13,7 @@ pub const DeleteFuotaTaskInput = struct {
     };
 };
 
-pub const DeleteFuotaTaskOutput = struct {
-};
+pub const DeleteFuotaTaskOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteFuotaTaskInput, options: CallOptions) !DeleteFuotaTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

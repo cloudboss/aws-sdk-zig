@@ -20,8 +20,7 @@ pub const DeleteIdentityPolicyInput = struct {
     policy_name: []const u8,
 };
 
-pub const DeleteIdentityPolicyOutput = struct {
-};
+pub const DeleteIdentityPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIdentityPolicyInput, options: CallOptions) !DeleteIdentityPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

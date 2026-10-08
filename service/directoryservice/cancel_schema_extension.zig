@@ -18,8 +18,7 @@ pub const CancelSchemaExtensionInput = struct {
     };
 };
 
-pub const CancelSchemaExtensionOutput = struct {
-};
+pub const CancelSchemaExtensionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelSchemaExtensionInput, options: CallOptions) !CancelSchemaExtensionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

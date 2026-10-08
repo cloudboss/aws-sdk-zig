@@ -7,9 +7,50 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SessionState = @import("session_state.zig").SessionState;
 const SessionSummary = @import("session_summary.zig").SessionSummary;
 
-pub const ListSessionsInput = @import("list_sessions_request.zig").ListSessionsRequest;
+pub const ListSessionsInput = struct {
+    /// The ID of the application to list sessions for.
+    application_id: []const u8,
 
-pub const ListSessionsOutput = @import("list_sessions_response.zig").ListSessionsResponse;
+    /// The lower bound of the option to filter by creation date and time.
+    created_at_after: ?i64 = null,
+
+    /// The upper bound of the option to filter by creation date and time.
+    created_at_before: ?i64 = null,
+
+    /// The maximum number of sessions to return in each page of results.
+    max_results: ?i32 = null,
+
+    /// The token for the next set of session results.
+    next_token: ?[]const u8 = null,
+
+    /// An optional filter for session states. Note that if this filter contains
+    /// multiple states, the resulting list will be grouped by the state.
+    states: ?[]const SessionState = null,
+
+    pub const json_field_names = .{
+        .application_id = "applicationId",
+        .created_at_after = "createdAtAfter",
+        .created_at_before = "createdAtBefore",
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+        .states = "states",
+    };
+};
+
+pub const ListSessionsOutput = struct {
+    /// The output displays the token for the next set of session results. This is
+    /// required for pagination and is available as a response of the previous
+    /// request.
+    next_token: ?[]const u8 = null,
+
+    /// The output lists information about the specified sessions.
+    sessions: ?[]const SessionSummary = null,
+
+    pub const json_field_names = .{
+        .next_token = "nextToken",
+        .sessions = "sessions",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSessionsInput, options: CallOptions) !ListSessionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

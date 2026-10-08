@@ -47,7 +47,7 @@ pub const AnomalyDetectorActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeAnomalyDetector(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeAnomalyDetector(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -186,7 +186,7 @@ pub const ScraperActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeScraper(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeScraper(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -316,7 +316,7 @@ pub const WorkspaceActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeWorkspace(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeWorkspace(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

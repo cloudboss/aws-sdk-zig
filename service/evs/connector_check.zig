@@ -13,12 +13,12 @@ pub const ConnectorCheck = struct {
     result: ?CheckResult = null,
 
     /// The check type.
-    @"type": ?CheckType = null,
+    type: ?CheckType = null,
 
     pub const json_field_names = .{
         .impaired_since = "impairedSince",
         .last_check_attempt = "lastCheckAttempt",
         .result = "result",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -15,8 +15,7 @@ pub const DeleteFindingAggregatorInput = struct {
     };
 };
 
-pub const DeleteFindingAggregatorOutput = struct {
-};
+pub const DeleteFindingAggregatorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteFindingAggregatorInput, options: CallOptions) !DeleteFindingAggregatorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

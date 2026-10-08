@@ -36,8 +36,7 @@ pub const PutEmailIdentityFeedbackAttributesInput = struct {
     };
 };
 
-pub const PutEmailIdentityFeedbackAttributesOutput = struct {
-};
+pub const PutEmailIdentityFeedbackAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutEmailIdentityFeedbackAttributesInput, options: CallOptions) !PutEmailIdentityFeedbackAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

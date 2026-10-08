@@ -14,8 +14,7 @@ pub const DeregisterApplicationInput = struct {
     };
 };
 
-pub const DeregisterApplicationOutput = struct {
-};
+pub const DeregisterApplicationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterApplicationInput, options: CallOptions) !DeregisterApplicationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

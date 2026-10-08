@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Insights = @import("insights.zig").Insights;
 
-pub const GetInsightsInput = struct {
-};
+pub const GetInsightsInput = struct {};
 
 pub const GetInsightsOutput = struct {
     /// The analytics data that the `GetInsights` API returned.

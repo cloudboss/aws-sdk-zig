@@ -21,7 +21,7 @@ pub const VpnGateway = struct {
     tags: ?[]const Tag = null,
 
     /// The type of VPN connection the virtual private gateway supports.
-    @"type": ?GatewayType = null,
+    type: ?GatewayType = null,
 
     /// Any VPCs attached to the virtual private gateway.
     vpc_attachments: ?[]const VpcAttachment = null,

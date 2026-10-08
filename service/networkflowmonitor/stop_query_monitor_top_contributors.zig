@@ -19,8 +19,7 @@ pub const StopQueryMonitorTopContributorsInput = struct {
     };
 };
 
-pub const StopQueryMonitorTopContributorsOutput = struct {
-};
+pub const StopQueryMonitorTopContributorsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopQueryMonitorTopContributorsInput, options: CallOptions) !StopQueryMonitorTopContributorsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

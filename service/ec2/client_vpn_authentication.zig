@@ -18,5 +18,5 @@ pub const ClientVpnAuthentication = struct {
     mutual_authentication: ?CertificateAuthentication = null,
 
     /// The authentication type used.
-    @"type": ?ClientVpnAuthenticationType = null,
+    type: ?ClientVpnAuthenticationType = null,
 };

@@ -816,7 +816,7 @@ pub fn deserializeAction(allocator: std.mem.Allocator, reader: *aws.xml.Reader) 
                 } else if (std.mem.eql(u8, e.local, "TargetGroupArn")) {
                     result.target_group_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = ActionTypeEnum.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
+                    result.type = ActionTypeEnum.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -1383,7 +1383,7 @@ pub fn deserializeLoadBalancer(allocator: std.mem.Allocator, reader: *aws.xml.Re
     result.scheme = null;
     result.security_groups = null;
     result.state = null;
-    result.@"type" = null;
+    result.type = null;
     result.vpc_id = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -1417,7 +1417,7 @@ pub fn deserializeLoadBalancer(allocator: std.mem.Allocator, reader: *aws.xml.Re
                 } else if (std.mem.eql(u8, e.local, "State")) {
                     result.state = try deserializeLoadBalancerState(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = LoadBalancerTypeEnum.fromWireName(try reader.readElementText());
+                    result.type = LoadBalancerTypeEnum.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "VpcId")) {
                     result.vpc_id = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -1779,7 +1779,7 @@ pub fn deserializeRuleTransform(allocator: std.mem.Allocator, reader: *aws.xml.R
                 if (std.mem.eql(u8, e.local, "HostHeaderRewriteConfig")) {
                     result.host_header_rewrite_config = try deserializeHostHeaderRewriteConfig(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = TransformTypeEnum.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
+                    result.type = TransformTypeEnum.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "UrlRewriteConfig")) {
                     result.url_rewrite_config = try deserializeUrlRewriteConfig(allocator, reader);
                 } else {
@@ -2733,7 +2733,7 @@ pub fn serializeAction(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), va
         try buf.appendSlice(allocator, "</TargetGroupArn>");
     }
     try buf.appendSlice(allocator, "<Type>");
-    try buf.appendSlice(allocator, value.@"type".wireName());
+    try buf.appendSlice(allocator, value.type.wireName());
     try buf.appendSlice(allocator, "</Type>");
 }
 
@@ -3202,7 +3202,7 @@ pub fn serializeRuleTransform(allocator: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(allocator, "</HostHeaderRewriteConfig>");
     }
     try buf.appendSlice(allocator, "<Type>");
-    try buf.appendSlice(allocator, value.@"type".wireName());
+    try buf.appendSlice(allocator, value.type.wireName());
     try buf.appendSlice(allocator, "</Type>");
     if (value.url_rewrite_config) |v| {
         try buf.appendSlice(allocator, "<UrlRewriteConfig>");
@@ -3339,4 +3339,3 @@ pub fn serializeUrlRewriteConfig(allocator: std.mem.Allocator, buf: *std.ArrayLi
         try buf.appendSlice(allocator, "</Rewrites>");
     }
 }
-

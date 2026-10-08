@@ -28,8 +28,7 @@ pub const AssociateGovernedTermsInput = struct {
     };
 };
 
-pub const AssociateGovernedTermsOutput = struct {
-};
+pub const AssociateGovernedTermsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateGovernedTermsInput, options: CallOptions) !AssociateGovernedTermsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -65,7 +64,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateGovernedTermsI
     try path_buf.appendSlice(allocator, "/v2/domains/");
     try path_buf.appendSlice(allocator, input.domain_identifier);
     try path_buf.appendSlice(allocator, "/entities/");
-    try path_buf.appendSlice(allocator, input.entity_type);
+    try path_buf.appendSlice(allocator, input.entity_type.wireName());
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.entity_identifier);
     try path_buf.appendSlice(allocator, "/associate-governed-terms");

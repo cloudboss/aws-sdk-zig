@@ -248,8 +248,7 @@ pub const UpdateUserPoolInput = struct {
     };
 };
 
-pub const UpdateUserPoolOutput = struct {
-};
+pub const UpdateUserPoolOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateUserPoolInput, options: CallOptions) !UpdateUserPoolOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

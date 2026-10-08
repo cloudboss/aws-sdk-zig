@@ -10,11 +10,11 @@ pub const LifeCycleLastLaunchInitiated = struct {
     job_id: ?[]const u8 = null,
 
     /// The Job type that was used to last launch the Source Server.
-    @"type": ?LastLaunchType = null,
+    type: ?LastLaunchType = null,
 
     pub const json_field_names = .{
         .api_call_date_time = "apiCallDateTime",
         .job_id = "jobID",
-        .@"type" = "type",
+        .type = "type",
     };
 };

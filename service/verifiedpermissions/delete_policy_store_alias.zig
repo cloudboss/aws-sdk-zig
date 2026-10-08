@@ -27,8 +27,7 @@ pub const DeletePolicyStoreAliasInput = struct {
     };
 };
 
-pub const DeletePolicyStoreAliasOutput = struct {
-};
+pub const DeletePolicyStoreAliasOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePolicyStoreAliasInput, options: CallOptions) !DeletePolicyStoreAliasOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

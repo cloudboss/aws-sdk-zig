@@ -15,8 +15,7 @@ pub const DeleteDashboardsInput = struct {
     };
 };
 
-pub const DeleteDashboardsOutput = struct {
-};
+pub const DeleteDashboardsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDashboardsInput, options: CallOptions) !DeleteDashboardsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -30,7 +30,7 @@ pub const SectionalElement = struct {
 
     /// The type of sectional element. Valid values are `Heading`, `Text`,
     /// and `Divider`.
-    @"type": []const u8,
+    type: []const u8,
 
     pub const json_field_names = .{
         .excluded = "excluded",
@@ -38,6 +38,6 @@ pub const SectionalElement = struct {
         .orientation = "orientation",
         .position = "position",
         .text = "text",
-        .@"type" = "type",
+        .type = "type",
     };
 };

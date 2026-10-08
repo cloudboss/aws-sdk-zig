@@ -40,7 +40,7 @@ pub const CreateNotebookInput = struct {
     parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the notebook.
-    @"type": ?NotebookType = null,
+    type: ?NotebookType = null,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
@@ -50,7 +50,7 @@ pub const CreateNotebookInput = struct {
         .name = "name",
         .owning_project_identifier = "owningProjectIdentifier",
         .parameters = "parameters",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -110,7 +110,7 @@ pub const CreateNotebookOutput = struct {
     status: NotebookStatus,
 
     /// The type of the notebook.
-    @"type": ?NotebookType = null,
+    type: ?NotebookType = null,
 
     /// The timestamp of when the notebook was last updated.
     updated_at: ?i64 = null,
@@ -137,7 +137,7 @@ pub const CreateNotebookOutput = struct {
         .owning_project_id = "owningProjectId",
         .parameters = "parameters",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
         .updated_by = "updatedBy",
     };
@@ -215,7 +215,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateNotebookInput, co
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"type\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);

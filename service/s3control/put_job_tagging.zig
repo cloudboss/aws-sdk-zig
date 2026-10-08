@@ -19,8 +19,7 @@ pub const PutJobTaggingInput = struct {
     tags: []const S3Tag,
 };
 
-pub const PutJobTaggingOutput = struct {
-};
+pub const PutJobTaggingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutJobTaggingInput, options: CallOptions) !PutJobTaggingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

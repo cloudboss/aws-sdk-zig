@@ -17,7 +17,7 @@ pub const DeactivateTypeInput = struct {
     ///
     /// Conditional: You must specify either `Arn`, or `TypeName` and
     /// `Type`.
-    @"type": ?ThirdPartyType = null,
+    type: ?ThirdPartyType = null,
 
     /// The type name of the extension in this account and Region. If you specified
     /// a type name
@@ -28,8 +28,7 @@ pub const DeactivateTypeInput = struct {
     type_name: ?[]const u8 = null,
 };
 
-pub const DeactivateTypeOutput = struct {
-};
+pub const DeactivateTypeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeactivateTypeInput, options: CallOptions) !DeactivateTypeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -68,7 +67,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeactivateTypeInput, co
         try body_buf.appendSlice(allocator, "&Arn=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         try body_buf.appendSlice(allocator, "&Type=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }

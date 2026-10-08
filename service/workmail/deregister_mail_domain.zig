@@ -18,8 +18,7 @@ pub const DeregisterMailDomainInput = struct {
     };
 };
 
-pub const DeregisterMailDomainOutput = struct {
-};
+pub const DeregisterMailDomainOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterMailDomainInput, options: CallOptions) !DeregisterMailDomainOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

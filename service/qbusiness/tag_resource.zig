@@ -6,9 +6,23 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the Amazon Q Business application or data
+    /// source to tag.
+    resource_arn: []const u8,
 
-pub const TagResourceOutput = @import("tag_resource_response.zig").TagResourceResponse;
+    /// A list of tag keys to add to the Amazon Q Business application or data
+    /// source. If a tag already exists, the existing value is replaced with the new
+    /// value.
+    tags: []const Tag,
+
+    pub const json_field_names = .{
+        .resource_arn = "resourceARN",
+        .tags = "tags",
+    };
+};
+
+pub const TagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TagResourceInput, options: CallOptions) !TagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -8,7 +8,39 @@ const SchemaVersionType = @import("schema_version_type.zig").SchemaVersionType;
 const SchemaVersionVisibility = @import("schema_version_visibility.zig").SchemaVersionVisibility;
 const SchemaVersionListItem = @import("schema_version_list_item.zig").SchemaVersionListItem;
 
-pub const ListSchemaVersionsInput = @import("list_schema_versions_request.zig").ListSchemaVersionsRequest;
+pub const ListSchemaVersionsInput = struct {
+    /// The maximum number of results to return at one time.
+    max_results: ?i32 = null,
+
+    /// Filter on the name of the schema version.
+    namespace: ?[]const u8 = null,
+
+    /// A token that can be used to retrieve the next set of results.
+    next_token: ?[]const u8 = null,
+
+    /// Filter on the id of the schema version.
+    schema_id: ?[]const u8 = null,
+
+    /// The schema version. If this is left blank, it defaults to the latest
+    /// version.
+    semantic_version: ?[]const u8 = null,
+
+    /// Filter on the type of schema version.
+    type: SchemaVersionType,
+
+    /// The visibility of the schema version.
+    visibility: ?SchemaVersionVisibility = null,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .namespace = "Namespace",
+        .next_token = "NextToken",
+        .schema_id = "SchemaId",
+        .semantic_version = "SemanticVersion",
+        .type = "Type",
+        .visibility = "Visibility",
+    };
+};
 
 pub const ListSchemaVersionsOutput = struct {
     /// The list of schema versions.
@@ -55,7 +87,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListSchemaVersionsInput
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/schema-versions/");
-    try path_buf.appendSlice(allocator, input.@"type");
+    try path_buf.appendSlice(allocator, input.type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .empty;

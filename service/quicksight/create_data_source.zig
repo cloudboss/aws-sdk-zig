@@ -56,7 +56,7 @@ pub const CreateDataSourceInput = struct {
     /// `ListDataSources`.
     ///
     /// Use `AMAZON_ELASTICSEARCH` for Amazon OpenSearch Service.
-    @"type": DataSourceType,
+    type: DataSourceType,
 
     /// Use this parameter only when you want Amazon Quick Sight to use a VPC
     /// connection when
@@ -73,7 +73,7 @@ pub const CreateDataSourceInput = struct {
         .permissions = "Permissions",
         .ssl_properties = "SslProperties",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
         .vpc_connection_properties = "VpcConnectionProperties",
     };
 };
@@ -191,7 +191,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDataSourceInput, 
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
     if (input.vpc_connection_properties) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");

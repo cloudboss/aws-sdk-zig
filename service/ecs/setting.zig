@@ -16,7 +16,7 @@ pub const Setting = struct {
     /// `aws_managed` account settings are read-only, as Amazon Web Services manages
     /// such on the customer's behalf. Currently, the `guardDutyActivate` account
     /// setting is the only one Amazon Web Services manages.
-    @"type": ?SettingType = null,
+    type: ?SettingType = null,
 
     /// Determines whether the account setting is on or off for the specified
     /// resource.
@@ -25,7 +25,7 @@ pub const Setting = struct {
     pub const json_field_names = .{
         .name = "name",
         .principal_arn = "principalArn",
-        .@"type" = "type",
+        .type = "type",
         .value = "value",
     };
 };

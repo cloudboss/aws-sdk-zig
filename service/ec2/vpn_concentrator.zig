@@ -15,7 +15,7 @@ pub const VpnConcentrator = struct {
     transit_gateway_id: ?[]const u8 = null,
 
     /// The type of VPN concentrator.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The ID of the VPN concentrator.
     vpn_concentrator_id: ?[]const u8 = null,

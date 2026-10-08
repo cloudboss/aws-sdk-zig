@@ -21,8 +21,7 @@ pub const UpdateTagsForDomainInput = struct {
     };
 };
 
-pub const UpdateTagsForDomainOutput = struct {
-};
+pub const UpdateTagsForDomainOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTagsForDomainInput, options: CallOptions) !UpdateTagsForDomainOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

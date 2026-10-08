@@ -18,8 +18,7 @@ pub const UpdateCapacityReservationInput = struct {
     };
 };
 
-pub const UpdateCapacityReservationOutput = struct {
-};
+pub const UpdateCapacityReservationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCapacityReservationInput, options: CallOptions) !UpdateCapacityReservationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

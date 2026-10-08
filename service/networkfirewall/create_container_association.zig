@@ -32,14 +32,14 @@ pub const CreateContainerAssociationInput = struct {
     /// * `ECS` - Amazon Elastic Container Service
     ///
     /// * `EKS` - Amazon Elastic Kubernetes Service
-    @"type": ContainerMonitoringType,
+    type: ContainerMonitoringType,
 
     pub const json_field_names = .{
         .container_association_name = "ContainerAssociationName",
         .container_monitoring_configurations = "ContainerMonitoringConfigurations",
         .description = "Description",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -68,7 +68,7 @@ pub const CreateContainerAssociationOutput = struct {
     /// * `ECS` - Amazon Elastic Container Service
     ///
     /// * `EKS` - Amazon Elastic Kubernetes Service
-    @"type": ?ContainerMonitoringType = null,
+    type: ?ContainerMonitoringType = null,
 
     /// A token used for optimistic locking. Network Firewall returns a token to
     /// your requests that access the container association.
@@ -92,7 +92,7 @@ pub const CreateContainerAssociationOutput = struct {
         .description = "Description",
         .status = "Status",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
         .update_token = "UpdateToken",
     };
 };

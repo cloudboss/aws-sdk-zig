@@ -7,9 +7,58 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Filter = @import("filter.zig").Filter;
 const MonitorSummary = @import("monitor_summary.zig").MonitorSummary;
 
-pub const ListMonitorsInput = @import("list_monitors_request.zig").ListMonitorsRequest;
+pub const ListMonitorsInput = struct {
+    /// An array of filters. For each filter, provide a condition and a match
+    /// statement. The
+    /// condition is either `IS` or `IS_NOT`, which specifies whether to
+    /// include or exclude the resources that match the statement from the list. The
+    /// match
+    /// statement consists of a key and a value.
+    ///
+    /// **Filter properties**
+    ///
+    /// * `Condition` - The condition to apply. Valid values are
+    /// `IS` and `IS_NOT`.
+    ///
+    /// * `Key` - The name of the parameter to filter on. The only valid value is
+    /// `Status`.
+    ///
+    /// * `Value` - The value to match.
+    ///
+    /// For example, to list all monitors who's status is ACTIVE, you would specify:
+    ///
+    /// `"Filters": [ { "Condition": "IS", "Key": "Status", "Value": "ACTIVE" } ]`
+    filters: ?[]const Filter = null,
 
-pub const ListMonitorsOutput = @import("list_monitors_response.zig").ListMonitorsResponse;
+    /// The maximum number of monitors to include in the response.
+    max_results: ?i32 = null,
+
+    /// If the result of the previous request was truncated, the response includes a
+    /// `NextToken`. To retrieve the next set of results, use the token in the next
+    /// request. Tokens expire after 24 hours.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .filters = "Filters",
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListMonitorsOutput = struct {
+    /// An array of objects that summarize each monitor's properties.
+    monitors: ?[]const MonitorSummary = null,
+
+    /// If the response is truncated, Amazon Forecast returns this token. To
+    /// retrieve the next set of
+    /// results, use the token in the next request.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .monitors = "Monitors",
+        .next_token = "NextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMonitorsInput, options: CallOptions) !ListMonitorsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

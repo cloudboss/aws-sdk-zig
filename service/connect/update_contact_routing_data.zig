@@ -41,8 +41,7 @@ pub const UpdateContactRoutingDataInput = struct {
     };
 };
 
-pub const UpdateContactRoutingDataOutput = struct {
-};
+pub const UpdateContactRoutingDataOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateContactRoutingDataInput, options: CallOptions) !UpdateContactRoutingDataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

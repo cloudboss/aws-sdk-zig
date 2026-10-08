@@ -14,8 +14,7 @@ pub const DeleteLicenseAssetRulesetInput = struct {
     };
 };
 
-pub const DeleteLicenseAssetRulesetOutput = struct {
-};
+pub const DeleteLicenseAssetRulesetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLicenseAssetRulesetInput, options: CallOptions) !DeleteLicenseAssetRulesetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

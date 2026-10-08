@@ -14,8 +14,7 @@ pub const DeleteRelayInput = struct {
     };
 };
 
-pub const DeleteRelayOutput = struct {
-};
+pub const DeleteRelayOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRelayInput, options: CallOptions) !DeleteRelayOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

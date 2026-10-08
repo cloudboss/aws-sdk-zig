@@ -20,8 +20,7 @@ pub const DisassociateHealthCheckInput = struct {
     };
 };
 
-pub const DisassociateHealthCheckOutput = struct {
-};
+pub const DisassociateHealthCheckOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateHealthCheckInput, options: CallOptions) !DisassociateHealthCheckOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -5,7 +5,18 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteDataSourceInput = @import("delete_data_source_request.zig").DeleteDataSourceRequest;
+pub const DeleteDataSourceInput = struct {
+    /// The identifier of the data source connector you want to delete.
+    id: []const u8,
+
+    /// The identifier of the index used with the data source connector.
+    index_id: []const u8,
+
+    pub const json_field_names = .{
+        .id = "Id",
+        .index_id = "IndexId",
+    };
+};
 
 pub const DeleteDataSourceOutput = struct {};
 

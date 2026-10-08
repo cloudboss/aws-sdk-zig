@@ -6,9 +6,43 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// Maximum number of tags to return in the response (integer). This
+    /// parameter value must be greater than 0. The number of items that Amazon FSx
+    /// returns is
+    /// the minimum of the `MaxResults` parameter specified in the request and the
+    /// service's internal maximum number of items per page.
+    max_results: ?i32 = null,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    /// Opaque pagination token returned from a previous
+    /// `ListTagsForResource` operation (String). If a token present, the action
+    /// continues the list from where the returning call left off.
+    next_token: ?[]const u8 = null,
+
+    /// The ARN of the Amazon FSx resource that will have its tags listed.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+        .resource_arn = "ResourceARN",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// This is present if there are more tags than returned in the response
+    /// (String). You
+    /// can use the `NextToken` value in the later request to fetch the tags.
+    next_token: ?[]const u8 = null,
+
+    /// A list of tags on the resource.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

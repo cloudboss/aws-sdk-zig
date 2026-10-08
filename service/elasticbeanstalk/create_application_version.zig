@@ -186,7 +186,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateApplicationVersio
                 try body_buf.appendSlice(allocator, "&ImageConfiguration.Build.TimeoutInMinutes=");
                 try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv2}) catch "");
             }
-            if (sv.@"type") |sv2| {
+            if (sv.type) |sv2| {
                 try body_buf.appendSlice(allocator, "&ImageConfiguration.Build.Type=");
                 try aws.url.appendUrlEncoded(allocator, &body_buf, sv2.wireName());
             }

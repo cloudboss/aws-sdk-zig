@@ -24,8 +24,7 @@ pub const UpdateImagePermissionsInput = struct {
     };
 };
 
-pub const UpdateImagePermissionsOutput = struct {
-};
+pub const UpdateImagePermissionsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateImagePermissionsInput, options: CallOptions) !UpdateImagePermissionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -23,8 +23,7 @@ pub const StartDeliveryStreamEncryptionInput = struct {
     };
 };
 
-pub const StartDeliveryStreamEncryptionOutput = struct {
-};
+pub const StartDeliveryStreamEncryptionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartDeliveryStreamEncryptionInput, options: CallOptions) !StartDeliveryStreamEncryptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

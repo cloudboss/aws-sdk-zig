@@ -14,8 +14,7 @@ pub const DeleteMembershipInput = struct {
     };
 };
 
-pub const DeleteMembershipOutput = struct {
-};
+pub const DeleteMembershipOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMembershipInput, options: CallOptions) !DeleteMembershipOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

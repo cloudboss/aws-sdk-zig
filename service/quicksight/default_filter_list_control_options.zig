@@ -21,12 +21,12 @@ pub const DefaultFilterListControlOptions = struct {
     /// * `MULTI_SELECT`: The user can select multiple entries from the list.
     ///
     /// * `SINGLE_SELECT`: The user can select a single entry from the list.
-    @"type": ?SheetControlListType = null,
+    type: ?SheetControlListType = null,
 
     pub const json_field_names = .{
         .control_sort_configurations = "ControlSortConfigurations",
         .display_options = "DisplayOptions",
         .selectable_values = "SelectableValues",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

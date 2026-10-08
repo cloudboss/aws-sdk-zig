@@ -13,8 +13,7 @@ pub const DeleteMulticastGroupInput = struct {
     };
 };
 
-pub const DeleteMulticastGroupOutput = struct {
-};
+pub const DeleteMulticastGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMulticastGroupInput, options: CallOptions) !DeleteMulticastGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

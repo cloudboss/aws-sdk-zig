@@ -18,8 +18,7 @@ pub const DeletePreparedStatementInput = struct {
     };
 };
 
-pub const DeletePreparedStatementOutput = struct {
-};
+pub const DeletePreparedStatementOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePreparedStatementInput, options: CallOptions) !DeletePreparedStatementOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

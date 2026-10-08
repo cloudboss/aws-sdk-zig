@@ -14,8 +14,7 @@ pub const DeactivateContactChannelInput = struct {
     };
 };
 
-pub const DeactivateContactChannelOutput = struct {
-};
+pub const DeactivateContactChannelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeactivateContactChannelInput, options: CallOptions) !DeactivateContactChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

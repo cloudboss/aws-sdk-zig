@@ -154,7 +154,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDelegationRequest
             }
             {
                 var prefix_buf: [256]u8 = undefined;
-                if (item.@"type") |fv_1| {
+                if (item.type) |fv_1| {
                     const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Permissions.Parameters.member.{d}.Type=", .{n}) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1.wireName());
@@ -165,7 +165,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateDelegationRequest
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Permissions.Parameters.member.{d}.Values.member.{d}=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Permissions.Parameters.member.{d}.Values.member.{d}=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
                     }

@@ -30,8 +30,7 @@ pub const UpdateEmailIdentityPolicyInput = struct {
     };
 };
 
-pub const UpdateEmailIdentityPolicyOutput = struct {
-};
+pub const UpdateEmailIdentityPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateEmailIdentityPolicyInput, options: CallOptions) !UpdateEmailIdentityPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

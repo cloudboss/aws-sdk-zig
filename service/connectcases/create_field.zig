@@ -22,14 +22,14 @@ pub const CreateFieldInput = struct {
 
     /// Defines the data type, some system constraints, and default display of the
     /// field.
-    @"type": FieldType,
+    type: FieldType,
 
     pub const json_field_names = .{
         .attributes = "attributes",
         .description = "description",
         .domain_id = "domainId",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -104,7 +104,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateFieldInput, confi
     has_prev = true;
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

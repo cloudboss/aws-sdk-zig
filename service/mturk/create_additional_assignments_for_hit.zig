@@ -31,8 +31,7 @@ pub const CreateAdditionalAssignmentsForHITInput = struct {
     };
 };
 
-pub const CreateAdditionalAssignmentsForHITOutput = struct {
-};
+pub const CreateAdditionalAssignmentsForHITOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAdditionalAssignmentsForHITInput, options: CallOptions) !CreateAdditionalAssignmentsForHITOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

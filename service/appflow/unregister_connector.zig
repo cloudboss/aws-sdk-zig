@@ -22,8 +22,7 @@ pub const UnregisterConnectorInput = struct {
     };
 };
 
-pub const UnregisterConnectorOutput = struct {
-};
+pub const UnregisterConnectorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UnregisterConnectorInput, options: CallOptions) !UnregisterConnectorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -8,9 +8,55 @@ const EgressAccessLogs = @import("egress_access_logs.zig").EgressAccessLogs;
 const HlsIngest = @import("hls_ingest.zig").HlsIngest;
 const IngressAccessLogs = @import("ingress_access_logs.zig").IngressAccessLogs;
 
-pub const CreateChannelInput = @import("create_channel_request.zig").CreateChannelRequest;
+pub const CreateChannelInput = struct {
+    /// A short text description of the Channel.
+    description: ?[]const u8 = null,
 
-pub const CreateChannelOutput = @import("create_channel_response.zig").CreateChannelResponse;
+    /// The ID of the Channel. The ID must be unique within the region and it
+    /// cannot be changed after a Channel is created.
+    id: []const u8,
+
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .description = "Description",
+        .id = "Id",
+        .tags = "Tags",
+    };
+};
+
+pub const CreateChannelOutput = struct {
+    /// The Amazon Resource Name (ARN) assigned to the Channel.
+    arn: ?[]const u8 = null,
+
+    /// The date and time the Channel was created.
+    created_at: ?[]const u8 = null,
+
+    /// A short text description of the Channel.
+    description: ?[]const u8 = null,
+
+    egress_access_logs: ?EgressAccessLogs = null,
+
+    hls_ingest: ?HlsIngest = null,
+
+    /// The ID of the Channel.
+    id: ?[]const u8 = null,
+
+    ingress_access_logs: ?IngressAccessLogs = null,
+
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .arn = "Arn",
+        .created_at = "CreatedAt",
+        .description = "Description",
+        .egress_access_logs = "EgressAccessLogs",
+        .hls_ingest = "HlsIngest",
+        .id = "Id",
+        .ingress_access_logs = "IngressAccessLogs",
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateChannelInput, options: CallOptions) !CreateChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

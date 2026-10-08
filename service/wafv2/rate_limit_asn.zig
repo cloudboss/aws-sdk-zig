@@ -4,5 +4,4 @@
 /// Each distinct ASN contributes to the aggregation instance.
 /// If you use a single ASN as your custom key, then each ASN fully defines an
 /// aggregation instance.
-pub const RateLimitAsn = struct {
-};
+pub const RateLimitAsn = struct {};

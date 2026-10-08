@@ -30,8 +30,7 @@ pub const CreateLFTagExpressionInput = struct {
     };
 };
 
-pub const CreateLFTagExpressionOutput = struct {
-};
+pub const CreateLFTagExpressionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLFTagExpressionInput, options: CallOptions) !CreateLFTagExpressionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

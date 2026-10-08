@@ -32,8 +32,7 @@ pub const RegisterToWorkMailInput = struct {
     };
 };
 
-pub const RegisterToWorkMailOutput = struct {
-};
+pub const RegisterToWorkMailOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RegisterToWorkMailInput, options: CallOptions) !RegisterToWorkMailOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

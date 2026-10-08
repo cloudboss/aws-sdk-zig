@@ -40,8 +40,7 @@ pub const UpdateWorkspacePageInput = struct {
     };
 };
 
-pub const UpdateWorkspacePageOutput = struct {
-};
+pub const UpdateWorkspacePageOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorkspacePageInput, options: CallOptions) !UpdateWorkspacePageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

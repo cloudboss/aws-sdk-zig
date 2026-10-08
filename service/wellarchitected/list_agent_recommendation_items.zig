@@ -19,13 +19,13 @@ pub const ListAgentRecommendationItemsInput = struct {
     recommendation_arn: []const u8,
 
     /// Optional filter to return only recommendation items of the specified type.
-    @"type": ?RecommendationItemType = null,
+    type: ?RecommendationItemType = null,
 
     pub const json_field_names = .{
         .max_results = "maxResults",
         .next_token = "nextToken",
         .recommendation_arn = "recommendationArn",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -96,7 +96,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAgentRecommendation
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());

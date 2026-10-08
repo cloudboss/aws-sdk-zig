@@ -14,8 +14,7 @@ pub const CancelAnnotationImportJobInput = struct {
     };
 };
 
-pub const CancelAnnotationImportJobOutput = struct {
-};
+pub const CancelAnnotationImportJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelAnnotationImportJobInput, options: CallOptions) !CancelAnnotationImportJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

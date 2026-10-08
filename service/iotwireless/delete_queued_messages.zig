@@ -27,8 +27,7 @@ pub const DeleteQueuedMessagesInput = struct {
     };
 };
 
-pub const DeleteQueuedMessagesOutput = struct {
-};
+pub const DeleteQueuedMessagesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteQueuedMessagesInput, options: CallOptions) !DeleteQueuedMessagesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

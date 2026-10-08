@@ -5,11 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeregisterDataLakeDelegatedAdministratorInput = struct {
-};
+pub const DeregisterDataLakeDelegatedAdministratorInput = struct {};
 
-pub const DeregisterDataLakeDelegatedAdministratorOutput = struct {
-};
+pub const DeregisterDataLakeDelegatedAdministratorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterDataLakeDelegatedAdministratorInput, options: CallOptions) !DeregisterDataLakeDelegatedAdministratorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

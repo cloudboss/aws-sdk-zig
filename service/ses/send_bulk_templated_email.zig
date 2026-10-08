@@ -202,7 +202,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendBulkTemplatedEmailI
                 const n_2 = idx_2 + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Destinations.member.{d}.Destination.BccAddresses.member.{d}=", .{n, n_2}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Destinations.member.{d}.Destination.BccAddresses.member.{d}=", .{ n, n_2 }) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, item_2);
                 }
@@ -213,7 +213,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendBulkTemplatedEmailI
                 const n_2 = idx_2 + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Destinations.member.{d}.Destination.CcAddresses.member.{d}=", .{n, n_2}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Destinations.member.{d}.Destination.CcAddresses.member.{d}=", .{ n, n_2 }) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, item_2);
                 }
@@ -224,7 +224,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendBulkTemplatedEmailI
                 const n_2 = idx_2 + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Destinations.member.{d}.Destination.ToAddresses.member.{d}=", .{n, n_2}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Destinations.member.{d}.Destination.ToAddresses.member.{d}=", .{ n, n_2 }) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, item_2);
                 }
@@ -235,13 +235,13 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendBulkTemplatedEmailI
                 const n_1 = idx_1 + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Destinations.member.{d}.ReplacementTags.member.{d}.Name=", .{n, n_1}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Destinations.member.{d}.ReplacementTags.member.{d}.Name=", .{ n, n_1 }) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, item_1.name);
                 }
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Destinations.member.{d}.ReplacementTags.member.{d}.Value=", .{n, n_1}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Destinations.member.{d}.ReplacementTags.member.{d}.Value=", .{ n, n_1 }) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, item_1.value);
                 }

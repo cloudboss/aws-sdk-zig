@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AccountStatus = @import("account_status.zig").AccountStatus;
 
-pub const GetAccountStatusInput = struct {
-};
+pub const GetAccountStatusInput = struct {};
 
 pub const GetAccountStatusOutput = struct {
     /// The status of the Amazon Web Services account.

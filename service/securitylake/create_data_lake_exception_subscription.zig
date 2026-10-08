@@ -24,8 +24,7 @@ pub const CreateDataLakeExceptionSubscriptionInput = struct {
     };
 };
 
-pub const CreateDataLakeExceptionSubscriptionOutput = struct {
-};
+pub const CreateDataLakeExceptionSubscriptionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDataLakeExceptionSubscriptionInput, options: CallOptions) !CreateDataLakeExceptionSubscriptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

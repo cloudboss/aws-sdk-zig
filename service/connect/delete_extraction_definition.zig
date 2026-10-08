@@ -19,8 +19,7 @@ pub const DeleteExtractionDefinitionInput = struct {
     };
 };
 
-pub const DeleteExtractionDefinitionOutput = struct {
-};
+pub const DeleteExtractionDefinitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteExtractionDefinitionInput, options: CallOptions) !DeleteExtractionDefinitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -27,8 +27,7 @@ pub const UpdateRoutingControlStatesInput = struct {
     };
 };
 
-pub const UpdateRoutingControlStatesOutput = struct {
-};
+pub const UpdateRoutingControlStatesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRoutingControlStatesInput, options: CallOptions) !UpdateRoutingControlStatesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

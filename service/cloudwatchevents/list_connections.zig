@@ -7,9 +7,42 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ConnectionState = @import("connection_state.zig").ConnectionState;
 const Connection = @import("connection.zig").Connection;
 
-pub const ListConnectionsInput = @import("list_connections_request.zig").ListConnectionsRequest;
+pub const ListConnectionsInput = struct {
+    /// The state of the connection.
+    connection_state: ?ConnectionState = null,
 
-pub const ListConnectionsOutput = @import("list_connections_response.zig").ListConnectionsResponse;
+    /// The maximum number of connections to return.
+    limit: ?i32 = null,
+
+    /// A name prefix to filter results returned. Only connections with a name that
+    /// starts with
+    /// the prefix are returned.
+    name_prefix: ?[]const u8 = null,
+
+    /// The token returned by a previous call to retrieve the next set of results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .connection_state = "ConnectionState",
+        .limit = "Limit",
+        .name_prefix = "NamePrefix",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListConnectionsOutput = struct {
+    /// An array of connections objects that include details about the connections.
+    connections: ?[]const Connection = null,
+
+    /// A token you can use in a subsequent request to retrieve the next set of
+    /// results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .connections = "Connections",
+        .next_token = "NextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListConnectionsInput, options: CallOptions) !ListConnectionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

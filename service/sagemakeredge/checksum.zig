@@ -6,10 +6,10 @@ pub const Checksum = struct {
     sum: ?[]const u8 = null,
 
     /// The type of the checksum.
-    @"type": ?ChecksumType = null,
+    type: ?ChecksumType = null,
 
     pub const json_field_names = .{
         .sum = "Sum",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

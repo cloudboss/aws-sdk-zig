@@ -38,8 +38,7 @@ pub const UpdateLocationFsxOntapInput = struct {
     };
 };
 
-pub const UpdateLocationFsxOntapOutput = struct {
-};
+pub const UpdateLocationFsxOntapOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLocationFsxOntapInput, options: CallOptions) !UpdateLocationFsxOntapOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

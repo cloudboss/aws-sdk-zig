@@ -20,8 +20,7 @@ pub const DeprecateThingTypeInput = struct {
     };
 };
 
-pub const DeprecateThingTypeOutput = struct {
-};
+pub const DeprecateThingTypeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeprecateThingTypeInput, options: CallOptions) !DeprecateThingTypeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

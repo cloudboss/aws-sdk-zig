@@ -6,10 +6,10 @@ pub const GeneratedQuery = struct {
     sql: ?[]const u8 = null,
 
     /// The type of transformed query.
-    @"type": ?GeneratedQueryType = null,
+    type: ?GeneratedQueryType = null,
 
     pub const json_field_names = .{
         .sql = "sql",
-        .@"type" = "type",
+        .type = "type",
     };
 };

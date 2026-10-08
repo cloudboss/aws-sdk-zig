@@ -23,8 +23,7 @@ pub const DeleteKxScalingGroupInput = struct {
     };
 };
 
-pub const DeleteKxScalingGroupOutput = struct {
-};
+pub const DeleteKxScalingGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteKxScalingGroupInput, options: CallOptions) !DeleteKxScalingGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

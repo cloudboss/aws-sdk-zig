@@ -6,9 +6,33 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DomainSummary = @import("domain_summary.zig").DomainSummary;
 
-pub const ListDomainsInput = @import("list_domains_request.zig").ListDomainsRequest;
+pub const ListDomainsInput = struct {
+    /// The maximum number of results to return per page.
+    max_results: ?i32 = null,
 
-pub const ListDomainsOutput = @import("list_domains_response.zig").ListDomainsResponse;
+    /// The token for the next set of results. Use the value returned in the
+    /// previous response in the next request to retrieve the next set of results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+    };
+};
+
+pub const ListDomainsOutput = struct {
+    /// The Cases domain.
+    domains: ?[]const DomainSummary = null,
+
+    /// The token for the next set of results. This is null if there are no more
+    /// results to return.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .domains = "domains",
+        .next_token = "nextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDomainsInput, options: CallOptions) !ListDomainsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

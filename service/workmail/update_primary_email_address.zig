@@ -34,8 +34,7 @@ pub const UpdatePrimaryEmailAddressInput = struct {
     };
 };
 
-pub const UpdatePrimaryEmailAddressOutput = struct {
-};
+pub const UpdatePrimaryEmailAddressOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdatePrimaryEmailAddressInput, options: CallOptions) !UpdatePrimaryEmailAddressOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

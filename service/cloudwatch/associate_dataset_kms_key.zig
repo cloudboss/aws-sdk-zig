@@ -35,8 +35,7 @@ pub const AssociateDatasetKmsKeyInput = struct {
     };
 };
 
-pub const AssociateDatasetKmsKeyOutput = struct {
-};
+pub const AssociateDatasetKmsKeyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateDatasetKmsKeyInput, options: CallOptions) !AssociateDatasetKmsKeyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

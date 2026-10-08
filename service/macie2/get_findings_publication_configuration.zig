@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SecurityHubConfiguration = @import("security_hub_configuration.zig").SecurityHubConfiguration;
 
-pub const GetFindingsPublicationConfigurationInput = struct {
-};
+pub const GetFindingsPublicationConfigurationInput = struct {};
 
 pub const GetFindingsPublicationConfigurationOutput = struct {
     /// The configuration settings that determine which findings are published to

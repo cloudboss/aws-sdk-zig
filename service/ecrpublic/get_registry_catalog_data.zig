@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const RegistryCatalogData = @import("registry_catalog_data.zig").RegistryCatalogData;
 
-pub const GetRegistryCatalogDataInput = struct {
-};
+pub const GetRegistryCatalogDataInput = struct {};
 
 pub const GetRegistryCatalogDataOutput = struct {
     /// The catalog metadata for the public registry.

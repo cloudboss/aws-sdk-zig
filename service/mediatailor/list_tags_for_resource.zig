@@ -5,9 +5,27 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// The Amazon Resource Name (ARN) associated with this resource.
+    resource_arn: []const u8,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// The tags associated with this resource. Tags are key-value pairs that you
+    /// can associate with Amazon resources to help with organization, access
+    /// control, and cost tracking. For more information, see [Tagging AWS Elemental
+    /// MediaTailor
+    /// Resources](https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html).
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -24,8 +24,7 @@ pub const AddRegionInput = struct {
     };
 };
 
-pub const AddRegionOutput = struct {
-};
+pub const AddRegionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddRegionInput, options: CallOptions) !AddRegionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

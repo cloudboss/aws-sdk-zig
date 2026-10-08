@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DescribeRegionSettingsInput = struct {
-};
+pub const DescribeRegionSettingsInput = struct {};
 
 pub const DescribeRegionSettingsOutput = struct {
     /// Returns whether Backup fully manages the backups for a resource type.

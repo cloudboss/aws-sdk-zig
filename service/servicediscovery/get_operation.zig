@@ -6,9 +6,30 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Operation = @import("operation.zig").Operation;
 
-pub const GetOperationInput = @import("get_operation_request.zig").GetOperationRequest;
+pub const GetOperationInput = struct {
+    /// The ID of the operation that you want to get more information about.
+    operation_id: []const u8,
 
-pub const GetOperationOutput = @import("get_operation_response.zig").GetOperationResponse;
+    /// The ID of the Amazon Web Services account that owns the namespace associated
+    /// with the operation, as specified in the namespace `ResourceOwner` field. For
+    /// operations associated with namespaces that are shared with your account, you
+    /// must specify an `OwnerAccount`.
+    owner_account: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .operation_id = "OperationId",
+        .owner_account = "OwnerAccount",
+    };
+};
+
+pub const GetOperationOutput = struct {
+    /// A complex type that contains information about the operation.
+    operation: ?Operation = null,
+
+    pub const json_field_names = .{
+        .operation = "Operation",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetOperationInput, options: CallOptions) !GetOperationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

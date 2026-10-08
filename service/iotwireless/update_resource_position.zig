@@ -32,8 +32,7 @@ pub const UpdateResourcePositionInput = struct {
     };
 };
 
-pub const UpdateResourcePositionOutput = struct {
-};
+pub const UpdateResourcePositionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateResourcePositionInput, options: CallOptions) !UpdateResourcePositionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

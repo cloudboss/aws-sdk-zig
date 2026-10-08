@@ -129,7 +129,7 @@ pub const GetAgentRecommendationOutput = struct {
     trade_offs: ?[]const TradeOff = null,
 
     /// The type of the recommendation.
-    @"type": RecommendationType,
+    type: RecommendationType,
 
     /// The free-text reason associated with the recommendation's most recent status
     /// update.
@@ -166,7 +166,7 @@ pub const GetAgentRecommendationOutput = struct {
         .tags = "tags",
         .title = "title",
         .trade_offs = "tradeOffs",
-        .@"type" = "type",
+        .type = "type",
         .update_reason = "updateReason",
     };
 };

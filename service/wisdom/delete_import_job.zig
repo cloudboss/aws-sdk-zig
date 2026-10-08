@@ -20,8 +20,7 @@ pub const DeleteImportJobInput = struct {
     };
 };
 
-pub const DeleteImportJobOutput = struct {
-};
+pub const DeleteImportJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteImportJobInput, options: CallOptions) !DeleteImportJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -13,10 +13,10 @@ pub const PreParseTextTransformation = struct {
     priority: i32 = 0,
 
     /// The type of pre-parse text transformation to apply to the raw query string.
-    @"type": PreParseTextTransformationType,
+    type: PreParseTextTransformationType,
 
     pub const json_field_names = .{
         .priority = "Priority",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

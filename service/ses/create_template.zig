@@ -14,8 +14,7 @@ pub const CreateTemplateInput = struct {
     template: Template,
 };
 
-pub const CreateTemplateOutput = struct {
-};
+pub const CreateTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateTemplateInput, options: CallOptions) !CreateTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

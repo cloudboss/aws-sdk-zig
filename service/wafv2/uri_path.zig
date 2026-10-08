@@ -6,5 +6,4 @@
 /// component types.
 ///
 /// JSON specification: `"UriPath": {}`
-pub const UriPath = struct {
-};
+pub const UriPath = struct {};

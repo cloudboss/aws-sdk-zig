@@ -43,7 +43,7 @@ pub const TextDetection = struct {
     parent_id: ?i32 = null,
 
     /// The type of text that was detected.
-    @"type": ?TextTypes = null,
+    type: ?TextTypes = null,
 
     pub const json_field_names = .{
         .confidence = "Confidence",
@@ -51,6 +51,6 @@ pub const TextDetection = struct {
         .geometry = "Geometry",
         .id = "Id",
         .parent_id = "ParentId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

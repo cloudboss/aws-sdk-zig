@@ -19,8 +19,7 @@ pub const ModifySelfservicePermissionsInput = struct {
     };
 };
 
-pub const ModifySelfservicePermissionsOutput = struct {
-};
+pub const ModifySelfservicePermissionsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifySelfservicePermissionsInput, options: CallOptions) !ModifySelfservicePermissionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

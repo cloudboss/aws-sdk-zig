@@ -10,8 +10,7 @@ pub const DeleteQueryLoggingConfigInput = struct {
     id: []const u8,
 };
 
-pub const DeleteQueryLoggingConfigOutput = struct {
-};
+pub const DeleteQueryLoggingConfigOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteQueryLoggingConfigInput, options: CallOptions) !DeleteQueryLoggingConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -39,8 +39,7 @@ pub const DeleteRecommendationPreferencesInput = struct {
     };
 };
 
-pub const DeleteRecommendationPreferencesOutput = struct {
-};
+pub const DeleteRecommendationPreferencesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRecommendationPreferencesInput, options: CallOptions) !DeleteRecommendationPreferencesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

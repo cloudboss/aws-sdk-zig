@@ -46,7 +46,7 @@ pub const CodeReviewCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeCodeReview(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeCodeReview(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -115,7 +115,7 @@ pub const RepositoryAssociationSucceededWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeRepositoryAssociation(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeRepositoryAssociation(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

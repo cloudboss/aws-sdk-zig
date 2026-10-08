@@ -25,14 +25,14 @@ pub const ListAutonomousDatabaseBackupsInput = struct {
     status: ?AutonomousDatabaseBackupStatus = null,
 
     /// The type of the Autonomous Database backups to return results for.
-    @"type": ?AutonomousDatabaseBackupType = null,
+    type: ?AutonomousDatabaseBackupType = null,
 
     pub const json_field_names = .{
         .autonomous_database_id = "autonomousDatabaseId",
         .max_results = "maxResults",
         .next_token = "nextToken",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 

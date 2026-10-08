@@ -85,8 +85,7 @@ pub const AdminUpdateUserAttributesInput = struct {
     };
 };
 
-pub const AdminUpdateUserAttributesOutput = struct {
-};
+pub const AdminUpdateUserAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminUpdateUserAttributesInput, options: CallOptions) !AdminUpdateUserAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

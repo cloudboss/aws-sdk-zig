@@ -12,11 +12,11 @@ pub const BudgetParameter = struct {
     budget: i32,
 
     /// The type of budget parameter being configured.
-    @"type": AccessBudgetType,
+    type: AccessBudgetType,
 
     pub const json_field_names = .{
         .auto_refresh = "autoRefresh",
         .budget = "budget",
-        .@"type" = "type",
+        .type = "type",
     };
 };

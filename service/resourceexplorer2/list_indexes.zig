@@ -36,13 +36,13 @@ pub const ListIndexesInput = struct {
     /// either `LOCAL` or `AGGREGATOR`.
     ///
     /// Use this option to discover the aggregator index for your account.
-    @"type": ?IndexType = null,
+    type: ?IndexType = null,
 
     pub const json_field_names = .{
         .max_results = "MaxResults",
         .next_token = "NextToken",
         .regions = "Regions",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -117,7 +117,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListIndexesInput, confi
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Type\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);

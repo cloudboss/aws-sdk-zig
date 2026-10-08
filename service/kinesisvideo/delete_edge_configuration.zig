@@ -20,8 +20,7 @@ pub const DeleteEdgeConfigurationInput = struct {
     };
 };
 
-pub const DeleteEdgeConfigurationOutput = struct {
-};
+pub const DeleteEdgeConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteEdgeConfigurationInput, options: CallOptions) !DeleteEdgeConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -10,8 +10,7 @@ pub const DeleteCidrCollectionInput = struct {
     id: []const u8,
 };
 
-pub const DeleteCidrCollectionOutput = struct {
-};
+pub const DeleteCidrCollectionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCidrCollectionInput, options: CallOptions) !DeleteCidrCollectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

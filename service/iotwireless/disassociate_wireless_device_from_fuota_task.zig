@@ -16,8 +16,7 @@ pub const DisassociateWirelessDeviceFromFuotaTaskInput = struct {
     };
 };
 
-pub const DisassociateWirelessDeviceFromFuotaTaskOutput = struct {
-};
+pub const DisassociateWirelessDeviceFromFuotaTaskOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateWirelessDeviceFromFuotaTaskInput, options: CallOptions) !DisassociateWirelessDeviceFromFuotaTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

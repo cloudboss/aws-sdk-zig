@@ -22,8 +22,7 @@ pub const ActivateEmailContactInput = struct {
     };
 };
 
-pub const ActivateEmailContactOutput = struct {
-};
+pub const ActivateEmailContactOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ActivateEmailContactInput, options: CallOptions) !ActivateEmailContactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

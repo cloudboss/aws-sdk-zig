@@ -13,14 +13,14 @@ pub const PutTableBucketMaintenanceConfigurationInput = struct {
     table_bucket_arn: []const u8,
 
     /// The type of the maintenance configuration.
-    @"type": TableBucketMaintenanceType,
+    type: TableBucketMaintenanceType,
 
     /// Defines the values of the maintenance configuration for the table bucket.
     value: TableBucketMaintenanceConfigurationValue,
 
     pub const json_field_names = .{
         .table_bucket_arn = "tableBucketARN",
-        .@"type" = "type",
+        .type = "type",
         .value = "value",
     };
 };
@@ -61,7 +61,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutTableBucketMaintenan
     try path_buf.appendSlice(allocator, "/buckets/");
     try path_buf.appendSlice(allocator, input.table_bucket_arn);
     try path_buf.appendSlice(allocator, "/maintenance/");
-    try path_buf.appendSlice(allocator, input.@"type");
+    try path_buf.appendSlice(allocator, input.type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .empty;

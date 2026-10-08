@@ -24,8 +24,7 @@ pub const DeleteThreatEntitySetInput = struct {
     };
 };
 
-pub const DeleteThreatEntitySetOutput = struct {
-};
+pub const DeleteThreatEntitySetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteThreatEntitySetInput, options: CallOptions) !DeleteThreatEntitySetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

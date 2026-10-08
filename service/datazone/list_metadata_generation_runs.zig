@@ -35,7 +35,7 @@ pub const ListMetadataGenerationRunsInput = struct {
     target_identifier: ?[]const u8 = null,
 
     /// The type of the metadata generation runs.
-    @"type": ?MetadataGenerationRunType = null,
+    type: ?MetadataGenerationRunType = null,
 
     pub const json_field_names = .{
         .domain_identifier = "domainIdentifier",
@@ -43,7 +43,7 @@ pub const ListMetadataGenerationRunsInput = struct {
         .next_token = "nextToken",
         .status = "status",
         .target_identifier = "targetIdentifier",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -130,7 +130,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListMetadataGenerationR
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());

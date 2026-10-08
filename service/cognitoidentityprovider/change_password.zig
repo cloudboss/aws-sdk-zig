@@ -28,8 +28,7 @@ pub const ChangePasswordInput = struct {
     };
 };
 
-pub const ChangePasswordOutput = struct {
-};
+pub const ChangePasswordOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ChangePasswordInput, options: CallOptions) !ChangePasswordOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -19,8 +19,7 @@ pub const DeleteIntermediateTableInput = struct {
     };
 };
 
-pub const DeleteIntermediateTableOutput = struct {
-};
+pub const DeleteIntermediateTableOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIntermediateTableInput, options: CallOptions) !DeleteIntermediateTableOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

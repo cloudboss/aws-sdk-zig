@@ -97,8 +97,7 @@ pub const UpdateResponsePlanInput = struct {
     };
 };
 
-pub const UpdateResponsePlanOutput = struct {
-};
+pub const UpdateResponsePlanOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateResponsePlanInput, options: CallOptions) !UpdateResponsePlanOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

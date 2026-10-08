@@ -8,10 +8,10 @@ pub const AvailableFilter = struct {
     id: ?[]const u8 = null,
 
     /// The type of the filter. Valid values: `METRIC_LEVEL` | `RESOURCE_LEVEL`.
-    @"type": ?AvailableFilterType = null,
+    type: ?AvailableFilterType = null,
 
     pub const json_field_names = .{
         .id = "Id",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

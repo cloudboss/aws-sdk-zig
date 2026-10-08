@@ -15,8 +15,7 @@ pub const DeleteTrafficDistributionGroupInput = struct {
     };
 };
 
-pub const DeleteTrafficDistributionGroupOutput = struct {
-};
+pub const DeleteTrafficDistributionGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTrafficDistributionGroupInput, options: CallOptions) !DeleteTrafficDistributionGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

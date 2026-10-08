@@ -18,8 +18,7 @@ pub const DisassociateTagOptionFromResourceInput = struct {
     };
 };
 
-pub const DisassociateTagOptionFromResourceOutput = struct {
-};
+pub const DisassociateTagOptionFromResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateTagOptionFromResourceInput, options: CallOptions) !DisassociateTagOptionFromResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ChannelEngineVersionResponse = @import("channel_engine_version_response.zig").ChannelEngineVersionResponse;
 
-pub const ListVersionsInput = struct {
-};
+pub const ListVersionsInput = struct {};
 
 pub const ListVersionsOutput = struct {
     /// List of engine versions that are available for this AWS account.

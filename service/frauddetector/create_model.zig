@@ -32,8 +32,7 @@ pub const CreateModelInput = struct {
     };
 };
 
-pub const CreateModelOutput = struct {
-};
+pub const CreateModelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateModelInput, options: CallOptions) !CreateModelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

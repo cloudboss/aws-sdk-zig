@@ -63,7 +63,7 @@ pub const Queue = struct {
     /// Specifies whether this on-demand queue is system or custom. System queues
     /// are built in. You can't modify or delete system queues. You can create and
     /// modify custom queues.
-    @"type": ?Type = null,
+    type: ?Type = null,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -79,6 +79,6 @@ pub const Queue = struct {
         .service_overrides = "ServiceOverrides",
         .status = "Status",
         .submitted_jobs_count = "SubmittedJobsCount",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

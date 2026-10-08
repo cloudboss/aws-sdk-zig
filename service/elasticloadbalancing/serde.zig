@@ -1340,4 +1340,3 @@ pub fn serializeTagKeyOnly(allocator: std.mem.Allocator, buf: *std.ArrayList(u8)
         try buf.appendSlice(allocator, "</Key>");
     }
 }
-

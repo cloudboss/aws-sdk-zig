@@ -35,8 +35,7 @@ pub const UpdateScalingPlanInput = struct {
     };
 };
 
-pub const UpdateScalingPlanOutput = struct {
-};
+pub const UpdateScalingPlanOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateScalingPlanInput, options: CallOptions) !UpdateScalingPlanOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

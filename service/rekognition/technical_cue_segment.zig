@@ -8,10 +8,10 @@ pub const TechnicalCueSegment = struct {
     confidence: ?f32 = null,
 
     /// The type of the technical cue.
-    @"type": ?TechnicalCueType = null,
+    type: ?TechnicalCueType = null,
 
     pub const json_field_names = .{
         .confidence = "Confidence",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

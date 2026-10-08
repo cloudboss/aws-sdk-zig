@@ -6,9 +6,27 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// Requests the tags associated with a particular Amazon Resource Name (ARN).
+    /// An ARN is an identifier for a specific Amazon Web Services resource, such as
+    /// a capability, partnership, profile, or transformer.
+    resource_arn: []const u8,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    pub const json_field_names = .{
+        .resource_arn = "ResourceARN",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// Returns the key-value pairs assigned to ARNs that you can use to group and
+    /// search for resources by type. You can attach this metadata to resources
+    /// (capabilities, partnerships, and so on) for any purpose.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

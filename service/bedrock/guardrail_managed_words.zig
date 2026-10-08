@@ -32,13 +32,13 @@ pub const GuardrailManagedWords = struct {
 
     /// ManagedWords$type The managed word type that was configured for the
     /// guardrail. (For now, we only offer profanity word list)
-    @"type": GuardrailManagedWordsType,
+    type: GuardrailManagedWordsType,
 
     pub const json_field_names = .{
         .input_action = "inputAction",
         .input_enabled = "inputEnabled",
         .output_action = "outputAction",
         .output_enabled = "outputEnabled",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -7,8 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const PartnerInfo = @import("partner_info.zig").PartnerInfo;
 const ProfileType = @import("profile_type.zig").ProfileType;
 
-pub const GetProfileInput = struct {
-};
+pub const GetProfileInput = struct {};
 
 pub const GetProfileOutput = struct {
     /// An object that describes the partner membership of the account, such as the

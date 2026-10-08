@@ -18,8 +18,7 @@ pub const UpdateCoreDefinitionInput = struct {
     };
 };
 
-pub const UpdateCoreDefinitionOutput = struct {
-};
+pub const UpdateCoreDefinitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCoreDefinitionInput, options: CallOptions) !UpdateCoreDefinitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

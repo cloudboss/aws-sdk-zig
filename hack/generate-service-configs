@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Generate smithy-build.json and services.txt for all AWS services."""
+"""Generate smithy-build.json and services.txt for supported public AWS services."""
 
+import html
 import json
 import os
+import re
 import sys
 
 AWS_MODELS_COMMIT = os.environ.get("AWS_MODELS_COMMIT", "")
@@ -50,6 +52,24 @@ def is_rpcv2_only(traits):
     return True
 
 
+def is_internal_service(traits):
+    """Recognize explicit internal-service metadata and documentation."""
+    if "smithy.api#internal" in traits:
+        return True
+    documentation = html.unescape(traits.get("smithy.api#documentation", ""))
+    documentation = " ".join(re.sub(r"<[^>]*>", " ", documentation).lower().split())
+    markers = (
+        "for internal aws use only",
+        "for aws internal use only",
+        "for internal use only",
+        "not yet available to external customers",
+        "not available to external customers",
+    )
+    return documentation.startswith("this is for internal use.") or any(
+        marker in documentation for marker in markers
+    )
+
+
 def scan_models(models_base):
     """Scan the models directory and return service info, sorted by package name."""
     services = []
@@ -84,6 +104,10 @@ def scan_models(models_base):
         shape_id, traits = find_service_shape(model)
         if shape_id is None:
             skipped.append((svc_dir, "no service shape found"))
+            continue
+
+        if is_internal_service(traits):
+            skipped.append((svc_dir, "internal use only"))
             continue
 
         if is_rpcv2_only(traits):

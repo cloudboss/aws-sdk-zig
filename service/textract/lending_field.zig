@@ -6,14 +6,14 @@ pub const LendingField = struct {
     key_detection: ?LendingDetection = null,
 
     /// The type of the lending document.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// An array of LendingDetection objects.
     value_detections: ?[]const LendingDetection = null,
 
     pub const json_field_names = .{
         .key_detection = "KeyDetection",
-        .@"type" = "Type",
+        .type = "Type",
         .value_detections = "ValueDetections",
     };
 };

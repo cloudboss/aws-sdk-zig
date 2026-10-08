@@ -23,8 +23,7 @@ pub const CreateConfigurationSetEventDestinationInput = struct {
     };
 };
 
-pub const CreateConfigurationSetEventDestinationOutput = struct {
-};
+pub const CreateConfigurationSetEventDestinationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateConfigurationSetEventDestinationInput, options: CallOptions) !CreateConfigurationSetEventDestinationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

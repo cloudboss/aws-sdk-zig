@@ -6,5 +6,4 @@
 /// component types.
 ///
 /// JSON specification: `"All": {}`
-pub const All = struct {
-};
+pub const All = struct {};

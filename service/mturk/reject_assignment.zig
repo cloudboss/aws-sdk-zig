@@ -20,8 +20,7 @@ pub const RejectAssignmentInput = struct {
     };
 };
 
-pub const RejectAssignmentOutput = struct {
-};
+pub const RejectAssignmentOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RejectAssignmentInput, options: CallOptions) !RejectAssignmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

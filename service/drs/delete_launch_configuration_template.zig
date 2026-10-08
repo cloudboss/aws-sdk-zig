@@ -14,8 +14,7 @@ pub const DeleteLaunchConfigurationTemplateInput = struct {
     };
 };
 
-pub const DeleteLaunchConfigurationTemplateOutput = struct {
-};
+pub const DeleteLaunchConfigurationTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLaunchConfigurationTemplateInput, options: CallOptions) !DeleteLaunchConfigurationTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

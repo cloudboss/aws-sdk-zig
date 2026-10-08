@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DirectoryLimits = @import("directory_limits.zig").DirectoryLimits;
 
-pub const GetDirectoryLimitsInput = struct {
-};
+pub const GetDirectoryLimitsInput = struct {};
 
 pub const GetDirectoryLimitsOutput = struct {
     /// A DirectoryLimits object that contains the directory limits for the

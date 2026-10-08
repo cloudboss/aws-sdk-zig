@@ -20,8 +20,7 @@ pub const DeleteChatResponseConfigurationInput = struct {
     };
 };
 
-pub const DeleteChatResponseConfigurationOutput = struct {
-};
+pub const DeleteChatResponseConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteChatResponseConfigurationInput, options: CallOptions) !DeleteChatResponseConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

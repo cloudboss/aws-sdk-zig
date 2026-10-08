@@ -18,8 +18,7 @@ pub const AbortMultipartReadSetUploadInput = struct {
     };
 };
 
-pub const AbortMultipartReadSetUploadOutput = struct {
-};
+pub const AbortMultipartReadSetUploadOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AbortMultipartReadSetUploadInput, options: CallOptions) !AbortMultipartReadSetUploadOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

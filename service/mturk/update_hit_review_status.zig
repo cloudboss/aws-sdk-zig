@@ -24,8 +24,7 @@ pub const UpdateHITReviewStatusInput = struct {
     };
 };
 
-pub const UpdateHITReviewStatusOutput = struct {
-};
+pub const UpdateHITReviewStatusOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateHITReviewStatusInput, options: CallOptions) !UpdateHITReviewStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

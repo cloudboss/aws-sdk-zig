@@ -44,7 +44,7 @@ pub const GetIndexOutput = struct {
     /// index and how it differs from a local index, see [Turning on cross-Region
     /// search by creating an aggregator
     /// index](https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html).
-    @"type": ?IndexType = null,
+    type: ?IndexType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -54,7 +54,7 @@ pub const GetIndexOutput = struct {
         .replicating_to = "ReplicatingTo",
         .state = "State",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

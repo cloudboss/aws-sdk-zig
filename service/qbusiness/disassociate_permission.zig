@@ -18,8 +18,7 @@ pub const DisassociatePermissionInput = struct {
     };
 };
 
-pub const DisassociatePermissionOutput = struct {
-};
+pub const DisassociatePermissionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociatePermissionInput, options: CallOptions) !DisassociatePermissionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -10,8 +10,7 @@ pub const DeleteConfigurationSetTrackingOptionsInput = struct {
     configuration_set_name: []const u8,
 };
 
-pub const DeleteConfigurationSetTrackingOptionsOutput = struct {
-};
+pub const DeleteConfigurationSetTrackingOptionsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConfigurationSetTrackingOptionsInput, options: CallOptions) !DeleteConfigurationSetTrackingOptionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -19,8 +19,7 @@ pub const DeleteWebExperienceInput = struct {
     };
 };
 
-pub const DeleteWebExperienceOutput = struct {
-};
+pub const DeleteWebExperienceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteWebExperienceInput, options: CallOptions) !DeleteWebExperienceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

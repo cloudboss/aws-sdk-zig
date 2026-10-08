@@ -23,8 +23,7 @@ pub const StopColumnStatisticsTaskRunInput = struct {
     };
 };
 
-pub const StopColumnStatisticsTaskRunOutput = struct {
-};
+pub const StopColumnStatisticsTaskRunOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopColumnStatisticsTaskRunInput, options: CallOptions) !StopColumnStatisticsTaskRunOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const DeleteDomainVerificationInput = struct {
     };
 };
 
-pub const DeleteDomainVerificationOutput = struct {
-};
+pub const DeleteDomainVerificationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDomainVerificationInput, options: CallOptions) !DeleteDomainVerificationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

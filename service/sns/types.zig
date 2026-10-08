@@ -1,8 +1,6 @@
 pub const BatchResultErrorEntry = @import("batch_result_error_entry.zig").BatchResultErrorEntry;
 pub const Endpoint = @import("endpoint.zig").Endpoint;
 pub const LanguageCodeString = @import("language_code_string.zig").LanguageCodeString;
-pub const ListTagsForResourceRequest = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
-pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
 pub const MessageAttributeValue = @import("message_attribute_value.zig").MessageAttributeValue;
 pub const NumberCapability = @import("number_capability.zig").NumberCapability;
 pub const PhoneNumberInformation = @import("phone_number_information.zig").PhoneNumberInformation;
@@ -14,8 +12,4 @@ pub const SMSSandboxPhoneNumber = @import("sms_sandbox_phone_number.zig").SMSSan
 pub const SMSSandboxPhoneNumberVerificationStatus = @import("sms_sandbox_phone_number_verification_status.zig").SMSSandboxPhoneNumberVerificationStatus;
 pub const Subscription = @import("subscription.zig").Subscription;
 pub const Tag = @import("tag.zig").Tag;
-pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
-pub const TagResourceResponse = @import("tag_resource_response.zig").TagResourceResponse;
 pub const Topic = @import("topic.zig").Topic;
-pub const UntagResourceRequest = @import("untag_resource_request.zig").UntagResourceRequest;
-pub const UntagResourceResponse = @import("untag_resource_response.zig").UntagResourceResponse;

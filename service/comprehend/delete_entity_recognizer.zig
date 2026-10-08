@@ -14,8 +14,7 @@ pub const DeleteEntityRecognizerInput = struct {
     };
 };
 
-pub const DeleteEntityRecognizerOutput = struct {
-};
+pub const DeleteEntityRecognizerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteEntityRecognizerInput, options: CallOptions) !DeleteEntityRecognizerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

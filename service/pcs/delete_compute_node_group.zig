@@ -28,8 +28,7 @@ pub const DeleteComputeNodeGroupInput = struct {
     };
 };
 
-pub const DeleteComputeNodeGroupOutput = struct {
-};
+pub const DeleteComputeNodeGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteComputeNodeGroupInput, options: CallOptions) !DeleteComputeNodeGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

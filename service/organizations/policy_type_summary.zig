@@ -12,10 +12,10 @@ pub const PolicyTypeSummary = struct {
     status: ?PolicyTypeStatus = null,
 
     /// The name of the policy type.
-    @"type": ?PolicyType = null,
+    type: ?PolicyType = null,
 
     pub const json_field_names = .{
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

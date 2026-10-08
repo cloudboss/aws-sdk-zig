@@ -52,8 +52,7 @@ pub const UpdateLocationS3Input = struct {
     };
 };
 
-pub const UpdateLocationS3Output = struct {
-};
+pub const UpdateLocationS3Output = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLocationS3Input, options: CallOptions) !UpdateLocationS3Output {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

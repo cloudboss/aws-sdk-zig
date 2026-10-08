@@ -14,8 +14,7 @@ pub const DeleteProfilingGroupInput = struct {
     };
 };
 
-pub const DeleteProfilingGroupOutput = struct {
-};
+pub const DeleteProfilingGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteProfilingGroupInput, options: CallOptions) !DeleteProfilingGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

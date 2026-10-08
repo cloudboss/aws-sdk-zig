@@ -7,8 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ThingGroupIndexingConfiguration = @import("thing_group_indexing_configuration.zig").ThingGroupIndexingConfiguration;
 const ThingIndexingConfiguration = @import("thing_indexing_configuration.zig").ThingIndexingConfiguration;
 
-pub const GetIndexingConfigurationInput = struct {
-};
+pub const GetIndexingConfigurationInput = struct {};
 
 pub const GetIndexingConfigurationOutput = struct {
     /// The index configuration.

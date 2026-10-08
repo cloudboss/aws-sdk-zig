@@ -7,8 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const TraceSegmentDestination = @import("trace_segment_destination.zig").TraceSegmentDestination;
 const TraceSegmentDestinationStatus = @import("trace_segment_destination_status.zig").TraceSegmentDestinationStatus;
 
-pub const GetTraceSegmentDestinationInput = struct {
-};
+pub const GetTraceSegmentDestinationInput = struct {};
 
 pub const GetTraceSegmentDestinationOutput = struct {
     /// Retrieves the current destination.

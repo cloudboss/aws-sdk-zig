@@ -41,8 +41,7 @@ pub const PutOriginEndpointPolicyInput = struct {
     };
 };
 
-pub const PutOriginEndpointPolicyOutput = struct {
-};
+pub const PutOriginEndpointPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutOriginEndpointPolicyInput, options: CallOptions) !PutOriginEndpointPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

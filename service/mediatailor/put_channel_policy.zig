@@ -18,8 +18,7 @@ pub const PutChannelPolicyInput = struct {
     };
 };
 
-pub const PutChannelPolicyOutput = struct {
-};
+pub const PutChannelPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutChannelPolicyInput, options: CallOptions) !PutChannelPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

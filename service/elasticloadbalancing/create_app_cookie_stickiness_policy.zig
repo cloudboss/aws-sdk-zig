@@ -18,8 +18,7 @@ pub const CreateAppCookieStickinessPolicyInput = struct {
     policy_name: []const u8,
 };
 
-pub const CreateAppCookieStickinessPolicyOutput = struct {
-};
+pub const CreateAppCookieStickinessPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAppCookieStickinessPolicyInput, options: CallOptions) !CreateAppCookieStickinessPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

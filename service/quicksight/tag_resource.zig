@@ -6,9 +6,33 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the resource that you want to tag.
+    resource_arn: []const u8,
 
-pub const TagResourceOutput = @import("tag_resource_response.zig").TagResourceResponse;
+    /// Contains a map of the key-value pairs for the resource tag or tags assigned
+    /// to the
+    /// resource.
+    tags: []const Tag,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+        .tags = "Tags",
+    };
+};
+
+pub const TagResourceOutput = struct {
+    /// The Amazon Web Services request ID for this operation.
+    request_id: ?[]const u8 = null,
+
+    /// The HTTP status of the request.
+    status: ?i32 = null,
+
+    pub const json_field_names = .{
+        .request_id = "RequestId",
+        .status = "Status",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TagResourceInput, options: CallOptions) !TagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -6,9 +6,32 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DomainStatus = @import("domain_status.zig").DomainStatus;
 
-pub const CreateDomainInput = @import("create_domain_request.zig").CreateDomainRequest;
+pub const CreateDomainInput = struct {
+    /// The name for your Cases domain. It must be unique for your Amazon Web
+    /// Services account.
+    name: []const u8,
 
-pub const CreateDomainOutput = @import("create_domain_response.zig").CreateDomainResponse;
+    pub const json_field_names = .{
+        .name = "name",
+    };
+};
+
+pub const CreateDomainOutput = struct {
+    /// The Amazon Resource Name (ARN) for the Cases domain.
+    domain_arn: []const u8,
+
+    /// The unique identifier of the Cases domain.
+    domain_id: []const u8,
+
+    /// The status of the domain.
+    domain_status: DomainStatus,
+
+    pub const json_field_names = .{
+        .domain_arn = "domainArn",
+        .domain_id = "domainId",
+        .domain_status = "domainStatus",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDomainInput, options: CallOptions) !CreateDomainOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

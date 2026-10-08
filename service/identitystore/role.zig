@@ -5,14 +5,14 @@ pub const Role = struct {
     primary: bool = false,
 
     /// A string representing the type of role. For example, "Work."
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// A string containing a role name. For example, "Researcher."
     value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .primary = "Primary",
-        .@"type" = "Type",
+        .type = "Type",
         .value = "Value",
     };
 };

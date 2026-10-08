@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const serde = @import("serde.zig");
 
-pub const GetAccountPropertiesInput = struct {
-};
+pub const GetAccountPropertiesInput = struct {};
 
 pub const GetAccountPropertiesOutput = struct {
     /// A map of account property key-value pairs. Keys are in the format

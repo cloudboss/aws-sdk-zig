@@ -1,0 +1,128 @@
+const aws = @import("aws");
+const std = @import("std");
+
+const Client = @import("client.zig").Client;
+const CallOptions = @import("call_options.zig").CallOptions;
+const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+
+pub const GetRevocationStatusInput = struct {
+    /// List of certificate hashes to check for revocation.
+    certificate_hashes: []const []const u8,
+
+    /// The ARN of the signing job that produced the signature.
+    job_arn: []const u8,
+
+    /// The platform identifier for the signing platform used.
+    platform_id: []const u8,
+
+    /// The ARN of the signing profile version used to sign the artifact.
+    profile_version_arn: []const u8,
+
+    /// The timestamp when the artifact was signed, in ISO 8601 format.
+    signature_timestamp: i64,
+
+    pub const json_field_names = .{
+        .certificate_hashes = "certificateHashes",
+        .job_arn = "jobArn",
+        .platform_id = "platformId",
+        .profile_version_arn = "profileVersionArn",
+        .signature_timestamp = "signatureTimestamp",
+    };
+};
+
+pub const GetRevocationStatusOutput = struct {
+    /// List of entity identifiers that have been revoked. Empty if no revocations
+    /// found.
+    revoked_entities: ?[]const []const u8 = null,
+
+    pub const json_field_names = .{
+        .revoked_entities = "revokedEntities",
+    };
+};
+
+pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetRevocationStatusInput, options: CallOptions) !GetRevocationStatusOutput {
+    var arena = std.heap.ArenaAllocator.init(client.allocator);
+    defer arena.deinit();
+    const alloc = arena.allocator();
+
+    var request = try serializeRequest(alloc, input, client.config);
+    defer request.deinit(alloc);
+
+    const creds = try client.config.credentials.getCredentials(client.allocator);
+    try aws.signing.signRequest(alloc, client.config.io, &request, creds, client.config.region, "signer", client.config.http_client.clock_skew_offset);
+
+    var response = try client.config.http_client.sendRequestWithOptions(&request, client.options);
+    defer response.deinit();
+
+    if (!response.isSuccess()) {
+        if (options.diagnostic) |d| {
+            d.* = try parseErrorResponse(client.allocator, response.body, response.status);
+        }
+        return error.ServiceError;
+    }
+
+    const result = try deserializeResponse(allocator, response.body, response.status, response.headers);
+    return result;
+}
+
+fn serializeRequest(allocator: std.mem.Allocator, input: GetRevocationStatusInput, config: *aws.Config) !aws.http.Request {
+    const endpoint = try config.getEndpointForService("data-signer", "Signer Data", allocator);
+
+    const ep = try aws.url.parseEndpoint(endpoint);
+
+    const path = "/revocations";
+
+    var query_buf: std.ArrayList(u8) = .empty;
+    var query_has_prev = false;
+    for (input.certificate_hashes) |item| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "certificateHashes=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, item);
+        query_has_prev = true;
+    }
+    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+    try query_buf.appendSlice(allocator, "jobArn=");
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.job_arn);
+    query_has_prev = true;
+    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+    try query_buf.appendSlice(allocator, "platformId=");
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.platform_id);
+    query_has_prev = true;
+    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+    try query_buf.appendSlice(allocator, "profileVersionArn=");
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.profile_version_arn);
+    query_has_prev = true;
+    if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+    try query_buf.appendSlice(allocator, "signatureTimestamp=");
+    {
+        const num_str = std.fmt.allocPrint(allocator, "{d}", .{input.signature_timestamp}) catch "";
+        try query_buf.appendSlice(allocator, num_str);
+    }
+    query_has_prev = true;
+    const query = try query_buf.toOwnedSlice(allocator);
+
+    const body: ?[]const u8 = null;
+
+    var request = aws.http.Request.init(ep.host);
+    request.method = .GET;
+    request.path = path;
+    request.tls = ep.tls;
+    request.port = ep.port;
+    request.body = body;
+    request.query = query;
+    try request.headers.put(allocator, "Content-Type", "application/json");
+
+    return request;
+}
+
+fn deserializeResponse(allocator: std.mem.Allocator, body: []const u8, status: u16, headers: anytype) !GetRevocationStatusOutput {
+    const result: GetRevocationStatusOutput = try aws.json.parseJsonObject(
+        GetRevocationStatusOutput,
+        if (body.len > 0) body else "{}",
+        allocator,
+    );
+    _ = status;
+    _ = headers;
+
+    return result;
+}

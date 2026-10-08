@@ -22,8 +22,7 @@ pub const UpdateResourceProfileDetectionsInput = struct {
     };
 };
 
-pub const UpdateResourceProfileDetectionsOutput = struct {
-};
+pub const UpdateResourceProfileDetectionsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateResourceProfileDetectionsInput, options: CallOptions) !UpdateResourceProfileDetectionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

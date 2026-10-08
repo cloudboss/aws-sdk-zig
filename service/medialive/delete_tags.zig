@@ -5,7 +5,17 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteTagsInput = @import("delete_tags_request.zig").DeleteTagsRequest;
+pub const DeleteTagsInput = struct {
+    resource_arn: []const u8,
+
+    /// An array of tag keys to delete
+    tag_keys: []const []const u8,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+        .tag_keys = "TagKeys",
+    };
+};
 
 pub const DeleteTagsOutput = struct {};
 

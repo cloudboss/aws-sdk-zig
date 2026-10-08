@@ -14,8 +14,7 @@ pub const DeleteEarthObservationJobInput = struct {
     };
 };
 
-pub const DeleteEarthObservationJobOutput = struct {
-};
+pub const DeleteEarthObservationJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteEarthObservationJobInput, options: CallOptions) !DeleteEarthObservationJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

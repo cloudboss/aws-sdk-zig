@@ -43,8 +43,7 @@ pub const UpdateAccessControlConfigurationInput = struct {
     };
 };
 
-pub const UpdateAccessControlConfigurationOutput = struct {
-};
+pub const UpdateAccessControlConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAccessControlConfigurationInput, options: CallOptions) !UpdateAccessControlConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

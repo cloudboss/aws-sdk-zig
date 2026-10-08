@@ -18,8 +18,7 @@ pub const RemoveTagsFromResourceInput = struct {
     };
 };
 
-pub const RemoveTagsFromResourceOutput = struct {
-};
+pub const RemoveTagsFromResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveTagsFromResourceInput, options: CallOptions) !RemoveTagsFromResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

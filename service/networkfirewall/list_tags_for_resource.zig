@@ -6,9 +6,49 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// The maximum number of objects that you want Network Firewall to return for
+    /// this request. If more
+    /// objects are available, in the response, Network Firewall provides a
+    /// `NextToken` value that you can use in a subsequent call to get the next
+    /// batch of objects.
+    max_results: ?i32 = null,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    /// When you request a list of objects with a `MaxResults` setting, if the
+    /// number of objects that are still available
+    /// for retrieval exceeds the maximum you requested, Network Firewall returns a
+    /// `NextToken`
+    /// value in the response. To retrieve the next batch of objects, use the token
+    /// returned from the prior request in your next request.
+    next_token: ?[]const u8 = null,
+
+    /// The Amazon Resource Name (ARN) of the resource.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+        .resource_arn = "ResourceArn",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// When you request a list of objects with a `MaxResults` setting, if the
+    /// number of objects that are still available
+    /// for retrieval exceeds the maximum you requested, Network Firewall returns a
+    /// `NextToken`
+    /// value in the response. To retrieve the next batch of objects, use the token
+    /// returned from the prior request in your next request.
+    next_token: ?[]const u8 = null,
+
+    /// The tags that are associated with the resource.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

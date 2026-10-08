@@ -11,11 +11,11 @@ pub const PluginTypeMetadataSummary = struct {
     description: ?[]const u8 = null,
 
     /// The type of the plugin.
-    @"type": ?PluginType = null,
+    type: ?PluginType = null,
 
     pub const json_field_names = .{
         .category = "category",
         .description = "description",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -37,7 +37,7 @@ pub const Trigger = struct {
     state: ?TriggerState = null,
 
     /// The type of trigger that this is.
-    @"type": ?TriggerType = null,
+    type: ?TriggerType = null,
 
     /// The name of the workflow associated with the trigger.
     workflow_name: ?[]const u8 = null,
@@ -51,7 +51,7 @@ pub const Trigger = struct {
         .predicate = "Predicate",
         .schedule = "Schedule",
         .state = "State",
-        .@"type" = "Type",
+        .type = "Type",
         .workflow_name = "WorkflowName",
     };
 };

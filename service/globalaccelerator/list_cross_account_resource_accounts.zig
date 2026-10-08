@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const ListCrossAccountResourceAccountsInput = struct {
-};
+pub const ListCrossAccountResourceAccountsInput = struct {};
 
 pub const ListCrossAccountResourceAccountsOutput = struct {
     /// The account IDs of principals (resource owners) in a cross-account

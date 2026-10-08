@@ -40,8 +40,7 @@ pub const PutRumMetricsDestinationInput = struct {
     };
 };
 
-pub const PutRumMetricsDestinationOutput = struct {
-};
+pub const PutRumMetricsDestinationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutRumMetricsDestinationInput, options: CallOptions) !PutRumMetricsDestinationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

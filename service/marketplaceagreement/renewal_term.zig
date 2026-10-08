@@ -59,7 +59,7 @@ pub const RenewalTerm = struct {
     term_templates: ?[]const TermTemplate = null,
 
     /// Category of the term being updated.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .adjustment_deadline = "adjustmentDeadline",
@@ -69,6 +69,6 @@ pub const RenewalTerm = struct {
         .max_renewals = "maxRenewals",
         .price_increase = "priceIncrease",
         .term_templates = "termTemplates",
-        .@"type" = "type",
+        .type = "type",
     };
 };

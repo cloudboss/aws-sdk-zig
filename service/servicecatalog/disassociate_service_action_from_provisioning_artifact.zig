@@ -37,8 +37,7 @@ pub const DisassociateServiceActionFromProvisioningArtifactInput = struct {
     };
 };
 
-pub const DisassociateServiceActionFromProvisioningArtifactOutput = struct {
-};
+pub const DisassociateServiceActionFromProvisioningArtifactOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateServiceActionFromProvisioningArtifactInput, options: CallOptions) !DisassociateServiceActionFromProvisioningArtifactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

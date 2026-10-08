@@ -7,8 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const OrganizationRuleMode = @import("organization_rule_mode.zig").OrganizationRuleMode;
 const EnrollmentStatus = @import("enrollment_status.zig").EnrollmentStatus;
 
-pub const GetEnrollmentConfigurationInput = struct {
-};
+pub const GetEnrollmentConfigurationInput = struct {};
 
 pub const GetEnrollmentConfigurationOutput = struct {
     /// The timestamp of the last update to the enrollment configuration.

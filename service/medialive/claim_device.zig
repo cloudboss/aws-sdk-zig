@@ -14,8 +14,7 @@ pub const ClaimDeviceInput = struct {
     };
 };
 
-pub const ClaimDeviceOutput = struct {
-};
+pub const ClaimDeviceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ClaimDeviceInput, options: CallOptions) !ClaimDeviceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

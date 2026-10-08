@@ -211,7 +211,7 @@ pub const GuardrailPiiEntityConfig = struct {
     /// * **Regex filter** - You can use a regular expressions to define patterns
     ///   for a guardrail to recognize and act upon such as serial number, booking
     ///   ID etc..
-    @"type": GuardrailPiiEntityType,
+    type: GuardrailPiiEntityType,
 
     pub const json_field_names = .{
         .action = "action",
@@ -219,6 +219,6 @@ pub const GuardrailPiiEntityConfig = struct {
         .input_enabled = "inputEnabled",
         .output_action = "outputAction",
         .output_enabled = "outputEnabled",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -40,7 +40,7 @@ pub const GetImpersonationRoleOutput = struct {
     rules: ?[]const ImpersonationRule = null,
 
     /// The impersonation role type.
-    @"type": ?ImpersonationRoleType = null,
+    type: ?ImpersonationRoleType = null,
 
     pub const json_field_names = .{
         .date_created = "DateCreated",
@@ -49,7 +49,7 @@ pub const GetImpersonationRoleOutput = struct {
         .impersonation_role_id = "ImpersonationRoleId",
         .name = "Name",
         .rules = "Rules",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

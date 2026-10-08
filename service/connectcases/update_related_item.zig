@@ -58,7 +58,7 @@ pub const UpdateRelatedItemOutput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Type of the updated related item.
-    @"type": RelatedItemType,
+    type: RelatedItemType,
 
     pub const json_field_names = .{
         .association_time = "associationTime",
@@ -68,7 +68,7 @@ pub const UpdateRelatedItemOutput = struct {
         .related_item_arn = "relatedItemArn",
         .related_item_id = "relatedItemId",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 

@@ -39,8 +39,7 @@ pub const CreateWorkspacePageInput = struct {
     };
 };
 
-pub const CreateWorkspacePageOutput = struct {
-};
+pub const CreateWorkspacePageOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateWorkspacePageInput, options: CallOptions) !CreateWorkspacePageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

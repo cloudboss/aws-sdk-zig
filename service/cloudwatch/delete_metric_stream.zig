@@ -14,8 +14,7 @@ pub const DeleteMetricStreamInput = struct {
     };
 };
 
-pub const DeleteMetricStreamOutput = struct {
-};
+pub const DeleteMetricStreamOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMetricStreamInput, options: CallOptions) !DeleteMetricStreamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

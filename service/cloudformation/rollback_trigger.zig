@@ -14,5 +14,5 @@ pub const RollbackTrigger = struct {
 
     /// The resource type of the rollback trigger. Specify either
     /// [AWS::CloudWatch::Alarm](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cloudwatch-alarm.html) or [AWS::CloudWatch::CompositeAlarm](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-cloudwatch-compositealarm.html) resource types.
-    @"type": []const u8,
+    type: []const u8,
 };

@@ -14,8 +14,7 @@ pub const ExtendTransactionInput = struct {
     };
 };
 
-pub const ExtendTransactionOutput = struct {
-};
+pub const ExtendTransactionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExtendTransactionInput, options: CallOptions) !ExtendTransactionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

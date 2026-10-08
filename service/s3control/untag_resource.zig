@@ -6,9 +6,22 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const serde = @import("serde.zig");
 
-pub const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceInput = struct {
+    /// The Amazon Web Services account ID that owns the resource that you're trying
+    /// to remove the tags from.
+    account_id: []const u8,
 
-pub const UntagResourceOutput = @import("untag_resource_result.zig").UntagResourceResult;
+    /// The Amazon Resource Name (ARN) of the S3 resource that you're removing tags
+    /// from. The tagged resource can be a directory bucket, S3 Storage Lens group
+    /// or S3 Access Grants instance, registered location, or grant.
+    resource_arn: []const u8,
+
+    /// The array of tag key-value pairs that you're trying to remove from of the S3
+    /// resource.
+    tag_keys: []const []const u8,
+};
+
+pub const UntagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResourceInput, options: CallOptions) !UntagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

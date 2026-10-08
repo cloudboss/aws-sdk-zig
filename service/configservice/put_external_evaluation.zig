@@ -19,8 +19,7 @@ pub const PutExternalEvaluationInput = struct {
     };
 };
 
-pub const PutExternalEvaluationOutput = struct {
-};
+pub const PutExternalEvaluationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutExternalEvaluationInput, options: CallOptions) !PutExternalEvaluationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

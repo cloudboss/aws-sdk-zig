@@ -25,8 +25,7 @@ pub const UpdateStandardsControlInput = struct {
     };
 };
 
-pub const UpdateStandardsControlOutput = struct {
-};
+pub const UpdateStandardsControlOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateStandardsControlInput, options: CallOptions) !UpdateStandardsControlOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

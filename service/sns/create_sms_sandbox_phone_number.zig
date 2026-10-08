@@ -17,8 +17,7 @@ pub const CreateSMSSandboxPhoneNumberInput = struct {
     phone_number: []const u8,
 };
 
-pub const CreateSMSSandboxPhoneNumberOutput = struct {
-};
+pub const CreateSMSSandboxPhoneNumberOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSMSSandboxPhoneNumberInput, options: CallOptions) !CreateSMSSandboxPhoneNumberOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

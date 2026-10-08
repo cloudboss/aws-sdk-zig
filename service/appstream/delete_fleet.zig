@@ -14,8 +14,7 @@ pub const DeleteFleetInput = struct {
     };
 };
 
-pub const DeleteFleetOutput = struct {
-};
+pub const DeleteFleetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteFleetInput, options: CallOptions) !DeleteFleetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

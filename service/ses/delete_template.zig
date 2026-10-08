@@ -10,8 +10,7 @@ pub const DeleteTemplateInput = struct {
     template_name: []const u8,
 };
 
-pub const DeleteTemplateOutput = struct {
-};
+pub const DeleteTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTemplateInput, options: CallOptions) !DeleteTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

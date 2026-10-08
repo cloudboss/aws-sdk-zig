@@ -30,8 +30,7 @@ pub const UpdateAuditSuppressionInput = struct {
     };
 };
 
-pub const UpdateAuditSuppressionOutput = struct {
-};
+pub const UpdateAuditSuppressionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAuditSuppressionInput, options: CallOptions) !UpdateAuditSuppressionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

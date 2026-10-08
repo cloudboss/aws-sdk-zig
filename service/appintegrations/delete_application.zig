@@ -26,8 +26,7 @@ pub const DeleteApplicationInput = struct {
     };
 };
 
-pub const DeleteApplicationOutput = struct {
-};
+pub const DeleteApplicationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteApplicationInput, options: CallOptions) !DeleteApplicationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

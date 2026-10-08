@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AccountSetting = @import("account_setting.zig").AccountSetting;
 
-pub const GetAccountSettingsInput = struct {
-};
+pub const GetAccountSettingsInput = struct {};
 
 pub const GetAccountSettingsOutput = struct {
     /// A list of regional account-level EVS settings for the account. EVS settings

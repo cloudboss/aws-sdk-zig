@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const PipelineBlueprintSummary = @import("pipeline_blueprint_summary.zig").PipelineBlueprintSummary;
 
-pub const ListPipelineBlueprintsInput = struct {
-};
+pub const ListPipelineBlueprintsInput = struct {};
 
 pub const ListPipelineBlueprintsOutput = struct {
     /// A list of available blueprints for Data Prepper.

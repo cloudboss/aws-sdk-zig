@@ -112,7 +112,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ReplaceNetworkAclEntryI
             try body_buf.appendSlice(allocator, "&Icmp.Code=");
             try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }
-        if (v.@"type") |sv| {
+        if (v.type) |sv| {
             try body_buf.appendSlice(allocator, "&Icmp.Type=");
             try aws.url.appendUrlEncoded(allocator, &body_buf, std.fmt.allocPrint(allocator, "{d}", .{sv}) catch "");
         }

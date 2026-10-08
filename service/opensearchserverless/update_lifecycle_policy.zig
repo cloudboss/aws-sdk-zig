@@ -24,7 +24,7 @@ pub const UpdateLifecyclePolicyInput = struct {
     policy_version: []const u8,
 
     /// The type of lifecycle policy.
-    @"type": LifecyclePolicyType,
+    type: LifecyclePolicyType,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
@@ -32,7 +32,7 @@ pub const UpdateLifecyclePolicyInput = struct {
         .name = "name",
         .policy = "policy",
         .policy_version = "policyVersion",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 

@@ -30,8 +30,7 @@ pub const UpdateSpendingLimitInput = struct {
     };
 };
 
-pub const UpdateSpendingLimitOutput = struct {
-};
+pub const UpdateSpendingLimitOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSpendingLimitInput, options: CallOptions) !UpdateSpendingLimitOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

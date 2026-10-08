@@ -14,8 +14,7 @@ pub const DeleteOdbPeeringConnectionInput = struct {
     };
 };
 
-pub const DeleteOdbPeeringConnectionOutput = struct {
-};
+pub const DeleteOdbPeeringConnectionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteOdbPeeringConnectionInput, options: CallOptions) !DeleteOdbPeeringConnectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

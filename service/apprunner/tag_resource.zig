@@ -6,9 +6,25 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the resource that you want to update tags
+    /// for.
+    ///
+    /// It must be the ARN of an App Runner resource.
+    resource_arn: []const u8,
 
-pub const TagResourceOutput = @import("tag_resource_response.zig").TagResourceResponse;
+    /// A list of tag key-value pairs to add or update. If a key is new to the
+    /// resource, the tag is added with the provided value. If a key is already
+    /// associated with the resource, the value of the tag is updated.
+    tags: []const Tag,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+        .tags = "Tags",
+    };
+};
+
+pub const TagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TagResourceInput, options: CallOptions) !TagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

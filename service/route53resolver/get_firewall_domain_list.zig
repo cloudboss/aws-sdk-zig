@@ -6,9 +6,23 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const FirewallDomainList = @import("firewall_domain_list.zig").FirewallDomainList;
 
-pub const GetFirewallDomainListInput = @import("get_firewall_domain_list_request.zig").GetFirewallDomainListRequest;
+pub const GetFirewallDomainListInput = struct {
+    /// The ID of the domain list.
+    firewall_domain_list_id: []const u8,
 
-pub const GetFirewallDomainListOutput = @import("get_firewall_domain_list_response.zig").GetFirewallDomainListResponse;
+    pub const json_field_names = .{
+        .firewall_domain_list_id = "FirewallDomainListId",
+    };
+};
+
+pub const GetFirewallDomainListOutput = struct {
+    /// The domain list that you requested.
+    firewall_domain_list: ?FirewallDomainList = null,
+
+    pub const json_field_names = .{
+        .firewall_domain_list = "FirewallDomainList",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetFirewallDomainListInput, options: CallOptions) !GetFirewallDomainListOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

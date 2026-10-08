@@ -36,8 +36,7 @@ pub const UpdatePermissionSetInput = struct {
     };
 };
 
-pub const UpdatePermissionSetOutput = struct {
-};
+pub const UpdatePermissionSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdatePermissionSetInput, options: CallOptions) !UpdatePermissionSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

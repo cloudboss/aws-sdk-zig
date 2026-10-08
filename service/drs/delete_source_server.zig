@@ -14,8 +14,7 @@ pub const DeleteSourceServerInput = struct {
     };
 };
 
-pub const DeleteSourceServerOutput = struct {
-};
+pub const DeleteSourceServerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSourceServerInput, options: CallOptions) !DeleteSourceServerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

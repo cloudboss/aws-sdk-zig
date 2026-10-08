@@ -6,9 +6,31 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the CloudWatch resource that you want to
+    /// view tags for.
+    ///
+    /// The ARN format of an Application Signals SLO is
+    /// `arn:aws:cloudwatch:*Region*:*account-id*:slo:*slo-name* `
+    ///
+    /// For more information about ARN format, see [ Resource Types Defined by
+    /// Amazon
+    /// CloudWatch](https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatch.html#amazoncloudwatch-resources-for-iam-policies) in the *Amazon Web Services General Reference*.
+    resource_arn: []const u8,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// The list of tag keys and values associated with the resource you specified.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

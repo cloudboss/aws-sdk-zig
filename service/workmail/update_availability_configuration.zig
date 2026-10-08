@@ -35,8 +35,7 @@ pub const UpdateAvailabilityConfigurationInput = struct {
     };
 };
 
-pub const UpdateAvailabilityConfigurationOutput = struct {
-};
+pub const UpdateAvailabilityConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAvailabilityConfigurationInput, options: CallOptions) !UpdateAvailabilityConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

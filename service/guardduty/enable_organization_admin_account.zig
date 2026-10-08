@@ -15,8 +15,7 @@ pub const EnableOrganizationAdminAccountInput = struct {
     };
 };
 
-pub const EnableOrganizationAdminAccountOutput = struct {
-};
+pub const EnableOrganizationAdminAccountOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableOrganizationAdminAccountInput, options: CallOptions) !EnableOrganizationAdminAccountOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

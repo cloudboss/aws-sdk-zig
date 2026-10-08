@@ -20,8 +20,7 @@ pub const DeletePrivacyBudgetTemplateInput = struct {
     };
 };
 
-pub const DeletePrivacyBudgetTemplateOutput = struct {
-};
+pub const DeletePrivacyBudgetTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePrivacyBudgetTemplateInput, options: CallOptions) !DeletePrivacyBudgetTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

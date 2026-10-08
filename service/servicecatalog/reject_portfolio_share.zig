@@ -39,8 +39,7 @@ pub const RejectPortfolioShareInput = struct {
     };
 };
 
-pub const RejectPortfolioShareOutput = struct {
-};
+pub const RejectPortfolioShareOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RejectPortfolioShareInput, options: CallOptions) !RejectPortfolioShareOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -22,8 +22,7 @@ pub const DeleteConstraintInput = struct {
     };
 };
 
-pub const DeleteConstraintOutput = struct {
-};
+pub const DeleteConstraintOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConstraintInput, options: CallOptions) !DeleteConstraintOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

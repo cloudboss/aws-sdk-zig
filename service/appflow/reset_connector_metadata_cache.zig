@@ -87,8 +87,7 @@ pub const ResetConnectorMetadataCacheInput = struct {
     };
 };
 
-pub const ResetConnectorMetadataCacheOutput = struct {
-};
+pub const ResetConnectorMetadataCacheOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ResetConnectorMetadataCacheInput, options: CallOptions) !ResetConnectorMetadataCacheOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

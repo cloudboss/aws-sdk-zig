@@ -18,8 +18,7 @@ pub const DisassociateAssessmentReportEvidenceFolderInput = struct {
     };
 };
 
-pub const DisassociateAssessmentReportEvidenceFolderOutput = struct {
-};
+pub const DisassociateAssessmentReportEvidenceFolderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateAssessmentReportEvidenceFolderInput, options: CallOptions) !DisassociateAssessmentReportEvidenceFolderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

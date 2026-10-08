@@ -5,9 +5,28 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceInput = struct {
+    /// The ARN of the canary or group that you're removing tags from.
+    ///
+    /// The ARN format of a canary is
+    /// `arn:aws:synthetics:*Region*:*account-id*:canary:*canary-name*
+    /// `.
+    ///
+    /// The ARN format of a group is
+    /// `arn:aws:synthetics:*Region*:*account-id*:group:*group-name*
+    /// `
+    resource_arn: []const u8,
 
-pub const UntagResourceOutput = @import("untag_resource_response.zig").UntagResourceResponse;
+    /// The list of tag keys to remove from the resource.
+    tag_keys: []const []const u8,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+        .tag_keys = "TagKeys",
+    };
+};
+
+pub const UntagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResourceInput, options: CallOptions) !UntagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

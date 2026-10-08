@@ -19,8 +19,7 @@ pub const UpdateRulesOfIpGroupInput = struct {
     };
 };
 
-pub const UpdateRulesOfIpGroupOutput = struct {
-};
+pub const UpdateRulesOfIpGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRulesOfIpGroupInput, options: CallOptions) !UpdateRulesOfIpGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

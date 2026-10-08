@@ -18,8 +18,7 @@ pub const SendEmailVerificationCodeInput = struct {
     };
 };
 
-pub const SendEmailVerificationCodeOutput = struct {
-};
+pub const SendEmailVerificationCodeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendEmailVerificationCodeInput, options: CallOptions) !SendEmailVerificationCodeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

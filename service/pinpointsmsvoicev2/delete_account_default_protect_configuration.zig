@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteAccountDefaultProtectConfigurationInput = struct {
-};
+pub const DeleteAccountDefaultProtectConfigurationInput = struct {};
 
 pub const DeleteAccountDefaultProtectConfigurationOutput = struct {
     /// The Amazon Resource Name (ARN) of the account default protect configuration.

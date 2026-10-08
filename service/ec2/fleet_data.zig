@@ -120,7 +120,7 @@ pub const FleetData = struct {
     /// places the required requests to meet this target capacity. It also
     /// automatically
     /// replenishes any interrupted Spot Instances. Default: `maintain`.
-    @"type": ?FleetType = null,
+    type: ?FleetType = null,
 
     /// The start date and time of the request, in UTC format (for example,
     /// *YYYY*-*MM*-*DD*T*HH*:*MM*:*SS*Z).

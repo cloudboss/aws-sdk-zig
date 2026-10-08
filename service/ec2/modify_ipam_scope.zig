@@ -88,7 +88,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyIpamScopeInput, c
             try body_buf.appendSlice(allocator, "&ExternalAuthorityConfiguration.ExternalResourceIdentifier=");
             try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
-        if (v.@"type") |sv| {
+        if (v.type) |sv| {
             try body_buf.appendSlice(allocator, "&ExternalAuthorityConfiguration.Type=");
             try aws.url.appendUrlEncoded(allocator, &body_buf, sv.wireName());
         }

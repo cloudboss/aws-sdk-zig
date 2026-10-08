@@ -8,5 +8,4 @@
 /// boundaries of the data don't matter, such as for continuous performance,
 /// latency, or
 /// resource-exhaustion monitoring.
-pub const SlidingWindow = struct {
-};
+pub const SlidingWindow = struct {};

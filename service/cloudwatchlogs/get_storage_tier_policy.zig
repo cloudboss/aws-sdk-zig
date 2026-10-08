@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const StorageTier = @import("storage_tier.zig").StorageTier;
 
-pub const GetStorageTierPolicyInput = struct {
-};
+pub const GetStorageTierPolicyInput = struct {};
 
 pub const GetStorageTierPolicyOutput = struct {
     /// The time when the storage tier policy was last updated, expressed as the

@@ -14,8 +14,7 @@ pub const DisassociateBrowserSettingsInput = struct {
     };
 };
 
-pub const DisassociateBrowserSettingsOutput = struct {
-};
+pub const DisassociateBrowserSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateBrowserSettingsInput, options: CallOptions) !DisassociateBrowserSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

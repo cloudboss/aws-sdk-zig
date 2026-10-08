@@ -14,8 +14,7 @@ pub const DeleteApiCacheInput = struct {
     };
 };
 
-pub const DeleteApiCacheOutput = struct {
-};
+pub const DeleteApiCacheOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteApiCacheInput, options: CallOptions) !DeleteApiCacheOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

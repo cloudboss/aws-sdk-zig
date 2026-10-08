@@ -46,7 +46,7 @@ pub const DaemonActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeDaemon(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeDaemon(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -108,7 +108,7 @@ pub const DaemonTaskDefinitionActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeDaemonTaskDefinition(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeDaemonTaskDefinition(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -177,7 +177,7 @@ pub const DaemonTaskDefinitionDeletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeDaemonTaskDefinition(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeDaemonTaskDefinition(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

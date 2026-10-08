@@ -5,9 +5,12 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteLoadBalancerInput = @import("delete_access_point_input.zig").DeleteAccessPointInput;
+pub const DeleteLoadBalancerInput = struct {
+    /// The name of the load balancer.
+    load_balancer_name: []const u8,
+};
 
-pub const DeleteLoadBalancerOutput = @import("delete_access_point_output.zig").DeleteAccessPointOutput;
+pub const DeleteLoadBalancerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLoadBalancerInput, options: CallOptions) !DeleteLoadBalancerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

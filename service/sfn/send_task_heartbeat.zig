@@ -18,8 +18,7 @@ pub const SendTaskHeartbeatInput = struct {
     };
 };
 
-pub const SendTaskHeartbeatOutput = struct {
-};
+pub const SendTaskHeartbeatOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendTaskHeartbeatInput, options: CallOptions) !SendTaskHeartbeatOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

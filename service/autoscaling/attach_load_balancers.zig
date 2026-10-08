@@ -14,8 +14,7 @@ pub const AttachLoadBalancersInput = struct {
     load_balancer_names: []const []const u8,
 };
 
-pub const AttachLoadBalancersOutput = struct {
-};
+pub const AttachLoadBalancersOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AttachLoadBalancersInput, options: CallOptions) !AttachLoadBalancersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

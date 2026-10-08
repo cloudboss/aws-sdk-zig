@@ -63,8 +63,7 @@ pub const AdminSetUserMFAPreferenceInput = struct {
     };
 };
 
-pub const AdminSetUserMFAPreferenceOutput = struct {
-};
+pub const AdminSetUserMFAPreferenceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminSetUserMFAPreferenceInput, options: CallOptions) !AdminSetUserMFAPreferenceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

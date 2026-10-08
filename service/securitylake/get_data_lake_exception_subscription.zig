@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetDataLakeExceptionSubscriptionInput = struct {
-};
+pub const GetDataLakeExceptionSubscriptionInput = struct {};
 
 pub const GetDataLakeExceptionSubscriptionOutput = struct {
     /// The expiration period and time-to-live (TTL). It is the duration of time

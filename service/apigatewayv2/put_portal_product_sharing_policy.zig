@@ -18,8 +18,7 @@ pub const PutPortalProductSharingPolicyInput = struct {
     };
 };
 
-pub const PutPortalProductSharingPolicyOutput = struct {
-};
+pub const PutPortalProductSharingPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutPortalProductSharingPolicyInput, options: CallOptions) !PutPortalProductSharingPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

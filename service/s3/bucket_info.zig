@@ -14,5 +14,5 @@ pub const BucketInfo = struct {
     data_redundancy: ?DataRedundancy = null,
 
     /// The type of bucket.
-    @"type": ?BucketType = null,
+    type: ?BucketType = null,
 };

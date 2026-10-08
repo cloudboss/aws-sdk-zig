@@ -18,8 +18,7 @@ pub const AssociateWirelessDeviceWithThingInput = struct {
     };
 };
 
-pub const AssociateWirelessDeviceWithThingOutput = struct {
-};
+pub const AssociateWirelessDeviceWithThingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateWirelessDeviceWithThingInput, options: CallOptions) !AssociateWirelessDeviceWithThingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

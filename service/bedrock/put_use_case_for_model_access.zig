@@ -14,8 +14,7 @@ pub const PutUseCaseForModelAccessInput = struct {
     };
 };
 
-pub const PutUseCaseForModelAccessOutput = struct {
-};
+pub const PutUseCaseForModelAccessOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutUseCaseForModelAccessInput, options: CallOptions) !PutUseCaseForModelAccessOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

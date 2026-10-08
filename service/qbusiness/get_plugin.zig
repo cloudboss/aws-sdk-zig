@@ -55,7 +55,7 @@ pub const GetPluginOutput = struct {
     state: ?PluginState = null,
 
     /// The type of the plugin.
-    @"type": ?PluginType = null,
+    type: ?PluginType = null,
 
     /// The timestamp for when the plugin was last updated.
     updated_at: ?i64 = null,
@@ -71,7 +71,7 @@ pub const GetPluginOutput = struct {
         .plugin_id = "pluginId",
         .server_url = "serverUrl",
         .state = "state",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
     };
 };

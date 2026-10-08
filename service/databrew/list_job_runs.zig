@@ -6,9 +6,36 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const JobRun = @import("job_run.zig").JobRun;
 
-pub const ListJobRunsInput = @import("list_job_runs_request.zig").ListJobRunsRequest;
+pub const ListJobRunsInput = struct {
+    /// The maximum number of results to return in this request.
+    max_results: ?i32 = null,
 
-pub const ListJobRunsOutput = @import("list_job_runs_response.zig").ListJobRunsResponse;
+    /// The name of the job.
+    name: []const u8,
+
+    /// The token returned by a previous call to retrieve the next set of results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .name = "Name",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListJobRunsOutput = struct {
+    /// A list of job runs that have occurred for the specified job.
+    job_runs: ?[]const JobRun = null,
+
+    /// A token that you can use in a subsequent call to retrieve the next set of
+    /// results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .job_runs = "JobRuns",
+        .next_token = "NextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListJobRunsInput, options: CallOptions) !ListJobRunsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

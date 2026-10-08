@@ -6,9 +6,31 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// A unique, case-sensitive identifier that you provide to ensure the
+    /// idempotency of the request. Must be 1-64 characters long and contain only
+    /// alphanumeric characters, underscores, and hyphens.
+    client_token: ?[]const u8 = null,
 
-pub const TagResourceOutput = @import("tag_resource_response.zig").TagResourceResponse;
+    /// The ARN of the resource to tag.
+    resource_arn: []const u8,
+
+    /// The revision number of the automation rule to tag. This ensures you're
+    /// tagging the correct version of the rule.
+    rule_revision: i64,
+
+    /// The tags to add to the resource.
+    tags: []const Tag,
+
+    pub const json_field_names = .{
+        .client_token = "clientToken",
+        .resource_arn = "resourceArn",
+        .rule_revision = "ruleRevision",
+        .tags = "tags",
+    };
+};
+
+pub const TagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TagResourceInput, options: CallOptions) !TagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -23,8 +23,7 @@ pub const PutEntityTypeInput = struct {
     };
 };
 
-pub const PutEntityTypeOutput = struct {
-};
+pub const PutEntityTypeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutEntityTypeInput, options: CallOptions) !PutEntityTypeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

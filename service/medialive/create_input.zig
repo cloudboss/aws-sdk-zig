@@ -73,7 +73,7 @@ pub const CreateInputInput = struct {
     /// A collection of key-value pairs.
     tags: ?[]const aws.map.StringMapEntry = null,
 
-    @"type": ?InputType = null,
+    type: ?InputType = null,
 
     vpc: ?InputVpcRequest = null,
 
@@ -93,7 +93,7 @@ pub const CreateInputInput = struct {
         .sources = "Sources",
         .srt_settings = "SrtSettings",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
         .vpc = "Vpc",
     };
 };
@@ -232,7 +232,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInputInput, confi
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Type\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);

@@ -62,7 +62,14 @@ pub const CreateSessionInput = struct {
     };
 };
 
-pub const CreateSessionOutput = @import("create_session_response.zig").CreateSessionResponse;
+pub const CreateSessionOutput = struct {
+    /// The session.
+    session: ?SessionData = null,
+
+    pub const json_field_names = .{
+        .session = "session",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSessionInput, options: CallOptions) !CreateSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -7,10 +7,10 @@ pub const Authentication = struct {
     password_count: ?i32 = null,
 
     /// Indicates whether the user requires a password to authenticate.
-    @"type": ?AuthenticationType = null,
+    type: ?AuthenticationType = null,
 
     pub const json_field_names = .{
         .password_count = "PasswordCount",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

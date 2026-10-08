@@ -30,5 +30,5 @@ pub const ClientVpnRoute = struct {
     transit_gateway_attachment_id: ?[]const u8 = null,
 
     /// The route type.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 };

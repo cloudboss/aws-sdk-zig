@@ -54,7 +54,7 @@ pub const ResourceConfigurationSummary = struct {
     /// * `ARN` - An Amazon Web Services resource.
     /// * `CIDR` - A network segment (a range of IP addresses) accessed through a
     ///   `Tunnel` VPC endpoint.
-    @"type": ?ResourceConfigurationType = null,
+    type: ?ResourceConfigurationType = null,
 
     pub const json_field_names = .{
         .amazon_managed = "amazonManaged",
@@ -69,6 +69,6 @@ pub const ResourceConfigurationSummary = struct {
         .resource_configuration_group_id = "resourceConfigurationGroupId",
         .resource_gateway_id = "resourceGatewayId",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };

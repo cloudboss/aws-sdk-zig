@@ -19,7 +19,7 @@ pub const Snapshot = struct {
     status: ?SnapshotStatus = null,
 
     /// The snapshot type.
-    @"type": ?SnapshotType = null,
+    type: ?SnapshotType = null,
 
     pub const json_field_names = .{
         .directory_id = "DirectoryId",
@@ -27,6 +27,6 @@ pub const Snapshot = struct {
         .snapshot_id = "SnapshotId",
         .start_time = "StartTime",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

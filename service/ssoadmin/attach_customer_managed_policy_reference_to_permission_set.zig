@@ -26,8 +26,7 @@ pub const AttachCustomerManagedPolicyReferenceToPermissionSetInput = struct {
     };
 };
 
-pub const AttachCustomerManagedPolicyReferenceToPermissionSetOutput = struct {
-};
+pub const AttachCustomerManagedPolicyReferenceToPermissionSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AttachCustomerManagedPolicyReferenceToPermissionSetInput, options: CallOptions) !AttachCustomerManagedPolicyReferenceToPermissionSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

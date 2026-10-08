@@ -14,8 +14,7 @@ pub const DeletePlaybackKeyPairInput = struct {
     };
 };
 
-pub const DeletePlaybackKeyPairOutput = struct {
-};
+pub const DeletePlaybackKeyPairOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePlaybackKeyPairInput, options: CallOptions) !DeletePlaybackKeyPairOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

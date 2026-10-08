@@ -6,9 +6,31 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ApplicationSummary = @import("application_summary.zig").ApplicationSummary;
 
-pub const ListApplicationsInput = @import("list_applications_request.zig").ListApplicationsRequest;
+pub const ListApplicationsInput = struct {
+    /// Maximum number of results to return
+    max_results: ?i32 = null,
 
-pub const ListApplicationsOutput = @import("list_applications_response.zig").ListApplicationsResponse;
+    /// Next Page Token
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+    };
+};
+
+pub const ListApplicationsOutput = struct {
+    /// List of applications
+    applications: ?[]const ApplicationSummary = null,
+
+    /// Next Page Token
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .applications = "applications",
+        .next_token = "nextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListApplicationsInput, options: CallOptions) !ListApplicationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

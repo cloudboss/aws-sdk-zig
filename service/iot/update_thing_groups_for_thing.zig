@@ -32,8 +32,7 @@ pub const UpdateThingGroupsForThingInput = struct {
     };
 };
 
-pub const UpdateThingGroupsForThingOutput = struct {
-};
+pub const UpdateThingGroupsForThingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateThingGroupsForThingInput, options: CallOptions) !UpdateThingGroupsForThingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

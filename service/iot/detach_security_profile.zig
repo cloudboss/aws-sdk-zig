@@ -18,8 +18,7 @@ pub const DetachSecurityProfileInput = struct {
     };
 };
 
-pub const DetachSecurityProfileOutput = struct {
-};
+pub const DetachSecurityProfileOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DetachSecurityProfileInput, options: CallOptions) !DetachSecurityProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

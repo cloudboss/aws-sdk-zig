@@ -20,7 +20,7 @@ pub const UpdateUserProfileInput = struct {
     status: UserProfileStatus,
 
     /// The type of the user profile that are to be updated.
-    @"type": ?UserProfileType = null,
+    type: ?UserProfileType = null,
 
     /// The identifier of the user whose user profile is to be updated.
     user_identifier: []const u8,
@@ -29,7 +29,7 @@ pub const UpdateUserProfileInput = struct {
         .domain_identifier = "domainIdentifier",
         .session_name = "sessionName",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
         .user_identifier = "userIdentifier",
     };
 };
@@ -49,14 +49,14 @@ pub const UpdateUserProfileOutput = struct {
     status: ?UserProfileStatus = null,
 
     /// The type of the user profile.
-    @"type": ?UserProfileType = null,
+    type: ?UserProfileType = null,
 
     pub const json_field_names = .{
         .details = "details",
         .domain_id = "domainId",
         .id = "id",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -111,7 +111,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateUserProfileInput,
     try body_buf.appendSlice(allocator, "\"status\":");
     try aws.json.writeValue(@TypeOf(input.status), input.status, allocator, &body_buf);
     has_prev = true;
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"type\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);

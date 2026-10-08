@@ -20,13 +20,13 @@ pub const IntermediateTableDependency = struct {
     parent_type: BaseTableParentType,
 
     /// The type of the dependency table.
-    @"type": BaseTableDependencyType,
+    type: BaseTableDependencyType,
 
     pub const json_field_names = .{
         .creator_account_id = "creatorAccountId",
         .id = "id",
         .name = "name",
         .parent_type = "parentType",
-        .@"type" = "type",
+        .type = "type",
     };
 };

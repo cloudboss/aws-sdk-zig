@@ -18,8 +18,7 @@ pub const DeleteStorageProfileInput = struct {
     };
 };
 
-pub const DeleteStorageProfileOutput = struct {
-};
+pub const DeleteStorageProfileOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteStorageProfileInput, options: CallOptions) !DeleteStorageProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

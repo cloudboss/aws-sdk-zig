@@ -50,8 +50,7 @@ pub const UpdateAccountAuditConfigurationInput = struct {
     };
 };
 
-pub const UpdateAccountAuditConfigurationOutput = struct {
-};
+pub const UpdateAccountAuditConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAccountAuditConfigurationInput, options: CallOptions) !UpdateAccountAuditConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -21,8 +21,7 @@ pub const DisableUserInput = struct {
     };
 };
 
-pub const DisableUserOutput = struct {
-};
+pub const DisableUserOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableUserInput, options: CallOptions) !DisableUserOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

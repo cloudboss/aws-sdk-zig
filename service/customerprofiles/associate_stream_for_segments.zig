@@ -35,8 +35,7 @@ pub const AssociateStreamForSegmentsInput = struct {
     };
 };
 
-pub const AssociateStreamForSegmentsOutput = struct {
-};
+pub const AssociateStreamForSegmentsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateStreamForSegmentsInput, options: CallOptions) !AssociateStreamForSegmentsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

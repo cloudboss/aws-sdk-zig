@@ -20,8 +20,7 @@ pub const DeleteSlackChannelConfigurationInput = struct {
     };
 };
 
-pub const DeleteSlackChannelConfigurationOutput = struct {
-};
+pub const DeleteSlackChannelConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSlackChannelConfigurationInput, options: CallOptions) !DeleteSlackChannelConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

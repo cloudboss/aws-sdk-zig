@@ -5,9 +5,17 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteProjectInput = @import("delete_project_request.zig").DeleteProjectRequest;
+pub const DeleteProjectInput = struct {
+    /// Represents the Amazon Resource Name (ARN) of the Device Farm project to
+    /// delete.
+    arn: []const u8,
 
-pub const DeleteProjectOutput = @import("delete_project_result.zig").DeleteProjectResult;
+    pub const json_field_names = .{
+        .arn = "arn",
+    };
+};
+
+pub const DeleteProjectOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteProjectInput, options: CallOptions) !DeleteProjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

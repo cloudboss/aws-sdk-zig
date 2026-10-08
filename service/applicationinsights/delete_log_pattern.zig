@@ -22,8 +22,7 @@ pub const DeleteLogPatternInput = struct {
     };
 };
 
-pub const DeleteLogPatternOutput = struct {
-};
+pub const DeleteLogPatternOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLogPatternInput, options: CallOptions) !DeleteLogPatternOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

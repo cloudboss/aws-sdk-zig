@@ -60,7 +60,7 @@ pub const CreateCustomerGatewayInput = struct {
 
     /// The type of VPN connection that this customer gateway supports
     /// (`ipsec.1`).
-    @"type": GatewayType,
+    type: GatewayType,
 };
 
 pub const CreateCustomerGatewayOutput = struct {
@@ -146,7 +146,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCustomerGatewayIn
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.key) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -154,7 +154,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCustomerGatewayIn
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.value) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -164,7 +164,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCustomerGatewayIn
         }
     }
     try body_buf.appendSlice(allocator, "&Type=");
-    try aws.url.appendUrlEncoded(allocator, &body_buf, input.@"type".wireName());
+    try aws.url.appendUrlEncoded(allocator, &body_buf, input.type.wireName());
 
     const body = try body_buf.toOwnedSlice(allocator);
 

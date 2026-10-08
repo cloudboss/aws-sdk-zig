@@ -36,8 +36,7 @@ pub const UpdateStreamStorageConfigurationInput = struct {
     };
 };
 
-pub const UpdateStreamStorageConfigurationOutput = struct {
-};
+pub const UpdateStreamStorageConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateStreamStorageConfigurationInput, options: CallOptions) !UpdateStreamStorageConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -15,16 +15,15 @@ pub const EnableClientAuthenticationInput = struct {
     /// that you enable Kerberos Constrained Delegation for the Service User to the
     /// LDAP service in
     /// your self-managed AD.
-    @"type": ClientAuthenticationType,
+    type: ClientAuthenticationType,
 
     pub const json_field_names = .{
         .directory_id = "DirectoryId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
-pub const EnableClientAuthenticationOutput = struct {
-};
+pub const EnableClientAuthenticationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableClientAuthenticationInput, options: CallOptions) !EnableClientAuthenticationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

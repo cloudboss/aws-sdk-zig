@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetSnowballUsageInput = struct {
-};
+pub const GetSnowballUsageInput = struct {};
 
 pub const GetSnowballUsageOutput = struct {
     /// The service limit for number of Snow devices this account can have at once.

@@ -120,7 +120,7 @@ pub const GetInterpolatedAssetPropertyValuesInput = struct {
     /// interpolated value. If a data point isn't found after 9 AM on July 2, 2021,
     /// IoT SiteWise uses the
     /// same interpolated value for the rest of the days.
-    @"type": []const u8,
+    type: []const u8,
 
     pub const json_field_names = .{
         .asset_id = "assetId",
@@ -135,7 +135,7 @@ pub const GetInterpolatedAssetPropertyValuesInput = struct {
         .quality = "quality",
         .start_time_in_seconds = "startTimeInSeconds",
         .start_time_offset_in_nanos = "startTimeOffsetInNanos",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -274,7 +274,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetInterpolatedAssetPro
     }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "type=");
-    try aws.url.appendUrlEncoded(allocator, &query_buf, input.@"type");
+    try aws.url.appendUrlEncoded(allocator, &query_buf, input.type);
     query_has_prev = true;
     const query = try query_buf.toOwnedSlice(allocator);
 

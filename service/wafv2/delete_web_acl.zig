@@ -46,8 +46,7 @@ pub const DeleteWebACLInput = struct {
     };
 };
 
-pub const DeleteWebACLOutput = struct {
-};
+pub const DeleteWebACLOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteWebACLInput, options: CallOptions) !DeleteWebACLOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

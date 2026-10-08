@@ -27,8 +27,7 @@ pub const TestHypervisorConfigurationInput = struct {
     };
 };
 
-pub const TestHypervisorConfigurationOutput = struct {
-};
+pub const TestHypervisorConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TestHypervisorConfigurationInput, options: CallOptions) !TestHypervisorConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

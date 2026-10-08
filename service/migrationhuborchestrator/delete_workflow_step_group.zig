@@ -18,8 +18,7 @@ pub const DeleteWorkflowStepGroupInput = struct {
     };
 };
 
-pub const DeleteWorkflowStepGroupOutput = struct {
-};
+pub const DeleteWorkflowStepGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteWorkflowStepGroupInput, options: CallOptions) !DeleteWorkflowStepGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -18,8 +18,7 @@ pub const DeleteVectorBucketInput = struct {
     };
 };
 
-pub const DeleteVectorBucketOutput = struct {
-};
+pub const DeleteVectorBucketOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVectorBucketInput, options: CallOptions) !DeleteVectorBucketOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -18,8 +18,7 @@ pub const RevokeIpRulesInput = struct {
     };
 };
 
-pub const RevokeIpRulesOutput = struct {
-};
+pub const RevokeIpRulesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RevokeIpRulesInput, options: CallOptions) !RevokeIpRulesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -58,8 +58,7 @@ pub const UpdateTimelineEventInput = struct {
     };
 };
 
-pub const UpdateTimelineEventOutput = struct {
-};
+pub const UpdateTimelineEventOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTimelineEventInput, options: CallOptions) !UpdateTimelineEventOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

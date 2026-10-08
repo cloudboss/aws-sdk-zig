@@ -14,8 +14,7 @@ pub const DeleteLabelInput = struct {
     };
 };
 
-pub const DeleteLabelOutput = struct {
-};
+pub const DeleteLabelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLabelInput, options: CallOptions) !DeleteLabelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

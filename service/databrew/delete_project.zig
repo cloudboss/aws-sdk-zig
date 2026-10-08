@@ -5,9 +5,23 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteProjectInput = @import("delete_project_request.zig").DeleteProjectRequest;
+pub const DeleteProjectInput = struct {
+    /// The name of the project to be deleted.
+    name: []const u8,
 
-pub const DeleteProjectOutput = @import("delete_project_response.zig").DeleteProjectResponse;
+    pub const json_field_names = .{
+        .name = "Name",
+    };
+};
+
+pub const DeleteProjectOutput = struct {
+    /// The name of the project that you deleted.
+    name: []const u8,
+
+    pub const json_field_names = .{
+        .name = "Name",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteProjectInput, options: CallOptions) !DeleteProjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

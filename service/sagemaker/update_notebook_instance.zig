@@ -127,8 +127,7 @@ pub const UpdateNotebookInstanceInput = struct {
     };
 };
 
-pub const UpdateNotebookInstanceOutput = struct {
-};
+pub const UpdateNotebookInstanceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateNotebookInstanceInput, options: CallOptions) !UpdateNotebookInstanceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

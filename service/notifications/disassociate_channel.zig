@@ -18,8 +18,7 @@ pub const DisassociateChannelInput = struct {
     };
 };
 
-pub const DisassociateChannelOutput = struct {
-};
+pub const DisassociateChannelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateChannelInput, options: CallOptions) !DisassociateChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const StartFleetInput = struct {
     };
 };
 
-pub const StartFleetOutput = struct {
-};
+pub const StartFleetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartFleetInput, options: CallOptions) !StartFleetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

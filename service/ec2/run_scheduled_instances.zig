@@ -238,7 +238,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RunScheduledInstancesIn
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.Group.{d}=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.Group.{d}=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
                     }
@@ -258,7 +258,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RunScheduledInstancesIn
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.ipv_6_address) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.Ipv6Address.{d}.Ipv6Address=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.Ipv6Address.{d}.Ipv6Address=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -287,7 +287,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RunScheduledInstancesIn
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.primary) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.PrivateIpAddressConfig.{d}.Primary=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.PrivateIpAddressConfig.{d}.Primary=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, if (fv_2) "true" else "false");
                         }
@@ -295,7 +295,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RunScheduledInstancesIn
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.private_ip_address) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.PrivateIpAddressConfig.{d}.PrivateIpAddress=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&LaunchSpecification.NetworkInterface.{d}.PrivateIpAddressConfig.{d}.PrivateIpAddress=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }

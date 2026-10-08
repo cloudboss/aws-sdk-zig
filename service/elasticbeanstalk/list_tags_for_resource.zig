@@ -7,9 +7,22 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_message.zig").ListTagsForResourceMessage;
+pub const ListTagsForResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the resouce for which a tag list is
+    /// requested.
+    ///
+    /// Must be the ARN of an Elastic Beanstalk resource.
+    resource_arn: []const u8,
+};
 
-pub const ListTagsForResourceOutput = @import("resource_tags_description_message.zig").ResourceTagsDescriptionMessage;
+pub const ListTagsForResourceOutput = struct {
+    /// The Amazon Resource Name (ARN) of the resource for which a tag list was
+    /// requested.
+    resource_arn: ?[]const u8 = null,
+
+    /// A list of tag key-value pairs.
+    resource_tags: ?[]const Tag = null,
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

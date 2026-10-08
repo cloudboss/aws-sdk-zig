@@ -17,8 +17,7 @@ pub const UpdateEventSourcesConfigInput = struct {
     };
 };
 
-pub const UpdateEventSourcesConfigOutput = struct {
-};
+pub const UpdateEventSourcesConfigOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateEventSourcesConfigInput, options: CallOptions) !UpdateEventSourcesConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

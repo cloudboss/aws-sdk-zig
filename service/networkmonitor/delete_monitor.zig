@@ -14,8 +14,7 @@ pub const DeleteMonitorInput = struct {
     };
 };
 
-pub const DeleteMonitorOutput = struct {
-};
+pub const DeleteMonitorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMonitorInput, options: CallOptions) !DeleteMonitorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

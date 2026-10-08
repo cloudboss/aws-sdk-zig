@@ -7,8 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ConfigurationStatus = @import("configuration_status.zig").ConfigurationStatus;
 const EncryptionType = @import("encryption_type.zig").EncryptionType;
 
-pub const GetDefaultEncryptionConfigurationInput = struct {
-};
+pub const GetDefaultEncryptionConfigurationInput = struct {};
 
 pub const GetDefaultEncryptionConfigurationOutput = struct {
     /// Provides the status of the default encryption configuration for an Amazon

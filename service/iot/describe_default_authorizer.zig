@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AuthorizerDescription = @import("authorizer_description.zig").AuthorizerDescription;
 
-pub const DescribeDefaultAuthorizerInput = struct {
-};
+pub const DescribeDefaultAuthorizerInput = struct {};
 
 pub const DescribeDefaultAuthorizerOutput = struct {
     /// The default authorizer's description.

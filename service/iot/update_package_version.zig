@@ -58,8 +58,7 @@ pub const UpdatePackageVersionInput = struct {
     };
 };
 
-pub const UpdatePackageVersionOutput = struct {
-};
+pub const UpdatePackageVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdatePackageVersionInput, options: CallOptions) !UpdatePackageVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

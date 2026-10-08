@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const StartSavingsPlansPurchaseRecommendationGenerationInput = struct {
-};
+pub const StartSavingsPlansPurchaseRecommendationGenerationInput = struct {};
 
 pub const StartSavingsPlansPurchaseRecommendationGenerationOutput = struct {
     /// The estimated time for when the recommendation generation will complete.

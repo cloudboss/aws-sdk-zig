@@ -24,8 +24,7 @@ pub const UpdateDocumentMetadataInput = struct {
     };
 };
 
-pub const UpdateDocumentMetadataOutput = struct {
-};
+pub const UpdateDocumentMetadataOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDocumentMetadataInput, options: CallOptions) !UpdateDocumentMetadataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -57,8 +57,7 @@ pub const UpdateDataSourceInput = struct {
     };
 };
 
-pub const UpdateDataSourceOutput = struct {
-};
+pub const UpdateDataSourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDataSourceInput, options: CallOptions) !UpdateDataSourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

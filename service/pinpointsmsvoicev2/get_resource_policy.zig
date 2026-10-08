@@ -5,9 +5,35 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetResourcePolicyInput = @import("get_resource_policy_request.zig").GetResourcePolicyRequest;
+pub const GetResourcePolicyInput = struct {
+    /// The Amazon Resource Name (ARN) of the End User Messaging SMS resource
+    /// attached to the resource-based policy.
+    resource_arn: []const u8,
 
-pub const GetResourcePolicyOutput = @import("get_resource_policy_result.zig").GetResourcePolicyResult;
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+    };
+};
+
+pub const GetResourcePolicyOutput = struct {
+    /// The time when the resource-based policy was created, in [UNIX epoch
+    /// time](https://www.epochconverter.com/) format.
+    created_timestamp: ?i64 = null,
+
+    /// The JSON formatted string that contains the resource-based policy attached
+    /// to the End User Messaging SMS resource.
+    policy: ?[]const u8 = null,
+
+    /// The Amazon Resource Name (ARN) of the End User Messaging SMS resource
+    /// attached to the resource-based policy.
+    resource_arn: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .created_timestamp = "CreatedTimestamp",
+        .policy = "Policy",
+        .resource_arn = "ResourceArn",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResourcePolicyInput, options: CallOptions) !GetResourcePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

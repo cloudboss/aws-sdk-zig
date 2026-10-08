@@ -41,7 +41,7 @@ pub const ListNotebooksInput = struct {
     status: ?NotebookStatus = null,
 
     /// The type to filter notebooks by.
-    @"type": ?NotebookType = null,
+    type: ?NotebookType = null,
 
     pub const json_field_names = .{
         .domain_identifier = "domainIdentifier",
@@ -51,7 +51,7 @@ pub const ListNotebooksInput = struct {
         .sort_by = "sortBy",
         .sort_order = "sortOrder",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -148,7 +148,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListNotebooksInput, con
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());

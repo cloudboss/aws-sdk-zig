@@ -11,7 +11,14 @@ const MacSecKey = @import("mac_sec_key.zig").MacSecKey;
 const RateLimiterStatus = @import("rate_limiter_status.zig").RateLimiterStatus;
 const Tag = @import("tag.zig").Tag;
 
-pub const DeleteConnectionInput = @import("delete_connection_request.zig").DeleteConnectionRequest;
+pub const DeleteConnectionInput = struct {
+    /// The ID of the connection.
+    connection_id: []const u8,
+
+    pub const json_field_names = .{
+        .connection_id = "connectionId",
+    };
+};
 
 pub const DeleteConnectionOutput = @import("connection.zig").Connection;
 

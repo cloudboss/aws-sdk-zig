@@ -20,8 +20,7 @@ pub const DeleteIdNamespaceAssociationInput = struct {
     };
 };
 
-pub const DeleteIdNamespaceAssociationOutput = struct {
-};
+pub const DeleteIdNamespaceAssociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIdNamespaceAssociationInput, options: CallOptions) !DeleteIdNamespaceAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

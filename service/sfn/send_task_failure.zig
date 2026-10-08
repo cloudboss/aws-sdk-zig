@@ -26,8 +26,7 @@ pub const SendTaskFailureInput = struct {
     };
 };
 
-pub const SendTaskFailureOutput = struct {
-};
+pub const SendTaskFailureOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendTaskFailureInput, options: CallOptions) !SendTaskFailureOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

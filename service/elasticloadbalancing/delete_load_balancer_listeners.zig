@@ -14,8 +14,7 @@ pub const DeleteLoadBalancerListenersInput = struct {
     load_balancer_ports: []const i32,
 };
 
-pub const DeleteLoadBalancerListenersOutput = struct {
-};
+pub const DeleteLoadBalancerListenersOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLoadBalancerListenersInput, options: CallOptions) !DeleteLoadBalancerListenersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

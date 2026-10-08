@@ -30,8 +30,7 @@ pub const StartContactRecordingInput = struct {
     };
 };
 
-pub const StartContactRecordingOutput = struct {
-};
+pub const StartContactRecordingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartContactRecordingInput, options: CallOptions) !StartContactRecordingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

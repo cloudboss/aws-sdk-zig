@@ -14,8 +14,7 @@ pub const DeleteDeviceProfileInput = struct {
     };
 };
 
-pub const DeleteDeviceProfileOutput = struct {
-};
+pub const DeleteDeviceProfileOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDeviceProfileInput, options: CallOptions) !DeleteDeviceProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

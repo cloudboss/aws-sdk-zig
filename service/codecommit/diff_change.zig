@@ -24,12 +24,12 @@ pub const DiffChange = struct {
     /// * `ADD` – Line added in the after blob.
     ///
     /// * `DELETE` – Line removed from the before blob.
-    @"type": ?DiffChangeType = null,
+    type: ?DiffChangeType = null,
 
     pub const json_field_names = .{
         .after_line_number = "afterLineNumber",
         .before_line_number = "beforeLineNumber",
         .content = "content",
-        .@"type" = "type",
+        .type = "type",
     };
 };

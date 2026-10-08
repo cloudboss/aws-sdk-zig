@@ -5,14 +5,14 @@ pub const AwsCodeBuildProjectEnvironmentEnvironmentVariablesDetails = struct {
     name: ?[]const u8 = null,
 
     /// The type of environment variable.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The value of the environment variable.
     value: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
         .value = "Value",
     };
 };

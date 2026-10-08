@@ -23,8 +23,7 @@ pub const UpdateModelInput = struct {
     };
 };
 
-pub const UpdateModelOutput = struct {
-};
+pub const UpdateModelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateModelInput, options: CallOptions) !UpdateModelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

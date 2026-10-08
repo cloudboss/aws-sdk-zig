@@ -33,8 +33,7 @@ pub const UpdateFacetInput = struct {
     };
 };
 
-pub const UpdateFacetOutput = struct {
-};
+pub const UpdateFacetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateFacetInput, options: CallOptions) !UpdateFacetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -191,8 +191,7 @@ pub const DeleteScheduledActionInput = struct {
     };
 };
 
-pub const DeleteScheduledActionOutput = struct {
-};
+pub const DeleteScheduledActionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteScheduledActionInput, options: CallOptions) !DeleteScheduledActionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

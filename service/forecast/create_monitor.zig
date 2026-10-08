@@ -6,9 +6,32 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const CreateMonitorInput = @import("create_monitor_request.zig").CreateMonitorRequest;
+pub const CreateMonitorInput = struct {
+    /// The name of the monitor resource.
+    monitor_name: []const u8,
 
-pub const CreateMonitorOutput = @import("create_monitor_response.zig").CreateMonitorResponse;
+    /// The Amazon Resource Name (ARN) of the predictor to monitor.
+    resource_arn: []const u8,
+
+    /// A list of
+    /// [tags](https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html) to apply to the monitor resource.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .monitor_name = "MonitorName",
+        .resource_arn = "ResourceArn",
+        .tags = "Tags",
+    };
+};
+
+pub const CreateMonitorOutput = struct {
+    /// The Amazon Resource Name (ARN) of the monitor resource.
+    monitor_arn: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .monitor_arn = "MonitorArn",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMonitorInput, options: CallOptions) !CreateMonitorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

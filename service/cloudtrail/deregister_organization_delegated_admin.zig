@@ -16,8 +16,7 @@ pub const DeregisterOrganizationDelegatedAdminInput = struct {
     };
 };
 
-pub const DeregisterOrganizationDelegatedAdminOutput = struct {
-};
+pub const DeregisterOrganizationDelegatedAdminOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterOrganizationDelegatedAdminInput, options: CallOptions) !DeregisterOrganizationDelegatedAdminOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

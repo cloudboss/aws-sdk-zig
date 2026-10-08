@@ -5,7 +5,14 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteAccessPointInput = @import("delete_access_point_request.zig").DeleteAccessPointRequest;
+pub const DeleteAccessPointInput = struct {
+    /// The ID of the access point that you want to delete.
+    access_point_id: []const u8,
+
+    pub const json_field_names = .{
+        .access_point_id = "AccessPointId",
+    };
+};
 
 pub const DeleteAccessPointOutput = struct {};
 

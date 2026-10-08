@@ -20,8 +20,7 @@ pub const PutConfigurationSetArchivingOptionsInput = struct {
     };
 };
 
-pub const PutConfigurationSetArchivingOptionsOutput = struct {
-};
+pub const PutConfigurationSetArchivingOptionsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutConfigurationSetArchivingOptionsInput, options: CallOptions) !PutConfigurationSetArchivingOptionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

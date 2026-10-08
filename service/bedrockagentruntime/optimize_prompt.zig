@@ -21,7 +21,6 @@ pub const OptimizePromptInput = struct {
 };
 
 pub const OptimizePromptOutput = struct {
-
     optimized_prompt: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *OptimizePromptOutput) void {

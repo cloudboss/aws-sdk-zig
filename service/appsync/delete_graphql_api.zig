@@ -14,8 +14,7 @@ pub const DeleteGraphqlApiInput = struct {
     };
 };
 
-pub const DeleteGraphqlApiOutput = struct {
-};
+pub const DeleteGraphqlApiOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteGraphqlApiInput, options: CallOptions) !DeleteGraphqlApiOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

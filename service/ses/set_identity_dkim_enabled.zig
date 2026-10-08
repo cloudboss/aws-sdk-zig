@@ -14,8 +14,7 @@ pub const SetIdentityDkimEnabledInput = struct {
     identity: []const u8,
 };
 
-pub const SetIdentityDkimEnabledOutput = struct {
-};
+pub const SetIdentityDkimEnabledOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetIdentityDkimEnabledInput, options: CallOptions) !SetIdentityDkimEnabledOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -18,8 +18,7 @@ pub const DeleteDataSourceInput = struct {
     };
 };
 
-pub const DeleteDataSourceOutput = struct {
-};
+pub const DeleteDataSourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDataSourceInput, options: CallOptions) !DeleteDataSourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

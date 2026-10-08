@@ -28,8 +28,7 @@ pub const DeleteUtterancesInput = struct {
     };
 };
 
-pub const DeleteUtterancesOutput = struct {
-};
+pub const DeleteUtterancesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteUtterancesInput, options: CallOptions) !DeleteUtterancesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

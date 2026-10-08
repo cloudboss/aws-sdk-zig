@@ -8,14 +8,14 @@ pub const ComplianceStringFilter = struct {
     /// The type of comparison that should be performed for the value: Equal,
     /// NotEqual, BeginWith,
     /// LessThan, or GreaterThan.
-    @"type": ?ComplianceQueryOperatorType = null,
+    type: ?ComplianceQueryOperatorType = null,
 
     /// The value for which to search.
     values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
         .key = "Key",
-        .@"type" = "Type",
+        .type = "Type",
         .values = "Values",
     };
 };

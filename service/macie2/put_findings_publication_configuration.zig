@@ -21,8 +21,7 @@ pub const PutFindingsPublicationConfigurationInput = struct {
     };
 };
 
-pub const PutFindingsPublicationConfigurationOutput = struct {
-};
+pub const PutFindingsPublicationConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutFindingsPublicationConfigurationInput, options: CallOptions) !PutFindingsPublicationConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

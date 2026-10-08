@@ -32,8 +32,7 @@ pub const DisassociateCreatedArtifactInput = struct {
     };
 };
 
-pub const DisassociateCreatedArtifactOutput = struct {
-};
+pub const DisassociateCreatedArtifactOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateCreatedArtifactInput, options: CallOptions) !DisassociateCreatedArtifactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -10,8 +10,7 @@ pub const DeleteReceiptFilterInput = struct {
     filter_name: []const u8,
 };
 
-pub const DeleteReceiptFilterOutput = struct {
-};
+pub const DeleteReceiptFilterOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteReceiptFilterInput, options: CallOptions) !DeleteReceiptFilterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

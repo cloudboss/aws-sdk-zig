@@ -14,8 +14,7 @@ pub const DeleteArchiveInput = struct {
     };
 };
 
-pub const DeleteArchiveOutput = struct {
-};
+pub const DeleteArchiveOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteArchiveInput, options: CallOptions) !DeleteArchiveOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

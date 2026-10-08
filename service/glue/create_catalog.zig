@@ -25,8 +25,7 @@ pub const CreateCatalogInput = struct {
     };
 };
 
-pub const CreateCatalogOutput = struct {
-};
+pub const CreateCatalogOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCatalogInput, options: CallOptions) !CreateCatalogOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

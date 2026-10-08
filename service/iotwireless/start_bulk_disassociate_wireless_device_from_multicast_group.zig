@@ -20,8 +20,7 @@ pub const StartBulkDisassociateWirelessDeviceFromMulticastGroupInput = struct {
     };
 };
 
-pub const StartBulkDisassociateWirelessDeviceFromMulticastGroupOutput = struct {
-};
+pub const StartBulkDisassociateWirelessDeviceFromMulticastGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartBulkDisassociateWirelessDeviceFromMulticastGroupInput, options: CallOptions) !StartBulkDisassociateWirelessDeviceFromMulticastGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

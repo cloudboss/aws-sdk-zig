@@ -7,7 +7,7 @@ pub const PolicyParameter = struct {
     name: ?[]const u8 = null,
 
     /// The data type of the policy parameter value.
-    @"type": ?PolicyParameterTypeEnum = null,
+    type: ?PolicyParameterTypeEnum = null,
 
     /// The allowed values for the policy parameter.
     values: ?[]const []const u8 = null,

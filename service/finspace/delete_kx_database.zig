@@ -22,8 +22,7 @@ pub const DeleteKxDatabaseInput = struct {
     };
 };
 
-pub const DeleteKxDatabaseOutput = struct {
-};
+pub const DeleteKxDatabaseOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteKxDatabaseInput, options: CallOptions) !DeleteKxDatabaseOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

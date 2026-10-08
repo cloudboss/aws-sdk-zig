@@ -14,8 +14,7 @@ pub const DeleteCertificateProviderInput = struct {
     };
 };
 
-pub const DeleteCertificateProviderOutput = struct {
-};
+pub const DeleteCertificateProviderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCertificateProviderInput, options: CallOptions) !DeleteCertificateProviderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

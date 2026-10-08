@@ -15,7 +15,17 @@ pub const GetBucketVersioningInput = struct {
     bucket: []const u8,
 };
 
-pub const GetBucketVersioningOutput = @import("get_bucket_versioning_result.zig").GetBucketVersioningResult;
+pub const GetBucketVersioningOutput = struct {
+    /// Specifies whether MFA delete is enabled in the bucket versioning
+    /// configuration. This
+    /// element is returned only if the bucket has been configured with MFA delete.
+    /// If MFA delete
+    /// has never been configured for the bucket, this element is not returned.
+    mfa_delete: ?MFADeleteStatus = null,
+
+    /// The versioning state of the S3 on Outposts bucket.
+    status: ?BucketVersioningStatus = null,
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketVersioningInput, options: CallOptions) !GetBucketVersioningOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

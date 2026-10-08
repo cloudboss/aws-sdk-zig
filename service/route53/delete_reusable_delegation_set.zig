@@ -10,8 +10,7 @@ pub const DeleteReusableDelegationSetInput = struct {
     id: []const u8,
 };
 
-pub const DeleteReusableDelegationSetOutput = struct {
-};
+pub const DeleteReusableDelegationSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteReusableDelegationSetInput, options: CallOptions) !DeleteReusableDelegationSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

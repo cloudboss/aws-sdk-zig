@@ -5,9 +5,51 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const PutResourcePolicyInput = @import("put_resource_policy_request.zig").PutResourcePolicyRequest;
+pub const PutResourcePolicyInput = struct {
+    /// The revision ID that Amazon Comprehend assigned to the policy that you are
+    /// updating. If
+    /// you are creating a new policy that has no prior version, don't use this
+    /// parameter. Amazon
+    /// Comprehend creates the revision ID for you.
+    policy_revision_id: ?[]const u8 = null,
 
-pub const PutResourcePolicyOutput = @import("put_resource_policy_response.zig").PutResourcePolicyResponse;
+    /// The Amazon Resource Name (ARN) of the custom model to attach the policy to.
+    resource_arn: []const u8,
+
+    /// The JSON resource-based policy to attach to your custom model. Provide your
+    /// JSON as a
+    /// UTF-8 encoded string without line breaks. To provide valid JSON for your
+    /// policy, enclose the
+    /// attribute names and values in double quotes. If the JSON body is also
+    /// enclosed in double
+    /// quotes, then you must escape the double quotes that are inside the policy:
+    ///
+    /// `"{\"attribute\": \"value\", \"attribute\": [\"value\"]}"`
+    ///
+    /// To avoid escaping quotes, you can use single quotes to enclose the policy
+    /// and double
+    /// quotes to enclose the JSON names and values:
+    ///
+    /// `'{"attribute": "value", "attribute": ["value"]}'`
+    resource_policy: []const u8,
+
+    pub const json_field_names = .{
+        .policy_revision_id = "PolicyRevisionId",
+        .resource_arn = "ResourceArn",
+        .resource_policy = "ResourcePolicy",
+    };
+};
+
+pub const PutResourcePolicyOutput = struct {
+    /// The revision ID of the policy. Each time you modify a policy, Amazon
+    /// Comprehend assigns a
+    /// new revision ID, and it deletes the prior version of the policy.
+    policy_revision_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .policy_revision_id = "PolicyRevisionId",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutResourcePolicyInput, options: CallOptions) !PutResourcePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

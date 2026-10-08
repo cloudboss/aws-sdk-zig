@@ -17,13 +17,13 @@ pub const ConfigurableUpfrontPricingTerm = struct {
     rate_cards: ?[]const ConfigurableUpfrontRateCardItem = null,
 
     /// Category of selector.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",
         .currency_code = "currencyCode",
         .id = "id",
         .rate_cards = "rateCards",
-        .@"type" = "type",
+        .type = "type",
     };
 };

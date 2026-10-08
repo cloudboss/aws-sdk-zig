@@ -24,8 +24,7 @@ pub const PutApplicationAssignmentConfigurationInput = struct {
     };
 };
 
-pub const PutApplicationAssignmentConfigurationOutput = struct {
-};
+pub const PutApplicationAssignmentConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutApplicationAssignmentConfigurationInput, options: CallOptions) !PutApplicationAssignmentConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

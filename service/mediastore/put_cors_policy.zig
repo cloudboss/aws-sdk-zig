@@ -19,8 +19,7 @@ pub const PutCorsPolicyInput = struct {
     };
 };
 
-pub const PutCorsPolicyOutput = struct {
-};
+pub const PutCorsPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutCorsPolicyInput, options: CallOptions) !PutCorsPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

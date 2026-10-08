@@ -21,13 +21,13 @@ pub const FlowNode = struct {
 
     /// The type of node. This value must match the name of the key that you provide
     /// in the configuration you provide in the `FlowNodeConfiguration` field.
-    @"type": FlowNodeType,
+    type: FlowNodeType,
 
     pub const json_field_names = .{
         .configuration = "configuration",
         .inputs = "inputs",
         .name = "name",
         .outputs = "outputs",
-        .@"type" = "type",
+        .type = "type",
     };
 };

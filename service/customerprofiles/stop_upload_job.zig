@@ -18,8 +18,7 @@ pub const StopUploadJobInput = struct {
     };
 };
 
-pub const StopUploadJobOutput = struct {
-};
+pub const StopUploadJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopUploadJobInput, options: CallOptions) !StopUploadJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

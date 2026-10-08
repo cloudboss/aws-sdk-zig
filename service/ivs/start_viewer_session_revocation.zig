@@ -26,8 +26,7 @@ pub const StartViewerSessionRevocationInput = struct {
     };
 };
 
-pub const StartViewerSessionRevocationOutput = struct {
-};
+pub const StartViewerSessionRevocationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartViewerSessionRevocationInput, options: CallOptions) !StartViewerSessionRevocationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

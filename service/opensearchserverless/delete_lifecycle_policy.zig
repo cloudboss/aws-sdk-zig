@@ -14,17 +14,16 @@ pub const DeleteLifecyclePolicyInput = struct {
     name: []const u8,
 
     /// The type of lifecycle policy.
-    @"type": LifecyclePolicyType,
+    type: LifecyclePolicyType,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
-pub const DeleteLifecyclePolicyOutput = struct {
-};
+pub const DeleteLifecyclePolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLifecyclePolicyInput, options: CallOptions) !DeleteLifecyclePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

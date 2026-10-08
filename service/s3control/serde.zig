@@ -6041,4 +6041,3 @@ pub fn serializeVpcConfiguration(allocator: std.mem.Allocator, buf: *std.ArrayLi
     try aws.xml.appendXmlEscaped(allocator, buf, value.vpc_id);
     try buf.appendSlice(allocator, "</VpcId>");
 }
-

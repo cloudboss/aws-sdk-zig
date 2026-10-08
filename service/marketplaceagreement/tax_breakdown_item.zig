@@ -7,11 +7,11 @@ pub const TaxBreakdownItem = struct {
     rate: ?[]const u8 = null,
 
     /// The type of tax (for example, VAT, ST, or GST).
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .amount = "amount",
         .rate = "rate",
-        .@"type" = "type",
+        .type = "type",
     };
 };

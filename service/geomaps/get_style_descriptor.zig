@@ -220,7 +220,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetStyleDescriptorInput
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/v2/styles/");
-    try path_buf.appendSlice(allocator, input.style);
+    try path_buf.appendSlice(allocator, input.style.wireName());
     try path_buf.appendSlice(allocator, "/descriptor");
     const path = try path_buf.toOwnedSlice(allocator);
 

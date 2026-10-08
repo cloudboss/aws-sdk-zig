@@ -14,8 +14,7 @@ pub const DeleteVpcLinkInput = struct {
     };
 };
 
-pub const DeleteVpcLinkOutput = struct {
-};
+pub const DeleteVpcLinkOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVpcLinkInput, options: CallOptions) !DeleteVpcLinkOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -24,8 +24,7 @@ pub const PauseContactInput = struct {
     };
 };
 
-pub const PauseContactOutput = struct {
-};
+pub const PauseContactOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PauseContactInput, options: CallOptions) !PauseContactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -18,8 +18,7 @@ pub const PutInboundDmarcSettingsInput = struct {
     };
 };
 
-pub const PutInboundDmarcSettingsOutput = struct {
-};
+pub const PutInboundDmarcSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutInboundDmarcSettingsInput, options: CallOptions) !PutInboundDmarcSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

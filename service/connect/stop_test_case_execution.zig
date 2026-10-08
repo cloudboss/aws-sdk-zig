@@ -31,8 +31,7 @@ pub const StopTestCaseExecutionInput = struct {
     };
 };
 
-pub const StopTestCaseExecutionOutput = struct {
-};
+pub const StopTestCaseExecutionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopTestCaseExecutionInput, options: CallOptions) !StopTestCaseExecutionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

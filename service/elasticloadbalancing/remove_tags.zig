@@ -16,8 +16,7 @@ pub const RemoveTagsInput = struct {
     tags: []const TagKeyOnly,
 };
 
-pub const RemoveTagsOutput = struct {
-};
+pub const RemoveTagsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveTagsInput, options: CallOptions) !RemoveTagsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

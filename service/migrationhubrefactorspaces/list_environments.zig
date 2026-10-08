@@ -6,9 +6,33 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const EnvironmentSummary = @import("environment_summary.zig").EnvironmentSummary;
 
-pub const ListEnvironmentsInput = @import("list_environments_request.zig").ListEnvironmentsRequest;
+pub const ListEnvironmentsInput = struct {
+    /// The maximum number of results to return with a single call. To retrieve the
+    /// remaining
+    /// results, make another call with the returned `nextToken` value.
+    max_results: ?i32 = null,
 
-pub const ListEnvironmentsOutput = @import("list_environments_response.zig").ListEnvironmentsResponse;
+    /// The token for the next page of results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListEnvironmentsOutput = struct {
+    /// The list of `EnvironmentSummary` objects.
+    environment_summary_list: ?[]const EnvironmentSummary = null,
+
+    /// The token for the next page of results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .environment_summary_list = "EnvironmentSummaryList",
+        .next_token = "NextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListEnvironmentsInput, options: CallOptions) !ListEnvironmentsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

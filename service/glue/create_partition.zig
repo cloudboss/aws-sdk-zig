@@ -30,8 +30,7 @@ pub const CreatePartitionInput = struct {
     };
 };
 
-pub const CreatePartitionOutput = struct {
-};
+pub const CreatePartitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreatePartitionInput, options: CallOptions) !CreatePartitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

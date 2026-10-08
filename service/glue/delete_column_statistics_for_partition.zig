@@ -31,8 +31,7 @@ pub const DeleteColumnStatisticsForPartitionInput = struct {
     };
 };
 
-pub const DeleteColumnStatisticsForPartitionOutput = struct {
-};
+pub const DeleteColumnStatisticsForPartitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteColumnStatisticsForPartitionInput, options: CallOptions) !DeleteColumnStatisticsForPartitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -23,8 +23,7 @@ pub const CreateQueueLimitAssociationInput = struct {
     };
 };
 
-pub const CreateQueueLimitAssociationOutput = struct {
-};
+pub const CreateQueueLimitAssociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateQueueLimitAssociationInput, options: CallOptions) !CreateQueueLimitAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -15,8 +15,7 @@ pub const RemoveAutoTerminationPolicyInput = struct {
     };
 };
 
-pub const RemoveAutoTerminationPolicyOutput = struct {
-};
+pub const RemoveAutoTerminationPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveAutoTerminationPolicyInput, options: CallOptions) !RemoveAutoTerminationPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

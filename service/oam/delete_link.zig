@@ -14,8 +14,7 @@ pub const DeleteLinkInput = struct {
     };
 };
 
-pub const DeleteLinkOutput = struct {
-};
+pub const DeleteLinkOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLinkInput, options: CallOptions) !DeleteLinkOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

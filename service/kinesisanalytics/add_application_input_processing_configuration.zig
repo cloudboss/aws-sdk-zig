@@ -37,8 +37,7 @@ pub const AddApplicationInputProcessingConfigurationInput = struct {
     };
 };
 
-pub const AddApplicationInputProcessingConfigurationOutput = struct {
-};
+pub const AddApplicationInputProcessingConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddApplicationInputProcessingConfigurationInput, options: CallOptions) !AddApplicationInputProcessingConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

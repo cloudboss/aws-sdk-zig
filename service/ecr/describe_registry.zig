@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ReplicationConfiguration = @import("replication_configuration.zig").ReplicationConfiguration;
 
-pub const DescribeRegistryInput = struct {
-};
+pub const DescribeRegistryInput = struct {};
 
 pub const DescribeRegistryOutput = struct {
     /// The registry ID associated with the request.

@@ -10,8 +10,7 @@ pub const VerifyEmailIdentityInput = struct {
     email_address: []const u8,
 };
 
-pub const VerifyEmailIdentityOutput = struct {
-};
+pub const VerifyEmailIdentityOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: VerifyEmailIdentityInput, options: CallOptions) !VerifyEmailIdentityOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

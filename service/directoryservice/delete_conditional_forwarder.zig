@@ -20,8 +20,7 @@ pub const DeleteConditionalForwarderInput = struct {
     };
 };
 
-pub const DeleteConditionalForwarderOutput = struct {
-};
+pub const DeleteConditionalForwarderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConditionalForwarderInput, options: CallOptions) !DeleteConditionalForwarderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

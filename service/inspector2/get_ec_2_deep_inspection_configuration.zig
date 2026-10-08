@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Ec2DeepInspectionStatus = @import("ec_2_deep_inspection_status.zig").Ec2DeepInspectionStatus;
 
-pub const GetEc2DeepInspectionConfigurationInput = struct {
-};
+pub const GetEc2DeepInspectionConfigurationInput = struct {};
 
 pub const GetEc2DeepInspectionConfigurationOutput = struct {
     /// An error message explaining why Amazon Inspector deep inspection

@@ -6,9 +6,9 @@ const FeedbackType = @import("feedback_type.zig").FeedbackType;
 pub const UserFeedback = struct {
     /// Optional `Positive` or `Negative` feedback submitted by
     /// the user about whether the recommendation is useful or not.
-    @"type": FeedbackType,
+    type: FeedbackType,
 
     pub const json_field_names = .{
-        .@"type" = "type",
+        .type = "type",
     };
 };

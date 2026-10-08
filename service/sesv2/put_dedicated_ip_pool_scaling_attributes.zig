@@ -21,8 +21,7 @@ pub const PutDedicatedIpPoolScalingAttributesInput = struct {
     };
 };
 
-pub const PutDedicatedIpPoolScalingAttributesOutput = struct {
-};
+pub const PutDedicatedIpPoolScalingAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutDedicatedIpPoolScalingAttributesInput, options: CallOptions) !PutDedicatedIpPoolScalingAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

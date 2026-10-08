@@ -7,10 +7,10 @@ pub const Record = struct {
     data: ?[]const u8 = null,
 
     /// The type of the test record, indicating the format or category of the data.
-    @"type": ?RecordFormat = null,
+    type: ?RecordFormat = null,
 
     pub const json_field_names = .{
         .data = "Data",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

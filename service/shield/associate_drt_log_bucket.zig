@@ -14,8 +14,7 @@ pub const AssociateDRTLogBucketInput = struct {
     };
 };
 
-pub const AssociateDRTLogBucketOutput = struct {
-};
+pub const AssociateDRTLogBucketOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateDRTLogBucketInput, options: CallOptions) !AssociateDRTLogBucketOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

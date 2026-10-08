@@ -55,8 +55,7 @@ pub const AssociateWebACLInput = struct {
     };
 };
 
-pub const AssociateWebACLOutput = struct {
-};
+pub const AssociateWebACLOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateWebACLInput, options: CallOptions) !AssociateWebACLOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

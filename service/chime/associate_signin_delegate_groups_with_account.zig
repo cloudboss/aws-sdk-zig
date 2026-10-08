@@ -19,8 +19,7 @@ pub const AssociateSigninDelegateGroupsWithAccountInput = struct {
     };
 };
 
-pub const AssociateSigninDelegateGroupsWithAccountOutput = struct {
-};
+pub const AssociateSigninDelegateGroupsWithAccountOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateSigninDelegateGroupsWithAccountInput, options: CallOptions) !AssociateSigninDelegateGroupsWithAccountOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

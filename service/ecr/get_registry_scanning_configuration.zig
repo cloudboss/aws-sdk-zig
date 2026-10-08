@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const RegistryScanningConfiguration = @import("registry_scanning_configuration.zig").RegistryScanningConfiguration;
 
-pub const GetRegistryScanningConfigurationInput = struct {
-};
+pub const GetRegistryScanningConfigurationInput = struct {};
 
 pub const GetRegistryScanningConfigurationOutput = struct {
     /// The registry ID associated with the request.

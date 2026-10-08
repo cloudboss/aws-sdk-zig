@@ -14,8 +14,7 @@ pub const DeleteQueuedSavingsPlanInput = struct {
     };
 };
 
-pub const DeleteQueuedSavingsPlanOutput = struct {
-};
+pub const DeleteQueuedSavingsPlanOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteQueuedSavingsPlanInput, options: CallOptions) !DeleteQueuedSavingsPlanOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

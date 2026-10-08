@@ -26,8 +26,7 @@ pub const DisassociateMemberFromJobInput = struct {
     };
 };
 
-pub const DisassociateMemberFromJobOutput = struct {
-};
+pub const DisassociateMemberFromJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateMemberFromJobInput, options: CallOptions) !DisassociateMemberFromJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

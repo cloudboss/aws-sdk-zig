@@ -20,8 +20,7 @@ pub const DeleteRegistryRecordInput = struct {
     };
 };
 
-pub const DeleteRegistryRecordOutput = struct {
-};
+pub const DeleteRegistryRecordOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRegistryRecordInput, options: CallOptions) !DeleteRegistryRecordOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

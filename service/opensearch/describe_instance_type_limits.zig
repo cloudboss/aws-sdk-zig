@@ -70,7 +70,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeInstanceTypeLim
     try path_buf.appendSlice(allocator, "/2021-01-01/opensearch/instanceTypeLimits/");
     try path_buf.appendSlice(allocator, input.engine_version);
     try path_buf.appendSlice(allocator, "/");
-    try path_buf.appendSlice(allocator, input.instance_type);
+    try path_buf.appendSlice(allocator, input.instance_type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .empty;

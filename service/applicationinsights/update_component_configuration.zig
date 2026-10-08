@@ -44,8 +44,7 @@ pub const UpdateComponentConfigurationInput = struct {
     };
 };
 
-pub const UpdateComponentConfigurationOutput = struct {
-};
+pub const UpdateComponentConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateComponentConfigurationInput, options: CallOptions) !UpdateComponentConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

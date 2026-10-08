@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const NotificationsAccessForOrganization = @import("notifications_access_for_organization.zig").NotificationsAccessForOrganization;
 
-pub const GetNotificationsAccessForOrganizationInput = struct {
-};
+pub const GetNotificationsAccessForOrganizationInput = struct {};
 
 pub const GetNotificationsAccessForOrganizationOutput = struct {
     /// The `AccessStatus` of Service Trust Enablement for User Notifications to

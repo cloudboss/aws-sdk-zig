@@ -15,8 +15,7 @@ pub const DisconnectCustomKeyStoreInput = struct {
     };
 };
 
-pub const DisconnectCustomKeyStoreOutput = struct {
-};
+pub const DisconnectCustomKeyStoreOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisconnectCustomKeyStoreInput, options: CallOptions) !DisconnectCustomKeyStoreOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -18,8 +18,7 @@ pub const AssociateDRTRoleInput = struct {
     };
 };
 
-pub const AssociateDRTRoleOutput = struct {
-};
+pub const AssociateDRTRoleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateDRTRoleInput, options: CallOptions) !AssociateDRTRoleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

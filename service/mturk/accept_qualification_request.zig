@@ -20,8 +20,7 @@ pub const AcceptQualificationRequestInput = struct {
     };
 };
 
-pub const AcceptQualificationRequestOutput = struct {
-};
+pub const AcceptQualificationRequestOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AcceptQualificationRequestInput, options: CallOptions) !AcceptQualificationRequestOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

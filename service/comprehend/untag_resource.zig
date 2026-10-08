@@ -5,9 +5,27 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the given Amazon Comprehend resource from
+    /// which you
+    /// want to remove the tags.
+    resource_arn: []const u8,
 
-pub const UntagResourceOutput = @import("untag_resource_response.zig").UntagResourceResponse;
+    /// The initial part of a key-value pair that forms a tag being removed from a
+    /// given resource.
+    /// For example, a tag with "Sales" as the key might be added to a resource to
+    /// indicate its use by
+    /// the sales department. Keys must be unique and cannot be duplicated for a
+    /// particular resource.
+    tag_keys: []const []const u8,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+        .tag_keys = "TagKeys",
+    };
+};
+
+pub const UntagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResourceInput, options: CallOptions) !UntagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

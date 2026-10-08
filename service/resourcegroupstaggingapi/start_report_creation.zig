@@ -21,8 +21,7 @@ pub const StartReportCreationInput = struct {
     };
 };
 
-pub const StartReportCreationOutput = struct {
-};
+pub const StartReportCreationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartReportCreationInput, options: CallOptions) !StartReportCreationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

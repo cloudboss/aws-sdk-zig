@@ -25,7 +25,10 @@ pub const GetBucketTaggingInput = struct {
     bucket: []const u8,
 };
 
-pub const GetBucketTaggingOutput = @import("get_bucket_tagging_result.zig").GetBucketTaggingResult;
+pub const GetBucketTaggingOutput = struct {
+    /// The tags set of the Outposts bucket.
+    tag_set: ?[]const S3Tag = null,
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketTaggingInput, options: CallOptions) !GetBucketTaggingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

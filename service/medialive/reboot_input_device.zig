@@ -23,8 +23,7 @@ pub const RebootInputDeviceInput = struct {
     };
 };
 
-pub const RebootInputDeviceOutput = struct {
-};
+pub const RebootInputDeviceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RebootInputDeviceInput, options: CallOptions) !RebootInputDeviceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

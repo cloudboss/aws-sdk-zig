@@ -14,8 +14,7 @@ pub const DeleteQuoteInput = struct {
     };
 };
 
-pub const DeleteQuoteOutput = struct {
-};
+pub const DeleteQuoteOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteQuoteInput, options: CallOptions) !DeleteQuoteOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

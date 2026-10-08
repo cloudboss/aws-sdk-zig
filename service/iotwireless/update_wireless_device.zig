@@ -44,8 +44,7 @@ pub const UpdateWirelessDeviceInput = struct {
     };
 };
 
-pub const UpdateWirelessDeviceOutput = struct {
-};
+pub const UpdateWirelessDeviceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWirelessDeviceInput, options: CallOptions) !UpdateWirelessDeviceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

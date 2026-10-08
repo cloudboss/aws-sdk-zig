@@ -15,8 +15,7 @@ pub const UpdatePurchaseOrdersInput = struct {
     };
 };
 
-pub const UpdatePurchaseOrdersOutput = struct {
-};
+pub const UpdatePurchaseOrdersOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdatePurchaseOrdersInput, options: CallOptions) !UpdatePurchaseOrdersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

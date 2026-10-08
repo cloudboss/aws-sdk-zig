@@ -33,8 +33,7 @@ pub const DeleteObjectsOnCancelInput = struct {
     };
 };
 
-pub const DeleteObjectsOnCancelOutput = struct {
-};
+pub const DeleteObjectsOnCancelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteObjectsOnCancelInput, options: CallOptions) !DeleteObjectsOnCancelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

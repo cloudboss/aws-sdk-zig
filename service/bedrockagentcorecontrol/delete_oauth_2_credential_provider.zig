@@ -14,8 +14,7 @@ pub const DeleteOauth2CredentialProviderInput = struct {
     };
 };
 
-pub const DeleteOauth2CredentialProviderOutput = struct {
-};
+pub const DeleteOauth2CredentialProviderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteOauth2CredentialProviderInput, options: CallOptions) !DeleteOauth2CredentialProviderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

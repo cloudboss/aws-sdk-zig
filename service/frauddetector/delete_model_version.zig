@@ -23,8 +23,7 @@ pub const DeleteModelVersionInput = struct {
     };
 };
 
-pub const DeleteModelVersionOutput = struct {
-};
+pub const DeleteModelVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteModelVersionInput, options: CallOptions) !DeleteModelVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

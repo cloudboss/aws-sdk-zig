@@ -27,8 +27,7 @@ pub const UpdateTrustedTokenIssuerInput = struct {
     };
 };
 
-pub const UpdateTrustedTokenIssuerOutput = struct {
-};
+pub const UpdateTrustedTokenIssuerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTrustedTokenIssuerInput, options: CallOptions) !UpdateTrustedTokenIssuerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -6,9 +6,37 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const StreamSessionSummary = @import("stream_session_summary.zig").StreamSessionSummary;
 
-pub const ListStreamSessionsInput = @import("list_stream_sessions_request.zig").ListStreamSessionsRequest;
+pub const ListStreamSessionsInput = struct {
+    /// Channel ARN used to filter the list.
+    channel_arn: []const u8,
 
-pub const ListStreamSessionsOutput = @import("list_stream_sessions_response.zig").ListStreamSessionsResponse;
+    /// Maximum number of streams to return. Default: 100.
+    max_results: ?i32 = null,
+
+    /// The first stream to retrieve. This is used for pagination; see the
+    /// `nextToken` response field.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .channel_arn = "channelArn",
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+    };
+};
+
+pub const ListStreamSessionsOutput = struct {
+    /// If there are more streams than `maxResults`, use `nextToken` in the request
+    /// to get the next set.
+    next_token: ?[]const u8 = null,
+
+    /// List of stream sessions.
+    stream_sessions: ?[]const StreamSessionSummary = null,
+
+    pub const json_field_names = .{
+        .next_token = "nextToken",
+        .stream_sessions = "streamSessions",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListStreamSessionsInput, options: CallOptions) !ListStreamSessionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

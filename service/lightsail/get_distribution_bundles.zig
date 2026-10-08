@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DistributionBundle = @import("distribution_bundle.zig").DistributionBundle;
 
-pub const GetDistributionBundlesInput = struct {
-};
+pub const GetDistributionBundlesInput = struct {};
 
 pub const GetDistributionBundlesOutput = struct {
     /// An object that describes a distribution bundle.

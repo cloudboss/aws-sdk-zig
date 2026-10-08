@@ -21,8 +21,7 @@ pub const DeleteVPCAssociationAuthorizationInput = struct {
     vpc: VPC,
 };
 
-pub const DeleteVPCAssociationAuthorizationOutput = struct {
-};
+pub const DeleteVPCAssociationAuthorizationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVPCAssociationAuthorizationInput, options: CallOptions) !DeleteVPCAssociationAuthorizationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

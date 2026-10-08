@@ -15,8 +15,7 @@ pub const DeleteKnowledgeBaseInput = struct {
     };
 };
 
-pub const DeleteKnowledgeBaseOutput = struct {
-};
+pub const DeleteKnowledgeBaseOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteKnowledgeBaseInput, options: CallOptions) !DeleteKnowledgeBaseOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

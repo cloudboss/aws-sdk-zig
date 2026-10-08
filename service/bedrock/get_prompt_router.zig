@@ -44,7 +44,7 @@ pub const GetPromptRouterOutput = struct {
     status: PromptRouterStatus,
 
     /// The router's type.
-    @"type": PromptRouterType,
+    type: PromptRouterType,
 
     /// When the router was updated.
     updated_at: ?i64 = null,
@@ -58,7 +58,7 @@ pub const GetPromptRouterOutput = struct {
         .prompt_router_name = "promptRouterName",
         .routing_criteria = "routingCriteria",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
     };
 };

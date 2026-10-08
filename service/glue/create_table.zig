@@ -48,8 +48,7 @@ pub const CreateTableInput = struct {
     };
 };
 
-pub const CreateTableOutput = struct {
-};
+pub const CreateTableOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateTableInput, options: CallOptions) !CreateTableOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

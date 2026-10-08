@@ -15,8 +15,7 @@ pub const DeleteDatasetInput = struct {
     };
 };
 
-pub const DeleteDatasetOutput = struct {
-};
+pub const DeleteDatasetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDatasetInput, options: CallOptions) !DeleteDatasetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -17,10 +17,10 @@ pub const AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails =
     options: ?[]const aws.map.StringMapEntry = null,
 
     /// The log router to use. Valid values are `fluentbit` or `fluentd`.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .options = "Options",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

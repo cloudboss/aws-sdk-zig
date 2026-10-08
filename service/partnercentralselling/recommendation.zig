@@ -10,11 +10,11 @@ pub const Recommendation = struct {
 
     /// The recommendation source type. Known values: `OpportunityQuality`,
     /// `SolutionRecommendation`, `SpecialistRecommendation`.
-    @"type": []const u8,
+    type: []const u8,
 
     pub const json_field_names = .{
         .attributes = "Attributes",
         .details = "Details",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

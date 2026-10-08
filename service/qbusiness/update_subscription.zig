@@ -16,12 +16,12 @@ pub const UpdateSubscriptionInput = struct {
     subscription_id: []const u8,
 
     /// The type of the Amazon Q Business subscription to be updated.
-    @"type": SubscriptionType,
+    type: SubscriptionType,
 
     pub const json_field_names = .{
         .application_id = "applicationId",
         .subscription_id = "subscriptionId",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -86,7 +86,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSubscriptionInput
 
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

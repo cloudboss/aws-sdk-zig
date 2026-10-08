@@ -6,7 +6,14 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ProjectStatus = @import("project_status.zig").ProjectStatus;
 
-pub const DeleteProjectInput = @import("delete_project_request.zig").DeleteProjectRequest;
+pub const DeleteProjectInput = struct {
+    /// The Amazon Resource Name (ARN) of the project that you want to delete.
+    project_arn: []const u8,
+
+    pub const json_field_names = .{
+        .project_arn = "ProjectArn",
+    };
+};
 
 pub const DeleteProjectOutput = struct {
     /// The current status of the delete project operation.

@@ -5,7 +5,18 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteEndpointInput = @import("delete_endpoint_request.zig").DeleteEndpointRequest;
+pub const DeleteEndpointInput = struct {
+    /// The ID of the endpoint.
+    endpoint_id: []const u8,
+
+    /// The ID of the Outposts.
+    outpost_id: []const u8,
+
+    pub const json_field_names = .{
+        .endpoint_id = "EndpointId",
+        .outpost_id = "OutpostId",
+    };
+};
 
 pub const DeleteEndpointOutput = struct {};
 

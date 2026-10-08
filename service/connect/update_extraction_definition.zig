@@ -41,8 +41,7 @@ pub const UpdateExtractionDefinitionInput = struct {
     };
 };
 
-pub const UpdateExtractionDefinitionOutput = struct {
-};
+pub const UpdateExtractionDefinitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateExtractionDefinitionInput, options: CallOptions) !UpdateExtractionDefinitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

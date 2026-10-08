@@ -6,9 +6,32 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ApplicationSummary = @import("application_summary.zig").ApplicationSummary;
 
-pub const ListApplicationsInput = @import("list_applications_request.zig").ListApplicationsRequest;
+pub const ListApplicationsInput = struct {
+    /// The upper bound of the number of results to return (cannot exceed 25). If
+    /// this parameter is omitted, it defaults to 25. This value is optional.
+    max_results: ?i32 = null,
 
-pub const ListApplicationsOutput = @import("list_applications_response.zig").ListApplicationsResponse;
+    /// The token to use to get the next page of results after a previous API call.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+    };
+};
+
+pub const ListApplicationsOutput = struct {
+    /// This list of applications.
+    applications: ?[]const ApplicationSummary = null,
+
+    /// The token to use to get the next page of results after a previous API call.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .applications = "applications",
+        .next_token = "nextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListApplicationsInput, options: CallOptions) !ListApplicationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

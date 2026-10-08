@@ -151,8 +151,7 @@ pub const UpdateLocationSmbInput = struct {
     };
 };
 
-pub const UpdateLocationSmbOutput = struct {
-};
+pub const UpdateLocationSmbOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLocationSmbInput, options: CallOptions) !UpdateLocationSmbOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

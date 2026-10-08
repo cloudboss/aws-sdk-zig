@@ -76,7 +76,7 @@ pub const PutLaunchActionOutput = struct {
     resource_id: ?[]const u8 = null,
 
     /// Launch action type.
-    @"type": ?LaunchActionType = null,
+    type: ?LaunchActionType = null,
 
     pub const json_field_names = .{
         .action_code = "actionCode",
@@ -90,7 +90,7 @@ pub const PutLaunchActionOutput = struct {
         .order = "order",
         .parameters = "parameters",
         .resource_id = "resourceId",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 

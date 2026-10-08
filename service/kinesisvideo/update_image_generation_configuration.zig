@@ -29,8 +29,7 @@ pub const UpdateImageGenerationConfigurationInput = struct {
     };
 };
 
-pub const UpdateImageGenerationConfigurationOutput = struct {
-};
+pub const UpdateImageGenerationConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateImageGenerationConfigurationInput, options: CallOptions) !UpdateImageGenerationConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

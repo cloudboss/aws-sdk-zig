@@ -40,8 +40,7 @@ pub const UpdateDashboardInput = struct {
     };
 };
 
-pub const UpdateDashboardOutput = struct {
-};
+pub const UpdateDashboardOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDashboardInput, options: CallOptions) !UpdateDashboardOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

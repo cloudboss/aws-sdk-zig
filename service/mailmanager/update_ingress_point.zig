@@ -46,8 +46,7 @@ pub const UpdateIngressPointInput = struct {
     };
 };
 
-pub const UpdateIngressPointOutput = struct {
-};
+pub const UpdateIngressPointOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateIngressPointInput, options: CallOptions) !UpdateIngressPointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

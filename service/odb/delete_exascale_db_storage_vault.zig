@@ -14,8 +14,7 @@ pub const DeleteExascaleDbStorageVaultInput = struct {
     };
 };
 
-pub const DeleteExascaleDbStorageVaultOutput = struct {
-};
+pub const DeleteExascaleDbStorageVaultOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteExascaleDbStorageVaultInput, options: CallOptions) !DeleteExascaleDbStorageVaultOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

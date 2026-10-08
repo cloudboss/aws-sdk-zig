@@ -1267,7 +1267,7 @@ pub const SignalMapCreatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getSignalMap(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getSignalMap(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -1330,7 +1330,7 @@ pub const SignalMapMonitorDeletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getSignalMap(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getSignalMap(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -1399,7 +1399,7 @@ pub const SignalMapMonitorDeployedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getSignalMap(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getSignalMap(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -1489,7 +1489,7 @@ pub const SignalMapUpdatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getSignalMap(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getSignalMap(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

@@ -14,8 +14,7 @@ pub const DeleteBillEstimateInput = struct {
     };
 };
 
-pub const DeleteBillEstimateOutput = struct {
-};
+pub const DeleteBillEstimateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteBillEstimateInput, options: CallOptions) !DeleteBillEstimateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

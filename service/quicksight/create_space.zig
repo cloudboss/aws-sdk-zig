@@ -5,9 +5,44 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const CreateSpaceInput = @import("create_space_request.zig").CreateSpaceRequest;
+pub const CreateSpaceInput = struct {
+    /// The ID of the Amazon Web Services account that contains the space.
+    aws_account_id: []const u8,
 
-pub const CreateSpaceOutput = @import("create_space_response.zig").CreateSpaceResponse;
+    /// A description of the space.
+    description: ?[]const u8 = null,
+
+    /// A display name for the space.
+    name: []const u8,
+
+    /// The ID of the space. This ID is unique per Amazon Web Services Region for
+    /// each Amazon Web Services account.
+    space_id: []const u8,
+
+    pub const json_field_names = .{
+        .aws_account_id = "AwsAccountId",
+        .description = "Description",
+        .name = "Name",
+        .space_id = "SpaceId",
+    };
+};
+
+pub const CreateSpaceOutput = struct {
+    /// The Amazon Web Services request ID for this operation.
+    request_id: ?[]const u8 = null,
+
+    /// The ARN of the space.
+    space_arn: ?[]const u8 = null,
+
+    /// The ID of the space.
+    space_id: []const u8,
+
+    pub const json_field_names = .{
+        .request_id = "RequestId",
+        .space_arn = "spaceArn",
+        .space_id = "spaceId",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSpaceInput, options: CallOptions) !CreateSpaceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

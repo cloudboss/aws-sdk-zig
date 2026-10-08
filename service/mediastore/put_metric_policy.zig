@@ -34,8 +34,7 @@ pub const PutMetricPolicyInput = struct {
     };
 };
 
-pub const PutMetricPolicyOutput = struct {
-};
+pub const PutMetricPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutMetricPolicyInput, options: CallOptions) !PutMetricPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

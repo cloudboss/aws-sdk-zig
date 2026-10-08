@@ -5,7 +5,18 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteSpaceInput = @import("delete_space_request.zig").DeleteSpaceRequest;
+pub const DeleteSpaceInput = struct {
+    /// The ID of the Amazon Web Services account that contains the space.
+    aws_account_id: []const u8,
+
+    /// The ID of the space that you want to delete.
+    space_id: []const u8,
+
+    pub const json_field_names = .{
+        .aws_account_id = "AwsAccountId",
+        .space_id = "SpaceId",
+    };
+};
 
 pub const DeleteSpaceOutput = struct {
     /// The Amazon Web Services request ID for this operation.

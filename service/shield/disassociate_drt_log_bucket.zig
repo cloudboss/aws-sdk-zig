@@ -14,8 +14,7 @@ pub const DisassociateDRTLogBucketInput = struct {
     };
 };
 
-pub const DisassociateDRTLogBucketOutput = struct {
-};
+pub const DisassociateDRTLogBucketOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateDRTLogBucketInput, options: CallOptions) !DisassociateDRTLogBucketOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

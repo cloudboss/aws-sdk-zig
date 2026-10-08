@@ -6,5 +6,4 @@
 /// for RuleAction and web ACL DefaultAction.
 ///
 /// JSON specification: `"None": {}`
-pub const NoneAction = struct {
-};
+pub const NoneAction = struct {};

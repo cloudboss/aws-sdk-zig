@@ -19,8 +19,7 @@ pub const PublishPortalInput = struct {
     };
 };
 
-pub const PublishPortalOutput = struct {
-};
+pub const PublishPortalOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PublishPortalInput, options: CallOptions) !PublishPortalOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

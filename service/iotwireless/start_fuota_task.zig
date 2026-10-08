@@ -17,8 +17,7 @@ pub const StartFuotaTaskInput = struct {
     };
 };
 
-pub const StartFuotaTaskOutput = struct {
-};
+pub const StartFuotaTaskOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartFuotaTaskInput, options: CallOptions) !StartFuotaTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

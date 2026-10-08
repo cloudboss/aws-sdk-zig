@@ -14,8 +14,7 @@ pub const DeleteCollaborationInput = struct {
     };
 };
 
-pub const DeleteCollaborationOutput = struct {
-};
+pub const DeleteCollaborationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCollaborationInput, options: CallOptions) !DeleteCollaborationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

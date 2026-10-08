@@ -46,8 +46,7 @@ pub const UpdateThreatEntitySetInput = struct {
     };
 };
 
-pub const UpdateThreatEntitySetOutput = struct {
-};
+pub const UpdateThreatEntitySetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateThreatEntitySetInput, options: CallOptions) !UpdateThreatEntitySetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

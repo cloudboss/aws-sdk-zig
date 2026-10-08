@@ -18,9 +18,9 @@ pub const CacheConfig = struct {
     /// The `AMPLIFY_MANAGED_NO_COOKIES` cache configuration type is the same as
     /// `AMPLIFY_MANAGED`, except that it excludes all cookies from the cache
     /// key. This is the default setting.
-    @"type": CacheConfigType,
+    type: CacheConfigType,
 
     pub const json_field_names = .{
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -83,7 +83,7 @@ pub const UpdateResourceConfigurationOutput = struct {
     /// * `ARN` - An Amazon Web Services resource.
     /// * `CIDR` - A network segment (a range of IP addresses) accessed through a
     ///   `Tunnel` VPC endpoint.
-    @"type": ?ResourceConfigurationType = null,
+    type: ?ResourceConfigurationType = null,
 
     pub const json_field_names = .{
         .allow_association_to_shareable_service_network = "allowAssociationToShareableServiceNetwork",
@@ -96,7 +96,7 @@ pub const UpdateResourceConfigurationOutput = struct {
         .resource_configuration_group_id = "resourceConfigurationGroupId",
         .resource_gateway_id = "resourceGatewayId",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 

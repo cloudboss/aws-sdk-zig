@@ -41,8 +41,7 @@ pub const CreateResourceDataSyncInput = struct {
     };
 };
 
-pub const CreateResourceDataSyncOutput = struct {
-};
+pub const CreateResourceDataSyncOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateResourceDataSyncInput, options: CallOptions) !CreateResourceDataSyncOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

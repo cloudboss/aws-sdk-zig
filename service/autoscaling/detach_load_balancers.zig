@@ -14,8 +14,7 @@ pub const DetachLoadBalancersInput = struct {
     load_balancer_names: []const []const u8,
 };
 
-pub const DetachLoadBalancersOutput = struct {
-};
+pub const DetachLoadBalancersOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DetachLoadBalancersInput, options: CallOptions) !DetachLoadBalancersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

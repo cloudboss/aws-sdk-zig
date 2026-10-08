@@ -42,7 +42,7 @@ pub const Device = struct {
     tags: ?[]const Tag = null,
 
     /// The device type.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The device vendor.
     vendor: ?[]const u8 = null,
@@ -60,7 +60,7 @@ pub const Device = struct {
         .site_id = "SiteId",
         .state = "State",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
         .vendor = "Vendor",
     };
 };

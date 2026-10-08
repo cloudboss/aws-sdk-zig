@@ -41,14 +41,14 @@ pub const CreateEnvironmentConnectorInput = struct {
     ///   5.x environments.
     /// * `VCENTER`: Connector to a vCenter Server appliance. Required for features
     ///   that depend on vCenter, such as Windows Server license-included.
-    @"type": ConnectorType,
+    type: ConnectorType,
 
     pub const json_field_names = .{
         .appliance_fqdn = "applianceFqdn",
         .client_token = "clientToken",
         .environment_id = "environmentId",
         .secret_identifier = "secretIdentifier",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 

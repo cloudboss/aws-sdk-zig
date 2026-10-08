@@ -22,8 +22,7 @@ pub const UnarchiveFindingsInput = struct {
     };
 };
 
-pub const UnarchiveFindingsOutput = struct {
-};
+pub const UnarchiveFindingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UnarchiveFindingsInput, options: CallOptions) !UnarchiveFindingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

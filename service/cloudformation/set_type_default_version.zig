@@ -19,7 +19,7 @@ pub const SetTypeDefaultVersionInput = struct {
     ///
     /// Conditional: You must specify either `TypeName` and `Type`, or
     /// `Arn`.
-    @"type": ?RegistryType = null,
+    type: ?RegistryType = null,
 
     /// The name of the extension.
     ///
@@ -34,8 +34,7 @@ pub const SetTypeDefaultVersionInput = struct {
     version_id: ?[]const u8 = null,
 };
 
-pub const SetTypeDefaultVersionOutput = struct {
-};
+pub const SetTypeDefaultVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetTypeDefaultVersionInput, options: CallOptions) !SetTypeDefaultVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -74,7 +73,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SetTypeDefaultVersionIn
         try body_buf.appendSlice(allocator, "&Arn=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         try body_buf.appendSlice(allocator, "&Type=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }

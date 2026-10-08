@@ -20,8 +20,7 @@ pub const DeleteCustomLogSourceInput = struct {
     };
 };
 
-pub const DeleteCustomLogSourceOutput = struct {
-};
+pub const DeleteCustomLogSourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCustomLogSourceInput, options: CallOptions) !DeleteCustomLogSourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

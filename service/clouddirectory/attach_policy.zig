@@ -25,8 +25,7 @@ pub const AttachPolicyInput = struct {
     };
 };
 
-pub const AttachPolicyOutput = struct {
-};
+pub const AttachPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AttachPolicyInput, options: CallOptions) !AttachPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

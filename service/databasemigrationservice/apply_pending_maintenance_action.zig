@@ -6,9 +6,48 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ResourcePendingMaintenanceActions = @import("resource_pending_maintenance_actions.zig").ResourcePendingMaintenanceActions;
 
-pub const ApplyPendingMaintenanceActionInput = @import("apply_pending_maintenance_action_message.zig").ApplyPendingMaintenanceActionMessage;
+pub const ApplyPendingMaintenanceActionInput = struct {
+    /// The pending maintenance action to apply to this resource.
+    ///
+    /// Valid values: `os-upgrade`, `system-update`,
+    /// `db-upgrade`, `os-patch`
+    apply_action: []const u8,
 
-pub const ApplyPendingMaintenanceActionOutput = @import("apply_pending_maintenance_action_response.zig").ApplyPendingMaintenanceActionResponse;
+    /// A value that specifies the type of opt-in request, or undoes an opt-in
+    /// request. You
+    /// can't undo an opt-in request of type `immediate`.
+    ///
+    /// Valid values:
+    ///
+    /// * `immediate` - Apply the maintenance action immediately.
+    ///
+    /// * `next-maintenance` - Apply the maintenance action during the next
+    /// maintenance window for the resource.
+    ///
+    /// * `undo-opt-in` - Cancel any existing `next-maintenance` opt-in
+    /// requests.
+    opt_in_type: []const u8,
+
+    /// The Amazon Resource Name (ARN) of the DMS resource that the pending
+    /// maintenance action
+    /// applies to.
+    replication_instance_arn: []const u8,
+
+    pub const json_field_names = .{
+        .apply_action = "ApplyAction",
+        .opt_in_type = "OptInType",
+        .replication_instance_arn = "ReplicationInstanceArn",
+    };
+};
+
+pub const ApplyPendingMaintenanceActionOutput = struct {
+    /// The DMS resource that the pending maintenance action will be applied to.
+    resource_pending_maintenance_actions: ?ResourcePendingMaintenanceActions = null,
+
+    pub const json_field_names = .{
+        .resource_pending_maintenance_actions = "ResourcePendingMaintenanceActions",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ApplyPendingMaintenanceActionInput, options: CallOptions) !ApplyPendingMaintenanceActionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

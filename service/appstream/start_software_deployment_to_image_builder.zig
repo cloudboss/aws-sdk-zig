@@ -18,8 +18,7 @@ pub const StartSoftwareDeploymentToImageBuilderInput = struct {
     };
 };
 
-pub const StartSoftwareDeploymentToImageBuilderOutput = struct {
-};
+pub const StartSoftwareDeploymentToImageBuilderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartSoftwareDeploymentToImageBuilderInput, options: CallOptions) !StartSoftwareDeploymentToImageBuilderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

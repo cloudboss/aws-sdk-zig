@@ -23,7 +23,10 @@ pub const GetBucketPolicyInput = struct {
     bucket: []const u8,
 };
 
-pub const GetBucketPolicyOutput = @import("get_bucket_policy_result.zig").GetBucketPolicyResult;
+pub const GetBucketPolicyOutput = struct {
+    /// The policy of the Outposts bucket.
+    policy: ?[]const u8 = null,
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketPolicyInput, options: CallOptions) !GetBucketPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

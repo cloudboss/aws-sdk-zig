@@ -23,8 +23,7 @@ pub const SendTaskSuccessInput = struct {
     };
 };
 
-pub const SendTaskSuccessOutput = struct {
-};
+pub const SendTaskSuccessOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendTaskSuccessInput, options: CallOptions) !SendTaskSuccessOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

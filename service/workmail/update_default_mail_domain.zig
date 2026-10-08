@@ -18,8 +18,7 @@ pub const UpdateDefaultMailDomainInput = struct {
     };
 };
 
-pub const UpdateDefaultMailDomainOutput = struct {
-};
+pub const UpdateDefaultMailDomainOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDefaultMailDomainInput, options: CallOptions) !UpdateDefaultMailDomainOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

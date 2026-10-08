@@ -25,7 +25,7 @@ pub const ListCachePoliciesInput = struct {
     ///   Services.
     /// * `custom` – Returns only the custom policies created in your Amazon Web
     ///   Services account.
-    @"type": ?CachePolicyType = null,
+    type: ?CachePolicyType = null,
 };
 
 pub const ListCachePoliciesOutput = struct {
@@ -82,7 +82,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListCachePoliciesInput,
         }
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "Type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());

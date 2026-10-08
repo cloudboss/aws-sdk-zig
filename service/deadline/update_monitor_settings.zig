@@ -20,8 +20,7 @@ pub const UpdateMonitorSettingsInput = struct {
     };
 };
 
-pub const UpdateMonitorSettingsOutput = struct {
-};
+pub const UpdateMonitorSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateMonitorSettingsInput, options: CallOptions) !UpdateMonitorSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

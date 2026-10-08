@@ -5,9 +5,23 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetResourcePolicyInput = @import("get_resource_policy_request.zig").GetResourcePolicyRequest;
+pub const GetResourcePolicyInput = struct {
+    /// Amazon Resource Name (ARN) of the resource to which a policy is attached.
+    resource_arn: ?[]const u8 = null,
 
-pub const GetResourcePolicyOutput = @import("get_resource_policy_response.zig").GetResourcePolicyResponse;
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+    };
+};
+
+pub const GetResourcePolicyOutput = struct {
+    /// The policy attached to a resource.
+    policy: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .policy = "Policy",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResourcePolicyInput, options: CallOptions) !GetResourcePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

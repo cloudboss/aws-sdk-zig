@@ -15,8 +15,7 @@ pub const AssociateCertificateInput = struct {
     };
 };
 
-pub const AssociateCertificateOutput = struct {
-};
+pub const AssociateCertificateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateCertificateInput, options: CallOptions) !AssociateCertificateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

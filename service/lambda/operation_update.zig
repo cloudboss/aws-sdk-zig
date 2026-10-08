@@ -46,7 +46,7 @@ pub const OperationUpdate = struct {
     sub_type: ?[]const u8 = null,
 
     /// The type of operation to update.
-    @"type": OperationType,
+    type: OperationType,
 
     /// Options for wait operations.
     wait_options: ?WaitOptions = null,
@@ -63,7 +63,7 @@ pub const OperationUpdate = struct {
         .payload = "Payload",
         .step_options = "StepOptions",
         .sub_type = "SubType",
-        .@"type" = "Type",
+        .type = "Type",
         .wait_options = "WaitOptions",
     };
 };

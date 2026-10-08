@@ -64,7 +64,7 @@ pub const Signal = struct {
     ///   enabled GuardDuty S3 Protection feature in your account. For more
     ///   information about S3 Protection and steps to enable it, see [S3
     ///   Protection](https://docs.aws.amazon.com/guardduty/latest/ug/s3-protection.html) in the *Amazon GuardDuty User Guide*.
-    @"type": SignalType,
+    type: SignalType,
 
     /// The unique identifier of the signal.
     uid: []const u8,
@@ -85,7 +85,7 @@ pub const Signal = struct {
         .resource_uids = "ResourceUids",
         .severity = "Severity",
         .signal_indicators = "SignalIndicators",
-        .@"type" = "Type",
+        .type = "Type",
         .uid = "Uid",
         .updated_at = "UpdatedAt",
     };

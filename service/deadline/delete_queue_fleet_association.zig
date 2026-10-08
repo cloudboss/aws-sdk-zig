@@ -22,8 +22,7 @@ pub const DeleteQueueFleetAssociationInput = struct {
     };
 };
 
-pub const DeleteQueueFleetAssociationOutput = struct {
-};
+pub const DeleteQueueFleetAssociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteQueueFleetAssociationInput, options: CallOptions) !DeleteQueueFleetAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

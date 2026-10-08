@@ -47,7 +47,7 @@ pub const WorkflowExecutionMetadata = struct {
 
     /// Indicates what type of workflow that Image Builder ran for this runtime
     /// instance of the workflow.
-    @"type": ?WorkflowType = null,
+    type: ?WorkflowType = null,
 
     /// The Amazon Resource Name (ARN) of the workflow resource build version that
     /// ran.
@@ -69,7 +69,7 @@ pub const WorkflowExecutionMetadata = struct {
         .total_steps_failed = "totalStepsFailed",
         .total_steps_skipped = "totalStepsSkipped",
         .total_steps_succeeded = "totalStepsSucceeded",
-        .@"type" = "type",
+        .type = "type",
         .workflow_build_version_arn = "workflowBuildVersionArn",
         .workflow_execution_id = "workflowExecutionId",
     };

@@ -14,8 +14,7 @@ pub const StartAccessLoggingInput = struct {
     };
 };
 
-pub const StartAccessLoggingOutput = struct {
-};
+pub const StartAccessLoggingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartAccessLoggingInput, options: CallOptions) !StartAccessLoggingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

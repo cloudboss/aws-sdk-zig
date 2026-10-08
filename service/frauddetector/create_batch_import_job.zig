@@ -43,8 +43,7 @@ pub const CreateBatchImportJobInput = struct {
     };
 };
 
-pub const CreateBatchImportJobOutput = struct {
-};
+pub const CreateBatchImportJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateBatchImportJobInput, options: CallOptions) !CreateBatchImportJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -71,7 +71,7 @@ pub const AgentRecommendationSummary = struct {
     title: []const u8,
 
     /// The type of the recommendation.
-    @"type": RecommendationType,
+    type: RecommendationType,
 
     /// The free-text reason associated with the recommendation's most recent status
     /// update.
@@ -98,7 +98,7 @@ pub const AgentRecommendationSummary = struct {
         .state = "state",
         .status = "status",
         .title = "title",
-        .@"type" = "type",
+        .type = "type",
         .update_reason = "updateReason",
     };
 };

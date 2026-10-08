@@ -4,10 +4,10 @@ pub const QuickSetupTypeOutput = struct {
     latest_version: ?[]const u8 = null,
 
     /// The type of the Quick Setup configuration.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .latest_version = "LatestVersion",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

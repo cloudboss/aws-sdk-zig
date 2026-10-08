@@ -6,9 +6,45 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Group = @import("group.zig").Group;
 
-pub const CreateGroupInput = @import("create_group_request.zig").CreateGroupRequest;
+pub const CreateGroupInput = struct {
+    /// The ID for the Amazon Web Services account that the group is in. Currently,
+    /// you use the ID for the
+    /// Amazon Web Services account that contains your Amazon Quick Sight account.
+    aws_account_id: []const u8,
 
-pub const CreateGroupOutput = @import("create_group_response.zig").CreateGroupResponse;
+    /// A description for the group that you want to create.
+    description: ?[]const u8 = null,
+
+    /// A name for the group that you want to create.
+    group_name: []const u8,
+
+    /// The namespace that you want the group to be a part of.
+    namespace: []const u8,
+
+    pub const json_field_names = .{
+        .aws_account_id = "AwsAccountId",
+        .description = "Description",
+        .group_name = "GroupName",
+        .namespace = "Namespace",
+    };
+};
+
+pub const CreateGroupOutput = struct {
+    /// The name of the group.
+    group: ?Group = null,
+
+    /// The Amazon Web Services request ID for this operation.
+    request_id: ?[]const u8 = null,
+
+    /// The HTTP status of the request.
+    status: ?i32 = null,
+
+    pub const json_field_names = .{
+        .group = "Group",
+        .request_id = "RequestId",
+        .status = "Status",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateGroupInput, options: CallOptions) !CreateGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

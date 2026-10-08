@@ -14,8 +14,7 @@ pub const DeleteIntegrationResourcePropertyInput = struct {
     };
 };
 
-pub const DeleteIntegrationResourcePropertyOutput = struct {
-};
+pub const DeleteIntegrationResourcePropertyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIntegrationResourcePropertyInput, options: CallOptions) !DeleteIntegrationResourcePropertyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

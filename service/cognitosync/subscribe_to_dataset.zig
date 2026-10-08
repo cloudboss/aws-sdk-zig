@@ -28,8 +28,7 @@ pub const SubscribeToDatasetInput = struct {
     };
 };
 
-pub const SubscribeToDatasetOutput = struct {
-};
+pub const SubscribeToDatasetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SubscribeToDatasetInput, options: CallOptions) !SubscribeToDatasetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

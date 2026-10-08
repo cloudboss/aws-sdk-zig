@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetCallerIdentityInput = struct {
-};
+pub const GetCallerIdentityInput = struct {};
 
 pub const GetCallerIdentityOutput = struct {
     /// The Amazon Web Services account ID number of the account that owns or

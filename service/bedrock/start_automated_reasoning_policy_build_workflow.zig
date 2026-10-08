@@ -81,7 +81,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartAutomatedReasoning
     try path_buf.appendSlice(allocator, "/automated-reasoning-policies/");
     try path_buf.appendSlice(allocator, input.policy_arn);
     try path_buf.appendSlice(allocator, "/build-workflows/");
-    try path_buf.appendSlice(allocator, input.build_workflow_type);
+    try path_buf.appendSlice(allocator, input.build_workflow_type.wireName());
     try path_buf.appendSlice(allocator, "/start");
     const path = try path_buf.toOwnedSlice(allocator);
 

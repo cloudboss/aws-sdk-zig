@@ -14,8 +14,7 @@ pub const RebootBrokerInput = struct {
     };
 };
 
-pub const RebootBrokerOutput = struct {
-};
+pub const RebootBrokerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RebootBrokerInput, options: CallOptions) !RebootBrokerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetGlueIdentityCenterConfigurationInput = struct {
-};
+pub const GetGlueIdentityCenterConfigurationInput = struct {};
 
 pub const GetGlueIdentityCenterConfigurationOutput = struct {
     /// The Amazon Resource Name (ARN) of the Identity Center application associated

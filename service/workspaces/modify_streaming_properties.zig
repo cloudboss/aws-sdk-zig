@@ -19,8 +19,7 @@ pub const ModifyStreamingPropertiesInput = struct {
     };
 };
 
-pub const ModifyStreamingPropertiesOutput = struct {
-};
+pub const ModifyStreamingPropertiesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyStreamingPropertiesInput, options: CallOptions) !ModifyStreamingPropertiesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

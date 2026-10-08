@@ -14,8 +14,7 @@ pub const DeleteServiceLevelObjectiveInput = struct {
     };
 };
 
-pub const DeleteServiceLevelObjectiveOutput = struct {
-};
+pub const DeleteServiceLevelObjectiveOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteServiceLevelObjectiveInput, options: CallOptions) !DeleteServiceLevelObjectiveOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

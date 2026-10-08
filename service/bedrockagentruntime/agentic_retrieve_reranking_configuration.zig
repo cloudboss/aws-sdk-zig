@@ -7,10 +7,10 @@ pub const AgenticRetrieveRerankingConfiguration = struct {
     bedrock_reranking_configuration: ?AgenticRetrieveBedrockRerankingConfiguration = null,
 
     /// The type of reranking configuration.
-    @"type": AgenticRetrieveRerankingConfigurationType,
+    type: AgenticRetrieveRerankingConfigurationType,
 
     pub const json_field_names = .{
         .bedrock_reranking_configuration = "bedrockRerankingConfiguration",
-        .@"type" = "type",
+        .type = "type",
     };
 };

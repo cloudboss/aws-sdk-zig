@@ -37,13 +37,13 @@ pub const AggregationThreshold = struct {
     /// The type of aggregation that the threshold enforces. Currently, the only
     /// supported value is `COUNT_DISTINCT`, which counts the distinct values in the
     /// identity column.
-    @"type": AggregationThresholdType,
+    type: AggregationThresholdType,
 
     pub const json_field_names = .{
         .allowed_aggregate_expression_type = "allowedAggregateExpressionType",
         .identity_columns = "identityColumns",
         .minimum_identity_count = "minimumIdentityCount",
         .output_column_thresholds = "outputColumnThresholds",
-        .@"type" = "type",
+        .type = "type",
     };
 };

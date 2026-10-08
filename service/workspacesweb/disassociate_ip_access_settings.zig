@@ -14,8 +14,7 @@ pub const DisassociateIpAccessSettingsInput = struct {
     };
 };
 
-pub const DisassociateIpAccessSettingsOutput = struct {
-};
+pub const DisassociateIpAccessSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateIpAccessSettingsInput, options: CallOptions) !DisassociateIpAccessSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

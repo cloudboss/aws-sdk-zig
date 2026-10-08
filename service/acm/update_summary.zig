@@ -26,7 +26,7 @@ pub const UpdateSummary = struct {
     ///
     /// * `DOMAIN_VALIDATION_METHOD` – The update changes the domain validation
     ///   method for the certificate.
-    @"type": ?UpdateType = null,
+    type: ?UpdateType = null,
 
     /// The time at which the certificate update status was last changed.
     updated_at: ?i64 = null,
@@ -35,7 +35,7 @@ pub const UpdateSummary = struct {
         .domain_validation_method_update_summary = "DomainValidationMethodUpdateSummary",
         .requested_at = "RequestedAt",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
         .updated_at = "UpdatedAt",
     };
 };

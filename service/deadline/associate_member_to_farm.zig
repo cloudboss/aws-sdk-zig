@@ -37,8 +37,7 @@ pub const AssociateMemberToFarmInput = struct {
     };
 };
 
-pub const AssociateMemberToFarmOutput = struct {
-};
+pub const AssociateMemberToFarmOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateMemberToFarmInput, options: CallOptions) !AssociateMemberToFarmOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

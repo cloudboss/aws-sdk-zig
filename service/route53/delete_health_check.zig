@@ -10,8 +10,7 @@ pub const DeleteHealthCheckInput = struct {
     health_check_id: []const u8,
 };
 
-pub const DeleteHealthCheckOutput = struct {
-};
+pub const DeleteHealthCheckOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteHealthCheckInput, options: CallOptions) !DeleteHealthCheckOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

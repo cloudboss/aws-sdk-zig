@@ -18,8 +18,7 @@ pub const DeprecateFlowTemplateInput = struct {
     };
 };
 
-pub const DeprecateFlowTemplateOutput = struct {
-};
+pub const DeprecateFlowTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeprecateFlowTemplateInput, options: CallOptions) !DeprecateFlowTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

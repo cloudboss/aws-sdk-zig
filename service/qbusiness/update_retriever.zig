@@ -31,8 +31,7 @@ pub const UpdateRetrieverInput = struct {
     };
 };
 
-pub const UpdateRetrieverOutput = struct {
-};
+pub const UpdateRetrieverOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRetrieverInput, options: CallOptions) !UpdateRetrieverOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -26,7 +26,7 @@ pub const ListResponseHeadersPoliciesInput = struct {
     /// * `managed` – Gets only the managed policies created by Amazon Web Services.
     /// * `custom` – Gets only the custom policies created in your Amazon Web
     ///   Services account.
-    @"type": ?ResponseHeadersPolicyType = null,
+    type: ?ResponseHeadersPolicyType = null,
 };
 
 pub const ListResponseHeadersPoliciesOutput = struct {
@@ -83,7 +83,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListResponseHeadersPoli
         }
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "Type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());

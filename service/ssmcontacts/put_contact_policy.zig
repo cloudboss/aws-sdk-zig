@@ -18,8 +18,7 @@ pub const PutContactPolicyInput = struct {
     };
 };
 
-pub const PutContactPolicyOutput = struct {
-};
+pub const PutContactPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutContactPolicyInput, options: CallOptions) !PutContactPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -68,8 +68,7 @@ pub const PutComplianceItemsInput = struct {
     };
 };
 
-pub const PutComplianceItemsOutput = struct {
-};
+pub const PutComplianceItemsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutComplianceItemsInput, options: CallOptions) !PutComplianceItemsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

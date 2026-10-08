@@ -24,8 +24,7 @@ pub const CreateIndexInput = struct {
     };
 };
 
-pub const CreateIndexOutput = struct {
-};
+pub const CreateIndexOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateIndexInput, options: CallOptions) !CreateIndexOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

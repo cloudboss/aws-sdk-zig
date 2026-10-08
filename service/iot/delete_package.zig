@@ -20,8 +20,7 @@ pub const DeletePackageInput = struct {
     };
 };
 
-pub const DeletePackageOutput = struct {
-};
+pub const DeletePackageOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePackageInput, options: CallOptions) !DeletePackageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

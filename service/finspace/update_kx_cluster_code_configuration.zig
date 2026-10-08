@@ -49,8 +49,7 @@ pub const UpdateKxClusterCodeConfigurationInput = struct {
     };
 };
 
-pub const UpdateKxClusterCodeConfigurationOutput = struct {
-};
+pub const UpdateKxClusterCodeConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateKxClusterCodeConfigurationInput, options: CallOptions) !UpdateKxClusterCodeConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

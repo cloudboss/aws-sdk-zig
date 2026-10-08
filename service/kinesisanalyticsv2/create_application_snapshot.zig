@@ -18,8 +18,7 @@ pub const CreateApplicationSnapshotInput = struct {
     };
 };
 
-pub const CreateApplicationSnapshotOutput = struct {
-};
+pub const CreateApplicationSnapshotOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateApplicationSnapshotInput, options: CallOptions) !CreateApplicationSnapshotOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -23,8 +23,7 @@ pub const SetUserSettingsInput = struct {
     };
 };
 
-pub const SetUserSettingsOutput = struct {
-};
+pub const SetUserSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetUserSettingsInput, options: CallOptions) !SetUserSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

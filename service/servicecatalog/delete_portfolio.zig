@@ -22,8 +22,7 @@ pub const DeletePortfolioInput = struct {
     };
 };
 
-pub const DeletePortfolioOutput = struct {
-};
+pub const DeletePortfolioOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePortfolioInput, options: CallOptions) !DeletePortfolioOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

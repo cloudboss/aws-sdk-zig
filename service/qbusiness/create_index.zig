@@ -8,9 +8,59 @@ const IndexCapacityConfiguration = @import("index_capacity_configuration.zig").I
 const Tag = @import("tag.zig").Tag;
 const IndexType = @import("index_type.zig").IndexType;
 
-pub const CreateIndexInput = @import("create_index_request.zig").CreateIndexRequest;
+pub const CreateIndexInput = struct {
+    /// The identifier of the Amazon Q Business application using the index.
+    application_id: []const u8,
 
-pub const CreateIndexOutput = @import("create_index_response.zig").CreateIndexResponse;
+    /// The capacity units you want to provision for your index. You can add and
+    /// remove capacity to fit your usage needs.
+    capacity_configuration: ?IndexCapacityConfiguration = null,
+
+    /// A token that you provide to identify the request to create an index.
+    /// Multiple calls to the `CreateIndex` API with the same client token will
+    /// create only one index.
+    client_token: ?[]const u8 = null,
+
+    /// A description for the Amazon Q Business index.
+    description: ?[]const u8 = null,
+
+    /// A name for the Amazon Q Business index.
+    display_name: []const u8,
+
+    /// A list of key-value pairs that identify or categorize the index. You can
+    /// also use tags to help control access to the index. Tag keys and values can
+    /// consist of Unicode letters, digits, white space, and any of the following
+    /// symbols: _ . : / = + - @.
+    tags: ?[]const Tag = null,
+
+    /// The index type that's suitable for your needs. For more information on
+    /// what's included in each type of index, see [Amazon Q Business
+    /// tiers](https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/tiers.html#index-tiers).
+    type: ?IndexType = null,
+
+    pub const json_field_names = .{
+        .application_id = "applicationId",
+        .capacity_configuration = "capacityConfiguration",
+        .client_token = "clientToken",
+        .description = "description",
+        .display_name = "displayName",
+        .tags = "tags",
+        .type = "type",
+    };
+};
+
+pub const CreateIndexOutput = struct {
+    /// The Amazon Resource Name (ARN) of an Amazon Q Business index.
+    index_arn: ?[]const u8 = null,
+
+    /// The identifier for the Amazon Q Business index.
+    index_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .index_arn = "indexArn",
+        .index_id = "indexId",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateIndexInput, options: CallOptions) !CreateIndexOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -80,7 +130,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateIndexInput, confi
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"type\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);

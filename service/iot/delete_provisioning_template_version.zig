@@ -18,8 +18,7 @@ pub const DeleteProvisioningTemplateVersionInput = struct {
     };
 };
 
-pub const DeleteProvisioningTemplateVersionOutput = struct {
-};
+pub const DeleteProvisioningTemplateVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteProvisioningTemplateVersionInput, options: CallOptions) !DeleteProvisioningTemplateVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

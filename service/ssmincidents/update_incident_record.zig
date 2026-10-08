@@ -68,8 +68,7 @@ pub const UpdateIncidentRecordInput = struct {
     };
 };
 
-pub const UpdateIncidentRecordOutput = struct {
-};
+pub const UpdateIncidentRecordOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateIncidentRecordInput, options: CallOptions) !UpdateIncidentRecordOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

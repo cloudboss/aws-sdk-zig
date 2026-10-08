@@ -18,8 +18,7 @@ pub const PutEmailIdentityConfigurationSetAttributesInput = struct {
     };
 };
 
-pub const PutEmailIdentityConfigurationSetAttributesOutput = struct {
-};
+pub const PutEmailIdentityConfigurationSetAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutEmailIdentityConfigurationSetAttributesInput, options: CallOptions) !PutEmailIdentityConfigurationSetAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

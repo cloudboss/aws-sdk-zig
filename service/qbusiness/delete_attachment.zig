@@ -26,8 +26,7 @@ pub const DeleteAttachmentInput = struct {
     };
 };
 
-pub const DeleteAttachmentOutput = struct {
-};
+pub const DeleteAttachmentOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAttachmentInput, options: CallOptions) !DeleteAttachmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

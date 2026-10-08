@@ -16,8 +16,7 @@ pub const DeleteCallAnalyticsCategoryInput = struct {
     };
 };
 
-pub const DeleteCallAnalyticsCategoryOutput = struct {
-};
+pub const DeleteCallAnalyticsCategoryOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCallAnalyticsCategoryInput, options: CallOptions) !DeleteCallAnalyticsCategoryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

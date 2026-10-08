@@ -21,8 +21,7 @@ pub const PutDataCatalogEncryptionSettingsInput = struct {
     };
 };
 
-pub const PutDataCatalogEncryptionSettingsOutput = struct {
-};
+pub const PutDataCatalogEncryptionSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutDataCatalogEncryptionSettingsInput, options: CallOptions) !PutDataCatalogEncryptionSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -18,8 +18,7 @@ pub const StopSuiteRunInput = struct {
     };
 };
 
-pub const StopSuiteRunOutput = struct {
-};
+pub const StopSuiteRunOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopSuiteRunInput, options: CallOptions) !StopSuiteRunOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

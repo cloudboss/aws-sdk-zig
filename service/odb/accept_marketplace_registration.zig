@@ -15,8 +15,7 @@ pub const AcceptMarketplaceRegistrationInput = struct {
     };
 };
 
-pub const AcceptMarketplaceRegistrationOutput = struct {
-};
+pub const AcceptMarketplaceRegistrationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AcceptMarketplaceRegistrationInput, options: CallOptions) !AcceptMarketplaceRegistrationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

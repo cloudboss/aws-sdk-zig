@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetLatestAssessmentIdInput = struct {
-};
+pub const GetLatestAssessmentIdInput = struct {};
 
 pub const GetLatestAssessmentIdOutput = struct {
     /// The latest ID for the specific assessment task.

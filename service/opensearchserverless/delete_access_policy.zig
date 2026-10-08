@@ -14,17 +14,16 @@ pub const DeleteAccessPolicyInput = struct {
     name: []const u8,
 
     /// The type of policy.
-    @"type": AccessPolicyType,
+    type: AccessPolicyType,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
-pub const DeleteAccessPolicyOutput = struct {
-};
+pub const DeleteAccessPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAccessPolicyInput, options: CallOptions) !DeleteAccessPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

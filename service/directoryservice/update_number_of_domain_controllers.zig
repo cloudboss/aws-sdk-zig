@@ -19,8 +19,7 @@ pub const UpdateNumberOfDomainControllersInput = struct {
     };
 };
 
-pub const UpdateNumberOfDomainControllersOutput = struct {
-};
+pub const UpdateNumberOfDomainControllersOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateNumberOfDomainControllersInput, options: CallOptions) !UpdateNumberOfDomainControllersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

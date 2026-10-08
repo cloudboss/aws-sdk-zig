@@ -16,8 +16,7 @@ pub const DeleteResourceMetricsConfigurationInput = struct {
     };
 };
 
-pub const DeleteResourceMetricsConfigurationOutput = struct {
-};
+pub const DeleteResourceMetricsConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteResourceMetricsConfigurationInput, options: CallOptions) !DeleteResourceMetricsConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

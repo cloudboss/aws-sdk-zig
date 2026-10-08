@@ -36,8 +36,7 @@ pub const PutDataExportConfigurationInput = struct {
     };
 };
 
-pub const PutDataExportConfigurationOutput = struct {
-};
+pub const PutDataExportConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutDataExportConfigurationInput, options: CallOptions) !PutDataExportConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -8,9 +8,48 @@ const ConnectionAuthorizationType = @import("connection_authorization_type.zig")
 const CreateConnectionAuthRequestParameters = @import("create_connection_auth_request_parameters.zig").CreateConnectionAuthRequestParameters;
 const ConnectionState = @import("connection_state.zig").ConnectionState;
 
-pub const CreateConnectionInput = @import("create_connection_request.zig").CreateConnectionRequest;
+pub const CreateConnectionInput = struct {
+    /// The type of authorization to use for the connection.
+    authorization_type: ConnectionAuthorizationType,
 
-pub const CreateConnectionOutput = @import("create_connection_response.zig").CreateConnectionResponse;
+    /// A `CreateConnectionAuthRequestParameters` object that contains the
+    /// authorization parameters to use to authorize with the endpoint.
+    auth_parameters: CreateConnectionAuthRequestParameters,
+
+    /// A description for the connection to create.
+    description: ?[]const u8 = null,
+
+    /// The name for the connection to create.
+    name: []const u8,
+
+    pub const json_field_names = .{
+        .authorization_type = "AuthorizationType",
+        .auth_parameters = "AuthParameters",
+        .description = "Description",
+        .name = "Name",
+    };
+};
+
+pub const CreateConnectionOutput = struct {
+    /// The ARN of the connection that was created by the request.
+    connection_arn: ?[]const u8 = null,
+
+    /// The state of the connection that was created by the request.
+    connection_state: ?ConnectionState = null,
+
+    /// A time stamp for the time that the connection was created.
+    creation_time: ?i64 = null,
+
+    /// A time stamp for the time that the connection was last updated.
+    last_modified_time: ?i64 = null,
+
+    pub const json_field_names = .{
+        .connection_arn = "ConnectionArn",
+        .connection_state = "ConnectionState",
+        .creation_time = "CreationTime",
+        .last_modified_time = "LastModifiedTime",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateConnectionInput, options: CallOptions) !CreateConnectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

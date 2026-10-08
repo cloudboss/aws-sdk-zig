@@ -43,8 +43,7 @@ pub const UpdateClassificationJobInput = struct {
     };
 };
 
-pub const UpdateClassificationJobOutput = struct {
-};
+pub const UpdateClassificationJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateClassificationJobInput, options: CallOptions) !UpdateClassificationJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

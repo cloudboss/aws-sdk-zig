@@ -13,8 +13,7 @@ pub const DeleteNetworkAnalyzerConfigurationInput = struct {
     };
 };
 
-pub const DeleteNetworkAnalyzerConfigurationOutput = struct {
-};
+pub const DeleteNetworkAnalyzerConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteNetworkAnalyzerConfigurationInput, options: CallOptions) !DeleteNetworkAnalyzerConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

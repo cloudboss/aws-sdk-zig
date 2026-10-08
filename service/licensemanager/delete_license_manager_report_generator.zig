@@ -14,8 +14,7 @@ pub const DeleteLicenseManagerReportGeneratorInput = struct {
     };
 };
 
-pub const DeleteLicenseManagerReportGeneratorOutput = struct {
-};
+pub const DeleteLicenseManagerReportGeneratorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLicenseManagerReportGeneratorInput, options: CallOptions) !DeleteLicenseManagerReportGeneratorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

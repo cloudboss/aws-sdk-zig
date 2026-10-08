@@ -188,8 +188,7 @@ pub const DeregisterScalableTargetInput = struct {
     };
 };
 
-pub const DeregisterScalableTargetOutput = struct {
-};
+pub const DeregisterScalableTargetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterScalableTargetInput, options: CallOptions) !DeregisterScalableTargetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

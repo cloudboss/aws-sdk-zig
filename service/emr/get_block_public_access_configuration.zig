@@ -7,8 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const BlockPublicAccessConfiguration = @import("block_public_access_configuration.zig").BlockPublicAccessConfiguration;
 const BlockPublicAccessConfigurationMetadata = @import("block_public_access_configuration_metadata.zig").BlockPublicAccessConfigurationMetadata;
 
-pub const GetBlockPublicAccessConfigurationInput = struct {
-};
+pub const GetBlockPublicAccessConfigurationInput = struct {};
 
 pub const GetBlockPublicAccessConfigurationOutput = struct {
     /// A configuration for Amazon EMR block public access. The configuration

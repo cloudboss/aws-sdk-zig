@@ -5,9 +5,21 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteResourcePolicyInput = @import("delete_resource_policy_request.zig").DeleteResourcePolicyRequest;
+pub const DeleteResourcePolicyInput = struct {
+    /// The revision ID of the policy to delete.
+    policy_revision_id: ?[]const u8 = null,
 
-pub const DeleteResourcePolicyOutput = @import("delete_resource_policy_response.zig").DeleteResourcePolicyResponse;
+    /// The Amazon Resource Name (ARN) of the custom model version that has the
+    /// policy to delete.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .policy_revision_id = "PolicyRevisionId",
+        .resource_arn = "ResourceArn",
+    };
+};
+
+pub const DeleteResourcePolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteResourcePolicyInput, options: CallOptions) !DeleteResourcePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

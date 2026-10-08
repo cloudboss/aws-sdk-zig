@@ -68,8 +68,7 @@ pub const UpdateMobileDeviceAccessRuleInput = struct {
     };
 };
 
-pub const UpdateMobileDeviceAccessRuleOutput = struct {
-};
+pub const UpdateMobileDeviceAccessRuleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateMobileDeviceAccessRuleInput, options: CallOptions) !UpdateMobileDeviceAccessRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

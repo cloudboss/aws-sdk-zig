@@ -39,8 +39,7 @@ pub const PutTenantSuppressionAttributesInput = struct {
     };
 };
 
-pub const PutTenantSuppressionAttributesOutput = struct {
-};
+pub const PutTenantSuppressionAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutTenantSuppressionAttributesInput, options: CallOptions) !PutTenantSuppressionAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

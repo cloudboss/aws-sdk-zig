@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetContainerAPIMetadataInput = struct {
-};
+pub const GetContainerAPIMetadataInput = struct {};
 
 pub const GetContainerAPIMetadataOutput = struct {
     /// Metadata about Lightsail containers, such as the current version of the

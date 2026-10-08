@@ -1,2 +1,1 @@
-pub const SSES3 = struct {
-};
+pub const SSES3 = struct {};

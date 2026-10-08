@@ -22,8 +22,7 @@ pub const DisassociateOpsItemRelatedItemInput = struct {
     };
 };
 
-pub const DisassociateOpsItemRelatedItemOutput = struct {
-};
+pub const DisassociateOpsItemRelatedItemOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateOpsItemRelatedItemInput, options: CallOptions) !DisassociateOpsItemRelatedItemOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

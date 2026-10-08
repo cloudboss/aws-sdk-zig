@@ -14,8 +14,7 @@ pub const PreviewPortalInput = struct {
     };
 };
 
-pub const PreviewPortalOutput = struct {
-};
+pub const PreviewPortalOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PreviewPortalInput, options: CallOptions) !PreviewPortalOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

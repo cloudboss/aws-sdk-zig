@@ -6,9 +6,29 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the resource or resources to which to add
+    /// tags. You can associate tags
+    /// with the following Device Farm resources: `PROJECT`, `TESTGRID_PROJECT`,
+    /// `RUN`,
+    /// `NETWORK_PROFILE`, `INSTANCE_PROFILE`, `DEVICE_INSTANCE`,
+    /// `SESSION`, `DEVICE_POOL`, `DEVICE`, and
+    /// `VPCE_CONFIGURATION`.
+    resource_arn: []const u8,
 
-pub const TagResourceOutput = @import("tag_resource_response.zig").TagResourceResponse;
+    /// The tags to add to the resource. A tag is an array of key-value pairs. Tag
+    /// keys can have a maximum
+    /// character length of 128 characters. Tag values can have a maximum length of
+    /// 256 characters.
+    tags: []const Tag,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceARN",
+        .tags = "Tags",
+    };
+};
+
+pub const TagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TagResourceInput, options: CallOptions) !TagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -28,8 +28,7 @@ pub const SendWorkflowStepStateInput = struct {
     };
 };
 
-pub const SendWorkflowStepStateOutput = struct {
-};
+pub const SendWorkflowStepStateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendWorkflowStepStateInput, options: CallOptions) !SendWorkflowStepStateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

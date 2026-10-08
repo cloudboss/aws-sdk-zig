@@ -18,12 +18,12 @@ pub const GetSchemaAnalysisRuleInput = struct {
     /// The type of the schema analysis rule to retrieve. Schema analysis rules are
     /// uniquely identified by a combination of the collaboration, the schema name,
     /// and their type.
-    @"type": AnalysisRuleType,
+    type: AnalysisRuleType,
 
     pub const json_field_names = .{
         .collaboration_identifier = "collaborationIdentifier",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -72,7 +72,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSchemaAnalysisRuleIn
     try path_buf.appendSlice(allocator, "/schemas/");
     try path_buf.appendSlice(allocator, input.name);
     try path_buf.appendSlice(allocator, "/analysisRule/");
-    try path_buf.appendSlice(allocator, input.@"type");
+    try path_buf.appendSlice(allocator, input.type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

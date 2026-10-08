@@ -36,8 +36,7 @@ pub const UpdateAutomatedDiscoveryConfigurationInput = struct {
     };
 };
 
-pub const UpdateAutomatedDiscoveryConfigurationOutput = struct {
-};
+pub const UpdateAutomatedDiscoveryConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAutomatedDiscoveryConfigurationInput, options: CallOptions) !UpdateAutomatedDiscoveryConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

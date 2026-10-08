@@ -1,3 +1,2 @@
 /// The MWAA serverless properties.
-pub const WorkflowsServerlessPropertiesOutput = struct {
-};
+pub const WorkflowsServerlessPropertiesOutput = struct {};

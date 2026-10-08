@@ -10,7 +10,7 @@ pub const MigrationWorkspace = struct {
     name: ?[]const u8 = null,
 
     /// The type of the new workspace to create.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The unique identifier of an existing workspace to use as the migration
     /// target. Specify either this parameter or `createWorkspace`.
@@ -19,7 +19,7 @@ pub const MigrationWorkspace = struct {
     pub const json_field_names = .{
         .create_workspace = "createWorkspace",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
         .workspace_id = "workspaceId",
     };
 };

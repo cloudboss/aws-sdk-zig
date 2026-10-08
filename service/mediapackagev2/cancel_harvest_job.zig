@@ -34,8 +34,7 @@ pub const CancelHarvestJobInput = struct {
     };
 };
 
-pub const CancelHarvestJobOutput = struct {
-};
+pub const CancelHarvestJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelHarvestJobInput, options: CallOptions) !CancelHarvestJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

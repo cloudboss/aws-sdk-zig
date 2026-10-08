@@ -6,9 +6,57 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Rule = @import("rule.zig").Rule;
 
-pub const ListRulesInput = @import("list_rules_request.zig").ListRulesRequest;
+pub const ListRulesInput = struct {
+    /// The name or ARN of the event bus to list the rules for. If you omit this,
+    /// the default
+    /// event bus is used.
+    event_bus_name: ?[]const u8 = null,
 
-pub const ListRulesOutput = @import("list_rules_response.zig").ListRulesResponse;
+    /// The maximum number of results to return.
+    limit: ?i32 = null,
+
+    /// The prefix matching the rule name.
+    name_prefix: ?[]const u8 = null,
+
+    /// The token returned by a previous call, which you can use to retrieve the
+    /// next set of results.
+    ///
+    /// The value of `nextToken` is a unique pagination token for each page. To
+    /// retrieve the next page of results, make the call again using
+    /// the returned token. Keep all other arguments unchanged.
+    ///
+    /// Using an expired pagination token results in an `HTTP 400 InvalidToken`
+    /// error.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .event_bus_name = "EventBusName",
+        .limit = "Limit",
+        .name_prefix = "NamePrefix",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListRulesOutput = struct {
+    /// A token indicating there are more results available. If there are no more
+    /// results, no token is included in the response.
+    ///
+    /// The value of `nextToken` is a unique pagination token for each page. To
+    /// retrieve the next page of results, make the call again using
+    /// the returned token. Keep all other arguments unchanged.
+    ///
+    /// Using an expired pagination token results in an `HTTP 400 InvalidToken`
+    /// error.
+    next_token: ?[]const u8 = null,
+
+    /// The rules that match the specified criteria.
+    rules: ?[]const Rule = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .rules = "Rules",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListRulesInput, options: CallOptions) !ListRulesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

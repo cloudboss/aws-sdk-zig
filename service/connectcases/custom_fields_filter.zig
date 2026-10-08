@@ -7,7 +7,7 @@ pub const CustomFieldsFilter = union(enum) {
     and_all: ?[]const CustomFieldsFilter,
     field: ?FieldFilter,
     /// Excludes items matching the filter.
-    not: ?CustomFieldsFilter,
+    not: ?*const CustomFieldsFilter,
     /// Provides "or all" filtering.
     or_all: ?[]const CustomFieldsFilter,
 

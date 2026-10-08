@@ -27,8 +27,7 @@ pub const CopyBlueprintStageInput = struct {
     };
 };
 
-pub const CopyBlueprintStageOutput = struct {
-};
+pub const CopyBlueprintStageOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CopyBlueprintStageInput, options: CallOptions) !CopyBlueprintStageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

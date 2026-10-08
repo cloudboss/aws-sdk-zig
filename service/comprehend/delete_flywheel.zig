@@ -14,8 +14,7 @@ pub const DeleteFlywheelInput = struct {
     };
 };
 
-pub const DeleteFlywheelOutput = struct {
-};
+pub const DeleteFlywheelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteFlywheelInput, options: CallOptions) !DeleteFlywheelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

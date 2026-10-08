@@ -22,7 +22,7 @@ pub const GuardrailChecksSensitiveInformationResultEntry = struct {
     message_index: i32,
 
     /// The PII entity type that was detected.
-    @"type": GuardrailChecksSensitiveInformationEntityType,
+    type: GuardrailChecksSensitiveInformationEntityType,
 
     pub const json_field_names = .{
         .begin_offset = "beginOffset",
@@ -30,6 +30,6 @@ pub const GuardrailChecksSensitiveInformationResultEntry = struct {
         .content_index = "contentIndex",
         .end_offset = "endOffset",
         .message_index = "messageIndex",
-        .@"type" = "type",
+        .type = "type",
     };
 };

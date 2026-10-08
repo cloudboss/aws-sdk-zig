@@ -9,10 +9,10 @@ pub const SegmentTypeInfo = struct {
     model_version: ?[]const u8 = null,
 
     /// The type of a segment (technical cue or shot detection).
-    @"type": ?SegmentType = null,
+    type: ?SegmentType = null,
 
     pub const json_field_names = .{
         .model_version = "ModelVersion",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

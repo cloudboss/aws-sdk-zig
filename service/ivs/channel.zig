@@ -76,7 +76,7 @@ pub const Channel = struct {
     /// exceed the allowable input resolution or bitrate, the stream probably will
     /// disconnect immediately.* Default: `STANDARD`. For details, see [Channel
     /// Types](https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html).
-    @"type": ?ChannelType = null,
+    type: ?ChannelType = null,
 
     pub const json_field_names = .{
         .ad_configuration_arn = "adConfigurationArn",
@@ -94,6 +94,6 @@ pub const Channel = struct {
         .recording_configuration_arn = "recordingConfigurationArn",
         .srt = "srt",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
     };
 };

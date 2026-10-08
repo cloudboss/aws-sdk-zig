@@ -63,7 +63,7 @@ pub const SchemaInputAttribute = struct {
     ///
     /// If you want to normalize `PHONE_NUMBER` and `PHONE_COUNTRYCODE`, you must
     /// group them by assigning them to the `PHONE` `groupName`.
-    @"type": SchemaAttributeType,
+    type: SchemaAttributeType,
 
     pub const json_field_names = .{
         .field_name = "fieldName",
@@ -71,6 +71,6 @@ pub const SchemaInputAttribute = struct {
         .hashed = "hashed",
         .match_key = "matchKey",
         .sub_type = "subType",
-        .@"type" = "type",
+        .type = "type",
     };
 };

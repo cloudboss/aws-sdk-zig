@@ -17,11 +17,11 @@ pub const WorkerComputeConfiguration = struct {
     properties: ?WorkerComputeConfigurationProperties = null,
 
     /// The worker compute configuration type.
-    @"type": WorkerComputeType = .cr1_x,
+    type: WorkerComputeType = .cr1_x,
 
     pub const json_field_names = .{
         .number = "number",
         .properties = "properties",
-        .@"type" = "type",
+        .type = "type",
     };
 };

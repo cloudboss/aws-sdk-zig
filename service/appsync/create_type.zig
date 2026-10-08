@@ -29,10 +29,10 @@ pub const CreateTypeInput = struct {
 
 pub const CreateTypeOutput = struct {
     /// The `Type` object.
-    @"type": ?Type = null,
+    type: ?Type = null,
 
     pub const json_field_names = .{
-        .@"type" = "type",
+        .type = "type",
     };
 };
 

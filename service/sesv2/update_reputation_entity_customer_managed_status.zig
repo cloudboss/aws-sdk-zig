@@ -33,8 +33,7 @@ pub const UpdateReputationEntityCustomerManagedStatusInput = struct {
     };
 };
 
-pub const UpdateReputationEntityCustomerManagedStatusOutput = struct {
-};
+pub const UpdateReputationEntityCustomerManagedStatusOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateReputationEntityCustomerManagedStatusInput, options: CallOptions) !UpdateReputationEntityCustomerManagedStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -68,7 +67,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateReputationEntityC
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/v2/email/reputation/entities/");
-    try path_buf.appendSlice(allocator, input.reputation_entity_type);
+    try path_buf.appendSlice(allocator, input.reputation_entity_type.wireName());
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.reputation_entity_reference);
     try path_buf.appendSlice(allocator, "/customer-managed-status");

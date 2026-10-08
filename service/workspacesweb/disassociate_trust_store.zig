@@ -14,8 +14,7 @@ pub const DisassociateTrustStoreInput = struct {
     };
 };
 
-pub const DisassociateTrustStoreOutput = struct {
-};
+pub const DisassociateTrustStoreOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateTrustStoreInput, options: CallOptions) !DisassociateTrustStoreOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

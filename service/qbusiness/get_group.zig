@@ -6,9 +6,39 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const GroupStatusDetail = @import("group_status_detail.zig").GroupStatusDetail;
 
-pub const GetGroupInput = @import("get_group_request.zig").GetGroupRequest;
+pub const GetGroupInput = struct {
+    /// The identifier of the application id the group is attached to.
+    application_id: []const u8,
 
-pub const GetGroupOutput = @import("get_group_response.zig").GetGroupResponse;
+    /// The identifier of the data source the group is attached to.
+    data_source_id: ?[]const u8 = null,
+
+    /// The name of the group.
+    group_name: []const u8,
+
+    /// The identifier of the index the group is attached to.
+    index_id: []const u8,
+
+    pub const json_field_names = .{
+        .application_id = "applicationId",
+        .data_source_id = "dataSourceId",
+        .group_name = "groupName",
+        .index_id = "indexId",
+    };
+};
+
+pub const GetGroupOutput = struct {
+    /// The current status of the group.
+    status: ?GroupStatusDetail = null,
+
+    /// The status history of the group.
+    status_history: ?[]const GroupStatusDetail = null,
+
+    pub const json_field_names = .{
+        .status = "status",
+        .status_history = "statusHistory",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetGroupInput, options: CallOptions) !GetGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

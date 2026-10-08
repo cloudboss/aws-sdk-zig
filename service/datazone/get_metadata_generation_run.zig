@@ -18,12 +18,12 @@ pub const GetMetadataGenerationRunInput = struct {
     identifier: []const u8,
 
     /// The type of the metadata generation run.
-    @"type": ?MetadataGenerationRunType = null,
+    type: ?MetadataGenerationRunType = null,
 
     pub const json_field_names = .{
         .domain_identifier = "domainIdentifier",
         .identifier = "identifier",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -52,7 +52,7 @@ pub const GetMetadataGenerationRunOutput = struct {
     target: ?MetadataGenerationRunTarget = null,
 
     /// The type of metadata generation run.
-    @"type": ?MetadataGenerationRunType = null,
+    type: ?MetadataGenerationRunType = null,
 
     /// The types of the metadata generation run.
     types: ?[]const MetadataGenerationRunType = null,
@@ -68,7 +68,7 @@ pub const GetMetadataGenerationRunOutput = struct {
         .owning_project_id = "owningProjectId",
         .status = "status",
         .target = "target",
-        .@"type" = "type",
+        .type = "type",
         .types = "types",
         .type_stats = "typeStats",
     };
@@ -113,7 +113,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetMetadataGenerationRu
 
     var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());

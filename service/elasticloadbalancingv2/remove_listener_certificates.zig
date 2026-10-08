@@ -17,8 +17,7 @@ pub const RemoveListenerCertificatesInput = struct {
     listener_arn: []const u8,
 };
 
-pub const RemoveListenerCertificatesOutput = struct {
-};
+pub const RemoveListenerCertificatesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveListenerCertificatesInput, options: CallOptions) !RemoveListenerCertificatesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

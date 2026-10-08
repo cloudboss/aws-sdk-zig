@@ -14,8 +14,7 @@ pub const DeleteIpAccessSettingsInput = struct {
     };
 };
 
-pub const DeleteIpAccessSettingsOutput = struct {
-};
+pub const DeleteIpAccessSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIpAccessSettingsInput, options: CallOptions) !DeleteIpAccessSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

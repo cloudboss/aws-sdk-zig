@@ -5,11 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const ClearDefaultAuthorizerInput = struct {
-};
+pub const ClearDefaultAuthorizerInput = struct {};
 
-pub const ClearDefaultAuthorizerOutput = struct {
-};
+pub const ClearDefaultAuthorizerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ClearDefaultAuthorizerInput, options: CallOptions) !ClearDefaultAuthorizerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

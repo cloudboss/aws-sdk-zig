@@ -28,8 +28,7 @@ pub const EnableMacieInput = struct {
     };
 };
 
-pub const EnableMacieOutput = struct {
-};
+pub const EnableMacieOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableMacieInput, options: CallOptions) !EnableMacieOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

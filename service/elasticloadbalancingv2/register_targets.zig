@@ -15,8 +15,7 @@ pub const RegisterTargetsInput = struct {
     targets: []const TargetDescription,
 };
 
-pub const RegisterTargetsOutput = struct {
-};
+pub const RegisterTargetsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RegisterTargetsInput, options: CallOptions) !RegisterTargetsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

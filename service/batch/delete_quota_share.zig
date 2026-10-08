@@ -14,8 +14,7 @@ pub const DeleteQuotaShareInput = struct {
     };
 };
 
-pub const DeleteQuotaShareOutput = struct {
-};
+pub const DeleteQuotaShareOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteQuotaShareInput, options: CallOptions) !DeleteQuotaShareOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

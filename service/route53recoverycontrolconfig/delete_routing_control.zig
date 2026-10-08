@@ -14,8 +14,7 @@ pub const DeleteRoutingControlInput = struct {
     };
 };
 
-pub const DeleteRoutingControlOutput = struct {
-};
+pub const DeleteRoutingControlOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRoutingControlInput, options: CallOptions) !DeleteRoutingControlOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

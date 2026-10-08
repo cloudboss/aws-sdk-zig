@@ -9,11 +9,11 @@ pub const EndpointInfo = struct {
     display_name: ?[]const u8 = null,
 
     /// Type of endpoint.
-    @"type": ?EndpointType = null,
+    type: ?EndpointType = null,
 
     pub const json_field_names = .{
         .address = "Address",
         .display_name = "DisplayName",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

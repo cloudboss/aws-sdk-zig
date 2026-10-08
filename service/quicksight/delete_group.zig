@@ -5,9 +5,37 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteGroupInput = @import("delete_group_request.zig").DeleteGroupRequest;
+pub const DeleteGroupInput = struct {
+    /// The ID for the Amazon Web Services account that the group is in. Currently,
+    /// you use the ID for the
+    /// Amazon Web Services account that contains your Amazon Quick Sight account.
+    aws_account_id: []const u8,
 
-pub const DeleteGroupOutput = @import("delete_group_response.zig").DeleteGroupResponse;
+    /// The name of the group that you want to delete.
+    group_name: []const u8,
+
+    /// The namespace of the group that you want to delete.
+    namespace: []const u8,
+
+    pub const json_field_names = .{
+        .aws_account_id = "AwsAccountId",
+        .group_name = "GroupName",
+        .namespace = "Namespace",
+    };
+};
+
+pub const DeleteGroupOutput = struct {
+    /// The Amazon Web Services request ID for this operation.
+    request_id: ?[]const u8 = null,
+
+    /// The HTTP status of the request.
+    status: ?i32 = null,
+
+    pub const json_field_names = .{
+        .request_id = "RequestId",
+        .status = "Status",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteGroupInput, options: CallOptions) !DeleteGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -6,9 +6,55 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const GroupSummary = @import("group_summary.zig").GroupSummary;
 
-pub const ListGroupsInput = @import("list_groups_request.zig").ListGroupsRequest;
+pub const ListGroupsInput = struct {
+    /// The identifier of the application for getting a list of groups mapped to
+    /// users.
+    application_id: []const u8,
 
-pub const ListGroupsOutput = @import("list_groups_response.zig").ListGroupsResponse;
+    /// The identifier of the data source for getting a list of groups mapped to
+    /// users.
+    data_source_id: ?[]const u8 = null,
+
+    /// The identifier of the index for getting a list of groups mapped to users.
+    index_id: []const u8,
+
+    /// The maximum number of returned groups that are mapped to users.
+    max_results: ?i32 = null,
+
+    /// If the previous response was incomplete (because there is more data to
+    /// retrieve), Amazon Q Business returns a pagination token in the response. You
+    /// can use this pagination token to retrieve the next set of groups that are
+    /// mapped to users.
+    next_token: ?[]const u8 = null,
+
+    /// The timestamp identifier used for the latest `PUT` or `DELETE` action for
+    /// mapping users to their groups.
+    updated_earlier_than: i64,
+
+    pub const json_field_names = .{
+        .application_id = "applicationId",
+        .data_source_id = "dataSourceId",
+        .index_id = "indexId",
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+        .updated_earlier_than = "updatedEarlierThan",
+    };
+};
+
+pub const ListGroupsOutput = struct {
+    /// Summary information for list of groups that are mapped to users.
+    items: ?[]const GroupSummary = null,
+
+    /// If the response is truncated, Amazon Q Business returns this token that you
+    /// can use in the subsequent request to retrieve the next set of groups that
+    /// are mapped to users.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .items = "items",
+        .next_token = "nextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListGroupsInput, options: CallOptions) !ListGroupsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

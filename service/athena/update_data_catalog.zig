@@ -53,18 +53,17 @@ pub const UpdateDataCatalogInput = struct {
     /// Specifies the type of data catalog to update. Specify `LAMBDA` for a
     /// federated catalog, `HIVE` for an external hive metastore, or
     /// `GLUE` for an Glue Data Catalog.
-    @"type": DataCatalogType,
+    type: DataCatalogType,
 
     pub const json_field_names = .{
         .description = "Description",
         .name = "Name",
         .parameters = "Parameters",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
-pub const UpdateDataCatalogOutput = struct {
-};
+pub const UpdateDataCatalogOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDataCatalogInput, options: CallOptions) !UpdateDataCatalogOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

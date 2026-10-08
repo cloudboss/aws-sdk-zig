@@ -18,8 +18,7 @@ pub const DeleteRetentionPolicyInput = struct {
     };
 };
 
-pub const DeleteRetentionPolicyOutput = struct {
-};
+pub const DeleteRetentionPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRetentionPolicyInput, options: CallOptions) !DeleteRetentionPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

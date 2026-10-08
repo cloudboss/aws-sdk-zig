@@ -47,8 +47,7 @@ pub const UpdateLimitInput = struct {
     };
 };
 
-pub const UpdateLimitOutput = struct {
-};
+pub const UpdateLimitOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLimitInput, options: CallOptions) !UpdateLimitOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

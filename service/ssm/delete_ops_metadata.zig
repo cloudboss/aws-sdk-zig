@@ -14,8 +14,7 @@ pub const DeleteOpsMetadataInput = struct {
     };
 };
 
-pub const DeleteOpsMetadataOutput = struct {
-};
+pub const DeleteOpsMetadataOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteOpsMetadataInput, options: CallOptions) !DeleteOpsMetadataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

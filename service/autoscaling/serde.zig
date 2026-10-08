@@ -3538,14 +3538,14 @@ pub fn deserializeTotalLocalStorageGBRequest(allocator: std.mem.Allocator, reade
 
 pub fn deserializeTrafficSourceIdentifier(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !TrafficSourceIdentifier {
     var result: TrafficSourceIdentifier = undefined;
-    result.@"type" = null;
+    result.type = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Identifier")) {
                     result.identifier = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = try allocator.dupe(u8, try reader.readElementText());
+                    result.type = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -3562,7 +3562,7 @@ pub fn deserializeTrafficSourceState(allocator: std.mem.Allocator, reader: *aws.
     result.identifier = null;
     result.state = null;
     result.traffic_source = null;
-    result.@"type" = null;
+    result.type = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -3573,7 +3573,7 @@ pub fn deserializeTrafficSourceState(allocator: std.mem.Allocator, reader: *aws.
                 } else if (std.mem.eql(u8, e.local, "TrafficSource")) {
                     result.traffic_source = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = try allocator.dupe(u8, try reader.readElementText());
+                    result.type = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -5452,7 +5452,7 @@ pub fn serializeTrafficSourceIdentifier(allocator: std.mem.Allocator, buf: *std.
     try buf.appendSlice(allocator, "<Identifier>");
     try aws.xml.appendXmlEscaped(allocator, buf, value.identifier);
     try buf.appendSlice(allocator, "</Identifier>");
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(allocator, "<Type>");
         try aws.xml.appendXmlEscaped(allocator, buf, v);
         try buf.appendSlice(allocator, "</Type>");
@@ -5475,4 +5475,3 @@ pub fn serializeVCpuCountRequest(allocator: std.mem.Allocator, buf: *std.ArrayLi
     }
     try buf.appendSlice(allocator, "</Min>");
 }
-

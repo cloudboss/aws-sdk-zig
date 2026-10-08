@@ -20,7 +20,7 @@ pub const RouteTaxiPlace = struct {
     station_details: ?RouteStationDetails = null,
 
     /// The type of the place.
-    @"type": ?RouteTaxiPlaceType = null,
+    type: ?RouteTaxiPlaceType = null,
 
     /// Index of the waypoint in the request.
     waypoint_index: ?i32 = null,
@@ -31,7 +31,7 @@ pub const RouteTaxiPlace = struct {
         .original_position = "OriginalPosition",
         .position = "Position",
         .station_details = "StationDetails",
-        .@"type" = "Type",
+        .type = "Type",
         .waypoint_index = "WaypointIndex",
     };
 };

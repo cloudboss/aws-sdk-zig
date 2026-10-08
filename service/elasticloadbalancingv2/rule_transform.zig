@@ -15,7 +15,7 @@ pub const RuleTransform = struct {
     /// * `host-header-rewrite` - Rewrite the host header.
     ///
     /// * `url-rewrite` - Rewrite the request URL.
-    @"type": TransformTypeEnum,
+    type: TransformTypeEnum,
 
     /// Information about a URL rewrite transform. This transform modifies the
     /// request URL.

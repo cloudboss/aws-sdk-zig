@@ -7,10 +7,10 @@ pub const ContentConfiguration = struct {
     level: ContentLevel = .metadata_only,
 
     /// Type of content to stream.
-    @"type": ContentType,
+    type: ContentType,
 
     pub const json_field_names = .{
         .level = "level",
-        .@"type" = "type",
+        .type = "type",
     };
 };

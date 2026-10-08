@@ -25,8 +25,7 @@ pub const DeleteAliasInput = struct {
     };
 };
 
-pub const DeleteAliasOutput = struct {
-};
+pub const DeleteAliasOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAliasInput, options: CallOptions) !DeleteAliasOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const DeleteWorkspaceInstanceInput = struct {
     };
 };
 
-pub const DeleteWorkspaceInstanceOutput = struct {
-};
+pub const DeleteWorkspaceInstanceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteWorkspaceInstanceInput, options: CallOptions) !DeleteWorkspaceInstanceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

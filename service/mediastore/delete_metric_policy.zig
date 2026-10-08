@@ -15,8 +15,7 @@ pub const DeleteMetricPolicyInput = struct {
     };
 };
 
-pub const DeleteMetricPolicyOutput = struct {
-};
+pub const DeleteMetricPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMetricPolicyInput, options: CallOptions) !DeleteMetricPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

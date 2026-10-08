@@ -20,8 +20,7 @@ pub const TerminateServiceJobInput = struct {
     };
 };
 
-pub const TerminateServiceJobOutput = struct {
-};
+pub const TerminateServiceJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TerminateServiceJobInput, options: CallOptions) !TerminateServiceJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

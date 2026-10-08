@@ -47,8 +47,7 @@ pub const PutEventTypeInput = struct {
     };
 };
 
-pub const PutEventTypeOutput = struct {
-};
+pub const PutEventTypeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutEventTypeInput, options: CallOptions) !PutEventTypeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

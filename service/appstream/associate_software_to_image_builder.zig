@@ -69,8 +69,7 @@ pub const AssociateSoftwareToImageBuilderInput = struct {
     };
 };
 
-pub const AssociateSoftwareToImageBuilderOutput = struct {
-};
+pub const AssociateSoftwareToImageBuilderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateSoftwareToImageBuilderInput, options: CallOptions) !AssociateSoftwareToImageBuilderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

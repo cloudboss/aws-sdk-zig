@@ -14,8 +14,7 @@ pub const DeleteGeofenceCollectionInput = struct {
     };
 };
 
-pub const DeleteGeofenceCollectionOutput = struct {
-};
+pub const DeleteGeofenceCollectionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteGeofenceCollectionInput, options: CallOptions) !DeleteGeofenceCollectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

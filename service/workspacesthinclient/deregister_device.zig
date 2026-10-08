@@ -34,8 +34,7 @@ pub const DeregisterDeviceInput = struct {
     };
 };
 
-pub const DeregisterDeviceOutput = struct {
-};
+pub const DeregisterDeviceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterDeviceInput, options: CallOptions) !DeregisterDeviceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

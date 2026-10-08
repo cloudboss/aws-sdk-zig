@@ -10,10 +10,10 @@ pub const AutomationRulesAction = struct {
 
     /// Specifies the type of action that Security Hub CSPM takes when a finding
     /// matches the defined criteria of a rule.
-    @"type": ?AutomationRulesActionType = null,
+    type: ?AutomationRulesActionType = null,
 
     pub const json_field_names = .{
         .finding_fields_update = "FindingFieldsUpdate",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

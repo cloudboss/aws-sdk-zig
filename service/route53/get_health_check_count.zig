@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetHealthCheckCountInput = struct {
-};
+pub const GetHealthCheckCountInput = struct {};
 
 pub const GetHealthCheckCountOutput = struct {
     /// The number of health checks associated with the current Amazon Web Services

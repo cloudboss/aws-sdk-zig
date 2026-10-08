@@ -34,8 +34,7 @@ pub const UpdateConditionalForwarderInput = struct {
     };
 };
 
-pub const UpdateConditionalForwarderOutput = struct {
-};
+pub const UpdateConditionalForwarderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateConditionalForwarderInput, options: CallOptions) !UpdateConditionalForwarderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

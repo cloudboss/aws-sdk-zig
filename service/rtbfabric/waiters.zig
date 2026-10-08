@@ -196,7 +196,7 @@ pub const InboundExternalLinkActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getInboundExternalLink(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getInboundExternalLink(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -269,7 +269,7 @@ pub const InboundExternalLinkDeletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getInboundExternalLink(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getInboundExternalLink(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -332,7 +332,7 @@ pub const LinkAcceptedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getLink(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getLink(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -400,7 +400,7 @@ pub const LinkActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getLink(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getLink(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -468,7 +468,7 @@ pub const LinkDeletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getLink(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getLink(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -531,7 +531,7 @@ pub const LinkRoutingRuleActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getLinkRoutingRule(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getLinkRoutingRule(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -659,7 +659,7 @@ pub const OutboundExternalLinkActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getOutboundExternalLink(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getOutboundExternalLink(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -732,7 +732,7 @@ pub const OutboundExternalLinkDeletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getOutboundExternalLink(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getOutboundExternalLink(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -795,7 +795,7 @@ pub const RequesterGatewayActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getRequesterGateway(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getRequesterGateway(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -923,7 +923,7 @@ pub const ResponderGatewayActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getResponderGateway(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getResponderGateway(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

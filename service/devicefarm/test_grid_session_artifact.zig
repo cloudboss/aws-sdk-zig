@@ -11,14 +11,14 @@ pub const TestGridSessionArtifact = struct {
     filename: ?[]const u8 = null,
 
     /// The kind of artifact.
-    @"type": ?TestGridSessionArtifactType = null,
+    type: ?TestGridSessionArtifactType = null,
 
     /// A semi-stable URL to the content of the object.
     url: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .filename = "filename",
-        .@"type" = "type",
+        .type = "type",
         .url = "url",
     };
 };

@@ -19,8 +19,7 @@ pub const DeleteBotAnalyzerRecommendationInput = struct {
     };
 };
 
-pub const DeleteBotAnalyzerRecommendationOutput = struct {
-};
+pub const DeleteBotAnalyzerRecommendationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteBotAnalyzerRecommendationInput, options: CallOptions) !DeleteBotAnalyzerRecommendationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

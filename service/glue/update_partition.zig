@@ -37,8 +37,7 @@ pub const UpdatePartitionInput = struct {
     };
 };
 
-pub const UpdatePartitionOutput = struct {
-};
+pub const UpdatePartitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdatePartitionInput, options: CallOptions) !UpdatePartitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

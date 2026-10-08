@@ -35,8 +35,7 @@ pub const UpdateContactFlowModuleAliasInput = struct {
     };
 };
 
-pub const UpdateContactFlowModuleAliasOutput = struct {
-};
+pub const UpdateContactFlowModuleAliasOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateContactFlowModuleAliasInput, options: CallOptions) !UpdateContactFlowModuleAliasOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

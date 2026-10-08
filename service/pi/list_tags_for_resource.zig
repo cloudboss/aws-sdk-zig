@@ -7,9 +7,34 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ServiceType = @import("service_type.zig").ServiceType;
 const Tag = @import("tag.zig").Tag;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// Lists all the tags for the Amazon RDS Performance Insights resource. This
+    /// value is an
+    /// Amazon Resource Name (ARN). For information about creating an ARN,
+    /// see [
+    /// Constructing an RDS Amazon Resource Name
+    /// (ARN)](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing).
+    resource_arn: []const u8,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    /// List the tags for the Amazon Web Services service for which Performance
+    /// Insights returns metrics. Valid value is `RDS`.
+    service_type: ServiceType,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceARN",
+        .service_type = "ServiceType",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// The metadata assigned to an Amazon RDS resource consisting of a key-value
+    /// pair.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

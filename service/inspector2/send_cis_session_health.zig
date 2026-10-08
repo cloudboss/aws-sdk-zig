@@ -18,8 +18,7 @@ pub const SendCisSessionHealthInput = struct {
     };
 };
 
-pub const SendCisSessionHealthOutput = struct {
-};
+pub const SendCisSessionHealthOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendCisSessionHealthInput, options: CallOptions) !SendCisSessionHealthOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

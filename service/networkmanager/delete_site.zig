@@ -6,9 +6,27 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Site = @import("site.zig").Site;
 
-pub const DeleteSiteInput = @import("delete_site_request.zig").DeleteSiteRequest;
+pub const DeleteSiteInput = struct {
+    /// The ID of the global network.
+    global_network_id: []const u8,
 
-pub const DeleteSiteOutput = @import("delete_site_response.zig").DeleteSiteResponse;
+    /// The ID of the site.
+    site_id: []const u8,
+
+    pub const json_field_names = .{
+        .global_network_id = "GlobalNetworkId",
+        .site_id = "SiteId",
+    };
+};
+
+pub const DeleteSiteOutput = struct {
+    /// Information about the site.
+    site: ?Site = null,
+
+    pub const json_field_names = .{
+        .site = "Site",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSiteInput, options: CallOptions) !DeleteSiteOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

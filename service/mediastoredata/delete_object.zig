@@ -5,10 +5,18 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteObjectInput = @import("delete_object_request.zig").DeleteObjectRequest;
+pub const DeleteObjectInput = struct {
+    /// The path (including the file name) where the object is stored in the
+    /// container.
+    /// Format: //
+    path: []const u8,
 
-pub const DeleteObjectOutput = struct {
+    pub const json_field_names = .{
+        .path = "Path",
+    };
 };
+
+pub const DeleteObjectOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteObjectInput, options: CallOptions) !DeleteObjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -51,8 +51,7 @@ pub const ExecuteChangeSetInput = struct {
     stack_name: ?[]const u8 = null,
 };
 
-pub const ExecuteChangeSetOutput = struct {
-};
+pub const ExecuteChangeSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExecuteChangeSetInput, options: CallOptions) !ExecuteChangeSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

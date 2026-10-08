@@ -19,8 +19,7 @@ pub const SetLoadBalancerPoliciesOfListenerInput = struct {
     policy_names: []const []const u8,
 };
 
-pub const SetLoadBalancerPoliciesOfListenerOutput = struct {
-};
+pub const SetLoadBalancerPoliciesOfListenerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetLoadBalancerPoliciesOfListenerInput, options: CallOptions) !SetLoadBalancerPoliciesOfListenerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

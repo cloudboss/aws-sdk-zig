@@ -20,8 +20,7 @@ pub const PutLexiconInput = struct {
     };
 };
 
-pub const PutLexiconOutput = struct {
-};
+pub const PutLexiconOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutLexiconInput, options: CallOptions) !PutLexiconOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

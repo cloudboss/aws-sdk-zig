@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const TaxExemptionType = @import("tax_exemption_type.zig").TaxExemptionType;
 
-pub const GetTaxExemptionTypesInput = struct {
-};
+pub const GetTaxExemptionTypesInput = struct {};
 
 pub const GetTaxExemptionTypesOutput = struct {
     /// The supported types of tax exemptions.

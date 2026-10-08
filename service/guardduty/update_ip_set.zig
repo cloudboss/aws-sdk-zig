@@ -40,8 +40,7 @@ pub const UpdateIPSetInput = struct {
     };
 };
 
-pub const UpdateIPSetOutput = struct {
-};
+pub const UpdateIPSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateIPSetInput, options: CallOptions) !UpdateIPSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

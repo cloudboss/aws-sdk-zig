@@ -15,8 +15,7 @@ pub const DeregisterSubscriptionProviderInput = struct {
     };
 };
 
-pub const DeregisterSubscriptionProviderOutput = struct {
-};
+pub const DeregisterSubscriptionProviderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterSubscriptionProviderInput, options: CallOptions) !DeregisterSubscriptionProviderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

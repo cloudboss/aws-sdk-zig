@@ -10,11 +10,11 @@ pub const WorkerComputeConfiguration = struct {
     properties: ?WorkerComputeConfigurationProperties = null,
 
     /// The instance type of the compute workers that are used.
-    @"type": WorkerComputeType = .cr1_x,
+    type: WorkerComputeType = .cr1_x,
 
     pub const json_field_names = .{
         .number = "number",
         .properties = "properties",
-        .@"type" = "type",
+        .type = "type",
     };
 };

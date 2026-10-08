@@ -63,7 +63,7 @@ pub const FieldIndex = struct {
     /// `FIELD_INDEX` for field-based indexing. This determines how the field is
     /// indexed
     /// and can be queried.
-    @"type": ?IndexType = null,
+    type: ?IndexType = null,
 
     pub const json_field_names = .{
         .field_index_name = "fieldIndexName",
@@ -72,6 +72,6 @@ pub const FieldIndex = struct {
         .last_event_time = "lastEventTime",
         .last_scan_time = "lastScanTime",
         .log_group_identifier = "logGroupIdentifier",
-        .@"type" = "type",
+        .type = "type",
     };
 };

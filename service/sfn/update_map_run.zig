@@ -27,8 +27,7 @@ pub const UpdateMapRunInput = struct {
     };
 };
 
-pub const UpdateMapRunOutput = struct {
-};
+pub const UpdateMapRunOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateMapRunInput, options: CallOptions) !UpdateMapRunOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -42,8 +42,7 @@ pub const SendAutomationSignalInput = struct {
     };
 };
 
-pub const SendAutomationSignalOutput = struct {
-};
+pub const SendAutomationSignalOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendAutomationSignalInput, options: CallOptions) !SendAutomationSignalOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

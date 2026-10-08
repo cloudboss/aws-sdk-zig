@@ -5,7 +5,17 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the resource.
+    resource_arn: []const u8,
+
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+        .tags = "tags",
+    };
+};
 
 pub const TagResourceOutput = struct {};
 

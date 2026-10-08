@@ -21,8 +21,7 @@ pub const UpdateEmailTemplateInput = struct {
     };
 };
 
-pub const UpdateEmailTemplateOutput = struct {
-};
+pub const UpdateEmailTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateEmailTemplateInput, options: CallOptions) !UpdateEmailTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

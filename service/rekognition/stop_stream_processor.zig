@@ -14,8 +14,7 @@ pub const StopStreamProcessorInput = struct {
     };
 };
 
-pub const StopStreamProcessorOutput = struct {
-};
+pub const StopStreamProcessorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopStreamProcessorInput, options: CallOptions) !StopStreamProcessorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -19,8 +19,7 @@ pub const DeleteSessionInput = struct {
     };
 };
 
-pub const DeleteSessionOutput = struct {
-};
+pub const DeleteSessionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSessionInput, options: CallOptions) !DeleteSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

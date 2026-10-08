@@ -14,8 +14,7 @@ pub const DeletePublicKeyInput = struct {
     };
 };
 
-pub const DeletePublicKeyOutput = struct {
-};
+pub const DeletePublicKeyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePublicKeyInput, options: CallOptions) !DeletePublicKeyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

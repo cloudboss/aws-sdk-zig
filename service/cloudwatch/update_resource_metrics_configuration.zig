@@ -78,7 +78,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateResourceMetricsCo
                 const n_1 = idx_1 + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricSelections.member.{d}.IncludeMetrics.member.{d}=", .{n, n_1}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&MetricSelections.member.{d}.IncludeMetrics.member.{d}=", .{ n, n_1 }) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
                 }

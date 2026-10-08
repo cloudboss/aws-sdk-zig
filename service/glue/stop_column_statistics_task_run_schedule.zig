@@ -24,8 +24,7 @@ pub const StopColumnStatisticsTaskRunScheduleInput = struct {
     };
 };
 
-pub const StopColumnStatisticsTaskRunScheduleOutput = struct {
-};
+pub const StopColumnStatisticsTaskRunScheduleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopColumnStatisticsTaskRunScheduleInput, options: CallOptions) !StopColumnStatisticsTaskRunScheduleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

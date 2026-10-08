@@ -28,8 +28,7 @@ pub const UpdateModelVersionStatusInput = struct {
     };
 };
 
-pub const UpdateModelVersionStatusOutput = struct {
-};
+pub const UpdateModelVersionStatusOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateModelVersionStatusInput, options: CallOptions) !UpdateModelVersionStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

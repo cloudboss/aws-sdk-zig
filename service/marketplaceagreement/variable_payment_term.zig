@@ -18,13 +18,13 @@ pub const VariablePaymentTerm = struct {
     max_total_charge_amount: ?[]const u8 = null,
 
     /// Type of the term.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .configuration = "configuration",
         .currency_code = "currencyCode",
         .id = "id",
         .max_total_charge_amount = "maxTotalChargeAmount",
-        .@"type" = "type",
+        .type = "type",
     };
 };

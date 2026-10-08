@@ -17,13 +17,13 @@ pub const ResultData = struct {
     result_id: []const u8,
 
     /// The type of the query result.
-    @"type": ?QueryResultType = null,
+    type: ?QueryResultType = null,
 
     pub const json_field_names = .{
         .data = "data",
         .document = "document",
         .relevance_score = "relevanceScore",
         .result_id = "resultId",
-        .@"type" = "type",
+        .type = "type",
     };
 };

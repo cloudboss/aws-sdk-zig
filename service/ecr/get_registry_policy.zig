@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetRegistryPolicyInput = struct {
-};
+pub const GetRegistryPolicyInput = struct {};
 
 pub const GetRegistryPolicyOutput = struct {
     /// The JSON text of the permissions policy for a registry.

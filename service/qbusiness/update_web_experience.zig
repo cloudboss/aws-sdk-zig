@@ -83,8 +83,7 @@ pub const UpdateWebExperienceInput = struct {
     };
 };
 
-pub const UpdateWebExperienceOutput = struct {
-};
+pub const UpdateWebExperienceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWebExperienceInput, options: CallOptions) !UpdateWebExperienceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

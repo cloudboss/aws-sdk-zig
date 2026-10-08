@@ -6,9 +6,41 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const RepositorySummary = @import("repository_summary.zig").RepositorySummary;
 
-pub const ListRepositoriesInput = @import("list_repositories_request.zig").ListRepositoriesRequest;
+pub const ListRepositoriesInput = struct {
+    /// The maximum number of results to return per page.
+    max_results: ?i32 = null,
 
-pub const ListRepositoriesOutput = @import("list_repositories_result.zig").ListRepositoriesResult;
+    /// The token for the next set of results. Use the value returned in the
+    /// previous response in the next request to retrieve the next set of results.
+    next_token: ?[]const u8 = null,
+
+    /// A prefix used to filter returned repositories. Only repositories with names
+    /// that start
+    /// with `repositoryPrefix` are returned.
+    repository_prefix: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+        .repository_prefix = "repositoryPrefix",
+    };
+};
+
+pub const ListRepositoriesOutput = struct {
+    /// If there are additional results, this is the token for the next set of
+    /// results.
+    next_token: ?[]const u8 = null,
+
+    /// The returned list of
+    /// [RepositorySummary](https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html)
+    /// objects.
+    repositories: ?[]const RepositorySummary = null,
+
+    pub const json_field_names = .{
+        .next_token = "nextToken",
+        .repositories = "repositories",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListRepositoriesInput, options: CallOptions) !ListRepositoriesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -23,8 +23,7 @@ pub const DeleteContactFlowVersionInput = struct {
     };
 };
 
-pub const DeleteContactFlowVersionOutput = struct {
-};
+pub const DeleteContactFlowVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteContactFlowVersionInput, options: CallOptions) !DeleteContactFlowVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

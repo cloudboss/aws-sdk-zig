@@ -17,12 +17,12 @@ pub const AwsWafRuleGroupRulesDetails = struct {
     rule_id: ?[]const u8 = null,
 
     /// The type of rule.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .action = "Action",
         .priority = "Priority",
         .rule_id = "RuleId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

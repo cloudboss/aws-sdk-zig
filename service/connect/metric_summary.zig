@@ -22,7 +22,7 @@ pub const MetricSummary = struct {
     status: MetricStatus,
 
     /// The type of the metric.
-    @"type": MetricType,
+    type: MetricType,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -31,6 +31,6 @@ pub const MetricSummary = struct {
         .last_modified_time = "LastModifiedTime",
         .name = "Name",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

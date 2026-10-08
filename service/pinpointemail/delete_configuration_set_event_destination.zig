@@ -20,8 +20,7 @@ pub const DeleteConfigurationSetEventDestinationInput = struct {
     };
 };
 
-pub const DeleteConfigurationSetEventDestinationOutput = struct {
-};
+pub const DeleteConfigurationSetEventDestinationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConfigurationSetEventDestinationInput, options: CallOptions) !DeleteConfigurationSetEventDestinationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -23,8 +23,7 @@ pub const DeleteQueueLimitAssociationInput = struct {
     };
 };
 
-pub const DeleteQueueLimitAssociationOutput = struct {
-};
+pub const DeleteQueueLimitAssociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteQueueLimitAssociationInput, options: CallOptions) !DeleteQueueLimitAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

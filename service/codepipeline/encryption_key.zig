@@ -21,10 +21,10 @@ pub const EncryptionKey = struct {
     /// The type of encryption key, such as an Amazon Web Services KMS key. When
     /// creating or
     /// updating a pipeline, the value must be set to 'KMS'.
-    @"type": EncryptionKeyType,
+    type: EncryptionKeyType,
 
     pub const json_field_names = .{
         .id = "id",
-        .@"type" = "type",
+        .type = "type",
     };
 };

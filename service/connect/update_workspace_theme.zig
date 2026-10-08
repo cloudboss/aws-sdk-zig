@@ -25,8 +25,7 @@ pub const UpdateWorkspaceThemeInput = struct {
     };
 };
 
-pub const UpdateWorkspaceThemeOutput = struct {
-};
+pub const UpdateWorkspaceThemeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorkspaceThemeInput, options: CallOptions) !UpdateWorkspaceThemeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

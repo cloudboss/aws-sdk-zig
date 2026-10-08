@@ -10,11 +10,11 @@ pub const Principal = struct {
     roles: ?[]const PermissionInfo = null,
 
     /// The type of resource.
-    @"type": ?PrincipalType = null,
+    type: ?PrincipalType = null,
 
     pub const json_field_names = .{
         .id = "Id",
         .roles = "Roles",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

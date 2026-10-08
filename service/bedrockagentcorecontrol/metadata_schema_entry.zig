@@ -17,12 +17,12 @@ pub const MetadataSchemaEntry = struct {
     key: []const u8,
 
     /// The MetadataValueType.
-    @"type": ?MetadataValueType = null,
+    type: ?MetadataValueType = null,
 
     pub const json_field_names = .{
         .extraction_config = "extractionConfig",
         .extraction_type = "extractionType",
         .key = "key",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -14,8 +14,7 @@ pub const DisassociateUserAccessLoggingSettingsInput = struct {
     };
 };
 
-pub const DisassociateUserAccessLoggingSettingsOutput = struct {
-};
+pub const DisassociateUserAccessLoggingSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateUserAccessLoggingSettingsInput, options: CallOptions) !DisassociateUserAccessLoggingSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

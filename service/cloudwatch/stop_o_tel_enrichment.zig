@@ -5,11 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const StopOTelEnrichmentInput = struct {
-};
+pub const StopOTelEnrichmentInput = struct {};
 
-pub const StopOTelEnrichmentOutput = struct {
-};
+pub const StopOTelEnrichmentOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopOTelEnrichmentInput, options: CallOptions) !StopOTelEnrichmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

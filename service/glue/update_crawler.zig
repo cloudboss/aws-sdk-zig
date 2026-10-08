@@ -92,8 +92,7 @@ pub const UpdateCrawlerInput = struct {
     };
 };
 
-pub const UpdateCrawlerOutput = struct {
-};
+pub const UpdateCrawlerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCrawlerInput, options: CallOptions) !UpdateCrawlerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

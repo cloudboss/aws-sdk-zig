@@ -19,8 +19,7 @@ pub const DissociateEntityFromThingInput = struct {
     };
 };
 
-pub const DissociateEntityFromThingOutput = struct {
-};
+pub const DissociateEntityFromThingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DissociateEntityFromThingInput, options: CallOptions) !DissociateEntityFromThingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

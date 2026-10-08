@@ -14,8 +14,7 @@ pub const DeleteBillScenarioInput = struct {
     };
 };
 
-pub const DeleteBillScenarioOutput = struct {
-};
+pub const DeleteBillScenarioOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteBillScenarioInput, options: CallOptions) !DeleteBillScenarioOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

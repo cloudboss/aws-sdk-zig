@@ -15,10 +15,10 @@ pub const HandshakeParty = struct {
     /// organization). Valid input values for the Target parameter are ACCOUNT and
     /// EMAIL
     /// only.
-    @"type": HandshakePartyType,
+    type: HandshakePartyType,
 
     pub const json_field_names = .{
         .id = "Id",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

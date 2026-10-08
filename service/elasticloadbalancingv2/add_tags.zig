@@ -15,8 +15,7 @@ pub const AddTagsInput = struct {
     tags: []const Tag,
 };
 
-pub const AddTagsOutput = struct {
-};
+pub const AddTagsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddTagsInput, options: CallOptions) !AddTagsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

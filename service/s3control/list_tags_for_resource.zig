@@ -7,9 +7,20 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// The Amazon Web Services account ID of the resource owner.
+    account_id: []const u8,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_result.zig").ListTagsForResourceResult;
+    /// The Amazon Resource Name (ARN) of the S3 resource that you want to list tags
+    /// for. The tagged resource can be a directory bucket, S3 Storage Lens group or
+    /// S3 Access Grants instance, registered location, or grant.
+    resource_arn: []const u8,
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// The Amazon Web Services resource tags that are associated with the resource.
+    tags: ?[]const Tag = null,
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

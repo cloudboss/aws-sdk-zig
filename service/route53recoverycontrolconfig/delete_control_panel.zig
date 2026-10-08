@@ -14,8 +14,7 @@ pub const DeleteControlPanelInput = struct {
     };
 };
 
-pub const DeleteControlPanelOutput = struct {
-};
+pub const DeleteControlPanelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteControlPanelInput, options: CallOptions) !DeleteControlPanelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

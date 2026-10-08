@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetDefaultKeyReplicationRegionsInput = struct {
-};
+pub const GetDefaultKeyReplicationRegionsInput = struct {};
 
 pub const GetDefaultKeyReplicationRegionsOutput = struct {
     /// The list of regions where default key replication is currently enabled for

@@ -32,8 +32,7 @@ pub const UpdateNotebookMetadataInput = struct {
     };
 };
 
-pub const UpdateNotebookMetadataOutput = struct {
-};
+pub const UpdateNotebookMetadataOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateNotebookMetadataInput, options: CallOptions) !UpdateNotebookMetadataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

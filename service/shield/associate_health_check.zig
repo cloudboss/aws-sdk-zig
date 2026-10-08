@@ -20,8 +20,7 @@ pub const AssociateHealthCheckInput = struct {
     };
 };
 
-pub const AssociateHealthCheckOutput = struct {
-};
+pub const AssociateHealthCheckOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateHealthCheckInput, options: CallOptions) !AssociateHealthCheckOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -34,7 +34,7 @@ pub const FilterSliderControl = struct {
     /// * `SINGLE_POINT`: Filter against(equals) a single data point.
     ///
     /// * `RANGE`: Filter data that is in a specified range.
-    @"type": ?SheetControlSliderType = null,
+    type: ?SheetControlSliderType = null,
 
     pub const json_field_names = .{
         .control_title_format_text = "ControlTitleFormatText",
@@ -45,6 +45,6 @@ pub const FilterSliderControl = struct {
         .source_filter_id = "SourceFilterId",
         .step_size = "StepSize",
         .title = "Title",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

@@ -18,8 +18,7 @@ pub const DeletePluginInput = struct {
     };
 };
 
-pub const DeletePluginOutput = struct {
-};
+pub const DeletePluginOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePluginInput, options: CallOptions) !DeletePluginOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

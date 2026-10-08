@@ -5,11 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DisassociateFromMasterAccountInput = struct {
-};
+pub const DisassociateFromMasterAccountInput = struct {};
 
-pub const DisassociateFromMasterAccountOutput = struct {
-};
+pub const DisassociateFromMasterAccountOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateFromMasterAccountInput, options: CallOptions) !DisassociateFromMasterAccountOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

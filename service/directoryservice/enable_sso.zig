@@ -37,8 +37,7 @@ pub const EnableSsoInput = struct {
     };
 };
 
-pub const EnableSsoOutput = struct {
-};
+pub const EnableSsoOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableSsoInput, options: CallOptions) !EnableSsoOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

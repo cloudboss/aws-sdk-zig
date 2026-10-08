@@ -5,10 +5,10 @@ pub const Identity = struct {
     principal_id: ?[]const u8 = null,
 
     /// The type of the identity. For Time To Live, the type is "Service".
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .principal_id = "PrincipalId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

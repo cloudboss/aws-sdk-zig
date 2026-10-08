@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DelegatedAdmin = @import("delegated_admin.zig").DelegatedAdmin;
 
-pub const GetDelegatedAdminAccountInput = struct {
-};
+pub const GetDelegatedAdminAccountInput = struct {};
 
 pub const GetDelegatedAdminAccountOutput = struct {
     /// The Amazon Web Services account ID of the Amazon Inspector delegated

@@ -19,8 +19,7 @@ pub const PutDedicatedIpWarmupAttributesInput = struct {
     };
 };
 
-pub const PutDedicatedIpWarmupAttributesOutput = struct {
-};
+pub const PutDedicatedIpWarmupAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutDedicatedIpWarmupAttributesInput, options: CallOptions) !PutDedicatedIpWarmupAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

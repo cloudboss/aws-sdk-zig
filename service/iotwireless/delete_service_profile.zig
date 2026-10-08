@@ -14,8 +14,7 @@ pub const DeleteServiceProfileInput = struct {
     };
 };
 
-pub const DeleteServiceProfileOutput = struct {
-};
+pub const DeleteServiceProfileOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteServiceProfileInput, options: CallOptions) !DeleteServiceProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -18,8 +18,7 @@ pub const DeleteGuardrailInput = struct {
     };
 };
 
-pub const DeleteGuardrailOutput = struct {
-};
+pub const DeleteGuardrailOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteGuardrailInput, options: CallOptions) !DeleteGuardrailOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

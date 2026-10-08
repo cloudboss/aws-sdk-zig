@@ -25,8 +25,7 @@ pub const PutWhatsAppBusinessPublicKeyInput = struct {
     };
 };
 
-pub const PutWhatsAppBusinessPublicKeyOutput = struct {
-};
+pub const PutWhatsAppBusinessPublicKeyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutWhatsAppBusinessPublicKeyInput, options: CallOptions) !PutWhatsAppBusinessPublicKeyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

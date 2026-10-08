@@ -14,8 +14,7 @@ pub const StopHumanLoopInput = struct {
     };
 };
 
-pub const StopHumanLoopOutput = struct {
-};
+pub const StopHumanLoopOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopHumanLoopInput, options: CallOptions) !StopHumanLoopOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

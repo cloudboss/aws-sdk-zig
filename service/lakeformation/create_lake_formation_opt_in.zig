@@ -22,8 +22,7 @@ pub const CreateLakeFormationOptInInput = struct {
     };
 };
 
-pub const CreateLakeFormationOptInOutput = struct {
-};
+pub const CreateLakeFormationOptInOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLakeFormationOptInInput, options: CallOptions) !CreateLakeFormationOptInOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

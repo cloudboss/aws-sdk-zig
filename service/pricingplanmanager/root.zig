@@ -1,0 +1,25 @@
+pub const Client = @import("client.zig").Client;
+pub const CallOptions = @import("call_options.zig").CallOptions;
+pub const errors = @import("errors.zig");
+pub const ServiceError = errors.ServiceError;
+pub const paginator = @import("paginator.zig");
+pub const types = @import("types.zig");
+
+pub const ApprovePaidSubscriptionInput = @import("approve_paid_subscription.zig").ApprovePaidSubscriptionInput;
+pub const ApprovePaidSubscriptionOutput = @import("approve_paid_subscription.zig").ApprovePaidSubscriptionOutput;
+pub const AssociateResourcesToSubscriptionInput = @import("associate_resources_to_subscription.zig").AssociateResourcesToSubscriptionInput;
+pub const AssociateResourcesToSubscriptionOutput = @import("associate_resources_to_subscription.zig").AssociateResourcesToSubscriptionOutput;
+pub const CancelSubscriptionChangeInput = @import("cancel_subscription_change.zig").CancelSubscriptionChangeInput;
+pub const CancelSubscriptionChangeOutput = @import("cancel_subscription_change.zig").CancelSubscriptionChangeOutput;
+pub const CancelSubscriptionInput = @import("cancel_subscription.zig").CancelSubscriptionInput;
+pub const CancelSubscriptionOutput = @import("cancel_subscription.zig").CancelSubscriptionOutput;
+pub const CreateSubscriptionInput = @import("create_subscription.zig").CreateSubscriptionInput;
+pub const CreateSubscriptionOutput = @import("create_subscription.zig").CreateSubscriptionOutput;
+pub const DisassociateResourcesFromSubscriptionInput = @import("disassociate_resources_from_subscription.zig").DisassociateResourcesFromSubscriptionInput;
+pub const DisassociateResourcesFromSubscriptionOutput = @import("disassociate_resources_from_subscription.zig").DisassociateResourcesFromSubscriptionOutput;
+pub const GetSubscriptionInput = @import("get_subscription.zig").GetSubscriptionInput;
+pub const GetSubscriptionOutput = @import("get_subscription.zig").GetSubscriptionOutput;
+pub const ListSubscriptionsInput = @import("list_subscriptions.zig").ListSubscriptionsInput;
+pub const ListSubscriptionsOutput = @import("list_subscriptions.zig").ListSubscriptionsOutput;
+pub const UpdateSubscriptionInput = @import("update_subscription.zig").UpdateSubscriptionInput;
+pub const UpdateSubscriptionOutput = @import("update_subscription.zig").UpdateSubscriptionOutput;

@@ -23,8 +23,7 @@ pub const PutDataLakeSettingsInput = struct {
     };
 };
 
-pub const PutDataLakeSettingsOutput = struct {
-};
+pub const PutDataLakeSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutDataLakeSettingsInput, options: CallOptions) !PutDataLakeSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

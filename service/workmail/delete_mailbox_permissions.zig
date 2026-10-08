@@ -45,8 +45,7 @@ pub const DeleteMailboxPermissionsInput = struct {
     };
 };
 
-pub const DeleteMailboxPermissionsOutput = struct {
-};
+pub const DeleteMailboxPermissionsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMailboxPermissionsInput, options: CallOptions) !DeleteMailboxPermissionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

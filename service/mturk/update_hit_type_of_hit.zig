@@ -18,8 +18,7 @@ pub const UpdateHITTypeOfHITInput = struct {
     };
 };
 
-pub const UpdateHITTypeOfHITOutput = struct {
-};
+pub const UpdateHITTypeOfHITOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateHITTypeOfHITInput, options: CallOptions) !UpdateHITTypeOfHITOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

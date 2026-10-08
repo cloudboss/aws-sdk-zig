@@ -25,8 +25,7 @@ pub const SetIdentityFeedbackForwardingEnabledInput = struct {
     identity: []const u8,
 };
 
-pub const SetIdentityFeedbackForwardingEnabledOutput = struct {
-};
+pub const SetIdentityFeedbackForwardingEnabledOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetIdentityFeedbackForwardingEnabledInput, options: CallOptions) !SetIdentityFeedbackForwardingEnabledOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

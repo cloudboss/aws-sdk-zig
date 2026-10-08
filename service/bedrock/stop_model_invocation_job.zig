@@ -14,8 +14,7 @@ pub const StopModelInvocationJobInput = struct {
     };
 };
 
-pub const StopModelInvocationJobOutput = struct {
-};
+pub const StopModelInvocationJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopModelInvocationJobInput, options: CallOptions) !StopModelInvocationJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

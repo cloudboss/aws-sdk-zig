@@ -19,8 +19,7 @@ pub const PutAccountSendingAttributesInput = struct {
     };
 };
 
-pub const PutAccountSendingAttributesOutput = struct {
-};
+pub const PutAccountSendingAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAccountSendingAttributesInput, options: CallOptions) !PutAccountSendingAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -42,7 +42,7 @@ pub const CreateSubscriptionTargetInput = struct {
     subscription_target_config: []const SubscriptionTargetForm,
 
     /// The type of the subscription target.
-    @"type": []const u8,
+    type: []const u8,
 
     pub const json_field_names = .{
         .applicable_asset_types = "applicableAssetTypes",
@@ -55,7 +55,7 @@ pub const CreateSubscriptionTargetInput = struct {
         .provider = "provider",
         .subscription_grant_creation_mode = "subscriptionGrantCreationMode",
         .subscription_target_config = "subscriptionTargetConfig",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -102,7 +102,7 @@ pub const CreateSubscriptionTargetOutput = struct {
     subscription_target_config: ?[]const SubscriptionTargetForm = null,
 
     /// The type of the subscription target.
-    @"type": []const u8,
+    type: []const u8,
 
     /// The timestamp of when the subscription target was updated.
     updated_at: ?i64 = null,
@@ -124,7 +124,7 @@ pub const CreateSubscriptionTargetOutput = struct {
         .provider = "provider",
         .subscription_grant_creation_mode = "subscriptionGrantCreationMode",
         .subscription_target_config = "subscriptionTargetConfig",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
         .updated_by = "updatedBy",
     };
@@ -212,7 +212,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateSubscriptionTarge
     has_prev = true;
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

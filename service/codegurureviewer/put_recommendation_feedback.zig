@@ -28,8 +28,7 @@ pub const PutRecommendationFeedbackInput = struct {
     };
 };
 
-pub const PutRecommendationFeedbackOutput = struct {
-};
+pub const PutRecommendationFeedbackOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutRecommendationFeedbackInput, options: CallOptions) !PutRecommendationFeedbackOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -79,7 +79,7 @@ pub const DataResource = struct {
     /// event selectors. For more
     /// information, see
     /// [AdvancedEventSelector](https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html).
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// An array of Amazon Resource Name (ARN) strings or partial ARN strings for
     /// the specified
@@ -130,7 +130,7 @@ pub const DataResource = struct {
     values: ?[]const []const u8 = null,
 
     pub const json_field_names = .{
-        .@"type" = "Type",
+        .type = "Type",
         .values = "Values",
     };
 };

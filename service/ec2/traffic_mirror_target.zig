@@ -25,5 +25,5 @@ pub const TrafficMirrorTarget = struct {
     traffic_mirror_target_id: ?[]const u8 = null,
 
     /// The type of Traffic Mirror target.
-    @"type": ?TrafficMirrorTargetType = null,
+    type: ?TrafficMirrorTargetType = null,
 };

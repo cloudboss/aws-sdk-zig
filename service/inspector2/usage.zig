@@ -17,13 +17,13 @@ pub const Usage = struct {
     total: f64 = 0,
 
     /// The type scan.
-    @"type": ?UsageType = null,
+    type: ?UsageType = null,
 
     pub const json_field_names = .{
         .cloud_provider = "cloudProvider",
         .currency = "currency",
         .estimated_monthly_cost = "estimatedMonthlyCost",
         .total = "total",
-        .@"type" = "type",
+        .type = "type",
     };
 };

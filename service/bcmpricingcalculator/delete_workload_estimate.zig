@@ -14,8 +14,7 @@ pub const DeleteWorkloadEstimateInput = struct {
     };
 };
 
-pub const DeleteWorkloadEstimateOutput = struct {
-};
+pub const DeleteWorkloadEstimateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteWorkloadEstimateInput, options: CallOptions) !DeleteWorkloadEstimateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

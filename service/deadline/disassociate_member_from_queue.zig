@@ -22,8 +22,7 @@ pub const DisassociateMemberFromQueueInput = struct {
     };
 };
 
-pub const DisassociateMemberFromQueueOutput = struct {
-};
+pub const DisassociateMemberFromQueueOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateMemberFromQueueInput, options: CallOptions) !DisassociateMemberFromQueueOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

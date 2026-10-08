@@ -23,13 +23,13 @@ pub const SchemaV2Field = struct {
     /// object for nested types such as `struct`, `list`, or `map`. For more
     /// information, see the [Apache Iceberg schemas and data types
     /// documentation](https://iceberg.apache.org/spec/#schemas-and-data-types).
-    @"type": []const u8,
+    type: []const u8,
 
     pub const json_field_names = .{
         .doc = "doc",
         .id = "id",
         .name = "name",
         .required = "required",
-        .@"type" = "type",
+        .type = "type",
     };
 };

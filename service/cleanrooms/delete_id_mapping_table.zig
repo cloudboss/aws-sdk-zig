@@ -19,8 +19,7 @@ pub const DeleteIdMappingTableInput = struct {
     };
 };
 
-pub const DeleteIdMappingTableOutput = struct {
-};
+pub const DeleteIdMappingTableOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIdMappingTableInput, options: CallOptions) !DeleteIdMappingTableOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

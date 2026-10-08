@@ -18,8 +18,7 @@ pub const DisassociateWhatsAppBusinessAccountInput = struct {
     };
 };
 
-pub const DisassociateWhatsAppBusinessAccountOutput = struct {
-};
+pub const DisassociateWhatsAppBusinessAccountOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateWhatsAppBusinessAccountInput, options: CallOptions) !DisassociateWhatsAppBusinessAccountOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

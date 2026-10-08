@@ -32,8 +32,7 @@ pub const DeleteApplicationReferenceDataSourceInput = struct {
     };
 };
 
-pub const DeleteApplicationReferenceDataSourceOutput = struct {
-};
+pub const DeleteApplicationReferenceDataSourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteApplicationReferenceDataSourceInput, options: CallOptions) !DeleteApplicationReferenceDataSourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

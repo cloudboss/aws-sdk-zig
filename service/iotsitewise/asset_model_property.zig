@@ -51,7 +51,7 @@ pub const AssetModelProperty = struct {
     path: ?[]const AssetModelPropertyPathSegment = null,
 
     /// The property type (see `PropertyType`).
-    @"type": PropertyType,
+    type: PropertyType,
 
     /// The unit of the asset model property, such as `Newtons` or
     /// `RPM`.
@@ -64,7 +64,7 @@ pub const AssetModelProperty = struct {
         .id = "id",
         .name = "name",
         .path = "path",
-        .@"type" = "type",
+        .type = "type",
         .unit = "unit",
     };
 };

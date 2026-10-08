@@ -24,12 +24,12 @@ pub const ProviderSchemaAttribute = struct {
     /// | `MAID`
     ///
     /// Unified ID 2.0 supports: `PHONE_NUMBER` | `EMAIL_ADDRESS` | `UNIQUE_ID`
-    @"type": SchemaAttributeType,
+    type: SchemaAttributeType,
 
     pub const json_field_names = .{
         .field_name = "fieldName",
         .hashing = "hashing",
         .sub_type = "subType",
-        .@"type" = "type",
+        .type = "type",
     };
 };

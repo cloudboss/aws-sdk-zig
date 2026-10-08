@@ -33,8 +33,7 @@ pub const AttachThingPrincipalInput = struct {
     };
 };
 
-pub const AttachThingPrincipalOutput = struct {
-};
+pub const AttachThingPrincipalOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AttachThingPrincipalInput, options: CallOptions) !AttachThingPrincipalOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

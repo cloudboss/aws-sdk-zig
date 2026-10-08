@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Endpoint = @import("endpoint.zig").Endpoint;
 
-pub const DescribeEndpointsInput = struct {
-};
+pub const DescribeEndpointsInput = struct {};
 
 pub const DescribeEndpointsOutput = struct {
     /// List of endpoints.

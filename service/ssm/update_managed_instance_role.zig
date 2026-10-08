@@ -27,8 +27,7 @@ pub const UpdateManagedInstanceRoleInput = struct {
     };
 };
 
-pub const UpdateManagedInstanceRoleOutput = struct {
-};
+pub const UpdateManagedInstanceRoleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateManagedInstanceRoleInput, options: CallOptions) !UpdateManagedInstanceRoleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

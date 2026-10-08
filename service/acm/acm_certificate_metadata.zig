@@ -71,7 +71,7 @@ pub const AcmCertificateMetadata = struct {
     /// between certificates that you import and those that ACM provides, see
     /// [Importing
     /// Certificates](https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html) in the *Certificate Manager User Guide*.
-    @"type": ?CertificateType = null,
+    type: ?CertificateType = null,
 
     /// Specifies the domain validation method.
     validation_method: ?ValidationMethod = null,
@@ -91,7 +91,7 @@ pub const AcmCertificateMetadata = struct {
         .renewal_status = "RenewalStatus",
         .revoked_at = "RevokedAt",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
         .validation_method = "ValidationMethod",
     };
 };

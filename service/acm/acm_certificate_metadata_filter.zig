@@ -27,7 +27,7 @@ pub const AcmCertificateMetadataFilter = union(enum) {
     /// Filter by certificate status.
     status: ?CertificateStatus,
     /// Filter by certificate type.
-    @"type": ?CertificateType,
+    type: ?CertificateType,
     /// Filter by validation method.
     validation_method: ?ValidationMethod,
 
@@ -41,7 +41,7 @@ pub const AcmCertificateMetadataFilter = union(enum) {
         .managed_by = "ManagedBy",
         .renewal_status = "RenewalStatus",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
         .validation_method = "ValidationMethod",
     };
 };

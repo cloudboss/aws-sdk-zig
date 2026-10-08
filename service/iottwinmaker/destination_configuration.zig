@@ -11,11 +11,11 @@ pub const DestinationConfiguration = struct {
     s_3_configuration: ?S3DestinationConfiguration = null,
 
     /// The destination type.
-    @"type": DestinationType,
+    type: DestinationType,
 
     pub const json_field_names = .{
         .iot_twin_maker_configuration = "iotTwinMakerConfiguration",
         .s_3_configuration = "s3Configuration",
-        .@"type" = "type",
+        .type = "type",
     };
 };

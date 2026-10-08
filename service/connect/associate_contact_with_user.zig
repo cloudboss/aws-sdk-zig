@@ -23,8 +23,7 @@ pub const AssociateContactWithUserInput = struct {
     };
 };
 
-pub const AssociateContactWithUserOutput = struct {
-};
+pub const AssociateContactWithUserOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateContactWithUserInput, options: CallOptions) !AssociateContactWithUserOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

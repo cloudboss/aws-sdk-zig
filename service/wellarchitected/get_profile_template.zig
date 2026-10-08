@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ProfileTemplate = @import("profile_template.zig").ProfileTemplate;
 
-pub const GetProfileTemplateInput = struct {
-};
+pub const GetProfileTemplateInput = struct {};
 
 pub const GetProfileTemplateOutput = struct {
     /// The profile template.

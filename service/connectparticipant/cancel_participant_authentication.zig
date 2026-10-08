@@ -19,8 +19,7 @@ pub const CancelParticipantAuthenticationInput = struct {
     };
 };
 
-pub const CancelParticipantAuthenticationOutput = struct {
-};
+pub const CancelParticipantAuthenticationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelParticipantAuthenticationInput, options: CallOptions) !CancelParticipantAuthenticationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -13,8 +13,7 @@ pub const CancelMulticastGroupSessionInput = struct {
     };
 };
 
-pub const CancelMulticastGroupSessionOutput = struct {
-};
+pub const CancelMulticastGroupSessionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelMulticastGroupSessionInput, options: CallOptions) !CancelMulticastGroupSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

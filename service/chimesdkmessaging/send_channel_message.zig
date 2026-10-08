@@ -60,7 +60,7 @@ pub const SendChannelMessageInput = struct {
     /// attachment.
     ///
     /// `CONTROL` messages are limited to 30 bytes and do not contain metadata.
-    @"type": ChannelMessageType,
+    type: ChannelMessageType,
 
     pub const json_field_names = .{
         .channel_arn = "ChannelArn",
@@ -74,7 +74,7 @@ pub const SendChannelMessageInput = struct {
         .push_notification = "PushNotification",
         .sub_channel_id = "SubChannelId",
         .target = "Target",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -189,7 +189,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SendChannelMessageInput
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

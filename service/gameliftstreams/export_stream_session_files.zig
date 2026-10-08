@@ -42,8 +42,7 @@ pub const ExportStreamSessionFilesInput = struct {
     };
 };
 
-pub const ExportStreamSessionFilesOutput = struct {
-};
+pub const ExportStreamSessionFilesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExportStreamSessionFilesInput, options: CallOptions) !ExportStreamSessionFilesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

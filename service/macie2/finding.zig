@@ -65,7 +65,7 @@ pub const Finding = struct {
     title: ?[]const u8 = null,
 
     /// The type of the finding.
-    @"type": ?FindingType = null,
+    type: ?FindingType = null,
 
     /// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie
     /// last updated the finding. For sensitive data findings, this value is the
@@ -90,7 +90,7 @@ pub const Finding = struct {
         .schema_version = "schemaVersion",
         .severity = "severity",
         .title = "title",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
     };
 };

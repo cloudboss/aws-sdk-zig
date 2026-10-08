@@ -30,8 +30,7 @@ pub const AssociateProductWithPortfolioInput = struct {
     };
 };
 
-pub const AssociateProductWithPortfolioOutput = struct {
-};
+pub const AssociateProductWithPortfolioOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateProductWithPortfolioInput, options: CallOptions) !AssociateProductWithPortfolioOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

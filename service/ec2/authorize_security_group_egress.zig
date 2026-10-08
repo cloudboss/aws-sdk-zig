@@ -126,7 +126,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeSecurityGroupE
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.cidr_ip) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.IpRanges.{d}.CidrIp=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.IpRanges.{d}.CidrIp=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -134,7 +134,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeSecurityGroupE
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.description) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.IpRanges.{d}.Description=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.IpRanges.{d}.Description=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -147,7 +147,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeSecurityGroupE
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.cidr_ipv_6) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Ipv6Ranges.{d}.CidrIpv6=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Ipv6Ranges.{d}.CidrIpv6=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -155,7 +155,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeSecurityGroupE
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.description) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Ipv6Ranges.{d}.Description=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Ipv6Ranges.{d}.Description=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -168,7 +168,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeSecurityGroupE
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.description) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.PrefixListIds.{d}.Description=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.PrefixListIds.{d}.Description=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -176,7 +176,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeSecurityGroupE
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.prefix_list_id) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.PrefixListIds.{d}.PrefixListId=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.PrefixListIds.{d}.PrefixListId=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -197,7 +197,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeSecurityGroupE
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.description) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Groups.{d}.Description=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Groups.{d}.Description=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -205,7 +205,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeSecurityGroupE
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.group_id) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Groups.{d}.GroupId=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Groups.{d}.GroupId=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -213,7 +213,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeSecurityGroupE
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.group_name) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Groups.{d}.GroupName=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Groups.{d}.GroupName=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -221,7 +221,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeSecurityGroupE
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.peering_status) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Groups.{d}.PeeringStatus=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Groups.{d}.PeeringStatus=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -229,7 +229,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeSecurityGroupE
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.user_id) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Groups.{d}.UserId=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Groups.{d}.UserId=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -237,7 +237,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeSecurityGroupE
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.vpc_id) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Groups.{d}.VpcId=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Groups.{d}.VpcId=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -245,7 +245,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeSecurityGroupE
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.vpc_peering_connection_id) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Groups.{d}.VpcPeeringConnectionId=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&IpPermissions.{d}.Groups.{d}.VpcPeeringConnectionId=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -283,7 +283,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeSecurityGroupE
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.key) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Key=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }
@@ -291,7 +291,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AuthorizeSecurityGroupE
                     {
                         var prefix_buf: [256]u8 = undefined;
                         if (item_1.value) |fv_2| {
-                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{n, n_1}) catch continue;
+                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TagSpecification.{d}.Tag.{d}.Value=", .{ n, n_1 }) catch continue;
                             try body_buf.appendSlice(allocator, field_prefix);
                             try aws.url.appendUrlEncoded(allocator, &body_buf, fv_2);
                         }

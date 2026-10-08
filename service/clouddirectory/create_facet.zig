@@ -49,8 +49,7 @@ pub const CreateFacetInput = struct {
     };
 };
 
-pub const CreateFacetOutput = struct {
-};
+pub const CreateFacetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateFacetInput, options: CallOptions) !CreateFacetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -18,8 +18,7 @@ pub const DeleteExperienceInput = struct {
     };
 };
 
-pub const DeleteExperienceOutput = struct {
-};
+pub const DeleteExperienceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteExperienceInput, options: CallOptions) !DeleteExperienceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

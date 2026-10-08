@@ -24,8 +24,7 @@ pub const DeleteAIAgentVersionInput = struct {
     };
 };
 
-pub const DeleteAIAgentVersionOutput = struct {
-};
+pub const DeleteAIAgentVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAIAgentVersionInput, options: CallOptions) !DeleteAIAgentVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

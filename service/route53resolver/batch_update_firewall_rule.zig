@@ -8,9 +8,27 @@ const UpdateFirewallRuleEntry = @import("update_firewall_rule_entry.zig").Update
 const FirewallRule = @import("firewall_rule.zig").FirewallRule;
 const BatchUpdateFirewallRuleError = @import("batch_update_firewall_rule_error.zig").BatchUpdateFirewallRuleError;
 
-pub const BatchUpdateFirewallRuleInput = @import("batch_update_firewall_rule_request.zig").BatchUpdateFirewallRuleRequest;
+pub const BatchUpdateFirewallRuleInput = struct {
+    /// The list of firewall rules to update.
+    update_firewall_rule_entries: []const UpdateFirewallRuleEntry,
 
-pub const BatchUpdateFirewallRuleOutput = @import("batch_update_firewall_rule_response.zig").BatchUpdateFirewallRuleResponse;
+    pub const json_field_names = .{
+        .update_firewall_rule_entries = "UpdateFirewallRuleEntries",
+    };
+};
+
+pub const BatchUpdateFirewallRuleOutput = struct {
+    /// The firewall rules that were successfully updated by the request.
+    updated_firewall_rules: ?[]const FirewallRule = null,
+
+    /// A list of errors that occurred while updating the firewall rules.
+    update_errors: ?[]const BatchUpdateFirewallRuleError = null,
+
+    pub const json_field_names = .{
+        .updated_firewall_rules = "UpdatedFirewallRules",
+        .update_errors = "UpdateErrors",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchUpdateFirewallRuleInput, options: CallOptions) !BatchUpdateFirewallRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

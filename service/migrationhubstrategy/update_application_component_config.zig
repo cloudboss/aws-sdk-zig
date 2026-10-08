@@ -50,8 +50,7 @@ pub const UpdateApplicationComponentConfigInput = struct {
     };
 };
 
-pub const UpdateApplicationComponentConfigOutput = struct {
-};
+pub const UpdateApplicationComponentConfigOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateApplicationComponentConfigInput, options: CallOptions) !UpdateApplicationComponentConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

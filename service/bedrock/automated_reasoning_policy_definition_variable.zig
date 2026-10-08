@@ -12,11 +12,11 @@ pub const AutomatedReasoningPolicyDefinitionVariable = struct {
 
     /// The data type of the variable. Valid types include bool, int, real, enum,
     /// and custom types that you can provide.
-    @"type": []const u8,
+    type: []const u8,
 
     pub const json_field_names = .{
         .description = "description",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -14,8 +14,7 @@ pub const StopMatchmakingInput = struct {
     };
 };
 
-pub const StopMatchmakingOutput = struct {
-};
+pub const StopMatchmakingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopMatchmakingInput, options: CallOptions) !StopMatchmakingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

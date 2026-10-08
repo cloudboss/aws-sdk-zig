@@ -22,8 +22,7 @@ pub const DisassociateApplicationsInput = struct {
     };
 };
 
-pub const DisassociateApplicationsOutput = struct {
-};
+pub const DisassociateApplicationsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateApplicationsInput, options: CallOptions) !DisassociateApplicationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

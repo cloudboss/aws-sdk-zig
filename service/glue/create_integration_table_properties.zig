@@ -35,8 +35,7 @@ pub const CreateIntegrationTablePropertiesInput = struct {
     };
 };
 
-pub const CreateIntegrationTablePropertiesOutput = struct {
-};
+pub const CreateIntegrationTablePropertiesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateIntegrationTablePropertiesInput, options: CallOptions) !CreateIntegrationTablePropertiesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const ReorderReceiptRuleSetInput = struct {
     rule_set_name: []const u8,
 };
 
-pub const ReorderReceiptRuleSetOutput = struct {
-};
+pub const ReorderReceiptRuleSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ReorderReceiptRuleSetInput, options: CallOptions) !ReorderReceiptRuleSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

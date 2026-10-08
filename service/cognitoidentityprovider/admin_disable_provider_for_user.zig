@@ -20,8 +20,7 @@ pub const AdminDisableProviderForUserInput = struct {
     };
 };
 
-pub const AdminDisableProviderForUserOutput = struct {
-};
+pub const AdminDisableProviderForUserOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminDisableProviderForUserInput, options: CallOptions) !AdminDisableProviderForUserOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

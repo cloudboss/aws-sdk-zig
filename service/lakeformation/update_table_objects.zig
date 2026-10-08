@@ -33,8 +33,7 @@ pub const UpdateTableObjectsInput = struct {
     };
 };
 
-pub const UpdateTableObjectsOutput = struct {
-};
+pub const UpdateTableObjectsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTableObjectsInput, options: CallOptions) !UpdateTableObjectsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

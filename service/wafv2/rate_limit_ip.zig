@@ -10,5 +10,4 @@
 /// `AggregateKeyType`, specify `IP`.
 ///
 /// JSON specification: `"RateLimitIP": {}`
-pub const RateLimitIP = struct {
-};
+pub const RateLimitIP = struct {};

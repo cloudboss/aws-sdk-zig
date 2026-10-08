@@ -6,9 +6,39 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const EnvironmentState = @import("environment_state.zig").EnvironmentState;
 
-pub const DeleteEnvironmentInput = @import("delete_environment_request.zig").DeleteEnvironmentRequest;
+pub const DeleteEnvironmentInput = struct {
+    /// The ID of the environment.
+    environment_identifier: []const u8,
 
-pub const DeleteEnvironmentOutput = @import("delete_environment_response.zig").DeleteEnvironmentResponse;
+    pub const json_field_names = .{
+        .environment_identifier = "EnvironmentIdentifier",
+    };
+};
+
+pub const DeleteEnvironmentOutput = struct {
+    /// The Amazon Resource Name (ARN) of the environment.
+    arn: ?[]const u8 = null,
+
+    /// The unique identifier of the environment.
+    environment_id: ?[]const u8 = null,
+
+    /// A timestamp that indicates when the environment was last updated.
+    last_updated_time: ?i64 = null,
+
+    /// The name of the environment.
+    name: ?[]const u8 = null,
+
+    /// The current state of the environment.
+    state: ?EnvironmentState = null,
+
+    pub const json_field_names = .{
+        .arn = "Arn",
+        .environment_id = "EnvironmentId",
+        .last_updated_time = "LastUpdatedTime",
+        .name = "Name",
+        .state = "State",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteEnvironmentInput, options: CallOptions) !DeleteEnvironmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

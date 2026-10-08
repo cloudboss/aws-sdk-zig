@@ -57,8 +57,7 @@ pub const UpdateProtectionGroupInput = struct {
     };
 };
 
-pub const UpdateProtectionGroupOutput = struct {
-};
+pub const UpdateProtectionGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateProtectionGroupInput, options: CallOptions) !UpdateProtectionGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

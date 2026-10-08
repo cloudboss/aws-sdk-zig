@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AccountQuota = @import("account_quota.zig").AccountQuota;
 
-pub const DescribeAccountAttributesInput = struct {
-};
+pub const DescribeAccountAttributesInput = struct {};
 
 pub const DescribeAccountAttributesOutput = struct {
     /// Account quota information.

@@ -14,8 +14,7 @@ pub const CreateReceiptFilterInput = struct {
     filter: ReceiptFilter,
 };
 
-pub const CreateReceiptFilterOutput = struct {
-};
+pub const CreateReceiptFilterOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateReceiptFilterInput, options: CallOptions) !CreateReceiptFilterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

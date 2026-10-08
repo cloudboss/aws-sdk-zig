@@ -7,10 +7,10 @@ pub const ByolPricingTerm = struct {
     id: ?[]const u8 = null,
 
     /// Type of the term being updated.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "id",
-        .@"type" = "type",
+        .type = "type",
     };
 };

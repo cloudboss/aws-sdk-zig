@@ -34,8 +34,7 @@ pub const CreateClassifierInput = struct {
     };
 };
 
-pub const CreateClassifierOutput = struct {
-};
+pub const CreateClassifierOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateClassifierInput, options: CallOptions) !CreateClassifierOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

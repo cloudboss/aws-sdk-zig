@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ContainerServiceRegistryLogin = @import("container_service_registry_login.zig").ContainerServiceRegistryLogin;
 
-pub const CreateContainerServiceRegistryLoginInput = struct {
-};
+pub const CreateContainerServiceRegistryLoginInput = struct {};
 
 pub const CreateContainerServiceRegistryLoginOutput = struct {
     /// An object that describes the log in information for the container service

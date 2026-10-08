@@ -23,8 +23,7 @@ pub const CancelBatchJobExecutionInput = struct {
     };
 };
 
-pub const CancelBatchJobExecutionOutput = struct {
-};
+pub const CancelBatchJobExecutionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelBatchJobExecutionInput, options: CallOptions) !CancelBatchJobExecutionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

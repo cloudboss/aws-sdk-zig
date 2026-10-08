@@ -22,8 +22,7 @@ pub const CreateLogSubscriptionInput = struct {
     };
 };
 
-pub const CreateLogSubscriptionOutput = struct {
-};
+pub const CreateLogSubscriptionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLogSubscriptionInput, options: CallOptions) !CreateLogSubscriptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

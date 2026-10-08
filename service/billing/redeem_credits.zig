@@ -14,8 +14,7 @@ pub const RedeemCreditsInput = struct {
     };
 };
 
-pub const RedeemCreditsOutput = struct {
-};
+pub const RedeemCreditsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RedeemCreditsInput, options: CallOptions) !RedeemCreditsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

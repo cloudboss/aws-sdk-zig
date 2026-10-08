@@ -14,8 +14,7 @@ pub const DeletePresetInput = struct {
     };
 };
 
-pub const DeletePresetOutput = struct {
-};
+pub const DeletePresetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePresetInput, options: CallOptions) !DeletePresetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

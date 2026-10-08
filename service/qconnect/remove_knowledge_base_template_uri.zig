@@ -15,8 +15,7 @@ pub const RemoveKnowledgeBaseTemplateUriInput = struct {
     };
 };
 
-pub const RemoveKnowledgeBaseTemplateUriOutput = struct {
-};
+pub const RemoveKnowledgeBaseTemplateUriOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveKnowledgeBaseTemplateUriInput, options: CallOptions) !RemoveKnowledgeBaseTemplateUriOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

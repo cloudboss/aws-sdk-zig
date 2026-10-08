@@ -27,11 +27,11 @@ pub const PutEncryptionConfigInput = struct {
 
     /// The type of encryption. Set to `KMS` to use your own key for encryption. Set
     /// to `NONE` for default encryption.
-    @"type": EncryptionType,
+    type: EncryptionType,
 
     pub const json_field_names = .{
         .key_id = "KeyId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -88,7 +88,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutEncryptionConfigInpu
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

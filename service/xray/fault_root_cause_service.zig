@@ -18,7 +18,7 @@ pub const FaultRootCauseService = struct {
     names: ?[]const []const u8 = null,
 
     /// The type associated to the service.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .account_id = "AccountId",
@@ -26,6 +26,6 @@ pub const FaultRootCauseService = struct {
         .inferred = "Inferred",
         .name = "Name",
         .names = "Names",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

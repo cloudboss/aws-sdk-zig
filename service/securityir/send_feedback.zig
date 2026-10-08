@@ -27,8 +27,7 @@ pub const SendFeedbackInput = struct {
     };
 };
 
-pub const SendFeedbackOutput = struct {
-};
+pub const SendFeedbackOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendFeedbackInput, options: CallOptions) !SendFeedbackOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

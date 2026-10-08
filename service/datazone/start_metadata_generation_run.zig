@@ -25,7 +25,7 @@ pub const StartMetadataGenerationRunInput = struct {
     target: MetadataGenerationRunTarget,
 
     /// The type of the metadata generation run.
-    @"type": ?MetadataGenerationRunType = null,
+    type: ?MetadataGenerationRunType = null,
 
     /// The types of the metadata generation run.
     types: ?[]const MetadataGenerationRunType = null,
@@ -35,7 +35,7 @@ pub const StartMetadataGenerationRunInput = struct {
         .domain_identifier = "domainIdentifier",
         .owning_project_identifier = "owningProjectIdentifier",
         .target = "target",
-        .@"type" = "type",
+        .type = "type",
         .types = "types",
     };
 };
@@ -62,7 +62,7 @@ pub const StartMetadataGenerationRunOutput = struct {
     status: ?MetadataGenerationRunStatus = null,
 
     /// The type of the metadata generation run.
-    @"type": ?MetadataGenerationRunType = null,
+    type: ?MetadataGenerationRunType = null,
 
     /// The types of the metadata generation run.
     types: ?[]const MetadataGenerationRunType = null,
@@ -74,7 +74,7 @@ pub const StartMetadataGenerationRunOutput = struct {
         .id = "id",
         .owning_project_id = "owningProjectId",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
         .types = "types",
     };
 };
@@ -133,7 +133,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartMetadataGeneration
     try body_buf.appendSlice(allocator, "\"target\":");
     try aws.json.writeValue(@TypeOf(input.target), input.target, allocator, &body_buf);
     has_prev = true;
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"type\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);

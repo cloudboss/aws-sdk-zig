@@ -14,8 +14,7 @@ pub const DeleteAggregatorV2Input = struct {
     };
 };
 
-pub const DeleteAggregatorV2Output = struct {
-};
+pub const DeleteAggregatorV2Output = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAggregatorV2Input, options: CallOptions) !DeleteAggregatorV2Output {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

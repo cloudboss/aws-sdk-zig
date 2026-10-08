@@ -69,8 +69,7 @@ pub const DisassociateSoftwareFromImageBuilderInput = struct {
     };
 };
 
-pub const DisassociateSoftwareFromImageBuilderOutput = struct {
-};
+pub const DisassociateSoftwareFromImageBuilderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateSoftwareFromImageBuilderInput, options: CallOptions) !DisassociateSoftwareFromImageBuilderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

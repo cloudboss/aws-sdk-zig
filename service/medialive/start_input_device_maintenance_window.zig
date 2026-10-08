@@ -15,8 +15,7 @@ pub const StartInputDeviceMaintenanceWindowInput = struct {
     };
 };
 
-pub const StartInputDeviceMaintenanceWindowOutput = struct {
-};
+pub const StartInputDeviceMaintenanceWindowOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartInputDeviceMaintenanceWindowInput, options: CallOptions) !StartInputDeviceMaintenanceWindowOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

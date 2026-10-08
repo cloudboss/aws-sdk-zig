@@ -17,8 +17,7 @@ pub const DeregisterTargetsInput = struct {
     targets: []const TargetDescription,
 };
 
-pub const DeregisterTargetsOutput = struct {
-};
+pub const DeregisterTargetsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterTargetsInput, options: CallOptions) !DeregisterTargetsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

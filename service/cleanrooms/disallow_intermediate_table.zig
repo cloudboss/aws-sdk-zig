@@ -24,8 +24,7 @@ pub const DisallowIntermediateTableInput = struct {
     };
 };
 
-pub const DisallowIntermediateTableOutput = struct {
-};
+pub const DisallowIntermediateTableOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisallowIntermediateTableInput, options: CallOptions) !DisallowIntermediateTableOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

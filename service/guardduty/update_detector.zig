@@ -43,8 +43,7 @@ pub const UpdateDetectorInput = struct {
     };
 };
 
-pub const UpdateDetectorOutput = struct {
-};
+pub const UpdateDetectorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDetectorInput, options: CallOptions) !UpdateDetectorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

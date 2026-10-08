@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const LogLevel = @import("log_level.zig").LogLevel;
 
-pub const GetLoggingOptionsInput = struct {
-};
+pub const GetLoggingOptionsInput = struct {};
 
 pub const GetLoggingOptionsOutput = struct {
     /// The logging level.

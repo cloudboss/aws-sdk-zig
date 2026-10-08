@@ -60,8 +60,7 @@ pub const UpdateLocationEfsInput = struct {
     };
 };
 
-pub const UpdateLocationEfsOutput = struct {
-};
+pub const UpdateLocationEfsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLocationEfsInput, options: CallOptions) !UpdateLocationEfsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

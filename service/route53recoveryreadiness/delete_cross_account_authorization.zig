@@ -14,8 +14,7 @@ pub const DeleteCrossAccountAuthorizationInput = struct {
     };
 };
 
-pub const DeleteCrossAccountAuthorizationOutput = struct {
-};
+pub const DeleteCrossAccountAuthorizationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCrossAccountAuthorizationInput, options: CallOptions) !DeleteCrossAccountAuthorizationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

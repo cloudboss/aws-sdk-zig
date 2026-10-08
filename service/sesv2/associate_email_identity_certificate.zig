@@ -32,8 +32,7 @@ pub const AssociateEmailIdentityCertificateInput = struct {
     };
 };
 
-pub const AssociateEmailIdentityCertificateOutput = struct {
-};
+pub const AssociateEmailIdentityCertificateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateEmailIdentityCertificateInput, options: CallOptions) !AssociateEmailIdentityCertificateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

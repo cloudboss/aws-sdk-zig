@@ -38,12 +38,12 @@ pub const PolicyTargetSummary = struct {
     target_id: ?[]const u8 = null,
 
     /// The type of the policy target.
-    @"type": ?TargetType = null,
+    type: ?TargetType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",
         .name = "Name",
         .target_id = "TargetId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

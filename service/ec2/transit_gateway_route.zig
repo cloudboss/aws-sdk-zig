@@ -20,5 +20,5 @@ pub const TransitGatewayRoute = struct {
     transit_gateway_route_table_announcement_id: ?[]const u8 = null,
 
     /// The route type.
-    @"type": ?TransitGatewayRouteType = null,
+    type: ?TransitGatewayRouteType = null,
 };

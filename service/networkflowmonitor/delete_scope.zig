@@ -16,8 +16,7 @@ pub const DeleteScopeInput = struct {
     };
 };
 
-pub const DeleteScopeOutput = struct {
-};
+pub const DeleteScopeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteScopeInput, options: CallOptions) !DeleteScopeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

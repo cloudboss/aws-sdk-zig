@@ -5,7 +5,14 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteMonitorInput = @import("delete_monitor_request.zig").DeleteMonitorRequest;
+pub const DeleteMonitorInput = struct {
+    /// The Amazon Resource Name (ARN) of the monitor resource to delete.
+    monitor_arn: []const u8,
+
+    pub const json_field_names = .{
+        .monitor_arn = "MonitorArn",
+    };
+};
 
 pub const DeleteMonitorOutput = struct {};
 

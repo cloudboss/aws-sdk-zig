@@ -42,8 +42,7 @@ pub const AssociateMemberToGroupInput = struct {
     };
 };
 
-pub const AssociateMemberToGroupOutput = struct {
-};
+pub const AssociateMemberToGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateMemberToGroupInput, options: CallOptions) !AssociateMemberToGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

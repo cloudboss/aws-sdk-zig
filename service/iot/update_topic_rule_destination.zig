@@ -51,8 +51,7 @@ pub const UpdateTopicRuleDestinationInput = struct {
     };
 };
 
-pub const UpdateTopicRuleDestinationOutput = struct {
-};
+pub const UpdateTopicRuleDestinationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTopicRuleDestinationInput, options: CallOptions) !UpdateTopicRuleDestinationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

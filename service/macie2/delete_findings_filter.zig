@@ -15,8 +15,7 @@ pub const DeleteFindingsFilterInput = struct {
     };
 };
 
-pub const DeleteFindingsFilterOutput = struct {
-};
+pub const DeleteFindingsFilterOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteFindingsFilterInput, options: CallOptions) !DeleteFindingsFilterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

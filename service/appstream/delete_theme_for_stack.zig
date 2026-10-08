@@ -14,8 +14,7 @@ pub const DeleteThemeForStackInput = struct {
     };
 };
 
-pub const DeleteThemeForStackOutput = struct {
-};
+pub const DeleteThemeForStackOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteThemeForStackInput, options: CallOptions) !DeleteThemeForStackOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

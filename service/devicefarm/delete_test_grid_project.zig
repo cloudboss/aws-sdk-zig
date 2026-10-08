@@ -15,8 +15,7 @@ pub const DeleteTestGridProjectInput = struct {
     };
 };
 
-pub const DeleteTestGridProjectOutput = struct {
-};
+pub const DeleteTestGridProjectOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTestGridProjectInput, options: CallOptions) !DeleteTestGridProjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

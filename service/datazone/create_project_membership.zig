@@ -28,8 +28,7 @@ pub const CreateProjectMembershipInput = struct {
     };
 };
 
-pub const CreateProjectMembershipOutput = struct {
-};
+pub const CreateProjectMembershipOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateProjectMembershipInput, options: CallOptions) !CreateProjectMembershipOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -7,9 +7,35 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 const Operation = @import("operation.zig").Operation;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the resource to which you want to add a
+    /// tag.
+    resource_arn: ?[]const u8 = null,
 
-pub const TagResourceOutput = @import("tag_resource_result.zig").TagResourceResult;
+    /// The name of the resource to which you are adding tags.
+    resource_name: []const u8,
+
+    /// The tag key and optional value.
+    tags: []const Tag,
+
+    pub const json_field_names = .{
+        .resource_arn = "resourceArn",
+        .resource_name = "resourceName",
+        .tags = "tags",
+    };
+};
+
+pub const TagResourceOutput = struct {
+    /// An array of objects that describe the result of the action, such as the
+    /// status of the
+    /// request, the timestamp of the request, and the resources affected by the
+    /// request.
+    operations: ?[]const Operation = null,
+
+    pub const json_field_names = .{
+        .operations = "operations",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TagResourceInput, options: CallOptions) !TagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

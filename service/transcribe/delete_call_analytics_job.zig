@@ -15,8 +15,7 @@ pub const DeleteCallAnalyticsJobInput = struct {
     };
 };
 
-pub const DeleteCallAnalyticsJobOutput = struct {
-};
+pub const DeleteCallAnalyticsJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCallAnalyticsJobInput, options: CallOptions) !DeleteCallAnalyticsJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

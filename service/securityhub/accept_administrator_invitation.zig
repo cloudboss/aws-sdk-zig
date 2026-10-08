@@ -20,8 +20,7 @@ pub const AcceptAdministratorInvitationInput = struct {
     };
 };
 
-pub const AcceptAdministratorInvitationOutput = struct {
-};
+pub const AcceptAdministratorInvitationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AcceptAdministratorInvitationInput, options: CallOptions) !AcceptAdministratorInvitationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

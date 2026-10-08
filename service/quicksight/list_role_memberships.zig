@@ -90,7 +90,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRoleMembershipsInpu
     try path_buf.appendSlice(allocator, "/namespaces/");
     try path_buf.appendSlice(allocator, input.namespace);
     try path_buf.appendSlice(allocator, "/roles/");
-    try path_buf.appendSlice(allocator, input.role);
+    try path_buf.appendSlice(allocator, input.role.wireName());
     try path_buf.appendSlice(allocator, "/members");
     const path = try path_buf.toOwnedSlice(allocator);
 

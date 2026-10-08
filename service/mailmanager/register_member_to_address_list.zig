@@ -18,8 +18,7 @@ pub const RegisterMemberToAddressListInput = struct {
     };
 };
 
-pub const RegisterMemberToAddressListOutput = struct {
-};
+pub const RegisterMemberToAddressListOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RegisterMemberToAddressListInput, options: CallOptions) !RegisterMemberToAddressListOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

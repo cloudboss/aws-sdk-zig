@@ -14,8 +14,7 @@ pub const DisassociateWirelessGatewayFromCertificateInput = struct {
     };
 };
 
-pub const DisassociateWirelessGatewayFromCertificateOutput = struct {
-};
+pub const DisassociateWirelessGatewayFromCertificateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateWirelessGatewayFromCertificateInput, options: CallOptions) !DisassociateWirelessGatewayFromCertificateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

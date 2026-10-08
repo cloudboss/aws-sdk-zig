@@ -40,8 +40,7 @@ pub const UpdateDirectorySetupInput = struct {
     };
 };
 
-pub const UpdateDirectorySetupOutput = struct {
-};
+pub const UpdateDirectorySetupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDirectorySetupInput, options: CallOptions) !UpdateDirectorySetupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -28,8 +28,7 @@ pub const UpdateLayoutInput = struct {
     };
 };
 
-pub const UpdateLayoutOutput = struct {
-};
+pub const UpdateLayoutOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLayoutInput, options: CallOptions) !UpdateLayoutOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

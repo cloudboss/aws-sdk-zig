@@ -35,8 +35,7 @@ pub const DeleteStackSetInput = struct {
     stack_set_name: []const u8,
 };
 
-pub const DeleteStackSetOutput = struct {
-};
+pub const DeleteStackSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteStackSetInput, options: CallOptions) !DeleteStackSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

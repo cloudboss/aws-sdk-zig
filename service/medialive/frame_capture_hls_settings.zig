@@ -1,3 +1,2 @@
 /// Frame Capture Hls Settings
-pub const FrameCaptureHlsSettings = struct {
-};
+pub const FrameCaptureHlsSettings = struct {};

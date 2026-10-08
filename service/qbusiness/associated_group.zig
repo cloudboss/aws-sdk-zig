@@ -9,10 +9,10 @@ pub const AssociatedGroup = struct {
 
     /// The type of the associated group. This indicates the scope of the group's
     /// applicability.
-    @"type": ?MembershipType = null,
+    type: ?MembershipType = null,
 
     pub const json_field_names = .{
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };

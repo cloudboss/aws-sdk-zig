@@ -1583,7 +1583,7 @@ pub fn deserializeChange(allocator: std.mem.Allocator, reader: *aws.xml.Reader) 
     var result: Change = undefined;
     result.hook_invocation_count = null;
     result.resource_change = null;
-    result.@"type" = null;
+    result.type = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1592,7 +1592,7 @@ pub fn deserializeChange(allocator: std.mem.Allocator, reader: *aws.xml.Reader) 
                 } else if (std.mem.eql(u8, e.local, "ResourceChange")) {
                     result.resource_change = try deserializeResourceChange(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = ChangeType.fromWireName(try reader.readElementText());
+                    result.type = ChangeType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2605,7 +2605,7 @@ pub fn deserializeRollbackTrigger(allocator: std.mem.Allocator, reader: *aws.xml
                 if (std.mem.eql(u8, e.local, "Arn")) {
                     result.arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = try allocator.dupe(u8, try reader.readElementText());
+                    result.type = try allocator.dupe(u8, try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -3911,7 +3911,7 @@ pub fn deserializeTypeConfigurationDetails(allocator: std.mem.Allocator, reader:
 
 pub fn deserializeTypeConfigurationIdentifier(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !TypeConfigurationIdentifier {
     var result: TypeConfigurationIdentifier = undefined;
-    result.@"type" = null;
+    result.type = null;
     result.type_arn = null;
     result.type_configuration_alias = null;
     result.type_configuration_arn = null;
@@ -3920,7 +3920,7 @@ pub fn deserializeTypeConfigurationIdentifier(allocator: std.mem.Allocator, read
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = ThirdPartyType.fromWireName(try reader.readElementText());
+                    result.type = ThirdPartyType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TypeArn")) {
                     result.type_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TypeConfigurationAlias")) {
@@ -3952,7 +3952,7 @@ pub fn deserializeTypeSummary(allocator: std.mem.Allocator, reader: *aws.xml.Rea
     result.publisher_id = null;
     result.publisher_identity = null;
     result.publisher_name = null;
-    result.@"type" = null;
+    result.type = null;
     result.type_arn = null;
     result.type_name = null;
     while (try reader.next()) |event| {
@@ -3979,7 +3979,7 @@ pub fn deserializeTypeSummary(allocator: std.mem.Allocator, reader: *aws.xml.Rea
                 } else if (std.mem.eql(u8, e.local, "PublisherName")) {
                     result.publisher_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = RegistryType.fromWireName(try reader.readElementText());
+                    result.type = RegistryType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TypeArn")) {
                     result.type_arn = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TypeName")) {
@@ -4002,7 +4002,7 @@ pub fn deserializeTypeVersionSummary(allocator: std.mem.Allocator, reader: *aws.
     result.is_default_version = null;
     result.public_version_number = null;
     result.time_created = null;
-    result.@"type" = null;
+    result.type = null;
     result.type_name = null;
     result.version_id = null;
     while (try reader.next()) |event| {
@@ -4019,7 +4019,7 @@ pub fn deserializeTypeVersionSummary(allocator: std.mem.Allocator, reader: *aws.
                 } else if (std.mem.eql(u8, e.local, "TimeCreated")) {
                     result.time_created = aws.date.parseIso8601(try reader.readElementText()) catch null;
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = RegistryType.fromWireName(try reader.readElementText());
+                    result.type = RegistryType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "TypeName")) {
                     result.type_name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "VersionId")) {
@@ -4038,14 +4038,14 @@ pub fn deserializeTypeVersionSummary(allocator: std.mem.Allocator, reader: *aws.
 pub fn deserializeWarningDetail(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !WarningDetail {
     var result: WarningDetail = undefined;
     result.properties = null;
-    result.@"type" = null;
+    result.type = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "Properties")) {
                     result.properties = try deserializeWarningProperties(allocator, reader, "member");
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = WarningType.fromWireName(try reader.readElementText());
+                    result.type = WarningType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -4651,7 +4651,7 @@ pub fn serializeRollbackTrigger(allocator: std.mem.Allocator, buf: *std.ArrayLis
     try aws.xml.appendXmlEscaped(allocator, buf, value.arn);
     try buf.appendSlice(allocator, "</Arn>");
     try buf.appendSlice(allocator, "<Type>");
-    try aws.xml.appendXmlEscaped(allocator, buf, value.@"type");
+    try aws.xml.appendXmlEscaped(allocator, buf, value.type);
     try buf.appendSlice(allocator, "</Type>");
 }
 
@@ -4784,7 +4784,7 @@ pub fn serializeTemplateSummaryConfig(allocator: std.mem.Allocator, buf: *std.Ar
 }
 
 pub fn serializeTypeConfigurationIdentifier(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: TypeConfigurationIdentifier) !void {
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(allocator, "<Type>");
         try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Type>");
@@ -4828,4 +4828,3 @@ pub fn serializeTypeFilters(allocator: std.mem.Allocator, buf: *std.ArrayList(u8
         try buf.appendSlice(allocator, "</TypeNamePrefix>");
     }
 }
-

@@ -39,7 +39,7 @@ pub const CreateContactInput = struct {
     /// * `ESCALATION`: An escalation plan.
     ///
     /// * `ONCALL_SCHEDULE`: An on-call schedule.
-    @"type": ContactType,
+    type: ContactType,
 
     pub const json_field_names = .{
         .alias = "Alias",
@@ -47,7 +47,7 @@ pub const CreateContactInput = struct {
         .idempotency_token = "IdempotencyToken",
         .plan = "Plan",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

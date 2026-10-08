@@ -14,8 +14,7 @@ pub const DeleteCloudExadataInfrastructureInput = struct {
     };
 };
 
-pub const DeleteCloudExadataInfrastructureOutput = struct {
-};
+pub const DeleteCloudExadataInfrastructureOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCloudExadataInfrastructureInput, options: CallOptions) !DeleteCloudExadataInfrastructureOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

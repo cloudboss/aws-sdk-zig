@@ -14,8 +14,7 @@ pub const DeleteAutonomousDatabaseInput = struct {
     };
 };
 
-pub const DeleteAutonomousDatabaseOutput = struct {
-};
+pub const DeleteAutonomousDatabaseOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAutonomousDatabaseInput, options: CallOptions) !DeleteAutonomousDatabaseOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

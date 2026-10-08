@@ -5,7 +5,18 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteSpaceInput = @import("delete_space_request.zig").DeleteSpaceRequest;
+pub const DeleteSpaceInput = struct {
+    /// The ID of the associated domain.
+    domain_id: []const u8,
+
+    /// The name of the space.
+    space_name: []const u8,
+
+    pub const json_field_names = .{
+        .domain_id = "DomainId",
+        .space_name = "SpaceName",
+    };
+};
 
 pub const DeleteSpaceOutput = struct {};
 

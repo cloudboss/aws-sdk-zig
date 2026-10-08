@@ -20,7 +20,7 @@ pub const KnowledgeBaseConfiguration = struct {
 
     /// The type of data that the data source is converted into for the knowledge
     /// base. Choose `MANAGED` to create a managed knowledge base.
-    @"type": KnowledgeBaseType,
+    type: KnowledgeBaseType,
 
     /// Contains details about the model that's used to convert the data source into
     /// vector embeddings.
@@ -30,7 +30,7 @@ pub const KnowledgeBaseConfiguration = struct {
         .kendra_knowledge_base_configuration = "kendraKnowledgeBaseConfiguration",
         .managed_knowledge_base_configuration = "managedKnowledgeBaseConfiguration",
         .sql_knowledge_base_configuration = "sqlKnowledgeBaseConfiguration",
-        .@"type" = "type",
+        .type = "type",
         .vector_knowledge_base_configuration = "vectorKnowledgeBaseConfiguration",
     };
 };

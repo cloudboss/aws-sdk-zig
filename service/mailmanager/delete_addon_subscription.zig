@@ -14,8 +14,7 @@ pub const DeleteAddonSubscriptionInput = struct {
     };
 };
 
-pub const DeleteAddonSubscriptionOutput = struct {
-};
+pub const DeleteAddonSubscriptionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAddonSubscriptionInput, options: CallOptions) !DeleteAddonSubscriptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

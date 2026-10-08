@@ -68,7 +68,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteIdentityPropagati
     try path_buf.appendSlice(allocator, "/accounts/");
     try path_buf.appendSlice(allocator, input.aws_account_id);
     try path_buf.appendSlice(allocator, "/identity-propagation-config/");
-    try path_buf.appendSlice(allocator, input.service);
+    try path_buf.appendSlice(allocator, input.service.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

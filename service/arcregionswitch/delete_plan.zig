@@ -14,8 +14,7 @@ pub const DeletePlanInput = struct {
     };
 };
 
-pub const DeletePlanOutput = struct {
-};
+pub const DeletePlanOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePlanInput, options: CallOptions) !DeletePlanOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

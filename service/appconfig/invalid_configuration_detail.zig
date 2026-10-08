@@ -16,7 +16,7 @@ pub const InvalidConfigurationDetail = struct {
     reason: ?[]const u8 = null,
 
     /// The type of error for an invalid configuration.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// Details about an error with Lambda when a synchronous extension
     /// experiences an error during an invocation.
@@ -26,7 +26,7 @@ pub const InvalidConfigurationDetail = struct {
         .constraint = "Constraint",
         .location = "Location",
         .reason = "Reason",
-        .@"type" = "Type",
+        .type = "Type",
         .value = "Value",
     };
 };

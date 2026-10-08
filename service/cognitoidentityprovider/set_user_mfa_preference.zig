@@ -58,8 +58,7 @@ pub const SetUserMFAPreferenceInput = struct {
     };
 };
 
-pub const SetUserMFAPreferenceOutput = struct {
-};
+pub const SetUserMFAPreferenceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetUserMFAPreferenceInput, options: CallOptions) !SetUserMFAPreferenceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

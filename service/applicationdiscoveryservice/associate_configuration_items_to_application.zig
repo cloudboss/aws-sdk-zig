@@ -19,8 +19,7 @@ pub const AssociateConfigurationItemsToApplicationInput = struct {
     };
 };
 
-pub const AssociateConfigurationItemsToApplicationOutput = struct {
-};
+pub const AssociateConfigurationItemsToApplicationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateConfigurationItemsToApplicationInput, options: CallOptions) !AssociateConfigurationItemsToApplicationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

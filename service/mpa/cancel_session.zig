@@ -14,8 +14,7 @@ pub const CancelSessionInput = struct {
     };
 };
 
-pub const CancelSessionOutput = struct {
-};
+pub const CancelSessionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelSessionInput, options: CallOptions) !CancelSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

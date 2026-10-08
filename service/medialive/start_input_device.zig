@@ -14,8 +14,7 @@ pub const StartInputDeviceInput = struct {
     };
 };
 
-pub const StartInputDeviceOutput = struct {
-};
+pub const StartInputDeviceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartInputDeviceInput, options: CallOptions) !StartInputDeviceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -15,8 +15,7 @@ pub const RemoveRegionInput = struct {
     };
 };
 
-pub const RemoveRegionOutput = struct {
-};
+pub const RemoveRegionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveRegionInput, options: CallOptions) !RemoveRegionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AutoshiftObserverNotificationStatus = @import("autoshift_observer_notification_status.zig").AutoshiftObserverNotificationStatus;
 
-pub const GetAutoshiftObserverNotificationStatusInput = struct {
-};
+pub const GetAutoshiftObserverNotificationStatusInput = struct {};
 
 pub const GetAutoshiftObserverNotificationStatusOutput = struct {
     /// The status of autoshift observer notification. If the status is `ENABLED`,

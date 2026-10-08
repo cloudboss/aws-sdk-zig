@@ -5,9 +5,45 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const CreateProjectInput = @import("create_project_request.zig").CreateProjectRequest;
+pub const CreateProjectInput = struct {
+    /// The description of the project. This description will be displayed to all
+    /// users of the project. We recommend providing a brief description of the
+    /// project and its intended purpose.
+    description: ?[]const u8 = null,
 
-pub const CreateProjectOutput = @import("create_project_response.zig").CreateProjectResponse;
+    /// The friendly name of the project that will be displayed to users.
+    display_name: []const u8,
+
+    /// The name of the space.
+    space_name: []const u8,
+
+    pub const json_field_names = .{
+        .description = "description",
+        .display_name = "displayName",
+        .space_name = "spaceName",
+    };
+};
+
+pub const CreateProjectOutput = struct {
+    /// The description of the project.
+    description: ?[]const u8 = null,
+
+    /// The friendly name of the project.
+    display_name: ?[]const u8 = null,
+
+    /// The name of the project in the space.
+    name: []const u8,
+
+    /// The name of the space.
+    space_name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .description = "description",
+        .display_name = "displayName",
+        .name = "name",
+        .space_name = "spaceName",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateProjectInput, options: CallOptions) !CreateProjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

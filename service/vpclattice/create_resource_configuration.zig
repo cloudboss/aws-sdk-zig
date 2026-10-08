@@ -101,7 +101,7 @@ pub const CreateResourceConfigurationInput = struct {
     ///   configuration to a service network. A CIDR resource configuration must be
     ///   associated with a resource gateway whose DNS resolution is set to
     ///   `IN_VPC`.
-    @"type": ResourceConfigurationType,
+    type: ResourceConfigurationType,
 
     pub const json_field_names = .{
         .allow_association_to_shareable_service_network = "allowAssociationToShareableServiceNetwork",
@@ -116,7 +116,7 @@ pub const CreateResourceConfigurationInput = struct {
         .resource_configuration_group_identifier = "resourceConfigurationGroupIdentifier",
         .resource_gateway_identifier = "resourceGatewayIdentifier",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -193,7 +193,7 @@ pub const CreateResourceConfigurationOutput = struct {
     ///   block). A consumer accesses the resources within the CIDR range through a
     ///   `Tunnel` VPC endpoint. A CIDR resource configuration must be associated
     ///   with a resource gateway whose DNS resolution is set to `IN_VPC`.
-    @"type": ?ResourceConfigurationType = null,
+    type: ?ResourceConfigurationType = null,
 
     pub const json_field_names = .{
         .allow_association_to_shareable_service_network = "allowAssociationToShareableServiceNetwork",
@@ -212,7 +212,7 @@ pub const CreateResourceConfigurationOutput = struct {
         .resource_configuration_group_id = "resourceConfigurationGroupId",
         .resource_gateway_id = "resourceGatewayId",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -324,7 +324,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateResourceConfigura
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

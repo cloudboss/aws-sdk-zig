@@ -17,8 +17,7 @@ pub const DistributeDatasetEntriesInput = struct {
     };
 };
 
-pub const DistributeDatasetEntriesOutput = struct {
-};
+pub const DistributeDatasetEntriesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DistributeDatasetEntriesInput, options: CallOptions) !DistributeDatasetEntriesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

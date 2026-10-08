@@ -28,8 +28,7 @@ pub const AssociateDefaultVocabularyInput = struct {
     };
 };
 
-pub const AssociateDefaultVocabularyOutput = struct {
-};
+pub const AssociateDefaultVocabularyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateDefaultVocabularyInput, options: CallOptions) !AssociateDefaultVocabularyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -65,7 +64,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AssociateDefaultVocabul
     try path_buf.appendSlice(allocator, "/default-vocabulary/");
     try path_buf.appendSlice(allocator, input.instance_id);
     try path_buf.appendSlice(allocator, "/");
-    try path_buf.appendSlice(allocator, input.language_code);
+    try path_buf.appendSlice(allocator, input.language_code.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .empty;

@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ServiceIntegrationConfig = @import("service_integration_config.zig").ServiceIntegrationConfig;
 
-pub const DescribeServiceIntegrationInput = struct {
-};
+pub const DescribeServiceIntegrationInput = struct {};
 
 pub const DescribeServiceIntegrationOutput = struct {
     service_integration: ?ServiceIntegrationConfig = null,

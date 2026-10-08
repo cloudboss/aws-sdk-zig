@@ -23,8 +23,7 @@ pub const DeleteAIGuardrailVersionInput = struct {
     };
 };
 
-pub const DeleteAIGuardrailVersionOutput = struct {
-};
+pub const DeleteAIGuardrailVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAIGuardrailVersionInput, options: CallOptions) !DeleteAIGuardrailVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const DeleteAccessLogSubscriptionInput = struct {
     };
 };
 
-pub const DeleteAccessLogSubscriptionOutput = struct {
-};
+pub const DeleteAccessLogSubscriptionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAccessLogSubscriptionInput, options: CallOptions) !DeleteAccessLogSubscriptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

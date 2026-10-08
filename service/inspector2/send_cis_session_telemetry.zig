@@ -23,8 +23,7 @@ pub const SendCisSessionTelemetryInput = struct {
     };
 };
 
-pub const SendCisSessionTelemetryOutput = struct {
-};
+pub const SendCisSessionTelemetryOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendCisSessionTelemetryInput, options: CallOptions) !SendCisSessionTelemetryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -21,8 +21,7 @@ pub const RemoveAutoScalingPolicyInput = struct {
     };
 };
 
-pub const RemoveAutoScalingPolicyOutput = struct {
-};
+pub const RemoveAutoScalingPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveAutoScalingPolicyInput, options: CallOptions) !RemoveAutoScalingPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

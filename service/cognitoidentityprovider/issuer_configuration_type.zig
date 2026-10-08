@@ -26,9 +26,9 @@ pub const IssuerConfigurationType = struct {
     /// `https://issuer-cognito-idp.[region].amazonaws.com/[userPoolId]`, where
     /// region is the
     /// primary Amazon Web Services Region of your user pool.
-    @"type": ?IssuerType = null,
+    type: ?IssuerType = null,
 
     pub const json_field_names = .{
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

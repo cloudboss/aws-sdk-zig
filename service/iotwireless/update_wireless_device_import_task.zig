@@ -19,8 +19,7 @@ pub const UpdateWirelessDeviceImportTaskInput = struct {
     };
 };
 
-pub const UpdateWirelessDeviceImportTaskOutput = struct {
-};
+pub const UpdateWirelessDeviceImportTaskOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWirelessDeviceImportTaskInput, options: CallOptions) !UpdateWirelessDeviceImportTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

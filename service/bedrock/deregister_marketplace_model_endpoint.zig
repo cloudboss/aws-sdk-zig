@@ -14,8 +14,7 @@ pub const DeregisterMarketplaceModelEndpointInput = struct {
     };
 };
 
-pub const DeregisterMarketplaceModelEndpointOutput = struct {
-};
+pub const DeregisterMarketplaceModelEndpointOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterMarketplaceModelEndpointInput, options: CallOptions) !DeregisterMarketplaceModelEndpointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

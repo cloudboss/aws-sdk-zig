@@ -31,7 +31,7 @@ pub const TemplateVariableMetadata = struct {
     source: ?TemplateVariableSource = null,
 
     /// The type of the variable.
-    @"type": TemplateVariableType,
+    type: TemplateVariableType,
 
     pub const json_field_names = .{
         .default_value = "DefaultValue",
@@ -43,6 +43,6 @@ pub const TemplateVariableMetadata = struct {
         .required = "Required",
         .sample = "Sample",
         .source = "Source",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

@@ -26,8 +26,7 @@ pub const CreatePreparedStatementInput = struct {
     };
 };
 
-pub const CreatePreparedStatementOutput = struct {
-};
+pub const CreatePreparedStatementOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreatePreparedStatementInput, options: CallOptions) !CreatePreparedStatementOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

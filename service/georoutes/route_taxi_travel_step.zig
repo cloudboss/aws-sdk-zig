@@ -44,7 +44,7 @@ pub const RouteTaxiTravelStep = struct {
     turn_step_details: ?RouteTurnStepDetails = null,
 
     /// Type of the step.
-    @"type": RouteTaxiTravelStepType,
+    type: RouteTaxiTravelStepType,
 
     u_turn_step_details: ?RouteUTurnStepDetails = null,
 
@@ -61,7 +61,7 @@ pub const RouteTaxiTravelStep = struct {
         .roundabout_exit_step_details = "RoundaboutExitStepDetails",
         .roundabout_pass_step_details = "RoundaboutPassStepDetails",
         .turn_step_details = "TurnStepDetails",
-        .@"type" = "Type",
+        .type = "Type",
         .u_turn_step_details = "UTurnStepDetails",
     };
 };

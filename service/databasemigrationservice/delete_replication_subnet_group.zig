@@ -14,8 +14,7 @@ pub const DeleteReplicationSubnetGroupInput = struct {
     };
 };
 
-pub const DeleteReplicationSubnetGroupOutput = struct {
-};
+pub const DeleteReplicationSubnetGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteReplicationSubnetGroupInput, options: CallOptions) !DeleteReplicationSubnetGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

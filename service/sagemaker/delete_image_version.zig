@@ -22,8 +22,7 @@ pub const DeleteImageVersionInput = struct {
     };
 };
 
-pub const DeleteImageVersionOutput = struct {
-};
+pub const DeleteImageVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteImageVersionInput, options: CallOptions) !DeleteImageVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

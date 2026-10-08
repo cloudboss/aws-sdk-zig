@@ -17,13 +17,13 @@ pub const NetworkRoute = struct {
     state: ?RouteState = null,
 
     /// The route type. The possible values are `propagated` and `static`.
-    @"type": ?RouteType = null,
+    type: ?RouteType = null,
 
     pub const json_field_names = .{
         .destination_cidr_block = "DestinationCidrBlock",
         .destinations = "Destinations",
         .prefix_list_id = "PrefixListId",
         .state = "State",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

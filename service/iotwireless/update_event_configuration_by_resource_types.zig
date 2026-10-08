@@ -45,8 +45,7 @@ pub const UpdateEventConfigurationByResourceTypesInput = struct {
     };
 };
 
-pub const UpdateEventConfigurationByResourceTypesOutput = struct {
-};
+pub const UpdateEventConfigurationByResourceTypesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateEventConfigurationByResourceTypesInput, options: CallOptions) !UpdateEventConfigurationByResourceTypesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

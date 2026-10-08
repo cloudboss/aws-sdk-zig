@@ -14,8 +14,7 @@ pub const TerminateWorkspacesPoolInput = struct {
     };
 };
 
-pub const TerminateWorkspacesPoolOutput = struct {
-};
+pub const TerminateWorkspacesPoolOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TerminateWorkspacesPoolInput, options: CallOptions) !TerminateWorkspacesPoolOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -28,8 +28,7 @@ pub const DeleteAPIKeyInput = struct {
     };
 };
 
-pub const DeleteAPIKeyOutput = struct {
-};
+pub const DeleteAPIKeyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAPIKeyInput, options: CallOptions) !DeleteAPIKeyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

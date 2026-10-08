@@ -5,7 +5,21 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) that identifies the MediaConnect resource to
+    /// which to add tags.
+    resource_arn: []const u8,
+
+    /// A map from tag keys to values. Tag keys can have a maximum character length
+    /// of 128 characters, and tag values can have a maximum length of 256
+    /// characters.
+    tags: []const aws.map.StringMapEntry,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+        .tags = "Tags",
+    };
+};
 
 pub const TagResourceOutput = struct {};
 

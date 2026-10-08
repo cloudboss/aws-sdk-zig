@@ -20,8 +20,7 @@ pub const DeleteWebAuthnCredentialInput = struct {
     };
 };
 
-pub const DeleteWebAuthnCredentialOutput = struct {
-};
+pub const DeleteWebAuthnCredentialOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteWebAuthnCredentialInput, options: CallOptions) !DeleteWebAuthnCredentialOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

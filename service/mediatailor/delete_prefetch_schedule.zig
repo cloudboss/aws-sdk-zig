@@ -19,8 +19,7 @@ pub const DeletePrefetchScheduleInput = struct {
     };
 };
 
-pub const DeletePrefetchScheduleOutput = struct {
-};
+pub const DeletePrefetchScheduleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePrefetchScheduleInput, options: CallOptions) !DeletePrefetchScheduleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

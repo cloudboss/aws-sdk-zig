@@ -3,13 +3,13 @@ const LaunchActionParameterType = @import("launch_action_parameter_type.zig").La
 /// Launch action parameter.
 pub const LaunchActionParameter = struct {
     /// Type.
-    @"type": ?LaunchActionParameterType = null,
+    type: ?LaunchActionParameterType = null,
 
     /// Value.
     value: ?[]const u8 = null,
 
     pub const json_field_names = .{
-        .@"type" = "type",
+        .type = "type",
         .value = "value",
     };
 };

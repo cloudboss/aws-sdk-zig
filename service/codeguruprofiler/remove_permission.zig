@@ -80,7 +80,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: RemovePermissionInput, 
     try path_buf.appendSlice(allocator, "/profilingGroups/");
     try path_buf.appendSlice(allocator, input.profiling_group_name);
     try path_buf.appendSlice(allocator, "/policy/");
-    try path_buf.appendSlice(allocator, input.action_group);
+    try path_buf.appendSlice(allocator, input.action_group.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .empty;

@@ -25,8 +25,7 @@ pub const DeleteConfiguredTableAssociationAnalysisRuleInput = struct {
     };
 };
 
-pub const DeleteConfiguredTableAssociationAnalysisRuleOutput = struct {
-};
+pub const DeleteConfiguredTableAssociationAnalysisRuleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConfiguredTableAssociationAnalysisRuleInput, options: CallOptions) !DeleteConfiguredTableAssociationAnalysisRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -64,7 +63,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteConfiguredTableAs
     try path_buf.appendSlice(allocator, "/configuredTableAssociations/");
     try path_buf.appendSlice(allocator, input.configured_table_association_identifier);
     try path_buf.appendSlice(allocator, "/analysisRule/");
-    try path_buf.appendSlice(allocator, input.analysis_rule_type);
+    try path_buf.appendSlice(allocator, input.analysis_rule_type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

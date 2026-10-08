@@ -14,8 +14,7 @@ pub const DeleteScheduledQueryInput = struct {
     };
 };
 
-pub const DeleteScheduledQueryOutput = struct {
-};
+pub const DeleteScheduledQueryOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteScheduledQueryInput, options: CallOptions) !DeleteScheduledQueryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -8,8 +8,7 @@ const MonetaryAmount = @import("monetary_amount.zig").MonetaryAmount;
 const AccountPlanStatus = @import("account_plan_status.zig").AccountPlanStatus;
 const AccountPlanType = @import("account_plan_type.zig").AccountPlanType;
 
-pub const GetAccountPlanStateInput = struct {
-};
+pub const GetAccountPlanStateInput = struct {};
 
 pub const GetAccountPlanStateOutput = struct {
     /// A unique identifier that identifies the account.

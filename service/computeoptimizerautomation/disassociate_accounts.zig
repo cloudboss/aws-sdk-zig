@@ -5,9 +5,31 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DisassociateAccountsInput = @import("disassociate_accounts_request.zig").DisassociateAccountsRequest;
+pub const DisassociateAccountsInput = struct {
+    /// The IDs of the member accounts to disassociate.
+    account_ids: []const []const u8,
 
-pub const DisassociateAccountsOutput = @import("disassociate_accounts_response.zig").DisassociateAccountsResponse;
+    /// A unique identifier to ensure idempotency of the request.
+    client_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .account_ids = "accountIds",
+        .client_token = "clientToken",
+    };
+};
+
+pub const DisassociateAccountsOutput = struct {
+    /// The IDs of the member accounts that were successfully disassociated.
+    account_ids: ?[]const []const u8 = null,
+
+    /// Any errors that occurred during the disassociation process.
+    errors: ?[]const []const u8 = null,
+
+    pub const json_field_names = .{
+        .account_ids = "accountIds",
+        .errors = "errors",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateAccountsInput, options: CallOptions) !DisassociateAccountsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

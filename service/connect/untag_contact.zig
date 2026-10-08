@@ -24,8 +24,7 @@ pub const UntagContactInput = struct {
     };
 };
 
-pub const UntagContactOutput = struct {
-};
+pub const UntagContactOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagContactInput, options: CallOptions) !UntagContactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

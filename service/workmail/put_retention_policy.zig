@@ -31,8 +31,7 @@ pub const PutRetentionPolicyInput = struct {
     };
 };
 
-pub const PutRetentionPolicyOutput = struct {
-};
+pub const PutRetentionPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutRetentionPolicyInput, options: CallOptions) !PutRetentionPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

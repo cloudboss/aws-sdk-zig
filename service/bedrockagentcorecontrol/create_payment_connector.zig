@@ -42,7 +42,7 @@ pub const CreatePaymentConnectorInput = struct {
 
     /// The type of payment connector, which determines the payment provider
     /// integration.
-    @"type": PaymentConnectorType,
+    type: PaymentConnectorType,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
@@ -51,7 +51,7 @@ pub const CreatePaymentConnectorInput = struct {
         .name = "name",
         .payment_manager_id = "paymentManagerId",
         .provision_mode = "provisionMode",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -81,7 +81,7 @@ pub const CreatePaymentConnectorOutput = struct {
     status: PaymentConnectorStatus,
 
     /// The type of the created payment connector.
-    @"type": PaymentConnectorType,
+    type: PaymentConnectorType,
 
     pub const json_field_names = .{
         .authorization_url = "authorizationUrl",
@@ -91,7 +91,7 @@ pub const CreatePaymentConnectorOutput = struct {
         .payment_connector_id = "paymentConnectorId",
         .payment_manager_id = "paymentManagerId",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -163,7 +163,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreatePaymentConnectorI
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

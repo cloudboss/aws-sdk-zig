@@ -51,7 +51,7 @@ pub const CallAnalyticsJobCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getCallAnalyticsJob(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getCallAnalyticsJob(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -113,7 +113,7 @@ pub const LanguageModelCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeLanguageModel(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeLanguageModel(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -175,7 +175,7 @@ pub const MedicalScribeJobCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getMedicalScribeJob(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getMedicalScribeJob(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -237,7 +237,7 @@ pub const MedicalTranscriptionJobCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getMedicalTranscriptionJob(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getMedicalTranscriptionJob(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -299,7 +299,7 @@ pub const MedicalVocabularyReadyWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getMedicalVocabulary(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getMedicalVocabulary(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -357,7 +357,7 @@ pub const TranscriptionJobCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getTranscriptionJob(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getTranscriptionJob(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -419,7 +419,7 @@ pub const VocabularyReadyWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getVocabulary(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getVocabulary(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

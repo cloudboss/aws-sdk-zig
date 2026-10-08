@@ -23,7 +23,7 @@ pub const UpdateSchemaInput = struct {
     schema_name: []const u8,
 
     /// The schema type for the events schema.
-    @"type": ?Type = null,
+    type: ?Type = null,
 
     pub const json_field_names = .{
         .client_token_id = "ClientTokenId",
@@ -31,7 +31,7 @@ pub const UpdateSchemaInput = struct {
         .description = "Description",
         .registry_name = "RegistryName",
         .schema_name = "SchemaName",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -54,7 +54,7 @@ pub const UpdateSchemaOutput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the schema.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The date the schema version was created.
     version_created_date: ?i64 = null,
@@ -66,7 +66,7 @@ pub const UpdateSchemaOutput = struct {
         .schema_name = "SchemaName",
         .schema_version = "SchemaVersion",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
         .version_created_date = "VersionCreatedDate",
     };
 };
@@ -130,7 +130,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateSchemaInput, conf
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"Type\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);

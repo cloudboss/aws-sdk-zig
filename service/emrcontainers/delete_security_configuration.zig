@@ -5,9 +5,23 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteSecurityConfigurationInput = @import("delete_security_configuration_request.zig").DeleteSecurityConfigurationRequest;
+pub const DeleteSecurityConfigurationInput = struct {
+    /// The ID of the security configuration to delete.
+    id: []const u8,
 
-pub const DeleteSecurityConfigurationOutput = @import("delete_security_configuration_response.zig").DeleteSecurityConfigurationResponse;
+    pub const json_field_names = .{
+        .id = "id",
+    };
+};
+
+pub const DeleteSecurityConfigurationOutput = struct {
+    /// The ID of the deleted security configuration.
+    id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .id = "id",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSecurityConfigurationInput, options: CallOptions) !DeleteSecurityConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

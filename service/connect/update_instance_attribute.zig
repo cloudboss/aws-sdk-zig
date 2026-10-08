@@ -84,7 +84,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateInstanceAttribute
     try path_buf.appendSlice(allocator, "/instance/");
     try path_buf.appendSlice(allocator, input.instance_id);
     try path_buf.appendSlice(allocator, "/attribute/");
-    try path_buf.appendSlice(allocator, input.attribute_type);
+    try path_buf.appendSlice(allocator, input.attribute_type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .empty;

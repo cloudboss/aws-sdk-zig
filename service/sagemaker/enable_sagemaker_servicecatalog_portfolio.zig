@@ -5,11 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const EnableSagemakerServicecatalogPortfolioInput = struct {
-};
+pub const EnableSagemakerServicecatalogPortfolioInput = struct {};
 
-pub const EnableSagemakerServicecatalogPortfolioOutput = struct {
-};
+pub const EnableSagemakerServicecatalogPortfolioOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableSagemakerServicecatalogPortfolioInput, options: CallOptions) !EnableSagemakerServicecatalogPortfolioOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

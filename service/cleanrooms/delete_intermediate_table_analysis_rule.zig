@@ -25,8 +25,7 @@ pub const DeleteIntermediateTableAnalysisRuleInput = struct {
     };
 };
 
-pub const DeleteIntermediateTableAnalysisRuleOutput = struct {
-};
+pub const DeleteIntermediateTableAnalysisRuleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIntermediateTableAnalysisRuleInput, options: CallOptions) !DeleteIntermediateTableAnalysisRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -64,7 +63,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteIntermediateTable
     try path_buf.appendSlice(allocator, "/intermediateTables/");
     try path_buf.appendSlice(allocator, input.intermediate_table_identifier);
     try path_buf.appendSlice(allocator, "/analysisRule/");
-    try path_buf.appendSlice(allocator, input.analysis_rule_type);
+    try path_buf.appendSlice(allocator, input.analysis_rule_type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

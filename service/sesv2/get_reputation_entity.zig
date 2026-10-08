@@ -65,7 +65,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetReputationEntityInpu
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/v2/email/reputation/entities/");
-    try path_buf.appendSlice(allocator, input.reputation_entity_type);
+    try path_buf.appendSlice(allocator, input.reputation_entity_type.wireName());
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.reputation_entity_reference);
     const path = try path_buf.toOwnedSlice(allocator);

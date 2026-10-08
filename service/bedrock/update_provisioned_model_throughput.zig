@@ -32,8 +32,7 @@ pub const UpdateProvisionedModelThroughputInput = struct {
     };
 };
 
-pub const UpdateProvisionedModelThroughputOutput = struct {
-};
+pub const UpdateProvisionedModelThroughputOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateProvisionedModelThroughputInput, options: CallOptions) !UpdateProvisionedModelThroughputOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

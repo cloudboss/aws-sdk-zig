@@ -116,7 +116,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListRulesInput, config:
     try path_buf.appendSlice(allocator, "/v2/domains/");
     try path_buf.appendSlice(allocator, input.domain_identifier);
     try path_buf.appendSlice(allocator, "/list-rules/");
-    try path_buf.appendSlice(allocator, input.target_type);
+    try path_buf.appendSlice(allocator, input.target_type.wireName());
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.target_identifier);
     const path = try path_buf.toOwnedSlice(allocator);

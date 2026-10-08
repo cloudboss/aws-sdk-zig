@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DescribeOrganizationConfigurationInput = struct {
-};
+pub const DescribeOrganizationConfigurationInput = struct {};
 
 pub const DescribeOrganizationConfigurationOutput = struct {
     /// Specifies whether Amazon Macie is enabled automatically for accounts that

@@ -5,11 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DisableSecurityHubInput = struct {
-};
+pub const DisableSecurityHubInput = struct {};
 
-pub const DisableSecurityHubOutput = struct {
-};
+pub const DisableSecurityHubOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableSecurityHubInput, options: CallOptions) !DisableSecurityHubOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

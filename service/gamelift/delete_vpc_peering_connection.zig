@@ -20,8 +20,7 @@ pub const DeleteVpcPeeringConnectionInput = struct {
     };
 };
 
-pub const DeleteVpcPeeringConnectionOutput = struct {
-};
+pub const DeleteVpcPeeringConnectionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVpcPeeringConnectionInput, options: CallOptions) !DeleteVpcPeeringConnectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

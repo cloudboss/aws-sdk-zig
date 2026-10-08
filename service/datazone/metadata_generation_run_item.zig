@@ -28,7 +28,7 @@ pub const MetadataGenerationRunItem = struct {
     target: ?MetadataGenerationRunTarget = null,
 
     /// The type of the metadata generation run.
-    @"type": ?MetadataGenerationRunType = null,
+    type: ?MetadataGenerationRunType = null,
 
     /// The types of the metadata generation run.
     types: ?[]const MetadataGenerationRunType = null,
@@ -41,7 +41,7 @@ pub const MetadataGenerationRunItem = struct {
         .owning_project_id = "owningProjectId",
         .status = "status",
         .target = "target",
-        .@"type" = "type",
+        .type = "type",
         .types = "types",
     };
 };

@@ -14,13 +14,13 @@ pub const RecurringPaymentTerm = struct {
     price: ?[]const u8 = null,
 
     /// Type of the term being updated.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .billing_period = "billingPeriod",
         .currency_code = "currencyCode",
         .id = "id",
         .price = "price",
-        .@"type" = "type",
+        .type = "type",
     };
 };

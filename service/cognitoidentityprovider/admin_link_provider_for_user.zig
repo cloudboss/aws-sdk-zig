@@ -77,8 +77,7 @@ pub const AdminLinkProviderForUserInput = struct {
     };
 };
 
-pub const AdminLinkProviderForUserOutput = struct {
-};
+pub const AdminLinkProviderForUserOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminLinkProviderForUserInput, options: CallOptions) !AdminLinkProviderForUserOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

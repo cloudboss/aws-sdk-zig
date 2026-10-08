@@ -53,8 +53,7 @@ pub const UpdateLicenseConfigurationInput = struct {
     };
 };
 
-pub const UpdateLicenseConfigurationOutput = struct {
-};
+pub const UpdateLicenseConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLicenseConfigurationInput, options: CallOptions) !UpdateLicenseConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

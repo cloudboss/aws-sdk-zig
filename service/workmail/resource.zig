@@ -25,7 +25,7 @@ pub const Resource = struct {
     state: ?EntityState = null,
 
     /// The type of the resource: equipment or room.
-    @"type": ?ResourceType = null,
+    type: ?ResourceType = null,
 
     pub const json_field_names = .{
         .description = "Description",
@@ -35,6 +35,6 @@ pub const Resource = struct {
         .id = "Id",
         .name = "Name",
         .state = "State",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

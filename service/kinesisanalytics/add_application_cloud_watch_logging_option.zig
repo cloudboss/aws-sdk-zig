@@ -27,8 +27,7 @@ pub const AddApplicationCloudWatchLoggingOptionInput = struct {
     };
 };
 
-pub const AddApplicationCloudWatchLoggingOptionOutput = struct {
-};
+pub const AddApplicationCloudWatchLoggingOptionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddApplicationCloudWatchLoggingOptionInput, options: CallOptions) !AddApplicationCloudWatchLoggingOptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

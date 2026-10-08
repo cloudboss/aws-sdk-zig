@@ -19,8 +19,7 @@ pub const DeleteFormTypeInput = struct {
     };
 };
 
-pub const DeleteFormTypeOutput = struct {
-};
+pub const DeleteFormTypeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteFormTypeInput, options: CallOptions) !DeleteFormTypeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

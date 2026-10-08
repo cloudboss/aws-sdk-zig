@@ -28,8 +28,7 @@ pub const UpdateIntegrationTablePropertiesInput = struct {
     };
 };
 
-pub const UpdateIntegrationTablePropertiesOutput = struct {
-};
+pub const UpdateIntegrationTablePropertiesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateIntegrationTablePropertiesInput, options: CallOptions) !UpdateIntegrationTablePropertiesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

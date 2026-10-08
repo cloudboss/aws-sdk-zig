@@ -6,9 +6,23 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Cluster = @import("cluster.zig").Cluster;
 
-pub const DeleteClusterInput = @import("delete_cluster_request.zig").DeleteClusterRequest;
+pub const DeleteClusterInput = struct {
+    /// The name of the cluster to delete.
+    name: []const u8,
 
-pub const DeleteClusterOutput = @import("delete_cluster_response.zig").DeleteClusterResponse;
+    pub const json_field_names = .{
+        .name = "name",
+    };
+};
+
+pub const DeleteClusterOutput = struct {
+    /// The full description of the cluster to delete.
+    cluster: ?Cluster = null,
+
+    pub const json_field_names = .{
+        .cluster = "cluster",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteClusterInput, options: CallOptions) !DeleteClusterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

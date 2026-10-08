@@ -23,8 +23,7 @@ pub const UntagStreamInput = struct {
     };
 };
 
-pub const UntagStreamOutput = struct {
-};
+pub const UntagStreamOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagStreamInput, options: CallOptions) !UntagStreamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

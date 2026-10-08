@@ -23,8 +23,7 @@ pub const UpdateCustomDetectionRuleAssociationInput = struct {
     };
 };
 
-pub const UpdateCustomDetectionRuleAssociationOutput = struct {
-};
+pub const UpdateCustomDetectionRuleAssociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCustomDetectionRuleAssociationInput, options: CallOptions) !UpdateCustomDetectionRuleAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

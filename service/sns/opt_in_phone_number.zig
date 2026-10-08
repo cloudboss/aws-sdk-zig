@@ -10,8 +10,7 @@ pub const OptInPhoneNumberInput = struct {
     phone_number: []const u8,
 };
 
-pub const OptInPhoneNumberOutput = struct {
-};
+pub const OptInPhoneNumberOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: OptInPhoneNumberInput, options: CallOptions) !OptInPhoneNumberOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

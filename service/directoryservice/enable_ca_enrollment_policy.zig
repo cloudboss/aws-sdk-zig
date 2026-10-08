@@ -27,8 +27,7 @@ pub const EnableCAEnrollmentPolicyInput = struct {
     };
 };
 
-pub const EnableCAEnrollmentPolicyOutput = struct {
-};
+pub const EnableCAEnrollmentPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableCAEnrollmentPolicyInput, options: CallOptions) !EnableCAEnrollmentPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

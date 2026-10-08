@@ -15,8 +15,7 @@ pub const CancelClusterInput = struct {
     };
 };
 
-pub const CancelClusterOutput = struct {
-};
+pub const CancelClusterOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelClusterInput, options: CallOptions) !CancelClusterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

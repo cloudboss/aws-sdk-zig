@@ -18,7 +18,7 @@ pub const WorkflowVersion = struct {
     owner: ?[]const u8 = null,
 
     /// The image creation stage that this workflow applies to.
-    @"type": ?WorkflowType = null,
+    type: ?WorkflowType = null,
 
     /// The semantic version of the workflow resource. The format includes three
     /// nodes: ...
@@ -30,7 +30,7 @@ pub const WorkflowVersion = struct {
         .description = "description",
         .name = "name",
         .owner = "owner",
-        .@"type" = "type",
+        .type = "type",
         .version = "version",
     };
 };

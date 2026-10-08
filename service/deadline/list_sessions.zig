@@ -6,9 +6,51 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SessionSummary = @import("session_summary.zig").SessionSummary;
 
-pub const ListSessionsInput = @import("list_sessions_request.zig").ListSessionsRequest;
+pub const ListSessionsInput = struct {
+    /// The farm ID for the list of sessions.
+    farm_id: []const u8,
 
-pub const ListSessionsOutput = @import("list_sessions_response.zig").ListSessionsResponse;
+    /// The job ID for the list of sessions.
+    job_id: []const u8,
+
+    /// The maximum number of results to return. Use this parameter with `NextToken`
+    /// to get results as a set of sequential pages.
+    max_results: ?i32 = null,
+
+    /// The token for the next set of results, or `null` to start from the
+    /// beginning.
+    next_token: ?[]const u8 = null,
+
+    /// The queue ID for the list of sessions
+    queue_id: []const u8,
+
+    pub const json_field_names = .{
+        .farm_id = "farmId",
+        .job_id = "jobId",
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+        .queue_id = "queueId",
+    };
+};
+
+pub const ListSessionsOutput = struct {
+    /// If Deadline Cloud returns `nextToken`, then there are more results
+    /// available. The value of `nextToken` is a unique pagination token for each
+    /// page. To retrieve the next page, call the operation again using the returned
+    /// token. Keep all other arguments unchanged. If no results remain, then
+    /// `nextToken` is set to `null`. Each pagination token expires after 24 hours.
+    /// If you provide a token that isn't valid, then you receive an HTTP 400
+    /// `ValidationException` error.
+    next_token: ?[]const u8 = null,
+
+    /// The sessions on the list.
+    sessions: ?[]const SessionSummary = null,
+
+    pub const json_field_names = .{
+        .next_token = "nextToken",
+        .sessions = "sessions",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSessionsInput, options: CallOptions) !ListSessionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

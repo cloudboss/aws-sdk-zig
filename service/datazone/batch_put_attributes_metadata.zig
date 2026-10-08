@@ -82,7 +82,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchPutAttributesMetad
     try path_buf.appendSlice(allocator, "/v2/domains/");
     try path_buf.appendSlice(allocator, input.domain_identifier);
     try path_buf.appendSlice(allocator, "/entities/");
-    try path_buf.appendSlice(allocator, input.entity_type);
+    try path_buf.appendSlice(allocator, input.entity_type.wireName());
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.entity_identifier);
     try path_buf.appendSlice(allocator, "/attributes-metadata");

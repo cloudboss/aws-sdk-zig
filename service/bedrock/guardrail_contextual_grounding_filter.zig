@@ -20,12 +20,12 @@ pub const GuardrailContextualGroundingFilter = struct {
     threshold: f64,
 
     /// The filter type details for the guardrails contextual grounding filter.
-    @"type": GuardrailContextualGroundingFilterType,
+    type: GuardrailContextualGroundingFilterType,
 
     pub const json_field_names = .{
         .action = "action",
         .enabled = "enabled",
         .threshold = "threshold",
-        .@"type" = "type",
+        .type = "type",
     };
 };

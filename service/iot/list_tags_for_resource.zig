@@ -6,9 +6,34 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// To retrieve the next set of results, the `nextToken`
+    /// value from a previous response; otherwise **null** to receive
+    /// the first set of results.
+    next_token: ?[]const u8 = null,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    /// The ARN of the resource.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .next_token = "nextToken",
+        .resource_arn = "resourceArn",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// The token to use to get the next set of results, or **null** if there are no
+    /// additional results.
+    next_token: ?[]const u8 = null,
+
+    /// The list of tags assigned to the resource.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .next_token = "nextToken",
+        .tags = "tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -8,10 +8,10 @@ pub const ListInsightsAnyStatusFilter = struct {
     start_time_range: StartTimeRange,
 
     /// Use to filter for either `REACTIVE` or `PROACTIVE` insights.
-    @"type": InsightType,
+    type: InsightType,
 
     pub const json_field_names = .{
         .start_time_range = "StartTimeRange",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

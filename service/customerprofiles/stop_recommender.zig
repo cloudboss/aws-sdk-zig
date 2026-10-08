@@ -18,8 +18,7 @@ pub const StopRecommenderInput = struct {
     };
 };
 
-pub const StopRecommenderOutput = struct {
-};
+pub const StopRecommenderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopRecommenderInput, options: CallOptions) !StopRecommenderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

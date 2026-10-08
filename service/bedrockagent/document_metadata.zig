@@ -20,12 +20,12 @@ pub const DocumentMetadata = struct {
     s_3_location: ?CustomS3Location = null,
 
     /// The type of the source source from which to add metadata.
-    @"type": MetadataSourceType,
+    type: MetadataSourceType,
 
     pub const json_field_names = .{
         .access_control_list = "accessControlList",
         .inline_attributes = "inlineAttributes",
         .s_3_location = "s3Location",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -14,8 +14,7 @@ pub const DeleteEnforcedGuardrailConfigurationInput = struct {
     };
 };
 
-pub const DeleteEnforcedGuardrailConfigurationOutput = struct {
-};
+pub const DeleteEnforcedGuardrailConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteEnforcedGuardrailConfigurationInput, options: CallOptions) !DeleteEnforcedGuardrailConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -19,8 +19,7 @@ pub const UpdateBudgetInput = struct {
     };
 };
 
-pub const UpdateBudgetOutput = struct {
-};
+pub const UpdateBudgetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateBudgetInput, options: CallOptions) !UpdateBudgetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

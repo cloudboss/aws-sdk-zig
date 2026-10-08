@@ -27,8 +27,7 @@ pub const CompleteLifecycleActionInput = struct {
     lifecycle_hook_name: []const u8,
 };
 
-pub const CompleteLifecycleActionOutput = struct {
-};
+pub const CompleteLifecycleActionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CompleteLifecycleActionInput, options: CallOptions) !CompleteLifecycleActionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

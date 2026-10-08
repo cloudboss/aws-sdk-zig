@@ -14,8 +14,7 @@ pub const StopThingRegistrationTaskInput = struct {
     };
 };
 
-pub const StopThingRegistrationTaskOutput = struct {
-};
+pub const StopThingRegistrationTaskOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopThingRegistrationTaskInput, options: CallOptions) !StopThingRegistrationTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -22,8 +22,7 @@ pub const DetachThingPrincipalInput = struct {
     };
 };
 
-pub const DetachThingPrincipalOutput = struct {
-};
+pub const DetachThingPrincipalOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DetachThingPrincipalInput, options: CallOptions) !DetachThingPrincipalOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

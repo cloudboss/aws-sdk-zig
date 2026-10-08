@@ -14,8 +14,7 @@ pub const DeleteLicenseEndpointInput = struct {
     };
 };
 
-pub const DeleteLicenseEndpointOutput = struct {
-};
+pub const DeleteLicenseEndpointOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLicenseEndpointInput, options: CallOptions) !DeleteLicenseEndpointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

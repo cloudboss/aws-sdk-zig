@@ -6,9 +6,40 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const GetResourcePoliciesResponseEntry = @import("get_resource_policies_response_entry.zig").GetResourcePoliciesResponseEntry;
 
-pub const GetResourcePoliciesInput = @import("get_resource_policies_request.zig").GetResourcePoliciesRequest;
+pub const GetResourcePoliciesInput = struct {
+    /// The maximum number of items to return for this call. The call also returns a
+    /// token that you
+    /// can specify in a subsequent call to get the next set of results.
+    max_results: ?i32 = null,
 
-pub const GetResourcePoliciesOutput = @import("get_resource_policies_response.zig").GetResourcePoliciesResponse;
+    /// A token to start the list. Use this token to get the next set of results.
+    next_token: ?[]const u8 = null,
+
+    /// Amazon Resource Name (ARN) of the resource to which the policies are
+    /// attached.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+        .resource_arn = "ResourceArn",
+    };
+};
+
+pub const GetResourcePoliciesOutput = struct {
+    /// The token for the next set of items to return. Use this token to get the
+    /// next set of
+    /// results.
+    next_token: ?[]const u8 = null,
+
+    /// An array of the `Policy` object.
+    policies: ?[]const GetResourcePoliciesResponseEntry = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .policies = "Policies",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResourcePoliciesInput, options: CallOptions) !GetResourcePoliciesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

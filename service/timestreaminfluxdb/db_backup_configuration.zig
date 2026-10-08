@@ -14,12 +14,12 @@ pub const DbBackupConfiguration = struct {
 
     /// The type of automated backup schedule. Valid values are HOURLY, DAILY,
     /// WEEKLY, MONTHLY, CUSTOM_SCHEDULE, and CONTINUOUS.
-    @"type": AutomatedDbBackupType,
+    type: AutomatedDbBackupType,
 
     pub const json_field_names = .{
         .custom_schedule = "customSchedule",
         .enabled = "enabled",
         .retention_days = "retentionDays",
-        .@"type" = "type",
+        .type = "type",
     };
 };

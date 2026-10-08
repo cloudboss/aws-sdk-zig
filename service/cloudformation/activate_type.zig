@@ -50,7 +50,7 @@ pub const ActivateTypeInput = struct {
     ///
     /// Conditional: You must specify `PublicTypeArn`, or `TypeName`,
     /// `Type`, and `PublisherId`.
-    @"type": ?ThirdPartyType = null,
+    type: ?ThirdPartyType = null,
 
     /// The name of the extension.
     ///
@@ -154,7 +154,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ActivateTypeInput, conf
         try body_buf.appendSlice(allocator, "&PublisherId=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         try body_buf.appendSlice(allocator, "&Type=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v.wireName());
     }

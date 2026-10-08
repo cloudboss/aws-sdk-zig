@@ -40,8 +40,7 @@ pub const UpdateTypedLinkFacetInput = struct {
     };
 };
 
-pub const UpdateTypedLinkFacetOutput = struct {
-};
+pub const UpdateTypedLinkFacetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTypedLinkFacetInput, options: CallOptions) !UpdateTypedLinkFacetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

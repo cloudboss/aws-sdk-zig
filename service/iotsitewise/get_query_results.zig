@@ -6,9 +6,46 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ColumnInformation = @import("column_information.zig").ColumnInformation;
 
-pub const GetQueryResultsInput = @import("get_query_results_request.zig").GetQueryResultsRequest;
+pub const GetQueryResultsInput = struct {
+    /// The maximum number of results to return for each paginated request.
+    max_results: ?i32 = null,
 
-pub const GetQueryResultsOutput = @import("get_query_results_response.zig").GetQueryResultsResponse;
+    /// The token to be used for the next set of paginated results.
+    next_token: ?[]const u8 = null,
+
+    /// The unique identifier for the query execution.
+    query_id: []const u8,
+
+    /// The name of the workspace associated with the query.
+    workspace_name: []const u8,
+
+    pub const json_field_names = .{
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+        .query_id = "queryId",
+        .workspace_name = "workspaceName",
+    };
+};
+
+pub const GetQueryResultsOutput = struct {
+    /// A list of column metadata for the query results. Each entry contains the
+    /// column name and data type. Present when the query status is COMPLETED.
+    column_info: ?[]const ColumnInformation = null,
+
+    /// The token for the next set of results, or null if there are no additional
+    /// results.
+    next_token: ?[]const u8 = null,
+
+    /// The result rows. Each row is a list of string column values, positional to
+    /// match the columnInfo order. Present when the query status is COMPLETED.
+    rows: ?[]const []const []const u8 = null,
+
+    pub const json_field_names = .{
+        .column_info = "columnInfo",
+        .next_token = "nextToken",
+        .rows = "rows",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetQueryResultsInput, options: CallOptions) !GetQueryResultsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

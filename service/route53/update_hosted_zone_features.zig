@@ -15,8 +15,7 @@ pub const UpdateHostedZoneFeaturesInput = struct {
     hosted_zone_id: []const u8,
 };
 
-pub const UpdateHostedZoneFeaturesOutput = struct {
-};
+pub const UpdateHostedZoneFeaturesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateHostedZoneFeaturesInput, options: CallOptions) !UpdateHostedZoneFeaturesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

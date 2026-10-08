@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const EnvironmentPlatform = @import("environment_platform.zig").EnvironmentPlatform;
 
-pub const ListCuratedEnvironmentImagesInput = struct {
-};
+pub const ListCuratedEnvironmentImagesInput = struct {};
 
 pub const ListCuratedEnvironmentImagesOutput = struct {
     /// Information about supported platforms for Docker images that are managed by

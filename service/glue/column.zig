@@ -12,12 +12,12 @@ pub const Column = struct {
     parameters: ?[]const aws.map.StringMapEntry = null,
 
     /// The data type of the `Column`.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .comment = "Comment",
         .name = "Name",
         .parameters = "Parameters",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

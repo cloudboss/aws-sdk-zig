@@ -36,8 +36,7 @@ pub const StopStackSetOperationInput = struct {
     stack_set_name: []const u8,
 };
 
-pub const StopStackSetOperationOutput = struct {
-};
+pub const StopStackSetOperationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopStackSetOperationInput, options: CallOptions) !StopStackSetOperationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

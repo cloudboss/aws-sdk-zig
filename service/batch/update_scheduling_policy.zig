@@ -26,8 +26,7 @@ pub const UpdateSchedulingPolicyInput = struct {
     };
 };
 
-pub const UpdateSchedulingPolicyOutput = struct {
-};
+pub const UpdateSchedulingPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSchedulingPolicyInput, options: CallOptions) !UpdateSchedulingPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

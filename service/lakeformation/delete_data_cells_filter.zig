@@ -26,8 +26,7 @@ pub const DeleteDataCellsFilterInput = struct {
     };
 };
 
-pub const DeleteDataCellsFilterOutput = struct {
-};
+pub const DeleteDataCellsFilterOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDataCellsFilterInput, options: CallOptions) !DeleteDataCellsFilterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

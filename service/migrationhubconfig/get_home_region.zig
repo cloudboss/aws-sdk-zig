@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetHomeRegionInput = struct {
-};
+pub const GetHomeRegionInput = struct {};
 
 pub const GetHomeRegionOutput = struct {
     /// The name of the home region of the calling account.

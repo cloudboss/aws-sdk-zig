@@ -42,7 +42,7 @@ pub const SupportedInstanceType = struct {
     /// type](http://aws.amazon.com/ec2/instance-types/), for example `m5.xlarge`,
     /// of the
     /// `SupportedInstanceType`.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The number of vCPUs available for the `SupportedInstanceType`.
     vcpu: ?i32 = null,
@@ -57,7 +57,7 @@ pub const SupportedInstanceType = struct {
         .memory_gb = "MemoryGB",
         .number_of_disks = "NumberOfDisks",
         .storage_gb = "StorageGB",
-        .@"type" = "Type",
+        .type = "Type",
         .vcpu = "VCPU",
     };
 };

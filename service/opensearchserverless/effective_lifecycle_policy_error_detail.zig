@@ -13,12 +13,12 @@ pub const EffectiveLifecyclePolicyErrorDetail = struct {
     resource: ?[]const u8 = null,
 
     /// The type of lifecycle policy.
-    @"type": ?LifecyclePolicyType = null,
+    type: ?LifecyclePolicyType = null,
 
     pub const json_field_names = .{
         .error_code = "errorCode",
         .error_message = "errorMessage",
         .resource = "resource",
-        .@"type" = "type",
+        .type = "type",
     };
 };

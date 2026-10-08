@@ -18,8 +18,7 @@ pub const DeleteCustomDomainAssociationInput = struct {
     };
 };
 
-pub const DeleteCustomDomainAssociationOutput = struct {
-};
+pub const DeleteCustomDomainAssociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCustomDomainAssociationInput, options: CallOptions) !DeleteCustomDomainAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

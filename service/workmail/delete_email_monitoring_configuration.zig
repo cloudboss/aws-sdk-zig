@@ -15,8 +15,7 @@ pub const DeleteEmailMonitoringConfigurationInput = struct {
     };
 };
 
-pub const DeleteEmailMonitoringConfigurationOutput = struct {
-};
+pub const DeleteEmailMonitoringConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteEmailMonitoringConfigurationInput, options: CallOptions) !DeleteEmailMonitoringConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -30,8 +30,7 @@ pub const DeleteCanaryInput = struct {
     };
 };
 
-pub const DeleteCanaryOutput = struct {
-};
+pub const DeleteCanaryOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCanaryInput, options: CallOptions) !DeleteCanaryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

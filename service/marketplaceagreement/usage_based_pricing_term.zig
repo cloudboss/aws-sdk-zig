@@ -13,12 +13,12 @@ pub const UsageBasedPricingTerm = struct {
     rate_cards: ?[]const UsageBasedRateCardItem = null,
 
     /// Category of the term.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .currency_code = "currencyCode",
         .id = "id",
         .rate_cards = "rateCards",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -15,8 +15,7 @@ pub const UpdateOrganizationConfigurationInput = struct {
     };
 };
 
-pub const UpdateOrganizationConfigurationOutput = struct {
-};
+pub const UpdateOrganizationConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateOrganizationConfigurationInput, options: CallOptions) !UpdateOrganizationConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

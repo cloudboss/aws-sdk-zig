@@ -22,8 +22,7 @@ pub const CreateComponentInput = struct {
     };
 };
 
-pub const CreateComponentOutput = struct {
-};
+pub const CreateComponentOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateComponentInput, options: CallOptions) !CreateComponentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

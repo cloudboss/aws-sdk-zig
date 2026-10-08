@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteRegistryPolicyInput = struct {
-};
+pub const DeleteRegistryPolicyInput = struct {};
 
 pub const DeleteRegistryPolicyOutput = struct {
     /// The contents of the registry permissions policy that was deleted.

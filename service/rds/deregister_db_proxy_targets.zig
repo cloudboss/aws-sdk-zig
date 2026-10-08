@@ -21,8 +21,7 @@ pub const DeregisterDBProxyTargetsInput = struct {
     target_group_name: ?[]const u8 = null,
 };
 
-pub const DeregisterDBProxyTargetsOutput = struct {
-};
+pub const DeregisterDBProxyTargetsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterDBProxyTargetsInput, options: CallOptions) !DeregisterDBProxyTargetsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

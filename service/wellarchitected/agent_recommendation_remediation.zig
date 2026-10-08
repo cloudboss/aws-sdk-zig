@@ -26,7 +26,7 @@ pub const AgentRecommendationRemediation = struct {
     steps: []const RemediationStep,
 
     /// The remediation method.
-    @"type": RemediationType,
+    type: RemediationType,
 
     pub const json_field_names = .{
         .created_at = "createdAt",
@@ -36,6 +36,6 @@ pub const AgentRecommendationRemediation = struct {
         .recommendation_arn = "recommendationArn",
         .resource_links = "resourceLinks",
         .steps = "steps",
-        .@"type" = "type",
+        .type = "type",
     };
 };

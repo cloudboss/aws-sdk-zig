@@ -6,9 +6,29 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the resource to which the tags are to be
+    /// added.
+    resource_arn: []const u8,
 
-pub const TagResourceOutput = @import("tag_resource_response.zig").TagResourceResponse;
+    /// A list of tags to be added to this resource. A tag is a key-value pair. A
+    /// tag key must be accompanied by a tag value, although null is accepted.
+    tags: []const Tag,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+        .tags = "Tags",
+    };
+};
+
+pub const TagResourceOutput = struct {
+    /// A list of tags as key-value pairs.
+    tag_list: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .tag_list = "TagList",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TagResourceInput, options: CallOptions) !TagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

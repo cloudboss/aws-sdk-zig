@@ -124,7 +124,7 @@ pub const FHIRDatastoreActiveWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeFhirDatastore(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeFhirDatastore(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -193,7 +193,7 @@ pub const FHIRDatastoreDeletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeFhirDatastore(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeFhirDatastore(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -248,7 +248,7 @@ pub const FHIRExportJobCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeFhirExportJob(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeFhirExportJob(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -331,7 +331,7 @@ pub const FHIRImportJobCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.describeFhirImportJob(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.describeFhirImportJob(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

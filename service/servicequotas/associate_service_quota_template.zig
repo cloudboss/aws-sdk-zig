@@ -5,11 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const AssociateServiceQuotaTemplateInput = struct {
-};
+pub const AssociateServiceQuotaTemplateInput = struct {};
 
-pub const AssociateServiceQuotaTemplateOutput = struct {
-};
+pub const AssociateServiceQuotaTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateServiceQuotaTemplateInput, options: CallOptions) !AssociateServiceQuotaTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

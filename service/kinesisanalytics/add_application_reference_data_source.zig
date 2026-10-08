@@ -33,8 +33,7 @@ pub const AddApplicationReferenceDataSourceInput = struct {
     };
 };
 
-pub const AddApplicationReferenceDataSourceOutput = struct {
-};
+pub const AddApplicationReferenceDataSourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddApplicationReferenceDataSourceInput, options: CallOptions) !AddApplicationReferenceDataSourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

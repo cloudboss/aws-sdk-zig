@@ -47,8 +47,7 @@ pub const AcceptPageInput = struct {
     };
 };
 
-pub const AcceptPageOutput = struct {
-};
+pub const AcceptPageOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AcceptPageInput, options: CallOptions) !AcceptPageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

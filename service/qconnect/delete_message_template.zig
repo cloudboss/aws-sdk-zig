@@ -19,8 +19,7 @@ pub const DeleteMessageTemplateInput = struct {
     };
 };
 
-pub const DeleteMessageTemplateOutput = struct {
-};
+pub const DeleteMessageTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMessageTemplateInput, options: CallOptions) !DeleteMessageTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

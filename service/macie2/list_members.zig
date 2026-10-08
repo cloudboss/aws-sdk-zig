@@ -6,9 +6,41 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Member = @import("member.zig").Member;
 
-pub const ListMembersInput = @import("list_members_request.zig").ListMembersRequest;
+pub const ListMembersInput = struct {
+    /// The maximum number of items to include in each page of a paginated response.
+    max_results: ?i32 = null,
 
-pub const ListMembersOutput = @import("list_members_response.zig").ListMembersResponse;
+    /// The nextToken string that specifies which page of results to return in a
+    /// paginated response.
+    next_token: ?[]const u8 = null,
+
+    /// Specifies which accounts to include in the response, based on the status of
+    /// an account's relationship with the administrator account. By default, the
+    /// response includes only current member accounts. To include all accounts, set
+    /// this value to false.
+    only_associated: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+        .only_associated = "onlyAssociated",
+    };
+};
+
+pub const ListMembersOutput = struct {
+    /// An array of objects, one for each account that's associated with the
+    /// administrator account and matches the criteria specified in the request.
+    members: ?[]const Member = null,
+
+    /// The string to use in a subsequent request to get the next page of results in
+    /// a paginated response. This value is null if there are no additional pages.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .members = "members",
+        .next_token = "nextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMembersInput, options: CallOptions) !ListMembersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -17,8 +17,7 @@ pub const CreateDataLakeOrganizationConfigurationInput = struct {
     };
 };
 
-pub const CreateDataLakeOrganizationConfigurationOutput = struct {
-};
+pub const CreateDataLakeOrganizationConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDataLakeOrganizationConfigurationInput, options: CallOptions) !CreateDataLakeOrganizationConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

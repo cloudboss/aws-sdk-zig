@@ -14,8 +14,7 @@ pub const DeleteCorsPolicyInput = struct {
     };
 };
 
-pub const DeleteCorsPolicyOutput = struct {
-};
+pub const DeleteCorsPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCorsPolicyInput, options: CallOptions) !DeleteCorsPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

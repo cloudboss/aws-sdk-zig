@@ -7,9 +7,42 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const TransactionStatusFilter = @import("transaction_status_filter.zig").TransactionStatusFilter;
 const TransactionDescription = @import("transaction_description.zig").TransactionDescription;
 
-pub const ListTransactionsInput = @import("list_transactions_request.zig").ListTransactionsRequest;
+pub const ListTransactionsInput = struct {
+    /// The catalog for which to list transactions. Defaults to the account ID of
+    /// the caller.
+    catalog_id: ?[]const u8 = null,
 
-pub const ListTransactionsOutput = @import("list_transactions_response.zig").ListTransactionsResponse;
+    /// The maximum number of transactions to return in a single call.
+    max_results: ?i32 = null,
+
+    /// A continuation token if this is not the first call to retrieve transactions.
+    next_token: ?[]const u8 = null,
+
+    /// A filter indicating the status of transactions to return. Options are ALL |
+    /// COMPLETED | COMMITTED | ABORTED | ACTIVE. The default is `ALL`.
+    status_filter: ?TransactionStatusFilter = null,
+
+    pub const json_field_names = .{
+        .catalog_id = "CatalogId",
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+        .status_filter = "StatusFilter",
+    };
+};
+
+pub const ListTransactionsOutput = struct {
+    /// A continuation token indicating whether additional data is available.
+    next_token: ?[]const u8 = null,
+
+    /// A list of transactions. The record for each transaction is a
+    /// `TransactionDescription` object.
+    transactions: ?[]const TransactionDescription = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .transactions = "Transactions",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTransactionsInput, options: CallOptions) !ListTransactionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -31,8 +31,7 @@ pub const DeleteTableVersionInput = struct {
     };
 };
 
-pub const DeleteTableVersionOutput = struct {
-};
+pub const DeleteTableVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTableVersionInput, options: CallOptions) !DeleteTableVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

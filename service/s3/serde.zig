@@ -1865,7 +1865,7 @@ pub fn deserializeGrantee(allocator: std.mem.Allocator, reader: *aws.xml.Reader)
                 } else if (std.mem.eql(u8, e.local, "ID")) {
                     result.id = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "xsi:type")) {
-                    result.@"type" = Type.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
+                    result.type = Type.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else if (std.mem.eql(u8, e.local, "URI")) {
                     result.uri = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -4164,7 +4164,7 @@ pub fn serializeBucketInfo(allocator: std.mem.Allocator, buf: *std.ArrayList(u8)
         try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</DataRedundancy>");
     }
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(allocator, "<Type>");
         try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Type>");
@@ -4577,7 +4577,7 @@ pub fn serializeGrantee(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), v
         try buf.appendSlice(allocator, "</ID>");
     }
     try buf.appendSlice(allocator, "<xsi:type>");
-    try buf.appendSlice(allocator, value.@"type".wireName());
+    try buf.appendSlice(allocator, value.type.wireName());
     try buf.appendSlice(allocator, "</xsi:type>");
     if (value.uri) |v| {
         try buf.appendSlice(allocator, "<URI>");
@@ -4765,7 +4765,7 @@ pub fn serializeInventoryTableConfigurationUpdates(allocator: std.mem.Allocator,
 }
 
 pub fn serializeJSONInput(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value: JSONInput) !void {
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(allocator, "<Type>");
         try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Type>");
@@ -4947,7 +4947,7 @@ pub fn serializeLocationInfo(allocator: std.mem.Allocator, buf: *std.ArrayList(u
         try aws.xml.appendXmlEscaped(allocator, buf, v);
         try buf.appendSlice(allocator, "</Name>");
     }
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(allocator, "<Type>");
         try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Type>");
@@ -5499,7 +5499,7 @@ pub fn serializeRestoreRequest(allocator: std.mem.Allocator, buf: *std.ArrayList
         try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Tier>");
     }
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(allocator, "<Type>");
         try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Type>");
@@ -5821,4 +5821,3 @@ pub fn serializeWebsiteConfiguration(allocator: std.mem.Allocator, buf: *std.Arr
         try buf.appendSlice(allocator, "</RoutingRules>");
     }
 }
-

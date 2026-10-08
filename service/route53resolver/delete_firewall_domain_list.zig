@@ -6,9 +6,23 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const FirewallDomainList = @import("firewall_domain_list.zig").FirewallDomainList;
 
-pub const DeleteFirewallDomainListInput = @import("delete_firewall_domain_list_request.zig").DeleteFirewallDomainListRequest;
+pub const DeleteFirewallDomainListInput = struct {
+    /// The ID of the domain list that you want to delete.
+    firewall_domain_list_id: []const u8,
 
-pub const DeleteFirewallDomainListOutput = @import("delete_firewall_domain_list_response.zig").DeleteFirewallDomainListResponse;
+    pub const json_field_names = .{
+        .firewall_domain_list_id = "FirewallDomainListId",
+    };
+};
+
+pub const DeleteFirewallDomainListOutput = struct {
+    /// The domain list that you just deleted.
+    firewall_domain_list: ?FirewallDomainList = null,
+
+    pub const json_field_names = .{
+        .firewall_domain_list = "FirewallDomainList",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteFirewallDomainListInput, options: CallOptions) !DeleteFirewallDomainListOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

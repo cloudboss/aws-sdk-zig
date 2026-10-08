@@ -25,7 +25,7 @@ pub const FlowTraceNodeInputField = struct {
     source: ?FlowTraceNodeInputSource = null,
 
     /// The data type of the input field for compatibility validation.
-    @"type": ?FlowNodeIODataType = null,
+    type: ?FlowNodeIODataType = null,
 
     pub const json_field_names = .{
         .category = "category",
@@ -33,6 +33,6 @@ pub const FlowTraceNodeInputField = struct {
         .execution_chain = "executionChain",
         .node_input_name = "nodeInputName",
         .source = "source",
-        .@"type" = "type",
+        .type = "type",
     };
 };

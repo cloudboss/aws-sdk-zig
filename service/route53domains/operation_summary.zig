@@ -48,7 +48,7 @@ pub const OperationSummary = struct {
     submitted_date: ?i64 = null,
 
     /// Type of the action requested.
-    @"type": ?OperationType = null,
+    type: ?OperationType = null,
 
     pub const json_field_names = .{
         .domain_name = "DomainName",
@@ -58,6 +58,6 @@ pub const OperationSummary = struct {
         .status = "Status",
         .status_flag = "StatusFlag",
         .submitted_date = "SubmittedDate",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

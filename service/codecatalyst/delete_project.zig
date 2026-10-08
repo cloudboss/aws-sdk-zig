@@ -5,9 +5,36 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteProjectInput = @import("delete_project_request.zig").DeleteProjectRequest;
+pub const DeleteProjectInput = struct {
+    /// The name of the project in the space. To retrieve a list of project names,
+    /// use ListProjects.
+    name: []const u8,
 
-pub const DeleteProjectOutput = @import("delete_project_response.zig").DeleteProjectResponse;
+    /// The name of the space.
+    space_name: []const u8,
+
+    pub const json_field_names = .{
+        .name = "name",
+        .space_name = "spaceName",
+    };
+};
+
+pub const DeleteProjectOutput = struct {
+    /// The friendly name displayed to users of the project in Amazon CodeCatalyst.
+    display_name: ?[]const u8 = null,
+
+    /// The name of the project in the space.
+    name: []const u8,
+
+    /// The name of the space.
+    space_name: []const u8,
+
+    pub const json_field_names = .{
+        .display_name = "displayName",
+        .name = "name",
+        .space_name = "spaceName",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteProjectInput, options: CallOptions) !DeleteProjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

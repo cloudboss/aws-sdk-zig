@@ -39,7 +39,7 @@ pub const CatalogItem = struct {
     price: ?[]const u8 = null,
 
     /// The type classification of the catalog item.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The timestamp when the catalog item was last updated.
     updated_at: ?i64 = null,
@@ -56,7 +56,7 @@ pub const CatalogItem = struct {
         .link = "Link",
         .name = "Name",
         .price = "Price",
-        .@"type" = "Type",
+        .type = "Type",
         .updated_at = "UpdatedAt",
     };
 };

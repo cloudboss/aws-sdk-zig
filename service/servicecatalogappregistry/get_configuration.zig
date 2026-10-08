@@ -8,7 +8,15 @@ const AppRegistryConfiguration = @import("app_registry_configuration.zig").AppRe
 
 pub const GetConfigurationInput = struct {};
 
-pub const GetConfigurationOutput = @import("get_configuration_response.zig").GetConfigurationResponse;
+pub const GetConfigurationOutput = struct {
+    /// Retrieves `TagKey` configuration
+    /// from an account.
+    configuration: ?AppRegistryConfiguration = null,
+
+    pub const json_field_names = .{
+        .configuration = "configuration",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetConfigurationInput, options: CallOptions) !GetConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

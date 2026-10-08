@@ -55,8 +55,7 @@ pub const AddGroupMemberInput = struct {
     };
 };
 
-pub const AddGroupMemberOutput = struct {
-};
+pub const AddGroupMemberOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddGroupMemberInput, options: CallOptions) !AddGroupMemberOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

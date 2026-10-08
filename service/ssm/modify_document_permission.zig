@@ -45,8 +45,7 @@ pub const ModifyDocumentPermissionInput = struct {
     };
 };
 
-pub const ModifyDocumentPermissionOutput = struct {
-};
+pub const ModifyDocumentPermissionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyDocumentPermissionInput, options: CallOptions) !ModifyDocumentPermissionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

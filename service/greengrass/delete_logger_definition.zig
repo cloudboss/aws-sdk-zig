@@ -14,8 +14,7 @@ pub const DeleteLoggerDefinitionInput = struct {
     };
 };
 
-pub const DeleteLoggerDefinitionOutput = struct {
-};
+pub const DeleteLoggerDefinitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLoggerDefinitionInput, options: CallOptions) !DeleteLoggerDefinitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

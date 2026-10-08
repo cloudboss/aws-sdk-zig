@@ -21,8 +21,7 @@ pub const RejectQualificationRequestInput = struct {
     };
 };
 
-pub const RejectQualificationRequestOutput = struct {
-};
+pub const RejectQualificationRequestOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RejectQualificationRequestInput, options: CallOptions) !RejectQualificationRequestOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

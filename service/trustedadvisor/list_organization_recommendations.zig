@@ -40,7 +40,7 @@ pub const ListOrganizationRecommendationsInput = struct {
     status: ?RecommendationStatus = null,
 
     /// The type of the Recommendation
-    @"type": ?RecommendationType = null,
+    type: ?RecommendationType = null,
 
     pub const json_field_names = .{
         .after_last_updated_at = "afterLastUpdatedAt",
@@ -52,7 +52,7 @@ pub const ListOrganizationRecommendationsInput = struct {
         .pillar = "pillar",
         .source = "source",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -167,7 +167,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListOrganizationRecomme
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());

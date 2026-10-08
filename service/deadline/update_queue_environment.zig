@@ -40,8 +40,7 @@ pub const UpdateQueueEnvironmentInput = struct {
     };
 };
 
-pub const UpdateQueueEnvironmentOutput = struct {
-};
+pub const UpdateQueueEnvironmentOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateQueueEnvironmentInput, options: CallOptions) !UpdateQueueEnvironmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

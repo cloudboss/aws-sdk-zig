@@ -7,9 +7,44 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const MetricType = @import("metric_type.zig").MetricType;
 const MetricSummary = @import("metric_summary.zig").MetricSummary;
 
-pub const ListMetricsInput = @import("list_metrics_request.zig").ListMetricsRequest;
+pub const ListMetricsInput = struct {
+    /// The identifier of the Connect Customer instance. You can [find the instance
+    /// ID](https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html) in the Amazon Resource Name (ARN) of the instance.
+    instance_id: []const u8,
 
-pub const ListMetricsOutput = @import("list_metrics_response.zig").ListMetricsResponse;
+    /// The maximum number of results to return per page.
+    max_results: ?i32 = null,
+
+    /// The token for the next set of results. Use the value returned in the
+    /// previous
+    /// response in the next request to retrieve the next set of results.
+    next_token: ?[]const u8 = null,
+
+    /// The type of metrics to list. Valid values: `AWS_MANAGED` |
+    /// `CUSTOMER_MANAGED`.
+    type: ?MetricType = null,
+
+    pub const json_field_names = .{
+        .instance_id = "InstanceId",
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+        .type = "Type",
+    };
+};
+
+pub const ListMetricsOutput = struct {
+    /// The list of metric summaries.
+    metric_summary_list: ?[]const MetricSummary = null,
+
+    /// If there are additional results, this is the token for the next set of
+    /// results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .metric_summary_list = "MetricSummaryList",
+        .next_token = "NextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListMetricsInput, options: CallOptions) !ListMetricsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -63,7 +98,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListMetricsInput, confi
         try aws.url.appendUrlEncoded(allocator, &query_buf, v);
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());

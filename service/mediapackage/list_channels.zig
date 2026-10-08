@@ -6,9 +6,32 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Channel = @import("channel.zig").Channel;
 
-pub const ListChannelsInput = @import("list_channels_request.zig").ListChannelsRequest;
+pub const ListChannelsInput = struct {
+    /// Upper bound on number of records to return.
+    max_results: ?i32 = null,
 
-pub const ListChannelsOutput = @import("list_channels_response.zig").ListChannelsResponse;
+    /// A token used to resume pagination from the end of a previous request.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListChannelsOutput = struct {
+    /// A list of Channel records.
+    channels: ?[]const Channel = null,
+
+    /// A token that can be used to resume pagination from the end of the
+    /// collection.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .channels = "Channels",
+        .next_token = "NextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListChannelsInput, options: CallOptions) !ListChannelsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

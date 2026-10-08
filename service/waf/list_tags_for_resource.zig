@@ -6,9 +6,30 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const TagInfoForResource = @import("tag_info_for_resource.zig").TagInfoForResource;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    limit: ?i32 = null,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    next_marker: ?[]const u8 = null,
+
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .limit = "Limit",
+        .next_marker = "NextMarker",
+        .resource_arn = "ResourceARN",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    next_marker: ?[]const u8 = null,
+
+    tag_info_for_resource: ?TagInfoForResource = null,
+
+    pub const json_field_names = .{
+        .next_marker = "NextMarker",
+        .tag_info_for_resource = "TagInfoForResource",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

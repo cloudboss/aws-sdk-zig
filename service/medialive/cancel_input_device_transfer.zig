@@ -15,8 +15,7 @@ pub const CancelInputDeviceTransferInput = struct {
     };
 };
 
-pub const CancelInputDeviceTransferOutput = struct {
-};
+pub const CancelInputDeviceTransferOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelInputDeviceTransferInput, options: CallOptions) !CancelInputDeviceTransferOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

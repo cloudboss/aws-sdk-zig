@@ -132,7 +132,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DescribeResourceCollect
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/accounts/health/resource-collection/");
-    try path_buf.appendSlice(allocator, input.resource_collection_type);
+    try path_buf.appendSlice(allocator, input.resource_collection_type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     var query_buf: std.ArrayList(u8) = .empty;

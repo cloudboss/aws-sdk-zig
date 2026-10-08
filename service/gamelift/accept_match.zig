@@ -27,8 +27,7 @@ pub const AcceptMatchInput = struct {
     };
 };
 
-pub const AcceptMatchOutput = struct {
-};
+pub const AcceptMatchOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AcceptMatchInput, options: CallOptions) !AcceptMatchOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

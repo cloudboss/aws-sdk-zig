@@ -14,8 +14,7 @@ pub const DeleteKeyspaceInput = struct {
     };
 };
 
-pub const DeleteKeyspaceOutput = struct {
-};
+pub const DeleteKeyspaceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteKeyspaceInput, options: CallOptions) !DeleteKeyspaceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

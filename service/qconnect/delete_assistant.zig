@@ -15,8 +15,7 @@ pub const DeleteAssistantInput = struct {
     };
 };
 
-pub const DeleteAssistantOutput = struct {
-};
+pub const DeleteAssistantOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAssistantInput, options: CallOptions) !DeleteAssistantOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

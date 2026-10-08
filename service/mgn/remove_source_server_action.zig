@@ -22,8 +22,7 @@ pub const RemoveSourceServerActionInput = struct {
     };
 };
 
-pub const RemoveSourceServerActionOutput = struct {
-};
+pub const RemoveSourceServerActionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveSourceServerActionInput, options: CallOptions) !RemoveSourceServerActionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

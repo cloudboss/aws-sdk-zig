@@ -54,8 +54,7 @@ pub const UpdateMembershipInput = struct {
     };
 };
 
-pub const UpdateMembershipOutput = struct {
-};
+pub const UpdateMembershipOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateMembershipInput, options: CallOptions) !UpdateMembershipOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

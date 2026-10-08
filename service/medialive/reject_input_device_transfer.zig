@@ -15,8 +15,7 @@ pub const RejectInputDeviceTransferInput = struct {
     };
 };
 
-pub const RejectInputDeviceTransferOutput = struct {
-};
+pub const RejectInputDeviceTransferOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RejectInputDeviceTransferInput, options: CallOptions) !RejectInputDeviceTransferOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -1,3 +1,2 @@
 /// Arib Destination Settings
-pub const AribDestinationSettings = struct {
-};
+pub const AribDestinationSettings = struct {};

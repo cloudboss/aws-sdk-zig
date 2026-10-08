@@ -30,7 +30,7 @@ pub const PaymentConnectorSummary = struct {
 
     /// The type of the payment connector, which determines the payment provider
     /// integration.
-    @"type": PaymentConnectorType,
+    type: PaymentConnectorType,
 
     pub const json_field_names = .{
         .last_updated_at = "lastUpdatedAt",
@@ -38,6 +38,6 @@ pub const PaymentConnectorSummary = struct {
         .payment_connector_id = "paymentConnectorId",
         .provision_mode = "provisionMode",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };

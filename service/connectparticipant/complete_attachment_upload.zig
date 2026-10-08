@@ -27,8 +27,7 @@ pub const CompleteAttachmentUploadInput = struct {
     };
 };
 
-pub const CompleteAttachmentUploadOutput = struct {
-};
+pub const CompleteAttachmentUploadOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CompleteAttachmentUploadInput, options: CallOptions) !CompleteAttachmentUploadOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

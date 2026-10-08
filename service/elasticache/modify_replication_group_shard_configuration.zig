@@ -135,7 +135,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ModifyReplicationGroupS
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReshardingConfiguration.ReshardingConfiguration.{d}.PreferredAvailabilityZones.AvailabilityZone.{d}=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ReshardingConfiguration.ReshardingConfiguration.{d}.PreferredAvailabilityZones.AvailabilityZone.{d}=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
                     }

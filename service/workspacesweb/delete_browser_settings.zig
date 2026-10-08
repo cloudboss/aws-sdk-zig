@@ -14,8 +14,7 @@ pub const DeleteBrowserSettingsInput = struct {
     };
 };
 
-pub const DeleteBrowserSettingsOutput = struct {
-};
+pub const DeleteBrowserSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteBrowserSettingsInput, options: CallOptions) !DeleteBrowserSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

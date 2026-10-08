@@ -11,12 +11,12 @@ pub const SchemaVersionSummary = struct {
     schema_version: ?[]const u8 = null,
 
     /// The type of schema.
-    @"type": ?Type = null,
+    type: ?Type = null,
 
     pub const json_field_names = .{
         .schema_arn = "SchemaArn",
         .schema_name = "SchemaName",
         .schema_version = "SchemaVersion",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

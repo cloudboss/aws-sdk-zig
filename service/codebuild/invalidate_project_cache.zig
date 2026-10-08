@@ -14,8 +14,7 @@ pub const InvalidateProjectCacheInput = struct {
     };
 };
 
-pub const InvalidateProjectCacheOutput = struct {
-};
+pub const InvalidateProjectCacheOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InvalidateProjectCacheInput, options: CallOptions) !InvalidateProjectCacheOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

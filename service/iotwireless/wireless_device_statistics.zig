@@ -41,7 +41,7 @@ pub const WirelessDeviceStatistics = struct {
     sidewalk: ?SidewalkListDevice = null,
 
     /// The wireless device type.
-    @"type": ?WirelessDeviceType = null,
+    type: ?WirelessDeviceType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -55,6 +55,6 @@ pub const WirelessDeviceStatistics = struct {
         .name = "Name",
         .positioning = "Positioning",
         .sidewalk = "Sidewalk",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

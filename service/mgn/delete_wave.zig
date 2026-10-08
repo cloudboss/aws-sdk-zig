@@ -18,8 +18,7 @@ pub const DeleteWaveInput = struct {
     };
 };
 
-pub const DeleteWaveOutput = struct {
-};
+pub const DeleteWaveOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteWaveInput, options: CallOptions) !DeleteWaveOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -27,8 +27,7 @@ pub const DisassociateVolumeInput = struct {
     };
 };
 
-pub const DisassociateVolumeOutput = struct {
-};
+pub const DisassociateVolumeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateVolumeInput, options: CallOptions) !DisassociateVolumeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

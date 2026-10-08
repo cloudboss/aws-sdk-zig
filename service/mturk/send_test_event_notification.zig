@@ -27,8 +27,7 @@ pub const SendTestEventNotificationInput = struct {
     };
 };
 
-pub const SendTestEventNotificationOutput = struct {
-};
+pub const SendTestEventNotificationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendTestEventNotificationInput, options: CallOptions) !SendTestEventNotificationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

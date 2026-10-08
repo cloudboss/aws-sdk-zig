@@ -6,9 +6,51 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const StepSummary = @import("step_summary.zig").StepSummary;
 
-pub const ListStepsInput = @import("list_steps_request.zig").ListStepsRequest;
+pub const ListStepsInput = struct {
+    /// The farm ID to include on the list of steps.
+    farm_id: []const u8,
 
-pub const ListStepsOutput = @import("list_steps_response.zig").ListStepsResponse;
+    /// The job ID to include on the list of steps.
+    job_id: []const u8,
+
+    /// The maximum number of results to return. Use this parameter with `NextToken`
+    /// to get results as a set of sequential pages.
+    max_results: ?i32 = null,
+
+    /// The token for the next set of results, or `null` to start from the
+    /// beginning.
+    next_token: ?[]const u8 = null,
+
+    /// The queue ID to include on the list of steps.
+    queue_id: []const u8,
+
+    pub const json_field_names = .{
+        .farm_id = "farmId",
+        .job_id = "jobId",
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+        .queue_id = "queueId",
+    };
+};
+
+pub const ListStepsOutput = struct {
+    /// If Deadline Cloud returns `nextToken`, then there are more results
+    /// available. The value of `nextToken` is a unique pagination token for each
+    /// page. To retrieve the next page, call the operation again using the returned
+    /// token. Keep all other arguments unchanged. If no results remain, then
+    /// `nextToken` is set to `null`. Each pagination token expires after 24 hours.
+    /// If you provide a token that isn't valid, then you receive an HTTP 400
+    /// `ValidationException` error.
+    next_token: ?[]const u8 = null,
+
+    /// The steps on the list.
+    steps: ?[]const StepSummary = null,
+
+    pub const json_field_names = .{
+        .next_token = "nextToken",
+        .steps = "steps",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListStepsInput, options: CallOptions) !ListStepsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

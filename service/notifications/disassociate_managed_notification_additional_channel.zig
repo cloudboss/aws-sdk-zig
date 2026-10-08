@@ -20,8 +20,7 @@ pub const DisassociateManagedNotificationAdditionalChannelInput = struct {
     };
 };
 
-pub const DisassociateManagedNotificationAdditionalChannelOutput = struct {
-};
+pub const DisassociateManagedNotificationAdditionalChannelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateManagedNotificationAdditionalChannelInput, options: CallOptions) !DisassociateManagedNotificationAdditionalChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

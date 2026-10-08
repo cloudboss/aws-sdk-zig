@@ -17,8 +17,7 @@ pub const PutKMSEncryptionKeyInput = struct {
     };
 };
 
-pub const PutKMSEncryptionKeyOutput = struct {
-};
+pub const PutKMSEncryptionKeyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutKMSEncryptionKeyInput, options: CallOptions) !PutKMSEncryptionKeyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

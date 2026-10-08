@@ -14,8 +14,7 @@ pub const DeleteWorkspaceBundleInput = struct {
     };
 };
 
-pub const DeleteWorkspaceBundleOutput = struct {
-};
+pub const DeleteWorkspaceBundleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteWorkspaceBundleInput, options: CallOptions) !DeleteWorkspaceBundleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

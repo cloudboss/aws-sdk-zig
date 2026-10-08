@@ -25,8 +25,7 @@ pub const UpdateContactTaskTemplateInput = struct {
     };
 };
 
-pub const UpdateContactTaskTemplateOutput = struct {
-};
+pub const UpdateContactTaskTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateContactTaskTemplateInput, options: CallOptions) !UpdateContactTaskTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

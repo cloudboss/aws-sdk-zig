@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AssessmentSummary = @import("assessment_summary.zig").AssessmentSummary;
 
-pub const GetPortfolioSummaryInput = struct {
-};
+pub const GetPortfolioSummaryInput = struct {};
 
 pub const GetPortfolioSummaryOutput = struct {
     /// An assessment summary for the portfolio including the number of servers to

@@ -54,8 +54,7 @@ pub const PutConfigurationSetSuppressionOptionsInput = struct {
     };
 };
 
-pub const PutConfigurationSetSuppressionOptionsOutput = struct {
-};
+pub const PutConfigurationSetSuppressionOptionsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutConfigurationSetSuppressionOptionsInput, options: CallOptions) !PutConfigurationSetSuppressionOptionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

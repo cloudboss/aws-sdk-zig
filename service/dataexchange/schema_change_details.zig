@@ -11,11 +11,11 @@ pub const SchemaChangeDetails = struct {
     name: []const u8,
 
     /// Is the field being added, removed, or modified?
-    @"type": SchemaChangeType,
+    type: SchemaChangeType,
 
     pub const json_field_names = .{
         .description = "Description",
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

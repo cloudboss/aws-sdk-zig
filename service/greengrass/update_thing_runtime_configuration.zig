@@ -19,8 +19,7 @@ pub const UpdateThingRuntimeConfigurationInput = struct {
     };
 };
 
-pub const UpdateThingRuntimeConfigurationOutput = struct {
-};
+pub const UpdateThingRuntimeConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateThingRuntimeConfigurationInput, options: CallOptions) !UpdateThingRuntimeConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

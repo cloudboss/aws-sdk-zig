@@ -1,2 +1,1 @@
-pub const ContinuationEvent = struct {
-};
+pub const ContinuationEvent = struct {};

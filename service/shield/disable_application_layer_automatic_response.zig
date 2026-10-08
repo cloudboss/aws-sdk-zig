@@ -14,8 +14,7 @@ pub const DisableApplicationLayerAutomaticResponseInput = struct {
     };
 };
 
-pub const DisableApplicationLayerAutomaticResponseOutput = struct {
-};
+pub const DisableApplicationLayerAutomaticResponseOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableApplicationLayerAutomaticResponseInput, options: CallOptions) !DisableApplicationLayerAutomaticResponseOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

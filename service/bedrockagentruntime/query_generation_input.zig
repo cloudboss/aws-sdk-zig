@@ -6,10 +6,10 @@ pub const QueryGenerationInput = struct {
     text: []const u8,
 
     /// The type of the query.
-    @"type": InputQueryType,
+    type: InputQueryType,
 
     pub const json_field_names = .{
         .text = "text",
-        .@"type" = "type",
+        .type = "type",
     };
 };

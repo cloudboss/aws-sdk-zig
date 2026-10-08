@@ -7,11 +7,11 @@ pub const Column = struct {
     name: []const u8,
 
     /// The data type of the column.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .comment = "Comment",
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

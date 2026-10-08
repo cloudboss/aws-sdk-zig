@@ -24,8 +24,7 @@ pub const DeleteReportGroupInput = struct {
     };
 };
 
-pub const DeleteReportGroupOutput = struct {
-};
+pub const DeleteReportGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteReportGroupInput, options: CallOptions) !DeleteReportGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

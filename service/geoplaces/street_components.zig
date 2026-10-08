@@ -29,7 +29,7 @@ pub const StreetComponents = struct {
     /// Street type part of the street name.
     ///
     /// Example: `"avenue"`.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// Defines if the street type is before or after the base name.
     type_placement: ?TypePlacement = null,
@@ -44,7 +44,7 @@ pub const StreetComponents = struct {
         .language = "Language",
         .prefix = "Prefix",
         .suffix = "Suffix",
-        .@"type" = "Type",
+        .type = "Type",
         .type_placement = "TypePlacement",
         .type_separator = "TypeSeparator",
     };

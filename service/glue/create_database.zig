@@ -25,8 +25,7 @@ pub const CreateDatabaseInput = struct {
     };
 };
 
-pub const CreateDatabaseOutput = struct {
-};
+pub const CreateDatabaseOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateDatabaseInput, options: CallOptions) !CreateDatabaseOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

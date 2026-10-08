@@ -26,8 +26,7 @@ pub const CreateUserDefinedFunctionInput = struct {
     };
 };
 
-pub const CreateUserDefinedFunctionOutput = struct {
-};
+pub const CreateUserDefinedFunctionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateUserDefinedFunctionInput, options: CallOptions) !CreateUserDefinedFunctionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

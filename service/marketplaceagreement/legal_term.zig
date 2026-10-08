@@ -11,11 +11,11 @@ pub const LegalTerm = struct {
     id: ?[]const u8 = null,
 
     /// Category of the term being updated.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .documents = "documents",
         .id = "id",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -7,8 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const FeatureType = @import("feature_type.zig").FeatureType;
 const serde = @import("serde.zig");
 
-pub const DisableOrganizationsRootSessionsInput = struct {
-};
+pub const DisableOrganizationsRootSessionsInput = struct {};
 
 pub const DisableOrganizationsRootSessionsOutput = struct {
     /// The features you have enabled for centralized root access of member accounts

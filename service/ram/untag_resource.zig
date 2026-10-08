@@ -5,9 +5,31 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceInput = struct {
+    /// Specifies the [Amazon Resource Name
+    /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the managed permission that you want to remove tags from. You must
+    /// specify either `resourceArn`, or `resourceShareArn`, but not
+    /// both.
+    resource_arn: ?[]const u8 = null,
 
-pub const UntagResourceOutput = @import("untag_resource_response.zig").UntagResourceResponse;
+    /// Specifies the [Amazon Resource Name
+    /// (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share that you want to remove tags from. The tags are
+    /// removed from the resource share, not the resources in the resource share.
+    /// You must specify either
+    /// `resourceShareArn`, or `resourceArn`, but not both.
+    resource_share_arn: ?[]const u8 = null,
+
+    /// Specifies a list of one or more tag keys that you want to remove.
+    tag_keys: []const []const u8,
+
+    pub const json_field_names = .{
+        .resource_arn = "resourceArn",
+        .resource_share_arn = "resourceShareArn",
+        .tag_keys = "tagKeys",
+    };
+};
+
+pub const UntagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResourceInput, options: CallOptions) !UntagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

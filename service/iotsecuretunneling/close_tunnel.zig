@@ -19,8 +19,7 @@ pub const CloseTunnelInput = struct {
     };
 };
 
-pub const CloseTunnelOutput = struct {
-};
+pub const CloseTunnelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CloseTunnelInput, options: CallOptions) !CloseTunnelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

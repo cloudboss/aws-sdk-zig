@@ -6,5 +6,4 @@
 /// using the rule name.
 ///
 /// `RuleName` is used as `ContactCategory`.
-pub const AssignContactCategoryActionDefinition = struct {
-};
+pub const AssignContactCategoryActionDefinition = struct {};

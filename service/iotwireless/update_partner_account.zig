@@ -24,8 +24,7 @@ pub const UpdatePartnerAccountInput = struct {
     };
 };
 
-pub const UpdatePartnerAccountOutput = struct {
-};
+pub const UpdatePartnerAccountOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdatePartnerAccountInput, options: CallOptions) !UpdatePartnerAccountOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

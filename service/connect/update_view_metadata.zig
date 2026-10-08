@@ -28,8 +28,7 @@ pub const UpdateViewMetadataInput = struct {
     };
 };
 
-pub const UpdateViewMetadataOutput = struct {
-};
+pub const UpdateViewMetadataOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateViewMetadataInput, options: CallOptions) !UpdateViewMetadataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

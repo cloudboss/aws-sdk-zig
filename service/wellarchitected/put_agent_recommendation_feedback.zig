@@ -19,18 +19,17 @@ pub const PutAgentRecommendationFeedbackInput = struct {
     recommendation_arn: []const u8,
 
     /// The type of feedback being provided.
-    @"type": RecommendationFeedbackType,
+    type: RecommendationFeedbackType,
 
     pub const json_field_names = .{
         .comments = "comments",
         .feedback_category = "feedbackCategory",
         .recommendation_arn = "recommendationArn",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
-pub const PutAgentRecommendationFeedbackOutput = struct {
-};
+pub const PutAgentRecommendationFeedbackOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAgentRecommendationFeedbackInput, options: CallOptions) !PutAgentRecommendationFeedbackOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -86,7 +85,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: PutAgentRecommendationF
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

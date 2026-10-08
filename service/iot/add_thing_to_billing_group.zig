@@ -29,8 +29,7 @@ pub const AddThingToBillingGroupInput = struct {
     };
 };
 
-pub const AddThingToBillingGroupOutput = struct {
-};
+pub const AddThingToBillingGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddThingToBillingGroupInput, options: CallOptions) !AddThingToBillingGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

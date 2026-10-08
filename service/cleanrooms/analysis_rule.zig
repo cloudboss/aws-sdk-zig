@@ -24,7 +24,7 @@ pub const AnalysisRule = struct {
     policy: AnalysisRulePolicy,
 
     /// The type of analysis rule.
-    @"type": AnalysisRuleType,
+    type: AnalysisRuleType,
 
     /// The time the analysis rule was last updated.
     update_time: i64,
@@ -36,7 +36,7 @@ pub const AnalysisRule = struct {
         .create_time = "createTime",
         .name = "name",
         .policy = "policy",
-        .@"type" = "type",
+        .type = "type",
         .update_time = "updateTime",
     };
 };

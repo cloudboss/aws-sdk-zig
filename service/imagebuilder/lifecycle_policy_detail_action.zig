@@ -17,10 +17,10 @@ pub const LifecyclePolicyDetailAction = struct {
     /// distributed AMIs, snapshots, or container images. `DEPRECATE` and
     /// `DISABLE` set the corresponding status on the image resource and,
     /// if `includeResources.amis` is set, on its distributed AMIs.
-    @"type": LifecyclePolicyDetailActionType,
+    type: LifecyclePolicyDetailActionType,
 
     pub const json_field_names = .{
         .include_resources = "includeResources",
-        .@"type" = "type",
+        .type = "type",
     };
 };

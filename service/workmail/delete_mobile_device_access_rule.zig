@@ -18,8 +18,7 @@ pub const DeleteMobileDeviceAccessRuleInput = struct {
     };
 };
 
-pub const DeleteMobileDeviceAccessRuleOutput = struct {
-};
+pub const DeleteMobileDeviceAccessRuleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMobileDeviceAccessRuleInput, options: CallOptions) !DeleteMobileDeviceAccessRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -15,8 +15,7 @@ pub const RemoveManagedScalingPolicyInput = struct {
     };
 };
 
-pub const RemoveManagedScalingPolicyOutput = struct {
-};
+pub const RemoveManagedScalingPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveManagedScalingPolicyInput, options: CallOptions) !RemoveManagedScalingPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

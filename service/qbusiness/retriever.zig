@@ -17,13 +17,13 @@ pub const Retriever = struct {
     status: ?RetrieverStatus = null,
 
     /// The type of your retriever.
-    @"type": ?RetrieverType = null,
+    type: ?RetrieverType = null,
 
     pub const json_field_names = .{
         .application_id = "applicationId",
         .display_name = "displayName",
         .retriever_id = "retrieverId",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };

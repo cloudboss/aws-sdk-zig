@@ -14,8 +14,7 @@ pub const DeleteIngressPointInput = struct {
     };
 };
 
-pub const DeleteIngressPointOutput = struct {
-};
+pub const DeleteIngressPointOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIngressPointInput, options: CallOptions) !DeleteIngressPointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

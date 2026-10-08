@@ -6,9 +6,41 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// The `MaxResults` parameter sets the maximum number of results returned in a
+    /// single page. This is for future use and is not supported currently.
+    max_results: ?i32 = null,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    /// The pagination token. This is for future use. Currently pagination is not
+    /// supported for
+    /// tagging.
+    next_token: ?[]const u8 = null,
+
+    /// The Amazon Resource Name (ARN) of the resource. Tagging is only supported
+    /// for
+    /// directories.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+        .resource_arn = "ResourceArn",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// The token to use to retrieve the next page of results. This value is null
+    /// when there are no more results to return.
+    next_token: ?[]const u8 = null,
+
+    /// A list of tag key value pairs that are associated with the response.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

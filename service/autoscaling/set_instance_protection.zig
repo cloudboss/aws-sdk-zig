@@ -19,8 +19,7 @@ pub const SetInstanceProtectionInput = struct {
     protected_from_scale_in: bool,
 };
 
-pub const SetInstanceProtectionOutput = struct {
-};
+pub const SetInstanceProtectionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetInstanceProtectionInput, options: CallOptions) !SetInstanceProtectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

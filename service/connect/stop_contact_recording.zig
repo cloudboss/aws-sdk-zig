@@ -30,8 +30,7 @@ pub const StopContactRecordingInput = struct {
     };
 };
 
-pub const StopContactRecordingOutput = struct {
-};
+pub const StopContactRecordingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopContactRecordingInput, options: CallOptions) !StopContactRecordingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

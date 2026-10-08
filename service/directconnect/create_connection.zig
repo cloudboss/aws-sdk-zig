@@ -12,7 +12,46 @@ const HasLogicalRedundancy = @import("has_logical_redundancy.zig").HasLogicalRed
 const MacSecKey = @import("mac_sec_key.zig").MacSecKey;
 const RateLimiterStatus = @import("rate_limiter_status.zig").RateLimiterStatus;
 
-pub const CreateConnectionInput = @import("create_connection_request.zig").CreateConnectionRequest;
+pub const CreateConnectionInput = struct {
+    /// The bandwidth of the connection.
+    bandwidth: []const u8,
+
+    /// The billing mode for the connection.
+    billing_mode: ?RequestBillingMode = null,
+
+    /// The name of the connection.
+    connection_name: []const u8,
+
+    /// The ID of the LAG.
+    lag_id: ?[]const u8 = null,
+
+    /// The location of the connection.
+    location: []const u8,
+
+    /// The name of the service provider associated with the requested connection.
+    provider_name: ?[]const u8 = null,
+
+    /// Indicates whether you want the connection to support MAC Security (MACsec).
+    ///
+    /// MAC Security (MACsec) is unavailable on hosted connections. For information
+    /// about MAC Security (MACsec) prerequisites, see [MAC Security in Direct
+    /// Connect](https://docs.aws.amazon.com/directconnect/latest/UserGuide/MACSec.html) in the *Direct Connect User Guide*.
+    request_mac_sec: ?bool = null,
+
+    /// The tags to associate with the lag.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .bandwidth = "bandwidth",
+        .billing_mode = "billingMode",
+        .connection_name = "connectionName",
+        .lag_id = "lagId",
+        .location = "location",
+        .provider_name = "providerName",
+        .request_mac_sec = "requestMACSec",
+        .tags = "tags",
+    };
+};
 
 pub const CreateConnectionOutput = @import("connection.zig").Connection;
 

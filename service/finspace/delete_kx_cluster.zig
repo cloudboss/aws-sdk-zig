@@ -22,8 +22,7 @@ pub const DeleteKxClusterInput = struct {
     };
 };
 
-pub const DeleteKxClusterOutput = struct {
-};
+pub const DeleteKxClusterOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteKxClusterInput, options: CallOptions) !DeleteKxClusterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

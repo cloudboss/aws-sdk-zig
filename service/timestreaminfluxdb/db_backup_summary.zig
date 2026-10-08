@@ -39,7 +39,7 @@ pub const DbBackupSummary = struct {
 
     /// The type of backup. Valid values are HOURLY, DAILY, WEEKLY, MONTHLY,
     /// CUSTOM_SCHEDULE, ON_DEMAND, and CONTINUOUS.
-    @"type": ?DbBackupType = null,
+    type: ?DbBackupType = null,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -52,6 +52,6 @@ pub const DbBackupSummary = struct {
         .kms_key_id = "kmsKeyId",
         .name = "name",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };

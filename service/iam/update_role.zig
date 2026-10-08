@@ -36,8 +36,7 @@ pub const UpdateRoleInput = struct {
     role_name: []const u8,
 };
 
-pub const UpdateRoleOutput = struct {
-};
+pub const UpdateRoleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRoleInput, options: CallOptions) !UpdateRoleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -16,8 +16,7 @@ pub const DeleteIndexPolicyInput = struct {
     };
 };
 
-pub const DeleteIndexPolicyOutput = struct {
-};
+pub const DeleteIndexPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIndexPolicyInput, options: CallOptions) !DeleteIndexPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

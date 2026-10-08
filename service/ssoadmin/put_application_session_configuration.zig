@@ -20,8 +20,7 @@ pub const PutApplicationSessionConfigurationInput = struct {
     };
 };
 
-pub const PutApplicationSessionConfigurationOutput = struct {
-};
+pub const PutApplicationSessionConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutApplicationSessionConfigurationInput, options: CallOptions) !PutApplicationSessionConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -23,8 +23,7 @@ pub const DeletePublishingDestinationInput = struct {
     };
 };
 
-pub const DeletePublishingDestinationOutput = struct {
-};
+pub const DeletePublishingDestinationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePublishingDestinationInput, options: CallOptions) !DeletePublishingDestinationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

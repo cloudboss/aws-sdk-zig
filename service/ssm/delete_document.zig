@@ -35,8 +35,7 @@ pub const DeleteDocumentInput = struct {
     };
 };
 
-pub const DeleteDocumentOutput = struct {
-};
+pub const DeleteDocumentOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDocumentInput, options: CallOptions) !DeleteDocumentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

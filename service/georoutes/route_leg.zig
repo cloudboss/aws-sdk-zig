@@ -53,7 +53,7 @@ pub const RouteLeg = struct {
     travel_mode: RouteLegTravelMode,
 
     /// Type of the leg.
-    @"type": RouteLegType,
+    type: RouteLegType,
 
     /// Details related to the vehicle leg.
     vehicle_leg_details: ?RouteVehicleLegDetails = null,
@@ -67,7 +67,7 @@ pub const RouteLeg = struct {
         .taxi_leg_details = "TaxiLegDetails",
         .transit_leg_details = "TransitLegDetails",
         .travel_mode = "TravelMode",
-        .@"type" = "Type",
+        .type = "Type",
         .vehicle_leg_details = "VehicleLegDetails",
     };
 };

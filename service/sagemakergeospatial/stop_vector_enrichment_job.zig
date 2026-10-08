@@ -14,8 +14,7 @@ pub const StopVectorEnrichmentJobInput = struct {
     };
 };
 
-pub const StopVectorEnrichmentJobOutput = struct {
-};
+pub const StopVectorEnrichmentJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopVectorEnrichmentJobInput, options: CallOptions) !StopVectorEnrichmentJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

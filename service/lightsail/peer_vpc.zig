@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Operation = @import("operation.zig").Operation;
 
-pub const PeerVpcInput = struct {
-};
+pub const PeerVpcInput = struct {};
 
 pub const PeerVpcOutput = struct {
     /// An array of objects that describe the result of the action, such as the

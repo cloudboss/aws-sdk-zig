@@ -8,10 +8,10 @@ pub const Resource = struct {
 
     /// Type of the resource, which is the product (for example, `SaaSProduct`,
     /// `AmiProduct`, `ContainerProduct`).
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "id",
-        .@"type" = "type",
+        .type = "type",
     };
 };

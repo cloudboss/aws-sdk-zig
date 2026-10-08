@@ -52,8 +52,7 @@ pub const NotifyProvisionProductEngineWorkflowResultInput = struct {
     };
 };
 
-pub const NotifyProvisionProductEngineWorkflowResultOutput = struct {
-};
+pub const NotifyProvisionProductEngineWorkflowResultOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: NotifyProvisionProductEngineWorkflowResultInput, options: CallOptions) !NotifyProvisionProductEngineWorkflowResultOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -22,8 +22,7 @@ pub const PutEmailIdentityDkimAttributesInput = struct {
     };
 };
 
-pub const PutEmailIdentityDkimAttributesOutput = struct {
-};
+pub const PutEmailIdentityDkimAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutEmailIdentityDkimAttributesInput, options: CallOptions) !PutEmailIdentityDkimAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

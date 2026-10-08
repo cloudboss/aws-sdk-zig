@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const CreateUploadUrlInput = struct {
-};
+pub const CreateUploadUrlInput = struct {};
 
 pub const CreateUploadUrlOutput = struct {
     /// An identifier for a unique import job. Use it when you call the

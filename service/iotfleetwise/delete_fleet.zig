@@ -5,7 +5,14 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteFleetInput = @import("delete_fleet_request.zig").DeleteFleetRequest;
+pub const DeleteFleetInput = struct {
+    /// The ID of the fleet to delete.
+    fleet_id: []const u8,
+
+    pub const json_field_names = .{
+        .fleet_id = "fleetId",
+    };
+};
 
 pub const DeleteFleetOutput = struct {
     /// The Amazon Resource Name (ARN) of the deleted fleet.

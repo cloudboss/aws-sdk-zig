@@ -28,8 +28,7 @@ pub const UpdateSignalingChannelInput = struct {
     };
 };
 
-pub const UpdateSignalingChannelOutput = struct {
-};
+pub const UpdateSignalingChannelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSignalingChannelInput, options: CallOptions) !UpdateSignalingChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

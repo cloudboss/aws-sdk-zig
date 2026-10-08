@@ -34,8 +34,7 @@ pub const UpdateMailboxQuotaInput = struct {
     };
 };
 
-pub const UpdateMailboxQuotaOutput = struct {
-};
+pub const UpdateMailboxQuotaOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateMailboxQuotaInput, options: CallOptions) !UpdateMailboxQuotaOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -5,9 +5,29 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the index, FAQ, data source, or other
+    /// resource to remove a tag.
+    /// For example, the ARN of an index is constructed as follows:
+    /// *arn:aws:kendra:your-region:your-account-id:index/index-id*
+    /// For information on how to construct an ARN for all types of Amazon Kendra
+    /// resources, see
+    /// [Resource
+    /// types](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonkendra.html#amazonkendra-resources-for-iam-policies).
+    resource_arn: []const u8,
 
-pub const UntagResourceOutput = @import("untag_resource_response.zig").UntagResourceResponse;
+    /// A list of tag keys to remove from the index, FAQ, data source, or other
+    /// resource. If a tag
+    /// key doesn't exist for the resource, it is ignored.
+    tag_keys: []const []const u8,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceARN",
+        .tag_keys = "TagKeys",
+    };
+};
+
+pub const UntagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResourceInput, options: CallOptions) !UntagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

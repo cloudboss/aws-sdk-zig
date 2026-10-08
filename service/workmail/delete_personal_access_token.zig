@@ -18,8 +18,7 @@ pub const DeletePersonalAccessTokenInput = struct {
     };
 };
 
-pub const DeletePersonalAccessTokenOutput = struct {
-};
+pub const DeletePersonalAccessTokenOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePersonalAccessTokenInput, options: CallOptions) !DeletePersonalAccessTokenOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -26,8 +26,7 @@ pub const DeleteProvisioningArtifactInput = struct {
     };
 };
 
-pub const DeleteProvisioningArtifactOutput = struct {
-};
+pub const DeleteProvisioningArtifactOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteProvisioningArtifactInput, options: CallOptions) !DeleteProvisioningArtifactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

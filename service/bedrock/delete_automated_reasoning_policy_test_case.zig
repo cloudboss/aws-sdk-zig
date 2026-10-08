@@ -24,8 +24,7 @@ pub const DeleteAutomatedReasoningPolicyTestCaseInput = struct {
     };
 };
 
-pub const DeleteAutomatedReasoningPolicyTestCaseOutput = struct {
-};
+pub const DeleteAutomatedReasoningPolicyTestCaseOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAutomatedReasoningPolicyTestCaseInput, options: CallOptions) !DeleteAutomatedReasoningPolicyTestCaseOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

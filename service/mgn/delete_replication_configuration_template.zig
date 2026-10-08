@@ -15,8 +15,7 @@ pub const DeleteReplicationConfigurationTemplateInput = struct {
     };
 };
 
-pub const DeleteReplicationConfigurationTemplateOutput = struct {
-};
+pub const DeleteReplicationConfigurationTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteReplicationConfigurationTemplateInput, options: CallOptions) !DeleteReplicationConfigurationTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

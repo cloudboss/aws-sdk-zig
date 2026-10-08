@@ -16,7 +16,7 @@ pub const LifecyclePolicyDetailFilter = struct {
     /// Filter resources based on either `AGE` or `COUNT`.
     /// You can only use the count filter with the `DELETE` action
     /// type.
-    @"type": LifecyclePolicyDetailFilterType,
+    type: LifecyclePolicyDetailFilterType,
 
     /// Defines the unit of time that the lifecycle policy uses to determine
     /// impacted
@@ -36,7 +36,7 @@ pub const LifecyclePolicyDetailFilter = struct {
 
     pub const json_field_names = .{
         .retain_at_least = "retainAtLeast",
-        .@"type" = "type",
+        .type = "type",
         .unit = "unit",
         .value = "value",
     };

@@ -13,5 +13,5 @@ pub const RecommendedAction = struct {
     text: ?[]const u8 = null,
 
     /// The type of command.
-    @"type": ?RecommendedActionType = null,
+    type: ?RecommendedActionType = null,
 };

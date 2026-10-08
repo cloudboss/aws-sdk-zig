@@ -41,8 +41,7 @@ pub const UpdateDataRetentionInput = struct {
     };
 };
 
-pub const UpdateDataRetentionOutput = struct {
-};
+pub const UpdateDataRetentionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDataRetentionInput, options: CallOptions) !UpdateDataRetentionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

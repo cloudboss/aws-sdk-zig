@@ -5,11 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const EnableAWSOrganizationsAccessInput = struct {
-};
+pub const EnableAWSOrganizationsAccessInput = struct {};
 
-pub const EnableAWSOrganizationsAccessOutput = struct {
-};
+pub const EnableAWSOrganizationsAccessOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableAWSOrganizationsAccessInput, options: CallOptions) !EnableAWSOrganizationsAccessOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DescribeSharedVpcConfigurationInput = struct {
-};
+pub const DescribeSharedVpcConfigurationInput = struct {};
 
 pub const DescribeSharedVpcConfigurationOutput = struct {
     /// Indicates whether participant accounts can create FSx for ONTAP Multi-AZ

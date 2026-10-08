@@ -45,11 +45,11 @@ pub const EndTimeBehavior = struct {
     ///   offer reaches its end date and the acceptor transitions to the public
     ///   offer for the product.
     /// * `EXPIRE` – The agreement ends and isn't renewed or replaced.
-    @"type": EndTimeBehaviorType,
+    type: EndTimeBehaviorType,
 
     pub const json_field_names = .{
         .reason_code = "reasonCode",
         .renewal_summary = "renewalSummary",
-        .@"type" = "type",
+        .type = "type",
     };
 };

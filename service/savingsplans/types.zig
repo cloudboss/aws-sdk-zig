@@ -1,6 +1,4 @@
 pub const CurrencyCode = @import("currency_code.zig").CurrencyCode;
-pub const ListTagsForResourceRequest = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
-pub const ListTagsForResourceResponse = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
 pub const ParentSavingsPlanOffering = @import("parent_savings_plan_offering.zig").ParentSavingsPlanOffering;
 pub const SavingsPlan = @import("savings_plan.zig").SavingsPlan;
 pub const SavingsPlanFilter = @import("savings_plan_filter.zig").SavingsPlanFilter;
@@ -25,7 +23,3 @@ pub const SavingsPlanRateUnit = @import("savings_plan_rate_unit.zig").SavingsPla
 pub const SavingsPlanState = @import("savings_plan_state.zig").SavingsPlanState;
 pub const SavingsPlanType = @import("savings_plan_type.zig").SavingsPlanType;
 pub const SavingsPlansFilterName = @import("savings_plans_filter_name.zig").SavingsPlansFilterName;
-pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
-pub const TagResourceResponse = @import("tag_resource_response.zig").TagResourceResponse;
-pub const UntagResourceRequest = @import("untag_resource_request.zig").UntagResourceRequest;
-pub const UntagResourceResponse = @import("untag_resource_response.zig").UntagResourceResponse;

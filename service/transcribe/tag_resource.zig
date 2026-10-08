@@ -6,9 +6,35 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the resource you want to tag. ARNs have
+    /// the format
+    /// `arn:partition:service:region:account-id:resource-type/resource-id`.
+    ///
+    /// For example,
+    /// `arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name`.
+    ///
+    /// Valid values for `resource-type` are: `transcription-job`,
+    /// `medical-transcription-job`, `vocabulary`,
+    /// `medical-vocabulary`, `vocabulary-filter`, and
+    /// `language-model`.
+    resource_arn: []const u8,
 
-pub const TagResourceOutput = @import("tag_resource_response.zig").TagResourceResponse;
+    /// Adds one or more custom tags, each in the form of a key:value pair, to the
+    /// specified
+    /// resource.
+    ///
+    /// To learn more about using tags with Amazon Transcribe, refer to [Tagging
+    /// resources](https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
+    tags: []const Tag,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+        .tags = "Tags",
+    };
+};
+
+pub const TagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TagResourceInput, options: CallOptions) !TagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

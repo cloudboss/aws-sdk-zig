@@ -19,8 +19,7 @@ pub const CancelMetadataGenerationRunInput = struct {
     };
 };
 
-pub const CancelMetadataGenerationRunOutput = struct {
-};
+pub const CancelMetadataGenerationRunOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelMetadataGenerationRunInput, options: CallOptions) !CancelMetadataGenerationRunOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

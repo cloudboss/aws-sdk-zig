@@ -18,8 +18,7 @@ pub const PutMeteredProductInput = struct {
     };
 };
 
-pub const PutMeteredProductOutput = struct {
-};
+pub const PutMeteredProductOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutMeteredProductInput, options: CallOptions) !PutMeteredProductOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

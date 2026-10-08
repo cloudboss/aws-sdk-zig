@@ -10,8 +10,7 @@ pub const DeleteLoadBalancerInput = struct {
     load_balancer_arn: []const u8,
 };
 
-pub const DeleteLoadBalancerOutput = struct {
-};
+pub const DeleteLoadBalancerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLoadBalancerInput, options: CallOptions) !DeleteLoadBalancerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

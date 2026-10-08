@@ -15,8 +15,7 @@ pub const DisassociateCertificateInput = struct {
     };
 };
 
-pub const DisassociateCertificateOutput = struct {
-};
+pub const DisassociateCertificateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateCertificateInput, options: CallOptions) !DisassociateCertificateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

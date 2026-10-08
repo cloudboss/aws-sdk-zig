@@ -17,12 +17,12 @@ pub const DocumentParameter = struct {
     name: ?[]const u8 = null,
 
     /// The type of parameter. The type can be either String or StringList.
-    @"type": ?DocumentParameterType = null,
+    type: ?DocumentParameterType = null,
 
     pub const json_field_names = .{
         .default_value = "DefaultValue",
         .description = "Description",
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

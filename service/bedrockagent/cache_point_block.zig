@@ -4,9 +4,9 @@ const CachePointType = @import("cache_point_type.zig").CachePointType;
 /// checkpoint is cached to be accessed on subsequent requests.
 pub const CachePointBlock = struct {
     /// Indicates that the CachePointBlock is of the default type
-    @"type": CachePointType,
+    type: CachePointType,
 
     pub const json_field_names = .{
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -60,8 +60,7 @@ pub const PutWarmPoolInput = struct {
     pool_state: ?WarmPoolState = null,
 };
 
-pub const PutWarmPoolOutput = struct {
-};
+pub const PutWarmPoolOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutWarmPoolInput, options: CallOptions) !PutWarmPoolOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

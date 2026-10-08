@@ -32,8 +32,7 @@ pub const PutAccountSuppressionAttributesInput = struct {
     };
 };
 
-pub const PutAccountSuppressionAttributesOutput = struct {
-};
+pub const PutAccountSuppressionAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAccountSuppressionAttributesInput, options: CallOptions) !PutAccountSuppressionAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

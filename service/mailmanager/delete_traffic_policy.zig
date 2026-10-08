@@ -14,8 +14,7 @@ pub const DeleteTrafficPolicyInput = struct {
     };
 };
 
-pub const DeleteTrafficPolicyOutput = struct {
-};
+pub const DeleteTrafficPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTrafficPolicyInput, options: CallOptions) !DeleteTrafficPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

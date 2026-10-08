@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const CloudWatchLogDeliveryOptions = @import("cloud_watch_log_delivery_options.zig").CloudWatchLogDeliveryOptions;
 
-pub const GetLoggingOptionsInput = struct {
-};
+pub const GetLoggingOptionsInput = struct {};
 
 pub const GetLoggingOptionsOutput = struct {
     /// Returns information about log delivery to Amazon CloudWatch Logs.

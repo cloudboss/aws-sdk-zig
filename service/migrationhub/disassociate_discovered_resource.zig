@@ -31,8 +31,7 @@ pub const DisassociateDiscoveredResourceInput = struct {
     };
 };
 
-pub const DisassociateDiscoveredResourceOutput = struct {
-};
+pub const DisassociateDiscoveredResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateDiscoveredResourceInput, options: CallOptions) !DisassociateDiscoveredResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

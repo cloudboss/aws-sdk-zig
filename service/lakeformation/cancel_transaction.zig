@@ -14,8 +14,7 @@ pub const CancelTransactionInput = struct {
     };
 };
 
-pub const CancelTransactionOutput = struct {
-};
+pub const CancelTransactionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelTransactionInput, options: CallOptions) !CancelTransactionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

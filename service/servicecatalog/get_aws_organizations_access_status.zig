@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AccessStatus = @import("access_status.zig").AccessStatus;
 
-pub const GetAWSOrganizationsAccessStatusInput = struct {
-};
+pub const GetAWSOrganizationsAccessStatusInput = struct {};
 
 pub const GetAWSOrganizationsAccessStatusOutput = struct {
     /// The status of the portfolio share feature.

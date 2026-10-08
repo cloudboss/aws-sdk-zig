@@ -9,10 +9,10 @@ pub const ScoringStrategy = struct {
 
     /// The scoring strategy type. Valid values are `LeastAllocated` or
     /// `MostAllocated`.
-    @"type": ?ScoringStrategyType = null,
+    type: ?ScoringStrategyType = null,
 
     pub const json_field_names = .{
         .resources = "resources",
-        .@"type" = "type",
+        .type = "type",
     };
 };

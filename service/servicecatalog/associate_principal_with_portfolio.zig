@@ -92,8 +92,7 @@ pub const AssociatePrincipalWithPortfolioInput = struct {
     };
 };
 
-pub const AssociatePrincipalWithPortfolioOutput = struct {
-};
+pub const AssociatePrincipalWithPortfolioOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociatePrincipalWithPortfolioInput, options: CallOptions) !AssociatePrincipalWithPortfolioOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

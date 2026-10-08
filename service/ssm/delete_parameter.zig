@@ -18,8 +18,7 @@ pub const DeleteParameterInput = struct {
     };
 };
 
-pub const DeleteParameterOutput = struct {
-};
+pub const DeleteParameterOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteParameterInput, options: CallOptions) !DeleteParameterOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,12 +14,12 @@ pub const SortAttribute = struct {
     order: SegmentSortOrder,
 
     /// The type of attribute (e.g., profile, calculated).
-    @"type": SortAttributeType = .profile,
+    type: SortAttributeType = .profile,
 
     pub const json_field_names = .{
         .data_type = "DataType",
         .name = "Name",
         .order = "Order",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

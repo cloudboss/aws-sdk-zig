@@ -18,8 +18,7 @@ pub const DeleteCustomDetectionRuleAssociationInput = struct {
     };
 };
 
-pub const DeleteCustomDetectionRuleAssociationOutput = struct {
-};
+pub const DeleteCustomDetectionRuleAssociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCustomDetectionRuleAssociationInput, options: CallOptions) !DeleteCustomDetectionRuleAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

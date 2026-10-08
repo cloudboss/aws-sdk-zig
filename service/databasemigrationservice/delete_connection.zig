@@ -6,9 +6,27 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Connection = @import("connection.zig").Connection;
 
-pub const DeleteConnectionInput = @import("delete_connection_message.zig").DeleteConnectionMessage;
+pub const DeleteConnectionInput = struct {
+    /// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+    endpoint_arn: []const u8,
 
-pub const DeleteConnectionOutput = @import("delete_connection_response.zig").DeleteConnectionResponse;
+    /// The Amazon Resource Name (ARN) of the replication instance.
+    replication_instance_arn: []const u8,
+
+    pub const json_field_names = .{
+        .endpoint_arn = "EndpointArn",
+        .replication_instance_arn = "ReplicationInstanceArn",
+    };
+};
+
+pub const DeleteConnectionOutput = struct {
+    /// The connection that is being deleted.
+    connection: ?Connection = null,
+
+    pub const json_field_names = .{
+        .connection = "Connection",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConnectionInput, options: CallOptions) !DeleteConnectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

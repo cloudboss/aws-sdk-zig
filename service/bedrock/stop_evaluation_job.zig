@@ -14,8 +14,7 @@ pub const StopEvaluationJobInput = struct {
     };
 };
 
-pub const StopEvaluationJobOutput = struct {
-};
+pub const StopEvaluationJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopEvaluationJobInput, options: CallOptions) !StopEvaluationJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

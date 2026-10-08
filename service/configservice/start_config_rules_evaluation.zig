@@ -15,8 +15,7 @@ pub const StartConfigRulesEvaluationInput = struct {
     };
 };
 
-pub const StartConfigRulesEvaluationOutput = struct {
-};
+pub const StartConfigRulesEvaluationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartConfigRulesEvaluationInput, options: CallOptions) !StartConfigRulesEvaluationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

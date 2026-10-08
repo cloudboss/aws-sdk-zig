@@ -14,8 +14,7 @@ pub const DeregisterResourceInput = struct {
     };
 };
 
-pub const DeregisterResourceOutput = struct {
-};
+pub const DeregisterResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterResourceInput, options: CallOptions) !DeregisterResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -18,8 +18,7 @@ pub const DeleteLimitInput = struct {
     };
 };
 
-pub const DeleteLimitOutput = struct {
-};
+pub const DeleteLimitOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLimitInput, options: CallOptions) !DeleteLimitOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

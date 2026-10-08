@@ -14,8 +14,7 @@ pub const DeleteMarketplaceModelEndpointInput = struct {
     };
 };
 
-pub const DeleteMarketplaceModelEndpointOutput = struct {
-};
+pub const DeleteMarketplaceModelEndpointOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMarketplaceModelEndpointInput, options: CallOptions) !DeleteMarketplaceModelEndpointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

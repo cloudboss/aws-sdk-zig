@@ -19,8 +19,7 @@ pub const CancelCapacityTaskInput = struct {
     };
 };
 
-pub const CancelCapacityTaskOutput = struct {
-};
+pub const CancelCapacityTaskOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelCapacityTaskInput, options: CallOptions) !CancelCapacityTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

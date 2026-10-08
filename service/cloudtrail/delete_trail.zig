@@ -16,8 +16,7 @@ pub const DeleteTrailInput = struct {
     };
 };
 
-pub const DeleteTrailOutput = struct {
-};
+pub const DeleteTrailOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTrailInput, options: CallOptions) !DeleteTrailOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

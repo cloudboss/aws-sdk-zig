@@ -10,11 +10,11 @@ pub const ConnectionHealth = struct {
     timestamp: ?i64 = null,
 
     /// The connection type.
-    @"type": ?ConnectionType = null,
+    type: ?ConnectionType = null,
 
     pub const json_field_names = .{
         .status = "Status",
         .timestamp = "Timestamp",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

@@ -23,8 +23,7 @@ pub const StopCisSessionInput = struct {
     };
 };
 
-pub const StopCisSessionOutput = struct {
-};
+pub const StopCisSessionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopCisSessionInput, options: CallOptions) !StopCisSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

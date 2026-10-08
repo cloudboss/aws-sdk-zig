@@ -18,8 +18,7 @@ pub const DeleteSceneInput = struct {
     };
 };
 
-pub const DeleteSceneOutput = struct {
-};
+pub const DeleteSceneOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSceneInput, options: CallOptions) !DeleteSceneOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

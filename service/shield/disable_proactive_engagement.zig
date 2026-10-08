@@ -5,11 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DisableProactiveEngagementInput = struct {
-};
+pub const DisableProactiveEngagementInput = struct {};
 
-pub const DisableProactiveEngagementOutput = struct {
-};
+pub const DisableProactiveEngagementOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableProactiveEngagementInput, options: CallOptions) !DisableProactiveEngagementOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

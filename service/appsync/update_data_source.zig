@@ -67,7 +67,7 @@ pub const UpdateDataSourceInput = struct {
     service_role_arn: ?[]const u8 = null,
 
     /// The new data source type.
-    @"type": DataSourceType,
+    type: DataSourceType,
 
     pub const json_field_names = .{
         .api_id = "apiId",
@@ -82,7 +82,7 @@ pub const UpdateDataSourceInput = struct {
         .open_search_service_config = "openSearchServiceConfig",
         .relational_database_config = "relationalDatabaseConfig",
         .service_role_arn = "serviceRoleArn",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -198,7 +198,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateDataSourceInput, 
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

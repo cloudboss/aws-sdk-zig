@@ -38,7 +38,7 @@ pub const TypeVersionSummary = struct {
     time_created: ?i64 = null,
 
     /// The kind of extension.
-    @"type": ?RegistryType = null,
+    type: ?RegistryType = null,
 
     /// The name of the extension.
     type_name: ?[]const u8 = null,

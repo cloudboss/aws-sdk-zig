@@ -14,8 +14,7 @@ pub const StopArchiveSearchInput = struct {
     };
 };
 
-pub const StopArchiveSearchOutput = struct {
-};
+pub const StopArchiveSearchOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopArchiveSearchInput, options: CallOptions) !StopArchiveSearchOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

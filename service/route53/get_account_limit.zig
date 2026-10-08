@@ -30,7 +30,7 @@ pub const GetAccountLimitInput = struct {
     /// current
     /// account. (Traffic policy instances are referred to as traffic flow policy
     /// records in the Amazon Route 53 console.)
-    @"type": AccountLimitType,
+    type: AccountLimitType,
 };
 
 pub const GetAccountLimitOutput = struct {
@@ -81,7 +81,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAccountLimitInput, c
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/2013-04-01/accountlimit/");
-    try path_buf.appendSlice(allocator, input.@"type".wireName());
+    try path_buf.appendSlice(allocator, input.type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

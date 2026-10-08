@@ -19,8 +19,7 @@ pub const AddTagsToResourceInput = struct {
     };
 };
 
-pub const AddTagsToResourceOutput = struct {
-};
+pub const AddTagsToResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddTagsToResourceInput, options: CallOptions) !AddTagsToResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

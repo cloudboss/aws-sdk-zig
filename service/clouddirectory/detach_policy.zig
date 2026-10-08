@@ -24,8 +24,7 @@ pub const DetachPolicyInput = struct {
     };
 };
 
-pub const DetachPolicyOutput = struct {
-};
+pub const DetachPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DetachPolicyInput, options: CallOptions) !DetachPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

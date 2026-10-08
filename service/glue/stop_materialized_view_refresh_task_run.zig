@@ -23,8 +23,7 @@ pub const StopMaterializedViewRefreshTaskRunInput = struct {
     };
 };
 
-pub const StopMaterializedViewRefreshTaskRunOutput = struct {
-};
+pub const StopMaterializedViewRefreshTaskRunOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopMaterializedViewRefreshTaskRunInput, options: CallOptions) !StopMaterializedViewRefreshTaskRunOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -25,8 +25,7 @@ pub const UpdateSecurityControlInput = struct {
     };
 };
 
-pub const UpdateSecurityControlOutput = struct {
-};
+pub const UpdateSecurityControlOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSecurityControlInput, options: CallOptions) !UpdateSecurityControlOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

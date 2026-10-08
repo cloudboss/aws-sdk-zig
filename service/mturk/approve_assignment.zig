@@ -25,8 +25,7 @@ pub const ApproveAssignmentInput = struct {
     };
 };
 
-pub const ApproveAssignmentOutput = struct {
-};
+pub const ApproveAssignmentOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ApproveAssignmentInput, options: CallOptions) !ApproveAssignmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

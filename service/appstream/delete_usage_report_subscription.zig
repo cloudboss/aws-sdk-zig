@@ -5,11 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteUsageReportSubscriptionInput = struct {
-};
+pub const DeleteUsageReportSubscriptionInput = struct {};
 
-pub const DeleteUsageReportSubscriptionOutput = struct {
-};
+pub const DeleteUsageReportSubscriptionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteUsageReportSubscriptionInput, options: CallOptions) !DeleteUsageReportSubscriptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

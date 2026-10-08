@@ -20,8 +20,7 @@ pub const UpdateDatasetGroupInput = struct {
     };
 };
 
-pub const UpdateDatasetGroupOutput = struct {
-};
+pub const UpdateDatasetGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDatasetGroupInput, options: CallOptions) !UpdateDatasetGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

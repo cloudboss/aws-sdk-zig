@@ -14,7 +14,4 @@ pub const Resource = @import("resource.zig").Resource;
 pub const ResourceResult = @import("resource_result.zig").ResourceResult;
 pub const ResourceSetOutput = @import("resource_set_output.zig").ResourceSetOutput;
 pub const RuleResult = @import("rule_result.zig").RuleResult;
-pub const TagResourceRequest = @import("tag_resource_request.zig").TagResourceRequest;
-pub const TagResourceResponse = @import("tag_resource_response.zig").TagResourceResponse;
 pub const TargetResource = @import("target_resource.zig").TargetResource;
-pub const UntagResourceRequest = @import("untag_resource_request.zig").UntagResourceRequest;

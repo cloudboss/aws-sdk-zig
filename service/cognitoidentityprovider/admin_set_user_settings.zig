@@ -31,8 +31,7 @@ pub const AdminSetUserSettingsInput = struct {
     };
 };
 
-pub const AdminSetUserSettingsOutput = struct {
-};
+pub const AdminSetUserSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminSetUserSettingsInput, options: CallOptions) !AdminSetUserSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

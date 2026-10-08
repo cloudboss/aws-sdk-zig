@@ -14,8 +14,7 @@ pub const ResumeBatchLoadTaskInput = struct {
     };
 };
 
-pub const ResumeBatchLoadTaskOutput = struct {
-};
+pub const ResumeBatchLoadTaskOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ResumeBatchLoadTaskInput, options: CallOptions) !ResumeBatchLoadTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

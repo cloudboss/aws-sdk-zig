@@ -20,8 +20,7 @@ pub const UpdateServerConfigInput = struct {
     };
 };
 
-pub const UpdateServerConfigOutput = struct {
-};
+pub const UpdateServerConfigOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateServerConfigInput, options: CallOptions) !UpdateServerConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

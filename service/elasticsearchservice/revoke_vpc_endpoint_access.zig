@@ -18,8 +18,7 @@ pub const RevokeVpcEndpointAccessInput = struct {
     };
 };
 
-pub const RevokeVpcEndpointAccessOutput = struct {
-};
+pub const RevokeVpcEndpointAccessOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RevokeVpcEndpointAccessInput, options: CallOptions) !RevokeVpcEndpointAccessOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

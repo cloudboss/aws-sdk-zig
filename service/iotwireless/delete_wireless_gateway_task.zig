@@ -14,8 +14,7 @@ pub const DeleteWirelessGatewayTaskInput = struct {
     };
 };
 
-pub const DeleteWirelessGatewayTaskOutput = struct {
-};
+pub const DeleteWirelessGatewayTaskOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteWirelessGatewayTaskInput, options: CallOptions) !DeleteWirelessGatewayTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

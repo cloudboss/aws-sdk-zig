@@ -6,10 +6,10 @@ pub const ValidationFindingScope = struct {
     id: ?[]const u8 = null,
 
     /// The type of the resource scope.
-    @"type": ?ValidationFindingScopeType = null,
+    type: ?ValidationFindingScopeType = null,
 
     pub const json_field_names = .{
         .id = "Id",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

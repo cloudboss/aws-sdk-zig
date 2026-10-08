@@ -10,11 +10,11 @@ pub const DocumentAccessControlEntry = struct {
     name: []const u8,
 
     /// The type of principal.
-    @"type": AccessControlPrincipalType,
+    type: AccessControlPrincipalType,
 
     pub const json_field_names = .{
         .access = "access",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };

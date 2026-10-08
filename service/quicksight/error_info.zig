@@ -6,10 +6,10 @@ pub const ErrorInfo = struct {
     message: ?[]const u8 = null,
 
     /// Error type.
-    @"type": ?IngestionErrorType = null,
+    type: ?IngestionErrorType = null,
 
     pub const json_field_names = .{
         .message = "Message",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

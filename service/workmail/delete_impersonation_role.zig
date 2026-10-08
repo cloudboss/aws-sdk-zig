@@ -18,8 +18,7 @@ pub const DeleteImpersonationRoleInput = struct {
     };
 };
 
-pub const DeleteImpersonationRoleOutput = struct {
-};
+pub const DeleteImpersonationRoleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteImpersonationRoleInput, options: CallOptions) !DeleteImpersonationRoleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

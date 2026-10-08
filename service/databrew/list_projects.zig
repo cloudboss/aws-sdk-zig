@@ -6,9 +6,32 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Project = @import("project.zig").Project;
 
-pub const ListProjectsInput = @import("list_projects_request.zig").ListProjectsRequest;
+pub const ListProjectsInput = struct {
+    /// The maximum number of results to return in this request.
+    max_results: ?i32 = null,
 
-pub const ListProjectsOutput = @import("list_projects_response.zig").ListProjectsResponse;
+    /// The token returned by a previous call to retrieve the next set of results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListProjectsOutput = struct {
+    /// A token that you can use in a subsequent call to retrieve the next set of
+    /// results.
+    next_token: ?[]const u8 = null,
+
+    /// A list of projects that are defined .
+    projects: ?[]const Project = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .projects = "Projects",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListProjectsInput, options: CallOptions) !ListProjectsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

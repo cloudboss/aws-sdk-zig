@@ -28,8 +28,7 @@ pub const CreateCustomMetadataInput = struct {
     };
 };
 
-pub const CreateCustomMetadataOutput = struct {
-};
+pub const CreateCustomMetadataOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCustomMetadataInput, options: CallOptions) !CreateCustomMetadataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

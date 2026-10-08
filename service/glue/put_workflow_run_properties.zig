@@ -27,8 +27,7 @@ pub const PutWorkflowRunPropertiesInput = struct {
     };
 };
 
-pub const PutWorkflowRunPropertiesOutput = struct {
-};
+pub const PutWorkflowRunPropertiesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutWorkflowRunPropertiesInput, options: CallOptions) !PutWorkflowRunPropertiesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

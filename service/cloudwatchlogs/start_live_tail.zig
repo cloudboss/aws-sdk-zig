@@ -65,7 +65,6 @@ pub const StartLiveTailInput = struct {
 };
 
 pub const StartLiveTailOutput = struct {
-
     response_stream: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *StartLiveTailOutput) void {

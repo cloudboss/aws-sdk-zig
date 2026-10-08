@@ -26,8 +26,7 @@ pub const UpdateApplicationLayerAutomaticResponseInput = struct {
     };
 };
 
-pub const UpdateApplicationLayerAutomaticResponseOutput = struct {
-};
+pub const UpdateApplicationLayerAutomaticResponseOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateApplicationLayerAutomaticResponseInput, options: CallOptions) !UpdateApplicationLayerAutomaticResponseOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

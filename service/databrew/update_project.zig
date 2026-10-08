@@ -6,9 +6,35 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Sample = @import("sample.zig").Sample;
 
-pub const UpdateProjectInput = @import("update_project_request.zig").UpdateProjectRequest;
+pub const UpdateProjectInput = struct {
+    /// The name of the project to be updated.
+    name: []const u8,
 
-pub const UpdateProjectOutput = @import("update_project_response.zig").UpdateProjectResponse;
+    /// The Amazon Resource Name (ARN) of the IAM role to be assumed for this
+    /// request.
+    role_arn: []const u8,
+
+    sample: ?Sample = null,
+
+    pub const json_field_names = .{
+        .name = "Name",
+        .role_arn = "RoleArn",
+        .sample = "Sample",
+    };
+};
+
+pub const UpdateProjectOutput = struct {
+    /// The date and time that the project was last modified.
+    last_modified_date: ?i64 = null,
+
+    /// The name of the project that you updated.
+    name: []const u8,
+
+    pub const json_field_names = .{
+        .last_modified_date = "LastModifiedDate",
+        .name = "Name",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateProjectInput, options: CallOptions) !UpdateProjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

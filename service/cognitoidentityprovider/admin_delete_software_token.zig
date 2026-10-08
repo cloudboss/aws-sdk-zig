@@ -25,8 +25,7 @@ pub const AdminDeleteSoftwareTokenInput = struct {
     };
 };
 
-pub const AdminDeleteSoftwareTokenOutput = struct {
-};
+pub const AdminDeleteSoftwareTokenOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminDeleteSoftwareTokenInput, options: CallOptions) !AdminDeleteSoftwareTokenOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

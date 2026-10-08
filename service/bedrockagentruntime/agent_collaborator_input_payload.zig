@@ -11,11 +11,11 @@ pub const AgentCollaboratorInputPayload = struct {
     text: ?[]const u8 = null,
 
     /// The input type.
-    @"type": ?PayloadType = null,
+    type: ?PayloadType = null,
 
     pub const json_field_names = .{
         .return_control_results = "returnControlResults",
         .text = "text",
-        .@"type" = "type",
+        .type = "type",
     };
 };

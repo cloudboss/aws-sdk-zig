@@ -14,8 +14,7 @@ pub const DeleteFoundationModelAgreementInput = struct {
     };
 };
 
-pub const DeleteFoundationModelAgreementOutput = struct {
-};
+pub const DeleteFoundationModelAgreementOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteFoundationModelAgreementInput, options: CallOptions) !DeleteFoundationModelAgreementOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

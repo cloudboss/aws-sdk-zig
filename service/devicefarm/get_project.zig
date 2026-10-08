@@ -6,9 +6,23 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Project = @import("project.zig").Project;
 
-pub const GetProjectInput = @import("get_project_request.zig").GetProjectRequest;
+pub const GetProjectInput = struct {
+    /// The project's ARN.
+    arn: []const u8,
 
-pub const GetProjectOutput = @import("get_project_result.zig").GetProjectResult;
+    pub const json_field_names = .{
+        .arn = "arn",
+    };
+};
+
+pub const GetProjectOutput = struct {
+    /// The project to get information about.
+    project: ?Project = null,
+
+    pub const json_field_names = .{
+        .project = "project",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetProjectInput, options: CallOptions) !GetProjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

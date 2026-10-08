@@ -6,9 +6,43 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ConnectionState = @import("connection_state.zig").ConnectionState;
 
-pub const DeleteConnectionInput = @import("delete_connection_request.zig").DeleteConnectionRequest;
+pub const DeleteConnectionInput = struct {
+    /// The name of the connection to delete.
+    name: []const u8,
 
-pub const DeleteConnectionOutput = @import("delete_connection_response.zig").DeleteConnectionResponse;
+    pub const json_field_names = .{
+        .name = "Name",
+    };
+};
+
+pub const DeleteConnectionOutput = struct {
+    /// The ARN of the connection that was deleted.
+    connection_arn: ?[]const u8 = null,
+
+    /// The state of the connection before it was deleted.
+    connection_state: ?ConnectionState = null,
+
+    /// A time stamp for the time that the connection was created.
+    creation_time: ?i64 = null,
+
+    /// A time stamp for the time that the connection was last authorized before it
+    /// wa
+    /// deleted.
+    last_authorized_time: ?i64 = null,
+
+    /// A time stamp for the time that the connection was last modified before it
+    /// was
+    /// deleted.
+    last_modified_time: ?i64 = null,
+
+    pub const json_field_names = .{
+        .connection_arn = "ConnectionArn",
+        .connection_state = "ConnectionState",
+        .creation_time = "CreationTime",
+        .last_authorized_time = "LastAuthorizedTime",
+        .last_modified_time = "LastModifiedTime",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConnectionInput, options: CallOptions) !DeleteConnectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -11,11 +11,11 @@ pub const ResolvedArtifact = struct {
     location: ?[]const u8 = null,
 
     /// Specifies the type of artifact.
-    @"type": ?ArtifactsType = null,
+    type: ?ArtifactsType = null,
 
     pub const json_field_names = .{
         .identifier = "identifier",
         .location = "location",
-        .@"type" = "type",
+        .type = "type",
     };
 };

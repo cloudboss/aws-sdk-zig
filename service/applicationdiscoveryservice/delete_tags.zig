@@ -24,8 +24,7 @@ pub const DeleteTagsInput = struct {
     };
 };
 
-pub const DeleteTagsOutput = struct {
-};
+pub const DeleteTagsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTagsInput, options: CallOptions) !DeleteTagsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

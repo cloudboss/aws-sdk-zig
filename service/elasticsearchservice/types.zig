@@ -1,5 +1,4 @@
 pub const AccessPoliciesStatus = @import("access_policies_status.zig").AccessPoliciesStatus;
-pub const AddTagsRequest = @import("add_tags_request.zig").AddTagsRequest;
 pub const AdditionalLimit = @import("additional_limit.zig").AdditionalLimit;
 pub const AdvancedOptionsStatus = @import("advanced_options_status.zig").AdvancedOptionsStatus;
 pub const AdvancedSecurityOptions = @import("advanced_security_options.zig").AdvancedSecurityOptions;
@@ -90,7 +89,6 @@ pub const PauseState = @import("pause_state.zig").PauseState;
 pub const PrincipalType = @import("principal_type.zig").PrincipalType;
 pub const PropertyValueType = @import("property_value_type.zig").PropertyValueType;
 pub const RecurringCharge = @import("recurring_charge.zig").RecurringCharge;
-pub const RemoveTagsRequest = @import("remove_tags_request.zig").RemoveTagsRequest;
 pub const ReservedElasticsearchInstance = @import("reserved_elasticsearch_instance.zig").ReservedElasticsearchInstance;
 pub const ReservedElasticsearchInstanceOffering = @import("reserved_elasticsearch_instance_offering.zig").ReservedElasticsearchInstanceOffering;
 pub const ReservedElasticsearchInstancePaymentOption = @import("reserved_elasticsearch_instance_payment_option.zig").ReservedElasticsearchInstancePaymentOption;

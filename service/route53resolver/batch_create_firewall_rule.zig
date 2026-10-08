@@ -8,9 +8,27 @@ const CreateFirewallRuleEntry = @import("create_firewall_rule_entry.zig").Create
 const FirewallRule = @import("firewall_rule.zig").FirewallRule;
 const BatchCreateFirewallRuleError = @import("batch_create_firewall_rule_error.zig").BatchCreateFirewallRuleError;
 
-pub const BatchCreateFirewallRuleInput = @import("batch_create_firewall_rule_request.zig").BatchCreateFirewallRuleRequest;
+pub const BatchCreateFirewallRuleInput = struct {
+    /// The list of firewall rules to create.
+    create_firewall_rule_entries: []const CreateFirewallRuleEntry,
 
-pub const BatchCreateFirewallRuleOutput = @import("batch_create_firewall_rule_response.zig").BatchCreateFirewallRuleResponse;
+    pub const json_field_names = .{
+        .create_firewall_rule_entries = "CreateFirewallRuleEntries",
+    };
+};
+
+pub const BatchCreateFirewallRuleOutput = struct {
+    /// The firewall rules that were successfully created by the request.
+    created_firewall_rules: ?[]const FirewallRule = null,
+
+    /// A list of errors that occurred while creating the firewall rules.
+    create_errors: ?[]const BatchCreateFirewallRuleError = null,
+
+    pub const json_field_names = .{
+        .created_firewall_rules = "CreatedFirewallRules",
+        .create_errors = "CreateErrors",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: BatchCreateFirewallRuleInput, options: CallOptions) !BatchCreateFirewallRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

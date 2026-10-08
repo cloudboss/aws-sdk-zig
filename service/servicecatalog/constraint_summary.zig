@@ -12,10 +12,10 @@ pub const ConstraintSummary = struct {
     /// * STACKSET
     ///
     /// * `TEMPLATE`
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .description = "Description",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

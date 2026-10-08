@@ -22,8 +22,7 @@ pub const DeleteIngestionInput = struct {
     };
 };
 
-pub const DeleteIngestionOutput = struct {
-};
+pub const DeleteIngestionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIngestionInput, options: CallOptions) !DeleteIngestionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

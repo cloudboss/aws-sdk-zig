@@ -53,8 +53,7 @@ pub const GrantPermissionsInput = struct {
     };
 };
 
-pub const GrantPermissionsOutput = struct {
-};
+pub const GrantPermissionsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GrantPermissionsInput, options: CallOptions) !GrantPermissionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

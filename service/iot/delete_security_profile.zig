@@ -22,8 +22,7 @@ pub const DeleteSecurityProfileInput = struct {
     };
 };
 
-pub const DeleteSecurityProfileOutput = struct {
-};
+pub const DeleteSecurityProfileOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSecurityProfileInput, options: CallOptions) !DeleteSecurityProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

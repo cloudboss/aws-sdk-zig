@@ -34,7 +34,7 @@ pub const StartRecommendationInput = struct {
     /// The type of recommendation to generate. Valid values are
     /// `SYSTEM_PROMPT_RECOMMENDATION` for system prompt optimization or
     /// `TOOL_DESCRIPTION_RECOMMENDATION` for tool description optimization.
-    @"type": RecommendationType,
+    type: RecommendationType,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
@@ -43,7 +43,7 @@ pub const StartRecommendationInput = struct {
         .name = "name",
         .recommendation_config = "recommendationConfig",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -70,7 +70,7 @@ pub const StartRecommendationOutput = struct {
     status: RecommendationStatus,
 
     /// The type of recommendation.
-    @"type": RecommendationType,
+    type: RecommendationType,
 
     /// The timestamp when the recommendation was last updated.
     updated_at: i64,
@@ -83,7 +83,7 @@ pub const StartRecommendationOutput = struct {
         .recommendation_config = "recommendationConfig",
         .recommendation_id = "recommendationId",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
     };
 };
@@ -158,7 +158,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartRecommendationInpu
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

@@ -12,11 +12,11 @@ pub const ProtectedJobWorkerComputeConfiguration = struct {
     properties: ?WorkerComputeConfigurationProperties = null,
 
     /// The worker compute configuration type.
-    @"type": ProtectedJobWorkerComputeType,
+    type: ProtectedJobWorkerComputeType,
 
     pub const json_field_names = .{
         .number = "number",
         .properties = "properties",
-        .@"type" = "type",
+        .type = "type",
     };
 };

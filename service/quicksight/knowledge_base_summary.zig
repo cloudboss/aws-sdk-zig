@@ -34,7 +34,7 @@ pub const KnowledgeBaseSummary = struct {
     status: DataSetStatus,
 
     /// The type of the knowledge base.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The date and time that the knowledge base was last updated.
     updated_at: ?i64 = null,
@@ -50,7 +50,7 @@ pub const KnowledgeBaseSummary = struct {
         .primary_owner_arn = "PrimaryOwnerArn",
         .primary_owner_username = "PrimaryOwnerUsername",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
         .updated_at = "UpdatedAt",
     };
 };

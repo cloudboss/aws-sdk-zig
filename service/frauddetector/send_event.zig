@@ -44,8 +44,7 @@ pub const SendEventInput = struct {
     };
 };
 
-pub const SendEventOutput = struct {
-};
+pub const SendEventOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendEventInput, options: CallOptions) !SendEventOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -25,8 +25,7 @@ pub const ImportMigrationTaskInput = struct {
     };
 };
 
-pub const ImportMigrationTaskOutput = struct {
-};
+pub const ImportMigrationTaskOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ImportMigrationTaskInput, options: CallOptions) !ImportMigrationTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

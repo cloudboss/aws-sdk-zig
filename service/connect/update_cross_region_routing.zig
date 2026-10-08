@@ -21,8 +21,7 @@ pub const UpdateCrossRegionRoutingInput = struct {
     };
 };
 
-pub const UpdateCrossRegionRoutingOutput = struct {
-};
+pub const UpdateCrossRegionRoutingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateCrossRegionRoutingInput, options: CallOptions) !UpdateCrossRegionRoutingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -40,7 +40,7 @@ pub const CreateActionConnectorInput = struct {
     tags: ?[]const Tag = null,
 
     /// The type of action connector.
-    @"type": ActionConnectorType,
+    type: ActionConnectorType,
 
     /// The ARN of the VPC connection to use for secure connectivity to the external
     /// service.
@@ -54,7 +54,7 @@ pub const CreateActionConnectorInput = struct {
         .name = "Name",
         .permissions = "Permissions",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
         .vpc_connection_arn = "VpcConnectionArn",
     };
 };
@@ -156,7 +156,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateActionConnectorIn
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
     if (input.vpc_connection_arn) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");

@@ -49,8 +49,7 @@ pub const DisassociateWebACLInput = struct {
     };
 };
 
-pub const DisassociateWebACLOutput = struct {
-};
+pub const DisassociateWebACLOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateWebACLInput, options: CallOptions) !DisassociateWebACLOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

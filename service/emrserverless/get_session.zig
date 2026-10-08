@@ -6,9 +6,27 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Session = @import("session.zig").Session;
 
-pub const GetSessionInput = @import("get_session_request.zig").GetSessionRequest;
+pub const GetSessionInput = struct {
+    /// The ID of the application that the session belongs to.
+    application_id: []const u8,
 
-pub const GetSessionOutput = @import("get_session_response.zig").GetSessionResponse;
+    /// The ID of the session.
+    session_id: []const u8,
+
+    pub const json_field_names = .{
+        .application_id = "applicationId",
+        .session_id = "sessionId",
+    };
+};
+
+pub const GetSessionOutput = struct {
+    /// The output displays information about the session.
+    session: ?Session = null,
+
+    pub const json_field_names = .{
+        .session = "session",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSessionInput, options: CallOptions) !GetSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

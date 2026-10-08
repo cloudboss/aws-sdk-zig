@@ -30,8 +30,7 @@ pub const CreateContactListInput = struct {
     };
 };
 
-pub const CreateContactListOutput = struct {
-};
+pub const CreateContactListOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateContactListInput, options: CallOptions) !CreateContactListOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

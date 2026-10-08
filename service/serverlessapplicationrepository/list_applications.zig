@@ -6,9 +6,31 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ApplicationSummary = @import("application_summary.zig").ApplicationSummary;
 
-pub const ListApplicationsInput = @import("list_applications_request.zig").ListApplicationsRequest;
+pub const ListApplicationsInput = struct {
+    /// The total number of items to return.
+    max_items: ?i32 = null,
 
-pub const ListApplicationsOutput = @import("list_applications_response.zig").ListApplicationsResponse;
+    /// A token to specify where to start paginating.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_items = "MaxItems",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListApplicationsOutput = struct {
+    /// An array of application summaries.
+    applications: ?[]const ApplicationSummary = null,
+
+    /// The token to request the next page of results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .applications = "Applications",
+        .next_token = "NextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListApplicationsInput, options: CallOptions) !ListApplicationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

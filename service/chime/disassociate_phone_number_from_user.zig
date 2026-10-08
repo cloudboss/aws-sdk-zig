@@ -18,8 +18,7 @@ pub const DisassociatePhoneNumberFromUserInput = struct {
     };
 };
 
-pub const DisassociatePhoneNumberFromUserOutput = struct {
-};
+pub const DisassociatePhoneNumberFromUserOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociatePhoneNumberFromUserInput, options: CallOptions) !DisassociatePhoneNumberFromUserOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

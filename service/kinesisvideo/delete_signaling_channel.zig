@@ -22,8 +22,7 @@ pub const DeleteSignalingChannelInput = struct {
     };
 };
 
-pub const DeleteSignalingChannelOutput = struct {
-};
+pub const DeleteSignalingChannelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSignalingChannelInput, options: CallOptions) !DeleteSignalingChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

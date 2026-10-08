@@ -24,8 +24,7 @@ pub const DeleteSuppressedDestinationInput = struct {
     };
 };
 
-pub const DeleteSuppressedDestinationOutput = struct {
-};
+pub const DeleteSuppressedDestinationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSuppressedDestinationInput, options: CallOptions) !DeleteSuppressedDestinationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

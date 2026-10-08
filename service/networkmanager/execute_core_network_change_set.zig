@@ -18,8 +18,7 @@ pub const ExecuteCoreNetworkChangeSetInput = struct {
     };
 };
 
-pub const ExecuteCoreNetworkChangeSetOutput = struct {
-};
+pub const ExecuteCoreNetworkChangeSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ExecuteCoreNetworkChangeSetInput, options: CallOptions) !ExecuteCoreNetworkChangeSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

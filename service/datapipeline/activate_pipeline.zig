@@ -24,8 +24,7 @@ pub const ActivatePipelineInput = struct {
     };
 };
 
-pub const ActivatePipelineOutput = struct {
-};
+pub const ActivatePipelineOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ActivatePipelineInput, options: CallOptions) !ActivatePipelineOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

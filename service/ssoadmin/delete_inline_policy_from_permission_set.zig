@@ -22,8 +22,7 @@ pub const DeleteInlinePolicyFromPermissionSetInput = struct {
     };
 };
 
-pub const DeleteInlinePolicyFromPermissionSetOutput = struct {
-};
+pub const DeleteInlinePolicyFromPermissionSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteInlinePolicyFromPermissionSetInput, options: CallOptions) !DeleteInlinePolicyFromPermissionSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

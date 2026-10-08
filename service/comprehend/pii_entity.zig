@@ -17,12 +17,12 @@ pub const PiiEntity = struct {
     score: ?f32 = null,
 
     /// The entity's type.
-    @"type": ?PiiEntityType = null,
+    type: ?PiiEntityType = null,
 
     pub const json_field_names = .{
         .begin_offset = "BeginOffset",
         .end_offset = "EndOffset",
         .score = "Score",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

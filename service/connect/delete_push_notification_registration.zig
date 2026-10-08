@@ -24,8 +24,7 @@ pub const DeletePushNotificationRegistrationInput = struct {
     };
 };
 
-pub const DeletePushNotificationRegistrationOutput = struct {
-};
+pub const DeletePushNotificationRegistrationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePushNotificationRegistrationInput, options: CallOptions) !DeletePushNotificationRegistrationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

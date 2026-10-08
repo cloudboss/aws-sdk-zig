@@ -15,8 +15,7 @@ pub const PutModelInvocationLoggingConfigurationInput = struct {
     };
 };
 
-pub const PutModelInvocationLoggingConfigurationOutput = struct {
-};
+pub const PutModelInvocationLoggingConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutModelInvocationLoggingConfigurationInput, options: CallOptions) !PutModelInvocationLoggingConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

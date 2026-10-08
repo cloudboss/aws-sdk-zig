@@ -46,8 +46,7 @@ pub const DeleteRuleGroupInput = struct {
     };
 };
 
-pub const DeleteRuleGroupOutput = struct {
-};
+pub const DeleteRuleGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRuleGroupInput, options: CallOptions) !DeleteRuleGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

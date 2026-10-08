@@ -24,8 +24,7 @@ pub const DeleteApplicationCloudWatchLoggingOptionInput = struct {
     };
 };
 
-pub const DeleteApplicationCloudWatchLoggingOptionOutput = struct {
-};
+pub const DeleteApplicationCloudWatchLoggingOptionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteApplicationCloudWatchLoggingOptionInput, options: CallOptions) !DeleteApplicationCloudWatchLoggingOptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

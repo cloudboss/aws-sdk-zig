@@ -98,11 +98,11 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSpritesInput, config
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/v2/styles/");
-    try path_buf.appendSlice(allocator, input.style);
+    try path_buf.appendSlice(allocator, input.style.wireName());
     try path_buf.appendSlice(allocator, "/");
-    try path_buf.appendSlice(allocator, input.color_scheme);
+    try path_buf.appendSlice(allocator, input.color_scheme.wireName());
     try path_buf.appendSlice(allocator, "/");
-    try path_buf.appendSlice(allocator, input.variant);
+    try path_buf.appendSlice(allocator, input.variant.wireName());
     try path_buf.appendSlice(allocator, "/sprites/");
     try path_buf.appendSlice(allocator, input.file_name);
     const path = try path_buf.toOwnedSlice(allocator);

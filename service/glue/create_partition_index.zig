@@ -29,8 +29,7 @@ pub const CreatePartitionIndexInput = struct {
     };
 };
 
-pub const CreatePartitionIndexOutput = struct {
-};
+pub const CreatePartitionIndexOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreatePartitionIndexInput, options: CallOptions) !CreatePartitionIndexOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

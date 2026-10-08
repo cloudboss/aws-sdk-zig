@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetDefaultScraperConfigurationInput = struct {
-};
+pub const GetDefaultScraperConfigurationInput = struct {};
 
 pub const GetDefaultScraperConfigurationOutput = struct {
     /// The configuration file. Base 64 encoded. For more information, see [Scraper

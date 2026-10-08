@@ -1,2 +1,0 @@
-pub const PutResourcePolicyResponse = struct {
-};

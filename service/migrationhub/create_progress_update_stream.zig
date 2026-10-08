@@ -21,8 +21,7 @@ pub const CreateProgressUpdateStreamInput = struct {
     };
 };
 
-pub const CreateProgressUpdateStreamOutput = struct {
-};
+pub const CreateProgressUpdateStreamOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateProgressUpdateStreamInput, options: CallOptions) !CreateProgressUpdateStreamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

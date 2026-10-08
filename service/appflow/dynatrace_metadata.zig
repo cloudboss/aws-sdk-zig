@@ -1,3 +1,2 @@
 /// The connector metadata specific to Dynatrace.
-pub const DynatraceMetadata = struct {
-};
+pub const DynatraceMetadata = struct {};

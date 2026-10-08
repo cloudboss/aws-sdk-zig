@@ -18,8 +18,7 @@ pub const DeleteResourceDataSyncInput = struct {
     };
 };
 
-pub const DeleteResourceDataSyncOutput = struct {
-};
+pub const DeleteResourceDataSyncOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteResourceDataSyncInput, options: CallOptions) !DeleteResourceDataSyncOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

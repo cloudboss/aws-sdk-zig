@@ -18,8 +18,7 @@ pub const DeleteWhatsAppFlowInput = struct {
     };
 };
 
-pub const DeleteWhatsAppFlowOutput = struct {
-};
+pub const DeleteWhatsAppFlowOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteWhatsAppFlowInput, options: CallOptions) !DeleteWhatsAppFlowOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

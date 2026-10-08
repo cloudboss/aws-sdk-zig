@@ -30,14 +30,14 @@ pub const CreateChannelMembershipInput = struct {
     /// are only returned if the type filter in `ListChannelMemberships` equals
     /// `HIDDEN`. Otherwise hidden members are not returned. This is only supported
     /// by moderators.
-    @"type": ChannelMembershipType,
+    type: ChannelMembershipType,
 
     pub const json_field_names = .{
         .channel_arn = "ChannelArn",
         .chime_bearer = "ChimeBearer",
         .member_arn = "MemberArn",
         .sub_channel_id = "SubChannelId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -110,7 +110,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateChannelMembership
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

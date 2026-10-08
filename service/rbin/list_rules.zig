@@ -55,7 +55,19 @@ pub const ListRulesInput = struct {
     };
 };
 
-pub const ListRulesOutput = @import("list_rules_response.zig").ListRulesResponse;
+pub const ListRulesOutput = struct {
+    /// The token to use to retrieve the next page of results. This value is `null`
+    /// when there are no more results to return.
+    next_token: ?[]const u8 = null,
+
+    /// Information about the retention rules.
+    rules: ?[]const RuleSummary = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .rules = "Rules",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListRulesInput, options: CallOptions) !ListRulesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

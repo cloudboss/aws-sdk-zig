@@ -19,10 +19,10 @@ pub const Child = struct {
     id: ?[]const u8 = null,
 
     /// The type of this child entity.
-    @"type": ?ChildType = null,
+    type: ?ChildType = null,
 
     pub const json_field_names = .{
         .id = "Id",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

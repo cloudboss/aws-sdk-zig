@@ -35,7 +35,7 @@ pub const CreateManagedEndpointInput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of the managed endpoint.
-    @"type": []const u8,
+    type: []const u8,
 
     /// The ID of the virtual cluster for which a managed endpoint is created.
     virtual_cluster_id: []const u8,
@@ -49,7 +49,7 @@ pub const CreateManagedEndpointInput = struct {
         .release_label = "releaseLabel",
         .session_idle_timeout_in_minutes = "sessionIdleTimeoutInMinutes",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .virtual_cluster_id = "virtualClusterId",
     };
 };
@@ -157,7 +157,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateManagedEndpointIn
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

@@ -22,8 +22,7 @@ pub const DeleteProgramManagementAccountInput = struct {
     };
 };
 
-pub const DeleteProgramManagementAccountOutput = struct {
-};
+pub const DeleteProgramManagementAccountOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteProgramManagementAccountInput, options: CallOptions) !DeleteProgramManagementAccountOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

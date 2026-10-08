@@ -14,8 +14,7 @@ pub const DeleteMapInput = struct {
     };
 };
 
-pub const DeleteMapOutput = struct {
-};
+pub const DeleteMapOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMapInput, options: CallOptions) !DeleteMapOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

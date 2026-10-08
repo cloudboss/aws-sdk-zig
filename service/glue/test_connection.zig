@@ -7,8 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const TestConnectionInput = @import("test_connection_request.zig").TestConnectionRequest;
 
-pub const TestConnectionOutput = struct {
-};
+pub const TestConnectionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: TestConnectionInput, options: CallOptions) !TestConnectionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

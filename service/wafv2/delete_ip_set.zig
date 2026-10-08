@@ -46,8 +46,7 @@ pub const DeleteIPSetInput = struct {
     };
 };
 
-pub const DeleteIPSetOutput = struct {
-};
+pub const DeleteIPSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIPSetInput, options: CallOptions) !DeleteIPSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

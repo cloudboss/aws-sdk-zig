@@ -28,7 +28,6 @@ pub const GetLogObjectInput = struct {
 };
 
 pub const GetLogObjectOutput = struct {
-
     field_stream: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *GetLogObjectOutput) void {

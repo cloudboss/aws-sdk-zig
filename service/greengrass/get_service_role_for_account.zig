@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetServiceRoleForAccountInput = struct {
-};
+pub const GetServiceRoleForAccountInput = struct {};
 
 pub const GetServiceRoleForAccountOutput = struct {
     /// The time when the service role was associated with the account.

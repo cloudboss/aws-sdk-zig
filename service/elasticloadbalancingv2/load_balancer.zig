@@ -83,7 +83,7 @@ pub const LoadBalancer = struct {
     state: ?LoadBalancerState = null,
 
     /// The type of load balancer.
-    @"type": ?LoadBalancerTypeEnum = null,
+    type: ?LoadBalancerTypeEnum = null,
 
     /// The ID of the VPC for the load balancer.
     vpc_id: ?[]const u8 = null,

@@ -20,8 +20,7 @@ pub const PutStorageLensConfigurationTaggingInput = struct {
     tags: []const StorageLensTag,
 };
 
-pub const PutStorageLensConfigurationTaggingOutput = struct {
-};
+pub const PutStorageLensConfigurationTaggingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutStorageLensConfigurationTaggingInput, options: CallOptions) !PutStorageLensConfigurationTaggingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

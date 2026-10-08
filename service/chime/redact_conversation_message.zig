@@ -22,8 +22,7 @@ pub const RedactConversationMessageInput = struct {
     };
 };
 
-pub const RedactConversationMessageOutput = struct {
-};
+pub const RedactConversationMessageOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RedactConversationMessageInput, options: CallOptions) !RedactConversationMessageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

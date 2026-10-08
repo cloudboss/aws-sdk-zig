@@ -51,8 +51,7 @@ pub const CreateCustomVerificationEmailTemplateInput = struct {
     };
 };
 
-pub const CreateCustomVerificationEmailTemplateOutput = struct {
-};
+pub const CreateCustomVerificationEmailTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateCustomVerificationEmailTemplateInput, options: CallOptions) !CreateCustomVerificationEmailTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

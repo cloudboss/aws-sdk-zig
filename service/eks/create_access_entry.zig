@@ -90,7 +90,7 @@ pub const CreateAccessEntryInput = struct {
     /// If you set the value to `EC2_LINUX` or `EC2_WINDOWS`, you can't
     /// specify values for `kubernetesGroups`, or associate an
     /// `AccessPolicy` to the access entry.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The username to authenticate to Kubernetes with. We recommend not specifying
     /// a username and
@@ -107,7 +107,7 @@ pub const CreateAccessEntryInput = struct {
         .kubernetes_groups = "kubernetesGroups",
         .principal_arn = "principalArn",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .username = "username",
     };
 };
@@ -182,7 +182,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateAccessEntryInput,
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"type\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);

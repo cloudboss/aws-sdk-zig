@@ -16,8 +16,7 @@ pub const ConnectCustomKeyStoreInput = struct {
     };
 };
 
-pub const ConnectCustomKeyStoreOutput = struct {
-};
+pub const ConnectCustomKeyStoreOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ConnectCustomKeyStoreInput, options: CallOptions) !ConnectCustomKeyStoreOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

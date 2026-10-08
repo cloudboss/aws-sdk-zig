@@ -23,8 +23,7 @@ pub const UpdateWorkflowRunInput = struct {
     };
 };
 
-pub const UpdateWorkflowRunOutput = struct {
-};
+pub const UpdateWorkflowRunOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorkflowRunInput, options: CallOptions) !UpdateWorkflowRunOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

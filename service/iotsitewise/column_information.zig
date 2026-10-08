@@ -5,10 +5,10 @@ pub const ColumnInformation = struct {
 
     /// The data type of the column. Valid values are STRING, DOUBLE, BOOLEAN,
     /// INTEGER, TIMESTAMP, and VARIANT.
-    @"type": []const u8,
+    type: []const u8,
 
     pub const json_field_names = .{
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };

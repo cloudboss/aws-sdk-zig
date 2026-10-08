@@ -22,8 +22,7 @@ pub const PutResourceLogLevelInput = struct {
     };
 };
 
-pub const PutResourceLogLevelOutput = struct {
-};
+pub const PutResourceLogLevelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutResourceLogLevelInput, options: CallOptions) !PutResourceLogLevelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

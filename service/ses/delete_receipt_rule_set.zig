@@ -10,8 +10,7 @@ pub const DeleteReceiptRuleSetInput = struct {
     rule_set_name: []const u8,
 };
 
-pub const DeleteReceiptRuleSetOutput = struct {
-};
+pub const DeleteReceiptRuleSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteReceiptRuleSetInput, options: CallOptions) !DeleteReceiptRuleSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

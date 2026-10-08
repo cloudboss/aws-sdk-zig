@@ -7,7 +7,7 @@ GRADLE_VERSION = 8.7
 CTR_IMAGE_BASE = ghcr.io/cloudboss/docker.io/library/alpine:3.23.2
 CTR_IMAGE_LOCALSTACK = ghcr.io/cloudboss/docker.io/localstack/localstack:4.14.0
 
-AWS_MODELS_COMMIT = 7eb6ab98cd5f1e5dc6dd90ea1bdc625f9ae308ba
+AWS_MODELS_COMMIT = 1cfdfb4bb9ea858e65623e66d73af04bec353201
 
 # The Dockerfile and its args are hashed to create a unique tag. The image
 # will be rebuilt if the hash changes, as the dependency file will change.
@@ -58,6 +58,7 @@ build: $(HAS_IMAGE_LOCAL)
 		$(CTR_IMAGE_LOCAL) /bin/sh -c "zig build $(ZIG_BUILD_FLAGS)"
 
 test: $(HAS_IMAGE_LOCAL)
+	@python3 -B -m unittest discover -s hack -p 'test_*.py'
 	@docker run --rm \
 		-v $(DIR_ROOT):/code \
 		-w /code \

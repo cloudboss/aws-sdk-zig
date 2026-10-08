@@ -6,10 +6,10 @@ pub const GroupDefinition = struct {
     key: []const u8,
 
     /// The type of grouping to apply.
-    @"type": GroupDefinitionType = .dimension,
+    type: GroupDefinitionType = .dimension,
 
     pub const json_field_names = .{
         .key = "key",
-        .@"type" = "type",
+        .type = "type",
     };
 };

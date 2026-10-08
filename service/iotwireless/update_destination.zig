@@ -6,9 +6,32 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ExpressionType = @import("expression_type.zig").ExpressionType;
 
-pub const UpdateDestinationInput = @import("update_destination_request.zig").UpdateDestinationRequest;
+pub const UpdateDestinationInput = struct {
+    /// A new description of the resource.
+    description: ?[]const u8 = null,
 
-pub const UpdateDestinationOutput = @import("update_destination_response.zig").UpdateDestinationResponse;
+    /// The new rule name or topic rule to send messages to.
+    expression: ?[]const u8 = null,
+
+    /// The type of value in `Expression`.
+    expression_type: ?ExpressionType = null,
+
+    /// The new name of the resource.
+    name: []const u8,
+
+    /// The ARN of the IAM Role that authorizes the destination.
+    role_arn: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .description = "Description",
+        .expression = "Expression",
+        .expression_type = "ExpressionType",
+        .name = "Name",
+        .role_arn = "RoleArn",
+    };
+};
+
+pub const UpdateDestinationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDestinationInput, options: CallOptions) !UpdateDestinationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

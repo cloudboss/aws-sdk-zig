@@ -57,7 +57,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetSettingsInput, confi
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/settings/");
-    try path_buf.appendSlice(allocator, input.attribute);
+    try path_buf.appendSlice(allocator, input.attribute.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

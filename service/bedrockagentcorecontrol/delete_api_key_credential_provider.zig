@@ -14,8 +14,7 @@ pub const DeleteApiKeyCredentialProviderInput = struct {
     };
 };
 
-pub const DeleteApiKeyCredentialProviderOutput = struct {
-};
+pub const DeleteApiKeyCredentialProviderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteApiKeyCredentialProviderInput, options: CallOptions) !DeleteApiKeyCredentialProviderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

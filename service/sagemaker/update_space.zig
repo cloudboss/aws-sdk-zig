@@ -6,7 +6,26 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SpaceSettings = @import("space_settings.zig").SpaceSettings;
 
-pub const UpdateSpaceInput = @import("update_space_request.zig").UpdateSpaceRequest;
+pub const UpdateSpaceInput = struct {
+    /// The ID of the associated domain.
+    domain_id: []const u8,
+
+    /// The name of the space that appears in the Amazon SageMaker Studio UI.
+    space_display_name: ?[]const u8 = null,
+
+    /// The name of the space.
+    space_name: []const u8,
+
+    /// A collection of space settings.
+    space_settings: ?SpaceSettings = null,
+
+    pub const json_field_names = .{
+        .domain_id = "DomainId",
+        .space_display_name = "SpaceDisplayName",
+        .space_name = "SpaceName",
+        .space_settings = "SpaceSettings",
+    };
+};
 
 pub const UpdateSpaceOutput = struct {
     /// The space's Amazon Resource Name (ARN).

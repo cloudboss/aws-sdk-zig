@@ -14,8 +14,7 @@ pub const DeleteCoreDefinitionInput = struct {
     };
 };
 
-pub const DeleteCoreDefinitionOutput = struct {
-};
+pub const DeleteCoreDefinitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCoreDefinitionInput, options: CallOptions) !DeleteCoreDefinitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -8,10 +8,10 @@ pub const IcmpTypeCode = struct {
     /// The ICMP type for which to deny or allow access. To deny or allow all types,
     /// use the
     /// value `-1`.
-    @"type": ?i32 = null,
+    type: ?i32 = null,
 
     pub const json_field_names = .{
         .code = "Code",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

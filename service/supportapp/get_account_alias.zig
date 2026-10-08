@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetAccountAliasInput = struct {
-};
+pub const GetAccountAliasInput = struct {};
 
 pub const GetAccountAliasOutput = struct {
     /// An alias or short name for an Amazon Web Services account.

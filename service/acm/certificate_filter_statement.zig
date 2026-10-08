@@ -8,7 +8,7 @@ pub const CertificateFilterStatement = union(enum) {
     /// A single certificate filter.
     filter: ?CertificateFilter,
     /// A filter statement that must not be true.
-    not: ?CertificateFilterStatement,
+    not: ?*const CertificateFilterStatement,
     /// A list of filter statements where at least one must be true.
     @"or": ?[]const CertificateFilterStatement,
 

@@ -19,8 +19,7 @@ pub const SubmitBenefitApplicationInput = struct {
     };
 };
 
-pub const SubmitBenefitApplicationOutput = struct {
-};
+pub const SubmitBenefitApplicationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SubmitBenefitApplicationInput, options: CallOptions) !SubmitBenefitApplicationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

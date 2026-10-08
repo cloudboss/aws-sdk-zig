@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Configuration = @import("configuration.zig").Configuration;
 
-pub const DescribeEventConfigurationsInput = struct {
-};
+pub const DescribeEventConfigurationsInput = struct {};
 
 pub const DescribeEventConfigurationsOutput = struct {
     /// The creation date of the event configuration.

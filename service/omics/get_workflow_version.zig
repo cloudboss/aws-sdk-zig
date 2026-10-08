@@ -19,7 +19,7 @@ pub const GetWorkflowVersionInput = struct {
     @"export": ?[]const WorkflowExport = null,
 
     /// The workflow's type.
-    @"type": ?WorkflowType = null,
+    type: ?WorkflowType = null,
 
     /// The workflow version name.
     version_name: []const u8,
@@ -34,7 +34,7 @@ pub const GetWorkflowVersionInput = struct {
 
     pub const json_field_names = .{
         .@"export" = "export",
-        .@"type" = "type",
+        .type = "type",
         .version_name = "versionName",
         .workflow_id = "workflowId",
         .workflow_owner_id = "workflowOwnerId",
@@ -114,7 +114,7 @@ pub const GetWorkflowVersionOutput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The workflow version type
-    @"type": ?WorkflowType = null,
+    type: ?WorkflowType = null,
 
     /// The universally unique identifier (UUID) value for this workflow version
     uuid: ?[]const u8 = null,
@@ -150,7 +150,7 @@ pub const GetWorkflowVersionOutput = struct {
         .storage_capacity = "storageCapacity",
         .storage_type = "storageType",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .uuid = "uuid",
         .version_name = "versionName",
         .workflow_bucket_owner_id = "workflowBucketOwnerId",
@@ -205,7 +205,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetWorkflowVersionInput
             query_has_prev = true;
         }
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());

@@ -1,9 +1,8 @@
 const std = @import("std");
 const aws = @import("aws");
 const iotsitewise = @import("iotsitewise");
-const lambda_core = @import("lambda-core");
-const lambda_microvms = @import("lambda-microvms");
-const lambda_web = @import("lambda-web");
+const lambdacore = @import("lambdacore");
+const lambdamicrovms = @import("lambdamicrovms");
 const bedrockruntime = @import("bedrockruntime");
 const kinesis = @import("kinesis");
 const s3 = @import("s3");
@@ -12,9 +11,8 @@ const s3 = @import("s3");
 comptime {
     for (.{
         .{ iotsitewise, "check_iotsitewise_calls" },
-        .{ lambda_core, "check_lambda_core_calls" },
-        .{ lambda_microvms, "check_lambda_microvms_calls" },
-        .{ lambda_web, "check_lambda_web_calls" },
+        .{ lambdacore, "check_lambdacore_calls" },
+        .{ lambdamicrovms, "check_lambdamicrovms_calls" },
         .{ bedrockruntime, "check_bedrockruntime_calls" },
         .{ kinesis, "check_kinesis_calls" },
     }) |entry| {
@@ -216,9 +214,9 @@ test "required response payload and headers are initialized" {
 test "new Lambda clients decode required response members" {
     const cases = .{
         .{
-            lambda_core,
+            lambdacore,
             "getNetworkConnector",
-            lambda_core.GetNetworkConnectorInput{ .identifier = "connector-1" },
+            lambdacore.GetNetworkConnectorInput{ .identifier = "connector-1" },
             \\{"Arn":"arn:connector","Id":"connector-1","Name":"example"}
             ,
             .{
@@ -229,9 +227,9 @@ test "new Lambda clients decode required response members" {
             },
         },
         .{
-            lambda_microvms,
+            lambdamicrovms,
             "getMicrovm",
-            lambda_microvms.GetMicrovmInput{ .microvm_identifier = "vm-1" },
+            lambdamicrovms.GetMicrovmInput{ .microvm_identifier = "vm-1" },
             \\{"endpoint":"https://example.com","imageArn":"arn:image","imageVersion":"1",
             \\ "maximumDurationInSeconds":3600,"microvmId":"vm-1","startedAt":123,"state":"RUNNING"}
             ,
@@ -246,25 +244,9 @@ test "new Lambda clients decode required response members" {
             },
         },
         .{
-            lambda_web,
-            "getWebFunction",
-            lambda_web.GetWebFunctionInput{ .function_name = "example" },
-            \\{"createdAt":123,"functionArn":"arn:function","functionName":"example",
-            \\ "state":"Active","stateReason":"ready","updatedAt":456}
-            ,
-            .{
-                .{ "created_at", 123 },
-                .{ "function_arn", "arn:function" },
-                .{ "function_name", "example" },
-                .{ "state", .active },
-                .{ "state_reason", "ready" },
-                .{ "updated_at", 456 },
-            },
-        },
-        .{
-            lambda_core,
+            lambdacore,
             "getNetworkConnector",
-            lambda_core.GetNetworkConnectorInput{ .identifier = "connector-1" },
+            lambdacore.GetNetworkConnectorInput{ .identifier = "connector-1" },
             "",
             .{ .{ "arn", "" }, .{ "id", "" }, .{ "name", "" }, .{ "configuration", null } },
         },
@@ -312,16 +294,16 @@ test "empty response reports a missing required enum" {
     var endpoint_buffer: [64]u8 = undefined;
     var config = try makeConfig(&env_map, try server.endpoint(&endpoint_buffer));
     defer config.http_client.deinit();
-    var client = lambda_web.Client.initWithOptions(
+    var client = lambdamicrovms.Client.initWithOptions(
         std.testing.allocator,
         &config,
         .{ .max_attempts = 1, .keep_alive = false },
     );
     defer client.deinit();
 
-    try std.testing.expectError(error.MissingField, client.getWebFunction(
+    try std.testing.expectError(error.MissingField, client.getMicrovm(
         std.testing.allocator,
-        .{ .function_name = "example" },
+        .{ .microvm_identifier = "vm-1" },
         .{},
     ));
 }
@@ -458,14 +440,14 @@ test "paginators own tokens and stop on null or empty values" {
             "{\"nextToken\":\"page-2\"}", "{}",
         },
         .{
-            lambda_core,                              "listNetworkConnectorsPaginator",
-            lambda_core.ListNetworkConnectorsInput{}, "next_marker",
-            "{\"NextMarker\":\"page-2\"}",            "{\"NextMarker\":\"\"}",
+            lambdacore,                              "listNetworkConnectorsPaginator",
+            lambdacore.ListNetworkConnectorsInput{}, "next_marker",
+            "{\"NextMarker\":\"page-2\"}",           "{\"NextMarker\":\"\"}",
         },
         .{
-            lambda_core,                              "listNetworkConnectorsPaginator",
-            lambda_core.ListNetworkConnectorsInput{}, "next_marker",
-            "{\"NextMarker\":\"page-2\"}",            "{\"NextMarker\":null}",
+            lambdacore,                              "listNetworkConnectorsPaginator",
+            lambdacore.ListNetworkConnectorsInput{}, "next_marker",
+            "{\"NextMarker\":\"page-2\"}",           "{\"NextMarker\":null}",
         },
     };
     inline for (cases) |case| {
@@ -527,7 +509,7 @@ test "pagination allocation failure preserves the previous token" {
     var config = try makeConfig(&env_map, try server.endpoint(&endpoint_buffer));
     defer config.http_client.deinit();
     var failing: TokenAllocator = .{ .token_len = token.len };
-    var client = lambda_core.Client.initWithOptions(
+    var client = lambdacore.Client.initWithOptions(
         failing.allocator(),
         &config,
         .{ .max_attempts = 1, .keep_alive = false },

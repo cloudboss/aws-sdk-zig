@@ -7,9 +7,43 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Location = @import("location.zig").Location;
 const Site = @import("site.zig").Site;
 
-pub const UpdateSiteInput = @import("update_site_request.zig").UpdateSiteRequest;
+pub const UpdateSiteInput = struct {
+    /// A description of your site.
+    ///
+    /// Constraints: Maximum length of 256 characters.
+    description: ?[]const u8 = null,
 
-pub const UpdateSiteOutput = @import("update_site_response.zig").UpdateSiteResponse;
+    /// The ID of the global network.
+    global_network_id: []const u8,
+
+    /// The site location:
+    ///
+    /// * `Address`: The physical address of the site.
+    ///
+    /// * `Latitude`: The latitude of the site.
+    ///
+    /// * `Longitude`: The longitude of the site.
+    location: ?Location = null,
+
+    /// The ID of your site.
+    site_id: []const u8,
+
+    pub const json_field_names = .{
+        .description = "Description",
+        .global_network_id = "GlobalNetworkId",
+        .location = "Location",
+        .site_id = "SiteId",
+    };
+};
+
+pub const UpdateSiteOutput = struct {
+    /// Information about the site.
+    site: ?Site = null,
+
+    pub const json_field_names = .{
+        .site = "Site",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSiteInput, options: CallOptions) !UpdateSiteOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

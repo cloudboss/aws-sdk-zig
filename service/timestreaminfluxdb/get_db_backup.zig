@@ -96,7 +96,7 @@ pub const GetDbBackupOutput = struct {
     status: ?DbBackupStatus = null,
 
     /// The type of backup.
-    @"type": ?DbBackupType = null,
+    type: ?DbBackupType = null,
 
     /// The VPC security group IDs associated with the resource at the time of
     /// backup.
@@ -128,7 +128,7 @@ pub const GetDbBackupOutput = struct {
         .port = "port",
         .publicly_accessible = "publiclyAccessible",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
         .vpc_security_group_ids = "vpcSecurityGroupIds",
         .vpc_subnet_ids = "vpcSubnetIds",
     };

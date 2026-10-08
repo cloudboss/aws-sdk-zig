@@ -14,8 +14,7 @@ pub const DeleteCustomVerificationEmailTemplateInput = struct {
     };
 };
 
-pub const DeleteCustomVerificationEmailTemplateOutput = struct {
-};
+pub const DeleteCustomVerificationEmailTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCustomVerificationEmailTemplateInput, options: CallOptions) !DeleteCustomVerificationEmailTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

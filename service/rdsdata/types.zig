@@ -1,10 +1,6 @@
 pub const ArrayValue = @import("array_value.zig").ArrayValue;
-pub const BatchExecuteStatementRequest = @import("batch_execute_statement_request.zig").BatchExecuteStatementRequest;
-pub const BatchExecuteStatementResponse = @import("batch_execute_statement_response.zig").BatchExecuteStatementResponse;
 pub const ColumnMetadata = @import("column_metadata.zig").ColumnMetadata;
 pub const DecimalReturnType = @import("decimal_return_type.zig").DecimalReturnType;
-pub const ExecuteStatementRequest = @import("execute_statement_request.zig").ExecuteStatementRequest;
-pub const ExecuteStatementResponse = @import("execute_statement_response.zig").ExecuteStatementResponse;
 pub const Field = @import("field.zig").Field;
 pub const LongReturnType = @import("long_return_type.zig").LongReturnType;
 pub const Record = @import("record.zig").Record;

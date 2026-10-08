@@ -23,8 +23,7 @@ pub const DisassociateEnvironmentRoleInput = struct {
     };
 };
 
-pub const DisassociateEnvironmentRoleOutput = struct {
-};
+pub const DisassociateEnvironmentRoleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateEnvironmentRoleInput, options: CallOptions) !DisassociateEnvironmentRoleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

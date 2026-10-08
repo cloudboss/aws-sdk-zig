@@ -23,8 +23,7 @@ pub const PutDeliverabilityDashboardOptionInput = struct {
     };
 };
 
-pub const PutDeliverabilityDashboardOptionOutput = struct {
-};
+pub const PutDeliverabilityDashboardOptionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutDeliverabilityDashboardOptionInput, options: CallOptions) !PutDeliverabilityDashboardOptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

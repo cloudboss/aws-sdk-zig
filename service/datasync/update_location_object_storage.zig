@@ -118,8 +118,7 @@ pub const UpdateLocationObjectStorageInput = struct {
     };
 };
 
-pub const UpdateLocationObjectStorageOutput = struct {
-};
+pub const UpdateLocationObjectStorageOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLocationObjectStorageInput, options: CallOptions) !UpdateLocationObjectStorageOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

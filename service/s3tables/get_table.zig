@@ -75,7 +75,7 @@ pub const GetTableOutput = struct {
     table_bucket_id: ?[]const u8 = null,
 
     /// The type of the table.
-    @"type": TableType,
+    type: TableType,
 
     /// The version token of the table.
     version_token: []const u8,
@@ -98,7 +98,7 @@ pub const GetTableOutput = struct {
         .owner_account_id = "ownerAccountId",
         .table_arn = "tableARN",
         .table_bucket_id = "tableBucketId",
-        .@"type" = "type",
+        .type = "type",
         .version_token = "versionToken",
         .warehouse_location = "warehouseLocation",
     };

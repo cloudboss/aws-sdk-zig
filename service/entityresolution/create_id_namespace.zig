@@ -38,7 +38,7 @@ pub const CreateIdNamespaceInput = struct {
     ///
     /// The `TARGET` contains a configuration of `targetId` to which all `sourceIds`
     /// will resolve to.
-    @"type": IdNamespaceType,
+    type: IdNamespaceType,
 
     pub const json_field_names = .{
         .description = "description",
@@ -47,7 +47,7 @@ pub const CreateIdNamespaceInput = struct {
         .input_source_config = "inputSourceConfig",
         .role_arn = "roleArn",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -87,7 +87,7 @@ pub const CreateIdNamespaceOutput = struct {
     ///
     /// The `TARGET` contains a configuration of `targetId` to which all `sourceIds`
     /// will resolve to.
-    @"type": IdNamespaceType,
+    type: IdNamespaceType,
 
     /// The timestamp of when the ID namespace was last updated.
     updated_at: i64,
@@ -101,7 +101,7 @@ pub const CreateIdNamespaceOutput = struct {
         .input_source_config = "inputSourceConfig",
         .role_arn = "roleArn",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
     };
 };
@@ -178,7 +178,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateIdNamespaceInput,
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

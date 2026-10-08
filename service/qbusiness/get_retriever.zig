@@ -48,7 +48,7 @@ pub const GetRetrieverOutput = struct {
     status: ?RetrieverStatus = null,
 
     /// The type of the retriever.
-    @"type": ?RetrieverType = null,
+    type: ?RetrieverType = null,
 
     /// The Unix timestamp when the retriever was last updated.
     updated_at: ?i64 = null,
@@ -62,7 +62,7 @@ pub const GetRetrieverOutput = struct {
         .retriever_id = "retrieverId",
         .role_arn = "roleArn",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
     };
 };

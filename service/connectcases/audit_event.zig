@@ -24,7 +24,7 @@ pub const AuditEvent = struct {
     ///
     /// Valid Values: `Case.Created` | `Case.Updated` | `RelatedItem.Created` |
     /// `RelatedItem.Updated` | `RelatedItem.Deleted`
-    @"type": AuditEventType,
+    type: AuditEventType,
 
     pub const json_field_names = .{
         .event_id = "eventId",
@@ -32,6 +32,6 @@ pub const AuditEvent = struct {
         .performed_by = "performedBy",
         .performed_time = "performedTime",
         .related_item_type = "relatedItemType",
-        .@"type" = "type",
+        .type = "type",
     };
 };

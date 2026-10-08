@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ServiceQuotaTemplateAssociationStatus = @import("service_quota_template_association_status.zig").ServiceQuotaTemplateAssociationStatus;
 
-pub const GetAssociationForServiceQuotaTemplateInput = struct {
-};
+pub const GetAssociationForServiceQuotaTemplateInput = struct {};
 
 pub const GetAssociationForServiceQuotaTemplateOutput = struct {
     /// The association status. If the status is `ASSOCIATED`, the quota increase

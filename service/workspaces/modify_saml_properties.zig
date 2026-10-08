@@ -31,8 +31,7 @@ pub const ModifySamlPropertiesInput = struct {
     };
 };
 
-pub const ModifySamlPropertiesOutput = struct {
-};
+pub const ModifySamlPropertiesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifySamlPropertiesInput, options: CallOptions) !ModifySamlPropertiesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

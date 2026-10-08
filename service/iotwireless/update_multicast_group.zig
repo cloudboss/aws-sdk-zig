@@ -23,8 +23,7 @@ pub const UpdateMulticastGroupInput = struct {
     };
 };
 
-pub const UpdateMulticastGroupOutput = struct {
-};
+pub const UpdateMulticastGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateMulticastGroupInput, options: CallOptions) !UpdateMulticastGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

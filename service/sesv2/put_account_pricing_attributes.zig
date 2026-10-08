@@ -26,8 +26,7 @@ pub const PutAccountPricingAttributesInput = struct {
     };
 };
 
-pub const PutAccountPricingAttributesOutput = struct {
-};
+pub const PutAccountPricingAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutAccountPricingAttributesInput, options: CallOptions) !PutAccountPricingAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

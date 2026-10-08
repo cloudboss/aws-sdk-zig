@@ -28,7 +28,7 @@ pub const NotebookSummary = struct {
     status: NotebookStatus,
 
     /// The type of the notebook.
-    @"type": ?NotebookType = null,
+    type: ?NotebookType = null,
 
     /// The timestamp of when the notebook was last updated.
     updated_at: ?i64 = null,
@@ -45,7 +45,7 @@ pub const NotebookSummary = struct {
         .name = "name",
         .owning_project_id = "owningProjectId",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
         .updated_by = "updatedBy",
     };

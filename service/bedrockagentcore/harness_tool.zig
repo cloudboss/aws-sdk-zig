@@ -11,11 +11,11 @@ pub const HarnessTool = struct {
     name: ?[]const u8 = null,
 
     /// The type of tool.
-    @"type": HarnessToolType,
+    type: HarnessToolType,
 
     pub const json_field_names = .{
         .config = "config",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };

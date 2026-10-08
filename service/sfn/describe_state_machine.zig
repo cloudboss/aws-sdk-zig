@@ -119,7 +119,7 @@ pub const DescribeStateMachineOutput = struct {
 
     /// The `type` of the state machine (`STANDARD` or
     /// `EXPRESS`).
-    @"type": StateMachineType,
+    type: StateMachineType,
 
     /// A map of **state name** to a list of variables referenced by that state.
     /// States that do not use variable references will not be shown in the
@@ -139,7 +139,7 @@ pub const DescribeStateMachineOutput = struct {
         .state_machine_arn = "stateMachineArn",
         .status = "status",
         .tracing_configuration = "tracingConfiguration",
-        .@"type" = "type",
+        .type = "type",
         .variable_references = "variableReferences",
     };
 };

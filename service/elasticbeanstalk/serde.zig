@@ -1380,7 +1380,7 @@ pub fn deserializeEnvironmentResourcesDescription(allocator: std.mem.Allocator, 
 pub fn deserializeEnvironmentTier(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !EnvironmentTier {
     var result: EnvironmentTier = undefined;
     result.name = null;
-    result.@"type" = null;
+    result.type = null;
     result.version = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -1388,7 +1388,7 @@ pub fn deserializeEnvironmentTier(allocator: std.mem.Allocator, reader: *aws.xml
                 if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = try allocator.dupe(u8, try reader.readElementText());
+                    result.type = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Version")) {
                     result.version = try allocator.dupe(u8, try reader.readElementText());
                 } else {
@@ -1453,7 +1453,7 @@ pub fn deserializeImageBuildConfiguration(allocator: std.mem.Allocator, reader: 
     result.compute_type = null;
     result.dockerfile_location = null;
     result.timeout_in_minutes = null;
-    result.@"type" = null;
+    result.type = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -1470,7 +1470,7 @@ pub fn deserializeImageBuildConfiguration(allocator: std.mem.Allocator, reader: 
                 } else if (std.mem.eql(u8, e.local, "TimeoutInMinutes")) {
                     result.timeout_in_minutes = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = ImageBuildType.fromWireName(try reader.readElementText());
+                    result.type = ImageBuildType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -2634,7 +2634,7 @@ pub fn serializeEnvironmentTier(allocator: std.mem.Allocator, buf: *std.ArrayLis
         try aws.xml.appendXmlEscaped(allocator, buf, v);
         try buf.appendSlice(allocator, "</Name>");
     }
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(allocator, "<Type>");
         try aws.xml.appendXmlEscaped(allocator, buf, v);
         try buf.appendSlice(allocator, "</Type>");
@@ -2680,7 +2680,7 @@ pub fn serializeImageBuildConfiguration(allocator: std.mem.Allocator, buf: *std.
         }
         try buf.appendSlice(allocator, "</TimeoutInMinutes>");
     }
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(allocator, "<Type>");
         try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Type>");
@@ -2770,7 +2770,7 @@ pub fn serializePlatformFilter(allocator: std.mem.Allocator, buf: *std.ArrayList
         try aws.xml.appendXmlEscaped(allocator, buf, v);
         try buf.appendSlice(allocator, "</Operator>");
     }
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(allocator, "<Type>");
         try aws.xml.appendXmlEscaped(allocator, buf, v);
         try buf.appendSlice(allocator, "</Type>");
@@ -2850,4 +2850,3 @@ pub fn serializeTag(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value
         try buf.appendSlice(allocator, "</Value>");
     }
 }
-

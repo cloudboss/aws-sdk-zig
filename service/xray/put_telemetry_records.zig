@@ -23,8 +23,7 @@ pub const PutTelemetryRecordsInput = struct {
     };
 };
 
-pub const PutTelemetryRecordsOutput = struct {
-};
+pub const PutTelemetryRecordsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutTelemetryRecordsInput, options: CallOptions) !PutTelemetryRecordsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

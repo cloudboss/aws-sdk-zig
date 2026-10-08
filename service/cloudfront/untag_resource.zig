@@ -7,7 +7,13 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const TagKeys = @import("tag_keys.zig").TagKeys;
 const serde = @import("serde.zig");
 
-pub const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceInput = struct {
+    /// An ARN of a CloudFront resource.
+    resource: []const u8,
+
+    /// A complex type that contains zero or more `Tag` key elements.
+    tag_keys: TagKeys,
+};
 
 pub const UntagResourceOutput = struct {};
 

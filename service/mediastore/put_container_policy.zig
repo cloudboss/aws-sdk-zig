@@ -23,8 +23,7 @@ pub const PutContainerPolicyInput = struct {
     };
 };
 
-pub const PutContainerPolicyOutput = struct {
-};
+pub const PutContainerPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutContainerPolicyInput, options: CallOptions) !PutContainerPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

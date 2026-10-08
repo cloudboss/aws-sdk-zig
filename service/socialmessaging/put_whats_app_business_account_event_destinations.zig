@@ -22,8 +22,7 @@ pub const PutWhatsAppBusinessAccountEventDestinationsInput = struct {
     };
 };
 
-pub const PutWhatsAppBusinessAccountEventDestinationsOutput = struct {
-};
+pub const PutWhatsAppBusinessAccountEventDestinationsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutWhatsAppBusinessAccountEventDestinationsInput, options: CallOptions) !PutWhatsAppBusinessAccountEventDestinationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

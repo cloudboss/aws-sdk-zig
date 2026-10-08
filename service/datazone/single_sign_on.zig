@@ -7,14 +7,14 @@ pub const SingleSignOn = struct {
     idc_instance_arn: ?[]const u8 = null,
 
     /// The type of single sign-on in Amazon DataZone.
-    @"type": ?AuthType = null,
+    type: ?AuthType = null,
 
     /// The single sign-on user assignment in Amazon DataZone.
     user_assignment: ?UserAssignment = null,
 
     pub const json_field_names = .{
         .idc_instance_arn = "idcInstanceArn",
-        .@"type" = "type",
+        .type = "type",
         .user_assignment = "userAssignment",
     };
 };

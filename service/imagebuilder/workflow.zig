@@ -49,7 +49,7 @@ pub const Workflow = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The image creation stage that the workflow applies to.
-    @"type": ?WorkflowType = null,
+    type: ?WorkflowType = null,
 
     /// The workflow resource version. Workflow resources are immutable.
     /// To make a change, you can clone a workflow or create a new version.
@@ -67,7 +67,7 @@ pub const Workflow = struct {
         .parameters = "parameters",
         .state = "state",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .version = "version",
     };
 };

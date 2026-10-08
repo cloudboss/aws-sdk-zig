@@ -16,8 +16,7 @@ pub const DeregisterJobDefinitionInput = struct {
     };
 };
 
-pub const DeregisterJobDefinitionOutput = struct {
-};
+pub const DeregisterJobDefinitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterJobDefinitionInput, options: CallOptions) !DeregisterJobDefinitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

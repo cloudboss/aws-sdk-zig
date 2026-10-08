@@ -5,9 +5,31 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceInput = struct {
+    /// A unique, case-sensitive identifier that you provide to ensure the
+    /// idempotency of the request. Must be 1-64 characters long and contain only
+    /// alphanumeric characters, underscores, and hyphens.
+    client_token: ?[]const u8 = null,
 
-pub const UntagResourceOutput = @import("untag_resource_response.zig").UntagResourceResponse;
+    /// The ARN of the resource to untag.
+    resource_arn: []const u8,
+
+    /// The revision number of the automation rule to untag. This ensures you're
+    /// untagging the correct version of the rule.
+    rule_revision: i64,
+
+    /// The keys of the tags to remove from the resource.
+    tag_keys: []const []const u8,
+
+    pub const json_field_names = .{
+        .client_token = "clientToken",
+        .resource_arn = "resourceArn",
+        .rule_revision = "ruleRevision",
+        .tag_keys = "tagKeys",
+    };
+};
+
+pub const UntagResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UntagResourceInput, options: CallOptions) !UntagResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

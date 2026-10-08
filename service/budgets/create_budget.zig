@@ -35,8 +35,7 @@ pub const CreateBudgetInput = struct {
     };
 };
 
-pub const CreateBudgetOutput = struct {
-};
+pub const CreateBudgetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateBudgetInput, options: CallOptions) !CreateBudgetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

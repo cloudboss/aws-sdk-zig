@@ -19,8 +19,7 @@ pub const ModifyWorkspaceStateInput = struct {
     };
 };
 
-pub const ModifyWorkspaceStateOutput = struct {
-};
+pub const ModifyWorkspaceStateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyWorkspaceStateInput, options: CallOptions) !ModifyWorkspaceStateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

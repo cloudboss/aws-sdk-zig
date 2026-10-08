@@ -14,8 +14,7 @@ pub const CancelOrderInput = struct {
     };
 };
 
-pub const CancelOrderOutput = struct {
-};
+pub const CancelOrderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelOrderInput, options: CallOptions) !CancelOrderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

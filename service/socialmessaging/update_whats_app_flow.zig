@@ -35,8 +35,7 @@ pub const UpdateWhatsAppFlowInput = struct {
     };
 };
 
-pub const UpdateWhatsAppFlowOutput = struct {
-};
+pub const UpdateWhatsAppFlowOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWhatsAppFlowInput, options: CallOptions) !UpdateWhatsAppFlowOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

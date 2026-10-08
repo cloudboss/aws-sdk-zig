@@ -11,11 +11,11 @@ pub const EventResource = struct {
     name: ?[]const u8 = null,
 
     /// The type of resource that emitted an event.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

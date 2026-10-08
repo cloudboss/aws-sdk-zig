@@ -9,11 +9,11 @@ pub const RetrievalResultContentColumn = struct {
     column_value: ?[]const u8 = null,
 
     /// The data type of the value.
-    @"type": ?RetrievalResultContentColumnType = null,
+    type: ?RetrievalResultContentColumnType = null,
 
     pub const json_field_names = .{
         .column_name = "columnName",
         .column_value = "columnValue",
-        .@"type" = "type",
+        .type = "type",
     };
 };

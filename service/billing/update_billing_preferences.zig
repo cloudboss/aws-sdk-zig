@@ -25,8 +25,7 @@ pub const UpdateBillingPreferencesInput = struct {
     };
 };
 
-pub const UpdateBillingPreferencesOutput = struct {
-};
+pub const UpdateBillingPreferencesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateBillingPreferencesInput, options: CallOptions) !UpdateBillingPreferencesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

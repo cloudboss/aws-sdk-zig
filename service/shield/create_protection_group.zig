@@ -63,8 +63,7 @@ pub const CreateProtectionGroupInput = struct {
     };
 };
 
-pub const CreateProtectionGroupOutput = struct {
-};
+pub const CreateProtectionGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateProtectionGroupInput, options: CallOptions) !CreateProtectionGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

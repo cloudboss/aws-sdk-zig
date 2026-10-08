@@ -14,8 +14,7 @@ pub const DeleteRuleSetInput = struct {
     };
 };
 
-pub const DeleteRuleSetOutput = struct {
-};
+pub const DeleteRuleSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRuleSetInput, options: CallOptions) !DeleteRuleSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

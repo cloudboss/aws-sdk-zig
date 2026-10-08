@@ -52,7 +52,7 @@ pub const Attribute = struct {
     traits: ?[]const Trait = null,
 
     /// The type of attribute.
-    @"type": ?EntitySubType = null,
+    type: ?EntitySubType = null,
 
     pub const json_field_names = .{
         .begin_offset = "BeginOffset",
@@ -64,6 +64,6 @@ pub const Attribute = struct {
         .score = "Score",
         .text = "Text",
         .traits = "Traits",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

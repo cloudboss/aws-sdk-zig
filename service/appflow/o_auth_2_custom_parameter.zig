@@ -24,7 +24,7 @@ pub const OAuth2CustomParameter = struct {
     label: ?[]const u8 = null,
 
     /// Indicates whether custom parameter is used with TokenUrl or AuthUrl.
-    @"type": ?OAuth2CustomPropType = null,
+    type: ?OAuth2CustomPropType = null,
 
     pub const json_field_names = .{
         .connector_supplied_values = "connectorSuppliedValues",
@@ -33,6 +33,6 @@ pub const OAuth2CustomParameter = struct {
         .is_sensitive_field = "isSensitiveField",
         .key = "key",
         .label = "label",
-        .@"type" = "type",
+        .type = "type",
     };
 };

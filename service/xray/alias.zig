@@ -7,11 +7,11 @@ pub const Alias = struct {
     names: ?[]const []const u8 = null,
 
     /// The type of the alias.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",
         .names = "Names",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

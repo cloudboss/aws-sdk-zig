@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DescribeReportCreationInput = struct {
-};
+pub const DescribeReportCreationInput = struct {};
 
 pub const DescribeReportCreationOutput = struct {
     /// Details of the common errors that all operations return.

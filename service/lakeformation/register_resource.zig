@@ -47,8 +47,7 @@ pub const RegisterResourceInput = struct {
     };
 };
 
-pub const RegisterResourceOutput = struct {
-};
+pub const RegisterResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RegisterResourceInput, options: CallOptions) !RegisterResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

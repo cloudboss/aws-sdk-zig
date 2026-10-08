@@ -18,8 +18,7 @@ pub const LogoutUserInput = struct {
     };
 };
 
-pub const LogoutUserOutput = struct {
-};
+pub const LogoutUserOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: LogoutUserInput, options: CallOptions) !LogoutUserOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

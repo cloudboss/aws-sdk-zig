@@ -6,10 +6,10 @@ pub const JobDependency = struct {
     job_id: ?[]const u8 = null,
 
     /// The type of the job dependency.
-    @"type": ?ArrayJobDependency = null,
+    type: ?ArrayJobDependency = null,
 
     pub const json_field_names = .{
         .job_id = "jobId",
-        .@"type" = "type",
+        .type = "type",
     };
 };

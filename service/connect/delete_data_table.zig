@@ -20,8 +20,7 @@ pub const DeleteDataTableInput = struct {
     };
 };
 
-pub const DeleteDataTableOutput = struct {
-};
+pub const DeleteDataTableOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDataTableInput, options: CallOptions) !DeleteDataTableOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

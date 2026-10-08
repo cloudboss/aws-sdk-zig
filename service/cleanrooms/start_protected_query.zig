@@ -28,7 +28,7 @@ pub const StartProtectedQueryInput = struct {
     sql_parameters: ProtectedQuerySQLParameters,
 
     /// The type of the protected query to be started.
-    @"type": ProtectedQueryType,
+    type: ProtectedQueryType,
 
     pub const json_field_names = .{
         .compute_configuration = "computeConfiguration",
@@ -36,7 +36,7 @@ pub const StartProtectedQueryInput = struct {
         .query_compute_payer_account_id = "queryComputePayerAccountId",
         .result_configuration = "resultConfiguration",
         .sql_parameters = "sqlParameters",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -113,7 +113,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartProtectedQueryInpu
     has_prev = true;
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

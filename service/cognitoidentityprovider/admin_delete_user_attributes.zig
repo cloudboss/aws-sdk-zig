@@ -32,8 +32,7 @@ pub const AdminDeleteUserAttributesInput = struct {
     };
 };
 
-pub const AdminDeleteUserAttributesOutput = struct {
-};
+pub const AdminDeleteUserAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminDeleteUserAttributesInput, options: CallOptions) !AdminDeleteUserAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

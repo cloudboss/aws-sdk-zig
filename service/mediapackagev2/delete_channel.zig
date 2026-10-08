@@ -5,10 +5,24 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteChannelInput = @import("delete_channel_request.zig").DeleteChannelRequest;
+pub const DeleteChannelInput = struct {
+    /// The name that describes the channel group. The name is the primary
+    /// identifier for the channel group, and must be unique for your account in the
+    /// AWS Region.
+    channel_group_name: []const u8,
 
-pub const DeleteChannelOutput = struct {
+    /// The name that describes the channel. The name is the primary identifier for
+    /// the channel, and must be unique for your account in the AWS Region and
+    /// channel group.
+    channel_name: []const u8,
+
+    pub const json_field_names = .{
+        .channel_group_name = "ChannelGroupName",
+        .channel_name = "ChannelName",
+    };
 };
+
+pub const DeleteChannelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteChannelInput, options: CallOptions) !DeleteChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

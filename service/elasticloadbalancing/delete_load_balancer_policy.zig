@@ -13,8 +13,7 @@ pub const DeleteLoadBalancerPolicyInput = struct {
     policy_name: []const u8,
 };
 
-pub const DeleteLoadBalancerPolicyOutput = struct {
-};
+pub const DeleteLoadBalancerPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLoadBalancerPolicyInput, options: CallOptions) !DeleteLoadBalancerPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

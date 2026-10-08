@@ -5,7 +5,18 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const UntagResourceInput = @import("untag_resource_request.zig").UntagResourceRequest;
+pub const UntagResourceInput = struct {
+    /// The resource's Amazon Resource Name (ARN).
+    resource: []const u8,
+
+    /// A list of tag keys to remove from the resource.
+    tag_keys: []const []const u8,
+
+    pub const json_field_names = .{
+        .resource = "Resource",
+        .tag_keys = "TagKeys",
+    };
+};
 
 pub const UntagResourceOutput = struct {};
 

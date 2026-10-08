@@ -33,8 +33,7 @@ pub const ChangeTagsForResourceInput = struct {
     resource_type: TagResourceType,
 };
 
-pub const ChangeTagsForResourceOutput = struct {
-};
+pub const ChangeTagsForResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ChangeTagsForResourceInput, options: CallOptions) !ChangeTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

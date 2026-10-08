@@ -14,8 +14,7 @@ pub const CancelDataQualityRuleRecommendationRunInput = struct {
     };
 };
 
-pub const CancelDataQualityRuleRecommendationRunOutput = struct {
-};
+pub const CancelDataQualityRuleRecommendationRunOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelDataQualityRuleRecommendationRunInput, options: CallOptions) !CancelDataQualityRuleRecommendationRunOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

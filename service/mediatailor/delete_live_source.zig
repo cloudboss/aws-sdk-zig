@@ -18,8 +18,7 @@ pub const DeleteLiveSourceInput = struct {
     };
 };
 
-pub const DeleteLiveSourceOutput = struct {
-};
+pub const DeleteLiveSourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLiveSourceInput, options: CallOptions) !DeleteLiveSourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

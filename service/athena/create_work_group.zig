@@ -40,8 +40,7 @@ pub const CreateWorkGroupInput = struct {
     };
 };
 
-pub const CreateWorkGroupOutput = struct {
-};
+pub const CreateWorkGroupOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateWorkGroupInput, options: CallOptions) !CreateWorkGroupOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

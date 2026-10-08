@@ -45,7 +45,7 @@ pub const Resource = struct {
     /// `service-code`:`resource-code`, and is case-insensitive. For
     /// example, an Amazon EC2 Subnet would be represented by the string
     /// `ec2:subnet`.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "arn",
@@ -56,6 +56,6 @@ pub const Resource = struct {
         .resource_share_arn = "resourceShareArn",
         .status = "status",
         .status_message = "statusMessage",
-        .@"type" = "type",
+        .type = "type",
     };
 };

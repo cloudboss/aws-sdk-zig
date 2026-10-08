@@ -27,7 +27,7 @@ pub const AgentRecommendationItemSummary = struct {
     recommendation_arn: []const u8,
 
     /// The type of the recommendation item.
-    @"type": RecommendationItemType,
+    type: RecommendationItemType,
 
     pub const json_field_names = .{
         .created_at = "createdAt",
@@ -37,6 +37,6 @@ pub const AgentRecommendationItemSummary = struct {
         .last_modified_by = "lastModifiedBy",
         .metadata = "metadata",
         .recommendation_arn = "recommendationArn",
-        .@"type" = "type",
+        .type = "type",
     };
 };

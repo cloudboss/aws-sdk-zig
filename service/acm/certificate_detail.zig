@@ -152,7 +152,7 @@ pub const CertificateDetail = struct {
     /// between certificates that you import and those that ACM provides, see
     /// [Importing
     /// Certificates](https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html) in the *Certificate Manager User Guide*.
-    @"type": ?CertificateType = null,
+    type: ?CertificateType = null,
 
     /// Contains information about the most recent update to the certificate. This
     /// field exists only when the certificate type is `AMAZON_ISSUED` and a
@@ -189,7 +189,7 @@ pub const CertificateDetail = struct {
         .status = "Status",
         .subject = "Subject",
         .subject_alternative_names = "SubjectAlternativeNames",
-        .@"type" = "Type",
+        .type = "Type",
         .update_summary = "UpdateSummary",
     };
 };

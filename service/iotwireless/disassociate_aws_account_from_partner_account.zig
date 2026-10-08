@@ -19,8 +19,7 @@ pub const DisassociateAwsAccountFromPartnerAccountInput = struct {
     };
 };
 
-pub const DisassociateAwsAccountFromPartnerAccountOutput = struct {
-};
+pub const DisassociateAwsAccountFromPartnerAccountOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateAwsAccountFromPartnerAccountInput, options: CallOptions) !DisassociateAwsAccountFromPartnerAccountOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

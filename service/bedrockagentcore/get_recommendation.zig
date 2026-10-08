@@ -49,7 +49,7 @@ pub const GetRecommendationOutput = struct {
     status: RecommendationStatus,
 
     /// The type of recommendation.
-    @"type": RecommendationType,
+    type: RecommendationType,
 
     /// The timestamp when the recommendation was last updated.
     updated_at: i64,
@@ -64,7 +64,7 @@ pub const GetRecommendationOutput = struct {
         .recommendation_id = "recommendationId",
         .recommendation_result = "recommendationResult",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
     };
 };

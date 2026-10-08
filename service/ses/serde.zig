@@ -1917,4 +1917,3 @@ pub fn serializeWorkmailAction(allocator: std.mem.Allocator, buf: *std.ArrayList
         try buf.appendSlice(allocator, "</TopicArn>");
     }
 }
-

@@ -22,8 +22,7 @@ pub const RevokeTokenInput = struct {
     };
 };
 
-pub const RevokeTokenOutput = struct {
-};
+pub const RevokeTokenOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RevokeTokenInput, options: CallOptions) !RevokeTokenOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const DeleteListInput = struct {
     };
 };
 
-pub const DeleteListOutput = struct {
-};
+pub const DeleteListOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteListInput, options: CallOptions) !DeleteListOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

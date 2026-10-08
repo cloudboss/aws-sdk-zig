@@ -22,8 +22,7 @@ pub const CancelMailboxExportJobInput = struct {
     };
 };
 
-pub const CancelMailboxExportJobOutput = struct {
-};
+pub const CancelMailboxExportJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelMailboxExportJobInput, options: CallOptions) !CancelMailboxExportJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

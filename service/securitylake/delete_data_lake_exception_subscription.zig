@@ -5,11 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteDataLakeExceptionSubscriptionInput = struct {
-};
+pub const DeleteDataLakeExceptionSubscriptionInput = struct {};
 
-pub const DeleteDataLakeExceptionSubscriptionOutput = struct {
-};
+pub const DeleteDataLakeExceptionSubscriptionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDataLakeExceptionSubscriptionInput, options: CallOptions) !DeleteDataLakeExceptionSubscriptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

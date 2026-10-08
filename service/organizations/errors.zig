@@ -1405,11 +1405,11 @@ pub const TooManyRequestsException = struct {
     message: []const u8 = "",
     request_id: []const u8 = "",
 
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .message = "Message",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

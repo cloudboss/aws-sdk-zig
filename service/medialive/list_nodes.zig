@@ -6,9 +6,35 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DescribeNodeSummary = @import("describe_node_summary.zig").DescribeNodeSummary;
 
-pub const ListNodesInput = @import("list_nodes_request.zig").ListNodesRequest;
+pub const ListNodesInput = struct {
+    /// The ID of the cluster
+    cluster_id: []const u8,
 
-pub const ListNodesOutput = @import("list_nodes_response.zig").ListNodesResponse;
+    /// The maximum number of items to return.
+    max_results: ?i32 = null,
+
+    /// The token to retrieve the next page of results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .cluster_id = "ClusterId",
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListNodesOutput = struct {
+    /// Token for the next result.
+    next_token: ?[]const u8 = null,
+
+    /// An array of Nodes that exist in the Cluster.
+    nodes: ?[]const DescribeNodeSummary = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .nodes = "Nodes",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListNodesInput, options: CallOptions) !ListNodesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

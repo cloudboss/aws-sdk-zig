@@ -25,8 +25,7 @@ pub const CreateLFTagInput = struct {
     };
 };
 
-pub const CreateLFTagOutput = struct {
-};
+pub const CreateLFTagOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLFTagInput, options: CallOptions) !CreateLFTagOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

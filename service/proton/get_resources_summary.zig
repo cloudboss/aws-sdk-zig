@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const CountsSummary = @import("counts_summary.zig").CountsSummary;
 
-pub const GetResourcesSummaryInput = struct {
-};
+pub const GetResourcesSummaryInput = struct {};
 
 pub const GetResourcesSummaryOutput = struct {
     /// Summary counts of each Proton resource type.

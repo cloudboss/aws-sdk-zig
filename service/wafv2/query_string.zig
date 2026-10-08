@@ -6,5 +6,4 @@
 /// component types.
 ///
 /// JSON specification: `"QueryString": {}`
-pub const QueryString = struct {
-};
+pub const QueryString = struct {};

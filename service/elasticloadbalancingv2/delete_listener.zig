@@ -10,8 +10,7 @@ pub const DeleteListenerInput = struct {
     listener_arn: []const u8,
 };
 
-pub const DeleteListenerOutput = struct {
-};
+pub const DeleteListenerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteListenerInput, options: CallOptions) !DeleteListenerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

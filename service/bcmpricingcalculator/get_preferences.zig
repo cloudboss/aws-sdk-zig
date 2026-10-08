@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const RateType = @import("rate_type.zig").RateType;
 
-pub const GetPreferencesInput = struct {
-};
+pub const GetPreferencesInput = struct {};
 
 pub const GetPreferencesOutput = struct {
     /// The preferred rate types for the management account.

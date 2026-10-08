@@ -14,7 +14,73 @@ const EnvironmentResourcesDescription = @import("environment_resources_descripti
 const EnvironmentStatus = @import("environment_status.zig").EnvironmentStatus;
 const serde = @import("serde.zig");
 
-pub const UpdateEnvironmentInput = @import("update_environment_message.zig").UpdateEnvironmentMessage;
+pub const UpdateEnvironmentInput = struct {
+    /// The name of the application with which the environment is associated.
+    application_name: ?[]const u8 = null,
+
+    /// If this parameter is specified, Elastic Beanstalk updates the description of
+    /// this environment.
+    description: ?[]const u8 = null,
+
+    /// The ID of the environment to update.
+    ///
+    /// If no environment with this ID exists, Elastic Beanstalk returns an
+    /// `InvalidParameterValue` error.
+    ///
+    /// Condition: You must specify either this or an EnvironmentName, or both. If
+    /// you do not specify either, Elastic Beanstalk returns
+    /// `MissingRequiredParameter` error.
+    environment_id: ?[]const u8 = null,
+
+    /// The name of the environment to update. If no environment with this name
+    /// exists, Elastic Beanstalk returns an `InvalidParameterValue` error.
+    ///
+    /// Condition: You must specify either this or an EnvironmentId, or both. If you
+    /// do not specify either, Elastic Beanstalk returns
+    /// `MissingRequiredParameter` error.
+    environment_name: ?[]const u8 = null,
+
+    /// The name of the group to which the target environment belongs. Specify a
+    /// group name only if the environment's name is specified in an environment
+    /// manifest and not with the environment name or environment ID parameters. See
+    /// [Environment Manifest
+    /// (env.yaml)](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html) for details.
+    group_name: ?[]const u8 = null,
+
+    /// If specified, Elastic Beanstalk updates the configuration set associated
+    /// with the running environment and sets the specified configuration options to
+    /// the
+    /// requested value.
+    option_settings: ?[]const ConfigurationOptionSetting = null,
+
+    /// A list of custom user-defined configuration options to remove from the
+    /// configuration set for this environment.
+    options_to_remove: ?[]const OptionSpecification = null,
+
+    /// The ARN of the platform, if used.
+    platform_arn: ?[]const u8 = null,
+
+    /// This specifies the platform version that the environment will run after the
+    /// environment is updated.
+    solution_stack_name: ?[]const u8 = null,
+
+    /// If this parameter is specified, Elastic Beanstalk deploys this configuration
+    /// template to the environment. If no such configuration template is found,
+    /// Elastic Beanstalk returns an `InvalidParameterValue` error.
+    template_name: ?[]const u8 = null,
+
+    /// This specifies the tier to use to update the environment.
+    ///
+    /// Condition: At this time, if you change the tier version, name, or type,
+    /// Elastic Beanstalk returns `InvalidParameterValue` error.
+    tier: ?EnvironmentTier = null,
+
+    /// If this parameter is specified, Elastic Beanstalk deploys the named
+    /// application version to the environment. If no such application version is
+    /// found, returns
+    /// an `InvalidParameterValue` error.
+    version_label: ?[]const u8 = null,
+};
 
 pub const UpdateEnvironmentOutput = @import("environment_description.zig").EnvironmentDescription;
 
@@ -154,7 +220,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateEnvironmentInput,
             try body_buf.appendSlice(allocator, "&Tier.Name=");
             try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }
-        if (v.@"type") |sv| {
+        if (v.type) |sv| {
             try body_buf.appendSlice(allocator, "&Tier.Type=");
             try aws.url.appendUrlEncoded(allocator, &body_buf, sv);
         }

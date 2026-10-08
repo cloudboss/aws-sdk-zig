@@ -21,7 +21,7 @@ pub const LifecyclePolicyDetail = struct {
     policy_version: ?[]const u8 = null,
 
     /// The type of lifecycle policy.
-    @"type": ?LifecyclePolicyType = null,
+    type: ?LifecyclePolicyType = null,
 
     pub const json_field_names = .{
         .created_date = "createdDate",
@@ -30,6 +30,6 @@ pub const LifecyclePolicyDetail = struct {
         .name = "name",
         .policy = "policy",
         .policy_version = "policyVersion",
-        .@"type" = "type",
+        .type = "type",
     };
 };

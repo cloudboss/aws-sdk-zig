@@ -26,8 +26,7 @@ pub const UpdateLocationFsxOpenZfsInput = struct {
     };
 };
 
-pub const UpdateLocationFsxOpenZfsOutput = struct {
-};
+pub const UpdateLocationFsxOpenZfsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLocationFsxOpenZfsInput, options: CallOptions) !UpdateLocationFsxOpenZfsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetHostedZoneCountInput = struct {
-};
+pub const GetHostedZoneCountInput = struct {};
 
 pub const GetHostedZoneCountOutput = struct {
     /// The total number of public and private hosted zones that are associated with

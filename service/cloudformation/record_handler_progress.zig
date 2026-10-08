@@ -37,8 +37,7 @@ pub const RecordHandlerProgressInput = struct {
     status_message: ?[]const u8 = null,
 };
 
-pub const RecordHandlerProgressOutput = struct {
-};
+pub const RecordHandlerProgressOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RecordHandlerProgressInput, options: CallOptions) !RecordHandlerProgressOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

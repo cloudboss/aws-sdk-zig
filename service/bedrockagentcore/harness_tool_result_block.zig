@@ -14,12 +14,12 @@ pub const HarnessToolResultBlock = struct {
     tool_use_id: []const u8,
 
     /// The type of tool use that produced this result.
-    @"type": ?HarnessToolUseType = null,
+    type: ?HarnessToolUseType = null,
 
     pub const json_field_names = .{
         .content = "content",
         .status = "status",
         .tool_use_id = "toolUseId",
-        .@"type" = "type",
+        .type = "type",
     };
 };

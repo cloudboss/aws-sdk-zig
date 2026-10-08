@@ -6,9 +6,39 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SecurityConfiguration = @import("security_configuration.zig").SecurityConfiguration;
 
-pub const ListSecurityConfigurationsInput = @import("list_security_configurations_request.zig").ListSecurityConfigurationsRequest;
+pub const ListSecurityConfigurationsInput = struct {
+    /// The date and time after which the security configuration was created.
+    created_after: ?i64 = null,
 
-pub const ListSecurityConfigurationsOutput = @import("list_security_configurations_response.zig").ListSecurityConfigurationsResponse;
+    /// The date and time before which the security configuration was created.
+    created_before: ?i64 = null,
+
+    /// The maximum number of security configurations the operation can list.
+    max_results: ?i32 = null,
+
+    /// The token for the next set of security configurations to return.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .created_after = "createdAfter",
+        .created_before = "createdBefore",
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+    };
+};
+
+pub const ListSecurityConfigurationsOutput = struct {
+    /// The token for the next set of security configurations to return.
+    next_token: ?[]const u8 = null,
+
+    /// The list of returned security configurations.
+    security_configurations: ?[]const SecurityConfiguration = null,
+
+    pub const json_field_names = .{
+        .next_token = "nextToken",
+        .security_configurations = "securityConfigurations",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSecurityConfigurationsInput, options: CallOptions) !ListSecurityConfigurationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

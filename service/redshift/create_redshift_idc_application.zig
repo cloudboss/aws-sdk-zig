@@ -105,7 +105,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRedshiftIdcApplic
                     const n_1 = idx_1 + 1;
                     {
                         var prefix_buf: [256]u8 = undefined;
-                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AuthorizedTokenIssuerList.member.{d}.AuthorizedAudiencesList.member.{d}=", .{n, n_1}) catch continue;
+                        const field_prefix = std.fmt.bufPrint(&prefix_buf, "&AuthorizedTokenIssuerList.member.{d}.AuthorizedAudiencesList.member.{d}=", .{ n, n_1 }) catch continue;
                         try body_buf.appendSlice(allocator, field_prefix);
                         try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
                     }
@@ -146,7 +146,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRedshiftIdcApplic
                                     if (u_2) |v_2| {
                                         {
                                             var prefix_buf: [256]u8 = undefined;
-                                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ServiceIntegrations.member.{d}.LakeFormation.member.{d}.LakeFormationQuery.Authorization=", .{n, n_1}) catch continue;
+                                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ServiceIntegrations.member.{d}.LakeFormation.member.{d}.LakeFormationQuery.Authorization=", .{ n, n_1 }) catch continue;
                                             try body_buf.appendSlice(allocator, field_prefix);
                                             try aws.url.appendUrlEncoded(allocator, &body_buf, v_2.authorization.wireName());
                                         }
@@ -165,7 +165,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRedshiftIdcApplic
                                     if (u_2) |v_2| {
                                         {
                                             var prefix_buf: [256]u8 = undefined;
-                                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ServiceIntegrations.member.{d}.Redshift.member.{d}.Connect.Authorization=", .{n, n_1}) catch continue;
+                                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ServiceIntegrations.member.{d}.Redshift.member.{d}.Connect.Authorization=", .{ n, n_1 }) catch continue;
                                             try body_buf.appendSlice(allocator, field_prefix);
                                             try aws.url.appendUrlEncoded(allocator, &body_buf, v_2.authorization.wireName());
                                         }
@@ -184,7 +184,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateRedshiftIdcApplic
                                     if (u_2) |v_2| {
                                         {
                                             var prefix_buf: [256]u8 = undefined;
-                                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ServiceIntegrations.member.{d}.S3AccessGrants.member.{d}.ReadWriteAccess.Authorization=", .{n, n_1}) catch continue;
+                                            const field_prefix = std.fmt.bufPrint(&prefix_buf, "&ServiceIntegrations.member.{d}.S3AccessGrants.member.{d}.ReadWriteAccess.Authorization=", .{ n, n_1 }) catch continue;
                                             try body_buf.appendSlice(allocator, field_prefix);
                                             try aws.url.appendUrlEncoded(allocator, &body_buf, v_2.authorization.wireName());
                                         }

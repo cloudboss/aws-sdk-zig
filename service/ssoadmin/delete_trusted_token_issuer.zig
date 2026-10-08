@@ -14,8 +14,7 @@ pub const DeleteTrustedTokenIssuerInput = struct {
     };
 };
 
-pub const DeleteTrustedTokenIssuerOutput = struct {
-};
+pub const DeleteTrustedTokenIssuerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTrustedTokenIssuerInput, options: CallOptions) !DeleteTrustedTokenIssuerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

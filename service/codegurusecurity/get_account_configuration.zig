@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const EncryptionConfig = @import("encryption_config.zig").EncryptionConfig;
 
-pub const GetAccountConfigurationInput = struct {
-};
+pub const GetAccountConfigurationInput = struct {};
 
 pub const GetAccountConfigurationOutput = struct {
     /// An `EncryptionConfig` object that contains the KMS key ARN that is used for

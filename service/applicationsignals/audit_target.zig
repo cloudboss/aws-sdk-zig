@@ -8,10 +8,10 @@ pub const AuditTarget = struct {
 
     /// The type of entity being audited, such as `service`, `SLO`,
     /// `service_operation`, or `canary`.
-    @"type": []const u8,
+    type: []const u8,
 
     pub const json_field_names = .{
         .data = "Data",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

@@ -28,8 +28,7 @@ pub const UnsubscribeFromDatasetInput = struct {
     };
 };
 
-pub const UnsubscribeFromDatasetOutput = struct {
-};
+pub const UnsubscribeFromDatasetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UnsubscribeFromDatasetInput, options: CallOptions) !UnsubscribeFromDatasetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

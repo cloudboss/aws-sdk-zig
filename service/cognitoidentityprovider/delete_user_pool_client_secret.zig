@@ -22,8 +22,7 @@ pub const DeleteUserPoolClientSecretInput = struct {
     };
 };
 
-pub const DeleteUserPoolClientSecretOutput = struct {
-};
+pub const DeleteUserPoolClientSecretOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteUserPoolClientSecretInput, options: CallOptions) !DeleteUserPoolClientSecretOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

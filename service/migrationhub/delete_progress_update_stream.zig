@@ -21,8 +21,7 @@ pub const DeleteProgressUpdateStreamInput = struct {
     };
 };
 
-pub const DeleteProgressUpdateStreamOutput = struct {
-};
+pub const DeleteProgressUpdateStreamOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteProgressUpdateStreamInput, options: CallOptions) !DeleteProgressUpdateStreamOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

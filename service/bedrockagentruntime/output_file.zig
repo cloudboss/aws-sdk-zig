@@ -7,11 +7,11 @@ pub const OutputFile = struct {
     name: ?[]const u8 = null,
 
     /// The type of file that contains response from the code interpreter.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bytes = "bytes",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };

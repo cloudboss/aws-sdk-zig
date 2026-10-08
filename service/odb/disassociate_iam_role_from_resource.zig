@@ -27,8 +27,7 @@ pub const DisassociateIamRoleFromResourceInput = struct {
     };
 };
 
-pub const DisassociateIamRoleFromResourceOutput = struct {
-};
+pub const DisassociateIamRoleFromResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateIamRoleFromResourceInput, options: CallOptions) !DisassociateIamRoleFromResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

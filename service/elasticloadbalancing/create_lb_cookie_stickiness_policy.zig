@@ -21,8 +21,7 @@ pub const CreateLBCookieStickinessPolicyInput = struct {
     policy_name: []const u8,
 };
 
-pub const CreateLBCookieStickinessPolicyOutput = struct {
-};
+pub const CreateLBCookieStickinessPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateLBCookieStickinessPolicyInput, options: CallOptions) !CreateLBCookieStickinessPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

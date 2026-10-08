@@ -8,9 +8,20 @@ const Filter = @import("filter.zig").Filter;
 const Tag = @import("tag.zig").Tag;
 const serde = @import("serde.zig");
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_message.zig").ListTagsForResourceMessage;
+pub const ListTagsForResourceInput = struct {
+    /// This parameter is not currently supported.
+    filters: ?[]const Filter = null,
 
-pub const ListTagsForResourceOutput = @import("tag_list_message.zig").TagListMessage;
+    /// The Amazon DocumentDB resource with tags to be listed. This value is an
+    /// Amazon Resource Name
+    /// (ARN).
+    resource_name: []const u8,
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// A list of one or more tags.
+    tag_list: ?[]const Tag = null,
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -58,7 +69,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListTagsForResourceInpu
                 const n_1 = idx_1 + 1;
                 {
                     var prefix_buf: [256]u8 = undefined;
-                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.Filter.{d}.Values.Value.{d}=", .{n, n_1}) catch continue;
+                    const field_prefix = std.fmt.bufPrint(&prefix_buf, "&Filters.Filter.{d}.Values.Value.{d}=", .{ n, n_1 }) catch continue;
                     try body_buf.appendSlice(allocator, field_prefix);
                     try aws.url.appendUrlEncoded(allocator, &body_buf, item_1);
                 }

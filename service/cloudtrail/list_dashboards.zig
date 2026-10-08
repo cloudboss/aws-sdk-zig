@@ -7,9 +7,40 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DashboardType = @import("dashboard_type.zig").DashboardType;
 const DashboardDetail = @import("dashboard_detail.zig").DashboardDetail;
 
-pub const ListDashboardsInput = @import("list_dashboards_request.zig").ListDashboardsRequest;
+pub const ListDashboardsInput = struct {
+    /// The maximum number of dashboards to display on a single page.
+    max_results: ?i32 = null,
 
-pub const ListDashboardsOutput = @import("list_dashboards_response.zig").ListDashboardsResponse;
+    /// Specify a name prefix to filter on.
+    name_prefix: ?[]const u8 = null,
+
+    /// A token you can use to get the next page of dashboard results.
+    next_token: ?[]const u8 = null,
+
+    /// Specify a dashboard type to filter on: `CUSTOM` or `MANAGED`.
+    type: ?DashboardType = null,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .name_prefix = "NamePrefix",
+        .next_token = "NextToken",
+        .type = "Type",
+    };
+};
+
+pub const ListDashboardsOutput = struct {
+    /// Contains information about dashboards in the account, in the current Region
+    /// that match the applied filters.
+    dashboards: ?[]const DashboardDetail = null,
+
+    /// A token you can use to get the next page of dashboard results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .dashboards = "Dashboards",
+        .next_token = "NextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDashboardsInput, options: CallOptions) !ListDashboardsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

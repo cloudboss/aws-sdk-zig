@@ -55,7 +55,7 @@ pub const CreateWirelessDeviceInput = struct {
     tags: ?[]const Tag = null,
 
     /// The wireless device type.
-    @"type": WirelessDeviceType,
+    type: WirelessDeviceType,
 
     pub const json_field_names = .{
         .client_request_token = "ClientRequestToken",
@@ -66,7 +66,7 @@ pub const CreateWirelessDeviceInput = struct {
         .positioning = "Positioning",
         .sidewalk = "Sidewalk",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -167,7 +167,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateWirelessDeviceInp
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

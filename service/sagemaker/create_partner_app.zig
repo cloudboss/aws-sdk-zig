@@ -68,7 +68,7 @@ pub const CreatePartnerAppInput = struct {
     /// The type of SageMaker Partner AI App to create. Must be one of the
     /// following: `lakera-guard`, `comet`, `deepchecks-llm-evaluation`, or
     /// `fiddler`.
-    @"type": PartnerAppType,
+    type: PartnerAppType,
 
     pub const json_field_names = .{
         .application_config = "ApplicationConfig",
@@ -83,7 +83,7 @@ pub const CreatePartnerAppInput = struct {
         .name = "Name",
         .tags = "Tags",
         .tier = "Tier",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

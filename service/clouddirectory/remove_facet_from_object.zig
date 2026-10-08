@@ -24,8 +24,7 @@ pub const RemoveFacetFromObjectInput = struct {
     };
 };
 
-pub const RemoveFacetFromObjectOutput = struct {
-};
+pub const RemoveFacetFromObjectOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveFacetFromObjectInput, options: CallOptions) !RemoveFacetFromObjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

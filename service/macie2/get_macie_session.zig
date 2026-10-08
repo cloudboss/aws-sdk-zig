@@ -7,8 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const FindingPublishingFrequency = @import("finding_publishing_frequency.zig").FindingPublishingFrequency;
 const MacieStatus = @import("macie_status.zig").MacieStatus;
 
-pub const GetMacieSessionInput = struct {
-};
+pub const GetMacieSessionInput = struct {};
 
 pub const GetMacieSessionOutput = struct {
     /// The date and time, in UTC and extended ISO 8601 format, when the Amazon

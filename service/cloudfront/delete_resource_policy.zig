@@ -5,7 +5,11 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteResourcePolicyInput = @import("delete_resource_policy_request.zig").DeleteResourcePolicyRequest;
+pub const DeleteResourcePolicyInput = struct {
+    /// The Amazon Resource Name (ARN) of the CloudFront resource for which the
+    /// resource policy should be deleted.
+    resource_arn: []const u8,
+};
 
 pub const DeleteResourcePolicyOutput = struct {};
 

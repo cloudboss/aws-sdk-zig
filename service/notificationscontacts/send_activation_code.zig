@@ -14,8 +14,7 @@ pub const SendActivationCodeInput = struct {
     };
 };
 
-pub const SendActivationCodeOutput = struct {
-};
+pub const SendActivationCodeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SendActivationCodeInput, options: CallOptions) !SendActivationCodeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

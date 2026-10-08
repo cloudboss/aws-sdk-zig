@@ -222,12 +222,12 @@ pub const LimitsExceededException = struct {
     limit: ?i64 = null,
 
     /// The type of limit that would be exceeded.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .limit = "Limit",
         .message = "message",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

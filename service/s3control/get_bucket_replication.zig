@@ -25,7 +25,14 @@ pub const GetBucketReplicationInput = struct {
     bucket: []const u8,
 };
 
-pub const GetBucketReplicationOutput = @import("get_bucket_replication_result.zig").GetBucketReplicationResult;
+pub const GetBucketReplicationOutput = struct {
+    /// A container for one or more replication rules. A replication configuration
+    /// must have at
+    /// least one rule and you can add up to 100 rules. The maximum size of a
+    /// replication
+    /// configuration is 128 KB.
+    replication_configuration: ?ReplicationConfiguration = null,
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetBucketReplicationInput, options: CallOptions) !GetBucketReplicationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

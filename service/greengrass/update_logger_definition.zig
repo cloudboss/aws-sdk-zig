@@ -18,8 +18,7 @@ pub const UpdateLoggerDefinitionInput = struct {
     };
 };
 
-pub const UpdateLoggerDefinitionOutput = struct {
-};
+pub const UpdateLoggerDefinitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLoggerDefinitionInput, options: CallOptions) !UpdateLoggerDefinitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -23,8 +23,7 @@ pub const DeleteColumnStatisticsTaskSettingsInput = struct {
     };
 };
 
-pub const DeleteColumnStatisticsTaskSettingsOutput = struct {
-};
+pub const DeleteColumnStatisticsTaskSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteColumnStatisticsTaskSettingsInput, options: CallOptions) !DeleteColumnStatisticsTaskSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

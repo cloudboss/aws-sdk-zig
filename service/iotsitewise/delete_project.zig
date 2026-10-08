@@ -20,8 +20,7 @@ pub const DeleteProjectInput = struct {
     };
 };
 
-pub const DeleteProjectOutput = struct {
-};
+pub const DeleteProjectOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteProjectInput, options: CallOptions) !DeleteProjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

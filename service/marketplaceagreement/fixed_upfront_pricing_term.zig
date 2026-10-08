@@ -20,7 +20,7 @@ pub const FixedUpfrontPricingTerm = struct {
     price: ?[]const u8 = null,
 
     /// Category of the term being updated.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .currency_code = "currencyCode",
@@ -28,6 +28,6 @@ pub const FixedUpfrontPricingTerm = struct {
         .grants = "grants",
         .id = "id",
         .price = "price",
-        .@"type" = "type",
+        .type = "type",
     };
 };

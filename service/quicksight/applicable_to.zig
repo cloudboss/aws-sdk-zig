@@ -14,10 +14,10 @@ pub const ApplicableTo = struct {
     /// * `GROUP`: The policy applies only to principals in the groups specified by
     /// `GroupArns`. When you use `GROUP`, you must also provide a value for
     /// `GroupArns`.
-    @"type": ApplicableToType,
+    type: ApplicableToType,
 
     pub const json_field_names = .{
         .group_arns = "GroupArns",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

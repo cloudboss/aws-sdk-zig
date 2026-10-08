@@ -38,8 +38,7 @@ pub const UpdateAccessPolicyInput = struct {
     };
 };
 
-pub const UpdateAccessPolicyOutput = struct {
-};
+pub const UpdateAccessPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAccessPolicyInput, options: CallOptions) !UpdateAccessPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

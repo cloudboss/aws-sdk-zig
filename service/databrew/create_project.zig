@@ -6,9 +6,46 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Sample = @import("sample.zig").Sample;
 
-pub const CreateProjectInput = @import("create_project_request.zig").CreateProjectRequest;
+pub const CreateProjectInput = struct {
+    /// The name of an existing dataset to associate this project with.
+    dataset_name: []const u8,
 
-pub const CreateProjectOutput = @import("create_project_response.zig").CreateProjectResponse;
+    /// A unique name for the new project. Valid characters are alphanumeric (A-Z,
+    /// a-z, 0-9),
+    /// hyphen (-), period (.), and space.
+    name: []const u8,
+
+    /// The name of an existing recipe to associate with the project.
+    recipe_name: []const u8,
+
+    /// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
+    /// role to
+    /// be assumed for this request.
+    role_arn: []const u8,
+
+    sample: ?Sample = null,
+
+    /// Metadata tags to apply to this project.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .dataset_name = "DatasetName",
+        .name = "Name",
+        .recipe_name = "RecipeName",
+        .role_arn = "RoleArn",
+        .sample = "Sample",
+        .tags = "Tags",
+    };
+};
+
+pub const CreateProjectOutput = struct {
+    /// The name of the project that you created.
+    name: []const u8,
+
+    pub const json_field_names = .{
+        .name = "Name",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateProjectInput, options: CallOptions) !CreateProjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ContainerServicePower = @import("container_service_power.zig").ContainerServicePower;
 
-pub const GetContainerServicePowersInput = struct {
-};
+pub const GetContainerServicePowersInput = struct {};
 
 pub const GetContainerServicePowersOutput = struct {
     /// An array of objects that describe the powers that can be specified for a

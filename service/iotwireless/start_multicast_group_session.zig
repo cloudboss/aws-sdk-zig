@@ -17,8 +17,7 @@ pub const StartMulticastGroupSessionInput = struct {
     };
 };
 
-pub const StartMulticastGroupSessionOutput = struct {
-};
+pub const StartMulticastGroupSessionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartMulticastGroupSessionInput, options: CallOptions) !StartMulticastGroupSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

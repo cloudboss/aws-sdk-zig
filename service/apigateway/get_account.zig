@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ThrottleSettings = @import("throttle_settings.zig").ThrottleSettings;
 
-pub const GetAccountInput = struct {
-};
+pub const GetAccountInput = struct {};
 
 pub const GetAccountOutput = struct {
     /// The version of the API keys used for the account.

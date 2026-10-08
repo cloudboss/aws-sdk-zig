@@ -22,19 +22,18 @@ pub const CreateTableOptimizerInput = struct {
     table_optimizer_configuration: TableOptimizerConfiguration,
 
     /// The type of table optimizer.
-    @"type": TableOptimizerType,
+    type: TableOptimizerType,
 
     pub const json_field_names = .{
         .catalog_id = "CatalogId",
         .database_name = "DatabaseName",
         .table_name = "TableName",
         .table_optimizer_configuration = "TableOptimizerConfiguration",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
-pub const CreateTableOptimizerOutput = struct {
-};
+pub const CreateTableOptimizerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateTableOptimizerInput, options: CallOptions) !CreateTableOptimizerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

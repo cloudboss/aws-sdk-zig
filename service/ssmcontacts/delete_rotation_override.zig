@@ -18,8 +18,7 @@ pub const DeleteRotationOverrideInput = struct {
     };
 };
 
-pub const DeleteRotationOverrideOutput = struct {
-};
+pub const DeleteRotationOverrideOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRotationOverrideInput, options: CallOptions) !DeleteRotationOverrideOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

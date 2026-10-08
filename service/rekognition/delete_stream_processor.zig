@@ -14,8 +14,7 @@ pub const DeleteStreamProcessorInput = struct {
     };
 };
 
-pub const DeleteStreamProcessorOutput = struct {
-};
+pub const DeleteStreamProcessorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteStreamProcessorInput, options: CallOptions) !DeleteStreamProcessorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

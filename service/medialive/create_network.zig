@@ -10,9 +10,78 @@ const IpPool = @import("ip_pool.zig").IpPool;
 const Route = @import("route.zig").Route;
 const NetworkState = @import("network_state.zig").NetworkState;
 
-pub const CreateNetworkInput = @import("create_network_request.zig").CreateNetworkRequest;
+pub const CreateNetworkInput = struct {
+    /// An array of IpPoolCreateRequests that identify a collection of IP addresses
+    /// in your network that you want to reserve for use in MediaLive Anywhere.
+    /// MediaLiveAnywhere uses these IP addresses for Push inputs (in both Bridge
+    /// and NATnetworks) and for output destinations (only in Bridge networks).
+    /// EachIpPoolUpdateRequest specifies one CIDR block.
+    ip_pools: ?[]const IpPoolCreateRequest = null,
 
-pub const CreateNetworkOutput = @import("create_network_response.zig").CreateNetworkResponse;
+    /// Specify a name that is unique in the AWS account. We recommend that you
+    /// assign a name that hints at the type of traffic on the network. Names are
+    /// case-sensitive.
+    name: ?[]const u8 = null,
+
+    /// An ID that you assign to a create request. This ID ensures idempotency when
+    /// creating resources.
+    request_id: ?[]const u8 = null,
+
+    /// An array of routes that MediaLive Anywhere needs to know about in order to
+    /// route encoding traffic.
+    routes: ?[]const RouteCreateRequest = null,
+
+    /// A collection of key-value pairs.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .ip_pools = "IpPools",
+        .name = "Name",
+        .request_id = "RequestId",
+        .routes = "Routes",
+        .tags = "Tags",
+    };
+};
+
+pub const CreateNetworkOutput = struct {
+    /// The ARN of this Network. It is automatically assigned when the Network is
+    /// created.
+    arn: ?[]const u8 = null,
+
+    associated_cluster_ids: ?[]const []const u8 = null,
+
+    /// The ID of the Network. Unique in the AWS account. The ID is the resource-id
+    /// portion of the ARN.
+    id: ?[]const u8 = null,
+
+    /// An array of IpPools in your organization's network that identify a
+    /// collection of IP addresses in this network that are reserved for use in
+    /// MediaLive Anywhere. MediaLive Anywhere uses these IP addresses for Push
+    /// inputs (in both Bridge and NAT networks) and for output destinations (only
+    /// in Bridge networks). Each IpPool specifies one CIDR block.
+    ip_pools: ?[]const IpPool = null,
+
+    /// The name that you specified for the Network.
+    name: ?[]const u8 = null,
+
+    /// An array of routes that MediaLive Anywhere needs to know about in order to
+    /// route encoding traffic.
+    routes: ?[]const Route = null,
+
+    /// The current state of the Network. Only MediaLive Anywhere can change the
+    /// state.
+    state: ?NetworkState = null,
+
+    pub const json_field_names = .{
+        .arn = "Arn",
+        .associated_cluster_ids = "AssociatedClusterIds",
+        .id = "Id",
+        .ip_pools = "IpPools",
+        .name = "Name",
+        .routes = "Routes",
+        .state = "State",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateNetworkInput, options: CallOptions) !CreateNetworkOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

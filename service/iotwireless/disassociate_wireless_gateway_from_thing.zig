@@ -14,8 +14,7 @@ pub const DisassociateWirelessGatewayFromThingInput = struct {
     };
 };
 
-pub const DisassociateWirelessGatewayFromThingOutput = struct {
-};
+pub const DisassociateWirelessGatewayFromThingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateWirelessGatewayFromThingInput, options: CallOptions) !DisassociateWirelessGatewayFromThingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

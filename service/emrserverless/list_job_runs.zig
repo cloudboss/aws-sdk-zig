@@ -8,9 +8,54 @@ const JobRunMode = @import("job_run_mode.zig").JobRunMode;
 const JobRunState = @import("job_run_state.zig").JobRunState;
 const JobRunSummary = @import("job_run_summary.zig").JobRunSummary;
 
-pub const ListJobRunsInput = @import("list_job_runs_request.zig").ListJobRunsRequest;
+pub const ListJobRunsInput = struct {
+    /// The ID of the application for which to list the job run.
+    application_id: []const u8,
 
-pub const ListJobRunsOutput = @import("list_job_runs_response.zig").ListJobRunsResponse;
+    /// The lower bound of the option to filter by creation date and time.
+    created_at_after: ?i64 = null,
+
+    /// The upper bound of the option to filter by creation date and time.
+    created_at_before: ?i64 = null,
+
+    /// The maximum number of job runs that can be listed.
+    max_results: ?i32 = null,
+
+    /// The mode of the job runs to list.
+    mode: ?JobRunMode = null,
+
+    /// The token for the next set of job run results.
+    next_token: ?[]const u8 = null,
+
+    /// An optional filter for job run states. Note that if this filter contains
+    /// multiple states, the resulting list will be grouped by the state.
+    states: ?[]const JobRunState = null,
+
+    pub const json_field_names = .{
+        .application_id = "applicationId",
+        .created_at_after = "createdAtAfter",
+        .created_at_before = "createdAtBefore",
+        .max_results = "maxResults",
+        .mode = "mode",
+        .next_token = "nextToken",
+        .states = "states",
+    };
+};
+
+pub const ListJobRunsOutput = struct {
+    /// The output lists information about the specified job runs.
+    job_runs: ?[]const JobRunSummary = null,
+
+    /// The output displays the token for the next set of job run results. This is
+    /// required for pagination and is available as a response of the previous
+    /// request.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .job_runs = "jobRuns",
+        .next_token = "nextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListJobRunsInput, options: CallOptions) !ListJobRunsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

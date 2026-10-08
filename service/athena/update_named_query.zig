@@ -26,8 +26,7 @@ pub const UpdateNamedQueryInput = struct {
     };
 };
 
-pub const UpdateNamedQueryOutput = struct {
-};
+pub const UpdateNamedQueryOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateNamedQueryInput, options: CallOptions) !UpdateNamedQueryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

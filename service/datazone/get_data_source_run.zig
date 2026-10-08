@@ -62,7 +62,7 @@ pub const GetDataSourceRunOutput = struct {
     stopped_at: ?i64 = null,
 
     /// The type of this data source run.
-    @"type": DataSourceRunType,
+    type: DataSourceRunType,
 
     /// The timestamp of when this data source run was updated.
     updated_at: i64,
@@ -80,7 +80,7 @@ pub const GetDataSourceRunOutput = struct {
         .started_at = "startedAt",
         .status = "status",
         .stopped_at = "stoppedAt",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
     };
 };

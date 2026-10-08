@@ -24,8 +24,7 @@ pub const AttachTrafficSourcesInput = struct {
     traffic_sources: []const TrafficSourceIdentifier,
 };
 
-pub const AttachTrafficSourcesOutput = struct {
-};
+pub const AttachTrafficSourcesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AttachTrafficSourcesInput, options: CallOptions) !AttachTrafficSourcesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -76,7 +75,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: AttachTrafficSourcesInp
         }
         {
             var prefix_buf: [256]u8 = undefined;
-            if (item.@"type") |fv_1| {
+            if (item.type) |fv_1| {
                 const field_prefix = std.fmt.bufPrint(&prefix_buf, "&TrafficSources.member.{d}.Type=", .{n}) catch continue;
                 try body_buf.appendSlice(allocator, field_prefix);
                 try aws.url.appendUrlEncoded(allocator, &body_buf, fv_1);

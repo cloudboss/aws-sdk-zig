@@ -38,7 +38,7 @@ pub const PolicySummary = struct {
     name: ?[]const u8 = null,
 
     /// The type of policy.
-    @"type": ?PolicyType = null,
+    type: ?PolicyType = null,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -46,6 +46,6 @@ pub const PolicySummary = struct {
         .description = "Description",
         .id = "Id",
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

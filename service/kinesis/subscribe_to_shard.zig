@@ -37,7 +37,6 @@ pub const SubscribeToShardInput = struct {
 };
 
 pub const SubscribeToShardOutput = struct {
-
     event_stream: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *SubscribeToShardOutput) void {

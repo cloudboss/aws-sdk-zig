@@ -16,8 +16,7 @@ pub const DeleteDataLakeOrganizationConfigurationInput = struct {
     };
 };
 
-pub const DeleteDataLakeOrganizationConfigurationOutput = struct {
-};
+pub const DeleteDataLakeOrganizationConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDataLakeOrganizationConfigurationInput, options: CallOptions) !DeleteDataLakeOrganizationConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

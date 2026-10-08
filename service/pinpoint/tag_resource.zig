@@ -6,7 +6,17 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const TagsModel = @import("tags_model.zig").TagsModel;
 
-pub const TagResourceInput = @import("tag_resource_request.zig").TagResourceRequest;
+pub const TagResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the resource.
+    resource_arn: []const u8,
+
+    tags_model: TagsModel,
+
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+        .tags_model = "TagsModel",
+    };
+};
 
 pub const TagResourceOutput = struct {};
 

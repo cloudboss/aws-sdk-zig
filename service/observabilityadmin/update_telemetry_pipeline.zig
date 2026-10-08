@@ -20,8 +20,7 @@ pub const UpdateTelemetryPipelineInput = struct {
     };
 };
 
-pub const UpdateTelemetryPipelineOutput = struct {
-};
+pub const UpdateTelemetryPipelineOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTelemetryPipelineInput, options: CallOptions) !UpdateTelemetryPipelineOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

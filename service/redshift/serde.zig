@@ -3499,7 +3499,7 @@ pub fn deserializeRecommendedAction(allocator: std.mem.Allocator, reader: *aws.x
     result.command = null;
     result.database = null;
     result.text = null;
-    result.@"type" = null;
+    result.type = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -3510,7 +3510,7 @@ pub fn deserializeRecommendedAction(allocator: std.mem.Allocator, reader: *aws.x
                 } else if (std.mem.eql(u8, e.local, "Text")) {
                     result.text = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = RecommendedActionType.fromWireName(try reader.readElementText());
+                    result.type = RecommendedActionType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -5115,4 +5115,3 @@ pub fn serializeTag(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value
         try buf.appendSlice(allocator, "</Value>");
     }
 }
-

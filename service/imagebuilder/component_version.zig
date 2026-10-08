@@ -55,7 +55,7 @@ pub const ComponentVersion = struct {
     /// The type of the component denotes whether the component is used to build the
     /// image or
     /// only to test it.
-    @"type": ?ComponentType = null,
+    type: ?ComponentType = null,
 
     /// The semantic version of the component.
     ///
@@ -91,7 +91,7 @@ pub const ComponentVersion = struct {
         .product_codes = "productCodes",
         .status = "status",
         .supported_os_versions = "supportedOsVersions",
-        .@"type" = "type",
+        .type = "type",
         .version = "version",
     };
 };

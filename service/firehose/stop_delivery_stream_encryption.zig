@@ -16,8 +16,7 @@ pub const StopDeliveryStreamEncryptionInput = struct {
     };
 };
 
-pub const StopDeliveryStreamEncryptionOutput = struct {
-};
+pub const StopDeliveryStreamEncryptionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopDeliveryStreamEncryptionInput, options: CallOptions) !StopDeliveryStreamEncryptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

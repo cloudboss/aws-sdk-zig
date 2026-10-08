@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ReportStatus = @import("report_status.zig").ReportStatus;
 
-pub const StartQuotaUtilizationReportInput = struct {
-};
+pub const StartQuotaUtilizationReportInput = struct {};
 
 pub const StartQuotaUtilizationReportOutput = struct {
     /// An optional message providing additional information about the report

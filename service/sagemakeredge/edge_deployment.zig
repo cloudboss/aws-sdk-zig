@@ -16,12 +16,12 @@ pub const EdgeDeployment = struct {
     failure_handling_policy: ?FailureHandlingPolicy = null,
 
     /// The type of the deployment.
-    @"type": ?DeploymentType = null,
+    type: ?DeploymentType = null,
 
     pub const json_field_names = .{
         .definitions = "Definitions",
         .deployment_name = "DeploymentName",
         .failure_handling_policy = "FailureHandlingPolicy",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

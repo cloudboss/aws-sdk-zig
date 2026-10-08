@@ -22,7 +22,7 @@ pub const RecommendationSummary = struct {
     status: RecommendationStatus,
 
     /// The type of recommendation.
-    @"type": RecommendationType,
+    type: RecommendationType,
 
     /// The timestamp when the recommendation was last updated.
     updated_at: i64,
@@ -34,7 +34,7 @@ pub const RecommendationSummary = struct {
         .recommendation_arn = "recommendationArn",
         .recommendation_id = "recommendationId",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
     };
 };

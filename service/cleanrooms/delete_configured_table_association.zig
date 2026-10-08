@@ -20,8 +20,7 @@ pub const DeleteConfiguredTableAssociationInput = struct {
     };
 };
 
-pub const DeleteConfiguredTableAssociationOutput = struct {
-};
+pub const DeleteConfiguredTableAssociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConfiguredTableAssociationInput, options: CallOptions) !DeleteConfiguredTableAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -37,8 +37,7 @@ pub const AssociateServiceActionWithProvisioningArtifactInput = struct {
     };
 };
 
-pub const AssociateServiceActionWithProvisioningArtifactOutput = struct {
-};
+pub const AssociateServiceActionWithProvisioningArtifactOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateServiceActionWithProvisioningArtifactInput, options: CallOptions) !AssociateServiceActionWithProvisioningArtifactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

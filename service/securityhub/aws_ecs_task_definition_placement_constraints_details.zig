@@ -4,10 +4,10 @@ pub const AwsEcsTaskDefinitionPlacementConstraintsDetails = struct {
     expression: ?[]const u8 = null,
 
     /// The type of constraint.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .expression = "Expression",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

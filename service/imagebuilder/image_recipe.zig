@@ -78,7 +78,7 @@ pub const ImageRecipe = struct {
     /// The output image type. For an image recipe, this is always AMI. Container
     /// images are built from container recipes, a separate resource. This field
     /// isn't currently returned in responses.
-    @"type": ?ImageType = null,
+    type: ?ImageType = null,
 
     /// The version of the image recipe.
     version: ?[]const u8 = null,
@@ -103,7 +103,7 @@ pub const ImageRecipe = struct {
         .parent_image = "parentImage",
         .platform = "platform",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .version = "version",
         .working_directory = "workingDirectory",
     };

@@ -2847,4 +2847,3 @@ pub fn serializeTag(allocator: std.mem.Allocator, buf: *std.ArrayList(u8), value
         try buf.appendSlice(allocator, "</Value>");
     }
 }
-

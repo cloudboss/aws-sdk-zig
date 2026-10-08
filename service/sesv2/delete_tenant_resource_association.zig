@@ -19,8 +19,7 @@ pub const DeleteTenantResourceAssociationInput = struct {
     };
 };
 
-pub const DeleteTenantResourceAssociationOutput = struct {
-};
+pub const DeleteTenantResourceAssociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTenantResourceAssociationInput, options: CallOptions) !DeleteTenantResourceAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

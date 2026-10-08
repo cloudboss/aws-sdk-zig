@@ -30,14 +30,14 @@ const EnvironmentFileType = @import("environment_file_type.zig").EnvironmentFile
 pub const EnvironmentFile = struct {
     /// The file type to use. Environment files are objects in Amazon S3. The only
     /// supported value is `s3`.
-    @"type": EnvironmentFileType,
+    type: EnvironmentFileType,
 
     /// The Amazon Resource Name (ARN) of the Amazon S3 object containing the
     /// environment variable file.
     value: []const u8,
 
     pub const json_field_names = .{
-        .@"type" = "type",
+        .type = "type",
         .value = "value",
     };
 };

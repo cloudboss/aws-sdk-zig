@@ -16,8 +16,7 @@ pub const DeleteChangeSetInput = struct {
     stack_name: ?[]const u8 = null,
 };
 
-pub const DeleteChangeSetOutput = struct {
-};
+pub const DeleteChangeSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteChangeSetInput, options: CallOptions) !DeleteChangeSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

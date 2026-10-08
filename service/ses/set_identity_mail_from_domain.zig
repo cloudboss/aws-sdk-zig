@@ -36,8 +36,7 @@ pub const SetIdentityMailFromDomainInput = struct {
     mail_from_domain: ?[]const u8 = null,
 };
 
-pub const SetIdentityMailFromDomainOutput = struct {
-};
+pub const SetIdentityMailFromDomainOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetIdentityMailFromDomainInput, options: CallOptions) !SetIdentityMailFromDomainOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

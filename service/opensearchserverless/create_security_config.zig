@@ -34,7 +34,7 @@ pub const CreateSecurityConfigInput = struct {
     saml_options: ?SamlConfigOptions = null,
 
     /// The type of security configuration.
-    @"type": SecurityConfigType,
+    type: SecurityConfigType,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
@@ -43,7 +43,7 @@ pub const CreateSecurityConfigInput = struct {
         .iam_identity_center_options = "iamIdentityCenterOptions",
         .name = "name",
         .saml_options = "samlOptions",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 

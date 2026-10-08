@@ -15,8 +15,7 @@ pub const RevokeOAuth2TokenWithIAMInput = struct {
     };
 };
 
-pub const RevokeOAuth2TokenWithIAMOutput = struct {
-};
+pub const RevokeOAuth2TokenWithIAMOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RevokeOAuth2TokenWithIAMInput, options: CallOptions) !RevokeOAuth2TokenWithIAMOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

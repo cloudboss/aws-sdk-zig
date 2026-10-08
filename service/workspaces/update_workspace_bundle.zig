@@ -18,8 +18,7 @@ pub const UpdateWorkspaceBundleInput = struct {
     };
 };
 
-pub const UpdateWorkspaceBundleOutput = struct {
-};
+pub const UpdateWorkspaceBundleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateWorkspaceBundleInput, options: CallOptions) !UpdateWorkspaceBundleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

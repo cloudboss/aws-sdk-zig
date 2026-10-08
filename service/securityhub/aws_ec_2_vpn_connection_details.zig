@@ -41,7 +41,7 @@ pub const AwsEc2VpnConnectionDetails = struct {
     transit_gateway_id: ?[]const u8 = null,
 
     /// The type of VPN connection.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// Information about the VPN tunnel.
     vgw_telemetry: ?[]const AwsEc2VpnConnectionVgwTelemetryDetails = null,
@@ -62,7 +62,7 @@ pub const AwsEc2VpnConnectionDetails = struct {
         .routes = "Routes",
         .state = "State",
         .transit_gateway_id = "TransitGatewayId",
-        .@"type" = "Type",
+        .type = "Type",
         .vgw_telemetry = "VgwTelemetry",
         .vpn_connection_id = "VpnConnectionId",
         .vpn_gateway_id = "VpnGatewayId",

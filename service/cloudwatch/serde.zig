@@ -3051,4 +3051,3 @@ pub fn serializeWarmUpConfiguration(allocator: std.mem.Allocator, buf: *std.Arra
     }
     try buf.appendSlice(allocator, "</WarmUpPeriodDurationInMinutes>");
 }
-

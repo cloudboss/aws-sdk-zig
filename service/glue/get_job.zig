@@ -15,7 +15,14 @@ pub const GetJobInput = struct {
     };
 };
 
-pub const GetJobOutput = @import("get_job_response.zig").GetJobResponse;
+pub const GetJobOutput = struct {
+    /// The requested job definition.
+    job: ?Job = null,
+
+    pub const json_field_names = .{
+        .job = "Job",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetJobInput, options: CallOptions) !GetJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

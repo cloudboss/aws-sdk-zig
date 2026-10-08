@@ -95,7 +95,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetAssociatedResourceIn
     try path_buf.appendSlice(allocator, "/applications/");
     try path_buf.appendSlice(allocator, input.application);
     try path_buf.appendSlice(allocator, "/resources/");
-    try path_buf.appendSlice(allocator, input.resource_type);
+    try path_buf.appendSlice(allocator, input.resource_type.wireName());
     try path_buf.appendSlice(allocator, "/");
     try path_buf.appendSlice(allocator, input.resource);
     const path = try path_buf.toOwnedSlice(allocator);

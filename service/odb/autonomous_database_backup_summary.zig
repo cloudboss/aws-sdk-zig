@@ -49,7 +49,7 @@ pub const AutonomousDatabaseBackupSummary = struct {
     time_started: ?i64 = null,
 
     /// The type of the Autonomous Database backup.
-    @"type": ?AutonomousDatabaseBackupType = null,
+    type: ?AutonomousDatabaseBackupType = null,
 
     pub const json_field_names = .{
         .autonomous_database_backup_arn = "autonomousDatabaseBackupArn",
@@ -66,6 +66,6 @@ pub const AutonomousDatabaseBackupSummary = struct {
         .time_available_till = "timeAvailableTill",
         .time_ended = "timeEnded",
         .time_started = "timeStarted",
-        .@"type" = "type",
+        .type = "type",
     };
 };

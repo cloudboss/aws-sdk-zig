@@ -79,5 +79,5 @@ pub const ImageBuildConfiguration = struct {
     /// * `buildpack` – Elastic Beanstalk builds the image with a Cloud Native
     ///   Buildpacks
     /// builder. Specify the builder with `Buildpack`.
-    @"type": ?ImageBuildType = null,
+    type: ?ImageBuildType = null,
 };

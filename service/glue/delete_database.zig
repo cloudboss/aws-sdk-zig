@@ -21,8 +21,7 @@ pub const DeleteDatabaseInput = struct {
     };
 };
 
-pub const DeleteDatabaseOutput = struct {
-};
+pub const DeleteDatabaseOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDatabaseInput, options: CallOptions) !DeleteDatabaseOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

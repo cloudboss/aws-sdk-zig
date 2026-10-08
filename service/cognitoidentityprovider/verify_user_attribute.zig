@@ -26,8 +26,7 @@ pub const VerifyUserAttributeInput = struct {
     };
 };
 
-pub const VerifyUserAttributeOutput = struct {
-};
+pub const VerifyUserAttributeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: VerifyUserAttributeInput, options: CallOptions) !VerifyUserAttributeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

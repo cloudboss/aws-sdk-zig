@@ -30,8 +30,7 @@ pub const PutPortfolioPreferencesInput = struct {
     };
 };
 
-pub const PutPortfolioPreferencesOutput = struct {
-};
+pub const PutPortfolioPreferencesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutPortfolioPreferencesInput, options: CallOptions) !PutPortfolioPreferencesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

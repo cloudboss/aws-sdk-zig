@@ -37,7 +37,7 @@ pub const ConnectionSummary = struct {
     scope: ?ConnectionScope = null,
 
     /// The connection type.
-    @"type": ConnectionType,
+    type: ConnectionType,
 
     pub const json_field_names = .{
         .configurations = "configurations",
@@ -50,6 +50,6 @@ pub const ConnectionSummary = struct {
         .project_id = "projectId",
         .props = "props",
         .scope = "scope",
-        .@"type" = "type",
+        .type = "type",
     };
 };

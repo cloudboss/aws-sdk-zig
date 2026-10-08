@@ -27,8 +27,7 @@ pub const UpdateLFTagExpressionInput = struct {
     };
 };
 
-pub const UpdateLFTagExpressionOutput = struct {
-};
+pub const UpdateLFTagExpressionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLFTagExpressionInput, options: CallOptions) !UpdateLFTagExpressionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

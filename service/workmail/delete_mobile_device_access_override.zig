@@ -31,8 +31,7 @@ pub const DeleteMobileDeviceAccessOverrideInput = struct {
     };
 };
 
-pub const DeleteMobileDeviceAccessOverrideOutput = struct {
-};
+pub const DeleteMobileDeviceAccessOverrideOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMobileDeviceAccessOverrideInput, options: CallOptions) !DeleteMobileDeviceAccessOverrideOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

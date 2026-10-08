@@ -24,7 +24,7 @@ pub const AgreementEntitlement = struct {
     status_reason_code: ?AgreementEntitlementStatusReasonCode = null,
 
     /// The type of entitlement.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .license_arn = "licenseArn",
@@ -32,6 +32,6 @@ pub const AgreementEntitlement = struct {
         .resource = "resource",
         .status = "status",
         .status_reason_code = "statusReasonCode",
-        .@"type" = "type",
+        .type = "type",
     };
 };

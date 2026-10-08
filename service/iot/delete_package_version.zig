@@ -24,8 +24,7 @@ pub const DeletePackageVersionInput = struct {
     };
 };
 
-pub const DeletePackageVersionOutput = struct {
-};
+pub const DeletePackageVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePackageVersionInput, options: CallOptions) !DeletePackageVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

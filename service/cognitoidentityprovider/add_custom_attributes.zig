@@ -57,8 +57,7 @@ pub const AddCustomAttributesInput = struct {
     };
 };
 
-pub const AddCustomAttributesOutput = struct {
-};
+pub const AddCustomAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddCustomAttributesInput, options: CallOptions) !AddCustomAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const DeleteConfiguredTableInput = struct {
     };
 };
 
-pub const DeleteConfiguredTableOutput = struct {
-};
+pub const DeleteConfiguredTableOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConfiguredTableInput, options: CallOptions) !DeleteConfiguredTableOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

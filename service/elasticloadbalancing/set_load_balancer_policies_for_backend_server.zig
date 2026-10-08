@@ -18,8 +18,7 @@ pub const SetLoadBalancerPoliciesForBackendServerInput = struct {
     policy_names: []const []const u8,
 };
 
-pub const SetLoadBalancerPoliciesForBackendServerOutput = struct {
-};
+pub const SetLoadBalancerPoliciesForBackendServerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetLoadBalancerPoliciesForBackendServerInput, options: CallOptions) !SetLoadBalancerPoliciesForBackendServerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

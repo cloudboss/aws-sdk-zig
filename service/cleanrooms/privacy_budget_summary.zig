@@ -35,7 +35,7 @@ pub const PrivacyBudgetSummary = struct {
     privacy_budget_template_id: []const u8,
 
     /// Specifies the type of the privacy budget.
-    @"type": PrivacyBudgetType,
+    type: PrivacyBudgetType,
 
     /// The most recent time at which the privacy budget was updated.
     update_time: i64,
@@ -50,7 +50,7 @@ pub const PrivacyBudgetSummary = struct {
         .membership_id = "membershipId",
         .privacy_budget_template_arn = "privacyBudgetTemplateArn",
         .privacy_budget_template_id = "privacyBudgetTemplateId",
-        .@"type" = "type",
+        .type = "type",
         .update_time = "updateTime",
     };
 };

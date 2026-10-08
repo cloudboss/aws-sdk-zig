@@ -14,8 +14,7 @@ pub const CancelDetectMitigationActionsTaskInput = struct {
     };
 };
 
-pub const CancelDetectMitigationActionsTaskOutput = struct {
-};
+pub const CancelDetectMitigationActionsTaskOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelDetectMitigationActionsTaskInput, options: CallOptions) !CancelDetectMitigationActionsTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

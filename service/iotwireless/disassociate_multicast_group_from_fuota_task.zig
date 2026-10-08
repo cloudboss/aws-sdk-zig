@@ -16,8 +16,7 @@ pub const DisassociateMulticastGroupFromFuotaTaskInput = struct {
     };
 };
 
-pub const DisassociateMulticastGroupFromFuotaTaskOutput = struct {
-};
+pub const DisassociateMulticastGroupFromFuotaTaskOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateMulticastGroupFromFuotaTaskInput, options: CallOptions) !DisassociateMulticastGroupFromFuotaTaskOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -6,9 +6,41 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const TagListEntry = @import("tag_list_entry.zig").TagListEntry;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// Specifies how many results that you want in the response.
+    max_results: ?i32 = null,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    /// Specifies an opaque string that indicates the position to begin the next
+    /// list of
+    /// results in the response.
+    next_token: ?[]const u8 = null,
+
+    /// Specifies the Amazon Resource Name (ARN) of the resource that you want tag
+    /// information
+    /// on.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+        .resource_arn = "ResourceArn",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// The opaque string that indicates the position to begin the next list of
+    /// results in the
+    /// response.
+    next_token: ?[]const u8 = null,
+
+    /// An array of tags applied to the specified resource.
+    tags: ?[]const TagListEntry = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

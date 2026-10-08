@@ -18,8 +18,7 @@ pub const DeleteAccessControlConfigurationInput = struct {
     };
 };
 
-pub const DeleteAccessControlConfigurationOutput = struct {
-};
+pub const DeleteAccessControlConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAccessControlConfigurationInput, options: CallOptions) !DeleteAccessControlConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

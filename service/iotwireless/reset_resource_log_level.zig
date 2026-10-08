@@ -18,8 +18,7 @@ pub const ResetResourceLogLevelInput = struct {
     };
 };
 
-pub const ResetResourceLogLevelOutput = struct {
-};
+pub const ResetResourceLogLevelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ResetResourceLogLevelInput, options: CallOptions) !ResetResourceLogLevelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

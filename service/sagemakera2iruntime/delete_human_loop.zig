@@ -14,8 +14,7 @@ pub const DeleteHumanLoopInput = struct {
     };
 };
 
-pub const DeleteHumanLoopOutput = struct {
-};
+pub const DeleteHumanLoopOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteHumanLoopInput, options: CallOptions) !DeleteHumanLoopOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

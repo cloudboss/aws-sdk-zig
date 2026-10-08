@@ -41,8 +41,7 @@ pub const UpdateIndexInput = struct {
     };
 };
 
-pub const UpdateIndexOutput = struct {
-};
+pub const UpdateIndexOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateIndexInput, options: CallOptions) !UpdateIndexOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

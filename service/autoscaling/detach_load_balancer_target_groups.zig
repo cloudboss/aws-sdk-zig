@@ -16,8 +16,7 @@ pub const DetachLoadBalancerTargetGroupsInput = struct {
     target_group_ar_ns: []const []const u8,
 };
 
-pub const DetachLoadBalancerTargetGroupsOutput = struct {
-};
+pub const DetachLoadBalancerTargetGroupsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DetachLoadBalancerTargetGroupsInput, options: CallOptions) !DetachLoadBalancerTargetGroupsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

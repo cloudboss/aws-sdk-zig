@@ -24,7 +24,7 @@ pub const UpdateImpersonationRoleInput = struct {
     rules: []const ImpersonationRule,
 
     /// The updated impersonation role type.
-    @"type": ImpersonationRoleType,
+    type: ImpersonationRoleType,
 
     pub const json_field_names = .{
         .description = "Description",
@@ -32,12 +32,11 @@ pub const UpdateImpersonationRoleInput = struct {
         .name = "Name",
         .organization_id = "OrganizationId",
         .rules = "Rules",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
-pub const UpdateImpersonationRoleOutput = struct {
-};
+pub const UpdateImpersonationRoleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateImpersonationRoleInput, options: CallOptions) !UpdateImpersonationRoleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

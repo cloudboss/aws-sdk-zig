@@ -15,8 +15,7 @@ pub const CreateSupportCaseInput = struct {
     };
 };
 
-pub const CreateSupportCaseOutput = struct {
-};
+pub const CreateSupportCaseOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSupportCaseInput, options: CallOptions) !CreateSupportCaseOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

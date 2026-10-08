@@ -25,8 +25,7 @@ pub const UpdateNotificationContentInput = struct {
     };
 };
 
-pub const UpdateNotificationContentOutput = struct {
-};
+pub const UpdateNotificationContentOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateNotificationContentInput, options: CallOptions) !UpdateNotificationContentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

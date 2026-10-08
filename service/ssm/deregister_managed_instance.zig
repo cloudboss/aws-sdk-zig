@@ -15,8 +15,7 @@ pub const DeregisterManagedInstanceInput = struct {
     };
 };
 
-pub const DeregisterManagedInstanceOutput = struct {
-};
+pub const DeregisterManagedInstanceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeregisterManagedInstanceInput, options: CallOptions) !DeregisterManagedInstanceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

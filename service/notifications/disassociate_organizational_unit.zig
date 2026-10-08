@@ -19,8 +19,7 @@ pub const DisassociateOrganizationalUnitInput = struct {
     };
 };
 
-pub const DisassociateOrganizationalUnitOutput = struct {
-};
+pub const DisassociateOrganizationalUnitOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateOrganizationalUnitInput, options: CallOptions) !DisassociateOrganizationalUnitOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

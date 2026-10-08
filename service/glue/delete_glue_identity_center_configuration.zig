@@ -5,11 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteGlueIdentityCenterConfigurationInput = struct {
-};
+pub const DeleteGlueIdentityCenterConfigurationInput = struct {};
 
-pub const DeleteGlueIdentityCenterConfigurationOutput = struct {
-};
+pub const DeleteGlueIdentityCenterConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteGlueIdentityCenterConfigurationInput, options: CallOptions) !DeleteGlueIdentityCenterConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

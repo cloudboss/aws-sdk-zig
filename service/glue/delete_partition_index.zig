@@ -28,8 +28,7 @@ pub const DeletePartitionIndexInput = struct {
     };
 };
 
-pub const DeletePartitionIndexOutput = struct {
-};
+pub const DeletePartitionIndexOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeletePartitionIndexInput, options: CallOptions) !DeletePartitionIndexOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

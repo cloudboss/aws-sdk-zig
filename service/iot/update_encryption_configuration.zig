@@ -25,8 +25,7 @@ pub const UpdateEncryptionConfigurationInput = struct {
     };
 };
 
-pub const UpdateEncryptionConfigurationOutput = struct {
-};
+pub const UpdateEncryptionConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateEncryptionConfigurationInput, options: CallOptions) !UpdateEncryptionConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

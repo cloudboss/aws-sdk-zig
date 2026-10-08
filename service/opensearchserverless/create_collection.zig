@@ -40,7 +40,7 @@ pub const CreateCollectionInput = struct {
     tags: ?[]const Tag = null,
 
     /// The type of collection.
-    @"type": ?CollectionType = null,
+    type: ?CollectionType = null,
 
     /// Configuration options for vector search capabilities in the collection.
     vector_options: ?VectorOptions = null,
@@ -54,7 +54,7 @@ pub const CreateCollectionInput = struct {
         .name = "name",
         .standby_replicas = "standbyReplicas",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .vector_options = "vectorOptions",
     };
 };

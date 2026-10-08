@@ -54,8 +54,7 @@ pub const UpdateLakeFormationIdentityCenterConfigurationInput = struct {
     };
 };
 
-pub const UpdateLakeFormationIdentityCenterConfigurationOutput = struct {
-};
+pub const UpdateLakeFormationIdentityCenterConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLakeFormationIdentityCenterConfigurationInput, options: CallOptions) !UpdateLakeFormationIdentityCenterConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

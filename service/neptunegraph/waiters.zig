@@ -49,7 +49,7 @@ pub const ExportTaskCancelledWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getExportTask(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getExportTask(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -102,7 +102,7 @@ pub const ExportTaskSuccessfulWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getExportTask(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getExportTask(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -170,7 +170,7 @@ pub const GraphAvailableWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getGraph(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getGraph(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -288,7 +288,7 @@ pub const GraphSnapshotAvailableWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getGraphSnapshot(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getGraphSnapshot(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -406,7 +406,7 @@ pub const GraphStoppedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getGraph(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getGraph(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -459,7 +459,7 @@ pub const ImportTaskCancelledWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getImportTask(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getImportTask(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -512,7 +512,7 @@ pub const ImportTaskSuccessfulWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getImportTask(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getImportTask(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -585,7 +585,7 @@ pub const PrivateGraphEndpointAvailableWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getPrivateGraphEndpoint(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getPrivateGraphEndpoint(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

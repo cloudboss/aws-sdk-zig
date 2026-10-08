@@ -22,8 +22,7 @@ pub const AssociateVolumeInput = struct {
     };
 };
 
-pub const AssociateVolumeOutput = struct {
-};
+pub const AssociateVolumeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateVolumeInput, options: CallOptions) !AssociateVolumeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

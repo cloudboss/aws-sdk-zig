@@ -11,8 +11,7 @@ pub const UpdateTemplateInput = struct {
     template: Template,
 };
 
-pub const UpdateTemplateOutput = struct {
-};
+pub const UpdateTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTemplateInput, options: CallOptions) !UpdateTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

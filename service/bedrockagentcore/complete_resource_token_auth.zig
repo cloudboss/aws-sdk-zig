@@ -23,8 +23,7 @@ pub const CompleteResourceTokenAuthInput = struct {
     };
 };
 
-pub const CompleteResourceTokenAuthOutput = struct {
-};
+pub const CompleteResourceTokenAuthOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CompleteResourceTokenAuthInput, options: CallOptions) !CompleteResourceTokenAuthOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

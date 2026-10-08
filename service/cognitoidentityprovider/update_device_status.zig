@@ -27,8 +27,7 @@ pub const UpdateDeviceStatusInput = struct {
     };
 };
 
-pub const UpdateDeviceStatusOutput = struct {
-};
+pub const UpdateDeviceStatusOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDeviceStatusInput, options: CallOptions) !UpdateDeviceStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

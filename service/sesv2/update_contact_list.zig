@@ -25,8 +25,7 @@ pub const UpdateContactListInput = struct {
     };
 };
 
-pub const UpdateContactListOutput = struct {
-};
+pub const UpdateContactListOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateContactListInput, options: CallOptions) !UpdateContactListOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

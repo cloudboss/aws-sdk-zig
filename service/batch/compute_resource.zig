@@ -461,7 +461,7 @@ pub const ComputeResource = struct {
     /// Multi-node parallel jobs aren't supported on Spot Instances or Amazon ECS
     /// Managed
     /// Instances.
-    @"type": CRType,
+    type: CRType,
 
     pub const json_field_names = .{
         .allocation_strategy = "allocationStrategy",
@@ -483,6 +483,6 @@ pub const ComputeResource = struct {
         .spot_iam_fleet_role = "spotIamFleetRole",
         .subnets = "subnets",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
     };
 };

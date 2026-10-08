@@ -6,9 +6,31 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DescribedExecution = @import("described_execution.zig").DescribedExecution;
 
-pub const DescribeExecutionInput = @import("describe_execution_request.zig").DescribeExecutionRequest;
+pub const DescribeExecutionInput = struct {
+    /// A unique identifier for the execution of a workflow.
+    execution_id: []const u8,
 
-pub const DescribeExecutionOutput = @import("describe_execution_response.zig").DescribeExecutionResponse;
+    /// A unique identifier for the workflow.
+    workflow_id: []const u8,
+
+    pub const json_field_names = .{
+        .execution_id = "ExecutionId",
+        .workflow_id = "WorkflowId",
+    };
+};
+
+pub const DescribeExecutionOutput = struct {
+    /// The structure that contains the details of the workflow' execution.
+    execution: ?DescribedExecution = null,
+
+    /// A unique identifier for the workflow.
+    workflow_id: []const u8,
+
+    pub const json_field_names = .{
+        .execution = "Execution",
+        .workflow_id = "WorkflowId",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeExecutionInput, options: CallOptions) !DescribeExecutionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

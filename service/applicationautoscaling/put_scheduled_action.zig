@@ -252,8 +252,7 @@ pub const PutScheduledActionInput = struct {
     };
 };
 
-pub const PutScheduledActionOutput = struct {
-};
+pub const PutScheduledActionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutScheduledActionInput, options: CallOptions) !PutScheduledActionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

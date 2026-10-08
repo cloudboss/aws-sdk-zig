@@ -6,10 +6,10 @@ pub const IndexedKey = struct {
     key: []const u8,
 
     /// The data type of the indexed key.
-    @"type": MetadataValueType,
+    type: MetadataValueType,
 
     pub const json_field_names = .{
         .key = "key",
-        .@"type" = "type",
+        .type = "type",
     };
 };

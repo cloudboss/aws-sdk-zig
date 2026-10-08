@@ -45,8 +45,7 @@ pub const DeleteRegexPatternSetInput = struct {
     };
 };
 
-pub const DeleteRegexPatternSetOutput = struct {
-};
+pub const DeleteRegexPatternSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRegexPatternSetInput, options: CallOptions) !DeleteRegexPatternSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

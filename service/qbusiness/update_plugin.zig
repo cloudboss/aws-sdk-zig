@@ -41,8 +41,7 @@ pub const UpdatePluginInput = struct {
     };
 };
 
-pub const UpdatePluginOutput = struct {
-};
+pub const UpdatePluginOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdatePluginInput, options: CallOptions) !UpdatePluginOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

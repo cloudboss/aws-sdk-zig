@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const FeatureDetail = @import("feature_detail.zig").FeatureDetail;
 
-pub const DescribeSecurityHubV2Input = struct {
-};
+pub const DescribeSecurityHubV2Input = struct {};
 
 pub const DescribeSecurityHubV2Output = struct {
     /// A map of opt-in features and their current status and metadata for the

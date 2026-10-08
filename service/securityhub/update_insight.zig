@@ -27,8 +27,7 @@ pub const UpdateInsightInput = struct {
     };
 };
 
-pub const UpdateInsightOutput = struct {
-};
+pub const UpdateInsightOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateInsightInput, options: CallOptions) !UpdateInsightOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -5,11 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const CreateSubscriptionInput = struct {
-};
+pub const CreateSubscriptionInput = struct {};
 
-pub const CreateSubscriptionOutput = struct {
-};
+pub const CreateSubscriptionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSubscriptionInput, options: CallOptions) !CreateSubscriptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -6,9 +6,35 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// Reserved for future use.
+    limit: ?i32 = null,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_result.zig").ListTagsForResourceResult;
+    /// Reserved for future use.
+    next_token: ?[]const u8 = null,
+
+    /// Identifier (ID) of the directory for which you want to retrieve tags.
+    resource_id: []const u8,
+
+    pub const json_field_names = .{
+        .limit = "Limit",
+        .next_token = "NextToken",
+        .resource_id = "ResourceId",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// Reserved for future use.
+    next_token: ?[]const u8 = null,
+
+    /// List of tags returned by the ListTagsForResource operation.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

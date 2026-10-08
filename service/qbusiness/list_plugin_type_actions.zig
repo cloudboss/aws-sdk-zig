@@ -72,7 +72,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListPluginTypeActionsIn
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/pluginTypes/");
-    try path_buf.appendSlice(allocator, input.plugin_type);
+    try path_buf.appendSlice(allocator, input.plugin_type.wireName());
     try path_buf.appendSlice(allocator, "/actions");
     const path = try path_buf.toOwnedSlice(allocator);
 

@@ -14,8 +14,7 @@ pub const DisassociateDataProtectionSettingsInput = struct {
     };
 };
 
-pub const DisassociateDataProtectionSettingsOutput = struct {
-};
+pub const DisassociateDataProtectionSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateDataProtectionSettingsInput, options: CallOptions) !DisassociateDataProtectionSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

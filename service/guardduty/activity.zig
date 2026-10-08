@@ -9,10 +9,10 @@ pub const Activity = struct {
     api: ?ApiCall = null,
 
     /// The type of the observed activity.
-    @"type": ActivityType,
+    type: ActivityType,
 
     pub const json_field_names = .{
         .api = "Api",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

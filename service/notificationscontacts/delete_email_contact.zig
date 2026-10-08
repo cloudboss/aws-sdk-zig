@@ -14,8 +14,7 @@ pub const DeleteEmailContactInput = struct {
     };
 };
 
-pub const DeleteEmailContactOutput = struct {
-};
+pub const DeleteEmailContactOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteEmailContactInput, options: CallOptions) !DeleteEmailContactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

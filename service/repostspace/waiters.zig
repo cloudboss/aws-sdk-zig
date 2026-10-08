@@ -46,7 +46,7 @@ pub const ChannelCreatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getChannel(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getChannel(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -179,7 +179,7 @@ pub const SpaceCreatedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getSpace(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getSpace(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

@@ -19,8 +19,7 @@ pub const PutDataQualityProfileAnnotationInput = struct {
     };
 };
 
-pub const PutDataQualityProfileAnnotationOutput = struct {
-};
+pub const PutDataQualityProfileAnnotationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutDataQualityProfileAnnotationInput, options: CallOptions) !PutDataQualityProfileAnnotationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

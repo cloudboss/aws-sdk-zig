@@ -22,8 +22,7 @@ pub const CreateSampleFindingsInput = struct {
     };
 };
 
-pub const CreateSampleFindingsOutput = struct {
-};
+pub const CreateSampleFindingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSampleFindingsInput, options: CallOptions) !CreateSampleFindingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

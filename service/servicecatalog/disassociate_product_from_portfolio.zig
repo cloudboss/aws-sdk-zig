@@ -26,8 +26,7 @@ pub const DisassociateProductFromPortfolioInput = struct {
     };
 };
 
-pub const DisassociateProductFromPortfolioOutput = struct {
-};
+pub const DisassociateProductFromPortfolioOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateProductFromPortfolioInput, options: CallOptions) !DisassociateProductFromPortfolioOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

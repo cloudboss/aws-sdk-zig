@@ -127,7 +127,6 @@ pub const ConverseStreamInput = struct {
 };
 
 pub const ConverseStreamOutput = struct {
-
     stream: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *ConverseStreamOutput) void {

@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const UsageReportSchedule = @import("usage_report_schedule.zig").UsageReportSchedule;
 
-pub const CreateUsageReportSubscriptionInput = struct {
-};
+pub const CreateUsageReportSubscriptionInput = struct {};
 
 pub const CreateUsageReportSubscriptionOutput = struct {
     /// The Amazon S3 bucket where generated reports are stored.

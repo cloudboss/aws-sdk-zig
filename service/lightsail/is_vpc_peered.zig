@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const IsVpcPeeredInput = struct {
-};
+pub const IsVpcPeeredInput = struct {};
 
 pub const IsVpcPeeredOutput = struct {
     /// Returns `true` if the Lightsail VPC is peered; otherwise,

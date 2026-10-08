@@ -19,7 +19,7 @@ pub const LoadBalancerTlsCertificateDomainValidationRecord = struct {
 
     /// The type of validation record. For example, `CNAME` for domain
     /// validation.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The validation status. Valid values are listed below.
     validation_status: ?LoadBalancerTlsCertificateDomainStatus = null,
@@ -31,7 +31,7 @@ pub const LoadBalancerTlsCertificateDomainValidationRecord = struct {
         .dns_record_creation_state = "dnsRecordCreationState",
         .domain_name = "domainName",
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
         .validation_status = "validationStatus",
         .value = "value",
     };

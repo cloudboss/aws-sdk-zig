@@ -1,3 +1,2 @@
 /// The configurations used for EventBridge subscriber notification.
-pub const SqsNotificationConfiguration = struct {
-};
+pub const SqsNotificationConfiguration = struct {};

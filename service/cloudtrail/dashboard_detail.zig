@@ -6,10 +6,10 @@ pub const DashboardDetail = struct {
     dashboard_arn: ?[]const u8 = null,
 
     /// The type of dashboard.
-    @"type": ?DashboardType = null,
+    type: ?DashboardType = null,
 
     pub const json_field_names = .{
         .dashboard_arn = "DashboardArn",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

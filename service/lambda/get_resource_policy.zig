@@ -5,9 +5,32 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetResourcePolicyInput = @import("get_resource_policy_request.zig").GetResourcePolicyRequest;
+pub const GetResourcePolicyInput = struct {
+    /// The Amazon Resource Name (ARN) of the Lambda resource you want to retrieve
+    /// the policy for. You can use a qualified or an unqualified ARN. The value
+    /// must be a complete ARN, and the operation does not accept wildcard
+    /// characters.
+    resource_arn: []const u8,
 
-pub const GetResourcePolicyOutput = @import("get_resource_policy_response.zig").GetResourcePolicyResponse;
+    pub const json_field_names = .{
+        .resource_arn = "ResourceArn",
+    };
+};
+
+pub const GetResourcePolicyOutput = struct {
+    /// The resource-based policy attached to the Lambda resource you specified.
+    policy: ?[]const u8 = null,
+
+    /// The revision ID of the policy. Pass this value as the `RevisionId` in a
+    /// PutResourcePolicy or DeleteResourcePolicy request. Doing so ensures the
+    /// operation acts on the expected version of the policy.
+    revision_id: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .policy = "Policy",
+        .revision_id = "RevisionId",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetResourcePolicyInput, options: CallOptions) !GetResourcePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

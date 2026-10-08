@@ -46,7 +46,7 @@ pub const PlanEvaluationStatusPassedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getPlanEvaluationStatus(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getPlanEvaluationStatus(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -109,7 +109,7 @@ pub const PlanExecutionCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getPlanExecution(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getPlanExecution(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

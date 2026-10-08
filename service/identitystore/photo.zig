@@ -12,7 +12,7 @@ pub const Photo = struct {
 
     /// The type of photo. This field is optional and can be used to categorize
     /// different types of photos.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The photo data or URL. Supported formats include jpg, jpeg, png, and gif.
     /// This field is required for all photo entries.
@@ -21,7 +21,7 @@ pub const Photo = struct {
     pub const json_field_names = .{
         .display = "Display",
         .primary = "Primary",
-        .@"type" = "Type",
+        .type = "Type",
         .value = "Value",
     };
 };

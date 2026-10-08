@@ -48,7 +48,7 @@ pub const DistributionDeployedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getDistribution(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getDistribution(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -103,7 +103,7 @@ pub const InvalidationCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getInvalidation(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getInvalidation(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -158,7 +158,7 @@ pub const InvalidationForDistributionTenantCompletedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getInvalidationForDistributionTenant(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getInvalidationForDistributionTenant(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 
@@ -213,7 +213,7 @@ pub const StreamingDistributionDeployedWaiter = struct {
         var arena = std.heap.ArenaAllocator.init(self.client.allocator);
         defer arena.deinit();
 
-        const output = self.client.getStreamingDistribution(arena.allocator(), self.params, .{}) catch  {
+        const output = self.client.getStreamingDistribution(arena.allocator(), self.params, .{}) catch {
             return .retry;
         };
 

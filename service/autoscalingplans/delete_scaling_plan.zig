@@ -19,8 +19,7 @@ pub const DeleteScalingPlanInput = struct {
     };
 };
 
-pub const DeleteScalingPlanOutput = struct {
-};
+pub const DeleteScalingPlanOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteScalingPlanInput, options: CallOptions) !DeleteScalingPlanOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

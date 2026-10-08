@@ -31,8 +31,7 @@ pub const PutIdentityPolicyInput = struct {
     policy_name: []const u8,
 };
 
-pub const PutIdentityPolicyOutput = struct {
-};
+pub const PutIdentityPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutIdentityPolicyInput, options: CallOptions) !PutIdentityPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -16,13 +16,13 @@ pub const LastKnownCheck = struct {
     status: ?LastKnownCheckStatus = null,
 
     /// Last known check type.
-    @"type": ?LastKnownCheckType = null,
+    type: ?LastKnownCheckType = null,
 
     pub const json_field_names = .{
         .checked_at = "checkedAt",
         .@"error" = "error",
         .name = "name",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };

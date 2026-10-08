@@ -83,7 +83,7 @@ pub const CreateWorkflowInput = struct {
     /// The image creation stage that this workflow applies to. Image Builder
     /// validates the
     /// workflow document steps against the stage you specify.
-    @"type": WorkflowType,
+    type: WorkflowType,
 
     /// The `uri` of a YAML workflow document file stored in Amazon S3. This must
     /// be an S3 URL (`s3://bucket/key`), and you must have permission to
@@ -105,7 +105,7 @@ pub const CreateWorkflowInput = struct {
         .name = "name",
         .semantic_version = "semanticVersion",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .uri = "uri",
     };
 };
@@ -217,7 +217,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateWorkflowInput, co
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
     if (input.uri) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");

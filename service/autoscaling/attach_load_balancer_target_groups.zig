@@ -17,8 +17,7 @@ pub const AttachLoadBalancerTargetGroupsInput = struct {
     target_group_ar_ns: []const []const u8,
 };
 
-pub const AttachLoadBalancerTargetGroupsOutput = struct {
-};
+pub const AttachLoadBalancerTargetGroupsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AttachLoadBalancerTargetGroupsInput, options: CallOptions) !AttachLoadBalancerTargetGroupsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

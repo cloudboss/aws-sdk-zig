@@ -27,8 +27,7 @@ pub const VoteOnProposalInput = struct {
     };
 };
 
-pub const VoteOnProposalOutput = struct {
-};
+pub const VoteOnProposalOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: VoteOnProposalInput, options: CallOptions) !VoteOnProposalOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

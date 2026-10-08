@@ -33,8 +33,7 @@ pub const UpdateKxClusterDatabasesInput = struct {
     };
 };
 
-pub const UpdateKxClusterDatabasesOutput = struct {
-};
+pub const UpdateKxClusterDatabasesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateKxClusterDatabasesInput, options: CallOptions) !UpdateKxClusterDatabasesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

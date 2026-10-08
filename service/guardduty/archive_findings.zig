@@ -23,8 +23,7 @@ pub const ArchiveFindingsInput = struct {
     };
 };
 
-pub const ArchiveFindingsOutput = struct {
-};
+pub const ArchiveFindingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ArchiveFindingsInput, options: CallOptions) !ArchiveFindingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

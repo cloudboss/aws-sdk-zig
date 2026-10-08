@@ -5,10 +5,16 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteChannelInput = @import("delete_channel_request.zig").DeleteChannelRequest;
+pub const DeleteChannelInput = struct {
+    /// The ID of the Channel to delete.
+    id: []const u8,
 
-pub const DeleteChannelOutput = struct {
+    pub const json_field_names = .{
+        .id = "Id",
+    };
 };
+
+pub const DeleteChannelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteChannelInput, options: CallOptions) !DeleteChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

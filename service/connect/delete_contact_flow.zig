@@ -19,8 +19,7 @@ pub const DeleteContactFlowInput = struct {
     };
 };
 
-pub const DeleteContactFlowOutput = struct {
-};
+pub const DeleteContactFlowOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteContactFlowInput, options: CallOptions) !DeleteContactFlowOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

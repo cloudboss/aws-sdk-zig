@@ -22,8 +22,7 @@ pub const DisassociateAgentCollaboratorInput = struct {
     };
 };
 
-pub const DisassociateAgentCollaboratorOutput = struct {
-};
+pub const DisassociateAgentCollaboratorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateAgentCollaboratorInput, options: CallOptions) !DisassociateAgentCollaboratorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const DeleteAutomationRuleV2Input = struct {
     };
 };
 
-pub const DeleteAutomationRuleV2Output = struct {
-};
+pub const DeleteAutomationRuleV2Output = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAutomationRuleV2Input, options: CallOptions) !DeleteAutomationRuleV2Output {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

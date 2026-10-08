@@ -6,10 +6,10 @@ pub const MappedResourceConfigurationListItem = struct {
     arn: ?[]const u8 = null,
 
     /// The type of the associated resource for the kinesis video stream.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "ARN",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

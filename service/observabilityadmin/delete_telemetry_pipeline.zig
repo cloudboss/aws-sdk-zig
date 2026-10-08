@@ -14,8 +14,7 @@ pub const DeleteTelemetryPipelineInput = struct {
     };
 };
 
-pub const DeleteTelemetryPipelineOutput = struct {
-};
+pub const DeleteTelemetryPipelineOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTelemetryPipelineInput, options: CallOptions) !DeleteTelemetryPipelineOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

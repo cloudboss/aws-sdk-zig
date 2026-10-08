@@ -12,7 +12,7 @@ pub const ThresholdConfiguration = struct {
     /// ECS multiplies `value` by the latest service desired count. For `COUNT`,
     /// Amazon ECS uses `value` directly as the threshold. The default is
     /// `BOUNDED_PERCENT`.
-    @"type": ThresholdType,
+    type: ThresholdType,
 
     /// Specifies the integer that Amazon ECS uses to calculate the failure
     /// threshold. When `type` is `COUNT`, this value is the failure threshold
@@ -22,7 +22,7 @@ pub const ThresholdConfiguration = struct {
     value: i32 = 0,
 
     pub const json_field_names = .{
-        .@"type" = "type",
+        .type = "type",
         .value = "value",
     };
 };

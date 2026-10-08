@@ -13,8 +13,7 @@ pub const DeleteLifecycleHookInput = struct {
     lifecycle_hook_name: []const u8,
 };
 
-pub const DeleteLifecycleHookOutput = struct {
-};
+pub const DeleteLifecycleHookOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLifecycleHookInput, options: CallOptions) !DeleteLifecycleHookOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const DeleteSlackWorkspaceAuthorizationInput = struct {
     };
 };
 
-pub const DeleteSlackWorkspaceAuthorizationOutput = struct {
-};
+pub const DeleteSlackWorkspaceAuthorizationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteSlackWorkspaceAuthorizationInput, options: CallOptions) !DeleteSlackWorkspaceAuthorizationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

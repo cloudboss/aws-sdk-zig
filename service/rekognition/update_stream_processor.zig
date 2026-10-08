@@ -42,8 +42,7 @@ pub const UpdateStreamProcessorInput = struct {
     };
 };
 
-pub const UpdateStreamProcessorOutput = struct {
-};
+pub const UpdateStreamProcessorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateStreamProcessorInput, options: CallOptions) !UpdateStreamProcessorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

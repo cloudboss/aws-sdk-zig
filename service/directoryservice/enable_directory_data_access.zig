@@ -14,8 +14,7 @@ pub const EnableDirectoryDataAccessInput = struct {
     };
 };
 
-pub const EnableDirectoryDataAccessOutput = struct {
-};
+pub const EnableDirectoryDataAccessOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableDirectoryDataAccessInput, options: CallOptions) !EnableDirectoryDataAccessOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

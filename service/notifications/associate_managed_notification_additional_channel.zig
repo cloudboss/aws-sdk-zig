@@ -29,8 +29,7 @@ pub const AssociateManagedNotificationAdditionalChannelInput = struct {
     };
 };
 
-pub const AssociateManagedNotificationAdditionalChannelOutput = struct {
-};
+pub const AssociateManagedNotificationAdditionalChannelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateManagedNotificationAdditionalChannelInput, options: CallOptions) !AssociateManagedNotificationAdditionalChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

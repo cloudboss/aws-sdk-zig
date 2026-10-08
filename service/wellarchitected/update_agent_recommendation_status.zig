@@ -23,8 +23,7 @@ pub const UpdateAgentRecommendationStatusInput = struct {
     };
 };
 
-pub const UpdateAgentRecommendationStatusOutput = struct {
-};
+pub const UpdateAgentRecommendationStatusOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateAgentRecommendationStatusInput, options: CallOptions) !UpdateAgentRecommendationStatusOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

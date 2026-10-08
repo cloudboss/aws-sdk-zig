@@ -6,9 +6,37 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// A pagination token. If multiple pages of results are returned, use the
+    /// `NextToken` value returned with
+    /// the current page of results as the value of this parameter to get the next
+    /// page of results.
+    next_token: ?[]const u8 = null,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    /// The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
+    resource_arn: []const u8,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .resource_arn = "ResourceARN",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// A pagination token. If multiple pages of results are returned, use the
+    /// `NextToken` value returned with
+    /// the current page of results to get the next page of results.
+    next_token: ?[]const u8 = null,
+
+    /// A list of tags, as key and value pairs, that is associated with the
+    /// specified X-Ray group or sampling rule.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

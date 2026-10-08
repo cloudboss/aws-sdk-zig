@@ -5,10 +5,20 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteApplicationInput = @import("delete_application_request.zig").DeleteApplicationRequest;
+pub const DeleteApplicationInput = struct {
+    /// ID of the Application to delete
+    id: []const u8,
 
-pub const DeleteApplicationOutput = struct {
+    /// Name of the workspace to associate with the underlying Application
+    workspace_name: []const u8,
+
+    pub const json_field_names = .{
+        .id = "id",
+        .workspace_name = "workspaceName",
+    };
 };
+
+pub const DeleteApplicationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteApplicationInput, options: CallOptions) !DeleteApplicationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

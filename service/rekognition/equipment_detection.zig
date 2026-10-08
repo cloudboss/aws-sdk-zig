@@ -17,12 +17,12 @@ pub const EquipmentDetection = struct {
     covers_body_part: ?CoversBodyPart = null,
 
     /// The type of detected PPE.
-    @"type": ?ProtectiveEquipmentType = null,
+    type: ?ProtectiveEquipmentType = null,
 
     pub const json_field_names = .{
         .bounding_box = "BoundingBox",
         .confidence = "Confidence",
         .covers_body_part = "CoversBodyPart",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

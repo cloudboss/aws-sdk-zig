@@ -22,8 +22,7 @@ pub const AssociateApplicationToEntitlementInput = struct {
     };
 };
 
-pub const AssociateApplicationToEntitlementOutput = struct {
-};
+pub const AssociateApplicationToEntitlementOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateApplicationToEntitlementInput, options: CallOptions) !AssociateApplicationToEntitlementOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

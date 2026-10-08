@@ -9,11 +9,11 @@ pub const SupportTerm = struct {
     refund_policy: ?[]const u8 = null,
 
     /// Category of the term being updated.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "id",
         .refund_policy = "refundPolicy",
-        .@"type" = "type",
+        .type = "type",
     };
 };

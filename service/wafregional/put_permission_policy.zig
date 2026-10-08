@@ -19,8 +19,7 @@ pub const PutPermissionPolicyInput = struct {
     };
 };
 
-pub const PutPermissionPolicyOutput = struct {
-};
+pub const PutPermissionPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutPermissionPolicyInput, options: CallOptions) !PutPermissionPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

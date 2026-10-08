@@ -15,8 +15,7 @@ pub const RegisterDataLakeDelegatedAdministratorInput = struct {
     };
 };
 
-pub const RegisterDataLakeDelegatedAdministratorOutput = struct {
-};
+pub const RegisterDataLakeDelegatedAdministratorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RegisterDataLakeDelegatedAdministratorInput, options: CallOptions) !RegisterDataLakeDelegatedAdministratorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

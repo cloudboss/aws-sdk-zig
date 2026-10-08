@@ -7,9 +7,51 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const FirewallDomainImportOperation = @import("firewall_domain_import_operation.zig").FirewallDomainImportOperation;
 const FirewallDomainListStatus = @import("firewall_domain_list_status.zig").FirewallDomainListStatus;
 
-pub const ImportFirewallDomainsInput = @import("import_firewall_domains_request.zig").ImportFirewallDomainsRequest;
+pub const ImportFirewallDomainsInput = struct {
+    /// The fully qualified URL or URI of the file stored in Amazon Simple Storage
+    /// Service
+    /// (Amazon S3) that contains the list of domains to import.
+    ///
+    /// The file must be in an S3 bucket that's in the same Region
+    /// as your DNS Firewall. The file must be a text file and must contain a single
+    /// domain per line.
+    domain_file_url: []const u8,
 
-pub const ImportFirewallDomainsOutput = @import("import_firewall_domains_response.zig").ImportFirewallDomainsResponse;
+    /// The ID of the domain list that you want to modify with the import operation.
+    firewall_domain_list_id: []const u8,
+
+    /// What you want DNS Firewall to do with the domains that are listed in the
+    /// file. This must be set to `REPLACE`, which updates the domain list to
+    /// exactly match the list in the file.
+    operation: FirewallDomainImportOperation,
+
+    pub const json_field_names = .{
+        .domain_file_url = "DomainFileUrl",
+        .firewall_domain_list_id = "FirewallDomainListId",
+        .operation = "Operation",
+    };
+};
+
+pub const ImportFirewallDomainsOutput = struct {
+    /// The Id of the firewall domain list that DNS Firewall just updated.
+    id: ?[]const u8 = null,
+
+    /// The name of the domain list.
+    name: ?[]const u8 = null,
+
+    /// Status of the import request.
+    status: ?FirewallDomainListStatus = null,
+
+    /// Additional information about the status of the list, if available.
+    status_message: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .id = "Id",
+        .name = "Name",
+        .status = "Status",
+        .status_message = "StatusMessage",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ImportFirewallDomainsInput, options: CallOptions) !ImportFirewallDomainsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const StopCompositionInput = struct {
     };
 };
 
-pub const StopCompositionOutput = struct {
-};
+pub const StopCompositionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopCompositionInput, options: CallOptions) !StopCompositionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

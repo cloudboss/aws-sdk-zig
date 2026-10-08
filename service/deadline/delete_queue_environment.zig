@@ -22,8 +22,7 @@ pub const DeleteQueueEnvironmentInput = struct {
     };
 };
 
-pub const DeleteQueueEnvironmentOutput = struct {
-};
+pub const DeleteQueueEnvironmentOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteQueueEnvironmentInput, options: CallOptions) !DeleteQueueEnvironmentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

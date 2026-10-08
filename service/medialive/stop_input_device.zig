@@ -14,8 +14,7 @@ pub const StopInputDeviceInput = struct {
     };
 };
 
-pub const StopInputDeviceOutput = struct {
-};
+pub const StopInputDeviceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopInputDeviceInput, options: CallOptions) !StopInputDeviceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const RegisterCustomEndpointInput = struct {
-};
+pub const RegisterCustomEndpointInput = struct {};
 
 pub const RegisterCustomEndpointOutput = struct {
     /// The IoT managed integrations dedicated, custom endpoint for the device to

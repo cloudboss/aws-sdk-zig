@@ -10,11 +10,11 @@ pub const NetPaymentTerm = struct {
     payment_due_period: ?[]const u8 = null,
 
     /// Type of the term being updated.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .id = "id",
         .payment_due_period = "paymentDuePeriod",
-        .@"type" = "type",
+        .type = "type",
     };
 };

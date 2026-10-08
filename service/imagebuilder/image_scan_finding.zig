@@ -62,7 +62,7 @@ pub const ImageScanFinding = struct {
     /// The type of the finding. Image Builder looks for findings of the type
     /// `PACKAGE_VULNERABILITY` that apply to output images, and excludes other
     /// types.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The timestamp when the finding was last updated.
     updated_at: ?i64 = null,
@@ -80,7 +80,7 @@ pub const ImageScanFinding = struct {
         .remediation = "remediation",
         .severity = "severity",
         .title = "title",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
     };
 };

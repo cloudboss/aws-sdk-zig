@@ -7,10 +7,10 @@ pub const NotificationSummary = struct {
     lens_upgrade_summary: ?LensUpgradeSummary = null,
 
     /// The type of notification.
-    @"type": ?NotificationType = null,
+    type: ?NotificationType = null,
 
     pub const json_field_names = .{
         .lens_upgrade_summary = "LensUpgradeSummary",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

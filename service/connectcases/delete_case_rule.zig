@@ -18,8 +18,7 @@ pub const DeleteCaseRuleInput = struct {
     };
 };
 
-pub const DeleteCaseRuleOutput = struct {
-};
+pub const DeleteCaseRuleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCaseRuleInput, options: CallOptions) !DeleteCaseRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

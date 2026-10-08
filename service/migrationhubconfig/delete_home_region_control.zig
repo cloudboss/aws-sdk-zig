@@ -16,8 +16,7 @@ pub const DeleteHomeRegionControlInput = struct {
     };
 };
 
-pub const DeleteHomeRegionControlOutput = struct {
-};
+pub const DeleteHomeRegionControlOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteHomeRegionControlInput, options: CallOptions) !DeleteHomeRegionControlOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

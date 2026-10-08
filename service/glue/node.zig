@@ -19,7 +19,7 @@ pub const Node = struct {
     trigger_details: ?TriggerNodeDetails = null,
 
     /// The type of Glue component represented by the node.
-    @"type": ?NodeType = null,
+    type: ?NodeType = null,
 
     /// The unique Id assigned to the node within the workflow.
     unique_id: ?[]const u8 = null,
@@ -29,7 +29,7 @@ pub const Node = struct {
         .job_details = "JobDetails",
         .name = "Name",
         .trigger_details = "TriggerDetails",
-        .@"type" = "Type",
+        .type = "Type",
         .unique_id = "UniqueId",
     };
 };

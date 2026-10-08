@@ -26,8 +26,7 @@ pub const DeleteWorkspaceMediaInput = struct {
     };
 };
 
-pub const DeleteWorkspaceMediaOutput = struct {
-};
+pub const DeleteWorkspaceMediaOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteWorkspaceMediaInput, options: CallOptions) !DeleteWorkspaceMediaOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -7,8 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const DeleteGroupingConfigurationInput = struct {};
 
-pub const DeleteGroupingConfigurationOutput = struct {
-};
+pub const DeleteGroupingConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteGroupingConfigurationInput, options: CallOptions) !DeleteGroupingConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

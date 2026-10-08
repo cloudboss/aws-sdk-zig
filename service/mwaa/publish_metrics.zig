@@ -22,8 +22,7 @@ pub const PublishMetricsInput = struct {
     };
 };
 
-pub const PublishMetricsOutput = struct {
-};
+pub const PublishMetricsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PublishMetricsInput, options: CallOptions) !PublishMetricsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

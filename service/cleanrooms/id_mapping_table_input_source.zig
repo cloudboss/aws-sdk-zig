@@ -6,10 +6,10 @@ pub const IdMappingTableInputSource = struct {
     id_namespace_association_id: []const u8,
 
     /// The type of the input source of the ID mapping table.
-    @"type": IdNamespaceType,
+    type: IdNamespaceType,
 
     pub const json_field_names = .{
         .id_namespace_association_id = "idNamespaceAssociationId",
-        .@"type" = "type",
+        .type = "type",
     };
 };

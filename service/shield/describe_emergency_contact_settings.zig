@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const EmergencyContact = @import("emergency_contact.zig").EmergencyContact;
 
-pub const DescribeEmergencyContactSettingsInput = struct {
-};
+pub const DescribeEmergencyContactSettingsInput = struct {};
 
 pub const DescribeEmergencyContactSettingsOutput = struct {
     /// A list of email addresses and phone numbers that the Shield Response Team

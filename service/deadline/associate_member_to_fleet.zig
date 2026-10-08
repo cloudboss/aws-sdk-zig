@@ -41,8 +41,7 @@ pub const AssociateMemberToFleetInput = struct {
     };
 };
 
-pub const AssociateMemberToFleetOutput = struct {
-};
+pub const AssociateMemberToFleetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateMemberToFleetInput, options: CallOptions) !AssociateMemberToFleetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

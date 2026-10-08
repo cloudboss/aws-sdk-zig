@@ -22,8 +22,7 @@ pub const UpdateDetectorVersionMetadataInput = struct {
     };
 };
 
-pub const UpdateDetectorVersionMetadataOutput = struct {
-};
+pub const UpdateDetectorVersionMetadataOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDetectorVersionMetadataInput, options: CallOptions) !UpdateDetectorVersionMetadataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

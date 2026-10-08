@@ -26,8 +26,7 @@ pub const UpdateLinkAttributesInput = struct {
     };
 };
 
-pub const UpdateLinkAttributesOutput = struct {
-};
+pub const UpdateLinkAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLinkAttributesInput, options: CallOptions) !UpdateLinkAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

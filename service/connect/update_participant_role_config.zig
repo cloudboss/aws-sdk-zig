@@ -24,8 +24,7 @@ pub const UpdateParticipantRoleConfigInput = struct {
     };
 };
 
-pub const UpdateParticipantRoleConfigOutput = struct {
-};
+pub const UpdateParticipantRoleConfigOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateParticipantRoleConfigInput, options: CallOptions) !UpdateParticipantRoleConfigOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

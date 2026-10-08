@@ -24,8 +24,7 @@ pub const PutVectorBucketDefaultIndexModeInput = struct {
     };
 };
 
-pub const PutVectorBucketDefaultIndexModeOutput = struct {
-};
+pub const PutVectorBucketDefaultIndexModeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutVectorBucketDefaultIndexModeInput, options: CallOptions) !PutVectorBucketDefaultIndexModeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

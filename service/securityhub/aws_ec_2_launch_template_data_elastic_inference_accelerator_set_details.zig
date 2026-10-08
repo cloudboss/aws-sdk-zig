@@ -4,10 +4,10 @@ pub const AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails = struct
     count: ?i32 = null,
 
     /// The type of Elastic Inference accelerator.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .count = "Count",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

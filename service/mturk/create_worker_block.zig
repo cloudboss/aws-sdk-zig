@@ -20,8 +20,7 @@ pub const CreateWorkerBlockInput = struct {
     };
 };
 
-pub const CreateWorkerBlockOutput = struct {
-};
+pub const CreateWorkerBlockOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateWorkerBlockInput, options: CallOptions) !CreateWorkerBlockOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -22,8 +22,7 @@ pub const RemoveWorkloadInput = struct {
     };
 };
 
-pub const RemoveWorkloadOutput = struct {
-};
+pub const RemoveWorkloadOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveWorkloadInput, options: CallOptions) !RemoveWorkloadOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

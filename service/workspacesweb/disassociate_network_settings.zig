@@ -14,8 +14,7 @@ pub const DisassociateNetworkSettingsInput = struct {
     };
 };
 
-pub const DisassociateNetworkSettingsOutput = struct {
-};
+pub const DisassociateNetworkSettingsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateNetworkSettingsInput, options: CallOptions) !DisassociateNetworkSettingsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

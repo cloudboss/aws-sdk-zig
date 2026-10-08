@@ -66,7 +66,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetConfiguredTableAnaly
     try path_buf.appendSlice(allocator, "/configuredTables/");
     try path_buf.appendSlice(allocator, input.configured_table_identifier);
     try path_buf.appendSlice(allocator, "/analysisRule/");
-    try path_buf.appendSlice(allocator, input.analysis_rule_type);
+    try path_buf.appendSlice(allocator, input.analysis_rule_type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

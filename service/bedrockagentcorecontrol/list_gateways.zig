@@ -6,9 +6,38 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const GatewaySummary = @import("gateway_summary.zig").GatewaySummary;
 
-pub const ListGatewaysInput = @import("list_gateways_request.zig").ListGatewaysRequest;
+pub const ListGatewaysInput = struct {
+    /// The maximum number of results to return in the response. If the total number
+    /// of results is greater than this value, use the token returned in the
+    /// response in the `nextToken` field when making another request to return the
+    /// next batch of results.
+    max_results: ?i32 = null,
 
-pub const ListGatewaysOutput = @import("list_gateways_response.zig").ListGatewaysResponse;
+    /// If the total number of results is greater than the `maxResults` value
+    /// provided in the request, enter the token returned in the `nextToken` field
+    /// in the response in this field to return the next batch of results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+    };
+};
+
+pub const ListGatewaysOutput = struct {
+    /// The list of gateway summaries.
+    items: ?[]const GatewaySummary = null,
+
+    /// If the total number of results is greater than the `maxResults` value
+    /// provided in the request, use this token when making another request in the
+    /// `nextToken` field to return the next batch of results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .items = "items",
+        .next_token = "nextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListGatewaysInput, options: CallOptions) !ListGatewaysOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -8,9 +8,47 @@ const EgressAccessLogs = @import("egress_access_logs.zig").EgressAccessLogs;
 const HlsIngest = @import("hls_ingest.zig").HlsIngest;
 const IngressAccessLogs = @import("ingress_access_logs.zig").IngressAccessLogs;
 
-pub const DescribeChannelInput = @import("describe_channel_request.zig").DescribeChannelRequest;
+pub const DescribeChannelInput = struct {
+    /// The ID of a Channel.
+    id: []const u8,
 
-pub const DescribeChannelOutput = @import("describe_channel_response.zig").DescribeChannelResponse;
+    pub const json_field_names = .{
+        .id = "Id",
+    };
+};
+
+pub const DescribeChannelOutput = struct {
+    /// The Amazon Resource Name (ARN) assigned to the Channel.
+    arn: ?[]const u8 = null,
+
+    /// The date and time the Channel was created.
+    created_at: ?[]const u8 = null,
+
+    /// A short text description of the Channel.
+    description: ?[]const u8 = null,
+
+    egress_access_logs: ?EgressAccessLogs = null,
+
+    hls_ingest: ?HlsIngest = null,
+
+    /// The ID of the Channel.
+    id: ?[]const u8 = null,
+
+    ingress_access_logs: ?IngressAccessLogs = null,
+
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .arn = "Arn",
+        .created_at = "CreatedAt",
+        .description = "Description",
+        .egress_access_logs = "EgressAccessLogs",
+        .hls_ingest = "HlsIngest",
+        .id = "Id",
+        .ingress_access_logs = "IngressAccessLogs",
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DescribeChannelInput, options: CallOptions) !DescribeChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

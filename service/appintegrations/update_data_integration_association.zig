@@ -23,8 +23,7 @@ pub const UpdateDataIntegrationAssociationInput = struct {
     };
 };
 
-pub const UpdateDataIntegrationAssociationOutput = struct {
-};
+pub const UpdateDataIntegrationAssociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDataIntegrationAssociationInput, options: CallOptions) !UpdateDataIntegrationAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

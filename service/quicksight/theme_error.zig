@@ -6,10 +6,10 @@ pub const ThemeError = struct {
     message: ?[]const u8 = null,
 
     /// The type of error.
-    @"type": ?ThemeErrorType = null,
+    type: ?ThemeErrorType = null,
 
     pub const json_field_names = .{
         .message = "Message",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

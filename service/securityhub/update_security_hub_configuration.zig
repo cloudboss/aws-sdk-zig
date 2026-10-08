@@ -49,8 +49,7 @@ pub const UpdateSecurityHubConfigurationInput = struct {
     };
 };
 
-pub const UpdateSecurityHubConfigurationOutput = struct {
-};
+pub const UpdateSecurityHubConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSecurityHubConfigurationInput, options: CallOptions) !UpdateSecurityHubConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

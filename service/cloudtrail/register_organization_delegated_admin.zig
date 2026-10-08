@@ -15,8 +15,7 @@ pub const RegisterOrganizationDelegatedAdminInput = struct {
     };
 };
 
-pub const RegisterOrganizationDelegatedAdminOutput = struct {
-};
+pub const RegisterOrganizationDelegatedAdminOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RegisterOrganizationDelegatedAdminInput, options: CallOptions) !RegisterOrganizationDelegatedAdminOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -41,7 +41,7 @@ pub const Connector = struct {
     status_reason: ?ConnectorStatusReason = null,
 
     /// The connector type.
-    @"type": ?ConnectorType = null,
+    type: ?ConnectorType = null,
 
     /// The date and time that the connector was updated.
     updated_at: ?i64 = null,
@@ -55,7 +55,7 @@ pub const Connector = struct {
         .open_id_configuration = "OpenIdConfiguration",
         .status = "Status",
         .status_reason = "StatusReason",
-        .@"type" = "Type",
+        .type = "Type",
         .updated_at = "UpdatedAt",
     };
 };

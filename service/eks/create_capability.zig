@@ -64,7 +64,7 @@ pub const CreateCapabilityInput = struct {
     ///
     /// * `KRO` – Kube Resource Orchestrator (KRO) for composing and managing custom
     ///   Kubernetes resources.
-    @"type": CapabilityType,
+    type: CapabilityType,
 
     pub const json_field_names = .{
         .capability_name = "capabilityName",
@@ -74,7 +74,7 @@ pub const CreateCapabilityInput = struct {
         .delete_propagation_policy = "deletePropagationPolicy",
         .role_arn = "roleArn",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -160,7 +160,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCapabilityInput, 
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

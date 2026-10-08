@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const PricingPlan = @import("pricing_plan.zig").PricingPlan;
 
-pub const GetPricingPlanInput = struct {
-};
+pub const GetPricingPlanInput = struct {};
 
 pub const GetPricingPlanOutput = struct {
     /// The chosen pricing plan for the current billing cycle.

@@ -21,8 +21,7 @@ pub const InitializeServiceInput = struct {
     };
 };
 
-pub const InitializeServiceOutput = struct {
-};
+pub const InitializeServiceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: InitializeServiceInput, options: CallOptions) !InitializeServiceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

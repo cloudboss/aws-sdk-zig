@@ -20,8 +20,7 @@ pub const ResetEncryptionKeyInput = struct {
     };
 };
 
-pub const ResetEncryptionKeyOutput = struct {
-};
+pub const ResetEncryptionKeyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ResetEncryptionKeyInput, options: CallOptions) !ResetEncryptionKeyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -2,7 +2,7 @@
 pub const AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails = struct {
     /// The type of resource to assign to a container. Valid values are `GPU` or
     /// `InferenceAccelerator`.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The value for the specified resource type.
     ///
@@ -15,7 +15,7 @@ pub const AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails = 
     value: ?[]const u8 = null,
 
     pub const json_field_names = .{
-        .@"type" = "Type",
+        .type = "Type",
         .value = "Value",
     };
 };

@@ -14,8 +14,7 @@ pub const CancelTraceRetrievalInput = struct {
     };
 };
 
-pub const CancelTraceRetrievalOutput = struct {
-};
+pub const CancelTraceRetrievalOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CancelTraceRetrievalInput, options: CallOptions) !CancelTraceRetrievalOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -22,8 +22,7 @@ pub const DeleteUserPoolDomainInput = struct {
     };
 };
 
-pub const DeleteUserPoolDomainOutput = struct {
-};
+pub const DeleteUserPoolDomainOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteUserPoolDomainInput, options: CallOptions) !DeleteUserPoolDomainOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -54,8 +54,7 @@ pub const PutResourceAttributesInput = struct {
     };
 };
 
-pub const PutResourceAttributesOutput = struct {
-};
+pub const PutResourceAttributesOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutResourceAttributesInput, options: CallOptions) !PutResourceAttributesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -29,7 +29,7 @@ pub const Insight = struct {
 
     /// The type of the insight. Possible values are `EVENT` and
     /// `RECOMMENDATION`.
-    @"type": ?InsightType = null,
+    type: ?InsightType = null,
 
     /// The timestamp when the insight was last updated, in epoch milliseconds.
     update_time: ?i64 = null,
@@ -41,7 +41,7 @@ pub const Insight = struct {
         .is_experimental = "IsExperimental",
         .priority = "Priority",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
         .update_time = "UpdateTime",
     };
 };

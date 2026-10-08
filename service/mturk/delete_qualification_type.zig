@@ -14,8 +14,7 @@ pub const DeleteQualificationTypeInput = struct {
     };
 };
 
-pub const DeleteQualificationTypeOutput = struct {
-};
+pub const DeleteQualificationTypeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteQualificationTypeInput, options: CallOptions) !DeleteQualificationTypeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

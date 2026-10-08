@@ -11,11 +11,11 @@ pub const ToolReference = struct {
     server_name: ?[]const u8 = null,
 
     /// The type of tool reference.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "name",
         .server_name = "serverName",
-        .@"type" = "type",
+        .type = "type",
     };
 };

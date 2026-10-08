@@ -47,7 +47,7 @@ pub const ListConnectionsInput = struct {
     sort_order: ?SortOrder = null,
 
     /// The type of connection.
-    @"type": ?ConnectionType = null,
+    type: ?ConnectionType = null,
 
     pub const json_field_names = .{
         .domain_identifier = "domainIdentifier",
@@ -59,7 +59,7 @@ pub const ListConnectionsInput = struct {
         .scope = "scope",
         .sort_by = "sortBy",
         .sort_order = "sortOrder",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -169,7 +169,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListConnectionsInput, c
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
         query_has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "type=");
         try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());

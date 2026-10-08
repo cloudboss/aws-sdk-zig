@@ -6,9 +6,27 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ChannelSummary = @import("channel_summary.zig").ChannelSummary;
 
-pub const ListChannelsInput = @import("list_channels_request.zig").ListChannelsRequest;
+pub const ListChannelsInput = struct {
+    max_results: ?i32 = null,
 
-pub const ListChannelsOutput = @import("list_channels_response.zig").ListChannelsResponse;
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListChannelsOutput = struct {
+    channels: ?[]const ChannelSummary = null,
+
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .channels = "Channels",
+        .next_token = "NextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListChannelsInput, options: CallOptions) !ListChannelsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

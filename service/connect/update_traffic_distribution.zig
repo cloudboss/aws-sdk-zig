@@ -34,8 +34,7 @@ pub const UpdateTrafficDistributionInput = struct {
     };
 };
 
-pub const UpdateTrafficDistributionOutput = struct {
-};
+pub const UpdateTrafficDistributionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateTrafficDistributionInput, options: CallOptions) !UpdateTrafficDistributionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

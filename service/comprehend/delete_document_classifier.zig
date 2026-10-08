@@ -14,8 +14,7 @@ pub const DeleteDocumentClassifierInput = struct {
     };
 };
 
-pub const DeleteDocumentClassifierOutput = struct {
-};
+pub const DeleteDocumentClassifierOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDocumentClassifierInput, options: CallOptions) !DeleteDocumentClassifierOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

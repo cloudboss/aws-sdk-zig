@@ -40,8 +40,7 @@ pub const PostAgentProfileInput = struct {
     };
 };
 
-pub const PostAgentProfileOutput = struct {
-};
+pub const PostAgentProfileOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PostAgentProfileInput, options: CallOptions) !PostAgentProfileOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

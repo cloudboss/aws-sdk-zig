@@ -19,8 +19,7 @@ pub const DeleteAdapterVersionInput = struct {
     };
 };
 
-pub const DeleteAdapterVersionOutput = struct {
-};
+pub const DeleteAdapterVersionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAdapterVersionInput, options: CallOptions) !DeleteAdapterVersionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

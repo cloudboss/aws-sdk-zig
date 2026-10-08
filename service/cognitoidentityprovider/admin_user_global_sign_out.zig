@@ -24,8 +24,7 @@ pub const AdminUserGlobalSignOutInput = struct {
     };
 };
 
-pub const AdminUserGlobalSignOutOutput = struct {
-};
+pub const AdminUserGlobalSignOutOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminUserGlobalSignOutInput, options: CallOptions) !AdminUserGlobalSignOutOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

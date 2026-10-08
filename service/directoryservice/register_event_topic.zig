@@ -20,8 +20,7 @@ pub const RegisterEventTopicInput = struct {
     };
 };
 
-pub const RegisterEventTopicOutput = struct {
-};
+pub const RegisterEventTopicOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RegisterEventTopicInput, options: CallOptions) !RegisterEventTopicOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

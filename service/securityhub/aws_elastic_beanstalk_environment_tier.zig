@@ -4,14 +4,14 @@ pub const AwsElasticBeanstalkEnvironmentTier = struct {
     name: ?[]const u8 = null,
 
     /// The type of environment tier. Valid values are `Standard` or `SQS/HTTP`.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     /// The version of the environment tier.
     version: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .name = "Name",
-        .@"type" = "Type",
+        .type = "Type",
         .version = "Version",
     };
 };

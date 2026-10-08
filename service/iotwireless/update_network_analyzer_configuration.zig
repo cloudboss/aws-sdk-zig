@@ -56,8 +56,7 @@ pub const UpdateNetworkAnalyzerConfigurationInput = struct {
     };
 };
 
-pub const UpdateNetworkAnalyzerConfigurationOutput = struct {
-};
+pub const UpdateNetworkAnalyzerConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateNetworkAnalyzerConfigurationInput, options: CallOptions) !UpdateNetworkAnalyzerConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

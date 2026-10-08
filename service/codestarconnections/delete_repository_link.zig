@@ -14,8 +14,7 @@ pub const DeleteRepositoryLinkInput = struct {
     };
 };
 
-pub const DeleteRepositoryLinkOutput = struct {
-};
+pub const DeleteRepositoryLinkOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRepositoryLinkInput, options: CallOptions) !DeleteRepositoryLinkOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Handshake = @import("handshake.zig").Handshake;
 
-pub const EnableAllFeaturesInput = struct {
-};
+pub const EnableAllFeaturesInput = struct {};
 
 pub const EnableAllFeaturesOutput = struct {
     /// A structure that contains details about the handshake created to support

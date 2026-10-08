@@ -36,8 +36,7 @@ pub const CreateAvailabilityConfigurationInput = struct {
     };
 };
 
-pub const CreateAvailabilityConfigurationOutput = struct {
-};
+pub const CreateAvailabilityConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateAvailabilityConfigurationInput, options: CallOptions) !CreateAvailabilityConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

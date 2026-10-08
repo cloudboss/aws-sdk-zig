@@ -14,8 +14,7 @@ pub const DeleteTopicRuleDestinationInput = struct {
     };
 };
 
-pub const DeleteTopicRuleDestinationOutput = struct {
-};
+pub const DeleteTopicRuleDestinationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTopicRuleDestinationInput, options: CallOptions) !DeleteTopicRuleDestinationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

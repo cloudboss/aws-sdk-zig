@@ -20,8 +20,7 @@ pub const DeleteAccessPolicyInput = struct {
     };
 };
 
-pub const DeleteAccessPolicyOutput = struct {
-};
+pub const DeleteAccessPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAccessPolicyInput, options: CallOptions) !DeleteAccessPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

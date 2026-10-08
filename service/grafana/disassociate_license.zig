@@ -63,7 +63,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisassociateLicenseInpu
     try path_buf.appendSlice(allocator, "/workspaces/");
     try path_buf.appendSlice(allocator, input.workspace_id);
     try path_buf.appendSlice(allocator, "/licenses/");
-    try path_buf.appendSlice(allocator, input.license_type);
+    try path_buf.appendSlice(allocator, input.license_type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

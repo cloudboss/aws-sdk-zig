@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Subscription = @import("subscription.zig").Subscription;
 
-pub const DescribeSubscriptionInput = struct {
-};
+pub const DescribeSubscriptionInput = struct {};
 
 pub const DescribeSubscriptionOutput = struct {
     /// The Shield Advanced subscription details for an account.

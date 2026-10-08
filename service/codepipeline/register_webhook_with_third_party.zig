@@ -15,8 +15,7 @@ pub const RegisterWebhookWithThirdPartyInput = struct {
     };
 };
 
-pub const RegisterWebhookWithThirdPartyOutput = struct {
-};
+pub const RegisterWebhookWithThirdPartyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RegisterWebhookWithThirdPartyInput, options: CallOptions) !RegisterWebhookWithThirdPartyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

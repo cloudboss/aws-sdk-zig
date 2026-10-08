@@ -15,8 +15,7 @@ pub const DeleteCustomKeyStoreInput = struct {
     };
 };
 
-pub const DeleteCustomKeyStoreOutput = struct {
-};
+pub const DeleteCustomKeyStoreOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCustomKeyStoreInput, options: CallOptions) !DeleteCustomKeyStoreOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

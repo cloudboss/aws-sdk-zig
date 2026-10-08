@@ -6,9 +6,40 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Database = @import("database.zig").Database;
 
-pub const ListDatabasesInput = @import("list_databases_request.zig").ListDatabasesRequest;
+pub const ListDatabasesInput = struct {
+    /// The total number of items to return in the output. If the total number of
+    /// items
+    /// available is more than the value specified, a NextToken is provided in the
+    /// output. To
+    /// resume pagination, provide the NextToken value as argument of a subsequent
+    /// API
+    /// invocation.
+    max_results: ?i32 = null,
 
-pub const ListDatabasesOutput = @import("list_databases_response.zig").ListDatabasesResponse;
+    /// The pagination token. To resume pagination, provide the NextToken value as
+    /// argument of a
+    /// subsequent API invocation.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListDatabasesOutput = struct {
+    /// A list of database names.
+    databases: ?[]const Database = null,
+
+    /// The pagination token. This parameter is returned when the response is
+    /// truncated.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .databases = "Databases",
+        .next_token = "NextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListDatabasesInput, options: CallOptions) !ListDatabasesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

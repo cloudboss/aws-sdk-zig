@@ -6,9 +6,25 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ResourceTags = @import("resource_tags.zig").ResourceTags;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// The Amazon Resource Name (ARN) of the resource that you want to list tags
+    /// for. To get the ARN, send a GET request with the resource name.
+    arn: []const u8,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    pub const json_field_names = .{
+        .arn = "Arn",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// The Amazon Resource Name (ARN) and tags for an AWS Elemental MediaConvert
+    /// resource.
+    resource_tags: ?ResourceTags = null,
+
+    pub const json_field_names = .{
+        .resource_tags = "ResourceTags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

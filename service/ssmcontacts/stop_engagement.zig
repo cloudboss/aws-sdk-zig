@@ -18,8 +18,7 @@ pub const StopEngagementInput = struct {
     };
 };
 
-pub const StopEngagementOutput = struct {
-};
+pub const StopEngagementOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopEngagementInput, options: CallOptions) !StopEngagementOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

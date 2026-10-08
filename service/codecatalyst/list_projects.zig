@@ -7,9 +7,45 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ProjectListFilter = @import("project_list_filter.zig").ProjectListFilter;
 const ProjectSummary = @import("project_summary.zig").ProjectSummary;
 
-pub const ListProjectsInput = @import("list_projects_request.zig").ListProjectsRequest;
+pub const ListProjectsInput = struct {
+    /// Information about filters to apply to narrow the results returned in the
+    /// list.
+    filters: ?[]const ProjectListFilter = null,
 
-pub const ListProjectsOutput = @import("list_projects_response.zig").ListProjectsResponse;
+    /// The maximum number of results to show in a single call to this API. If the
+    /// number of results is larger than the number you specified, the response will
+    /// include a `NextToken` element, which you can use to obtain additional
+    /// results.
+    max_results: ?i32 = null,
+
+    /// A token returned from a call to this API to indicate the next batch of
+    /// results to return, if any.
+    next_token: ?[]const u8 = null,
+
+    /// The name of the space.
+    space_name: []const u8,
+
+    pub const json_field_names = .{
+        .filters = "filters",
+        .max_results = "maxResults",
+        .next_token = "nextToken",
+        .space_name = "spaceName",
+    };
+};
+
+pub const ListProjectsOutput = struct {
+    /// Information about the projects.
+    items: ?[]const ProjectSummary = null,
+
+    /// A token returned from a call to this API to indicate the next batch of
+    /// results to return, if any.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .items = "items",
+        .next_token = "nextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListProjectsInput, options: CallOptions) !ListProjectsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

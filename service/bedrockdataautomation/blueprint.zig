@@ -28,7 +28,7 @@ pub const Blueprint = struct {
 
     schema: []const u8,
 
-    @"type": Type,
+    type: Type,
 
     pub const json_field_names = .{
         .blueprint_arn = "blueprintArn",
@@ -42,6 +42,6 @@ pub const Blueprint = struct {
         .optimization_samples = "optimizationSamples",
         .optimization_time = "optimizationTime",
         .schema = "schema",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const VpcPeeringAuthorization = @import("vpc_peering_authorization.zig").VpcPeeringAuthorization;
 
-pub const DescribeVpcPeeringAuthorizationsInput = struct {
-};
+pub const DescribeVpcPeeringAuthorizationsInput = struct {};
 
 pub const DescribeVpcPeeringAuthorizationsOutput = struct {
     /// A collection of objects that describe all valid VPC peering operations for

@@ -39,8 +39,7 @@ pub const AcceptPortfolioShareInput = struct {
     };
 };
 
-pub const AcceptPortfolioShareOutput = struct {
-};
+pub const AcceptPortfolioShareOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AcceptPortfolioShareInput, options: CallOptions) !AcceptPortfolioShareOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

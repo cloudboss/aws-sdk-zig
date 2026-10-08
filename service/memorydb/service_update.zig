@@ -28,7 +28,7 @@ pub const ServiceUpdate = struct {
     status: ?ServiceUpdateStatus = null,
 
     /// Reflects the nature of the service update
-    @"type": ?ServiceUpdateType = null,
+    type: ?ServiceUpdateType = null,
 
     pub const json_field_names = .{
         .auto_update_start_date = "AutoUpdateStartDate",
@@ -39,6 +39,6 @@ pub const ServiceUpdate = struct {
         .release_date = "ReleaseDate",
         .service_update_name = "ServiceUpdateName",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

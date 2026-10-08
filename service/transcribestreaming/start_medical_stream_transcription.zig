@@ -99,7 +99,7 @@ pub const StartMedicalStreamTranscriptionInput = struct {
     /// Specify the type of input audio. For example, choose `DICTATION` for a
     /// provider dictating patient notes and `CONVERSATION` for a dialogue between a
     /// patient and a medical professional.
-    @"type": Type,
+    type: Type,
 
     /// Specify the name of the custom vocabulary that you want to use when
     /// processing your
@@ -117,7 +117,7 @@ pub const StartMedicalStreamTranscriptionInput = struct {
         .session_id = "SessionId",
         .show_speaker_label = "ShowSpeakerLabel",
         .specialty = "Specialty",
-        .@"type" = "Type",
+        .type = "Type",
         .vocabulary_name = "VocabularyName",
     };
 };
@@ -158,7 +158,7 @@ pub const StartMedicalStreamTranscriptionOutput = struct {
     transcript_result_stream: ?MedicalTranscriptResultStream = null,
 
     /// Provides the type of audio you specified in your request.
-    @"type": ?Type = null,
+    type: ?Type = null,
 
     /// Provides the name of the custom vocabulary that you specified in your
     /// request.
@@ -176,7 +176,7 @@ pub const StartMedicalStreamTranscriptionOutput = struct {
         .show_speaker_label = "ShowSpeakerLabel",
         .specialty = "Specialty",
         .transcript_result_stream = "TranscriptResultStream",
-        .@"type" = "Type",
+        .type = "Type",
         .vocabulary_name = "VocabularyName",
     };
 };

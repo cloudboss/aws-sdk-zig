@@ -23,13 +23,13 @@ pub const CreateServiceLinkedAnalyzerInput = struct {
 
     /// The type of analyzer to create. Valid values are `ACCOUNT_UNUSED_ACCESS` and
     /// `ORGANIZATION_UNUSED_ACCESS`.
-    @"type": Type,
+    type: Type,
 
     pub const json_field_names = .{
         .archive_rules = "archiveRules",
         .client_token = "clientToken",
         .configuration = "configuration",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -100,7 +100,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateServiceLinkedAnal
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

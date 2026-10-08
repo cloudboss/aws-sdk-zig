@@ -22,8 +22,7 @@ pub const AssociateSourceServersInput = struct {
     };
 };
 
-pub const AssociateSourceServersOutput = struct {
-};
+pub const AssociateSourceServersOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateSourceServersInput, options: CallOptions) !AssociateSourceServersOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

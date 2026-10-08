@@ -22,8 +22,7 @@ pub const AssociateChannelInput = struct {
     };
 };
 
-pub const AssociateChannelOutput = struct {
-};
+pub const AssociateChannelOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateChannelInput, options: CallOptions) !AssociateChannelOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

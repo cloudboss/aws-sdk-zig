@@ -36,8 +36,7 @@ pub const UpdateParticipantAuthenticationInput = struct {
     };
 };
 
-pub const UpdateParticipantAuthenticationOutput = struct {
-};
+pub const UpdateParticipantAuthenticationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateParticipantAuthenticationInput, options: CallOptions) !UpdateParticipantAuthenticationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

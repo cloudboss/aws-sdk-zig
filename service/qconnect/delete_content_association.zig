@@ -23,8 +23,7 @@ pub const DeleteContentAssociationInput = struct {
     };
 };
 
-pub const DeleteContentAssociationOutput = struct {
-};
+pub const DeleteContentAssociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteContentAssociationInput, options: CallOptions) !DeleteContentAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

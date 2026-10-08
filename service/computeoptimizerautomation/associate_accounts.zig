@@ -5,9 +5,33 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const AssociateAccountsInput = @import("associate_accounts_request.zig").AssociateAccountsRequest;
+pub const AssociateAccountsInput = struct {
+    /// The IDs of the member accounts to associate. You can specify up to 50
+    /// account IDs.
+    account_ids: []const []const u8,
 
-pub const AssociateAccountsOutput = @import("associate_accounts_response.zig").AssociateAccountsResponse;
+    /// A unique identifier to ensure idempotency of the request. Valid for 24 hours
+    /// after creation.
+    client_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .account_ids = "accountIds",
+        .client_token = "clientToken",
+    };
+};
+
+pub const AssociateAccountsOutput = struct {
+    /// The IDs of the member accounts that were successfully associated.
+    account_ids: ?[]const []const u8 = null,
+
+    /// Any errors that occurred during the association process.
+    errors: ?[]const []const u8 = null,
+
+    pub const json_field_names = .{
+        .account_ids = "accountIds",
+        .errors = "errors",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateAccountsInput, options: CallOptions) !AssociateAccountsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

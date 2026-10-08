@@ -1042,14 +1042,14 @@ pub fn deserializeAuthentication(allocator: std.mem.Allocator, reader: *aws.xml.
     _ = allocator;
     var result: Authentication = undefined;
     result.password_count = null;
-    result.@"type" = null;
+    result.type = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
                 if (std.mem.eql(u8, e.local, "PasswordCount")) {
                     result.password_count = std.fmt.parseInt(i32, try reader.readElementText(), 10) catch null;
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = AuthenticationType.fromWireName(try reader.readElementText());
+                    result.type = AuthenticationType.fromWireName(try reader.readElementText());
                 } else {
                     try reader.skipElement();
                 }
@@ -3645,7 +3645,7 @@ pub fn serializeAuthenticationMode(allocator: std.mem.Allocator, buf: *std.Array
         try serializePasswordListInput(allocator, buf, v, "member");
         try buf.appendSlice(allocator, "</Passwords>");
     }
-    if (value.@"type") |v| {
+    if (value.type) |v| {
         try buf.appendSlice(allocator, "<Type>");
         try buf.appendSlice(allocator, v.wireName());
         try buf.appendSlice(allocator, "</Type>");
@@ -3939,4 +3939,3 @@ pub fn serializeTimeRangeFilter(allocator: std.mem.Allocator, buf: *std.ArrayLis
         try buf.appendSlice(allocator, "</StartTime>");
     }
 }
-

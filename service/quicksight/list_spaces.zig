@@ -6,9 +6,47 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SpaceSummary = @import("space_summary.zig").SpaceSummary;
 
-pub const ListSpacesInput = @import("list_spaces_request.zig").ListSpacesRequest;
+pub const ListSpacesInput = struct {
+    /// The ID of the Amazon Web Services account that contains the spaces.
+    aws_account_id: []const u8,
 
-pub const ListSpacesOutput = @import("list_spaces_response.zig").ListSpacesResponse;
+    /// The maximum number of results to return.
+    max_results: ?i32 = null,
+
+    /// The token for the next set of results, or null if there are no more results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .aws_account_id = "AwsAccountId",
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListSpacesOutput = struct {
+    /// The token for the next set of results, or null if there are no more results.
+    next_token: ?[]const u8 = null,
+
+    /// The Amazon Web Services request ID for this operation.
+    request_id: ?[]const u8 = null,
+
+    /// The ARN of the space.
+    space_arn: ?[]const u8 = null,
+
+    /// The ID of the space.
+    space_id: []const u8,
+
+    /// A list of space summaries.
+    space_summaries: ?[]const SpaceSummary = null,
+
+    pub const json_field_names = .{
+        .next_token = "NextToken",
+        .request_id = "RequestId",
+        .space_arn = "spaceArn",
+        .space_id = "spaceId",
+        .space_summaries = "SpaceSummaries",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListSpacesInput, options: CallOptions) !ListSpacesOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

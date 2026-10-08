@@ -46,7 +46,7 @@ pub const UpdateNotebookInput = struct {
     status: ?NotebookStatus = null,
 
     /// The updated type of the notebook.
-    @"type": ?NotebookType = null,
+    type: ?NotebookType = null,
 
     pub const json_field_names = .{
         .cell_order = "cellOrder",
@@ -59,7 +59,7 @@ pub const UpdateNotebookInput = struct {
         .name = "name",
         .parameters = "parameters",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -119,7 +119,7 @@ pub const UpdateNotebookOutput = struct {
     status: NotebookStatus,
 
     /// The type of the notebook.
-    @"type": ?NotebookType = null,
+    type: ?NotebookType = null,
 
     /// The timestamp of when the notebook was last updated.
     updated_at: ?i64 = null,
@@ -146,7 +146,7 @@ pub const UpdateNotebookOutput = struct {
         .owning_project_id = "owningProjectId",
         .parameters = "parameters",
         .status = "status",
-        .@"type" = "type",
+        .type = "type",
         .updated_at = "updatedAt",
         .updated_by = "updatedBy",
     };
@@ -241,7 +241,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateNotebookInput, co
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
-    if (input.@"type") |v| {
+    if (input.type) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"type\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);

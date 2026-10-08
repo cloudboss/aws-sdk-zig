@@ -27,8 +27,7 @@ pub const DeleteVpcPeeringAuthorizationInput = struct {
     };
 };
 
-pub const DeleteVpcPeeringAuthorizationOutput = struct {
-};
+pub const DeleteVpcPeeringAuthorizationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteVpcPeeringAuthorizationInput, options: CallOptions) !DeleteVpcPeeringAuthorizationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

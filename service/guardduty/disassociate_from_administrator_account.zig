@@ -14,8 +14,7 @@ pub const DisassociateFromAdministratorAccountInput = struct {
     };
 };
 
-pub const DisassociateFromAdministratorAccountOutput = struct {
-};
+pub const DisassociateFromAdministratorAccountOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateFromAdministratorAccountInput, options: CallOptions) !DisassociateFromAdministratorAccountOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

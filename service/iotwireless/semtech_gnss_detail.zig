@@ -15,12 +15,12 @@ pub const SemtechGnssDetail = struct {
     status: ?PositionConfigurationStatus = null,
 
     /// The type of positioning solver used.
-    @"type": ?PositionSolverType = null,
+    type: ?PositionSolverType = null,
 
     pub const json_field_names = .{
         .fec = "Fec",
         .provider = "Provider",
         .status = "Status",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

@@ -20,8 +20,7 @@ pub const DeleteCustomDetectionRuleOrgConfigurationInput = struct {
     };
 };
 
-pub const DeleteCustomDetectionRuleOrgConfigurationOutput = struct {
-};
+pub const DeleteCustomDetectionRuleOrgConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteCustomDetectionRuleOrgConfigurationInput, options: CallOptions) !DeleteCustomDetectionRuleOrgConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

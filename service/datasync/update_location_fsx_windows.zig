@@ -67,8 +67,7 @@ pub const UpdateLocationFsxWindowsInput = struct {
     };
 };
 
-pub const UpdateLocationFsxWindowsOutput = struct {
-};
+pub const UpdateLocationFsxWindowsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLocationFsxWindowsInput, options: CallOptions) !UpdateLocationFsxWindowsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

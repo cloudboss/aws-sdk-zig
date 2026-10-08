@@ -14,8 +14,7 @@ pub const DisassociateConnectionAliasInput = struct {
     };
 };
 
-pub const DisassociateConnectionAliasOutput = struct {
-};
+pub const DisassociateConnectionAliasOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateConnectionAliasInput, options: CallOptions) !DisassociateConnectionAliasOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

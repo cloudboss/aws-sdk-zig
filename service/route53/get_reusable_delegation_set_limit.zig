@@ -15,7 +15,7 @@ pub const GetReusableDelegationSetLimitInput = struct {
     /// Specify `MAX_ZONES_BY_REUSABLE_DELEGATION_SET` to get the maximum number of
     /// hosted zones that you can associate with the specified reusable delegation
     /// set.
-    @"type": ReusableDelegationSetLimitType,
+    type: ReusableDelegationSetLimitType,
 };
 
 pub const GetReusableDelegationSetLimitOutput = struct {
@@ -64,7 +64,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetReusableDelegationSe
     try path_buf.appendSlice(allocator, "/2013-04-01/reusabledelegationsetlimit/");
     try path_buf.appendSlice(allocator, input.delegation_set_id);
     try path_buf.appendSlice(allocator, "/");
-    try path_buf.appendSlice(allocator, input.@"type".wireName());
+    try path_buf.appendSlice(allocator, input.type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

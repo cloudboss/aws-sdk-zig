@@ -24,8 +24,7 @@ pub const AdminEnableUserInput = struct {
     };
 };
 
-pub const AdminEnableUserOutput = struct {
-};
+pub const AdminEnableUserOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminEnableUserInput, options: CallOptions) !AdminEnableUserOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -19,8 +19,7 @@ pub const AssociateOrganizationalUnitInput = struct {
     };
 };
 
-pub const AssociateOrganizationalUnitOutput = struct {
-};
+pub const AssociateOrganizationalUnitOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateOrganizationalUnitInput, options: CallOptions) !AssociateOrganizationalUnitOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

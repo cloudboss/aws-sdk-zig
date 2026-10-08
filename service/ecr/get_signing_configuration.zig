@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SigningConfiguration = @import("signing_configuration.zig").SigningConfiguration;
 
-pub const GetSigningConfigurationInput = struct {
-};
+pub const GetSigningConfigurationInput = struct {};
 
 pub const GetSigningConfigurationOutput = struct {
     /// The Amazon Web Services account ID associated with the registry.

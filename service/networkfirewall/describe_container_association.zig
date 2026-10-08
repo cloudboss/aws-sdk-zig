@@ -57,7 +57,7 @@ pub const DescribeContainerAssociationOutput = struct {
     /// * `ECS` - Amazon Elastic Container Service
     ///
     /// * `EKS` - Amazon Elastic Kubernetes Service
-    @"type": ?ContainerMonitoringType = null,
+    type: ?ContainerMonitoringType = null,
 
     /// A token used for optimistic locking. Network Firewall returns a token to
     /// your requests that access the container association.
@@ -83,7 +83,7 @@ pub const DescribeContainerAssociationOutput = struct {
         .resolved_cidr_count = "ResolvedCidrCount",
         .status = "Status",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
         .update_token = "UpdateToken",
     };
 };

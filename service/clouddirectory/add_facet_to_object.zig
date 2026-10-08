@@ -31,8 +31,7 @@ pub const AddFacetToObjectInput = struct {
     };
 };
 
-pub const AddFacetToObjectOutput = struct {
-};
+pub const AddFacetToObjectOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AddFacetToObjectInput, options: CallOptions) !AddFacetToObjectOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

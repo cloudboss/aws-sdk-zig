@@ -3,9 +3,9 @@ const GuardrailChecksSensitiveInformationEntityType = @import("guardrail_checks_
 /// The configuration for a single sensitive information entity type to detect.
 pub const GuardrailChecksSensitiveInformationEntityConfig = struct {
     /// The PII entity type to detect.
-    @"type": GuardrailChecksSensitiveInformationEntityType,
+    type: GuardrailChecksSensitiveInformationEntityType,
 
     pub const json_field_names = .{
-        .@"type" = "type",
+        .type = "type",
     };
 };

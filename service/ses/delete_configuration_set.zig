@@ -10,8 +10,7 @@ pub const DeleteConfigurationSetInput = struct {
     configuration_set_name: []const u8,
 };
 
-pub const DeleteConfigurationSetOutput = struct {
-};
+pub const DeleteConfigurationSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConfigurationSetInput, options: CallOptions) !DeleteConfigurationSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

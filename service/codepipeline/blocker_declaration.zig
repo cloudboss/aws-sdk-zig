@@ -6,10 +6,10 @@ pub const BlockerDeclaration = struct {
     name: []const u8,
 
     /// Reserved for future use.
-    @"type": BlockerType,
+    type: BlockerType,
 
     pub const json_field_names = .{
         .name = "name",
-        .@"type" = "type",
+        .type = "type",
     };
 };

@@ -19,8 +19,7 @@ pub const RemoveTemplateActionInput = struct {
     };
 };
 
-pub const RemoveTemplateActionOutput = struct {
-};
+pub const RemoveTemplateActionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveTemplateActionInput, options: CallOptions) !RemoveTemplateActionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

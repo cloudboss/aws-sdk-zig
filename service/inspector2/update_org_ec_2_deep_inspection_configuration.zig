@@ -15,8 +15,7 @@ pub const UpdateOrgEc2DeepInspectionConfigurationInput = struct {
     };
 };
 
-pub const UpdateOrgEc2DeepInspectionConfigurationOutput = struct {
-};
+pub const UpdateOrgEc2DeepInspectionConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateOrgEc2DeepInspectionConfigurationInput, options: CallOptions) !UpdateOrgEc2DeepInspectionConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

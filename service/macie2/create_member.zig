@@ -6,9 +6,33 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AccountDetail = @import("account_detail.zig").AccountDetail;
 
-pub const CreateMemberInput = @import("create_member_request.zig").CreateMemberRequest;
+pub const CreateMemberInput = struct {
+    /// The details of the account to associate with the administrator account.
+    account: AccountDetail,
 
-pub const CreateMemberOutput = @import("create_member_response.zig").CreateMemberResponse;
+    /// A map of key-value pairs that specifies the tags to associate with the
+    /// account in Amazon Macie.
+    ///
+    /// An account can have a maximum of 50 tags. Each tag consists of a tag key and
+    /// an associated tag value. The maximum length of a tag key is 128 characters.
+    /// The maximum length of a tag value is 256 characters.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .account = "account",
+        .tags = "tags",
+    };
+};
+
+pub const CreateMemberOutput = struct {
+    /// The Amazon Resource Name (ARN) of the account that was associated with the
+    /// administrator account.
+    arn: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .arn = "arn",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateMemberInput, options: CallOptions) !CreateMemberOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -87,7 +87,6 @@ pub const SelectObjectContentInput = struct {
 };
 
 pub const SelectObjectContentOutput = struct {
-
     payload: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *SelectObjectContentOutput) void {

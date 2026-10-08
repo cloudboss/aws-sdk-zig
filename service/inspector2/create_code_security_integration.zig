@@ -19,13 +19,13 @@ pub const CreateCodeSecurityIntegrationInput = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// The type of repository provider for the integration.
-    @"type": IntegrationType,
+    type: IntegrationType,
 
     pub const json_field_names = .{
         .details = "details",
         .name = "name",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
     };
 };
 
@@ -100,7 +100,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateCodeSecurityInteg
     }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

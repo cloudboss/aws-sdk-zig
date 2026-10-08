@@ -1,7 +1,10 @@
 accessanalyzer models/accessanalyzer/service/2019-11-01/accessanalyzer-2019-11-01.json com.amazonaws.accessanalyzer#AccessAnalyzer
 account models/account/service/2021-02-01/account-2021-02-01.json com.amazonaws.account#Account
+accountaccess models/account-access/service/2018-05-10/account-access-2018-05-10.json com.amazonaws.accountaccess#AWSAccountAccess
 acm models/acm/service/2015-12-08/acm-2015-12-08.json com.amazonaws.acm#CertificateManager
 acmpca models/acm-pca/service/2017-08-22/acm-pca-2017-08-22.json com.amazonaws.acmpca#ACMPrivateCA
+agentregistry models/agent-registry/service/2025-12-01/agent-registry-2025-12-01.json com.amazonaws.agentregistry#AgentRegistry
+agentregistrycontrol models/agent-registry-control/service/2025-12-01/agent-registry-control-2025-12-01.json com.amazonaws.agentregistrycontrol#AgentRegistryControl
 aiops models/aiops/service/2018-05-10/aiops-2018-05-10.json com.amazonaws.aiops#AIOps
 amp models/amp/service/2020-08-01/amp-2020-08-01.json com.amazonaws.amp#AmazonPrometheusService
 amplify models/amplify/service/2017-07-25/amplify-2017-07-25.json com.amazonaws.amplify#Amplify
@@ -101,6 +104,7 @@ connectcampaigns models/connectcampaigns/service/2021-01-30/connectcampaigns-202
 connectcampaignsv2 models/connectcampaignsv2/service/2024-04-23/connectcampaignsv2-2024-04-23.json com.amazonaws.connectcampaignsv2#AmazonConnectCampaignServiceV2
 connectcases models/connectcases/service/2022-10-03/connectcases-2022-10-03.json com.amazonaws.connectcases#AmazonConnectCases
 connectcontactlens models/connect-contact-lens/service/2020-08-21/connect-contact-lens-2020-08-21.json com.amazonaws.connectcontactlens#AmazonConnectContactLens
+connecthealth models/connecthealth/service/2025-01-29/connecthealth-2025-01-29.json com.amazonaws.connecthealth#ConnectHealth
 connectparticipant models/connectparticipant/service/2018-09-07/connectparticipant-2018-09-07.json com.amazonaws.connectparticipant#AmazonConnectParticipantServiceLambda
 controlcatalog models/controlcatalog/service/2018-05-10/controlcatalog-2018-05-10.json com.amazonaws.controlcatalog#ControlCatalog
 controltower models/controltower/service/2018-05-10/controltower-2018-05-10.json com.amazonaws.controltower#AWSControlTowerApis
@@ -118,6 +122,7 @@ dax models/dax/service/2017-04-19/dax-2017-04-19.json com.amazonaws.dax#AmazonDA
 deadline models/deadline/service/2023-10-12/deadline-2023-10-12.json com.amazonaws.deadline#Deadline
 detective models/detective/service/2018-10-26/detective-2018-10-26.json com.amazonaws.detective#AmazonDetective
 devicefarm models/device-farm/service/2015-06-23/device-farm-2015-06-23.json com.amazonaws.devicefarm#DeviceFarm_20150623
+devopsagent models/devops-agent/service/2026-01-01/devops-agent-2026-01-01.json com.amazonaws.devopsagent#DevOpsAgent
 devopsguru models/devops-guru/service/2020-12-01/devops-guru-2020-12-01.json com.amazonaws.devopsguru#CapstoneControlPlaneService
 directconnect models/direct-connect/service/2012-10-25/direct-connect-2012-10-25.json com.amazonaws.directconnect#OvertureService
 directoryservice models/directory-service/service/2015-04-16/directory-service-2015-04-16.json com.amazonaws.directoryservice#DirectoryService_20150416
@@ -143,9 +148,11 @@ elasticbeanstalk models/elastic-beanstalk/service/2010-12-01/elastic-beanstalk-2
 elasticloadbalancing models/elastic-load-balancing/service/2012-06-01/elastic-load-balancing-2012-06-01.json com.amazonaws.elasticloadbalancing#ElasticLoadBalancing_v7
 elasticloadbalancingv2 models/elastic-load-balancing-v2/service/2015-12-01/elastic-load-balancing-v2-2015-12-01.json com.amazonaws.elasticloadbalancingv2#ElasticLoadBalancing_v10
 elasticsearchservice models/elasticsearch-service/service/2015-01-01/elasticsearch-service-2015-01-01.json com.amazonaws.elasticsearchservice#AmazonElasticsearchService2015
+elementalinference models/elementalinference/service/2018-11-14/elementalinference-2018-11-14.json com.amazonaws.elementalinference#ElementalInference
 emr models/emr/service/2009-03-31/emr-2009-03-31.json com.amazonaws.emr#ElasticMapReduce
 emrcontainers models/emr-containers/service/2020-10-01/emr-containers-2020-10-01.json com.amazonaws.emrcontainers#AwsChicagoWebService
 emrserverless models/emr-serverless/service/2021-07-13/emr-serverless-2021-07-13.json com.amazonaws.emrserverless#AwsToledoWebService
+endusermessaging models/endusermessaging/service/2026-09-21/endusermessaging-2026-09-21.json com.amazonaws.endusermessaging#EndUserMessaging
 entityresolution models/entityresolution/service/2018-05-10/entityresolution-2018-05-10.json com.amazonaws.entityresolution#AWSVeniceService
 eventbridge models/eventbridge/service/2015-10-07/eventbridge-2015-10-07.json com.amazonaws.eventbridge#AWSEvents
 evs models/evs/service/2023-07-27/evs-2023-07-27.json com.amazonaws.evs#AmazonElasticVMwareService
@@ -175,11 +182,13 @@ guardduty models/guardduty/service/2017-11-28/guardduty-2017-11-28.json com.amaz
 health models/health/service/2016-08-04/health-2016-08-04.json com.amazonaws.health#AWSHealth_20160804
 healthlake models/healthlake/service/2017-07-01/healthlake-2017-07-01.json com.amazonaws.healthlake#HealthLake
 iam models/iam/service/2010-05-08/iam-2010-05-08.json com.amazonaws.iam#AWSIdentityManagementV20100508
+iamtoolbox models/iam-toolbox/service/2018-05-10/iam-toolbox-2018-05-10.json com.amazonaws.iamtoolbox#AuthRequestService
 identitystore models/identitystore/service/2020-06-15/identitystore-2020-06-15.json com.amazonaws.identitystore#AWSIdentityStore
 imagebuilder models/imagebuilder/service/2019-12-02/imagebuilder-2019-12-02.json com.amazonaws.imagebuilder#imagebuilder
 inspector models/inspector/service/2016-02-16/inspector-2016-02-16.json com.amazonaws.inspector#InspectorService
 inspector2 models/inspector2/service/2020-06-08/inspector2-2020-06-08.json com.amazonaws.inspector2#Inspector2
 inspectorscan models/inspector-scan/service/2023-08-08/inspector-scan-2023-08-08.json com.amazonaws.inspectorscan#InspectorScan
+interconnect models/interconnect/service/2022-07-26/interconnect-2022-07-26.json com.amazonaws.interconnect#Interconnect
 internetmonitor models/internetmonitor/service/2021-06-03/internetmonitor-2021-06-03.json com.amazonaws.internetmonitor#InternetMonitor20210603
 invoicing models/invoicing/service/2024-12-01/invoicing-2024-12-01.json com.amazonaws.invoicing#Invoicing
 iot models/iot/service/2015-05-28/iot-2015-05-28.json com.amazonaws.iot#AWSIotService
@@ -213,9 +222,8 @@ kinesisvideowebrtcstorage models/kinesis-video-webrtc-storage/service/2018-05-10
 kms models/kms/service/2014-11-01/kms-2014-11-01.json com.amazonaws.kms#TrentService
 lakeformation models/lakeformation/service/2017-03-31/lakeformation-2017-03-31.json com.amazonaws.lakeformation#AWSLakeFormation
 lambda models/lambda/service/2015-03-31/lambda-2015-03-31.json com.amazonaws.lambda#AWSGirApiService
-lambda-core models/lambda-core/service/2026-04-30/lambda-core-2026-04-30.json com.amazonaws.lambdacore#LambdaCoreApiService
-lambda-microvms models/lambda-microvms/service/2025-09-09/lambda-microvms-2025-09-09.json com.amazonaws.lambdamicrovms#LambdaMicrovms
-lambda-web models/lambda-web/service/2025-03-07/lambda-web-2025-03-07.json com.amazonaws.lambdaweb#LambdaWeb
+lambdacore models/lambda-core/service/2026-04-30/lambda-core-2026-04-30.json com.amazonaws.lambdacore#LambdaCoreApiService
+lambdamicrovms models/lambda-microvms/service/2025-09-09/lambda-microvms-2025-09-09.json com.amazonaws.lambdamicrovms#LambdaMicrovms
 launchwizard models/launch-wizard/service/2018-05-10/launch-wizard-2018-05-10.json com.amazonaws.launchwizard#LaunchWizard
 lexmodelbuildingservice models/lex-model-building-service/service/2017-04-19/lex-model-building-service-2017-04-19.json com.amazonaws.lexmodelbuildingservice#AWSDeepSenseModelBuildingService
 lexmodelsv2 models/lex-models-v2/service/2020-08-07/lex-models-v2-2020-08-07.json com.amazonaws.lexmodelsv2#LexModelBuildingServiceV2
@@ -237,6 +245,7 @@ marketplaceagreement models/marketplace-agreement/service/2020-03-01/marketplace
 marketplacecatalog models/marketplace-catalog/service/2018-09-17/marketplace-catalog-2018-09-17.json com.amazonaws.marketplacecatalog#AWSMPSeymour
 marketplacecommerceanalytics models/marketplace-commerce-analytics/service/2015-07-01/marketplace-commerce-analytics-2015-07-01.json com.amazonaws.marketplacecommerceanalytics#MarketplaceCommerceAnalytics20150701
 marketplacedeployment models/marketplace-deployment/service/2023-01-25/marketplace-deployment-2023-01-25.json com.amazonaws.marketplacedeployment#AWSMPDeploymentParametersService
+marketplacediscovery models/marketplace-discovery/service/2026-02-05/marketplace-discovery-2026-02-05.json com.amazonaws.marketplacediscovery#AWSMarketplaceDiscovery
 marketplaceentitlementservice models/marketplace-entitlement-service/service/2017-01-11/marketplace-entitlement-service-2017-01-11.json com.amazonaws.marketplaceentitlementservice#AWSMPEntitlementService
 marketplacemetering models/marketplace-metering/service/2016-01-14/marketplace-metering-2016-01-14.json com.amazonaws.marketplacemetering#AWSMPMeteringService
 marketplacereporting models/marketplace-reporting/service/2018-05-10/marketplace-reporting-2018-05-10.json com.amazonaws.marketplacereporting#AWSMarketplaceReporting
@@ -269,6 +278,7 @@ networkfirewall models/network-firewall/service/2020-11-12/network-firewall-2020
 networkflowmonitor models/networkflowmonitor/service/2023-04-19/networkflowmonitor-2023-04-19.json com.amazonaws.networkflowmonitor#NetworkFlowMonitor
 networkmanager models/networkmanager/service/2019-07-05/networkmanager-2019-07-05.json com.amazonaws.networkmanager#NetworkManager
 networkmonitor models/networkmonitor/service/2023-08-01/networkmonitor-2023-08-01.json com.amazonaws.networkmonitor#NetworkMonitor
+networksecuritymanager models/network-security-manager/service/2025-10-30/network-security-manager-2025-10-30.json com.amazonaws.networksecuritymanager#PiccoloCustomerAPIService
 notifications models/notifications/service/2018-05-10/notifications-2018-05-10.json com.amazonaws.notifications#Notifications
 notificationscontacts models/notificationscontacts/service/2018-05-10/notificationscontacts-2018-05-10.json com.amazonaws.notificationscontacts#NotificationsContacts
 novaact models/nova-act/service/2025-08-22/nova-act-2025-08-22.json com.amazonaws.novaact#AmazonNovaAgentsDataPlane
@@ -301,6 +311,7 @@ pinpointsmsvoicev2 models/pinpoint-sms-voice-v2/service/2022-03-31/pinpoint-sms-
 pipes models/pipes/service/2015-10-07/pipes-2015-10-07.json com.amazonaws.pipes#Pipes
 polly models/polly/service/2016-06-10/polly-2016-06-10.json com.amazonaws.polly#Parrot_v1
 pricing models/pricing/service/2017-10-15/pricing-2017-10-15.json com.amazonaws.pricing#AWSPriceListService
+pricingplanmanager models/pricing-plan-manager/service/2025-08-05/pricing-plan-manager-2025-08-05.json com.amazonaws.pricingplanmanager#AWSPricingPlanManager
 proton models/proton/service/2020-07-20/proton-2020-07-20.json com.amazonaws.proton#AwsProton20200720
 qapps models/qapps/service/2023-11-27/qapps-2023-11-27.json com.amazonaws.qapps#QAppsService
 qbusiness models/qbusiness/service/2023-11-27/qbusiness-2023-11-27.json com.amazonaws.qbusiness#ExpertQ
@@ -316,6 +327,7 @@ redshiftserverless models/redshift-serverless/service/2021-04-21/redshift-server
 rekognition models/rekognition/service/2016-06-27/rekognition-2016-06-27.json com.amazonaws.rekognition#RekognitionService
 repostspace models/repostspace/service/2022-05-13/repostspace-2022-05-13.json com.amazonaws.repostspace#RepostSpace
 resiliencehub models/resiliencehub/service/2020-04-30/resiliencehub-2020-04-30.json com.amazonaws.resiliencehub#AwsResilienceHub
+resiliencehubv2 models/resiliencehubv2/service/2026-02-17/resiliencehubv2-2026-02-17.json com.amazonaws.resiliencehubv2#NGRHServiceCore
 resourceexplorer2 models/resource-explorer-2/service/2022-07-28/resource-explorer-2-2022-07-28.json com.amazonaws.resourceexplorer2#ResourceExplorer
 resourcegroups models/resource-groups/service/2017-11-27/resource-groups-2017-11-27.json com.amazonaws.resourcegroups#Ardi
 resourcegroupstaggingapi models/resource-groups-tagging-api/service/2017-01-26/resource-groups-tagging-api-2017-01-26.json com.amazonaws.resourcegroupstaggingapi#ResourceGroupsTaggingAPI_20170126
@@ -332,6 +344,7 @@ rtbfabric models/rtbfabric/service/2023-05-15/rtbfabric-2023-05-15.json com.amaz
 rum models/rum/service/2018-05-10/rum-2018-05-10.json com.amazonaws.rum#RUM
 s3 models/s3/service/2006-03-01/s3-2006-03-01.json com.amazonaws.s3#AmazonS3
 s3control models/s3-control/service/2018-08-20/s3-control-2018-08-20.json com.amazonaws.s3control#AWSS3ControlServiceV20180820
+s3files models/s3files/service/2025-05-05/s3files-2025-05-05.json com.amazonaws.s3files#S3Files
 s3outposts models/s3outposts/service/2017-07-25/s3outposts-2017-07-25.json com.amazonaws.s3outposts#S3Outposts
 s3tables models/s3tables/service/2018-05-10/s3tables-2018-05-10.json com.amazonaws.s3tables#S3TableBuckets
 s3vectors models/s3vectors/service/2025-07-15/s3vectors-2025-07-15.json com.amazonaws.s3vectors#S3Vectors
@@ -340,6 +353,7 @@ sagemakera2iruntime models/sagemaker-a2i-runtime/service/2019-11-07/sagemaker-a2
 sagemakeredge models/sagemaker-edge/service/2020-09-23/sagemaker-edge-2020-09-23.json com.amazonaws.sagemakeredge#AmazonSageMakerEdge
 sagemakerfeaturestoreruntime models/sagemaker-featurestore-runtime/service/2020-07-01/sagemaker-featurestore-runtime-2020-07-01.json com.amazonaws.sagemakerfeaturestoreruntime#AmazonSageMakerFeatureStoreRuntime
 sagemakergeospatial models/sagemaker-geospatial/service/2020-05-27/sagemaker-geospatial-2020-05-27.json com.amazonaws.sagemakergeospatial#SageMakerGeospatial
+sagemakerjobruntime models/sagemakerjobruntime/service/2026-02-01/sagemakerjobruntime-2026-02-01.json com.amazonaws.sagemakerjobruntime#AgenticRFTRuntimeService
 sagemakermetrics models/sagemaker-metrics/service/2022-09-30/sagemaker-metrics-2022-09-30.json com.amazonaws.sagemakermetrics#SageMakerMetricsService
 sagemakerruntime models/sagemaker-runtime/service/2017-05-13/sagemaker-runtime-2017-05-13.json com.amazonaws.sagemakerruntime#AmazonSageMakerRuntime
 sagemakerruntimehttp2 models/sagemaker-runtime-http2/service/2025-10-01/sagemaker-runtime-http2-2025-10-01.json com.amazonaws.sagemakerruntimehttp2#AmazonSageMakerRuntimeHttp2
@@ -347,6 +361,7 @@ savingsplans models/savingsplans/service/2019-06-28/savingsplans-2019-06-28.json
 scheduler models/scheduler/service/2021-06-30/scheduler-2021-06-30.json com.amazonaws.scheduler#AWSChronosService
 schemas models/schemas/service/2019-12-02/schemas-2019-12-02.json com.amazonaws.schemas#schemas
 secretsmanager models/secrets-manager/service/2017-10-17/secrets-manager-2017-10-17.json com.amazonaws.secretsmanager#secretsmanager
+securityagent models/securityagent/service/2025-09-06/securityagent-2025-09-06.json com.amazonaws.securityagent#SecurityAgent
 securityhub models/securityhub/service/2018-10-26/securityhub-2018-10-26.json com.amazonaws.securityhub#SecurityHubAPIService
 securityir models/security-ir/service/2018-05-10/security-ir-2018-05-10.json com.amazonaws.securityir#SecurityIncidentResponse
 securitylake models/securitylake/service/2018-05-10/securitylake-2018-05-10.json com.amazonaws.securitylake#SecurityLake
@@ -360,7 +375,9 @@ sesv2 models/sesv2/service/2019-09-27/sesv2-2019-09-27.json com.amazonaws.sesv2#
 sfn models/sfn/service/2016-11-23/sfn-2016-11-23.json com.amazonaws.sfn#AWSStepFunctions
 shield models/shield/service/2016-06-02/shield-2016-06-02.json com.amazonaws.shield#AWSShield_20160616
 signer models/signer/service/2017-08-25/signer-2017-08-25.json com.amazonaws.signer#WallabyService
+signerdata models/signer-data/service/2017-08-25/signer-data-2017-08-25.json com.amazonaws.signerdata#SignerDataPlane
 signin models/signin/service/2023-01-01/signin-2023-01-01.json com.amazonaws.signin#Signin
+simpledbv2 models/simpledbv2/service/2025-09-26/simpledbv2-2025-09-26.json com.amazonaws.simpledbv2#SimpleDBv2
 snowball models/snowball/service/2016-06-30/snowball-2016-06-30.json com.amazonaws.snowball#AWSIESnowballJobManagementService
 snowdevicemanagement models/snow-device-management/service/2021-08-04/snow-device-management-2021-08-04.json com.amazonaws.snowdevicemanagement#SnowDeviceManagement
 sns models/sns/service/2010-03-31/sns-2010-03-31.json com.amazonaws.sns#AmazonSimpleNotificationService
@@ -380,6 +397,8 @@ sts models/sts/service/2011-06-15/sts-2011-06-15.json com.amazonaws.sts#AWSSecur
 supplychain models/supplychain/service/2024-01-01/supplychain-2024-01-01.json com.amazonaws.supplychain#GalaxyPublicAPIGateway
 support models/support/service/2013-04-15/support-2013-04-15.json com.amazonaws.support#AWSSupport_20130415
 supportapp models/support-app/service/2021-08-20/support-app-2021-08-20.json com.amazonaws.supportapp#SupportApp
+supportauthz models/supportauthz/service/2026-06-30/supportauthz-2026-06-30.json com.amazonaws.supportauthz#SupportAuthZ
+sustainability models/sustainability/service/2018-05-10/sustainability-2018-05-10.json com.amazonaws.sustainability#AwsSustainabilityApiService
 swf models/swf/service/2012-01-25/swf-2012-01-25.json com.amazonaws.swf#SimpleWorkflowService
 synthetics models/synthetics/service/2017-10-11/synthetics-2017-10-11.json com.amazonaws.synthetics#Synthetics
 taxsettings models/taxsettings/service/2018-05-10/taxsettings-2018-05-10.json com.amazonaws.taxsettings#TaxSettings
@@ -393,6 +412,7 @@ transcribestreaming models/transcribe-streaming/service/2017-10-26/transcribe-st
 transfer models/transfer/service/2018-11-05/transfer-2018-11-05.json com.amazonaws.transfer#TransferService
 translate models/translate/service/2017-07-01/translate-2017-07-01.json com.amazonaws.translate#AWSShineFrontendService_20170701
 trustedadvisor models/trustedadvisor/service/2022-09-15/trustedadvisor-2022-09-15.json com.amazonaws.trustedadvisor#TrustedAdvisor
+uxc models/uxc/service/2024-07-01/uxc-2024-07-01.json com.amazonaws.uxc#AWSAccountUXSetting
 verifiedpermissions models/verifiedpermissions/service/2021-12-01/verifiedpermissions-2021-12-01.json com.amazonaws.verifiedpermissions#VerifiedPermissions
 voiceid models/voice-id/service/2021-09-27/voice-id-2021-09-27.json com.amazonaws.voiceid#VoiceID
 vpclattice models/vpc-lattice/service/2022-11-30/vpc-lattice-2022-11-30.json com.amazonaws.vpclattice#MercuryControlPlane

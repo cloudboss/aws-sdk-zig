@@ -18,8 +18,7 @@ pub const DeleteIndexInput = struct {
     };
 };
 
-pub const DeleteIndexOutput = struct {
-};
+pub const DeleteIndexOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteIndexInput, options: CallOptions) !DeleteIndexOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

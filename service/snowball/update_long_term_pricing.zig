@@ -26,8 +26,7 @@ pub const UpdateLongTermPricingInput = struct {
     };
 };
 
-pub const UpdateLongTermPricingOutput = struct {
-};
+pub const UpdateLongTermPricingOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLongTermPricingInput, options: CallOptions) !UpdateLongTermPricingOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

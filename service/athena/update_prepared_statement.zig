@@ -26,8 +26,7 @@ pub const UpdatePreparedStatementInput = struct {
     };
 };
 
-pub const UpdatePreparedStatementOutput = struct {
-};
+pub const UpdatePreparedStatementOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdatePreparedStatementInput, options: CallOptions) !UpdatePreparedStatementOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

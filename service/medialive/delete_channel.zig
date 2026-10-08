@@ -21,7 +21,14 @@ const PipelineDetail = @import("pipeline_detail.zig").PipelineDetail;
 const ChannelState = @import("channel_state.zig").ChannelState;
 const VpcOutputSettingsDescription = @import("vpc_output_settings_description.zig").VpcOutputSettingsDescription;
 
-pub const DeleteChannelInput = @import("delete_channel_request.zig").DeleteChannelRequest;
+pub const DeleteChannelInput = struct {
+    /// Unique ID of the channel.
+    channel_id: []const u8,
+
+    pub const json_field_names = .{
+        .channel_id = "ChannelId",
+    };
+};
 
 pub const DeleteChannelOutput = struct {
     /// Anywhere settings for this channel.

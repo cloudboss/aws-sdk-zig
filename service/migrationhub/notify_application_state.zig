@@ -31,8 +31,7 @@ pub const NotifyApplicationStateInput = struct {
     };
 };
 
-pub const NotifyApplicationStateOutput = struct {
-};
+pub const NotifyApplicationStateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: NotifyApplicationStateInput, options: CallOptions) !NotifyApplicationStateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

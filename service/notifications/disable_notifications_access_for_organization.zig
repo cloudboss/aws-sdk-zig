@@ -5,11 +5,9 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DisableNotificationsAccessForOrganizationInput = struct {
-};
+pub const DisableNotificationsAccessForOrganizationInput = struct {};
 
-pub const DisableNotificationsAccessForOrganizationOutput = struct {
-};
+pub const DisableNotificationsAccessForOrganizationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisableNotificationsAccessForOrganizationInput, options: CallOptions) !DisableNotificationsAccessForOrganizationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

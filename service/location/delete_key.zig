@@ -27,8 +27,7 @@ pub const DeleteKeyInput = struct {
     };
 };
 
-pub const DeleteKeyOutput = struct {
-};
+pub const DeleteKeyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteKeyInput, options: CallOptions) !DeleteKeyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

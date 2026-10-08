@@ -19,8 +19,7 @@ pub const DeleteLakeFormationIdentityCenterConfigurationInput = struct {
     };
 };
 
-pub const DeleteLakeFormationIdentityCenterConfigurationOutput = struct {
-};
+pub const DeleteLakeFormationIdentityCenterConfigurationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLakeFormationIdentityCenterConfigurationInput, options: CallOptions) !DeleteLakeFormationIdentityCenterConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

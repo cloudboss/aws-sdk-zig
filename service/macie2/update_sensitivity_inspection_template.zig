@@ -38,8 +38,7 @@ pub const UpdateSensitivityInspectionTemplateInput = struct {
     };
 };
 
-pub const UpdateSensitivityInspectionTemplateOutput = struct {
-};
+pub const UpdateSensitivityInspectionTemplateOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateSensitivityInspectionTemplateInput, options: CallOptions) !UpdateSensitivityInspectionTemplateOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

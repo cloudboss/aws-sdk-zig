@@ -24,8 +24,7 @@ pub const UpdateMacieSessionInput = struct {
     };
 };
 
-pub const UpdateMacieSessionOutput = struct {
-};
+pub const UpdateMacieSessionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateMacieSessionInput, options: CallOptions) !UpdateMacieSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

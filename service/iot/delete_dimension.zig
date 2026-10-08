@@ -14,8 +14,7 @@ pub const DeleteDimensionInput = struct {
     };
 };
 
-pub const DeleteDimensionOutput = struct {
-};
+pub const DeleteDimensionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDimensionInput, options: CallOptions) !DeleteDimensionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

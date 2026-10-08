@@ -109,7 +109,7 @@ pub const CreateConstraintInput = struct {
     /// * `STACKSET`
     ///
     /// * `TEMPLATE`
-    @"type": []const u8,
+    type: []const u8,
 
     pub const json_field_names = .{
         .accept_language = "AcceptLanguage",
@@ -118,7 +118,7 @@ pub const CreateConstraintInput = struct {
         .parameters = "Parameters",
         .portfolio_id = "PortfolioId",
         .product_id = "ProductId",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 

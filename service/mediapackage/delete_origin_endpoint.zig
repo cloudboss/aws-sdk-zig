@@ -14,8 +14,7 @@ pub const DeleteOriginEndpointInput = struct {
     };
 };
 
-pub const DeleteOriginEndpointOutput = struct {
-};
+pub const DeleteOriginEndpointOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteOriginEndpointInput, options: CallOptions) !DeleteOriginEndpointOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -5,7 +5,18 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const DeleteRouteInput = @import("delete_route_request.zig").DeleteRouteRequest;
+pub const DeleteRouteInput = struct {
+    /// The API identifier.
+    api_id: []const u8,
+
+    /// The route ID.
+    route_id: []const u8,
+
+    pub const json_field_names = .{
+        .api_id = "ApiId",
+        .route_id = "RouteId",
+    };
+};
 
 pub const DeleteRouteOutput = struct {};
 

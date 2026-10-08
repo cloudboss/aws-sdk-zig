@@ -5,9 +5,20 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const PutResourcePolicyInput = @import("put_resource_policy_request.zig").PutResourcePolicyRequest;
+pub const PutResourcePolicyInput = struct {
+    /// The JSON-formatted resource policy to create.
+    policy_document: []const u8,
 
-pub const PutResourcePolicyOutput = @import("put_resource_policy_result.zig").PutResourcePolicyResult;
+    /// The Amazon Resource Name (ARN) of the CloudFront resource for which the
+    /// policy is being created.
+    resource_arn: []const u8,
+};
+
+pub const PutResourcePolicyOutput = struct {
+    /// The Amazon Resource Name (ARN) of the CloudFront resource for which the
+    /// policy was created.
+    resource_arn: ?[]const u8 = null,
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutResourcePolicyInput, options: CallOptions) !PutResourcePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -21,12 +21,12 @@ pub const IcebergSchemaV2 = struct {
     /// in the [Apache Iceberg
     /// specification](https://iceberg.apache.org/spec/#schemas-and-data-types).
     /// This value must be `struct`.
-    @"type": SchemaV2FieldType,
+    type: SchemaV2FieldType,
 
     pub const json_field_names = .{
         .fields = "fields",
         .identifier_field_ids = "identifierFieldIds",
         .schema_id = "schemaId",
-        .@"type" = "type",
+        .type = "type",
     };
 };

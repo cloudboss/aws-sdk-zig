@@ -10,8 +10,7 @@ pub const DeleteMonitoringSubscriptionInput = struct {
     distribution_id: []const u8,
 };
 
-pub const DeleteMonitoringSubscriptionOutput = struct {
-};
+pub const DeleteMonitoringSubscriptionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteMonitoringSubscriptionInput, options: CallOptions) !DeleteMonitoringSubscriptionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

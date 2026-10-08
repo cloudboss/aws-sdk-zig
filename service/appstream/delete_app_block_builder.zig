@@ -14,8 +14,7 @@ pub const DeleteAppBlockBuilderInput = struct {
     };
 };
 
-pub const DeleteAppBlockBuilderOutput = struct {
-};
+pub const DeleteAppBlockBuilderOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAppBlockBuilderInput, options: CallOptions) !DeleteAppBlockBuilderOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

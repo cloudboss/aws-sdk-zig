@@ -6,9 +6,41 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Project = @import("project.zig").Project;
 
-pub const ListProjectsInput = @import("list_projects_request.zig").ListProjectsRequest;
+pub const ListProjectsInput = struct {
+    /// Optional. If no Amazon Resource Name (ARN) is specified, then AWS Device
+    /// Farm
+    /// returns a list of all projects for the AWS account. You can also specify a
+    /// project
+    /// ARN.
+    arn: ?[]const u8 = null,
 
-pub const ListProjectsOutput = @import("list_projects_result.zig").ListProjectsResult;
+    /// An identifier that was returned from the previous call to this operation,
+    /// which can
+    /// be used to return the next set of items in the list.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .arn = "arn",
+        .next_token = "nextToken",
+    };
+};
+
+pub const ListProjectsOutput = struct {
+    /// If the number of items that are returned is significantly large, this is an
+    /// identifier that is also
+    /// returned. It can be used in a subsequent call to this operation to return
+    /// the next set of items in the
+    /// list.
+    next_token: ?[]const u8 = null,
+
+    /// Information about the projects.
+    projects: ?[]const Project = null,
+
+    pub const json_field_names = .{
+        .next_token = "nextToken",
+        .projects = "projects",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListProjectsInput, options: CallOptions) !ListProjectsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

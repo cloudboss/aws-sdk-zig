@@ -7,7 +7,6 @@ const create_theme = @import("create_theme.zig");
 const delete_component = @import("delete_component.zig");
 const delete_form = @import("delete_form.zig");
 const delete_theme = @import("delete_theme.zig");
-const exchange_code_for_token = @import("exchange_code_for_token.zig");
 const export_components = @import("export_components.zig");
 const export_forms = @import("export_forms.zig");
 const export_themes = @import("export_themes.zig");
@@ -22,7 +21,6 @@ const list_forms = @import("list_forms.zig");
 const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const list_themes = @import("list_themes.zig");
 const put_metadata_flag = @import("put_metadata_flag.zig");
-const refresh_token = @import("refresh_token.zig");
 const start_codegen_job = @import("start_codegen_job.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
@@ -87,13 +85,6 @@ pub const Client = struct {
     /// Deletes a theme from an Amplify app.
     pub fn deleteTheme(self: *Self, allocator: std.mem.Allocator, input: delete_theme.DeleteThemeInput, options: CallOptions) !delete_theme.DeleteThemeOutput {
         return delete_theme.execute(self, allocator, input, options);
-    }
-
-    /// This is for internal use.
-    ///
-    /// Amplify uses this action to exchange an access code for a token.
-    pub fn exchangeCodeForToken(self: *Self, allocator: std.mem.Allocator, input: exchange_code_for_token.ExchangeCodeForTokenInput, options: CallOptions) !exchange_code_for_token.ExchangeCodeForTokenOutput {
-        return exchange_code_for_token.execute(self, allocator, input, options);
     }
 
     /// Exports component configurations to code that is ready to integrate into an
@@ -171,14 +162,6 @@ pub const Client = struct {
     /// Stores the metadata information about a feature on a form.
     pub fn putMetadataFlag(self: *Self, allocator: std.mem.Allocator, input: put_metadata_flag.PutMetadataFlagInput, options: CallOptions) !put_metadata_flag.PutMetadataFlagOutput {
         return put_metadata_flag.execute(self, allocator, input, options);
-    }
-
-    /// This is for internal use.
-    ///
-    /// Amplify uses this action to refresh a previously issued access token that
-    /// might have expired.
-    pub fn refreshToken(self: *Self, allocator: std.mem.Allocator, input: refresh_token.RefreshTokenInput, options: CallOptions) !refresh_token.RefreshTokenOutput {
-        return refresh_token.execute(self, allocator, input, options);
     }
 
     /// Starts a code generation job for a specified Amplify app and backend

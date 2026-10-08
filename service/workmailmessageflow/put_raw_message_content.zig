@@ -19,8 +19,7 @@ pub const PutRawMessageContentInput = struct {
     };
 };
 
-pub const PutRawMessageContentOutput = struct {
-};
+pub const PutRawMessageContentOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutRawMessageContentInput, options: CallOptions) !PutRawMessageContentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -6,10 +6,10 @@ pub const DocumentAclUser = struct {
     id: []const u8,
 
     /// The membership type indicating the scope of the user entry.
-    @"type": DocumentAclMembershipType,
+    type: DocumentAclMembershipType,
 
     pub const json_field_names = .{
         .id = "id",
-        .@"type" = "type",
+        .type = "type",
     };
 };

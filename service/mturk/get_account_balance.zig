@@ -5,8 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
-pub const GetAccountBalanceInput = struct {
-};
+pub const GetAccountBalanceInput = struct {};
 
 pub const GetAccountBalanceOutput = struct {
     available_balance: ?[]const u8 = null,

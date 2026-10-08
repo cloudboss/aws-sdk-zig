@@ -19,8 +19,7 @@ pub const DeleteAssessmentFrameworkShareInput = struct {
     };
 };
 
-pub const DeleteAssessmentFrameworkShareOutput = struct {
-};
+pub const DeleteAssessmentFrameworkShareOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAssessmentFrameworkShareInput, options: CallOptions) !DeleteAssessmentFrameworkShareOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

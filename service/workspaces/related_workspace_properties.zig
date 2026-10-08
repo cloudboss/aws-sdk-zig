@@ -12,7 +12,7 @@ pub const RelatedWorkspaceProperties = struct {
     state: ?WorkspaceState = null,
 
     /// Indicates the type of WorkSpace.
-    @"type": ?StandbyWorkspaceRelationshipType = null,
+    type: ?StandbyWorkspaceRelationshipType = null,
 
     /// The identifier of the related WorkSpace.
     workspace_id: ?[]const u8 = null,
@@ -20,7 +20,7 @@ pub const RelatedWorkspaceProperties = struct {
     pub const json_field_names = .{
         .region = "Region",
         .state = "State",
-        .@"type" = "Type",
+        .type = "Type",
         .workspace_id = "WorkspaceId",
     };
 };

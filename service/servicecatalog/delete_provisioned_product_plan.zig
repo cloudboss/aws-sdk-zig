@@ -28,8 +28,7 @@ pub const DeleteProvisionedProductPlanInput = struct {
     };
 };
 
-pub const DeleteProvisionedProductPlanOutput = struct {
-};
+pub const DeleteProvisionedProductPlanOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteProvisionedProductPlanInput, options: CallOptions) !DeleteProvisionedProductPlanOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -13,7 +13,7 @@ pub const InheritedAllowedResultReceiversSource = struct {
     source_account_id: []const u8,
 
     /// The type of the parent table.
-    @"type": BaseTableDependencyType,
+    type: BaseTableDependencyType,
 
     /// The allowed result receiver account IDs defined on the parent table.
     value: []const []const u8,
@@ -22,7 +22,7 @@ pub const InheritedAllowedResultReceiversSource = struct {
         .id = "id",
         .name = "name",
         .source_account_id = "sourceAccountId",
-        .@"type" = "type",
+        .type = "type",
         .value = "value",
     };
 };

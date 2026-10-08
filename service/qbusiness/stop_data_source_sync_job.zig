@@ -24,8 +24,7 @@ pub const StopDataSourceSyncJobInput = struct {
     };
 };
 
-pub const StopDataSourceSyncJobOutput = struct {
-};
+pub const StopDataSourceSyncJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopDataSourceSyncJobInput, options: CallOptions) !StopDataSourceSyncJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -1,3 +1,2 @@
 /// A structure used to unlock a device.
-pub const Unlock = struct {
-};
+pub const Unlock = struct {};

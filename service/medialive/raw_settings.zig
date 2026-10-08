@@ -1,3 +1,2 @@
 /// Raw Settings
-pub const RawSettings = struct {
-};
+pub const RawSettings = struct {};

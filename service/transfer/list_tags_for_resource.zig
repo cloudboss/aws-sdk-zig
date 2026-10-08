@@ -6,9 +6,49 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Tag = @import("tag.zig").Tag;
 
-pub const ListTagsForResourceInput = @import("list_tags_for_resource_request.zig").ListTagsForResourceRequest;
+pub const ListTagsForResourceInput = struct {
+    /// Requests the tags associated with a particular Amazon Resource Name (ARN).
+    /// An ARN is an identifier for a specific Amazon Web Services resource, such as
+    /// a server, user, or role.
+    arn: []const u8,
 
-pub const ListTagsForResourceOutput = @import("list_tags_for_resource_response.zig").ListTagsForResourceResponse;
+    /// Specifies the number of tags to return as a response to the
+    /// `ListTagsForResource` request.
+    max_results: ?i32 = null,
+
+    /// When you request additional results from the `ListTagsForResource`
+    /// operation, a `NextToken` parameter is returned in the input. You can then
+    /// pass in a subsequent command to the `NextToken` parameter to continue
+    /// listing additional tags.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .arn = "Arn",
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListTagsForResourceOutput = struct {
+    /// The ARN you specified to list the tags of.
+    arn: ?[]const u8 = null,
+
+    /// When you can get additional results from the `ListTagsForResource` call, a
+    /// `NextToken` parameter is returned in the output. You can then pass in a
+    /// subsequent command to the `NextToken` parameter to continue listing
+    /// additional tags.
+    next_token: ?[]const u8 = null,
+
+    /// Key-value pairs that are assigned to a resource, usually for the purpose of
+    /// grouping and searching for items. Tags are metadata that you define.
+    tags: ?[]const Tag = null,
+
+    pub const json_field_names = .{
+        .arn = "Arn",
+        .next_token = "NextToken",
+        .tags = "Tags",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListTagsForResourceInput, options: CallOptions) !ListTagsForResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

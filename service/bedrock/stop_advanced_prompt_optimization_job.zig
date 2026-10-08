@@ -14,8 +14,7 @@ pub const StopAdvancedPromptOptimizationJobInput = struct {
     };
 };
 
-pub const StopAdvancedPromptOptimizationJobOutput = struct {
-};
+pub const StopAdvancedPromptOptimizationJobOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopAdvancedPromptOptimizationJobInput, options: CallOptions) !StopAdvancedPromptOptimizationJobOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

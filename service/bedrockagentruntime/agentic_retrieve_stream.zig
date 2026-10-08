@@ -53,7 +53,6 @@ pub const AgenticRetrieveStreamInput = struct {
 };
 
 pub const AgenticRetrieveStreamOutput = struct {
-
     stream: aws.event_stream_reader.EventStreamReader = undefined,
 
     pub fn deinit(self: *AgenticRetrieveStreamOutput) void {

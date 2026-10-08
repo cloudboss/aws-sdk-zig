@@ -50,7 +50,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DeleteNotificationConfi
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/notification-configurations/");
-    try path_buf.appendSlice(allocator, input.event_type);
+    try path_buf.appendSlice(allocator, input.event_type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

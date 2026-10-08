@@ -6,9 +6,59 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ApplicationStatus = @import("application_status.zig").ApplicationStatus;
 
-pub const CreateApplicationInput = @import("create_application_request.zig").CreateApplicationRequest;
+pub const CreateApplicationInput = struct {
+    /// Unique client token for idempotent request handling
+    client_token: ?[]const u8 = null,
 
-pub const CreateApplicationOutput = @import("create_application_response.zig").CreateApplicationResponse;
+    /// Description of the application
+    description: ?[]const u8 = null,
+
+    /// Identity Center Instance ARN to create the application in
+    idc_instance_arn: []const u8,
+
+    /// Name of the application
+    name: []const u8,
+
+    /// A list of key-value pairs that contain metadata for the application.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    /// Name of the workspace to associate with the underlying Application
+    workspace_name: []const u8,
+
+    pub const json_field_names = .{
+        .client_token = "clientToken",
+        .description = "description",
+        .idc_instance_arn = "idcInstanceArn",
+        .name = "name",
+        .tags = "tags",
+        .workspace_name = "workspaceName",
+    };
+};
+
+pub const CreateApplicationOutput = struct {
+    /// ARN of the application
+    arn: []const u8,
+
+    /// DNS subdomain for the application
+    dns_subdomain: []const u8,
+
+    /// Unique identifier of the application
+    id: []const u8,
+
+    /// Name of the application
+    name: []const u8,
+
+    /// Current status of the application
+    status: ApplicationStatus,
+
+    pub const json_field_names = .{
+        .arn = "arn",
+        .dns_subdomain = "dnsSubdomain",
+        .id = "id",
+        .name = "name",
+        .status = "status",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateApplicationInput, options: CallOptions) !CreateApplicationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

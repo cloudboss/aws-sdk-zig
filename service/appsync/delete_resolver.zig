@@ -22,8 +22,7 @@ pub const DeleteResolverInput = struct {
     };
 };
 
-pub const DeleteResolverOutput = struct {
-};
+pub const DeleteResolverOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteResolverInput, options: CallOptions) !DeleteResolverOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

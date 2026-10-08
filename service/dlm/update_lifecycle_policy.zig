@@ -106,8 +106,7 @@ pub const UpdateLifecyclePolicyInput = struct {
     };
 };
 
-pub const UpdateLifecyclePolicyOutput = struct {
-};
+pub const UpdateLifecyclePolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateLifecyclePolicyInput, options: CallOptions) !UpdateLifecyclePolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

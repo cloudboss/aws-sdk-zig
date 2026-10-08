@@ -61,7 +61,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateGatewayResponseIn
     try path_buf.appendSlice(allocator, "/restapis/");
     try path_buf.appendSlice(allocator, input.rest_api_id);
     try path_buf.appendSlice(allocator, "/gatewayresponses/");
-    try path_buf.appendSlice(allocator, input.response_type);
+    try path_buf.appendSlice(allocator, input.response_type.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .empty;

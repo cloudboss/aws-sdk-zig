@@ -16,8 +16,7 @@ pub const DeleteRemoteAccessSessionInput = struct {
     };
 };
 
-pub const DeleteRemoteAccessSessionOutput = struct {
-};
+pub const DeleteRemoteAccessSessionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRemoteAccessSessionInput, options: CallOptions) !DeleteRemoteAccessSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

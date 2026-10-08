@@ -37,7 +37,7 @@ pub const Entity = struct {
     traits: ?[]const Trait = null,
 
     /// Describes the specific type of entity with category of entities.
-    @"type": ?EntitySubType = null,
+    type: ?EntitySubType = null,
 
     pub const json_field_names = .{
         .attributes = "Attributes",
@@ -48,6 +48,6 @@ pub const Entity = struct {
         .score = "Score",
         .text = "Text",
         .traits = "Traits",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

@@ -22,8 +22,7 @@ pub const DeleteAppAuthorizationInput = struct {
     };
 };
 
-pub const DeleteAppAuthorizationOutput = struct {
-};
+pub const DeleteAppAuthorizationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteAppAuthorizationInput, options: CallOptions) !DeleteAppAuthorizationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

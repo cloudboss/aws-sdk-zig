@@ -19,8 +19,7 @@ pub const PutConfigurationSetVdmOptionsInput = struct {
     };
 };
 
-pub const PutConfigurationSetVdmOptionsOutput = struct {
-};
+pub const PutConfigurationSetVdmOptionsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutConfigurationSetVdmOptionsInput, options: CallOptions) !PutConfigurationSetVdmOptionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -45,7 +45,7 @@ pub const Activity = struct {
     time_stamp: ?i64 = null,
 
     /// The activity type.
-    @"type": ?ActivityType = null,
+    type: ?ActivityType = null,
 
     pub const json_field_names = .{
         .comment_metadata = "CommentMetadata",
@@ -56,6 +56,6 @@ pub const Activity = struct {
         .participants = "Participants",
         .resource_metadata = "ResourceMetadata",
         .time_stamp = "TimeStamp",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

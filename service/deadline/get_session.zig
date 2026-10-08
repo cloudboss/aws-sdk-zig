@@ -9,9 +9,79 @@ const SessionLifecycleStatus = @import("session_lifecycle_status.zig").SessionLi
 const LogConfiguration = @import("log_configuration.zig").LogConfiguration;
 const SessionLifecycleTargetStatus = @import("session_lifecycle_target_status.zig").SessionLifecycleTargetStatus;
 
-pub const GetSessionInput = @import("get_session_request.zig").GetSessionRequest;
+pub const GetSessionInput = struct {
+    /// The farm ID for the session.
+    farm_id: []const u8,
 
-pub const GetSessionOutput = @import("get_session_response.zig").GetSessionResponse;
+    /// The job ID for the session.
+    job_id: []const u8,
+
+    /// The queue ID for the session.
+    queue_id: []const u8,
+
+    /// The session ID.
+    session_id: []const u8,
+
+    pub const json_field_names = .{
+        .farm_id = "farmId",
+        .job_id = "jobId",
+        .queue_id = "queueId",
+        .session_id = "sessionId",
+    };
+};
+
+pub const GetSessionOutput = struct {
+    /// The date and time the resource ended running.
+    ended_at: ?i64 = null,
+
+    /// The fleet ID for the session.
+    fleet_id: []const u8,
+
+    /// Provides the Amazon EC2 properties of the host.
+    host_properties: ?HostPropertiesResponse = null,
+
+    /// The life cycle status of the session.
+    lifecycle_status: SessionLifecycleStatus,
+
+    /// The session log.
+    log: ?LogConfiguration = null,
+
+    /// The session ID.
+    session_id: []const u8,
+
+    /// The date and time the resource started running.
+    started_at: i64,
+
+    /// The life cycle status with which the session started.
+    target_lifecycle_status: ?SessionLifecycleTargetStatus = null,
+
+    /// The date and time the resource was updated.
+    updated_at: ?i64 = null,
+
+    /// The user or system that updated this resource.
+    updated_by: ?[]const u8 = null,
+
+    /// The worker ID for the session.
+    worker_id: []const u8,
+
+    /// The worker log for the session.
+    worker_log: ?LogConfiguration = null,
+
+    pub const json_field_names = .{
+        .ended_at = "endedAt",
+        .fleet_id = "fleetId",
+        .host_properties = "hostProperties",
+        .lifecycle_status = "lifecycleStatus",
+        .log = "log",
+        .session_id = "sessionId",
+        .started_at = "startedAt",
+        .target_lifecycle_status = "targetLifecycleStatus",
+        .updated_at = "updatedAt",
+        .updated_by = "updatedBy",
+        .worker_id = "workerId",
+        .worker_log = "workerLog",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: GetSessionInput, options: CallOptions) !GetSessionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

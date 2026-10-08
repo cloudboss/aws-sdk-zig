@@ -19,8 +19,7 @@ pub const DeleteGlossaryInput = struct {
     };
 };
 
-pub const DeleteGlossaryOutput = struct {
-};
+pub const DeleteGlossaryOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteGlossaryInput, options: CallOptions) !DeleteGlossaryOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

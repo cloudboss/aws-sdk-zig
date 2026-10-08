@@ -14,8 +14,7 @@ pub const StopBulkDeploymentInput = struct {
     };
 };
 
-pub const StopBulkDeploymentOutput = struct {
-};
+pub const StopBulkDeploymentOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopBulkDeploymentInput, options: CallOptions) !StopBulkDeploymentOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

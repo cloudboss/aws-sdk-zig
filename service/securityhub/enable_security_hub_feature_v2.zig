@@ -15,8 +15,7 @@ pub const EnableSecurityHubFeatureV2Input = struct {
     };
 };
 
-pub const EnableSecurityHubFeatureV2Output = struct {
-};
+pub const EnableSecurityHubFeatureV2Output = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: EnableSecurityHubFeatureV2Input, options: CallOptions) !EnableSecurityHubFeatureV2Output {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -50,7 +49,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: EnableSecurityHubFeatur
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/hubv2/feature/");
-    try path_buf.appendSlice(allocator, input.feature_name);
+    try path_buf.appendSlice(allocator, input.feature_name.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     const body: ?[]const u8 = null;

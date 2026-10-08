@@ -6,10 +6,10 @@ pub const CapacityTaskFailure = struct {
     reason: []const u8,
 
     /// The type of failure.
-    @"type": ?CapacityTaskFailureType = null,
+    type: ?CapacityTaskFailureType = null,
 
     pub const json_field_names = .{
         .reason = "Reason",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

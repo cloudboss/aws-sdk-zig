@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SummaryMetricConfiguration = @import("summary_metric_configuration.zig").SummaryMetricConfiguration;
 
-pub const GetMetricConfigurationInput = struct {
-};
+pub const GetMetricConfigurationInput = struct {};
 
 pub const GetMetricConfigurationOutput = struct {
     /// The configuration status of the AWS account for summary metric aggregation.

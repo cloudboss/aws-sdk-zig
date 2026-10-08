@@ -17,8 +17,7 @@ pub const ModifyReportDefinitionInput = struct {
     };
 };
 
-pub const ModifyReportDefinitionOutput = struct {
-};
+pub const ModifyReportDefinitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ModifyReportDefinitionInput, options: CallOptions) !ModifyReportDefinitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

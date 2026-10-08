@@ -30,8 +30,7 @@ pub const SetIdentityNotificationTopicInput = struct {
     sns_topic: ?[]const u8 = null,
 };
 
-pub const SetIdentityNotificationTopicOutput = struct {
-};
+pub const SetIdentityNotificationTopicOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: SetIdentityNotificationTopicInput, options: CallOptions) !SetIdentityNotificationTopicOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

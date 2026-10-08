@@ -27,8 +27,7 @@ pub const UpdateRootDomainUnitOwnerInput = struct {
     };
 };
 
-pub const UpdateRootDomainUnitOwnerOutput = struct {
-};
+pub const UpdateRootDomainUnitOwnerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateRootDomainUnitOwnerInput, options: CallOptions) !UpdateRootDomainUnitOwnerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

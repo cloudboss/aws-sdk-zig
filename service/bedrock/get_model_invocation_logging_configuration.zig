@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const LoggingConfig = @import("logging_config.zig").LoggingConfig;
 
-pub const GetModelInvocationLoggingConfigurationInput = struct {
-};
+pub const GetModelInvocationLoggingConfigurationInput = struct {};
 
 pub const GetModelInvocationLoggingConfigurationOutput = struct {
     /// The current configuration values.

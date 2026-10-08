@@ -14,8 +14,7 @@ pub const RemoveTrustStoreRevocationsInput = struct {
     trust_store_arn: []const u8,
 };
 
-pub const RemoveTrustStoreRevocationsOutput = struct {
-};
+pub const RemoveTrustStoreRevocationsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: RemoveTrustStoreRevocationsInput, options: CallOptions) !RemoveTrustStoreRevocationsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const DeleteDataIntegrationInput = struct {
     };
 };
 
-pub const DeleteDataIntegrationOutput = struct {
-};
+pub const DeleteDataIntegrationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteDataIntegrationInput, options: CallOptions) !DeleteDataIntegrationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

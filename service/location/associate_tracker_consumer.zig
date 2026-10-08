@@ -24,8 +24,7 @@ pub const AssociateTrackerConsumerInput = struct {
     };
 };
 
-pub const AssociateTrackerConsumerOutput = struct {
-};
+pub const AssociateTrackerConsumerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateTrackerConsumerInput, options: CallOptions) !AssociateTrackerConsumerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

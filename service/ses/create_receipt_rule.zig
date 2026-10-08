@@ -22,8 +22,7 @@ pub const CreateReceiptRuleInput = struct {
     rule_set_name: []const u8,
 };
 
-pub const CreateReceiptRuleOutput = struct {
-};
+pub const CreateReceiptRuleOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateReceiptRuleInput, options: CallOptions) !CreateReceiptRuleOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

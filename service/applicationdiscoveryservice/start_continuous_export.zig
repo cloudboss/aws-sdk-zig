@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DataSource = @import("data_source.zig").DataSource;
 
-pub const StartContinuousExportInput = struct {
-};
+pub const StartContinuousExportInput = struct {};
 
 pub const StartContinuousExportOutput = struct {
     /// The type of data collector used to gather this data (currently only offered

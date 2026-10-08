@@ -6,8 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ClassificationExportConfiguration = @import("classification_export_configuration.zig").ClassificationExportConfiguration;
 
-pub const GetClassificationExportConfigurationInput = struct {
-};
+pub const GetClassificationExportConfigurationInput = struct {};
 
 pub const GetClassificationExportConfigurationOutput = struct {
     /// The location where data classification results are stored, and the

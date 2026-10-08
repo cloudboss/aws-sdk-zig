@@ -7,8 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AuditCheckConfiguration = @import("audit_check_configuration.zig").AuditCheckConfiguration;
 const AuditNotificationTarget = @import("audit_notification_target.zig").AuditNotificationTarget;
 
-pub const DescribeAccountAuditConfigurationInput = struct {
-};
+pub const DescribeAccountAuditConfigurationInput = struct {};
 
 pub const DescribeAccountAuditConfigurationOutput = struct {
     /// Which audit checks are enabled and disabled for this account.

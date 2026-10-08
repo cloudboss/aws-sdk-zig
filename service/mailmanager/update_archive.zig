@@ -23,8 +23,7 @@ pub const UpdateArchiveInput = struct {
     };
 };
 
-pub const UpdateArchiveOutput = struct {
-};
+pub const UpdateArchiveOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateArchiveInput, options: CallOptions) !UpdateArchiveOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

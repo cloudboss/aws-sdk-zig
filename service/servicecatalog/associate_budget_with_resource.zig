@@ -18,8 +18,7 @@ pub const AssociateBudgetWithResourceInput = struct {
     };
 };
 
-pub const AssociateBudgetWithResourceOutput = struct {
-};
+pub const AssociateBudgetWithResourceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateBudgetWithResourceInput, options: CallOptions) !AssociateBudgetWithResourceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

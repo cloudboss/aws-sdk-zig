@@ -7,9 +7,48 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ContainerProvider = @import("container_provider.zig").ContainerProvider;
 const SecurityConfigurationData = @import("security_configuration_data.zig").SecurityConfigurationData;
 
-pub const CreateSecurityConfigurationInput = @import("create_security_configuration_request.zig").CreateSecurityConfigurationRequest;
+pub const CreateSecurityConfigurationInput = struct {
+    /// The client idempotency token to use when creating the security
+    /// configuration.
+    client_token: []const u8,
 
-pub const CreateSecurityConfigurationOutput = @import("create_security_configuration_response.zig").CreateSecurityConfigurationResponse;
+    /// The container provider associated with the security configuration.
+    container_provider: ?ContainerProvider = null,
+
+    /// The name of the security configuration.
+    name: []const u8,
+
+    /// Security configuration input for the request.
+    security_configuration_data: SecurityConfigurationData,
+
+    /// The tags to add to the security configuration.
+    tags: ?[]const aws.map.StringMapEntry = null,
+
+    pub const json_field_names = .{
+        .client_token = "clientToken",
+        .container_provider = "containerProvider",
+        .name = "name",
+        .security_configuration_data = "securityConfigurationData",
+        .tags = "tags",
+    };
+};
+
+pub const CreateSecurityConfigurationOutput = struct {
+    /// The ARN (Amazon Resource Name) of the security configuration.
+    arn: ?[]const u8 = null,
+
+    /// The ID of the security configuration.
+    id: ?[]const u8 = null,
+
+    /// The name of the security configuration.
+    name: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .arn = "arn",
+        .id = "id",
+        .name = "name",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CreateSecurityConfigurationInput, options: CallOptions) !CreateSecurityConfigurationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

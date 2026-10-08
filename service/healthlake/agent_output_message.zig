@@ -11,11 +11,11 @@ pub const AgentOutputMessage = struct {
 
     /// The type of output message, which indicates how to interpret the agent's
     /// response.
-    @"type": AgentOutputMessageType,
+    type: AgentOutputMessageType,
 
     pub const json_field_names = .{
         .body = "Body",
         .options_list = "OptionsList",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

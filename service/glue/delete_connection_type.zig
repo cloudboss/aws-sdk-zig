@@ -15,8 +15,7 @@ pub const DeleteConnectionTypeInput = struct {
     };
 };
 
-pub const DeleteConnectionTypeOutput = struct {
-};
+pub const DeleteConnectionTypeOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConnectionTypeInput, options: CallOptions) !DeleteConnectionTypeOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

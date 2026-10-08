@@ -14,8 +14,7 @@ pub const DeleteTrustStoreInput = struct {
     };
 };
 
-pub const DeleteTrustStoreOutput = struct {
-};
+pub const DeleteTrustStoreOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteTrustStoreInput, options: CallOptions) !DeleteTrustStoreOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

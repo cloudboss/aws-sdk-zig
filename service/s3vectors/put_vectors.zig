@@ -30,8 +30,7 @@ pub const PutVectorsInput = struct {
     };
 };
 
-pub const PutVectorsOutput = struct {
-};
+pub const PutVectorsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutVectorsInput, options: CallOptions) !PutVectorsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

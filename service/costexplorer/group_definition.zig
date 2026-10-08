@@ -8,10 +8,10 @@ pub const GroupDefinition = struct {
     key: ?[]const u8 = null,
 
     /// The string that represents the type of group.
-    @"type": ?GroupDefinitionType = null,
+    type: ?GroupDefinitionType = null,
 
     pub const json_field_names = .{
         .key = "Key",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

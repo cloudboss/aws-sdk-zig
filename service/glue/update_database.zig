@@ -27,8 +27,7 @@ pub const UpdateDatabaseInput = struct {
     };
 };
 
-pub const UpdateDatabaseOutput = struct {
-};
+pub const UpdateDatabaseOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateDatabaseInput, options: CallOptions) !UpdateDatabaseOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -23,8 +23,7 @@ pub const DisassociateAccessPolicyInput = struct {
     };
 };
 
-pub const DisassociateAccessPolicyOutput = struct {
-};
+pub const DisassociateAccessPolicyOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateAccessPolicyInput, options: CallOptions) !DisassociateAccessPolicyOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -15,8 +15,7 @@ pub const DeleteLexiconInput = struct {
     };
 };
 
-pub const DeleteLexiconOutput = struct {
-};
+pub const DeleteLexiconOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteLexiconInput, options: CallOptions) !DeleteLexiconOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const DeleteRunBatchInput = struct {
     };
 };
 
-pub const DeleteRunBatchOutput = struct {
-};
+pub const DeleteRunBatchOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteRunBatchInput, options: CallOptions) !DeleteRunBatchOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -90,7 +90,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateAttachedFilesConf
     try path_buf.appendSlice(allocator, "/attached-files-configurations/");
     try path_buf.appendSlice(allocator, input.instance_id);
     try path_buf.appendSlice(allocator, "/");
-    try path_buf.appendSlice(allocator, input.attachment_scope);
+    try path_buf.appendSlice(allocator, input.attachment_scope.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .empty;

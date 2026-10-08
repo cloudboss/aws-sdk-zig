@@ -35,7 +35,7 @@ pub const Link = struct {
     tags: ?[]const Tag = null,
 
     /// The type of the link.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .bandwidth = "Bandwidth",
@@ -48,6 +48,6 @@ pub const Link = struct {
         .site_id = "SiteId",
         .state = "State",
         .tags = "Tags",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };

@@ -20,8 +20,7 @@ pub const DeleteConfiguredAudienceModelAssociationInput = struct {
     };
 };
 
-pub const DeleteConfiguredAudienceModelAssociationOutput = struct {
-};
+pub const DeleteConfiguredAudienceModelAssociationOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteConfiguredAudienceModelAssociationInput, options: CallOptions) !DeleteConfiguredAudienceModelAssociationOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

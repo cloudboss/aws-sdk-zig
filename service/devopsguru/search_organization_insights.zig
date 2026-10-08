@@ -32,7 +32,7 @@ pub const SearchOrganizationInsightsInput = struct {
 
     /// The type of insights you are searching for (`REACTIVE` or
     /// `PROACTIVE`).
-    @"type": InsightType,
+    type: InsightType,
 
     pub const json_field_names = .{
         .account_ids = "AccountIds",
@@ -40,7 +40,7 @@ pub const SearchOrganizationInsightsInput = struct {
         .max_results = "MaxResults",
         .next_token = "NextToken",
         .start_time_range = "StartTimeRange",
-        .@"type" = "Type",
+        .type = "Type",
     };
 };
 
@@ -131,7 +131,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: SearchOrganizationInsig
     has_prev = true;
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"Type\":");
-    try aws.json.writeValue(@TypeOf(input.@"type"), input.@"type", allocator, &body_buf);
+    try aws.json.writeValue(@TypeOf(input.type), input.type, allocator, &body_buf);
     has_prev = true;
 
     try body_buf.appendSlice(allocator, "}");

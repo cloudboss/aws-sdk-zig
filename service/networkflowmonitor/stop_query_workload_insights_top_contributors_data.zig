@@ -21,8 +21,7 @@ pub const StopQueryWorkloadInsightsTopContributorsDataInput = struct {
     };
 };
 
-pub const StopQueryWorkloadInsightsTopContributorsDataOutput = struct {
-};
+pub const StopQueryWorkloadInsightsTopContributorsDataOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StopQueryWorkloadInsightsTopContributorsDataInput, options: CallOptions) !StopQueryWorkloadInsightsTopContributorsDataOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -14,8 +14,7 @@ pub const DeleteWorkforceInput = struct {
     };
 };
 
-pub const DeleteWorkforceOutput = struct {
-};
+pub const DeleteWorkforceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteWorkforceInput, options: CallOptions) !DeleteWorkforceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

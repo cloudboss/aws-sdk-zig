@@ -20,12 +20,12 @@ pub const ToolResultBlock = struct {
     tool_use_id: []const u8,
 
     /// The type for the tool result content block.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .content = "content",
         .status = "status",
         .tool_use_id = "toolUseId",
-        .@"type" = "type",
+        .type = "type",
     };
 };

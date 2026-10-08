@@ -21,8 +21,7 @@ pub const CloneReceiptRuleSetInput = struct {
     rule_set_name: []const u8,
 };
 
-pub const CloneReceiptRuleSetOutput = struct {
-};
+pub const CloneReceiptRuleSetOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: CloneReceiptRuleSetInput, options: CallOptions) !CloneReceiptRuleSetOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

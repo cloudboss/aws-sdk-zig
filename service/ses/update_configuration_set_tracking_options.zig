@@ -14,8 +14,7 @@ pub const UpdateConfigurationSetTrackingOptionsInput = struct {
     tracking_options: TrackingOptions,
 };
 
-pub const UpdateConfigurationSetTrackingOptionsOutput = struct {
-};
+pub const UpdateConfigurationSetTrackingOptionsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: UpdateConfigurationSetTrackingOptionsInput, options: CallOptions) !UpdateConfigurationSetTrackingOptionsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

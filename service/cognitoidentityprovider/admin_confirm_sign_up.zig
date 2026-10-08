@@ -60,8 +60,7 @@ pub const AdminConfirmSignUpInput = struct {
     };
 };
 
-pub const AdminConfirmSignUpOutput = struct {
-};
+pub const AdminConfirmSignUpOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AdminConfirmSignUpInput, options: CallOptions) !AdminConfirmSignUpOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

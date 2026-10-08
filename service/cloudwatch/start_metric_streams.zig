@@ -21,8 +21,7 @@ pub const StartMetricStreamsInput = struct {
     };
 };
 
-pub const StartMetricStreamsOutput = struct {
-};
+pub const StartMetricStreamsOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: StartMetricStreamsInput, options: CallOptions) !StartMetricStreamsOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

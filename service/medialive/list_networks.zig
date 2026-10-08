@@ -6,9 +6,31 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DescribeNetworkSummary = @import("describe_network_summary.zig").DescribeNetworkSummary;
 
-pub const ListNetworksInput = @import("list_networks_request.zig").ListNetworksRequest;
+pub const ListNetworksInput = struct {
+    /// The maximum number of items to return.
+    max_results: ?i32 = null,
 
-pub const ListNetworksOutput = @import("list_networks_response.zig").ListNetworksResponse;
+    /// The token to retrieve the next page of results.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .max_results = "MaxResults",
+        .next_token = "NextToken",
+    };
+};
+
+pub const ListNetworksOutput = struct {
+    /// An array of networks that you have created.
+    networks: ?[]const DescribeNetworkSummary = null,
+
+    /// Token for the next ListNetworks request.
+    next_token: ?[]const u8 = null,
+
+    pub const json_field_names = .{
+        .networks = "Networks",
+        .next_token = "NextToken",
+    };
+};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: ListNetworksInput, options: CallOptions) !ListNetworksOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

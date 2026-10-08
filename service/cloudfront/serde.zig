@@ -2047,7 +2047,7 @@ pub fn deserializeCachePolicySummary(allocator: std.mem.Allocator, reader: *aws.
                 if (std.mem.eql(u8, e.local, "CachePolicy")) {
                     result.cache_policy = try deserializeCachePolicy(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = CachePolicyType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
+                    result.type = CachePolicyType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -4843,7 +4843,7 @@ pub fn deserializeOriginRequestPolicySummary(allocator: std.mem.Allocator, reade
                 if (std.mem.eql(u8, e.local, "OriginRequestPolicy")) {
                     result.origin_request_policy = try deserializeOriginRequestPolicy(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = OriginRequestPolicyType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
+                    result.type = OriginRequestPolicyType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -5751,7 +5751,7 @@ pub fn deserializeResponseHeadersPolicySummary(allocator: std.mem.Allocator, rea
                 if (std.mem.eql(u8, e.local, "ResponseHeadersPolicy")) {
                     result.response_headers_policy = try deserializeResponseHeadersPolicy(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = ResponseHeadersPolicyType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
+                    result.type = ResponseHeadersPolicyType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -6214,7 +6214,7 @@ pub fn deserializeTrafficConfig(allocator: std.mem.Allocator, reader: *aws.xml.R
                 } else if (std.mem.eql(u8, e.local, "SingleWeightConfig")) {
                     result.single_weight_config = try deserializeContinuousDeploymentSingleWeightConfig(allocator, reader);
                 } else if (std.mem.eql(u8, e.local, "Type")) {
-                    result.@"type" = ContinuousDeploymentPolicyType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
+                    result.type = ContinuousDeploymentPolicyType.fromWireName(try reader.readElementText()) orelse return error.InvalidResponse;
                 } else {
                     try reader.skipElement();
                 }
@@ -9074,7 +9074,7 @@ pub fn serializeTrafficConfig(allocator: std.mem.Allocator, buf: *std.ArrayList(
         try buf.appendSlice(allocator, "</SingleWeightConfig>");
     }
     try buf.appendSlice(allocator, "<Type>");
-    try buf.appendSlice(allocator, value.@"type".wireName());
+    try buf.appendSlice(allocator, value.type.wireName());
     try buf.appendSlice(allocator, "</Type>");
 }
 
@@ -9243,4 +9243,3 @@ pub fn serializeWebAclCustomization(allocator: std.mem.Allocator, buf: *std.Arra
         try buf.appendSlice(allocator, "</Arn>");
     }
 }
-

@@ -39,7 +39,7 @@ pub const ActionParameters = struct {
 
     /// The type of navigation action. Valid values are `url` and `anchor`.
     /// This value is required for a navigation action.
-    @"type": ?ComponentProperty = null,
+    type: ?ComponentProperty = null,
 
     /// The URL to the location to open. Specify this value for a navigation action.
     url: ?ComponentProperty = null,
@@ -52,7 +52,7 @@ pub const ActionParameters = struct {
         .model = "model",
         .state = "state",
         .target = "target",
-        .@"type" = "type",
+        .type = "type",
         .url = "url",
     };
 };

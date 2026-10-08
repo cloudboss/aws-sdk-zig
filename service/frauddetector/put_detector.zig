@@ -27,8 +27,7 @@ pub const PutDetectorInput = struct {
     };
 };
 
-pub const PutDetectorOutput = struct {
-};
+pub const PutDetectorOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutDetectorInput, options: CallOptions) !PutDetectorOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

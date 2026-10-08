@@ -149,7 +149,7 @@ pub const Image = struct {
     tags: ?[]const aws.map.StringMapEntry = null,
 
     /// Specifies whether this image produces an AMI or a container image.
-    @"type": ?ImageType = null,
+    type: ?ImageType = null,
 
     /// The semantic version of the image.
     ///
@@ -204,7 +204,7 @@ pub const Image = struct {
         .source_pipeline_name = "sourcePipelineName",
         .state = "state",
         .tags = "tags",
-        .@"type" = "type",
+        .type = "type",
         .version = "version",
         .workflows = "workflows",
     };

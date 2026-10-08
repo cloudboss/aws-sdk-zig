@@ -21,13 +21,13 @@ pub const ValidityTerm = struct {
     id: ?[]const u8 = null,
 
     /// Category of the term being updated.
-    @"type": ?[]const u8 = null,
+    type: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .agreement_duration = "agreementDuration",
         .agreement_end_date = "agreementEndDate",
         .agreement_start_date = "agreementStartDate",
         .id = "id",
-        .@"type" = "type",
+        .type = "type",
     };
 };

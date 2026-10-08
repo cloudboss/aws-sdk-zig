@@ -8,8 +8,7 @@ const OTelEnrichmentMetricSelector = @import("o_tel_enrichment_metric_selector.z
 const OTelEnrichmentStatus = @import("o_tel_enrichment_status.zig").OTelEnrichmentStatus;
 const serde = @import("serde.zig");
 
-pub const GetOTelEnrichmentInput = struct {
-};
+pub const GetOTelEnrichmentInput = struct {};
 
 pub const GetOTelEnrichmentOutput = struct {
     /// The date and time that enrichment started for the account. This parameter is

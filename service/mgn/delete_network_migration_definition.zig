@@ -14,8 +14,7 @@ pub const DeleteNetworkMigrationDefinitionInput = struct {
     };
 };
 
-pub const DeleteNetworkMigrationDefinitionOutput = struct {
-};
+pub const DeleteNetworkMigrationDefinitionOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DeleteNetworkMigrationDefinitionInput, options: CallOptions) !DeleteNetworkMigrationDefinitionOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

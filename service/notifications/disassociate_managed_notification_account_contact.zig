@@ -21,8 +21,7 @@ pub const DisassociateManagedNotificationAccountContactInput = struct {
     };
 };
 
-pub const DisassociateManagedNotificationAccountContactOutput = struct {
-};
+pub const DisassociateManagedNotificationAccountContactOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: DisassociateManagedNotificationAccountContactInput, options: CallOptions) !DisassociateManagedNotificationAccountContactOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
@@ -56,7 +55,7 @@ fn serializeRequest(allocator: std.mem.Allocator, input: DisassociateManagedNoti
 
     var path_buf: std.ArrayList(u8) = .empty;
     try path_buf.appendSlice(allocator, "/contacts/disassociate-managed-notification/");
-    try path_buf.appendSlice(allocator, input.contact_identifier);
+    try path_buf.appendSlice(allocator, input.contact_identifier.wireName());
     const path = try path_buf.toOwnedSlice(allocator);
 
     var body_buf: std.ArrayList(u8) = .empty;

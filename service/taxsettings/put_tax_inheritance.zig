@@ -15,8 +15,7 @@ pub const PutTaxInheritanceInput = struct {
     };
 };
 
-pub const PutTaxInheritanceOutput = struct {
-};
+pub const PutTaxInheritanceOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: PutTaxInheritanceInput, options: CallOptions) !PutTaxInheritanceOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);

@@ -30,8 +30,7 @@ pub const AssociateQualificationWithWorkerInput = struct {
     };
 };
 
-pub const AssociateQualificationWithWorkerOutput = struct {
-};
+pub const AssociateQualificationWithWorkerOutput = struct {};
 
 pub fn execute(client: *Client, allocator: std.mem.Allocator, input: AssociateQualificationWithWorkerInput, options: CallOptions) !AssociateQualificationWithWorkerOutput {
     var arena = std.heap.ArenaAllocator.init(client.allocator);
