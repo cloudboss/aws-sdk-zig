@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run Gradle codegen in batches to avoid loading all models into JVM at once."""
+"""Run Gradle codegen and Zig formatting in batches to limit JVM memory use."""
 
 import json
 import os
@@ -101,7 +101,11 @@ def populate_model_dir(batch):
         shutil.copy2(src, dst)
 
 
-def run_gradle():
+def run_codegen(batch):
+    output_dirs = [
+        os.path.join("..", PROJECTIONS_DIR, pkg, "zig-codegen")
+        for pkg, _ in batch
+    ]
     result = subprocess.run(
         [
             "docker", "run", "--rm",
@@ -109,7 +113,8 @@ def run_gradle():
             "-w", "/code",
             "--security-opt", "label=type:container_runtime_t",
             CTR_IMAGE,
-            "/bin/sh", "-c", GRADLE_CMD,
+            "/bin/sh", "-c", GRADLE_CMD + ' && zig fmt "${@}"',
+            "run-codegen", *output_dirs,
         ],
         capture_output=False,
     )
@@ -152,10 +157,11 @@ def main():
         populate_model_dir(batch)
         write_batch_smithy_build(batch)
 
-        rc = run_gradle()
+        rc = run_codegen(batch)
         if rc != 0:
-            print(f"  Gradle failed (exit {rc}) for batch {i}; continuing.", file=sys.stderr)
+            print(f"  Codegen failed (exit {rc}) for batch {i}; continuing.", file=sys.stderr)
             failed_batches.append(i)
+            continue
 
         copy_outputs(batch)
 
