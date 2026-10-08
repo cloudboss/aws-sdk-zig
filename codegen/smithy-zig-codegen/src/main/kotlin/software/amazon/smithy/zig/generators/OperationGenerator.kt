@@ -587,28 +587,5 @@ class OperationGenerator(
 
     private fun isSharedType(
         shapeId: software.amazon.smithy.model.shapes.ShapeId
-    ): Boolean {
-        // Check 1: Is this shape directly referenced as a member type?
-        for (shape in model.toSet()) {
-            if (shape !is StructureShape || shape.id == shapeId) continue
-            for ((_, memberShape) in shape.allMembers) {
-                if (memberShape.target == shapeId) return true
-                val target = model.getShape(memberShape.target).orElse(null)
-                if (target is ListShape && target.member.target == shapeId)
-                    return true
-                if (target is MapShape && target.value.target == shapeId)
-                    return true
-            }
-        }
-
-        // Check 2: Does the generated name collide with another shape in the model?
-        val generatedName = if (shapeId == inputShape.id) "${operationName}Input" else "${operationName}Output"
-        if (generatedName != shapeId.name) {
-            for (shape in model.toSet()) {
-                if (shape.id.name == generatedName && shape.id != shapeId) return true
-            }
-        }
-
-        return false
-    }
+    ): Boolean = shapeId !in context.operationIoSkipSet
 }

@@ -337,62 +337,8 @@ class SerdeGenerator(
         return result
     }
 
-    /**
-     * Collects I/O shape IDs that are *exclusively* operation I/O -- not referenced
-     * as member targets by any other struct in the service. Shapes that serve as both
-     * I/O and member types (e.g., EC2 Volume) must be included in serde.zig.
-     */
-    private fun collectExclusiveIoShapeIds(): Set<ShapeId> {
-        val allIoIds = mutableSetOf<ShapeId>()
-        for (op in topDownIndex.getContainedOperations(service)) {
-            allIoIds.add(op.inputShape)
-            allIoIds.add(op.outputShape)
-        }
-
-        // Find I/O shapes that are also member targets of other structs
-        val referencedAsMembers = mutableSetOf<ShapeId>()
-        for (shape in model.getShapesWithTrait(software.amazon.smithy.model.traits.MixinTrait::class.java).plus(
-            model.structureShapes
-        )) {
-            for ((_, member) in shape.allMembers) {
-                val targetId = member.target
-                if (targetId in allIoIds) {
-                    referencedAsMembers.add(targetId)
-                }
-                // Also check through lists
-                val target = model.expectShape(targetId)
-                if (target is ListShape) {
-                    val elemId = target.member.target
-                    if (elemId in allIoIds) {
-                        referencedAsMembers.add(elemId)
-                    }
-                }
-                if (target is MapShape) {
-                    val valueId = target.value.target
-                    if (valueId in allIoIds) {
-                        referencedAsMembers.add(valueId)
-                    }
-                }
-            }
-        }
-
-        // Also exclude I/O shapes whose generated name collides with another shape
-        val allShapeNames = model.toSet().map { it.id.name }.toSet()
-        val nameCollisionIds = mutableSetOf<ShapeId>()
-        for (op in topDownIndex.getContainedOperations(service)) {
-            val opName = op.id.name
-            val inputName = model.expectShape(op.inputShape).id.name
-            val outputName = model.expectShape(op.outputShape).id.name
-            if ("${opName}Input" != inputName && "${opName}Input" in allShapeNames) {
-                nameCollisionIds.add(op.inputShape)
-            }
-            if ("${opName}Output" != outputName && "${opName}Output" in allShapeNames) {
-                nameCollisionIds.add(op.outputShape)
-            }
-        }
-
-        return allIoIds - referencedAsMembers - nameCollisionIds
-    }
+    private fun collectExclusiveIoShapeIds(): Set<ShapeId> =
+        context.operationIoSkipSet
 
     // ---- Import collection ----
 

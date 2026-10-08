@@ -13,6 +13,7 @@ import software.amazon.smithy.codegen.core.directed.GenerateServiceDirective
 import software.amazon.smithy.codegen.core.directed.GenerateStructureDirective
 import software.amazon.smithy.codegen.core.directed.GenerateUnionDirective
 import software.amazon.smithy.model.knowledge.TopDownIndex
+import software.amazon.smithy.model.neighbor.Walker
 import software.amazon.smithy.model.shapes.ShapeId
 import software.amazon.smithy.zig.generators.EnumGenerator
 import software.amazon.smithy.zig.generators.IntEnumGenerator
@@ -69,7 +70,7 @@ class DirectedZigCodegen :
         if (directive.shape().id.namespace == "smithy.api") return
 
         // Skip operation input/output shapes -- they are generated inline by OperationGenerator
-        if (directive.shape().id in DirectedZigCodegen.getOperationIoShapeIds(directive.context())) return
+        if (directive.shape().id in directive.context().operationIoSkipSet) return
 
         StructureGenerator(directive).run()
     }
@@ -114,15 +115,16 @@ class DirectedZigCodegen :
          */
         fun getOperationIoShapeIds(context: ZigContext): Set<ShapeId> {
             val topDownIndex = TopDownIndex.of(context.model())
+            val serviceDefinitions = Walker(context.model()).walkShapes(context.service)
             val ioShapeIds = mutableSetOf<ShapeId>()
             for (opShape in topDownIndex.getContainedOperations(context.service)) {
                 ioShapeIds.add(opShape.inputShape)
                 ioShapeIds.add(opShape.outputShape)
             }
 
-            // Find shapes referenced as member types by any structure in the model
+            // Collect member targets within this service.
             val referencedAsMembers = mutableSetOf<ShapeId>()
-            for (shape in context.model().toSet()) {
+            for (shape in serviceDefinitions) {
                 if (shape is software.amazon.smithy.model.shapes.StructureShape) {
                     for ((_, memberShape) in shape.allMembers) {
                         referencedAsMembers.add(memberShape.target)
@@ -138,9 +140,8 @@ class DirectedZigCodegen :
                 }
             }
 
-            // Find I/O shapes whose generated name collides with another shape name.
-            // These must be generated as standalone files, not inline.
-            val allShapeNames = context.model().toSet().map { it.id.name }.toSet()
+            // Keep separate files when type names conflict within this service.
+            val allShapeNames = serviceDefinitions.map { it.id.name }.toSet()
             val nameCollisionIds = mutableSetOf<ShapeId>()
             for (opShape in topDownIndex.getContainedOperations(context.service)) {
                 val opName = opShape.id.name

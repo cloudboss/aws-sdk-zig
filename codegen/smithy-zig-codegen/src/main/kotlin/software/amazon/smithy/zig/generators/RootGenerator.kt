@@ -11,7 +11,6 @@ import software.amazon.smithy.model.shapes.StructureShape
 import software.amazon.smithy.model.shapes.UnionShape
 import software.amazon.smithy.model.traits.EnumTrait
 import software.amazon.smithy.model.traits.ErrorTrait
-import software.amazon.smithy.zig.DirectedZigCodegen
 import software.amazon.smithy.zig.NamingUtil
 import software.amazon.smithy.zig.ZigContext
 
@@ -32,7 +31,7 @@ class RootGenerator(
         // Use Walker to get only shapes in this service's closure.
         val walker = Walker(model)
         val serviceShapes = walker.walkShapes(service)
-        val operationIoSkipSet = DirectedZigCodegen.getOperationIoShapeIds(context)
+        val operationIoSkipSet = context.operationIoSkipSet
         val operationNames = topDownIndex.getContainedOperations(service)
             .map { NamingUtil.toSnakeCase(it.id.name) }
             .toSet()

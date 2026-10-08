@@ -6,6 +6,7 @@ import software.amazon.smithy.codegen.core.SymbolProvider
 import software.amazon.smithy.codegen.core.WriterDelegator
 import software.amazon.smithy.model.Model
 import software.amazon.smithy.model.shapes.ServiceShape
+import software.amazon.smithy.model.shapes.ShapeId
 import java.util.Optional
 
 class ZigContext(
@@ -17,6 +18,10 @@ class ZigContext(
     private val integrations: List<ZigIntegration>,
     val service: ServiceShape,
 ) : CodegenContext<ZigSettings, ZigWriter, ZigIntegration> {
+
+    internal val operationIoSkipSet: Set<ShapeId> by lazy {
+        DirectedZigCodegen.getOperationIoShapeIds(this)
+    }
 
     override fun model(): Model = model
 

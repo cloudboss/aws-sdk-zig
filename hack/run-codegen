@@ -102,6 +102,10 @@ def populate_model_dir(batch):
 
 
 def run_codegen(batch):
+    for pkg, _ in batch:
+        projection_dir = os.path.join(PROJECTIONS_DIR, pkg, "zig-codegen")
+        if os.path.isdir(projection_dir):
+            shutil.rmtree(projection_dir)
     output_dirs = [
         os.path.join("..", PROJECTIONS_DIR, pkg, "zig-codegen")
         for pkg, _ in batch
