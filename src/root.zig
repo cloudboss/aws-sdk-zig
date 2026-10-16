@@ -25,6 +25,7 @@ pub const sts_common = @import("sts_common.zig");
 pub const web_identity = @import("web_identity.zig");
 pub const process_creds = @import("process.zig");
 pub const sso = @import("sso.zig");
+pub const login = @import("login.zig");
 pub const assume_role = @import("assume_role.zig");
 pub const user_agent = @import("user_agent.zig");
 pub const event_stream = @import("event_stream.zig");
