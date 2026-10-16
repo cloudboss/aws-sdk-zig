@@ -297,8 +297,15 @@ pub const ChainProvider = struct {
     default_expiration: ?i64 = 900,
     /// Mutex for thread-safe credential caching
     mutex: std.Io.Mutex = .init,
+    profile_only: bool = false,
+    profile_path: ?*const ProfilePath = null,
 
     const Self = @This();
+
+    const ProfilePath = struct {
+        name: []const u8,
+        parent: ?*const ProfilePath,
+    };
 
     const ProviderType = enum {
         environment,
@@ -313,7 +320,10 @@ pub const ChainProvider = struct {
     };
 
     /// Get credentials, using cache if valid
-    pub fn getCredentials(self: *Self, allocator: Allocator) !Credentials {
+    pub fn getCredentials(
+        self: *Self,
+        allocator: Allocator,
+    ) CredentialsProvider.GetCredentialsError!Credentials {
         self.mutex.lockUncancelable(self.io);
         defer self.mutex.unlock(self.io);
 
@@ -327,10 +337,12 @@ pub const ChainProvider = struct {
         // If we previously succeeded with a provider, try it first
         if (self.successful_provider) |provider| {
             if (self.tryProvider(allocator, provider)) |creds| {
+                defer freeProviderCreds(allocator, creds, provider);
                 try self.cacheCredentials(creds);
-                freeProviderCreds(allocator, creds, provider);
                 return self.cached.?;
-            } else |_| {
+            } else |err| {
+                if (err == error.OutOfMemory) return error.OutOfMemory;
+                if (err == error.ProfileCredentialsFailed) return error.CredentialsNotFound;
                 // Provider failed, clear it and try the full chain
                 self.successful_provider = null;
             }
@@ -349,12 +361,19 @@ pub const ChainProvider = struct {
             .imds,
         };
         for (providers) |provider| {
+            // A source profile must not select credentials outside that profile.
+            if (self.profile_only) switch (provider) {
+                .environment, .web_identity, .ecs, .imds => continue,
+                else => {},
+            };
             if (self.tryProvider(allocator, provider)) |creds| {
+                defer freeProviderCreds(allocator, creds, provider);
                 try self.cacheCredentials(creds);
-                freeProviderCreds(allocator, creds, provider);
                 self.successful_provider = provider;
                 return self.cached.?;
-            } else |_| {
+            } else |err| {
+                if (err == error.OutOfMemory) return error.OutOfMemory;
+                if (err == error.ProfileCredentialsFailed) return error.CredentialsNotFound;
                 // Continue to next provider
             }
         }
@@ -394,22 +413,34 @@ pub const ChainProvider = struct {
                     break :blk error.CredentialsNotFound;
                 const role_arn = p.role_arn orelse
                     break :blk error.CredentialsNotFound;
-                const src_profile = p.source_profile orelse
-                    break :blk error.CredentialsNotFound;
+                const src_profile = p.source_profile orelse {
+                    if (p.web_identity_token_file != null) break :blk error.CredentialsNotFound;
+                    break :blk error.ProfileCredentialsFailed;
+                };
                 const region = self.region orelse
-                    break :blk error.CredentialsNotFound;
-                var fp = FileProvider{
-                    .io = self.io,
-                    .env_map = self.env_map,
-                    .profile = src_profile,
-                };
-                const source_creds = fp.load(
-                    allocator,
-                ) catch
-                    break :blk error.CredentialsNotFound;
+                    break :blk error.ProfileCredentialsFailed;
+                const profile_name = self.profile orelse "default";
+                var ancestor = self.profile_path;
+                while (ancestor) |node| : (ancestor = node.parent) {
+                    if (std.mem.eql(u8, node.name, profile_name)) {
+                        break :blk error.ProfileCredentialsFailed;
+                    }
+                }
+                const path = ProfilePath{ .name = profile_name, .parent = self.profile_path };
                 var source = CredentialsProvider{
-                    .static = source_creds,
+                    .chain = .{
+                        .allocator = allocator,
+                        .io = self.io,
+                        .env_map = self.env_map,
+                        .profile = src_profile,
+                        .region = region,
+                        .endpoint_url = self.endpoint_url,
+                        .sts_regional_endpoints = self.sts_regional_endpoints,
+                        .profile_only = true,
+                        .profile_path = &path,
+                    },
                 };
+                defer source.deinit();
                 var ar = assume_role.AssumeRoleProvider{
                     .io = self.io,
                     .env_map = self.env_map,
@@ -422,7 +453,10 @@ pub const ChainProvider = struct {
                     .endpoint_url = self.endpoint_url,
                     .sts_regional_endpoints = self.sts_regional_endpoints,
                 };
-                break :blk ar.getCredentials(allocator);
+                break :blk ar.getCredentials(allocator) catch |err| switch (err) {
+                    error.OutOfMemory => error.OutOfMemory,
+                    else => error.ProfileCredentialsFailed,
+                };
             },
             .profile_sso => blk: {
                 var cf = config_mod.loadConfigFile(allocator, self.io, self.env_map) catch
@@ -933,6 +967,254 @@ test "profile_sso skips when profile lacks sso_session" {
         result,
     );
 }
+
+test "chain assumes role from process, file, and role source profiles" {
+    if (@import("builtin").os.tag == .windows) return error.SkipZigTest;
+
+    const allocator = std.testing.allocator;
+    const role_config =
+        \\[profile development-auto]
+        \\region = us-west-2
+        \\role_arn = arn:aws:iam::111111111111:role/automation/infra-automation
+        \\role_session_name = joseph.wright
+        \\external_id = test-external-id
+        \\source_profile = infra
+    ;
+    const file_credentials =
+        \\[infra]
+        \\aws_access_key_id = SOURCE
+        \\aws_secret_access_key = secret
+        \\aws_session_token = source-token
+    ;
+    const cases = [_]struct {
+        config: []const u8,
+        credentials: []const u8 = "",
+        signing_keys: []const []const u8,
+    }{
+        .{
+            .config = role_config ++ "\n[profile infra]\ncredential_process = echo '" ++
+                "{\"Version\":1,\"AccessKeyId\":\"SOURCE\",\"SecretAccessKey\":\"secret\"," ++
+                "\"SessionToken\":\"source-token\"}'\n",
+            .signing_keys = &.{"SOURCE"},
+        },
+        .{
+            .config = role_config,
+            .credentials = file_credentials,
+            .signing_keys = &.{"SOURCE"},
+        },
+        .{
+            .config = role_config ++ "\n" ++
+                \\[profile infra]
+                \\role_arn = arn:aws:iam::111111111111:role/Intermediate
+                \\source_profile = base
+            ,
+            .credentials =
+            \\[base]
+            \\aws_access_key_id = SOURCE
+            \\aws_secret_access_key = secret
+            \\aws_session_token = source-token
+            ,
+            .signing_keys = &.{ "SOURCE", "ASSUMED" },
+        },
+    };
+    for (cases) |case| {
+        var tmp = std.testing.tmpDir(.{});
+        defer tmp.cleanup();
+        try tmp.dir.writeFile(std.testing.io, .{ .sub_path = "config", .data = case.config });
+        try tmp.dir.writeFile(std.testing.io, .{
+            .sub_path = "credentials",
+            .data = case.credentials,
+        });
+
+        var config_path: [std.fs.max_path_bytes]u8 = undefined;
+        var env_map: std.process.Environ.Map = .init(allocator);
+        defer env_map.deinit();
+        try env_map.put("AWS_CONFIG_FILE", try std.fmt.bufPrint(
+            &config_path,
+            ".zig-cache/tmp/{s}/config",
+            .{tmp.sub_path},
+        ));
+        var credentials_path: [std.fs.max_path_bytes]u8 = undefined;
+        try env_map.put("AWS_SHARED_CREDENTIALS_FILE", try std.fmt.bufPrint(
+            &credentials_path,
+            ".zig-cache/tmp/{s}/credentials",
+            .{tmp.sub_path},
+        ));
+        try env_map.put("AWS_PROFILE", "development-auto");
+        try env_map.put("AWS_EC2_METADATA_DISABLED", "true");
+
+        var server = try ProfileTestServer.init();
+        server.request_count = case.signing_keys.len;
+        defer server.server.deinit(std.testing.io);
+        var group: std.Io.Group = .init;
+        defer group.cancel(std.testing.io);
+        try group.concurrent(std.testing.io, ProfileTestServer.run, .{&server});
+
+        var endpoint_buf: [64]u8 = undefined;
+        const endpoint = try std.fmt.bufPrint(
+            &endpoint_buf,
+            "http://127.0.0.1:{d}",
+            .{server.server.socket.address.getPort()},
+        );
+        var cfg = try config_mod.Config.load(allocator, std.testing.io, &env_map, .{
+            .endpoint_url = endpoint,
+        });
+        defer cfg.deinit();
+        // Credential providers make their own STS requests.
+        cfg.credentials.chain.endpoint_url = endpoint;
+
+        const creds = try cfg.credentials.getCredentials(allocator);
+        try std.testing.expectEqualStrings("ASSUMED", creds.access_key_id);
+        try std.testing.expectEqualStrings("assumed-secret", creds.secret_access_key);
+        try std.testing.expectEqualStrings("assumed-token", creds.session_token.?);
+        try std.testing.expect(creds.expiration != null);
+        try group.await(std.testing.io);
+        for (case.signing_keys, 0..) |signing_key, index| {
+            var signing_buf: [64]u8 = undefined;
+            const expected = try std.fmt.bufPrint(&signing_buf, "Credential={s}/", .{signing_key});
+            try std.testing.expect(
+                std.mem.find(u8, server.requests[index].bytes(), expected) != null,
+            );
+        }
+        try std.testing.expect(
+            std.mem.find(u8, server.requests[0].bytes(), "source-token") != null,
+        );
+        const request = server.requests[case.signing_keys.len - 1].bytes();
+        try std.testing.expect(std.mem.find(u8, request, "Action=AssumeRole&") != null);
+        try std.testing.expect(std.mem.find(u8, request, "RoleSessionName=joseph.wright") != null);
+        try std.testing.expect(std.mem.find(u8, request, "ExternalId=test-external-id") != null);
+        try std.testing.expect(std.mem.find(
+            u8,
+            request,
+            "RoleArn=arn%3Aaws%3Aiam%3A%3A111111111111%3Arole%2Fautomation%2Finfra-automation",
+        ) != null);
+        try std.testing.expect(cfg.credentials.chain.imds_provider == null);
+        try std.testing.expectEqualStrings(
+            "ASSUMED",
+            (try cfg.credentials.getCredentials(allocator)).access_key_id,
+        );
+
+        try tmp.dir.writeFile(std.testing.io, .{
+            .sub_path = "config",
+            .data = "[profile development-auto]\nrole_arn = test-role\nsource_profile = missing\n",
+        });
+        cfg.credentials.chain.clearCache();
+        try std.testing.expectError(
+            error.CredentialsNotFound,
+            cfg.credentials.getCredentials(allocator),
+        );
+        try std.testing.expect(cfg.credentials.chain.ecs_provider == null);
+        try std.testing.expect(cfg.credentials.chain.imds_provider == null);
+    }
+}
+
+test "chain stops after a configured role fails" {
+    const allocator = std.testing.allocator;
+    const cases = [_][]const u8{
+        "[profile development-auto]\nrole_arn = test-role\nsource_profile = missing\n",
+        "[profile development-auto]\nrole_arn = test-role\nsource_profile = development-auto\n",
+        "[profile development-auto]\nrole_arn = test-role\nsource_profile = infra\n" ++
+            "[profile infra]\nrole_arn = other-role\nsource_profile = development-auto\n",
+        "[profile development-auto]\nrole_arn = test-role\nsource_profile = infra\n" ++
+            "[profile infra]\nsso_session = absent\n",
+    };
+    for (cases) |content| {
+        var tmp = std.testing.tmpDir(.{});
+        defer tmp.cleanup();
+        try tmp.dir.writeFile(std.testing.io, .{
+            .sub_path = "config",
+            .data = content,
+        });
+        var config_path: [std.fs.max_path_bytes]u8 = undefined;
+        var env_map: std.process.Environ.Map = .init(allocator);
+        defer env_map.deinit();
+        try env_map.put("AWS_CONFIG_FILE", try std.fmt.bufPrint(
+            &config_path,
+            ".zig-cache/tmp/{s}/config",
+            .{tmp.sub_path},
+        ));
+        try env_map.put("AWS_EC2_METADATA_DISABLED", "true");
+        var chain = ChainProvider{
+            .allocator = allocator,
+            .io = std.testing.io,
+            .env_map = &env_map,
+            .profile = "development-auto",
+            .region = "us-west-2",
+        };
+        defer chain.deinit();
+
+        try std.testing.expectError(error.CredentialsNotFound, chain.getCredentials(allocator));
+        try std.testing.expect(chain.ecs_provider == null);
+        try std.testing.expect(chain.imds_provider == null);
+    }
+}
+
+const ProfileTestServer = struct {
+    server: std.Io.net.Server,
+    request_count: usize = 1,
+    requests: [2]CapturedRequest = .{ .{}, .{} },
+
+    const CapturedRequest = struct {
+        buffer: [8192]u8 = undefined,
+        len: usize = 0,
+
+        fn bytes(self: *const CapturedRequest) []const u8 {
+            return self.buffer[0..self.len];
+        }
+    };
+
+    fn init() !ProfileTestServer {
+        const address = try std.Io.net.IpAddress.parseIp4("127.0.0.1", 0);
+        return .{ .server = try address.listen(std.testing.io, .{}) };
+    }
+
+    fn run(self: *ProfileTestServer) void {
+        for (self.requests[0..self.request_count]) |*request| self.respond(request);
+    }
+
+    fn respond(self: *ProfileTestServer, request: *CapturedRequest) void {
+        var stream = self.server.accept(std.testing.io) catch return;
+        defer stream.close(std.testing.io);
+        var read_buf: [8192]u8 = undefined;
+        var reader = stream.reader(std.testing.io, &read_buf);
+        var content_length: usize = 0;
+        while (true) {
+            const line = reader.interface.takeDelimiterInclusive('\n') catch return;
+            if (request.len + line.len > request.buffer.len) return;
+            @memcpy(request.buffer[request.len..][0..line.len], line);
+            request.len += line.len;
+            const prefix = "content-length:";
+            if (std.ascii.startsWithIgnoreCase(line, prefix)) {
+                content_length = std.fmt.parseInt(
+                    usize,
+                    std.mem.trim(u8, line[prefix.len..], " \r\n"),
+                    10,
+                ) catch return;
+            }
+            if (std.mem.eql(u8, line, "\r\n")) break;
+        }
+        if (request.len + content_length > request.buffer.len) return;
+        reader.interface.readSliceAll(
+            request.buffer[request.len..][0..content_length],
+        ) catch return;
+        request.len += content_length;
+
+        const body =
+            "<AssumeRoleResponse><AssumeRoleResult><Credentials>" ++
+            "<AccessKeyId>ASSUMED</AccessKeyId>" ++
+            "<SecretAccessKey>assumed-secret</SecretAccessKey>" ++
+            "<SessionToken>assumed-token</SessionToken>" ++
+            "<Expiration>2099-01-01T00:00:00Z</Expiration>" ++
+            "</Credentials></AssumeRoleResult></AssumeRoleResponse>";
+        var write_buf: [1024]u8 = undefined;
+        var writer = stream.writer(std.testing.io, &write_buf);
+        writer.interface.print(
+            "HTTP/1.1 200 OK\r\nContent-Length: {d}\r\nConnection: close\r\n\r\n{s}",
+            .{ body.len, body },
+        ) catch return;
+        writer.interface.flush() catch {};
+    }
+};
 
 test "jitteredBuffer returns values in [buffer/2, buffer]" {
     const buffer: i64 = 300;
