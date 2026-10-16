@@ -397,6 +397,7 @@ fn sdkIdToConfigKey(sdk_id: []const u8, buf: []u8) []const u8 {
 /// Profile settings from ~/.aws/config
 pub const Profile = struct {
     region: ?[]const u8 = null,
+    login_session: ?[]const u8 = null,
     // Assume role
     role_arn: ?[]const u8 = null,
     source_profile: ?[]const u8 = null,
@@ -681,6 +682,8 @@ fn setProfileField(p: *Profile, key: []const u8, value: []const u8) void {
         p.web_identity_token_file = value;
     } else if (std.mem.eql(u8, key, "credential_process")) {
         p.credential_process = value;
+    } else if (std.mem.eql(u8, key, "login_session")) {
+        p.login_session = value;
     } else if (std.mem.eql(u8, key, "sso_start_url")) {
         p.sso_start_url = value;
     } else if (std.mem.eql(u8, key, "sso_account_id")) {
@@ -1000,6 +1003,18 @@ test "parseConfigFile sso-session sections" {
     try std.testing.expectEqualStrings("https://my-org.awsapps.com/start", session.sso_start_url.?);
     try std.testing.expectEqualStrings("us-east-1", session.sso_region.?);
     try std.testing.expectEqualStrings("sso:account:access", session.sso_registration_scopes.?);
+}
+
+test "parseConfigFile login_session" {
+    var cf = try parseConfigFile(
+        std.testing.allocator,
+        "[profile infra]\nlogin_session = arn:aws:iam::111111111111:user/test\n",
+    );
+    defer cf.deinit();
+    try std.testing.expectEqualStrings(
+        "arn:aws:iam::111111111111:user/test",
+        cf.getProfile("infra").?.login_session orelse "",
+    );
 }
 
 test "parseConfigFile empty content" {

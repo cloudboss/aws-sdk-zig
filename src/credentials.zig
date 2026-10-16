@@ -9,6 +9,7 @@ const ecs = @import("ecs.zig");
 const web_identity = @import("web_identity.zig");
 const process = @import("process.zig");
 const sso = @import("sso.zig");
+const login = @import("login.zig");
 const assume_role = @import("assume_role.zig");
 const config_mod = @import("config.zig");
 const sts_common = @import("sts_common.zig");
@@ -68,13 +69,15 @@ pub const CredentialsProvider = union(enum) {
     assume_role: assume_role.AssumeRoleProvider,
     /// Load via SSO (cached access token)
     sso: sso.SsoProvider,
+    /// Load from an AWS CLI login session and refresh through AWS Sign-In.
+    login: login.LoginProvider,
     /// Automatic credential chain (environment -> file -> web_identity -> ecs -> imds)
     chain: ChainProvider,
 
     pub const GetCredentialsError = error{
         CredentialsNotFound,
         OutOfMemory,
-    };
+    } || login.Error;
 
     /// Retrieve credentials from this provider
     pub fn getCredentials(
@@ -90,8 +93,10 @@ pub const CredentialsProvider = union(enum) {
             .imds => |*i| i.load(allocator) catch return error.CredentialsNotFound,
             .ecs => |*e| e.load(allocator) catch return error.CredentialsNotFound,
             .process => |*p| p.getCredentials(allocator) catch return error.CredentialsNotFound,
-            .assume_role => |*a| a.getCredentials(allocator) catch return error.CredentialsNotFound,
+            .assume_role => |*a| a.getCredentials(allocator) catch |err|
+                return login.credentialError(err) orelse error.CredentialsNotFound,
             .sso => |*s| s.getCredentials(allocator) catch return error.CredentialsNotFound,
+            .login => |*l| l.getCredentials(allocator),
             .chain => |*c| c.getCredentials(allocator),
         };
     }
@@ -261,7 +266,7 @@ pub const FileProvider = struct {
 /// Automatic credential chain provider
 ///
 /// Tries providers in order: environment -> file ->
-/// profile_assume_role -> profile_sso -> profile_process ->
+/// profile_assume_role -> profile_login -> profile_sso -> profile_process ->
 /// profile_web_identity -> web_identity -> ecs -> imds
 pub const ChainProvider = struct {
     /// Long-lived allocator used for owning cached credential strings.
@@ -311,6 +316,7 @@ pub const ChainProvider = struct {
         environment,
         file,
         profile_assume_role,
+        profile_login,
         profile_sso,
         profile_process,
         profile_web_identity,
@@ -341,7 +347,7 @@ pub const ChainProvider = struct {
                 try self.cacheCredentials(creds);
                 return self.cached.?;
             } else |err| {
-                if (err == error.OutOfMemory) return error.OutOfMemory;
+                if (login.credentialError(err)) |cause| return cause;
                 if (err == error.ProfileCredentialsFailed) return error.CredentialsNotFound;
                 // Provider failed, clear it and try the full chain
                 self.successful_provider = null;
@@ -353,6 +359,7 @@ pub const ChainProvider = struct {
             .environment,
             .file,
             .profile_assume_role,
+            .profile_login,
             .profile_sso,
             .profile_process,
             .profile_web_identity,
@@ -372,7 +379,7 @@ pub const ChainProvider = struct {
                 self.successful_provider = provider;
                 return self.cached.?;
             } else |err| {
-                if (err == error.OutOfMemory) return error.OutOfMemory;
+                if (login.credentialError(err)) |cause| return cause;
                 if (err == error.ProfileCredentialsFailed) return error.CredentialsNotFound;
                 // Continue to next provider
             }
@@ -453,10 +460,25 @@ pub const ChainProvider = struct {
                     .endpoint_url = self.endpoint_url,
                     .sts_regional_endpoints = self.sts_regional_endpoints,
                 };
-                break :blk ar.getCredentials(allocator) catch |err| switch (err) {
-                    error.OutOfMemory => error.OutOfMemory,
-                    else => error.ProfileCredentialsFailed,
+                break :blk ar.getCredentials(allocator) catch |err| {
+                    if (login.credentialError(err)) |cause| break :blk cause;
+                    break :blk error.ProfileCredentialsFailed;
                 };
+            },
+            .profile_login => blk: {
+                var cf = try config_mod.loadConfigFile(allocator, self.io, self.env_map);
+                defer cf.deinit();
+                const p = cf.getProfile(self.profile orelse "default") orelse
+                    break :blk error.CredentialsNotFound;
+                const session = p.login_session orelse break :blk error.CredentialsNotFound;
+                var login_provider = login.LoginProvider{
+                    .io = self.io,
+                    .env_map = self.env_map,
+                    .login_session = session,
+                    .region = p.region orelse self.region orelse
+                        break :blk error.LoginCacheInvalid,
+                };
+                break :blk login_provider.getCredentials(allocator);
             },
             .profile_sso => blk: {
                 var cf = config_mod.loadConfigFile(allocator, self.io, self.env_map) catch
@@ -968,7 +990,7 @@ test "profile_sso skips when profile lacks sso_session" {
     );
 }
 
-test "chain assumes role from process, file, and role source profiles" {
+test "chain assumes role from process, file, login, and role source profiles" {
     if (@import("builtin").os.tag == .windows) return error.SkipZigTest;
 
     const allocator = std.testing.allocator;
@@ -990,6 +1012,7 @@ test "chain assumes role from process, file, and role source profiles" {
         config: []const u8,
         credentials: []const u8 = "",
         signing_keys: []const []const u8,
+        login_cache: bool = false,
     }{
         .{
             .config = role_config ++ "\n[profile infra]\ncredential_process = echo '" ++
@@ -1001,6 +1024,12 @@ test "chain assumes role from process, file, and role source profiles" {
             .config = role_config,
             .credentials = file_credentials,
             .signing_keys = &.{"SOURCE"},
+        },
+        .{
+            .config = role_config ++ "\n[profile infra]\n" ++
+                "login_session = arn:aws:iam::111111111111:user/test\n",
+            .signing_keys = &.{"SOURCE"},
+            .login_cache = true,
         },
         .{
             .config = role_config ++ "\n" ++
@@ -1042,6 +1071,25 @@ test "chain assumes role from process, file, and role source profiles" {
         ));
         try env_map.put("AWS_PROFILE", "development-auto");
         try env_map.put("AWS_EC2_METADATA_DISABLED", "true");
+        if (case.login_cache) {
+            var hash: [32]u8 = undefined;
+            std.crypto.hash.sha2.Sha256.hash("arn:aws:iam::111111111111:user/test", &hash, .{});
+            try tmp.dir.writeFile(std.testing.io, .{
+                .sub_path = std.fmt.bytesToHex(hash, .lower) ++ ".json",
+                .data =
+                \\{"accessToken":{"accessKeyId":"SOURCE","secretAccessKey":"secret",
+                \\"sessionToken":"source-token","accountId":"111111111111",
+                \\"expiresAt":"2099-01-01T00:00:00Z"},"clientId":"test-client",
+                \\"refreshToken":"test-refresh-token","dpopKey":"test-key"}
+                ,
+            });
+            var cache_path: [std.fs.max_path_bytes]u8 = undefined;
+            try env_map.put("AWS_LOGIN_CACHE_DIRECTORY", try std.fmt.bufPrint(
+                &cache_path,
+                ".zig-cache/tmp/{s}",
+                .{tmp.sub_path},
+            ));
+        }
 
         var server = try ProfileTestServer.init();
         server.request_count = case.signing_keys.len;
@@ -1215,6 +1263,51 @@ const ProfileTestServer = struct {
         writer.interface.flush() catch {};
     }
 };
+
+test "chain preserves login errors from direct and source profiles" {
+    const allocator = std.testing.allocator;
+    var tmp = std.testing.tmpDir(.{});
+    defer tmp.cleanup();
+    try tmp.dir.writeFile(std.testing.io, .{
+        .sub_path = "config",
+        .data =
+        \\[profile development-auto]
+        \\role_arn = arn:aws:iam::111111111111:role/Automation
+        \\source_profile = infra
+        \\[profile infra]
+        \\login_session = test-session
+        ,
+    });
+    var config_buf: [std.fs.max_path_bytes]u8 = undefined;
+    var cache_buf: [std.fs.max_path_bytes]u8 = undefined;
+    var env_map: std.process.Environ.Map = .init(allocator);
+    defer env_map.deinit();
+    try env_map.put("AWS_CONFIG_FILE", try std.fmt.bufPrint(
+        &config_buf,
+        ".zig-cache/tmp/{s}/config",
+        .{tmp.sub_path},
+    ));
+    try env_map.put("AWS_LOGIN_CACHE_DIRECTORY", try std.fmt.bufPrint(
+        &cache_buf,
+        ".zig-cache/tmp/{s}",
+        .{tmp.sub_path},
+    ));
+    for ([_][]const u8{ "development-auto", "infra" }) |profile| {
+        var provider = CredentialsProvider{
+            .chain = .{
+                .allocator = allocator,
+                .io = std.testing.io,
+                .env_map = &env_map,
+                .profile = profile,
+                .region = "us-west-2",
+            },
+        };
+        defer provider.deinit();
+        try std.testing.expectError(error.LoginCacheNotFound, provider.getCredentials(allocator));
+        try std.testing.expect(provider.chain.ecs_provider == null);
+        try std.testing.expect(provider.chain.imds_provider == null);
+    }
+}
 
 test "jitteredBuffer returns values in [buffer/2, buffer]" {
     const buffer: i64 = 300;

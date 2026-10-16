@@ -86,7 +86,10 @@ Credentials are resolved automatically in this order:
 4. **ECS container credentials** -- Via `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI`
 5. **EC2 Instance Metadata** -- IMDS v2
 
-Additional providers (SSO, process credentials, assume role) can be configured through AWS profiles.
+Additional providers (AWS login, SSO, process credentials, assume role) use AWS profiles.
+Profiles with `login_session` read the `aws login` cache and refresh credentials through AWS Sign-In.
+`AWS_LOGIN_CACHE_DIRECTORY` overrides the default `~/.aws/login/cache` directory.
+Run `aws login --profile <profile>` again if the login session expires.
 
 ## Endpoint Resolution
 
