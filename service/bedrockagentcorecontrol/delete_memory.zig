@@ -9,7 +9,7 @@ const MemoryStatus = @import("memory_status.zig").MemoryStatus;
 pub const DeleteMemoryInput = struct {
     /// A client token is used for keeping track of idempotent requests. It can
     /// contain a session id which can be around 250 chars, combined with a unique
-    /// AWS identifier.
+    /// Amazon Web Services identifier.
     client_token: ?[]const u8 = null,
 
     /// The unique identifier of the memory to delete.

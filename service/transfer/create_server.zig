@@ -7,6 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const Domain = @import("domain.zig").Domain;
 const EndpointDetails = @import("endpoint_details.zig").EndpointDetails;
 const EndpointType = @import("endpoint_type.zig").EndpointType;
+const HostKeyStorageType = @import("host_key_storage_type.zig").HostKeyStorageType;
 const IdentityProviderDetails = @import("identity_provider_details.zig").IdentityProviderDetails;
 const IdentityProviderType = @import("identity_provider_type.zig").IdentityProviderType;
 const IpAddressType = @import("ip_address_type.zig").IpAddressType;
@@ -114,6 +115,12 @@ pub const CreateServerInput = struct {
     /// For more information, see [Manage host keys for your SFTP-enabled
     /// server](https://docs.aws.amazon.com/transfer/latest/userguide/edit-server-config.html#configuring-servers-change-host-key) in the *Transfer Family User Guide*.
     host_key: ?[]const u8 = null,
+
+    /// Specifies whether the host key is stored by Transfer Family
+    /// (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`). When you
+    /// specify `SECRETS_MANAGER`, Transfer Family stores the private host key
+    /// material in an Secrets Manager secret.
+    host_key_storage_type: ?HostKeyStorageType = null,
 
     /// Required when `IdentityProviderType` is set to `AWS_DIRECTORY_SERVICE`,
     /// `Amazon Web Services_LAMBDA` or `API_GATEWAY`. Accepts an array containing
@@ -285,6 +292,7 @@ pub const CreateServerInput = struct {
         .endpoint_details = "EndpointDetails",
         .endpoint_type = "EndpointType",
         .host_key = "HostKey",
+        .host_key_storage_type = "HostKeyStorageType",
         .identity_provider_details = "IdentityProviderDetails",
         .identity_provider_type = "IdentityProviderType",
         .ip_address_type = "IpAddressType",

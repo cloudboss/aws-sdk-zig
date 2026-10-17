@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AssociatedSystem = @import("associated_system.zig").AssociatedSystem;
 const DependencyDiscoveryInput = @import("dependency_discovery_input.zig").DependencyDiscoveryInput;
+const DevOpsAgentConfiguration = @import("dev_ops_agent_configuration.zig").DevOpsAgentConfiguration;
 const PermissionModel = @import("permission_model.zig").PermissionModel;
 const ServiceReportConfiguration = @import("service_report_configuration.zig").ServiceReportConfiguration;
 const Service = @import("service.zig").Service;
@@ -19,6 +20,11 @@ pub const CreateServiceInput = struct {
     dependency_discovery: ?DependencyDiscoveryInput = null,
 
     description: ?[]const u8 = null,
+
+    /// The optional DevOps Agent integration configuration to apply to the new
+    /// service. If you omit this field, the new service has no DevOps Agent
+    /// integration.
+    dev_ops_agent_configuration: ?DevOpsAgentConfiguration = null,
 
     kms_key_id: ?[]const u8 = null,
 
@@ -41,6 +47,7 @@ pub const CreateServiceInput = struct {
         .client_token = "clientToken",
         .dependency_discovery = "dependencyDiscovery",
         .description = "description",
+        .dev_ops_agent_configuration = "devOpsAgentConfiguration",
         .kms_key_id = "kmsKeyId",
         .name = "name",
         .permission_model = "permissionModel",
@@ -117,6 +124,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateServiceInput, con
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"description\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.dev_ops_agent_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"devOpsAgentConfiguration\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

@@ -7,7 +7,7 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 
 pub const ListConfigurationSetsInput = struct {
     /// An object that contains filters to apply when listing configuration sets.
-    /// You can filter by configuration set name.
+    /// You can filter by a substring of the configuration set name.
     filter: ?[]const aws.map.StringMapEntry = null,
 
     /// A token returned from a previous call to `ListConfigurationSets` to

@@ -1,3 +1,4 @@
+const ColorInformation = @import("color_information.zig").ColorInformation;
 const FrameResolution = @import("frame_resolution.zig").FrameResolution;
 const ScanMode = @import("scan_mode.zig").ScanMode;
 
@@ -11,6 +12,10 @@ pub const NdiMediaStreamInfo = struct {
 
     /// The codec used for the media stream. For NDI sources, use `speed-hq`.
     codec: []const u8,
+
+    /// The color signaling of the video stream. Used when the `streamType` is
+    /// `Video`.
+    color: ?ColorInformation = null,
 
     /// The number of video frames displayed per second. Used when the `streamType`
     /// is `Video`.
@@ -37,6 +42,7 @@ pub const NdiMediaStreamInfo = struct {
     pub const json_field_names = .{
         .channels = "Channels",
         .codec = "Codec",
+        .color = "Color",
         .frame_rate = "FrameRate",
         .frame_resolution = "FrameResolution",
         .sample_rate = "SampleRate",

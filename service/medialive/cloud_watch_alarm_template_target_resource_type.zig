@@ -12,6 +12,7 @@ pub const CloudWatchAlarmTemplateTargetResourceType = enum {
     mediaconnect_flow,
     s3_bucket,
     mediatailor_playback_configuration,
+    elemental_inference_feed,
 
     pub const json_field_names = .{
         .cloudfront_distribution = "CLOUDFRONT_DISTRIBUTION",
@@ -23,6 +24,7 @@ pub const CloudWatchAlarmTemplateTargetResourceType = enum {
         .mediaconnect_flow = "MEDIACONNECT_FLOW",
         .s3_bucket = "S3_BUCKET",
         .mediatailor_playback_configuration = "MEDIATAILOR_PLAYBACK_CONFIGURATION",
+        .elemental_inference_feed = "ELEMENTAL_INFERENCE_FEED",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -36,6 +38,7 @@ pub const CloudWatchAlarmTemplateTargetResourceType = enum {
             .mediaconnect_flow => "MEDIACONNECT_FLOW",
             .s3_bucket => "S3_BUCKET",
             .mediatailor_playback_configuration => "MEDIATAILOR_PLAYBACK_CONFIGURATION",
+            .elemental_inference_feed => "ELEMENTAL_INFERENCE_FEED",
         };
     }
 

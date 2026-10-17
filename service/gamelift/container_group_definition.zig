@@ -6,8 +6,8 @@ const SupportContainerDefinition = @import("support_container_definition.zig").S
 
 /// The properties that describe a container group resource. You can update all
 /// properties of
-/// a container group definition properties. Updates to a container group
-/// definition are saved as
+/// a container group definition. Updates to a container group definition are
+/// saved as
 /// new versions.
 ///
 /// **Used with:**
@@ -89,13 +89,13 @@ pub const ContainerGroupDefinition = struct {
     ///
     /// * An internal issue prevented Amazon GameLift Servers from creating
     /// the container group definition resource. Delete the failed resource and call
-    /// [CreateContainerGroupDefinition](https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerGroupDefinition.html)again.
+    /// [CreateContainerGroupDefinition](https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateContainerGroupDefinition.html) again.
     ///
     /// * An access-denied message means that you don't have permissions to access
     ///   the container image on ECR. See
     /// [
     /// IAM permission
-    /// examples](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-iam-policy-examples.html.html)
+    /// examples](https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-iam-policy-examples.html)
     /// for help setting up required IAM permissions for Amazon GameLift Servers.
     ///
     /// * The `ImageUri` value for at least one
@@ -117,8 +117,8 @@ pub const ContainerGroupDefinition = struct {
 
     /// The set of definitions for support containers in this group. A container
     /// group definition
-    /// might have zero support container definitions. Support container can be used
-    /// in any type of
+    /// might have zero support container definitions. Support containers can be
+    /// used in any type of
     /// container group.
     support_container_definitions: ?[]const SupportContainerDefinition = null,
 
@@ -137,11 +137,21 @@ pub const ContainerGroupDefinition = struct {
     /// group (1 vCPU
     /// is equal to 1024 CPU units). All containers in the group share these
     /// resources. You can set a
-    /// limit for each container definition in the group. If individual containers
-    /// have limits, this
-    /// total value must be equal to or greater than the sum of the limits for each
-    /// container in the
-    /// group.
+    /// vCPU reservation for each container definition in the group. If individual
+    /// containers have
+    /// reservations, this total value must be equal to or greater than the sum of
+    /// the reservations
+    /// for each container in the group.
+    ///
+    /// For a game server container group, if this property is set, Amazon GameLift
+    /// Servers uses this value to
+    /// calculate how many game server container groups fit on an instance. If this
+    /// property isn't set,
+    /// the group's containers can use up to the instance's available vCPU, and
+    /// Amazon GameLift Servers uses the sum of
+    /// the containers' `Vcpu` values to calculate how many game server container
+    /// groups fit
+    /// on an instance.
     total_vcpu_limit: ?f64 = null,
 
     /// An optional description that was provided for a container group definition

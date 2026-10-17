@@ -19,6 +19,9 @@ pub const Finding = struct {
     /// The time and date when the finding was created.
     created_at: []const u8,
 
+    /// The name of the custom detection rule that generated this finding.
+    custom_detection_rule_name: ?[]const u8 = null,
+
     /// The description of the finding.
     description: ?[]const u8 = null,
 
@@ -58,6 +61,7 @@ pub const Finding = struct {
         .associated_attack_sequence_arn = "AssociatedAttackSequenceArn",
         .confidence = "Confidence",
         .created_at = "CreatedAt",
+        .custom_detection_rule_name = "CustomDetectionRuleName",
         .description = "Description",
         .id = "Id",
         .partition = "Partition",

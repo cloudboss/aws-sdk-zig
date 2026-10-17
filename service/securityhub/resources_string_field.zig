@@ -21,6 +21,7 @@ pub const ResourcesStringField = enum {
     host_resource_guid,
     host_resource_type,
     canonical_id,
+    resource_criticality,
 
     pub const json_field_names = .{
         .resource_guid = "ResourceGuid",
@@ -43,6 +44,7 @@ pub const ResourcesStringField = enum {
         .host_resource_guid = "ResourceInfo.AIDetails.HostResourceGuid",
         .host_resource_type = "ResourceInfo.AIDetails.HostResourceType",
         .canonical_id = "ResourceInfo.AIDetails.CanonicalId",
+        .resource_criticality = "ResourceCriticality",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -67,6 +69,7 @@ pub const ResourcesStringField = enum {
             .host_resource_guid => "ResourceInfo.AIDetails.HostResourceGuid",
             .host_resource_type => "ResourceInfo.AIDetails.HostResourceType",
             .canonical_id => "ResourceInfo.AIDetails.CanonicalId",
+            .resource_criticality => "ResourceCriticality",
         };
     }
 

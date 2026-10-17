@@ -99,8 +99,11 @@ pub const UpdateMatchmakingConfigurationInput = struct {
     /// Queues are used to start new
     /// Amazon GameLift Servers-hosted game sessions for matches that are created
     /// with this matchmaking
-    /// configuration. If `FlexMatchMode` is set to `STANDALONE`, do not
-    /// set this parameter.
+    /// configuration. A matchmaking configuration supports only one queue; if you
+    /// specify
+    /// more than one ARN, the request fails with an `InvalidRequestException`.
+    /// If `FlexMatchMode` is set to `STANDALONE`, do not set this
+    /// parameter.
     game_session_queue_arns: ?[]const []const u8 = null,
 
     /// A unique identifier for the matchmaking configuration to update. You can use

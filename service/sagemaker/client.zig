@@ -77,6 +77,7 @@ const create_space = @import("create_space.zig");
 const create_studio_lifecycle_config = @import("create_studio_lifecycle_config.zig");
 const create_training_job = @import("create_training_job.zig");
 const create_training_plan = @import("create_training_plan.zig");
+const create_training_session = @import("create_training_session.zig");
 const create_transform_job = @import("create_transform_job.zig");
 const create_trial = @import("create_trial.zig");
 const create_trial_component = @import("create_trial_component.zig");
@@ -140,6 +141,7 @@ const delete_space = @import("delete_space.zig");
 const delete_studio_lifecycle_config = @import("delete_studio_lifecycle_config.zig");
 const delete_tags = @import("delete_tags.zig");
 const delete_training_job = @import("delete_training_job.zig");
+const delete_training_session = @import("delete_training_session.zig");
 const delete_trial = @import("delete_trial.zig");
 const delete_trial_component = @import("delete_trial_component.zig");
 const delete_user_profile = @import("delete_user_profile.zig");
@@ -216,6 +218,7 @@ const describe_subscribed_workteam = @import("describe_subscribed_workteam.zig")
 const describe_training_job = @import("describe_training_job.zig");
 const describe_training_plan = @import("describe_training_plan.zig");
 const describe_training_plan_extension_history = @import("describe_training_plan_extension_history.zig");
+const describe_training_session = @import("describe_training_session.zig");
 const describe_transform_job = @import("describe_transform_job.zig");
 const describe_trial = @import("describe_trial.zig");
 const describe_trial_component = @import("describe_trial_component.zig");
@@ -317,6 +320,7 @@ const list_tags = @import("list_tags.zig");
 const list_training_jobs = @import("list_training_jobs.zig");
 const list_training_jobs_for_hyper_parameter_tuning_job = @import("list_training_jobs_for_hyper_parameter_tuning_job.zig");
 const list_training_plans = @import("list_training_plans.zig");
+const list_training_sessions = @import("list_training_sessions.zig");
 const list_transform_jobs = @import("list_transform_jobs.zig");
 const list_trial_components = @import("list_trial_components.zig");
 const list_trials = @import("list_trials.zig");
@@ -359,6 +363,7 @@ const stop_optimization_job = @import("stop_optimization_job.zig");
 const stop_pipeline_execution = @import("stop_pipeline_execution.zig");
 const stop_processing_job = @import("stop_processing_job.zig");
 const stop_training_job = @import("stop_training_job.zig");
+const stop_training_session = @import("stop_training_session.zig");
 const stop_transform_job = @import("stop_transform_job.zig");
 const update_action = @import("update_action.zig");
 const update_app_image_config = @import("update_app_image_config.zig");
@@ -1599,6 +1604,22 @@ pub const Client = struct {
         return create_training_plan.execute(self, allocator, input, options);
     }
 
+    /// Creates a training session in Amazon SageMaker. A training session
+    /// provisions compute resources for fine-tuning a foundation model using
+    /// Low-Rank Adaptation (LoRA). After the session is created, you can submit
+    /// training operations and sample inference requests through the Amazon
+    /// SageMaker Training Session Runtime API.
+    ///
+    /// The following operations are related to `CreateTrainingSession`:
+    ///
+    /// * `DescribeTrainingSession`
+    /// * `ListTrainingSessions`
+    /// * `StopTrainingSession`
+    /// * `DeleteTrainingSession`
+    pub fn createTrainingSession(self: *Self, allocator: std.mem.Allocator, input: create_training_session.CreateTrainingSessionInput, options: CallOptions) !create_training_session.CreateTrainingSessionOutput {
+        return create_training_session.execute(self, allocator, input, options);
+    }
+
     /// Starts a transform job. A transform job uses a trained model to get
     /// inferences on a dataset and saves these results to an Amazon S3 location
     /// that you specify.
@@ -2100,6 +2121,18 @@ pub const Client = struct {
         return delete_training_job.execute(self, allocator, input, options);
     }
 
+    /// Deletes a training session. You must stop a running session before deleting
+    /// it. Use the `StopTrainingSession` operation to stop the session first.
+    ///
+    /// The following operations are related to `DeleteTrainingSession`:
+    ///
+    /// * `CreateTrainingSession`
+    /// * `DescribeTrainingSession`
+    /// * `StopTrainingSession`
+    pub fn deleteTrainingSession(self: *Self, allocator: std.mem.Allocator, input: delete_training_session.DeleteTrainingSessionInput, options: CallOptions) !delete_training_session.DeleteTrainingSessionOutput {
+        return delete_training_session.execute(self, allocator, input, options);
+    }
+
     /// Deletes the specified trial. All trial components that make up the trial
     /// must be deleted first. Use the
     /// [DescribeTrialComponent](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrialComponent.html) API to get the list of trial components.
@@ -2566,6 +2599,20 @@ pub const Client = struct {
     /// end dates, status, payment status, and cost information.
     pub fn describeTrainingPlanExtensionHistory(self: *Self, allocator: std.mem.Allocator, input: describe_training_plan_extension_history.DescribeTrainingPlanExtensionHistoryInput, options: CallOptions) !describe_training_plan_extension_history.DescribeTrainingPlanExtensionHistoryOutput {
         return describe_training_plan_extension_history.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves detailed information about a training session, including its
+    /// current status, model configuration, Low-Rank Adaptation (LoRA) parameters,
+    /// and timestamps.
+    ///
+    /// The following operations are related to `DescribeTrainingSession`:
+    ///
+    /// * `CreateTrainingSession`
+    /// * `ListTrainingSessions`
+    /// * `StopTrainingSession`
+    /// * `DeleteTrainingSession`
+    pub fn describeTrainingSession(self: *Self, allocator: std.mem.Allocator, input: describe_training_session.DescribeTrainingSessionInput, options: CallOptions) !describe_training_session.DescribeTrainingSessionOutput {
+        return describe_training_session.execute(self, allocator, input, options);
     }
 
     /// Returns information about a transform job.
@@ -3180,6 +3227,18 @@ pub const Client = struct {
         return list_training_plans.execute(self, allocator, input, options);
     }
 
+    /// Lists training sessions in your account. You can filter results by creation
+    /// time, name, and status. The operation paginates results. To retrieve
+    /// additional results, use the `NextToken` parameter.
+    ///
+    /// The following operations are related to `ListTrainingSessions`:
+    ///
+    /// * `CreateTrainingSession`
+    /// * `DescribeTrainingSession`
+    pub fn listTrainingSessions(self: *Self, allocator: std.mem.Allocator, input: list_training_sessions.ListTrainingSessionsInput, options: CallOptions) !list_training_sessions.ListTrainingSessionsOutput {
+        return list_training_sessions.execute(self, allocator, input, options);
+    }
+
     /// Lists transform jobs.
     pub fn listTransformJobs(self: *Self, allocator: std.mem.Allocator, input: list_transform_jobs.ListTransformJobsInput, options: CallOptions) !list_transform_jobs.ListTransformJobsOutput {
         return list_transform_jobs.execute(self, allocator, input, options);
@@ -3510,6 +3569,19 @@ pub const Client = struct {
     /// to `Stopped`.
     pub fn stopTrainingJob(self: *Self, allocator: std.mem.Allocator, input: stop_training_job.StopTrainingJobInput, options: CallOptions) !stop_training_job.StopTrainingJobOutput {
         return stop_training_job.execute(self, allocator, input, options);
+    }
+
+    /// Stops a running training session and sets the session status to `Stopping`.
+    /// After the session stops, the status changes to `Stopped`. To delete a
+    /// stopped session, use the `DeleteTrainingSession` operation.
+    ///
+    /// The following operations are related to `StopTrainingSession`:
+    ///
+    /// * `CreateTrainingSession`
+    /// * `DescribeTrainingSession`
+    /// * `DeleteTrainingSession`
+    pub fn stopTrainingSession(self: *Self, allocator: std.mem.Allocator, input: stop_training_session.StopTrainingSessionInput, options: CallOptions) !stop_training_session.StopTrainingSessionOutput {
+        return stop_training_session.execute(self, allocator, input, options);
     }
 
     /// Stops a batch transform job.
@@ -4468,6 +4540,13 @@ pub const Client = struct {
     }
 
     pub fn listTrainingPlansPaginator(self: *Self, params: list_training_plans.ListTrainingPlansInput) paginator.ListTrainingPlansPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listTrainingSessionsPaginator(self: *Self, params: list_training_sessions.ListTrainingSessionsInput) paginator.ListTrainingSessionsPaginator {
         return .{
             .client = self,
             .params = params,

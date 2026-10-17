@@ -16,6 +16,7 @@ const RdsPromoteReadReplicaConfiguration = @import("rds_promote_read_replica_con
 const RdsSwitchoverReadReplicaConfiguration = @import("rds_switchover_read_replica_configuration.zig").RdsSwitchoverReadReplicaConfiguration;
 const RegionSwitchPlanConfiguration = @import("region_switch_plan_configuration.zig").RegionSwitchPlanConfiguration;
 const Route53HealthCheckConfiguration = @import("route_53_health_check_configuration.zig").Route53HealthCheckConfiguration;
+const SsmSendCommandConfiguration = @import("ssm_send_command_configuration.zig").SsmSendCommandConfiguration;
 
 /// Execution block configurations for a workflow in a Region switch plan. An
 /// execution block represents a specific type of action to perform during a
@@ -56,6 +57,8 @@ pub const ExecutionBlockConfiguration = union(enum) {
     region_switch_plan_config: ?RegionSwitchPlanConfiguration,
     /// The Amazon Route 53 health check configuration.
     route_53_health_check_config: ?Route53HealthCheckConfiguration,
+    /// Specifies an AWS Systems Manager `SendCommand` execution block.
+    ssm_send_command_config: ?SsmSendCommandConfiguration,
 
     pub const json_field_names = .{
         .arc_routing_control_config = "arcRoutingControlConfig",
@@ -76,5 +79,6 @@ pub const ExecutionBlockConfiguration = union(enum) {
         .rds_switchover_read_replica_config = "rdsSwitchoverReadReplicaConfig",
         .region_switch_plan_config = "regionSwitchPlanConfig",
         .route_53_health_check_config = "route53HealthCheckConfig",
+        .ssm_send_command_config = "ssmSendCommandConfig",
     };
 };

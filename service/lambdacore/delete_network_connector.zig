@@ -8,6 +8,12 @@ const NetworkConnectorConfiguration = @import("network_connector_configuration.z
 const NetworkConnectorState = @import("network_connector_state.zig").NetworkConnectorState;
 
 pub const DeleteNetworkConnectorInput = struct {
+    /// The identifier of the network connector to delete. Provide an unqualified
+    /// ARN (or an ID or name) to delete the entire connector and all of its
+    /// versions, or a version-qualified ARN — one that includes the immutable
+    /// version suffix — to delete a specific historical version. You can't delete
+    /// the latest version with a version-qualified identifier; delete the connector
+    /// instead.
     identifier: []const u8,
 
     pub const json_field_names = .{
@@ -23,6 +29,7 @@ pub const DeleteNetworkConnectorOutput = struct {
     /// security groups.
     configuration: ?NetworkConnectorConfiguration = null,
 
+    /// The unique identifier of the network connector.
     id: []const u8,
 
     /// The name of the network connector.
@@ -36,6 +43,13 @@ pub const DeleteNetworkConnectorOutput = struct {
     /// `DELETING` after this call.
     state: ?NetworkConnectorState = null,
 
+    /// The version number of the connector version affected by this request.
+    version: ?i64 = null,
+
+    /// The qualified ARN of the connector version affected by this request,
+    /// including the immutable version suffix.
+    version_arn: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .arn = "Arn",
         .configuration = "Configuration",
@@ -43,6 +57,8 @@ pub const DeleteNetworkConnectorOutput = struct {
         .name = "Name",
         .operator_role = "OperatorRole",
         .state = "State",
+        .version = "Version",
+        .version_arn = "VersionArn",
     };
 };
 

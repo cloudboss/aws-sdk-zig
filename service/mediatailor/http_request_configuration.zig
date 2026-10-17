@@ -1,5 +1,6 @@
 const aws = @import("aws");
 
+const HttpRequestCacheConfiguration = @import("http_request_cache_configuration.zig").HttpRequestCacheConfiguration;
 const MethodType = @import("method_type.zig").MethodType;
 const RuntimeType = @import("runtime_type.zig").RuntimeType;
 
@@ -11,6 +12,12 @@ pub const HttpRequestConfiguration = struct {
     /// An expression that evaluates to the request body. Used with `POST` requests.
     /// The maximum size after evaluation is 64 KB.
     body: ?[]const u8 = null,
+
+    /// The optional response-caching configuration for the function. When present,
+    /// MediaTailor caches the responses that the function receives from the HTTP
+    /// endpoint, within the time-to-live (TTL) bounds that you specify. Omit this
+    /// configuration to disable response caching.
+    cache: ?HttpRequestCacheConfiguration = null,
 
     /// A map of HTTP header names to expression values. MediaTailor evaluates each
     /// header value expression at runtime and includes the result in the outbound
@@ -46,6 +53,7 @@ pub const HttpRequestConfiguration = struct {
 
     pub const json_field_names = .{
         .body = "Body",
+        .cache = "Cache",
         .headers = "Headers",
         .method_type = "MethodType",
         .output = "Output",

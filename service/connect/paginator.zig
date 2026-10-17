@@ -16,6 +16,7 @@ const list_authentication_profiles = @import("list_authentication_profiles.zig")
 const list_bots = @import("list_bots.zig");
 const list_child_hours_of_operations = @import("list_child_hours_of_operations.zig");
 const list_contact_evaluations = @import("list_contact_evaluations.zig");
+const list_contact_flow_aliases = @import("list_contact_flow_aliases.zig");
 const list_contact_flow_module_aliases = @import("list_contact_flow_module_aliases.zig");
 const list_contact_flow_module_versions = @import("list_contact_flow_module_versions.zig");
 const list_contact_flow_modules = @import("list_contact_flow_modules.zig");
@@ -531,6 +532,44 @@ pub const ListContactEvaluationsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_contact_evaluations.execute(self.client, allocator, self.params, options);
+
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
+        }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListContactFlowAliasesPaginator = struct {
+    client: *Client,
+    params: list_contact_flow_aliases.ListContactFlowAliasesInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_contact_flow_aliases.ListContactFlowAliasesOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_contact_flow_aliases.execute(self.client, allocator, self.params, options);
 
         const next_token: ?[]const u8 = output.next_token;
         const owned_token = if (next_token) |token|

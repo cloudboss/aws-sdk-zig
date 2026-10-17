@@ -1,5 +1,6 @@
 const CostCategoryValues = @import("cost_category_values.zig").CostCategoryValues;
 const DimensionValues = @import("dimension_values.zig").DimensionValues;
+const ProductAttributeValues = @import("product_attribute_values.zig").ProductAttributeValues;
 const TagValues = @import("tag_values.zig").TagValues;
 
 /// Use `Expression` to filter in various Cost Explorer APIs.
@@ -11,9 +12,10 @@ const TagValues = @import("tag_values.zig").TagValues;
 ///
 /// * Simple dimension values.
 ///
-/// * There are three types of simple dimension values:
-/// `CostCategories`, `Tags`, and
-/// `Dimensions`.
+/// * There are four types of simple dimension values:
+/// `CostCategories`, `Tags`,
+/// `Dimensions`, and
+/// `ProductAttributes`.
 ///
 /// * Specify the `CostCategories` field to define a
 /// filter that acts on Cost Categories.
@@ -25,6 +27,19 @@ const TagValues = @import("tag_values.zig").TagValues;
 /// that acts on the [
 /// `DimensionValues`
 /// ](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html).
+///
+/// * Specify the `ProductAttributes` field to define a
+/// filter that acts on the product attributes of supported
+/// services, such as Amazon Bedrock. Only
+/// `GetCostAndUsage`,
+/// `GetCostAndUsageWithResources`,
+/// `GetDimensionValues` (in the
+/// `COST_AND_USAGE` context),
+/// `GetTags`, and `GetCostCategories`
+/// support `ProductAttributes`. For the supported
+/// services, keys and `SERVICE` filter rules, see [
+/// `ProductAttributeValues`
+/// ](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html).
 ///
 /// * For each filter type, you can set the dimension name and values for
 /// the filters that you plan to use.
@@ -110,6 +125,17 @@ pub const Expression = struct {
     /// Return results that match either `Dimension` object.
     @"or": ?[]const Expression = null,
 
+    /// The filter that's based on `ProductAttributeValues`. Use it to filter the
+    /// costs of supported services, such as Amazon Bedrock, by product attributes.
+    /// The following
+    /// operations support this filter: `GetCostAndUsage`,
+    /// `GetCostAndUsageWithResources`, `GetDimensionValues` (in the
+    /// `COST_AND_USAGE` context), `GetTags`, and
+    /// `GetCostCategories`. For the supported services and keys, see [
+    /// `ProductAttributeValues`
+    /// ](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html).
+    product_attributes: ?ProductAttributeValues = null,
+
     /// The specific `Tag` to use for `Expression`.
     tags: ?TagValues = null,
 
@@ -119,6 +145,7 @@ pub const Expression = struct {
         .dimensions = "Dimensions",
         .not = "Not",
         .@"or" = "Or",
+        .product_attributes = "ProductAttributes",
         .tags = "Tags",
     };
 };

@@ -44,7 +44,7 @@ pub const CreateScriptInput = struct {
 
     /// A list of labels to assign to the new script resource. Tags are
     /// developer-defined
-    /// key-value pairs. Tagging Amazon Web Services resources are useful for
+    /// key-value pairs. Tagging Amazon Web Services resources is useful for
     /// resource management, access
     /// management and cost allocation. For more information, see [ Tagging Amazon
     /// Web Services
@@ -97,7 +97,7 @@ pub const CreateScriptOutput = struct {
     /// that was
     /// provided in the *CreateScript* request; (2) If the script file was
     /// uploaded from a local zip file, the storage location reflects an S3 location
-    /// controls by
+    /// controlled by
     /// the Amazon GameLift Servers service.
     script: ?Script = null,
 

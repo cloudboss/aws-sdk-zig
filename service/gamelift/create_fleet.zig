@@ -206,7 +206,7 @@ pub const CreateFleetInput = struct {
     player_gateway_configuration: ?PlayerGatewayConfiguration = null,
 
     /// Configures player gateway for your fleet. Player gateway provides benefits
-    /// such as DDoS protection by rate limiting and validating traﬃc before it
+    /// such as DDoS protection by rate limiting and validating traffic before it
     /// reaches game servers, hiding game server IP addresses from players, and
     /// providing updated endpoints when relay endpoints become unhealthy. Note,
     /// player gateway is only available for fleets using server SDK 5.x or later
@@ -241,7 +241,7 @@ pub const CreateFleetInput = struct {
 
     /// Instructions for how to launch and run server processes on the fleet. Set
     /// runtime
-    /// configuration for managed EC2 fleets. For an Anywhere fleets, set this
+    /// configuration for managed EC2 fleets. For an Anywhere fleet, set this
     /// parameter only if the fleet is running the Amazon GameLift Servers Agent.
     /// The runtime configuration
     /// defines one or more server process configurations. Each server process
@@ -273,7 +273,7 @@ pub const CreateFleetInput = struct {
 
     /// A list of labels to assign to the new fleet resource. Tags are
     /// developer-defined
-    /// key-value pairs. Tagging Amazon Web Services resources are useful for
+    /// key-value pairs. Tagging Amazon Web Services resources is useful for
     /// resource management, access
     /// management and cost allocation. For more information, see [ Tagging Amazon
     /// Web Services

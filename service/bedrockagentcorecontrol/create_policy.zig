@@ -11,10 +11,10 @@ const PolicyStatus = @import("policy_status.zig").PolicyStatus;
 
 pub const CreatePolicyInput = struct {
     /// A unique, case-sensitive identifier to ensure the idempotency of the
-    /// request. The AWS SDK automatically generates this token, so you don't need
-    /// to provide it in most cases. If you retry a request with the same client
-    /// token, the service returns the same response without creating a duplicate
-    /// policy.
+    /// request. The Amazon Web Services SDK automatically generates this token, so
+    /// you don't need to provide it in most cases. If you retry a request with the
+    /// same client token, the service returns the same response without creating a
+    /// duplicate policy.
     client_token: ?[]const u8 = null,
 
     /// The Cedar or Dogwood policy statement that defines the access control rules.

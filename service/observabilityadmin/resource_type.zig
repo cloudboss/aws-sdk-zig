@@ -23,6 +23,7 @@ pub const ResourceType = enum {
     aws_msk_cluster,
     aws_s3_bucket,
     aws_bedrock_knowledgebase,
+    aws_xray_transaction_search_config,
 
     pub const json_field_names = .{
         .aws_ec2_instance = "AWS::EC2::Instance",
@@ -47,6 +48,7 @@ pub const ResourceType = enum {
         .aws_msk_cluster = "AWS::MSK::Cluster",
         .aws_s3_bucket = "AWS::S3::Bucket",
         .aws_bedrock_knowledgebase = "AWS::Bedrock::KnowledgeBase",
+        .aws_xray_transaction_search_config = "AWS::XRay::TransactionSearchConfig",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -73,6 +75,7 @@ pub const ResourceType = enum {
             .aws_msk_cluster => "AWS::MSK::Cluster",
             .aws_s3_bucket => "AWS::S3::Bucket",
             .aws_bedrock_knowledgebase => "AWS::Bedrock::KnowledgeBase",
+            .aws_xray_transaction_search_config => "AWS::XRay::TransactionSearchConfig",
         };
     }
 

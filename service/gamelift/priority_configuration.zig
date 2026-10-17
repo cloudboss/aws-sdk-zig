@@ -21,7 +21,8 @@ const PriorityType = @import("priority_type.zig").PriorityType;
 ///   Servers re-orders
 /// the queue's destinations to make placements where the average player latency
 /// is
-/// lowest. It reorders based the following priorities: (1) the lowest average
+/// lowest. It reorders based on the following priorities: (1) the lowest
+/// average
 /// latency across all players, (2) the lowest hosting cost, (3) the queue's
 /// default
 /// destination order, and (4) for multi-location fleets, an alphabetic list of

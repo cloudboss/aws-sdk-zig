@@ -1,3 +1,4 @@
+const AthenaStepMetadata = @import("athena_step_metadata.zig").AthenaStepMetadata;
 const AutoMLJobStepMetadata = @import("auto_ml_job_step_metadata.zig").AutoMLJobStepMetadata;
 const BedrockCustomModelMetadata = @import("bedrock_custom_model_metadata.zig").BedrockCustomModelMetadata;
 const BedrockCustomModelDeploymentMetadata = @import("bedrock_custom_model_deployment_metadata.zig").BedrockCustomModelDeploymentMetadata;
@@ -5,11 +6,14 @@ const BedrockModelImportMetadata = @import("bedrock_model_import_metadata.zig").
 const BedrockProvisionedModelThroughputMetadata = @import("bedrock_provisioned_model_throughput_metadata.zig").BedrockProvisionedModelThroughputMetadata;
 const CallbackStepMetadata = @import("callback_step_metadata.zig").CallbackStepMetadata;
 const ClarifyCheckStepMetadata = @import("clarify_check_step_metadata.zig").ClarifyCheckStepMetadata;
+const CleanupStepMetadata = @import("cleanup_step_metadata.zig").CleanupStepMetadata;
 const ConditionStepMetadata = @import("condition_step_metadata.zig").ConditionStepMetadata;
 const EMRStepMetadata = @import("emr_step_metadata.zig").EMRStepMetadata;
+const EMRServerlessStepMetadata = @import("emr_serverless_step_metadata.zig").EMRServerlessStepMetadata;
 const EndpointStepMetadata = @import("endpoint_step_metadata.zig").EndpointStepMetadata;
 const EndpointConfigStepMetadata = @import("endpoint_config_step_metadata.zig").EndpointConfigStepMetadata;
 const FailStepMetadata = @import("fail_step_metadata.zig").FailStepMetadata;
+const ForEachStepMetadata = @import("for_each_step_metadata.zig").ForEachStepMetadata;
 const InferenceComponentMetadata = @import("inference_component_metadata.zig").InferenceComponentMetadata;
 const JobStepMetadata = @import("job_step_metadata.zig").JobStepMetadata;
 const LambdaStepMetadata = @import("lambda_step_metadata.zig").LambdaStepMetadata;
@@ -24,6 +28,9 @@ const TuningJobStepMetaData = @import("tuning_job_step_meta_data.zig").TuningJob
 
 /// Metadata for a step execution.
 pub const PipelineExecutionStepMetadata = struct {
+    /// The metadata for the Athena step execution.
+    athena: ?AthenaStepMetadata = null,
+
     /// The Amazon Resource Name (ARN) of the AutoML job that was run by this step.
     auto_ml_job: ?AutoMLJobStepMetadata = null,
 
@@ -63,11 +70,17 @@ pub const PipelineExecutionStepMetadata = struct {
     ///   `CalculatedBaseline`.
     clarify_check: ?ClarifyCheckStepMetadata = null,
 
+    /// The metadata for the cleanup step execution.
+    cleanup: ?CleanupStepMetadata = null,
+
     /// The outcome of the condition evaluation that was run by this step execution.
     condition: ?ConditionStepMetadata = null,
 
     /// The configurations and outcomes of an Amazon EMR step execution.
     emr: ?EMRStepMetadata = null,
+
+    /// The configurations and outcomes of an Amazon EMR Serverless step execution.
+    emr_serverless: ?EMRServerlessStepMetadata = null,
 
     /// The endpoint that was invoked during this step execution.
     endpoint: ?EndpointStepMetadata = null,
@@ -78,6 +91,9 @@ pub const PipelineExecutionStepMetadata = struct {
 
     /// The configurations and outcomes of a Fail step execution.
     fail: ?FailStepMetadata = null,
+
+    /// The metadata for the ForEach step execution.
+    for_each: ?ForEachStepMetadata = null,
 
     /// The metadata of the inference component used in pipeline execution step.
     inference_component: ?InferenceComponentMetadata = null,
@@ -133,6 +149,7 @@ pub const PipelineExecutionStepMetadata = struct {
     tuning_job: ?TuningJobStepMetaData = null,
 
     pub const json_field_names = .{
+        .athena = "Athena",
         .auto_ml_job = "AutoMLJob",
         .bedrock_custom_model = "BedrockCustomModel",
         .bedrock_custom_model_deployment = "BedrockCustomModelDeployment",
@@ -140,11 +157,14 @@ pub const PipelineExecutionStepMetadata = struct {
         .bedrock_provisioned_model_throughput = "BedrockProvisionedModelThroughput",
         .callback = "Callback",
         .clarify_check = "ClarifyCheck",
+        .cleanup = "Cleanup",
         .condition = "Condition",
         .emr = "EMR",
+        .emr_serverless = "EMRServerless",
         .endpoint = "Endpoint",
         .endpoint_config = "EndpointConfig",
         .fail = "Fail",
+        .for_each = "ForEach",
         .inference_component = "InferenceComponent",
         .job = "Job",
         .lambda = "Lambda",

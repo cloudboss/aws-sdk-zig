@@ -13,10 +13,7 @@ pub const CreateRegistryRecordInput = struct {
     /// Client token for idempotency
     client_token: ?[]const u8 = null,
 
-    /// The custom metadata to attach to the registry record. Each key must match a
-    /// property defined in the registry's custom metadata schema. Values can be
-    /// strings (maximum 128 characters) or native JSON booleans (`true` or
-    /// `false`). Values are validated against the schema at creation time.
+    /// The custom metadata for the record. Values are strings or JSON booleans.
     custom_metadata: ?[]const u8 = null,
 
     /// The description of the registry record

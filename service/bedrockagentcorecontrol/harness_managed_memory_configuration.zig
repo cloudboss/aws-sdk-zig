@@ -6,8 +6,8 @@ pub const HarnessManagedMemoryConfiguration = struct {
     /// on Create/Update input.
     arn: ?[]const u8 = null,
 
-    /// Customer-managed KMS key. Defaults to AWS-owned key. Not updatable after
-    /// creation.
+    /// Customer-managed KMS key. Defaults to Amazon Web Services-owned key. Not
+    /// updatable after creation.
     encryption_key_arn: ?[]const u8 = null,
 
     /// Event retention in days. Defaults to 30.

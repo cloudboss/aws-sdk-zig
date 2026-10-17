@@ -55,6 +55,7 @@ pub const ExecutionStepResult = @import("execution_step_result.zig").ExecutionSt
 pub const FileLocation = @import("file_location.zig").FileLocation;
 pub const HomeDirectoryMapEntry = @import("home_directory_map_entry.zig").HomeDirectoryMapEntry;
 pub const HomeDirectoryType = @import("home_directory_type.zig").HomeDirectoryType;
+pub const HostKeyStorageType = @import("host_key_storage_type.zig").HostKeyStorageType;
 pub const IdentityCenterConfig = @import("identity_center_config.zig").IdentityCenterConfig;
 pub const IdentityProviderDetails = @import("identity_provider_details.zig").IdentityProviderDetails;
 pub const IdentityProviderType = @import("identity_provider_type.zig").IdentityProviderType;

@@ -69,8 +69,8 @@ pub const GameServerGroup = struct {
     /// the game.
     /// Protected instances cannot be terminated while there are active game servers
     /// running except
-    /// in the event of a forced game server group deletion (see ). An exception to
-    /// this is with Spot
+    /// in the event of a forced game server group deletion. An exception to this is
+    /// with Spot
     /// Instances, which can be terminated by Amazon Web Services regardless of
     /// protection status.
     game_server_protection_policy: ?GameServerProtectionPolicy = null,

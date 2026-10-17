@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const InstanceMetadataOptions = @import("instance_metadata_options.zig").InstanceMetadataOptions;
 const Logging = @import("logging.zig").Logging;
+const ParentInstanceConfiguration = @import("parent_instance_configuration.zig").ParentInstanceConfiguration;
 const Placement = @import("placement.zig").Placement;
 
 pub const UpdateInfrastructureConfigurationInput = struct {
@@ -73,6 +74,20 @@ pub const UpdateInfrastructureConfigurationInput = struct {
     /// specified bucket under the key prefix.
     logging: ?Logging = null,
 
+    /// The Amazon EC2 Auto Scaling group that Image Builder takes the build
+    /// instance from, instead of
+    /// launching a new instance. This applies only to the build phase.
+    ///
+    /// To use this feature, the execution role for the build must have permissions
+    /// to
+    /// describe the Auto Scaling group, tag the instance while it's still in the
+    /// group, and
+    /// detach it from the group. For more information, see [Build on an
+    /// instance from an Auto Scaling
+    /// group](https://docs.aws.amazon.com/imagebuilder/latest/userguide/infra-config-parent-instance.html) in the *EC2 Image Builder User
+    /// Guide*.
+    parent_instance: ?ParentInstanceConfiguration = null,
+
     /// The instance placement settings that define where the build and test
     /// instances that Image Builder launches during image creation run. These
     /// settings
@@ -113,6 +128,12 @@ pub const UpdateInfrastructureConfigurationInput = struct {
     /// request fails.
     subnet_id: ?[]const u8 = null,
 
+    /// Specifies whether Image Builder terminates build and test instances when
+    /// image creation
+    /// ends without a failure (success, cancellation, or expiration). Defaults to
+    /// `true`.
+    terminate_instance_on_completion: ?bool = null,
+
     /// Specifies whether to terminate the instance on failure. Set to
     /// false if you want Image Builder to retain the instance used to configure
     /// your AMI if the build or
@@ -128,11 +149,13 @@ pub const UpdateInfrastructureConfigurationInput = struct {
         .instance_types = "instanceTypes",
         .key_pair = "keyPair",
         .logging = "logging",
+        .parent_instance = "parentInstance",
         .placement = "placement",
         .resource_tags = "resourceTags",
         .security_group_ids = "securityGroupIds",
         .sns_topic_arn = "snsTopicArn",
         .subnet_id = "subnetId",
+        .terminate_instance_on_completion = "terminateInstanceOnCompletion",
         .terminate_instance_on_failure = "terminateInstanceOnFailure",
     };
 };
@@ -234,6 +257,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateInfrastructureCon
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }
+    if (input.parent_instance) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"parentInstance\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.placement) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"placement\":");
@@ -261,6 +290,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateInfrastructureCon
     if (input.subnet_id) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"subnetId\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.terminate_instance_on_completion) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"terminateInstanceOnCompletion\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

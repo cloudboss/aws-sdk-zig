@@ -12,6 +12,7 @@ const MCPServerNewRelicConfiguration = @import("mcp_server_new_relic_configurati
 const MCPServerSigV4Configuration = @import("mcp_server_sig_v4_configuration.zig").MCPServerSigV4Configuration;
 const MCPServerSplunkConfiguration = @import("mcp_server_splunk_configuration.zig").MCPServerSplunkConfiguration;
 const PagerDutyConfiguration = @import("pager_duty_configuration.zig").PagerDutyConfiguration;
+const ReleaseManagementConfiguration = @import("release_management_configuration.zig").ReleaseManagementConfiguration;
 const RemoteAgentConfiguration = @import("remote_agent_configuration.zig").RemoteAgentConfiguration;
 const RemoteAgentSigV4Configuration = @import("remote_agent_sig_v4_configuration.zig").RemoteAgentSigV4Configuration;
 const ServiceNowConfiguration = @import("service_now_configuration.zig").ServiceNowConfiguration;
@@ -49,6 +50,8 @@ pub const ServiceConfiguration = union(enum) {
     mcpserversplunk: ?MCPServerSplunkConfiguration,
     /// PagerDuty integration configuration
     pagerduty: ?PagerDutyConfiguration,
+    /// Release management network environment configuration
+    release_management: ?ReleaseManagementConfiguration,
     /// Remote A2A agent integration configuration (token-based auth).
     remoteagent: ?RemoteAgentConfiguration,
     /// Remote A2A agent integration configuration (SigV4 auth).
@@ -75,6 +78,7 @@ pub const ServiceConfiguration = union(enum) {
         .mcpserversigv_4 = "mcpserversigv4",
         .mcpserversplunk = "mcpserversplunk",
         .pagerduty = "pagerduty",
+        .release_management = "releaseManagement",
         .remoteagent = "remoteagent",
         .remoteagentsigv_4 = "remoteagentsigv4",
         .servicenow = "servicenow",

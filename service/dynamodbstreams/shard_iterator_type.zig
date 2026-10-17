@@ -5,12 +5,14 @@ pub const ShardIteratorType = enum {
     latest,
     at_sequence_number,
     after_sequence_number,
+    at_timestamp,
 
     pub const json_field_names = .{
         .trim_horizon = "TRIM_HORIZON",
         .latest = "LATEST",
         .at_sequence_number = "AT_SEQUENCE_NUMBER",
         .after_sequence_number = "AFTER_SEQUENCE_NUMBER",
+        .at_timestamp = "AT_TIMESTAMP",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -19,6 +21,7 @@ pub const ShardIteratorType = enum {
             .latest => "LATEST",
             .at_sequence_number => "AT_SEQUENCE_NUMBER",
             .after_sequence_number => "AFTER_SEQUENCE_NUMBER",
+            .at_timestamp => "AT_TIMESTAMP",
         };
     }
 

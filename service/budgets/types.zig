@@ -34,6 +34,7 @@ pub const Notification = @import("notification.zig").Notification;
 pub const NotificationState = @import("notification_state.zig").NotificationState;
 pub const NotificationType = @import("notification_type.zig").NotificationType;
 pub const NotificationWithSubscribers = @import("notification_with_subscribers.zig").NotificationWithSubscribers;
+pub const ProductAttributeValues = @import("product_attribute_values.zig").ProductAttributeValues;
 pub const ResourceTag = @import("resource_tag.zig").ResourceTag;
 pub const ScpActionDefinition = @import("scp_action_definition.zig").ScpActionDefinition;
 pub const Spend = @import("spend.zig").Spend;

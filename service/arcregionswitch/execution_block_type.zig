@@ -19,6 +19,7 @@ pub const ExecutionBlockType = enum {
     aurora_provisioned_scaling,
     neptune,
     rds_switchover_read_replica,
+    ssm_send_command,
 
     pub const json_field_names = .{
         .custom_action_lambda = "CustomActionLambda",
@@ -39,6 +40,7 @@ pub const ExecutionBlockType = enum {
         .aurora_provisioned_scaling = "AuroraProvisionedScaling",
         .neptune = "NeptuneGlobalDatabase",
         .rds_switchover_read_replica = "RdsSwitchoverReadReplica",
+        .ssm_send_command = "SSMSendCommand",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -61,6 +63,7 @@ pub const ExecutionBlockType = enum {
             .aurora_provisioned_scaling => "AuroraProvisionedScaling",
             .neptune => "NeptuneGlobalDatabase",
             .rds_switchover_read_replica => "RdsSwitchoverReadReplica",
+            .ssm_send_command => "SSMSendCommand",
         };
     }
 

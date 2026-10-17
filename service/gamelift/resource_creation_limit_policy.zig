@@ -8,7 +8,7 @@
 /// receiving
 /// a `CreateGameSession` request, Amazon GameLift Servers checks that the
 /// player (identified by
-/// `CreatorId`) has created fewer than game session limit in the specified
+/// `CreatorId`) has created fewer than the game session limit in the specified
 /// time period.
 ///
 /// The purpose of this policy is to prevent a single player from consuming a
@@ -32,7 +32,7 @@ pub const ResourceCreationLimitPolicy = struct {
     /// receiving
     /// a `CreateGameSession` request, Amazon GameLift Servers checks that the
     /// player (identified by
-    /// `CreatorId`) has created fewer than game session limit in the specified
+    /// `CreatorId`) has created fewer than the game session limit in the specified
     /// time period.
     new_game_sessions_per_creator: ?i32 = null,
 

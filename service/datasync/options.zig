@@ -2,6 +2,7 @@ const Atime = @import("atime.zig").Atime;
 const Gid = @import("gid.zig").Gid;
 const LogLevel = @import("log_level.zig").LogLevel;
 const Mtime = @import("mtime.zig").Mtime;
+const ObjectMetadata = @import("object_metadata.zig").ObjectMetadata;
 const ObjectTags = @import("object_tags.zig").ObjectTags;
 const OverwriteMode = @import("overwrite_mode.zig").OverwriteMode;
 const PosixPermissions = @import("posix_permissions.zig").PosixPermissions;
@@ -107,6 +108,15 @@ pub const Options = struct {
     ///
     /// Enhanced mode tasks don't support `Mtime` set to `NONE`.
     mtime: ?Mtime = null,
+
+    /// Specifies whether you want DataSync to `PRESERVE` object metadata
+    /// (default behavior) when transferring between object storage systems. If you
+    /// want your
+    /// DataSync task to ignore object metadata, specify the `NONE` value.
+    ///
+    /// Even if you specify `NONE`, metadata for the last modified time is still
+    /// preserved.
+    object_metadata: ?ObjectMetadata = null,
 
     /// Specifies whether you want DataSync to `PRESERVE` object tags
     /// (default behavior) when transferring between object storage systems. If you
@@ -318,6 +328,7 @@ pub const Options = struct {
         .gid = "Gid",
         .log_level = "LogLevel",
         .mtime = "Mtime",
+        .object_metadata = "ObjectMetadata",
         .object_tags = "ObjectTags",
         .overwrite_mode = "OverwriteMode",
         .posix_permissions = "PosixPermissions",

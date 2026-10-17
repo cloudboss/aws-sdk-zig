@@ -38,6 +38,7 @@ const create_attached_file = @import("create_attached_file.zig");
 const create_auth_code = @import("create_auth_code.zig");
 const create_contact = @import("create_contact.zig");
 const create_contact_flow = @import("create_contact_flow.zig");
+const create_contact_flow_alias = @import("create_contact_flow_alias.zig");
 const create_contact_flow_module = @import("create_contact_flow_module.zig");
 const create_contact_flow_module_alias = @import("create_contact_flow_module_alias.zig");
 const create_contact_flow_module_version = @import("create_contact_flow_module_version.zig");
@@ -79,6 +80,7 @@ const delete_attached_file = @import("delete_attached_file.zig");
 const delete_contact_data = @import("delete_contact_data.zig");
 const delete_contact_evaluation = @import("delete_contact_evaluation.zig");
 const delete_contact_flow = @import("delete_contact_flow.zig");
+const delete_contact_flow_alias = @import("delete_contact_flow_alias.zig");
 const delete_contact_flow_module = @import("delete_contact_flow_module.zig");
 const delete_contact_flow_module_alias = @import("delete_contact_flow_module_alias.zig");
 const delete_contact_flow_module_version = @import("delete_contact_flow_module_version.zig");
@@ -121,6 +123,7 @@ const describe_authentication_profile = @import("describe_authentication_profile
 const describe_contact = @import("describe_contact.zig");
 const describe_contact_evaluation = @import("describe_contact_evaluation.zig");
 const describe_contact_flow = @import("describe_contact_flow.zig");
+const describe_contact_flow_alias = @import("describe_contact_flow_alias.zig");
 const describe_contact_flow_module = @import("describe_contact_flow_module.zig");
 const describe_contact_flow_module_alias = @import("describe_contact_flow_module_alias.zig");
 const describe_data_table = @import("describe_data_table.zig");
@@ -199,6 +202,7 @@ const list_authentication_profiles = @import("list_authentication_profiles.zig")
 const list_bots = @import("list_bots.zig");
 const list_child_hours_of_operations = @import("list_child_hours_of_operations.zig");
 const list_contact_evaluations = @import("list_contact_evaluations.zig");
+const list_contact_flow_aliases = @import("list_contact_flow_aliases.zig");
 const list_contact_flow_module_aliases = @import("list_contact_flow_module_aliases.zig");
 const list_contact_flow_module_versions = @import("list_contact_flow_module_versions.zig");
 const list_contact_flow_modules = @import("list_contact_flow_modules.zig");
@@ -335,6 +339,7 @@ const update_authentication_profile = @import("update_authentication_profile.zig
 const update_contact = @import("update_contact.zig");
 const update_contact_attributes = @import("update_contact_attributes.zig");
 const update_contact_evaluation = @import("update_contact_evaluation.zig");
+const update_contact_flow_alias = @import("update_contact_flow_alias.zig");
 const update_contact_flow_content = @import("update_contact_flow_content.zig");
 const update_contact_flow_metadata = @import("update_contact_flow_metadata.zig");
 const update_contact_flow_module_alias = @import("update_contact_flow_module_alias.zig");
@@ -929,6 +934,11 @@ pub const Client = struct {
         return create_contact_flow.execute(self, allocator, input, options);
     }
 
+    /// Creates a named alias that points to a specific version of a flow.
+    pub fn createContactFlowAlias(self: *Self, allocator: std.mem.Allocator, input: create_contact_flow_alias.CreateContactFlowAliasInput, options: CallOptions) !create_contact_flow_alias.CreateContactFlowAliasOutput {
+        return create_contact_flow_alias.execute(self, allocator, input, options);
+    }
+
     /// Creates a flow module for the specified Connect Customer instance.
     pub fn createContactFlowModule(self: *Self, allocator: std.mem.Allocator, input: create_contact_flow_module.CreateContactFlowModuleInput, options: CallOptions) !create_contact_flow_module.CreateContactFlowModuleOutput {
         return create_contact_flow_module.execute(self, allocator, input, options);
@@ -951,9 +961,7 @@ pub const Client = struct {
     /// monotonically increasing. If the
     /// `FlowContentSha256` provided is different from the `FlowContentSha256` of
     /// the
-    /// `$LATEST` published flow content, then an error is returned. This API only
-    /// supports creating versions for
-    /// flows of type `Campaign`.
+    /// `$LATEST` published flow content, then an error is returned.
     pub fn createContactFlowVersion(self: *Self, allocator: std.mem.Allocator, input: create_contact_flow_version.CreateContactFlowVersionInput, options: CallOptions) !create_contact_flow_version.CreateContactFlowVersionOutput {
         return create_contact_flow_version.execute(self, allocator, input, options);
     }
@@ -1358,6 +1366,12 @@ pub const Client = struct {
         return delete_contact_flow.execute(self, allocator, input, options);
     }
 
+    /// Deletes an alias from a flow without deleting the version that the alias
+    /// points to.
+    pub fn deleteContactFlowAlias(self: *Self, allocator: std.mem.Allocator, input: delete_contact_flow_alias.DeleteContactFlowAliasInput, options: CallOptions) !delete_contact_flow_alias.DeleteContactFlowAliasOutput {
+        return delete_contact_flow_alias.execute(self, allocator, input, options);
+    }
+
     /// Deletes the specified flow module.
     pub fn deleteContactFlowModule(self: *Self, allocator: std.mem.Allocator, input: delete_contact_flow_module.DeleteContactFlowModuleInput, options: CallOptions) !delete_contact_flow_module.DeleteContactFlowModuleOutput {
         return delete_contact_flow_module.execute(self, allocator, input, options);
@@ -1708,6 +1722,12 @@ pub const Client = struct {
     /// `SAVED` does not initiate validation of the content. `SAVED` | `PUBLISHED`
     pub fn describeContactFlow(self: *Self, allocator: std.mem.Allocator, input: describe_contact_flow.DescribeContactFlowInput, options: CallOptions) !describe_contact_flow.DescribeContactFlowOutput {
         return describe_contact_flow.execute(self, allocator, input, options);
+    }
+
+    /// Returns information about a specific flow alias, including the version that
+    /// it points to.
+    pub fn describeContactFlowAlias(self: *Self, allocator: std.mem.Allocator, input: describe_contact_flow_alias.DescribeContactFlowAliasInput, options: CallOptions) !describe_contact_flow_alias.DescribeContactFlowAliasOutput {
+        return describe_contact_flow_alias.execute(self, allocator, input, options);
     }
 
     /// Describes the specified flow module.
@@ -2545,6 +2565,12 @@ pub const Client = struct {
     /// Lists contact evaluations in the specified Connect Customer instance.
     pub fn listContactEvaluations(self: *Self, allocator: std.mem.Allocator, input: list_contact_evaluations.ListContactEvaluationsInput, options: CallOptions) !list_contact_evaluations.ListContactEvaluationsOutput {
         return list_contact_evaluations.execute(self, allocator, input, options);
+    }
+
+    /// Lists the aliases associated with a flow, including the version that each
+    /// alias points to.
+    pub fn listContactFlowAliases(self: *Self, allocator: std.mem.Allocator, input: list_contact_flow_aliases.ListContactFlowAliasesInput, options: CallOptions) !list_contact_flow_aliases.ListContactFlowAliasesOutput {
+        return list_contact_flow_aliases.execute(self, allocator, input, options);
     }
 
     /// Lists all aliases associated with a contact flow module, showing their
@@ -4011,6 +4037,11 @@ pub const Client = struct {
         return update_contact_evaluation.execute(self, allocator, input, options);
     }
 
+    /// Updates the name, description, or flow version associated with an alias.
+    pub fn updateContactFlowAlias(self: *Self, allocator: std.mem.Allocator, input: update_contact_flow_alias.UpdateContactFlowAliasInput, options: CallOptions) !update_contact_flow_alias.UpdateContactFlowAliasOutput {
+        return update_contact_flow_alias.execute(self, allocator, input, options);
+    }
+
     /// Updates the specified flow.
     ///
     /// You can also create and update flows using the [Connect Customer
@@ -4715,6 +4746,13 @@ pub const Client = struct {
     }
 
     pub fn listContactEvaluationsPaginator(self: *Self, params: list_contact_evaluations.ListContactEvaluationsInput) paginator.ListContactEvaluationsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listContactFlowAliasesPaginator(self: *Self, params: list_contact_flow_aliases.ListContactFlowAliasesInput) paginator.ListContactFlowAliasesPaginator {
         return .{
             .client = self,
             .params = params,

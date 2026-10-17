@@ -42,6 +42,10 @@ pub const RegisterComputeNodeGroupInstanceOutput = struct {
     /// jobs.
     node_lifecycle_actions: ?NodeLifecycleActions = null,
 
+    /// The scheduler version that the cluster is running. A compute node uses this
+    /// value to run the matching scheduler version.
+    scheduler_version: ?[]const u8 = null,
+
     /// For the Slurm scheduler, this is the shared Munge key the scheduler uses to
     /// authenticate compute node group instances.
     shared_secret: []const u8,
@@ -53,6 +57,7 @@ pub const RegisterComputeNodeGroupInstanceOutput = struct {
         .endpoints = "endpoints",
         .node_id = "nodeID",
         .node_lifecycle_actions = "nodeLifecycleActions",
+        .scheduler_version = "schedulerVersion",
         .shared_secret = "sharedSecret",
     };
 };

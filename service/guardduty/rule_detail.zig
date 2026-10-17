@@ -1,6 +1,7 @@
 const DetectionRuleDataSource = @import("detection_rule_data_source.zig").DetectionRuleDataSource;
 const RuleDefinition = @import("rule_definition.zig").RuleDefinition;
 const RuleLanguage = @import("rule_language.zig").RuleLanguage;
+const DetectionRuleRuntimeMonitoringDetails = @import("detection_rule_runtime_monitoring_details.zig").DetectionRuleRuntimeMonitoringDetails;
 const RuleSchema = @import("rule_schema.zig").RuleSchema;
 const DetectionRuleSeverity = @import("detection_rule_severity.zig").DetectionRuleSeverity;
 
@@ -31,6 +32,11 @@ pub const RuleDetail = struct {
     /// The unique identifier for the rule.
     rule_id: []const u8,
 
+    /// Runtime Monitoring-specific details for the rule, including the platforms on
+    /// which the rule can run and the minimum GuardDuty agent version required on
+    /// each.
+    runtime_monitoring_details: ?DetectionRuleRuntimeMonitoringDetails = null,
+
     /// The schema version used by the rule definition.
     schema: ?RuleSchema = null,
 
@@ -58,6 +64,7 @@ pub const RuleDetail = struct {
         .language = "Language",
         .name = "Name",
         .rule_id = "RuleId",
+        .runtime_monitoring_details = "RuntimeMonitoringDetails",
         .schema = "Schema",
         .service = "Service",
         .severity = "Severity",

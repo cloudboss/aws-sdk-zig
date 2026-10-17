@@ -10,6 +10,10 @@ pub const GitHubConfiguration = struct {
 
     owner_type: GithubRepoOwnerType,
 
+    /// The identifier of the release management association that this repository
+    /// maps to for automatic verification testing.
+    release_management_association_id: ?[]const u8 = null,
+
     /// Associated Github repo ID
     repo_id: []const u8,
 
@@ -24,6 +28,7 @@ pub const GitHubConfiguration = struct {
         .instance_identifier = "instanceIdentifier",
         .owner = "owner",
         .owner_type = "ownerType",
+        .release_management_association_id = "releaseManagementAssociationId",
         .repo_id = "repoId",
         .repo_name = "repoName",
         .runtime_role_arn = "runtimeRoleArn",

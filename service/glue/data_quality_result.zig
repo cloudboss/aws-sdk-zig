@@ -32,8 +32,8 @@ pub const DataQualityResult = struct {
     /// The job run ID associated with the data quality result, if any.
     job_run_id: ?[]const u8 = null,
 
-    /// A list of `DataQualityObservation` objects representing the observations
-    /// generated after evaluating the rules and analyzers.
+    /// A list of `DataQualityObservation` objects representing the anomaly
+    /// detection observations generated after evaluating the rules and analyzers.
     observations: ?[]const DataQualityObservation = null,
 
     /// The Profile ID for the data quality result.

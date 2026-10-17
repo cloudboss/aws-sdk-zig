@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const PriceWithCurrency = @import("price_with_currency.zig").PriceWithCurrency;
 const DomainTransferability = @import("domain_transferability.zig").DomainTransferability;
 
 pub const CheckDomainTransferabilityInput = struct {
@@ -45,6 +46,16 @@ pub const CheckDomainTransferabilityOutput = struct {
     /// Provides an explanation for when a domain can't be transferred.
     message: ?[]const u8 = null,
 
+    /// The price to transfer the domain name to Route 53, in the currency that
+    /// `Currency` specifies. If the domain has registry premium pricing, this
+    /// price is different from the standard rate for the TLD that `ListPrices`
+    /// returns. Use `PriceType` to determine which rate applies.
+    ///
+    /// This element is returned only when Route 53 can determine whether the domain
+    /// is
+    /// transferable.
+    price: ?PriceWithCurrency = null,
+
     /// A complex type that contains information about whether the specified domain
     /// can be
     /// transferred to Route 53.
@@ -52,6 +63,7 @@ pub const CheckDomainTransferabilityOutput = struct {
 
     pub const json_field_names = .{
         .message = "Message",
+        .price = "Price",
         .transferability = "Transferability",
     };
 };

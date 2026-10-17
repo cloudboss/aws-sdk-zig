@@ -14,6 +14,18 @@ pub const UsageFeature = enum {
     fargate_runtime_monitoring,
     rds_dbi_protection_provisioned,
     rds_dbi_protection_serverless,
+    /// Usage attributed to RDS Protection database infrastructure monitoring for
+    /// Amazon Aurora DSQL Limitless databases.
+    rds_dbi_protection_limitless,
+    /// Usage attributed to RDS Data Activity Monitoring for provisioned Amazon RDS
+    /// databases.
+    rds_data_activity_dbi_protection_provisioned,
+    /// Usage attributed to RDS Data Activity Monitoring for Amazon Aurora
+    /// Serverless databases.
+    rds_data_activity_dbi_protection_serverless,
+    /// Usage attributed to RDS Data Activity Monitoring for Amazon Aurora DSQL
+    /// Limitless databases.
+    rds_data_activity_dbi_protection_limitless,
     ai_protection,
 
     pub const json_field_names = .{
@@ -30,6 +42,10 @@ pub const UsageFeature = enum {
         .fargate_runtime_monitoring = "FARGATE_RUNTIME_MONITORING",
         .rds_dbi_protection_provisioned = "RDS_DBI_PROTECTION_PROVISIONED",
         .rds_dbi_protection_serverless = "RDS_DBI_PROTECTION_SERVERLESS",
+        .rds_dbi_protection_limitless = "RDS_DBI_PROTECTION_LIMITLESS",
+        .rds_data_activity_dbi_protection_provisioned = "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED",
+        .rds_data_activity_dbi_protection_serverless = "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS",
+        .rds_data_activity_dbi_protection_limitless = "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS",
         .ai_protection = "AI_PROTECTION",
     };
 
@@ -48,6 +64,10 @@ pub const UsageFeature = enum {
             .fargate_runtime_monitoring => "FARGATE_RUNTIME_MONITORING",
             .rds_dbi_protection_provisioned => "RDS_DBI_PROTECTION_PROVISIONED",
             .rds_dbi_protection_serverless => "RDS_DBI_PROTECTION_SERVERLESS",
+            .rds_dbi_protection_limitless => "RDS_DBI_PROTECTION_LIMITLESS",
+            .rds_data_activity_dbi_protection_provisioned => "RDS_DATA_ACTIVITY_DBI_PROTECTION_PROVISIONED",
+            .rds_data_activity_dbi_protection_serverless => "RDS_DATA_ACTIVITY_DBI_PROTECTION_SERVERLESS",
+            .rds_data_activity_dbi_protection_limitless => "RDS_DATA_ACTIVITY_DBI_PROTECTION_LIMITLESS",
             .ai_protection => "AI_PROTECTION",
         };
     }

@@ -4,12 +4,12 @@ const PlayerSessionStatus = @import("player_session_status.zig").PlayerSessionSt
 /// specific game
 /// session, or as part of a game session placement or matchmaking request. A
 /// player session
-/// can represents a reserved player slot in a game session (when status is
+/// can represent a reserved player slot in a game session (when status is
 /// `RESERVED`) or actual player activity in a game session (when status is
 /// `ACTIVE`). A player session object, including player data, is
 /// automatically passed to a game session when the player connects to the game
 /// session and
-/// is validated. After the game session ends, player sessions information is
+/// is validated. After the game session ends, player session information is
 /// retained for
 /// 30 days and then removed.
 ///

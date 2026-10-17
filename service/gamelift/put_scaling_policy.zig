@@ -41,7 +41,7 @@ pub const PutScalingPolicyInput = struct {
     /// are currently running at least one game session.
     ///
     /// * **AvailableGameSessions** -- Additional game
-    /// sessions that fleet could host simultaneously, given current capacity.
+    /// sessions that a fleet could host simultaneously, given current capacity.
     ///
     /// * **AvailablePlayerSessions** -- Empty player
     /// slots in currently active game sessions. This includes game sessions that

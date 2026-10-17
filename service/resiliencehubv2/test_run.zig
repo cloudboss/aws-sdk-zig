@@ -1,6 +1,7 @@
 const aws = @import("aws");
 
 const AccountTargeting = @import("account_targeting.zig").AccountTargeting;
+const DevOpsAgentInvestigation = @import("dev_ops_agent_investigation.zig").DevOpsAgentInvestigation;
 const ExperimentDetails = @import("experiment_details.zig").ExperimentDetails;
 const LoggingConfiguration = @import("logging_configuration.zig").LoggingConfiguration;
 const PermissionModel = @import("permission_model.zig").PermissionModel;
@@ -16,6 +17,10 @@ pub const TestRun = struct {
     /// Indicates whether the test run targets resources in a single AWS account or
     /// across multiple accounts.
     account_targeting: ?AccountTargeting = null,
+
+    /// The DevOps Agent investigation result for the test run, present when the
+    /// integration is enabled for the service.
+    dev_ops_agent_investigation: ?DevOpsAgentInvestigation = null,
 
     /// The timestamp when the test run ended.
     ended_at: ?i64 = null,
@@ -91,6 +96,7 @@ pub const TestRun = struct {
 
     pub const json_field_names = .{
         .account_targeting = "accountTargeting",
+        .dev_ops_agent_investigation = "devOpsAgentInvestigation",
         .ended_at = "endedAt",
         .error_message = "errorMessage",
         .event_count = "eventCount",

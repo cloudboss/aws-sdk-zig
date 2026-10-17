@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const GameServerContainerDefinitionInput = @import("game_server_container_definition_input.zig").GameServerContainerDefinitionInput;
 const ContainerOperatingSystem = @import("container_operating_system.zig").ContainerOperatingSystem;
+const ContainerGroupDefinitionRemoveAttribute = @import("container_group_definition_remove_attribute.zig").ContainerGroupDefinitionRemoveAttribute;
 const SupportContainerDefinitionInput = @import("support_container_definition_input.zig").SupportContainerDefinitionInput;
 const ContainerGroupDefinition = @import("container_group_definition.zig").ContainerGroupDefinition;
 
@@ -36,6 +37,16 @@ pub const UpdateContainerGroupDefinitionInput = struct {
     /// 5.](https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-serversdk5-migration.html)
     operating_system: ?ContainerOperatingSystem = null,
 
+    /// If set, this update removes the container group's total vCPU limit, and the
+    /// group's
+    /// containers can use up to the instance's available vCPU. You can't remove the
+    /// total vCPU limit
+    /// from a per-instance container group. A game server container group needs
+    /// either a total vCPU
+    /// limit or a `Vcpu` value for the game server container. You can't set
+    /// `TotalVcpuLimit` in the same request.
+    remove_attributes: ?[]const ContainerGroupDefinitionRemoveAttribute = null,
+
     /// The container group definition version to update. The new version starts
     /// with values from
     /// the source version, and then updates values included in this request.
@@ -57,11 +68,26 @@ pub const UpdateContainerGroupDefinitionInput = struct {
 
     /// The maximum amount of vCPU units to allocate to the container group (1 vCPU
     /// is equal to 1024
-    /// CPU units). All containers in the group share this memory. If you specify
-    /// vCPU limits for
+    /// CPU units). All containers in the group share these resources. If you set
+    /// vCPU reservations for
     /// individual containers, the total value must be equal to or greater than the
-    /// sum of the CPU
-    /// limits for all containers in the group.
+    /// sum of the
+    /// `Vcpu` values for all containers in the group.
+    ///
+    /// For a game server container group, Amazon GameLift Servers requires either a
+    /// total vCPU limit or a
+    /// `Vcpu` value for the game server container. If the container group has a
+    /// total vCPU
+    /// limit, Amazon GameLift Servers uses this value to calculate how many game
+    /// server container groups fit on an
+    /// instance. If the container group doesn't have a total vCPU limit, its
+    /// containers can use up to
+    /// the instance's available vCPU, and Amazon GameLift Servers uses the sum of
+    /// the containers' `Vcpu`
+    /// values to calculate how many game server container groups fit on an
+    /// instance. To remove the
+    /// total vCPU limit, omit this parameter and set `RemoveAttributes` to
+    /// `TOTAL_VCPU_LIMIT`.
     total_vcpu_limit: ?f64 = null,
 
     /// A description for this update to the container group definition.
@@ -71,6 +97,7 @@ pub const UpdateContainerGroupDefinitionInput = struct {
         .game_server_container_definition = "GameServerContainerDefinition",
         .name = "Name",
         .operating_system = "OperatingSystem",
+        .remove_attributes = "RemoveAttributes",
         .source_version_number = "SourceVersionNumber",
         .support_container_definitions = "SupportContainerDefinitions",
         .total_memory_limit_mebibytes = "TotalMemoryLimitMebibytes",

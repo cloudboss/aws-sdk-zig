@@ -4,9 +4,13 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const IncludedData = @import("included_data.zig").IncludedData;
 const AgentSpace = @import("agent_space.zig").AgentSpace;
 
 pub const ListAgentSpacesInput = struct {
+    /// How much data to include in the response.
+    included_data: ?IncludedData = null,
+
     /// Maximum number of results to return in a single call.
     max_results: ?i32 = null,
 
@@ -14,6 +18,7 @@ pub const ListAgentSpacesInput = struct {
     next_token: ?[]const u8 = null,
 
     pub const json_field_names = .{
+        .included_data = "includedData",
         .max_results = "maxResults",
         .next_token = "nextToken",
     };
@@ -66,6 +71,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ListAgentSpacesInput, c
 
     var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
+    if (input.included_data) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "includedData=");
+        try aws.url.appendUrlEncoded(allocator, &query_buf, v.wireName());
+        query_has_prev = true;
+    }
     if (input.max_results) |v| {
         if (query_has_prev) try query_buf.appendSlice(allocator, "&");
         try query_buf.appendSlice(allocator, "maxResults=");

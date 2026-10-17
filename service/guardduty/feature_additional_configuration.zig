@@ -4,11 +4,16 @@ pub const FeatureAdditionalConfiguration = enum {
     eks_addon_management,
     ecs_fargate_agent_management,
     ec2_agent_management,
+    /// RDS Data Activity Monitoring, which monitors data activity on supported
+    /// Amazon RDS database engines to detect potentially unauthorized access to
+    /// your data.
+    rds_data_risk,
 
     pub const json_field_names = .{
         .eks_addon_management = "EKS_ADDON_MANAGEMENT",
         .ecs_fargate_agent_management = "ECS_FARGATE_AGENT_MANAGEMENT",
         .ec2_agent_management = "EC2_AGENT_MANAGEMENT",
+        .rds_data_risk = "RDS_DATA_RISK",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +21,7 @@ pub const FeatureAdditionalConfiguration = enum {
             .eks_addon_management => "EKS_ADDON_MANAGEMENT",
             .ecs_fargate_agent_management => "ECS_FARGATE_AGENT_MANAGEMENT",
             .ec2_agent_management => "EC2_AGENT_MANAGEMENT",
+            .rds_data_risk => "RDS_DATA_RISK",
         };
     }
 

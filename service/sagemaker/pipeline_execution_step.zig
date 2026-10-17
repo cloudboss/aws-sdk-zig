@@ -1,4 +1,5 @@
 const CacheHitResult = @import("cache_hit_result.zig").CacheHitResult;
+const IterationContext = @import("iteration_context.zig").IterationContext;
 const PipelineExecutionStepMetadata = @import("pipeline_execution_step_metadata.zig").PipelineExecutionStepMetadata;
 const SelectiveExecutionResult = @import("selective_execution_result.zig").SelectiveExecutionResult;
 const StepStatus = @import("step_status.zig").StepStatus;
@@ -19,6 +20,10 @@ pub const PipelineExecutionStep = struct {
     /// The reason why the step failed execution. This is only returned if the step
     /// failed its execution.
     failure_reason: ?[]const u8 = null,
+
+    /// The context for the iteration of a ForEach step that generated this step
+    /// execution.
+    iteration_context: ?IterationContext = null,
 
     /// Metadata to run the pipeline step.
     metadata: ?PipelineExecutionStepMetadata = null,
@@ -47,6 +52,7 @@ pub const PipelineExecutionStep = struct {
         .cache_hit_result = "CacheHitResult",
         .end_time = "EndTime",
         .failure_reason = "FailureReason",
+        .iteration_context = "IterationContext",
         .metadata = "Metadata",
         .selective_execution_result = "SelectiveExecutionResult",
         .start_time = "StartTime",

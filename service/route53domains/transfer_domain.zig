@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ContactDetail = @import("contact_detail.zig").ContactDetail;
+const Consent = @import("consent.zig").Consent;
 const Nameserver = @import("nameserver.zig").Nameserver;
 
 pub const TransferDomainInput = struct {
@@ -24,6 +25,15 @@ pub const TransferDomainInput = struct {
 
     /// Provides detailed contact information.
     billing_contact: ?ContactDetail = null,
+
+    /// Specifies the maximum price that you agree to pay to transfer the domain
+    /// name to Route 53. This element is
+    /// required if the domain has registry premium pricing, and optional if the
+    /// domain
+    /// is priced at the standard rate for its TLD. If you include it and the
+    /// transfer
+    /// price is more than `MaxPrice`, the request fails.
+    consent: ?Consent = null,
 
     /// The name of the domain that you want to transfer to Route 53. The top-level
     /// domain
@@ -126,6 +136,7 @@ pub const TransferDomainInput = struct {
         .auth_code = "AuthCode",
         .auto_renew = "AutoRenew",
         .billing_contact = "BillingContact",
+        .consent = "Consent",
         .domain_name = "DomainName",
         .duration_in_years = "DurationInYears",
         .idn_lang_code = "IdnLangCode",

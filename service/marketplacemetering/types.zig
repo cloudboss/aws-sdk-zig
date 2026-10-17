@@ -1,3 +1,4 @@
+pub const Metadata = @import("metadata.zig").Metadata;
 pub const Tag = @import("tag.zig").Tag;
 pub const UsageAllocation = @import("usage_allocation.zig").UsageAllocation;
 pub const UsageRecord = @import("usage_record.zig").UsageRecord;

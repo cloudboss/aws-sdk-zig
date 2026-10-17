@@ -32,8 +32,6 @@ pub const SupportContainerDefinitionInput = struct {
     /// same container group. A container can have dependencies on multiple
     /// different containers.
     ///
-    /// .
-    ///
     /// You can use dependencies to establish a startup/shutdown sequence across the
     /// container
     /// group. For example, you might specify that *ContainerB* has a
@@ -102,7 +100,8 @@ pub const SupportContainerDefinitionInput = struct {
     /// allocation.
     ///
     /// **Related data type: **
-    /// [ContainerGroupDefinition](https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html)TotalMemoryLimitMebibytes``
+    /// [ContainerGroupDefinition](https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html)
+    /// `TotalMemoryLimitMebibytes`
     memory_hard_limit_mebibytes: ?i32 = null,
 
     /// A mount point that binds a path inside the container to a file or directory
@@ -114,8 +113,8 @@ pub const SupportContainerDefinitionInput = struct {
     /// container. The container port
     /// configuration must have enough ports for each container process that accepts
     /// inbound traffic
-    /// connections. A container port configuration can have can have one or more
-    /// container port
+    /// connections. A container port configuration can have one or more container
+    /// port
     /// ranges. Each range specifies starting and ending values as well as the
     /// supported network
     /// protocol.
@@ -129,12 +128,12 @@ pub const SupportContainerDefinitionInput = struct {
 
     /// The number of vCPU units to reserve for this container. The container can
     /// use more
-    /// resources when needed, if available. If you don't reserve CPU units for this
-    /// container, it
+    /// resources when needed, if available. If you don't reserve vCPU units for
+    /// this container, it
     /// shares the container group's total vCPU limit.
     ///
     /// **Related data type: **
-    /// [ContainerGroupDefinition](https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html) TotalCpuLimit
+    /// [ContainerGroupDefinition](https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html) TotalVcpuLimit
     vcpu: ?f64 = null,
 
     pub const json_field_names = .{

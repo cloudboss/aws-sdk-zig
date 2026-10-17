@@ -4,16 +4,19 @@ const std = @import("std");
 pub const ProviderType = enum {
     source_code,
     documentation,
+    issue_tracking,
 
     pub const json_field_names = .{
         .source_code = "SOURCE_CODE",
         .documentation = "DOCUMENTATION",
+        .issue_tracking = "ISSUE_TRACKING",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .source_code => "SOURCE_CODE",
             .documentation => "DOCUMENTATION",
+            .issue_tracking => "ISSUE_TRACKING",
         };
     }
 

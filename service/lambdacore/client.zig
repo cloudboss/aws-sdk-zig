@@ -4,6 +4,7 @@ const std = @import("std");
 const create_network_connector = @import("create_network_connector.zig");
 const delete_network_connector = @import("delete_network_connector.zig");
 const get_network_connector = @import("get_network_connector.zig");
+const list_network_connector_versions = @import("list_network_connector_versions.zig");
 const list_network_connectors = @import("list_network_connectors.zig");
 const update_network_connector = @import("update_network_connector.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
@@ -46,8 +47,9 @@ pub const Client = struct {
     /// state while ENIs are provisioned in your VPC (provisioning typically takes
     /// up to 10 minutes). Use `GetNetworkConnector` to poll the connector state
     /// until it reaches `ACTIVE`. Once active, you can attach the connector to
-    /// Lambda MicroVMs at run time using the `egressNetworkConnectors` parameter on
-    /// `RunMicroVm`.
+    /// supported Lambda compute resources — such as MicroVMs and WebFunctions — at
+    /// run time. For how to attach a connector, see the documentation for the
+    /// specific compute type.
     ///
     /// This operation is idempotent when you provide a `ClientToken` — if you retry
     /// a request that completed successfully using the same client token, the
@@ -64,8 +66,14 @@ pub const Client = struct {
     /// This operation is idempotent — calling delete on a connector that is already
     /// deleting or has been deleted succeeds without error. You can delete
     /// connectors in `ACTIVE` or `FAILED` states. Before deleting a connector,
-    /// ensure that no Lambda MicroVMs are using it, as they will lose VPC egress
-    /// connectivity immediately.
+    /// ensure that no Lambda compute resources are using it, as they will lose VPC
+    /// egress connectivity immediately.
+    ///
+    /// Deleting with an unqualified identifier removes the connector and all of its
+    /// versions. To remove a single historical version, supply its
+    /// version-qualified ARN; the connector and its remaining versions are
+    /// unaffected. You can't delete the latest version on its own — delete the
+    /// connector to remove it.
     pub fn deleteNetworkConnector(self: *Self, allocator: std.mem.Allocator, input: delete_network_connector.DeleteNetworkConnectorInput, options: CallOptions) !delete_network_connector.DeleteNetworkConnectorOutput {
         return delete_network_connector.execute(self, allocator, input, options);
     }
@@ -81,6 +89,21 @@ pub const Client = struct {
     /// update succeeded or failed.
     pub fn getNetworkConnector(self: *Self, allocator: std.mem.Allocator, input: get_network_connector.GetNetworkConnectorInput, options: CallOptions) !get_network_connector.GetNetworkConnectorOutput {
         return get_network_connector.execute(self, allocator, input, options);
+    }
+
+    /// Returns a paginated list of the versions of a network connector. Each
+    /// configuration update creates a new immutable version; this operation lists
+    /// those versions for the connector you specify. You can optionally filter
+    /// results by version state. Use the `Marker` parameter from a previous
+    /// response to retrieve the next page of results.
+    ///
+    /// Each item in the response includes the version-qualified ARN, version
+    /// number, current state, and last modified timestamp for that version. To
+    /// retrieve the current (latest) configuration of the connector, use
+    /// `GetNetworkConnector`; to inspect a specific version, call
+    /// `GetNetworkConnector` with a version-qualified identifier.
+    pub fn listNetworkConnectorVersions(self: *Self, allocator: std.mem.Allocator, input: list_network_connector_versions.ListNetworkConnectorVersionsInput, options: CallOptions) !list_network_connector_versions.ListNetworkConnectorVersionsOutput {
+        return list_network_connector_versions.execute(self, allocator, input, options);
     }
 
     /// Returns a paginated list of network connectors in your account for the
@@ -107,8 +130,20 @@ pub const Client = struct {
     /// If the update fails, the `LastUpdateStatusReasonCode` field provides a
     /// specific error code for troubleshooting. This operation is idempotent when
     /// you provide a `ClientToken`.
+    ///
+    /// Each successful configuration change creates a new immutable version. A
+    /// connector can have a limited number of versions; once that limit is reached,
+    /// further updates fail with `NetworkConnectorLimitExceededException` until you
+    /// delete older versions.
     pub fn updateNetworkConnector(self: *Self, allocator: std.mem.Allocator, input: update_network_connector.UpdateNetworkConnectorInput, options: CallOptions) !update_network_connector.UpdateNetworkConnectorOutput {
         return update_network_connector.execute(self, allocator, input, options);
+    }
+
+    pub fn listNetworkConnectorVersionsPaginator(self: *Self, params: list_network_connector_versions.ListNetworkConnectorVersionsInput) paginator.ListNetworkConnectorVersionsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
     }
 
     pub fn listNetworkConnectorsPaginator(self: *Self, params: list_network_connectors.ListNetworkConnectorsInput) paginator.ListNetworkConnectorsPaginator {

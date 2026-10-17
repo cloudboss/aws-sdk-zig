@@ -161,7 +161,7 @@ pub const Client = struct {
     }
 
     /// Creates an
-    /// [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) for a Lambda function version. Use aliases to provide clients with a function identifier that you can update to invoke a different version.
+    /// [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) for a Lambda Event Function version. Use aliases to provide clients with a function identifier that you can update to invoke a different version.
     ///
     /// You can also map an alias to split invocation requests between two versions.
     /// Use the `RoutingConfig` parameter to specify a second version and the
@@ -170,8 +170,8 @@ pub const Client = struct {
         return create_alias.execute(self, allocator, input, options);
     }
 
-    /// Creates a capacity provider that manages compute resources for Lambda
-    /// functions
+    /// Creates a capacity provider that manages compute resources for Lambda Event
+    /// Functions
     pub fn createCapacityProvider(self: *Self, allocator: std.mem.Allocator, input: create_capacity_provider.CreateCapacityProviderInput, options: CallOptions) !create_capacity_provider.CreateCapacityProviderOutput {
         return create_capacity_provider.execute(self, allocator, input, options);
     }
@@ -182,8 +182,8 @@ pub const Client = struct {
         return create_code_signing_config.execute(self, allocator, input, options);
     }
 
-    /// Creates a mapping between an event source and an Lambda function. Lambda
-    /// reads items from the event source and invokes the function.
+    /// Creates a mapping between an event source and an Lambda Event Function.
+    /// Lambda reads items from the event source and invokes the function.
     ///
     /// For details about how to configure different event sources, see the
     /// following topics.
@@ -245,7 +245,8 @@ pub const Client = struct {
         return create_event_source_mapping.execute(self, allocator, input, options);
     }
 
-    /// Creates a Lambda function. To create a function, you need a [deployment
+    /// Creates a Lambda Event Function. To create a function, you need a
+    /// [deployment
     /// package](https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html) and an [execution role](https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role). The deployment package is a .zip file archive or container image that contains your function code. The execution role grants the function permission to use Amazon Web Services services, such as Amazon CloudWatch Logs for log streaming and X-Ray for request tracing.
     ///
     /// If the deployment package is a [container
@@ -308,7 +309,7 @@ pub const Client = struct {
         return create_function_url_config.execute(self, allocator, input, options);
     }
 
-    /// Deletes a Lambda function
+    /// Deletes a Lambda Event Function
     /// [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
     pub fn deleteAlias(self: *Self, allocator: std.mem.Allocator, input: delete_alias.DeleteAliasInput, options: CallOptions) !delete_alias.DeleteAliasOutput {
         return delete_alias.execute(self, allocator, input, options);
@@ -335,9 +336,9 @@ pub const Client = struct {
         return delete_event_source_mapping.execute(self, allocator, input, options);
     }
 
-    /// Deletes a Lambda function. To delete a specific function version, use the
-    /// `Qualifier` parameter. Otherwise, all versions and aliases are deleted. This
-    /// doesn't require the user to have explicit permissions for DeleteAlias.
+    /// Deletes a Lambda Event Function. To delete a specific function version, use
+    /// the `Qualifier` parameter. Otherwise, all versions and aliases are deleted.
+    /// This doesn't require the user to have explicit permissions for DeleteAlias.
     ///
     /// A deleted Lambda function cannot be recovered. Ensure that you specify the
     /// correct function name and version before deleting.
@@ -399,7 +400,7 @@ pub const Client = struct {
         return get_account_settings.execute(self, allocator, input, options);
     }
 
-    /// Returns details about a Lambda function
+    /// Returns details about a Lambda Event Function
     /// [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
     pub fn getAlias(self: *Self, allocator: std.mem.Allocator, input: get_alias.GetAliasInput, options: CallOptions) !get_alias.GetAliasOutput {
         return get_alias.execute(self, allocator, input, options);
@@ -469,9 +470,9 @@ pub const Client = struct {
         return get_function_concurrency.execute(self, allocator, input, options);
     }
 
-    /// Returns the version-specific settings of a Lambda function or version. The
-    /// output includes only options that can vary between versions of a function.
-    /// To modify these settings, use UpdateFunctionConfiguration.
+    /// Returns the version-specific settings of a Lambda Event Function or version.
+    /// The output includes only options that can vary between versions of a
+    /// function. To modify these settings, use UpdateFunctionConfiguration.
     ///
     /// To get all of a function's details, including function-level settings, use
     /// GetFunction.
@@ -550,10 +551,10 @@ pub const Client = struct {
         return get_runtime_management_config.execute(self, allocator, input, options);
     }
 
-    /// Invokes a Lambda function. You can invoke a function synchronously (and wait
-    /// for the response), or asynchronously. By default, Lambda invokes your
-    /// function synchronously (i.e. the`InvocationType` is `RequestResponse`). To
-    /// invoke a function asynchronously, set `InvocationType` to `Event`. Lambda
+    /// Invokes a Lambda Event Function. You can invoke a function synchronously
+    /// (and wait for the response), or asynchronously. By default, Lambda invokes
+    /// your function synchronously (i.e. the`InvocationType` is `RequestResponse`).
+    /// To invoke a function asynchronously, set `InvocationType` to `Event`. Lambda
     /// passes the `ClientContext` object to your function for synchronous
     /// invocations only.
     ///
@@ -602,8 +603,8 @@ pub const Client = struct {
         return invoke_async.execute(self, allocator, input, options);
     }
 
-    /// Configure your Lambda functions to stream response payloads back to clients.
-    /// For more information, see [Configuring a Lambda function to stream
+    /// Configure your Lambda Event Functions to stream response payloads back to
+    /// clients. For more information, see [Configuring a Lambda function to stream
     /// responses](https://docs.aws.amazon.com/lambda/latest/dg/configuration-response-streaming.html).
     ///
     /// This operation requires permission for the
@@ -613,7 +614,7 @@ pub const Client = struct {
     }
 
     /// Returns a list of
-    /// [aliases](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) for a Lambda function.
+    /// [aliases](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) for a Lambda Event Function.
     pub fn listAliases(self: *Self, allocator: std.mem.Allocator, input: list_aliases.ListAliasesInput, options: CallOptions) !list_aliases.ListAliasesOutput {
         return list_aliases.execute(self, allocator, input, options);
     }
@@ -661,8 +662,8 @@ pub const Client = struct {
         return list_function_versions_by_capacity_provider.execute(self, allocator, input, options);
     }
 
-    /// Returns a list of Lambda functions, with the version-specific configuration
-    /// of each. Lambda returns up to 50 functions per call.
+    /// Returns a list of Lambda Event Functions, with the version-specific
+    /// configuration of each. Lambda returns up to 50 functions per call.
     ///
     /// Set `FunctionVersion` to `ALL` to include all published versions of each
     /// function in addition to the unpublished version.
@@ -883,7 +884,7 @@ pub const Client = struct {
         return untag_resource.execute(self, allocator, input, options);
     }
 
-    /// Updates the configuration of a Lambda function
+    /// Updates the configuration of a Lambda Event Function
     /// [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
     pub fn updateAlias(self: *Self, allocator: std.mem.Allocator, input: update_alias.UpdateAliasInput, options: CallOptions) !update_alias.UpdateAliasOutput {
         return update_alias.execute(self, allocator, input, options);
@@ -964,7 +965,7 @@ pub const Client = struct {
         return update_event_source_mapping.execute(self, allocator, input, options);
     }
 
-    /// Updates a Lambda function's code. If code signing is enabled for the
+    /// Updates a Lambda Event Function's code. If code signing is enabled for the
     /// function, the code package must be signed by a trusted publisher. For more
     /// information, see [Configuring code signing for
     /// Lambda](https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html).
@@ -991,7 +992,7 @@ pub const Client = struct {
         return update_function_code.execute(self, allocator, input, options);
     }
 
-    /// Modify the version-specific settings of a Lambda function.
+    /// Modifies the version-specific settings of a Lambda Event Function.
     ///
     /// When you update a function, Lambda provisions an instance of the function
     /// and its supporting resources. If your function connects to a VPC, this

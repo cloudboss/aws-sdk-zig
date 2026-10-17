@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const AssociatedSystem = @import("associated_system.zig").AssociatedSystem;
 const DependencyDiscoveryInput = @import("dependency_discovery_input.zig").DependencyDiscoveryInput;
+const DevOpsAgentConfiguration = @import("dev_ops_agent_configuration.zig").DevOpsAgentConfiguration;
 const PermissionModel = @import("permission_model.zig").PermissionModel;
 const ServiceReportConfiguration = @import("service_report_configuration.zig").ServiceReportConfiguration;
 const Service = @import("service.zig").Service;
@@ -17,6 +18,11 @@ pub const UpdateServiceInput = struct {
     dependency_discovery: ?DependencyDiscoveryInput = null,
 
     description: ?[]const u8 = null,
+
+    /// The optional DevOps Agent integration configuration to set, replace, or
+    /// disconnect for the service. If you omit this field, the existing DevOps
+    /// Agent linkage stays unchanged.
+    dev_ops_agent_configuration: ?DevOpsAgentConfiguration = null,
 
     /// The updated permission model for the service.
     permission_model: ?PermissionModel = null,
@@ -34,6 +40,7 @@ pub const UpdateServiceInput = struct {
         .associated_systems = "associatedSystems",
         .dependency_discovery = "dependencyDiscovery",
         .description = "description",
+        .dev_ops_agent_configuration = "devOpsAgentConfiguration",
         .permission_model = "permissionModel",
         .policy_arn = "policyArn",
         .regions = "regions",
@@ -102,6 +109,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateServiceInput, con
     if (input.description) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"description\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.dev_ops_agent_configuration) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"devOpsAgentConfiguration\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

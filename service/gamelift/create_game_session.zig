@@ -24,8 +24,8 @@ pub const CreateGameSessionInput = struct {
     /// `CreatorId`
     /// in a specified time period.
     ///
-    /// If you your fleet doesn't have a resource creation limit policy and you
-    /// provide a
+    /// If your fleet doesn't have a resource creation limit policy and you provide
+    /// a
     /// `CreatorId` in your `CreateGameSession` requests, Amazon GameLift Servers
     /// limits requests to one request per `CreatorId` per second.
     ///

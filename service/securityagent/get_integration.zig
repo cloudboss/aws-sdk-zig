@@ -40,6 +40,9 @@ pub const GetIntegrationOutput = struct {
     /// The type of the integration provider.
     provider_type: ProviderType,
 
+    /// The Atlassian Cloud site URL for Atlassian integrations.
+    site_url: ?[]const u8 = null,
+
     /// The HTTPS URL of the customer self-hosted instance, such as a GitHub
     /// Enterprise Server or self-managed GitLab instance. This value is absent for
     /// SaaS integrations.
@@ -57,6 +60,7 @@ pub const GetIntegrationOutput = struct {
         .private_connection_name = "privateConnectionName",
         .provider = "provider",
         .provider_type = "providerType",
+        .site_url = "siteUrl",
         .target_url = "targetUrl",
         .webhook_url = "webhookUrl",
     };

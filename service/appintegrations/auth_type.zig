@@ -2,14 +2,17 @@ const std = @import("std");
 
 pub const AuthType = enum {
     api_key,
+    connect_jwt,
 
     pub const json_field_names = .{
         .api_key = "API_KEY",
+        .connect_jwt = "CONNECT_JWT",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .api_key => "API_KEY",
+            .connect_jwt => "CONNECT_JWT",
         };
     }
 

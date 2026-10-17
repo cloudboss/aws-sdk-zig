@@ -4,8 +4,8 @@
 /// player
 /// reports latency higher than the cap. Latency policies are used only with
 /// placement
-/// request that provide player latency information. Player latency policies can
-/// be stacked
+/// requests that provide player latency information. Player latency policies
+/// can be stacked
 /// to gradually relax latency requirements over time.
 pub const PlayerLatencyPolicy = struct {
     /// The maximum latency value that is allowed for any player, in milliseconds.

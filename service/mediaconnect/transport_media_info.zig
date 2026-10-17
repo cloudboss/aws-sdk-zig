@@ -5,7 +5,12 @@ pub const TransportMediaInfo = struct {
     /// The list of transport stream programs in the current flow's source.
     programs: []const TransportStreamProgram,
 
+    /// The transport stream ID (TSID) of the source, from the Program Association
+    /// Table (PAT).
+    ts_id: ?i32 = null,
+
     pub const json_field_names = .{
         .programs = "Programs",
+        .ts_id = "TsId",
     };
 };

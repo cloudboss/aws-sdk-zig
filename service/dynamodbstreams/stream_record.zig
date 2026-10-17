@@ -6,9 +6,11 @@ const StreamViewType = @import("stream_view_type.zig").StreamViewType;
 /// A description of a single data modification that was performed on an item in
 /// a DynamoDB table.
 pub const StreamRecord = struct {
-    /// The approximate date and time when the stream record was created, in [ISO
-    /// 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format and
-    /// rounded down to the closest second.
+    /// The approximate date and time when the stream record was created, in [UNIX
+    /// epoch time](http://www.epochconverter.com/) format and rounded down to the
+    /// closest second.
+    /// Some tools and SDKs may convert this value to a different format, such as
+    /// [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html).
     approximate_creation_date_time: ?i64 = null,
 
     /// The primary key attribute(s) for the DynamoDB item that was modified.

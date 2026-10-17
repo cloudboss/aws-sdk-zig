@@ -1,6 +1,7 @@
 const MCPServerAPIKeyConfig = @import("mcp_server_api_key_config.zig").MCPServerAPIKeyConfig;
 const MCPServerAuthorizationDiscoveryConfig = @import("mcp_server_authorization_discovery_config.zig").MCPServerAuthorizationDiscoveryConfig;
 const MCPServerBearerTokenConfig = @import("mcp_server_bearer_token_config.zig").MCPServerBearerTokenConfig;
+const MCPServerCustomHeadersConfig = @import("mcp_server_custom_headers_config.zig").MCPServerCustomHeadersConfig;
 const MCPServerOAuth3LOConfig = @import("mcp_server_o_auth_3_lo_config.zig").MCPServerOAuth3LOConfig;
 const MCPServerOAuthClientCredentialsConfig = @import("mcp_server_o_auth_client_credentials_config.zig").MCPServerOAuthClientCredentialsConfig;
 
@@ -13,6 +14,8 @@ pub const MCPServerAuthorizationConfig = union(enum) {
     authorization_discovery: ?MCPServerAuthorizationDiscoveryConfig,
     /// MCP server configuration with Bearer token (RFC 6750).
     bearer_token: ?MCPServerBearerTokenConfig,
+    /// MCP server configuration with one or more custom authentication headers.
+    custom_headers: ?MCPServerCustomHeadersConfig,
     /// MCP server configuration with OAuth 3LO.
     o_auth_3_lo: ?MCPServerOAuth3LOConfig,
     /// MCP server configuration with OAuth client credentials.
@@ -22,6 +25,7 @@ pub const MCPServerAuthorizationConfig = union(enum) {
         .api_key = "apiKey",
         .authorization_discovery = "authorizationDiscovery",
         .bearer_token = "bearerToken",
+        .custom_headers = "customHeaders",
         .o_auth_3_lo = "oAuth3LO",
         .o_auth_client_credentials = "oAuthClientCredentials",
     };

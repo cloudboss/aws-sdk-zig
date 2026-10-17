@@ -11,6 +11,7 @@ const batch_get_blueprints = @import("batch_get_blueprints.zig");
 const batch_get_crawlers = @import("batch_get_crawlers.zig");
 const batch_get_custom_entity_types = @import("batch_get_custom_entity_types.zig");
 const batch_get_data_quality_result = @import("batch_get_data_quality_result.zig");
+const batch_get_data_quality_result_v2 = @import("batch_get_data_quality_result_v2.zig");
 const batch_get_data_quality_ruleset_evaluation_run = @import("batch_get_data_quality_ruleset_evaluation_run.zig");
 const batch_get_dev_endpoints = @import("batch_get_dev_endpoints.zig");
 const batch_get_iterable_forms = @import("batch_get_iterable_forms.zig");
@@ -130,6 +131,7 @@ const get_data_catalog_export_configuration = @import("get_data_catalog_export_c
 const get_data_quality_model = @import("get_data_quality_model.zig");
 const get_data_quality_model_result = @import("get_data_quality_model_result.zig");
 const get_data_quality_result = @import("get_data_quality_result.zig");
+const get_data_quality_result_v2 = @import("get_data_quality_result_v2.zig");
 const get_data_quality_rule_recommendation_run = @import("get_data_quality_rule_recommendation_run.zig");
 const get_data_quality_ruleset = @import("get_data_quality_ruleset.zig");
 const get_data_quality_ruleset_evaluation_run = @import("get_data_quality_ruleset_evaluation_run.zig");
@@ -172,6 +174,8 @@ const get_security_configurations = @import("get_security_configurations.zig");
 const get_session = @import("get_session.zig");
 const get_session_endpoint = @import("get_session_endpoint.zig");
 const get_statement = @import("get_statement.zig");
+const get_system_logs_for_job_run = @import("get_system_logs_for_job_run.zig");
+const get_system_logs_for_session = @import("get_system_logs_for_session.zig");
 const get_table = @import("get_table.zig");
 const get_table_optimizer = @import("get_table_optimizer.zig");
 const get_table_version = @import("get_table_version.zig");
@@ -199,6 +203,7 @@ const list_crawlers = @import("list_crawlers.zig");
 const list_crawls = @import("list_crawls.zig");
 const list_custom_entity_types = @import("list_custom_entity_types.zig");
 const list_data_quality_results = @import("list_data_quality_results.zig");
+const list_data_quality_results_v2 = @import("list_data_quality_results_v2.zig");
 const list_data_quality_rule_recommendation_runs = @import("list_data_quality_rule_recommendation_runs.zig");
 const list_data_quality_ruleset_evaluation_runs = @import("list_data_quality_ruleset_evaluation_runs.zig");
 const list_data_quality_rulesets = @import("list_data_quality_rulesets.zig");
@@ -225,6 +230,7 @@ const list_triggers = @import("list_triggers.zig");
 const list_usage_profiles = @import("list_usage_profiles.zig");
 const list_workflows = @import("list_workflows.zig");
 const modify_integration = @import("modify_integration.zig");
+const publish_data_quality_result_v2 = @import("publish_data_quality_result_v2.zig");
 const put_asset = @import("put_asset.zig");
 const put_asset_type = @import("put_asset_type.zig");
 const put_attachment = @import("put_attachment.zig");
@@ -394,6 +400,12 @@ pub const Client = struct {
     /// Retrieves a list of data quality results for the specified result IDs.
     pub fn batchGetDataQualityResult(self: *Self, allocator: std.mem.Allocator, input: batch_get_data_quality_result.BatchGetDataQualityResultInput, options: CallOptions) !batch_get_data_quality_result.BatchGetDataQualityResultOutput {
         return batch_get_data_quality_result.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves a list of data quality results for the specified result IDs. You
+    /// can specify up to 100 result IDs in a single request.
+    pub fn batchGetDataQualityResultV2(self: *Self, allocator: std.mem.Allocator, input: batch_get_data_quality_result_v2.BatchGetDataQualityResultV2Input, options: CallOptions) !batch_get_data_quality_result_v2.BatchGetDataQualityResultV2Output {
+        return batch_get_data_quality_result_v2.execute(self, allocator, input, options);
     }
 
     /// Retrieves the details of multiple evaluation runs in a single request.
@@ -1213,6 +1225,12 @@ pub const Client = struct {
         return get_data_quality_result.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the result of a data quality rule evaluation published from any
+    /// supported data platform.
+    pub fn getDataQualityResultV2(self: *Self, allocator: std.mem.Allocator, input: get_data_quality_result_v2.GetDataQualityResultV2Input, options: CallOptions) !get_data_quality_result_v2.GetDataQualityResultV2Output {
+        return get_data_quality_result_v2.execute(self, allocator, input, options);
+    }
+
     /// Gets the specified recommendation run that was used to generate rules.
     pub fn getDataQualityRuleRecommendationRun(self: *Self, allocator: std.mem.Allocator, input: get_data_quality_rule_recommendation_run.GetDataQualityRuleRecommendationRunInput, options: CallOptions) !get_data_quality_rule_recommendation_run.GetDataQualityRuleRecommendationRunOutput {
         return get_data_quality_rule_recommendation_run.execute(self, allocator, input, options);
@@ -1517,6 +1535,16 @@ pub const Client = struct {
         return get_statement.execute(self, allocator, input, options);
     }
 
+    /// Retrieves the system logs for a job run.
+    pub fn getSystemLogsForJobRun(self: *Self, allocator: std.mem.Allocator, input: get_system_logs_for_job_run.GetSystemLogsForJobRunInput, options: CallOptions) !get_system_logs_for_job_run.GetSystemLogsForJobRunOutput {
+        return get_system_logs_for_job_run.execute(self, allocator, input, options);
+    }
+
+    /// Retrieves the system logs for an interactive session.
+    pub fn getSystemLogsForSession(self: *Self, allocator: std.mem.Allocator, input: get_system_logs_for_session.GetSystemLogsForSessionInput, options: CallOptions) !get_system_logs_for_session.GetSystemLogsForSessionOutput {
+        return get_system_logs_for_session.execute(self, allocator, input, options);
+    }
+
     /// Retrieves the `Table` definition in a Data Catalog for
     /// a specified table.
     pub fn getTable(self: *Self, allocator: std.mem.Allocator, input: get_table.GetTableInput, options: CallOptions) !get_table.GetTableOutput {
@@ -1700,6 +1728,13 @@ pub const Client = struct {
         return list_data_quality_results.execute(self, allocator, input, options);
     }
 
+    /// Returns a paginated list of data quality execution results for your account,
+    /// filtered by the specified criteria. Use the `NextToken` parameter to
+    /// retrieve additional results.
+    pub fn listDataQualityResultsV2(self: *Self, allocator: std.mem.Allocator, input: list_data_quality_results_v2.ListDataQualityResultsV2Input, options: CallOptions) !list_data_quality_results_v2.ListDataQualityResultsV2Output {
+        return list_data_quality_results_v2.execute(self, allocator, input, options);
+    }
+
     /// Lists the recommendation runs meeting the filter criteria.
     pub fn listDataQualityRuleRecommendationRuns(self: *Self, allocator: std.mem.Allocator, input: list_data_quality_rule_recommendation_runs.ListDataQualityRuleRecommendationRunsInput, options: CallOptions) !list_data_quality_rule_recommendation_runs.ListDataQualityRuleRecommendationRunsOutput {
         return list_data_quality_rule_recommendation_runs.execute(self, allocator, input, options);
@@ -1875,6 +1910,13 @@ pub const Client = struct {
     /// Modifies a Zero-ETL integration in the caller's account.
     pub fn modifyIntegration(self: *Self, allocator: std.mem.Allocator, input: modify_integration.ModifyIntegrationInput, options: CallOptions) !modify_integration.ModifyIntegrationOutput {
         return modify_integration.execute(self, allocator, input, options);
+    }
+
+    /// This operation is intended for internal use. Do not call it directly.
+    ///
+    /// AWS Glue Data Quality uses this operation to publish a data quality result.
+    pub fn publishDataQualityResultV2(self: *Self, allocator: std.mem.Allocator, input: publish_data_quality_result_v2.PublishDataQualityResultV2Input, options: CallOptions) !publish_data_quality_result_v2.PublishDataQualityResultV2Output {
+        return publish_data_quality_result_v2.execute(self, allocator, input, options);
     }
 
     /// Creates or updates an asset in Glue Data Catalog. If the asset already
@@ -2698,6 +2740,13 @@ pub const Client = struct {
     }
 
     pub fn listDataQualityResultsPaginator(self: *Self, params: list_data_quality_results.ListDataQualityResultsInput) paginator.ListDataQualityResultsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listDataQualityResultsV2Paginator(self: *Self, params: list_data_quality_results_v2.ListDataQualityResultsV2Input) paginator.ListDataQualityResultsV2Paginator {
         return .{
             .client = self,
             .params = params,

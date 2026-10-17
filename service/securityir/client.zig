@@ -10,6 +10,7 @@ const create_membership = @import("create_membership.zig");
 const get_case = @import("get_case.zig");
 const get_case_attachment_download_url = @import("get_case_attachment_download_url.zig");
 const get_case_attachment_upload_url = @import("get_case_attachment_upload_url.zig");
+const get_finding_metrics = @import("get_finding_metrics.zig");
 const get_membership = @import("get_membership.zig");
 const list_case_edits = @import("list_case_edits.zig");
 const list_cases = @import("list_cases.zig");
@@ -104,6 +105,11 @@ pub const Client = struct {
     /// Uploads an attachment to a case.
     pub fn getCaseAttachmentUploadUrl(self: *Self, allocator: std.mem.Allocator, input: get_case_attachment_upload_url.GetCaseAttachmentUploadUrlInput, options: CallOptions) !get_case_attachment_upload_url.GetCaseAttachmentUploadUrlOutput {
         return get_case_attachment_upload_url.execute(self, allocator, input, options);
+    }
+
+    /// Returns finding-lifecycle metrics for a membership over a date range.
+    pub fn getFindingMetrics(self: *Self, allocator: std.mem.Allocator, input: get_finding_metrics.GetFindingMetricsInput, options: CallOptions) !get_finding_metrics.GetFindingMetricsOutput {
+        return get_finding_metrics.execute(self, allocator, input, options);
     }
 
     /// Returns the attributes of a membership.

@@ -4,16 +4,19 @@ const std = @import("std");
 pub const ResourceType = enum {
     code_repository,
     document,
+    project,
 
     pub const json_field_names = .{
         .code_repository = "CODE_REPOSITORY",
         .document = "DOCUMENT",
+        .project = "PROJECT",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .code_repository => "CODE_REPOSITORY",
             .document => "DOCUMENT",
+            .project => "PROJECT",
         };
     }
 

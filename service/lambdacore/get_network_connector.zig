@@ -11,6 +11,11 @@ const NetworkConnectorState = @import("network_connector_state.zig").NetworkConn
 const NetworkConnectorStateReasonCode = @import("network_connector_state_reason_code.zig").NetworkConnectorStateReasonCode;
 
 pub const GetNetworkConnectorInput = struct {
+    /// The identifier of the network connector to retrieve. You can specify the
+    /// connector ID, name, or ARN. Provide an unqualified ARN (or an ID or name) to
+    /// retrieve the connector's latest version, or a version-qualified ARN — one
+    /// that includes the immutable version suffix — to retrieve a specific
+    /// historical version.
     identifier: []const u8,
 
     pub const json_field_names = .{
@@ -26,6 +31,7 @@ pub const GetNetworkConnectorOutput = struct {
     /// security groups.
     configuration: ?NetworkConnectorConfiguration = null,
 
+    /// The unique identifier of the network connector.
     id: []const u8,
 
     /// The date and time when the connector configuration was last modified.
@@ -41,6 +47,18 @@ pub const GetNetworkConnectorOutput = struct {
     /// A machine-readable code indicating the reason for the last update status.
     /// Use this for programmatic error handling.
     last_update_status_reason_code: ?NetworkConnectorLastUpdateStatusReasonCode = null,
+
+    /// The version number of the connector's latest active version. Each
+    /// configuration update creates a new immutable version; this attribute exposes
+    /// the most recent one. This field is returned only on a standard (unqualified)
+    /// request.
+    latest_version: ?i64 = null,
+
+    /// The qualified ARN of the connector's latest active version, including the
+    /// immutable version suffix. This field is returned only on a standard
+    /// (unqualified) request; when you supply a version-qualified identifier it is
+    /// not returned, and `VersionArn` is returned instead.
+    latest_version_arn: ?[]const u8 = null,
 
     /// The name of the network connector.
     name: []const u8,
@@ -60,9 +78,19 @@ pub const GetNetworkConnectorOutput = struct {
     /// this for programmatic error handling.
     state_reason_code: ?NetworkConnectorStateReasonCode = null,
 
-    /// The version number of the connector configuration, incremented on each
-    /// update.
+    /// The version number of the network connector. On a standard (unqualified)
+    /// request, this is the connector's current version; each configuration update
+    /// increments it. When you supply a version-qualified identifier, this is the
+    /// specific version you requested.
     version: ?i64 = null,
+
+    /// The qualified ARN of the specific connector version returned by this
+    /// request, including the immutable version suffix. This is populated only when
+    /// you supply a version-qualified identifier. On a standard (unqualified)
+    /// request, this field is not populated; the connector's latest active version
+    /// is returned instead through the `LatestVersionArn` and `LatestVersion`
+    /// fields described below.
+    version_arn: ?[]const u8 = null,
 
     pub const json_field_names = .{
         .arn = "Arn",
@@ -72,12 +100,15 @@ pub const GetNetworkConnectorOutput = struct {
         .last_update_status = "LastUpdateStatus",
         .last_update_status_reason = "LastUpdateStatusReason",
         .last_update_status_reason_code = "LastUpdateStatusReasonCode",
+        .latest_version = "LatestVersion",
+        .latest_version_arn = "LatestVersionArn",
         .name = "Name",
         .operator_role = "OperatorRole",
         .state = "State",
         .state_reason = "StateReason",
         .state_reason_code = "StateReasonCode",
         .version = "Version",
+        .version_arn = "VersionArn",
     };
 };
 

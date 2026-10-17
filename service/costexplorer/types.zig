@@ -83,6 +83,7 @@ pub const NumericOperator = @import("numeric_operator.zig").NumericOperator;
 pub const OfferingClass = @import("offering_class.zig").OfferingClass;
 pub const PaymentOption = @import("payment_option.zig").PaymentOption;
 pub const PlatformDifference = @import("platform_difference.zig").PlatformDifference;
+pub const ProductAttributeValues = @import("product_attribute_values.zig").ProductAttributeValues;
 pub const RDSInstanceDetails = @import("rds_instance_details.zig").RDSInstanceDetails;
 pub const RecommendationDetailData = @import("recommendation_detail_data.zig").RecommendationDetailData;
 pub const RecommendationDetailHourlyMetrics = @import("recommendation_detail_hourly_metrics.zig").RecommendationDetailHourlyMetrics;

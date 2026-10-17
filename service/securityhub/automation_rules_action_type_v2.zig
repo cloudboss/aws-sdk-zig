@@ -3,16 +3,19 @@ const std = @import("std");
 pub const AutomationRulesActionTypeV2 = enum {
     finding_fields_update,
     external_integration,
+    resource_fields_update,
 
     pub const json_field_names = .{
         .finding_fields_update = "FINDING_FIELDS_UPDATE",
         .external_integration = "EXTERNAL_INTEGRATION",
+        .resource_fields_update = "RESOURCE_FIELDS_UPDATE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .finding_fields_update => "FINDING_FIELDS_UPDATE",
             .external_integration => "EXTERNAL_INTEGRATION",
+            .resource_fields_update => "RESOURCE_FIELDS_UPDATE",
         };
     }
 

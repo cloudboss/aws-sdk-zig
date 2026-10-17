@@ -17,7 +17,7 @@
 /// task, call
 /// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_RequestUploadCredentials.html](https://docs.aws.amazon.com/gamelift/latest/apireference/API_RequestUploadCredentials.html).
 ///
-/// * To remotely connect to an active Amazon GameLift Servers fleet instances.
+/// * To remotely connect to an active Amazon GameLift Servers fleet instance.
 /// To get remote access, call
 /// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetComputeAccess.html](https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetComputeAccess.html).
 pub const AwsCredentials = struct {

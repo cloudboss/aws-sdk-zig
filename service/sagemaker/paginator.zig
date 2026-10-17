@@ -86,6 +86,7 @@ const list_tags = @import("list_tags.zig");
 const list_training_jobs = @import("list_training_jobs.zig");
 const list_training_jobs_for_hyper_parameter_tuning_job = @import("list_training_jobs_for_hyper_parameter_tuning_job.zig");
 const list_training_plans = @import("list_training_plans.zig");
+const list_training_sessions = @import("list_training_sessions.zig");
 const list_transform_jobs = @import("list_transform_jobs.zig");
 const list_trial_components = @import("list_trial_components.zig");
 const list_trials = @import("list_trials.zig");
@@ -3190,6 +3191,44 @@ pub const ListTrainingPlansPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_training_plans.execute(self.client, allocator, self.params, options);
+
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
+        }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListTrainingSessionsPaginator = struct {
+    client: *Client,
+    params: list_training_sessions.ListTrainingSessionsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_training_sessions.ListTrainingSessionsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_training_sessions.execute(self.client, allocator, self.params, options);
 
         const next_token: ?[]const u8 = output.next_token;
         const owned_token = if (next_token) |token|

@@ -10,12 +10,14 @@ pub const MCPServerAuthorizationMethod = enum {
     api_key,
     /// Bearer token authentication (RFC 6750).
     bearer_token,
+    custom_headers,
 
     pub const json_field_names = .{
         .oauth_client_credentials = "oauth-client-credentials",
         .oauth_3_lo = "oauth-3lo",
         .api_key = "api-key",
         .bearer_token = "bearer-token",
+        .custom_headers = "custom-headers",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -24,6 +26,7 @@ pub const MCPServerAuthorizationMethod = enum {
             .oauth_3_lo => "oauth-3lo",
             .api_key => "api-key",
             .bearer_token => "bearer-token",
+            .custom_headers => "custom-headers",
         };
     }
 

@@ -5,6 +5,14 @@ pub const TenantInfo = struct {
     /// The date and time when the tenant was created.
     created_timestamp: ?i64 = null,
 
+    /// The status of sending capability for the tenant:
+    ///
+    /// * `ENABLED` – Sending is allowed for the tenant.
+    ///
+    /// * `DISABLED` – Sending is prevented for the tenant.
+    ///
+    /// * `REINSTATED` – Sending is allowed even if there are active reputation
+    ///   findings.
     sending_status: ?SendingStatus = null,
 
     /// The Amazon Resource Name (ARN) of the tenant.

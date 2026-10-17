@@ -4,8 +4,14 @@ const GlobalAuroraUngraceful = @import("global_aurora_ungraceful.zig").GlobalAur
 /// Configuration for Amazon Aurora global databases used in a Region switch
 /// plan.
 pub const GlobalAuroraConfiguration = struct {
-    /// The behavior for a global database, that is, only allow switchover or also
-    /// allow failover.
+    /// The default behavior for the Aurora global database execution block. Valid
+    /// values:
+    ///
+    /// * `switchoverOnly` - Calls `SwitchoverGlobalCluster` for a zero-data-loss
+    ///   switchover during graceful execution.
+    /// * `failover` - Calls `FailoverGlobalCluster` with `AllowDataLoss` set to
+    ///   `true`. This operation might cause data loss, including during graceful
+    ///   execution.
     behavior: GlobalAuroraDefaultBehavior = .switchover_only,
 
     /// The cross account role for the configuration.
@@ -23,7 +29,8 @@ pub const GlobalAuroraConfiguration = struct {
     /// The timeout value specified for the configuration.
     timeout_minutes: i32 = 60,
 
-    /// The settings for ungraceful execution.
+    /// The behavior to use when the plan runs in ungraceful mode. If you omit this
+    /// value, Region switch uses the value of `behavior`.
     ungraceful: ?GlobalAuroraUngraceful = null,
 
     pub const json_field_names = .{

@@ -1,9 +1,11 @@
 const GlobalAuroraUngracefulBehavior = @import("global_aurora_ungraceful_behavior.zig").GlobalAuroraUngracefulBehavior;
 
-/// Configuration for handling failures when performing operations on Aurora
-/// global databases.
+/// Configuration for an Aurora global database execution block in ungraceful
+/// mode.
 pub const GlobalAuroraUngraceful = struct {
-    /// The settings for ungraceful execution.
+    /// The ungraceful behavior. The only valid value is `failover`, which calls
+    /// `FailoverGlobalCluster` with `AllowDataLoss` set to `true` and might cause
+    /// data loss.
     ungraceful: ?GlobalAuroraUngracefulBehavior = null,
 
     pub const json_field_names = .{

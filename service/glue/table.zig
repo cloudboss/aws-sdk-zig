@@ -3,6 +3,7 @@ const aws = @import("aws");
 const FederatedTable = @import("federated_table.zig").FederatedTable;
 const IcebergTableMetadata = @import("iceberg_table_metadata.zig").IcebergTableMetadata;
 const Column = @import("column.zig").Column;
+const RLSProperties = @import("rls_properties.zig").RLSProperties;
 const TableStatus = @import("table_status.zig").TableStatus;
 const StorageDescriptor = @import("storage_descriptor.zig").StorageDescriptor;
 const TableIdentifier = @import("table_identifier.zig").TableIdentifier;
@@ -77,6 +78,10 @@ pub const Table = struct {
     /// The retention time for this table.
     retention: i32 = 0,
 
+    /// A `RLSProperties` structure that describes the default row-level security
+    /// policy of the table.
+    rls_properties: ?RLSProperties = null,
+
     /// Indicates the the state of an asynchronous change to a table.
     status: ?*TableStatus = null,
 
@@ -143,6 +148,7 @@ pub const Table = struct {
         .parameters = "Parameters",
         .partition_keys = "PartitionKeys",
         .retention = "Retention",
+        .rls_properties = "RLSProperties",
         .status = "Status",
         .storage_descriptor = "StorageDescriptor",
         .table_type = "TableType",

@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const RecordExpirySpecification = @import("record_expiry_specification.zig").RecordExpirySpecification;
 const MemoryRecordUpdateInput = @import("memory_record_update_input.zig").MemoryRecordUpdateInput;
 const MemoryRecordOutput = @import("memory_record_output.zig").MemoryRecordOutput;
 
@@ -11,12 +12,33 @@ pub const BatchUpdateMemoryRecordsInput = struct {
     /// The unique ID of the memory resource where records will be updated.
     memory_id: []const u8,
 
+    /// The record expiry (long-term memory time-to-live) applied to every record
+    /// updated by this request. Set `recordExpiryDurationDays` to configure or
+    /// overwrite the number of days after which the records expire, or set `action`
+    /// to `REMOVE` to clear a previously configured expiry so that the records no
+    /// longer expire.
+    ///
+    /// When you do not provide this value, the service determines each record's
+    /// expiry from its current state:
+    ///
+    /// * If the record already has an expiry configured, the service resets and
+    ///   reapplies the expiry based on the last applied `recordExpiryDurationDays`.
+    /// * If the record does not have an expiry configured, no expiry is applied and
+    ///   the record remains non-expiring. This is the outcome regardless of whether
+    ///   the record's strategy configures an expiry.
+    ///
+    /// Providing an explicit `recordExpiryDurationDays` always takes precedence: it
+    /// overwrites an existing expiry, or sets one on a record that previously had
+    /// none.
+    record_expiry_specification: ?RecordExpirySpecification = null,
+
     /// A list of memory record update inputs to be processed in the batch
     /// operation.
     records: []const MemoryRecordUpdateInput,
 
     pub const json_field_names = .{
         .memory_id = "memoryId",
+        .record_expiry_specification = "recordExpirySpecification",
         .records = "records",
     };
 };
@@ -76,6 +98,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchUpdateMemoryRecord
     var has_prev = false;
     try body_buf.appendSlice(allocator, "{");
 
+    if (input.record_expiry_specification) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"recordExpirySpecification\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (has_prev) try body_buf.appendSlice(allocator, ",");
     try body_buf.appendSlice(allocator, "\"records\":");
     try aws.json.writeValue(@TypeOf(input.records), input.records, allocator, &body_buf);

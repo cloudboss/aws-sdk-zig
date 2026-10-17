@@ -7,6 +7,8 @@ const batch_delete_code_reviews = @import("batch_delete_code_reviews.zig");
 const batch_delete_pentests = @import("batch_delete_pentests.zig");
 const batch_delete_security_requirements = @import("batch_delete_security_requirements.zig");
 const batch_delete_threat_models = @import("batch_delete_threat_models.zig");
+const batch_disassociate_finding_issue = @import("batch_disassociate_finding_issue.zig");
+const batch_export_findings = @import("batch_export_findings.zig");
 const batch_get_agent_spaces = @import("batch_get_agent_spaces.zig");
 const batch_get_artifact_metadata = @import("batch_get_artifact_metadata.zig");
 const batch_get_code_review_job_tasks = @import("batch_get_code_review_job_tasks.zig");
@@ -155,6 +157,16 @@ pub const Client = struct {
     /// Deletes one or more threat models from an agent space.
     pub fn batchDeleteThreatModels(self: *Self, allocator: std.mem.Allocator, input: batch_delete_threat_models.BatchDeleteThreatModelsInput, options: CallOptions) !batch_delete_threat_models.BatchDeleteThreatModelsOutput {
         return batch_delete_threat_models.execute(self, allocator, input, options);
+    }
+
+    /// Disassociates a batch of findings from their linked issues.
+    pub fn batchDisassociateFindingIssue(self: *Self, allocator: std.mem.Allocator, input: batch_disassociate_finding_issue.BatchDisassociateFindingIssueInput, options: CallOptions) !batch_disassociate_finding_issue.BatchDisassociateFindingIssueOutput {
+        return batch_disassociate_finding_issue.execute(self, allocator, input, options);
+    }
+
+    /// Exports a batch of findings to the connected issue tracker as issues.
+    pub fn batchExportFindings(self: *Self, allocator: std.mem.Allocator, input: batch_export_findings.BatchExportFindingsInput, options: CallOptions) !batch_export_findings.BatchExportFindingsOutput {
+        return batch_export_findings.execute(self, allocator, input, options);
     }
 
     /// Retrieves information about one or more agent spaces.

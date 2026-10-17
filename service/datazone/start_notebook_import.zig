@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const SourceLocation = @import("source_location.zig").SourceLocation;
+const NotebookType = @import("notebook_type.zig").NotebookType;
 const NotebookStatus = @import("notebook_status.zig").NotebookStatus;
 
 pub const StartNotebookImportInput = struct {
@@ -26,9 +27,13 @@ pub const StartNotebookImportInput = struct {
     /// The identifier of the project that will own the imported notebook.
     owning_project_identifier: []const u8,
 
-    /// The source location of the notebook to import. This specifies the Amazon
-    /// Simple Storage Service URI of the notebook file.
+    /// The source location of the notebook to import. Specify either a single
+    /// Amazon Simple Storage Service URI, or a list of objects to import as the
+    /// notebook's cells.
     source_location: SourceLocation,
+
+    /// The type of the notebook to import. If not specified, defaults to `DATA`.
+    type: ?NotebookType = null,
 
     pub const json_field_names = .{
         .client_token = "clientToken",
@@ -37,6 +42,7 @@ pub const StartNotebookImportInput = struct {
         .name = "name",
         .owning_project_identifier = "owningProjectIdentifier",
         .source_location = "sourceLocation",
+        .type = "type",
     };
 };
 
@@ -68,6 +74,9 @@ pub const StartNotebookImportOutput = struct {
     /// The status of the notebook import.
     status: ?NotebookStatus = null,
 
+    /// The type of the imported notebook.
+    type: ?NotebookType = null,
+
     pub const json_field_names = .{
         .created_at = "createdAt",
         .created_by = "createdBy",
@@ -78,6 +87,7 @@ pub const StartNotebookImportOutput = struct {
         .owning_project_id = "owningProjectId",
         .source_location = "sourceLocation",
         .status = "status",
+        .type = "type",
     };
 };
 
@@ -145,6 +155,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: StartNotebookImportInpu
     try body_buf.appendSlice(allocator, "\"sourceLocation\":");
     try aws.json.writeValue(@TypeOf(input.source_location), input.source_location, allocator, &body_buf);
     has_prev = true;
+    if (input.type) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"type\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
 
     try body_buf.appendSlice(allocator, "}");
     const body = try body_buf.toOwnedSlice(allocator);

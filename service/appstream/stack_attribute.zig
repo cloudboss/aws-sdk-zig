@@ -27,6 +27,8 @@ const std = @import("std");
 /// * STREAMING_EXPERIENCE_SETTINGS
 ///
 /// * AGENT_ACCESS_CONFIG
+///
+/// * STORAGE_CONNECTOR_AUTHENTICATION
 pub const StackAttribute = enum {
     storage_connectors,
     storage_connector_homefolders,
@@ -42,6 +44,7 @@ pub const StackAttribute = enum {
     streaming_experience_settings,
     content_redirection,
     agent_access_config,
+    storage_connector_authentication,
 
     pub const json_field_names = .{
         .storage_connectors = "STORAGE_CONNECTORS",
@@ -58,6 +61,7 @@ pub const StackAttribute = enum {
         .streaming_experience_settings = "STREAMING_EXPERIENCE_SETTINGS",
         .content_redirection = "CONTENT_REDIRECTION",
         .agent_access_config = "AGENT_ACCESS_CONFIG",
+        .storage_connector_authentication = "STORAGE_CONNECTOR_AUTHENTICATION",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -76,6 +80,7 @@ pub const StackAttribute = enum {
             .streaming_experience_settings => "STREAMING_EXPERIENCE_SETTINGS",
             .content_redirection => "CONTENT_REDIRECTION",
             .agent_access_config => "AGENT_ACCESS_CONFIG",
+            .storage_connector_authentication => "STORAGE_CONNECTOR_AUTHENTICATION",
         };
     }
 

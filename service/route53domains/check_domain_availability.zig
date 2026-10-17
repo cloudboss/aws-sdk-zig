@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const DomainAvailability = @import("domain_availability.zig").DomainAvailability;
+const PriceWithCurrency = @import("price_with_currency.zig").PriceWithCurrency;
 
 pub const CheckDomainAvailabilityInput = struct {
     /// The name of the domain that you want to get availability for. The top-level
@@ -100,8 +101,19 @@ pub const CheckDomainAvailabilityOutput = struct {
     /// The domain name is forbidden.
     availability: ?DomainAvailability = null,
 
+    /// The price to register the domain name, in the currency that `Currency`
+    /// specifies. If the domain has registry premium pricing, this price is
+    /// different from the
+    /// standard rate for the TLD that `ListPrices` returns. Use
+    /// `PriceType` to determine which rate applies.
+    ///
+    /// This element is returned only when `Availability` is
+    /// `AVAILABLE`.
+    price: ?PriceWithCurrency = null,
+
     pub const json_field_names = .{
         .availability = "Availability",
+        .price = "Price",
     };
 };
 

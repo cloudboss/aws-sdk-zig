@@ -63,7 +63,7 @@ pub const UpdateScriptOutput = struct {
     /// under your account, the storage location reflects the information that was
     /// provided in
     /// the *CreateScript* request; (2) If the script file was uploaded from
-    /// a local zip file, the storage location reflects an S3 location controls by
+    /// a local zip file, the storage location reflects an S3 location controlled by
     /// the Amazon GameLift Servers
     /// service.
     script: ?Script = null,

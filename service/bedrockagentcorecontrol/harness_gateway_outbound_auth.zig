@@ -7,6 +7,10 @@ pub const HarnessGatewayOutboundAuth = union(enum) {
     /// No authentication.
     none: ?struct {},
     /// Use OAuth credentials for outbound authentication to the gateway.
+    ///
+    /// The `AUTHORIZATION_CODE` grant type is not supported for outbound
+    /// authentication from a harness to an AgentCore Gateway, even when
+    /// `defaultReturnUrl` is specified.
     oauth: ?OAuthCredentialProvider,
 
     pub const json_field_names = .{

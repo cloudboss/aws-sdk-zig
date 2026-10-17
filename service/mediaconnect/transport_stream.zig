@@ -1,3 +1,4 @@
+const ColorInformation = @import("color_information.zig").ColorInformation;
 const FrameResolution = @import("frame_resolution.zig").FrameResolution;
 
 /// The metadata of an elementary transport stream.
@@ -7,6 +8,9 @@ pub const TransportStream = struct {
 
     /// The codec used by the stream.
     codec: ?[]const u8 = null,
+
+    /// The color signaling of the video stream.
+    color: ?ColorInformation = null,
 
     /// The frame rate used by the video stream.
     frame_rate: ?[]const u8 = null,
@@ -29,6 +33,7 @@ pub const TransportStream = struct {
     pub const json_field_names = .{
         .channels = "Channels",
         .codec = "Codec",
+        .color = "Color",
         .frame_rate = "FrameRate",
         .frame_resolution = "FrameResolution",
         .pid = "Pid",

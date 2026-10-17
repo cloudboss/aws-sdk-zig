@@ -26,6 +26,7 @@ pub const ContainerFleetLocationStatus = @import("container_fleet_location_statu
 pub const ContainerFleetRemoveAttribute = @import("container_fleet_remove_attribute.zig").ContainerFleetRemoveAttribute;
 pub const ContainerFleetStatus = @import("container_fleet_status.zig").ContainerFleetStatus;
 pub const ContainerGroupDefinition = @import("container_group_definition.zig").ContainerGroupDefinition;
+pub const ContainerGroupDefinitionRemoveAttribute = @import("container_group_definition_remove_attribute.zig").ContainerGroupDefinitionRemoveAttribute;
 pub const ContainerGroupDefinitionStatus = @import("container_group_definition_status.zig").ContainerGroupDefinitionStatus;
 pub const ContainerGroupPortMapping = @import("container_group_port_mapping.zig").ContainerGroupPortMapping;
 pub const ContainerGroupType = @import("container_group_type.zig").ContainerGroupType;

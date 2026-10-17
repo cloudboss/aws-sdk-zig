@@ -6,6 +6,7 @@ pub const NetworkConnectorState = @import("network_connector_state.zig").Network
 pub const NetworkConnectorStateReasonCode = @import("network_connector_state_reason_code.zig").NetworkConnectorStateReasonCode;
 pub const NetworkConnectorSummary = @import("network_connector_summary.zig").NetworkConnectorSummary;
 pub const NetworkConnectorType = @import("network_connector_type.zig").NetworkConnectorType;
+pub const NetworkConnectorVersionSummary = @import("network_connector_version_summary.zig").NetworkConnectorVersionSummary;
 pub const NetworkConnectorVpcEgressConfiguration = @import("network_connector_vpc_egress_configuration.zig").NetworkConnectorVpcEgressConfiguration;
 pub const NetworkProtocol = @import("network_protocol.zig").NetworkProtocol;
 pub const ThrottleReason = @import("throttle_reason.zig").ThrottleReason;

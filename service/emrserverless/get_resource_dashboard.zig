@@ -7,6 +7,10 @@ const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ResourceType = @import("resource_type.zig").ResourceType;
 
 pub const GetResourceDashboardInput = struct {
+    /// Allows access to system profile logs for Lake Formation-enabled sessions.
+    /// Default is false.
+    access_system_profile_logs: ?bool = null,
+
     /// The ID of the application that the resource belongs to.
     application_id: []const u8,
 
@@ -18,6 +22,7 @@ pub const GetResourceDashboardInput = struct {
     resource_type: ResourceType,
 
     pub const json_field_names = .{
+        .access_system_profile_logs = "accessSystemProfileLogs",
         .application_id = "applicationId",
         .resource_id = "resourceId",
         .resource_type = "resourceType",
@@ -74,6 +79,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: GetResourceDashboardInp
 
     var query_buf: std.ArrayList(u8) = .empty;
     var query_has_prev = false;
+    if (input.access_system_profile_logs) |v| {
+        if (query_has_prev) try query_buf.appendSlice(allocator, "&");
+        try query_buf.appendSlice(allocator, "accessSystemProfileLogs=");
+        try query_buf.appendSlice(allocator, if (v) "true" else "false");
+        query_has_prev = true;
+    }
     if (query_has_prev) try query_buf.appendSlice(allocator, "&");
     try query_buf.appendSlice(allocator, "resourceId=");
     try aws.url.appendUrlEncoded(allocator, &query_buf, input.resource_id);

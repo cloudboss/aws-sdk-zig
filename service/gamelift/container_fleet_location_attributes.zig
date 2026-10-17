@@ -37,7 +37,7 @@ pub const ContainerFleetLocationAttributes = struct {
     /// * `ACTIVE` -- The container fleet has been deployed and is ready to
     /// host game sessions.
     ///
-    /// * `UPDATING` -- Updates to the container fleet is being updated. A
+    /// * `UPDATING` -- The container fleet is being updated. A
     /// deployment is in progress.
     ///
     /// * `EXPIRED` -- The container fleet has been expired. The fleet is

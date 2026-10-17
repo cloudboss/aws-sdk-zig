@@ -8,7 +8,10 @@ pub const NfsMountOptions = struct {
     ///
     /// You can specify the following options:
     ///
-    /// * `AUTOMATIC` (default): DataSync chooses NFS version 4.1.
+    /// * `AUTOMATIC` (default): DataSync chooses NFS version 4.1. For
+    /// Amazon FSx for OpenZFS locations, DataSync first attempts to use NFS
+    /// version 4.2, then falls back to version 4.1, and then to earlier versions if
+    /// needed.
     ///
     /// * `NFS3`: Stateless protocol version that allows for asynchronous writes on
     /// the server.
@@ -20,6 +23,13 @@ pub const NfsMountOptions = struct {
     /// delegations, and parallel data processing. NFS version 4.1 also includes all
     /// features
     /// available in version 4.0.
+    ///
+    /// * `NFSv4_2`: Stateful protocol version that supports sparse file
+    /// operations, space reservation, and server-side copy operations, in addition
+    /// to all
+    /// features available in version 4.1. Selecting NFS version 4.2 requires an
+    /// Enhanced mode
+    /// task.
     ///
     /// DataSync currently only supports NFS version 3 with Amazon FSx for NetApp
     /// ONTAP locations.

@@ -182,7 +182,7 @@ pub const Client = struct {
     /// failed match is handled as follows:
     ///
     /// * If the ticket has one or more players who rejected the match or failed to
-    /// respond, the ticket status is set `CANCELLED` and processing is
+    /// respond, the ticket status is set to `CANCELLED` and processing is
     /// terminated.
     ///
     /// * If all players in the ticket accepted the match, the ticket
@@ -530,7 +530,8 @@ pub const Client = struct {
     ///
     /// * `TotalMemoryLimitMebibytes`
     ///
-    /// * `TotalVcpuLimit`
+    /// * Either `TotalVcpuLimit` or a `Vcpu` value for the game server
+    /// container
     ///
     /// * At least one `GameServerContainerDefinition`
     ///
@@ -675,7 +676,8 @@ pub const Client = struct {
 
     /// **This API works with the following fleet types:** EC2, Anywhere, Container
     ///
-    /// Adds remote locations to an EC2 and begins populating the new locations with
+    /// Adds remote locations to an EC2 fleet and begins populating the new
+    /// locations with
     /// instances. The new instances conform to the fleet's instance type,
     /// auto-scaling, and
     /// other configuration settings.
@@ -820,8 +822,8 @@ pub const Client = struct {
     /// [UpdateGameSession](https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html) to change the game session's player session creation
     /// policy.
     ///
-    /// Amazon GameLift Servers retains logs for active for 14 days. To access the
-    /// logs, call
+    /// Amazon GameLift Servers retains logs for active game sessions for 14 days.
+    /// To access the logs, call
     /// [GetGameSessionLogUrl](https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetGameSessionLogUrl.html) to download the log files.
     ///
     /// *Available in Amazon GameLift Servers Local.*
@@ -944,7 +946,7 @@ pub const Client = struct {
 
     /// **This API works with the following fleet types:** EC2, Anywhere, Container
     ///
-    /// Defines a new matchmaking configuration for use with FlexMatch. Whether your
+    /// Defines a new matchmaking configuration for use with FlexMatch. Whether you
     /// are using
     /// FlexMatch with Amazon GameLift Servers hosting or as a standalone
     /// matchmaking service, the matchmaking
@@ -1232,7 +1234,7 @@ pub const Client = struct {
     /// Services account that is used
     /// to manage the Amazon GameLift Servers fleets. Identify the following values:
     /// (1) The ID of the fleet you
-    /// want to be enable a VPC peering connection for; (2) The Amazon Web Services
+    /// want to enable a VPC peering connection for; (2) The Amazon Web Services
     /// account with the VPC that
     /// you want to peer with; and (3) The ID of the VPC you want to peer with. This
     /// operation
@@ -1400,7 +1402,7 @@ pub const Client = struct {
     ///
     /// Removes locations from a multi-location fleet. When deleting a location, all
     /// game
-    /// server process and all instances that are still active in the location are
+    /// server processes and all instances that are still active in the location are
     /// shut down.
     ///
     /// To delete fleet locations, identify the fleet ID and provide a list of the
@@ -1575,7 +1577,7 @@ pub const Client = struct {
     ///
     /// Removes a VPC peering connection. To delete the connection, you must have a
     /// valid
-    /// authorization for the VPC peering connection that you want to delete..
+    /// authorization for the VPC peering connection that you want to delete.
     ///
     /// Once a valid authorization exists, call this operation from the Amazon Web
     /// Services account that is
@@ -1597,7 +1599,7 @@ pub const Client = struct {
     /// no longer
     /// host game sessions through Amazon GameLift Servers. Use this operation with
     /// an Anywhere fleet that
-    /// doesn't use the Amazon GameLift Servers Agent For Anywhere fleets with the
+    /// doesn't use the Amazon GameLift Servers Agent. For Anywhere fleets with the
     /// Agent, the Agent handles all
     /// compute registry tasks for you.
     ///
@@ -1727,7 +1729,7 @@ pub const Client = struct {
     /// the fleet properties, including information about the most recent
     /// deployment.
     ///
-    /// Some API operations limit the number of fleet IDs that allowed in one
+    /// Some API operations limit the number of fleet IDs that are allowed in one
     /// request. If
     /// a request exceeds this limit, the request fails and the error message
     /// contains the
@@ -1904,7 +1906,7 @@ pub const Client = struct {
     /// If successful, a `FleetAttributes` object is returned for each fleet
     /// requested, unless the fleet identifier is not found.
     ///
-    /// Some API operations limit the number of fleet IDs that allowed in one
+    /// Some API operations limit the number of fleet IDs that are allowed in one
     /// request. If
     /// a request exceeds this limit, the request fails and the error message
     /// contains the
@@ -2268,7 +2270,7 @@ pub const Client = struct {
     ///
     /// Retrieves additional game session properties, including the game session
     /// protection
-    /// policy in force, a set of one or more game sessions in a specific fleet
+    /// policy in force, for a set of one or more game sessions in a specific fleet
     /// location. You
     /// can optionally filter the results by current game session status.
     ///
@@ -2405,7 +2407,7 @@ pub const Client = struct {
         return describe_game_sessions.execute(self, allocator, input, options);
     }
 
-    /// **This API works with the following fleet types:**EC2, Container
+    /// **This API works with the following fleet types:** EC2, Container
     ///
     /// Retrieves information about the EC2 instances in an Amazon GameLift Servers
     /// managed fleet, including
@@ -3059,7 +3061,7 @@ pub const Client = struct {
     /// based on their
     /// home Region only.
     ///
-    /// You can use operation in the following ways:
+    /// You can use this operation in the following ways:
     ///
     /// * To get a list of all fleets in a Region, don't provide a build or script
     /// identifier.
@@ -3088,7 +3090,7 @@ pub const Client = struct {
 
     /// **This API works with the following fleet types:** EC2 (FleetIQ)
     ///
-    /// Lists a game server groups.
+    /// Lists game server groups.
     pub fn listGameServerGroups(self: *Self, allocator: std.mem.Allocator, input: list_game_server_groups.ListGameServerGroupsInput, options: CallOptions) !list_game_server_groups.ListGameServerGroupsOutput {
         return list_game_server_groups.execute(self, allocator, input, options);
     }
@@ -3482,7 +3484,7 @@ pub const Client = struct {
     ///   custom data in a game session.
     /// For example: `{"Key": "difficulty", "Value": "novice"}`.
     /// The filter expression must specify the
-    /// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameProperty](https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameProperty) -- a `Key` and a string `Value` to search for the game sessions.
+    /// [GameProperty](https://docs.aws.amazon.com/gamelift/latest/apireference/API_GameProperty.html) -- a `Key` and a string `Value` to search for the game sessions.
     ///
     /// For example, to search for the above key-value pair, specify the following
     /// search filter: `gameSessionProperties.difficulty = "novice"`.
@@ -3606,7 +3608,7 @@ pub const Client = struct {
     /// * `PlayerLatencies`. Include a set of latency values for
     /// destinations in the queue. When a request includes latency data, Amazon
     /// GameLift Servers
-    /// automatically reorder the queue's locations priority list based on
+    /// automatically reorders the queue's locations priority list based on
     /// lowest available latency values. If a request includes latency data for
     /// multiple players, Amazon GameLift Servers calculates each location's average
     /// latency for
@@ -3627,7 +3629,7 @@ pub const Client = struct {
     /// fails to place the game session in any of the locations on the override
     /// list.
     ///
-    /// * Request a placement and prioritized based on a custom list of locations.
+    /// * Request a placement and prioritize based on a custom list of locations.
     ///
     /// * You can request new player sessions for a group of players. Include the
     /// *DesiredPlayerSessions* parameter and include at minimum
@@ -3678,8 +3680,8 @@ pub const Client = struct {
     /// and they
     /// provide matchmaking data for all players currently in the game session.
     /// FlexMatch uses
-    /// this information to select new players so that backfilled match continues to
-    /// meet the
+    /// this information to select new players so that the backfilled match
+    /// continues to meet the
     /// original match requirements.
     ///
     /// When using FlexMatch with Amazon GameLift Servers managed hosting, you can
@@ -3833,7 +3835,7 @@ pub const Client = struct {
     /// and moves
     /// the `GameSessionPlacement` to `CANCELLED` status.
     ///
-    /// This operation results in an `InvalidRequestExecption` (400) error if a
+    /// This operation results in an `InvalidRequestException` (400) error if a
     /// game session has already been created for this placement. You can clean up
     /// an unneeded
     /// game session by calling
@@ -4086,7 +4088,7 @@ pub const Client = struct {
     /// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetDeployment.html](https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetDeployment.html).
     ///
     /// A managed fleet's runtime environment, which depends on the fleet's
-    /// Amazon Machine Image {AMI} version, can't be updated. You must create a new
+    /// Amazon Machine Image (AMI) version, can't be updated. You must create a new
     /// fleet. As a best practice, we recommend replacing your managed fleets every
     /// 30
     /// days to maintain a secure and up-to-date runtime environment for your hosted
@@ -4133,7 +4135,7 @@ pub const Client = struct {
     /// deployment replaces existing fleet instances with new instances that are
     /// deployed with
     /// the updated fleet properties. The fleet is placed in `UPDATING` status until
-    /// the deployment is complete, then return to `ACTIVE`.
+    /// the deployment is complete, then returns to `ACTIVE`.
     ///
     /// You can have only one update deployment active at a time for a fleet. If a
     /// second
@@ -4185,13 +4187,21 @@ pub const Client = struct {
     /// only one
     /// support container definition, provide an empty set.
     ///
+    /// * Remove the total vCPU limit from a game server container group so that its
+    ///   containers
+    /// can use up to the instance's available vCPU. Set `RemoveAttributes` to
+    /// `TOTAL_VCPU_LIMIT`. The game server container must have a `Vcpu`
+    /// value, because a game server container group needs either a total vCPU limit
+    /// or a game
+    /// server `Vcpu` value.
+    ///
     /// **Results:**
     ///
     /// If successful, this operation returns the complete properties of the new
     /// container group
     /// definition version.
     ///
-    /// If the container group definition version is used in an active fleets, the
+    /// If the container group definition version is used in an active fleet, the
     /// update
     /// automatically initiates a new fleet deployment of the new version. You can
     /// track a fleet's
@@ -4213,7 +4223,7 @@ pub const Client = struct {
     /// for the updated fleet.
     ///
     /// A managed fleet's runtime environment, which depends on the fleet's
-    /// Amazon Machine Image {AMI} version, can't be updated. You must create a new
+    /// Amazon Machine Image (AMI) version, can't be updated. You must create a new
     /// fleet. As a best practice, we recommend replacing your managed fleets every
     /// 30
     /// days to maintain a secure and up-to-date runtime environment for your hosted
@@ -4357,7 +4367,7 @@ pub const Client = struct {
     /// game
     /// server group and specify the new utilization status. You can't change the
     /// status
-    /// from to `UTILIZED` to `AVAILABLE` .
+    /// from `UTILIZED` to `AVAILABLE` .
     ///
     /// * To report health status, identify the game server and game server group
     ///   and

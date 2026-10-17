@@ -4,7 +4,7 @@ const EC2InstanceType = @import("ec2_instance_type.zig").EC2InstanceType;
 /// and current utilization. Amazon GameLift Servers
 /// allows Amazon Web Services accounts a maximum number of instances, per
 /// instance type, per Amazon Web Services Region
-/// or location, for use with Amazon GameLift Servers. You can request an limit
+/// or location, for use with Amazon GameLift Servers. You can request a limit
 /// increase for your account by
 /// using the **Service limits** page in the Amazon GameLift Servers
 /// console.

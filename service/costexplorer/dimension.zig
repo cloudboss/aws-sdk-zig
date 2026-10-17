@@ -36,6 +36,7 @@ pub const Dimension = enum {
     invoicing_entity,
     anomaly_total_impact_absolute,
     anomaly_total_impact_percentage,
+    product_attribute,
 
     pub const json_field_names = .{
         .az = "AZ",
@@ -73,6 +74,7 @@ pub const Dimension = enum {
         .invoicing_entity = "INVOICING_ENTITY",
         .anomaly_total_impact_absolute = "ANOMALY_TOTAL_IMPACT_ABSOLUTE",
         .anomaly_total_impact_percentage = "ANOMALY_TOTAL_IMPACT_PERCENTAGE",
+        .product_attribute = "PRODUCT_ATTRIBUTE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -112,6 +114,7 @@ pub const Dimension = enum {
             .invoicing_entity => "INVOICING_ENTITY",
             .anomaly_total_impact_absolute => "ANOMALY_TOTAL_IMPACT_ABSOLUTE",
             .anomaly_total_impact_percentage => "ANOMALY_TOTAL_IMPACT_PERCENTAGE",
+            .product_attribute => "PRODUCT_ATTRIBUTE",
         };
     }
 

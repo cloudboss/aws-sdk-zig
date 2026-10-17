@@ -12,6 +12,8 @@ pub const GetAccountUsageOutput = struct {
     /// Monthly evaluation hours usage and limit for an account
     monthly_account_evaluation_hours: ?UsageMetric = null,
 
+    monthly_account_grader_hours: ?UsageMetric = null,
+
     /// Monthly investigation hours usage and limit for an account
     monthly_account_investigation_hours: ?UsageMetric = null,
 
@@ -29,6 +31,7 @@ pub const GetAccountUsageOutput = struct {
 
     pub const json_field_names = .{
         .monthly_account_evaluation_hours = "monthlyAccountEvaluationHours",
+        .monthly_account_grader_hours = "monthlyAccountGraderHours",
         .monthly_account_investigation_hours = "monthlyAccountInvestigationHours",
         .monthly_account_on_demand_hours = "monthlyAccountOnDemandHours",
         .monthly_account_system_learning_hours = "monthlyAccountSystemLearningHours",

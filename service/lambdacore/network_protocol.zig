@@ -1,5 +1,7 @@
 const std = @import("std");
 
+/// The network protocol for a connector. `IPv4` enables IPv4-only networking;
+/// `DualStack` enables both IPv4 and IPv6.
 pub const NetworkProtocol = enum {
     /// IPv4
     i_pv_4,

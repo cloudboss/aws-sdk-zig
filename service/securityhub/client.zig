@@ -15,6 +15,7 @@ const batch_update_automation_rules = @import("batch_update_automation_rules.zig
 const batch_update_findings = @import("batch_update_findings.zig");
 const batch_update_findings_v2 = @import("batch_update_findings_v2.zig");
 const batch_update_standards_control_associations = @import("batch_update_standards_control_associations.zig");
+const cancel_export_job_v2 = @import("cancel_export_job_v2.zig");
 const create_action_target = @import("create_action_target.zig");
 const create_aggregator_v2 = @import("create_aggregator_v2.zig");
 const create_automation_rule = @import("create_automation_rule.zig");
@@ -67,6 +68,7 @@ const get_configuration_policy_association = @import("get_configuration_policy_a
 const get_connector = @import("get_connector.zig");
 const get_connector_v2 = @import("get_connector_v2.zig");
 const get_enabled_standards = @import("get_enabled_standards.zig");
+const get_export_job_v2 = @import("get_export_job_v2.zig");
 const get_finding_aggregator = @import("get_finding_aggregator.zig");
 const get_finding_history = @import("get_finding_history.zig");
 const get_finding_statistics_v2 = @import("get_finding_statistics_v2.zig");
@@ -93,6 +95,7 @@ const list_configuration_policy_associations = @import("list_configuration_polic
 const list_connectors = @import("list_connectors.zig");
 const list_connectors_v2 = @import("list_connectors_v2.zig");
 const list_enabled_products_for_import = @import("list_enabled_products_for_import.zig");
+const list_export_jobs_v2 = @import("list_export_jobs_v2.zig");
 const list_exposures_by_remediation_v2 = @import("list_exposures_by_remediation_v2.zig");
 const list_finding_aggregators = @import("list_finding_aggregators.zig");
 const list_free_trial_statuses_v2 = @import("list_free_trial_statuses_v2.zig");
@@ -105,6 +108,7 @@ const list_tags_for_resource = @import("list_tags_for_resource.zig");
 const register_connector_v2 = @import("register_connector_v2.zig");
 const start_configuration_policy_association = @import("start_configuration_policy_association.zig");
 const start_configuration_policy_disassociation = @import("start_configuration_policy_disassociation.zig");
+const start_export_job_v2 = @import("start_export_job_v2.zig");
 const tag_resource = @import("tag_resource.zig");
 const untag_resource = @import("untag_resource.zig");
 const update_action_target = @import("update_action_target.zig");
@@ -394,6 +398,23 @@ pub const Client = struct {
     /// enablement status of a control in a standard.
     pub fn batchUpdateStandardsControlAssociations(self: *Self, allocator: std.mem.Allocator, input: batch_update_standards_control_associations.BatchUpdateStandardsControlAssociationsInput, options: CallOptions) !batch_update_standards_control_associations.BatchUpdateStandardsControlAssociationsOutput {
         return batch_update_standards_control_associations.execute(self, allocator, input, options);
+    }
+
+    /// Cancels a findings export job that is in progress. Security Hub transitions
+    /// a running job to the `CANCELLED` state and returns the `ExportJobId` and its
+    /// new `Status`. Canceling a job that is already in the `CANCELLED` state
+    /// succeeds and returns the same result, so you can safely retry a cancel
+    /// request.
+    ///
+    /// You can't cancel an export job that has already reached a terminal
+    /// `SUCCEEDED` or `FAILED` state; in that case, this operation returns a
+    /// `ConflictException`. If no export job matches the `ExportJobId` that you
+    /// provide, this operation returns a `ResourceNotFoundException`.
+    ///
+    /// The `Status` value returned by this operation reflects the cancellation
+    /// immediately, even though the job can take a short time to stop completely.
+    pub fn cancelExportJobV2(self: *Self, allocator: std.mem.Allocator, input: cancel_export_job_v2.CancelExportJobV2Input, options: CallOptions) !cancel_export_job_v2.CancelExportJobV2Output {
+        return cancel_export_job_v2.execute(self, allocator, input, options);
     }
 
     /// Creates a custom action target in Security Hub CSPM.
@@ -915,6 +936,21 @@ pub const Client = struct {
         return get_enabled_standards.execute(self, allocator, input, options);
     }
 
+    /// Returns the details of a single findings export job, including its current
+    /// `Status`, the `Destination` it writes to, the `OutputConfiguration` it was
+    /// started with, and its `StartedAt` and `EndedAt` timestamps. Use this
+    /// operation to poll an export job that you started with `StartExportJobV2`
+    /// until it reaches a terminal state (`SUCCEEDED`, `FAILED`, or `CANCELLED`).
+    ///
+    /// If the job failed, the response includes a `FailureCode` and
+    /// `FailureMessage` that describe the reason. Input values such as `Scopes` and
+    /// `Filters` are echoed back as they were submitted, with relative date ranges
+    /// returned unresolved. If no export job matches the `ExportJobId` that you
+    /// provide, this operation returns a `ResourceNotFoundException`.
+    pub fn getExportJobV2(self: *Self, allocator: std.mem.Allocator, input: get_export_job_v2.GetExportJobV2Input, options: CallOptions) !get_export_job_v2.GetExportJobV2Output {
+        return get_export_job_v2.execute(self, allocator, input, options);
+    }
+
     /// The *aggregation Region* is now called the *home Region*.
     ///
     /// Returns the current configuration in the calling account for cross-Region
@@ -1202,6 +1238,21 @@ pub const Client = struct {
         return list_enabled_products_for_import.execute(self, allocator, input, options);
     }
 
+    /// Returns the findings export jobs in your account as a paginated list of
+    /// `ExportSummary` objects. You can filter the results by job `Status` or
+    /// `DataType`.
+    ///
+    /// To page through the results, use the `MaxResults` and `NextToken`
+    /// parameters. If the response includes a `NextToken` value, pass it in a
+    /// subsequent request to retrieve the next page of results.
+    ///
+    /// Each `ExportSummary` reports the output `Format` of the job but not its full
+    /// `OutputConfiguration`. To retrieve the filters and selected fields that a
+    /// job was started with, call `GetExportJobV2`.
+    pub fn listExportJobsV2(self: *Self, allocator: std.mem.Allocator, input: list_export_jobs_v2.ListExportJobsV2Input, options: CallOptions) !list_export_jobs_v2.ListExportJobsV2Output {
+        return list_export_jobs_v2.execute(self, allocator, input, options);
+    }
+
     /// Retrieves the exposure findings tied to a specific remediation target.
     /// Results are sorted by
     /// previous severity, highest first, and are paginated.
@@ -1305,6 +1356,44 @@ pub const Client = struct {
     /// operation from the home Region.
     pub fn startConfigurationPolicyDisassociation(self: *Self, allocator: std.mem.Allocator, input: start_configuration_policy_disassociation.StartConfigurationPolicyDisassociationInput, options: CallOptions) !start_configuration_policy_disassociation.StartConfigurationPolicyDisassociationOutput {
         return start_configuration_policy_disassociation.execute(self, allocator, input, options);
+    }
+
+    /// Starts an ad hoc export job that writes Security Hub findings to an Amazon
+    /// Simple Storage Service (Amazon S3) bucket that you own. Because the export
+    /// runs asynchronously, this operation returns only the `ExportJobId` of the
+    /// new job; it doesn't wait for the export to finish. Use `GetExportJobV2` to
+    /// poll the job, and `ListExportJobsV2` to view the export jobs in your
+    /// account.
+    ///
+    /// Security Hub allows only one export job in the `RUNNING` state per account
+    /// at a time. If an export job is already running, this operation returns a
+    /// `ServiceQuotaExceededException`. Wait for the running job to finish, or
+    /// cancel it with `CancelExportJobV2`, before you start a new one.
+    ///
+    /// Specify the destination bucket and Amazon Web Services Key Management
+    /// Service (Amazon Web Services KMS) key in the `Destination` parameter, and
+    /// the output format (`CSV` or `OCSF_JSON`), optional filters, and field
+    /// selection in the `OutputConfiguration` parameter. Before you call this
+    /// operation, you must grant Security Hub permission to write to your bucket
+    /// and use your Amazon Web Services KMS key by adding the bucket policy and key
+    /// policy statements shown in the Examples section.
+    ///
+    /// Two identities use your Amazon Web Services KMS key, and each needs its own
+    /// permission. Security Hub uses the key when it writes the export objects to
+    /// your bucket. The IAM principal that calls `StartExportJobV2` must also have
+    /// `kms:GenerateDataKey` and `kms:Decrypt` permissions on the key. The Examples
+    /// section shows both grants.
+    ///
+    /// A delegated administrator can use the optional `Scopes` parameter to export
+    /// findings for specific organizations or organizational units (OUs).
+    ///
+    /// To make the request idempotent, provide a `ClientToken`. If you retry a
+    /// `StartExportJobV2` request with the same `ClientToken` and the same request
+    /// parameters, Security Hub returns the `ExportJobId` of the original job
+    /// instead of starting a new one. If you reuse a `ClientToken` with different
+    /// request parameters, this operation returns a `ConflictException`.
+    pub fn startExportJobV2(self: *Self, allocator: std.mem.Allocator, input: start_export_job_v2.StartExportJobV2Input, options: CallOptions) !start_export_job_v2.StartExportJobV2Output {
+        return start_export_job_v2.execute(self, allocator, input, options);
     }
 
     /// Adds one or more tags to a resource.
@@ -1542,6 +1631,13 @@ pub const Client = struct {
     }
 
     pub fn listEnabledProductsForImportPaginator(self: *Self, params: list_enabled_products_for_import.ListEnabledProductsForImportInput) paginator.ListEnabledProductsForImportPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listExportJobsV2Paginator(self: *Self, params: list_export_jobs_v2.ListExportJobsV2Input) paginator.ListExportJobsV2Paginator {
         return .{
             .client = self,
             .params = params,

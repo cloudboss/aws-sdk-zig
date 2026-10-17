@@ -1,6 +1,6 @@
 const HarnessHookFailureMode = @import("harness_hook_failure_mode.zig").HarnessHookFailureMode;
 
-/// The configuration for an AWS Lambda hook target.
+/// The configuration for an Amazon Web Services Lambda hook target.
 pub const HarnessHookLambdaTarget = struct {
     /// The ARN of the Lambda function to invoke.
     arn: []const u8,

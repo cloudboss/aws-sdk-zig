@@ -203,6 +203,9 @@ pub const Client = struct {
     /// information for troubleshooting a failed update rollback, see [Update
     /// rollback
     /// failed](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed).
+    ///
+    /// `ForceRollback` and `ResourcesToSkip` are mutually exclusive.
+    /// For details, see ContinueUpdateRollbackInput$ForceRollback.
     pub fn continueUpdateRollback(self: *Self, allocator: std.mem.Allocator, input: continue_update_rollback.ContinueUpdateRollbackInput, options: CallOptions) !continue_update_rollback.ContinueUpdateRollbackOutput {
         return continue_update_rollback.execute(self, allocator, input, options);
     }

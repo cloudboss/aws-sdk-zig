@@ -13,12 +13,12 @@ pub const CreateLocationInput = struct {
 
     /// A list of labels to assign to the new resource. Tags are developer-defined
     /// key-value
-    /// pairs. Tagging Amazon Web Services resources are useful for resource
+    /// pairs. Tagging Amazon Web Services resources is useful for resource
     /// management, access management,
     /// and cost allocation. For more information, see [ Tagging Amazon Web Services
     /// Resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
     /// in the
-    /// *Amazon Web Services General Rareference*.
+    /// *Amazon Web Services General Reference*.
     tags: ?[]const Tag = null,
 
     pub const json_field_names = .{

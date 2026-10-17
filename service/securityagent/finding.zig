@@ -1,6 +1,7 @@
 const CodeLocation = @import("code_location.zig").CodeLocation;
 const CodeRemediationTask = @import("code_remediation_task.zig").CodeRemediationTask;
 const ConfidenceLevel = @import("confidence_level.zig").ConfidenceLevel;
+const LinkedIssue = @import("linked_issue.zig").LinkedIssue;
 const RiskLevel = @import("risk_level.zig").RiskLevel;
 const FindingStatus = @import("finding_status.zig").FindingStatus;
 const ValidationStatus = @import("validation_status.zig").ValidationStatus;
@@ -53,6 +54,10 @@ pub const Finding = struct {
     /// The identifier of the entity that last updated the finding.
     last_updated_by: ?[]const u8 = null,
 
+    /// The issue in a third-party issue tracker that this finding has been exported
+    /// to.
+    linked_issue: ?LinkedIssue = null,
+
     /// The name of the finding.
     name: ?[]const u8 = null,
 
@@ -69,6 +74,10 @@ pub const Finding = struct {
     /// The reasoning behind the finding, explaining why it was identified as a
     /// vulnerability.
     reasoning: ?[]const u8 = null,
+
+    /// The suggested fix for the finding, describing the changes recommended to
+    /// remediate the vulnerability, with example code or configuration.
+    remediation_code: ?[]const u8 = null,
 
     /// The list of pentest job identifiers for revalidation jobs that retested this
     /// finding.
@@ -116,11 +125,13 @@ pub const Finding = struct {
         .description = "description",
         .finding_id = "findingId",
         .last_updated_by = "lastUpdatedBy",
+        .linked_issue = "linkedIssue",
         .name = "name",
         .original_finding_id = "originalFindingId",
         .pentest_id = "pentestId",
         .pentest_job_id = "pentestJobId",
         .reasoning = "reasoning",
+        .remediation_code = "remediationCode",
         .revalidation_job_ids = "revalidationJobIds",
         .risk_level = "riskLevel",
         .risk_score = "riskScore",

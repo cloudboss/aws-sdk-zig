@@ -40,9 +40,19 @@ pub const GetDomainSuggestionsInput = struct {
     /// that are available. If `OnlyAvailable` is `false`, Route 53
     /// returns domain names without checking whether they're available to be
     /// registered. To
-    /// determine whether the domain is available, you can call
-    /// `checkDomainAvailability` for each suggestion.
+    /// determine whether the domain is available, call `checkDomainAvailability`
+    /// for
+    /// each suggestion.
+    ///
+    /// If `OnlyAvailable` is `false`, Route 53 does not return pricing
+    /// information for the suggested domain names.
     only_available: bool,
+
+    /// If `true`, Route 53 returns only domain names that are priced at the
+    /// standard registration rate for their TLD. If `false`, Route 53 includes
+    /// domain names with premium pricing in the suggestions list. The default is
+    /// `true`.
+    only_standard_prices: ?bool = null,
 
     /// The number of suggested domain names that you want Route 53 to return.
     /// Specify a value
@@ -53,6 +63,7 @@ pub const GetDomainSuggestionsInput = struct {
     pub const json_field_names = .{
         .domain_name = "DomainName",
         .only_available = "OnlyAvailable",
+        .only_standard_prices = "OnlyStandardPrices",
         .suggestion_count = "SuggestionCount",
     };
 };

@@ -46,6 +46,11 @@ pub const AddOutputRequest = struct {
     /// The name of the output. This value must be unique within the current flow.
     name: ?[]const u8 = null,
 
+    /// The audio reference level of the NDI receiver, in decibels relative to full
+    /// scale (dBFS). Common values are `-20` (NDI and SMPTE) and `-18` (EBU). If
+    /// you don't specify this field, MediaConnect uses `-20`.
+    ndi_audio_reference_level: ?i32 = null,
+
     /// Controls how MediaConnect generates timecodes for NDI output frames. If you
     /// don't specify this field, MediaConnect uses `EMBEDDED_TIMECODE`.
     ///
@@ -113,6 +118,7 @@ pub const AddOutputRequest = struct {
         .media_stream_output_configurations = "MediaStreamOutputConfigurations",
         .min_latency = "MinLatency",
         .name = "Name",
+        .ndi_audio_reference_level = "NdiAudioReferenceLevel",
         .ndi_output_timecode_source = "NdiOutputTimecodeSource",
         .ndi_program_name = "NdiProgramName",
         .ndi_speed_hq_quality = "NdiSpeedHqQuality",

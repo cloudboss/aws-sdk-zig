@@ -64,7 +64,7 @@ pub const CreateContainerFleetInput = struct {
     /// server container groups that
     /// can fit on each instance. This calculation is based on the CPU and memory
     /// resources of
-    /// the fleet's instance type). To use the calculated maximum, don't set this
+    /// the fleet's instance type. To use the calculated maximum, don't set this
     /// parameter. If
     /// you set this number manually, Amazon GameLift Servers uses your value as
     /// long as it's less than the
@@ -154,7 +154,7 @@ pub const CreateContainerFleetInput = struct {
     /// remote locations.
     /// Instance type determines the computing resources and processing power that's
     /// available
-    /// to host your game servers. This includes including CPU, memory, storage, and
+    /// to host your game servers. This includes CPU, memory, storage, and
     /// networking
     /// capacity.
     ///
@@ -197,9 +197,9 @@ pub const CreateContainerFleetInput = struct {
     ///
     /// By default, this property is set to `CLOUDWATCH`.
     ///
-    /// Amazon GameLift Servers requires permissions to send logs other Amazon Web
-    /// Services services in your account. These permissions are included in the IAM
-    /// fleet role for this container fleet (see `FleetRoleArn)`.
+    /// Amazon GameLift Servers requires permissions to send logs to other Amazon
+    /// Web Services services in your account. These permissions are included in the
+    /// IAM fleet role for this container fleet (see `FleetRoleArn`).
     log_configuration: ?LogConfiguration = null,
 
     /// The name of an Amazon Web Services CloudWatch metric group to add this fleet
@@ -229,7 +229,7 @@ pub const CreateContainerFleetInput = struct {
     new_game_session_protection_policy: ?ProtectionPolicy = null,
 
     /// The name of a container group definition resource that describes a set of
-    /// axillary
+    /// auxiliary
     /// software. A fleet instance has one process for executables in this container
     /// group. A
     /// per-instance container group is optional. You can update the fleet to add or
@@ -247,7 +247,7 @@ pub const CreateContainerFleetInput = struct {
     per_instance_container_group_definition_name: ?[]const u8 = null,
 
     /// Configures player gateway for your fleet. Player gateway provides benefits
-    /// such as DDoS protection by rate limiting and validating traﬃc before it
+    /// such as DDoS protection by rate limiting and validating traffic before it
     /// reaches game servers, hiding game server IP addresses from players, and
     /// providing updated endpoints when relay endpoints become unhealthy.
     ///
@@ -275,7 +275,7 @@ pub const CreateContainerFleetInput = struct {
 
     /// A list of labels to assign to the new fleet resource. Tags are
     /// developer-defined
-    /// key-value pairs. Tagging Amazon Web Services resources are useful for
+    /// key-value pairs. Tagging Amazon Web Services resources is useful for
     /// resource management, access
     /// management and cost allocation. For more information, see [ Tagging Amazon
     /// Web Services

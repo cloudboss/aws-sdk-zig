@@ -1,5 +1,7 @@
 const std = @import("std");
 
+/// The status of the most recent update operation on a network connector:
+/// `Successful`, `Failed`, or `InProgress`.
 pub const NetworkConnectorLastUpdateStatus = enum {
     successful,
     failed,

@@ -1,3 +1,4 @@
+const VpcIpAddressType = @import("vpc_ip_address_type.zig").VpcIpAddressType;
 const OriginProtocolPolicy = @import("origin_protocol_policy.zig").OriginProtocolPolicy;
 const OriginSslProtocols = @import("origin_ssl_protocols.zig").OriginSslProtocols;
 
@@ -13,6 +14,11 @@ pub const VpcOriginEndpointConfig = struct {
     /// The HTTPS port of the CloudFront VPC origin endpoint configuration. The
     /// default value is `443`.
     https_port: i32,
+
+    /// The IP address type of the CloudFront VPC origin endpoint configuration.
+    /// Valid values are `ipv4` and `dualstack`. IPv6-only is not supported for VPC
+    /// origins.
+    ip_address_type: ?VpcIpAddressType = null,
 
     /// The name of the CloudFront VPC origin endpoint configuration.
     name: []const u8,

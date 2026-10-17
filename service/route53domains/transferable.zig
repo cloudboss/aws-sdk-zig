@@ -17,9 +17,16 @@ const std = @import("std");
 ///
 /// **DONT_KNOW**
 ///
-/// The TLD registry didn't respond in time or didn't provide a definitive
-/// answer about domain transferability, which can occur due to registry
-/// maintenance or temporary delays.
+/// The TLD registry didn't reply with a definitive answer about whether the
+/// domain name can be transferred. Route 53 can return this response for a
+/// variety of reasons, for example, the registry is performing maintenance. Try
+/// again later.
+///
+/// **PENDING**
+///
+/// The TLD registry didn't return a response in the expected amount of time.
+/// When the response is delayed, it usually takes just a few extra seconds. You
+/// can resubmit the request immediately.
 ///
 /// **DOMAIN_IN_OWN_ACCOUNT**
 ///
@@ -39,6 +46,7 @@ pub const Transferable = enum {
     domain_in_own_account,
     domain_in_another_account,
     premium_domain,
+    pending,
 
     pub const json_field_names = .{
         .transferable = "TRANSFERABLE",
@@ -47,6 +55,7 @@ pub const Transferable = enum {
         .domain_in_own_account = "DOMAIN_IN_OWN_ACCOUNT",
         .domain_in_another_account = "DOMAIN_IN_ANOTHER_ACCOUNT",
         .premium_domain = "PREMIUM_DOMAIN",
+        .pending = "PENDING",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -57,6 +66,7 @@ pub const Transferable = enum {
             .domain_in_own_account => "DOMAIN_IN_OWN_ACCOUNT",
             .domain_in_another_account => "DOMAIN_IN_ANOTHER_ACCOUNT",
             .premium_domain => "PREMIUM_DOMAIN",
+            .pending => "PENDING",
         };
     }
 

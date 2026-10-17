@@ -1,11 +1,11 @@
 const PriceWithCurrency = @import("price_with_currency.zig").PriceWithCurrency;
 
-/// Information about the domain price associated with a TLD.
+/// Information about the prices associated with a TLD or a domain name.
 pub const DomainPrice = struct {
     /// The price for changing domain ownership.
     change_ownership_price: ?PriceWithCurrency = null,
 
-    /// The name of the TLD for which the prices apply.
+    /// The TLD or domain name that the prices apply to.
     name: ?[]const u8 = null,
 
     /// The price for domain registration with Route 53.

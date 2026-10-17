@@ -34,6 +34,7 @@ const list_connection_types = @import("list_connection_types.zig");
 const list_crawlers = @import("list_crawlers.zig");
 const list_custom_entity_types = @import("list_custom_entity_types.zig");
 const list_data_quality_results = @import("list_data_quality_results.zig");
+const list_data_quality_results_v2 = @import("list_data_quality_results_v2.zig");
 const list_data_quality_rule_recommendation_runs = @import("list_data_quality_rule_recommendation_runs.zig");
 const list_data_quality_ruleset_evaluation_runs = @import("list_data_quality_ruleset_evaluation_runs.zig");
 const list_data_quality_rulesets = @import("list_data_quality_rulesets.zig");
@@ -1175,6 +1176,44 @@ pub const ListDataQualityResultsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_data_quality_results.execute(self.client, allocator, self.params, options);
+
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
+        }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListDataQualityResultsV2Paginator = struct {
+    client: *Client,
+    params: list_data_quality_results_v2.ListDataQualityResultsV2Input,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_data_quality_results_v2.ListDataQualityResultsV2Output {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_data_quality_results_v2.execute(self.client, allocator, self.params, options);
 
         const next_token: ?[]const u8 = output.next_token;
         const owned_token = if (next_token) |token|

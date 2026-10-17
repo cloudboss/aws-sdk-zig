@@ -8,6 +8,10 @@ pub const RegisteredMCPServerDetails = struct {
     /// The MCP server uses this authorization method.
     authorization_method: MCPServerAuthorizationMethod,
 
+    /// The configured custom authentication header names when the MCP server uses
+    /// custom-header authentication. Secret values are not returned.
+    custom_header_names: ?[]const []const u8 = null,
+
     /// Optional description for the MCP server.
     description: ?[]const u8 = null,
 
@@ -20,6 +24,7 @@ pub const RegisteredMCPServerDetails = struct {
     pub const json_field_names = .{
         .api_key_header = "apiKeyHeader",
         .authorization_method = "authorizationMethod",
+        .custom_header_names = "customHeaderNames",
         .description = "description",
         .endpoint = "endpoint",
         .name = "name",

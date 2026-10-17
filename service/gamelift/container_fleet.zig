@@ -84,8 +84,8 @@ pub const ContainerFleet = struct {
     /// type
     /// determines the computing resources and processing power that's available to
     /// host your
-    /// game servers. This includes including CPU, memory, storage, and networking
-    /// capacity. You
+    /// game servers. This includes CPU, memory, storage, and networking capacity.
+    /// You
     /// can't update this fleet property.
     instance_type: ?[]const u8 = null,
 
@@ -107,7 +107,7 @@ pub const ContainerFleet = struct {
     /// * `NONE` -- Don't collect container logs.
     log_configuration: ?LogConfiguration = null,
 
-    /// The calculated maximum number of game server container group that can be
+    /// The calculated maximum number of game server container groups that can be
     /// deployed on
     /// each fleet instance. The calculation depends on the resource needs of the
     /// container
@@ -169,8 +169,7 @@ pub const ContainerFleet = struct {
     ///   game
     /// sessions.
     ///
-    /// * `UPDATING` -- Updates to the container fleet is being updated. A
-    ///   deployment is in
+    /// * `UPDATING` -- The container fleet is being updated. A deployment is in
     /// progress.
     ///
     /// * `EXPIRED` -- The container fleet has been expired. The fleet is scaled

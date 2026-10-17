@@ -33,8 +33,8 @@ pub const UpdateDomainConfigInput = struct {
     /// A list of advisory warning codes to accept for this configuration change. By
     /// default, any advisory warning blocks the change. Include the code of each
     /// warning you want to accept so the change can proceed. You can find warning
-    /// codes in the`ValidationFailures` list returned by
-    /// `DescribeDomainChangeProgress`and `DescribeDryRunProgress`. Critical
+    /// codes in the `ValidationFailures` list returned by
+    /// `DescribeDomainChangeProgress` and `DescribeDryRunProgress`. Critical
     /// validation failures cannot be accepted and always block the change. If you
     /// omit this parameter or pass an empty list, all warnings block the change.
     /// For more information, see [Validating a domain

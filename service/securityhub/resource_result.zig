@@ -1,6 +1,8 @@
+const CriticalitySource = @import("criticality_source.zig").CriticalitySource;
 const DiscoveryType = @import("discovery_type.zig").DiscoveryType;
 const ResourceFindingsSummary = @import("resource_findings_summary.zig").ResourceFindingsSummary;
 const ResourceCategory = @import("resource_category.zig").ResourceCategory;
+const ResourceCriticality = @import("resource_criticality.zig").ResourceCriticality;
 const ResourceInfo = @import("resource_info.zig").ResourceInfo;
 const ResourceSubCategory = @import("resource_sub_category.zig").ResourceSubCategory;
 const ResourceTag = @import("resource_tag.zig").ResourceTag;
@@ -15,6 +17,9 @@ pub const ResourceResult = struct {
     /// The name of the Amazon Web Services account that's associated with the
     /// resource.
     account_name: ?[]const u8 = null,
+
+    /// The sources of criticalities determined from a resource.
+    criticality_sources: ?[]const CriticalitySource = null,
 
     /// Specifies how the resource was discovered. If the value is `Managed`, the
     /// resource is natively provided by a cloud service provider. If the value is
@@ -42,6 +47,9 @@ pub const ResourceResult = struct {
 
     /// The time when the resource was created.
     resource_creation_time_dt: ?[]const u8 = null,
+
+    /// The criticality assigned to a resource.
+    resource_criticality: ?ResourceCriticality = null,
 
     /// The timestamp when information about the resource was captured.
     resource_detail_capture_time_dt: []const u8,
@@ -92,6 +100,7 @@ pub const ResourceResult = struct {
     pub const json_field_names = .{
         .account_id = "AccountId",
         .account_name = "AccountName",
+        .criticality_sources = "CriticalitySources",
         .discovery_type = "DiscoveryType",
         .findings_summary = "FindingsSummary",
         .region = "Region",
@@ -99,6 +108,7 @@ pub const ResourceResult = struct {
         .resource_cloud_partition = "ResourceCloudPartition",
         .resource_config = "ResourceConfig",
         .resource_creation_time_dt = "ResourceCreationTimeDt",
+        .resource_criticality = "ResourceCriticality",
         .resource_detail_capture_time_dt = "ResourceDetailCaptureTimeDt",
         .resource_guid = "ResourceGuid",
         .resource_id = "ResourceId",

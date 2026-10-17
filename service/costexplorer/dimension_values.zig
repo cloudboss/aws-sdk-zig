@@ -18,6 +18,11 @@ pub const DimensionValues = struct {
     /// `ANOMALY_TOTAL_IMPACT_ABSOLUTE` and
     /// `ANOMALY_TOTAL_IMPACT_PERCENTAGE` can only be used in
     /// [AnomalySubscriptions](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html).
+    ///
+    /// Use `PRODUCT_ATTRIBUTE` only as the `Dimension` in
+    /// `GetDimensionValues`. To filter or group by product attributes, use the
+    /// `ProductAttributes` field of `Expression` or the
+    /// `PRODUCT_ATTRIBUTE` group type.
     key: ?Dimension = null,
 
     /// The match options that you can use to filter your results.

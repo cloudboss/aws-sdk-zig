@@ -1,0 +1,45 @@
+const std = @import("std");
+
+/// The state of an export job. Valid values are as follows:
+///
+/// * `RUNNING` – The job is queued or in progress.
+///
+/// * `SUCCEEDED` – The job completed and the output is available in the
+///   destination bucket.
+///
+/// * `FAILED` – The job didn't complete. See `FailureCode` and
+///   `FailureMessage`.
+///
+/// * `CANCELLED` – The job was canceled with `CancelExportJobV2`.
+pub const ExportStatus = enum {
+    running,
+    succeeded,
+    failed,
+    cancelled,
+
+    pub const json_field_names = .{
+        .running = "RUNNING",
+        .succeeded = "SUCCEEDED",
+        .failed = "FAILED",
+        .cancelled = "CANCELLED",
+    };
+
+    pub fn wireName(self: @This()) []const u8 {
+        return switch (self) {
+            .running => "RUNNING",
+            .succeeded => "SUCCEEDED",
+            .failed => "FAILED",
+            .cancelled => "CANCELLED",
+        };
+    }
+
+    pub fn fromWireName(str: []const u8) ?@This() {
+        const fields = @typeInfo(@TypeOf(json_field_names)).@"struct".field_names;
+        inline for (fields) |field_name| {
+            if (std.mem.eql(u8, str, @field(json_field_names, field_name))) {
+                return @field(@This(), field_name);
+            }
+        }
+        return std.meta.stringToEnum(@This(), str);
+    }
+};

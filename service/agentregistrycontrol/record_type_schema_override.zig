@@ -1,13 +1,12 @@
 const RecordType = @import("record_type.zig").RecordType;
 
-/// A schema override for a specific record type within a custom metadata schema
-/// configuration.
+/// The custom metadata fields for one record type, in addition to the common
+/// attributes defined in `defaultSchema`.
 pub const RecordTypeSchemaOverride = struct {
-    /// The record type that this schema override applies to.
+    /// The record type these fields apply to.
     record_type: RecordType,
 
-    /// The JSON Schema for the specified record type. Must follow the same
-    /// structural rules as the default schema.
+    /// A JSON Schema with the fields for this record type.
     schema: []const u8,
 
     pub const json_field_names = .{

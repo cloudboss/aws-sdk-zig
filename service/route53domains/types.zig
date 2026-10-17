@@ -20,6 +20,7 @@ pub const OperationStatus = @import("operation_status.zig").OperationStatus;
 pub const OperationSummary = @import("operation_summary.zig").OperationSummary;
 pub const OperationType = @import("operation_type.zig").OperationType;
 pub const Operator = @import("operator.zig").Operator;
+pub const PriceType = @import("price_type.zig").PriceType;
 pub const PriceWithCurrency = @import("price_with_currency.zig").PriceWithCurrency;
 pub const ReachabilityStatus = @import("reachability_status.zig").ReachabilityStatus;
 pub const SortCondition = @import("sort_condition.zig").SortCondition;

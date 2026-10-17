@@ -22,6 +22,10 @@ pub const Finding = struct {
     /// Infrastructure and code recommendations to address the finding.
     infrastructure_and_code_recommendations: ?[]const InfrastructureAndCodeRecommendation = null,
 
+    /// A deep link to an interactive DevOps Agent investigation seeded with this
+    /// finding. This value is null until DevOps Agent creates an investigation.
+    investigation_deep_link: ?[]const u8 = null,
+
     /// The name of the finding.
     name: ?[]const u8 = null,
 
@@ -55,6 +59,7 @@ pub const Finding = struct {
         .failure_category = "failureCategory",
         .finding_id = "findingId",
         .infrastructure_and_code_recommendations = "infrastructureAndCodeRecommendations",
+        .investigation_deep_link = "investigationDeepLink",
         .name = "name",
         .observability_recommendations = "observabilityRecommendations",
         .policy_component = "policyComponent",

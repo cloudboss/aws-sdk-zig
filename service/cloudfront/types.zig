@@ -247,6 +247,7 @@ pub const ViewerCertificate = @import("viewer_certificate.zig").ViewerCertificat
 pub const ViewerMtlsConfig = @import("viewer_mtls_config.zig").ViewerMtlsConfig;
 pub const ViewerMtlsMode = @import("viewer_mtls_mode.zig").ViewerMtlsMode;
 pub const ViewerProtocolPolicy = @import("viewer_protocol_policy.zig").ViewerProtocolPolicy;
+pub const VpcIpAddressType = @import("vpc_ip_address_type.zig").VpcIpAddressType;
 pub const VpcOrigin = @import("vpc_origin.zig").VpcOrigin;
 pub const VpcOriginConfig = @import("vpc_origin_config.zig").VpcOriginConfig;
 pub const VpcOriginEndpointConfig = @import("vpc_origin_endpoint_config.zig").VpcOriginEndpointConfig;

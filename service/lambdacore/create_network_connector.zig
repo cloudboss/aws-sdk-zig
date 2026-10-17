@@ -49,6 +49,7 @@ pub const CreateNetworkConnectorOutput = struct {
     /// security groups.
     configuration: ?NetworkConnectorConfiguration = null,
 
+    /// The unique identifier of the network connector.
     id: []const u8,
 
     /// The name of the network connector.
@@ -61,6 +62,14 @@ pub const CreateNetworkConnectorOutput = struct {
     /// The current state of the network connector.
     state: ?NetworkConnectorState = null,
 
+    /// The version number assigned to the connector. A newly created connector
+    /// starts at version 1.
+    version: ?i64 = null,
+
+    /// The qualified ARN of the connector version created by this request,
+    /// including the immutable version suffix.
+    version_arn: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .arn = "Arn",
         .configuration = "Configuration",
@@ -68,6 +77,8 @@ pub const CreateNetworkConnectorOutput = struct {
         .name = "Name",
         .operator_role = "OperatorRole",
         .state = "State",
+        .version = "Version",
+        .version_arn = "VersionArn",
     };
 };
 

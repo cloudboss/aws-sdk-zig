@@ -10,6 +10,10 @@ pub const GitLabConfiguration = struct {
     /// Full GitLab project path (e.g., namespace/project-name).
     project_path: []const u8,
 
+    /// The identifier of the release management association that this project maps
+    /// to for automatic verification testing.
+    release_management_association_id: ?[]const u8 = null,
+
     /// Optional role ARN that AIDevOps assumes at runtime for automatic
     /// verification testing and VPC connectivity on this association.
     runtime_role_arn: ?[]const u8 = null,
@@ -18,6 +22,7 @@ pub const GitLabConfiguration = struct {
         .instance_identifier = "instanceIdentifier",
         .project_id = "projectId",
         .project_path = "projectPath",
+        .release_management_association_id = "releaseManagementAssociationId",
         .runtime_role_arn = "runtimeRoleArn",
     };
 };

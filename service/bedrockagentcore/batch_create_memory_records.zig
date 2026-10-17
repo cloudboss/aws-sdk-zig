@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const RecordExpirySpecification = @import("record_expiry_specification.zig").RecordExpirySpecification;
 const MemoryRecordCreateInput = @import("memory_record_create_input.zig").MemoryRecordCreateInput;
 const MemoryRecordOutput = @import("memory_record_output.zig").MemoryRecordOutput;
 
@@ -15,6 +16,14 @@ pub const BatchCreateMemoryRecordsInput = struct {
     /// The unique ID of the memory resource where records will be created.
     memory_id: []const u8,
 
+    /// The record expiry (long-term memory time-to-live) applied to every record
+    /// created by this request. Set `recordExpiryDurationDays` to the number of
+    /// days after which the records expire. Only the expiry provided here is
+    /// applied; the records' strategy association has no effect on their expiry. If
+    /// you do not provide this value, the records do not expire. The `REMOVE`
+    /// action does not apply when creating records.
+    record_expiry_specification: ?RecordExpirySpecification = null,
+
     /// A list of memory record creation inputs to be processed in the batch
     /// operation.
     records: []const MemoryRecordCreateInput,
@@ -22,6 +31,7 @@ pub const BatchCreateMemoryRecordsInput = struct {
     pub const json_field_names = .{
         .client_token = "clientToken",
         .memory_id = "memoryId",
+        .record_expiry_specification = "recordExpirySpecification",
         .records = "records",
     };
 };
@@ -84,6 +94,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: BatchCreateMemoryRecord
     if (input.client_token) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"clientToken\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.record_expiry_specification) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"recordExpirySpecification\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

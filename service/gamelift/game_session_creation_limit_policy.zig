@@ -8,7 +8,7 @@
 /// receiving
 /// a `CreateGameSession` request, Amazon GameLift Servers checks that the
 /// player (identified by
-/// `CreatorId`) has created fewer than game session limit in the specified
+/// `CreatorId`) has created fewer than the game session limit in the specified
 /// time period.
 pub const GameSessionCreationLimitPolicy = struct {
     /// A policy that puts limits on the number of game sessions that a player can
@@ -21,7 +21,8 @@ pub const GameSessionCreationLimitPolicy = struct {
     /// receiving a
     /// `CreateGameSession` request, Amazon GameLift Servers checks that the player
     /// (identified
-    /// by `CreatorId`) has created fewer than game session limit in the specified
+    /// by `CreatorId`) has created fewer than the game session limit in the
+    /// specified
     /// time period.
     new_game_sessions_per_creator: ?i32 = null,
 

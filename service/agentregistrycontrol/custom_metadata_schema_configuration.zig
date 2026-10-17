@@ -1,19 +1,16 @@
 const RecordTypeSchemaOverride = @import("record_type_schema_override.zig").RecordTypeSchemaOverride;
 
-/// Configuration that defines a typed metadata schema for a registry. Specify
-/// at least one of a default schema or per-record-type schema overrides. You
-/// can provide both.
+/// The custom metadata fields that records in the registry can carry.
+/// `defaultSchema` defines the common attributes for every record type, and
+/// `recordTypeSchemaOverrides` adds fields for individual record types.
 pub const CustomMetadataSchemaConfiguration = struct {
-    /// The default JSON Schema that applies to record types without a specific
-    /// override. Supported property types are `string`, `string` with an `enum`
-    /// constraint, `string` with a `uri` format, and `boolean`.
+    /// A JSON Schema with the common attributes: fields that records of every
+    /// record type can carry.
     default_schema: ?[]const u8 = null,
 
-    /// A list of per-record-type schema overrides. When a record's type matches an
-    /// override, that override's schema is used instead of the default schema for
-    /// validation. If you don't specify an override for a record type, the default
-    /// schema applies. If no default schema exists, custom metadata on records of
-    /// that type is rejected.
+    /// The fields for individual record types. Records of a record type can carry
+    /// the common attributes defined in `defaultSchema` plus that record type's
+    /// fields.
     record_type_schema_overrides: ?[]const RecordTypeSchemaOverride = null,
 
     pub const json_field_names = .{

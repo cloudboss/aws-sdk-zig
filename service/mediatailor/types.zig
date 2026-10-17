@@ -46,6 +46,7 @@ pub const HlsPlaylistSettings = @import("hls_playlist_settings.zig").HlsPlaylist
 pub const HttpConfiguration = @import("http_configuration.zig").HttpConfiguration;
 pub const HttpPackageConfiguration = @import("http_package_configuration.zig").HttpPackageConfiguration;
 pub const HttpRequest = @import("http_request.zig").HttpRequest;
+pub const HttpRequestCacheConfiguration = @import("http_request_cache_configuration.zig").HttpRequestCacheConfiguration;
 pub const HttpRequestConfiguration = @import("http_request_configuration.zig").HttpRequestConfiguration;
 pub const InsertionMode = @import("insertion_mode.zig").InsertionMode;
 pub const KeyValuePair = @import("key_value_pair.zig").KeyValuePair;

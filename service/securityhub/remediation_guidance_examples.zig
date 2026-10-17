@@ -1,7 +1,7 @@
 /// Provided remediation guidance examples in different formats that can be run
 /// for remediating the target.
 pub const RemediationGuidanceExamples = struct {
-    /// An AWS CLI snippet version of the example.
+    /// An CLI snippet version of the example.
     aws_cli: ?[]const u8 = null,
 
     /// A CDK snippet version of the example.

@@ -17,7 +17,7 @@ pub const UpdateMemoryInput = struct {
 
     /// A client token is used for keeping track of idempotent requests. It can
     /// contain a session id which can be around 250 chars, combined with a unique
-    /// AWS identifier.
+    /// Amazon Web Services identifier.
     client_token: ?[]const u8 = null,
 
     /// The updated description of the AgentCore Memory resource.

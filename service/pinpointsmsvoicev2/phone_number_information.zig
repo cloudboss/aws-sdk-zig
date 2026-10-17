@@ -55,6 +55,9 @@ pub const PhoneNumberInformation = struct {
     /// The unique identifier of the pool associated with the phone number.
     pool_id: ?[]const u8 = null,
 
+    /// The pricing model.
+    pricing_tier: ?[]const u8 = null,
+
     /// The unique identifier for the registration.
     registration_id: ?[]const u8 = null,
 
@@ -96,6 +99,7 @@ pub const PhoneNumberInformation = struct {
         .phone_number_arn = "PhoneNumberArn",
         .phone_number_id = "PhoneNumberId",
         .pool_id = "PoolId",
+        .pricing_tier = "PricingTier",
         .registration_id = "RegistrationId",
         .self_managed_opt_outs_enabled = "SelfManagedOptOutsEnabled",
         .status = "Status",

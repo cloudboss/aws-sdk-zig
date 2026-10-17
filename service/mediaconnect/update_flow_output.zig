@@ -51,6 +51,11 @@ pub const UpdateFlowOutputInput = struct {
     /// minimum latency and the receiver’s minimum latency.
     min_latency: ?i32 = null,
 
+    /// The audio reference level of the NDI receiver, in decibels relative to full
+    /// scale (dBFS). Common values are `-20` (NDI and SMPTE) and `-18` (EBU). If
+    /// you don't specify this field, MediaConnect leaves the value unchanged.
+    ndi_audio_reference_level: ?i32 = null,
+
     /// Controls how MediaConnect generates timecodes for NDI output frames. If you
     /// don't specify this field, MediaConnect leaves the value unchanged.
     ///
@@ -122,6 +127,7 @@ pub const UpdateFlowOutputInput = struct {
         .max_latency = "MaxLatency",
         .media_stream_output_configurations = "MediaStreamOutputConfigurations",
         .min_latency = "MinLatency",
+        .ndi_audio_reference_level = "NdiAudioReferenceLevel",
         .ndi_output_timecode_source = "NdiOutputTimecodeSource",
         .ndi_program_name = "NdiProgramName",
         .ndi_speed_hq_quality = "NdiSpeedHqQuality",
@@ -233,6 +239,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: UpdateFlowOutputInput, 
     if (input.min_latency) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"MinLatency\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.ndi_audio_reference_level) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"NdiAudioReferenceLevel\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

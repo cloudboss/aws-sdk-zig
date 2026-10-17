@@ -1,3 +1,4 @@
+const HostKeyStorageType = @import("host_key_storage_type.zig").HostKeyStorageType;
 const Tag = @import("tag.zig").Tag;
 
 /// The details for a server host key.
@@ -18,6 +19,14 @@ pub const DescribedHostKey = struct {
     /// A unique identifier for the host key.
     host_key_id: ?[]const u8 = null,
 
+    /// The ARN of the Secrets Manager secret that stores the host key material,
+    /// when `StorageType` is `SECRETS_MANAGER`.
+    secret_id: ?[]const u8 = null,
+
+    /// Specifies whether the host key is stored by Transfer Family
+    /// (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`).
+    storage_type: ?HostKeyStorageType = null,
+
     /// Key-value pairs that can be used to group and search for host keys.
     tags: ?[]const Tag = null,
 
@@ -37,6 +46,8 @@ pub const DescribedHostKey = struct {
         .description = "Description",
         .host_key_fingerprint = "HostKeyFingerprint",
         .host_key_id = "HostKeyId",
+        .secret_id = "SecretId",
+        .storage_type = "StorageType",
         .tags = "Tags",
         .type = "Type",
     };

@@ -6,6 +6,10 @@ pub const PipelineExecutionStatus = enum {
     stopped,
     failed,
     succeeded,
+    /// The pipeline completed all reachable work after one or more steps failed.
+    /// Every failed step was handled by a scheduled downstream step whose trigger
+    /// is `Failed` or `Any`.
+    completed_with_failures,
 
     pub const json_field_names = .{
         .executing = "Executing",
@@ -13,6 +17,7 @@ pub const PipelineExecutionStatus = enum {
         .stopped = "Stopped",
         .failed = "Failed",
         .succeeded = "Succeeded",
+        .completed_with_failures = "CompletedWithFailures",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -22,6 +27,7 @@ pub const PipelineExecutionStatus = enum {
             .stopped => "Stopped",
             .failed => "Failed",
             .succeeded => "Succeeded",
+            .completed_with_failures => "CompletedWithFailures",
         };
     }
 

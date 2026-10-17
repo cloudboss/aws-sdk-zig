@@ -5,7 +5,7 @@ const EC2InstanceType = @import("ec2_instance_type.zig").EC2InstanceType;
 
 /// An Amazon GameLift Servers compute resource for hosting your game servers.
 /// Computes in an Amazon GameLift Servers
-/// fleet differs depending on the fleet's compute type property as follows:
+/// fleet differ depending on the fleet's compute type property as follows:
 ///
 /// * For managed EC2 fleets, a compute is an EC2 instance.
 ///

@@ -1,5 +1,9 @@
 const std = @import("std");
 
+/// The lifecycle state of a network connector. A connector is `PENDING` while
+/// resources provision, `ACTIVE` when ready for use, `INACTIVE` when
+/// temporarily unavailable, `FAILED` when creation or update fails, `DELETING`
+/// while resources are cleaned up, and `DELETE_FAILED` when deletion fails.
 pub const NetworkConnectorState = enum {
     /// Being created, resources provisioning
     pending,

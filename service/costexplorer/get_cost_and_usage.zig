@@ -34,10 +34,22 @@ pub const GetCostAndUsageInput = struct {
     /// Valid values for `MatchOptions` for `Dimensions` are
     /// `EQUALS` and `CASE_SENSITIVE`.
     ///
-    /// Valid values for `MatchOptions` for `CostCategories` and
-    /// `Tags` are `EQUALS`, `ABSENT`, and
-    /// `CASE_SENSITIVE`. Default values are `EQUALS` and
-    /// `CASE_SENSITIVE`.
+    /// Valid values for `MatchOptions` for `CostCategories`,
+    /// `Tags`, and `ProductAttributes` are `EQUALS`,
+    /// `ABSENT`, and `CASE_SENSITIVE`. Default values are `EQUALS`
+    /// and `CASE_SENSITIVE`.
+    ///
+    /// You can filter by product attributes with or without grouping by them. If
+    /// you filter or
+    /// group by product attributes, the results include only the costs of supported
+    /// services, and a
+    /// `SERVICE` filter is optional. For more information, see
+    /// [ProductAttributeValues](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html).
+    ///
+    /// If you include a `SERVICE` filter, it must apply to the whole request:
+    /// combine it with other filters by using `And`, and include it in every branch
+    /// of an `Or`. A `SERVICE` filter inside `Not` doesn't meet this requirement,
+    /// and the request fails with a `ValidationException`.
     filter: ?Expression = null,
 
     /// Sets the Amazon Web Services cost granularity to `MONTHLY` or
@@ -48,7 +60,9 @@ pub const GetCostAndUsageInput = struct {
 
     /// You can group Amazon Web Services costs using up to two different groups,
     /// either
-    /// dimensions, tag keys, cost categories, or any two group by types.
+    /// dimensions, tag keys, cost categories, product attributes, or any two group
+    /// by
+    /// types.
     ///
     /// Valid values for the `DIMENSION` type are `AZ`,
     /// `INSTANCE_TYPE`, `LEGAL_ENTITY_NAME`, `INVOICING_ENTITY`,
@@ -58,6 +72,21 @@ pub const GetCostAndUsageInput = struct {
     ///
     /// When you group by the `TAG` type and include a valid tag key, you get all
     /// tag values, including empty strings.
+    ///
+    /// To group by the `PRODUCT_ATTRIBUTE` type, set `Key` to a
+    /// product attribute key, such as `model`. For the keys of each supported
+    /// service, see
+    /// [ProductAttributeValues](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html). The results include only the costs of supported services, and if you have no
+    /// such costs, the response contains no groups.
+    ///
+    /// In the response, each group key has the format `key$value`, for example,
+    /// `model$Claude Sonnet 5`. Costs that have no value for the key are in the
+    /// group
+    /// `key$`, for example, `model$`. Remove the `key$` prefix
+    /// before you use a value in a `ProductAttributes` filter. Keys are
+    /// case-sensitive: if
+    /// you group by a key that doesn't exist, such as `Model`, all of your costs of
+    /// supported services are in the group `Model$`.
     group_by: ?[]const GroupDefinition = null,
 
     /// Which metrics are returned in the query. For more information about blended

@@ -3,6 +3,15 @@ const MediaLiveTransitEncryption = @import("media_live_transit_encryption.zig").
 
 /// Configuration settings for connecting a router input to a MediaLive channel
 /// output.
+///
+/// To connect the router input to the MediaLive channel output, provide all
+/// three of `mediaLiveChannelArn`, `mediaLivePipelineId`, and
+/// `mediaLiveChannelOutputName`. To disconnect it, call the update operation
+/// and omit all three fields while keeping this configuration object.
+///
+/// You can't change `sourceTransitDecryption` while the router input is
+/// connected to a MediaLive channel output. To change it, first disconnect the
+/// router input, then update the decryption.
 pub const MediaLiveChannelRouterInputConfiguration = struct {
     /// The ARN of the MediaLive channel to connect to this router input.
     media_live_channel_arn: ?[]const u8 = null,

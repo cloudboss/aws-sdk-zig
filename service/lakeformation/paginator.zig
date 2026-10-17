@@ -13,6 +13,8 @@ const list_lf_tag_expressions = @import("list_lf_tag_expressions.zig");
 const list_lf_tags = @import("list_lf_tags.zig");
 const list_permissions = @import("list_permissions.zig");
 const list_resources = @import("list_resources.zig");
+const list_rls_policies = @import("list_rls_policies.zig");
+const list_rls_policy_attachments = @import("list_rls_policy_attachments.zig");
 const list_table_storage_optimizers = @import("list_table_storage_optimizers.zig");
 const list_transactions = @import("list_transactions.zig");
 const search_databases_by_lf_tags = @import("search_databases_by_lf_tags.zig");
@@ -338,6 +340,82 @@ pub const ListResourcesPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_resources.execute(self.client, allocator, self.params, options);
+
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
+        }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListRLSPoliciesPaginator = struct {
+    client: *Client,
+    params: list_rls_policies.ListRLSPoliciesInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_rls_policies.ListRLSPoliciesOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_rls_policies.execute(self.client, allocator, self.params, options);
+
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
+        }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListRLSPolicyAttachmentsPaginator = struct {
+    client: *Client,
+    params: list_rls_policy_attachments.ListRLSPolicyAttachmentsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_rls_policy_attachments.ListRLSPolicyAttachmentsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_rls_policy_attachments.execute(self.client, allocator, self.params, options);
 
         const next_token: ?[]const u8 = output.next_token;
         const owned_token = if (next_token) |token|

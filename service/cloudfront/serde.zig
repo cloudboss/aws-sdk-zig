@@ -248,6 +248,7 @@ const ViewerCertificate = @import("viewer_certificate.zig").ViewerCertificate;
 const ViewerMtlsConfig = @import("viewer_mtls_config.zig").ViewerMtlsConfig;
 const ViewerMtlsMode = @import("viewer_mtls_mode.zig").ViewerMtlsMode;
 const ViewerProtocolPolicy = @import("viewer_protocol_policy.zig").ViewerProtocolPolicy;
+const VpcIpAddressType = @import("vpc_ip_address_type.zig").VpcIpAddressType;
 const VpcOrigin = @import("vpc_origin.zig").VpcOrigin;
 const VpcOriginConfig = @import("vpc_origin_config.zig").VpcOriginConfig;
 const VpcOriginEndpointConfig = @import("vpc_origin_endpoint_config.zig").VpcOriginEndpointConfig;
@@ -6512,6 +6513,7 @@ pub fn deserializeVpcOriginConfig(allocator: std.mem.Allocator, reader: *aws.xml
 
 pub fn deserializeVpcOriginEndpointConfig(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !VpcOriginEndpointConfig {
     var result: VpcOriginEndpointConfig = undefined;
+    result.ip_address_type = null;
     result.origin_ssl_protocols = null;
     while (try reader.next()) |event| {
         switch (event) {
@@ -6522,6 +6524,8 @@ pub fn deserializeVpcOriginEndpointConfig(allocator: std.mem.Allocator, reader: 
                     result.http_port = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
                 } else if (std.mem.eql(u8, e.local, "HTTPSPort")) {
                     result.https_port = try std.fmt.parseInt(i32, try reader.readElementText(), 10);
+                } else if (std.mem.eql(u8, e.local, "IpAddressType")) {
+                    result.ip_address_type = VpcIpAddressType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Name")) {
                     result.name = try allocator.dupe(u8, try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "OriginProtocolPolicy")) {
@@ -6572,6 +6576,7 @@ pub fn deserializeVpcOriginList(allocator: std.mem.Allocator, reader: *aws.xml.R
 pub fn deserializeVpcOriginSummary(allocator: std.mem.Allocator, reader: *aws.xml.Reader) !VpcOriginSummary {
     var result: VpcOriginSummary = undefined;
     result.account_id = null;
+    result.ip_address_type = null;
     while (try reader.next()) |event| {
         switch (event) {
             .element_start => |e| {
@@ -6583,6 +6588,8 @@ pub fn deserializeVpcOriginSummary(allocator: std.mem.Allocator, reader: *aws.xm
                     result.created_time = try aws.date.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Id")) {
                     result.id = try allocator.dupe(u8, try reader.readElementText());
+                } else if (std.mem.eql(u8, e.local, "IpAddressType")) {
+                    result.ip_address_type = VpcIpAddressType.fromWireName(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "LastModifiedTime")) {
                     result.last_modified_time = try aws.date.parseIso8601(try reader.readElementText());
                 } else if (std.mem.eql(u8, e.local, "Name")) {
@@ -9220,6 +9227,11 @@ pub fn serializeVpcOriginEndpointConfig(allocator: std.mem.Allocator, buf: *std.
         try buf.appendSlice(allocator, num_str);
     }
     try buf.appendSlice(allocator, "</HTTPSPort>");
+    if (value.ip_address_type) |v| {
+        try buf.appendSlice(allocator, "<IpAddressType>");
+        try buf.appendSlice(allocator, v.wireName());
+        try buf.appendSlice(allocator, "</IpAddressType>");
+    }
     try buf.appendSlice(allocator, "<Name>");
     try aws.xml.appendXmlEscaped(allocator, buf, value.name);
     try buf.appendSlice(allocator, "</Name>");

@@ -1,5 +1,7 @@
 const std = @import("std");
 
+/// The type of a network connector. `VPC_EGRESS` provides VPC egress
+/// connectivity.
 pub const NetworkConnectorType = enum {
     /// VPC egress connectivity
     vpc_egress,

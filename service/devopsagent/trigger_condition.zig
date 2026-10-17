@@ -1,8 +1,9 @@
 const ScheduleCondition = @import("schedule_condition.zig").ScheduleCondition;
 
-/// Defines the firing condition for a Trigger
+/// Defines how a Trigger fires.
 pub const TriggerCondition = union(enum) {
-    /// Time-based firing condition
+    /// Schedule-based firing condition. On CreateTrigger supply exactly one of the
+    /// schedule condition's expression or spec.
     schedule: ?ScheduleCondition,
 
     pub const json_field_names = .{

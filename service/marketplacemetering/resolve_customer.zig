@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const Metadata = @import("metadata.zig").Metadata;
 
 pub const ResolveCustomerInput = struct {
     /// When a buyer visits your website during the registration process, the buyer
@@ -47,6 +48,11 @@ pub const ResolveCustomerOutput = struct {
     /// response, store that for future purposes/API calls/integrations.
     license_arn: ?[]const u8 = null,
 
+    /// The metadata associated with the resolved customer, including the
+    /// `AgreementId` of the Amazon Web Services Marketplace agreement the customer
+    /// accepted.
+    metadata: ?Metadata = null,
+
     /// The product code is returned to confirm that the buyer is registering for
     /// your
     /// product. Subsequent `BatchMeterUsage` calls should be made using this
@@ -58,6 +64,7 @@ pub const ResolveCustomerOutput = struct {
         .customer_aws_account_id = "CustomerAWSAccountId",
         .customer_identifier = "CustomerIdentifier",
         .license_arn = "LicenseArn",
+        .metadata = "Metadata",
         .product_code = "ProductCode",
     };
 };

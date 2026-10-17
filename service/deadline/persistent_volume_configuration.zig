@@ -6,7 +6,7 @@ pub const PersistentVolumeConfiguration = struct {
 
     /// The number of hours a persistent volume can remain unused before it is
     /// deleted. The default is 168 (7 days).
-    last_used_ttl_hours: i32 = 168,
+    last_used_ttl_hours: i32 = 12,
 
     /// The file system path where the persistent volume is mounted on the worker
     /// instance.

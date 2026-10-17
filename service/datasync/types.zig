@@ -33,6 +33,7 @@ pub const ManifestFormat = @import("manifest_format.zig").ManifestFormat;
 pub const Mtime = @import("mtime.zig").Mtime;
 pub const NfsMountOptions = @import("nfs_mount_options.zig").NfsMountOptions;
 pub const NfsVersion = @import("nfs_version.zig").NfsVersion;
+pub const ObjectMetadata = @import("object_metadata.zig").ObjectMetadata;
 pub const ObjectStorageServerProtocol = @import("object_storage_server_protocol.zig").ObjectStorageServerProtocol;
 pub const ObjectTags = @import("object_tags.zig").ObjectTags;
 pub const ObjectVersionIds = @import("object_version_ids.zig").ObjectVersionIds;

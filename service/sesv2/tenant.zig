@@ -7,7 +7,14 @@ pub const Tenant = struct {
     /// The date and time when the tenant was created.
     created_timestamp: ?i64 = null,
 
-    /// The status of sending capability for the tenant.
+    /// The status of sending capability for the tenant:
+    ///
+    /// * `ENABLED` – Sending is allowed for the tenant.
+    ///
+    /// * `DISABLED` – Sending is prevented for the tenant.
+    ///
+    /// * `REINSTATED` – Sending is allowed even if there are active reputation
+    ///   findings.
     sending_status: ?SendingStatus = null,
 
     /// An object that contains information about the suppression list preferences

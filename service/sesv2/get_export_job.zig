@@ -30,7 +30,9 @@ pub const GetExportJobOutput = struct {
     /// The data source of the export job.
     export_data_source: ?ExportDataSource = null,
 
-    /// The destination of the export job.
+    /// The destination of the export job. When `JobStatus` is
+    /// `COMPLETED`, this object includes `S3Url`, a pre-signed URL
+    /// that you use to download the export file.
     export_destination: ?ExportDestination = null,
 
     /// The type of source of the export job.

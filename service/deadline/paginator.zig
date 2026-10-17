@@ -16,6 +16,7 @@ const list_job_parameter_definitions = @import("list_job_parameter_definitions.z
 const list_jobs = @import("list_jobs.zig");
 const list_license_endpoints = @import("list_license_endpoints.zig");
 const list_limits = @import("list_limits.zig");
+const list_memberships = @import("list_memberships.zig");
 const list_metered_products = @import("list_metered_products.zig");
 const list_monitors = @import("list_monitors.zig");
 const list_queue_environments = @import("list_queue_environments.zig");
@@ -469,6 +470,44 @@ pub const ListLimitsPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_limits.execute(self.client, allocator, self.params, options);
+
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
+        }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListMembershipsPaginator = struct {
+    client: *Client,
+    params: list_memberships.ListMembershipsInput,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_memberships.ListMembershipsOutput {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_memberships.execute(self.client, allocator, self.params, options);
 
         const next_token: ?[]const u8 = output.next_token;
         const owned_token = if (next_token) |token|

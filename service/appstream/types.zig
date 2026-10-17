@@ -84,6 +84,7 @@ pub const StackAttribute = @import("stack_attribute.zig").StackAttribute;
 pub const StackError = @import("stack_error.zig").StackError;
 pub const StackErrorCode = @import("stack_error_code.zig").StackErrorCode;
 pub const StorageConnector = @import("storage_connector.zig").StorageConnector;
+pub const StorageConnectorAuthentication = @import("storage_connector_authentication.zig").StorageConnectorAuthentication;
 pub const StorageConnectorType = @import("storage_connector_type.zig").StorageConnectorType;
 pub const StreamView = @import("stream_view.zig").StreamView;
 pub const StreamingExperienceSettings = @import("streaming_experience_settings.zig").StreamingExperienceSettings;

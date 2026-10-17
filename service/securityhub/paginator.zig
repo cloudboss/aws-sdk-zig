@@ -23,6 +23,7 @@ const list_aggregators_v2 = @import("list_aggregators_v2.zig");
 const list_configuration_policies = @import("list_configuration_policies.zig");
 const list_configuration_policy_associations = @import("list_configuration_policy_associations.zig");
 const list_enabled_products_for_import = @import("list_enabled_products_for_import.zig");
+const list_export_jobs_v2 = @import("list_export_jobs_v2.zig");
 const list_exposures_by_remediation_v2 = @import("list_exposures_by_remediation_v2.zig");
 const list_finding_aggregators = @import("list_finding_aggregators.zig");
 const list_free_trial_statuses_v2 = @import("list_free_trial_statuses_v2.zig");
@@ -732,6 +733,44 @@ pub const ListEnabledProductsForImportPaginator = struct {
         self.params.next_token = self.next_token;
 
         const output = try list_enabled_products_for_import.execute(self.client, allocator, self.params, options);
+
+        const next_token: ?[]const u8 = output.next_token;
+        const owned_token = if (next_token) |token|
+            if (token.len > 0) try self.client.allocator.dupe(u8, token) else null
+        else
+            null;
+        if (self.next_token) |old| {
+            self.client.allocator.free(old);
+        }
+        self.next_token = owned_token;
+        self.done = self.next_token == null;
+
+        return output;
+    }
+
+    pub fn deinit(self: *Self) void {
+        if (self.next_token) |token| {
+            self.client.allocator.free(token);
+        }
+    }
+};
+
+pub const ListExportJobsV2Paginator = struct {
+    client: *Client,
+    params: list_export_jobs_v2.ListExportJobsV2Input,
+    next_token: ?[]const u8 = null,
+    done: bool = false,
+
+    const Self = @This();
+
+    pub fn next(self: *Self, allocator: std.mem.Allocator, options: CallOptions) !list_export_jobs_v2.ListExportJobsV2Output {
+        if (self.done) {
+            return error.EndOfPagination;
+        }
+
+        self.params.next_token = self.next_token;
+
+        const output = try list_export_jobs_v2.execute(self.client, allocator, self.params, options);
 
         const next_token: ?[]const u8 = output.next_token;
         const owned_token = if (next_token) |token|

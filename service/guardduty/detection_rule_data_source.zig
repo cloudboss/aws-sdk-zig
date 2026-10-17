@@ -2,14 +2,17 @@ const std = @import("std");
 
 pub const DetectionRuleDataSource = enum {
     cloudtrail_management_event,
+    runtime_monitoring,
 
     pub const json_field_names = .{
         .cloudtrail_management_event = "CloudTrailManagementEvent",
+        .runtime_monitoring = "RuntimeMonitoring",
     };
 
     pub fn wireName(self: @This()) []const u8 {
         return switch (self) {
             .cloudtrail_management_event => "CloudTrailManagementEvent",
+            .runtime_monitoring => "RuntimeMonitoring",
         };
     }
 

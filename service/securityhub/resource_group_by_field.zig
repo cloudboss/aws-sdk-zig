@@ -17,6 +17,7 @@ pub const ResourceGroupByField = enum {
     discovery_type,
     host_resource_type,
     canonical_id,
+    resource_criticality,
 
     pub const json_field_names = .{
         .account_id = "AccountId",
@@ -35,6 +36,7 @@ pub const ResourceGroupByField = enum {
         .discovery_type = "DiscoveryType",
         .host_resource_type = "ResourceInfo.AIDetails.HostResourceType",
         .canonical_id = "ResourceInfo.AIDetails.CanonicalId",
+        .resource_criticality = "ResourceCriticality",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -55,6 +57,7 @@ pub const ResourceGroupByField = enum {
             .discovery_type => "DiscoveryType",
             .host_resource_type => "ResourceInfo.AIDetails.HostResourceType",
             .canonical_id => "ResourceInfo.AIDetails.CanonicalId",
+            .resource_criticality => "ResourceCriticality",
         };
     }
 

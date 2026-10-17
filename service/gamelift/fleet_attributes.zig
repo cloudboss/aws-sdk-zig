@@ -218,8 +218,8 @@ pub const FleetAttributes = struct {
     ///   has started creating the fleet.
     /// Desired instances is set to 1.
     ///
-    /// * DOWNLOADING/VALIDATING/BUILDING -- Amazon GameLift Servers is download the
-    ///   game server build,
+    /// * DOWNLOADING/VALIDATING/BUILDING -- Amazon GameLift Servers is downloading
+    ///   the game server build,
     /// running install scripts, and then validating the build files. When complete,
     /// Amazon GameLift Servers launches a fleet instance.
     ///

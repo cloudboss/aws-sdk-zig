@@ -1,5 +1,7 @@
 const std = @import("std");
 
+/// A machine-readable code indicating why the last update operation reached its
+/// current status. Use this for programmatic error handling.
 pub const NetworkConnectorLastUpdateStatusReasonCode = enum {
     disallowed_by_vpc_encryption_control,
     ec_2_request_limit_exceeded,
@@ -7,6 +9,7 @@ pub const NetworkConnectorLastUpdateStatusReasonCode = enum {
     internal_error,
     invalid_security_group,
     invalid_subnet,
+    security_groups_per_interface_limit_exceeded,
     subnet_out_of_ip_addresses,
 
     pub const json_field_names = .{
@@ -16,6 +19,7 @@ pub const NetworkConnectorLastUpdateStatusReasonCode = enum {
         .internal_error = "InternalError",
         .invalid_security_group = "InvalidSecurityGroup",
         .invalid_subnet = "InvalidSubnet",
+        .security_groups_per_interface_limit_exceeded = "SecurityGroupsPerInterfaceLimitExceeded",
         .subnet_out_of_ip_addresses = "SubnetOutOfIPAddresses",
     };
 
@@ -27,6 +31,7 @@ pub const NetworkConnectorLastUpdateStatusReasonCode = enum {
             .internal_error => "InternalError",
             .invalid_security_group => "InvalidSecurityGroup",
             .invalid_subnet => "InvalidSubnet",
+            .security_groups_per_interface_limit_exceeded => "SecurityGroupsPerInterfaceLimitExceeded",
             .subnet_out_of_ip_addresses => "SubnetOutOfIPAddresses",
         };
     }

@@ -4,8 +4,18 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const Consent = @import("consent.zig").Consent;
 
 pub const RenewDomainInput = struct {
+    /// Specifies the maximum price that you agree to pay to renew the domain name.
+    /// This element is
+    /// required if the domain has registry premium pricing, and optional if the
+    /// domain
+    /// is priced at the standard rate for its TLD. If you include it and the
+    /// renewal
+    /// price is more than `MaxPrice`, the request fails.
+    consent: ?Consent = null,
+
     /// The year when the registration for the domain is set to expire. This value
     /// must match
     /// the current expiration date for the domain.
@@ -27,6 +37,7 @@ pub const RenewDomainInput = struct {
     duration_in_years: ?i32 = null,
 
     pub const json_field_names = .{
+        .consent = "Consent",
         .current_expiry_year = "CurrentExpiryYear",
         .domain_name = "DomainName",
         .duration_in_years = "DurationInYears",

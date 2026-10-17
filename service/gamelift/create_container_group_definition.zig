@@ -58,7 +58,7 @@ pub const CreateContainerGroupDefinitionInput = struct {
 
     /// A list of labels to assign to the container group definition resource. Tags
     /// are
-    /// developer-defined key-value pairs. Tagging Amazon Web Services resources are
+    /// developer-defined key-value pairs. Tagging Amazon Web Services resources is
     /// useful for resource management,
     /// access management and cost allocation. For more information, see [ Tagging
     /// Amazon Web Services
@@ -78,14 +78,28 @@ pub const CreateContainerGroupDefinitionInput = struct {
 
     /// The maximum amount of vCPU units to allocate to the container group (1 vCPU
     /// is equal to 1024
-    /// CPU units). All containers in the group share this memory. If you specify
-    /// vCPU limits for
+    /// CPU units). All containers in the group share these resources. If you set
+    /// vCPU reservations for
     /// individual containers, the total value must be equal to or greater than the
-    /// sum of the CPU
-    /// limits for all containers in the group.
+    /// sum of the
+    /// `Vcpu` values for all containers in the group.
     ///
-    /// Default value: 1
-    total_vcpu_limit: f64,
+    /// This property is required for a per-instance container group.
+    ///
+    /// For a game server container group, Amazon GameLift Servers requires either a
+    /// total vCPU limit or a
+    /// `Vcpu` value for the game server container. If you set a total vCPU limit
+    /// for a
+    /// game server container group, Amazon GameLift Servers uses this value to
+    /// calculate how many game server
+    /// container groups fit on an instance. If you don't set a total vCPU limit,
+    /// the group's
+    /// containers can use up to the instance's available vCPU, and Amazon GameLift
+    /// Servers uses the sum of the
+    /// containers' `Vcpu` values to calculate how many game server container groups
+    /// fit
+    /// on an instance.
+    total_vcpu_limit: ?f64 = null,
 
     /// A description for the initial version of this container group definition.
     version_description: ?[]const u8 = null,

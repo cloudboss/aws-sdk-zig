@@ -2,7 +2,7 @@
 /// by
 /// Amazon GameLift Servers.
 pub const S3Location = struct {
-    /// An Amazon S3 bucket identifier. Thename of the S3 bucket.
+    /// An Amazon S3 bucket identifier. The name of the S3 bucket.
     ///
     /// Amazon GameLift Servers doesn't support uploading from Amazon S3 buckets
     /// with names that contain a dot

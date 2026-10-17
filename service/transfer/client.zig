@@ -709,8 +709,15 @@ pub const Client = struct {
         return update_connector.execute(self, allocator, input, options);
     }
 
-    /// Updates the description for the host key that's specified by the `ServerId`
-    /// and `HostKeyId` parameters.
+    /// Updates the host key that's specified by the `ServerId` and `HostKeyId`
+    /// parameters. You can update the description of the host key, change where the
+    /// host key is stored by specifying the `StorageType`, and specify the KMS key
+    /// used to encrypt the host key when it's stored in Secrets Manager.
+    ///
+    /// To change a host key's storage type from `SERVICE_MANAGED` to
+    /// `SECRETS_MANAGER`, you must have the `transfer:ExportHostKey` permission.
+    /// `transfer:ExportHostKey` is a permission-only action that has no
+    /// corresponding API operation.
     pub fn updateHostKey(self: *Self, allocator: std.mem.Allocator, input: update_host_key.UpdateHostKeyInput, options: CallOptions) !update_host_key.UpdateHostKeyOutput {
         return update_host_key.execute(self, allocator, input, options);
     }

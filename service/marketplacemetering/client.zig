@@ -34,6 +34,19 @@ pub const Client = struct {
         _ = self;
     }
 
+    /// The Amazon Web Services Marketplace AI Metering Agent Skill
+    /// (`aws-marketplace-metering`) helps an AI
+    /// coding agent integrate your SaaS product's usage reporting with the
+    /// `BatchMeterUsage` API. The skill is a curated package of instructions and
+    /// reference material that guides your AI coding agent through building,
+    /// deploying, and
+    /// testing the metering integration. To get the skill on demand without
+    /// checking it out
+    /// locally, install the [Amazon Web Services MCP
+    /// Server](https://docs.aws.amazon.com/agent-toolkit/latest/userguide/mcp-server.html) in your coding agent; the agent then discovers and loads
+    /// the skill at runtime. The skill source is also available on
+    /// [GitHub](https://github.com/aws/agent-toolkit-for-aws/blob/main/skills/specialized-skills/aws-marketplace-skills/aws-marketplace-metering). For more information, see [Get started with the Amazon Web Services Marketplace AI Metering Agent Skill](https://aws.amazon.com/blogs/awsmarketplace/build-aws-marketplace-saas-metering-with-the-metering-agent-skill/) on the Amazon Web Services Marketplace blog.
+    ///
     /// Amazon Web Services Marketplace is introducing Concurrent Agreements,
     /// enabling buyers to make multiple purchases per Amazon Web Services account.
     /// Starting June 1, 2026, new SaaS products must use `CustomerAWSAccountId`
@@ -67,8 +80,21 @@ pub const Client = struct {
     ///
     /// `BatchMeterUsage` can process up to 25
     /// `UsageRecords` at a time, and each request must be less than
-    /// 1 MB in size. Optionally, you can have multiple usage allocations for
-    /// usage data that's split into buckets according to predefined tags.
+    /// 1 MB in size.
+    ///
+    /// **Vendor-metered tagging**
+    ///
+    /// `BatchMeterUsage` supports vendor-metered tagging. Optionally, you can
+    /// split the usage in a `UsageRecord` into buckets by including
+    /// `UsageAllocations`, where each `UsageAllocation` has a set of
+    /// `Tags` that you define. Vendor-metered tagging doesn't change the price,
+    /// dimensions, or the total usage that you report. It gives buyers a more
+    /// granular view of
+    /// their usage of your product so they can perform cost allocation in the
+    /// Amazon Web Services Billing and
+    /// Cost Management console. For more information, see [Vendor-metered
+    /// tagging](https://docs.aws.amazon.com/marketplace/latest/userguide/metering-for-usage.html#saas-vendor-metered-tagging) and [BatchMeterUsage with usage allocation tagging code example](https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-tagging) in the
+    /// *Amazon Web Services Marketplace Seller Guide*.
     ///
     /// `BatchMeterUsage` returns a list of
     /// `UsageRecordResult` objects, which have each

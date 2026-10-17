@@ -2,8 +2,8 @@ const ContainerDependencyCondition = @import("container_dependency_condition.zig
 
 /// A container's dependency on another container in the same container group.
 /// The dependency
-/// impacts how the dependent container is able to start or shut down based the
-/// status of the
+/// impacts how the dependent container is able to start or shut down based on
+/// the status of the
 /// other container.
 ///
 /// For example, *ContainerA* is configured with the following dependency: a

@@ -18,6 +18,8 @@ pub const UpdateNetworkConnectorInput = struct {
     /// this replaces the existing configuration.
     configuration: ?NetworkConnectorConfiguration = null,
 
+    /// The identifier of the network connector to update. You can specify the
+    /// connector ID, name, or full ARN.
     identifier: []const u8,
 
     /// The updated ARN of the IAM role that Lambda assumes to manage ENIs. Use this
@@ -40,6 +42,7 @@ pub const UpdateNetworkConnectorOutput = struct {
     /// security groups.
     configuration: ?NetworkConnectorConfiguration = null,
 
+    /// The unique identifier of the network connector.
     id: []const u8,
 
     /// The timestamp of this update.
@@ -62,6 +65,15 @@ pub const UpdateNetworkConnectorOutput = struct {
     /// The current state of the network connector.
     state: ?NetworkConnectorState = null,
 
+    /// The version number of the connector version resulting from this update. A
+    /// configuration change creates a new, incremented version; a no-op update
+    /// returns the current version number.
+    version: ?i64 = null,
+
+    /// The qualified ARN of the connector version resulting from this update,
+    /// including the immutable version suffix.
+    version_arn: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .arn = "Arn",
         .configuration = "Configuration",
@@ -72,6 +84,8 @@ pub const UpdateNetworkConnectorOutput = struct {
         .name = "Name",
         .operator_role = "OperatorRole",
         .state = "State",
+        .version = "Version",
+        .version_arn = "VersionArn",
     };
 };
 

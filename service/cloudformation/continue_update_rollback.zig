@@ -16,6 +16,36 @@ pub const ContinueUpdateRollbackInput = struct {
     /// them.
     client_request_token: ?[]const u8 = null,
 
+    /// Specifies whether CloudFormation forces the rollback to continue by skipping
+    /// resources
+    /// currently in the `UPDATE_FAILED` state. Use this instead of listing each
+    /// resource
+    /// individually in `ResourcesToSkip`. Only resources that entered the
+    /// `UPDATE_FAILED` state because a rollback failed are skipped. If you don't
+    /// specify
+    /// a value, the default is `false` and CloudFormation doesn't skip any
+    /// resources.
+    ///
+    /// `ForceRollback` and `ResourcesToSkip` are mutually exclusive.
+    /// Specifying both in the same request returns a validation error.
+    ///
+    /// We recommend that you
+    /// [troubleshoot](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed) resources before skipping them. CloudFormation sets the status of the
+    /// skipped resources to `UPDATE_COMPLETE` and continues to roll back the stack,
+    /// including resources in nested stacks. After the rollback completes, the
+    /// skipped resources no
+    /// longer match the resources in the stack template. Before performing another
+    /// stack update,
+    /// you must update the stack or resources to be consistent with each other. If
+    /// you don't,
+    /// subsequent stack updates might fail, and the stack will become
+    /// unrecoverable.
+    ///
+    /// Drift detection reports skipped resources as `NOT_CHECKED`. For guidance,
+    /// see [Continue rolling back an
+    /// update](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html) in the *CloudFormation User Guide*.
+    force_rollback: ?bool = null,
+
     /// A list of the logical IDs of the resources that CloudFormation skips during
     /// the continue
     /// update rollback operation. You can specify only resources that are in the
@@ -130,6 +160,10 @@ fn serializeRequest(allocator: std.mem.Allocator, input: ContinueUpdateRollbackI
     if (input.client_request_token) |v| {
         try body_buf.appendSlice(allocator, "&ClientRequestToken=");
         try aws.url.appendUrlEncoded(allocator, &body_buf, v);
+    }
+    if (input.force_rollback) |v| {
+        try body_buf.appendSlice(allocator, "&ForceRollback=");
+        try aws.url.appendUrlEncoded(allocator, &body_buf, if (v) "true" else "false");
     }
     if (input.resources_to_skip) |list| {
         for (list, 0..) |item, idx| {

@@ -7,6 +7,7 @@ pub const Provider = enum {
     bitbucket,
     confluence,
     azure_devops,
+    jira,
 
     pub const json_field_names = .{
         .github = "GITHUB",
@@ -14,6 +15,7 @@ pub const Provider = enum {
         .bitbucket = "BITBUCKET",
         .confluence = "CONFLUENCE",
         .azure_devops = "AZURE_DEVOPS",
+        .jira = "JIRA",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -23,6 +25,7 @@ pub const Provider = enum {
             .bitbucket => "BITBUCKET",
             .confluence => "CONFLUENCE",
             .azure_devops => "AZURE_DEVOPS",
+            .jira => "JIRA",
         };
     }
 

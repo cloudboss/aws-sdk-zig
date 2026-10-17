@@ -4,7 +4,7 @@ const GameServerInstanceStatus = @import("game_server_instance_status.zig").Game
 /// including status, that describe an EC2 instance in a game server group.
 /// Instance
 /// configurations are set with game server group properties (see
-/// `DescribeGameServerGroup` and with the EC2 launch template that was used
+/// `DescribeGameServerGroup`) and with the EC2 launch template that was used
 /// when creating the game server group.
 ///
 /// Retrieve game server instances for a game server group by calling

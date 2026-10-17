@@ -84,8 +84,8 @@ pub const GameServerContainerDefinitionInput = struct {
     /// inbound traffic
     /// connections. For example, a game server process requires a container port to
     /// allow game
-    /// clients to connect to it. A container port configuration can have can have
-    /// one or more
+    /// clients to connect to it. A container port configuration can have one or
+    /// more
     /// container port ranges. Each range specifies starting and ending values as
     /// well as the
     /// supported network protocol.
@@ -102,6 +102,30 @@ pub const GameServerContainerDefinitionInput = struct {
     /// using 5.2.0 or higher are compatible with container fleets.
     server_sdk_version: []const u8,
 
+    /// The number of vCPU units reserved for the game server container. The
+    /// container can use
+    /// more vCPU when it's available, up to the container group's total vCPU limit
+    /// if one is set. If
+    /// the container group has a total vCPU limit and the request doesn't set this
+    /// value, Amazon GameLift Servers
+    /// calculates the game server container's vCPU as the total vCPU limit minus
+    /// the sum of the vCPU
+    /// units reserved for the group's support containers.
+    ///
+    /// A game server container group needs either a total vCPU limit or this value.
+    /// If the
+    /// container group doesn't have a total vCPU limit, the group's containers can
+    /// use up to the
+    /// instance's available vCPU, and Amazon GameLift Servers uses the sum of the
+    /// group's container
+    /// `Vcpu` values to calculate how many game server container groups fit on an
+    /// instance.
+    ///
+    /// **Related data type: **
+    /// [ContainerGroupDefinition](https://docs.aws.amazon.com/gamelift/latest/apireference/API_ContainerGroupDefinition.html)
+    /// `TotalVcpuLimit`
+    vcpu: ?f64 = null,
+
     pub const json_field_names = .{
         .container_name = "ContainerName",
         .depends_on = "DependsOn",
@@ -111,5 +135,6 @@ pub const GameServerContainerDefinitionInput = struct {
         .mount_points = "MountPoints",
         .port_configuration = "PortConfiguration",
         .server_sdk_version = "ServerSdkVersion",
+        .vcpu = "Vcpu",
     };
 };

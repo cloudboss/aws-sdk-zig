@@ -11,12 +11,21 @@ pub const PrivateLinkConfig = struct {
     /// provides DataSync access to your VPC endpoint. You can only specify one ARN.
     security_group_arns: ?[]const []const u8 = null,
 
-    /// Specifies the ARN of the subnet where your VPC endpoint is located. You can
-    /// only specify
-    /// one ARN.
+    /// Specifies the ARN of the subnet where DataSync creates the network
+    /// interfaces
+    /// that handle data transfer traffic for your tasks. You can only specify one
+    /// ARN.
+    ///
+    /// The subnet doesn't have to be the subnet that contains your VPC endpoint.
     subnet_arns: ?[]const []const u8 = null,
 
-    /// Specifies the ID of the VPC endpoint that your agent connects to.
+    /// Specifies the ID of the VPC service endpoint that's recorded for your agent.
+    /// The endpoint ID
+    /// is informational and isn't verified by DataSync. Your agent communicates
+    /// through the
+    /// private IP address in `PrivateLinkEndpoint`, which is set when you activate
+    /// the
+    /// agent.
     vpc_endpoint_id: ?[]const u8 = null,
 
     pub const json_field_names = .{

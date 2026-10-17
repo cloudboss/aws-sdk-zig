@@ -8,7 +8,8 @@ const IdentityInfo = @import("identity_info.zig").IdentityInfo;
 
 pub const ListEmailIdentitiesInput = struct {
     /// An object that contains filters to apply when listing email identities.
-    /// You can filter by identity name, identity type, or verification status.
+    /// You can filter by a substring of the identity name, by identity type, or by
+    /// verification status.
     filter: ?[]const aws.map.StringMapEntry = null,
 
     /// A token returned from a previous call to `ListEmailIdentities` to indicate

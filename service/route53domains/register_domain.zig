@@ -5,6 +5,7 @@ const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const ContactDetail = @import("contact_detail.zig").ContactDetail;
+const Consent = @import("consent.zig").Consent;
 
 pub const RegisterDomainInput = struct {
     /// Provides detailed contact information. For information about the values that
@@ -25,6 +26,15 @@ pub const RegisterDomainInput = struct {
     /// specify for each element, see
     /// [ContactDetail](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ContactDetail.html).
     billing_contact: ?ContactDetail = null,
+
+    /// Specifies the maximum price that you agree to pay to register the domain
+    /// name. This element is
+    /// required if the domain has registry premium pricing, and optional if the
+    /// domain
+    /// is priced at the standard rate for its TLD. If you include it and the
+    /// registration
+    /// price is more than `MaxPrice`, the request fails.
+    consent: ?Consent = null,
 
     /// The domain name that you want to register. The top-level domain (TLD), such
     /// as .com,
@@ -138,6 +148,7 @@ pub const RegisterDomainInput = struct {
         .admin_contact = "AdminContact",
         .auto_renew = "AutoRenew",
         .billing_contact = "BillingContact",
+        .consent = "Consent",
         .domain_name = "DomainName",
         .duration_in_years = "DurationInYears",
         .idn_lang_code = "IdnLangCode",

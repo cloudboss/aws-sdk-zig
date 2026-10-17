@@ -67,11 +67,11 @@ pub const UpdateLocationHdfsInput = struct {
     ///
     /// The number of NameNodes you can specify depends on the task mode:
     ///
-    /// * Enhanced mode – You can specify multiple NameNodes for HDFS High
+    /// * **Enhanced mode** – You can specify multiple NameNodes for HDFS High
     ///   Availability (HA)
     /// configurations.
     ///
-    /// * Basic mode – You can specify only one NameNode.
+    /// * **Basic mode** – You can specify only one NameNode.
     name_nodes: ?[]const HdfsNameNode = null,
 
     /// The Quality of Protection (QOP) configuration specifies the Remote Procedure

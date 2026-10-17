@@ -4,11 +4,13 @@ pub const GroupDefinitionType = enum {
     dimension,
     tag,
     cost_category,
+    product_attribute,
 
     pub const json_field_names = .{
         .dimension = "DIMENSION",
         .tag = "TAG",
         .cost_category = "COST_CATEGORY",
+        .product_attribute = "PRODUCT_ATTRIBUTE",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +18,7 @@ pub const GroupDefinitionType = enum {
             .dimension => "DIMENSION",
             .tag => "TAG",
             .cost_category => "COST_CATEGORY",
+            .product_attribute => "PRODUCT_ATTRIBUTE",
         };
     }
 

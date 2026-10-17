@@ -1429,6 +1429,15 @@ pub const InstanceType = enum {
     r_9_gd_48_xlarge,
     r_9_gd_metal_48_xl,
     m_9_g_medium,
+    t_8_i_nano,
+    t_8_i_micro,
+    t_8_i_small,
+    t_8_i_medium,
+    i_8_g_metal_48_xl,
+    r_8_gb_48_xlarge,
+    r_8_gb_metal_48_xl,
+    m_9_gd_medium,
+    trn_2_u_48_xlarge,
 
     pub const json_field_names = .{
         .a_1_medium = "a1.medium",
@@ -2859,6 +2868,15 @@ pub const InstanceType = enum {
         .r_9_gd_48_xlarge = "r9gd.48xlarge",
         .r_9_gd_metal_48_xl = "r9gd.metal-48xl",
         .m_9_g_medium = "m9g.medium",
+        .t_8_i_nano = "t8i.nano",
+        .t_8_i_micro = "t8i.micro",
+        .t_8_i_small = "t8i.small",
+        .t_8_i_medium = "t8i.medium",
+        .i_8_g_metal_48_xl = "i8g.metal-48xl",
+        .r_8_gb_48_xlarge = "r8gb.48xlarge",
+        .r_8_gb_metal_48_xl = "r8gb.metal-48xl",
+        .m_9_gd_medium = "m9gd.medium",
+        .trn_2_u_48_xlarge = "trn2u.48xlarge",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -4291,11 +4309,20 @@ pub const InstanceType = enum {
             .r_9_gd_48_xlarge => "r9gd.48xlarge",
             .r_9_gd_metal_48_xl => "r9gd.metal-48xl",
             .m_9_g_medium => "m9g.medium",
+            .t_8_i_nano => "t8i.nano",
+            .t_8_i_micro => "t8i.micro",
+            .t_8_i_small => "t8i.small",
+            .t_8_i_medium => "t8i.medium",
+            .i_8_g_metal_48_xl => "i8g.metal-48xl",
+            .r_8_gb_48_xlarge => "r8gb.48xlarge",
+            .r_8_gb_metal_48_xl => "r8gb.metal-48xl",
+            .m_9_gd_medium => "m9gd.medium",
+            .trn_2_u_48_xlarge => "trn2u.48xlarge",
         };
     }
 
     pub fn fromWireName(str: []const u8) ?@This() {
-        @setEvalBranchQuota(4384);
+        @setEvalBranchQuota(4411);
         const fields = @typeInfo(@TypeOf(json_field_names)).@"struct".field_names;
         inline for (fields) |field_name| {
             if (std.mem.eql(u8, str, @field(json_field_names, field_name))) {

@@ -4,6 +4,7 @@ const BitbucketDataCenterIntegrationInput = @import("bitbucket_data_center_integ
 const ConfluenceIntegrationInput = @import("confluence_integration_input.zig").ConfluenceIntegrationInput;
 const GitHubIntegrationInput = @import("git_hub_integration_input.zig").GitHubIntegrationInput;
 const GitLabIntegrationInput = @import("git_lab_integration_input.zig").GitLabIntegrationInput;
+const JiraIntegrationInput = @import("jira_integration_input.zig").JiraIntegrationInput;
 
 /// The provider-specific input for creating an integration. This is a union
 /// type that contains provider-specific configuration.
@@ -20,6 +21,8 @@ pub const ProviderInput = union(enum) {
     github: ?GitHubIntegrationInput,
     /// The configuration for a GitLab integration.
     gitlab: ?GitLabIntegrationInput,
+    /// The configuration for a Jira integration.
+    jira: ?JiraIntegrationInput,
 
     pub const json_field_names = .{
         .azure_dev_ops = "azureDevOps",
@@ -28,5 +31,6 @@ pub const ProviderInput = union(enum) {
         .confluence = "confluence",
         .github = "github",
         .gitlab = "gitlab",
+        .jira = "jira",
     };
 };

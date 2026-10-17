@@ -30,7 +30,7 @@ pub const UpdateGameServerInput = struct {
     /// Indicates if the game server is available or is currently hosting gameplay.
     /// You can
     /// update a game server status from `AVAILABLE` to `UTILIZED`, but
-    /// you can't change a the status from `UTILIZED` to
+    /// you can't change the status from `UTILIZED` to
     /// `AVAILABLE`.
     utilization_status: ?GameServerUtilizationStatus = null,
 

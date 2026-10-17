@@ -72,7 +72,7 @@ pub const CreateBuildInput = struct {
 
     /// A list of labels to assign to the new build resource. Tags are developer
     /// defined
-    /// key-value pairs. Tagging Amazon Web Services resources are useful for
+    /// key-value pairs. Tagging Amazon Web Services resources is useful for
     /// resource management, access
     /// management and cost allocation. For more information, see [ Tagging Amazon
     /// Web Services
@@ -103,7 +103,7 @@ pub const CreateBuildInput = struct {
 };
 
 pub const CreateBuildOutput = struct {
-    /// The newly created build resource, including a unique build IDs and status.
+    /// The newly created build resource, including a unique build ID and status.
     build: ?Build = null,
 
     /// Amazon S3 location for your game build file, including bucket name and key.

@@ -3,7 +3,7 @@
 /// can use a filter to temporarily exclude specific locations from receiving
 /// placements.
 /// For queues that have multi-location fleets, you can use a filter
-/// configuration allow
+/// configuration to allow
 /// placement with some, but not all, of a fleet's locations.
 pub const FilterConfiguration = struct {
     /// A list of locations to allow game session placement in, in the form of

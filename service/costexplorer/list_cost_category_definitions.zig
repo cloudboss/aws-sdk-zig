@@ -23,7 +23,8 @@ pub const ListCostCategoryDefinitionsInput = struct {
     /// based on the latest version. If the filter is present, the result only
     /// includes Cost Categories that supports input resource type. If the filter
     /// isn't provided, no filtering is applied. The valid values are
-    /// `billing:rispgroupsharing` and `billing:billingview`.
+    /// `billing:rispgroupsharing`, `billing:billingview`, and
+    /// `billing:creditsharing`.
     supported_resource_types: ?[]const []const u8 = null,
 
     pub const json_field_names = .{

@@ -36,7 +36,7 @@ pub const MatchmakingTicket = struct {
     /// FlexMatch
     /// engine creates a new game session for it. This information is added to the
     /// matchmaking
-    /// ticket, which you can be retrieve by calling
+    /// ticket, which you can retrieve by calling
     /// [DescribeMatchmaking](https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeMatchmaking.html) .
     game_session_connection_info: ?GameSessionConnectionInfo = null,
 

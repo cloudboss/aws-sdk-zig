@@ -3,6 +3,7 @@ const AgentAccessConfig = @import("agent_access_config.zig").AgentAccessConfig;
 const ApplicationSettingsResponse = @import("application_settings_response.zig").ApplicationSettingsResponse;
 const ContentRedirection = @import("content_redirection.zig").ContentRedirection;
 const StackError = @import("stack_error.zig").StackError;
+const StorageConnectorAuthentication = @import("storage_connector_authentication.zig").StorageConnectorAuthentication;
 const StorageConnector = @import("storage_connector.zig").StorageConnector;
 const StreamingExperienceSettings = @import("streaming_experience_settings.zig").StreamingExperienceSettings;
 const UserSetting = @import("user_setting.zig").UserSetting;
@@ -55,6 +56,14 @@ pub const Stack = struct {
     /// The errors for the stack.
     stack_errors: ?[]const StackError = null,
 
+    /// Indicates whether users' cloud storage authentication persists across
+    /// streaming sessions. When this attribute is FORCE_REAUTHENTICATION,
+    /// WorkSpaces Applications removes the stored authentication for the stack's
+    /// OneDrive and Google Drive connectors when a user's session ends. The user
+    /// links their cloud storage again on their next session. The default is
+    /// REUSE_CREDENTIALS.
+    storage_connector_authentication: ?StorageConnectorAuthentication = null,
+
     /// The storage connectors to enable.
     storage_connectors: ?[]const StorageConnector = null,
 
@@ -80,6 +89,7 @@ pub const Stack = struct {
         .name = "Name",
         .redirect_url = "RedirectURL",
         .stack_errors = "StackErrors",
+        .storage_connector_authentication = "StorageConnectorAuthentication",
         .storage_connectors = "StorageConnectors",
         .streaming_experience_settings = "StreamingExperienceSettings",
         .user_settings = "UserSettings",

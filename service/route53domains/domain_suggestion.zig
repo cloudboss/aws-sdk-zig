@@ -1,6 +1,11 @@
+const PriceWithCurrency = @import("price_with_currency.zig").PriceWithCurrency;
+
 /// Information about one suggested domain name.
 pub const DomainSuggestion = struct {
-    /// Whether the domain name is available for registering.
+    /// Specifies whether the domain name is available for registering. This element
+    /// is
+    /// populated only if you specified `true` for `OnlyAvailable` in the
+    /// request.
     ///
     /// You can register only the domains that are designated as
     /// `AVAILABLE`.
@@ -53,8 +58,14 @@ pub const DomainSuggestion = struct {
     /// A suggested domain name.
     domain_name: ?[]const u8 = null,
 
+    /// The price to register the suggested domain name, in the currency that
+    /// `Currency` specifies. This element is populated only if you specified
+    /// `true` for `OnlyAvailable` in the request.
+    price: ?PriceWithCurrency = null,
+
     pub const json_field_names = .{
         .availability = "Availability",
         .domain_name = "DomainName",
+        .price = "Price",
     };
 };

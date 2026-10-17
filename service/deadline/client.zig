@@ -83,6 +83,7 @@ const list_job_parameter_definitions = @import("list_job_parameter_definitions.z
 const list_jobs = @import("list_jobs.zig");
 const list_license_endpoints = @import("list_license_endpoints.zig");
 const list_limits = @import("list_limits.zig");
+const list_memberships = @import("list_memberships.zig");
 const list_metered_products = @import("list_metered_products.zig");
 const list_monitors = @import("list_monitors.zig");
 const list_queue_environments = @import("list_queue_environments.zig");
@@ -673,6 +674,13 @@ pub const Client = struct {
         return list_limits.execute(self, allocator, input, options);
     }
 
+    /// Lists the Deadline Cloud resource memberships associated with a specified
+    /// IAM Identity Center principal, optionally filtered by the requested resource
+    /// types.
+    pub fn listMemberships(self: *Self, allocator: std.mem.Allocator, input: list_memberships.ListMembershipsInput, options: CallOptions) !list_memberships.ListMembershipsOutput {
+        return list_memberships.execute(self, allocator, input, options);
+    }
+
     /// Lists metered products.
     pub fn listMeteredProducts(self: *Self, allocator: std.mem.Allocator, input: list_metered_products.ListMeteredProductsInput, options: CallOptions) !list_metered_products.ListMeteredProductsOutput {
         return list_metered_products.execute(self, allocator, input, options);
@@ -996,6 +1004,13 @@ pub const Client = struct {
     }
 
     pub fn listLimitsPaginator(self: *Self, params: list_limits.ListLimitsInput) paginator.ListLimitsPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listMembershipsPaginator(self: *Self, params: list_memberships.ListMembershipsInput) paginator.ListMembershipsPaginator {
         return .{
             .client = self,
             .params = params,

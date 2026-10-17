@@ -28,6 +28,11 @@ pub const Transport = struct {
     /// minimum latency and the receiver’s minimum latency.
     min_latency: ?i32 = null,
 
+    /// The audio reference level of the NDI receiver, in decibels relative to full
+    /// scale (dBFS). Common values are `-20` (NDI and SMPTE) and `-18` (EBU). For
+    /// NDI outputs, this field is always present and defaults to `-20`.
+    ndi_audio_reference_level: ?i32 = null,
+
     /// The timecode source for NDI output frames. For NDI outputs, this field is
     /// always present and defaults to `EMBEDDED_TIMECODE`.
     ///
@@ -86,6 +91,7 @@ pub const Transport = struct {
         .max_latency = "MaxLatency",
         .max_sync_buffer = "MaxSyncBuffer",
         .min_latency = "MinLatency",
+        .ndi_audio_reference_level = "NdiAudioReferenceLevel",
         .ndi_output_timecode_source = "NdiOutputTimecodeSource",
         .ndi_program_name = "NdiProgramName",
         .ndi_source_settings = "NdiSourceSettings",

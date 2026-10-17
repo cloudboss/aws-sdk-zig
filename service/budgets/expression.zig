@@ -1,5 +1,6 @@
 const CostCategoryValues = @import("cost_category_values.zig").CostCategoryValues;
 const ExpressionDimensionValues = @import("expression_dimension_values.zig").ExpressionDimensionValues;
+const ProductAttributeValues = @import("product_attribute_values.zig").ProductAttributeValues;
 const TagValues = @import("tag_values.zig").TagValues;
 
 /// Use Expression to filter in various Budgets APIs.
@@ -19,6 +20,10 @@ pub const Expression = struct {
     /// Return results that match either Dimension object.
     @"or": ?[]const Expression = null,
 
+    /// The filter that limits results based on the values of specific product
+    /// attributes.
+    product_attributes: ?ProductAttributeValues = null,
+
     /// The specific Tag to use for Expression.
     tags: ?TagValues = null,
 
@@ -28,6 +33,7 @@ pub const Expression = struct {
         .dimensions = "Dimensions",
         .not = "Not",
         .@"or" = "Or",
+        .product_attributes = "ProductAttributes",
         .tags = "Tags",
     };
 };

@@ -1,5 +1,6 @@
 const ModifyStrategyConfiguration = @import("modify_strategy_configuration.zig").ModifyStrategyConfiguration;
 const MemoryRecordSchema = @import("memory_record_schema.zig").MemoryRecordSchema;
+const RecordExpirySpecification = @import("record_expiry_specification.zig").RecordExpirySpecification;
 
 /// Input for modifying a memory strategy.
 pub const ModifyMemoryStrategyInput = struct {
@@ -22,6 +23,13 @@ pub const ModifyMemoryStrategyInput = struct {
     /// The updated namespaceTemplates for the memory strategy.
     namespace_templates: ?[]const []const u8 = null,
 
+    /// Updates or removes the record expiry (long-term memory time-to-live) for
+    /// this strategy. Set `recordExpiryDurationDays` to configure or update the
+    /// number of days after which records expire, or set `action` to `REMOVE` to
+    /// remove a previously configured time-to-live so that newer records no longer
+    /// expire. The change applies only to records created after the update.
+    record_expiry_specification: ?RecordExpirySpecification = null,
+
     pub const json_field_names = .{
         .configuration = "configuration",
         .description = "description",
@@ -29,5 +37,6 @@ pub const ModifyMemoryStrategyInput = struct {
         .memory_strategy_id = "memoryStrategyId",
         .namespaces = "namespaces",
         .namespace_templates = "namespaceTemplates",
+        .record_expiry_specification = "recordExpirySpecification",
     };
 };

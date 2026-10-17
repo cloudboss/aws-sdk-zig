@@ -54,8 +54,11 @@ pub const JobRun = struct {
     /// The execution role ARN of the job run.
     execution_role: []const u8,
 
-    /// Returns the job run timeout value from the `StartJobRun` call. If no timeout
-    /// was specified, then it returns the default timeout of 720 minutes.
+    /// Returns the job run timeout value from the `StartJobRun` call. If you didn't
+    /// specify a timeout, this value defaults to 720 minutes.
+    ///
+    /// For BATCH mode job runs, the maximum value is 10080 minutes (7 days)
+    /// starting with Amazon EMR release 7.11.
     execution_timeout_minutes: ?i64 = null,
 
     image_configuration: ?ImageConfiguration = null,

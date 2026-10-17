@@ -9,6 +9,13 @@ pub const SourceAccessType = enum {
     virtual_host,
     client_certificate_tls_auth,
     server_root_ca_certificate,
+    oauthbearer_auth,
+    oauthbearer_scope,
+    oauthbearer_audience,
+    oauthbearer_logical_cluster,
+    oauthbearer_identity_pool,
+    iam_auth,
+    iam_oauthbearer_auth,
 
     pub const json_field_names = .{
         .basic_auth = "BASIC_AUTH",
@@ -19,6 +26,13 @@ pub const SourceAccessType = enum {
         .virtual_host = "VIRTUAL_HOST",
         .client_certificate_tls_auth = "CLIENT_CERTIFICATE_TLS_AUTH",
         .server_root_ca_certificate = "SERVER_ROOT_CA_CERTIFICATE",
+        .oauthbearer_auth = "OAUTHBEARER_AUTH",
+        .oauthbearer_scope = "OAUTHBEARER_SCOPE",
+        .oauthbearer_audience = "OAUTHBEARER_AUDIENCE",
+        .oauthbearer_logical_cluster = "OAUTHBEARER_LOGICAL_CLUSTER",
+        .oauthbearer_identity_pool = "OAUTHBEARER_IDENTITY_POOL",
+        .iam_auth = "IAM_AUTH",
+        .iam_oauthbearer_auth = "IAM_OAUTHBEARER_AUTH",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -31,6 +45,13 @@ pub const SourceAccessType = enum {
             .virtual_host => "VIRTUAL_HOST",
             .client_certificate_tls_auth => "CLIENT_CERTIFICATE_TLS_AUTH",
             .server_root_ca_certificate => "SERVER_ROOT_CA_CERTIFICATE",
+            .oauthbearer_auth => "OAUTHBEARER_AUTH",
+            .oauthbearer_scope => "OAUTHBEARER_SCOPE",
+            .oauthbearer_audience => "OAUTHBEARER_AUDIENCE",
+            .oauthbearer_logical_cluster => "OAUTHBEARER_LOGICAL_CLUSTER",
+            .oauthbearer_identity_pool => "OAUTHBEARER_IDENTITY_POOL",
+            .iam_auth => "IAM_AUTH",
+            .iam_oauthbearer_auth => "IAM_OAUTHBEARER_AUTH",
         };
     }
 

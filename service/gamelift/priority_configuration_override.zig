@@ -16,7 +16,7 @@ const PlacementFallbackStrategy = @import("placement_fallback_strategy.zig").Pla
 /// used to
 /// limit placements to a subset of the locations in a queue's destinations. If
 /// the
-/// override list includes a location that's not on in the
+/// override list includes a location that's not in the
 /// `FilterConfiguration` allowed list, Amazon GameLift Servers won't attempt to
 /// place a
 /// game session there.

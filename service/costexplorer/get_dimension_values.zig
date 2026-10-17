@@ -95,6 +95,10 @@ pub const GetDimensionValuesInput = struct {
     /// * PLATFORM - The Amazon EC2 operating system. Examples are Windows or
     /// Linux.
     ///
+    /// * PRODUCT_ATTRIBUTE - The product attributes of supported services, such as
+    ///   the model
+    /// provider or the model for Amazon Bedrock.
+    ///
     /// * PURCHASE_TYPE - The reservation type of the purchase that this usage is
     ///   related to.
     /// Examples include On-Demand Instances and Standard Reserved Instances.
@@ -195,7 +199,36 @@ pub const GetDimensionValuesInput = struct {
     /// `Context`. For more information, see `Context`.
     /// `LINK_ACCOUNT_NAME` and `SERVICE_CODE` can only be used in
     /// [CostCategoryRule](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html).
+    ///
+    /// `PRODUCT_ATTRIBUTE` returns the product attribute keys that are available
+    /// for
+    /// your costs of supported services, or the values of the key that you specify
+    /// in
+    /// `DimensionKey`. `PRODUCT_ATTRIBUTE` is supported only in the
+    /// `COST_AND_USAGE` context.
     dimension: Dimension,
+
+    /// The product attribute key to return values for, such as `model`. If you omit
+    /// `DimensionKey` or set it to an empty string, the response lists the product
+    /// attribute keys that are available for your costs of supported services
+    /// instead. For the
+    /// supported services, see
+    /// [ProductAttributeValues](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ProductAttributeValues.html).
+    ///
+    /// If you specify a key, the response lists the values of that key. If some of
+    /// your costs
+    /// have no value for the key, the response includes an empty-string value. Keys
+    /// are
+    /// case-sensitive, and a key that doesn't exist returns no values other than an
+    /// empty
+    /// string.
+    ///
+    /// You can specify `DimensionKey` only when `Dimension` is
+    /// `PRODUCT_ATTRIBUTE`. If you also specify `SortBy`,
+    /// `DimensionKey` is required. As a result, you can't list product attribute
+    /// keys when
+    /// you use `SortBy`.
+    dimension_key: ?[]const u8 = null,
 
     filter: ?Expression = null,
 
@@ -256,6 +289,7 @@ pub const GetDimensionValuesInput = struct {
         .billing_view_arn = "BillingViewArn",
         .context = "Context",
         .dimension = "Dimension",
+        .dimension_key = "DimensionKey",
         .filter = "Filter",
         .max_results = "MaxResults",
         .next_page_token = "NextPageToken",

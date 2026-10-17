@@ -6,6 +6,7 @@ const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
 const InstanceMetadataOptions = @import("instance_metadata_options.zig").InstanceMetadataOptions;
 const Logging = @import("logging.zig").Logging;
+const ParentInstanceConfiguration = @import("parent_instance_configuration.zig").ParentInstanceConfiguration;
 const Placement = @import("placement.zig").Placement;
 
 pub const CreateInfrastructureConfigurationInput = struct {
@@ -81,6 +82,20 @@ pub const CreateInfrastructureConfigurationInput = struct {
     /// name.
     name: []const u8,
 
+    /// The Amazon EC2 Auto Scaling group that Image Builder takes the build
+    /// instance from, instead of
+    /// launching a new instance. This applies only to the build phase.
+    ///
+    /// To use this feature, the execution role for the build must have permissions
+    /// to
+    /// describe the Auto Scaling group, tag the instance while it's still in the
+    /// group, and
+    /// detach it from the group. For more information, see [Build on an
+    /// instance from an Auto Scaling
+    /// group](https://docs.aws.amazon.com/imagebuilder/latest/userguide/infra-config-parent-instance.html) in the *EC2 Image Builder User
+    /// Guide*.
+    parent_instance: ?ParentInstanceConfiguration = null,
+
     /// The instance placement settings that define where the build and test
     /// instances that Image Builder launches during image creation run. These
     /// settings
@@ -126,6 +141,12 @@ pub const CreateInfrastructureConfigurationInput = struct {
     /// creates as output. Tags are formatted as key value pairs.
     tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// Specifies whether Image Builder terminates build and test instances when
+    /// image creation
+    /// ends without a failure (success, cancellation, or expiration). Defaults to
+    /// `true`.
+    terminate_instance_on_completion: ?bool = null,
+
     /// Specifies whether to terminate the instance on failure. Set to
     /// false if you want Image Builder to retain the instance used to configure
     /// your AMI if the build or
@@ -142,12 +163,14 @@ pub const CreateInfrastructureConfigurationInput = struct {
         .key_pair = "keyPair",
         .logging = "logging",
         .name = "name",
+        .parent_instance = "parentInstance",
         .placement = "placement",
         .resource_tags = "resourceTags",
         .security_group_ids = "securityGroupIds",
         .sns_topic_arn = "snsTopicArn",
         .subnet_id = "subnetId",
         .tags = "tags",
+        .terminate_instance_on_completion = "terminateInstanceOnCompletion",
         .terminate_instance_on_failure = "terminateInstanceOnFailure",
     };
 };
@@ -255,6 +278,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInfrastructureCon
     try body_buf.appendSlice(allocator, "\"name\":");
     try aws.json.writeValue(@TypeOf(input.name), input.name, allocator, &body_buf);
     has_prev = true;
+    if (input.parent_instance) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"parentInstance\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
     if (input.placement) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"placement\":");
@@ -288,6 +317,12 @@ fn serializeRequest(allocator: std.mem.Allocator, input: CreateInfrastructureCon
     if (input.tags) |v| {
         if (has_prev) try body_buf.appendSlice(allocator, ",");
         try body_buf.appendSlice(allocator, "\"tags\":");
+        try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
+        has_prev = true;
+    }
+    if (input.terminate_instance_on_completion) |v| {
+        if (has_prev) try body_buf.appendSlice(allocator, ",");
+        try body_buf.appendSlice(allocator, "\"terminateInstanceOnCompletion\":");
         try aws.json.writeValue(@TypeOf(v), v, allocator, &body_buf);
         has_prev = true;
     }

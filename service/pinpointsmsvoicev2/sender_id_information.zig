@@ -23,6 +23,9 @@ pub const SenderIdInformation = struct {
     /// The monthly leasing price, in US dollars.
     monthly_leasing_price: []const u8,
 
+    /// The pricing model.
+    pricing_tier: ?[]const u8 = null,
+
     /// True if the sender ID is registered.
     registered: bool = false,
 
@@ -42,6 +45,7 @@ pub const SenderIdInformation = struct {
         .message_types = "MessageTypes",
         .messaging_limits = "MessagingLimits",
         .monthly_leasing_price = "MonthlyLeasingPrice",
+        .pricing_tier = "PricingTier",
         .registered = "Registered",
         .registration_id = "RegistrationId",
         .sender_id = "SenderId",

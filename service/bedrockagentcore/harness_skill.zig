@@ -4,7 +4,7 @@ const HarnessSkillS3Source = @import("harness_skill_s3_source.zig").HarnessSkill
 
 /// A skill available to the agent.
 pub const HarnessSkill = union(enum) {
-    /// AWS Skills baked into the Harness's underlying Runtime.
+    /// Amazon Web Services Skills baked into the Harness's underlying Runtime.
     aws_skills: ?HarnessSkillAwsSkillsSource,
     /// A git repository containing the skill.
     git: ?HarnessSkillGitSource,

@@ -85,7 +85,17 @@ pub const RouterOutput = struct {
     /// Key-value pairs that can be used to tag and organize this router output.
     tags: []const aws.map.StringMapEntry,
 
-    /// The tier level of the router output.
+    /// The tier level for the router output. The tier sets the maximum bitrate, in
+    /// Mbps, for the router output. Valid values include the following:
+    ///
+    /// * `OUTPUT_20` – 20 Mbps
+    /// * `OUTPUT_50` – 50 Mbps
+    /// * `OUTPUT_100` – 100 Mbps
+    /// * `OUTPUT_250` – 250 Mbps
+    /// * `OUTPUT_500` – 500 Mbps
+    ///
+    /// The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support TR-07
+    /// (JPEG XS) workflows.
     tier: RouterOutputTier,
 
     /// The timestamp when the router output was last updated.

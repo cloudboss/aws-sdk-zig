@@ -30,7 +30,7 @@
 /// require
 /// each player to meet a certain skill level, each team to have at least one
 /// player
-/// in a certain role, or the match to have a minimum average skill level. or
+/// in a certain role, or the match to have a minimum average skill level, or
 /// may
 /// describe an entire group--such as all teams must be evenly matched or have
 /// at

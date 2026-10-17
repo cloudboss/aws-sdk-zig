@@ -39,10 +39,14 @@ pub const GetCostAndUsageWithResourcesInput = struct {
     /// Valid values for `MatchOptions` for `Dimensions` are
     /// `EQUALS` and `CASE_SENSITIVE`.
     ///
-    /// Valid values for `MatchOptions` for `CostCategories` and
-    /// `Tags` are `EQUALS`, `ABSENT`, and
-    /// `CASE_SENSITIVE`. Default values are `EQUALS` and
-    /// `CASE_SENSITIVE`.
+    /// Valid values for `MatchOptions` for `CostCategories`,
+    /// `Tags`, and `ProductAttributes` are `EQUALS`,
+    /// `ABSENT`, and `CASE_SENSITIVE`. Default values are `EQUALS`
+    /// and `CASE_SENSITIVE`.
+    ///
+    /// If you filter or group by product attributes, the `SERVICE` filter rules are
+    /// the same as for
+    /// [GetCostAndUsage](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetCostAndUsage.html).
     filter: Expression,
 
     /// Sets the Amazon Web Services cost granularity to `MONTHLY`,
@@ -52,7 +56,13 @@ pub const GetCostAndUsageWithResourcesInput = struct {
     granularity: Granularity,
 
     /// You can group Amazon Web Services costs using up to two different groups:
-    /// `DIMENSION`, `TAG`, `COST_CATEGORY`.
+    /// `DIMENSION`, `TAG`, `COST_CATEGORY`, and
+    /// `PRODUCT_ATTRIBUTE`.
+    ///
+    /// `PRODUCT_ATTRIBUTE` groups work the same way as in
+    /// [GetCostAndUsage](https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetCostAndUsage.html). A
+    /// `PRODUCT_ATTRIBUTE` group or a `ProductAttributes` filter doesn't meet
+    /// the requirement to group by or filter by a `ResourceId`.
     group_by: ?[]const GroupDefinition = null,
 
     /// Which metrics are returned in the query. For more information about blended

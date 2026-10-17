@@ -15,6 +15,7 @@ const enable_domain_auto_renew = @import("enable_domain_auto_renew.zig");
 const enable_domain_transfer_lock = @import("enable_domain_transfer_lock.zig");
 const get_contact_reachability_status = @import("get_contact_reachability_status.zig");
 const get_domain_detail = @import("get_domain_detail.zig");
+const get_domain_prices = @import("get_domain_prices.zig");
 const get_domain_suggestions = @import("get_domain_suggestions.zig");
 const get_operation_detail = @import("get_operation_detail.zig");
 const list_domains = @import("list_domains.zig");
@@ -240,6 +241,27 @@ pub const Client = struct {
         return get_domain_detail.execute(self, allocator, input, options);
     }
 
+    /// Returns the following prices for the specified domain:
+    ///
+    /// * Registration
+    ///
+    /// * Transfer
+    ///
+    /// * Owner change
+    ///
+    /// * Renewal
+    ///
+    /// * Restoration
+    ///
+    /// For most domains, the prices match the standard prices for the TLD that the
+    /// [ListPrices](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListPrices.html) operation returns. For a premium domain, the registry sets the
+    /// price individually. Premium prices might differ from the standard prices and
+    /// can change
+    /// over time.
+    pub fn getDomainPrices(self: *Self, allocator: std.mem.Allocator, input: get_domain_prices.GetDomainPricesInput, options: CallOptions) !get_domain_prices.GetDomainPricesOutput {
+        return get_domain_prices.execute(self, allocator, input, options);
+    }
+
     /// The GetDomainSuggestions operation returns a list of suggested domain names.
     pub fn getDomainSuggestions(self: *Self, allocator: std.mem.Allocator, input: get_domain_suggestions.GetDomainSuggestionsInput, options: CallOptions) !get_domain_suggestions.GetDomainSuggestionsOutput {
         return get_domain_suggestions.execute(self, allocator, input, options);
@@ -277,9 +299,15 @@ pub const Client = struct {
     ///
     /// * Owner change
     ///
-    /// * Domain renewal
+    /// * Renewal
     ///
-    /// * Domain restoration
+    /// * Restoration
+    ///
+    /// The prices that `ListPrices` returns are the standard rates for a TLD.
+    /// `ListPrices` doesn't return registry premium prices, which apply to
+    /// individual domain names rather than to a TLD. To get accurate pricing for a
+    /// specific
+    /// domain name, including premium prices, call `GetDomainPrices`.
     pub fn listPrices(self: *Self, allocator: std.mem.Allocator, input: list_prices.ListPricesInput, options: CallOptions) !list_prices.ListPricesOutput {
         return list_prices.execute(self, allocator, input, options);
     }

@@ -9,9 +9,14 @@ pub const VpcConfigResponse = struct {
     /// VPC ID computed from the provided subnet IDs.
     vpc_id: ?[]const u8 = null,
 
+    /// The Amazon Web Services account ID of the cross-account VPC owner for
+    /// RAM-shared VPC configurations.
+    vpc_owner_account_id: ?[]const u8 = null,
+
     pub const json_field_names = .{
         .security_group_ids = "securityGroupIds",
         .subnet_ids = "subnetIds",
         .vpc_id = "vpcId",
+        .vpc_owner_account_id = "vpcOwnerAccountId",
     };
 };

@@ -5,6 +5,7 @@ const DataLocationResource = @import("data_location_resource.zig").DataLocationR
 const LFTagKeyResource = @import("lf_tag_key_resource.zig").LFTagKeyResource;
 const LFTagExpressionResource = @import("lf_tag_expression_resource.zig").LFTagExpressionResource;
 const LFTagPolicyResource = @import("lf_tag_policy_resource.zig").LFTagPolicyResource;
+const RLSPolicyResource = @import("rls_policy_resource.zig").RLSPolicyResource;
 const TableResource = @import("table_resource.zig").TableResource;
 const TableWithColumnsResource = @import("table_with_columns_resource.zig").TableWithColumnsResource;
 
@@ -38,6 +39,10 @@ pub const Resource = struct {
     /// resource's LF-tag policy.
     lf_tag_policy: ?LFTagPolicyResource = null,
 
+    /// A row-level security policy resource. Specify this when granting or revoking
+    /// permissions on a row-level security policy.
+    rls_policy: ?RLSPolicyResource = null,
+
     /// The table for the resource. A table is a metadata definition that represents
     /// your data. You can Grant and Revoke table privileges to a principal.
     table: ?TableResource = null,
@@ -55,6 +60,7 @@ pub const Resource = struct {
         .lf_tag = "LFTag",
         .lf_tag_expression = "LFTagExpression",
         .lf_tag_policy = "LFTagPolicy",
+        .rls_policy = "RLSPolicy",
         .table = "Table",
         .table_with_columns = "TableWithColumns",
     };

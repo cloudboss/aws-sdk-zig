@@ -13,6 +13,10 @@ pub const FindingSummary = struct {
     /// The unique identifier of the finding.
     finding_id: ?[]const u8 = null,
 
+    /// A deep link to an interactive DevOps Agent investigation seeded with this
+    /// finding. This value is null until DevOps Agent creates an investigation.
+    investigation_deep_link: ?[]const u8 = null,
+
     /// The name of the finding.
     name: ?[]const u8 = null,
 
@@ -34,6 +38,7 @@ pub const FindingSummary = struct {
         .description = "description",
         .failure_category = "failureCategory",
         .finding_id = "findingId",
+        .investigation_deep_link = "investigationDeepLink",
         .name = "name",
         .policy_component = "policyComponent",
         .service_arn = "serviceArn",

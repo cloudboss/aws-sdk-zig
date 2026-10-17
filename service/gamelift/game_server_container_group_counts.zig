@@ -6,8 +6,7 @@
 /// concurrently. For example, if a
 /// fleet has 50 game server container groups, and the game server container in
 /// each group runs 1 game server
-/// process, then the fleet has the capacity to run host 50 game sessions at a
-/// time.
+/// process, then the fleet has the capacity to host 50 game sessions at a time.
 ///
 /// **Returned by:**
 /// [https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetCapacity.html](https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetCapacity.html), [https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html](https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html)

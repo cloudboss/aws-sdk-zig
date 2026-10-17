@@ -27,6 +27,11 @@ pub const MemoryRecordSummary = struct {
     /// result. Higher values indicate greater relevance to the search query.
     score: ?f64 = null,
 
+    /// The timestamp based on which the memory record was ingested. This reflects
+    /// the time of the source content that the record was derived from, which can
+    /// differ from `createdAt`, the time the record itself was written.
+    timestamp: ?i64 = null,
+
     pub const json_field_names = .{
         .content = "content",
         .created_at = "createdAt",
@@ -35,5 +40,6 @@ pub const MemoryRecordSummary = struct {
         .metadata = "metadata",
         .namespaces = "namespaces",
         .score = "score",
+        .timestamp = "timestamp",
     };
 };

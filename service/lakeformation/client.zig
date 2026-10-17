@@ -3,6 +3,7 @@ const std = @import("std");
 
 const add_lf_tags_to_resource = @import("add_lf_tags_to_resource.zig");
 const assume_decorated_role_with_saml = @import("assume_decorated_role_with_saml.zig");
+const attach_rls_policy = @import("attach_rls_policy.zig");
 const batch_grant_permissions = @import("batch_grant_permissions.zig");
 const batch_revoke_permissions = @import("batch_revoke_permissions.zig");
 const cancel_transaction = @import("cancel_transaction.zig");
@@ -12,16 +13,19 @@ const create_lake_formation_identity_center_configuration = @import("create_lake
 const create_lake_formation_opt_in = @import("create_lake_formation_opt_in.zig");
 const create_lf_tag = @import("create_lf_tag.zig");
 const create_lf_tag_expression = @import("create_lf_tag_expression.zig");
+const create_rls_policy = @import("create_rls_policy.zig");
 const delete_data_cells_filter = @import("delete_data_cells_filter.zig");
 const delete_lake_formation_identity_center_configuration = @import("delete_lake_formation_identity_center_configuration.zig");
 const delete_lake_formation_opt_in = @import("delete_lake_formation_opt_in.zig");
 const delete_lf_tag = @import("delete_lf_tag.zig");
 const delete_lf_tag_expression = @import("delete_lf_tag_expression.zig");
 const delete_objects_on_cancel = @import("delete_objects_on_cancel.zig");
+const delete_rls_policy = @import("delete_rls_policy.zig");
 const deregister_resource = @import("deregister_resource.zig");
 const describe_lake_formation_identity_center_configuration = @import("describe_lake_formation_identity_center_configuration.zig");
 const describe_resource = @import("describe_resource.zig");
 const describe_transaction = @import("describe_transaction.zig");
+const detach_rls_policy = @import("detach_rls_policy.zig");
 const extend_transaction = @import("extend_transaction.zig");
 const get_data_cells_filter = @import("get_data_cells_filter.zig");
 const get_data_lake_principal = @import("get_data_lake_principal.zig");
@@ -32,6 +36,7 @@ const get_lf_tag_expression = @import("get_lf_tag_expression.zig");
 const get_query_state = @import("get_query_state.zig");
 const get_query_statistics = @import("get_query_statistics.zig");
 const get_resource_lf_tags = @import("get_resource_lf_tags.zig");
+const get_rls_policy = @import("get_rls_policy.zig");
 const get_table_objects = @import("get_table_objects.zig");
 const get_temporary_data_location_credentials = @import("get_temporary_data_location_credentials.zig");
 const get_temporary_glue_partition_credentials = @import("get_temporary_glue_partition_credentials.zig");
@@ -45,6 +50,8 @@ const list_lf_tag_expressions = @import("list_lf_tag_expressions.zig");
 const list_lf_tags = @import("list_lf_tags.zig");
 const list_permissions = @import("list_permissions.zig");
 const list_resources = @import("list_resources.zig");
+const list_rls_policies = @import("list_rls_policies.zig");
+const list_rls_policy_attachments = @import("list_rls_policy_attachments.zig");
 const list_table_storage_optimizers = @import("list_table_storage_optimizers.zig");
 const list_transactions = @import("list_transactions.zig");
 const put_data_lake_settings = @import("put_data_lake_settings.zig");
@@ -60,6 +67,7 @@ const update_lake_formation_identity_center_configuration = @import("update_lake
 const update_lf_tag = @import("update_lf_tag.zig");
 const update_lf_tag_expression = @import("update_lf_tag_expression.zig");
 const update_resource = @import("update_resource.zig");
+const update_rls_policy = @import("update_rls_policy.zig");
 const update_table_objects = @import("update_table_objects.zig");
 const update_table_storage_optimizer = @import("update_table_storage_optimizer.zig");
 const CallOptions = @import("call_options.zig").CallOptions;
@@ -128,6 +136,13 @@ pub const Client = struct {
         return assume_decorated_role_with_saml.execute(self, allocator, input, options);
     }
 
+    /// Attaches a row-level security policy to a resource for a principal. When the
+    /// principal queries the resource, Lake Formation applies the policy's filter
+    /// expression so that only the permitted rows are returned.
+    pub fn attachRlsPolicy(self: *Self, allocator: std.mem.Allocator, input: attach_rls_policy.AttachRLSPolicyInput, options: CallOptions) !attach_rls_policy.AttachRLSPolicyOutput {
+        return attach_rls_policy.execute(self, allocator, input, options);
+    }
+
     /// Batch operation to grant permissions to the principal.
     pub fn batchGrantPermissions(self: *Self, allocator: std.mem.Allocator, input: batch_grant_permissions.BatchGrantPermissionsInput, options: CallOptions) !batch_grant_permissions.BatchGrantPermissionsOutput {
         return batch_grant_permissions.execute(self, allocator, input, options);
@@ -190,6 +205,15 @@ pub const Client = struct {
         return create_lf_tag_expression.execute(self, allocator, input, options);
     }
 
+    /// Creates a row-level security (RLS) policy. A row-level security policy
+    /// defines a filter expression that Lake Formation evaluates to determine which
+    /// rows of a table a principal is allowed to see. The policy is created
+    /// independently of any resource, and is later associated with a resource and
+    /// principal using `AttachRLSPolicy`.
+    pub fn createRlsPolicy(self: *Self, allocator: std.mem.Allocator, input: create_rls_policy.CreateRLSPolicyInput, options: CallOptions) !create_rls_policy.CreateRLSPolicyOutput {
+        return create_rls_policy.execute(self, allocator, input, options);
+    }
+
     /// Deletes a data cell filter.
     pub fn deleteDataCellsFilter(self: *Self, allocator: std.mem.Allocator, input: delete_data_cells_filter.DeleteDataCellsFilterInput, options: CallOptions) !delete_data_cells_filter.DeleteDataCellsFilterOutput {
         return delete_data_cells_filter.execute(self, allocator, input, options);
@@ -242,6 +266,13 @@ pub const Client = struct {
         return delete_objects_on_cancel.execute(self, allocator, input, options);
     }
 
+    /// Deletes a row-level security policy. Any active attachments of the policy
+    /// are automatically removed as part of the deletion, so you do not need to
+    /// detach the policy first.
+    pub fn deleteRlsPolicy(self: *Self, allocator: std.mem.Allocator, input: delete_rls_policy.DeleteRLSPolicyInput, options: CallOptions) !delete_rls_policy.DeleteRLSPolicyOutput {
+        return delete_rls_policy.execute(self, allocator, input, options);
+    }
+
     /// Deregisters the resource as managed by the Data Catalog.
     ///
     /// When you deregister a path, Lake Formation removes the path from the inline
@@ -264,6 +295,13 @@ pub const Client = struct {
     /// Returns the details of a single transaction.
     pub fn describeTransaction(self: *Self, allocator: std.mem.Allocator, input: describe_transaction.DescribeTransactionInput, options: CallOptions) !describe_transaction.DescribeTransactionOutput {
         return describe_transaction.execute(self, allocator, input, options);
+    }
+
+    /// Detaches a row-level security policy from a resource for a principal. After
+    /// the policy is detached, its filter expression is no longer applied to the
+    /// principal's queries on that resource.
+    pub fn detachRlsPolicy(self: *Self, allocator: std.mem.Allocator, input: detach_rls_policy.DetachRLSPolicyInput, options: CallOptions) !detach_rls_policy.DetachRLSPolicyOutput {
+        return detach_rls_policy.execute(self, allocator, input, options);
     }
 
     /// Indicates to the service that the specified transaction is still active and
@@ -327,6 +365,12 @@ pub const Client = struct {
     /// Returns the LF-tags applied to a resource.
     pub fn getResourceLfTags(self: *Self, allocator: std.mem.Allocator, input: get_resource_lf_tags.GetResourceLFTagsInput, options: CallOptions) !get_resource_lf_tags.GetResourceLFTagsOutput {
         return get_resource_lf_tags.execute(self, allocator, input, options);
+    }
+
+    /// Returns the definition of a row-level security policy, including its
+    /// attachment columns and filter expression.
+    pub fn getRlsPolicy(self: *Self, allocator: std.mem.Allocator, input: get_rls_policy.GetRLSPolicyInput, options: CallOptions) !get_rls_policy.GetRLSPolicyOutput {
+        return get_rls_policy.execute(self, allocator, input, options);
     }
 
     /// Returns the set of Amazon S3 objects that make up the specified governed
@@ -456,6 +500,17 @@ pub const Client = struct {
     /// Lists the resources registered to be managed by the Data Catalog.
     pub fn listResources(self: *Self, allocator: std.mem.Allocator, input: list_resources.ListResourcesInput, options: CallOptions) !list_resources.ListResourcesOutput {
         return list_resources.execute(self, allocator, input, options);
+    }
+
+    /// Lists the row-level security policies in the Data Catalog.
+    pub fn listRlsPolicies(self: *Self, allocator: std.mem.Allocator, input: list_rls_policies.ListRLSPoliciesInput, options: CallOptions) !list_rls_policies.ListRLSPoliciesOutput {
+        return list_rls_policies.execute(self, allocator, input, options);
+    }
+
+    /// Lists the row-level security policy attachments in the Data Catalog. You can
+    /// filter the results by resource, principal, or policy name.
+    pub fn listRlsPolicyAttachments(self: *Self, allocator: std.mem.Allocator, input: list_rls_policy_attachments.ListRLSPolicyAttachmentsInput, options: CallOptions) !list_rls_policy_attachments.ListRLSPolicyAttachmentsOutput {
+        return list_rls_policy_attachments.execute(self, allocator, input, options);
     }
 
     /// Returns the configuration of all storage optimizers associated with a
@@ -593,6 +648,12 @@ pub const Client = struct {
         return update_resource.execute(self, allocator, input, options);
     }
 
+    /// Updates the filter expression of an existing row-level security policy. The
+    /// change applies to all attachments of the policy.
+    pub fn updateRlsPolicy(self: *Self, allocator: std.mem.Allocator, input: update_rls_policy.UpdateRLSPolicyInput, options: CallOptions) !update_rls_policy.UpdateRLSPolicyOutput {
+        return update_rls_policy.execute(self, allocator, input, options);
+    }
+
     /// Updates the manifest of Amazon S3 objects that make up the specified
     /// governed table.
     pub fn updateTableObjects(self: *Self, allocator: std.mem.Allocator, input: update_table_objects.UpdateTableObjectsInput, options: CallOptions) !update_table_objects.UpdateTableObjectsOutput {
@@ -661,6 +722,20 @@ pub const Client = struct {
     }
 
     pub fn listResourcesPaginator(self: *Self, params: list_resources.ListResourcesInput) paginator.ListResourcesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listRlsPoliciesPaginator(self: *Self, params: list_rls_policies.ListRLSPoliciesInput) paginator.ListRLSPoliciesPaginator {
+        return .{
+            .client = self,
+            .params = params,
+        };
+    }
+
+    pub fn listRlsPolicyAttachmentsPaginator(self: *Self, params: list_rls_policy_attachments.ListRLSPolicyAttachmentsInput) paginator.ListRLSPolicyAttachmentsPaginator {
         return .{
             .client = self,
             .params = params,

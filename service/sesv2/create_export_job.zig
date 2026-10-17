@@ -11,7 +11,9 @@ pub const CreateExportJobInput = struct {
     /// The data source for the export job.
     export_data_source: ExportDataSource,
 
-    /// The destination for the export job.
+    /// The destination for the export job. Specify only `DataFormat`. Do not
+    /// include `S3Url` in this request. SES writes the export file to a
+    /// location that it manages and returns the download URL in `GetExportJob`.
     export_destination: ExportDestination,
 
     pub const json_field_names = .{

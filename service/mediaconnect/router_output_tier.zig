@@ -4,11 +4,15 @@ pub const RouterOutputTier = enum {
     output_100,
     output_50,
     output_20,
+    output_500,
+    output_250,
 
     pub const json_field_names = .{
         .output_100 = "OUTPUT_100",
         .output_50 = "OUTPUT_50",
         .output_20 = "OUTPUT_20",
+        .output_500 = "OUTPUT_500",
+        .output_250 = "OUTPUT_250",
     };
 
     pub fn wireName(self: @This()) []const u8 {
@@ -16,6 +20,8 @@ pub const RouterOutputTier = enum {
             .output_100 => "OUTPUT_100",
             .output_50 => "OUTPUT_50",
             .output_20 => "OUTPUT_20",
+            .output_500 => "OUTPUT_500",
+            .output_250 => "OUTPUT_250",
         };
     }
 

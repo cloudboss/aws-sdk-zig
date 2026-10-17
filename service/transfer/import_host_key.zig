@@ -4,6 +4,7 @@ const std = @import("std");
 const Client = @import("client.zig").Client;
 const CallOptions = @import("call_options.zig").CallOptions;
 const parseErrorResponse = @import("errors.zig").parseErrorResponse;
+const HostKeyStorageType = @import("host_key_storage_type.zig").HostKeyStorageType;
 const Tag = @import("tag.zig").Tag;
 
 pub const ImportHostKeyInput = struct {
@@ -15,9 +16,23 @@ pub const ImportHostKeyInput = struct {
     /// Transfer Family accepts RSA, ECDSA, and ED25519 keys.
     host_key_body: []const u8,
 
+    /// The Amazon Resource Name (ARN) of the KMS key used to encrypt the Secrets
+    /// Manager secret that stores the host key. If you specify a customer managed
+    /// key, its key policy must allow the `AWSServiceRoleForTransfer`
+    /// service-linked role to decrypt the secret. If you don't specify a value,
+    /// Transfer Family uses the Amazon Web Services managed key for Secrets
+    /// Manager.
+    kms_key: ?[]const u8 = null,
+
     /// The identifier of the server that contains the host key that you are
     /// importing.
     server_id: []const u8,
+
+    /// Specifies whether the host key is stored by Transfer Family
+    /// (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`). When you
+    /// specify `SECRETS_MANAGER`, Transfer Family stores the private host key
+    /// material in an Secrets Manager secret.
+    storage_type: ?HostKeyStorageType = null,
 
     /// Key-value pairs that can be used to group and search for host keys.
     tags: ?[]const Tag = null,
@@ -25,7 +40,9 @@ pub const ImportHostKeyInput = struct {
     pub const json_field_names = .{
         .description = "Description",
         .host_key_body = "HostKeyBody",
+        .kms_key = "KmsKey",
         .server_id = "ServerId",
+        .storage_type = "StorageType",
         .tags = "Tags",
     };
 };

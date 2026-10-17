@@ -2,6 +2,7 @@ const aws = @import("aws");
 
 const InstanceMetadataOptions = @import("instance_metadata_options.zig").InstanceMetadataOptions;
 const Logging = @import("logging.zig").Logging;
+const ParentInstanceConfiguration = @import("parent_instance_configuration.zig").ParentInstanceConfiguration;
 const Placement = @import("placement.zig").Placement;
 
 /// Details of the infrastructure configuration.
@@ -39,6 +40,11 @@ pub const InfrastructureConfiguration = struct {
     /// The name of the infrastructure configuration.
     name: ?[]const u8 = null,
 
+    /// The Amazon EC2 Auto Scaling group that Image Builder takes the build
+    /// instance from, instead of
+    /// launching a new instance. This applies only to the build phase.
+    parent_instance: ?ParentInstanceConfiguration = null,
+
     /// The instance placement settings that define where the build and test
     /// instances that Image Builder launches during image creation run. These
     /// settings
@@ -71,6 +77,11 @@ pub const InfrastructureConfiguration = struct {
     /// The tags of the infrastructure configuration.
     tags: ?[]const aws.map.StringMapEntry = null,
 
+    /// Specifies whether Image Builder terminates build and test instances when
+    /// image creation
+    /// ends without a failure.
+    terminate_instance_on_completion: ?bool = null,
+
     /// Indicates whether Image Builder terminates the build and test instances when
     /// the image
     /// build fails. When `false`, Image Builder retains the instance so that you
@@ -88,12 +99,14 @@ pub const InfrastructureConfiguration = struct {
         .key_pair = "keyPair",
         .logging = "logging",
         .name = "name",
+        .parent_instance = "parentInstance",
         .placement = "placement",
         .resource_tags = "resourceTags",
         .security_group_ids = "securityGroupIds",
         .sns_topic_arn = "snsTopicArn",
         .subnet_id = "subnetId",
         .tags = "tags",
+        .terminate_instance_on_completion = "terminateInstanceOnCompletion",
         .terminate_instance_on_failure = "terminateInstanceOnFailure",
     };
 };

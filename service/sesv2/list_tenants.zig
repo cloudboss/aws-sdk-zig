@@ -9,7 +9,7 @@ const TenantInfo = @import("tenant_info.zig").TenantInfo;
 pub const ListTenantsInput = struct {
     /// An object that contains filters to apply when listing tenants. You can
     /// filter
-    /// by tenant name or sending status.
+    /// by a substring of the tenant name or by sending status.
     filter: ?[]const aws.map.StringMapEntry = null,
 
     /// A token returned from a previous call to `ListTenants` to indicate the

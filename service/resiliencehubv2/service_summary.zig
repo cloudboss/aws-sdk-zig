@@ -2,6 +2,7 @@ const Achievability = @import("achievability.zig").Achievability;
 const AssessmentStatus = @import("assessment_status.zig").AssessmentStatus;
 const AssociatedSystem = @import("associated_system.zig").AssociatedSystem;
 const DependencyDiscoveryConfig = @import("dependency_discovery_config.zig").DependencyDiscoveryConfig;
+const DevOpsAgentConnectionStatus = @import("dev_ops_agent_connection_status.zig").DevOpsAgentConnectionStatus;
 
 /// Contains summary information about a service.
 pub const ServiceSummary = struct {
@@ -22,6 +23,18 @@ pub const ServiceSummary = struct {
 
     /// The dependency discovery configuration.
     dependency_discovery: ?DependencyDiscoveryConfig = null,
+
+    /// The ARN of the DevOps Agent Agent Space linked to the service, when the
+    /// service is linked to one.
+    dev_ops_agent_space_arn: ?[]const u8 = null,
+
+    /// The DevOps Agent connection status for the service. Valid values:
+    ///
+    /// * CONNECTING - The service is being connected to the Agent Space.
+    /// * CONNECTED - The service is connected to the Agent Space.
+    /// * DISCONNECTED - The service is not connected to an Agent Space.
+    /// * FAILED - The connection attempt failed.
+    dev_ops_agent_status: ?DevOpsAgentConnectionStatus = null,
 
     name: []const u8,
 
@@ -54,6 +67,8 @@ pub const ServiceSummary = struct {
         .associated_systems = "associatedSystems",
         .created_at = "createdAt",
         .dependency_discovery = "dependencyDiscovery",
+        .dev_ops_agent_space_arn = "devOpsAgentSpaceArn",
+        .dev_ops_agent_status = "devOpsAgentStatus",
         .name = "name",
         .open_findings_count = "openFindingsCount",
         .organization_id = "organizationId",

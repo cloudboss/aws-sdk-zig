@@ -159,11 +159,11 @@ pub const Client = struct {
     /// Region or account in the plan.
     ///
     /// Returns the warnings for the plans that you own and for plans that are
-    /// shared with your account through AWS Resource Access Manager (AWS RAM). To
-    /// return warnings for specific plans, provide a list of plan Amazon Resource
-    /// Names (ARNs). Region switch ignores any plan ARN that you can't access. If
-    /// you don't provide any plan ARNs, Region switch returns the warnings for all
-    /// of your accessible plans.
+    /// shared with your account through Resource Access Manager (RAM). To return
+    /// warnings for specific plans, provide a list of plan Amazon Resource Names
+    /// (ARNs). Region switch ignores any plan ARN that you can't access. If you
+    /// don't provide any plan ARNs, Region switch returns the warnings for all of
+    /// your accessible plans.
     pub fn listServiceQuotaWarnings(self: *Self, allocator: std.mem.Allocator, input: list_service_quota_warnings.ListServiceQuotaWarningsInput, options: CallOptions) !list_service_quota_warnings.ListServiceQuotaWarningsOutput {
         return list_service_quota_warnings.execute(self, allocator, input, options);
     }

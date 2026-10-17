@@ -90,6 +90,7 @@ pub const EBSOptions = @import("ebs_options.zig").EBSOptions;
 pub const EBSOptionsStatus = @import("ebs_options_status.zig").EBSOptionsStatus;
 pub const EncryptionAtRestOptions = @import("encryption_at_rest_options.zig").EncryptionAtRestOptions;
 pub const EncryptionAtRestOptionsStatus = @import("encryption_at_rest_options_status.zig").EncryptionAtRestOptionsStatus;
+pub const EncryptionMode = @import("encryption_mode.zig").EncryptionMode;
 pub const EngineMode = @import("engine_mode.zig").EngineMode;
 pub const EngineModeStatus = @import("engine_mode_status.zig").EngineModeStatus;
 pub const EngineType = @import("engine_type.zig").EngineType;

@@ -4,6 +4,7 @@ const Achievability = @import("achievability.zig").Achievability;
 const AssessmentStatus = @import("assessment_status.zig").AssessmentStatus;
 const AssociatedSystem = @import("associated_system.zig").AssociatedSystem;
 const DependencyDiscoveryConfig = @import("dependency_discovery_config.zig").DependencyDiscoveryConfig;
+const DevOpsAgentConfigurationView = @import("dev_ops_agent_configuration_view.zig").DevOpsAgentConfigurationView;
 const EffectivePolicyValues = @import("effective_policy_values.zig").EffectivePolicyValues;
 const AssessmentCost = @import("assessment_cost.zig").AssessmentCost;
 const PermissionModel = @import("permission_model.zig").PermissionModel;
@@ -32,6 +33,9 @@ pub const Service = struct {
     dependency_discovery: ?DependencyDiscoveryConfig = null,
 
     description: ?[]const u8 = null,
+
+    /// The current DevOps Agent integration state for the service.
+    dev_ops_agent_configuration: ?DevOpsAgentConfigurationView = null,
 
     /// The effective policy values for the service.
     effective_policy_values: ?EffectivePolicyValues = null,
@@ -86,6 +90,7 @@ pub const Service = struct {
         .created_at = "createdAt",
         .dependency_discovery = "dependencyDiscovery",
         .description = "description",
+        .dev_ops_agent_configuration = "devOpsAgentConfiguration",
         .effective_policy_values = "effectivePolicyValues",
         .estimated_assessment_cost = "estimatedAssessmentCost",
         .kms_key_id = "kmsKeyId",

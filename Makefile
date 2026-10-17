@@ -7,7 +7,7 @@ GRADLE_VERSION = 8.7
 CTR_IMAGE_BASE = ghcr.io/cloudboss/docker.io/library/alpine:3.23.2
 CTR_IMAGE_LOCALSTACK = ghcr.io/cloudboss/docker.io/localstack/localstack:4.14.0
 
-AWS_MODELS_COMMIT = 1cfdfb4bb9ea858e65623e66d73af04bec353201
+AWS_MODELS_COMMIT = 60e5ceb684d77232c6f0b2bb1e43461df98aa073
 
 # The Dockerfile and its args are hashed to create a unique tag. The image
 # will be rebuilt if the hash changes, as the dependency file will change.

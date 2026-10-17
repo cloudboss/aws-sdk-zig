@@ -51,7 +51,7 @@ pub const Event = struct {
     /// instance.
     ///
     /// * FLEET_CREATION_EXTRACTING_BUILD -- The game server build was successfully
-    /// downloaded to an instance, and Amazon GameLift Serversis now extracting the
+    /// downloaded to an instance, and Amazon GameLift Servers is now extracting the
     /// build files from the
     /// uploaded build. Failure at this stage prevents a fleet from moving to ACTIVE
     /// status. Logs for this stage display a list of the files that are extracted
@@ -72,7 +72,7 @@ pub const Event = struct {
     /// successfully installed and validation of the installation will begin
     /// soon.
     ///
-    /// * FLEET_CREATION_FAILED_INSTALLER -- The installed failed while attempting
+    /// * FLEET_CREATION_FAILED_INSTALLER -- The installer failed while attempting
     ///   to
     /// install the build files. This event indicates that the failure occurred
     /// before
@@ -80,8 +80,7 @@ pub const Event = struct {
     ///
     /// * FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build process was
     ///   successful,
-    /// and the GameLift is now verifying that the game server launch paths, which
-    /// are
+    /// and GameLift is now verifying that the game server launch paths, which are
     /// specified in the fleet's runtime configuration, exist. If any listed launch
     /// path
     /// exists, Amazon GameLift Servers tries to launch a game server process and

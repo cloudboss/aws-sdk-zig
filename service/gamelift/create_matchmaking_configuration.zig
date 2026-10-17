@@ -100,8 +100,11 @@ pub const CreateMatchmakingConfigurationInput = struct {
     /// Queues are used to start new
     /// Amazon GameLift Servers-hosted game sessions for matches that are created
     /// with this matchmaking
-    /// configuration. If `FlexMatchMode` is set to `STANDALONE`, do not
-    /// set this parameter.
+    /// configuration. A matchmaking configuration supports only one queue; if you
+    /// specify
+    /// more than one ARN, the request fails with an `InvalidRequestException`.
+    /// If `FlexMatchMode` is set to `STANDALONE`, do not set this
+    /// parameter.
     game_session_queue_arns: ?[]const []const u8 = null,
 
     /// A unique identifier for the matchmaking configuration. This name is used to
@@ -130,7 +133,7 @@ pub const CreateMatchmakingConfigurationInput = struct {
 
     /// A list of labels to assign to the new matchmaking configuration resource.
     /// Tags are
-    /// developer-defined key-value pairs. Tagging Amazon Web Services resources are
+    /// developer-defined key-value pairs. Tagging Amazon Web Services resources is
     /// useful for resource
     /// management, access management and cost allocation. For more information, see
     /// [ Tagging Amazon Web Services
