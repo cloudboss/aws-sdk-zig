@@ -205,21 +205,35 @@ test "putSecretValue updates the secret" {
             },
             .{},
         );
-        try std.testing.expect(put.version_id != null);
-    }
+        const version_id = put.version_id orelse
+            return error.MissingVersionId;
 
-    {
-        const result = try client.getSecretValue(
-            arena.allocator(),
-            .{ .secret_id = shared_secret_name },
-            .{},
-        );
+        // The default version can lag behind a successful update.
+        for (0..20) |attempt| {
+            var read_arena = std.heap.ArenaAllocator.init(std.testing.allocator);
+            defer read_arena.deinit();
 
-        try std.testing.expectEqualStrings(
-            "updated-secret-value",
-            result.secret_string orelse
-                return error.MissingSecretString,
-        );
+            const result = try client.getSecretValue(
+                read_arena.allocator(),
+                .{ .secret_id = shared_secret_name },
+                .{},
+            );
+            const current_version_id = result.version_id orelse
+                return error.MissingVersionId;
+
+            if (!std.mem.eql(u8, version_id, current_version_id) and attempt < 19) {
+                try std.testing.io.sleep(.fromMilliseconds(500), .awake);
+                continue;
+            }
+
+            try std.testing.expectEqualStrings(version_id, current_version_id);
+            try std.testing.expectEqualStrings(
+                "updated-secret-value",
+                result.secret_string orelse
+                    return error.MissingSecretString,
+            );
+            break;
+        }
     }
 }
 
